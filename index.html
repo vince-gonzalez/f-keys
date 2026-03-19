@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+// ============================================================
+// WORKFLOW STACK
+// File:        index.html
+// Brand:       Zengine™ — F-Keys product site
+// Author:      Vincent Gonzalez | © 2026 Zengine™ | www.zengine.site
+// Version:     v1.0.0
+// Description: F-Keys marketing site. Single-file SPA.
+//              Sections: hero, features, download, f-hub,
+//              faq, privacy policy.
+// Boot Order:
+//   1. Fonts + AdSense load
+//   2. DOM ready → initTerminal(), initScroll(), initNav()
+//   3. typeHero() → animated hero terminal sequence
+//   4. Intersection observer → reveal sections on scroll
+// External Deps:
+//   - Google Fonts: VT323, Share Tech Mono
+//   - Google AdSense: ca-pub-8826956454892311
+// Layout Target: 320px–2560px responsive
+// Browser Target: Chrome / Firefox / Safari / Edge (latest)
+// ============================================================
+
+// ASSET MANIFEST
+// VT323              — display font (Google Fonts)
+// Share Tech Mono    — body mono font (Google Fonts)
+// AdSense            — ca-pub-8826956454892311
+// No external JS libs — vanilla only
+// ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="F-Keys — Turn your phone into a hardware macro controller. No app. No hardware. Just glass and glass.">
+<meta name="theme-color" content="#0a0e0a">
+<title>F-KEYS — YOUR GLASS. YOUR RULES.</title>
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8826956454892311" crossorigin="anonymous"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+/* ── Variables ─────────────────────────────────────────── */
+:root {
+  --bg:        #0a0e0a;
+  --bg2:       #0d120d;
+  --bg3:       #101610;
+  --panel:     #111911;
+  --border:    #1a2e1a;
+  --border2:   #243824;
+  --green:     #39ff14;
+  --green-dim: #1a7a08;
+  --green-dark:#0d3d06;
+  --cyan:      #00ffcc;
+  --amber:     #ffb700;
+  --red:       #ff3131;
+  --text:      #a8c8a8;
+  --text-dim:  #3a5a3a;
+  --text-bright:#e0ffe0;
+  --font-head: 'VT323', 'Courier New', monospace;
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  --glow:      0 0 20px rgba(57,255,20,0.45);
+  --glow-sm:   0 0 8px  rgba(57,255,20,0.35);
+  --glow-cyan: 0 0 16px rgba(0,255,204,0.35);
+  --radius:    3px;
+  --max:       1100px;
+}
+
+/* ── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+a { color: var(--green); text-decoration: none; }
+a:hover { text-shadow: var(--glow-sm); }
+
+/* ── Scanlines ──────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ── CRT vignette ───────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center,
+    transparent 60%, rgba(0,0,0,0.65) 100%);
+  pointer-events: none;
+  z-index: 9001;
+}
+
+/* ── Matrix rain canvas ─────────────────────────────────── */
+#matrix-canvas {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Nav ────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 8000;
+  background: rgba(10,14,10,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 52px;
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 28px;
+  letter-spacing: 6px;
+  color: var(--green);
+  text-shadow: var(--glow);
+}
+.nav-logo span { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; }
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+.nav-links a {
+  color: var(--text-dim);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green); text-shadow: var(--glow-sm); }
+.nav-cta {
+  font-family: var(--font-head);
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 6px 20px;
+  border: 1px solid var(--green);
+  color: var(--green);
+  background: transparent;
+  border-radius: var(--radius);
+  cursor: crosshair;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover { background: rgba(57,255,20,0.1); box-shadow: var(--glow); }
+
+/* ── Mobile nav ─────────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: crosshair;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--green);
+  transition: all 0.2s;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 52px; left: 0; right: 0;
+  background: rgba(10,14,10,0.98);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 32px;
+  z-index: 7999;
+  flex-direction: column;
+  gap: 16px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--text);
+  font-family: var(--font-head);
+}
+
+/* ── Sections ───────────────────────────────────────────── */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 100px 32px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+section.full-bleed {
+  max-width: 100%;
+  padding-left: 0; padding-right: 0;
+}
+section.full-bleed > .inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ── Reveal on scroll ───────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Section label ──────────────────────────────────────── */
+.section-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--green-dim);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--green-dim);
+}
+
+/* ── H2 ─────────────────────────────────────────────────── */
+h2 {
+  font-family: var(--font-head);
+  font-size: clamp(36px, 5vw, 58px);
+  letter-spacing: 4px;
+  color: var(--text-bright);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+h2 .hl { color: var(--green); text-shadow: var(--glow-sm); }
+h2 .hl2 { color: var(--cyan); }
+
+/* ── Horizontal rule ────────────────────────────────────── */
+.hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  max-width: 100%;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.hero-inner { max-width: var(--max); margin: 0 auto; width: 100%; }
+
+.hero-pre {
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: var(--green-dim);
+  margin-bottom: 16px;
+}
+.hero-pre .blink {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  color: var(--green);
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(64px, 12vw, 160px);
+  letter-spacing: 8px;
+  color: var(--green);
+  text-shadow: var(--glow);
+  line-height: 0.9;
+  margin-bottom: 12px;
+}
+.hero-sub {
+  font-family: var(--font-head);
+  font-size: clamp(18px, 3vw, 32px);
+  letter-spacing: 6px;
+  color: var(--text-dim);
+  margin-bottom: 40px;
+}
+.hero-sub .hl { color: var(--cyan); }
+
+/* Terminal block */
+.terminal {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  font-size: 14px;
+  line-height: 1.9;
+  max-width: 640px;
+  margin-bottom: 40px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.4), var(--glow-sm);
+  position: relative;
+}
+.terminal::before {
+  content: '● ● ●';
+  position: absolute;
+  top: 10px; left: 14px;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 4px;
+}
+.terminal-body { margin-top: 12px; }
+.t-prompt { color: var(--green); }
+.t-cmd    { color: var(--text-bright); }
+.t-out    { color: var(--text-dim); padding-left: 16px; }
+.t-out.ok { color: var(--green-dim); }
+.t-out.hi { color: var(--cyan); }
+.t-cursor {
+  display: inline-block;
+  width: 10px; height: 16px;
+  background: var(--green);
+  animation: blink 0.8s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  font-family: var(--font-head);
+  font-size: 20px;
+  letter-spacing: 4px;
+  padding: 12px 36px;
+  background: var(--green);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  cursor: crosshair;
+  transition: box-shadow 0.2s, transform 0.1s;
+  display: inline-block;
+}
+.btn-primary:hover { box-shadow: var(--glow); transform: translateY(-1px); color: var(--bg); }
+.btn-secondary {
+  font-family: var(--font-head);
+  font-size: 20px;
+  letter-spacing: 4px;
+  padding: 12px 36px;
+  background: transparent;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  border-radius: var(--radius);
+  cursor: crosshair;
+  transition: box-shadow 0.2s, transform 0.1s;
+  display: inline-block;
+}
+.btn-secondary:hover { box-shadow: var(--glow-cyan); transform: translateY(-1px); }
+
+/* Hero stats bar */
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+.stat-item { }
+.stat-num {
+  font-family: var(--font-head);
+  font-size: 36px;
+  color: var(--green);
+  text-shadow: var(--glow-sm);
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AD STRIP
+═══════════════════════════════════════════════════════════ */
+.ad-strip {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+  text-align: center;
+  position: relative; z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FEATURES
+═══════════════════════════════════════════════════════════ */
+#features { padding-top: 80px; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 48px;
+}
+.feature-card {
+  background: var(--bg2);
+  padding: 32px 28px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute; top:0; left:0;
+  width: 3px; height: 0;
+  background: var(--green);
+  transition: height 0.3s ease;
+}
+.feature-card:hover { background: var(--bg3); }
+.feature-card:hover::before { height: 100%; }
+
+.feat-icon {
+  font-family: var(--font-head);
+  font-size: 42px;
+  color: var(--green);
+  text-shadow: var(--glow-sm);
+  margin-bottom: 12px;
+  display: block;
+}
+.feat-title {
+  font-family: var(--font-head);
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+.feat-body {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+.feat-tag {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  color: var(--green-dim);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DOWNLOAD / INSTALL
+═══════════════════════════════════════════════════════════ */
+#download {
+  background: var(--bg2);
+  padding-top: 80px; padding-bottom: 80px;
+  max-width: 100%;
+}
+#download .inner { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+.install-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.install-step {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.step-num {
+  font-family: var(--font-head);
+  font-size: 48px;
+  color: var(--border2);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.step-title {
+  font-family: var(--font-head);
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.step-body { font-size: 12px; color: var(--text-dim); line-height: 1.8; }
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-top: 32px;
+  font-size: 13px;
+  line-height: 2;
+  overflow-x: auto;
+}
+.code-block .ln { color: var(--text-dim); user-select: none; margin-right: 16px; }
+.code-block .cmd { color: var(--green); }
+.code-block .cmt { color: var(--text-dim); }
+.code-block .kw  { color: var(--cyan); }
+
+.dl-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.dl-note { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; }
+
+/* ═══════════════════════════════════════════════════════════
+   F-HUB
+═══════════════════════════════════════════════════════════ */
+#fhub { padding-top: 80px; }
+
+.fhub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+.fhub-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+.fhub-card:hover { border-color: var(--green-dim); }
+.fhub-card-title {
+  font-family: var(--font-head);
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+.fhub-card-body { font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+
+.layout-preview {
+  margin-top: 48px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.layout-preview-title {
+  font-size: 11px; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 20px;
+}
+.layout-demo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 440px;
+}
+.lkey {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 14px 8px;
+  text-align: center;
+  font-family: var(--font-head);
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--text);
+  transition: border-color 0.15s, color 0.15s;
+  cursor: default;
+}
+.lkey:hover { border-color: var(--green); color: var(--green); }
+.lkey.accent { border-color: var(--green-dark); color: var(--green); }
+
+/* ═══════════════════════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════════════════════ */
+#faq { padding-top: 80px; }
+
+.faq-list { margin-top: 48px; }
+.faq-item {
+  border-top: 1px solid var(--border);
+  padding: 0;
+  overflow: hidden;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--border); }
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 4px;
+  font-family: var(--font-head);
+  font-size: 19px;
+  letter-spacing: 2px;
+  color: var(--text-bright);
+  cursor: crosshair;
+  user-select: none;
+  gap: 16px;
+}
+.faq-q:hover { color: var(--green); }
+.faq-arrow {
+  font-size: 20px;
+  color: var(--text-dim);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-arrow { transform: rotate(45deg); color: var(--green); }
+.faq-a {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.9;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 4px;
+}
+.faq-item.open .faq-a { max-height: 400px; padding-bottom: 20px; }
+
+/* ═══════════════════════════════════════════════════════════
+   PRIVACY
+═══════════════════════════════════════════════════════════ */
+#privacy { padding-top: 80px; }
+.privacy-body {
+  margin-top: 36px;
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 2;
+  max-width: 760px;
+}
+.privacy-body h3 {
+  font-family: var(--font-head);
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--text);
+  margin-top: 28px;
+  margin-bottom: 6px;
+}
+.privacy-body p { margin-bottom: 10px; }
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 40px 32px 28px;
+}
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+.footer-brand-name {
+  font-family: var(--font-head);
+  font-size: 32px;
+  letter-spacing: 6px;
+  color: var(--green);
+  text-shadow: var(--glow-sm);
+  margin-bottom: 8px;
+}
+.footer-tagline { font-size: 11px; color: var(--text-dim); letter-spacing: 2px; }
+.footer-col-title {
+  font-family: var(--font-head);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; }
+.footer-links a:hover { color: var(--green); }
+.footer-bottom {
+  max-width: var(--max);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+.footer-zg {
+  font-family: var(--font-head);
+  font-size: 14px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+.footer-zg span { color: var(--green-dim); }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 60px 20px; }
+  #hero { padding-left: 20px; padding-right: 20px; }
+  .hero-title { letter-spacing: 4px; }
+  .fhub-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .hero-stats { gap: 24px; }
+  .install-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="nav-logo">F-KEYS <span>v0.1.0 ALPHA</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">FEATURES</a></li>
+    <li><a href="#download">INSTALL</a></li>
+    <li><a href="#fhub">F-HUB</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="docs.html">DOCS</a></li>
+  </ul>
+  <a href="#download" class="nav-cta">GET IT FREE</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#features"  onclick="toggleMenu()">FEATURES</a>
+  <a href="#download"  onclick="toggleMenu()">INSTALL</a>
+  <a href="#fhub"      onclick="toggleMenu()">F-HUB</a>
+  <a href="#faq"       onclick="toggleMenu()">FAQ</a>
+  <a href="docs.html"  onclick="toggleMenu()">DOCS</a>
+  <a href="#download"  onclick="toggleMenu()">GET IT FREE →</a>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-pre">
+      <span class="blink">▊</span>&nbsp; SYSTEM READY — ALPHA BUILD LIVE
+    </div>
+    <div class="hero-title">F-KEYS</div>
+    <div class="hero-sub">YOUR GLASS. <span class="hl">YOUR RULES.</span></div>
+
+    <div class="terminal">
+      <div class="terminal-body" id="terminal-body">
+        <div><span class="t-prompt">$&nbsp;</span><span class="t-cmd">node fkeys-server.js</span></div>
+        <div><span class="t-out ok">✓ WebSocket bridge active on :7332</span></div>
+        <div><span class="t-out ok">✓ Controller page served on :7331</span></div>
+        <div><span class="t-out hi">  QR code ready — scan with your phone</span></div>
+        <div><span class="t-out ok">✓ Keystroke injection: ACTIVE</span></div>
+        <div><span class="t-prompt">$&nbsp;</span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">DOWNLOAD ALPHA</a>
+      <a href="docs.html" class="btn-secondary">READ THE DOCS</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">0</span>
+        <div class="stat-label">HARDWARE REQUIRED</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">0</span>
+        <div class="stat-label">APP INSTALLS</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">∞</span>
+        <div class="stat-label">BUTTON LAYOUTS</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">FREE</span>
+        <div class="stat-label">ALPHA ACCESS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ad strip -->
+<div class="ad-strip">
+  <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8826956454892311"
+     data-ad-slot="auto"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<hr class="hr">
+
+<!-- ══════════════════════════════════════════════
+     FEATURES
+══════════════════════════════════════════════ -->
+<section id="features">
+  <div class="section-label reveal">CAPABILITIES</div>
+  <h2 class="reveal">THE PHONE IS <span class="hl">THE HARDWARE.</span></h2>
+  <p class="reveal" style="max-width:600px; color:var(--text-dim); font-size:13px; letter-spacing:1px; line-height:1.9;">
+    F-Keys turns any smartphone browser into a live macro keypad for your PC. No app store. No Stream Deck. No USB dongle. Scan a QR code and your glass becomes a fully programmable command center.
+  </p>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feat-icon">⌨</span>
+      <div class="feat-title">REAL KEYSTROKES</div>
+      <div class="feat-body">Every button press fires actual OS-level keystrokes on your PC. Ctrl+C, F5, media controls, custom combos — anything your keyboard can do, your phone now does.</div>
+      <span class="feat-tag">KERNEL-LEVEL INJECTION</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">⚡</span>
+      <div class="feat-title">ZERO INSTALL</div>
+      <div class="feat-body">Phone side needs nothing. Scan the QR code — your mobile browser IS the controller. No App Store, no APK sideload, no MDM headaches.</div>
+      <span class="feat-tag">PURE BROWSER</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">◈</span>
+      <div class="feat-title">LIVE LAYOUT EDITOR</div>
+      <div class="feat-body">Build your button grid on the PC dashboard. Label, action, color per key. Push to phone in one click. Export and share layouts as plain JSON files.</div>
+      <span class="feat-tag">DRAG + DROP CANVAS</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">◎</span>
+      <div class="feat-title">HAPTIC FEEDBACK</div>
+      <div class="feat-body">Tapping glass feels dead. F-Keys uses the phone's vibration engine to simulate tactile click resistance on every keypress. Digital buttons that push back.</div>
+      <span class="feat-tag">TAPTIC ENGINE</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">⟳</span>
+      <div class="feat-title">AUTO-RECONNECT</div>
+      <div class="feat-body">Drop off Wi-Fi? F-Keys auto-reconnects within 3 seconds. No stuck keys. No zombie processes. The bridge cleans itself up on every disconnect.</div>
+      <span class="feat-tag">FAULT-TOLERANT</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">☰</span>
+      <div class="feat-title">PORTABLE LAYOUTS</div>
+      <div class="feat-body">Your layout is a text file. QR-share it, email it, commit it to git. No proprietary format, no cloud lock-in. Your config, your filesystem, forever.</div>
+      <span class="feat-tag">JSON SCHEMA</span>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ══════════════════════════════════════════════
+     DOWNLOAD / INSTALL
+══════════════════════════════════════════════ -->
+<div id="download" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); position:relative; z-index:1; padding:80px 0;">
+  <div style="max-width:var(--max); margin:0 auto; padding:0 32px;">
+    <div class="section-label reveal">GET STARTED</div>
+    <h2 class="reveal">UP IN <span class="hl">60 SECONDS.</span></h2>
+    <p class="reveal" style="max-width:560px; color:var(--text-dim); font-size:13px; letter-spacing:1px; line-height:1.9;">
+      Three files, one terminal command. F-Keys runs on any PC with Node.js installed. No admin rights required for the server.
+    </p>
+
+    <div class="install-steps">
+      <div class="install-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">DOWNLOAD FILES</div>
+        <div class="step-body">Grab the three alpha files below. Drop them in a folder together. That folder is your F-Keys install.</div>
+      </div>
+      <div class="install-step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">INSTALL DEPS</div>
+        <div class="step-body">Open a terminal in that folder. Run the npm install command. Takes under a minute on most connections.</div>
+      </div>
+      <div class="install-step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">RUN THE SERVER</div>
+        <div class="step-body">One command starts everything. Open the dashboard URL in Chrome, scan the QR with your phone. You're live.</div>
+      </div>
+      <div class="install-step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">TAP A BUTTON</div>
+        <div class="step-body">Phone button → WebSocket → PC keystroke. The loop is complete. Build your layout and get to work.</div>
+      </div>
+    </div>
+
+    <div class="code-block reveal">
+      <div><span class="ln">1</span><span class="cmt"># Install dependencies (first run only)</span></div>
+      <div><span class="ln">2</span><span class="cmd">npm install ws qrcode @nut-tree-fork/nut-js</span></div>
+      <div><span class="ln">3</span></div>
+      <div><span class="ln">4</span><span class="cmt"># Start the server</span></div>
+      <div><span class="ln">5</span><span class="cmd">node fkeys-server.js</span></div>
+      <div><span class="ln">6</span></div>
+      <div><span class="ln">7</span><span class="cmt"># Open dashboard in Chrome, scan QR on your phone</span></div>
+      <div><span class="ln">8</span><span class="kw">→ http://[your-local-ip]:7331/</span></div>
+    </div>
+
+    <div class="dl-buttons reveal">
+      <a href="https://github.com/zengineco/fkeys/releases/latest" class="btn-primary" rel="noopener noreferrer" target="_blank" onclick="this.opener=null">↓ DOWNLOAD v0.1.0 ALPHA</a>
+      <a href="docs.html" class="btn-secondary">VIEW FULL DOCS</a>
+      <div class="dl-note">Requires Node.js v16+ · Windows / Mac / Linux · Free forever in alpha</div>
+    </div>
+  </div>
+</div>
+
+<!-- Ad strip -->
+<div class="ad-strip">
+  <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8826956454892311"
+     data-ad-slot="auto"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     F-HUB
+══════════════════════════════════════════════ -->
+<section id="fhub">
+  <div class="section-label reveal">COMMUNITY</div>
+  <h2 class="reveal">THE <span class="hl2">F-HUB</span></h2>
+  <p class="reveal" style="max-width:620px; color:var(--text-dim); font-size:13px; letter-spacing:1px; line-height:1.9;">
+    The community repository for F-Keys layouts. If you've built the perfect Photoshop panel, OBS stream deck, or coding terminal layout — upload it. The F-Hub is the App Store for keypads.
+  </p>
+
+  <div class="fhub-grid reveal">
+    <div class="fhub-card">
+      <div class="fhub-card-title">UPLOAD YOUR LAYOUT</div>
+      <div class="fhub-card-body">Export your layout JSON from the dashboard and submit it to the F-Hub. Tag it by software, use case, or category. Other users can download and run it in seconds.</div>
+    </div>
+    <div class="fhub-card">
+      <div class="fhub-card-title">BROWSE + SUBSCRIBE</div>
+      <div class="fhub-card-body">Find community-built layouts for the tools you use. Subscribe to a creator's layouts and get updates automatically. The F-Hub grows with the community.</div>
+    </div>
+    <div class="fhub-card">
+      <div class="fhub-card-title">PRO ARCHITECT TIER</div>
+      <div class="fhub-card-body">Top community contributors earn Official Partner status. More details coming with the v1.0.0 commercial release.</div>
+    </div>
+    <div class="fhub-card">
+      <div class="fhub-card-title">STATUS: COMING SOON</div>
+      <div class="fhub-card-body">F-Hub launches alongside the Sovereign tier. In the meantime, share your layout JSON directly in the F-Keys Discord and GitHub discussions.</div>
+    </div>
+  </div>
+
+  <div class="layout-preview reveal">
+    <div class="layout-preview-title">// SAMPLE COMMUNITY LAYOUT: OBS STREAM PANEL</div>
+    <div class="layout-demo">
+      <div class="lkey accent">SCENE 1</div>
+      <div class="lkey accent">SCENE 2</div>
+      <div class="lkey accent">SCENE 3</div>
+      <div class="lkey">SCENE 4</div>
+      <div class="lkey">MUTE MIC</div>
+      <div class="lkey">CAM OFF</div>
+      <div class="lkey">START REC</div>
+      <div class="lkey">END STRM</div>
+      <div class="lkey">CLIP IT</div>
+      <div class="lkey">LOWER 3</div>
+      <div class="lkey">ALERT</div>
+      <div class="lkey">BRB SCN</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ══════════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="section-label reveal">SUPPORT</div>
+  <h2 class="reveal">FREQUENTLY <span class="hl">ASKED.</span></h2>
+
+  <div class="faq-list reveal">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Does this work on iPhone?
+        <span class="faq-arrow">+</span>
+      </div>
+      <div class="faq-a">Yes. The phone controller is a standard mobile browser page — it works on iOS Safari, Chrome for iOS, and Android Chrome. The only iOS limitation is that haptic vibration is not supported by Safari; everything else (touch input, WebSocket, layout rendering) works fully.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do my phone and PC need to be on the same Wi-Fi?
+        <span class="faq-arrow">+</span>
+      </div>
+      <div class="faq-a">Yes — in the current alpha, your phone must be on the same local network as your PC. This covers most home and office setups. If your router isolates devices, you can hotspot your phone to your PC as a workaround. A cloud relay mode is on the roadmap for v1.0.0.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Why can't I install nut-js? Keystroke injection isn't working.
+        <span class="faq-arrow">+</span>
+      </div>
+      <div class="faq-a">nut-js requires native build tools to compile. On Windows, install Visual Studio Build Tools and Python 3, then re-run npm install. On Mac, run xcode-select --install. On Linux, run sudo apt install build-essential. Without nut-js, F-Keys runs in relay-only mode — keypresses are received by the dashboard but not injected into the OS. The full docs page covers this in detail.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is this free? What's the long-term pricing model?
+        <span class="faq-arrow">+</span>
+      </div>
+      <div class="faq-a">The current alpha is completely free, no accounts required. The commercial release will introduce a tiered model (Canvas free / Sovereign paid) with advanced features behind the paywall. Core functionality — real keystrokes, layout editor, QR pairing — will remain free. Pricing details will be published before launch.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Will anti-cheat software flag this?
+        <span class="faq-arrow">+</span>
+      </div>
+      <div class="faq-a">F-Keys injects keystrokes at the OS level using the same mechanism as accessibility software and legitimate automation tools. The server runs as a standard Node.js user-space process, not a kernel driver. Most anti-cheat systems target ring-0 drivers and memory readers — not a WebSocket-to-input bridge. Use at your own judgment for competitive gaming; it is safe for productivity, streaming, and creative work.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I contribute layouts or code?
+        <span class="faq-arrow">+</span>
+      </div>
+      <div class="faq-a">Yes. F-Keys is open to community layout contributions via GitHub. The codebase is Zengine IP but layout JSON files are open — submit them to the community layouts repository. Code contributions are by invitation during the alpha. Follow @ZengineHQ for updates on when the contribution pipeline opens fully.</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ══════════════════════════════════════════════
+     PRIVACY POLICY
+══════════════════════════════════════════════ -->
+<section id="privacy">
+  <div class="section-label reveal">LEGAL</div>
+  <h2 class="reveal">PRIVACY <span class="hl">POLICY</span></h2>
+
+  <div class="privacy-body reveal">
+    <p><em>Effective date: March 19, 2026. Last updated: March 19, 2026.</em></p>
+
+    <h3>1. WHO WE ARE</h3>
+    <p>F-Keys is a product of Zengine™, operated by Vincent Gonzalez. Contact: legal@zengine.site</p>
+
+    <h3>2. WHAT DATA WE COLLECT</h3>
+    <p><strong>The F-Keys server software collects no data.</strong> It runs entirely on your local machine. No keystrokes, layouts, or usage data are transmitted to Zengine servers. All communication stays on your local network between your PC and your phone.</p>
+    <p>This website (f-keys.com) uses Google AdSense to display advertisements. Google may collect anonymized usage data and set cookies in accordance with their own privacy policies. We do not receive individually identifiable data from Google AdSense.</p>
+
+    <h3>3. COOKIES</h3>
+    <p>This website does not set first-party cookies. Google AdSense may set third-party cookies for ad personalization. You can opt out of personalized advertising at <a href="https://adssettings.google.com" rel="noopener noreferrer" target="_blank">adssettings.google.com</a>.</p>
+
+    <h3>4. LOCAL SOFTWARE DATA</h3>
+    <p>The F-Keys server software processes keypress events locally to inject keystrokes into your OS. This processing is entirely local. No event data leaves your machine. Layout files are stored on your filesystem only.</p>
+
+    <h3>5. THIRD-PARTY SERVICES</h3>
+    <p>This site uses Google Fonts (fonts.googleapis.com) for typography. Google may log font request metadata. We use Google AdSense (pagead2.googlesyndication.com) for advertising. Both services are governed by Google's Privacy Policy at google.com/privacy.</p>
+
+    <h3>6. CHILDREN</h3>
+    <p>F-Keys is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has submitted personal information, contact us immediately.</p>
+
+    <h3>7. CHANGES TO THIS POLICY</h3>
+    <p>We may update this policy as the product evolves. The effective date above reflects the most recent revision. Continued use of the site or software constitutes acceptance of the current policy.</p>
+
+    <h3>8. CONTACT</h3>
+    <p>Questions about privacy: <a href="mailto:legal@zengine.site">legal@zengine.site</a></p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">F-KEYS</div>
+      <div class="footer-tagline">YOUR GLASS. YOUR RULES.<br>A ZENGINE™ PRODUCT</div>
+    </div>
+    <div>
+      <div class="footer-col-title">NAVIGATE</div>
+      <ul class="footer-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="#fhub">F-Hub</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="docs.html">Docs</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">ZENGINE™</div>
+      <ul class="footer-links">
+        <li><a href="https://www.zengine.site" rel="noopener noreferrer" target="_blank">zengine.site</a></li>
+        <li><a href="https://github.com/zengineco" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="mailto:hello@zengine.site">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Zengine™ — All rights reserved. F-Keys is Zengine original IP.</span>
+    <span class="footer-zg"><span>ZG</span> www.zengine.site</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
+<script>
+/* ===== CONFIG BLOCK ===== */
+var CFG = {
+  DEV_MODE:      true,
+  MATRIX_CHARS:  'アイウエオカキクケコFKEYSZENGINE01コントローラABCDEF0123',
+  MATRIX_SPEED:  45,
+  MATRIX_COLS:   0,
+};
+/* ===== END CONFIG BLOCK ===== */
+
+// ── Matrix rain ──────────────────────────────────────────
+var canvas = document.getElementById('matrix-canvas');
+var ctx = canvas.getContext('2d');
+var drops = [];
+var matrixTimer = null;
+
+function initMatrix() {
+  // READS: CFG, window dimensions
+  // WRITES: canvas, drops[]
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  var cols = Math.floor(canvas.width / 18);
+  CFG.MATRIX_COLS = cols;
+  drops = [];
+  for (var i = 0; i < cols; i++) {
+    drops[i] = Math.random() * -canvas.height;
+  }
+}
+
+function drawMatrix() {
+  // READS: drops[], canvas
+  // WRITES: canvas 2d context
+  ctx.fillStyle = 'rgba(10,14,10,0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#39ff14';
+  ctx.font = '14px monospace';
+  for (var i = 0; i < drops.length; i++) {
+    var ch = CFG.MATRIX_CHARS[Math.floor(Math.random() * CFG.MATRIX_CHARS.length)];
+    ctx.fillText(ch, i * 18, drops[i]);
+    if (drops[i] > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i] += 18;
+  }
+}
+
+initMatrix();
+matrixTimer = setInterval(drawMatrix, CFG.MATRIX_SPEED);
+window.addEventListener('resize', function() {
+  initMatrix();
+});
+
+// ── Scroll reveal ────────────────────────────────────────
+function initScroll() {
+  // READS: .reveal elements
+  // WRITES: .visible class
+  var els = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el) { obs.observe(el); });
+}
+initScroll();
+
+// ── FAQ accordion ────────────────────────────────────────
+function toggleFaq(qEl) {
+  // READS: .faq-item parent
+  // WRITES: .open class
+  var item = qEl.parentElement;
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i) {
+    i.classList.remove('open');
+  });
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ── Mobile menu ──────────────────────────────────────────
+function toggleMenu() {
+  // READS: #mobile-menu
+  // WRITES: .open class
+  var menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('open');
+}
+
+// Close mobile menu on outside click
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('mobile-menu');
+  if (!menu.contains(e.target) && !e.target.closest('.hamburger')) {
+    menu.classList.remove('open');
+  }
+});
+
+// ── Active nav highlight on scroll ──────────────────────
+var sections = document.querySelectorAll('section[id], div[id]');
+window.addEventListener('scroll', function() {
+  var scrollY = window.scrollY + 80;
+  sections.forEach(function(sec) {
+    var top = sec.offsetTop;
+    var bottom = top + sec.offsetHeight;
+    if (scrollY >= top && scrollY < bottom) {
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        a.style.color = '';
+      });
+      var link = document.querySelector('.nav-links a[href="#' + sec.id + '"]');
+      if (link) link.style.color = 'var(--green)';
+    }
+  });
+}, { passive: true });
+
+/*
+CHANGE LOG v1.0.0
+- Initial site build. Single-file, GitHub Pages ready.
+- Sections: hero, features (6 cards), download/install, F-Hub,
+  FAQ (6 items), privacy policy, footer.
+- Matrix rain canvas background (opacity 0.04).
+- Intersection observer scroll reveals on all .reveal elements.
+- FAQ accordion — one open at a time.
+- AdSense in head + two ad strips (hero + download).
+- Responsive: hamburger menu + single-col stack at <768px.
+- Active nav section highlight on scroll.
+- All links rel="noopener noreferrer" + opener=null on target=_blank.
+
+NEXT STEPS
+- Add waitlist/email form when Sovereign tier is ready to announce
+- Replace GitHub releases link with actual repo URL when live
+- Add OG meta tags (og:image, og:title) for social sharing
+- Consider adding a changelog/releases section as versions ship
+*/
+</script>
+</body>
+</html>
