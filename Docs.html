@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+// ============================================================
+// WORKFLOW STACK
+// File:        docs.html
+// Brand:       Zengine™ — F-Keys product site
+// Author:      Vincent Gonzalez | © 2026 Zengine™ | www.zengine.site
+// Version:     v1.0.0
+// Description: F-Keys documentation page. Quick-start guide,
+//              config reference, action strings, troubleshooting.
+// Boot Order:
+//   1. Fonts load
+//   2. DOM ready → initScroll(), initDocNav()
+//   3. Scroll spy → highlight active doc section in sidebar
+// External Deps:
+//   - Google Fonts: VT323, Share Tech Mono
+//   - Google AdSense: ca-pub-8826956454892311
+// Layout Target: sidebar + content, 768px+. Single col mobile.
+// Browser Target: Chrome / Firefox / Safari / Edge (latest)
+// ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="F-Keys Documentation — Quick-start guide, config reference, action strings, troubleshooting.">
+<title>F-KEYS DOCS — ZENGINE™</title>
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8826956454892311" crossorigin="anonymous"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:         #0a0e0a;
+  --bg2:        #0d120d;
+  --bg3:        #101610;
+  --panel:      #111911;
+  --border:     #1a2e1a;
+  --border2:    #243824;
+  --green:      #39ff14;
+  --green-dim:  #1a7a08;
+  --green-dark: #0d3d06;
+  --cyan:       #00ffcc;
+  --amber:      #ffb700;
+  --red:        #ff3131;
+  --text:       #a8c8a8;
+  --text-dim:   #3a5a3a;
+  --text-bright:#e0ffe0;
+  --font-head:  'VT323', 'Courier New', monospace;
+  --font-body:  'Share Tech Mono', 'Courier New', monospace;
+  --glow:       0 0 20px rgba(57,255,20,0.45);
+  --glow-sm:    0 0 8px  rgba(57,255,20,0.3);
+  --radius:     3px;
+  --sidebar-w:  240px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.8;
+  cursor: crosshair;
+}
+a { color: var(--green); text-decoration: none; }
+a:hover { text-shadow: var(--glow-sm); }
+
+/* Scanlines */
+body::before {
+  content: '';
+  position: fixed; inset:0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 8000;
+  height: 52px;
+  background: rgba(10,14,10,0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 26px;
+  letter-spacing: 5px;
+  color: var(--green);
+  text-shadow: var(--glow-sm);
+}
+.nav-logo span { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; }
+.nav-right { display: flex; align-items: center; gap: 24px; font-size: 12px; letter-spacing: 2px; }
+.nav-right a { color: var(--text-dim); }
+.nav-right a:hover { color: var(--green); }
+.nav-back {
+  font-family: var(--font-head);
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 5px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  transition: border-color 0.2s, color 0.2s;
+}
+.nav-back:hover { border-color: var(--green); color: var(--green); }
+
+/* ── Doc layout ── */
+.doc-wrap {
+  display: flex;
+  padding-top: 52px;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 28px 0;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+
+.sidebar-section-title {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  padding: 14px 20px 6px;
+  text-transform: uppercase;
+}
+.sidebar-link {
+  display: block;
+  padding: 7px 20px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.sidebar-link:hover { color: var(--text); border-left-color: var(--border2); }
+.sidebar-link.active { color: var(--green); border-left-color: var(--green); text-shadow: var(--glow-sm); }
+
+/* ── Doc content ── */
+.doc-content {
+  flex: 1;
+  max-width: 820px;
+  padding: 48px 48px 80px;
+  min-width: 0;
+}
+
+/* ── Doc sections ── */
+.doc-section {
+  margin-bottom: 72px;
+  scroll-margin-top: 72px;
+}
+
+.doc-h1 {
+  font-family: var(--font-head);
+  font-size: 52px;
+  letter-spacing: 5px;
+  color: var(--text-bright);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.doc-h1 span { color: var(--green); text-shadow: var(--glow-sm); }
+
+.doc-h2 {
+  font-family: var(--font-head);
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: var(--text-bright);
+  margin-bottom: 16px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.doc-h2::before {
+  content: '//';
+  color: var(--green-dim);
+  font-size: 18px;
+}
+
+.doc-h3 {
+  font-family: var(--font-head);
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  margin-bottom: 10px;
+  margin-top: 28px;
+}
+
+.doc-p {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 14px;
+  max-width: 680px;
+}
+.doc-p strong { color: var(--text); }
+.doc-p a { color: var(--green); }
+
+/* ── Code block ── */
+.doc-code {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  font-size: 13px;
+  line-height: 2;
+  overflow-x: auto;
+  margin: 16px 0;
+  position: relative;
+}
+.doc-code .ln  { color: var(--text-dim); user-select: none; margin-right: 16px; }
+.doc-code .cmd { color: var(--green); }
+.doc-code .cmt { color: var(--text-dim); }
+.doc-code .kw  { color: var(--cyan); }
+.doc-code .str { color: var(--amber); }
+.doc-code .err { color: var(--red); }
+.copy-btn {
+  position: absolute; top: 10px; right: 12px;
+  font-family: var(--font-head);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 3px 12px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text-dim);
+  border-radius: var(--radius);
+  cursor: crosshair;
+  transition: color 0.2s, border-color 0.2s;
+}
+.copy-btn:hover { color: var(--green); border-color: var(--green); }
+
+/* ── Inline code ── */
+code {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1px 7px;
+  border-radius: 2px;
+  font-size: 12px;
+  color: var(--cyan);
+  font-family: var(--font-body);
+}
+
+/* ── Table ── */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 16px 0;
+}
+.doc-table th {
+  font-family: var(--font-head);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  padding: 8px 12px;
+  background: var(--bg2);
+}
+.doc-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  vertical-align: top;
+}
+.doc-table td:first-child { color: var(--cyan); }
+.doc-table tr:hover td { background: rgba(57,255,20,0.03); }
+
+/* ── Callout boxes ── */
+.callout {
+  border-left: 3px solid var(--green-dim);
+  background: var(--bg2);
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 12px;
+  color: var(--text-dim);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.callout.warn { border-left-color: var(--amber); }
+.callout.err  { border-left-color: var(--red); }
+.callout strong { color: var(--text); display: block; margin-bottom: 4px; letter-spacing: 1px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .doc-content { padding: 28px 20px 60px; }
+  .doc-h1 { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">F-KEYS <span>DOCS</span></div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">← BACK TO SITE</a>
+  </div>
+</nav>
+
+<div class="doc-wrap">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-section-title">GETTING STARTED</div>
+    <a href="#overview"     class="sidebar-link active">Overview</a>
+    <a href="#requirements" class="sidebar-link">Requirements</a>
+    <a href="#quickstart"   class="sidebar-link">Quick-Start</a>
+
+    <div class="sidebar-section-title">REFERENCE</div>
+    <a href="#files"        class="sidebar-link">File Reference</a>
+    <a href="#config"       class="sidebar-link">Config Block</a>
+    <a href="#actions"      class="sidebar-link">Action Strings</a>
+    <a href="#layout-json"  class="sidebar-link">Layout JSON</a>
+
+    <div class="sidebar-section-title">USAGE</div>
+    <a href="#dashboard"    class="sidebar-link">Dashboard Guide</a>
+    <a href="#controller"   class="sidebar-link">Phone Controller</a>
+    <a href="#pairing"      class="sidebar-link">QR Pairing</a>
+
+    <div class="sidebar-section-title">TROUBLESHOOTING</div>
+    <a href="#nutjs"        class="sidebar-link">nut-js Install</a>
+    <a href="#firewall"     class="sidebar-link">Firewall / Ports</a>
+    <a href="#ios"          class="sidebar-link">iOS Notes</a>
+    <a href="#errors"       class="sidebar-link">Common Errors</a>
+
+    <div class="sidebar-section-title">PROJECT</div>
+    <a href="#roadmap"      class="sidebar-link">Roadmap</a>
+    <a href="#changelog"    class="sidebar-link">Changelog</a>
+  </aside>
+
+  <!-- ── Content ── -->
+  <main class="doc-content">
+
+    <!-- ─── Overview ─── -->
+    <div class="doc-section" id="overview">
+      <div class="doc-h1">F-KEYS <span>DOCS</span></div>
+      <p class="doc-p" style="font-size:11px; letter-spacing:3px; color:var(--text-dim);">v0.1.0 ALPHA — © 2026 ZENGINE™</p>
+
+      <div class="doc-h2">Overview</div>
+      <p class="doc-p">F-Keys turns your smartphone browser into a live macro keypad for your PC. It works entirely on your local network — no cloud, no accounts, no installed apps on the phone.</p>
+      <p class="doc-p">The system has three parts: a <strong>Node.js server</strong> that bridges communication, a <strong>PC dashboard</strong> where you build and manage button layouts, and a <strong>phone controller page</strong> that becomes your physical keypad.</p>
+
+      <div class="callout">
+        <strong>ALPHA STATUS</strong>
+        This is a v0.1.0 alpha build. Core functionality is complete and working. Some advanced features (cloud relay, long-press actions, multi-page layouts) are on the roadmap. Report issues via GitHub.
+      </div>
+    </div>
+
+    <!-- ─── Requirements ─── -->
+    <div class="doc-section" id="requirements">
+      <div class="doc-h2">Requirements</div>
+
+      <div class="doc-h3">PC</div>
+      <table class="doc-table">
+        <tr><th>Requirement</th><th>Details</th></tr>
+        <tr><td>Node.js</td><td>v16.0.0 or higher. Download at nodejs.org</td></tr>
+        <tr><td>npm</td><td>Bundled with Node.js. v7+ recommended.</td></tr>
+        <tr><td>OS</td><td>Windows 10/11, macOS 11+, Ubuntu 20.04+</td></tr>
+        <tr><td>Browser</td><td>Chrome or Edge (latest) for the dashboard</td></tr>
+        <tr><td>Ports</td><td>7331 (HTTP) and 7332 (WebSocket) must be open</td></tr>
+      </table>
+
+      <div class="doc-h3">Phone</div>
+      <table class="doc-table">
+        <tr><th>Requirement</th><th>Details</th></tr>
+        <tr><td>Browser</td><td>Chrome for Android, Safari for iOS, Firefox. Any modern mobile browser.</td></tr>
+        <tr><td>Network</td><td>Same Wi-Fi network as PC, or hotspot to PC</td></tr>
+        <tr><td>App install</td><td>None required</td></tr>
+      </table>
+
+      <div class="doc-h3">Native Build Tools (for keystroke injection)</div>
+      <p class="doc-p">The <code>@nut-tree-fork/nut-js</code> package compiles native bindings. Without it, F-Keys runs in relay-only mode. See the <a href="#nutjs">nut-js troubleshooting section</a>.</p>
+      <table class="doc-table">
+        <tr><th>OS</th><th>Required Tools</th></tr>
+        <tr><td>Windows</td><td>Visual Studio Build Tools 2019+ with "Desktop development with C++" workload + Python 3</td></tr>
+        <tr><td>macOS</td><td>Xcode Command Line Tools: <code>xcode-select --install</code></td></tr>
+        <tr><td>Linux</td><td><code>sudo apt install build-essential libxtst-dev</code></td></tr>
+      </table>
+    </div>
+
+    <!-- ─── Quick-Start ─── -->
+    <div class="doc-section" id="quickstart">
+      <div class="doc-h2">Quick-Start</div>
+
+      <div class="doc-h3">Step 1 — Get the files</div>
+      <p class="doc-p">Download the three alpha files from the <a href="index.html#download">download section</a> and place them in the same folder:</p>
+      <div class="doc-code">
+        <span class="cmd">fkeys-server.js</span><br>
+        <span class="cmd">fkeys-dashboard.html</span><br>
+        <span class="cmd">fkeys-controller.html</span>
+      </div>
+
+      <div class="doc-h3">Step 2 — Install dependencies</div>
+      <p class="doc-p">Open a terminal in that folder and run:</p>
+      <div class="doc-code">
+        <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+        <span class="ln">1</span><span class="cmd">npm install ws qrcode @nut-tree-fork/nut-js</span>
+      </div>
+      <div class="callout warn">
+        <strong>IF NUT-JS FAILS</strong>
+        If the install errors on @nut-tree-fork/nut-js, run <code>npm install ws qrcode</code> first to get the server running, then fix nut-js separately. See <a href="#nutjs">nut-js troubleshooting</a>.
+      </div>
+
+      <div class="doc-h3">Step 3 — Start the server</div>
+      <div class="doc-code">
+        <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+        <span class="ln">1</span><span class="cmd">node fkeys-server.js</span>
+      </div>
+      <p class="doc-p">You'll see a banner with your server URLs:</p>
+      <div class="doc-code">
+        <span class="kw">╔══════════════════════════════════════════════╗</span><br>
+        <span class="kw">║         F-KEYS SERVER v0.1.0 RUNNING         ║</span><br>
+        <span class="kw">╠══════════════════════════════════════════════╣</span><br>
+        <span class="cmd">║  Dashboard:  http://192.168.1.42:7331/</span><br>
+        <span class="cmd">║  Controller: http://192.168.1.42:7331/controller</span><br>
+        <span class="cmd">║  QR Code:    http://192.168.1.42:7331/qr</span><br>
+        <span class="kw">╚══════════════════════════════════════════════╝</span>
+      </div>
+
+      <div class="doc-h3">Step 4 — Open the dashboard</div>
+      <p class="doc-p">Open the Dashboard URL in Chrome or Edge on your PC. The status bar should show <strong>SERVER: LIVE</strong> within a second.</p>
+
+      <div class="doc-h3">Step 5 — Pair your phone</div>
+      <p class="doc-p">On your phone: open the camera app (or a QR scanner), scan the QR code shown on the dashboard. Your phone's browser opens the controller page and connects automatically. The dashboard status bar shows <strong>CONTROLLER: LIVE</strong>.</p>
+
+      <div class="doc-h3">Step 6 — Press a button</div>
+      <p class="doc-p">Tap any button on your phone. The dashboard live feed lights up showing the keypress, and the action fires as a real OS-level keystroke on your PC.</p>
+    </div>
+
+    <!-- Ad -->
+    <div style="margin: 16px 0;">
+      <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8826956454892311"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- ─── Files ─── -->
+    <div class="doc-section" id="files">
+      <div class="doc-h2">File Reference</div>
+      <table class="doc-table">
+        <tr><th>File</th><th>Role</th><th>Runs On</th></tr>
+        <tr><td>fkeys-server.js</td><td>HTTP server + WebSocket bridge + keystroke injector</td><td>PC (Node.js)</td></tr>
+        <tr><td>fkeys-dashboard.html</td><td>Layout builder, pairing QR display, live feed</td><td>PC browser</td></tr>
+        <tr><td>fkeys-controller.html</td><td>Touch keypad UI served to phone browser</td><td>Phone browser (via server)</td></tr>
+      </table>
+      <p class="doc-p">All three files must live in the same directory. The server serves <code>fkeys-controller.html</code> at the <code>/controller</code> route, injecting your local IP at serve time so the phone auto-connects.</p>
+    </div>
+
+    <!-- ─── Config ─── -->
+    <div class="doc-section" id="config">
+      <div class="doc-h2">Config Block</div>
+      <p class="doc-p">Each file has a <code>CONFIG</code> / <code>CFG</code> block at the top. Modify these values to adjust behavior without digging into the logic.</p>
+
+      <div class="doc-h3">fkeys-server.js</div>
+      <table class="doc-table">
+        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+        <tr><td>HTTP_PORT</td><td>7331</td><td>Port for the HTTP server. Change if 7331 is in use.</td></tr>
+        <tr><td>WS_PORT</td><td>7332</td><td>Port for the WebSocket bridge. Must match dashboard + controller CFG.</td></tr>
+        <tr><td>DEV_MODE</td><td>true</td><td>Verbose console logging. Set false for silent production mode.</td></tr>
+        <tr><td>KEY_DELAY_MS</td><td>30</td><td>Delay between keydown and keyup in milliseconds. Increase to 60–80 if keystrokes miss in games.</td></tr>
+        <tr><td>MAX_CLIENTS</td><td>8</td><td>Max simultaneous WebSocket connections. Covers multiple phones + dashboards.</td></tr>
+      </table>
+
+      <div class="doc-h3">fkeys-dashboard.html</div>
+      <table class="doc-table">
+        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+        <tr><td>WS_PORT</td><td>7332</td><td>Must match server WS_PORT.</td></tr>
+        <tr><td>HTTP_PORT</td><td>7331</td><td>Must match server HTTP_PORT. Used to fetch QR and /ip endpoint.</td></tr>
+        <tr><td>PING_INTERVAL</td><td>4000</td><td>How often (ms) the dashboard pings the server for latency measurement.</td></tr>
+        <tr><td>MAX_FEED</td><td>40</td><td>Maximum entries in the live keypress feed before oldest are removed.</td></tr>
+      </table>
+
+      <div class="doc-h3">fkeys-controller.html</div>
+      <table class="doc-table">
+        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+        <tr><td>WS_PORT</td><td>7332</td><td>Auto-injected by server. Override manually if needed.</td></tr>
+        <tr><td>PING_INTERVAL</td><td>5000</td><td>How often (ms) the controller pings for latency display.</td></tr>
+        <tr><td>HAPTIC_MS</td><td>40</td><td>Vibration duration in ms on each key press. Set 0 to disable.</td></tr>
+      </table>
+    </div>
+
+    <!-- ─── Action Strings ─── -->
+    <div class="doc-section" id="actions">
+      <div class="doc-h2">Action Strings</div>
+      <p class="doc-p">The <strong>Action</strong> field in the key editor accepts a <code>+</code>-separated keystroke string. F-Keys resolves each token to an OS key via nut-js.</p>
+
+      <div class="doc-h3">Format</div>
+      <div class="doc-code">
+        <span class="cmt"># Single key</span><br>
+        <span class="cmd">f5</span><br><br>
+        <span class="cmt"># Key combo</span><br>
+        <span class="cmd">ctrl+c</span><br><br>
+        <span class="cmt"># Three-key combo</span><br>
+        <span class="cmd">ctrl+shift+s</span><br><br>
+        <span class="cmt"># Media / system key</span><br>
+        <span class="cmd">mute</span>
+      </div>
+
+      <div class="doc-h3">Supported Tokens</div>
+      <table class="doc-table">
+        <tr><th>Token</th><th>Key</th></tr>
+        <tr><td>ctrl, control</td><td>Left Control</td></tr>
+        <tr><td>shift</td><td>Left Shift</td></tr>
+        <tr><td>alt</td><td>Left Alt</td></tr>
+        <tr><td>win, cmd, super</td><td>Windows / Command key</td></tr>
+        <tr><td>enter, return</td><td>Enter / Return</td></tr>
+        <tr><td>esc, escape</td><td>Escape</td></tr>
+        <tr><td>space</td><td>Space bar</td></tr>
+        <tr><td>tab</td><td>Tab</td></tr>
+        <tr><td>backspace</td><td>Backspace</td></tr>
+        <tr><td>delete</td><td>Delete</td></tr>
+        <tr><td>up, down, left, right</td><td>Arrow keys</td></tr>
+        <tr><td>f1 … f12</td><td>Function keys F1–F12</td></tr>
+        <tr><td>volumeup</td><td>Volume Up</td></tr>
+        <tr><td>volumedown</td><td>Volume Down</td></tr>
+        <tr><td>mute</td><td>Audio Mute</td></tr>
+        <tr><td>playpause</td><td>Media Play/Pause</td></tr>
+        <tr><td>home, end</td><td>Home / End</td></tr>
+        <tr><td>pageup, pagedown</td><td>Page Up / Down</td></tr>
+        <tr><td>a–z, 0–9</td><td>Letter and number keys</td></tr>
+      </table>
+
+      <div class="callout">
+        <strong>UNRECOGNIZED TOKEN?</strong>
+        If you use a token not in the table, the server logs a warning: <code>WARN: unresolved key token "[x]"</code>. That token is skipped but other keys in the combo still fire.
+      </div>
+    </div>
+
+    <!-- ─── Layout JSON ─── -->
+    <div class="doc-section" id="layout-json">
+      <div class="doc-h2">Layout JSON</div>
+      <p class="doc-p">Layouts are plain JSON files. Export from the dashboard, share freely, import on any F-Keys install.</p>
+
+      <div class="doc-h3">Schema</div>
+      <div class="doc-code">
+<span class="kw">{</span><br>
+<span class="str">  "cols"</span><span class="kw">: 4,</span>         <span class="cmt">// grid columns (1–8)</span><br>
+<span class="str">  "rows"</span><span class="kw">: 3,</span>         <span class="cmt">// grid rows (1–8)</span><br>
+<span class="str">  "keys"</span><span class="kw">: [</span><br>
+<span class="kw">    {</span><br>
+<span class="str">      "id"</span><span class="kw">:     </span><span class="str">"k1"</span><span class="kw">,</span>       <span class="cmt">// unique string ID</span><br>
+<span class="str">      "label"</span><span class="kw">: </span><span class="str">"COPY"</span><span class="kw">,</span>     <span class="cmt">// button display text</span><br>
+<span class="str">      "sub"</span><span class="kw">:   </span><span class="str">"ctrl+c"</span><span class="kw">,</span>   <span class="cmt">// subtitle / hint text</span><br>
+<span class="str">      "action"</span><span class="kw">:</span><span class="str">"ctrl+c"</span><span class="kw">,</span>   <span class="cmt">// keystroke action string</span><br>
+<span class="str">      "color"</span><span class="kw">: </span><span class="str">"#111820"</span>   <span class="cmt">// optional hex background</span><br>
+<span class="kw">    }</span><br>
+<span class="kw">  ]</span><br>
+<span class="kw">}</span>
+      </div>
+
+      <p class="doc-p">All fields except <code>id</code>, <code>label</code>, and <code>action</code> are optional. Omitting <code>color</code> uses the default dark background.</p>
+    </div>
+
+    <!-- ─── Dashboard Guide ─── -->
+    <div class="doc-section" id="dashboard">
+      <div class="doc-h2">Dashboard Guide</div>
+
+      <div class="doc-h3">Left Panel — Pairing</div>
+      <p class="doc-p">The server IP is auto-detected on load. If it shows the wrong IP, type the correct one and click <strong>CONNECT</strong>. The QR code updates automatically. Below the QR code, the Grid Config inputs control how many columns and rows your layout has.</p>
+
+      <div class="doc-h3">Center Canvas — Layout Builder</div>
+      <p class="doc-p">Click any key to select it (highlighted green border). Use the Key Editor in the right panel to change its label, subtitle, action, and background color. Changes update the button in real time. Click <strong>+ ADD KEY</strong> to append a new key. Click <strong>− REMOVE</strong> to delete the selected key.</p>
+
+      <div class="doc-h3">Right Panel — Key Editor</div>
+      <p class="doc-p"><strong>Label:</strong> What's displayed on the button (large text).<br>
+      <strong>Subtitle:</strong> Small hint text below the label — usually the action string or a description.<br>
+      <strong>Action:</strong> The keystroke string fired when the button is pressed. See <a href="#actions">Action Strings</a>.<br>
+      <strong>Background Color:</strong> Per-key color picker. Use it to group related keys visually.</p>
+
+      <div class="doc-h3">Right Panel — Live Feed</div>
+      <p class="doc-p">Every keypress from the phone appears here in real time with the key label, action fired, and timestamp. Useful for confirming the loop is working.</p>
+
+      <div class="doc-h3">▶ PUSH TO PHONE</div>
+      <p class="doc-p">Sends your current layout to the phone over WebSocket. The phone re-renders its grid immediately. Push any time you make layout changes — they don't apply to the phone automatically.</p>
+    </div>
+
+    <!-- ─── Phone Controller ─── -->
+    <div class="doc-section" id="controller">
+      <div class="doc-h2">Phone Controller</div>
+      <p class="doc-p">The controller page is a touch-optimized version of your layout. It auto-scales to fit your screen. The status badge at the top right shows connection state: <strong>LIVE</strong> (green), <strong>OFFLINE</strong> (red), <strong>CONNECTING…</strong>.</p>
+      <p class="doc-p">Tap a button — the visual press animation fires, the phone vibrates (Android), and the keystroke is sent over WebSocket to your PC within milliseconds.</p>
+      <p class="doc-p">The controller auto-reconnects if it loses the WebSocket connection. No manual reload needed.</p>
+    </div>
+
+    <!-- ─── QR Pairing ─── -->
+    <div class="doc-section" id="pairing">
+      <div class="doc-h2">QR Pairing</div>
+      <p class="doc-p">The QR code encodes your controller URL: <code>http://[your-local-ip]:7331/controller</code>. Scan it with your phone's camera or a QR app. The browser opens automatically.</p>
+      <p class="doc-p">If the QR scan opens to an error, check that your firewall allows port 7331 (see <a href="#firewall">Firewall / Ports</a>). You can also navigate manually by typing the controller URL into your phone's browser.</p>
+
+      <div class="callout">
+        <strong>BOOKMARK THE URL</strong>
+        Once connected once, bookmark the controller URL on your phone. Future sessions just need the server running — no QR scan needed.
+      </div>
+    </div>
+
+    <!-- ─── nut-js ─── -->
+    <div class="doc-section" id="nutjs">
+      <div class="doc-h2">nut-js Install</div>
+      <p class="doc-p"><code>@nut-tree-fork/nut-js</code> is a native module that requires compilation. If it fails to install, follow the steps for your OS:</p>
+
+      <div class="doc-h3">Windows</div>
+      <div class="doc-code">
+        <span class="cmt"># 1. Install Visual Studio Build Tools</span><br>
+        <span class="cmt">#    Download: https://visualstudio.microsoft.com/visual-cpp-build-tools/</span><br>
+        <span class="cmt">#    Select: "Desktop development with C++"</span><br><br>
+        <span class="cmt"># 2. Install Python 3 (from microsoft store or python.org)</span><br><br>
+        <span class="cmt"># 3. Configure npm</span><br>
+        <span class="cmd">npm config set msvs_version 2019</span><br><br>
+        <span class="cmt"># 4. Re-install</span><br>
+        <span class="cmd">npm install @nut-tree-fork/nut-js</span>
+      </div>
+
+      <div class="doc-h3">macOS</div>
+      <div class="doc-code">
+        <span class="cmd">xcode-select --install</span><br>
+        <span class="cmd">npm install @nut-tree-fork/nut-js</span>
+      </div>
+
+      <div class="doc-h3">Linux (Ubuntu / Debian)</div>
+      <div class="doc-code">
+        <span class="cmd">sudo apt install build-essential libxtst-dev python3</span><br>
+        <span class="cmd">npm install @nut-tree-fork/nut-js</span>
+      </div>
+
+      <div class="callout warn">
+        <strong>RELAY-ONLY MODE</strong>
+        Without nut-js, the server still runs and keypresses appear in the dashboard live feed — but no OS keystrokes are fired. The server logs: <code>Keystroke injection: INACTIVE</code> on startup.
+      </div>
+    </div>
+
+    <!-- ─── Firewall ─── -->
+    <div class="doc-section" id="firewall">
+      <div class="doc-h2">Firewall / Ports</div>
+      <p class="doc-p">F-Keys uses two ports. Both must be reachable from your phone:</p>
+      <table class="doc-table">
+        <tr><th>Port</th><th>Protocol</th><th>Purpose</th></tr>
+        <tr><td>7331</td><td>TCP (HTTP)</td><td>Serves dashboard + controller pages, QR endpoint</td></tr>
+        <tr><td>7332</td><td>TCP (WebSocket)</td><td>Real-time keypress relay</td></tr>
+      </table>
+
+      <div class="doc-h3">Windows Defender Firewall</div>
+      <p class="doc-p">On first run, Windows may prompt you to allow Node.js through the firewall. Click <strong>Allow</strong> for private networks. If you missed the prompt, open Windows Defender Firewall → Allow an app → add <code>node.exe</code> with Private checked.</p>
+
+      <div class="doc-h3">Router AP Isolation</div>
+      <p class="doc-p">Some routers block device-to-device traffic on the same Wi-Fi (AP isolation / client isolation). If your phone can't reach the PC, check your router settings. Alternatively, hotspot your phone directly to the PC — this bypasses the router entirely.</p>
+
+      <div class="doc-h3">Changing Ports</div>
+      <p class="doc-p">Edit <code>HTTP_PORT</code> and <code>WS_PORT</code> in the CONFIG BLOCK at the top of <code>fkeys-server.js</code>. Update the matching <code>WS_PORT</code> and <code>HTTP_PORT</code> values in <code>fkeys-dashboard.html</code>'s CFG block.</p>
+    </div>
+
+    <!-- ─── iOS ─── -->
+    <div class="doc-section" id="ios">
+      <div class="doc-h2">iOS Notes</div>
+      <table class="doc-table">
+        <tr><th>Feature</th><th>iOS Safari</th><th>iOS Chrome</th></tr>
+        <tr><td>WebSocket</td><td>✓ Supported</td><td>✓ Supported</td></tr>
+        <tr><td>Touch input</td><td>✓ Supported</td><td>✓ Supported</td></tr>
+        <tr><td>Haptic vibration</td><td>✗ Not available</td><td>✗ Not available</td></tr>
+        <tr><td>Add to Home Screen</td><td>✓ Works</td><td>✓ Works</td></tr>
+        <tr><td>Background WebSocket</td><td>Drops after ~60s</td><td>Drops after ~60s</td></tr>
+      </table>
+      <p class="doc-p">The auto-reconnect logic handles iOS background drops. When you return to the browser, the controller reconnects within 3 seconds automatically.</p>
+    </div>
+
+    <!-- ─── Common Errors ─── -->
+    <div class="doc-section" id="errors">
+      <div class="doc-h2">Common Errors</div>
+
+      <div class="doc-h3">Dashboard shows "DISCONNECTED" immediately</div>
+      <p class="doc-p">The server is not running, or the IP in the dashboard connect field is wrong. Check the terminal where you ran <code>node fkeys-server.js</code>. If the server crashed, check for port-in-use errors and change <code>HTTP_PORT</code> or <code>WS_PORT</code> if needed.</p>
+
+      <div class="doc-h3">Phone QR scan fails / "Site can't be reached"</div>
+      <p class="doc-p">Firewall is blocking port 7331, or the phone is on a different network. See <a href="#firewall">Firewall / Ports</a>.</p>
+
+      <div class="doc-h3">Keystrokes fire on the wrong window</div>
+      <p class="doc-p">nut-js injects keystrokes into whichever window has OS focus. Click the window you want to control on your PC before pressing phone buttons.</p>
+
+      <div class="doc-h3">fkeys-controller.html not found</div>
+      <p class="doc-p">The server returns this message if <code>fkeys-controller.html</code> is not in the same directory as <code>fkeys-server.js</code>. Move both files to the same folder.</p>
+
+      <div class="doc-code">
+        <span class="err">fkeys-controller.html not found — make sure it is in the same folder as fkeys-server.js</span>
+      </div>
+
+      <div class="doc-h3">Error: listen EADDRINUSE :::7331</div>
+      <p class="doc-p">Another process is already using port 7331. Either stop that process or change <code>HTTP_PORT</code> in the server CONFIG BLOCK to a free port like 7333.</p>
+    </div>
+
+    <!-- ─── Roadmap ─── -->
+    <div class="doc-section" id="roadmap">
+      <div class="doc-h2">Roadmap</div>
+      <table class="doc-table">
+        <tr><th>Feature</th><th>Target</th><th>Status</th></tr>
+        <tr><td>Layout persistence to disk</td><td>v0.2.0</td><td>Planned</td></tr>
+        <tr><td>Long-press alternate action</td><td>v0.2.0</td><td>Planned</td></tr>
+        <tr><td>Swipe gesture per key (4 actions)</td><td>v0.2.0</td><td>Planned</td></tr>
+        <tr><td>Drag-to-reorder keys on dashboard</td><td>v0.3.0</td><td>Planned</td></tr>
+        <tr><td>Multi-page layouts (page tabs)</td><td>v0.3.0</td><td>Planned</td></tr>
+        <tr><td>Cloud relay (cross-network pairing)</td><td>v1.0.0</td><td>Planned</td></tr>
+        <tr><td>F-Hub community layout repository</td><td>v1.0.0</td><td>Planned</td></tr>
+        <tr><td>Rotary dial widget</td><td>v1.0.0</td><td>Planned</td></tr>
+        <tr><td>X/Y touchpad widget</td><td>v1.0.0</td><td>Planned</td></tr>
+        <tr><td>Sovereign tier (paid features)</td><td>v1.0.0</td><td>Planned</td></tr>
+        <tr><td>USB HID fallback mode</td><td>v1.1.0</td><td>Future</td></tr>
+        <tr><td>MIDI / OSC output mode</td><td>v1.1.0</td><td>Future</td></tr>
+      </table>
+    </div>
+
+    <!-- ─── Changelog ─── -->
+    <div class="doc-section" id="changelog">
+      <div class="doc-h2">Changelog</div>
+
+      <div class="doc-h3">v0.1.0 — 2026-03-19</div>
+      <p class="doc-p">Initial alpha release.</p>
+      <div class="doc-code">
+        <span class="cmd">+ fkeys-server.js: HTTP + WebSocket bridge, nut-js keystroke injection</span><br>
+        <span class="cmd">+ fkeys-dashboard.html: layout builder, QR pairing, live feed</span><br>
+        <span class="cmd">+ fkeys-controller.html: touch-optimized phone keypad</span><br>
+        <span class="cmd">+ QR pairing via /qr endpoint</span><br>
+        <span class="cmd">+ Auto-reconnect on both dashboard and controller</span><br>
+        <span class="cmd">+ Layout export / import as JSON</span><br>
+        <span class="cmd">+ Push layout from dashboard to phone over WebSocket</span><br>
+        <span class="cmd">+ Haptic feedback on Android</span><br>
+        <span class="cmd">+ 12 default keys with common actions pre-mapped</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ===== CONFIG BLOCK ===== */
+var CFG = { DEV_MODE: true };
+/* ===== END CONFIG BLOCK ===== */
+
+// ── Scroll spy ───────────────────────────────────────────
+var docSections = document.querySelectorAll('.doc-section');
+var sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+window.addEventListener('scroll', function() {
+  var scrollY = window.scrollY + 80;
+  var active = null;
+  docSections.forEach(function(sec) {
+    if (sec.offsetTop <= scrollY) active = sec.id;
+  });
+  sidebarLinks.forEach(function(link) {
+    link.classList.remove('active');
+    if (active && link.getAttribute('href') === '#' + active) {
+      link.classList.add('active');
+    }
+  });
+}, { passive: true });
+
+// ── Copy code button ─────────────────────────────────────
+function copyCode(btn) {
+  var block = btn.parentElement;
+  var text = block.innerText
+    .replace(/^COPY\n/, '')
+    .replace(/\n$/, '');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'COPIED';
+    setTimeout(function() { btn.textContent = 'COPY'; }, 1500);
+  }).catch(function() {
+    btn.textContent = 'ERROR';
+    setTimeout(function() { btn.textContent = 'COPY'; }, 1500);
+  });
+}
+
+/*
+CHANGE LOG v1.0.0
+- Initial docs page. All sections: overview, requirements,
+  quick-start, file reference, config, action strings,
+  layout JSON schema, dashboard guide, controller guide,
+  QR pairing, nut-js install, firewall, iOS notes,
+  common errors, roadmap, changelog.
+- Sticky sidebar with scroll spy active-link highlight.
+- Copy button on code blocks.
+- AdSense mid-page ad placement.
+- Responsive: sidebar hidden on mobile (<768px).
+
+NEXT STEPS
+- Add v0.2.0 docs when long-press + swipe features ship
+- Add search/filter within docs page
+- Add OG meta for docs page social sharing
+*/
+</script>
+</body>
+</html>
