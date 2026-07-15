@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RemapWrap — F-Keys</title>
+<meta name="description" content="Turn your phone into programmable hardware. No app. No extra hardware. Just glass and glass.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e0a; --panel: #111911; --border: #1a2e1a;
+  --green: #39ff14; --cyan: #00ffcc; --text: #a8c8a8; --dim: #3a5a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Share Tech Mono', monospace;
+  line-height: 1.6; overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+  pointer-events: none; z-index: 9000;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  background: rgba(10,14,10,0.95); border-bottom: 1px solid var(--border);
+  padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-family: 'VT323', monospace; font-size: 24px; color: var(--green); letter-spacing: 3px; }
+.back-link { color: var(--dim); text-decoration: none; }
+
+.hero {
+  min-height: 100vh; display: flex; align-items: center; padding: 80px 2rem 4rem;
+  position: relative;
+}
+.hero-content { max-width: 820px; margin: 0 auto; text-align: center; }
+.hero h1 {
+  font-family: 'VT323', monospace; font-size: clamp(52px, 10vw, 96px);
+  color: var(--green); letter-spacing: 6px; margin-bottom: 1rem;
+}
+.tagline { font-size: 1.5rem; color: var(--dim); margin-bottom: 2.5rem; }
+
+.terminal {
+  background: var(--panel); border: 1px solid var(--border);
+  padding: 20px 24px; margin: 2rem auto; max-width: 640px;
+  text-align: left; font-size: 14px;
+}
+.t-prompt { color: var(--green); }
+.t-out.ok { color: #00c97a; }
+
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; max-width: 1100px; margin: 4rem auto;
+}
+.feature-card {
+  background: var(--panel); border: 1px solid var(--border);
+  padding: 2rem; transition: all 0.2s;
+}
+.feature-card:hover { border-color: var(--green); transform: translateY(-4px); }
+
+.btn {
+  font-family: 'VT323', monospace; font-size: 1.4rem; padding: 14px 36px;
+  border: 2px solid var(--green); color: var(--green); background: transparent;
+  cursor: pointer; display: inline-block; margin: 0.5rem;
+}
+.btn:hover { background: var(--green); color: #0a0e0a; }
+
+footer { text-align: center; padding: 3rem 2rem; color: var(--dim); border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">F-KEYS / REMAPWRAP</div>
+  <a href="index.html" class="back-link">← Back to F-Keys</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>REMAPWRAP</h1>
+    <p class="tagline">YOUR GLASS.<br>YOUR RULES.</p>
+    <p style="max-width:520px;margin:0 auto 2rem;color:var(--dim);">
+      Turn any smartphone into a fully programmable hardware macro controller.<br>
+      No app. No dongle. No extra hardware.
+    </p>
+
+    <div class="terminal">
+      <div><span class="t-prompt">$ </span>node remapwrap-server.js</div>
+      <div><span class="t-out ok">✓ WebSocket bridge active</span></div>
+      <div><span class="t-out ok">✓ QR code ready — scan with phone</span></div>
+      <div><span class="t-out ok">✓ Keystroke injection: LIVE</span></div>
+    </div>
+
+    <div>
+      <a href="#download" class="btn">GET ALPHA</a>
+      <a href="#features" class="btn" style="border-color:var(--cyan);color:var(--cyan);">FEATURES</a>
+    </div>
+  </div>
+</section>
+
+<section id="features" style="padding:6rem 2rem;background:var(--panel);">
+  <h2 style="text-align:center;font-family:'VT323',monospace;font-size:2.5rem;color:var(--green);margin-bottom:3rem;">CAPABILITIES</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3 style="color:var(--green);">REAL KEYSTROKES</h3>
+      <p>Actual OS-level input. Works with any software.</p>
+    </div>
+    <div class="feature-card">
+      <h3 style="color:var(--green);">ZERO INSTALL</h3>
+      <p>Phone needs only a browser. Scan QR → instant controller.</p>
+    </div>
+    <div class="feature-card">
+      <h3 style="color:var(--green);">LIVE LAYOUT EDITOR</h3>
+      <p>Drag-drop canvas. Export/import JSON layouts.</p>
+    </div>
+    <div class="feature-card">
+      <h3 style="color:var(--green);">HAPTIC FEEDBACK</h3>
+      <p>Phone vibration simulates physical button press.</p>
+    </div>
+  </div>
+</section>
+
+<section id="download" style="padding:6rem 2rem;">
+  <h2 style="text-align:center;font-family:'VT323',monospace;font-size:2.5rem;color:var(--green);">UP IN 60 SECONDS</h2>
+  <div style="max-width:700px;margin:3rem auto;background:#0d120d;border:1px solid var(--border);padding:2rem;">
+    <ol style="font-size:1.1rem;line-height:2.2;">
+      <li>Download the alpha package</li>
+      <li><code style="background:#000;color:var(--green);">npm install</code></li>
+      <li><code style="background:#000;color:var(--green);">node remapwrap-server.js</code></li>
+      <li>Scan QR with your phone</li>
+    </ol>
+  </div>
+  <div style="text-align:center;margin-top:2rem;">
+    <a href="https://github.com/zengineco/f-keys/releases" class="btn">DOWNLOAD ALPHA</a>
+  </div>
+</section>
+
+<footer>
+  <p>RemapWrap is a product of <a href="index.html" style="color:var(--green);">F-Keys</a></p>
+  <p style="margin-top:1rem;font-size:0.9rem;">© 2026 F-Keys • Vincent Gonzalez</p>
+</footer>
+
+</body>
+</html>
