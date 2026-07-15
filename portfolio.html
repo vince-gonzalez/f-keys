@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F-Keys Labs — Product Archive</title>
+<meta name="description" content="Portfolio of independent hardware, software, and creative projects by Vincent Gonzalez under F-Keys.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e0a; --panel: #111911; --border: #1a2e1a;
+  --green: #39ff14; --text: #a8c8a8; --dim: #3a5a3a; --cyan: #00ffcc;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Share Tech Mono', monospace;
+  line-height: 1.6; overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+  pointer-events: none; z-index: 9000;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  background: rgba(10,14,10,0.95); border-bottom: 1px solid var(--border);
+  padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-family: 'VT323', monospace; font-size: 28px; color: var(--green); letter-spacing: 4px; }
+.hero {
+  min-height: 60vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 2rem 4rem; text-align: center; border-bottom: 1px solid var(--border);
+}
+.hero h1 {
+  font-family: 'VT323', monospace; font-size: clamp(42px, 8vw, 78px);
+  color: var(--green); letter-spacing: 6px; margin-bottom: 1rem;
+}
+.stats {
+  display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 3rem;
+  font-size: 1.1rem;
+}
+.stat-num { color: var(--green); font-size: 2.2rem; display: block; }
+
+main { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+.section { margin-bottom: 5rem; }
+.section h2 {
+  font-family: 'VT323', monospace; font-size: 2.2rem; color: var(--green);
+  margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;
+}
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: #0d120d; border: 1px solid var(--border); padding: 1.75rem;
+  transition: all 0.25s;
+}
+.card:hover {
+  border-color: var(--green); transform: translateY(-6px);
+}
+.card h3 { font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--cyan); }
+.card p { color: var(--dim); font-size: 0.95rem; margin-bottom: 1.25rem; }
+.tag { font-size: 0.75rem; color: var(--dim); border: 1px solid var(--border); padding: 2px 8px; margin-right: 6px; }
+
+footer {
+  text-align: center; padding: 3rem 2rem; color: var(--dim); font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">F-KEYS LABS</div>
+  <a href="index.html" style="color:var(--dim);text-decoration:none;">← Back to Home</a>
+</nav>
+
+<section class="hero">
+  <h1>PRODUCT ARCHIVE</h1>
+  <p style="max-width:620px;margin:0 auto 2rem;color:var(--dim);font-size:1.1rem;">
+    Built by F-Keys • Independent hardware, software, accessibility tools, games, and creative systems.
+  </p>
+  <div class="stats">
+    <div><span class="stat-num">54</span> Total Projects</div>
+    <div><span class="stat-num" style="color:#00c97a;">20+</span> Released</div>
+    <div><span class="stat-num" style="color:#f0a500;">15</span> In Development</div>
+    <div><span class="stat-num" style="color:#9988cc;">20+</span> Concepts</div>
+  </div>
+</section>
+
+<main>
+  <!-- You can expand this with real project cards from your previous portfolio data -->
+  <div class="section">
+    <h2>Featured Builds</h2>
+    <div class="grid">
+      <!-- Example cards — replace / expand with your actual projects -->
+      <div class="card">
+        <h3>OpticQuiz Ecosystem</h3>
+        <p>Accessibility infrastructure for color vision. Research, API, checker, widget, VS Code extension, and daltonization tools.</p>
+        <div><span class="tag">Accessibility</span><span class="tag">Platform</span></div>
+        <a href="https://opticquiz.com" target="_blank" style="color:var(--green);margin-top:1rem;display:inline-block;">Visit →</a>
+      </div>
+      <div class="card">
+        <h3>RemapWrap (F-Keys)</h3>
+        <p>Turn your phone into a programmable hardware macro controller. No app. No hardware. Just glass.</p>
+        <div><span class="tag">Hardware</span><span class="tag">Input</span></div>
+        <a href="/remapwrap" style="color:var(--green);margin-top:1rem;display:inline-block;">Details →</a>
+      </div>
+      <div class="card">
+        <h3>Trailer Load Simulator</h3>
+        <p>Realistic physics-based freight loading trainer.</p>
+        <div><span class="tag">Games</span><span class="tag">Simulation</span></div>
+        <a href="https://trailer-load.com" target="_blank" style="color:var(--green);margin-top:1rem;display:inline-block;">Visit →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add more sections as needed (Games, Tools, Hardware, Creative, etc.) -->
+  <!-- You can paste your full PROJECTS array + rendering logic from the older portfolio here if you want full interactivity. Let me know. -->
+
+</main>
+
+<footer>
+  Built by F-Keys • Vincent Gonzalez • All projects reflect the same engineering notebook ethos.<br>
+  <a href="index.html" style="color:var(--green);">← Return to F-Keys Home</a>
+</footer>
+
+</body>
+</html>
