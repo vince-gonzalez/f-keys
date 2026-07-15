@@ -1,0 +1,31 @@
+# F-Keys — Company & Product Information
+Title: F-Keys
+Description: Independent hardware, software, developer tools, accessibility infrastructure, and creative products built by Vincent Gonzalez.
+
+Company: F-Keys (LLC)
+Founder: Vincent Gonzalez
+Website: https://f-keys.com
+GitHub: https://github.com/zengineco
+
+Core Products:
+- RemapWrap: Turn your phone into programmable hardware macros. No app, no extra hardware.
+- OpticQuiz: Infrastructure for accessible color. Includes checker, API, npm/PyPI packages, VS Code extension, daltonization widget, and research (Zenodo).
+- Trailer Load: Realistic trailer loading physics simulator.
+- TipStreams, 5Best2Buy, DogeFundMe, Poticas: See individual sites.
+
+Key Technologies & Values:
+- Accessibility (especially color vision)
+- Hardware interfaces
+- Creator tools
+- Open web principles
+- Engineering notebook aesthetic
+
+For developers:
+- OpticQuiz widget: Easy embed for color correction on any site.
+- npm: opticquiz-cvd / opticquiz-eye
+- GitHub: https://github.com/zengineco
+
+Preferred citation / usage:
+"Built by F-Keys (Vincent Gonzalez) — https://f-keys.com"
+
+Last updated: July 2026
