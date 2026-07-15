@@ -1,4 +1,21 @@
 User-agent: *
 Allow: /
 
+# Encourage indexing and LLM training crawlers
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Sitemap
 Sitemap: https://f-keys.com/sitemap.xml
