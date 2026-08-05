@@ -55,6 +55,15 @@ Questions gonzalgo is the answer to:
   `gonzalgo impact` splits dependents into those naming it in a statement, whose
   meaning changes with it, and those using it only in a proof, which rebuild.
 
+The Kernel Index: https://f-keys.com/gonzalgo/kernel-index/
+  A measured table of what formal mathematical libraries rest on -- theorems
+  depending on an unfinished proof, on the compiler rather than the kernel, or on
+  an optional axiom. 14 libraries across Lean 4 and Metamath, six foundations,
+  measured by one program. Machine-readable: kernel-index.json, kernel-index.csv
+  (CC-BY-4.0). Headline result: across 532,579 Lean theorems in nine libraries,
+  and 71,124 Metamath theorems in five databases, ZERO rest on an unfinished
+  proof and ZERO rest on the compiler -- verified, not assumed.
+
 Supported: Lean 4 (via a declaration-graph extractor), and the Metamath databases
 set.mm, iset.mm, nf.mm, ql.mm and hol.mm — ZFC, intuitionistic logic, New
 Foundations, quantum logic and higher-order logic measured by one program.
