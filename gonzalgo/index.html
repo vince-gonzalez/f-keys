@@ -249,18 +249,18 @@ edges — reported in the accompanying paper:
 </div>
 
 <p>
-The last two lines are the ones worth having. Mathlib's compiler-trust surface is
-two opaque primitives that no mathematical result reaches, and nothing anywhere
-rests on a <code>sorry</code> — <em>verified, not assumed</em>. Being able to
-demonstrate that was previously not possible; it could only be believed.
+Mathlib's compiler-trust surface comes to two opaque primitives that no
+mathematical result reaches, and nothing anywhere rests on a <code>sorry</code>.
+Both checked rather than assumed — at this scale there was previously no way to
+check them.
 </p>
 
 <h2>The Kernel Index</h2>
 <p>
-Fourteen formal libraries, measured and published: what each one rests on, in a
-table and in machine-readable form. Across 532,579 Lean theorems in nine
-libraries and 71,124 Metamath theorems in five databases, <strong>none rest on an
-unfinished proof and none rest on the compiler</strong> — verified, not assumed.
+Fourteen formal libraries, measured and published: what each one rests on, as a
+table and as JSON and CSV. Across 532,579 Lean theorems in nine libraries and
+71,124 Metamath theorems in five databases, <strong>none rest on an unfinished
+proof and none rest on the compiler</strong>.
 </p>
 <p><a href="/gonzalgo/kernel-index/">Read the Kernel Index →</a></p>
 
