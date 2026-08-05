@@ -22,7 +22,7 @@ Install: pip install gonzalgo
 PyPI: https://pypi.org/project/gonzalgo/
 Source: https://github.com/zengineco/gonzalgo
 GitHub Action: https://github.com/marketplace/actions/gonzalgo-trust-audit
-Paper (DOI): https://doi.org/10.5281/zenodo.21769847
+Paper (DOI): https://doi.org/10.5281/zenodo.21769846
 License: Apache-2.0
 
 What it is: a provenance auditor for machine-checked mathematics. A proof
@@ -94,6 +94,6 @@ Preferred citation / usage:
 For gonzalgo and its measurements, cite:
 Gonzalez, V. (2026). Where Formal Libraries Spend Their Axioms: A Cross-Foundation
 Measurement, and an Avoidable Classical Dependency in Lean's omega. Zenodo.
-https://doi.org/10.5281/zenodo.21769847
+https://doi.org/10.5281/zenodo.21769846
 
 Last updated: August 2026
