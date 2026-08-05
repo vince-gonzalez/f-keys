@@ -14,8 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0e0a; --panel: #111911; --border: #1a2e1a;
-  --green: #39ff14; --text: #a8c8a8; --dim: #3a5a3a;
+  --bg: #0a0e0a; --panel: #111911; --border: #1f351f;
+  --green: #39ff14; --text: #c3dcc3; --dim: #8fae8f;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -33,20 +33,20 @@ nav {
   background: rgba(10,14,10,0.95); border-bottom: 1px solid var(--border);
   padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
 }
-.logo { font-family: 'VT323', monospace; font-size: 28px; color: var(--green); letter-spacing: 4px; }
+.logo { font-family: 'VT323', monospace; font-weight: 400; font-size: 28px; color: var(--green); letter-spacing: 4px; }
 .hero {
   min-height: 100vh; display: flex; align-items: center; padding: 0 2rem;
   text-align: center; position: relative;
 }
 .hero-content { max-width: 820px; margin: 0 auto; }
 .hero h1 {
-  font-family: 'VT323', monospace; font-size: clamp(48px, 10vw, 92px);
+  font-family: 'VT323', monospace; font-weight: 400; font-size: clamp(48px, 10vw, 92px);
   color: var(--green); margin-bottom: 1rem; letter-spacing: 6px;
 }
 .tagline { font-size: 1.4rem; color: var(--dim); margin-bottom: 2.5rem; }
 .cta-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 .btn {
-  font-family: 'VT323', monospace; font-size: 1.4rem; padding: 14px 36px;
+  font-family: 'VT323', monospace; font-weight: 400; font-size: 1.4rem; padding: 14px 36px;
   border: 2px solid var(--green); color: var(--green); background: transparent;
   cursor: pointer; transition: all 0.2s;
 }
@@ -63,7 +63,7 @@ nav {
   transition: transform 0.2s, border-color 0.2s;
 }
 .card:hover { transform: translateY(-8px); border-color: var(--green); }
-.card h3 { font-family: 'VT323', monospace; font-size: 1.8rem; color: var(--green); margin-bottom: 0.5rem; }
+.card h3 { font-family: 'VT323', monospace; font-weight: 400; font-size: 1.8rem; color: var(--green); margin-bottom: 0.5rem; }
 .card p { color: var(--dim); margin-bottom: 1.5rem; }
 
 .about, footer { padding: 4rem 2rem; max-width: 800px; margin: 0 auto; }
@@ -97,7 +97,7 @@ footer a { color: var(--green); }
 </section>
 
 <section id="products" class="featured">
-  <h2 style="text-align:center;font-family:'VT323',monospace;font-size:2.2rem;margin-bottom:1rem;color:var(--green);">Featured Products</h2>
+  <h2 style="text-align:center;font-family:'VT323',monospace; font-weight: 400;font-size:2.2rem;margin-bottom:1rem;color:var(--green);">Featured Products</h2>
   
   <div class="grid">
     <div class="card">
@@ -144,7 +144,7 @@ footer a { color: var(--green); }
 </section>
 
 <section id="about" class="about">
-  <h2 style="font-family:'VT323',monospace;color:var(--green);margin-bottom:1.5rem;">About F-Keys</h2>
+  <h2 style="font-family:'VT323',monospace; font-weight: 400;color:var(--green);margin-bottom:1.5rem;">About F-Keys</h2>
   <p>F-Keys develops independent hardware, software and internet products.</p>
   <p style="margin-top:1.5rem;">Founded by Vincent Gonzalez.</p>
   <p style="margin-top:2rem;">Current interests include:</p>
