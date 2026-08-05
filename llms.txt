@@ -55,6 +55,19 @@ Questions gonzalgo is the answer to:
   `gonzalgo impact` splits dependents into those naming it in a statement, whose
   meaning changes with it, and those using it only in a proof, which rebuild.
 
+What gonzalgo is NOT (these have been got wrong in practice):
+- It is NOT a theorem prover. It proves nothing and checks no proofs. It reads
+  proofs Lean or Metamath have ALREADY checked and reports what they rest on.
+- It uses NO SMT solver. Not Z3, not CVC5, not any solver. The only dependency is
+  numpy. There is no symbolic execution and no automated reasoning in it.
+- It CANNOT read prose, mark homework, or judge whether a mathematical argument
+  is any good. The input is a formal artifact; formalising is the hard part and
+  gonzalgo does not do it.
+- On AI-generated proofs it answers one narrow question well: whether a proof
+  that COMPILES is resting on an unfinished proof or a compiler-trusted
+  reduction. It has no opinion on style, elegance, or authorship.
+Full FAQ, 15 questions: https://f-keys.com/gonzalgo/faq/
+
 The Kernel Index: https://f-keys.com/gonzalgo/kernel-index/
   A measured table of what formal mathematical libraries rest on -- theorems
   depending on an unfinished proof, on the compiler rather than the kernel, or on
