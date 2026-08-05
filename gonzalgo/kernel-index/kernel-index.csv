@@ -1,0 +1,15 @@
+library,system,foundation,theorems,unfinished_theorems,compiler_trusting_theorems,optional_axiom,optional_reach,optional_reach_pct,axioms_used,entry_points,entries_per_theorem,amplification
+Mathlib,Lean 4,Dependent type theory,437429,0,0,choice,291416,66.62,,,,
+Lean core (Init),Lean 4,Dependent type theory,45051,0,0,choice,10773,23.91,,,,
+Std,Lean 4,Dependent type theory,34510,0,0,choice,19552,56.66,,,,
+Lean core (Lean),Lean 4,Dependent type theory,9281,0,0,choice,1191,12.83,,,,
+Batteries,Lean 4,Dependent type theory,5249,0,0,choice,1713,32.63,,,,
+Aesop,Lean 4,Dependent type theory,771,0,0,choice,100,12.97,,,,
+ProofWidgets,Lean 4,Dependent type theory,165,0,0,choice,46,27.88,,,,
+Plausible,Lean 4,Dependent type theory,87,0,0,choice,6,6.9,,,,
+Qq,Lean 4,Dependent type theory,36,0,0,choice,7,19.44,,,,
+set.mm,Metamath,"ZFC set theory, classical first-order logic",47621,0,,choice,583,1.22,1447,17898,0.3758,292.1
+iset.mm,Metamath,Intuitionistic set theory,16236,0,,,0,,480,6140,0.3782,220.5
+nf.mm,Metamath,Quine's New Foundations,5976,0,,,0,,195,2545,0.4259,93.5
+ql.mm,Metamath,Quantum logic,1140,0,,,0,,43,2759,2.4202,6.3
+hol.mm,Metamath,Higher-order logic,151,0,,,0,,43,175,1.1589,16.7
