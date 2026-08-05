@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/">
+
+<title>gonzalgo — find Lean 4 theorems resting on an inherited sorry or native_decide</title>
+<meta name="description" content="gonzalgo reports what a machine-checked proof actually rests on. Finds Lean 4 theorems depending on a sorry anywhere upstream, or on native_decide, and fails CI when they do. kernel &gt; sorry.">
+<meta name="keywords" content="Lean 4, Mathlib, sorry, native_decide, axiom, provenance, proof assistant, formal verification, Metamath, theorem prover, kernel">
+<meta name="author" content="Vincent Gonzalez">
+
+<!-- LLM / AI discovery -->
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/">
+<meta property="og:title" content="gonzalgo — what does your proof actually rest on?">
+<meta property="og:description" content="Finds Lean 4 theorems resting on an inherited sorry or on native_decide, anywhere upstream. Fails CI when they do. kernel &gt; sorry.">
+<meta property="og:site_name" content="F-Keys">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="gonzalgo — what does your proof actually rest on?">
+<meta name="twitter:description" content="Finds Lean 4 theorems resting on an inherited sorry or on native_decide. kernel &gt; sorry.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://f-keys.com/gonzalgo/#software",
+      "name": "gonzalgo",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "macOS, Windows, Linux",
+      "url": "https://f-keys.com/gonzalgo/",
+      "downloadUrl": "https://pypi.org/project/gonzalgo/",
+      "codeRepository": "https://github.com/zengineco/gonzalgo",
+      "programmingLanguage": ["Python", "Lean 4"],
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "description": "Provenance auditing for machine-checked mathematics. Reports what a formal library rests on: theorems depending on an unfinished proof anywhere upstream, results obtained by trusting the compiler rather than the kernel, and the shortest path from any declaration to any axiom.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": {
+        "@type": "Person",
+        "name": "Vincent Gonzalez",
+        "identifier": "https://orcid.org/0009-0005-3640-014X"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://doi.org/10.5281/zenodo.21769847",
+      "name": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
+      "identifier": "https://doi.org/10.5281/zenodo.21769847",
+      "datePublished": "2026-08-03",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {
+        "@type": "Person",
+        "name": "Vincent Gonzalez",
+        "identifier": "https://orcid.org/0009-0005-3640-014X"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know if my Lean proof depends on a sorry?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lean warns once, on the line where you typed sorry. It does not warn you about a theorem several files later that uses that lemma and is therefore also not proved. gonzalgo trust reports every theorem that reaches a sorry anywhere upstream, however far."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a sorry inherited from a dependency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The audit covers the whole environment, so an unfinished proof inside a library you import is reported exactly like one in your own file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does my Lean project use native_decide anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A native_decide result is obtained by compiling and running code and believing the answer, so the compiler and runtime are trusted rather than the kernel. gonzalgo trust reports Lean.ofReduceBool and Lean.ofReduceNat, the axioms native_decide emits, and how many theorems inherit them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What axioms does a Lean theorem depend on, and why?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "#print axioms answers whether. gonzalgo why gives the shortest path from a declaration to an axiom and labels each step as a statement dependency or a proof dependency, so you can see which step introduced it and whether it can be rerouted."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I fail a build when a proof rests on something unfinished?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. gonzalgo trust --fail-on-trust exits non-zero, and a GitHub Action wraps it in three lines of CI configuration."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1a2e1a; --green:#39ff14; --text:#a8c8a8; --dim:#3a5a3a; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; line-height:1.65; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,0.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:900px; margin:0 auto; padding:7rem 1.5rem 4rem; }
+h1 { font-family:'VT323',monospace; font-size:clamp(44px,9vw,86px); color:var(--green); letter-spacing:5px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-size:clamp(22px,4vw,34px); color:var(--cyan); letter-spacing:3px; margin:.6rem 0 1.4rem; }
+h2 { font-family:'VT323',monospace; font-size:1.9rem; color:var(--green); margin:3rem 0 1rem; letter-spacing:2px; }
+h3 { font-family:'VT323',monospace; font-size:1.35rem; color:var(--cyan); margin:1.8rem 0 .4rem; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+pre { background:#0d120d; border:1px solid var(--border); padding:1.1rem; overflow-x:auto; font-size:.85rem; margin:1rem 0; color:var(--text); }
+code { color:var(--cyan); }
+.lede { font-size:1.15rem; color:var(--text); }
+.pill { display:inline-block; border:1px solid var(--border); padding:.3rem .8rem; margin:.2rem .3rem .2rem 0; font-size:.85rem; color:var(--dim); }
+.panel { background:var(--panel); border:1px solid var(--border); padding:1.5rem; margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem; }
+td,th { border-bottom:1px solid var(--border); padding:.5rem .4rem; text-align:left; }
+th { color:var(--green); }
+footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.6rem;font-size:.9rem;">
+    <a href="/">Home</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+
+<main>
+
+<h1>GONZALGO</h1>
+<p class="kicker">kernel &gt; sorry</p>
+
+<p class="lede">
+A proof assistant can confirm that a proof checks. It will not readily tell you
+that the theorem is standing on an <strong>unfinished proof several files
+upstream</strong>, or that the result was obtained by <strong>trusting the
+compiler rather than the kernel</strong>.
+</p>
+<p class="lede">gonzalgo answers what a proof actually rests on.</p>
+
+<p style="margin-top:1.5rem;">
+  <span class="pill">Lean 4</span><span class="pill">Metamath</span>
+  <span class="pill">Apache-2.0</span><span class="pill">macOS · Windows · Linux</span>
+</p>
+
+<pre>pip install gonzalgo</pre>
+
+<p>
+  <a href="https://pypi.org/project/gonzalgo/">PyPI</a> ·
+  <a href="https://github.com/zengineco/gonzalgo">Source</a> ·
+  <a href="https://github.com/marketplace/actions/gonzalgo-trust-audit">GitHub Action</a> ·
+  <a href="https://doi.org/10.5281/zenodo.21769847">Paper (DOI)</a>
+</p>
+
+<h2>Questions it answers</h2>
+
+<h3>How do I know if my Lean proof depends on a <code>sorry</code>?</h3>
+<p>
+Lean warns once, on the line you typed. It says nothing about the theorem three
+files later that uses that lemma and is therefore <em>also not proved</em>.
+<code>gonzalgo trust</code> reports every theorem reaching a <code>sorry</code>
+anywhere upstream, however far.
+</p>
+
+<h3>How do I find a <code>sorry</code> inherited from a dependency?</h3>
+<p>
+The audit runs over the whole environment, so an unfinished proof inside a
+library you import is reported exactly like one in your own file.
+</p>
+
+<h3>Does my project use <code>native_decide</code> anywhere?</h3>
+<p>
+A <code>native_decide</code> result is obtained by compiling and running code and
+believing the answer — the compiler and runtime are trusted, not the kernel, and
+soundness bugs have been found there. gonzalgo reports the axioms it emits and
+how many theorems inherit them.
+</p>
+
+<h3>What axioms does this theorem depend on, and <em>why</em>?</h3>
+<p>
+<code>#print axioms</code> answers <em>whether</em>. <code>gonzalgo why</code>
+gives the shortest path from a declaration to an axiom and labels every step as a
+statement dependency or a proof dependency — so you can see which step introduced
+it, and whether it can be rerouted.
+</p>
+
+<pre>Int.mem_box
+  --proof--&gt; Int.mem_box._proof_1_5
+    --proof--&gt; Classical.propDecidable
+      --proof--&gt; Classical.choice</pre>
+
+<h3>Can I fail a build when a proof rests on something unfinished?</h3>
+<p>Yes. Three lines:</p>
+
+<pre>- uses: zengineco/gonzalgo@v1
+  with:
+    module: MyProject</pre>
+
+<p>
+Name the workflow <code>kernel-clean</code> and GitHub's ordinary status badge
+reads <strong>kernel-clean ✓</strong>. It certifies that no theorem in the
+project is standing on an unfinished proof, and that none were decided by running
+compiled code instead of by the kernel.
+</p>
+
+<h2>Measured</h2>
+
+<p>
+Applied to Lean 4.32.1 with Mathlib — 790,171 declarations, 30 million dependency
+edges — reported in the accompanying paper:
+</p>
+
+<div class="panel">
+<table>
+<tr><th>quantity</th><th></th></tr>
+<tr><td>theorems in Mathlib</td><td>532,605</td></tr>
+<tr><td>depending on <code>Classical.choice</code></td><td>324,808 &nbsp;(61.0%)</td></tr>
+<tr><td>actually <em>spending</em> it — entry points</td><td>144</td></tr>
+<tr><td>eligible to be stated without it</td><td>13.1% &nbsp;(a ceiling)</td></tr>
+<tr><td>declarations removable, kernel-verified</td><td>275</td></tr>
+<tr><td>theorems resting on an unfinished proof</td><td>0</td></tr>
+<tr><td>theorems resting on the compiler</td><td>0</td></tr>
+</table>
+</div>
+
+<p>
+The last two lines are the ones worth having. Mathlib's compiler-trust surface is
+two opaque primitives that no mathematical result reaches, and nothing anywhere
+rests on a <code>sorry</code> — <em>verified, not assumed</em>. Being able to
+demonstrate that was previously not possible; it could only be believed.
+</p>
+
+<h2>Also</h2>
+<p>
+Reads the Metamath databases <code>set.mm</code>, <code>iset.mm</code>,
+<code>nf.mm</code>, <code>ql.mm</code> and <code>hol.mm</code> with the same
+measurements and the same code, so foundations as different as ZFC,
+intuitionistic logic, New Foundations, quantum logic and higher-order logic are
+compared under identical definitions rather than by analogy.
+</p>
+
+<footer>
+  <p>
+    gonzalgo is built and maintained by <strong>Vincent Gonzalez</strong>
+    (<a href="https://orcid.org/0009-0005-3640-014X">ORCID</a>) and lives at
+    <a href="https://f-keys.com/gonzalgo/">f-keys.com/gonzalgo</a> — the home of
+    <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1rem;">
+    Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>.
+    Zenodo. <a href="https://doi.org/10.5281/zenodo.21769847">10.5281/zenodo.21769847</a>
+  </p>
+  <p style="margin-top:1.5rem;">© 2026 F-Keys</p>
+</footer>
+
+</main>
+</body>
+</html>

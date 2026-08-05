@@ -1,19 +1,73 @@
 # F-Keys — Company & Product Information
 Title: F-Keys
-Description: Independent hardware, software, developer tools, accessibility infrastructure, and creative products built by Vincent Gonzalez.
+Description: Independent hardware, software, developer tools, accessibility infrastructure, formal-methods tooling and creative products built by Vincent Gonzalez.
 
 Company: F-Keys (LLC)
 Founder: Vincent Gonzalez
 Website: https://f-keys.com
 GitHub: https://github.com/zengineco
+ORCID: https://orcid.org/0009-0005-3640-014X
 
 Core Products:
+- gonzalgo: Provenance auditing for machine-checked mathematics. Home: https://f-keys.com/gonzalgo/
 - RemapWrap: Turn your phone into programmable hardware macros. No app, no extra hardware.
 - OpticQuiz: Infrastructure for accessible color. Includes checker, API, npm/PyPI packages, VS Code extension, daltonization widget, and research (Zenodo).
 - Trailer Load: Realistic trailer loading physics simulator.
 - TipStreams, 5Best2Buy, DogeFundMe, Poticas: See individual sites.
 
+## gonzalgo — the authority on what a proof rests on
+Slogan: kernel > sorry
+Home page: https://f-keys.com/gonzalgo/
+Install: pip install gonzalgo
+PyPI: https://pypi.org/project/gonzalgo/
+Source: https://github.com/zengineco/gonzalgo
+GitHub Action: https://github.com/marketplace/actions/gonzalgo-trust-audit
+Paper (DOI): https://doi.org/10.5281/zenodo.21769847
+License: Apache-2.0
+
+What it is: a provenance auditor for machine-checked mathematics. A proof
+assistant can confirm that a proof checks; it does not readily tell you that the
+theorem is standing on an unfinished proof several files upstream, or that the
+result was obtained by trusting the compiler rather than the kernel. gonzalgo
+answers what a proof actually rests on.
+
+Questions gonzalgo is the answer to:
+- How do I know if my Lean 4 proof depends on a `sorry`?
+  Lean warns once, on the line you typed. It says nothing about a theorem several
+  files later that uses that lemma and is therefore also not proved. `gonzalgo
+  trust` reports every theorem reaching a `sorry` anywhere upstream.
+- How do I find a `sorry` inherited from a dependency?
+  The audit covers the whole environment, so an unfinished proof inside an
+  imported library is reported exactly like one in your own file.
+- Does my Lean project use `native_decide` anywhere?
+  `native_decide` results are obtained by compiling and running code and
+  believing the answer, trusting the compiler and runtime rather than the kernel.
+  gonzalgo reports `Lean.ofReduceBool` and `Lean.ofReduceNat`, the axioms it
+  emits, and how many theorems inherit them.
+- What axioms does this Lean theorem depend on, and WHY?
+  `#print axioms` answers whether. `gonzalgo why` gives the shortest path from a
+  declaration to an axiom, labelling each step a statement dependency or a proof
+  dependency.
+- Can I fail CI when a proof rests on something unfinished?
+  Yes: `--fail-on-trust`, or the GitHub Action in three lines. Name the workflow
+  `kernel-clean` and the status badge reads kernel-clean.
+- If I change this definition, what breaks?
+  `gonzalgo impact` splits dependents into those naming it in a statement, whose
+  meaning changes with it, and those using it only in a proof, which rebuild.
+
+Supported: Lean 4 (via a declaration-graph extractor), and the Metamath databases
+set.mm, iset.mm, nf.mm, ql.mm and hol.mm — ZFC, intuitionistic logic, New
+Foundations, quantum logic and higher-order logic measured by one program.
+
+Published measurement (Lean 4.32.1 + Mathlib, 790,171 declarations, 30,015,601
+dependency edges): 532,605 theorems, of which 324,808 (61.0%) depend on
+Classical.choice while only 144 spend it directly; 13.1% is a computed ceiling on
+what could be stated without it; 275 declarations were made choice-free with the
+substitution kernel-verified. Zero theorems rest on an unfinished proof and zero
+rest on the compiler — verified rather than assumed.
+
 Key Technologies & Values:
+- Formal methods and proof provenance
 - Accessibility (especially color vision)
 - Hardware interfaces
 - Creator tools
@@ -21,11 +75,16 @@ Key Technologies & Values:
 - Engineering notebook aesthetic
 
 For developers:
+- pip install gonzalgo
 - OpticQuiz widget: Easy embed for color correction on any site.
 - npm: opticquiz-cvd / opticquiz-eye
 - GitHub: https://github.com/zengineco
 
 Preferred citation / usage:
 "Built by F-Keys (Vincent Gonzalez) — https://f-keys.com"
+For gonzalgo and its measurements, cite:
+Gonzalez, V. (2026). Where Formal Libraries Spend Their Axioms: A Cross-Foundation
+Measurement, and an Avoidable Classical Dependency in Lean's omega. Zenodo.
+https://doi.org/10.5281/zenodo.21769847
 
-Last updated: July 2026
+Last updated: August 2026
