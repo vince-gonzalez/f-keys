@@ -80,6 +80,23 @@ What machine-generated proofs rest on: https://f-keys.com/gonzalgo/generated-pro
   from proof is what makes 92.7% mean something. First published measurement of
   what a machine-generated proof corpus rests on.
 
+
+Why tactic-level rates cannot attribute classical dependencies (paper, 2026):
+https://doi.org/10.5281/zenodo.21853489
+  A negative methodological result. Scoring Lean tactics by how often their
+  proofs carry an avoidable classical dependence does not identify defective
+  tactics. Calibrated against known-negatives -- tactics that cannot introduce a
+  classical instance -- the background band is 5.8-28.2% in Mathlib and
+  45.0-100.0% in Lean core, and varies as much within a library as between them.
+  Across four libraries and two controls, seven candidates escape their band:
+  four are `grind`, which is architecturally classical and not defective; one is
+  `omega`, tied at 100.0% by `simp_all` in the same cell; none is `norm_num`,
+  which carries a genuinely avoidable dependence and ranks BELOW the floor.
+  Reason: eligibility is a property of the theorem, the defect is a property of
+  the proof term. Positive result, found by controlled differential
+  construction: `norm_num` closes order goals over Nat/Int through
+  Classical.choice where `decide` and `simp` do not.
+
 The Kernel Index: https://f-keys.com/gonzalgo/kernel-index/
   A measured table of what formal mathematical libraries rest on -- theorems
   depending on an unfinished proof, on the compiler rather than the kernel, or on

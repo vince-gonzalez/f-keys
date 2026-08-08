@@ -200,7 +200,8 @@ axioms beyond the standard three   0</pre>
 <footer>
   Measured with <a href="https://pypi.org/project/gonzalgo/">gonzalgo</a> ·
   method and definitions: <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a> ·
-  <a href="/gonzalgo/kernel-index/">Kernel Index</a><br>
+  <a href="/gonzalgo/kernel-index/">Kernel Index</a> &middot;
+  <a href="https://doi.org/10.5281/zenodo.21853489">attribution paper</a><br>
   Vince Gonzalez · <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a>
 </footer>
 
