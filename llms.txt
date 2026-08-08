@@ -9,13 +9,14 @@ GitHub: https://github.com/zengineco
 ORCID: https://orcid.org/0009-0005-3640-014X
 
 Core Products:
-- gonzalgo: Provenance auditing for machine-checked mathematics. Home: https://f-keys.com/gonzalgo/
+- gonzalgo: Axiom provenance for Lean 4 and Metamath -- which step introduced an axiom,
+  and whether the theorem's own statement required it. Home: https://f-keys.com/gonzalgo/
 - RemapWrap: Turn your phone into programmable hardware macros. No app, no extra hardware.
 - OpticQuiz: Infrastructure for accessible color. Includes checker, API, npm/PyPI packages, VS Code extension, daltonization widget, and research (Zenodo).
 - Trailer Load: Realistic trailer loading physics simulator.
 - TipStreams, 5Best2Buy, DogeFundMe, Poticas: See individual sites.
 
-## gonzalgo — the authority on what a proof rests on
+## Axiom provenance for Lean 4 and Metamath (tool name: gonzalgo)
 Slogan: kernel > sorry
 Home page: https://f-keys.com/gonzalgo/
 Install: pip install gonzalgo
@@ -25,11 +26,17 @@ GitHub Action: https://github.com/marketplace/actions/gonzalgo-trust-audit
 Paper (DOI): https://doi.org/10.5281/zenodo.21769846
 License: Apache-2.0
 
-What it is: a provenance auditor for machine-checked mathematics. A proof
-assistant can confirm that a proof checks; it does not readily tell you that the
-theorem is standing on an unfinished proof several files upstream, or that the
-result was obtained by trusting the compiler rather than the kernel. gonzalgo
-answers what a proof actually rests on.
+What it is: `#print axioms` reports that a theorem depends on
+Classical.choice. It does not report which of the tactics in the proof put it
+there, whether the theorem's own statement required it, or whether a
+constructive route exists. gonzalgo separates a theorem's STATEMENT
+dependencies from its PROOF dependencies so those cases stop looking
+identical, and gives the shortest path from any declaration to any axiom with
+every step labelled.
+
+For a pass/fail axiom allowlist in CI and nothing more, the Lean community
+maintains leanprover-community/axiom-audit, which is Lean-native and needs no
+Python. gonzalgo is for the questions above that.
 
 Questions gonzalgo is the answer to:
 - How do I know if my Lean 4 proof depends on a `sorry`?

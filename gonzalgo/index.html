@@ -6,9 +6,9 @@
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://f-keys.com/gonzalgo/">
 
-<title>gonzalgo — find Lean 4 theorems resting on an inherited sorry or native_decide</title>
-<meta name="description" content="gonzalgo reports what a machine-checked proof actually rests on. Finds Lean 4 theorems depending on a sorry anywhere upstream, or on native_decide, and fails CI when they do. kernel &gt; sorry.">
-<meta name="keywords" content="Lean 4, Mathlib, sorry, native_decide, axiom, provenance, proof assistant, formal verification, Metamath, theorem prover, kernel">
+<title>Axiom provenance for Lean 4 — which tactic introduced Classical.choice, and could it not have | gonzalgo</title>
+<meta name="description" content="Separates a theorem's statement dependencies from its proof dependencies, so an axiom the theorem requires stops looking like one a tactic reached for. Shortest path from any declaration to any axiom, in Lean 4 and Metamath. gonzalgo.">
+<meta name="keywords" content="axiom provenance, Lean 4, Mathlib, Classical.choice, which tactic introduced axiom, statement versus proof dependency, constructive mathematics, sorry, native_decide, Metamath, formal verification, gonzalgo">
 <meta name="author" content="Vincent Gonzalez">
 
 <!-- LLM / AI discovery -->
@@ -17,12 +17,12 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/">
-<meta property="og:title" content="gonzalgo — what does your proof actually rest on?">
-<meta property="og:description" content="Finds Lean 4 theorems resting on an inherited sorry or on native_decide, anywhere upstream. Fails CI when they do. kernel &gt; sorry.">
+<meta property="og:title" content="Axiom provenance for Lean 4 — which step introduced it, and could it not have">
+<meta property="og:description" content="#print axioms says a theorem depends on Classical.choice. It does not say which tactic put it there, or whether the statement required it. gonzalgo does.">
 <meta property="og:site_name" content="F-Keys">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="gonzalgo — what does your proof actually rest on?">
-<meta name="twitter:description" content="Finds Lean 4 theorems resting on an inherited sorry or on native_decide. kernel &gt; sorry.">
+<meta name="twitter:title" content="Axiom provenance for Lean 4 — which step introduced it, and could it not have">
+<meta name="twitter:description" content="#print axioms says a theorem depends on Classical.choice. It does not say which tactic put it there. gonzalgo does.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -35,14 +35,24 @@
       "@type": "SoftwareApplication",
       "@id": "https://f-keys.com/gonzalgo/#software",
       "name": "gonzalgo",
+      "alternateName": "Axiom provenance for Lean 4",
       "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Formal verification",
       "operatingSystem": "macOS, Windows, Linux",
       "url": "https://f-keys.com/gonzalgo/",
       "downloadUrl": "https://pypi.org/project/gonzalgo/",
       "codeRepository": "https://github.com/zengineco/gonzalgo",
       "programmingLanguage": ["Python", "Lean 4"],
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
-      "description": "Provenance auditing for machine-checked mathematics. Reports what a formal library rests on: theorems depending on an unfinished proof anywhere upstream, results obtained by trusting the compiler rather than the kernel, and the shortest path from any declaration to any axiom.",
+      "description": "Axiom provenance for Lean 4 and Metamath. Separates a theorem's statement dependencies from its proof dependencies, so an axiom the theorem genuinely requires stops looking identical to one a tactic reached for unnecessarily. Gives the shortest path from any declaration to any axiom with each step labelled statement or proof, computes the band of theorems whose statements are choice-free while their proofs are not, and reports what breaks downstream if a definition changes.",
+      "featureList": [
+        "Which step introduced an axiom, as a labelled shortest path",
+        "Statement versus proof dependency separation",
+        "Eligibility band: an upper bound on removable classical dependence",
+        "Downstream impact split by statement versus proof use",
+        "Detection of inherited sorry and compiler-trusted results",
+        "Lean 4 and five Metamath databases measured by one program"
+      ],
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "author": {
         "@type": "Person",
@@ -56,6 +66,19 @@
       "name": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
       "identifier": "https://doi.org/10.5281/zenodo.21769846",
       "datePublished": "2026-08-03",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {
+        "@type": "Person",
+        "name": "Vincent Gonzalez",
+        "identifier": "https://orcid.org/0009-0005-3640-014X"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://doi.org/10.5281/zenodo.21853489",
+      "name": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
+      "identifier": "https://doi.org/10.5281/zenodo.21853489",
+      "datePublished": "2026-08-08",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {
         "@type": "Person",
@@ -152,16 +175,16 @@ footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; co
 
 <main>
 
-<h1>GONZALGO</h1>
-<p class="kicker">kernel &gt; sorry</p>
+<h1>AXIOM PROVENANCE<br>FOR LEAN 4</h1>
+<p class="kicker">gonzalgo &nbsp;·&nbsp; which step introduced it, and could it not have</p>
 
 <p class="lede">
-A proof assistant can confirm that a proof checks. It will not readily tell you
-that the theorem is standing on an <strong>unfinished proof several files
-upstream</strong>, or that the result was obtained by <strong>trusting the
-compiler rather than the kernel</strong>.
+<code>#print axioms</code> tells you a theorem depends on
+<code>Classical.choice</code>. It does not tell you <strong>which of the eight
+tactics in the proof put it there</strong>, whether the theorem's own statement
+required it, or whether a constructive route exists.
 </p>
-<p class="lede">gonzalgo answers what a proof actually rests on.</p>
+<p class="lede">Those are the questions gonzalgo answers.</p>
 
 <p style="margin-top:1.5rem;">
   <span class="pill">Lean 4</span><span class="pill">Metamath</span>
@@ -173,29 +196,74 @@ compiler rather than the kernel</strong>.
 <p>
   <a href="https://pypi.org/project/gonzalgo/">PyPI</a> ·
   <a href="https://github.com/zengineco/gonzalgo">Source</a> ·
-  <a href="https://github.com/marketplace/actions/gonzalgo-trust-audit">GitHub Action</a> ·
-  <a href="https://doi.org/10.5281/zenodo.21769846">Paper (DOI)</a> ·
-  <a href="/gonzalgo/faq/">FAQ</a>
-  &middot;
+  <a href="/gonzalgo/faq/">FAQ</a> ·
+  <a href="/gonzalgo/kernel-index/">Kernel Index</a> ·
   <a href="/gonzalgo/generated-proofs/">Generated proofs</a>
-  &middot;
-  <a href="https://doi.org/10.5281/zenodo.21853489">Attribution paper (DOI)</a>
+</p>
+<p>
+  Papers:
+  <a href="https://doi.org/10.5281/zenodo.21769846">where axioms are spent</a> ·
+  <a href="https://doi.org/10.5281/zenodo.21853489">why tactic rates cannot attribute them</a>
+</p>
+
+<h2>The distinction the tool is built on</h2>
+
+<p>
+A theorem about the real numbers depends on the axiom of choice because
+<strong>ℝ is constructed with it</strong>. No proof of that theorem avoids it.
+A theorem about the integers that comes out classical because a tactic reached
+for <code>Classical.propDecidable</code> is a different situation entirely, and
+a fixable one.
+</p>
+<p>
+gonzalgo separates a theorem's <strong>statement</strong> dependencies from its
+<strong>proof</strong> dependencies, so those two cases stop looking identical.
+Across 9,169 machine-generated Lean proofs, 92.7% depend on choice — but 86.1%
+of them are fixed by what the theorems say, and only 6.5% are avoidable. Without
+the split you would report the first number and mean nothing by it.
 </p>
 
 <h2>Questions it answers</h2>
 
-<h3>How do I know if my Lean proof depends on a <code>sorry</code>?</h3>
+<h3>Which step introduced this axiom?</h3>
+<p>
+<code>gonzalgo why</code> gives the shortest path from a declaration to an
+axiom, labelling every step a <em>statement</em> dependency or a <em>proof</em>
+dependency — so you can see where it entered and whether it can be rerouted.
+This is how the <code>omega</code> and <code>norm_num</code> defects in the
+papers were found.
+</p>
+
+<h3>Could this theorem be stated without the axiom of choice?</h3>
+<p>
+<code>gonzalgo eligible</code> computes the band whose statements are
+choice-free while their proofs are not — an upper bound on what could be
+removed. For Mathlib that is <strong>13.1%</strong> of theorems, against a
+figure of 55% that circulates without a measurement behind it.
+</p>
+
+<h3>If I change this definition, what breaks?</h3>
+<p>
+<code>gonzalgo impact</code> splits dependents into those naming it in a
+<em>statement</em>, whose meaning changes with it, and those using it only in a
+<em>proof</em>, which simply rebuild.
+</p>
+
+<h3>How do I know if my proof depends on a <code>sorry</code>?</h3>
 <p>
 Lean warns once, on the line you typed. It says nothing about the theorem three
 files later that uses that lemma and is therefore <em>also not proved</em>.
 <code>gonzalgo trust</code> reports every theorem reaching a <code>sorry</code>
-anywhere upstream, however far.
+anywhere upstream, however far, and
+<a href="https://github.com/marketplace/actions/gonzalgo-trust-audit">fails CI</a>
+when one does.
 </p>
-
-<h3>How do I find a <code>sorry</code> inherited from a dependency?</h3>
 <p>
-The audit runs over the whole environment, so an unfinished proof inside a
-library you import is reported exactly like one in your own file.
+For that job alone — an allowlist gate in CI, nothing else — the Lean community
+maintains
+<a href="https://github.com/leanprover-community/axiom-audit">axiom-audit</a>,
+which is Lean-native and needs no Python. Use it if a pass/fail gate is all you
+want. gonzalgo is for the questions above it.
 </p>
 
 <h3>Does my project use <code>native_decide</code> anywhere?</h3>
