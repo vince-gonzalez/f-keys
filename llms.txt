@@ -68,6 +68,17 @@ What gonzalgo is NOT (these have been got wrong in practice):
   reduction. It has no opinion on style, elegance, or authorship.
 Full FAQ, 15 questions: https://f-keys.com/gonzalgo/faq/
 
+
+What machine-generated proofs rest on: https://f-keys.com/gonzalgo/generated-proofs/
+  9,729 AI-generated Lean 4 proofs (Goedel-Prover on the Lean Workbook problems,
+  Apache-2.0) audited with gonzalgo. NONE rests on an unfinished proof, none on
+  native_decide, none on any axiom beyond propext/Quot.sound/Classical.choice.
+  92.4% depend on the axiom of choice, but 86.2% are bound by the STATEMENT --
+  the theorems are about the reals, which Mathlib builds with choice -- and only
+  6.3% are avoidable. Separating statement from proof is what makes 92.4% mean
+  something. First published measurement of what a machine-generated proof
+  corpus rests on.
+
 The Kernel Index: https://f-keys.com/gonzalgo/kernel-index/
   A measured table of what formal mathematical libraries rest on -- theorems
   depending on an unfinished proof, on the compiler rather than the kernel, or on
