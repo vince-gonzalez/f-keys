@@ -14,15 +14,15 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 CANON = "https://f-keys.com/gonzalgo/generated-proofs/"
 
-TITLE = "What 9,729 machine-generated Lean proofs rest on"
+TITLE = "What 9,169 machine-generated Lean proofs rest on"
 
 NUMBERS = {
     "corpus": 10000,
-    "compiled": 9729,
-    "reach": 8994,
-    "bound": 8384,
-    "eligible": 610,
-    "clean": 735,
+    "compiled": 9169,
+    "reach": 8496,
+    "bound": 7899,
+    "eligible": 597,
+    "clean": 673,
     "sorry_total": 520,
     "sorry_drift": 520,
     "sorry_real": 0,
@@ -34,7 +34,7 @@ BODY = [
         "proof compiles, or it does not. What the proof ends up standing on is "
         "not part of that signal and nobody has measured it.",
         "This is that measurement, over the Goedel-Prover output for the Lean "
-        "Workbook problems — 10,000 proofs, of which 9,729 still compile under "
+        "Workbook problems — 10,000 proofs, of which 9,169 still compile under Lean 4.32. The other 560 fail on the version gap and are held out of every figure below.",
         "Lean 4.32.",
     ]),
     ("The result", [
@@ -46,16 +46,16 @@ BODY = [
         "could be asserted; it could not be shown.",
     ]),
     ("Classical dependence, and what it means", [
-        "8,994 of the 9,729 — 92.4% — depend on the axiom of choice. Read alone "
+        "8,496 of the 9,169 — 92.7% — depend on the axiom of choice. Read alone "
         "that number is alarming and it is also nearly meaningless.",
-        "8,384 of them depend on it because of what they SAY. The theorem is "
+        "7,899 of them depend on it because of what they SAY. The theorem is "
         "about the real numbers, the reals are constructed with choice in "
         "Mathlib, and no proof of such a statement can avoid it. The dependence "
         "is a property of the claim.",
-        "610 depend on it only because of HOW they were proved. Nothing in those "
+        "597 depend on it only because of HOW they were proved. Nothing in those "
         "statements needs choice; a different proof would not carry it. That is "
-        "6.3% of the corpus, and it is the only part anyone could act on.",
-        "Separating the statement from the proof is what turns 92.4% into two "
+        "6.5% of the corpus, and it is the only part anyone could act on.",
+        "Separating the statement from the proof is what turns 92.7% into two "
         "numbers that mean different things. Without it the honest report and "
         "the misleading one are the same figure.",
     ]),
@@ -74,7 +74,7 @@ BODY = [
         "The first pass measured only the 519 corpus proofs that invoke `omega`, "
         "on the reasoning that they were where the effect should appear. They "
         "came back 46.6% avoidable.",
-        "The full corpus is 6.3%. Selecting for `omega` selected for `Nat` and "
+        "The full corpus is 6.5%. Selecting for `omega` selected for `Nat` and "
         "`Int` goals, which is exactly the population whose statements are "
         "choice-free and whose dependence is therefore removable. The subset was "
         "unrepresentative by construction and overstated the finding sevenfold.",
@@ -83,12 +83,7 @@ BODY = [
         "Lean admits a declaration whose proof failed to elaborate, carrying "
         "`sorryAx`. In a report that is indistinguishable from a proof that was "
         "genuinely never finished.",
-        "520 theorems reach `sorryAx`. Cross-referencing every one against the "
-        "compiler's error output: 520 are elaboration failures from the 4.27-to-"
-        "4.32 version gap, and 0 are corpus proofs resting on nothing. An earlier "
-        "count put 45 in the second category, which turned out to be one batch "
-        "whose compile log had not been captured. Without that log the default is "
-        "to call them genuine, and the headline would have been fabricated.",
+        "520 theorems reach `sorryAx`, and every one is among the 560 that failed to compile. Of the 9,169 that compiled cleanly, zero reach it. An earlier count put 45 in the second category, which turned out to be one batch whose compile log had not been captured; without the log the default is to call them genuine, and the headline would have been fabricated.",
     ]),
     ("Method", [
         "Axioms come from `Lean.collectAxioms`, the same call behind "
@@ -122,7 +117,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="canonical" href="{canon}">
 
 <title>{title} — gonzalgo</title>
-<meta name="description" content="9,729 AI-generated Lean proofs audited: none rests on an unfinished proof or on the compiler. 92.4% depend on the axiom of choice, but only 6.3% avoidably.">
+<meta name="description" content="9,169 AI-generated Lean proofs audited: none rests on an unfinished proof or on the compiler. 92.7% depend on the axiom of choice, but only 6.5% avoidably.">
 <meta name="keywords" content="AI generated proofs, Lean 4, Goedel-Prover, Lean Workbook, Classical.choice, sorry, axiom dependency, formal verification, machine-generated mathematics">
 <meta name="author" content="Vincent Gonzalez">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
@@ -130,11 +125,11 @@ TEMPLATE = """<!DOCTYPE html>
 <meta property="og:type" content="article">
 <meta property="og:url" content="{canon}">
 <meta property="og:title" content="{title}">
-<meta property="og:description" content="None rests on an unfinished proof. 92.4% depend on choice; only 6.3% avoidably.">
+<meta property="og:description" content="None rests on an unfinished proof. 92.7% depend on choice; only 6.5% avoidably.">
 <meta property="og:site_name" content="F-Keys">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
-<meta name="twitter:description" content="None rests on an unfinished proof. 92.4% depend on choice; only 6.3% avoidably.">
+<meta name="twitter:description" content="None rests on an unfinished proof. 92.7% depend on choice; only 6.5% avoidably.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -184,12 +179,13 @@ footer {{ border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; c
 <p class="kicker">none of them rests on an unfinished proof</p>
 
 <pre>corpus                        10,000
-compiled under Lean 4.32       9,729
+compiled under Lean 4.32       9,169
+held out, failed to compile      560
 
-reach Classical.choice         8,994    92.4%
-  statement-bound              8,384    86.2%   unavoidable
-  avoidable, proof only          610     6.3%
-choice-free entirely             735     7.6%
+reach Classical.choice         8,496    92.7%
+  statement-bound              7,899    86.1%   unavoidable
+  avoidable, proof only          597     6.5%
+choice-free entirely             673     7.3%
 
 rests on an unfinished proof       0
 native_decide / compiler trust     0
@@ -226,11 +222,11 @@ def build() -> str:
                   "axiom of choice", "proof provenance"],
         "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
         "abstract": (
-            "9,729 machine-generated Lean 4 proofs were audited for what they "
+            "9,169 machine-generated Lean 4 proofs were audited for what they "
             "rest on. None depends on an unfinished proof, on native_decide, or "
             "on any axiom beyond propext, Quot.sound and Classical.choice. "
-            "92.4% depend on the axiom of choice, of which 86.2% are bound by "
-            "the statement and only 6.3% are avoidable."),
+            "92.7% depend on the axiom of choice, of which 86.1% are bound by "
+            "the statement and only 6.5% are avoidable."),
     }
     parts = []
     for heading, paras in BODY:
