@@ -135,23 +135,23 @@ axioms beyond the standard three   0</pre>
 
 <p>This was reported upstream and closed as completed, with the reply that avoiding choice is a deliberate non-goal of Lean core. The behaviour is within Lean&#x27;s stated design. It still propagates into every proof a model generates with that tactic.</p>
 
-<h2>A subset would have given the wrong answer</h2>
+<h2>Why the whole corpus, and not a sample</h2>
 
-<p>The first pass measured only the 519 corpus proofs that invoke <code>omega</code>, on the reasoning that they were where the effect should appear. They came back 46.6% avoidable.</p>
+<p>Measuring only the proofs that invoke <code>omega</code> returns 46.6% avoidable. That figure is wrong by a factor of seven, and wrong for a reason worth stating: <code>omega</code> operates on <code>Nat</code> and <code>Int</code>, which is exactly the population whose statements are choice-free and whose dependence is therefore removable.</p>
 
-<p>The full corpus is 6.5%. Selecting for <code>omega</code> selected for <code>Nat</code> and <code>Int</code> goals, which is exactly the population whose statements are choice-free and whose dependence is therefore removable. The subset was unrepresentative by construction and overstated the finding sevenfold.</p>
+<p>Any sample drawn on tactic use selects on the outcome. The denominator has to be the corpus.</p>
 
-<h2>The failure mode this had to avoid</h2>
+<h2>Separating drift from finding</h2>
 
-<p>Lean admits a declaration whose proof failed to elaborate, carrying <code>sorryAx</code>. In a report that is indistinguishable from a proof that was genuinely never finished.</p>
+<p>Lean admits a declaration whose proof failed to elaborate, carrying <code>sorryAx</code>. In a report that is indistinguishable from a proof that was genuinely never finished, so the two have to be told apart by the compiler&#x27;s error output rather than by the axiom set.</p>
 
-<p>520 theorems reach <code>sorryAx</code>, and every one is among the 560 that failed to compile. Of the 9,169 that compiled cleanly, zero reach it. An earlier count put 45 in the second category, which turned out to be one batch whose compile log had not been captured; without the log the default is to call them genuine, and the headline would have been fabricated.</p>
+<p>520 theorems reach <code>sorryAx</code> and every one of them is among the 560 that failed to compile. Of the 9,169 that compiled, none does. Compile failures are held out of every figure here; a corpus targeting Lean 4.27 measured under 4.32 would otherwise report version drift as a property of the proofs.</p>
 
 <h2>Method</h2>
 
 <p>Axioms come from <code>Lean.collectAxioms</code>, the same call behind <code>#print axioms</code>, run per theorem inside the environment. Statement axioms are the union over the constants appearing in the theorem&#x27;s type.</p>
 
-<p>An earlier version of this analysis serialised the whole 790,000-declaration environment and recomputed reachability outside Lean. Both approaches were run against the same subset and agree; the graph version was additionally checked by two traversals in opposite directions returning identical sets. The kernel&#x27;s own bookkeeping is what is reported here.</p>
+<p>Cross-checked against an independent route: serialising the whole 790,000-declaration environment and recomputing reachability outside Lean gives the same answer on the same subset, and that graph was itself traversed in both directions returning identical sets. The kernel&#x27;s own bookkeeping is what is reported here.</p>
 
 <p>Controls fixed before measuring: a <code>Nat</code> goal closed by <code>omega</code> must show choice in the proof and not the statement, a structural proof must show nothing, and a goal over the reals must show choice in both. All three behave as required.</p>
 

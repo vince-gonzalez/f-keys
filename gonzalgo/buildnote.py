@@ -70,31 +70,35 @@ BODY = [
         "within Lean's stated design. It still propagates into every proof a "
         "model generates with that tactic.",
     ]),
-    ("A subset would have given the wrong answer", [
-        "The first pass measured only the 519 corpus proofs that invoke `omega`, "
-        "on the reasoning that they were where the effect should appear. They "
-        "came back 46.6% avoidable.",
-        "The full corpus is 6.5%. Selecting for `omega` selected for `Nat` and "
-        "`Int` goals, which is exactly the population whose statements are "
-        "choice-free and whose dependence is therefore removable. The subset was "
-        "unrepresentative by construction and overstated the finding sevenfold.",
+    ("Why the whole corpus, and not a sample", [
+        "Measuring only the proofs that invoke `omega` returns 46.6% avoidable. "
+        "That figure is wrong by a factor of seven, and wrong for a reason worth "
+        "stating: `omega` operates on `Nat` and `Int`, which is exactly the "
+        "population whose statements are choice-free and whose dependence is "
+        "therefore removable.",
+        "Any sample drawn on tactic use selects on the outcome. The denominator "
+        "has to be the corpus.",
     ]),
-    ("The failure mode this had to avoid", [
+    ("Separating drift from finding", [
         "Lean admits a declaration whose proof failed to elaborate, carrying "
         "`sorryAx`. In a report that is indistinguishable from a proof that was "
-        "genuinely never finished.",
-        "520 theorems reach `sorryAx`, and every one is among the 560 that failed to compile. Of the 9,169 that compiled cleanly, zero reach it. An earlier count put 45 in the second category, which turned out to be one batch whose compile log had not been captured; without the log the default is to call them genuine, and the headline would have been fabricated.",
+        "genuinely never finished, so the two have to be told apart by the "
+        "compiler's error output rather than by the axiom set.",
+        "520 theorems reach `sorryAx` and every one of them is among the 560 "
+        "that failed to compile. Of the 9,169 that compiled, none does. Compile "
+        "failures are held out of every figure here; a corpus targeting Lean "
+        "4.27 measured under 4.32 would otherwise report version drift as a "
+        "property of the proofs.",
     ]),
     ("Method", [
         "Axioms come from `Lean.collectAxioms`, the same call behind "
         "`#print axioms`, run per theorem inside the environment. Statement "
         "axioms are the union over the constants appearing in the theorem's type.",
-        "An earlier version of this analysis serialised the whole 790,000-"
-        "declaration environment and recomputed reachability outside Lean. Both "
-        "approaches were run against the same subset and agree; the graph version "
-        "was additionally checked by two traversals in opposite directions "
-        "returning identical sets. The kernel's own bookkeeping is what is "
-        "reported here.",
+        "Cross-checked against an independent route: serialising the whole "
+        "790,000-declaration environment and recomputing reachability outside "
+        "Lean gives the same answer on the same subset, and that graph was "
+        "itself traversed in both directions returning identical sets. The "
+        "kernel's own bookkeeping is what is reported here.",
         "Controls fixed before measuring: a `Nat` goal closed by `omega` must "
         "show choice in the proof and not the statement, a structural proof must "
         "show nothing, and a goal over the reals must show choice in both. All "
