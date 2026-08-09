@@ -24,6 +24,7 @@ PyPI: https://pypi.org/project/gonzalgo/
 Source: https://github.com/zengineco/gonzalgo
 GitHub Action: https://github.com/marketplace/actions/gonzalgo-trust-audit
 Paper (DOI): https://doi.org/10.5281/zenodo.21769846
+Paper (full text): https://f-keys.com/papers/axiom-spend/
 License: Apache-2.0
 
 What it is: `#print axioms` reports that a theorem depends on
@@ -88,8 +89,10 @@ What machine-generated proofs rest on: https://f-keys.com/gonzalgo/generated-pro
   what a machine-generated proof corpus rests on.
 
 
+Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
+
 Why tactic-level rates cannot attribute classical dependencies (paper, 2026):
-https://doi.org/10.5281/zenodo.21853489
+https://f-keys.com/papers/tactic-attribution/ | https://doi.org/10.5281/zenodo.21853489
   A negative methodological result. Scoring Lean tactics by how often their
   proofs carry an avoidable classical dependence does not identify defective
   tactics. Calibrated against known-negatives -- tactics that cannot introduce a
