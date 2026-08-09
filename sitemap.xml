@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://f-keys.com/</loc><lastmod>2026-08-05</lastmod><priority>1.0</priority></url>
-  <url><loc>https://f-keys.com/papers/</loc><lastmod>2026-08-09</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/papers/tactic-attribution/</loc><lastmod>2026-08-09</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/papers/tactic-attribution.pdf</loc><lastmod>2026-08-09</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/papers/axiom-spend/</loc><lastmod>2026-08-09</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/papers/axiom-spend.pdf</loc><lastmod>2026-08-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/</loc><lastmod>2026-08-05</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/kernel-index/</loc><lastmod>2026-08-05</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/faq/</loc><lastmod>2026-08-05</lastmod><priority>0.9</priority></url>
@@ -13,4 +8,65 @@
   <url><loc>https://f-keys.com/portfolio.html</loc><lastmod>2026-08-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/remapwrap.html</loc><lastmod>2026-08-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/Docs.html</loc><lastmod>2026-08-05</lastmod><priority>0.6</priority></url>
+  <url><loc>https://f-keys.com/papers/</loc><lastmod>2026-08-09</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/papers/why-tactic-level-rates-cannot-attribute/</loc><lastmod>2026-08-08</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/why-tactic-level-rates-cannot-attribute.pdf</loc><lastmod>2026-08-08</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/</loc><lastmod>2026-08-05</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/where-formal-libraries-spend-their-axioms.pdf</loc><lastmod>2026-08-05</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/certified-upper-bounds-fejes-t-th/</loc><lastmod>2026-08-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/certified-upper-bounds-fejes-t-th.pdf</loc><lastmod>2026-08-01</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/maximality-added-vector-codes-cohn-li/</loc><lastmod>2026-08-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/maximality-added-vector-codes-cohn-li.pdf</loc><lastmod>2026-08-01</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/rigorous-areas-classical-lebesgue-universal-covering/</loc><lastmod>2026-07-31</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/rigorous-areas-classical-lebesgue-universal-covering.pdf</loc><lastmod>2026-07-31</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/certified-opaque-barrier-unit-disc-length/</loc><lastmod>2026-07-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/certified-opaque-barrier-unit-disc-length.pdf</loc><lastmod>2026-07-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/machine-checked-proof-opacity-faber-mycielski/</loc><lastmod>2026-07-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/machine-checked-proof-opacity-faber-mycielski.pdf</loc><lastmod>2026-07-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/added-vector-code-odd-sign-construction/</loc><lastmod>2026-07-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/added-vector-code-odd-sign-construction.pdf</loc><lastmod>2026-07-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/first-return-walks-vertex-transitive-graphs/</loc><lastmod>2026-07-27</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/first-return-walks-vertex-transitive-graphs.pdf</loc><lastmod>2026-07-27</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/procedural-method-generating-pseudoisochromatic-plates-browser/</loc><lastmod>2026-07-11</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/procedural-method-generating-pseudoisochromatic-plates-browser.pdf</loc><lastmod>2026-07-11</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/potica-america-naming-transmission-printed-record/</loc><lastmod>2026-07-11</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/competitive-context-jailbreak-accelerant-inter-model/</loc><lastmod>2026-05-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/federated-classification-infrastructure-registry-governance-node/</loc><lastmod>2026-04-24</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/federated-classification-infrastructure-registry-governance-node.pdf</loc><lastmod>2026-04-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/modulign-architecture-implementation-applications-dimensional-address/</loc><lastmod>2026-04-24</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/modulign-architecture-implementation-applications-dimensional-address.pdf</loc><lastmod>2026-04-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/epistemology-observation-formal-certification-framework-human/</loc><lastmod>2026-04-24</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/epistemology-observation-formal-certification-framework-human.pdf</loc><lastmod>2026-04-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/human-attestation-protocol-confrontation-clause-compliance/</loc><lastmod>2026-04-24</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/human-attestation-protocol-confrontation-clause-compliance.pdf</loc><lastmod>2026-04-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/modulign-correction-protocol-formal-specification-append/</loc><lastmod>2026-04-24</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/modulign-correction-protocol-formal-specification-append.pdf</loc><lastmod>2026-04-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/ai-generated-evidence-admissibility-formal-classification/</loc><lastmod>2026-04-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/ai-generated-evidence-admissibility-formal-classification.pdf</loc><lastmod>2026-04-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/architecture-epistemic-enforcement-empirical-implementation-universal/</loc><lastmod>2026-04-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/architecture-epistemic-enforcement-empirical-implementation-universal.pdf</loc><lastmod>2026-04-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/chain-custody-formalisation-digital-forensics-modulign/</loc><lastmod>2026-04-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/chain-custody-formalisation-digital-forensics-modulign.pdf</loc><lastmod>2026-04-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/inter-rater-reliability-automated-modulign-standard/</loc><lastmod>2026-04-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/inter-rater-reliability-automated-modulign-standard.pdf</loc><lastmod>2026-04-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/record-formal-epistemology-journalistic-attestation/</loc><lastmod>2026-04-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/version-3-1-amendment-document/</loc><lastmod>2026-04-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/classification-deficit-article-50-eu-ai/</loc><lastmod>2026-04-14</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/classification-deficit-article-50-eu-ai.pdf</loc><lastmod>2026-04-14</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/dimensional-address-rigid-designation-dag-or/</loc><lastmod>2026-04-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/dimensional-address-rigid-designation-dag-or.pdf</loc><lastmod>2026-04-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/modulign-standard-automated-classifier-certification-framework/</loc><lastmod>2026-04-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/modulign-standard-automated-classifier-certification-framework.pdf</loc><lastmod>2026-04-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/public-commitment-document/</loc><lastmod>2026-04-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/public-commitment-document.pdf</loc><lastmod>2026-04-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/structural-dissolution-gettier-problem-address-theoretic/</loc><lastmod>2026-04-06</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/structural-dissolution-gettier-problem-address-theoretic.pdf</loc><lastmod>2026-04-06</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/modulign-standard-dimensional-address-grammar-observable/</loc><lastmod>2026-03-31</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/modulign-standard-dimensional-address-grammar-observable.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/modulign-evidence/</loc><lastmod>2026-03-31</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/modulign-evidence.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/synthetic-content-epistemic-category/</loc><lastmod>2026-03-31</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/synthetic-content-epistemic-category.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/papers/formal-logic-modulign/</loc><lastmod>2026-03-31</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/papers/pdf/formal-logic-modulign.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
 </urlset>
