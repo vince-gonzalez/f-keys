@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/">
+
+<title>Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoida — Vince Gonzalez</title>
+<meta name="description" content="A proof assistant can report which axioms a theorem rests on, but only one theorem at a time, and only whether rather than why. I measure axiom use across six libraries and two proof systems - the Metamath databases set.mm (ZFC, classical first-order), iset.mm (intuitionistic), n">
+<meta name="author" content="Vince Gonzalez">
+
+<!-- Google Scholar -->
+<meta name="citation_title" content="Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean&#x27;s omega">
+<meta name="citation_author" content="Gonzalez, Vince">
+<meta name="citation_author_institution" content="F-Keys">
+<meta name="citation_author_orcid" content="https://orcid.org/0009-0005-3640-014X">
+<meta name="citation_publication_date" content="2026/08/05">
+<meta name="citation_online_date" content="2026/08/05">
+<meta name="citation_abstract_html_url" content="https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/">
+<meta name="citation_doi" content="10.5281/zenodo.21769846">
+<meta name="citation_technical_report_institution" content="F-Keys">
+<meta name="citation_language" content="en">
+<meta name="citation_keywords" content="formal verification, proof assistants, axiom of choice, Lean 4, Mathlib, Metamath, dependency analysis, constructive mathematics, omega decision procedure, reverse mathematics, proof engineering, quantitative metamathematics">
+<meta name="citation_pdf_url" content="https://f-keys.com/papers/pdf/where-formal-libraries-spend-their-axioms.pdf">
+<meta name="citation_fulltext_world_readable" content="">
+
+<!-- Dublin Core -->
+<meta name="DC.title" content="Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean&#x27;s omega">
+<meta name="DC.creator" content="Gonzalez, Vince">
+<meta name="DC.date" content="2026-08-05">
+<meta name="DC.type" content="Text">
+<meta name="DC.identifier" content="https://doi.org/10.5281/zenodo.21769846">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/">
+<meta property="og:title" content="Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean&#x27;s omega">
+<meta property="og:description" content="A proof assistant can report which axioms a theorem rests on, but only one theorem at a time, and only whether rather than why. I measure axiom use across six libraries and two proof systems - the Met">
+<meta property="og:site_name" content="F-Keys">
+<meta name="twitter:card" content="summary">
+
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "@id": "https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/",
+  "headline": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
+  "url": "https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/",
+  "datePublished": "2026-08-05",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "identifier": "https://doi.org/10.5281/zenodo.21769846",
+  "sameAs": "https://doi.org/10.5281/zenodo.21769846",
+  "author": {
+    "@type": "Person",
+    "name": "Vince Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X",
+    "sameAs": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": { "@type": "Organization", "name": "F-Keys", "url": "https://f-keys.com/" },
+  "abstract": "A proof assistant can report which axioms a theorem rests on, but only one theorem at a time, and only whether rather than why. I measure axiom use across six libraries and two proof systems - the Metamath databases set.mm (ZFC, classical first-order), iset.mm (intuitionistic), nf.mm (Quine's New Foundations), ql.mm (quantum logic) and hol.mm (higher-order logic), and Lean 4's Mathlib (dependent type theory) - using one program for all six, so the comparison rests on identical definitions rather than analogy. Axiom use funnels through very few lemmas in the mature libraries. The median axiom is cited directly in 2 to 4 proofs and inherited by thousands, and entry points per theorem agree to within 13% across set.mm, iset.mm and nf.mm despite three different foundations. Two smaller databases, ql.mm and hol.mm, sit three to six times higher, so the concentration is a property of maturity rather than of formal libraries as such - a narrowing of what version 1.0.0 of this paper claimed. The mechanism is ordinary: a young library has not yet had its shared subproofs factored out into gateway lemmas. A refactoring-invariance result settles which of these measurements can bear comparison between libraries. Under inlining and factoring - operations that change how a library is written, not what it proves - the dependent set is invariant while the entry-point set is not, so amplification can be driven to any value between 1 and the number of dependents. No bound on amplification can therefore depend on mathematical content alone. Reach is invariant, and is the quantity reported: full choice in set.mm reaches 1.2% of the library against Classical.choice's 61.0% of Mathlib. Separating each theorem's statement from its proof bounds how much classical dependence is even eligible fo",
+  "isPartOf": { "@type": "Collection", "name": "F-Keys papers", "url": "https://f-keys.com/papers/" },
+  "encoding": { "@type": "MediaObject", "contentUrl": "https://f-keys.com/papers/pdf/where-formal-libraries-spend-their-axioms.pdf", "encodingFormat": "application/pdf" }
+}
+</script>
+
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; line-height:1.65; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,0.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:820px; margin:0 auto; padding:7rem 1.5rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(30px,5vw,46px); color:var(--green); letter-spacing:1px; line-height:1.15; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(18px,3vw,24px); color:var(--cyan); letter-spacing:1px; margin:.6rem 0 1.4rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.6rem; color:var(--green); margin:2.6rem 0 .7rem; letter-spacing:1px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+code { color:var(--cyan); }
+pre { background:#0d120d; border:1px solid var(--border); padding:1.1rem; overflow-x:auto; font-size:.85rem; margin:1.4rem 0; color:var(--text); }
+.byline { color:var(--dim); margin-bottom:1.8rem; font-size:.95rem; }
+.getit { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.6rem 0 2.2rem; }
+.getit a { display:inline-block; border:1px solid var(--green); color:var(--green); padding:.55rem 1.1rem; text-decoration:none; font-size:.9rem; }
+.getit a:hover { background:var(--green); color:var(--bg); }
+.getit a.alt { border-color:var(--border); color:var(--dim); }
+.getit a.alt:hover { background:var(--border); color:var(--text); }
+.entry { border-top:1px solid var(--border); padding:1.6rem 0; }
+.entry h2 { margin:0 0 .3rem; font-size:1.5rem; }
+.entry h2 a { text-decoration:none; }
+.entry .meta { color:var(--dim); font-size:.85rem; margin-bottom:.6rem; }
+.entry p { margin-bottom:.6rem; }
+footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.6rem;font-size:.9rem;">
+    <a href="/papers/">papers</a>
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="https://github.com/zengineco">GitHub</a>
+  </div>
+</nav>
+
+<main>
+
+<h1>Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean&#x27;s omega</h1>
+
+<p class="byline">Vince Gonzalez ·
+<a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> ·
+2026-08-05 · Preprint · CC-BY-4.0</p>
+
+<div class="getit">
+  <a href="/papers/pdf/where-formal-libraries-spend-their-axioms.pdf">Read the PDF</a>
+  <a class="alt" href="https://doi.org/10.5281/zenodo.21769846">DOI: 10.5281/zenodo.21769846</a>
+  <a class="alt" href="/papers/">All papers</a>
+</div>
+
+<h2>Abstract</h2>
+<p>A proof assistant can report which axioms a theorem rests on, but only one theorem at a time, and only whether rather than why. I measure axiom use across six libraries and two proof systems - the Metamath databases set.mm (ZFC, classical first-order), iset.mm (intuitionistic), nf.mm (Quine's New Foundations), ql.mm (quantum logic) and hol.mm (higher-order logic), and Lean 4's Mathlib (dependent type theory) - using one program for all six, so the comparison rests on identical definitions rather than analogy.</p>
+<p>Axiom use funnels through very few lemmas in the mature libraries. The median axiom is cited directly in 2 to 4 proofs and inherited by thousands, and entry points per theorem agree to within 13% across set.mm, iset.mm and nf.mm despite three different foundations. Two smaller databases, ql.mm and hol.mm, sit three to six times higher, so the concentration is a property of maturity rather than of formal libraries as such - a narrowing of what version 1.0.0 of this paper claimed. The mechanism is ordinary: a young library has not yet had its shared subproofs factored out into gateway lemmas.</p>
+<p>A refactoring-invariance result settles which of these measurements can bear comparison between libraries. Under inlining and factoring - operations that change how a library is written, not what it proves - the dependent set is invariant while the entry-point set is not, so amplification can be driven to any value between 1 and the number of dependents. No bound on amplification can therefore depend on mathematical content alone. Reach is invariant, and is the quantity reported: full choice in set.mm reaches 1.2% of the library against Classical.choice's 61.0% of Mathlib.</p>
+<p>Separating each theorem's statement from its proof bounds how much classical dependence is even eligible for removal: 13.1% of Mathlib theorems have a choice-free statement and a choice-dependent proof, and nothing outside that band can be eliminated under any argument.</p>
+<p>A substitutability test re-synthesizes each site where the elaborator inserted classical decidability and classifies the result by the kernel's own axiom bookkeeping rather than by name - a name-based screen on set.mm measured 41.5% precision, its characteristic failure being a lemma that relocates choice into an antecedent instead of discharging it. Across 8,907 declarations and 23,279 verdicts the test finds 805 sites where a choice-free instance was available and unused, and 280 declarations whose only route to Classical.choice runs through such a site.</p>
+<p>Those 280 share a cause. 276 of them (98.6%) trace to the omega decision procedure, which supplies the Decidable arguments of six helper lemmas as a literal Classical.propDecidable and never attempts instance synthesis. On Nat and Int, where the required instances exist and are axiom-free, this makes otherwise constructive proofs depend on the axiom of choice. It reproduces in one line with no imports, and the hardcoded instances are still present in Lean master as of August 2026.</p>
+<p>The fix is applied rather than only proposed, and then tested for whether it preserves the proofs. Rewriting all 280 proof terms and submitting each to the kernel against its unchanged statement, 276 are accepted and 4 are rejected, and the four rejections are exactly the four declarations traced to a cause other than omega. 275 declarations lose their dependence on Classical.choice outright. The partition is structural: omega passes the instance to a helper lemma and never computes with it, so its terms are indifferent to which instance they receive, while the four exceptions use decidability computationally and break.</p>
+<p>Reported upstream, the issue was closed as completed with the reply that avoiding choice is a deliberate non-goal of Lean core. No figure was disputed. The behaviour is therefore within Lean's stated design rather than a defect by its own standard, and the reply also serves as a primary source for the paper's reading of why set.mm and Mathlib differ so widely in reach - set.mm tiers countable and dependent choice separately on purpose, and Lean core does not.</p>
+<p>The paper also documents a measurement hazard specific to Lean 4.32: ConstantInfo.value? returns none for theorems unless called with allowOpaque := true, so an extractor written the obvious way sees no proof terms, silently measures statements, and reports them as proofs. This invalidated a full round of results before an exact zero in a 2x2 classification exposed it. The superseded data is included so the error remains checkable.</p>
+<p>Code, all 23,279 verdicts, the 280 declarations and the per-declaration kernel outcomes are included. A single command recomputes every quantitative claim from the shipped artifacts and reports OK or MISMATCH against the published value.</p>
+<p>The measurement pipeline is packaged as gonzalgo (pip install gonzalgo), and the standing survey it produces - what 14 formal libraries across 2 proof systems rest on - is published as the Kernel Index at https://www.f-keys.com/gonzalgo/kernel-index/</p>
+<p>Changes in 1.0.2: the cross-foundation comparison gains ql.mm and hol.mm, which narrow the concentration claim from formal libraries generally to mature ones; a new section records the upstream outcome and corrects an over-reading of an earlier accepted Lean issue as general policy; the abstract's library count is corrected to six.</p>
+
+<h2>Cite it</h2>
+<pre>Gonzalez, V. (2026). Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean&#x27;s omega.
+  Zenodo. https://doi.org/10.5281/zenodo.21769846</pre>
+
+</main>
+
+<footer>
+  <p>Vince Gonzalez · <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> ·
+  <a href="/papers/">papers</a> · <a href="/">f-keys.com</a></p>
+</footer>
+
+</body>
+</html>
