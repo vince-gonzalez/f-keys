@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/papers/which-constant-responsible-dominator-analysis-classical/">
+
+<title>Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib — Vince Gonzalez</title>
+<meta name="description" content="61.2% of Mathlib&#x27;s theorems depend on Classical.choice. Asking which constant is responsible for that dependence is a different question from asking which constants a proof touches, and the two answers differ by a factor of 58 on the first case examined: 116,766 theorems reach th">
+<meta name="author" content="Vince Gonzalez">
+
+<!-- Google Scholar -->
+<meta name="citation_title" content="Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib">
+<meta name="citation_author" content="Gonzalez, Vince">
+<meta name="citation_author_institution" content="F-Keys">
+<meta name="citation_author_orcid" content="https://orcid.org/0009-0005-3640-014X">
+<meta name="citation_publication_date" content="2026/08/11">
+<meta name="citation_online_date" content="2026/08/11">
+<meta name="citation_abstract_html_url" content="https://f-keys.com/papers/which-constant-responsible-dominator-analysis-classical/">
+<meta name="citation_doi" content="10.5281/zenodo.21883963">
+<meta name="citation_technical_report_institution" content="F-Keys">
+<meta name="citation_language" content="en">
+<meta name="citation_keywords" content="Lean 4, Mathlib, axiom of choice, Classical.choice, Classical.propDecidable, dominator tree, dependency graph, formal verification, proof provenance, constructive mathematics, interactive theorem proving">
+<meta name="citation_pdf_url" content="https://f-keys.com/papers/pdf/which-constant-responsible-dominator-analysis-classical.pdf">
+<meta name="citation_fulltext_world_readable" content="">
+
+<!-- Dublin Core -->
+<meta name="DC.title" content="Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib">
+<meta name="DC.creator" content="Gonzalez, Vince">
+<meta name="DC.date" content="2026-08-11">
+<meta name="DC.type" content="Text">
+<meta name="DC.identifier" content="https://doi.org/10.5281/zenodo.21883963">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://f-keys.com/papers/which-constant-responsible-dominator-analysis-classical/">
+<meta property="og:title" content="Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib">
+<meta property="og:description" content="61.2% of Mathlib&#x27;s theorems depend on Classical.choice. Asking which constant is responsible for that dependence is a different question from asking which constants a proof touches, and the two answer">
+<meta property="og:site_name" content="F-Keys">
+<meta name="twitter:card" content="summary">
+
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "@id": "https://f-keys.com/papers/which-constant-responsible-dominator-analysis-classical/",
+  "headline": "Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib",
+  "url": "https://f-keys.com/papers/which-constant-responsible-dominator-analysis-classical/",
+  "datePublished": "2026-08-11",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "identifier": "https://doi.org/10.5281/zenodo.21883963",
+  "sameAs": "https://doi.org/10.5281/zenodo.21883963",
+  "author": {
+    "@type": "Person",
+    "name": "Vince Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X",
+    "sameAs": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": { "@type": "Organization", "name": "F-Keys", "url": "https://f-keys.com/" },
+  "abstract": "61.2% of Mathlib's theorems depend on Classical.choice. Asking which constant is responsible for that dependence is a different question from asking which constants a proof touches, and the two answers differ by a factor of 58 on the first case examined: 116,766 theorems reach the order lemma lt_or_eq_of_le, and 2,018 would stop being classical if it were rebuilt constructively. The rest have another route. The distinction is exactly dominance. In the dependency graph reversed and rooted at the axiom, severing a constant frees precisely the theorems it dominates, so one dominator tree answers for all 766,564 constants what a separate reachability computation answers for one. Built with the iterative algorithm of Cooper, Harvey and Kennedy, it converges in three passes and reproduces six independently computed severing counts exactly. Two results follow. First, 60.1% of classically dependent theorems have no responsible constant at all: their immediate dominator is the axiom itself, so no single declaration gates them and no local repair can reach them. Second, the 39.9% that do have one concentrate in a way that a mathematics library is not usually described in. Outside classical logic itself, the largest sites are a functor category instance (5,271 theorems), hash-map well-formedness in the standard library (4,899), the powerset Boolean algebra (3,430) and string-to-list conversion (1,111). Classical dependence in Mathlib accumulates in its infrastructure rather than in its mathematics. The dominator construction is standard and is used this way in memory profilers and bundle-size tooling; what appears to be new is its application to a proof-dependency graph rooted at an axiom, and the reading of the resulting subtree sizes as removability weights. Measured on Lean 4.3",
+  "isPartOf": { "@type": "Collection", "name": "F-Keys papers", "url": "https://f-keys.com/papers/" },
+  "encoding": { "@type": "MediaObject", "contentUrl": "https://f-keys.com/papers/pdf/which-constant-responsible-dominator-analysis-classical.pdf", "encodingFormat": "application/pdf" }
+}
+</script>
+
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; line-height:1.65; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,0.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:820px; margin:0 auto; padding:7rem 1.5rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(30px,5vw,46px); color:var(--green); letter-spacing:1px; line-height:1.15; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(18px,3vw,24px); color:var(--cyan); letter-spacing:1px; margin:.6rem 0 1.4rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.6rem; color:var(--green); margin:2.6rem 0 .7rem; letter-spacing:1px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+code { color:var(--cyan); }
+pre { background:#0d120d; border:1px solid var(--border); padding:1.1rem; overflow-x:auto; font-size:.85rem; margin:1.4rem 0; color:var(--text); }
+.byline { color:var(--dim); margin-bottom:1.8rem; font-size:.95rem; }
+.getit { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.6rem 0 2.2rem; }
+.getit a { display:inline-block; border:1px solid var(--green); color:var(--green); padding:.55rem 1.1rem; text-decoration:none; font-size:.9rem; }
+.getit a:hover { background:var(--green); color:var(--bg); }
+.getit a.alt { border-color:var(--border); color:var(--dim); }
+.getit a.alt:hover { background:var(--border); color:var(--text); }
+.entry { border-top:1px solid var(--border); padding:1.6rem 0; }
+.entry h2 { margin:0 0 .3rem; font-size:1.5rem; }
+.entry h2 a { text-decoration:none; }
+.entry .meta { color:var(--dim); font-size:.85rem; margin-bottom:.6rem; }
+.entry p { margin-bottom:.6rem; }
+footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.6rem;font-size:.9rem;">
+    <a href="/papers/">papers</a>
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="https://github.com/zengineco">GitHub</a>
+  </div>
+</nav>
+
+<main>
+
+<h1>Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib</h1>
+
+<p class="byline">Vince Gonzalez ·
+<a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> ·
+2026-08-11 · Preprint · CC-BY-4.0</p>
+
+<div class="getit">
+  <a href="/papers/pdf/which-constant-responsible-dominator-analysis-classical.pdf">Read the PDF</a>
+  <a class="alt" href="https://doi.org/10.5281/zenodo.21883963">DOI: 10.5281/zenodo.21883963</a>
+  <a class="alt" href="/papers/">All papers</a>
+</div>
+
+<h2>Abstract</h2>
+<p>61.2% of Mathlib's theorems depend on Classical.choice. Asking which constant is responsible for that dependence is a different question from asking which constants a proof touches, and the two answers differ by a factor of 58 on the first case examined: 116,766 theorems reach the order lemma lt_or_eq_of_le, and 2,018 would stop being classical if it were rebuilt constructively. The rest have another route.</p>
+<p>The distinction is exactly dominance. In the dependency graph reversed and rooted at the axiom, severing a constant frees precisely the theorems it dominates, so one dominator tree answers for all 766,564 constants what a separate reachability computation answers for one. Built with the iterative algorithm of Cooper, Harvey and Kennedy, it converges in three passes and reproduces six independently computed severing counts exactly.</p>
+<p>Two results follow. First, 60.1% of classically dependent theorems have no responsible constant at all: their immediate dominator is the axiom itself, so no single declaration gates them and no local repair can reach them. Second, the 39.9% that do have one concentrate in a way that a mathematics library is not usually described in. Outside classical logic itself, the largest sites are a functor category instance (5,271 theorems), hash-map well-formedness in the standard library (4,899), the powerset Boolean algebra (3,430) and string-to-list conversion (1,111). Classical dependence in Mathlib accumulates in its infrastructure rather than in its mathematics.</p>
+<p>The dominator construction is standard and is used this way in memory profilers and bundle-size tooling; what appears to be new is its application to a proof-dependency graph rooted at an axiom, and the reading of the resulting subtree sizes as removability weights.</p>
+<p>Measured on Lean 4.32.1 with Mathlib v4.32.1: 766,564 declarations, 29,469,817 dependency edges. The pipeline is validated against the author's previously published figures before any new number is reported, reproducing 324,510 theorems reaching Classical.choice against a published 324,808, and the eligibility ceiling at 13.1%.</p>
+<p>The reproduction archive recomputes every table from bundled data with no Lean toolchain; the Lean sources that regenerate the graph are included.</p>
+
+<h2>Cite it</h2>
+<pre>Gonzalez, V. (2026). Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib.
+  Zenodo. https://doi.org/10.5281/zenodo.21883963</pre>
+
+</main>
+
+<footer>
+  <p>Vince Gonzalez · <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> ·
+  <a href="/papers/">papers</a> · <a href="/">f-keys.com</a></p>
+</footer>
+
+</body>
+</html>

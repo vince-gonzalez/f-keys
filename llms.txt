@@ -91,6 +91,35 @@ What machine-generated proofs rest on: https://f-keys.com/gonzalgo/generated-pro
 
 Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
 
+Which constant is responsible? Dominator analysis of classical dependence in
+Mathlib (note, 2026): https://f-keys.com/papers/which-constant-responsible-dominator-analysis-classical/
+| https://doi.org/10.5281/zenodo.21883963
+  Asking which constant is RESPONSIBLE for a theorem's dependence on the axiom
+  of choice is a different question from asking which constants its proof
+  touches, and the answers differ by 58x on the first case examined: 116,766
+  theorems reach the order lemma lt_or_eq_of_le, 2,018 would stop being
+  classical if it were rebuilt. The distinction is dominance, so one dominator
+  tree over the reversed dependency graph rooted at the axiom answers it for all
+  766,564 constants at once. Two results: 60.1% of classically dependent
+  theorems have NO responsible constant -- their immediate dominator is the
+  axiom itself, so no local repair reaches them; and outside classical logic the
+  largest sites are infrastructure, not mathematics -- a functor category
+  instance, hash-map well-formedness, the powerset Boolean algebra, string
+  conversion.
+
+Eligibility discriminates among theorems and not among the constants they rest
+on (note, 2026): https://f-keys.com/papers/eligibility-discriminates-among-theorems-not-among/
+| https://doi.org/10.5281/zenodo.21884471
+  A negative result about the statement/proof measure. It gives a real 13.1%
+  ceiling over Mathlib's theorems and is informative there because 78.6% fail
+  it. Applied to the 327,981 constants that dominate those theorems it gives
+  22.88% overall, but the rate is 16.04% among constants dominating one theorem
+  and above 99% among those dominating two or more -- a cliff, not a gradient.
+  The property that makes a constant important is the property that makes it
+  eligible, so the test cannot choose which load-bearing constant to attack.
+  Witness: Classical.propDecidable has a choice-free type, is therefore
+  eligible, dominates 91,858 theorems, and cannot be made constructive.
+
 Why tactic-level rates cannot attribute classical dependencies (paper, 2026):
 https://f-keys.com/papers/tactic-attribution/ | https://doi.org/10.5281/zenodo.21853489
   A negative methodological result. Scoring Lean tactics by how often their
