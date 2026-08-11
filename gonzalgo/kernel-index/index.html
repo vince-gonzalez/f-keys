@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-snippet:-1">
 <link rel="canonical" href="https://f-keys.com/gonzalgo/kernel-index/">
-<title>The Kernel Index &mdash; what formal mathematical libraries rest on</title>
+<title>The Kernel Index — what formal mathematical libraries rest on</title>
 <meta name="description" content="A measured table of what formal libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, or on an optional axiom. Lean 4 and Metamath, six foundations, one program.">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/kernel-index/">
 <meta property="og:title" content="The Kernel Index">
-<meta property="og:description" content="What formal mathematical libraries rest on. Measured, not assumed.">
+<meta property="og:description" content="what formal libraries actually rest on">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -42,7 +42,18 @@
     "name": "Vincent Gonzalez",
     "identifier": "https://orcid.org/0009-0005-3640-014X"
   },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
   "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
   "distribution": [
     {
       "@type": "DataDownload",
@@ -60,18 +71,20 @@
 <style>
 :root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; line-height:1.65; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
 body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
 nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
 .logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
-nav a { color:var(--dim); text-decoration:none; } nav a:hover { color:var(--green); }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
 main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
 h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
-.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(18px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
 h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
-p { margin-bottom:1rem; } a { color:var(--green); }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
 .wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
-table { width:100%; border-collapse:collapse; font-size:.88rem; min-width:820px; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
 th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
 td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
 td.num { text-align:right; font-variant-numeric:tabular-nums; }
@@ -79,9 +92,10 @@ td.found { color:var(--dim); }
 tr:hover td { background:#0d120d; }
 strong { color:#ff8080; }
 .note { color:var(--dim); font-size:.9rem; }
-pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.85rem; margin:1rem 0; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
 code { color:var(--cyan); }
-footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
 </style>
 </head>
 <body>
@@ -89,6 +103,7 @@ footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; 
   <a href="/" class="logo">F-KEYS</a>
   <div style="display:flex;gap:1.5rem;font-size:.9rem;">
     <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
     <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
   </div>
 </nav>
@@ -97,26 +112,12 @@ footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; 
 <h1>THE KERNEL INDEX</h1>
 <p class="kicker">what formal libraries actually rest on</p>
 
-<p>
-Each library here was measured directly. The two middle columns are the ones to
-read: how many theorems rest on a proof that was never finished, and how many
-were settled by running compiled code rather than by the kernel.
-</p>
-<p class="note">
-Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib
-&middot; Metamath <code>set.mm</code>, <code>iset.mm</code>, <code>nf.mm</code>,
-<code>ql.mm</code>, <code>hol.mm</code> &middot; last measured 2026-08-05
-</p>
+<p>Each library here was measured directly. The two middle columns are the ones to read: how many theorems rest on a proof that was never finished, and how many were settled by running compiled code rather than by the kernel.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib &middot; Metamath <code>set.mm</code>, <code>iset.mm</code>, <code>nf.mm</code>, <code>ql.mm</code>, <code>hol.mm</code></p>
 
 <div class="wrap">
 <table>
-<thead><tr>
-  <th>library</th><th>system</th><th>foundation</th>
-  <th style="text-align:right">theorems</th>
-  <th style="text-align:right">unfinished</th>
-  <th style="text-align:right">compiler-trusted</th>
-  <th style="text-align:right">optional axiom</th>
-</tr></thead>
+<thead><tr><th>library</th><th>system</th><th>foundation</th><th style="text-align:right">theorems</th><th style="text-align:right">unfinished</th><th style="text-align:right">compiler-trusted</th><th style="text-align:right">optional axiom</th></tr></thead>
 <tbody>
 <tr><td>Mathlib</td><td>Lean 4</td><td class='found'>Dependent type theory</td><td class='num'>437,429</td><td class='num'>0</td><td class='num'>0</td><td class='num'>66.62%</td></tr>
 <tr><td>Lean core (Init)</td><td>Lean 4</td><td class='found'>Dependent type theory</td><td class='num'>45,051</td><td class='num'>0</td><td class='num'>0</td><td class='num'>23.91%</td></tr>
@@ -136,48 +137,32 @@ Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathli
 </table>
 </div>
 
-<p class="note">
-<strong style="color:#ff8080">Red</strong> marks a non-zero count &mdash; theorems
-resting on an unfinished proof, or on the compiler. <em>unfinished</em> counts
-theorems reaching a <code>sorry</code> (Lean) or a <code>?</code>-bearing proof
-(Metamath) anywhere upstream, not only those that state one.
-<em>optional axiom</em> is the share of theorems depending on
-<code>Classical.choice</code> in Lean and on full choice in <code>set.mm</code>;
-the other databases declare no choice axiom.
-</p>
+<p class="note"><strong style="color:#ff8080">Red</strong> marks a non-zero count &mdash; theorems resting on an unfinished proof, or on the compiler. <em>unfinished</em> counts theorems reaching a <code>sorry</code> (Lean) or a <code>?</code>-bearing proof (Metamath) anywhere upstream, not only those that state one. <em>optional axiom</em> is the share of theorems depending on <code>Classical.choice</code> in Lean and on full choice in <code>set.mm</code>; the other databases declare no choice axiom.</p>
 
 <h2>Get the data</h2>
 <p>
 <a href="kernel-index.json">kernel-index.json</a> &middot;
-<a href="kernel-index.csv">kernel-index.csv</a> &middot; CC-BY-4.0
+<a href="kernel-index.csv">kernel-index.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-05
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
 </p>
 
 <h2>Reproduce it</h2>
 <pre>pip install gonzalgo
 gonzalgo trust mathlib_split.tsv      # the Lean rows
 gonzalgo mm set.mm iset.mm nf.mm ql.mm hol.mm   # the Metamath rows</pre>
-<p class="note">
-Every figure comes from the proof system's own bookkeeping &mdash; Lean's
-<code>collectAxioms</code> and Metamath's proof structure. The extractors ship
-with the tool, so you can re-derive any row here yourself.
-</p>
+<p class="note">Every figure comes from the proof system's own bookkeeping &mdash; Lean's <code>collectAxioms</code> and Metamath's proof structure. The extractors ship with the tool, so you can re-derive any row here yourself.</p>
 
 <h2>Why it exists</h2>
-<p>
-&ldquo;This library rests on nothing but the kernel&rdquo; is something people
-have had to take on faith, because checking it at library scale wasn't
-practical. The numbers above are that check. A zero in the middle columns means
-someone ran it and it came back empty.
-</p>
+<p>&ldquo;This library rests on nothing but the kernel&rdquo; is something people have had to take on faith, because checking it at library scale wasn't practical. The numbers above are that check. A zero in the middle columns means someone ran it and it came back empty.</p>
 
 <footer>
-  <p>
-    Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>.
-    Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>
-  </p>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
   <p style="margin-top:.8rem;">
-    The Kernel Index is maintained at
-    <a href="https://f-keys.com/gonzalgo/kernel-index/">f-keys.com/gonzalgo/kernel-index</a>
+    Maintained at <a href="https://f-keys.com/gonzalgo/kernel-index/">f-keys.com/gonzalgo/kernel-index/</a>
     &mdash; the home of <code>kernel &gt; sorry</code>.
   </p>
   <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>

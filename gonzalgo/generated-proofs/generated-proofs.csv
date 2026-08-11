@@ -1,0 +1,11 @@
+category,proofs,share_of_compiled_pct,note
+corpus,10000,,"Goedel-Prover proofs of Lean Workbook problems, Apache-2.0"
+compiled under Lean 4.32,9169,100.0,
+"held out, failed to compile",831,,"corpus targets Lean 4.27; version drift, not a property of the proofs"
+depends on Classical.choice,8496,92.7,
+choice dependence bound by the statement,7899,86.1,unavoidable: the theorem is about the reals
+"choice dependence avoidable, proof only",597,6.5,the only part anyone could act on
+choice-free entirely,673,7.3,
+rests on an unfinished proof,0,0.0,"520 reach sorryAx, all among the held-out"
+native_decide / compiler-trusted,0,0.0,
+"axioms beyond propext, Quot.sound, Classical.choice",0,0.0,

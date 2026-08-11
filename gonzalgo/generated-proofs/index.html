@@ -53,6 +53,57 @@
   "abstract": "9,169 machine-generated Lean 4 proofs were audited for what they rest on. None depends on an unfinished proof, on native_decide, or on any axiom beyond propext, Quot.sound and Classical.choice. 92.7% depend on the axiom of choice, of which 86.1% are bound by the statement and only 6.5% are avoidable."
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "What machine-generated Lean proofs rest on",
+  "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
+  "url": "https://f-keys.com/gonzalgo/generated-proofs/",
+  "version": "2026-08-11",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "machine-generated proofs",
+    "AI generated proofs",
+    "Lean 4",
+    "Goedel-Prover",
+    "Lean Workbook",
+    "axiom of choice",
+    "sorry",
+    "native_decide",
+    "formal verification"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.csv"
+    }
+  ]
+}
+</script>
 
 <style>
 :root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
@@ -94,22 +145,20 @@ footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; co
 <h1>What 9,169 machine-generated Lean proofs rest on</h1>
 <p class="kicker">none of them rests on an unfinished proof</p>
 
-<pre>corpus                        10,000
-compiled under Lean 4.32       9,169
-held out, failed to compile      560
-
-reach Classical.choice         8,496    92.7%
-  statement-bound              7,899    86.1%   unavoidable
-  avoidable, proof only          597     6.5%
-choice-free entirely             673     7.3%
-
-rests on an unfinished proof       0
-native_decide / compiler trust     0
-axioms beyond the standard three   0</pre>
+<pre>corpus                                                10,000
+compiled under Lean 4.32                               9,169   100.0%
+held out, failed to compile                              831
+depends on Classical.choice                            8,496    92.7%
+choice dependence bound by the statement               7,899    86.1%
+choice dependence avoidable, proof only                  597     6.5%
+choice-free entirely                                     673     7.3%
+rests on an unfinished proof                               0     0.0%
+native_decide / compiler-trusted                           0     0.0%
+axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 
 <p>A language model that writes a Lean proof gets one bit of feedback: the proof compiles, or it does not. What the proof ends up standing on is not part of that signal and nobody has measured it.</p>
 
-<p>This is that measurement, over the Goedel-Prover output for the Lean Workbook problems — 10,000 proofs, of which 9,169 still compile under Lean 4.32. The other 560 fail on the version gap and are held out of every figure below.</p>
+<p>This is that measurement, over the Goedel-Prover output for the Lean Workbook problems — 10,000 proofs, of which 9,169 still compile under Lean 4.32. The other 831 fail on the version gap and are held out of every figure below.</p>
 
 <p>Lean 4.32.</p>
 
@@ -145,7 +194,7 @@ axioms beyond the standard three   0</pre>
 
 <p>Lean admits a declaration whose proof failed to elaborate, carrying <code>sorryAx</code>. In a report that is indistinguishable from a proof that was genuinely never finished, so the two have to be told apart by the compiler&#x27;s error output rather than by the axiom set.</p>
 
-<p>520 theorems reach <code>sorryAx</code> and every one of them is among the 560 that failed to compile. Of the 9,169 that compiled, none does. Compile failures are held out of every figure here; a corpus targeting Lean 4.27 measured under 4.32 would otherwise report version drift as a property of the proofs.</p>
+<p>520 theorems reach <code>sorryAx</code> and every one of them is among the 831 that failed to compile. Of the 9,169 that compiled, none does. Compile failures are held out of every figure here; a corpus targeting Lean 4.27 measured under 4.32 would otherwise report version drift as a property of the proofs.</p>
 
 <h2>Method</h2>
 
@@ -158,6 +207,20 @@ axioms beyond the standard three   0</pre>
 <h2>Reproducing it</h2>
 
 <p>The corpus is banach1729/goedel-workbook-lean427 on Hugging Face, Apache-2.0. The tool is <code>pip install gonzalgo</code>. Compile the proofs in batches against Mathlib and run the axiom report; the whole thing takes a few hours on a laptop and needs no Lean expertise.</p>
+
+<h2>Get the data</h2>
+<p>
+The table above, machine-readable:
+<a href="generated-proofs.json">generated-proofs.json</a> &middot;
+<a href="generated-proofs.csv">generated-proofs.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-11
+</p>
+<p style="color:var(--dim);font-size:.9rem;border:1px solid var(--border);background:var(--panel);padding:.7rem .9rem;">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on. The per-proof results behind
+these totals are not published yet; releasing them means re-running the audit,
+and a summary is not a substitute for the rows.
+</p>
 
 <footer>
   Measured with <a href="https://pypi.org/project/gonzalgo/">gonzalgo</a> ·

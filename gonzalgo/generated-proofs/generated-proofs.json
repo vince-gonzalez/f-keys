@@ -1,0 +1,103 @@
+{
+  "name": "What machine-generated Lean proofs rest on",
+  "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
+  "version": "2026-08-11",
+  "sha256": "906a39491ab2be7a06c7370cd525e649b9644351c8387abf883bd8cd5ee01987",
+  "url": "https://f-keys.com/gonzalgo/generated-proofs/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "producedBy": {
+    "software": "gonzalgo",
+    "url": "https://pypi.org/project/gonzalgo/",
+    "paper": "https://doi.org/10.5281/zenodo.21769846"
+  },
+  "measured": {
+    "Lean 4": "4.32",
+    "corpus": "banach1729/goedel-workbook-lean427, Apache-2.0"
+  },
+  "fields": [
+    "category",
+    "proofs",
+    "share_of_compiled_pct",
+    "note"
+  ],
+  "displayed": [
+    {
+      "key": "category",
+      "label": "category"
+    },
+    {
+      "key": "proofs",
+      "label": "proofs"
+    },
+    {
+      "key": "share_of_compiled_pct",
+      "label": "share"
+    },
+    {
+      "key": "note",
+      "label": "note"
+    }
+  ],
+  "rows": [
+    {
+      "category": "corpus",
+      "proofs": 10000,
+      "share_of_compiled_pct": null,
+      "note": "Goedel-Prover proofs of Lean Workbook problems, Apache-2.0"
+    },
+    {
+      "category": "compiled under Lean 4.32",
+      "proofs": 9169,
+      "share_of_compiled_pct": 100.0,
+      "note": null
+    },
+    {
+      "category": "held out, failed to compile",
+      "proofs": 831,
+      "share_of_compiled_pct": null,
+      "note": "corpus targets Lean 4.27; version drift, not a property of the proofs"
+    },
+    {
+      "category": "depends on Classical.choice",
+      "proofs": 8496,
+      "share_of_compiled_pct": 92.7,
+      "note": null
+    },
+    {
+      "category": "choice dependence bound by the statement",
+      "proofs": 7899,
+      "share_of_compiled_pct": 86.1,
+      "note": "unavoidable: the theorem is about the reals"
+    },
+    {
+      "category": "choice dependence avoidable, proof only",
+      "proofs": 597,
+      "share_of_compiled_pct": 6.5,
+      "note": "the only part anyone could act on"
+    },
+    {
+      "category": "choice-free entirely",
+      "proofs": 673,
+      "share_of_compiled_pct": 7.3,
+      "note": null
+    },
+    {
+      "category": "rests on an unfinished proof",
+      "proofs": 0,
+      "share_of_compiled_pct": 0.0,
+      "note": "520 reach sorryAx, all among the held-out"
+    },
+    {
+      "category": "native_decide / compiler-trusted",
+      "proofs": 0,
+      "share_of_compiled_pct": 0.0,
+      "note": null
+    },
+    {
+      "category": "axioms beyond propext, Quot.sound, Classical.choice",
+      "proofs": 0,
+      "share_of_compiled_pct": 0.0,
+      "note": null
+    }
+  ]
+}

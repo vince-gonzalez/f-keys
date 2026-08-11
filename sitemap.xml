@@ -4,7 +4,7 @@
   <url><loc>https://f-keys.com/gonzalgo/</loc><lastmod>2026-08-05</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/kernel-index/</loc><lastmod>2026-08-05</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/faq/</loc><lastmod>2026-08-05</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/generated-proofs/</loc><lastmod>2026-08-07</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/generated-proofs/</loc><lastmod>2026-08-11</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/portfolio.html</loc><lastmod>2026-08-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/remapwrap.html</loc><lastmod>2026-08-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/Docs.html</loc><lastmod>2026-08-05</lastmod><priority>0.6</priority></url>
@@ -75,4 +75,12 @@
   <url><loc>https://f-keys.com/papers/pdf/synthetic-content-epistemic-category.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/papers/formal-logic-modulign/</loc><lastmod>2026-03-31</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/papers/pdf/formal-logic-modulign.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/data/</loc><lastmod>2026-08-11</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/kernel-index/kernel-index.json</loc><lastmod>2026-08-05</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/kernel-index/kernel-index.csv</loc><lastmod>2026-08-05</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/dominator-table/</loc><lastmod>2026-08-11</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/dominator-table/dominator-table.json</loc><lastmod>2026-08-11</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/dominator-table/dominator-table.csv</loc><lastmod>2026-08-11</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.json</loc><lastmod>2026-08-11</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.csv</loc><lastmod>2026-08-11</lastmod><priority>0.7</priority></url>
 </urlset>

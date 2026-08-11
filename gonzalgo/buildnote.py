@@ -9,9 +9,12 @@ from __future__ import annotations
 import html
 import json
 import re
+import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE / "_build"))
+import indexlib  # noqa: E402
 CANON = "https://f-keys.com/gonzalgo/generated-proofs/"
 
 TITLE = "What 9,169 machine-generated Lean proofs rest on"
@@ -27,6 +30,43 @@ NUMBERS = {
     "sorry_drift": 520,
     "sorry_real": 0,
 }
+# Derived, never typed twice. This page shipped saying 560 held out, which is
+# 271 short of what 10,000 minus 9,169 leaves. The corpus is 10,000 by count —
+# GoedelProofs/Proof_00000.lean through Proof_09999.lean — and 9,169 is the
+# denominator that reproduces all four published percentages, so the held-out
+# figure was the wrong one.
+NUMBERS["held_out"] = NUMBERS["corpus"] - NUMBERS["compiled"]
+
+
+def check_numbers(n: dict) -> None:
+    """Every part must sum to its whole, and every percentage must round to what
+    the prose claims. A figure nobody can re-derive is a figure nobody can
+    correct."""
+    fails = []
+    if n["compiled"] + n["held_out"] != n["corpus"]:
+        fails.append(f"compiled {n['compiled']} + held_out {n['held_out']} "
+                     f"!= corpus {n['corpus']}")
+    if n["bound"] + n["eligible"] != n["reach"]:
+        fails.append(f"bound {n['bound']} + eligible {n['eligible']} "
+                     f"!= reach {n['reach']}")
+    if n["reach"] + n["clean"] != n["compiled"]:
+        fails.append(f"reach {n['reach']} + clean {n['clean']} "
+                     f"!= compiled {n['compiled']}")
+    if n["sorry_real"] != 0:
+        fails.append(f"sorry_real is {n['sorry_real']}, the page says none")
+    for key, claimed in (("reach", 92.7), ("bound", 86.1),
+                         ("eligible", 6.5), ("clean", 7.3)):
+        got = round(100 * n[key] / n["compiled"], 1)
+        if got != claimed:
+            fails.append(f"{key}: {n[key]}/{n['compiled']} = {got}%, "
+                         f"prose says {claimed}%")
+    if fails:
+        raise ValueError("generated-proofs figures do not hold together:\n  "
+                         + "\n  ".join(fails))
+
+
+def pct(key: str) -> str:
+    return f"{100 * NUMBERS[key] / NUMBERS['compiled']:.1f}%"
 
 BODY = [
     ("", [
@@ -34,7 +74,10 @@ BODY = [
         "proof compiles, or it does not. What the proof ends up standing on is "
         "not part of that signal and nobody has measured it.",
         "This is that measurement, over the Goedel-Prover output for the Lean "
-        "Workbook problems — 10,000 proofs, of which 9,169 still compile under Lean 4.32. The other 560 fail on the version gap and are held out of every figure below.",
+        f"Workbook problems — {NUMBERS['corpus']:,} proofs, of which "
+        f"{NUMBERS['compiled']:,} still compile under Lean 4.32. The other "
+        f"{NUMBERS['held_out']:,} fail on the version gap and are held out of "
+        "every figure below.",
         "Lean 4.32.",
     ]),
     ("The result", [
@@ -84,8 +127,9 @@ BODY = [
         "`sorryAx`. In a report that is indistinguishable from a proof that was "
         "genuinely never finished, so the two have to be told apart by the "
         "compiler's error output rather than by the axiom set.",
-        "520 theorems reach `sorryAx` and every one of them is among the 560 "
-        "that failed to compile. Of the 9,169 that compiled, none does. Compile "
+        f"{NUMBERS['sorry_total']} theorems reach `sorryAx` and every one of "
+        f"them is among the {NUMBERS['held_out']:,} that failed to compile. Of "
+        f"the {NUMBERS['compiled']:,} that compiled, none does. Compile "
         "failures are held out of every figure here; a corpus targeting Lean "
         "4.27 measured under 4.32 would otherwise report version drift as a "
         "property of the proofs.",
@@ -182,20 +226,23 @@ footer {{ border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; c
 <h1>{title}</h1>
 <p class="kicker">none of them rests on an unfinished proof</p>
 
-<pre>corpus                        10,000
-compiled under Lean 4.32       9,169
-held out, failed to compile      560
-
-reach Classical.choice         8,496    92.7%
-  statement-bound              7,899    86.1%   unavoidable
-  avoidable, proof only          597     6.5%
-choice-free entirely             673     7.3%
-
-rests on an unfinished proof       0
-native_decide / compiler trust     0
-axioms beyond the standard three   0</pre>
+<pre>{summary}</pre>
 
 {body}
+
+<h2>Get the data</h2>
+<p>
+The table above, machine-readable:
+<a href="generated-proofs.json">generated-proofs.json</a> &middot;
+<a href="generated-proofs.csv">generated-proofs.csv</a> &middot; CC-BY-4.0 &middot;
+version {version}
+</p>
+<p style="color:var(--dim);font-size:.9rem;border:1px solid var(--border);background:var(--panel);padding:.7rem .9rem;">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on. The per-proof results behind
+these totals are not published yet; releasing them means re-running the audit,
+and a summary is not a substitute for the rows.
+</p>
 
 <footer>
   Measured with <a href="https://pypi.org/project/gonzalgo/">gonzalgo</a> ·
@@ -211,7 +258,84 @@ axioms beyond the standard three   0</pre>
 """
 
 
+# Filled in by build(), read by _build/build_all.py to list this page on the
+# index hub. The article is hand-written but the data underneath is not special.
+META: dict = {}
+
+
+def rows() -> list[dict]:
+    """The summary block as data. The <pre> on the page is rendered from this
+    list, so the block and the download cannot say different things."""
+    n = NUMBERS
+    def r(category, count, share=None, note=None):
+        return {"category": category, "proofs": count,
+                "share_of_compiled_pct": share, "note": note}
+    return [
+        r("corpus", n["corpus"], None,
+          "Goedel-Prover proofs of Lean Workbook problems, Apache-2.0"),
+        r("compiled under Lean 4.32", n["compiled"], 100.0),
+        r("held out, failed to compile", n["held_out"], None,
+          "corpus targets Lean 4.27; version drift, not a property of the proofs"),
+        r("depends on Classical.choice", n["reach"],
+          round(100 * n["reach"] / n["compiled"], 1)),
+        r("choice dependence bound by the statement", n["bound"],
+          round(100 * n["bound"] / n["compiled"], 1),
+          "unavoidable: the theorem is about the reals"),
+        r("choice dependence avoidable, proof only", n["eligible"],
+          round(100 * n["eligible"] / n["compiled"], 1),
+          "the only part anyone could act on"),
+        r("choice-free entirely", n["clean"],
+          round(100 * n["clean"] / n["compiled"], 1)),
+        r("rests on an unfinished proof", n["sorry_real"], 0.0,
+          f"{n['sorry_total']} reach sorryAx, all among the held-out"),
+        r("native_decide / compiler-trusted", 0, 0.0),
+        r("axioms beyond propext, Quot.sound, Classical.choice", 0, 0.0),
+    ]
+
+
+def summary_block(data: list[dict]) -> str:
+    """The <pre> table, laid out from the rows rather than typed by hand."""
+    width = max(len(d["category"]) for d in data)
+    lines = []
+    for d in data:
+        share = ("" if d["share_of_compiled_pct"] is None
+                 else f"   {d['share_of_compiled_pct']:>5.1f}%")
+        lines.append(f"{d['category']:<{width}}  {d['proofs']:>7,}{share}")
+    return html.escape("\n".join(lines))
+
+
 def build() -> str:
+    check_numbers(NUMBERS)
+    data = rows()
+
+    idx = indexlib.Index(
+        slug="generated-proofs",
+        title="What machine-generated Lean proofs rest on",
+        kicker="", meta_title="", meta_description="",
+        lede=[], columns=[
+            indexlib.Column("category", "category"),
+            indexlib.Column("proofs", "proofs", align="right"),
+            indexlib.Column("share_of_compiled_pct", "share", align="right", pct=True),
+            indexlib.Column("note", "note", dim=True),
+        ],
+        rows=data,
+        description=(
+            "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 "
+            "Goedel-Prover proofs of Lean Workbook problems that compile under "
+            "Lean 4.32, audited for unfinished proofs, compiler-trusted "
+            "reductions and axiom dependence, with choice dependence split into "
+            "the part the statement forces and the part the proof adds."),
+        measured={"Lean 4": "4.32",
+                  "corpus": "banach1729/goedel-workbook-lean427, Apache-2.0"},
+        provenance="",
+        keywords=["machine-generated proofs", "AI generated proofs", "Lean 4",
+                  "Goedel-Prover", "Lean Workbook", "axiom of choice",
+                  "sorry", "native_decide", "formal verification"],
+        based_on="https://doi.org/10.5281/zenodo.21769846",
+    )
+    emitted = indexlib.emit_data(idx)
+    META.update(emitted)
+
     ld = {
         "@context": "https://schema.org",
         "@type": "ScholarlyArticle",
@@ -246,8 +370,14 @@ def build() -> str:
             t = re.sub(bt + r"([^" + bt + r"]+)" + bt,
                        r"<code>\1</code>", html.escape(p))
             parts.append(f"<p>{t}</p>")
+    # Two blocks, not one: the prose is the article, the table is the dataset.
+    # A page that is both should say so, or dataset search never sees it.
+    blocks = (json.dumps(ld, indent=2, ensure_ascii=False)
+              + "\n</script>\n<script type=\"application/ld+json\">\n"
+              + emitted["jsonld"])
     return TEMPLATE.format(canon=CANON, title=html.escape(TITLE),
-                           ld=json.dumps(ld, indent=2, ensure_ascii=False),
+                           ld=blocks, summary=summary_block(data),
+                           version=emitted["version"],
                            body="\n\n".join(parts))
 
 

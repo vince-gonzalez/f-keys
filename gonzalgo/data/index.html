@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/data/">
+<title>gonzalgo indexes &mdash; standing measurements of what formal libraries rest on</title>
+<meta name="description" content="Downloadable measurements of what formal mathematical libraries rest on: unfinished proofs, compiler-trusted reductions, axiom dependence, and which constants that dependence is responsible to. JSON and CSV, CC-BY-4.0.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/data/">
+<meta property="og:title" content="gonzalgo indexes">
+<meta property="og:description" content="Standing measurements of what formal libraries rest on. JSON and CSV, CC-BY-4.0.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DataCatalog",
+  "name": "gonzalgo indexes",
+  "url": "https://f-keys.com/gonzalgo/data/",
+  "description": "Standing measurements of what formal mathematical libraries rest on, produced by gonzalgo and remeasured as the libraries move.",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "dataset": [
+    {
+      "@type": "Dataset",
+      "name": "The Kernel Index",
+      "url": "https://f-keys.com/gonzalgo/kernel-index/",
+      "description": "What formal mathematical libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, and on an optional axiom. Measured by one program across two proof systems and six foundations.",
+      "version": "2026-08-05",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/kernel-index/kernel-index.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/kernel-index/kernel-index.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "name": "The Dominator Table",
+      "url": "https://f-keys.com/gonzalgo/dominator-table/",
+      "description": "Mathlib constants ranked by how many theorems each is uniquely responsible for making classical — the number that would stop depending on the axiom of choice if that constant alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom.",
+      "version": "2026-08-11",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/dominator-table/dominator-table.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/dominator-table/dominator-table.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "name": "What machine-generated Lean proofs rest on",
+      "url": "https://f-keys.com/gonzalgo/generated-proofs/",
+      "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
+      "version": "2026-08-11",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.csv"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+
+.card { border:1px solid var(--border); background:var(--panel); padding:1.2rem 1.3rem; margin:1.2rem 0; }
+.card h2 { margin:0 0 .5rem; }
+.card h2 a { text-decoration:none; }
+.card p { margin-bottom:.6rem; }
+.meta { color:var(--dim); font-size:.9rem; margin-bottom:0; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/faq/">FAQ</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>GONZALGO INDEXES</h1>
+<p class="kicker">measurements, kept current, in a form you can download</p>
+
+<p>
+What a formal library rests on is a fact about it that changes when the library
+changes. These are the measurements taken so far, each with the table on the
+page and the same table as JSON and CSV.
+</p>
+<p>
+Every figure comes from the proof system's own bookkeeping &mdash; Lean's
+<code>collectAxioms</code> and Metamath's proof structure &mdash; read by
+<a href="/gonzalgo/">gonzalgo</a>, which proves nothing itself. Each index says
+which version of which library it was taken from, and carries a version that
+moves only when the numbers do.
+</p>
+
+
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/kernel-index/">The Kernel Index</a></h2>
+  <p>What formal mathematical libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, and on an optional axiom. Measured by one program across two proof systems and six foundations.</p>
+  <p class="meta">
+    14 rows &middot; version 2026-08-05 &middot;
+    <a href="https://f-keys.com/gonzalgo/kernel-index/kernel-index.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/kernel-index/kernel-index.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/dominator-table/">The Dominator Table</a></h2>
+  <p>Mathlib constants ranked by how many theorems each is uniquely responsible for making classical — the number that would stop depending on the axiom of choice if that constant alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom.</p>
+  <p class="meta">
+    3,000 rows &middot; version 2026-08-11 &middot;
+    <a href="https://f-keys.com/gonzalgo/dominator-table/dominator-table.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/dominator-table/dominator-table.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/generated-proofs/">What machine-generated Lean proofs rest on</a></h2>
+  <p>What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.</p>
+  <p class="meta">
+    10 rows &middot; version 2026-08-11 &middot;
+    <a href="https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+
+<h2>Using them</h2>
+<p>
+CC-BY-4.0: use them, quote them, redistribute them, cite the DOI on the index
+you used. If a number here disagrees with one you measured, that is worth an
+<a href="https://github.com/zengineco/gonzalgo/issues">issue</a> &mdash; the
+point of publishing the data is that someone can check it.
+</p>
+
+<footer>
+  <p>
+    Method and definitions: Gonzalez, V. (2026).
+    <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo.
+    <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>
+  </p>
+  <p style="margin-top:.8rem;">
+    Vince Gonzalez &middot;
+    <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> &middot;
+    the home of <code>kernel &gt; sorry</code>
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

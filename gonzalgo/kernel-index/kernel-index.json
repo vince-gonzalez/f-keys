@@ -2,6 +2,8 @@
   "name": "The Kernel Index",
   "description": "What formal mathematical libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, and on an optional axiom. Measured by one program across two proof systems and six foundations.",
   "version": "2026-08-05",
+  "sha256": "9d0bf4f36a423930fe01144235192fb4cb384487499ddda7c47c9a265e977dbb",
+  "url": "https://f-keys.com/gonzalgo/kernel-index/",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",
@@ -12,6 +14,51 @@
     "Lean 4": "4.32.1 with Mathlib",
     "Metamath": "set.mm, iset.mm, nf.mm, ql.mm, hol.mm"
   },
+  "fields": [
+    "library",
+    "system",
+    "foundation",
+    "theorems",
+    "unfinished_theorems",
+    "compiler_trusting_theorems",
+    "optional_axiom",
+    "optional_reach",
+    "optional_reach_pct",
+    "axioms_used",
+    "entry_points",
+    "entries_per_theorem",
+    "amplification"
+  ],
+  "displayed": [
+    {
+      "key": "library",
+      "label": "library"
+    },
+    {
+      "key": "system",
+      "label": "system"
+    },
+    {
+      "key": "foundation",
+      "label": "foundation"
+    },
+    {
+      "key": "theorems",
+      "label": "theorems"
+    },
+    {
+      "key": "unfinished_theorems",
+      "label": "unfinished"
+    },
+    {
+      "key": "compiler_trusting_theorems",
+      "label": "compiler-trusted"
+    },
+    {
+      "key": "optional_reach_pct",
+      "label": "optional axiom"
+    }
+  ],
   "rows": [
     {
       "library": "Mathlib",

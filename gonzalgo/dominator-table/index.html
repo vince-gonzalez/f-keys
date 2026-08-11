@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/dominator-table/">
+<title>The Dominator Table — which constants Mathlib's classical dependence rests on</title>
+<meta name="description" content="3,000 Mathlib constants ranked by how many theorems would stop depending on the axiom of choice if that one constant were rebuilt. Dominance, not reachability: the two answers differ by 58x on the first case examined.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/dominator-table/">
+<meta property="og:title" content="The Dominator Table">
+<meta property="og:description" content="which constants Mathlib's use of choice actually rests on">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Dominator Table",
+  "description": "Mathlib constants ranked by how many theorems each is uniquely responsible for making classical — the number that would stop depending on the axiom of choice if that constant alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom.",
+  "url": "https://f-keys.com/gonzalgo/dominator-table/",
+  "version": "2026-08-11",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "formal verification",
+    "Lean 4",
+    "Mathlib",
+    "axiom of choice",
+    "dominator tree",
+    "dependency graph",
+    "classical logic",
+    "proof assistant",
+    "provenance",
+    "constructive mathematics"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21883963",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/dominator-table/dominator-table.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/dominator-table/dominator-table.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE DOMINATOR TABLE</h1>
+<p class="kicker">which constants Mathlib's use of choice actually rests on</p>
+
+<p>Asking which constant a theorem's classical dependence is <em>responsible</em> for is not the same as asking which constants its proof touches, and the answers are far apart. 116,766 theorems reach the order lemma <code>lt_or_eq_of_le</code>; 2,018 would stop being classical if it were rebuilt. Reachability overstates responsibility by 58x in that one case.</p>
+<p>The column below is the second number. A constant's count is the theorems whose every route to <code>Classical.choice</code> passes through it, so repairing it repairs exactly them and nothing else.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; 790,171 declarations, 30,015,601 dependency edges, one dominator tree over all 766,564 constants</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th style="text-align:right">#</th><th>constant</th><th>kind</th><th>area</th><th style="text-align:right">theorems dominated</th><th>eligible</th></tr></thead>
+<tbody>
+<tr><td class='num'>1</td><td>Classical.propDecidable</td><td class='found'>definition</td><td class='found'>classical logic</td><td class='num'>91,858</td><td>yes</td></tr>
+<tr><td class='num'>2</td><td>Classical.byContradiction</td><td class='found'>theorem</td><td class='found'>classical logic</td><td class='num'>23,550</td><td>yes</td></tr>
+<tr><td class='num'>3</td><td>CategoryTheory.Functor.category</td><td class='found'>definition</td><td class='found'>category theory</td><td class='num'>5,271</td><td>yes</td></tr>
+<tr><td class='num'>4</td><td>Std.DHashMap.Internal.Raw₀.isHashSelf_updateBucket_alter</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>4,899</td><td>&mdash;</td></tr>
+<tr><td class='num'>5</td><td>Std.DHashMap.Internal.Raw₀.wfImp_alterₘ</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>4,896</td><td>&mdash;</td></tr>
+<tr><td class='num'>6</td><td>Std.DHashMap.Internal.Raw.WF.out</td><td class='found'>theorem</td><td class='found'>Std: hash maps</td><td class='num'>4,892</td><td>yes</td></tr>
+<tr><td class='num'>7</td><td>Classical.indefiniteDescription</td><td class='found'>definition</td><td class='found'>classical logic</td><td class='num'>4,711</td><td>yes</td></tr>
+<tr><td class='num'>8</td><td>Set.instCompleteAtomicBooleanAlgebra</td><td class='found'>definition</td><td class='found'>sets</td><td class='num'>3,430</td><td>yes</td></tr>
+<tr><td class='num'>9</td><td>lt_or_eq_of_le</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>2,018</td><td>yes</td></tr>
+<tr><td class='num'>10</td><td>_private.Mathlib.Data.Set.Image.0.Set.image_univ._proof_1_1</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>1,484</td><td>&mdash;</td></tr>
+<tr><td class='num'>11</td><td>Set.image_univ</td><td class='found'>theorem</td><td class='found'>sets</td><td class='num'>1,483</td><td>yes</td></tr>
+<tr><td class='num'>12</td><td>GroupWithZero.toDivisionMonoid</td><td class='found'>definition</td><td class='found'>GroupWithZero</td><td class='num'>1,290</td><td>yes</td></tr>
+<tr><td class='num'>13</td><td>eq_or_lt_of_le</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>1,221</td><td>yes</td></tr>
+<tr><td class='num'>14</td><td>LE.le.eq_or_lt</td><td class='found'>theorem</td><td class='found'>LE</td><td class='num'>1,179</td><td>yes</td></tr>
+<tr><td class='num'>15</td><td>CategoryTheory.Functor.comp</td><td class='found'>definition</td><td class='found'>category theory</td><td class='num'>1,112</td><td>yes</td></tr>
+<tr><td class='num'>16</td><td>String.Internal.toArray</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>1,111</td><td>&mdash;</td></tr>
+<tr><td class='num'>17</td><td>String.toList</td><td class='found'>definition</td><td class='found'>strings</td><td class='num'>1,109</td><td>yes</td></tr>
+<tr><td class='num'>18</td><td>AddAction.orbitRel._proof_3</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>1,044</td><td>&mdash;</td></tr>
+<tr><td class='num'>19</td><td>AddAction.orbitRel</td><td class='found'>definition</td><td class='found'>AddAction</td><td class='num'>1,041</td><td>yes</td></tr>
+<tr><td class='num'>20</td><td>QuotientAddGroup.leftRel</td><td class='found'>definition</td><td class='found'>QuotientAddGroup</td><td class='num'>1,009</td><td>yes</td></tr>
+<tr><td class='num'>21</td><td>_private.Mathlib.Algebra.Group.Hom.Defs.0.map_sub'._proof_1_2</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>856</td><td>&mdash;</td></tr>
+<tr><td class='num'>22</td><td>map_sub'</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>855</td><td>&mdash;</td></tr>
+<tr><td class='num'>23</td><td>map_sub</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>853</td><td>yes</td></tr>
+<tr><td class='num'>24</td><td>Classical.not_not</td><td class='found'>theorem</td><td class='found'>classical logic</td><td class='num'>792</td><td>yes</td></tr>
+<tr><td class='num'>25</td><td>GeneralizedBooleanAlgebra.toGeneralizedCoheytingAlgebra._proof_8</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>722</td><td>&mdash;</td></tr>
+<tr><td class='num'>26</td><td>GeneralizedBooleanAlgebra.toGeneralizedCoheytingAlgebra</td><td class='found'>definition</td><td class='found'>GeneralizedBooleanAlgebra</td><td class='num'>721</td><td>yes</td></tr>
+<tr><td class='num'>27</td><td>String.compare</td><td class='found'>definition</td><td class='found'>strings</td><td class='num'>702</td><td>yes</td></tr>
+<tr><td class='num'>28</td><td>String.instOrd</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>702</td><td>&mdash;</td></tr>
+<tr><td class='num'>29</td><td>Filter.comap._proof_2</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>662</td><td>&mdash;</td></tr>
+<tr><td class='num'>30</td><td>Filter.comap</td><td class='found'>definition</td><td class='found'>filters</td><td class='num'>660</td><td>yes</td></tr>
+<tr><td class='num'>31</td><td>CategoryTheory.Functor.fromPUnit</td><td class='found'>definition</td><td class='found'>category theory</td><td class='num'>616</td><td>yes</td></tr>
+<tr><td class='num'>32</td><td>LE.le.lt_or_eq</td><td class='found'>theorem</td><td class='found'>LE</td><td class='num'>583</td><td>yes</td></tr>
+<tr><td class='num'>33</td><td>contravariant_le_iff_contravariant_lt_and_eq</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>578</td><td>&mdash;</td></tr>
+<tr><td class='num'>34</td><td>_private.Init.Data.List.Nat.Range.0.List.pairwise_lt_range'._proof_1_4</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>534</td><td>&mdash;</td></tr>
+<tr><td class='num'>35</td><td>List.pairwise_lt_range'</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>533</td><td>&mdash;</td></tr>
+<tr><td class='num'>36</td><td>List.pairwise_lt_range'._f</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>533</td><td>&mdash;</td></tr>
+<tr><td class='num'>37</td><td>List.nodup_range'</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>525</td><td>&mdash;</td></tr>
+<tr><td class='num'>38</td><td>_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_two_pow_sub_succ._proof_1_3</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>520</td><td>&mdash;</td></tr>
+<tr><td class='num'>39</td><td>Nat.testBit_two_pow_sub_succ</td><td class='found'>theorem</td><td class='found'>Nat</td><td class='num'>519</td><td>yes</td></tr>
+<tr><td class='num'>40</td><td>_private.Init.Data.List.Nat.Range.0.List.nodup_range._simp_1_1</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>515</td><td>&mdash;</td></tr>
+<tr><td class='num'>41</td><td>List.nodup_range</td><td class='found'>theorem</td><td class='found'>lists</td><td class='num'>514</td><td>yes</td></tr>
+<tr><td class='num'>42</td><td>subset_interior_iff_isOpen</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>511</td><td>yes</td></tr>
+<tr><td class='num'>43</td><td>Classical.not_forall</td><td class='found'>theorem</td><td class='found'>classical logic</td><td class='num'>497</td><td>yes</td></tr>
+<tr><td class='num'>44</td><td>Classical.em</td><td class='found'>theorem</td><td class='found'>classical logic</td><td class='num'>476</td><td>yes</td></tr>
+<tr><td class='num'>45</td><td>CategoryTheory.instCompleteLatticePresieve</td><td class='found'>definition</td><td class='found'>category theory</td><td class='num'>450</td><td>yes</td></tr>
+<tr><td class='num'>46</td><td>_private.Init.Data.Nat.Mod.0.Nat.mul_lt_mul_left._proof_1_1</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>440</td><td>&mdash;</td></tr>
+<tr><td class='num'>47</td><td>Nat.mul_lt_mul_left</td><td class='found'>theorem</td><td class='found'>Nat</td><td class='num'>439</td><td>yes</td></tr>
+<tr><td class='num'>48</td><td>MulAction.orbitRel._proof_3</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>423</td><td>&mdash;</td></tr>
+<tr><td class='num'>49</td><td>MulAction.orbitRel</td><td class='found'>definition</td><td class='found'>MulAction</td><td class='num'>420</td><td>yes</td></tr>
+<tr><td class='num'>50</td><td>Array.foldrM_congr</td><td class='found'>theorem</td><td class='found'>arrays</td><td class='num'>410</td><td>yes</td></tr>
+<tr><td class='num'>51</td><td>Nat.rel_of_forall_rel_succ_of_le_of_le</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>405</td><td>&mdash;</td></tr>
+<tr><td class='num'>52</td><td>Nat.rel_of_forall_rel_succ_of_le</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>400</td><td>&mdash;</td></tr>
+<tr><td class='num'>53</td><td>monotone_nat_of_le_succ</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>399</td><td>yes</td></tr>
+<tr><td class='num'>54</td><td>WellFounded.extrinsicFix</td><td class='found'>definition</td><td class='found'>WellFounded</td><td class='num'>398</td><td>yes</td></tr>
+<tr><td class='num'>55</td><td>IsUnit.unit</td><td class='found'>definition</td><td class='found'>IsUnit</td><td class='num'>397</td><td>yes</td></tr>
+<tr><td class='num'>56</td><td>BooleanAlgebra.toBiheytingAlgebra</td><td class='found'>definition</td><td class='found'>BooleanAlgebra</td><td class='num'>381</td><td>yes</td></tr>
+<tr><td class='num'>57</td><td>Std.DHashMap.Internal.Raw.foldRev_eq</td><td class='found'>theorem</td><td class='found'>Std: hash maps</td><td class='num'>374</td><td>yes</td></tr>
+<tr><td class='num'>58</td><td>Std.DHashMap.Internal.Raw.foldRev_cons_apply</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>373</td><td>&mdash;</td></tr>
+<tr><td class='num'>59</td><td>WellFounded.extrinsicFix₂</td><td class='found'>definition</td><td class='found'>WellFounded</td><td class='num'>366</td><td>yes</td></tr>
+<tr><td class='num'>60</td><td>Multiset.add_right_inj</td><td class='found'>theorem</td><td class='found'>multisets</td><td class='num'>363</td><td>yes</td></tr>
+<tr><td class='num'>61</td><td>List.eq_nil_iff_forall_not_mem</td><td class='found'>theorem</td><td class='found'>lists</td><td class='num'>363</td><td>yes</td></tr>
+<tr><td class='num'>62</td><td>Multiset.instAddCancelCommMonoid._proof_3</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>361</td><td>&mdash;</td></tr>
+<tr><td class='num'>63</td><td>Multiset.instAddCancelCommMonoid</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>360</td><td>&mdash;</td></tr>
+<tr><td class='num'>64</td><td>LinearMap.range._proof_1</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>358</td><td>&mdash;</td></tr>
+<tr><td class='num'>65</td><td>LinearMap.range</td><td class='found'>definition</td><td class='found'>LinearMap</td><td class='num'>357</td><td>yes</td></tr>
+<tr><td class='num'>66</td><td>_private.Mathlib.Algebra.Group.Center.0.Set.mul_mem_center._proof_1_4</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>351</td><td>&mdash;</td></tr>
+<tr><td class='num'>67</td><td>Set.mul_mem_center</td><td class='found'>theorem</td><td class='found'>sets</td><td class='num'>350</td><td>yes</td></tr>
+<tr><td class='num'>68</td><td>Std.IterM.toArray.go</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>348</td><td>&mdash;</td></tr>
+<tr><td class='num'>69</td><td>Std.IterM.toArray</td><td class='found'>definition</td><td class='found'>Std: other</td><td class='num'>347</td><td>yes</td></tr>
+<tr><td class='num'>70</td><td>AddSubmonoid.instCompleteLattice._proof_1</td><td class='found'>theorem</td><td class='found'>AddSubmonoid</td><td class='num'>337</td><td>yes</td></tr>
+<tr><td class='num'>71</td><td>CategoryTheory.shiftFunctor</td><td class='found'>definition</td><td class='found'>category theory</td><td class='num'>335</td><td>yes</td></tr>
+<tr><td class='num'>72</td><td>Lean.Name.quickCmpAux._f</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>333</td><td>&mdash;</td></tr>
+<tr><td class='num'>73</td><td>Lean.Name.quickCmpAux</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>333</td><td>&mdash;</td></tr>
+<tr><td class='num'>74</td><td>Lean.Name.quickCmp</td><td class='found'>definition</td><td class='found'>Lean</td><td class='num'>333</td><td>yes</td></tr>
+<tr><td class='num'>75</td><td>Submodule.completeLattice</td><td class='found'>definition</td><td class='found'>Submodule</td><td class='num'>333</td><td>yes</td></tr>
+<tr><td class='num'>76</td><td>Nat.mono_cast</td><td class='found'>theorem</td><td class='found'>Nat</td><td class='num'>328</td><td>yes</td></tr>
+<tr><td class='num'>77</td><td>AddSubmonoid.instCompleteLattice</td><td class='found'>definition</td><td class='found'>AddSubmonoid</td><td class='num'>326</td><td>yes</td></tr>
+<tr><td class='num'>78</td><td>CategoryTheory.Sieve.instCompleteLattice</td><td class='found'>definition</td><td class='found'>category theory</td><td class='num'>322</td><td>yes</td></tr>
+<tr><td class='num'>79</td><td>Classical.ofNonempty</td><td class='found'>definition</td><td class='found'>classical logic</td><td class='num'>321</td><td>yes</td></tr>
+<tr><td class='num'>80</td><td>em</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>316</td><td>yes</td></tr>
+<tr><td class='num'>81</td><td>QuotientGroup.leftRel</td><td class='found'>definition</td><td class='found'>QuotientGroup</td><td class='num'>308</td><td>yes</td></tr>
+<tr><td class='num'>82</td><td>GroupWithZero.noZeroDivisors</td><td class='found'>theorem</td><td class='found'>GroupWithZero</td><td class='num'>288</td><td>yes</td></tr>
+<tr><td class='num'>83</td><td>CategoryTheory.MorphismProperty.instCompleteBooleanAlgebra</td><td class='found'>definition</td><td class='found'>category theory</td><td class='num'>284</td><td>yes</td></tr>
+<tr><td class='num'>84</td><td>Real.definition._@.Mathlib.Data.Real.Basic.1175651576._hygCtx._hyg.8</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>283</td><td>&mdash;</td></tr>
+<tr><td class='num'>85</td><td>Real.wrapped._@.Mathlib.Data.Real.Basic.1175651576._hygCtx._hyg.8</td><td class='found'>other</td><td class='found'>&mdash;</td><td class='num'>282</td><td>&mdash;</td></tr>
+<tr><td class='num'>86</td><td>_private.Mathlib.Data.Real.Basic.0.Real.lt</td><td class='found'>definition</td><td class='found'>&mdash;</td><td class='num'>282</td><td>&mdash;</td></tr>
+<tr><td class='num'>87</td><td>Real.instLT</td><td class='found'>definition</td><td class='found'>Real</td><td class='num'>282</td><td>yes</td></tr>
+<tr><td class='num'>88</td><td>LinearEquiv.ofBijective</td><td class='found'>definition</td><td class='found'>LinearEquiv</td><td class='num'>281</td><td>yes</td></tr>
+<tr><td class='num'>89</td><td>isOpen_iff_forall_mem_open</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>279</td><td>&mdash;</td></tr>
+<tr><td class='num'>90</td><td>zpow_ne_zero</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>279</td><td>yes</td></tr>
+<tr><td class='num'>91</td><td>IsLocallyConstant.tfae</td><td class='found'>theorem</td><td class='found'>IsLocallyConstant</td><td class='num'>278</td><td>yes</td></tr>
+<tr><td class='num'>92</td><td>IsLocallyConstant.iff_eventually_eq</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>272</td><td>&mdash;</td></tr>
+<tr><td class='num'>93</td><td>Set.biInter_range</td><td class='found'>theorem</td><td class='found'>sets</td><td class='num'>270</td><td>yes</td></tr>
+<tr><td class='num'>94</td><td>Std.DTreeMap.Internal.Impl.WF.ordered</td><td class='found'>theorem</td><td class='found'>Std: other</td><td class='num'>266</td><td>yes</td></tr>
+<tr><td class='num'>95</td><td>FreeAlgebra.lift._proof_4</td><td class='found'>theorem</td><td class='found'>FreeAlgebra</td><td class='num'>263</td><td>yes</td></tr>
+<tr><td class='num'>96</td><td>DFinsupp.zipWith._proof_4</td><td class='found'>theorem</td><td class='found'>&mdash;</td><td class='num'>262</td><td>&mdash;</td></tr>
+<tr><td class='num'>97</td><td>DFinsupp.zipWith</td><td class='found'>definition</td><td class='found'>DFinsupp</td><td class='num'>261</td><td>yes</td></tr>
+<tr><td class='num'>98</td><td>eq_or_ne</td><td class='found'>theorem</td><td class='found'>order / root namespace</td><td class='num'>260</td><td>yes</td></tr>
+<tr><td class='num'>99</td><td>Equiv.ofBijective</td><td class='found'>definition</td><td class='found'>Equiv</td><td class='num'>258</td><td>yes</td></tr>
+<tr><td class='num'>100</td><td>Equiv.Perm.permGroup</td><td class='found'>definition</td><td class='found'>Equiv</td><td class='num'>250</td><td>yes</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Showing the first 100 of 3,000 rows. The tail is long and flat &mdash; rank 3,000 dominates 10 theorems. The full set is in the JSON and the CSV.</p>
+<p class="note"><em>theorems dominated</em> counts theorems for which this constant is the sole route to the axiom. <em>eligible</em> is false when the constant's own type is classical, so no constructive replacement for it can exist; it is false for only 2 of the 1,500 constants where it was computed, which is the negative result in the eligibility note &mdash; the test does not discriminate among load-bearing constants. <em>area</em> and <em>eligible</em> were computed for the top 1,500 only; below that they are blank rather than guessed.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="dominator-table.json">dominator-table.json</a> &middot;
+<a href="dominator-table.csv">dominator-table.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-11
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+</p>
+
+<h2>Reproduce it</h2>
+<pre># regenerate the declaration graph (~3 min, ~600 MB)
+lake env lean -D maxErrors=4000 lean/Dump.lean
+python analysis/dominators.py</pre>
+<p class="note"><code>ConstantInfo.value?</code> must be passed <code>allowOpaque := true</code> or theorem proofs read as empty and every statement-versus-proof figure is wrong rather than imprecise. Code and derived data: <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a>.</p>
+
+<h2>Two results worth reading off it</h2>
+<p>60.1% of classically dependent theorems have no responsible constant at all. Their immediate dominator is the axiom itself, so no local repair anywhere in the library reaches them. That is the ceiling on what this kind of work can do, and it was not previously known.</p>
+<p>Outside classical logic proper, the largest sites are infrastructure rather than mathematics: a functor category instance at 5,271, hash-map well-formedness at 4,899, the powerset Boolean algebra at 3,430, string conversion at 1,111. The places where choice is load-bearing are not the places anyone would have pointed at.</p>
+
+<h2>A disagreement in the source data</h2>
+<p>The reproduction archive carries two files with a count per constant, and they disagree on 137 of the 1,500 they share &mdash; hash-map well-formedness is 4,899 in one and 4,892 in the other. The published note reports 4,899, so that file is used here for every count and the other only for the categorical columns. Where they differ, the row carries a <code>count_in_eligibility_file</code> field so the disagreement is visible in the data rather than resolved out of sight.</p>
+
+<h2>What is not here yet</h2>
+<p>A reach column. The 58x figure above is one measured pair; computing reach for every row means a second traversal of the full graph and it has not been run. It is missing rather than estimated.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/dominator-table/">f-keys.com/gonzalgo/dominator-table/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>
