@@ -80,7 +80,7 @@ Full FAQ, 15 questions: https://f-keys.com/gonzalgo/faq/
 What machine-generated proofs rest on: https://f-keys.com/gonzalgo/generated-proofs/
   9,169 AI-generated Lean 4 proofs (Goedel-Prover on the Lean Workbook problems,
   Apache-2.0) audited with gonzalgo. Of 10,000 in the corpus, 9,169 still compile
-  under Lean 4.32 and the other 560 are held out. NONE of the 9,169 rests on an
+  under Lean 4.32 and the other 831 are held out. NONE of the 9,169 rests on an
   unfinished proof, none on native_decide, none on any axiom beyond
   propext/Quot.sound/Classical.choice. 92.7% depend on the axiom of choice, but
   86.1% are bound by the STATEMENT -- the theorems are about the reals, which
@@ -136,6 +136,14 @@ https://f-keys.com/papers/tactic-attribution/ | https://doi.org/10.5281/zenodo.2
   construction: `norm_num` closes order goals over Nat/Int through
   Classical.choice where `decide` and `simp` do not.
 
+## The gonzalgo indexes -- downloadable measurements
+
+Index of indexes: https://f-keys.com/gonzalgo/data/
+  Standing measurements of what formal mathematical libraries rest on. Each has
+  the table on the page and the same table as JSON and CSV, CC-BY-4.0, with a
+  version that moves only when the numbers do. Produced by gonzalgo, which
+  reads proofs the system has already checked and proves nothing itself.
+
 The Kernel Index: https://f-keys.com/gonzalgo/kernel-index/
   A measured table of what formal mathematical libraries rest on -- theorems
   depending on an unfinished proof, on the compiler rather than the kernel, or on
@@ -144,6 +152,18 @@ The Kernel Index: https://f-keys.com/gonzalgo/kernel-index/
   (CC-BY-4.0). Headline result: across 532,579 Lean theorems in nine libraries,
   and 71,124 Metamath theorems in five databases, ZERO rest on an unfinished
   proof and ZERO rest on the compiler -- verified, not assumed.
+
+The Dominator Table: https://f-keys.com/gonzalgo/dominator-table/
+  3,000 Mathlib constants ranked by how many theorems would stop depending on the
+  axiom of choice if that one constant were rebuilt -- responsibility, not
+  reachability. The two differ by 58x on the first case examined: 116,766
+  theorems reach lt_or_eq_of_le, 2,018 are dominated by it. Machine-readable:
+  dominator-table.json, dominator-table.csv (CC-BY-4.0). Top sites are
+  Classical.propDecidable 91,858, Classical.byContradiction 23,550, and then
+  infrastructure rather than mathematics -- a functor category instance 5,271,
+  hash-map well-formedness 4,899, the powerset Boolean algebra 3,430. No reach
+  column yet: computing reach per row needs a second full-graph traversal that
+  has not been run, so it is absent rather than estimated.
 
 Supported: Lean 4 (via a declaration-graph extractor), and the Metamath databases
 set.mm, iset.mm, nf.mm, ql.mm and hol.mm — ZFC, intuitionistic logic, New

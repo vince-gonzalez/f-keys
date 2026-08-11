@@ -1,0 +1,17 @@
+{
+  "dominator-table": {
+    "history": [],
+    "sha256": "d5f56ac36030feacfeb3f2103c21465a0eb9083abe77ee510f2474096e48dd4f",
+    "version": "2026-08-11"
+  },
+  "generated-proofs": {
+    "history": [],
+    "sha256": "906a39491ab2be7a06c7370cd525e649b9644351c8387abf883bd8cd5ee01987",
+    "version": "2026-08-11"
+  },
+  "kernel-index": {
+    "history": [],
+    "sha256": "9d0bf4f36a423930fe01144235192fb4cb384487499ddda7c47c9a265e977dbb",
+    "version": "2026-08-05"
+  }
+}
