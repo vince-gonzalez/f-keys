@@ -89,6 +89,28 @@ What machine-generated proofs rest on: https://f-keys.com/gonzalgo/generated-pro
   what a machine-generated proof corpus rests on.
 
 
+The Cleanable Table: https://f-keys.com/gonzalgo/cleanable/
+  280 declarations a choice-removing rewrite was attempted on: 275 removed with the
+  Lean KERNEL accepting the result, 4 refused on type mismatch with the kernel's
+  message carried verbatim, 1 still classical. The library split is the finding --
+  Init 223, Std 41, Mathlib 9, Batteries 3, Lean 3, Plausible 1 -- so four fifths of
+  the removable classical dependence sits in Lean core, whose maintainers have stated
+  that avoiding choice is a deliberate non-goal. The unit is a compiler-generated
+  _proof_N term rather than a lemma anyone wrote, so this points at a tactic change
+  and not at a list of proofs to edit. Machine-readable: cleanable.json, cleanable.csv
+  (CC-BY-4.0).
+
+The set.mm Axiom Table: https://f-keys.com/gonzalgo/setmm-axioms/
+  All 3,004 axiomatic assertions in Metamath's set.mm with how many of the library's
+  47,621 theorems reach each. The three kinds are kept apart because they are not
+  comparable: 126 logical axioms, 1,435 definitions, 1,443 well-formedness syntax
+  constructors, all of them $a statements. ax-mp is reached by 47,562 theorems
+  (99.9%), ax-gen by 44,537. 213 statements are reached by no theorem at all, 8 of
+  them axioms. The 1,447 "axioms used" reported for set.mm decomposes here: it is the
+  118 axioms plus 1,329 definitions that at least one theorem reaches, excluding
+  syntax constructors and everything unreached. Machine-readable: setmm-axioms.json,
+  setmm-axioms.csv (CC-BY-4.0).
+
 Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
 
 Which constant is responsible? Dominator analysis of classical dependence in
