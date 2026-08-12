@@ -84,6 +84,44 @@ def deposits() -> list[str]:
     return list(dict.fromkeys(out))
 
 
+_PAPERS: dict[str, dict] | None = None
+
+
+def papers_index() -> dict[str, dict]:
+    """Map a Zenodo DOI suffix to its full-text page on the domain.
+
+    The site already carries a page per deposit with citation_* metadata the
+    author wrote. Reusing those keywords means nothing here is invented; a
+    keyword this script cannot source is a keyword it does not add."""
+    global _PAPERS
+    if _PAPERS is not None:
+        return _PAPERS
+    import re
+    _PAPERS = {}
+    sm = urllib.request.urlopen(urllib.request.Request(
+        "https://f-keys.com/sitemap.xml",
+        headers={"User-Agent": "c"})).read().decode()
+    for slug in re.findall(
+            r"<loc>https://f-keys\.com/papers/([a-z0-9\-]+)/</loc>", sm):
+        url = f"https://f-keys.com/papers/{slug}/"
+        try:
+            html = urllib.request.urlopen(urllib.request.Request(
+                url, headers={"User-Agent": "c"})).read().decode()
+        except Exception:
+            continue
+        m = re.search(r"10\.5281/zenodo\.(\d+)", html, re.I)
+        if not m:
+            continue
+        kw = re.search(r'<meta name="citation_keywords" content="([^"]*)"', html)
+        _PAPERS[m.group(1)] = {
+            "url": url,
+            "keywords": [k.strip() for k in kw.group(1).split(",")
+                         if k.strip()] if kw else [],
+        }
+        time.sleep(0.05)
+    return _PAPERS
+
+
 def plan_for(rec: dict) -> tuple[dict, list[str]]:
     """Return (patch, notes-for-the-human). Patch is only verifiable additions."""
     m = rec["metadata"]
@@ -95,9 +133,13 @@ def plan_for(rec: dict) -> tuple[dict, list[str]]:
 
     rel = {(r.get("relation"), r.get("identifier"))
            for r in m.get("related_identifiers", [])}
+    # Dedupe by target, not by (relation, target): a DOI already linked under
+    # any relation does not need a second, vaguer one alongside it.
+    linked = {r.get("identifier", "").lower()
+              for r in m.get("related_identifiers", [])}
     add = []
     for key, url in REPO.items():
-        if key in title and ("isSupplementedBy", url) not in rel:
+        if key in title and url.lower() not in linked:
             add.append({"relation": "isSupplementedBy", "identifier": url,
                         "scheme": "url", "resource_type": "software"})
     # A version record carries its own DOI and its concept DOI, and linking to
@@ -109,7 +151,7 @@ def plan_for(rec: dict) -> tuple[dict, list[str]]:
         for sib in AXIOM_SERIES:
             if sib.lower() in own:
                 continue
-            if ("isRelatedTo", sib) not in rel and ("isSupplementTo", sib) not in rel:
+            if sib.lower() not in linked:
                 add.append({"relation": "isRelatedTo", "identifier": sib,
                             "scheme": "doi"})
         if ("isDocumentedBy", CATALOGUE) not in rel:
@@ -118,11 +160,52 @@ def plan_for(rec: dict) -> tuple[dict, list[str]]:
     if add:
         patch["related_identifiers"] = m.get("related_identifiers", []) + add
 
+    # Self-deposited work is a preprint. Zenodo's other publication types state
+    # where a work appeared -- a journal, a publisher, a data journal -- and
+    # DataCite carries that claim downstream, so a wrong one is a wrong claim
+    # rather than a wrong label.
     if m["resource_type"]["title"] in OVERCLAIMING:
-        flags.append(f"resource type is {m['resource_type']['title']!r} — "
-                     "not decided here")
-    if not m.get("keywords"):
-        flags.append("no keywords")
+        patch["upload_type"] = "publication"
+        patch["publication_type"] = "preprint"
+        flags.append(f"retyped from {m['resource_type']['title']!r} to preprint")
+
+    # Full text, keywords and code, all sourced rather than composed.
+    papers = papers_index()
+    entry = None
+    for key in (str(rec.get("conceptdoi") or ""), str(rec.get("doi") or "")):
+        suffix = key.lower().split("zenodo.")[-1]
+        if suffix in papers:
+            entry = papers[suffix]
+            break
+
+    if entry:
+        if ("isIdenticalTo", entry["url"]) not in rel and \
+                ("isVersionOf", entry["url"]) not in rel:
+            patch.setdefault("related_identifiers",
+                             m.get("related_identifiers", []))
+            patch["related_identifiers"] = patch["related_identifiers"] + [
+                {"relation": "isVariantFormOf", "identifier": entry["url"],
+                 "scheme": "url", "resource_type": "publication-preprint"}]
+        if not m.get("keywords") and entry["keywords"]:
+            patch["keywords"] = entry["keywords"]
+
+    code = [f["key"] for f in rec.get("files", [])
+            if f["key"].endswith(".zip")]
+    if not (m.get("notes") or "").strip():
+        lines = []
+        if entry:
+            lines.append(f'Full text on the author\'s domain: '
+                         f'<a href="{entry["url"]}">{entry["url"]}</a>')
+        if code:
+            lines.append("Code and derived data are attached to this record as "
+                         + ", ".join(f"<code>{c}</code>" for c in code)
+                         + ".")
+        for key, url in REPO.items():
+            if key in title:
+                lines.append(f'Source: <a href="{url}">{url}</a>')
+        if lines:
+            patch["notes"] = "<br>".join(lines)
+
     if not m.get("references"):
         flags.append("no references")
     return patch, flags
