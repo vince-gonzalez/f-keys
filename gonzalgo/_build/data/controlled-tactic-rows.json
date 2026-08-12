@@ -1,0 +1,2702 @@
+[
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ∣ 12",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 1,
+    "goal": "(5 : Nat) ∣ 40",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "dvd_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ∣ 7",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 0,
+    "goal": "(2 : Int) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 1,
+    "goal": "(6 : Int) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_int",
+    "goal_index": 2,
+    "goal": "(2 : Int) - 9 = -7",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 0,
+    "goal": "(2 : Nat) + 3 = 5",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 1,
+    "goal": "(6 : Nat) * 7 = 42",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "eq_nat",
+    "goal_index": 2,
+    "goal": "(10 : Nat) - 4 = 6",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 0,
+    "goal": "(5 : Nat) ≥ 3",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 1,
+    "goal": "(40 : Nat) ≥ 12",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ge_nat",
+    "goal_index": 2,
+    "goal": "(7 : Nat) ≥ 0",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) ≤ 5",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) ≤ 2",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) ≤ 7",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≤ 5",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≤ 40",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "le_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) ≤ 7",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 0,
+    "goal": "(3 : Int) < 5",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 1,
+    "goal": "(-4 : Int) < 2",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_int",
+    "goal_index": 2,
+    "goal": "(0 : Int) < 7",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) < 5",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) < 40",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "positivity",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "simp",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "lt_nat",
+    "goal_index": 2,
+    "goal": "(0 : Nat) < 7",
+    "shape": "order",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 0,
+    "goal": "(3 : Nat) ≠ 5",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 1,
+    "goal": "(12 : Nat) ≠ 40",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "aesop",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "decide",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "grind",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "linarith",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "norm_num",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "omega",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "positivity",
+    "closed": true,
+    "classical": true,
+    "axioms": "propext Classical.choice Quot.sound"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "rfl",
+    "closed": false,
+    "classical": false,
+    "axioms": "sorryAx"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "simp",
+    "closed": true,
+    "classical": false,
+    "axioms": "propext"
+  },
+  {
+    "family": "ne_nat",
+    "goal_index": 2,
+    "goal": "(1 : Nat) ≠ 0",
+    "shape": "equality/divisibility",
+    "tactic": "trivial",
+    "closed": true,
+    "classical": false,
+    "axioms": "(none)"
+  }
+]

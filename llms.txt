@@ -24,7 +24,7 @@ PyPI: https://pypi.org/project/gonzalgo/
 Source: https://github.com/zengineco/gonzalgo
 GitHub Action: https://github.com/marketplace/actions/gonzalgo-trust-audit
 Paper (DOI): https://doi.org/10.5281/zenodo.21769846
-Paper (full text): https://f-keys.com/papers/axiom-spend/
+Paper (full text): https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/
 License: Apache-2.0
 
 What it is: `#print axioms` reports that a theorem depends on
@@ -121,7 +121,7 @@ on (note, 2026): https://f-keys.com/papers/eligibility-discriminates-among-theor
   eligible, dominates 91,858 theorems, and cannot be made constructive.
 
 Why tactic-level rates cannot attribute classical dependencies (paper, 2026):
-https://f-keys.com/papers/tactic-attribution/ | https://doi.org/10.5281/zenodo.21853489
+https://f-keys.com/papers/why-tactic-level-rates-cannot-attribute/ | https://doi.org/10.5281/zenodo.21853489
   A negative methodological result. Scoring Lean tactics by how often their
   proofs carry an avoidable classical dependence does not identify defective
   tactics. Calibrated against known-negatives -- tactics that cannot introduce a
@@ -154,16 +154,31 @@ The Kernel Index: https://f-keys.com/gonzalgo/kernel-index/
   proof and ZERO rest on the compiler -- verified, not assumed.
 
 The Dominator Table: https://f-keys.com/gonzalgo/dominator-table/
-  3,000 Mathlib constants ranked by how many theorems would stop depending on the
-  axiom of choice if that one constant were rebuilt -- responsibility, not
-  reachability. The two differ by 58x on the first case examined: 116,766
-  theorems reach lt_or_eq_of_le, 2,018 are dominated by it. Machine-readable:
-  dominator-table.json, dominator-table.csv (CC-BY-4.0). Top sites are
-  Classical.propDecidable 91,858, Classical.byContradiction 23,550, and then
-  infrastructure rather than mathematics -- a functor category instance 5,271,
-  hash-map well-formedness 4,899, the powerset Boolean algebra 3,430. No reach
-  column yet: computing reach per row needs a second full-graph traversal that
-  has not been run, so it is absent rather than estimated.
+  The 1,500 largest sites of classical dependence in Mathlib, ranked by how many
+  theorems would stop depending on the axiom of choice if that site were rebuilt
+  -- responsibility, not reachability. The two differ by 58x on the first case
+  examined: 116,766 theorems reach lt_or_eq_of_le, 2,018 are dominated by it.
+  Machine-readable: dominator-table.json, dominator-table.csv (CC-BY-4.0). Top
+  sites are Classical.propDecidable 91,858, Classical.byContradiction 23,550, and
+  then infrastructure rather than mathematics -- a functor category instance
+  5,271, hash-map well-formedness 4,899, the powerset Boolean algebra 3,430.
+  A site is a chain of constants that each dominate the next: severing any member
+  frees the same theorems, so counting them separately would count one repair
+  several times. 182 of the 1,500 rows are such chains. No reach column yet:
+  computing reach per row needs a second full-graph traversal that has not been
+  run, so it is absent rather than estimated.
+
+The Controlled Tactic Table: https://f-keys.com/gonzalgo/controlled-tactics/
+  A controlled experiment rather than a census. 27 arithmetic goals over Nat and
+  Int, each put to ten Lean tactics, axiom set recorded per cell -- 270 cells,
+  fully crossed. Holding the goal fixed and varying only the tactic is what
+  separates a classical dependence introduced by the proof from one required by
+  the statement. Result: norm_num introduces Classical.choice on all 15 order
+  goals and none of the 12 equality/divisibility goals, a boundary rather than a
+  gradient, while decide, omega and trivial close all 27 choice-free, so no goal
+  required it. grind is classical on all 27 it closes and is architecturally
+  classical, not defective. aesop matches simp cell for cell on all 27.
+  Machine-readable: controlled-tactics.json, controlled-tactics.csv (CC-BY-4.0).
 
 Supported: Lean 4 (via a declaration-graph extractor), and the Metamath databases
 set.mm, iset.mm, nf.mm, ql.mm and hol.mm — ZFC, intuitionistic logic, New

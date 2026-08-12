@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/controlled-tactics/">
+<title>The Controlled Tactic Table — which Lean tactics introduce the axiom of choice</title>
+<meta name="description" content="270 cells: 27 arithmetic goals over Nat and Int put to ten Lean tactics each, with the axiom set recorded per cell. norm_num is classical on all 15 order goals and none of the 12 equality goals, while decide, omega and trivial close all 27 choice-free.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/controlled-tactics/">
+<meta property="og:title" content="The Controlled Tactic Table">
+<meta property="og:description" content="same goal, ten tactics, axioms recorded per cell">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Controlled Tactic Table",
+  "description": "A controlled experiment over Lean tactics. 27 arithmetic goals over Nat and Int, each put to ten tactics, with the axiom set recorded for every cell. Holding the goal fixed and varying only the tactic separates a classical dependence introduced by the proof from one required by the statement.",
+  "url": "https://f-keys.com/gonzalgo/controlled-tactics/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Lean 4",
+    "tactics",
+    "norm_num",
+    "omega",
+    "decide",
+    "grind",
+    "aesop",
+    "axiom of choice",
+    "controlled experiment",
+    "formal verification",
+    "Mathlib"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21853489",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE CONTROLLED TACTIC TABLE</h1>
+<p class="kicker">same goal, ten tactics, axioms recorded per cell</p>
+
+<p>Every observational measure in this program has the same weakness: a theorem's classical dependence can come from what it says or from how it was proved, and a census cannot tell you which. This is the intervention that can. The goal is held fixed, the tactic varies, and anything that changes between cells is the tactic's doing.</p>
+<p>The result is a boundary rather than a gradient. <code>norm_num</code> introduces the axiom of choice on all 15 order goals (<code>&le;</code>, <code>&lt;</code>, <code>&ge;</code> over <code>Nat</code> and <code>Int</code>) and on none of the 12 equality and divisibility goals. On the same 27 goals <code>decide</code>, <code>omega</code> and <code>trivial</code> introduce it nowhere, so no goal here ever required it.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; 9 goal families &times; 3 goals &times; 10 tactics = 270 cells, every cell a separate theorem with its own <code>#print axioms</code></p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>goal</th><th>shape</th><th>tactic</th><th>closed</th><th>classical</th><th>axioms</th></tr></thead>
+<tbody>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>linarith</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Nat) ∣ 12</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>linarith</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(5 : Nat) ∣ 40</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>linarith</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ∣ 7</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>rfl</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Int) + 3 = 5</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>rfl</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(6 : Int) * 7 = 42</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>rfl</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Int) - 9 = -7</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>rfl</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(2 : Nat) + 3 = 5</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>rfl</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(6 : Nat) * 7 = 42</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>rfl</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(10 : Nat) - 4 = 6</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(5 : Nat) ≥ 3</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(40 : Nat) ≥ 12</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>positivity</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(7 : Nat) ≥ 0</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Int) ≤ 5</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(-4 : Int) ≤ 2</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>positivity</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>simp</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) ≤ 7</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) ≤ 5</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(12 : Nat) ≤ 40</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>positivity</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(0 : Nat) ≤ 7</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Int) < 5</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>simp</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(-4 : Int) < 2</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>positivity</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>simp</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Int) < 7</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) < 5</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(12 : Nat) < 40</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>aesop</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>norm_num</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>positivity</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>simp</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(0 : Nat) < 7</td><td class='found'>order</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(3 : Nat) ≠ 5</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>positivity</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(12 : Nat) ≠ 40</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>aesop</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>decide</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>grind</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>linarith</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>norm_num</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>omega</td><td>yes</td><td>no</td><td class='found'>propext Quot.sound</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>positivity</td><td>yes</td><td>yes</td><td class='found'>propext Classical.choice Quot.sound</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>rfl</td><td>no</td><td>no</td><td class='found'>sorryAx</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>simp</td><td>yes</td><td>no</td><td class='found'>propext</td></tr>
+<tr><td>(1 : Nat) ≠ 0</td><td class='found'>equality/divisibility</td><td>trivial</td><td>yes</td><td>no</td><td class='found'>(none)</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="note"><em>closed</em> is false where the tactic did not prove the goal. Lean records those as depending on <code>sorryAx</code>, which is the tactic failing rather than a proof resting on something unfinished, so they are excluded from every rate below &mdash; a tactic that never ran cannot have introduced an axiom. <em>classical</em> means <code>Classical.choice</code> appears in the cell's axiom set.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="controlled-tactics.json">controlled-tactics.json</a> &middot;
+<a href="controlled-tactics.csv">controlled-tactics.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>lake env lean -D maxErrors=4000 lean/Controlled.lean</pre>
+<p class="note"><code>set_option maxErrors</code> inside the file is ignored; only the command-line flag works, and without it Lean halts at 100 errors long before the last theorem. The generator and the raw output are in <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a>.</p>
+
+<h2>Rates, over goals each tactic actually closed</h2>
+<p><div class='wrap'><table><thead><tr><th>tactic</th><th style='text-align:right'>goals closed</th><th style='text-align:right'>classical</th><th style='text-align:right'>rate</th></tr></thead><tbody><tr><td><code>aesop</code></td><td class='num'>27</td><td class='num'>4</td><td class='num'>15%</td></tr><tr><td><code>decide</code></td><td class='num'>27</td><td class='num'>0</td><td class='num'>0%</td></tr><tr><td><code>grind</code></td><td class='num'>27</td><td class='num'>27</td><td class='num'>100%</td></tr><tr><td><code>linarith</code></td><td class='num'>24</td><td class='num'>24</td><td class='num'>100%</td></tr><tr><td><code>norm_num</code></td><td class='num'>27</td><td class='num'>15</td><td class='num'>56%</td></tr><tr><td><code>omega</code></td><td class='num'>27</td><td class='num'>0</td><td class='num'>0%</td></tr><tr><td><code>positivity</code></td><td class='num'>6</td><td class='num'>6</td><td class='num'>100%</td></tr><tr><td><code>rfl</code></td><td class='num'>6</td><td class='num'>0</td><td class='num'>0%</td></tr><tr><td><code>simp</code></td><td class='num'>27</td><td class='num'>4</td><td class='num'>15%</td></tr><tr><td><code>trivial</code></td><td class='num'>27</td><td class='num'>0</td><td class='num'>0%</td></tr></tbody></table></div></p>
+
+<h2>What the boundary means</h2>
+<p><code>norm_num</code>'s dependence is not a property of the arithmetic. The same numbers, stated as an equality, come out choice-free from the same tactic. It is the order goals specifically, and on <code>Nat</code> and <code>Int</code> the constructive decidability instance exists and is axiom-free, so the classical route was taken where a free one was available.</p>
+<p><code>grind</code> is classical on every goal it closes and that is not a defect: it is architecturally classical. Reporting it beside <code>norm_num</code> without that distinction is exactly the error the attribution paper is about &mdash; a rate cannot separate a tactic that is designed classical from one that reached for choice unnecessarily.</p>
+<p><code>aesop</code> and <code>simp</code> agree on all 27 goals, cell for cell. aesop's classical cells are simp's classical cells. A search procedure built over a simp set inherits that set's axiom behaviour rather than adding to it.</p>
+
+<h2>Why this is worth more than the census</h2>
+<p>Per-tactic rates measured across a library vary as much within a library as between them &mdash; 5.8&ndash;28.2% in Mathlib, 45&ndash;100% in Lean core &mdash; because eligibility is a property of the theorem while the defect is a property of the proof term. Fixing the goal removes that confound entirely. Every difference in this table is attributable, because nothing else was allowed to vary.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Why Tactic-Level Rates Cannot Attribute Classical Dependencies</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21853489">10.5281/zenodo.21853489</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/controlled-tactics/">f-keys.com/gonzalgo/controlled-tactics/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

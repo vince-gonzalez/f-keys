@@ -83,6 +83,32 @@ idx = Index(
     keywords=["formal verification", "Lean 4", "Mathlib", "Metamath",
               "proof assistant", "axiom", "sorry", "native_decide",
               "provenance", "trusted base"],
+    invariants=[
+        # The headline is the two zero columns. If either ever goes non-zero
+        # the page's whole claim changes, so it fails the build rather than
+        # rendering a red number under prose that says nobody found any.
+        ("no theorem rests on an unfinished proof",
+         lambda rs: all(r["unfinished_theorems"] == 0 for r in rs)),
+        ("no theorem rests on the compiler",
+         lambda rs: all(r.get("compiler_trusting_theorems") in (0, None)
+                        for r in rs)),
+        ("every optional-axiom percentage recomputes from its own counts",
+         lambda rs: all(
+             r.get("optional_reach_pct") is None
+             or abs(round(100 * r["optional_reach"] / r["theorems"], 2)
+                    - r["optional_reach_pct"]) <= 0.01
+             for r in rs)),
+        ("reach never exceeds the theorem count",
+         lambda rs: all((r.get("optional_reach") or 0) <= r["theorems"]
+                        for r in rs)),
+        # Quoted in llms.txt and on the page; both must follow from the rows.
+        ("Lean rows total 532,579 theorems across nine libraries",
+         lambda rs: sum(r["theorems"] for r in rs if r["system"] == "Lean 4")
+         == 532579 and sum(1 for r in rs if r["system"] == "Lean 4") == 9),
+        ("Metamath rows total 71,124 theorems across five databases",
+         lambda rs: sum(r["theorems"] for r in rs if r["system"] == "Metamath")
+         == 71124 and sum(1 for r in rs if r["system"] == "Metamath") == 5),
+    ],
     citation=(
         'Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. '
         'Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">'

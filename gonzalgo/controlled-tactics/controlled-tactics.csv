@@ -1,0 +1,271 @@
+family,goal_index,goal,shape,tactic,closed,classical,axioms
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,aesop,true,false,propext Quot.sound
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,decide,true,false,propext
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,linarith,false,false,sorryAx
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,norm_num,true,false,propext
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,omega,true,false,propext Quot.sound
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,positivity,false,false,sorryAx
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,rfl,false,false,sorryAx
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,simp,true,false,propext Quot.sound
+dvd_nat,0,(3 : Nat) ∣ 12,equality/divisibility,trivial,true,false,propext
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,aesop,true,false,propext Quot.sound
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,decide,true,false,propext
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,linarith,false,false,sorryAx
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,norm_num,true,false,propext
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,omega,true,false,propext Quot.sound
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,positivity,false,false,sorryAx
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,rfl,false,false,sorryAx
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,simp,true,false,propext Quot.sound
+dvd_nat,1,(5 : Nat) ∣ 40,equality/divisibility,trivial,true,false,propext
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,aesop,true,false,propext
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,decide,true,false,propext
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,linarith,false,false,sorryAx
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,norm_num,true,false,propext
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,omega,true,false,propext Quot.sound
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,positivity,false,false,sorryAx
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,rfl,false,false,sorryAx
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,simp,true,false,propext
+dvd_nat,2,(1 : Nat) ∣ 7,equality/divisibility,trivial,true,false,propext
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,aesop,true,false,propext
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,decide,true,false,(none)
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,norm_num,true,false,propext
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,omega,true,false,propext Quot.sound
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,positivity,false,false,sorryAx
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,rfl,true,false,(none)
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,simp,true,false,propext
+eq_int,0,(2 : Int) + 3 = 5,equality/divisibility,trivial,true,false,(none)
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,aesop,true,false,propext
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,decide,true,false,(none)
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,norm_num,true,false,propext
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,omega,true,false,propext Quot.sound
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,positivity,false,false,sorryAx
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,rfl,true,false,(none)
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,simp,true,false,propext
+eq_int,1,(6 : Int) * 7 = 42,equality/divisibility,trivial,true,false,(none)
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,aesop,true,false,propext
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,decide,true,false,(none)
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,norm_num,true,false,propext
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,omega,true,false,propext Quot.sound
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,positivity,false,false,sorryAx
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,rfl,true,false,(none)
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,simp,true,false,propext
+eq_int,2,(2 : Int) - 9 = -7,equality/divisibility,trivial,true,false,(none)
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,aesop,true,false,propext
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,decide,true,false,(none)
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,norm_num,true,false,propext
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,omega,true,false,propext Quot.sound
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,positivity,false,false,sorryAx
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,rfl,true,false,(none)
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,simp,true,false,propext
+eq_nat,0,(2 : Nat) + 3 = 5,equality/divisibility,trivial,true,false,(none)
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,aesop,true,false,propext
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,decide,true,false,(none)
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,norm_num,true,false,propext
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,omega,true,false,propext Quot.sound
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,positivity,false,false,sorryAx
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,rfl,true,false,(none)
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,simp,true,false,propext
+eq_nat,1,(6 : Nat) * 7 = 42,equality/divisibility,trivial,true,false,(none)
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,aesop,true,false,propext
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,decide,true,false,(none)
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,norm_num,true,false,propext
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,omega,true,false,propext Quot.sound
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,positivity,false,false,sorryAx
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,rfl,true,false,(none)
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,simp,true,false,propext
+eq_nat,2,(10 : Nat) - 4 = 6,equality/divisibility,trivial,true,false,(none)
+ge_nat,0,(5 : Nat) ≥ 3,order,aesop,true,false,propext
+ge_nat,0,(5 : Nat) ≥ 3,order,decide,true,false,(none)
+ge_nat,0,(5 : Nat) ≥ 3,order,grind,true,true,propext Classical.choice Quot.sound
+ge_nat,0,(5 : Nat) ≥ 3,order,linarith,true,true,propext Classical.choice Quot.sound
+ge_nat,0,(5 : Nat) ≥ 3,order,norm_num,true,true,propext Classical.choice Quot.sound
+ge_nat,0,(5 : Nat) ≥ 3,order,omega,true,false,propext Quot.sound
+ge_nat,0,(5 : Nat) ≥ 3,order,positivity,false,false,sorryAx
+ge_nat,0,(5 : Nat) ≥ 3,order,rfl,false,false,sorryAx
+ge_nat,0,(5 : Nat) ≥ 3,order,simp,true,false,propext
+ge_nat,0,(5 : Nat) ≥ 3,order,trivial,true,false,(none)
+ge_nat,1,(40 : Nat) ≥ 12,order,aesop,true,false,propext
+ge_nat,1,(40 : Nat) ≥ 12,order,decide,true,false,(none)
+ge_nat,1,(40 : Nat) ≥ 12,order,grind,true,true,propext Classical.choice Quot.sound
+ge_nat,1,(40 : Nat) ≥ 12,order,linarith,true,true,propext Classical.choice Quot.sound
+ge_nat,1,(40 : Nat) ≥ 12,order,norm_num,true,true,propext Classical.choice Quot.sound
+ge_nat,1,(40 : Nat) ≥ 12,order,omega,true,false,propext Quot.sound
+ge_nat,1,(40 : Nat) ≥ 12,order,positivity,false,false,sorryAx
+ge_nat,1,(40 : Nat) ≥ 12,order,rfl,false,false,sorryAx
+ge_nat,1,(40 : Nat) ≥ 12,order,simp,true,false,propext
+ge_nat,1,(40 : Nat) ≥ 12,order,trivial,true,false,(none)
+ge_nat,2,(7 : Nat) ≥ 0,order,aesop,true,false,propext
+ge_nat,2,(7 : Nat) ≥ 0,order,decide,true,false,(none)
+ge_nat,2,(7 : Nat) ≥ 0,order,grind,true,true,propext Classical.choice Quot.sound
+ge_nat,2,(7 : Nat) ≥ 0,order,linarith,true,true,propext Classical.choice Quot.sound
+ge_nat,2,(7 : Nat) ≥ 0,order,norm_num,true,true,propext Classical.choice Quot.sound
+ge_nat,2,(7 : Nat) ≥ 0,order,omega,true,false,propext Quot.sound
+ge_nat,2,(7 : Nat) ≥ 0,order,positivity,true,true,propext Classical.choice Quot.sound
+ge_nat,2,(7 : Nat) ≥ 0,order,rfl,false,false,sorryAx
+ge_nat,2,(7 : Nat) ≥ 0,order,simp,true,false,propext
+ge_nat,2,(7 : Nat) ≥ 0,order,trivial,true,false,(none)
+le_int,0,(3 : Int) ≤ 5,order,aesop,true,false,propext
+le_int,0,(3 : Int) ≤ 5,order,decide,true,false,(none)
+le_int,0,(3 : Int) ≤ 5,order,grind,true,true,propext Classical.choice Quot.sound
+le_int,0,(3 : Int) ≤ 5,order,linarith,true,true,propext Classical.choice Quot.sound
+le_int,0,(3 : Int) ≤ 5,order,norm_num,true,true,propext Classical.choice Quot.sound
+le_int,0,(3 : Int) ≤ 5,order,omega,true,false,propext Quot.sound
+le_int,0,(3 : Int) ≤ 5,order,positivity,false,false,sorryAx
+le_int,0,(3 : Int) ≤ 5,order,rfl,false,false,sorryAx
+le_int,0,(3 : Int) ≤ 5,order,simp,true,false,propext
+le_int,0,(3 : Int) ≤ 5,order,trivial,true,false,(none)
+le_int,1,(-4 : Int) ≤ 2,order,aesop,true,false,propext
+le_int,1,(-4 : Int) ≤ 2,order,decide,true,false,(none)
+le_int,1,(-4 : Int) ≤ 2,order,grind,true,true,propext Classical.choice Quot.sound
+le_int,1,(-4 : Int) ≤ 2,order,linarith,true,true,propext Classical.choice Quot.sound
+le_int,1,(-4 : Int) ≤ 2,order,norm_num,true,true,propext Classical.choice Quot.sound
+le_int,1,(-4 : Int) ≤ 2,order,omega,true,false,propext Quot.sound
+le_int,1,(-4 : Int) ≤ 2,order,positivity,false,false,sorryAx
+le_int,1,(-4 : Int) ≤ 2,order,rfl,false,false,sorryAx
+le_int,1,(-4 : Int) ≤ 2,order,simp,true,false,propext
+le_int,1,(-4 : Int) ≤ 2,order,trivial,true,false,(none)
+le_int,2,(0 : Int) ≤ 7,order,aesop,true,true,propext Classical.choice Quot.sound
+le_int,2,(0 : Int) ≤ 7,order,decide,true,false,(none)
+le_int,2,(0 : Int) ≤ 7,order,grind,true,true,propext Classical.choice Quot.sound
+le_int,2,(0 : Int) ≤ 7,order,linarith,true,true,propext Classical.choice Quot.sound
+le_int,2,(0 : Int) ≤ 7,order,norm_num,true,true,propext Classical.choice Quot.sound
+le_int,2,(0 : Int) ≤ 7,order,omega,true,false,propext Quot.sound
+le_int,2,(0 : Int) ≤ 7,order,positivity,true,true,propext Classical.choice Quot.sound
+le_int,2,(0 : Int) ≤ 7,order,rfl,false,false,sorryAx
+le_int,2,(0 : Int) ≤ 7,order,simp,true,true,propext Classical.choice Quot.sound
+le_int,2,(0 : Int) ≤ 7,order,trivial,true,false,(none)
+le_nat,0,(3 : Nat) ≤ 5,order,aesop,true,false,propext
+le_nat,0,(3 : Nat) ≤ 5,order,decide,true,false,(none)
+le_nat,0,(3 : Nat) ≤ 5,order,grind,true,true,propext Classical.choice Quot.sound
+le_nat,0,(3 : Nat) ≤ 5,order,linarith,true,true,propext Classical.choice Quot.sound
+le_nat,0,(3 : Nat) ≤ 5,order,norm_num,true,true,propext Classical.choice Quot.sound
+le_nat,0,(3 : Nat) ≤ 5,order,omega,true,false,propext Quot.sound
+le_nat,0,(3 : Nat) ≤ 5,order,positivity,false,false,sorryAx
+le_nat,0,(3 : Nat) ≤ 5,order,rfl,false,false,sorryAx
+le_nat,0,(3 : Nat) ≤ 5,order,simp,true,false,propext
+le_nat,0,(3 : Nat) ≤ 5,order,trivial,true,false,(none)
+le_nat,1,(12 : Nat) ≤ 40,order,aesop,true,false,propext
+le_nat,1,(12 : Nat) ≤ 40,order,decide,true,false,(none)
+le_nat,1,(12 : Nat) ≤ 40,order,grind,true,true,propext Classical.choice Quot.sound
+le_nat,1,(12 : Nat) ≤ 40,order,linarith,true,true,propext Classical.choice Quot.sound
+le_nat,1,(12 : Nat) ≤ 40,order,norm_num,true,true,propext Classical.choice Quot.sound
+le_nat,1,(12 : Nat) ≤ 40,order,omega,true,false,propext Quot.sound
+le_nat,1,(12 : Nat) ≤ 40,order,positivity,false,false,sorryAx
+le_nat,1,(12 : Nat) ≤ 40,order,rfl,false,false,sorryAx
+le_nat,1,(12 : Nat) ≤ 40,order,simp,true,false,propext
+le_nat,1,(12 : Nat) ≤ 40,order,trivial,true,false,(none)
+le_nat,2,(0 : Nat) ≤ 7,order,aesop,true,false,propext
+le_nat,2,(0 : Nat) ≤ 7,order,decide,true,false,(none)
+le_nat,2,(0 : Nat) ≤ 7,order,grind,true,true,propext Classical.choice Quot.sound
+le_nat,2,(0 : Nat) ≤ 7,order,linarith,true,true,propext Classical.choice Quot.sound
+le_nat,2,(0 : Nat) ≤ 7,order,norm_num,true,true,propext Classical.choice Quot.sound
+le_nat,2,(0 : Nat) ≤ 7,order,omega,true,false,propext Quot.sound
+le_nat,2,(0 : Nat) ≤ 7,order,positivity,true,true,propext Classical.choice Quot.sound
+le_nat,2,(0 : Nat) ≤ 7,order,rfl,false,false,sorryAx
+le_nat,2,(0 : Nat) ≤ 7,order,simp,true,false,propext
+le_nat,2,(0 : Nat) ≤ 7,order,trivial,true,false,(none)
+lt_int,0,(3 : Int) < 5,order,aesop,true,false,propext
+lt_int,0,(3 : Int) < 5,order,decide,true,false,(none)
+lt_int,0,(3 : Int) < 5,order,grind,true,true,propext Classical.choice Quot.sound
+lt_int,0,(3 : Int) < 5,order,linarith,true,true,propext Classical.choice Quot.sound
+lt_int,0,(3 : Int) < 5,order,norm_num,true,true,propext Classical.choice Quot.sound
+lt_int,0,(3 : Int) < 5,order,omega,true,false,propext Quot.sound
+lt_int,0,(3 : Int) < 5,order,positivity,false,false,sorryAx
+lt_int,0,(3 : Int) < 5,order,rfl,false,false,sorryAx
+lt_int,0,(3 : Int) < 5,order,simp,true,false,propext
+lt_int,0,(3 : Int) < 5,order,trivial,true,false,(none)
+lt_int,1,(-4 : Int) < 2,order,aesop,true,true,propext Classical.choice Quot.sound
+lt_int,1,(-4 : Int) < 2,order,decide,true,false,(none)
+lt_int,1,(-4 : Int) < 2,order,grind,true,true,propext Classical.choice Quot.sound
+lt_int,1,(-4 : Int) < 2,order,linarith,true,true,propext Classical.choice Quot.sound
+lt_int,1,(-4 : Int) < 2,order,norm_num,true,true,propext Classical.choice Quot.sound
+lt_int,1,(-4 : Int) < 2,order,omega,true,false,propext Quot.sound
+lt_int,1,(-4 : Int) < 2,order,positivity,false,false,sorryAx
+lt_int,1,(-4 : Int) < 2,order,rfl,false,false,sorryAx
+lt_int,1,(-4 : Int) < 2,order,simp,true,true,propext Classical.choice Quot.sound
+lt_int,1,(-4 : Int) < 2,order,trivial,true,false,(none)
+lt_int,2,(0 : Int) < 7,order,aesop,true,true,propext Classical.choice Quot.sound
+lt_int,2,(0 : Int) < 7,order,decide,true,false,(none)
+lt_int,2,(0 : Int) < 7,order,grind,true,true,propext Classical.choice Quot.sound
+lt_int,2,(0 : Int) < 7,order,linarith,true,true,propext Classical.choice Quot.sound
+lt_int,2,(0 : Int) < 7,order,norm_num,true,true,propext Classical.choice Quot.sound
+lt_int,2,(0 : Int) < 7,order,omega,true,false,propext Quot.sound
+lt_int,2,(0 : Int) < 7,order,positivity,true,true,propext Classical.choice Quot.sound
+lt_int,2,(0 : Int) < 7,order,rfl,false,false,sorryAx
+lt_int,2,(0 : Int) < 7,order,simp,true,true,propext Classical.choice Quot.sound
+lt_int,2,(0 : Int) < 7,order,trivial,true,false,(none)
+lt_nat,0,(3 : Nat) < 5,order,aesop,true,false,propext
+lt_nat,0,(3 : Nat) < 5,order,decide,true,false,(none)
+lt_nat,0,(3 : Nat) < 5,order,grind,true,true,propext Classical.choice Quot.sound
+lt_nat,0,(3 : Nat) < 5,order,linarith,true,true,propext Classical.choice Quot.sound
+lt_nat,0,(3 : Nat) < 5,order,norm_num,true,true,propext Classical.choice Quot.sound
+lt_nat,0,(3 : Nat) < 5,order,omega,true,false,propext Quot.sound
+lt_nat,0,(3 : Nat) < 5,order,positivity,false,false,sorryAx
+lt_nat,0,(3 : Nat) < 5,order,rfl,false,false,sorryAx
+lt_nat,0,(3 : Nat) < 5,order,simp,true,false,propext
+lt_nat,0,(3 : Nat) < 5,order,trivial,true,false,(none)
+lt_nat,1,(12 : Nat) < 40,order,aesop,true,false,propext
+lt_nat,1,(12 : Nat) < 40,order,decide,true,false,(none)
+lt_nat,1,(12 : Nat) < 40,order,grind,true,true,propext Classical.choice Quot.sound
+lt_nat,1,(12 : Nat) < 40,order,linarith,true,true,propext Classical.choice Quot.sound
+lt_nat,1,(12 : Nat) < 40,order,norm_num,true,true,propext Classical.choice Quot.sound
+lt_nat,1,(12 : Nat) < 40,order,omega,true,false,propext Quot.sound
+lt_nat,1,(12 : Nat) < 40,order,positivity,false,false,sorryAx
+lt_nat,1,(12 : Nat) < 40,order,rfl,false,false,sorryAx
+lt_nat,1,(12 : Nat) < 40,order,simp,true,false,propext
+lt_nat,1,(12 : Nat) < 40,order,trivial,true,false,(none)
+lt_nat,2,(0 : Nat) < 7,order,aesop,true,true,propext Classical.choice Quot.sound
+lt_nat,2,(0 : Nat) < 7,order,decide,true,false,(none)
+lt_nat,2,(0 : Nat) < 7,order,grind,true,true,propext Classical.choice Quot.sound
+lt_nat,2,(0 : Nat) < 7,order,linarith,true,true,propext Classical.choice Quot.sound
+lt_nat,2,(0 : Nat) < 7,order,norm_num,true,true,propext Classical.choice Quot.sound
+lt_nat,2,(0 : Nat) < 7,order,omega,true,false,propext Quot.sound
+lt_nat,2,(0 : Nat) < 7,order,positivity,true,true,propext Classical.choice Quot.sound
+lt_nat,2,(0 : Nat) < 7,order,rfl,false,false,sorryAx
+lt_nat,2,(0 : Nat) < 7,order,simp,true,true,propext Classical.choice Quot.sound
+lt_nat,2,(0 : Nat) < 7,order,trivial,true,false,(none)
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,aesop,true,false,propext
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,decide,true,false,(none)
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,norm_num,true,false,propext
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,omega,true,false,propext Quot.sound
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,positivity,false,false,sorryAx
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,rfl,false,false,sorryAx
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,simp,true,false,propext
+ne_nat,0,(3 : Nat) ≠ 5,equality/divisibility,trivial,true,false,(none)
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,aesop,true,false,propext
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,decide,true,false,(none)
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,norm_num,true,false,propext
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,omega,true,false,propext Quot.sound
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,positivity,false,false,sorryAx
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,rfl,false,false,sorryAx
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,simp,true,false,propext
+ne_nat,1,(12 : Nat) ≠ 40,equality/divisibility,trivial,true,false,(none)
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,aesop,true,false,propext
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,decide,true,false,(none)
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,grind,true,true,propext Classical.choice Quot.sound
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,linarith,true,true,propext Classical.choice Quot.sound
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,norm_num,true,false,propext
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,omega,true,false,propext Quot.sound
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,positivity,true,true,propext Classical.choice Quot.sound
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,rfl,false,false,sorryAx
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,simp,true,false,propext
+ne_nat,2,(1 : Nat) ≠ 0,equality/divisibility,trivial,true,false,(none)
