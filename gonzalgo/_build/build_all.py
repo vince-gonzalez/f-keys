@@ -29,6 +29,7 @@ import mk_spend_points  # noqa: E402
 import mk_substitution  # noqa: E402
 import mk_entry_points  # noqa: E402
 import mk_tactic_bands  # noqa: E402
+import mk_cleanable  # noqa: E402
 import buildnote  # noqa: E402
 
 HUB = SITE / "gonzalgo" / "data"
@@ -42,7 +43,8 @@ def build_indexes() -> list[dict]:
              indexlib.build(mk_spend_points.idx),
              indexlib.build(mk_substitution.idx),
              indexlib.build(mk_entry_points.idx),
-             indexlib.build(mk_tactic_bands.idx)]
+             indexlib.build(mk_tactic_bands.idx),
+             indexlib.build(mk_cleanable.idx)]
 
     # generated-proofs keeps its own hand-written page; only its data comes
     # through indexlib, so build it the way that page expects and take the

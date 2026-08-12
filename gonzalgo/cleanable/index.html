@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/cleanable/">
+<title>The Cleanable Table — 275 kernel-verified removals of classical dependence in Lean</title>
+<meta name="description" content="Every declaration in Lean core, Std, Batteries and Mathlib where a classical dependence was rewritten away and the kernel accepted the result: 275 removed, 4 rejected, 1 still classical, across 60 modules. 223 of them are in Lean core.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/cleanable/">
+<meta property="og:title" content="The Cleanable Table">
+<meta property="og:description" content="the declarations whose dependence on choice actually came out">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Cleanable Table",
+  "description": "Declarations in Lean 4 core, Std, Batteries, Mathlib and Plausible where a rewrite removing a classical dependence was attempted, with the module, the compiler-generated proof term carrying the dependence, the outcome, and the kernel's reason where it refused.",
+  "url": "https://f-keys.com/gonzalgo/cleanable/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Lean 4",
+    "Mathlib",
+    "Batteries",
+    "Lean core",
+    "axiom of choice",
+    "Classical.propDecidable",
+    "Decidable",
+    "kernel",
+    "constructive mathematics",
+    "formal verification"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/cleanable/cleanable.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/cleanable/cleanable.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE CLEANABLE TABLE</h1>
+<p class="kicker">the declarations whose dependence on choice actually came out</p>
+
+<p>275 declarations across 60 modules were rewritten to remove a dependence on the axiom of choice, and the Lean kernel accepted every one. Four were refused and one kept its dependence. This is the list.</p>
+<p>The unit is a compiler-generated <code>_proof_N</code> term rather than a lemma anyone wrote, and that is the finding rather than a caveat. The removable dependence in these libraries sits in terms the elaborator emitted, so it comes out by changing the tactic that emits them and not by editing a proof.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; every rewrite checked by the Lean kernel, not the elaborator</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>library</th><th>module</th><th>declaration</th><th style="text-align:right">occurrences</th><th>outcome</th></tr></thead>
+<tbody>
+<tr><td>Batteries</td><td class='found'>Batteries.Data.Char.AsciiCasing</td><td>Char.toLower_eq_of_not_isUpper</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Batteries</td><td class='found'>Batteries.Data.String.Lemmas</td><td>String.Legacy.Iterator.hasNext_cons_addChar</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Batteries</td><td class='found'>Batteries.Data.String.Lemmas</td><td>String.splitAux_of_valid</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Array.Extract</td><td>Array.extract_eq_self_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Array.Lemmas</td><td>Array.back?_eq_none_iff</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.carry_succ</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.carry_succ</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.intMin_udiv_ne_zero_of_ne_zero</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.saddOverflow_eq</td><td class='num'>10</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.sdivOverflow_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.sdivOverflow_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.sdivOverflow_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.ssubOverflow_eq</td><td class='num'>14</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.ult_eq_not_carry</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Bitblast</td><td>BitVec.umulOverflow_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.clzAuxRec_eq_iff_of_getLsbD_false</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.clzAuxRec_eq_iff_of_getLsbD_false</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.clzAuxRec_eq_zero_iff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.clzAuxRec_eq_zero_iff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_false_of_clzAuxRec</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_false_of_clzAuxRec</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_intMax</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_intMin</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_shiftConcat_eq_decide</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_shiftConcat_eq_decide</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_true_of_eq_clzAuxRec_of_ne_zero</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getLsbD_true_of_eq_clzAuxRec_of_ne_zero</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getMsbD_extractLsb</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getMsbD_extractLsb</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getMsbD_extractLsb'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getMsbD_extractLsb'</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.getMsbD_twoPow</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.le_add_iff_sub_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.le_toInt_shiftRight</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.msb_one</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.msb_setWidth</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.sdivOverflow_eq_negOverflow_of_eq_allOnes</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.setWidth_setWidth</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.sle_eq_not_slt</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.sle_eq_slt_or_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.sub_le_sub_iff_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toInt_mul_toInt_lt_neg_two_pow_iff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toInt_mul_toInt_lt_neg_two_pow_iff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toInt_neg_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toInt_pos_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toInt_shiftRight_lt</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toInt_sub_toInt_lt_twoPow_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toInt_sub_toInt_lt_twoPow_iff</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.toNat_signExtend_of_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.twoPow_le_toInt_sub_toInt_iff</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.two_pow_le_toInt_mul_toInt_iff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.two_pow_le_toInt_mul_toInt_iff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.two_pow_le_toInt_mul_toInt_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.uaddOverflow_assoc</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.BitVec.Lemmas</td><td>BitVec.ult_eq_msb_of_msb_neq</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.ByteArray.Lemmas</td><td>ByteArray.extract_eq_empty_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Fin.Lemmas</td><td>Fin.coe_sub_iff_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Fin.Lemmas</td><td>Fin.coe_sub_iff_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Fin.Lemmas</td><td>Fin.coe_sub_iff_lt</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Fin.Lemmas</td><td>Fin.coe_sub_iff_lt</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Fin.Lemmas</td><td>Nat.mod_eq_sub_of_lt_two_mul</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.Cooper</td><td>Int.cooper_resolution_dvd_right</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.add_one_tdiv</td><td class='num'>8</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.add_one_tdiv_of_pos</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.bmod_neg_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.bmod_neg_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.ediv_le_iff_le_mul</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.fdiv_fmod_unique'</td><td class='num'>8</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.le_mul_iff_le_left</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.mul_fdiv_self_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.natAbs_ediv</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.natCast_eq_zero</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.tdiv_tmod_unique</td><td class='num'>8</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.tdiv_tmod_unique</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.DivMod.Lemmas</td><td>Int.tdiv_tmod_unique'</td><td class='num'>9</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.Gcd</td><td>Int.eq_zero_of_lcm_eq_zero</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.eq_natCast_toNat</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.lt_toNat</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.mul_le_mul_of_natAbs_le</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.natCast_le_zero</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.natCast_ne_zero</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.natCast_ne_zero_iff_pos</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.natCast_nonpos_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.natCast_toNat_eq_self</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.neg_lt_self_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.neg_nonpos_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.pos_iff_toNat_pos</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.toNat_eq_zero</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.toNat_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.toNat_lt'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.LemmasAux</td><td>Int.toNat_lt_toNat</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Int.Pow</td><td>Int.pow_lt_pow_of_lt</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.count_range_1'</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.erase_range'</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.erase_range'</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.erase_range'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.find?_range'_eq_some</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.find?_range'_eq_some</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.range'_eq_singleton_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.sum_range'</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Range</td><td>List.sum_range'</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.List.Nat.Sum</td><td>List.sum_pos_iff_exists_pos_nat</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Bitwise.Lemmas</td><td>Nat.testBit_log2</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Bitwise.Lemmas</td><td>Nat.testBit_log2</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Bitwise.Lemmas</td><td>Nat.testBit_two_pow_sub_succ</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Div.Lemmas</td><td>Nat.div_le_iff_le_mul</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Div.Lemmas</td><td>Nat.le_mul_iff_le_left</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_left</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_max_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_min_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_one_iff</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_right</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_three_iff</td><td class='num'>10</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_two_iff</td><td class='num'>8</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_eq_zero</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_lt_iff_lt_sub_right</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.add_pos_iff_pos_or_pos</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.le_add_one_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.le_and_le_add_one_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.le_iff_lt_add_one</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.left_eq_add</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.lt_sub_iff_add_lt'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.max_eq_zero_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.min_eq_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.one_lt_iff_ne_zero_and_ne_one</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.pow_eq_zero</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.pow_lt_pow_iff_pow_mul_le_pow</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.right_eq_add</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.sub_lt_iff_lt_add</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.sub_lt_iff_lt_add'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Lemmas</td><td>Nat.sub_lt_sub_iff_right</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Mod</td><td>Nat.mul_lt_mul_left</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Power2.Lemmas</td><td>Nat.and_sub_one_testBit_log2</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.Power2.Lemmas</td><td>Nat.and_sub_one_testBit_log2</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Nat.ToString</td><td>Nat.toDigits_of_base_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Lemmas</td><td>Std.Legacy.Range.forIn'_loop_eq_forIn'_range'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Lemmas</td><td>Std.Legacy.Range.forM_loop_eq_forM_range'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Lemmas</td><td>Std.Legacy.Range.size_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Lemmas</td><td>Std.Legacy.Range.size_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Lemmas</td><td>Std.Legacy.Range.size_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.getElem!_toArray_roo_ne_zero_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.getElem!_toList_roc_ne_zero_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.getElem?_toList_rco</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toArray_rcc_eq_singleton_append_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toArray_rco_eq_singleton_iff</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toArray_roo_eq_singleton_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toList_rcc_eq_cons_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toList_rcc_eq_nil_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toList_rcc_eq_singleton_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toList_rcc_ne_nil_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toList_rco_eq_singleton_iff</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toList_roc_eq_singleton_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.toList_roo_eq_singleton_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.zero_lt_getElem!_toArray_roc_iff</td><td class='num'>8</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.IntLemmas</td><td>Int.zero_ne_getElem!_toList_roo_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Internal.SignedBitVec</td><td>BitVec.Signed.sle_iff_rotate_le_rotate</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Internal.SignedBitVec</td><td>BitVec.Signed.sle_iff_rotate_le_rotate</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat</td><td class='num'>11</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat_1</td><td class='num'>12</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat_2</td><td class='num'>8</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat_3</td><td class='num'>10</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat_4</td><td class='num'>11</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat_5</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat_6</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.Nat</td><td>Std.instLawfulRcoIntersectionNat_7</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.getElem!_toArray_roc_eq_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.getElem!_toArray_roo_eq_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.getElem!_toList_rco_eq_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.getElem!_toList_rco_eq_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.getElem!_toList_roc_eq_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.getElem!_toList_roo_eq_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toArray_rcc_eq_singleton_append_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toArray_rco_eq_singleton_iff</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_rcc_eq_cons_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_rcc_eq_nil_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_rcc_eq_singleton_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_rcc_ne_nil_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_rco_eq_singleton_iff</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_ric_eq_singleton_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_rio_eq_singleton_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_roc_eq_singleton_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.toList_roo_eq_singleton_iff</td><td class='num'>7</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.zero_lt_getElem!_toArray_roc_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.zero_lt_getElem!_toArray_roo_iff</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.zero_lt_getElem!_toList_rco_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.zero_lt_getElem!_toList_roc_iff</td><td class='num'>4</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.NatLemmas</td><td>Nat.zero_lt_getElem!_toList_roo_iff</td><td class='num'>3</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.Range.Polymorphic.SInt</td><td>HasModel.succMany?_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.SInt.Lemmas</td><td>ISize.le_iff_lt_or_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.SInt.Lemmas</td><td>Int16.le_iff_lt_or_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.SInt.Lemmas</td><td>Int32.le_iff_lt_or_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.SInt.Lemmas</td><td>Int64.le_iff_lt_or_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.SInt.Lemmas</td><td>Int8.le_iff_lt_or_eq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Basic</td><td>String.Pos.Raw.isValid_push</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Basic</td><td>String.Pos.sliceFrom_inj</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Basic</td><td>String.Pos.slice_inj</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Basic</td><td>String.Slice.Pos.sliceFrom_inj</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Basic</td><td>String.Slice.Pos.slice_inj</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Decode</td><td>ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Decode</td><td>ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Decode</td><td>ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Decode</td><td>ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Basic</td><td>String.Slice.slice_eq_self_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Pos.sliceFrom_le_sliceFrom_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Pos.sliceFrom_lt_sliceFrom_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Pos.slice_le_slice_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Pos.slice_lt_slice_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Slice.Pos.sliceFrom_le_sliceFrom_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Slice.Pos.sliceFrom_lt_sliceFrom_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Slice.Pos.slice_le_slice_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Order</td><td>String.Slice.Pos.slice_lt_slice_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Lemmas.Pattern.String.ForwardSearcher</td><td>String.Slice.Pattern.Model.ForwardSliceSearcher.prefixFunctionRecurrence_eq_prefixFunction</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.PosRaw</td><td>String.Pos.Raw.dec_lt_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.PosRaw</td><td>String.Pos.Raw.le_dec</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Termination</td><td>String.Slice.Pos.le_iff_remainingBytes_le</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Termination</td><td>String.Slice.Pos.lt_iff_remainingBytes_lt</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Data.String.Termination</td><td>String.Slice.Pos.remainingBytes_inj</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Grind.Ordered.Int</td><td>Lean.Grind.instLawfulOrderLTInt</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Grind.Ordered.Int</td><td>Lean.Grind.instOrderedAddInt</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Grind.Ring.Basic</td><td>Lean.Grind.IsCharP.mk'_aux</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Grind.ToInt</td><td>Lean.Grind.IntInterval.wrap_eq_self_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Grind.ToInt</td><td>Lean.Grind.IntInterval.wrap_eq_self_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.Grind.ToInt</td><td>Lean.Grind.IntInterval.wrap_eq_self_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.GrindInstances.Nat</td><td>Lean.Grind.instExistsAddOfLTNat</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.GrindInstances.Ring.Nat</td><td>Lean.Grind.instLawfulOrderLTNat</td><td class='num'>5</td><td>removed</td></tr>
+<tr><td>Init</td><td class='found'>Init.GrindInstances.Ring.Nat</td><td>Lean.Grind.instOrderedRingNat</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Lean</td><td class='found'>Lean.Meta.Sym.Simp.Have</td><td>Lean.Meta.Sym.Simp.toHave</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Lean</td><td class='found'>Lean.Util.Diff</td><td>Lean.Diff.diff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Lean</td><td class='found'>Lean.Util.Diff</td><td>Lean.Diff.diff</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.Algebra.Group.Fin.Basic</td><td>Fin.lt_sub_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.Algebra.SkewPolynomial.Basic</td><td>SkewPolynomial.coeff_erase</td><td class='num'>1</td><td>kernel rejected</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts</td><td>CategoryTheory.Limits.BinaryBicone.toBiconeFunctor</td><td class='num'>7</td><td>kernel rejected</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.Data.List.Infix</td><td>List.take_isPrefix_take</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.LinearAlgebra.RootSystem.Finite.G2</td><td>RootPairing.EmbeddedG2.isOrthogonal_short_and_long_aux</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.Logic.Equiv.Defs</td><td>Equiv.propEquivBool</td><td class='num'>1</td><td>kernel rejected</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.MeasureTheory.VectorMeasure.Basic</td><td>MeasureTheory.VectorMeasure.dirac</td><td class='num'>1</td><td>kernel rejected</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.Order.Interval.Finset.Box</td><td>Int.mem_box</td><td class='num'>12</td><td>still classical</td></tr>
+<tr><td>Mathlib</td><td class='found'>Mathlib.Tactic.DeriveFintype</td><td>Mathlib.Deriving.Fintype.mkFintypeInstanceHandler</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Plausible</td><td class='found'>Plausible.Gen</td><td>Plausible.Gen.chooseNatLt</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balanced</td><td>Std.DTreeMap.Internal.Impl.balancedAtRoot_one_one</td><td class='num'>1</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balanced</td><td>Std.DTreeMap.Internal.Impl.balancedAtRoot_one_two</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balanced</td><td>Std.DTreeMap.Internal.Impl.balancedAtRoot_two_one</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balanced</td><td>Std.DTreeMap.Internal.Impl.balancedAtRoot_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balanced</td><td>Std.DTreeMap.Internal.Impl.balancedAtRoot_zero_iff'</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.BalanceLPrecond.erase</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.BalancedAtRoot.adjust_left</td><td class='num'>10</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.BalancedAtRoot.erase_left</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balance!_desc</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balance!_eq_balanceₘ</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balance!_eq_balanceₘ</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanceLErasePrecond_zero_iff</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanceLErasePrecond_zero_iff'</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_doubleL</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_doubleL</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_doubleL</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_doubleR</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_doubleR</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_doubleR</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_singleL</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_singleL</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_singleR</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Balancing</td><td>Std.DTreeMap.Internal.Impl.balanced_singleR</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Model</td><td>Std.DTreeMap.Internal.Impl.updateCell</td><td class='num'>10</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Model</td><td>Std.DTreeMap.Internal.Impl.updateCell</td><td class='num'>10</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.erase</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.erase</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.insert</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.insert</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.insertMax</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.insertMin</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.link</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.link</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.link</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.link2</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Data.DTreeMap.Internal.Operations</td><td>Std.DTreeMap.Internal.Impl.link2</td><td class='num'>6</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Sat.AIG.Basic</td><td>Std.Sat.AIG.mkGate</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Sat.AIG.Cached</td><td>Std.Sat.AIG.mkGateCached</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Tactic.BVDecide.Bitblast.BVExpr.Basic</td><td>Std.Tactic.BVDecide.BVExpr.decEq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Tactic.BVDecide.Bitblast.BVExpr.Basic</td><td>Std.Tactic.BVDecide.BVExpr.decEq</td><td class='num'>2</td><td>removed</td></tr>
+<tr><td>Std</td><td class='found'>Std.Tactic.BVDecide.LRAT.Internal.Convert</td><td>Std.Tactic.BVDecide.LRAT.Internal.CNF.lift</td><td class='num'>2</td><td>removed</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="note"><em>occurrences</em> is how many uses of <code>Classical.propDecidable</code> the generated term carried. <em>outcome</em> is <code>removed</code> where the kernel accepted the rewritten term, <code>kernel rejected</code> where it refused, and <code>still classical</code> where the rewrite left the dependence in place. The full data carries the generated term's name and, for the four refusals, the kernel's message verbatim.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="cleanable.json">cleanable.json</a> &middot;
+<a href="cleanable.csv">cleanable.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>lake env lean -D maxErrors=4000 lean/Substitute.lean</pre>
+<p class="note"><code>ConstantInfo.value?</code> must be passed <code>allowOpaque := true</code> or theorem proof terms read as empty and every occurrence count comes back zero. Method: <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>.</p>
+
+<h2>Where it lives</h2>
+<p>The distribution is the useful part: Init 223, Std 41, Mathlib 9, Batteries 3, Lean 3, Plausible 1. Four fifths of the removable classical dependence in this measurement is in Lean core, and only nine declarations are in Mathlib.</p>
+<p>That matters for what anyone can do about it. Lean core's position on the tactic behaviour behind most of these is on record: avoiding choice is a deliberate non-goal there, stated in response to the <code>omega</code> report and without disputing any figure. So the largest share of what is removable sits where removal is not wanted, and the share sitting where it might be welcomed is small.</p>
+
+<h2>The four the kernel refused</h2>
+<p>Every refusal is a type mismatch rather than a timeout or a missing instance: the substituted term elaborated and then failed to check. Those are the interesting ones, because they are cases where a <code>Decidable</code> instance exists and is still not interchangeable with the classical one at the point it is used. The kernel's message is carried verbatim in the data for each.</p>
+
+<h2>What this is not</h2>
+<p>It is not a claim that 275 theorems were made constructive. Removing a use of <code>Classical.propDecidable</code> from a generated term removes one route to the axiom; whether the declaration still reaches choice by another route is a separate question this table does not answer. The <a href="/gonzalgo/dominator-table/">Dominator Table</a> is where routes are counted.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/cleanable/">f-keys.com/gonzalgo/cleanable/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>
