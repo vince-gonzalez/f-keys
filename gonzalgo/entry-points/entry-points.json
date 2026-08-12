@@ -1,0 +1,102 @@
+{
+  "name": "The Entry-Point Table",
+  "description": "Axioms used, direct entry points into them, and entry points per theorem, for five Metamath databases spanning five foundations. Entry points per theorem normalises for library size and is the measure that can be compared across databases; amplification is carried as reported but is a property of factorization rather than of mathematics.",
+  "version": "2026-08-12",
+  "sha256": "41f9ae6059bde6064bc4f944d1899f12291b0dc4eca63501891576469b0745af",
+  "url": "https://f-keys.com/gonzalgo/entry-points/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "producedBy": {
+    "software": "gonzalgo",
+    "url": "https://pypi.org/project/gonzalgo/",
+    "paper": "https://doi.org/10.5281/zenodo.21769846"
+  },
+  "measured": {
+    "Metamath": "set.mm, iset.mm, nf.mm, ql.mm, hol.mm"
+  },
+  "fields": [
+    "database",
+    "foundation",
+    "theorems",
+    "axioms_used",
+    "entry_points",
+    "entries_per_theorem",
+    "amplification_as_reported"
+  ],
+  "displayed": [
+    {
+      "key": "database",
+      "label": "database"
+    },
+    {
+      "key": "foundation",
+      "label": "foundation"
+    },
+    {
+      "key": "theorems",
+      "label": "theorems"
+    },
+    {
+      "key": "axioms_used",
+      "label": "axioms used"
+    },
+    {
+      "key": "entry_points",
+      "label": "entry points"
+    },
+    {
+      "key": "entries_per_theorem",
+      "label": "entries / theorem"
+    },
+    {
+      "key": "amplification_as_reported",
+      "label": "amplification"
+    }
+  ],
+  "rows": [
+    {
+      "database": "set.mm",
+      "foundation": "ZFC set theory, classical first-order logic",
+      "theorems": 47621,
+      "axioms_used": 1447,
+      "entry_points": 17898,
+      "entries_per_theorem": 0.3758,
+      "amplification_as_reported": 292.1
+    },
+    {
+      "database": "iset.mm",
+      "foundation": "Intuitionistic set theory",
+      "theorems": 16236,
+      "axioms_used": 480,
+      "entry_points": 6140,
+      "entries_per_theorem": 0.3782,
+      "amplification_as_reported": 220.5
+    },
+    {
+      "database": "nf.mm",
+      "foundation": "Quine's New Foundations",
+      "theorems": 5976,
+      "axioms_used": 195,
+      "entry_points": 2545,
+      "entries_per_theorem": 0.4259,
+      "amplification_as_reported": 93.5
+    },
+    {
+      "database": "hol.mm",
+      "foundation": "Higher-order logic",
+      "theorems": 151,
+      "axioms_used": 43,
+      "entry_points": 175,
+      "entries_per_theorem": 1.1589,
+      "amplification_as_reported": 16.7
+    },
+    {
+      "database": "ql.mm",
+      "foundation": "Quantum logic",
+      "theorems": 1140,
+      "axioms_used": 43,
+      "entry_points": 2759,
+      "entries_per_theorem": 2.4202,
+      "amplification_as_reported": 6.3
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/substitution-ledger/">
+<title>The Substitution Ledger — kernel-verified removal of classical dependence in Mathlib</title>
+<meta name="description" content="Substitution attempted on the 20 largest sites of classical dependence in Mathlib: 114 occurrences of Classical.propDecidable, 21 reachable by the harness, 8 replaced by a constructive instance the kernel accepted, in 3 declarations.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/substitution-ledger/">
+<meta property="og:title" content="The Substitution Ledger">
+<meta property="og:description" content="what actually came out, checked by the kernel">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Substitution Ledger",
+  "description": "Kernel-verified substitution attempted against the 20 largest sites of classical dependence in Mathlib. For each declaration: occurrences of Classical.propDecidable in its proof term, how many the harness could reach, how many had a Decidable instance synthesised, and how many produced a term the kernel accepted.",
+  "url": "https://f-keys.com/gonzalgo/substitution-ledger/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "formal verification",
+    "Lean 4",
+    "Mathlib",
+    "axiom of choice",
+    "Classical.propDecidable",
+    "Decidable",
+    "constructive mathematics",
+    "kernel",
+    "proof assistant",
+    "provenance"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21883963",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE SUBSTITUTION LEDGER</h1>
+<p class="kicker">what actually came out, checked by the kernel</p>
+
+<p>Every other measure in this program ranks or bounds. This one removes. A site is only shown to be repairable when a substituted proof term is accepted by Lean's kernel, which is the same standard the library itself is held to and the only measure here that has ever discriminated.</p>
+<p>Run against the top of the dominance ranking it returns 8 of 114 occurrences, in 3 declarations. That is the result: at the very top of the ranking, substitution almost entirely fails.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; substituted terms accepted by the Lean kernel, not by the elaborator</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>declaration</th><th style="text-align:right">dominates</th><th style="text-align:right">occurrences</th><th style="text-align:right">testable</th><th style="text-align:right">synthesised</th><th style="text-align:right">choice-free</th></tr></thead>
+<tbody>
+<tr><td>Std.DHashMap.Internal.Raw₀.isHashSelf_updateBucket_alter</td><td class='num'>4,899</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>lt_or_eq_of_le</td><td class='num'>2,018</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Classical.not_not</td><td class='num'>792</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_two_pow_sub_succ._proof_1_3</td><td class='num'>520</td><td class='num'>2</td><td class='num'>2</td><td class='num'>2</td><td class='num'><strong>2</strong></td></tr>
+<tr><td>Classical.not_forall</td><td class='num'>497</td><td class='num'>2</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>_private.Init.Data.Nat.Mod.0.Nat.mul_lt_mul_left._proof_1_1</td><td class='num'>440</td><td class='num'>4</td><td class='num'>4</td><td class='num'>4</td><td class='num'><strong>4</strong></td></tr>
+<tr><td>WellFounded.extrinsicFix</td><td class='num'>398</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Multiset.add_right_inj</td><td class='num'>363</td><td class='num'>44</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>List.perm_insert_swap</td><td class='num'>237</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Std.instMinEqOrOfLawfulOrderLeftLeaningMin</td><td class='num'>237</td><td class='num'>45</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>_private.Init.Data.Int.DivMod.Lemmas.0.Int.natCast_eq_zero._proof_1_1</td><td class='num'>236</td><td class='num'>2</td><td class='num'>2</td><td class='num'>2</td><td class='num'><strong>2</strong></td></tr>
+<tr><td>Classical.or_iff_not_imp_left</td><td class='num'>230</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>and_forall_ne</td><td class='num'>215</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Classical.or_iff_not_imp_right</td><td class='num'>&mdash;</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>DerivingHelpers.deriving_lawful_beq_helper_nd</td><td class='num'>&mdash;</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>HomologicalComplex.Hom.comm</td><td class='num'>&mdash;</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>by_contradiction</td><td class='num'>&mdash;</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>not_and_or</td><td class='num'>&mdash;</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>not_iff_not</td><td class='num'>&mdash;</td><td class='num'>2</td><td class='num'>2</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>not_imp_not</td><td class='num'>&mdash;</td><td class='num'>1</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="note">The four counts narrow in sequence. <em>occurrences</em> is uses of <code>Classical.propDecidable</code> in the proof term; <em>testable</em> is how many the harness could reach; <em>synthesised</em> is how many had a <code>Decidable</code> instance found; <em>choice-free</em> is how many produced a term the kernel accepted. Only the last column means a removal happened.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="substitution-ledger.json">substitution-ledger.json</a> &middot;
+<a href="substitution-ledger.csv">substitution-ledger.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>lake env lean -D maxErrors=4000 lean/Subst2.lean</pre>
+<p class="note"><code>ConstantInfo.value?</code> must be passed <code>allowOpaque := true</code> or theorem proof terms read as empty and every occurrence count here comes back zero. Code and derived data: <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a>.</p>
+
+<h2>The bottleneck is not synthesis</h2>
+<p>Of 114 occurrences only 21 were testable at all. The rest occur under binders, where the proposition is not closed and cannot be handed to instance synthesis from outside its declaration. That is a limit of this harness rather than a fact about the proofs, so the 8 here is a floor. Re-running inside each declaration's own context is the obvious next move and has not been done.</p>
+<p>Where an occurrence was testable, synthesis and the kernel agreed every time: 8 synthesised, 8 accepted, no term that elaborated and then failed to check.</p>
+
+<h2>What came out, and what it says</h2>
+<p>All three successes are private lemmas about <code>Nat</code> and <code>Int</code> — bit arithmetic, modular arithmetic, a cast — where the propositions are decidable by computation and a constructive instance already exists. That is the same population the controlled experiment identifies: on Nat and Int the free instance is there and the classical one was taken anyway.</p>
+<p>Nothing at the head of the ranking moved. <code>Classical.propDecidable</code> dominates 91,858 theorems, has a choice-free type, passes the eligibility test, and cannot be made constructive. <code>lt_or_eq_of_le</code> dominates 2,018 and its one occurrence was not testable. The ranking is good at finding what is load-bearing and it does not follow that what is load-bearing can be moved.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/substitution-ledger/">f-keys.com/gonzalgo/substitution-ledger/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

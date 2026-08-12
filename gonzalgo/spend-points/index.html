@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/spend-points/">
+<title>The Spend-Point Table — where Mathlib actually spends the axiom of choice</title>
+<meta name="description" content="The 20 largest sites of classical dependence in Mathlib, showing which contain a direct use of a choice primitive and which only inherit one. 15 of the 20 spend nothing: they dominate 25,992 theorems between them with every primitive use sitting above them in the graph.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/spend-points/">
+<meta property="og:title" content="The Spend-Point Table">
+<meta property="og:description" content="where choice is spent, and where it is only inherited">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Spend-Point Table",
+  "description": "The 20 largest sites of classical dependence in Mathlib, each with the number of declarations in its dominator subtree that cite a choice primitive directly. Separates sites where the axiom is spent from sites that dominate theorems while inheriting the axiom from further up.",
+  "url": "https://f-keys.com/gonzalgo/spend-points/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "formal verification",
+    "Lean 4",
+    "Mathlib",
+    "axiom of choice",
+    "dominator tree",
+    "Classical.propDecidable",
+    "excluded middle",
+    "proof assistant",
+    "provenance"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21883963",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/spend-points/spend-points.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/spend-points/spend-points.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE SPEND-POINT TABLE</h1>
+<p class="kicker">where choice is spent, and where it is only inherited</p>
+
+<p>Dominance says which site a theorem's classical dependence is responsible to. It does not say where the axiom is actually spent, and the two come apart hard.</p>
+<p>15 of these 20 sites contain no direct use of a choice primitive anywhere in their subtree. Between them they dominate 25,992 theorems while spending nothing — every primitive use is above them in the graph. Rebuilding such a site does not remove a use of choice; it removes a route to one.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; dominator subtrees over 766,564 constants, primitives counted where cited directly</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th style="text-align:right">#</th><th>site</th><th style="text-align:right">theorems dominated</th><th style="text-align:right">subtree</th><th style="text-align:right">spenders</th><th>primitives cited</th></tr></thead>
+<tbody>
+<tr><td class='num'>1</td><td>Classical.propDecidable</td><td class='num'>91,858</td><td class='num'>112,158</td><td class='num'>6,775</td><td class='found'>Classical.byContradiction x5338, Classical.propDecidable x1540</td></tr>
+<tr><td class='num'>2</td><td>Classical.byContradiction</td><td class='num'>23,550</td><td class='num'>30,169</td><td class='num'>1,854</td><td class='found'>Classical.byContradiction x1854</td></tr>
+<tr><td class='num'>3</td><td>CategoryTheory.Functor.category</td><td class='num'>5,271</td><td class='num'>7,558</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>4</td><td>Std.DHashMap.Internal.Raw.WF.out</td><td class='num'>4,899</td><td class='num'>5,000</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>5</td><td>Classical.indefiniteDescription</td><td class='num'>4,711</td><td class='num'>5,452</td><td class='num'>44</td><td class='found'>Classical.em x30, Classical.indefiniteDescription x14</td></tr>
+<tr><td class='num'>6</td><td>Set.instCompleteAtomicBooleanAlgebra</td><td class='num'>3,430</td><td class='num'>4,047</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>7</td><td>lt_or_eq_of_le</td><td class='num'>2,018</td><td class='num'>2,151</td><td class='num'>1</td><td class='found'>Classical.propDecidable x1</td></tr>
+<tr><td class='num'>8</td><td>Set.image_univ</td><td class='num'>1,484</td><td class='num'>1,838</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>9</td><td>GroupWithZero.toDivisionMonoid</td><td class='num'>1,290</td><td class='num'>1,558</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>10</td><td>eq_or_lt_of_le</td><td class='num'>1,221</td><td class='num'>1,314</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>11</td><td>LE.le.eq_or_lt</td><td class='num'>1,179</td><td class='num'>1,271</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>12</td><td>CategoryTheory.Functor.comp</td><td class='num'>1,112</td><td class='num'>1,515</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>13</td><td>String.toList</td><td class='num'>1,111</td><td class='num'>4,557</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>14</td><td>AddAction.orbitRel</td><td class='num'>1,044</td><td class='num'>1,311</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>15</td><td>QuotientAddGroup.leftRel</td><td class='num'>1,009</td><td class='num'>1,271</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>16</td><td>map_sub</td><td class='num'>856</td><td class='num'>999</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>17</td><td>Classical.not_not</td><td class='num'>792</td><td class='num'>799</td><td class='num'>1</td><td class='found'>Classical.propDecidable x1</td></tr>
+<tr><td class='num'>18</td><td>GeneralizedBooleanAlgebra.toGeneralizedCoheytingAlgebra</td><td class='num'>722</td><td class='num'>828</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>19</td><td>String.compare</td><td class='num'>702</td><td class='num'>3,427</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+<tr><td class='num'>20</td><td>Filter.comap</td><td class='num'>662</td><td class='num'>784</td><td class='num'>0</td><td class='found'>(none — inherits)</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="note"><em>subtree</em> is the constants under the site in the dominator tree. <em>spenders</em> is how many of them cite a choice primitive (<code>Classical.propDecidable</code>, <code>byContradiction</code>, <code>indefiniteDescription</code>, <code>em</code>) directly rather than through another constant. Zero means the site inherits the axiom entirely.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="spend-points.json">spend-points.json</a> &middot;
+<a href="spend-points.csv">spend-points.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>lake env lean -D maxErrors=4000 lean/Dump.lean
+python analysis/spendpoints.py</pre>
+<p class="note">Code and derived data: <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a>.</p>
+
+<h2>The two that carry almost everything</h2>
+<p><code>Classical.propDecidable</code> has 6,775 spenders in its subtree and <code>Classical.byContradiction</code> 1,854. Between them they account for nearly all direct spending in the library, and propDecidable's own subtree spends byContradiction 5,338 times against its own 1,540 — the decidability fallback reaches the axiom mostly through excluded middle rather than directly.</p>
+<p>Everything below them in this table is structural. A functor category instance dominates 5,271 theorems and spends nothing. Hash-map well-formedness dominates 4,899 and spends nothing. These are places classical dependence passes through, not places it originates.</p>
+
+<h2>Why the distinction changes what you would do</h2>
+<p>A repair aimed at a spend point removes a use of the axiom. A repair aimed at a pure dominator reroutes a large number of theorems without removing anything, and only helps if the route it removes was the only one. Both are visible as large numbers in a dominance ranking and they are not the same kind of target.</p>
+<p><code>String.toList</code> is the sharpest case here: 1,111 theorems dominated, a subtree of 4,557 constants, and no spender in any of them.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/spend-points/">f-keys.com/gonzalgo/spend-points/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

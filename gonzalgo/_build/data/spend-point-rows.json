@@ -1,0 +1,202 @@
+[
+  {
+    "rank": 1,
+    "site": "Classical.propDecidable",
+    "theorems_dominated": 91858,
+    "subtree_constants": 112158,
+    "spenders": 6775,
+    "spends_directly": true,
+    "primitives": "Classical.byContradiction x5338, Classical.propDecidable x1540",
+    "example_dependents": "Std.DHashMap.Internal.Raw₀.isHashSelf_updateBucket_alter ; lt_or_eq_of_le ; _private.Mathlib.Data.Set.Image.0.Set.image_univ._proof_1_1"
+  },
+  {
+    "rank": 2,
+    "site": "Classical.byContradiction",
+    "theorems_dominated": 23550,
+    "subtree_constants": 30169,
+    "spenders": 1854,
+    "spends_directly": true,
+    "primitives": "Classical.byContradiction x1854",
+    "example_dependents": "_private.Mathlib.Algebra.Group.Hom.Defs.0.map_sub'._proof_1_2 ; Array.getElem_extract_loop_ge ; _private.Mathlib.CategoryTheory.Iso.0.CategoryTheory.Iso.refl._proof_1"
+  },
+  {
+    "rank": 3,
+    "site": "CategoryTheory.Functor.category",
+    "theorems_dominated": 5271,
+    "subtree_constants": 7558,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 4,
+    "site": "Std.DHashMap.Internal.Raw.WF.out",
+    "theorems_dominated": 4899,
+    "subtree_constants": 5000,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 5,
+    "site": "Classical.indefiniteDescription",
+    "theorems_dominated": 4711,
+    "subtree_constants": 5452,
+    "spenders": 44,
+    "spends_directly": true,
+    "primitives": "Classical.em x30, Classical.indefiniteDescription x14",
+    "example_dependents": "em ; Classical.choose ; Std.Trichotomous.rel_or_eq_or_rel_swap"
+  },
+  {
+    "rank": 6,
+    "site": "Set.instCompleteAtomicBooleanAlgebra",
+    "theorems_dominated": 3430,
+    "subtree_constants": 4047,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 7,
+    "site": "lt_or_eq_of_le",
+    "theorems_dominated": 2018,
+    "subtree_constants": 2151,
+    "spenders": 1,
+    "spends_directly": true,
+    "primitives": "Classical.propDecidable x1",
+    "example_dependents": "lt_or_eq_of_le"
+  },
+  {
+    "rank": 8,
+    "site": "Set.image_univ",
+    "theorems_dominated": 1484,
+    "subtree_constants": 1838,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 9,
+    "site": "GroupWithZero.toDivisionMonoid",
+    "theorems_dominated": 1290,
+    "subtree_constants": 1558,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 10,
+    "site": "eq_or_lt_of_le",
+    "theorems_dominated": 1221,
+    "subtree_constants": 1314,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 11,
+    "site": "LE.le.eq_or_lt",
+    "theorems_dominated": 1179,
+    "subtree_constants": 1271,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 12,
+    "site": "CategoryTheory.Functor.comp",
+    "theorems_dominated": 1112,
+    "subtree_constants": 1515,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 13,
+    "site": "String.toList",
+    "theorems_dominated": 1111,
+    "subtree_constants": 4557,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 14,
+    "site": "AddAction.orbitRel",
+    "theorems_dominated": 1044,
+    "subtree_constants": 1311,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 15,
+    "site": "QuotientAddGroup.leftRel",
+    "theorems_dominated": 1009,
+    "subtree_constants": 1271,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 16,
+    "site": "map_sub",
+    "theorems_dominated": 856,
+    "subtree_constants": 999,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 17,
+    "site": "Classical.not_not",
+    "theorems_dominated": 792,
+    "subtree_constants": 799,
+    "spenders": 1,
+    "spends_directly": true,
+    "primitives": "Classical.propDecidable x1",
+    "example_dependents": "Classical.not_not"
+  },
+  {
+    "rank": 18,
+    "site": "GeneralizedBooleanAlgebra.toGeneralizedCoheytingAlgebra",
+    "theorems_dominated": 722,
+    "subtree_constants": 828,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 19,
+    "site": "String.compare",
+    "theorems_dominated": 702,
+    "subtree_constants": 3427,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  },
+  {
+    "rank": 20,
+    "site": "Filter.comap",
+    "theorems_dominated": 662,
+    "subtree_constants": 784,
+    "spenders": 0,
+    "spends_directly": false,
+    "primitives": "(none — inherits)",
+    "example_dependents": ""
+  }
+]

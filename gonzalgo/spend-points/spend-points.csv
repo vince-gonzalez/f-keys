@@ -1,0 +1,21 @@
+rank,site,theorems_dominated,subtree_constants,spenders,spends_directly,primitives,example_dependents
+1,Classical.propDecidable,91858,112158,6775,true,"Classical.byContradiction x5338, Classical.propDecidable x1540",Std.DHashMap.Internal.Raw₀.isHashSelf_updateBucket_alter ; lt_or_eq_of_le ; _private.Mathlib.Data.Set.Image.0.Set.image_univ._proof_1_1
+2,Classical.byContradiction,23550,30169,1854,true,Classical.byContradiction x1854,_private.Mathlib.Algebra.Group.Hom.Defs.0.map_sub'._proof_1_2 ; Array.getElem_extract_loop_ge ; _private.Mathlib.CategoryTheory.Iso.0.CategoryTheory.Iso.refl._proof_1
+3,CategoryTheory.Functor.category,5271,7558,0,false,(none — inherits),
+4,Std.DHashMap.Internal.Raw.WF.out,4899,5000,0,false,(none — inherits),
+5,Classical.indefiniteDescription,4711,5452,44,true,"Classical.em x30, Classical.indefiniteDescription x14",em ; Classical.choose ; Std.Trichotomous.rel_or_eq_or_rel_swap
+6,Set.instCompleteAtomicBooleanAlgebra,3430,4047,0,false,(none — inherits),
+7,lt_or_eq_of_le,2018,2151,1,true,Classical.propDecidable x1,lt_or_eq_of_le
+8,Set.image_univ,1484,1838,0,false,(none — inherits),
+9,GroupWithZero.toDivisionMonoid,1290,1558,0,false,(none — inherits),
+10,eq_or_lt_of_le,1221,1314,0,false,(none — inherits),
+11,LE.le.eq_or_lt,1179,1271,0,false,(none — inherits),
+12,CategoryTheory.Functor.comp,1112,1515,0,false,(none — inherits),
+13,String.toList,1111,4557,0,false,(none — inherits),
+14,AddAction.orbitRel,1044,1311,0,false,(none — inherits),
+15,QuotientAddGroup.leftRel,1009,1271,0,false,(none — inherits),
+16,map_sub,856,999,0,false,(none — inherits),
+17,Classical.not_not,792,799,1,true,Classical.propDecidable x1,Classical.not_not
+18,GeneralizedBooleanAlgebra.toGeneralizedCoheytingAlgebra,722,828,0,false,(none — inherits),
+19,String.compare,702,3427,0,false,(none — inherits),
+20,Filter.comap,662,784,0,false,(none — inherits),

@@ -25,6 +25,9 @@ from indexlib import BASE, CSS, LICENSE, ORCID, check_fonts  # noqa: E402
 import mk_kernel_index  # noqa: E402
 import mk_dominator_table  # noqa: E402
 import mk_controlled_tactics  # noqa: E402
+import mk_spend_points  # noqa: E402
+import mk_substitution  # noqa: E402
+import mk_entry_points  # noqa: E402
 import buildnote  # noqa: E402
 
 HUB = SITE / "gonzalgo" / "data"
@@ -34,7 +37,10 @@ def build_indexes() -> list[dict]:
     print("indexes:")
     metas = [indexlib.build(mk_kernel_index.idx),
              indexlib.build(mk_dominator_table.idx),
-             indexlib.build(mk_controlled_tactics.idx)]
+             indexlib.build(mk_controlled_tactics.idx),
+             indexlib.build(mk_spend_points.idx),
+             indexlib.build(mk_substitution.idx),
+             indexlib.build(mk_entry_points.idx)]
 
     # generated-proofs keeps its own hand-written page; only its data comes
     # through indexlib, so build it the way that page expects and take the

@@ -14,6 +14,11 @@
     "sha256": "415eb3f9bd2923d2a336dfa059fffb66bc5bc1b73f2e3cff23598f31bc44baa4",
     "version": "2026-08-12"
   },
+  "entry-points": {
+    "history": [],
+    "sha256": "41f9ae6059bde6064bc4f944d1899f12291b0dc4eca63501891576469b0745af",
+    "version": "2026-08-12"
+  },
   "generated-proofs": {
     "history": [],
     "sha256": "906a39491ab2be7a06c7370cd525e649b9644351c8387abf883bd8cd5ee01987",
@@ -23,5 +28,15 @@
     "history": [],
     "sha256": "9d0bf4f36a423930fe01144235192fb4cb384487499ddda7c47c9a265e977dbb",
     "version": "2026-08-05"
+  },
+  "spend-points": {
+    "history": [],
+    "sha256": "8c7668803b226410c020aa64f0e95762a9b89b4f81b9b92574f6a1dd4028c880",
+    "version": "2026-08-12"
+  },
+  "substitution-ledger": {
+    "history": [],
+    "sha256": "8992a894d1cf1eada111bf8cb08f3e956759ae6ad77925701f17ce18938124e6",
+    "version": "2026-08-12"
   }
 }
