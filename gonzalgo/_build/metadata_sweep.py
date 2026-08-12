@@ -234,16 +234,36 @@ def main() -> None:
             if live["metadata"].get("title") != entry["title_full"]:
                 print(f"  {rid}: changed since the plan was written, skipping")
                 skipped += 1; continue
+            # A published deposition is locked. It has to be unlocked with the
+            # edit action before a PUT is accepted, and published again after.
+            # Going straight to the PUT fails and changes nothing.
+            ec, er = http("POST",
+                          f"{API}/deposit/depositions/{rid}/actions/edit", token)
+            if ec not in (200, 201, 400):        # 400 == already in edit mode
+                print(f"  {rid}: cannot unlock ({ec}) "
+                      f"{str(er.get('error',''))[:90]}")
+                skipped += 1
+                continue
+
             merged = dict(live["metadata"]); merged.update(entry["patch"])
-            c, _ = http("PUT", f"{API}/deposit/depositions/{rid}", token,
+            c, r = http("PUT", f"{API}/deposit/depositions/{rid}", token,
                         {"metadata": merged})
-            if c in (200, 201):
-                http("POST", f"{API}/deposit/depositions/{rid}/actions/publish",
-                     token)
-                print(f"  {rid}: {', '.join(entry['patch'])}")
-                done += 1
-            else:
-                print(f"  {rid}: PUT failed {c}"); skipped += 1
+            if c not in (200, 201):
+                print(f"  {rid}: PUT failed {c} {str(r.get('error',''))[:120]}")
+                skipped += 1
+                continue
+
+            pc, pr = http("POST",
+                          f"{API}/deposit/depositions/{rid}/actions/publish",
+                          token)
+            if pc not in (200, 201, 202):
+                # Left unlocked rather than silently half-applied.
+                print(f"  {rid}: edited but NOT republished ({pc}) "
+                      f"{str(pr.get('error',''))[:90]}")
+                skipped += 1
+                continue
+            print(f"  {rid}: {', '.join(entry['patch'])}")
+            done += 1
             time.sleep(0.3)
         print(f"\n  {done} updated, {skipped} skipped")
         return
