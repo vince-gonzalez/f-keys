@@ -1,0 +1,3005 @@
+label,role,dependents,share_of_library_pct
+ax-mp,axiom,47562,99.88
+wi,syntax constructor,47560,99.87
+ax-1,axiom,47449,99.64
+ax-2,axiom,47428,99.59
+wn,syntax constructor,47276,99.28
+ax-3,axiom,47221,99.16
+wb,syntax constructor,47039,98.78
+df-bi,definition,47036,98.77
+wa,syntax constructor,45864,96.31
+df-an,definition,45835,96.25
+wal,syntax constructor,44820,94.12
+ax-gen,axiom,44537,93.52
+ax-4,axiom,44501,93.45
+cv,syntax constructor,44410,93.26
+wex,syntax constructor,44361,93.15
+df-ex,definition,44315,93.06
+wceq,syntax constructor,44262,92.95
+ax-5,axiom,44067,92.54
+ax-6,axiom,43859,92.1
+ax-7,axiom,43787,91.95
+wcel,syntax constructor,43165,90.64
+ax-9,axiom,42398,89.03
+ax-ext,axiom,42325,88.88
+df-cleq,definition,42311,88.85
+wsb,syntax constructor,42204,88.62
+df-sb,definition,42191,88.6
+ax-8,axiom,42120,88.45
+df-clel,definition,42045,88.29
+wtru,syntax constructor,42000,88.2
+df-tru,definition,41970,88.13
+cab,syntax constructor,41847,87.88
+df-clab,definition,41839,87.86
+wo,syntax constructor,41216,86.55
+df-or,definition,41207,86.53
+cvv,syntax constructor,40979,86.05
+df-v,definition,40704,85.47
+wss,syntax constructor,40114,84.24
+df-ss,definition,40047,84.1
+w3a,syntax constructor,39676,83.32
+df-3an,definition,39652,83.27
+csn,syntax constructor,39283,82.49
+cdif,syntax constructor,39245,82.41
+df-dif,definition,39225,82.37
+wfal,syntax constructor,39200,82.32
+cun,syntax constructor,39172,82.26
+df-un,definition,39166,82.25
+df-fal,definition,39163,82.24
+c0,syntax constructor,39151,82.21
+crab,syntax constructor,39150,82.21
+df-rab,definition,39149,82.21
+df-sn,definition,39139,82.19
+df-nul,definition,39024,81.95
+cpr,syntax constructor,38865,81.61
+df-pr,definition,38827,81.53
+cop,syntax constructor,38687,81.24
+wral,syntax constructor,38541,80.93
+df-ral,definition,38458,80.76
+cif,syntax constructor,38421,80.68
+df-if,definition,38415,80.67
+df-op,definition,38324,80.48
+wbr,syntax constructor,38288,80.4
+df-br,definition,38043,79.89
+cin,syntax constructor,37840,79.46
+df-in,definition,37813,79.4
+wrex,syntax constructor,37798,79.37
+df-rex,definition,37723,79.22
+copab,syntax constructor,37257,78.24
+df-opab,definition,37256,78.23
+ax-sep,axiom,37162,78.04
+ax-12,axiom,36916,77.52
+ax-pr,axiom,36828,77.34
+cuni,syntax constructor,36618,76.89
+df-uni,definition,36576,76.81
+wnf,syntax constructor,36560,76.77
+df-nf,definition,36558,76.77
+cxp,syntax constructor,36351,76.33
+ax-10,axiom,36165,75.94
+df-xp,definition,36115,75.84
+ax-11,axiom,35916,75.42
+cdm,syntax constructor,35830,75.24
+ccnv,syntax constructor,35765,75.1
+df-dm,definition,35660,74.88
+df-cnv,definition,35654,74.87
+wne,syntax constructor,35543,74.64
+wrel,syntax constructor,35451,74.44
+df-rel,definition,35439,74.42
+df-ne,definition,35399,74.33
+cfv,syntax constructor,35278,74.08
+cio,syntax constructor,35243,74.01
+df-iota,definition,35231,73.98
+wmo,syntax constructor,35091,73.69
+df-mo,definition,35065,73.63
+df-fv,definition,35023,73.55
+ccom,syntax constructor,34763,73.0
+df-co,definition,34689,72.84
+df-nfc,definition,34674,72.81
+wnfc,syntax constructor,34674,72.81
+weu,syntax constructor,34649,72.76
+df-eu,definition,34643,72.75
+cid,syntax constructor,34579,72.61
+wfun,syntax constructor,34345,72.12
+df-id,definition,34260,71.94
+df-fun,definition,34174,71.76
+ax-nul,axiom,34035,71.47
+crn,syntax constructor,34016,71.43
+df-rn,definition,33809,71.0
+cres,syntax constructor,33054,69.41
+df-res,definition,33015,69.33
+cmpt,syntax constructor,32675,68.61
+df-mpt,definition,32638,68.54
+cpw,syntax constructor,32596,68.45
+wsbc,syntax constructor,32592,68.44
+df-sbc,definition,32571,68.4
+df-pw,definition,32497,68.24
+wfn,syntax constructor,32453,68.15
+df-fn,definition,32236,67.69
+cima,syntax constructor,32010,67.22
+df-ima,definition,31954,67.1
+wf,syntax constructor,31737,66.64
+df-f,definition,31667,66.5
+ax-un,axiom,31580,66.32
+co,syntax constructor,31261,65.65
+df-ov,definition,30838,64.76
+csb,syntax constructor,30644,64.35
+df-csb,definition,30604,64.27
+wfo,syntax constructor,29969,62.93
+df-fo,definition,29918,62.83
+wf1,syntax constructor,29688,62.34
+df-f1,definition,29670,62.3
+wf1o,syntax constructor,29620,62.2
+ax-pow,axiom,29579,62.11
+df-f1o,definition,29545,62.04
+wreu,syntax constructor,28516,59.88
+df-reu,definition,28510,59.87
+ciun,syntax constructor,27768,58.31
+df-iun,definition,27756,58.29
+coprab,syntax constructor,27686,58.14
+df-oprab,definition,27683,58.13
+cmpo,syntax constructor,26875,56.44
+df-mpo,definition,26805,56.29
+w3o,syntax constructor,26790,56.26
+df-3or,definition,26604,55.87
+wpo,syntax constructor,25843,54.27
+df-po,definition,25832,54.24
+wor,syntax constructor,25796,54.17
+df-so,definition,25785,54.15
+c2nd,syntax constructor,25420,53.38
+df-2nd,definition,25128,52.77
+crio,syntax constructor,23960,50.31
+df-riota,definition,23947,50.29
+cep,syntax constructor,23656,49.68
+df-eprel,definition,23436,49.21
+wfr,syntax constructor,23409,49.16
+df-fr,definition,23393,49.12
+wtr,syntax constructor,23348,49.03
+con0,syntax constructor,23343,49.02
+df-tr,definition,23337,49.01
+cen,syntax constructor,23290,48.91
+wwe,syntax constructor,23285,48.9
+df-we,definition,23272,48.87
+csuc,syntax constructor,23267,48.86
+wpss,syntax constructor,23228,48.78
+df-en,definition,23226,48.77
+df-pss,definition,23225,48.77
+df-suc,definition,23216,48.75
+word,syntax constructor,23208,48.73
+df-ord,definition,23201,48.72
+df-on,definition,23137,48.59
+cc,syntax constructor,22731,47.73
+cdom,syntax constructor,22638,47.54
+df-dom,definition,22512,47.27
+df-er,definition,22464,47.17
+wer,syntax constructor,22464,47.17
+com,syntax constructor,22252,46.73
+cr,syntax constructor,22187,46.59
+wlim,syntax constructor,22183,46.58
+csdm,syntax constructor,22113,46.44
+df-sdom,definition,22107,46.42
+cc0,syntax constructor,22031,46.26
+df-lim,definition,22009,46.22
+c1,syntax constructor,21924,46.04
+caddc,syntax constructor,21873,45.93
+df-om,definition,21864,45.91
+wnel,syntax constructor,21863,45.91
+df-nel,definition,21856,45.9
+cpred,syntax constructor,21824,45.83
+df-pred,definition,21820,45.82
+ax-resscn,axiom,21805,45.79
+cpnf,syntax constructor,21782,45.74
+cfrecs,syntax constructor,21714,45.6
+df-frecs,definition,21714,45.6
+clt,syntax constructor,21657,45.48
+cmnf,syntax constructor,21653,45.47
+cwrecs,syntax constructor,21633,45.43
+df-wrecs,definition,21633,45.43
+crecs,syntax constructor,21619,45.4
+df-recs,definition,21618,45.4
+df-pnf,definition,21490,45.13
+df-mnf,definition,21466,45.08
+cltrr,syntax constructor,21434,45.01
+df-ltxr,definition,21426,44.99
+ax-1cn,axiom,21416,44.97
+cmul,syntax constructor,21409,44.96
+ax-pre-lttri,axiom,21364,44.86
+ax-pre-lttrn,axiom,21300,44.73
+ax-addcl,axiom,21269,44.66
+ci,syntax constructor,21093,44.29
+crdg,syntax constructor,20988,44.07
+df-rdg,definition,20976,44.05
+ax-mulcl,axiom,20947,43.99
+ax-addrcl,axiom,20941,43.97
+ax-cnre,axiom,20940,43.97
+ax-icn,axiom,20934,43.96
+ax-i2m1,axiom,20904,43.9
+ax-rnegex,axiom,20862,43.81
+ax-mulrcl,axiom,20782,43.64
+ax-1ne0,axiom,20771,43.62
+ax-rrecex,axiom,20769,43.61
+cle,syntax constructor,20729,43.53
+ax-addass,axiom,20713,43.5
+ax-mulass,axiom,20694,43.46
+ax-distr,axiom,20693,43.45
+ax-1rid,axiom,20685,43.44
+ax-pre-ltadd,axiom,20674,43.41
+ax-mulcom,axiom,20605,43.27
+cmin,syntax constructor,20582,43.22
+cxr,syntax constructor,20541,43.13
+df-xr,definition,20512,43.07
+df-le,definition,20201,42.42
+cneg,syntax constructor,20180,42.38
+df-neg,definition,20141,42.29
+df-sub,definition,20120,42.25
+c1st,syntax constructor,19870,41.73
+cn,syntax constructor,19732,41.44
+df-1st,definition,19685,41.34
+ax-cnex,axiom,19516,40.98
+ax-pre-mulgt0,axiom,19361,40.66
+ax-rep,axiom,19198,40.31
+df-nn,definition,19168,40.25
+df-rmo,definition,18685,39.24
+wrmo,syntax constructor,18685,39.24
+cz,syntax constructor,16993,35.68
+cn0,syntax constructor,16955,35.6
+df-z,definition,16820,35.32
+df-n0,definition,16795,35.27
+c2,syntax constructor,16255,34.13
+cuz,syntax constructor,16241,34.1
+df-2,definition,16045,33.69
+df-uz,definition,16038,33.68
+c1o,syntax constructor,14889,31.27
+df-1o,definition,14772,31.02
+cbs,syntax constructor,13829,29.04
+cfn,syntax constructor,13783,28.94
+df-fin,definition,13472,28.29
+cint,syntax constructor,13302,27.93
+df-int,definition,13274,27.87
+cfz,syntax constructor,13222,27.77
+df-fz,definition,12980,27.26
+c3,syntax constructor,12928,27.15
+df-3,definition,12855,26.99
+cmap,syntax constructor,12325,25.88
+df-map,definition,11785,24.75
+cdiv,syntax constructor,9922,20.84
+csup,syntax constructor,9746,20.47
+df-sup,definition,9740,20.45
+cseq,syntax constructor,9672,20.31
+df-seq,definition,9644,20.25
+df-div,definition,9442,19.83
+cnx,syntax constructor,9412,19.76
+cslot,syntax constructor,9335,19.6
+df-slot,definition,9335,19.6
+ccrd,syntax constructor,9324,19.58
+df-card,definition,9314,19.56
+cplusg,syntax constructor,9303,19.54
+df-ndx,definition,9299,19.53
+df-base,definition,9144,19.2
+chash,syntax constructor,8788,18.45
+c4,syntax constructor,8753,18.38
+df-4,definition,8738,18.35
+crp,syntax constructor,8568,17.99
+df-hash,definition,8527,17.91
+df-rp,definition,8388,17.61
+c0g,syntax constructor,8237,17.3
+ax-pre-sup,axiom,8236,17.29
+c5,syntax constructor,8211,17.24
+df-5,definition,8205,17.23
+cfzo,syntax constructor,8189,17.2
+df-plusg,definition,8163,17.14
+c6,syntax constructor,8139,17.09
+df-6,definition,8131,17.07
+ctp,syntax constructor,8125,17.06
+df-tp,definition,8082,16.97
+df-fzo,definition,8041,16.89
+csts,syntax constructor,7950,16.69
+df-sets,definition,7871,16.53
+cmnd,syntax constructor,7848,16.48
+cple,syntax constructor,7814,16.41
+cexp,syntax constructor,7800,16.38
+ccj,syntax constructor,7764,16.3
+cmgm,syntax constructor,7737,16.25
+cmulr,syntax constructor,7732,16.24
+csgrp,syntax constructor,7715,16.2
+df-0g,definition,7712,16.19
+df-mgm,definition,7692,16.15
+df-sgrp,definition,7679,16.13
+cabs,syntax constructor,7665,16.1
+df-mnd,definition,7644,16.05
+df-exp,definition,7617,16.0
+c2o,syntax constructor,7407,15.55
+df-2o,definition,7298,15.33
+c7,syntax constructor,7276,15.28
+df-7,definition,7238,15.2
+c8,syntax constructor,7230,15.18
+wse,syntax constructor,7202,15.12
+df-se,definition,7197,15.11
+df-8,definition,7190,15.1
+cre,syntax constructor,7140,14.99
+cim,syntax constructor,7100,14.91
+df-cj,definition,7091,14.89
+df-re,definition,7078,14.86
+df-im,definition,7067,14.84
+cress,syntax constructor,7009,14.72
+cstr,syntax constructor,6943,14.58
+df-struct,definition,6943,14.58
+csqrt,syntax constructor,6873,14.43
+c9,syntax constructor,6811,14.3
+df-9,definition,6800,14.28
+df-sqrt,definition,6785,14.25
+wiso,syntax constructor,6754,14.18
+df-isom,definition,6753,14.18
+cinf,syntax constructor,6715,14.1
+df-abs,definition,6712,14.09
+df-inf,definition,6712,14.09
+df-ress,definition,6704,14.08
+cminusg,syntax constructor,6684,14.04
+df-mulr,definition,6520,13.69
+csca,syntax constructor,6453,13.55
+cdc,syntax constructor,6417,13.48
+df-dec,definition,6404,13.45
+cvsca,syntax constructor,6337,13.31
+ccmn,syntax constructor,6229,13.08
+coi,syntax constructor,6181,12.98
+df-oi,definition,6165,12.95
+ciin,syntax constructor,6149,12.91
+df-iin,definition,6148,12.91
+df-cmn,definition,6091,12.79
+df-sca,definition,5552,11.66
+df-vsca,definition,5545,11.64
+cds,syntax constructor,5542,11.64
+cts,syntax constructor,5522,11.6
+df-tset,definition,5461,11.47
+ax-inf2,axiom,5420,11.38
+cpm,syntax constructor,5238,11.0
+cgrp,syntax constructor,5210,10.94
+df-pm,definition,5204,10.93
+cof,syntax constructor,5184,10.89
+df-ple,definition,5161,10.84
+df-of,definition,5113,10.74
+df-ds,definition,5000,10.5
+chom,syntax constructor,4990,10.48
+ctopn,syntax constructor,4927,10.35
+cgsu,syntax constructor,4922,10.34
+cco,syntax constructor,4906,10.3
+csubmnd,syntax constructor,4856,10.2
+df-submnd,definition,4856,10.2
+cixp,syntax constructor,4822,10.13
+df-grp,definition,4807,10.09
+ctop,syntax constructor,4774,10.02
+df-ixp,definition,4751,9.98
+ccntz,syntax constructor,4696,9.86
+df-cntz,definition,4674,9.81
+cfl,syntax constructor,4641,9.75
+cip,syntax constructor,4635,9.73
+df-top,definition,4623,9.71
+cli,syntax constructor,4621,9.7
+df-fl,definition,4616,9.69
+df-ip,definition,4556,9.57
+csupp,syntax constructor,4515,9.48
+df-supp,definition,4480,9.41
+df-hom,definition,4468,9.38
+df-cco,definition,4464,9.37
+cmopn,syntax constructor,4444,9.33
+df-clim,definition,4394,9.23
+cfsupp,syntax constructor,4380,9.2
+cq,syntax constructor,4349,9.13
+df-q,definition,4343,9.12
+cico,syntax constructor,4331,9.09
+cpt,syntax constructor,4322,9.08
+cxad,syntax constructor,4319,9.07
+df-fsupp,definition,4303,9.04
+cmgp,syntax constructor,4277,8.98
+ctopon,syntax constructor,4271,8.97
+df-topon,definition,4271,8.97
+df-minusg,definition,4263,8.95
+crg,syntax constructor,4256,8.94
+df-xadd,definition,4208,8.84
+df-ico,definition,4182,8.78
+ctg,syntax constructor,4134,8.68
+cur,syntax constructor,4129,8.67
+cmre,syntax constructor,4126,8.66
+df-mre,definition,4122,8.66
+df-topgen,definition,4122,8.66
+cmrc,syntax constructor,4102,8.61
+df-mgp,definition,4099,8.61
+df-mrc,definition,4068,8.54
+csu,syntax constructor,4054,8.51
+cicc,syntax constructor,4049,8.5
+cmg,syntax constructor,4044,8.49
+df-gsum,definition,4038,8.48
+df-sum,definition,4038,8.48
+ctb,syntax constructor,4036,8.48
+df-bases,definition,4031,8.46
+cacs,syntax constructor,4026,8.45
+df-acs,definition,4024,8.45
+df-ring,definition,4006,8.41
+df-mulg,definition,4003,8.41
+df-icc,definition,3920,8.23
+coa,syntax constructor,3866,8.12
+cprds,syntax constructor,3856,8.1
+df-prds,definition,3853,8.09
+df-ur,definition,3851,8.09
+df-oadd,definition,3829,8.04
+cxmet,syntax constructor,3826,8.03
+df-xmet,definition,3825,8.03
+cstv,syntax constructor,3819,8.02
+cxne,syntax constructor,3809,8.0
+ccnfld,syntax constructor,3784,7.95
+df-xneg,definition,3739,7.85
+df-starv,definition,3735,7.84
+cmetu,syntax constructor,3729,7.83
+cunif,syntax constructor,3727,7.83
+cxmu,syntax constructor,3722,7.82
+df-unif,definition,3722,7.82
+df-cnfld,definition,3704,7.78
+crest,syntax constructor,3703,7.78
+cmet,syntax constructor,3653,7.67
+df-xmul,definition,3645,7.65
+df-met,definition,3625,7.61
+cpsmet,syntax constructor,3617,7.6
+df-rest,definition,3616,7.59
+df-psmet,definition,3615,7.59
+cbl,syntax constructor,3587,7.53
+ax-addf,axiom,3585,7.53
+df-bl,definition,3574,7.51
+cabl,syntax constructor,3571,7.5
+df-abl,definition,3560,7.48
+cfi,syntax constructor,3465,7.28
+df-fi,definition,3456,7.26
+df-mopn,definition,3434,7.21
+cioo,syntax constructor,3376,7.09
+df-ioo,definition,3326,6.98
+csubg,syntax constructor,3289,6.91
+crng,syntax constructor,3286,6.9
+df-subg,definition,3269,6.86
+df-rng,definition,3257,6.84
+ctps,syntax constructor,3058,6.42
+df-topsp,definition,3041,6.39
+cxrs,syntax constructor,3030,6.36
+ccn,syntax constructor,3024,6.35
+csg,syntax constructor,3006,6.31
+df-cn,definition,2960,6.22
+clmod,syntax constructor,2946,6.19
+cqtop,syntax constructor,2923,6.14
+df-topn,definition,2911,6.11
+cxms,syntax constructor,2900,6.09
+df-xms,definition,2897,6.08
+df-sbg,definition,2893,6.08
+cms,syntax constructor,2865,6.02
+cimas,syntax constructor,2863,6.01
+df-imas,definition,2860,6.01
+df-ms,definition,2855,6.0
+cplt,syntax constructor,2851,5.99
+crli,syntax constructor,2848,5.98
+df-rlim,definition,2848,5.98
+ccld,syntax constructor,2840,5.96
+df-cld,definition,2824,5.93
+cordt,syntax constructor,2809,5.9
+ccnp,syntax constructor,2799,5.88
+df-cnp,definition,2797,5.87
+df-lmod,definition,2784,5.85
+ctx,syntax constructor,2678,5.62
+cnt,syntax constructor,2647,5.56
+df-ntr,definition,2642,5.55
+df-tx,definition,2630,5.52
+cdju,syntax constructor,2628,5.52
+df-dju,definition,2628,5.52
+chmeo,syntax constructor,2607,5.47
+df-xrs,definition,2593,5.45
+df-hmeo,definition,2589,5.44
+ccl,syntax constructor,2583,5.42
+df-cls,definition,2559,5.37
+df-qtop,definition,2548,5.35
+df-pt,definition,2543,5.34
+cnei,syntax constructor,2535,5.32
+cfbas,syntax constructor,2534,5.32
+cxps,syntax constructor,2531,5.31
+df-xps,definition,2530,5.31
+df-fbas,definition,2524,5.3
+df-nei,definition,2519,5.29
+cpo,syntax constructor,2514,5.28
+cmo,syntax constructor,2506,5.26
+cfil,syntax constructor,2504,5.26
+df-fil,definition,2485,5.22
+ctms,syntax constructor,2481,5.21
+df-tms,definition,2481,5.21
+df-mod,definition,2475,5.2
+cha,syntax constructor,2452,5.15
+df-haus,definition,2448,5.14
+cfg,syntax constructor,2415,5.07
+df-fg,definition,2410,5.06
+clss,syntax constructor,2394,5.03
+df-poset,definition,2383,5.0
+cjn,syntax constructor,2373,4.98
+cflim,syntax constructor,2371,4.98
+cproset,syntax constructor,2365,4.97
+ctpos,syntax constructor,2363,4.96
+df-tpos,definition,2359,4.95
+df-flim,definition,2350,4.93
+df-lss,definition,2347,4.93
+df-proset,definition,2346,4.93
+club,syntax constructor,2320,4.87
+cglb,syntax constructor,2309,4.85
+cmee,syntax constructor,2308,4.85
+cfm,syntax constructor,2298,4.83
+df-fm,definition,2286,4.8
+cflf,syntax constructor,2277,4.78
+df-flf,definition,2271,4.77
+catm,syntax constructor,2256,4.74
+df-lub,definition,2251,4.73
+df-glb,definition,2237,4.7
+clat,syntax constructor,2227,4.68
+cp0,syntax constructor,2218,4.66
+df-lat,definition,2188,4.59
+df-join,definition,2170,4.56
+cp1,syntax constructor,2147,4.51
+ccvr,syntax constructor,2145,4.5
+df-meet,definition,2142,4.5
+chlt,syntax constructor,2134,4.48
+cxnn0,syntax constructor,2132,4.48
+coc,syntax constructor,2124,4.46
+df-xnn0,definition,2116,4.44
+df-ats,definition,2095,4.4
+ccla,syntax constructor,2084,4.38
+coml,syntax constructor,2079,4.37
+cal,syntax constructor,2076,4.36
+clc,syntax constructor,2075,4.36
+df-atl,definition,2065,4.34
+df-plt,definition,2063,4.33
+df-cvlat,definition,2048,4.3
+df-hlat,definition,2048,4.3
+coppr,syntax constructor,2039,4.28
+cdvds,syntax constructor,2012,4.23
+csubrg,syntax constructor,2004,4.21
+df-p0,definition,1994,4.19
+df-covers,definition,1984,4.17
+df-oppr,definition,1984,4.17
+cops,syntax constructor,1965,4.13
+df-subrg,definition,1965,4.13
+df-oposet,definition,1957,4.11
+cghm,syntax constructor,1942,4.08
+cword,syntax constructor,1937,4.07
+col,syntax constructor,1931,4.05
+df-dvds,definition,1928,4.05
+df-ol,definition,1926,4.04
+df-oml,definition,1902,3.99
+df-word,definition,1898,3.99
+df-ghm,definition,1889,3.97
+cui,syntax constructor,1880,3.95
+df-clat,definition,1867,3.92
+cmhm,syntax constructor,1851,3.89
+cdsr,syntax constructor,1850,3.88
+df-mhm,definition,1844,3.87
+cfa,syntax constructor,1843,3.87
+df-dvdsr,definition,1843,3.87
+df-fac,definition,1827,3.84
+ccncf,syntax constructor,1786,3.75
+df-cncf,definition,1783,3.74
+df-unit,definition,1782,3.74
+clh,syntax constructor,1758,3.69
+cdr,syntax constructor,1752,3.68
+clsp,syntax constructor,1725,3.62
+df-limsup,definition,1725,3.62
+cinvr,syntax constructor,1662,3.49
+ccrg,syntax constructor,1660,3.49
+df-invr,definition,1660,3.49
+comu,syntax constructor,1639,3.44
+df-cring,definition,1624,3.41
+ax-mulf,axiom,1618,3.4
+climc,syntax constructor,1616,3.39
+df-limc,definition,1615,3.39
+cbc,syntax constructor,1613,3.39
+cioc,syntax constructor,1610,3.38
+df-bc,definition,1608,3.38
+df-drng,definition,1603,3.37
+df-ioc,definition,1603,3.37
+df-omul,definition,1600,3.36
+df-acn,definition,1592,3.34
+wacn,syntax constructor,1592,3.34
+df-p1,definition,1586,3.33
+clp,syntax constructor,1584,3.33
+df-lp,definition,1580,3.32
+cdv,syntax constructor,1548,3.25
+df-lhyp,definition,1546,3.25
+df-dv,definition,1543,3.24
+clspn,syntax constructor,1539,3.23
+cperf,syntax constructor,1527,3.21
+df-perf,definition,1527,3.21
+df-lsp,definition,1501,3.15
+cpmap,syntax constructor,1494,3.14
+cshi,syntax constructor,1493,3.14
+df-shft,definition,1493,3.14
+df-pmap,definition,1490,3.13
+cpadd,syntax constructor,1478,3.1
+csubrng,syntax constructor,1478,3.1
+df-subrng,definition,1478,3.1
+df-padd,definition,1475,3.1
+cpsubsp,syntax constructor,1465,3.08
+df-psubsp,definition,1459,3.06
+ce,syntax constructor,1437,3.02
+df-ef,definition,1427,3.0
+csra,syntax constructor,1421,2.98
+df-sra,definition,1416,2.97
+cvtx,syntax constructor,1412,2.97
+clln,syntax constructor,1410,2.96
+crglmod,syntax constructor,1406,2.95
+df-llines,definition,1398,2.94
+df-rgmod,definition,1376,2.89
+chba,syntax constructor,1367,2.87
+clpl,syntax constructor,1360,2.86
+df-lplanes,definition,1355,2.85
+csin,syntax constructor,1335,2.8
+ccos,syntax constructor,1330,2.79
+df-sin,definition,1329,2.79
+df-cos,definition,1327,2.79
+cconcat,syntax constructor,1315,2.76
+cltrn,syntax constructor,1311,2.75
+df-concat,definition,1289,2.71
+cpws,syntax constructor,1267,2.66
+df-pws,definition,1260,2.65
+clvol,syntax constructor,1257,2.64
+df-lvols,definition,1257,2.64
+clines,syntax constructor,1253,2.63
+df-lines,definition,1253,2.63
+csm,syntax constructor,1250,2.62
+cablo,syntax constructor,1241,2.61
+cpi,syntax constructor,1241,2.61
+cofr,syntax constructor,1238,2.6
+df-pi,definition,1228,2.58
+cotp,syntax constructor,1223,2.57
+cdvr,syntax constructor,1218,2.56
+cgr,syntax constructor,1218,2.56
+df-dvr,definition,1217,2.56
+cva,syntax constructor,1212,2.55
+cgi,syntax constructor,1207,2.53
+claut,syntax constructor,1192,2.5
+df-grpo,definition,1191,2.5
+df-ot,definition,1190,2.5
+df-laut,definition,1185,2.49
+cldil,syntax constructor,1181,2.48
+cs1,syntax constructor,1175,2.47
+df-ldil,definition,1175,2.47
+ctrl,syntax constructor,1172,2.46
+df-ltrn,definition,1171,2.46
+df-s1,definition,1169,2.45
+ax-hilex,axiom,1159,2.43
+cund,syntax constructor,1158,2.43
+df-undef,definition,1158,2.43
+ax-riotaBAD,axiom,1153,2.42
+df-ablo,definition,1149,2.41
+c0v,syntax constructor,1144,2.4
+ciedg,syntax constructor,1141,2.4
+clvec,syntax constructor,1141,2.4
+df-trl,definition,1127,2.37
+df-lvec,definition,1108,2.33
+ax-hfvmul,axiom,1101,2.31
+cec,syntax constructor,1092,2.29
+cnv,syntax constructor,1085,2.28
+df-gid,definition,1079,2.27
+cvc,syntax constructor,1077,2.26
+ax-hv0cl,axiom,1072,2.25
+ax-hfvadd,axiom,1070,2.25
+df-vc,definition,1069,2.24
+df-ec,definition,1062,2.23
+df-nv,definition,1054,2.21
+cba,syntax constructor,1051,2.21
+cgcd,syntax constructor,1051,2.21
+cpv,syntax constructor,1048,2.2
+df-gcd,definition,1041,2.19
+cns,syntax constructor,1040,2.18
+df-va,definition,1040,2.18
+cnmcv,syntax constructor,1039,2.18
+csp,syntax constructor,1039,2.18
+ax-hvmul0,axiom,1034,2.17
+cmv,syntax constructor,1034,2.17
+df-nmcv,definition,1034,2.17
+df-sm,definition,1033,2.17
+df-ba,definition,1026,2.15
+clog,syntax constructor,1022,2.15
+cn0v,syntax constructor,1022,2.15
+df-0v,definition,1020,2.14
+ax-cc,axiom,1016,2.13
+crh,syntax constructor,1015,2.13
+df-ofr,definition,1011,2.12
+ax-hfi,axiom,998,2.1
+ccmp,syntax constructor,998,2.1
+df-hvsub,definition,994,2.09
+df-cmp,definition,991,2.08
+cgn,syntax constructor,988,2.07
+df-log,definition,987,2.07
+df-ginv,definition,983,2.06
+df-rhm,definition,982,2.06
+cprime,syntax constructor,977,2.05
+clsm,syntax constructor,975,2.05
+ax-his3,axiom,974,2.05
+ccat,syntax constructor,971,2.04
+ax-hvmulid,axiom,957,2.01
+cno,syntax constructor,949,1.99
+df-lsm,definition,947,1.99
+ax-hvaddid,axiom,945,1.98
+ax-his1,axiom,944,1.98
+ax-hvass,axiom,940,1.97
+ax-hvcom,axiom,932,1.96
+ax-hvdistr2,axiom,928,1.95
+cmps,syntax constructor,928,1.95
+df-prm,definition,925,1.94
+wdisj,syntax constructor,924,1.94
+df-psr,definition,916,1.92
+ax-his4,axiom,903,1.9
+ax-his2,axiom,902,1.89
+cedg,syntax constructor,899,1.89
+csh,syntax constructor,898,1.89
+df-sh,definition,888,1.86
+cgs,syntax constructor,863,1.81
+df-gdiv,definition,863,1.81
+ax-hvmulass,axiom,861,1.81
+clm,syntax constructor,860,1.81
+df-lm,definition,860,1.81
+df-hnorm,definition,859,1.8
+df-disj,definition,855,1.8
+cs2,syntax constructor,850,1.78
+df-s2,definition,850,1.78
+cims,syntax constructor,846,1.78
+ax-hvdistr1,axiom,843,1.77
+cnsb,syntax constructor,836,1.76
+cch,syntax constructor,835,1.75
+df-vs,definition,835,1.75
+cmpl,syntax constructor,833,1.75
+chli,syntax constructor,829,1.74
+ctendo,syntax constructor,815,1.71
+csur,syntax constructor,807,1.69
+df-ch,definition,806,1.69
+df-ims,definition,804,1.69
+df-mpl,definition,803,1.69
+cqs,syntax constructor,793,1.67
+df-qs,definition,790,1.66
+ccid,syntax constructor,788,1.65
+ccmet,syntax constructor,784,1.65
+df-hlim,definition,762,1.6
+clts,syntax constructor,760,1.6
+cort,syntax constructor,752,1.58
+df-no,definition,751,1.58
+ccfil,syntax constructor,750,1.57
+df-tendo,definition,748,1.57
+df-cfil,definition,739,1.55
+cedring,syntax constructor,733,1.54
+df-cmet,definition,732,1.54
+ccau,syntax constructor,726,1.52
+df-cau,definition,726,1.52
+ccphlo,syntax constructor,724,1.52
+cdvh,syntax constructor,724,1.52
+cdip,syntax constructor,711,1.49
+df-oc,definition,711,1.49
+df-dip,definition,709,1.49
+c0h,syntax constructor,708,1.49
+cfrlm,syntax constructor,705,1.48
+df-lts,definition,703,1.48
+df-ch0,definition,702,1.47
+cnzr,syntax constructor,689,1.45
+df-edring,definition,689,1.45
+df-ph,definition,684,1.44
+df-nzr,definition,683,1.43
+cdia,syntax constructor,680,1.43
+ccbn,syntax constructor,679,1.43
+cbday,syntax constructor,676,1.42
+ccauold,syntax constructor,675,1.42
+df-hcau,definition,674,1.42
+df-hba,definition,673,1.41
+df-cbn,definition,672,1.41
+df-disoa,definition,669,1.4
+df-bday,definition,667,1.4
+ax-hcompl,axiom,665,1.4
+df-dvech,definition,665,1.4
+cdsmm,syntax constructor,664,1.39
+df-dsmm,definition,662,1.39
+df-frlm,definition,652,1.37
+cltb,syntax constructor,651,1.37
+copws,syntax constructor,649,1.36
+df-opsr,definition,649,1.36
+css,syntax constructor,648,1.36
+df-ssp,definition,648,1.36
+csubstr,syntax constructor,645,1.35
+covol,syntax constructor,644,1.35
+cpl1,syntax constructor,642,1.35
+df-ovol,definition,639,1.34
+df-substr,definition,639,1.34
+df-edg,definition,634,1.33
+cps1,syntax constructor,631,1.33
+df-psr1,definition,629,1.32
+cdib,syntax constructor,628,1.32
+cslts,syntax constructor,624,1.31
+cvol,syntax constructor,624,1.31
+df-slts,definition,624,1.31
+df-dib,definition,623,1.31
+ccuts,syntax constructor,616,1.29
+cdic,syntax constructor,616,1.29
+df-ac,definition,611,1.28
+df-ply1,definition,611,1.28
+wac,syntax constructor,611,1.28
+cpfx,syntax constructor,608,1.28
+df-cat,definition,608,1.28
+wif,syntax constructor,608,1.28
+coppg,syntax constructor,603,1.27
+df-oppg,definition,603,1.27
+df-dic,definition,599,1.26
+df-cuts,definition,598,1.26
+df-pfx,definition,595,1.25
+df-vol,definition,590,1.24
+df-ifp,definition,584,1.23
+cdih,syntax constructor,580,1.22
+df-dih,definition,577,1.21
+ax-ac2,axiom,574,1.21
+cph,syntax constructor,573,1.2
+df-shs,definition,573,1.2
+cfunc,syntax constructor,567,1.19
+cmade,syntax constructor,565,1.19
+df-made,definition,565,1.19
+df-cid,definition,563,1.18
+cold,syntax constructor,555,1.17
+df-old,definition,550,1.15
+cmvr,syntax constructor,549,1.15
+cs3,syntax constructor,544,1.14
+df-s3,definition,540,1.13
+df-mvr,definition,539,1.13
+clidl,syntax constructor,528,1.11
+cascl,syntax constructor,525,1.1
+cright,syntax constructor,523,1.1
+cleft,syntax constructor,518,1.09
+ax-reg,axiom,513,1.08
+czring,syntax constructor,512,1.08
+df-right,definition,509,1.07
+df-ascl,definition,507,1.06
+df-left,definition,507,1.06
+clsa,syntax constructor,506,1.06
+cdomn,syntax constructor,504,1.06
+crlreg,syntax constructor,503,1.06
+df-func,definition,502,1.05
+df-rlreg,definition,502,1.05
+df-lsatoms,definition,498,1.05
+df-zring,definition,497,1.04
+df-lidl,definition,496,1.04
+coch,syntax constructor,495,1.04
+ax-13,axiom,494,1.04
+df-domn,definition,494,1.04
+clfn,syntax constructor,484,1.02
+c0s,syntax constructor,479,1.01
+clsw,syntax constructor,479,1.01
+cupgr,syntax constructor,477,1.0
+cprod,syntax constructor,476,1.0
+df-prod,definition,476,1.0
+df-upgr,definition,476,1.0
+cnm,syntax constructor,466,0.98
+df-doch,definition,465,0.98
+cnadd,syntax constructor,459,0.96
+df-0s,definition,459,0.96
+citv,syntax constructor,457,0.96
+ccxp,syntax constructor,456,0.96
+cr1,syntax constructor,455,0.96
+df-cxp,definition,455,0.96
+df-nadd,definition,455,0.96
+csrg,syntax constructor,454,0.95
+cadds,syntax constructor,452,0.95
+df-r1,definition,452,0.95
+cuhgr,syntax constructor,449,0.94
+df-lfl,definition,449,0.94
+df-uhgr,definition,449,0.94
+c0p,syntax constructor,439,0.92
+cpc,syntax constructor,438,0.92
+cles,syntax constructor,437,0.92
+df-srg,definition,437,0.92
+cmat,syntax constructor,434,0.91
+df-0p,definition,433,0.91
+df-les,definition,432,0.91
+df-pc,definition,431,0.91
+cmmul,syntax constructor,426,0.89
+clng,syntax constructor,424,0.89
+cusgr,syntax constructor,422,0.89
+df-lsw,definition,422,0.89
+cco1,syntax constructor,418,0.88
+cdveca,syntax constructor,416,0.87
+cqg,syntax constructor,416,0.87
+df-dveca,definition,416,0.87
+clk,syntax constructor,413,0.87
+cstrkg,syntax constructor,412,0.87
+cnorec2,syntax constructor,411,0.86
+df-norec2,definition,411,0.86
+df-mat,definition,410,0.86
+casa,syntax constructor,406,0.85
+df-assa,definition,406,0.85
+clsh,syntax constructor,405,0.85
+df-adds,definition,405,0.85
+ctgrp,syntax constructor,404,0.85
+df-tgrp,definition,404,0.85
+cv1,syntax constructor,403,0.85
+df-eqg,definition,401,0.84
+cwlks,syntax constructor,399,0.84
+czrh,syntax constructor,399,0.84
+df-lshyp,definition,397,0.83
+df-vr1,definition,397,0.83
+cdjh,syntax constructor,396,0.83
+df-djh,definition,396,0.83
+cqus,syntax constructor,395,0.83
+crnk,syntax constructor,395,0.83
+cmbf,syntax constructor,392,0.82
+df-lkr,definition,391,0.82
+df-coe1,definition,388,0.81
+df-usgr,definition,384,0.81
+clmhm,syntax constructor,381,0.8
+df-qus,definition,379,0.8
+cngp,syntax constructor,378,0.79
+crsp,syntax constructor,378,0.79
+cstrkgc,syntax constructor,376,0.79
+df-mbf,definition,376,0.79
+cstrkgb,syntax constructor,375,0.79
+cstrkgcb,syntax constructor,375,0.79
+df-wlks,definition,375,0.79
+cld,syntax constructor,374,0.79
+df-rank,definition,374,0.79
+df-trkg,definition,374,0.79
+df-nm,definition,373,0.78
+cpjh,syntax constructor,370,0.78
+df-pjh,definition,368,0.77
+df-ldual,definition,367,0.77
+df-zrh,definition,365,0.77
+cedgf,syntax constructor,354,0.74
+cumgr,syntax constructor,352,0.74
+df-umgr,definition,352,0.74
+cefmnd,syntax constructor,351,0.74
+df-efmnd,definition,350,0.73
+cfield,syntax constructor,348,0.73
+df-trkgc,definition,348,0.73
+df-rsp,definition,347,0.73
+cnsg,syntax constructor,345,0.72
+cnegs,syntax constructor,344,0.72
+df-lmhm,definition,343,0.72
+df-trkgcb,definition,341,0.72
+chj,syntax constructor,340,0.71
+df-nsg,definition,339,0.71
+citg2,syntax constructor,338,0.71
+cnorec,syntax constructor,334,0.7
+df-norec,definition,334,0.7
+df-negs,definition,332,0.7
+df-field,definition,331,0.7
+citg1,syntax constructor,330,0.69
+df-itg1,definition,327,0.69
+clcv,syntax constructor,325,0.68
+df-lcv,definition,325,0.68
+df-iedg,definition,323,0.68
+csubs,syntax constructor,314,0.66
+cuspgr,syntax constructor,313,0.66
+cnlm,syntax constructor,311,0.65
+csymg,syntax constructor,311,0.65
+df-ngp,definition,311,0.65
+df-uspgr,definition,310,0.65
+df-chj,definition,309,0.65
+df-vtx,definition,307,0.64
+df-trkgb,definition,305,0.64
+df-symg,definition,302,0.63
+wxo,syntax constructor,301,0.63
+cgim,syntax constructor,300,0.63
+df-gim,definition,300,0.63
+df-xor,definition,298,0.63
+cnrg,syntax constructor,294,0.62
+df-subs,definition,293,0.62
+ces,syntax constructor,289,0.61
+c2idl,syntax constructor,286,0.6
+casp,syntax constructor,285,0.6
+df-2idl,definition,285,0.6
+df-asp,definition,285,0.6
+df-evls,definition,282,0.59
+df-itg2,definition,276,0.58
+ccoss,syntax constructor,275,0.58
+cps,syntax constructor,275,0.58
+df-ps,definition,271,0.57
+cii,syntax constructor,268,0.56
+df-coss,definition,267,0.56
+clcd,syntax constructor,266,0.56
+df-nlm,definition,265,0.56
+ccgrg,syntax constructor,264,0.55
+cnbgr,syntax constructor,264,0.55
+chomf,syntax constructor,263,0.55
+cod,syntax constructor,263,0.55
+df-cgrg,definition,258,0.54
+c1s,syntax constructor,257,0.54
+ctsr,syntax constructor,257,0.54
+df-tsr,definition,257,0.54
+df-od,definition,256,0.54
+cnpi,syntax constructor,255,0.54
+csumge0,syntax constructor,253,0.53
+df-lcdual,definition,251,0.53
+citg,syntax constructor,248,0.52
+df-ordt,definition,248,0.52
+df-nbgr,definition,247,0.52
+cibl,syntax constructor,246,0.52
+csr,syntax constructor,246,0.52
+df-itg,definition,246,0.52
+cmpd,syntax constructor,245,0.51
+df-homf,definition,245,0.51
+cphi,syntax constructor,243,0.51
+df-phi,definition,243,0.51
+df-ni,definition,242,0.51
+df-ibl,definition,241,0.51
+cdg1,syntax constructor,239,0.5
+ctrls,syntax constructor,238,0.5
+df-mapd,definition,238,0.5
+cmdg,syntax constructor,236,0.5
+df-ii,definition,236,0.5
+df-mdeg,definition,236,0.5
+cabv,syntax constructor,235,0.49
+cpmtr,syntax constructor,235,0.49
+cnat,syntax constructor,234,0.49
+ctsu,syntax constructor,234,0.49
+cee,syntax constructor,232,0.49
+cevl,syntax constructor,229,0.48
+ctan,syntax constructor,229,0.48
+df-tan,definition,228,0.48
+csalg,syntax constructor,227,0.48
+df-evl,definition,227,0.48
+df-mamu,definition,227,0.48
+df-abv,definition,223,0.47
+df-pmtr,definition,223,0.47
+ccofu,syntax constructor,222,0.47
+df-trls,definition,222,0.47
+df-1s,definition,221,0.46
+cply,syntax constructor,219,0.46
+df-deg1,definition,218,0.46
+clti,syntax constructor,216,0.45
+csplice,syntax constructor,216,0.45
+df-splice,definition,216,0.45
+cnq,syntax constructor,215,0.45
+df-ply,definition,215,0.45
+ceq,syntax constructor,214,0.45
+cmi,syntax constructor,214,0.45
+df-sumge0,definition,213,0.45
+cxpc,syntax constructor,212,0.45
+cmuls,syntax constructor,209,0.44
+df-ee,definition,209,0.44
+df-mi,definition,206,0.43
+df-nq,definition,206,0.43
+crefld,syntax constructor,203,0.43
+czn,syntax constructor,201,0.42
+cplusf,syntax constructor,198,0.42
+df-lti,definition,198,0.42
+df-xpc,definition,198,0.42
+cphl,syntax constructor,197,0.41
+csymdif,syntax constructor,195,0.41
+df-refld,definition,195,0.41
+df-symdif,definition,194,0.41
+ce1,syntax constructor,193,0.41
+df-evl1,definition,193,0.41
+ct1,syntax constructor,192,0.4
+df-enq,definition,192,0.4
+df-t1,definition,192,0.4
+df-zn,definition,192,0.4
+ctmd,syntax constructor,191,0.4
+cstf,syntax constructor,190,0.4
+df-salg,definition,190,0.4
+cesum,syntax constructor,189,0.4
+culm,syntax constructor,189,0.4
+df-nat,definition,189,0.4
+csiga,syntax constructor,188,0.39
+df-ulm,definition,188,0.39
+df-esum,definition,187,0.39
+df-srng,definition,187,0.39
+df-cofu,definition,186,0.39
+df-nrg,definition,186,0.39
+cclm,syntax constructor,185,0.39
+cfuc,syntax constructor,185,0.39
+df-muls,definition,185,0.39
+df-staf,definition,185,0.39
+ccoe,syntax constructor,184,0.39
+cltq,syntax constructor,183,0.38
+df-clm,definition,182,0.38
+cdenom,syntax constructor,180,0.38
+cmir,syntax constructor,180,0.38
+cnumer,syntax constructor,180,0.38
+df-denom,definition,180,0.38
+df-numer,definition,180,0.38
+df-plusf,definition,180,0.38
+df-mir,definition,179,0.38
+creverse,syntax constructor,178,0.37
+df-reverse,definition,178,0.37
+cdgr,syntax constructor,177,0.37
+df-coe,definition,176,0.37
+c1q,syntax constructor,175,0.37
+cerq,syntax constructor,175,0.37
+df-1nq,definition,175,0.37
+c-bnj14,syntax constructor,174,0.37
+cidom,syntax constructor,174,0.37
+crpss,syntax constructor,174,0.37
+csect,syntax constructor,174,0.37
+df-phl,definition,174,0.37
+cceil,syntax constructor,173,0.36
+cvtxdg,syntax constructor,173,0.36
+df-erq,definition,173,0.36
+cnp,syntax constructor,172,0.36
+df-idom,definition,171,0.36
+df-rpss,definition,171,0.36
+cn0s,syntax constructor,170,0.36
+ceu,syntax constructor,169,0.35
+ctgp,syntax constructor,169,0.35
+df-e,definition,169,0.35
+df-np,definition,169,0.35
+df-tmd,definition,169,0.35
+df-dgr,definition,168,0.35
+wcnvrefrel,syntax constructor,168,0.35
+cpli,syntax constructor,166,0.35
+cpsgn,syntax constructor,166,0.35
+df-cnvrefrel,definition,166,0.35
+df-tsms,definition,166,0.35
+w-bnj17,syntax constructor,166,0.35
+df-bnj17,definition,165,0.35
+coppc,syntax constructor,163,0.34
+df-pli,definition,163,0.34
+cmpq,syntax constructor,162,0.34
+df-mpq,definition,162,0.34
+df-n0s,definition,162,0.34
+df-vtxdg,definition,162,0.34
+ctng,syntax constructor,161,0.34
+cwwlks,syntax constructor,161,0.34
+df-psgn,definition,161,0.34
+df-siga,definition,161,0.34
+df-tng,definition,161,0.34
+cltpq,syntax constructor,160,0.34
+cwwlksn,syntax constructor,160,0.34
+df-ltnq,definition,159,0.33
+cmq,syntax constructor,157,0.33
+df-fuc,definition,157,0.33
+df-mq,definition,157,0.33
+df-ceil,definition,156,0.33
+df-ltpq,definition,156,0.33
+df-sect,definition,156,0.33
+df-tgp,definition,154,0.32
+df-wwlks,definition,154,0.32
+cbtwn,syntax constructor,153,0.32
+ccsh,syntax constructor,153,0.32
+cplpq,syntax constructor,153,0.32
+crelexp,syntax constructor,153,0.32
+df-plpq,definition,153,0.32
+wdisjALTV,syntax constructor,152,0.32
+ax-frege1,axiom,150,0.31
+char,syntax constructor,150,0.31
+crngo,syntax constructor,150,0.31
+cplq,syntax constructor,149,0.31
+df-vd1,definition,149,0.31
+wvd1,syntax constructor,149,0.31
+df-disjALTV,definition,148,0.31
+df-plq,definition,148,0.31
+df-relexp,definition,148,0.31
+cinv,syntax constructor,147,0.31
+df-wwlksn,definition,147,0.31
+cclwwlk,syntax constructor,146,0.31
+ax-frege2,axiom,145,0.3
+ccgr,syntax constructor,145,0.3
+df-csh,definition,145,0.3
+df-inv,definition,145,0.3
+df-clwwlk,definition,144,0.3
+df-oppc,definition,144,0.3
+coe,syntax constructor,143,0.3
+df-har,definition,143,0.3
+cpths,syntax constructor,142,0.3
+cs4,syntax constructor,140,0.29
+df-s4,definition,140,0.29
+cleg,syntax constructor,139,0.29
+df-leg,definition,139,0.29
+wdfat,syntax constructor,139,0.29
+clogb,syntax constructor,138,0.29
+cnns,syntax constructor,138,0.29
+crag,syntax constructor,138,0.29
+df-cgr,definition,138,0.29
+ax-frege8,axiom,137,0.29
+chlg,syntax constructor,137,0.29
+crq,syntax constructor,137,0.29
+df-rq,definition,137,0.29
+ctcph,syntax constructor,136,0.29
+df-tcph,definition,135,0.28
+cresub,syntax constructor,134,0.28
+cssc,syntax constructor,134,0.28
+df-pths,definition,134,0.28
+df-resub,definition,134,0.28
+chdma1,syntax constructor,133,0.28
+cuc1p,syntax constructor,133,0.28
+df-logb,definition,133,0.28
+df-rag,definition,133,0.28
+df-uc1p,definition,133,0.28
+clbs,syntax constructor,132,0.28
+df-lbs,definition,132,0.28
+ctrg,syntax constructor,131,0.28
+df-nns,definition,131,0.28
+df-ocomp,definition,131,0.28
+df-ssc,definition,131,0.28
+cmn1,syntax constructor,130,0.27
+ccph,syntax constructor,129,0.27
+chdma,syntax constructor,129,0.27
+co1,syntax constructor,129,0.27
+codd,syntax constructor,129,0.27
+cthinc,syntax constructor,129,0.27
+df-hdmap1,definition,129,0.27
+df-o1,definition,129,0.27
+ccomf,syntax constructor,128,0.27
+clo,syntax constructor,128,0.27
+clo1,syntax constructor,128,0.27
+cspn,syntax constructor,128,0.27
+df-comf,definition,128,0.27
+df-lo1,definition,128,0.27
+df-span,definition,128,0.27
+ch0o,syntax constructor,127,0.27
+cvma,syntax constructor,127,0.27
+df-dfat,definition,127,0.27
+df-edgf,definition,127,0.27
+df-h0op,definition,127,0.27
+df-hlg,definition,127,0.27
+df-mon1,definition,127,0.27
+cipo,syntax constructor,126,0.26
+df-lnop,definition,126,0.26
+wsymrel,syntax constructor,126,0.26
+df-cph,definition,125,0.26
+wrefrel,syntax constructor,124,0.26
+catan,syntax constructor,123,0.26
+cresc,syntax constructor,123,0.26
+csquarenn,syntax constructor,123,0.26
+df-atan,definition,123,0.26
+df-ipo,definition,123,0.26
+df-symrel,definition,123,0.26
+cclwwlkn,syntax constructor,122,0.26
+ccurf,syntax constructor,122,0.26
+cdivs,syntax constructor,122,0.26
+cperpg,syntax constructor,122,0.26
+cpp,syntax constructor,122,0.26
+df-btwn,definition,122,0.26
+df-perpg,definition,122,0.26
+cmeas,syntax constructor,121,0.25
+cscaf,syntax constructor,121,0.25
+df-clwwlkn,definition,121,0.25
+df-vma,definition,121,0.25
+df-curf,definition,120,0.25
+df-refrel,definition,120,0.25
+df-resc,definition,120,0.25
+df-thinc,definition,118,0.25
+cseqom,syntax constructor,117,0.25
+df-oexp,definition,117,0.25
+df-seqom,definition,117,0.25
+df-trg,definition,117,0.25
+wtrrel,syntax constructor,117,0.25
+chvm,syntax constructor,116,0.24
+ciso,syntax constructor,116,0.24
+df-odd,definition,114,0.24
+weqvrel,syntax constructor,114,0.24
+ceven,syntax constructor,113,0.24
+cfcls,syntax constructor,113,0.24
+df-iso,definition,113,0.24
+df-eqvrel,definition,112,0.24
+df-fcls,definition,112,0.24
+df-hvmap,definition,112,0.24
+df-scaf,definition,112,0.24
+cup,syntax constructor,111,0.23
+cpell1234qr,syntax constructor,110,0.23
+ctcl,syntax constructor,110,0.23
+cust,syntax constructor,110,0.23
+df-pell1234qr,definition,110,0.23
+df-plp,definition,110,0.23
+df-trrel,definition,110,0.23
+cpell14qr,syntax constructor,109,0.23
+cq1p,syntax constructor,109,0.23
+clindf,syntax constructor,108,0.23
+cnr,syntax constructor,108,0.23
+df-even,definition,108,0.23
+df-pell14qr,definition,108,0.23
+df-q1p,definition,108,0.23
+df-ust,definition,108,0.23
+crrx,syntax constructor,107,0.22
+cwun,syntax constructor,107,0.22
+cstrkgld,syntax constructor,106,0.22
+df-trkgld,definition,106,0.22
+df-wun,definition,106,0.22
+ces1,syntax constructor,105,0.22
+cuvc,syntax constructor,105,0.22
+df-lindf,definition,105,0.22
+df-meas,definition,105,0.22
+df-rrx,definition,105,0.22
+df-uvc,definition,105,0.22
+cer,syntax constructor,104,0.22
+crels,syntax constructor,104,0.22
+csmblfn,syntax constructor,104,0.22
+df-hdmap,definition,104,0.22
+df-smblfn,definition,104,0.22
+csetc,syntax constructor,103,0.22
+csubc,syntax constructor,103,0.22
+df-evls1,definition,103,0.22
+df-rngo,definition,103,0.22
+df-setc,definition,103,0.22
+df-subc,definition,103,0.22
+cestrc,syntax constructor,102,0.21
+cga,syntax constructor,102,0.21
+cgz,syntax constructor,102,0.21
+chtpy,syntax constructor,102,0.21
+cltp,syntax constructor,102,0.21
+cr1p,syntax constructor,102,0.21
+df-enr,definition,102,0.21
+df-ga,definition,102,0.21
+df-r1p,definition,102,0.21
+cmat2pmat,syntax constructor,101,0.21
+df-gz,definition,101,0.21
+cchp,syntax constructor,100,0.21
+cdprd,syntax constructor,100,0.21
+cmdat,syntax constructor,100,0.21
+cpell1qr,syntax constructor,100,0.21
+df-estrc,definition,100,0.21
+df-pell1qr,definition,100,0.21
+df-dprd,definition,99,0.21
+df-ltp,definition,99,0.21
+df-mat2pmat,definition,99,0.21
+df-vd2,definition,99,0.21
+w-bnj15,syntax constructor,99,0.21
+wvd2,syntax constructor,99,0.21
+cale,syntax constructor,98,0.21
+cnop,syntax constructor,98,0.21
+csdrg,syntax constructor,98,0.21
+df-chp,definition,98,0.21
+df-htpy,definition,98,0.21
+df-aleph,definition,97,0.2
+df-sdrg,definition,97,0.2
+clgs,syntax constructor,96,0.2
+df-lgs,definition,96,0.2
+ccht,syntax constructor,95,0.2
+cfth,syntax constructor,95,0.2
+chos,syntax constructor,95,0.2
+cmri,syntax constructor,95,0.2
+cphtpy,syntax constructor,95,0.2
+df-cht,definition,95,0.2
+df-fth,definition,95,0.2
+df-mri,definition,95,0.2
+df-nmop,definition,95,0.2
+df-trcl,definition,95,0.2
+ccv,syntax constructor,94,0.2
+cho,syntax constructor,94,0.2
+df-hosum,definition,94,0.2
+df-mdet,definition,94,0.2
+cconn,syntax constructor,93,0.2
+cdrs,syntax constructor,93,0.2
+crnghm,syntax constructor,93,0.2
+cushgr,syntax constructor,93,0.2
+df-conn,definition,93,0.2
+df-divs,definition,93,0.2
+df-drs,definition,93,0.2
+df-nr,definition,93,0.2
+df-phtpy,definition,93,0.2
+df-ushgr,definition,93,0.2
+clinds,syntax constructor,92,0.19
+csigagen,syntax constructor,92,0.19
+cssr,syntax constructor,92,0.19
+czs,syntax constructor,92,0.19
+df-hmop,definition,92,0.19
+df-linds,definition,92,0.19
+df-ssr,definition,92,0.19
+cchr,syntax constructor,91,0.19
+cidfu,syntax constructor,91,0.19
+df-idfu,definition,91,0.19
+df-rels,definition,91,0.19
+cful,syntax constructor,90,0.19
+cpellfund,syntax constructor,90,0.19
+df-full,definition,90,0.19
+df-pellfund,definition,90,0.19
+df-squarenn,definition,90,0.19
+cphtpc,syntax constructor,89,0.19
+cppi,syntax constructor,89,0.19
+ctos,syntax constructor,89,0.19
+df-cv,definition,89,0.19
+df-funALTV,definition,89,0.19
+df-ppi,definition,89,0.19
+df-zs,definition,89,0.19
+wfunALTV,syntax constructor,89,0.19
+ax-dc,axiom,88,0.18
+caiota,syntax constructor,88,0.18
+come,syntax constructor,88,0.18
+cwlkson,syntax constructor,88,0.18
+df-aiota,definition,88,0.18
+cxrn,syntax constructor,87,0.18
+cdvn,syntax constructor,86,0.18
+cgrim,syntax constructor,85,0.18
+df-grim,definition,85,0.18
+ccf,syntax constructor,84,0.18
+cclnbgr,syntax constructor,84,0.18
+cwdom,syntax constructor,84,0.18
+df-wdom,definition,84,0.18
+cfrgr,syntax constructor,83,0.17
+df-dvn,definition,83,0.17
+df-ome,definition,83,0.17
+df-phtpc,definition,83,0.17
+df-wlkson,definition,83,0.17
+df-xrn,definition,83,0.17
+ctrlson,syntax constructor,82,0.17
+df-cf,definition,82,0.17
+df-rnghm,definition,82,0.17
+df-sigagen,definition,82,0.17
+c1stf,syntax constructor,81,0.17
+cem,syntax constructor,81,0.17
+df-chr,definition,81,0.17
+df-em,definition,81,0.17
+df-frgr,definition,81,0.17
+ccms,syntax constructor,80,0.17
+cdchr,syntax constructor,80,0.17
+chod,syntax constructor,80,0.17
+cnmoo,syntax constructor,80,0.17
+covoln,syntax constructor,80,0.17
+df-dchr,definition,80,0.17
+c-bnj18,syntax constructor,79,0.17
+cat,syntax constructor,79,0.17
+cpolN,syntax constructor,79,0.17
+df-1stf,definition,79,0.17
+df-at,definition,79,0.17
+df-up,definition,79,0.17
+cfusgr,syntax constructor,78,0.16
+df-nan,definition,78,0.16
+df-ovoln,definition,78,0.16
+wnan,syntax constructor,78,0.16
+df-bnj14,definition,77,0.16
+df-fusgr,definition,77,0.16
+cafv,syntax constructor,76,0.16
+cprmidl,syntax constructor,76,0.16
+df-afv,definition,76,0.16
+df-hodif,definition,76,0.16
+df-nmoo,definition,76,0.16
+ccnf,syntax constructor,75,0.16
+cgpg,syntax constructor,75,0.16
+coppf,syntax constructor,75,0.16
+df-cnf,definition,75,0.16
+df-gpg,definition,75,0.16
+cgna,syntax constructor,74,0.16
+cmgmhm,syntax constructor,74,0.16
+crmx,syntax constructor,74,0.16
+crmy,syntax constructor,74,0.16
+ctermc,syntax constructor,74,0.16
+df-mgmhm,definition,74,0.16
+df-rmx,definition,74,0.16
+df-rmy,definition,74,0.16
+df-termc,definition,74,0.16
+cgol,syntax constructor,73,0.15
+clcm,syntax constructor,73,0.15
+cmu,syntax constructor,73,0.15
+cocv,syntax constructor,73,0.15
+cpj1,syntax constructor,73,0.15
+df-lcm,definition,73,0.15
+df-mu,definition,73,0.15
+ax-frege52a,axiom,72,0.15
+chpg,syntax constructor,72,0.15
+clf,syntax constructor,72,0.15
+clno,syntax constructor,72,0.15
+cs5,syntax constructor,72,0.15
+cspths,syntax constructor,72,0.15
+df-lnfn,definition,72,0.15
+df-trlson,definition,72,0.15
+ax-frege58b,axiom,71,0.15
+crs,syntax constructor,71,0.15
+csat,syntax constructor,71,0.15
+cuvtx,syntax constructor,71,0.15
+df-rim,definition,71,0.15
+df-s5,definition,71,0.15
+ccaragen,syntax constructor,70,0.15
+cfrmd,syntax constructor,70,0.15
+cgoe,syntax constructor,70,0.15
+cind,syntax constructor,70,0.15
+cmbfm,syntax constructor,70,0.15
+cmzpcl,syntax constructor,70,0.15
+df-clnbgr,definition,70,0.15
+df-mzpcl,definition,70,0.15
+df-smo,definition,70,0.15
+df-toset,definition,70,0.15
+wsmo,syntax constructor,70,0.15
+cclwwlknon,syntax constructor,69,0.14
+cscott,syntax constructor,69,0.14
+df-caragen,definition,69,0.14
+df-cms,definition,69,0.14
+df-lno,definition,69,0.14
+df-prmidl,definition,69,0.14
+df-scott,definition,69,0.14
+cdiag,syntax constructor,68,0.14
+cfuco,syntax constructor,68,0.14
+chsup,syntax constructor,68,0.14
+clinc,syntax constructor,68,0.14
+df-chsup,definition,68,0.14
+df-fuco,definition,68,0.14
+df-polarityN,definition,68,0.14
+df-uvtx,definition,68,0.14
+ccolin,syntax constructor,67,0.14
+chlo,syntax constructor,67,0.14
+cofs,syntax constructor,67,0.14
+df-hlo,definition,67,0.14
+df-ind,definition,67,0.14
+df-ofs,definition,67,0.14
+df-sat,definition,67,0.14
+cdecpmat,syntax constructor,66,0.14
+cmzp,syntax constructor,66,0.14
+cseqs,syntax constructor,66,0.14
+df-frmd,definition,66,0.14
+df-seqs,definition,66,0.14
+crgr,syntax constructor,65,0.14
+df-bnj18,definition,65,0.14
+df-clwwlknon,definition,65,0.14
+df-pj1,definition,65,0.14
+cnlly,syntax constructor,64,0.13
+cpgp,syntax constructor,64,0.13
+ctxp,syntax constructor,64,0.13
+df-bnj15,definition,64,0.13
+df-decpmat,definition,64,0.13
+df-nlly,definition,64,0.13
+w-bnj13,syntax constructor,64,0.13
+cbits,syntax constructor,63,0.13
+cgric,syntax constructor,63,0.13
+chot,syntax constructor,63,0.13
+clmim,syntax constructor,63,0.13
+cmagm,syntax constructor,63,0.13
+cmea,syntax constructor,63,0.13
+cxko,syntax constructor,63,0.13
+df-bnj13,definition,63,0.13
+df-hpg,definition,63,0.13
+df-lmim,definition,63,0.13
+df-mea,definition,63,0.13
+df-mzp,definition,63,0.13
+ccatc,syntax constructor,62,0.13
+cexps,syntax constructor,62,0.13
+clcmf,syntax constructor,62,0.13
+cldim,syntax constructor,62,0.13
+clly,syntax constructor,62,0.13
+cpco,syntax constructor,62,0.13
+cpthson,syntax constructor,62,0.13
+cwwlksnon,syntax constructor,62,0.13
+df-colinear,definition,62,0.13
+df-eldisj,definition,62,0.13
+df-lcmf,definition,62,0.13
+df-txp,definition,62,0.13
+weldisj,syntax constructor,62,0.13
+c2s,syntax constructor,61,0.13
+ccgra,syntax constructor,61,0.13
+cexid,syntax constructor,61,0.13
+cidp,syntax constructor,61,0.13
+cprb,syntax constructor,61,0.13
+cswapf,syntax constructor,61,0.13
+df-bits,definition,61,0.13
+df-bj-nnf,definition,61,0.13
+df-catc,definition,61,0.13
+df-dim,definition,61,0.13
+df-he,definition,61,0.13
+df-idp,definition,61,0.13
+df-lly,definition,61,0.13
+df-spths,definition,61,0.13
+df-swapf,definition,61,0.13
+df-wwlksnon,definition,61,0.13
+whe,syntax constructor,61,0.13
+wnnf,syntax constructor,61,0.13
+ccycls,syntax constructor,60,0.13
+ccyg,syntax constructor,60,0.13
+cisubgr,syntax constructor,60,0.13
+comnd,syntax constructor,60,0.13
+cuo,syntax constructor,60,0.13
+df-homul,definition,60,0.13
+df-mgmOLD,definition,60,0.13
+df-rgr,definition,60,0.13
+df-unop,definition,60,0.13
+chg,syntax constructor,59,0.12
+cnmf,syntax constructor,59,0.12
+cpconn,syntax constructor,59,0.12
+crusgr,syntax constructor,59,0.12
+df-mbfm,definition,59,0.12
+df-nmfn,definition,59,0.12
+df-oppf,definition,59,0.12
+df-prob,definition,59,0.12
+df-pthson,definition,59,0.12
+df-rusgr,definition,59,0.12
+c0o,syntax constructor,58,0.12
+c1p,syntax constructor,58,0.12
+cafv2,syntax constructor,58,0.12
+cevpm,syntax constructor,58,0.12
+cmxidl,syntax constructor,58,0.12
+df-0o,definition,58,0.12
+df-cgra,definition,58,0.12
+df-cyg,definition,58,0.12
+df-evpm,definition,58,0.12
+df-exps,definition,58,0.12
+df-had,definition,58,0.12
+df-mxidl,definition,58,0.12
+df-omnd,definition,58,0.12
+whad,syntax constructor,58,0.12
+ccgr3,syntax constructor,57,0.12
+ccm,syntax constructor,57,0.12
+cmvar,syntax constructor,57,0.12
+df-1p,definition,57,0.12
+df-2s,definition,57,0.12
+df-afv2,definition,57,0.12
+df-cm,definition,57,0.12
+df-cycls,definition,57,0.12
+df-exid,definition,57,0.12
+ccop,syntax constructor,56,0.12
+ccvm,syntax constructor,56,0.12
+cdit,syntax constructor,56,0.12
+cplng,syntax constructor,56,0.12
+cs6,syntax constructor,56,0.12
+df-cgr3,definition,56,0.12
+df-cnop,definition,56,0.12
+df-cvm,definition,56,0.12
+df-diag,definition,56,0.12
+df-ditg,definition,56,0.12
+df-goel,definition,56,0.12
+wcad,syntax constructor,56,0.12
+cbo,syntax constructor,55,0.12
+ccnfn,syntax constructor,55,0.12
+clsi,syntax constructor,55,0.12
+cmd,syntax constructor,55,0.12
+cprcof,syntax constructor,55,0.12
+df-bdop,definition,55,0.12
+df-c,definition,55,0.12
+df-cnfn,definition,55,0.12
+df-liminf,definition,55,0.12
+df-md,definition,55,0.12
+df-ocv,definition,55,0.12
+df-pconn,definition,55,0.12
+df-s6,definition,55,0.12
+cdmd,syntax constructor,54,0.11
+cspthson,syntax constructor,54,0.11
+df-cad,definition,54,0.11
+df-dmd,definition,54,0.11
+df-linc,definition,54,0.11
+df-pgp,definition,54,0.11
+cidl,syntax constructor,53,0.11
+cnvc,syntax constructor,53,0.11
+csem,syntax constructor,53,0.11
+ctsk,syntax constructor,53,0.11
+df-tsk,definition,53,0.11
+cdp2,syntax constructor,52,0.11
+cfldext,syntax constructor,52,0.11
+cmid,syntax constructor,52,0.11
+cogrp,syntax constructor,52,0.11
+df-mid,definition,52,0.11
+cass,syntax constructor,51,0.11
+ccic,syntax constructor,51,0.11
+ccnvrefrels,syntax constructor,51,0.11
+ccplgr,syntax constructor,51,0.11
+cfallfac,syntax constructor,51,0.11
+cgru,syntax constructor,51,0.11
+cmex,syntax constructor,51,0.11
+cons,syntax constructor,51,0.11
+csgn,syntax constructor,51,0.11
+cuss,syntax constructor,51,0.11
+cutop,syntax constructor,51,0.11
+df-cic,definition,51,0.11
+df-gric,definition,51,0.11
+df-gru,definition,51,0.11
+df-ons,definition,51,0.11
+c3o,syntax constructor,50,0.1
+cchn,syntax constructor,50,0.1
+cfmtno,syntax constructor,50,0.1
+df-chn,definition,50,0.1
+df-dp2,definition,50,0.1
+df-fallfac,definition,50,0.1
+df-fldext,definition,50,0.1
+df-fmtno,definition,50,0.1
+df-sgrOLD,definition,50,0.1
+ax-frege28,axiom,49,0.1
+cgex,syntax constructor,49,0.1
+cmndo,syntax constructor,49,0.1
+cmp,syntax constructor,49,0.1
+cs7,syntax constructor,49,0.1
+czlm,syntax constructor,49,0.1
+df-gex,definition,49,0.1
+df-mndo,definition,49,0.1
+df-mp,definition,49,0.1
+df-s7,definition,49,0.1
+chmph,syntax constructor,48,0.1
+clpidl,syntax constructor,48,0.1
+cmcn,syntax constructor,48,0.1
+cquot,syntax constructor,48,0.1
+ctermo,syntax constructor,48,0.1
+df-ass,definition,48,0.1
+df-cplgr,definition,48,0.1
+df-plng,definition,48,0.1
+df-quot,definition,48,0.1
+df-utop,definition,48,0.1
+ccnvrefs,syntax constructor,47,0.1
+cinito,syntax constructor,47,0.1
+cmrex,syntax constructor,47,0.1
+cnl,syntax constructor,47,0.1
+cnmo,syntax constructor,47,0.1
+csconn,syntax constructor,47,0.1
+df-3o,definition,47,0.1
+df-cnvrefrels,definition,47,0.1
+df-cnvrefs,definition,47,0.1
+df-dmqs,definition,47,0.1
+df-isubgr,definition,47,0.1
+df-nlfn,definition,47,0.1
+df-ogrp,definition,47,0.1
+df-pco,definition,47,0.1
+df-sconn,definition,47,0.1
+wdmqs,syntax constructor,47,0.1
+csubgr,syntax constructor,46,0.1
+cttc,syntax constructor,46,0.1
+cvoln,syntax constructor,46,0.1
+df-goal,definition,46,0.1
+df-hmph,definition,46,0.1
+df-lpidl,definition,46,0.1
+df-nmo,definition,46,0.1
+df-sgn,definition,46,0.1
+df-spthson,definition,46,0.1
+df-subgr,definition,46,0.1
+df-ttc,definition,46,0.1
+df-vd3,definition,46,0.1
+df-voln,definition,46,0.1
+wvd3,syntax constructor,46,0.1
+c0r,syntax constructor,45,0.09
+cado,syntax constructor,45,0.09
+ccpmat,syntax constructor,45,0.09
+cfmla,syntax constructor,45,0.09
+cifs,syntax constructor,45,0.09
+creps,syntax constructor,45,0.09
+df-adjh,definition,45,0.09
+df-fmla,definition,45,0.09
+df-ifs,definition,45,0.09
+df-reps,definition,45,0.09
+cbrsiga,syntax constructor,44,0.09
+choma,syntax constructor,44,0.09
+cprimroots,syntax constructor,44,0.09
+csalgen,syntax constructor,44,0.09
+ctocyc,syntax constructor,44,0.09
+cwina,syntax constructor,44,0.09
+df-salgen,definition,44,0.09
+df-tocyc,definition,44,0.09
+df-wina,definition,44,0.09
+ax-c7,axiom,43,0.09
+cclwlks,syntax constructor,43,0.09
+cfin4,syntax constructor,43,0.09
+cnghm,syntax constructor,43,0.09
+cplr,syntax constructor,43,0.09
+df-brsiga,definition,43,0.09
+df-idl,definition,43,0.09
+df-inito,definition,43,0.09
+ax-c5,axiom,42,0.09
+cdioph,syntax constructor,42,0.09
+cig1p,syntax constructor,42,0.09
+clmi,syntax constructor,42,0.09
+codu,syntax constructor,42,0.09
+cringc,syntax constructor,42,0.09
+df-0r,definition,42,0.09
+df-cpmat,definition,42,0.09
+df-dioph,definition,42,0.09
+df-fin4,definition,42,0.09
+df-lmi,definition,42,0.09
+df-odu,definition,42,0.09
+df-primroots,definition,42,0.09
+df-ringc,definition,42,0.09
+df-termo,definition,42,0.09
+caa,syntax constructor,41,0.09
+cblo,syntax constructor,41,0.09
+cefg,syntax constructor,41,0.09
+cir,syntax constructor,41,0.09
+cmrsub,syntax constructor,41,0.09
+codz,syntax constructor,41,0.09
+cufil,syntax constructor,41,0.09
+df-blo,definition,41,0.09
+df-clwlks,definition,41,0.09
+df-ig1p,definition,41,0.09
+df-irred,definition,41,0.09
+df-odz,definition,41,0.09
+cina,syntax constructor,40,0.08
+clsxlim,syntax constructor,40,0.08
+df-homa,definition,40,0.08
+df-ina,definition,40,0.08
+df-xlim,definition,40,0.08
+df-zlm,definition,40,0.08
+cgrlim,syntax constructor,39,0.08
+cspr,syntax constructor,39,0.08
+ctc,syntax constructor,39,0.08
+df-aa,definition,39,0.08
+df-grlim,definition,39,0.08
+df-plr,definition,39,0.08
+df-tc,definition,39,0.08
+df-ufil,definition,39,0.08
+cdisjs,syntax constructor,38,0.08
+cfldgen,syntax constructor,38,0.08
+cirng,syntax constructor,38,0.08
+df-fldgen,definition,38,0.08
+df-mrex,definition,38,0.08
+df-spr,definition,38,0.08
+ax-frege31,axiom,37,0.08
+cbn,syntax constructor,37,0.08
+ccfilu,syntax constructor,37,0.08
+cdp,syntax constructor,37,0.08
+cmadu,syntax constructor,37,0.08
+df-gona,definition,37,0.08
+df-irng,definition,37,0.08
+df-nghm,definition,37,0.08
+df-nvc,definition,37,0.08
+ax-c4,axiom,36,0.08
+bj-csngl,syntax constructor,36,0.08
+ccoels,syntax constructor,36,0.08
+ccusgr,syntax constructor,36,0.08
+ccusp,syntax constructor,36,0.08
+cismt,syntax constructor,36,0.08
+citco,syntax constructor,36,0.08
+csad,syntax constructor,36,0.08
+df-coels,definition,36,0.08
+df-cusgr,definition,36,0.08
+df-efg,definition,36,0.08
+df-hgmap,definition,36,0.08
+df-madu,definition,36,0.08
+df-metu,definition,36,0.08
+df-mrsub,definition,36,0.08
+cconstr,syntax constructor,35,0.07
+cextdg,syntax constructor,35,0.07
+clmic,syntax constructor,35,0.07
+cst,syntax constructor,35,0.07
+df-constr,definition,35,0.07
+df-dp,definition,35,0.07
+df-ismt,definition,35,0.07
+df-lmic,definition,35,0.07
+df-part,definition,35,0.07
+df-prcof,definition,35,0.07
+w-bnj19,syntax constructor,35,0.07
+wpart,syntax constructor,35,0.07
+casin,syntax constructor,34,0.07
+cmpst,syntax constructor,34,0.07
+cmr,syntax constructor,34,0.07
+comi,syntax constructor,34,0.07
+creg,syntax constructor,34,0.07
+crepr,syntax constructor,34,0.07
+cscmat,syntax constructor,34,0.07
+df-bnj19,definition,34,0.07
+df-reg,definition,34,0.07
+df-repr,definition,34,0.07
+df-scmat,definition,34,0.07
+ax-luk1,axiom,33,0.07
+ccss,syntax constructor,33,0.07
+cdisjss,syntax constructor,33,0.07
+cmdv,syntax constructor,33,0.07
+cnrm,syntax constructor,33,0.07
+crediv,syntax constructor,33,0.07
+crpm,syntax constructor,33,0.07
+cttrcl,syntax constructor,33,0.07
+cusp,syntax constructor,33,0.07
+cwwspthsnon,syntax constructor,33,0.07
+df-asin,definition,33,0.07
+df-disjs,definition,33,0.07
+df-erALTV,definition,33,0.07
+df-extdg,definition,33,0.07
+df-rediv,definition,33,0.07
+df-st,definition,33,0.07
+df-ttrcl,definition,33,0.07
+df-wspthsnon,definition,33,0.07
+werALTV,syntax constructor,33,0.07
+cblen,syntax constructor,32,0.07
+ccur,syntax constructor,32,0.07
+chof,syntax constructor,32,0.07
+ckq,syntax constructor,32,0.07
+df-blen,definition,32,0.07
+df-bn,definition,32,0.07
+df-cfilu,definition,32,0.07
+df-cur,definition,32,0.07
+df-kq,definition,32,0.07
+df-mr,definition,32,0.07
+df-om1,definition,32,0.07
+df-sad,definition,32,0.07
+ccvs,syntax constructor,31,0.07
+ciccp,syntax constructor,31,0.07
+clfig,syntax constructor,31,0.07
+cminply,syntax constructor,31,0.07
+corng,syntax constructor,31,0.07
+cringcALTV,syntax constructor,31,0.07
+crngc,syntax constructor,31,0.07
+df-cvs,definition,31,0.07
+df-disjss,definition,31,0.07
+df-hof,definition,31,0.07
+df-iccp,definition,31,0.07
+df-itco,definition,31,0.07
+df-minply,definition,31,0.07
+df-mpst,definition,31,0.07
+df-ringcALTV,definition,31,0.07
+df-xko,definition,31,0.07
+ax-c9,axiom,30,0.06
+ax-luk2,axiom,30,0.06
+ax-luk3,axiom,30,0.06
+caov,syntax constructor,30,0.06
+cchpmat,syntax constructor,30,0.06
+ceupth,syntax constructor,30,0.06
+cmtc,syntax constructor,30,0.06
+cmvrs,syntax constructor,30,0.06
+cprlng,syntax constructor,30,0.06
+cpscN,syntax constructor,30,0.06
+csymrels,syntax constructor,30,0.06
+csyms,syntax constructor,30,0.06
+ct0,syntax constructor,30,0.06
+df-aov,definition,30,0.06
+df-chpmat,definition,30,0.06
+df-eupth,definition,30,0.06
+df-prlng,definition,30,0.06
+df-psubclN,definition,30,0.06
+df-rngc,definition,30,0.06
+df-rprm,definition,30,0.06
+df-symrels,definition,30,0.06
+df-syms,definition,30,0.06
+df-t0,definition,30,0.06
+ax-frege52c,axiom,29,0.06
+bj-ctag,syntax constructor,29,0.06
+ccm2,syntax constructor,29,0.06
+ccntr,syntax constructor,29,0.06
+cdpj,syntax constructor,29,0.06
+cehl,syntax constructor,29,0.06
+chio,syntax constructor,29,0.06
+cidlsrg,syntax constructor,29,0.06
+cmhp,syntax constructor,29,0.06
+cmsta,syntax constructor,29,0.06
+cric,syntax constructor,29,0.06
+crrv,syntax constructor,29,0.06
+df-bj-tag,definition,29,0.06
+df-cntr,definition,29,0.06
+df-dpj,definition,29,0.06
+df-iop,definition,29,0.06
+df-orng,definition,29,0.06
+df-ric,definition,29,0.06
+df-rrv,definition,29,0.06
+df-usp,definition,29,0.06
+df-uss,definition,29,0.06
+ax-c10,axiom,28,0.06
+cgbe,syntax constructor,28,0.06
+chlh,syntax constructor,28,0.06
+clpir,syntax constructor,28,0.06
+cmsr,syntax constructor,28,0.06
+cofc,syntax constructor,28,0.06
+cpm2mp,syntax constructor,28,0.06
+cqqh,syntax constructor,28,0.06
+cref,syntax constructor,28,0.06
+crrh,syntax constructor,28,0.06
+cslmd,syntax constructor,28,0.06
+cstgr,syntax constructor,28,0.06
+df-bj-sngl,definition,28,0.06
+df-hlhil,definition,28,0.06
+df-idlsrg,definition,28,0.06
+df-itv,definition,28,0.06
+df-lpir,definition,28,0.06
+df-ofc,definition,28,0.06
+df-pm2mp,definition,28,0.06
+df-slmd,definition,28,0.06
+ccrcts,syntax constructor,27,0.06
+cfs,syntax constructor,27,0.06
+clgam,syntax constructor,27,0.06
+cltr,syntax constructor,27,0.06
+cm1r,syntax constructor,27,0.06
+cmty,syntax constructor,27,0.06
+cmvmul,syntax constructor,27,0.06
+cnaryf,syntax constructor,27,0.06
+cqmap,syntax constructor,27,0.06
+csucmap,syntax constructor,27,0.06
+df-crcts,definition,27,0.06
+df-css,definition,27,0.06
+df-fs,definition,27,0.06
+df-gbe,definition,27,0.06
+df-lgam,definition,27,0.06
+df-mhp,definition,27,0.06
+df-mvmul,definition,27,0.06
+df-naryf,definition,27,0.06
+df-qmap,definition,27,0.06
+df-qqh,definition,27,0.06
+ax-frege41,axiom,26,0.05
+c2ndf,syntax constructor,26,0.05
+carw,syntax constructor,26,0.05
+ccnext,syntax constructor,26,0.05
+ccring,syntax constructor,26,0.05
+cdmat,syntax constructor,26,0.05
+cerl,syntax constructor,26,0.05
+cgic,syntax constructor,26,0.05
+ckgen,syntax constructor,26,0.05
+clnm,syntax constructor,26,0.05
+cmon,syntax constructor,26,0.05
+cmsub,syntax constructor,26,0.05
+cpi1,syntax constructor,26,0.05
+crefrels,syntax constructor,26,0.05
+crefs,syntax constructor,26,0.05
+cwwspthsn,syntax constructor,26,0.05
+df-arw,definition,26,0.05
+df-crngo,definition,26,0.05
+df-dmat,definition,26,0.05
+df-ehl,definition,26,0.05
+df-gic,definition,26,0.05
+df-ich,definition,26,0.05
+df-kgen,definition,26,0.05
+df-lfig,definition,26,0.05
+df-ltr,definition,26,0.05
+df-msr,definition,26,0.05
+df-pi1,definition,26,0.05
+df-refrels,definition,26,0.05
+df-refs,definition,26,0.05
+df-stgr,definition,26,0.05
+wich,syntax constructor,26,0.05
+cbr,syntax constructor,25,0.05
+cdig,syntax constructor,25,0.05
+cfne,syntax constructor,25,0.05
+clininds,syntax constructor,25,0.05
+cmax,syntax constructor,25,0.05
+cmvt,syntax constructor,25,0.05
+cprf,syntax constructor,25,0.05
+crisefac,syntax constructor,25,0.05
+cucn,syntax constructor,25,0.05
+cvdwa,syntax constructor,25,0.05
+df-2ndf,definition,25,0.05
+df-bra,definition,25,0.05
+df-cnext,definition,25,0.05
+df-cusp,definition,25,0.05
+df-dig,definition,25,0.05
+df-fne,definition,25,0.05
+df-mon,definition,25,0.05
+df-msub,definition,25,0.05
+df-risefac,definition,25,0.05
+df-ucn,definition,25,0.05
+c1r,syntax constructor,24,0.05
+cbnd,syntax constructor,24,0.05
+cgch,syntax constructor,24,0.05
+cmarrep,syntax constructor,24,0.05
+cmfs,syntax constructor,24,0.05
+cminmar1,syntax constructor,24,0.05
+cprstc,syntax constructor,24,0.05
+df-bnd,definition,24,0.05
+df-gch,definition,24,0.05
+df-lininds,definition,24,0.05
+df-lng,definition,24,0.05
+df-m1r,definition,24,0.05
+df-marrep,definition,24,0.05
+df-mfs,definition,24,0.05
+df-minmar1,definition,24,0.05
+df-nrm,definition,24,0.05
+df-prf,definition,24,0.05
+df-prstc,definition,24,0.05
+df-sucmap,definition,24,0.05
+df-vdwap,definition,24,0.05
+df-wspthsn,definition,24,0.05
+ccoda,syntax constructor,23,0.05
+ccpmat2mat,syntax constructor,23,0.05
+cdoma,syntax constructor,23,0.05
+cimage,syntax constructor,23,0.05
+cline,syntax constructor,23,0.05
+crngim,syntax constructor,23,0.05
+crrext,syntax constructor,23,0.05
+csimpg,syntax constructor,23,0.05
+cxdiv,syntax constructor,23,0.05
+df-1r,definition,23,0.05
+df-cpmat2mat,definition,23,0.05
+df-line,definition,23,0.05
+df-lnm,definition,23,0.05
+df-mex,definition,23,0.05
+df-rngim,definition,23,0.05
+df-rrext,definition,23,0.05
+df-simpg,definition,23,0.05
+df-xdiv,definition,23,0.05
+ax-c11,axiom,22,0.05
+ax-groth,axiom,22,0.05
+c1stc,syntax constructor,22,0.05
+caltop,syntax constructor,22,0.05
+ckard,syntax constructor,22,0.05
+cpridl,syntax constructor,22,0.05
+cram,syntax constructor,22,0.05
+csubma,syntax constructor,22,0.05
+ctotbnd,syntax constructor,22,0.05
+cyon,syntax constructor,22,0.05
+df-1stc,definition,22,0.05
+df-image,definition,22,0.05
+df-kard,definition,22,0.05
+df-ram,definition,22,0.05
+df-subma,definition,22,0.05
+df-totbnd,definition,22,0.05
+df-yon,definition,22,0.05
+c2ndc,syntax constructor,21,0.04
+cack,syntax constructor,21,0.04
+ccmtN,syntax constructor,21,0.04
+cevlf,syntax constructor,21,0.04
+chst,syntax constructor,21,0.04
+cinftm,syntax constructor,21,0.04
+cleo,syntax constructor,21,0.04
+cmatrepV,syntax constructor,21,0.04
+corvc,syntax constructor,21,0.04
+crngohom,syntax constructor,21,0.04
+csingle,syntax constructor,21,0.04
+csitg,syntax constructor,21,0.04
+df-ack,definition,21,0.04
+df-als,definition,21,0.04
+df-cmtN,definition,21,0.04
+df-erl,definition,21,0.04
+df-hst,definition,21,0.04
+df-inftm,definition,21,0.04
+df-leop,definition,21,0.04
+df-orvc,definition,21,0.04
+wals,syntax constructor,21,0.04
+bj-cproj,syntax constructor,20,0.04
+cfin3,syntax constructor,20,0.04
+cfrgp,syntax constructor,20,0.04
+cgam,syntax constructor,20,0.04
+cgbow,syntax constructor,20,0.04
+chl,syntax constructor,20,0.04
+cmcls,syntax constructor,20,0.04
+cmgc,syntax constructor,20,0.04
+cpid,syntax constructor,20,0.04
+cpj,syntax constructor,20,0.04
+cprmo,syntax constructor,20,0.04
+crngcALTV,syntax constructor,20,0.04
+ctrrels,syntax constructor,20,0.04
+df-altop,definition,20,0.04
+df-bj-proj,definition,20,0.04
+df-coda,definition,20,0.04
+df-doma,definition,20,0.04
+df-evlf,definition,20,0.04
+df-fin3,definition,20,0.04
+df-frgp,definition,20,0.04
+df-hl,definition,20,0.04
+df-marepv,definition,20,0.04
+df-mgc,definition,20,0.04
+df-pid,definition,20,0.04
+df-prmo,definition,20,0.04
+df-r,definition,20,0.04
+df-singleton,definition,20,0.04
+ccarsg,syntax constructor,19,0.04
+ccpn,syntax constructor,19,0.04
+ceqvrels,syntax constructor,19,0.04
+cgbo,syntax constructor,19,0.04
+cgrlic,syntax constructor,19,0.04
+cran,syntax constructor,19,0.04
+crgspn,syntax constructor,19,0.04
+cslv,syntax constructor,19,0.04
+cslw,syntax constructor,19,0.04
+df-carsg,definition,19,0.04
+df-coeleqvrel,definition,19,0.04
+df-com2,definition,19,0.04
+df-cpn,definition,19,0.04
+df-gbow,definition,19,0.04
+df-grlic,definition,19,0.04
+df-pj,definition,19,0.04
+df-ran,definition,19,0.04
+df-ref,definition,19,0.04
+df-rgspn,definition,19,0.04
+df-rngcALTV,definition,19,0.04
+df-sitg,definition,19,0.04
+df-slw,definition,19,0.04
+wcoeleqvrel,syntax constructor,19,0.04
+carchi,syntax constructor,18,0.04
+ccoll,syntax constructor,18,0.04
+cconngr,syntax constructor,18,0.04
+clocfin,syntax constructor,18,0.04
+cmvh,syntax constructor,18,0.04
+cnew,syntax constructor,18,0.04
+cofld,syntax constructor,18,0.04
+csetrecs,syntax constructor,18,0.04
+csgm,syntax constructor,18,0.04
+csmat,syntax constructor,18,0.04
+ctdrg,syntax constructor,18,0.04
+ctrs,syntax constructor,18,0.04
+cufl,syntax constructor,18,0.04
+df-2ndc,definition,18,0.04
+df-archi,definition,18,0.04
+df-coll,definition,18,0.04
+df-conngr,definition,18,0.04
+df-gbo,definition,18,0.04
+df-new,definition,18,0.04
+df-ofld,definition,18,0.04
+df-selv,definition,18,0.04
+df-setrecs,definition,18,0.04
+df-sgm,definition,18,0.04
+df-smat,definition,18,0.04
+df-trrels,definition,18,0.04
+df-trs,definition,18,0.04
+cabss,syntax constructor,17,0.04
+cbcc,syntax constructor,17,0.04
+cdmqss,syntax constructor,17,0.04
+cesply,syntax constructor,17,0.04
+cigen,syntax constructor,17,0.04
+cipf,syntax constructor,17,0.04
+clan,syntax constructor,17,0.04
+cpclN,syntax constructor,17,0.04
+crloc,syntax constructor,17,0.04
+cstrkge,syntax constructor,17,0.04
+ctlm,syntax constructor,17,0.04
+cvrmd,syntax constructor,17,0.04
+cz12s,syntax constructor,17,0.04
+df-abss,definition,17,0.04
+df-bcc,definition,17,0.04
+df-esply,definition,17,0.04
+df-gam,definition,17,0.04
+df-igen,definition,17,0.04
+df-ipf,definition,17,0.04
+df-lan,definition,17,0.04
+df-msta,definition,17,0.04
+df-mvh,definition,17,0.04
+df-pclN,definition,17,0.04
+df-pridl,definition,17,0.04
+df-rloc,definition,17,0.04
+df-rngohom,definition,17,0.04
+df-trkge,definition,17,0.04
+df-vrmd,definition,17,0.04
+df-z12s,definition,17,0.04
+cdir,syntax constructor,16,0.03
+cdrng,syntax constructor,16,0.03
+clinco,syntax constructor,16,0.03
+cline2,syntax constructor,16,0.03
+cmndtc,syntax constructor,16,0.03
+cmnring,syntax constructor,16,0.03
+cnmul,syntax constructor,16,0.03
+coutsideof,syntax constructor,16,0.03
+crcl,syntax constructor,16,0.03
+crtcl,syntax constructor,16,0.03
+csate,syntax constructor,16,0.03
+csubmgm,syntax constructor,16,0.03
+df-comember,definition,16,0.03
+df-dir,definition,16,0.03
+df-lco,definition,16,0.03
+df-line2,definition,16,0.03
+df-locfin,definition,16,0.03
+df-mndtc,definition,16,0.03
+df-mnring,definition,16,0.03
+df-nmul,definition,16,0.03
+df-rcl,definition,16,0.03
+df-relp,definition,16,0.03
+df-rtrcl,definition,16,0.03
+df-submgm,definition,16,0.03
+df-vhc2,definition,16,0.03
+wcomember,syntax constructor,16,0.03
+wrelp,syntax constructor,16,0.03
+wvhc2,syntax constructor,16,0.03
+cgrtri,syntax constructor,15,0.03
+cinl,syntax constructor,15,0.03
+cinr,syntax constructor,15,0.03
+cocaN,syntax constructor,15,0.03
+cresv,syntax constructor,15,0.03
+crspec,syntax constructor,15,0.03
+csingles,syntax constructor,15,0.03
+csseq,syntax constructor,15,0.03
+ctayl,syntax constructor,15,0.03
+cvdwm,syntax constructor,15,0.03
+df-dmqss,definition,15,0.03
+df-drngo,definition,15,0.03
+df-eqvrels,definition,15,0.03
+df-grtri,definition,15,0.03
+df-inl,definition,15,0.03
+df-inr,definition,15,0.03
+df-resv,definition,15,0.03
+df-rrh,definition,15,0.03
+df-rspec,definition,15,0.03
+df-sate,definition,15,0.03
+df-sseq,definition,15,0.03
+df-tayl,definition,15,0.03
+df-vdwmc,definition,15,0.03
+cacos,syntax constructor,14,0.03
+cacycgr,syntax constructor,14,0.03
+ccref,syntax constructor,14,0.03
+cdgraa,syntax constructor,14,0.03
+cedring-rN,syntax constructor,14,0.03
+cfin2,syntax constructor,14,0.03
+cfix,syntax constructor,14,0.03
+cfxp,syntax constructor,14,0.03
+cghomOLD,syntax constructor,14,0.03
+cinag,syntax constructor,14,0.03
+cnmhm,syntax constructor,14,0.03
+crrvec,syntax constructor,14,0.03
+csmu,syntax constructor,14,0.03
+csph,syntax constructor,14,0.03
+df-acos,definition,14,0.03
+df-acycgr,definition,14,0.03
+df-bj-rvec,definition,14,0.03
+df-cdeq,definition,14,0.03
+df-cref,definition,14,0.03
+df-edring-rN,definition,14,0.03
+df-fin2,definition,14,0.03
+df-ghomOLD,definition,14,0.03
+df-membpart,definition,14,0.03
+df-mul,definition,14,0.03
+df-nmhm,definition,14,0.03
+df-outsideof,definition,14,0.03
+df-singles,definition,14,0.03
+df-smu,definition,14,0.03
+df-sph,definition,14,0.03
+df-tdrg,definition,14,0.03
+df-tlm,definition,14,0.03
+df-ufl,definition,14,0.03
+wcdeq,syntax constructor,14,0.03
+wmembpart,syntax constructor,14,0.03
+cbp,syntax constructor,13,0.03
+ccmd,syntax constructor,13,0.03
+cepi,syntax constructor,13,0.03
+cextv,syntax constructor,13,0.03
+cfinxp,syntax constructor,13,0.03
+cfppr,syntax constructor,13,0.03
+chf,syntax constructor,13,0.03
+cprmrng,syntax constructor,13,0.03
+cprrng,syntax constructor,13,0.03
+cpsd,syntax constructor,13,0.03
+crrn,syntax constructor,13,0.03
+csx,syntax constructor,13,0.03
+df-bpoly,definition,13,0.03
+df-cmd,definition,13,0.03
+df-dgraa,definition,13,0.03
+df-epi,definition,13,0.03
+df-extv,definition,13,0.03
+df-finxp,definition,13,0.03
+df-fix,definition,13,0.03
+df-fppr,definition,13,0.03
+df-fxp,definition,13,0.03
+df-hf,definition,13,0.03
+df-prmring,definition,13,0.03
+df-psd,definition,13,0.03
+df-rals,definition,13,0.03
+df-rrn,definition,13,0.03
+df-sx,definition,13,0.03
+wrals,syntax constructor,13,0.03
+ax-regs,axiom,12,0.03
+bj-c1upl,syntax constructor,12,0.03
+casslaw,syntax constructor,12,0.03
+cbigcup,syntax constructor,12,0.03
+cintop,syntax constructor,12,0.03
+cismty,syntax constructor,12,0.03
+clmd,syntax constructor,12,0.03
+clnr,syntax constructor,12,0.03
+clring,syntax constructor,12,0.03
+cmend,syntax constructor,12,0.03
+cmpps,syntax constructor,12,0.03
+cpprod,syntax constructor,12,0.03
+csegle,syntax constructor,12,0.03
+cvdwp,syntax constructor,12,0.03
+cvrgp,syntax constructor,12,0.03
+cvts,syntax constructor,12,0.03
+df-add,definition,12,0.03
+df-bj-1upl,definition,12,0.03
+df-docaN,definition,12,0.03
+df-intop,definition,12,0.03
+df-ismty,definition,12,0.03
+df-lmd,definition,12,0.03
+df-lnr,definition,12,0.03
+df-lring,definition,12,0.03
+df-mcls,definition,12,0.03
+df-mend,definition,12,0.03
+df-pprod,definition,12,0.03
+df-prrngo,definition,12,0.03
+df-segle,definition,12,0.03
+df-vdwpc,definition,12,0.03
+df-vrgp,definition,12,0.03
+ax-frege58a,axiom,11,0.02
+ax-tco,axiom,11,0.02
+carea,syntax constructor,11,0.02
+cclintop,syntax constructor,11,0.02
+ccoa,syntax constructor,11,0.02
+cfunsALTV,syntax constructor,11,0.02
+cfunss,syntax constructor,11,0.02
+cinftyexpi,syntax constructor,11,0.02
+clindeps,syntax constructor,11,0.02
+cmoore,syntax constructor,11,0.02
+cobs,syntax constructor,11,0.02
+cparts,syntax constructor,11,0.02
+cplig,syntax constructor,11,0.02
+cpre,syntax constructor,11,0.02
+crngoiso,syntax constructor,11,0.02
+cttg,syntax constructor,11,0.02
+czeroo,syntax constructor,11,0.02
+df-area,definition,11,0.02
+df-bigcup,definition,11,0.02
+df-bj-inftyexpi,definition,11,0.02
+df-bj-moore,definition,11,0.02
+df-coa,definition,11,0.02
+df-funsALTV,definition,11,0.02
+df-funss,definition,11,0.02
+df-lindeps,definition,11,0.02
+df-nor,definition,11,0.02
+df-obs,definition,11,0.02
+df-parts,definition,11,0.02
+df-plig,definition,11,0.02
+df-pre,definition,11,0.02
+df-ttg,definition,11,0.02
+df-vts,definition,11,0.02
+df-zeroo,definition,11,0.02
+wnor,syntax constructor,11,0.02
+bj-cpr1,syntax constructor,10,0.02
+ceeng,syntax constructor,10,0.02
+cei,syntax constructor,10,0.02
+cfcf,syntax constructor,10,0.02
+cprpr,syntax constructor,10,0.02
+cufd,syntax constructor,10,0.02
+df-alseu,definition,10,0.02
+df-bj-pr1,definition,10,0.02
+df-clintop,definition,10,0.02
+df-eeng,definition,10,0.02
+df-fcf,definition,10,0.02
+df-mpps,definition,10,0.02
+df-prpr,definition,10,0.02
+df-ufd,definition,10,0.02
+walseu,syntax constructor,10,0.02
+ax-ac,axiom,9,0.02
+cbigo,syntax constructor,9,0.02
+ccnrm,syntax constructor,9,0.02
+cdmn,syntax constructor,9,0.02
+celdisjs,syntax constructor,9,0.02
+cers,syntax constructor,9,0.02
+cewlks,syntax constructor,9,0.02
+cfdiv,syntax constructor,9,0.02
+cfin7,syntax constructor,9,0.02
+cida,syntax constructor,9,0.02
+ck,syntax constructor,9,0.02
+clmat,syntax constructor,9,0.02
+clpoN,syntax constructor,9,0.02
+cmnt,syntax constructor,9,0.02
+creno,syntax constructor,9,0.02
+ctus,syntax constructor,9,0.02
+cwpointsN,syntax constructor,9,0.02
+df-bigo,definition,9,0.02
+df-cnrm,definition,9,0.02
+df-dmn,definition,9,0.02
+df-eldisjs,definition,9,0.02
+df-ers,definition,9,0.02
+df-ewlks,definition,9,0.02
+df-fdiv,definition,9,0.02
+df-fin7,definition,9,0.02
+df-ida,definition,9,0.02
+df-inag,definition,9,0.02
+df-kb,definition,9,0.02
+df-lmat,definition,9,0.02
+df-lpolN,definition,9,0.02
+df-mnt,definition,9,0.02
+df-prt,definition,9,0.02
+df-reno,definition,9,0.02
+df-tus,definition,9,0.02
+wprt,syntax constructor,9,0.02
+ax-c16,axiom,8,0.02
+c4o,syntax constructor,8,0.02
+cae,syntax constructor,8,0.02
+ccllaw,syntax constructor,8,0.02
+cfib,syntax constructor,8,0.02
+cfunpart,syntax constructor,8,0.02
+cldgis,syntax constructor,8,0.02
+cmetid,syntax constructor,8,0.02
+cmthm,syntax constructor,8,0.02
+cnacs,syntax constructor,8,0.02
+coms,syntax constructor,8,0.02
+cprjsp,syntax constructor,8,0.02
+cprjspn,syntax constructor,8,0.02
+csuccl,syntax constructor,8,0.02
+ctail,syntax constructor,8,0.02
+cupwlks,syntax constructor,8,0.02
+cwsuc,syntax constructor,8,0.02
+df-4o,definition,8,0.02
+df-eigvec,definition,8,0.02
+df-fib,definition,8,0.02
+df-funpart,definition,8,0.02
+df-ldgis,definition,8,0.02
+df-lt,definition,8,0.02
+df-mthm,definition,8,0.02
+df-nacs,definition,8,0.02
+df-oms,definition,8,0.02
+df-succl,definition,8,0.02
+df-tail,definition,8,0.02
+df-upwlks,definition,8,0.02
+df-wsuc,definition,8,0.02
+bj-c2uple,syntax constructor,7,0.01
+bj-cpr2,syntax constructor,7,0.01
+cassintop,syntax constructor,7,0.01
+cccinfty,syntax constructor,7,0.01
+ccprob,syntax constructor,7,0.01
+chft,syntax constructor,7,0.01
+cigam,syntax constructor,7,0.01
+cmaxidl,syntax constructor,7,0.01
+cmpaa,syntax constructor,7,0.01
+cresf,syntax constructor,7,0.01
+crtrcl,syntax constructor,7,0.01
+cs8,syntax constructor,7,0.01
+cunc,syntax constructor,7,0.01
+df-2reu,definition,7,0.01
+df-assintop,definition,7,0.01
+df-bj-2upl,definition,7,0.01
+df-bj-pr2,definition,7,0.01
+df-cllaw,definition,7,0.01
+df-cndprob,definition,7,0.01
+df-hfmul,definition,7,0.01
+df-igam,definition,7,0.01
+df-maxidl,definition,7,0.01
+df-metid,definition,7,0.01
+df-mpaa,definition,7,0.01
+df-prjsp,definition,7,0.01
+df-ralseu,definition,7,0.01
+df-resf,definition,7,0.01
+df-rngoiso,definition,7,0.01
+df-rtrclrec,definition,7,0.01
+df-s8,definition,7,0.01
+df-unc,definition,7,0.01
+df-vhc3,definition,7,0.01
+w2reu,syntax constructor,7,0.01
+wralseu,syntax constructor,7,0.01
+wvhc3,syntax constructor,7,0.01
+ax-inf,axiom,6,0.01
+ax-ros335,axiom,6,0.01
+ax-ros336,axiom,6,0.01
+bj-cgab,syntax constructor,6,0.01
+caj,syntax constructor,6,0.01
+caltxp,syntax constructor,6,0.01
+ccart,syntax constructor,6,0.01
+ccot,syntax constructor,6,0.01
+cdilN,syntax constructor,6,0.01
+cdlat,syntax constructor,6,0.01
+cel,syntax constructor,6,0.01
+cfin1a,syntax constructor,6,0.01
+cfld,syntax constructor,6,0.01
+cfrac,syntax constructor,6,0.01
+cleag,syntax constructor,6,0.01
+clines2,syntax constructor,6,0.01
+clpad,syntax constructor,6,0.01
+cmembparts,syntax constructor,6,0.01
+cpg,syntax constructor,6,0.01
+cptfin,syntax constructor,6,0.01
+csec,syntax constructor,6,0.01
+csset,syntax constructor,6,0.01
+ctvc,syntax constructor,6,0.01
+cuncf,syntax constructor,6,0.01
+cwlim,syntax constructor,6,0.01
+cwunm,syntax constructor,6,0.01
+df-altxp,definition,6,0.01
+df-asslaw,definition,6,0.01
+df-bj-gab,definition,6,0.01
+df-cart,definition,6,0.01
+df-cot,definition,6,0.01
+df-dlat,definition,6,0.01
+df-eigval,definition,6,0.01
+df-fin1a,definition,6,0.01
+df-fld,definition,6,0.01
+df-frac,definition,6,0.01
+df-leag,definition,6,0.01
+df-lines2,definition,6,0.01
+df-lpad,definition,6,0.01
+df-ltbag,definition,6,0.01
+df-prjspn,definition,6,0.01
+df-ptfin,definition,6,0.01
+df-redund,definition,6,0.01
+df-sec,definition,6,0.01
+df-sset,definition,6,0.01
+df-tvc,definition,6,0.01
+df-uncf,definition,6,0.01
+df-wlim,definition,6,0.01
+df-wunc,definition,6,0.01
+wredund,syntax constructor,6,0.01
+ax-bj-sn,axiom,5,0.01
+ax-frege54a,axiom,5,0.01
+ax-prv1,axiom,5,0.01
+ax-prv2,axiom,5,0.01
+cadjliftmap,syntax constructor,5,0.01
+cccbar,syntax constructor,5,0.01
+ccsc,syntax constructor,5,0.01
+ccup,syntax constructor,5,0.01
+cdjaN,syntax constructor,5,0.01
+cfin5,syntax constructor,5,0.01
+cfullfn,syntax constructor,5,0.01
+chil,syntax constructor,5,0.01
+cimdir,syntax constructor,5,0.01
+cmgm2,syntax constructor,5,0.01
+cnelbr,syntax constructor,5,0.01
+cpautN,syntax constructor,5,0.01
+cpcmp,syntax constructor,5,0.01
+cpnrm,syntax constructor,5,0.01
+cprvb,syntax constructor,5,0.01
+crisc,syntax constructor,5,0.01
+cthl,syntax constructor,5,0.01
+ctskm,syntax constructor,5,0.01
+df-0,definition,5,0.01
+df-1,definition,5,0.01
+df-adjliftmap,definition,5,0.01
+df-ae,definition,5,0.01
+df-bj-ccbar,definition,5,0.01
+df-bj-ccinfty,definition,5,0.01
+df-csc,definition,5,0.01
+df-cup,definition,5,0.01
+df-djaN,definition,5,0.01
+df-fin5,definition,5,0.01
+df-fullfun,definition,5,0.01
+df-hil,definition,5,0.01
+df-imdir,definition,5,0.01
+df-mvrs,definition,5,0.01
+df-nelbr,definition,5,0.01
+df-pcmp,definition,5,0.01
+df-pnrm,definition,5,0.01
+df-redundp,definition,5,0.01
+df-risc,definition,5,0.01
+df-thl,definition,5,0.01
+df-tskm,definition,5,0.01
+wredundp,syntax constructor,5,0.01
+ax-bgbltosilva,axiom,4,0.01
+ax-bj-bun,axiom,4,0.01
+ccomembers,syntax constructor,4,0.01
+cdiag2,syntax constructor,4,0.01
+cdmatalt,syntax constructor,4,0.01
+cdomain,syntax constructor,4,0.01
+cend,syntax constructor,4,0.01
+cfin6,syntax constructor,4,0.01
+cfinext,syntax constructor,4,0.01
+cfuns,syntax constructor,4,0.01
+cimg,syntax constructor,4,0.01
+citgo,syntax constructor,4,0.01
+climits,syntax constructor,4,0.01
+cmnc,syntax constructor,4,0.01
+cpetparts,syntax constructor,4,0.01
+cpinfty,syntax constructor,4,0.01
+cplusr,syntax constructor,4,0.01
+cpointsN,syntax constructor,4,0.01
+cprv,syntax constructor,4,0.01
+crange,syntax constructor,4,0.01
+csitm,syntax constructor,4,0.01
+csply,syntax constructor,4,0.01
+ctransport,syntax constructor,4,0.01
+df-addr,definition,4,0.01
+df-aj,definition,4,0.01
+df-antisymrel,definition,4,0.01
+df-bj-diag,definition,4,0.01
+df-bj-end,definition,4,0.01
+df-bj-pinfty,definition,4,0.01
+df-dmatalt,definition,4,0.01
+df-domain,definition,4,0.01
+df-fin6,definition,4,0.01
+df-finext,definition,4,0.01
+df-funs,definition,4,0.01
+df-h0v,definition,4,0.01
+df-i,definition,4,0.01
+df-img,definition,4,0.01
+df-itgo,definition,4,0.01
+df-limits,definition,4,0.01
+df-mdv,definition,4,0.01
+df-mnc,definition,4,0.01
+df-petparts,definition,4,0.01
+df-pointsN,definition,4,0.01
+df-prv,definition,4,0.01
+df-range,definition,4,0.01
+df-sitm,definition,4,0.01
+df-sply,definition,4,0.01
+df-transport,definition,4,0.01
+wantisymrel,syntax constructor,4,0.01
+ax-bj-adj,axiom,3,0.01
+ax-c14,axiom,3,0.01
+ax-hgprmladder,axiom,3,0.01
+ax-hgt749,axiom,3,0.01
+ax-prv3,axiom,3,0.01
+ax-xrssca,axiom,3,0.01
+ax-xrsvsca,axiom,3,0.01
+cafs,syntax constructor,3,0.01
+capply,syntax constructor,3,0.01
+ccap,syntax constructor,3,0.01
+ccoeleqvrels,syntax constructor,3,0.01
+ccomlaw,syntax constructor,3,0.01
+ccosh,syntax constructor,3,0.01
+cdde,syntax constructor,3,0.01
+cfae,syntax constructor,3,0.01
+cfwddifn,syntax constructor,3,0.01
+cge-real,syntax constructor,3,0.01
+cgt,syntax constructor,3,0.01
+ciminv,syntax constructor,3,0.01
+cminfty,syntax constructor,3,0.01
+cminusr,syntax constructor,3,0.01
+cmntop,syntax constructor,3,0.01
+cpeters,syntax constructor,3,0.01
+cprjcrv,syntax constructor,3,0.01
+cpstm,syntax constructor,3,0.01
+cray,syntax constructor,3,0.01
+csgns,syntax constructor,3,0.01
+csgrp2,syntax constructor,3,0.01
+cshiftstable,syntax constructor,3,0.01
+csinh,syntax constructor,3,0.01
+cstrkg2d,syntax constructor,3,0.01
+csuccf,syntax constructor,3,0.01
+ctimesr,syntax constructor,3,0.01
+ctrans,syntax constructor,3,0.01
+ctrnN,syntax constructor,3,0.01
+df-3nand,definition,3,0.01
+df-afs,definition,3,0.01
+df-apply,definition,3,0.01
+df-bj-minfty,definition,3,0.01
+df-cap,definition,3,0.01
+df-coeleqvrels,definition,3,0.01
+df-comembers,definition,3,0.01
+df-dde,definition,3,0.01
+df-dilN,definition,3,0.01
+df-fae,definition,3,0.01
+df-fwddifn,definition,3,0.01
+df-gt,definition,3,0.01
+df-gte,definition,3,0.01
+df-iminv,definition,3,0.01
+df-membparts,definition,3,0.01
+df-mgm2,definition,3,0.01
+df-mntop,definition,3,0.01
+df-mulv,definition,3,0.01
+df-mvt,definition,3,0.01
+df-peters,definition,3,0.01
+df-pg,definition,3,0.01
+df-prjcrv,definition,3,0.01
+df-pstm,definition,3,0.01
+df-ray,definition,3,0.01
+df-sgns,definition,3,0.01
+df-shiftstable,definition,3,0.01
+df-sinh,definition,3,0.01
+df-subr,definition,3,0.01
+df-succf,definition,3,0.01
+df-trans,definition,3,0.01
+df-trkg2d,definition,3,0.01
+df-trnN,definition,3,0.01
+df-watsN,definition,3,0.01
+w3nand,syntax constructor,3,0.01
+ax-exfinfld,axiom,2,0.0
+ax-tgoldbachgt,axiom,2,0.0
+calgext,syntax constructor,2,0.0
+cblockliftfix,syntax constructor,2,0.0
+cblockliftmap,syntax constructor,2,0.0
+ccytp,syntax constructor,2,0.0
+ceqlg,syntax constructor,2,0.0
+ceuf,syntax constructor,2,0.0
+cfractemp,syntax constructor,2,0.0
+chfs,syntax constructor,2,0.0
+chmo,syntax constructor,2,0.0
+cinftyexpitau,syntax constructor,2,0.0
+cpet2parts,syntax constructor,2,0.0
+credunds,syntax constructor,2,0.0
+crestrict,syntax constructor,2,0.0
+cspc,syntax constructor,2,0.0
+ctau,syntax constructor,2,0.0
+cub,syntax constructor,2,0.0
+df-algext,definition,2,0.0
+df-bj-inftyexpitau,definition,2,0.0
+df-blockliftfix,definition,2,0.0
+df-blockliftmap,definition,2,0.0
+df-cosh,definition,2,0.0
+df-cytp,definition,2,0.0
+df-eqlg,definition,2,0.0
+df-euf,definition,2,0.0
+df-hfsum,definition,2,0.0
+df-hmo,definition,2,0.0
+df-pautN,definition,2,0.0
+df-pet2parts,definition,2,0.0
+df-redunds,definition,2,0.0
+df-restrict,definition,2,0.0
+df-sgrp2,definition,2,0.0
+df-spec,definition,2,0.0
+df-tau,definition,2,0.0
+df-ub,definition,2,0.0
+ax-c11n,axiom,1,0.0
+ax-c15,axiom,1,0.0
+ax-flt,axiom,1,0.0
+ax-frege54c,axiom,1,0.0
+ax-wl-13v,axiom,1,0.0
+ccchat,syntax constructor,1,0.0
+cccinftyN,syntax constructor,1,0.0
+ccmgm2,syntax constructor,1,0.0
+ccsgrp2,syntax constructor,1,0.0
+ccsrg,syntax constructor,1,0.0
+cfinsum,syntax constructor,1,0.0
+cfwddif,syntax constructor,1,0.0
+cgcdOLD,syntax constructor,1,0.0
+cinfty,syntax constructor,1,0.0
+ciomnn,syntax constructor,1,0.0
+clb,syntax constructor,1,0.0
+cldlf,syntax constructor,1,0.0
+cpet2ers,syntax constructor,1,0.0
+crrhat,syntax constructor,1,0.0
+cstrset,syntax constructor,1,0.0
+ctanh,syntax constructor,1,0.0
+cxrh,syntax constructor,1,0.0
+df-bj-cchat,definition,1,0.0
+df-bj-ccinftyN,definition,1,0.0
+df-bj-finsum,definition,1,0.0
+df-bj-iomnn,definition,1,0.0
+df-bj-rrhat,definition,1,0.0
+df-cmgm2,definition,1,0.0
+df-comlaw,definition,1,0.0
+df-csgrp2,definition,1,0.0
+df-csring,definition,1,0.0
+df-fwddif,definition,1,0.0
+df-gcdOLD,definition,1,0.0
+df-lb,definition,1,0.0
+df-ldlf,definition,1,0.0
+df-pet2ers,definition,1,0.0
+df-strset,definition,1,0.0
+df-tanh,definition,1,0.0
+df-xrh,definition,1,0.0
+ax-10d,axiom,0,0.0
+ax-11d,axiom,0,0.0
+ax-7d,axiom,0,0.0
+ax-8d,axiom,0,0.0
+ax-9d1,axiom,0,0.0
+ax-9d2,axiom,0,0.0
+ax-wl-clel,axiom,0,0.0
+ax-wl-cleq,axiom,0,0.0
+caddcc,syntax constructor,0,0.0
+cai,syntax constructor,0,0.0
+cana,syntax constructor,0,0.0
+carg,syntax constructor,0,0.0
+ccloneop,syntax constructor,0,0.0
+ccp,syntax constructor,0,0.0
+ccpms,syntax constructor,0,0.0
+ccur-,syntax constructor,0,0.0
+cdivc,syntax constructor,0,0.0
+cedom,syntax constructor,0,0.0
+celwise,syntax constructor,0,0.0
+ceqp,syntax constructor,0,0.0
+cgf,syntax constructor,0,0.0
+cgfo,syntax constructor,0,0.0
+cgmdl,syntax constructor,0,0.0
+cgoa,syntax constructor,0,0.0
+cgob,syntax constructor,0,0.0
+cgoi,syntax constructor,0,0.0
+cgon,syntax constructor,0,0.0
+cgoo,syntax constructor,0,0.0
+cgoq,syntax constructor,0,0.0
+cgox,syntax constructor,0,0.0
+cgrisom,syntax constructor,0,0.0
+cgze,syntax constructor,0,0.0
+cgzf,syntax constructor,0,0.0
+cgzg,syntax constructor,0,0.0
+cgzi,syntax constructor,0,0.0
+cgzp,syntax constructor,0,0.0
+cgzr,syntax constructor,0,0.0
+cgzu,syntax constructor,0,0.0
+chalf,syntax constructor,0,0.0
+chcmp,syntax constructor,0,0.0
+chlb,syntax constructor,0,0.0
+chlim,syntax constructor,0,0.0
+cinvc,syntax constructor,0,0.0
+citgm,syntax constructor,0,0.0
+cline3,syntax constructor,0,0.0
+clog-,syntax constructor,0,0.0
+cltxr,syntax constructor,0,0.0
+cm0s,syntax constructor,0,0.0
+cmdl,syntax constructor,0,0.0
+cmesy,syntax constructor,0,0.0
+cmevl,syntax constructor,0,0.0
+cmfitp,syntax constructor,0,0.0
+cmfr,syntax constructor,0,0.0
+cmfsh,syntax constructor,0,0.0
+cmgfs,syntax constructor,0,0.0
+cmgmhom,syntax constructor,0,0.0
+cmitp,syntax constructor,0,0.0
+cmpt3,syntax constructor,0,0.0
+cmsa,syntax constructor,0,0.0
+cmsax,syntax constructor,0,0.0
+cmst,syntax constructor,0,0.0
+cmsy,syntax constructor,0,0.0
+cmtree,syntax constructor,0,0.0
+cmufs,syntax constructor,0,0.0
+cmulc,syntax constructor,0,0.0
+cmuv,syntax constructor,0,0.0
+cmvl,syntax constructor,0,0.0
+cmvsb,syntax constructor,0,0.0
+cmwgfs,syntax constructor,0,0.0
+cnnbar,syntax constructor,0,0.0
+comn,syntax constructor,0,0.0
+coppcc,syntax constructor,0,0.0
+cpfl,syntax constructor,0,0.0
+cpin,syntax constructor,0,0.0
+cplylt,syntax constructor,0,0.0
+cprj,syntax constructor,0,0.0
+cpsl,syntax constructor,0,0.0
+cptdfc,syntax constructor,0,0.0
+cqp,syntax constructor,0,0.0
+cqpa,syntax constructor,0,0.0
+cretr,syntax constructor,0,0.0
+crqp,syntax constructor,0,0.0
+crr3c,syntax constructor,0,0.0
+crrbar,syntax constructor,0,0.0
+csalon,syntax constructor,0,0.0
+cscmatalt,syntax constructor,0,0.0
+csethom,syntax constructor,0,0.0
+csf,syntax constructor,0,0.0
+csf1,syntax constructor,0,0.0
+csuppos,syntax constructor,0,0.0
+ctophom,syntax constructor,0,0.0
+ctoplnd,syntax constructor,0,0.0
+ctopmgmhom,syntax constructor,0,0.0
+ctopsep,syntax constructor,0,0.0
+ctp1,syntax constructor,0,0.0
+cunc-,syntax constructor,0,0.0
+cusyn,syntax constructor,0,0.0
+cza,syntax constructor,0,0.0
+czeta,syntax constructor,0,0.0
+czp,syntax constructor,0,0.0
+czr,syntax constructor,0,0.0
+czzbar,syntax constructor,0,0.0
+czzhat,syntax constructor,0,0.0
+df-algind,definition,0,0.0
+df-ana,definition,0,0.0
+df-bj-addc,definition,0,0.0
+df-bj-arg,definition,0,0.0
+df-bj-cur,definition,0,0.0
+df-bj-divc,definition,0,0.0
+df-bj-fractemp,definition,0,0.0
+df-bj-infty,definition,0,0.0
+df-bj-invc,definition,0,0.0
+df-bj-lt,definition,0,0.0
+df-bj-mgmhom,definition,0,0.0
+df-bj-mo,definition,0,0.0
+df-bj-mpt3,definition,0,0.0
+df-bj-mulc,definition,0,0.0
+df-bj-nnbar,definition,0,0.0
+df-bj-onehalf,definition,0,0.0
+df-bj-oppc,definition,0,0.0
+df-bj-rnf,definition,0,0.0
+df-bj-rrbar,definition,0,0.0
+df-bj-sethom,definition,0,0.0
+df-bj-tophom,definition,0,0.0
+df-bj-topmgmhom,definition,0,0.0
+df-bj-unc,definition,0,0.0
+df-bj-zzbar,definition,0,0.0
+df-bj-zzhat,definition,0,0.0
+df-cloneop,definition,0,0.0
+df-cp,definition,0,0.0
+df-cplmet,definition,0,0.0
+df-edom,definition,0,0.0
+df-elwise,definition,0,0.0
+df-eqp,definition,0,0.0
+df-gf,definition,0,0.0
+df-gfoo,definition,0,0.0
+df-gmdl,definition,0,0.0
+df-goan,definition,0,0.0
+df-gobi,definition,0,0.0
+df-goeq,definition,0,0.0
+df-goex,definition,0,0.0
+df-goim,definition,0,0.0
+df-gonot,definition,0,0.0
+df-goor,definition,0,0.0
+df-grisom,definition,0,0.0
+df-gzext,definition,0,0.0
+df-gzf,definition,0,0.0
+df-gzinf,definition,0,0.0
+df-gzpow,definition,0,0.0
+df-gzreg,definition,0,0.0
+df-gzrep,definition,0,0.0
+df-gzun,definition,0,0.0
+df-hcmp,definition,0,0.0
+df-homlim,definition,0,0.0
+df-homlimb,definition,0,0.0
+df-irreflexive,definition,0,0.0
+df-itgm,definition,0,0.0
+df-line3,definition,0,0.0
+df-logbALT,definition,0,0.0
+df-m0s,definition,0,0.0
+df-mcn,definition,0,0.0
+df-mdl,definition,0,0.0
+df-mesyn,definition,0,0.0
+df-mevl,definition,0,0.0
+df-mfitp,definition,0,0.0
+df-mfrel,definition,0,0.0
+df-mfsh,definition,0,0.0
+df-mgfs,definition,0,0.0
+df-mitp,definition,0,0.0
+df-mmax,definition,0,0.0
+df-msa,definition,0,0.0
+df-msax,definition,0,0.0
+df-mst,definition,0,0.0
+df-msyn,definition,0,0.0
+df-mtc,definition,0,0.0
+df-mtree,definition,0,0.0
+df-mty,definition,0,0.0
+df-mufs,definition,0,0.0
+df-musyn,definition,0,0.0
+df-muv,definition,0,0.0
+df-mvar,definition,0,0.0
+df-mvl,definition,0,0.0
+df-mvsb,definition,0,0.0
+df-mwgfs,definition,0,0.0
+df-omn,definition,0,0.0
+df-pin,definition,0,0.0
+df-plfl,definition,0,0.0
+df-plylt,definition,0,0.0
+df-prj,definition,0,0.0
+df-psl,definition,0,0.0
+df-ptdf,definition,0,0.0
+df-qp,definition,0,0.0
+df-qpa,definition,0,0.0
+df-reflexive,definition,0,0.0
+df-retr,definition,0,0.0
+df-rqp,definition,0,0.0
+df-rr3,definition,0,0.0
+df-salon,definition,0,0.0
+df-scmatalt,definition,0,0.0
+df-sfl,definition,0,0.0
+df-sfl1,definition,0,0.0
+df-suppos,definition,0,0.0
+df-toplnd,definition,0,0.0
+df-toply1,definition,0,0.0
+df-topsep,definition,0,0.0
+df-za,definition,0,0.0
+df-zeta,definition,0,0.0
+df-zp,definition,0,0.0
+df-zrng,definition,0,0.0
+wirreflexive,syntax constructor,0,0.0
+wmoo,syntax constructor,0,0.0
+wreflexive,syntax constructor,0,0.0
+wrnf,syntax constructor,0,0.0
