@@ -19,6 +19,15 @@
   <url><loc>https://f-keys.com/gonzalgo/controlled-tactics/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/spend-points/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/spend-points/spend-points.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/spend-points/spend-points.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/substitution-ledger/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/entry-points/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/entry-points/entry-points.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/entry-points/entry-points.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/papers/</loc><lastmod>2026-08-09</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/papers/eligibility-discriminates-among-theorems-not-among/</loc><lastmod>2026-08-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/papers/pdf/eligibility-discriminates-among-theorems-not-among.pdf</loc><lastmod>2026-08-11</lastmod><priority>0.7</priority></url>
@@ -49,7 +58,6 @@
   <url><loc>https://f-keys.com/papers/potica-america-naming-transmission-printed-record/</loc><lastmod>2026-07-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/papers/pdf/potica-america-naming-transmission-printed-record.pdf</loc><lastmod>2026-07-11</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/papers/competitive-context-jailbreak-accelerant-inter-model/</loc><lastmod>2026-05-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/papers/pdf/competitive-context-jailbreak-accelerant-inter-model.pdf</loc><lastmod>2026-05-03</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/papers/federated-classification-infrastructure-registry-governance-node/</loc><lastmod>2026-04-24</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/papers/pdf/federated-classification-infrastructure-registry-governance-node.pdf</loc><lastmod>2026-04-24</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/papers/modulign-architecture-implementation-applications-dimensional-address/</loc><lastmod>2026-04-24</lastmod><priority>0.8</priority></url>
@@ -90,13 +98,4 @@
   <url><loc>https://f-keys.com/papers/pdf/synthetic-content-epistemic-category.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/papers/formal-logic-modulign/</loc><lastmod>2026-03-31</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/papers/pdf/formal-logic-modulign.pdf</loc><lastmod>2026-03-31</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/spend-points/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/spend-points/spend-points.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/spend-points/spend-points.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/substitution-ledger/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/entry-points/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/entry-points/entry-points.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/entry-points/entry-points.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
 </urlset>
