@@ -4,6 +4,7 @@
   "version": "2026-08-05",
   "sha256": "9d0bf4f36a423930fe01144235192fb4cb384487499ddda7c47c9a265e977dbb",
   "url": "https://f-keys.com/gonzalgo/kernel-index/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

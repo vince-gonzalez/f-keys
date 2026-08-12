@@ -4,6 +4,7 @@
   "version": "2026-08-12",
   "sha256": "073870ae0569b45f4b796065f5964d3d81bd47951981e775337a166abcc68177",
   "url": "https://f-keys.com/gonzalgo/cleanable/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",
