@@ -141,22 +141,19 @@ def plan_for(rec: dict) -> tuple[dict, list[str]]:
     for key, url in REPO.items():
         if key in title and url.lower() not in linked:
             add.append({"relation": "isSupplementedBy", "identifier": url,
-                        "scheme": "url", "resource_type": "software"})
+                        "resource_type": "software"})
     # A version record carries its own DOI and its concept DOI, and linking to
     # either is a self-reference. Both have to be excluded, not just the first.
     own = {(rec.get("doi") or "").lower(), (rec.get("conceptdoi") or "").lower()}
     own.discard("")
     if any(k in title for k in ("axiom", "classical depend", "dominator",
                                 "eligibility", "tactic-level", "gonzalgo")):
-        for sib in AXIOM_SERIES:
-            if sib.lower() in own:
-                continue
-            if sib.lower() not in linked:
-                add.append({"relation": "isRelatedTo", "identifier": sib,
-                            "scheme": "doi"})
+        # No sibling cross-links: the only legacy relation that would carry
+        # them is `references`, which asserts a citation this cannot verify.
+        # The records that genuinely cite each other already say so.
         if ("isDocumentedBy", CATALOGUE) not in rel:
-            add.append({"relation": "isDocumentedBy", "identifier": CATALOGUE,
-                        "scheme": "url"})
+            add.append({"relation": "isDocumentedBy",
+                        "identifier": CATALOGUE})
     if add:
         patch["related_identifiers"] = m.get("related_identifiers", []) + add
 
@@ -179,13 +176,15 @@ def plan_for(rec: dict) -> tuple[dict, list[str]]:
             break
 
     if entry:
-        if ("isIdenticalTo", entry["url"]) not in rel and \
-                ("isVersionOf", entry["url"]) not in rel:
+        # Guard on the target, not the relation. Checking for a relation this
+        # branch does not write made the sweep non-idempotent: a second run
+        # appended a duplicate link to every record the first run had fixed.
+        if entry["url"].lower() not in linked:
             patch.setdefault("related_identifiers",
                              m.get("related_identifiers", []))
             patch["related_identifiers"] = patch["related_identifiers"] + [
                 {"relation": "isVariantFormOf", "identifier": entry["url"],
-                 "scheme": "url", "resource_type": "publication-preprint"}]
+                 "resource_type": "publication-preprint"}]
         if not m.get("keywords") and entry["keywords"]:
             patch["keywords"] = entry["keywords"]
 
@@ -246,8 +245,23 @@ def main() -> None:
                 continue
 
             merged = dict(live["metadata"]); merged.update(entry["patch"])
+            for ri in merged.get("related_identifiers", []) or []:
+                ri.pop("scheme", None)
             c, r = http("PUT", f"{API}/deposit/depositions/{rid}", token,
                         {"metadata": merged})
+            if c == 400:
+                # The API names the field it rejected. Drop that one and retry
+                # once; a field the deposit endpoint refuses to take back is a
+                # field it never accepted in this shape.
+                import re as _re
+                bad = _re.findall(r'"field":\s*"metadata\.([a-z_]+)',
+                                  str(r.get("error", "")))
+                if bad:
+                    for f in set(bad):
+                        merged.pop(f, None)
+                    print(f"  {rid}: retrying without {', '.join(set(bad))}")
+                    c, r = http("PUT", f"{API}/deposit/depositions/{rid}",
+                                token, {"metadata": merged})
             if c not in (200, 201):
                 print(f"  {rid}: PUT failed {c} {str(r.get('error',''))[:120]}")
                 skipped += 1
