@@ -80,6 +80,15 @@ class Index:
     citation: str = ""                           # HTML, the footer cite line
     row_limit: int | None = None                 # HTML shows this many; data has all
     row_limit_note: str = ""
+    # (description, fn(rows) -> bool). Every relation the prose depends on:
+    # parts summing to wholes, counts matching what a heading claims,
+    # percentages reproducing from their denominator. A page shipped saying
+    # 560 proofs were held out when the corpus arithmetic gave 831, because the
+    # figure was a difference between measured values and differences had
+    # nothing to be checked against. Measured values get verified against the
+    # tool; derived values only ever get verified against each other, so if
+    # they are not declared here they are not checked at all.
+    invariants: list[tuple[str, object]] = field(default_factory=list)
 
 
 # --------------------------------------------------------------------------
@@ -166,6 +175,29 @@ def check_fonts(css: str, where: str) -> None:
 # --------------------------------------------------------------------------
 # rendering
 # --------------------------------------------------------------------------
+def check_invariants(idx: Index) -> None:
+    """Refuse to emit an index whose declared relations do not hold.
+
+    A raising check is the point. One that logs a warning gets published over."""
+    if not idx.invariants:
+        raise ValueError(
+            f"{idx.slug}: no invariants declared. Every index states at least "
+            "one relation its prose depends on, or the numbers in the prose "
+            "are unchecked.")
+    failed = []
+    for description, fn in idx.invariants:
+        try:
+            ok = fn(idx.rows)
+        except Exception as exc:                      # a check that errors
+            failed.append(f"{description}  [check itself raised: {exc!r}]")
+            continue
+        if not ok:
+            failed.append(description)
+    if failed:
+        raise ValueError(f"{idx.slug}: declared invariants do not hold:\n  "
+                         + "\n  ".join(failed))
+
+
 def _csv_value(v):
     """Booleans go out as true/false, matching the JSON, not Python's True/False."""
     if v is None:
@@ -246,6 +278,7 @@ def emit_data(idx: Index) -> dict:
     Split out from build() so a hand-written page — a write-up whose prose is
     the point — can still ship the same data files and the same Dataset block
     without being forced through the table template."""
+    check_invariants(idx)
     version, digest, changed = resolve_version(idx)
     fields = data_fields(idx)
     out = GONZALGO / idx.slug

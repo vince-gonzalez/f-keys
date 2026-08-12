@@ -293,6 +293,15 @@ def rows() -> list[dict]:
     ]
 
 
+def _n(rows: list[dict], category: str) -> int:
+    """The count on a named row. Raises if the row is missing, so renaming a
+    category breaks the build instead of quietly voiding an invariant."""
+    for r in rows:
+        if r["category"] == category:
+            return r["proofs"]
+    raise KeyError(category)
+
+
 def summary_block(data: list[dict]) -> str:
     """The <pre> table, laid out from the rows rather than typed by hand."""
     width = max(len(d["category"]) for d in data)
@@ -332,6 +341,32 @@ def build() -> str:
                   "Goedel-Prover", "Lean Workbook", "axiom of choice",
                   "sorry", "native_decide", "formal verification"],
         based_on="https://doi.org/10.5281/zenodo.21769846",
+        invariants=[
+            # The failure this page actually shipped: a row that must be a
+            # total was filled with the size of a correction.
+            ("compiled and held-out sum to the corpus",
+             lambda rs: _n(rs, "compiled under Lean 4.32")
+             + _n(rs, "held out, failed to compile") == _n(rs, "corpus")),
+            ("statement-bound and avoidable sum to the choice-dependent total",
+             lambda rs: _n(rs, "choice dependence bound by the statement")
+             + _n(rs, "choice dependence avoidable, proof only")
+             == _n(rs, "depends on Classical.choice")),
+            ("choice-dependent and choice-free sum to the compiled total",
+             lambda rs: _n(rs, "depends on Classical.choice")
+             + _n(rs, "choice-free entirely")
+             == _n(rs, "compiled under Lean 4.32")),
+            ("every share recomputes from the compiled denominator",
+             lambda rs: all(
+                 r["share_of_compiled_pct"] is None
+                 or abs(round(100 * r["proofs"] / _n(rs, "compiled under Lean 4.32"), 1)
+                        - r["share_of_compiled_pct"]) <= 0.05
+                 for r in rs)),
+            ("the three zero claims are still zero",
+             lambda rs: all(_n(rs, c) == 0 for c in (
+                 "rests on an unfinished proof",
+                 "native_decide / compiler-trusted",
+                 "axioms beyond propext, Quot.sound, Classical.choice"))),
+        ],
     )
     emitted = indexlib.emit_data(idx)
     META.update(emitted)

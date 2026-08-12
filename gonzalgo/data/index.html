@@ -59,8 +59,8 @@
       "@type": "Dataset",
       "name": "The Dominator Table",
       "url": "https://f-keys.com/gonzalgo/dominator-table/",
-      "description": "Mathlib constants ranked by how many theorems each is uniquely responsible for making classical — the number that would stop depending on the axiom of choice if that constant alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom.",
-      "version": "2026-08-11",
+      "description": "Sites of classical dependence in Mathlib ranked by how many theorems each is uniquely responsible for — the number that would stop depending on the axiom of choice if that site alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom, with chains of constants that free the same theorems collapsed to a single site.",
+      "version": "2026-08-12",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "distribution": [
         {
@@ -72,6 +72,26 @@
           "@type": "DataDownload",
           "encodingFormat": "text/csv",
           "contentUrl": "https://f-keys.com/gonzalgo/dominator-table/dominator-table.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "name": "The Controlled Tactic Table",
+      "url": "https://f-keys.com/gonzalgo/controlled-tactics/",
+      "description": "A controlled experiment over Lean tactics. 27 arithmetic goals over Nat and Int, each put to ten tactics, with the axiom set recorded for every cell. Holding the goal fixed and varying only the tactic separates a classical dependence introduced by the proof from one required by the statement.",
+      "version": "2026-08-12",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.csv"
         }
       ]
     },
@@ -173,11 +193,20 @@ moves only when the numbers do.
 </div>
 <div class="card">
   <h2><a href="https://f-keys.com/gonzalgo/dominator-table/">The Dominator Table</a></h2>
-  <p>Mathlib constants ranked by how many theorems each is uniquely responsible for making classical — the number that would stop depending on the axiom of choice if that constant alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom.</p>
+  <p>Sites of classical dependence in Mathlib ranked by how many theorems each is uniquely responsible for — the number that would stop depending on the axiom of choice if that site alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom, with chains of constants that free the same theorems collapsed to a single site.</p>
   <p class="meta">
-    3,000 rows &middot; version 2026-08-11 &middot;
+    1,500 rows &middot; version 2026-08-12 &middot;
     <a href="https://f-keys.com/gonzalgo/dominator-table/dominator-table.json">JSON</a> &middot;
     <a href="https://f-keys.com/gonzalgo/dominator-table/dominator-table.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/controlled-tactics/">The Controlled Tactic Table</a></h2>
+  <p>A controlled experiment over Lean tactics. 27 arithmetic goals over Nat and Int, each put to ten tactics, with the axiom set recorded for every cell. Holding the goal fixed and varying only the tactic separates a classical dependence introduced by the proof from one required by the statement.</p>
+  <p class="meta">
+    270 rows &middot; version 2026-08-12 &middot;
+    <a href="https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.csv">CSV</a> &middot; CC-BY-4.0
   </p>
 </div>
 <div class="card">

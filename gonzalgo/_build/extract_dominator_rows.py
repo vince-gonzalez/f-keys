@@ -2,14 +2,21 @@
 
     python gonzalgo/_build/extract_dominator_rows.py
 
-Source: dominator-analysis-code.zip, the archive attached to
-10.5281/zenodo.21883963. Two files in it carry a `alone` count per constant and
-they do not agree on 137 of the 1,500 they share — dominators.json says
-Std.DHashMap.Internal.Raw.WF.out dominates 4,899 theorems, site_eligibility.json
-says 4,892. The published note reports 4,899, so dominators.json is authoritative
-here and only the categorical fields (area, statement_bound, route) are taken
-from the other. Disagreements are recorded on the row rather than resolved
-silently, and the count is printed on every run.
+Source: dominator-analysis-code.zip, attached to 10.5281/zenodo.21883963.
+
+The archive holds two files and they measure different things. `dominators.json`
+counts CONSTANTS: what each one alone dominates. `site_eligibility.json` counts
+SITES: a run of constants each dominating the next, with no theorems lost
+between them, is one site, because severing any member frees the same set. The
+note is explicit — "Std.DHashMap.Internal.Raw.WF.out, wfImp_alterₘ and
+isHashSelf_updateBucket_alter carry 4,892, 4,896 and 4,899 and are one site, not
+three" — and reports 4,899.
+
+The site is the publishable unit and the one the note's figures refer to, so the
+table is built from the sites file. Verified on every row: a site's count is the
+maximum over its chain, and equals its chain head's own constant count. Where a
+site's label differs in count from that constant taken alone, both are carried:
+`theorems_dominated` is the site, `constant_alone` is the label constant.
 """
 from __future__ import annotations
 
@@ -24,34 +31,43 @@ ARCHIVE = Path(r"C:\Users\Admin\OneDrive\Desktop\PAPER-dominators"
 KIND = {"D": "definition", "T": "theorem", "O": "other"}
 
 z = zipfile.ZipFile(ARCHIVE)
-dominators = json.loads(z.read("data/dominators.json"))
-eligibility = {r["name"]: r for r in json.loads(z.read("data/site_eligibility.json"))}
+constants = {r["name"]: r["alone"]
+             for r in json.loads(z.read("data/dominators.json"))}
+sites = json.loads(z.read("data/site_eligibility.json"))
+sites.sort(key=lambda s: -s["alone"])
 
 rows = []
-disagreements = 0
-for rank, d in enumerate(dominators, start=1):
-    e = eligibility.get(d["name"])
+collapsed = 0
+for rank, s in enumerate(sites, start=1):
+    chain = s["chain"]
+    members = [constants[c] for c in chain if c in constants]
+    assert s["alone"] == max(members), f"{s['name']}: not the max over its chain"
+    assert s["alone"] == constants[chain[0]], f"{s['name']}: head count differs"
+    if len(chain) > 1:
+        collapsed += 1
     row = {
         "rank": rank,
-        "constant": d["name"],
-        "kind": KIND.get(d["kind"], d["kind"]),
-        "theorems_dominated": d["alone"],
-        "area": e["area"] if e else None,
-        # statement_bound: the constant's own TYPE is classical, so no
-        # constructive replacement of it can exist. eligible is its negation.
-        "eligible": (not e["statement_bound"]) if e else None,
-        "route": " > ".join(e["chain"]) if e else None,
+        "site": s["name"],
+        "kind": KIND.get(s["kind"], s["kind"]),
+        "theorems_dominated": s["alone"],
+        "area": s["area"],
+        # statement_bound: the constant's own type is classical, so no
+        # constructive replacement can exist. eligible is its negation.
+        "eligible": not s["statement_bound"],
+        "chain_length": len(chain),
+        "chain": " > ".join(chain),
     }
-    if e and e["alone"] != d["alone"]:
-        row["count_in_eligibility_file"] = e["alone"]
-        disagreements += 1
+    alone = constants.get(s["name"])
+    if alone is not None and alone != s["alone"]:
+        row["constant_alone"] = alone
     rows.append(row)
 
 out = HERE / "data" / "dominator-table-rows.json"
 out.parent.mkdir(exist_ok=True)
 out.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
 
-covered = sum(1 for r in rows if r["area"] is not None)
-print(f"  wrote {out.name}: {len(rows):,} rows")
-print(f"  eligibility fields available for {covered:,}")
-print(f"  count disagreements between the two source files: {disagreements}")
+print(f"  wrote {out.name}: {len(rows):,} sites")
+print(f"  collapsed chains (more than one constant): {collapsed}")
+print(f"  label constant differs from its site count: "
+      f"{sum(1 for r in rows if 'constant_alone' in r)}")
+print(f"  ineligible sites: {sum(1 for r in rows if not r['eligible'])}")
