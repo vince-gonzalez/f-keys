@@ -23,6 +23,7 @@
   "name": "gonzalgo indexes",
   "url": "https://f-keys.com/gonzalgo/data/",
   "description": "Standing measurements of what formal mathematical libraries rest on, produced by gonzalgo and remeasured as the libraries move.",
+  "identifier": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "creator": {
     "@type": "Person",
@@ -217,6 +218,26 @@
     },
     {
       "@type": "Dataset",
+      "name": "The Site Diagnosis Table",
+      "url": "https://f-keys.com/gonzalgo/site-diagnosis/",
+      "description": "Sites of classical dependence in Lean 4 examined for constructive replacement and not removed, each with the reason: no instance could be synthesised, the occurrence was not in a position where an instance is supplied, the available instance itself depends on choice, or synthesis timed out.",
+      "version": "2026-08-12",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
       "name": "What machine-generated Lean proofs rest on",
       "url": "https://f-keys.com/gonzalgo/generated-proofs/",
       "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
@@ -384,6 +405,15 @@ moves only when the numbers do.
   </p>
 </div>
 <div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/site-diagnosis/">The Site Diagnosis Table</a></h2>
+  <p>Sites of classical dependence in Lean 4 examined for constructive replacement and not removed, each with the reason: no instance could be synthesised, the occurrence was not in a position where an instance is supplied, the available instance itself depends on choice, or synthesis timed out.</p>
+  <p class="meta">
+    765 rows &middot; version 2026-08-12 &middot;
+    <a href="https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
   <h2><a href="https://f-keys.com/gonzalgo/generated-proofs/">What machine-generated Lean proofs rest on</a></h2>
   <p>What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.</p>
   <p class="meta">
@@ -403,6 +433,10 @@ point of publishing the data is that someone can check it.
 
 <footer>
   <p>
+    Cite the series: Gonzalez, V. (2026). <em>The gonzalgo Indexes</em>. Zenodo.
+    <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>
+  </p>
+  <p style="margin-top:.8rem;">
     Method and definitions: Gonzalez, V. (2026).
     <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo.
     <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>

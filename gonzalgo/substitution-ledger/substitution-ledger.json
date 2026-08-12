@@ -4,6 +4,7 @@
   "version": "2026-08-12",
   "sha256": "8992a894d1cf1eada111bf8cb08f3e956759ae6ad77925701f17ce18938124e6",
   "url": "https://f-keys.com/gonzalgo/substitution-ledger/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

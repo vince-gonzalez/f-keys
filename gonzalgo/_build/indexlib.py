@@ -41,6 +41,11 @@ BASE = "https://f-keys.com"
 LICENSE = "https://creativecommons.org/licenses/by/4.0/"
 ORCID = "https://orcid.org/0009-0005-3640-014X"
 
+# Concept DOI for the series, which always resolves to the latest deposited
+# version. Every index carries it so a page that gets found on its own still
+# hands the reader something citable.
+SERIES_DOI = "https://doi.org/10.5281/zenodo.21900625"
+
 MIN_PX = 13.6   # 0.85rem. Anything under this has been complained about.
 
 
@@ -291,6 +296,7 @@ def emit_data(idx: Index) -> dict:
         "version": version,
         "sha256": digest,
         "url": url,
+        "seriesDoi": SERIES_DOI,
         "license": LICENSE,
         "producedBy": {
             "software": "gonzalgo",
@@ -325,8 +331,10 @@ def emit_data(idx: Index) -> dict:
         "publisher": {"@type": "Organization", "name": "F-Keys",
                       "url": BASE},
         "isBasedOn": idx.based_on,
+        "identifier": SERIES_DOI,
         "isPartOf": {"@type": "DataCatalog", "name": "gonzalgo indexes",
-                     "url": f"{BASE}/gonzalgo/data/"},
+                     "url": f"{BASE}/gonzalgo/data/",
+                     "identifier": SERIES_DOI},
         "measurementTechnique": "gonzalgo",
         "distribution": [
             {"@type": "DataDownload", "encodingFormat": "application/json",
@@ -426,6 +434,8 @@ version {version}
 <p class="series">
 One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
 measurements of what formal libraries rest on, remeasured as the libraries move.
+Cite the series as <a href="{SERIES_DOI}">10.5281/zenodo.21900625</a>, which
+resolves to the current deposit.
 </p>
 
 {repro}

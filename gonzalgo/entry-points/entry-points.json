@@ -4,6 +4,7 @@
   "version": "2026-08-12",
   "sha256": "41f9ae6059bde6064bc4f944d1899f12291b0dc4eca63501891576469b0745af",
   "url": "https://f-keys.com/gonzalgo/entry-points/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

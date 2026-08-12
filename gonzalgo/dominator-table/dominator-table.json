@@ -4,6 +4,7 @@
   "version": "2026-08-12",
   "sha256": "415eb3f9bd2923d2a336dfa059fffb66bc5bc1b73f2e3cff23598f31bc44baa4",
   "url": "https://f-keys.com/gonzalgo/dominator-table/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

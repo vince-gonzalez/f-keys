@@ -20,7 +20,7 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(SITE / "gonzalgo"))
 
 import indexlib  # noqa: E402
-from indexlib import BASE, CSS, LICENSE, ORCID, check_fonts  # noqa: E402
+from indexlib import BASE, CSS, LICENSE, ORCID, SERIES_DOI, check_fonts  # noqa: E402
 
 import mk_kernel_index  # noqa: E402
 import mk_dominator_table  # noqa: E402
@@ -31,6 +31,7 @@ import mk_entry_points  # noqa: E402
 import mk_tactic_bands  # noqa: E402
 import mk_cleanable  # noqa: E402
 import mk_setmm_axioms  # noqa: E402
+import mk_site_diagnosis  # noqa: E402
 import buildnote  # noqa: E402
 
 HUB = SITE / "gonzalgo" / "data"
@@ -46,7 +47,8 @@ def build_indexes() -> list[dict]:
              indexlib.build(mk_entry_points.idx),
              indexlib.build(mk_tactic_bands.idx),
              indexlib.build(mk_cleanable.idx),
-             indexlib.build(mk_setmm_axioms.idx)]
+             indexlib.build(mk_setmm_axioms.idx),
+             indexlib.build(mk_site_diagnosis.idx)]
 
     # generated-proofs keeps its own hand-written page; only its data comes
     # through indexlib, so build it the way that page expects and take the
@@ -72,6 +74,7 @@ def build_hub(metas: list[dict]) -> None:
         "description": (
             "Standing measurements of what formal mathematical libraries rest "
             "on, produced by gonzalgo and remeasured as the libraries move."),
+        "identifier": SERIES_DOI,
         "license": LICENSE,
         "creator": {"@type": "Person", "name": "Vincent Gonzalez",
                     "identifier": ORCID},
@@ -175,6 +178,10 @@ point of publishing the data is that someone can check it.
 
 <footer>
   <p>
+    Cite the series: Gonzalez, V. (2026). <em>The gonzalgo Indexes</em>. Zenodo.
+    <a href="{SERIES_DOI}">10.5281/zenodo.21900625</a>
+  </p>
+  <p style="margin-top:.8rem;">
     Method and definitions: Gonzalez, V. (2026).
     <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo.
     <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>

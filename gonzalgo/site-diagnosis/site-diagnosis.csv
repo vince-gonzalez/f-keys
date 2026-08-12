@@ -1,0 +1,766 @@
+verdict,meaning,library,module,declaration,proposition
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_1,Classical.propDecidable (sSup (Subtype.val '' t) ∈ Set.Ici a)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_3,Classical.propDecidable (sInf (Subtype.val '' t) ∈ Set.Ici a)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Order.PiLex,Pi.Lex.linearOrder,Classical.decRel fun x1 x2 => x1 < x2
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,LowerSet.instLinearOrder,Classical.propDecidable (a = b)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,LowerSet.instLinearOrder,Classical.propDecidable (a ≤ b)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,LowerSet.instLinearOrder,Classical.propDecidable (a < b)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,UpperSet.instLinearOrder,Classical.propDecidable (a = b)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,UpperSet.instLinearOrder,Classical.propDecidable (a ≤ b)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,UpperSet.instLinearOrder,Classical.propDecidable (a < b)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.HahnSeries.Lex,HahnSeries.instLinearOrderLex,Classical.decRel LE.le a b
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.HahnSeries.Lex,HahnSeries.instLinearOrderLex,Classical.decRel LE.le
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.Valuation.ValuationRing,ValuationRing.instLinearOrderIdealOfDecidableLE,Classical.propDecidable (a < b)
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_25,Classical.decRel LE.le a b
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_27,Classical.decRel LE.le a b
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_29,Classical.decRel LE.le
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_32,Classical.decRel LE.le
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_34,Classical.decRel LE.le
+choice-needed,instance exists but needs choice,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_36,Classical.decRel LE.le
+no-instance,no Decidable instance found,Batteries,Batteries.Data.List.Lemmas,List.Sublist.erase_diff_erase_sublist._f,Classical.propDecidable (b = a)
+no-instance,no Decidable instance found,Init,Init.Data.List.Count,List.count_erase._f,Classical.propDecidable (c = b)
+no-instance,no Decidable instance found,Init,Init.Data.List.Count,List.count_erase._f,Classical.propDecidable (b = a)
+no-instance,no Decidable instance found,Init,Init.Data.List.Erase,List.erase_eq_eraseP._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Init,Init.Data.List.Sublist,List.isSublist_iff_sublist._f,Classical.propDecidable (head✝¹ = head✝)
+no-instance,no Decidable instance found,Init,Init.Grind.Ring.Field,Lean.Grind.Field.noNatZeroDivisors.ofIsCharPZero,Classical.propDecidable (b = 0)
+no-instance,no Decidable instance found,Init,Init.While,_private.Init.While.0.whileM.Pred,"Classical.propDecidable (∃ g, whileM.body f g = g)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Category.Ring.Under.Limits,CommRingCat.Under.tensorProductFanIsLimit,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Colimit.Ring,Field.DirectLimit.inv,Classical.propDecidable (p = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.DirectSum.Finsupp,finsuppLEquivDirectSum,Classical.decPred fun m => m ≠ 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Field.IsField,IsField.toSemifield,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.GroupWithZero.Range,MonoidWithZeroHom.ValueGroup₀.embedding,Classical.decPred fun b => b = 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.GroupWithZero.Range,MonoidWithZeroHom.ValueGroup₀.restrict₀,Classical.decPred (fun b => b = 0) (f a)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.GroupWithZero.Units.Basic,Ring.inverse,"Classical.propDecidable (∃ u, ↑u = x)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.GroupWithZero.Units.Basic,groupWithZeroOfIsUnitOrEqZero,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.DifferentialObject,HomologicalComplex.dgoToHomologicalComplex,Classical.propDecidable (i + b = j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.double,Classical.propDecidable (k = i₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.double,Classical.propDecidable (k = i₁)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.double,Classical.propDecidable (k' = i₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.double,Classical.propDecidable (k' = i₁)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.double,Classical.propDecidable (i₀ = i₁)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.evalCompCoyonedaCorepresentable,"Classical.propDecidable (∃ k, c.Rel j k)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.evalCompCoyonedaCorepresentable,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.evalCompCoyonedaCorepresentative,"Classical.propDecidable (∃ k, c.Rel j k)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.evalCompCoyonedaCorepresentative,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.mkHomFromDouble,Classical.propDecidable (k = i₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.mkHomFromDouble,Classical.propDecidable (k = i₁)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Embedding.Basic,ComplexShape.Embedding.r,"Classical.propDecidable (∃ i, e.f i = i')"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Homology.Embedding.HomEquiv,ComplexShape.Embedding.liftExtend.f,"Classical.propDecidable (∃ i, e.f i = i')"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Lie.Loop,LieAlgebra.LoopAlgebra.toFinsupp,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Lie.Weights.Chain,LieModule.chainTopCoeff,Classical.propDecidable (α = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Lie.Weights.Chain,LieModule.chainTopCoeff,Classical.propDecidable (LieModule.genWeightSpace M (a • α + ⇑β) = ⊥)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.MonoidAlgebra.Division,AddMonoidAlgebra.modOf,"Classical.decPred (fun g₁ => ∃ g₂, g₁ = g + g₂) a"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.MvPolynomial.Basic,MvPolynomial.coeffs,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.MvPolynomial.Degrees,MvPolynomial.degreeOf,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.MvPolynomial.Degrees,MvPolynomial.degrees,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.MvPolynomial.PDeriv,MvPolynomial.pderiv,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.MvPolynomial.Variables,MvPolynomial.vars,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_1,Classical.propDecidable t.Nonempty
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_1,Classical.propDecidable (BddAbove t)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_3,Classical.propDecidable t.Nonempty
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_3,Classical.propDecidable (BddBelow t)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Basic,Polynomial.coeffs,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Degree.CardPowDegree,Polynomial.cardPowDegree,Classical.decEq Fq
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Derivative,_private.Mathlib.Algebra.Polynomial.Derivative.0.Polynomial.iterate_derivative_prod_X_sub_C.match_1_4,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Derivative,_private.Mathlib.Algebra.Polynomial.Derivative.0.Polynomial.iterate_derivative_prod_X_sub_C.match_1_6,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.divByMonic,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.divModByMonicAux._unary,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.modByMonic,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.rootMultiplicity,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.rootMultiplicity,Classical.decPred fun n => ¬(Polynomial.X - Polynomial.C a) ^ (n + 1) ∣ p
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.GroupRingAction,prodXSubSMul,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Inductions,Polynomial.recOnHorner._unary,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Inductions,Polynomial.recOnHorner._unary,Classical.decEq R (p.coeff 0) 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.nthRootsFinset,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.rootSet,Classical.decEq S
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.rootSetFintype,Classical.decEq S
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.roots,Classical.dec (p = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.roots,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point,WeierstrassCurve.Jacobian.Point.toAffine,Classical.propDecidable (W.Nonsingular P)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point,WeierstrassCurve.Jacobian.Point.toAffine,Classical.propDecidable (P 2 = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point,WeierstrassCurve.Projective.Point.toAffine,Classical.propDecidable (W.Nonsingular P)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point,WeierstrassCurve.Projective.Point.toAffine,Classical.propDecidable (P 2 = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.Morphisms.Basic,_private.Mathlib.AlgebraicGeometry.Morphisms.Basic.0.AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top.match_1_2,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.ResidueField,AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_1,Classical.propDecidable (a✝ = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.ResidueField,AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_3,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicGeometry.ResidueField,AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_5,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicTopology.DoldKan.FunctorGamma,AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono,Classical.propDecidable (Δ = Δ')
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicTopology.DoldKan.FunctorGamma,AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono,Classical.propDecidable (AlgebraicTopology.DoldKan.Isδ₀ i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.AlgebraicTopology.DoldKan.SplitSimplicialObject,CategoryTheory.SimplicialObject.Splitting.πSummand,Classical.propDecidable (B = A)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Basic,BoxIntegral.Prepartition.biUnion,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Basic,BoxIntegral.Prepartition.disjUnion,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Basic,BoxIntegral.Prepartition.restrict,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Split,BoxIntegral.Box.splitLower,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Split,BoxIntegral.Box.splitUpper,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Split,BoxIntegral.Prepartition.split,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Tagged,BoxIntegral.TaggedPrepartition.disjUnion,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.UnitPartition,BoxIntegral.unitPartition.prepartition,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.BoxIntegral.UnitPartition,BoxIntegral.unitPartition.prepartition,Classical.propDecidable (I = BoxIntegral.unitPartition.box n a)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital,definition._@.Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital.2216632569._hygCtx._hyg.8,Classical.propDecidable (p a)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital,definition._@.Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital.2216632569._hygCtx._hyg.8,Classical.propDecidable (ContinuousOn f (quasispectrum R a))
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital,definition._@.Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital.2216632569._hygCtx._hyg.8,Classical.propDecidable (f 0 = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Calculus.DSlope,dslope,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Complex.ValueDistribution.LogCounting.Basic,ValueDistribution.logCounting,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic,ValueDistribution.proximity,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.InnerProductSpace.Orientation,Orientation.definition._@.Mathlib.Analysis.InnerProductSpace.Orientation.2114562672._hygCtx._hyg.2,Classical.propDecidable (o = positiveOrientation)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.InnerProductSpace.PiL2,OrthonormalBasis.instFunLike,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.InnerProductSpace.l2Space,HilbertBasis.instFunLike,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.InnerProductSpace.l2Space,HilbertBasis.instFunLike.match_1,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Matrix.Normed,_private.Mathlib.Analysis.Matrix.Normed.0.Matrix.unitOf,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Meromorphic.NormalForm,toMeromorphicNFAt,Classical.propDecidable (MeromorphicAt f x)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Meromorphic.NormalForm,toMeromorphicNFAt,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis._sizeOf_1,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.casesOn,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.mk._flat_ctor,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.mk.noConfusion,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.noConfusion,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.noConfusionType,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.recOn,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Bases,_private.Mathlib.Analysis.Normed.Module.Bases.0.GeneralSchauderBasis.ext.match_1,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Analysis.Normed.Module.Multilinear.Basic,ContinuousMultilinearMap.iteratedFDeriv,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives,CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.largerSubobject,Classical.propDecidable (A = ⊤)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Category.PartialFun,partialFunEquivPointed,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.FinCategory.Basic,CategoryTheory.discreteHomFintype,Classical.propDecidable (X.as = Y.as)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData'.f',Classical.propDecidable (i = j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData'.t'',Classical.propDecidable (i = j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData'.t'',Classical.propDecidable (i = k)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData'.t'',Classical.propDecidable (j = k)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData'.t'',Classical.propDecidable (j = i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData.ofGlueData',Classical.propDecidable (ij.1 = ij.2)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData.ofGlueData',"Classical.propDecidable ((i, j).1 = (i, j).2)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData.ofGlueData',"Classical.propDecidable ((j, i).1 = (j, i).2)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData.ofGlueData',Classical.propDecidable (i = j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Bicones,CategoryTheory.BiconeHom.decidableEq,Classical.propDecidable (f✝⁴ = f✝)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Bicones,CategoryTheory.finBicone,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone._sizeOf_1,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.casesOn,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.mk._flat_ctor,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.mk.noConfusion,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.noConfusion,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.noConfusionType,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.ofColimitCocone,Classical.propDecidable (j' = j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.ofLimitCone,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.recOn,Classical.propDecidable (j = j')
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits,CategoryTheory.Limits.WidePullbackShape.fintypeHom,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits,CategoryTheory.Limits.WidePushoutShape.fintypeHom,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.MultiequalizerPullback,CategoryTheory.Limits.Multicofork.IsColimit.isPushout.multicofork,Classical.propDecidable (k = J.fst default)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Preadditive.Biproducts,CategoryTheory.Biproduct.columnNonzeroOfIso,Classical.propDecidable   (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.biproduct.ι S s)       (CategoryTheory.CategoryStruct.comp f (CategoryTheory.Limits.biproduct.π T a)) =     0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Preadditive.HomOrthogonal,CategoryTheory.HomOrthogonal.matrixDecomposition,Classical.propDecidable (f j = g k)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Preadditive.Mat,CategoryTheory.Mat_.Hom.id,Classical.propDecidable (i = j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Preadditive.Mat,CategoryTheory.Mat_.isoBiproductEmbedding,Classical.propDecidable (j = i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Preadditive.Mat,CategoryTheory.Mat_.isoBiproductEmbedding,Classical.propDecidable (i = k)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Preadditive.Mat,CategoryTheory.instCategoryMatOfSemiring,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.CategoryTheory.Preadditive.Schur,CategoryTheory.instDivisionRingEndOfHasKernelsOfSimple,Classical.propDecidable (f = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Clique,_private.Mathlib.Combinatorics.SimpleGraph.Clique.0.SimpleGraph.is3Clique_iff_exists_cycle_length_three.match_1_3,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex,SimpleGraph.instFintypeColoring,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.copyCount,Classical.propDecidable (Nonempty (H ≃g a.coe))
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.copyCount,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.copyCount,Classical.propDecidable (G.Adj a b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.definition._@.Mathlib.Combinatorics.SimpleGraph.Copy.3082331781._hygCtx._hyg.14,Classical.propDecidable (H = ⊥)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.labelledCopyCount,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.labelledCopyCount,Classical.propDecidable (H.Adj a b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.labelledCopyCount,Classical.propDecidable (G.Adj a b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Extremal.TuranDensity,SimpleGraph.turanDensityConst,"Classical.propDecidable   (∀ (b : ℕ),     a ≤ b →       ∀ {G : SimpleGraph (Fin b)} [inst : DecidableRel G.Adj],         ↑G.edgeFinset.card ≥ (H.turanDensity + ε) * ↑(b.choose 2) → H.IsContained G)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Combinatorics.SimpleGraph.Paths,SimpleGraph.Walk.IsTrail.isPath_iff_isSubwalk_imp_not_isCycle._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1.stmts,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1.stmts₁._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1.stmts₁._sunfold,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1to1.trSupp,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1to1.writes._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1to1.writes._sunfold,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2.stmts,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2.stmts₁._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2.stmts₁._sunfold,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2to1.trStmts₁._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2to1.trStmts₁._sunfold,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2to1.trSupp,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finset.Finsupp,Finset.finsupp,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.AList,AList.lookupFinsupp,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.AList,AList.lookupFinsupp,Classical.decEq M x.snd 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Basic,Finsupp.curry,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Basic,Finsupp.curry,Classical.propDecidable (x.1 = a)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Basic,Finsupp.frange,Classical.decEq M
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Basic,Finsupp.splitSupport,Classical.decEq ι
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Defs,Finsupp.embDomain,Classical.decEq β (f a) b
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Defs,Finsupp.onFinsetSupport,Classical.decEq M (f a) 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Defs,Finsupp.zipWith,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Indicator,Finsupp.indicator,Classical.decEq α (f ↑a ⋯) 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Indicator,Finsupp.indicator,Classical.decEq ι
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.erase,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.erase,Classical.decEq α a' a
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.single,Classical.decEq M b 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.single,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.update,Classical.decEq M b 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.update,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.ToDFinsupp,sigmaFinsuppEquivDFinsupp,Classical.decEq ι
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Finsupp.ToDFinsupp,sigmaFinsuppEquivDFinsupp,Classical.decEq (η i →₀ N)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.EquivFin,Fintype.equivFin,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.EquivFin,Fintype.equivFinOfCardEq,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.EquivFin,Fintype.equivOfCardEq,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.EquivFin,Fintype.equivOfCardEq,Classical.decEq β
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.EquivFin,_private.Mathlib.Data.Fintype.EquivFin.0.Infinite.natEmbeddingAux,Classical.decEq α
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.OfMap,Fintype.ofInjective,Classical.dec (Nonempty α)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.OfMap,Fintype.ofInjective,Classical.dec (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Fintype.Pi,Function.Embedding.fintype,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.List.Prime,perm_of_prod_eq_prod._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Data.Set.Finite.Basic,Finset.exists_card_eq._f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Dynamics.PeriodicPts.Defs,Function.minimalPeriod,Classical.propDecidable (x ∈ Function.periodicPts f)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Dynamics.PeriodicPts.Defs,Function.minimalPeriod,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Dynamics.SymbolicDynamics.Basic,SymbolicDynamics.FullShift.Pattern.fromConfig,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Dynamics.SymbolicDynamics.Basic,SymbolicDynamics.FullShift.Pattern.mulShift,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Dynamics.SymbolicDynamics.Basic,SymbolicDynamics.FullShift.Pattern.shift,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.Extension,_private.Mathlib.FieldTheory.Extension.0.IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset.match_1_11,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.toSplittingField,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.KummerExtension,AdjoinRootXPowSubCEquivToRootsOfUnity,Classical.decEq K a 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.Minpoly.Field,minpoly.Fintype.subtypeProd,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.PolynomialGaloisGroup,Polynomial.Gal.restrictDvd,Classical.dec (q = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.PurelyInseparable.Exponent,IsPurelyInseparable.elemExponent,"Classical.propDecidable (∃ y, minpoly K a✝ = Polynomial.X ^ ringExpChar K ^ a - Polynomial.C y)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.PurelyInseparable.Exponent,IsPurelyInseparable.elemReduct,"Classical.propDecidable (∃ y, minpoly K a✝ = Polynomial.X ^ ringExpChar K ^ a - Polynomial.C y)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.RatFunc.Basic,RatFunc.numDenom,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.RatFunc.Luroth,RatFunc.Luroth.generator,Classical.propDecidable (E = ⊥)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.RatFunc.Luroth,_private.Mathlib.FieldTheory.RatFunc.Luroth.0.RatFunc.Luroth.c,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.RatFunc.Luroth,_private.Mathlib.FieldTheory.RatFunc.Luroth.0.RatFunc.Luroth.Φ,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.RatFunc.Valuation,RatFunc.CompletionAtInfty.instField._aux_48,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.SeparableDegree,Polynomial.natSepDegree,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.FieldTheory.SplittingField.IsSplittingField,Polynomial.IsSplittingField.lift,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Geometry.Convex.ConvexSpace.Prod,Finsupp.instConvexSpace,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField,AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField._aux_1,Classical.propDecidable (a✝ = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField,AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField._aux_3,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField,AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField._aux_5,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Coxeter.Length,CoxeterSystem.length,"Classical.propDecidable (∃ ω, a = ω.length ∧ cs.wordProd ω = w)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Divisible,divisibleByOfSMulRightSurj,Classical.dec (n = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Divisible,rootableByOfPowLeftSurj,Classical.dec (n = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Exponent,AddMonoid.exponent,Classical.propDecidable (AddMonoid.ExponentExists G)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Exponent,AddMonoid.exponent,"Classical.propDecidable (∀ (g : G), a • g = 0)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Exponent,Monoid.exponent,Classical.propDecidable (Monoid.ExponentExists G)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Exponent,Monoid.exponent,"Classical.propDecidable (∀ (g : G), g ^ a = 1)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Nilpotent,AddGroup.nilpotencyClass,Classical.propDecidable (AddGroup.IsNilpotent G)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Nilpotent,AddGroup.nilpotencyClass,Classical.propDecidable (AddSubgroup.upperCentralSeries G a = ⊤)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Nilpotent,Group.nilpotencyClass,Classical.propDecidable (Group.IsNilpotent G)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Nilpotent,Group.nilpotencyClass,Classical.propDecidable (Subgroup.upperCentralSeries G a = ⊤)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.QuotientGroup.Finite,AddGroup.fintypeOfKerLeRange,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.QuotientGroup.Finite,Group.fintypeOfKerLeRange,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Rank,AddGroup.rank,"Classical.decPred fun n => ∃ S, S.card = n ∧ AddSubgroup.closure ↑S = ⊤"
+no-instance,no Decidable instance found,Mathlib,Mathlib.GroupTheory.Rank,Group.rank,"Classical.decPred fun n => ∃ S, S.card = n ∧ Subgroup.closure ↑S = ⊤"
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Basis.Defs,Module.fintypeOfFintype,Classical.decEq ι
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.DFinsupp,_private.Mathlib.LinearAlgebra.DFinsupp.0.Submodule.mem_iSup_iff_exists_finsupp.match_1_1,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Determinant,LinearMap.definition._@.Mathlib.LinearAlgebra.Determinant.1959956828._hygCtx._hyg.8,"Classical.propDecidable (∃ s, Nonempty (Module.Basis (↥s) A M))"
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Determinant,LinearMap.definition._@.Mathlib.LinearAlgebra.Determinant.1959956828._hygCtx._hyg.8,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.DirectSum.Finsupp,finsuppTensorFinsupp,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Dual.Lemmas,Subspace.quotEquivAnnihilator,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.FiniteDimensional.Basic,divisionRingOfFiniteDimensional,Classical.decEq K x 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Finsupp.VectorSpace,Finsupp.basis,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Finsupp.VectorSpace,Finsupp.basis,Classical.propDecidable (m = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.FreeModule.Finite.Quotient,Submodule.quotientEquivPiSpan,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.LinearIndependent.Lemmas,_private.Mathlib.LinearAlgebra.LinearIndependent.Lemmas.0.exists_of_linearIndepOn_of_finite_span.match_1_1,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.LinearIndependent.Lemmas,_private.Mathlib.LinearAlgebra.LinearIndependent.Lemmas.0.exists_of_linearIndepOn_of_finite_span.match_1_3,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.LinearIndependent.Lemmas,_private.Mathlib.LinearAlgebra.LinearIndependent.Lemmas.0.exists_of_linearIndepOn_of_finite_span.match_1_5,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Multilinear.Basic,MultilinearMap.iteratedFDeriv,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Multilinear.Basis,Basis.multilinearMap,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Orientation,Module.Basis.adjustToOrientation,Classical.decEq (Orientation R M ι) e.orientation x
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.PiTensorProduct.Basis,Basis.piTensorProduct,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.PiTensorProduct.DirectSum,PiTensorProduct.ofDirectSumEquiv,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.PiTensorProduct.Dual,PiTensorProduct.dualDistribInvOfBasis,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.Finite.G2,RootPairing.EmbeddedG2.indexEquivAllRoots,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.e,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.e,Classical.propDecidable (j = -↑i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.e,Classical.propDecidable (i' = ↑i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.e,Classical.propDecidable (P.root i' = P.root ↑i + P.root j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.f,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.f,Classical.propDecidable (j = ↑i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.f,Classical.propDecidable (i' = -↑i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.f,Classical.propDecidable (P.root i' = P.root j - P.root ↑i)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.h,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.ω,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.ω,Classical.propDecidable (i = -j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.TensorProduct.Free,Algebra.TensorProduct.equivFinsuppOfBasis,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.TensorProduct.Free,Algebra.TensorProduct.equivPiOfFiniteBasis,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Trace,LinearMap.trace,"Classical.propDecidable (∃ s, Nonempty (Module.Basis (↥s) R M))"
+no-instance,no Decidable instance found,Mathlib,Mathlib.LinearAlgebra.Trace,LinearMap.trace,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Logic.Equiv.Fintype,Equiv.setDiffEquiv,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Logic.Equiv.List,Fintype.toEncodable,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Constructions.Pi,MeasureTheory.Measure.pi',Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Function.AEEqFun,MeasureTheory.AEEqFun.cast,"Classical.propDecidable (∃ b, f = MeasureTheory.AEEqFun.mk (Function.const α b) ⋯)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.AddContent,MeasureTheory.AddContent.onIocAux,"Classical.propDecidable (∃ p, p.1 ≤ p.2 ∧ s = Set.Ioc p.1 p.2)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.AddContent,_private.Mathlib.MeasureTheory.Measure.AddContent.0.MeasureTheory.AddContent.supClosureFun,"Classical.propDecidable (∃ J, ↑J ⊆ C ∧ (↑J).PairwiseDisjoint id ∧ s = ⋃₀ ↑J)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.Comap,MeasureTheory.Measure.comap,Classical.propDecidable (Function.Injective f)
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.Comap,MeasureTheory.Measure.comap,"Classical.propDecidable (∀ (s : Set α), MeasurableSet s → MeasureTheory.NullMeasurableSet (f '' s) μ)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.Comap,MeasureTheory.Measure.comapₗ,Classical.propDecidable (Function.Injective f)
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.Comap,MeasureTheory.Measure.comapₗ,"Classical.propDecidable (∀ (s : Set α), MeasurableSet s → MeasurableSet (f '' s))"
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.MeasureSpaceDef,MeasureTheory.definition._@.Mathlib.MeasureTheory.Measure.MeasureSpaceDef.2399900266._hygCtx._hyg.8,"Classical.propDecidable (∃ t ⊇ s, MeasurableSet t ∧ t =ᵐ[μ] s)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.MeasureTheory.Measure.MeasureSpaceDef,MeasureTheory.definition._@.Mathlib.MeasureTheory.Measure.MeasureSpaceDef.2399900266._hygCtx._hyg.8,"Classical.propDecidable (∃ t ⊇ s, MeasurableSet t ∧ ∀ (u : Set α), MeasurableSet u → μ (t ∩ u) = μ (s ∩ u))"
+no-instance,no Decidable instance found,Mathlib,Mathlib.ModelTheory.Algebra.Field.Basic,FirstOrder.Field.fieldOfModelField,Classical.decEq K x 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.ClassNumber.Finite,ClassGroup.fintypeOfAdmissibleOfFinite,Classical.decEq L
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.ClassNumber.FunctionField,FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.Height.Basic,Height.mulHeight,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.KummerDedekind,KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.MulChar.Basic,MulChar.ofUnitHom,"Classical.propDecidable (∃ u, ↑u = x)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.MulChar.Basic,MulChar.trivial,"Classical.propDecidable (∃ u, ↑u = x)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic,NumberField.canonicalEmbedding.latticeBasis,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic,NumberField.canonicalEmbedding.latticeBasis,Classical.propDecidable (Nonempty (K →+* ℂ))
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic,NumberField.mixedEmbedding.matrixToStdBasis,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody,NumberField.mixedEmbedding.convexBodyLT',Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody,_private.Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody.0.NumberField.mixedEmbedding.convexBodyLT'_mem.match_1_8,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.FundamentalCone,NumberField.mixedEmbedding.fundamentalCone,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.compactSet,Classical.propDecidable (w = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.completeFamily,Classical.propDecidable (i = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.equivFinRank,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.paramSet,Classical.propDecidable (w = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,_private.Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne.0.NumberField.mixedEmbedding.fundamentalCone.normAtAllPlaces_normLeOne.match_1_1,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind,NumberField.Ideal.primesOverSpanEquivMonicFactorsMod,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind,_private.Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind.0.NumberField.Ideal.primesOverSpanEquivMonicFactorsModAux,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.InfinitePlace.Basic,NumberField.InfinitePlace.fintype,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Units.DirichletTheorem,_private.Mathlib.NumberTheory.NumberField.Units.DirichletTheorem.0.NumberField.Units.instDiscrete_unitLattice.match_1,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.basisOfIsMaxRank,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.basisOfIsMaxRank,Classical.propDecidable (Nonempty { w // w ≠ NumberField.Units.dirichletUnitTheorem.w₀ })
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.equivFinRank,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.regOfFamily,Classical.propDecidable (NumberField.Units.IsMaxRank u)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.regOfFamily,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.regulator,Classical.propDecidable (a = NumberField.Units.dirichletUnitTheorem.w₀)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.Padics.PadicNumbers,Padic.addValuationDef,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.Padics.PadicNumbers,Padic.mulValuation,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.Padics.RingHoms,PadicInt.appr._f,Classical.propDecidable (y = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.NumberTheory.Padics.RingHoms,PadicInt.appr._sunfold,Classical.propDecidable (y = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.Atoms,IsSimpleOrder.completeBooleanAlgebra,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.Birkhoff,LatticeHom.birkhoffFinset,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.BoundedOrder.Basic,botOrderOrNoBotOrder,"Classical.propDecidable (∀ (a : α), ∃ b, ¬a ≤ b)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.BoundedOrder.Basic,topOrderOrNoTopOrder,"Classical.propDecidable (∀ (a : α), ∃ b, ¬b ≤ a)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.InitialSeg,InitialSeg.principalSumRelIso,Classical.propDecidable (Function.Surjective ⇑f)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.Lattice.Nat,Nat.instSupSet,"Classical.propDecidable (∃ n, ∀ a ∈ s, a ≤ n)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.Lattice.Nat,Nat.instSupSet,"Classical.propDecidable (∀ a_1 ∈ s, a_1 ≤ a)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.NonemptyFiniteChains,PartialOrder.NonemptyFiniteChains.map,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Order.WellFoundedSet,Set.PartiallyWellOrderedOn.minBadSeqOfBadSeq,"Classical.propDecidable (∃ g, (∀ m < n, f m = g m) ∧ Set.PartiallyWellOrderedOn.IsBadSeq r s g ∧ rk (g n) = a)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Probability.Distributions.Uniform,PMF.ofMultiset,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Probability.Distributions.Uniform,PMF.uniformOfFinset,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Probability.ProbabilityMassFunction.Monad,PMF.pure,Classical.propDecidable (a' = a)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Probability.Process.HittingTime,MeasureTheory.hittingAfter,"Classical.propDecidable (∃ j, n ≤ j ∧ u j x ∈ s)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Probability.Process.HittingTime,MeasureTheory.hittingBtwn,"Classical.propDecidable (∃ j ∈ Set.Icc n m, u j x ∈ s)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Algebraic.Integral,_private.Mathlib.RingTheory.Algebraic.Integral.0.IsAlgebraic.restrictScalars.match_1_3,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.DedekindDomain.AdicValuation,IsDedekindDomain.HeightOneSpectrum.intValuationDef,Classical.propDecidable (r = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.DedekindDomain.Different,FractionalIdeal.dual,Classical.propDecidable (I = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.DedekindDomain.Different,_private.Mathlib.RingTheory.DedekindDomain.Different.0.FractionalIdeal.dual.match_3,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.DedekindDomain.Factorization,FractionalIdeal.count,Classical.propDecidable (I = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.DiscreteValuationRing.Basic,IsDiscreteValuationRing.quotient,Classical.propDecidable (y = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.DiscreteValuationRing.Basic,IsDiscreteValuationRing.quotient,Classical.propDecidable (y ∣ x)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.DividedPowers.Basic,dividedPowersBot,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Extension.Presentation.Core,Algebra.SubmersivePresentation.jacobianOfHasCoeffs,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Extension.Presentation.Core,Algebra.SubmersivePresentation.jacobianRelations,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Extension.Presentation.Submersive,Algebra.SubmersivePresentation.aevalDifferentialEquiv,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.FractionalIdeal.Operations,FractionalIdeal.instDivNonZeroDivisors,Classical.propDecidable (J = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.HahnSeries.Basic,HahnSeries.order,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.HahnSeries.Basic,HahnSeries.orderTop,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.HahnSeries.Basic,HahnSeries.single,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.divisionRing,Classical.propDecidable (a✝ = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.divisionRing,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.field,Classical.propDecidable (a✝ = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.field,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.groupWithZero,Classical.propDecidable (a✝ = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.groupWithZero,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.LaurentSeries,LaurentSeries.instFieldSpaceWithValRatFuncWithZeroMultiplicativeIntPolynomialValuationXRatfuncAdicComplPkg._aux_48,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.LocalRing.Module,_private.Mathlib.RingTheory.LocalRing.Module.0.Module.IsLocalRing.linearIndependent_of_flat.match_1_1,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.LocalRing.ResidueField.Defs,IsLocalRing.ResidueField.field,Classical.propDecidable (a✝ = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.LocalRing.ResidueField.Defs,IsLocalRing.ResidueField.field,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Localization.FractionRing,IsFractionRing.definition._@.Mathlib.RingTheory.Localization.FractionRing.1935392398._hygCtx._hyg.2,Classical.propDecidable (z = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Multiplicity,emultiplicity,Classical.propDecidable (FiniteMultiplicity a b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Multiplicity,emultiplicity,Classical.propDecidable (a✝ ^ (a + 1) ∣ b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous,MvPolynomial.weightedHomogeneousComponent,Classical.decEq M ((Finsupp.weight w) a) n
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPowerSeries.Basic,MvPowerSeries.instMul,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPowerSeries.Basic,MvPowerSeries.monomial,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPowerSeries.Evaluation,MvPowerSeries.eval₂,"Classical.propDecidable (∃ p, ↑p = f)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPowerSeries.Inverse,MvPowerSeries.inv.aux,Classical.decEq σ
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPowerSeries.LexOrder,MvPowerSeries.lexOrder,Classical.propDecidable (φ = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPowerSeries.Order,MvPowerSeries.weightedOrder,Classical.propDecidable (f = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.MvPowerSeries.Order,MvPowerSeries.weightedOrder,"Classical.propDecidable (∃ d, (MvPowerSeries.coeff d) f ≠ 0 ∧ (Finsupp.weight w) d = a)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.OreLocalization.NonZeroDivisors,OreLocalization.inv,Classical.propDecidable (r = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Perfection,ModP.preVal,Classical.dec (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Perfection,PreTilt.valAux,"Classical.propDecidable (∃ n, (PreTilt.coeff n) f ≠ 0)"
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Perfection,PreTilt.valAux,Classical.propDecidable ((PreTilt.coeff a) f = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Polynomial.Content,Polynomial.normalizedGcdMonoid,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Polynomial.Content,Polynomial.primPart,Classical.decEq R
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.PowerBasis,PowerBasis.AlgHom.fintype,Classical.decEq B
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.PowerSeries.Inverse,PowerSeries.Unit_of_divided_by_X_pow_order,Classical.propDecidable (f = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.PowerSeries.Order,PowerSeries.order,Classical.decEq (PowerSeries R) φ 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.PowerSeries.Order,PowerSeries.order,Classical.decEq R ((PowerSeries.coeff a) φ) 0
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.PowerSeries.WeierstrassPreparation,PowerSeries.weierstrassDiv,Classical.propDecidable ((PowerSeries.map (IsLocalRing.residue A)) g = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.PowerSeries.WeierstrassPreparation,PowerSeries.weierstrassMod,Classical.propDecidable ((PowerSeries.map (IsLocalRing.residue A)) g = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.PrincipalIdealDomain,PrincipalIdealRing.factors,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Radical.Basic,UniqueFactorizationMonoid.primeFactors,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots,primitiveRoots,Classical.propDecidable (IsPrimitiveRoot a k)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots,primitiveRoots,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Smooth.IntegralClosure,_private.Mathlib.RingTheory.Smooth.IntegralClosure.0.exists_derivative_mul_eq_and_isIntegral_coeff.match_1_2,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Spectrum.Prime.RingHom,_private.Mathlib.RingTheory.Spectrum.Prime.RingHom.0.PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite.match_1_4,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.Spectrum.Prime.RingHom,_private.Mathlib.RingTheory.Spectrum.Prime.RingHom.0.PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite.match_1_4,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.Basic,UniqueFactorizationMonoid.factors_pow._f,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.Defs,UniqueFactorizationMonoid.factors,Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.Finite,UniqueFactorizationMonoid.fintypeSubtypeDvd,Classical.decEq M
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.NormalizedFactors,UniqueFactorizationMonoid.strongNormalizationMonoid,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.NormalizedFactors,UniqueFactorizationMonoid.strongNormalizationMonoid,Classical.propDecidable (a ≈ b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Tactic.FieldSimp.Lemmas,Mathlib.Tactic.FieldSimp.zpow',Classical.propDecidable (a = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.Algebra.UniformField,UniformSpace.Completion.instInvCompletion,Classical.propDecidable (x = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.Category.Profinite.Nobeling.Span,Profinite.NobelingProof.spanFinBasis,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.Compactification.OnePoint.Basic,OnePoint.equivOfIsEmbeddingOfRangeEq,Classical.propDecidable (q = y)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.Compactification.OnePoint.Sphere,onePointEquivSphereOfFinrankEq,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.ContinuousMap.CompactlySupported,CompactlySupportedContinuousMap.compLeft,Classical.propDecidable (g 0 = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.ContinuousMap.ContinuousMapZero,ContinuousMapZero.mkD,Classical.propDecidable (Continuous f)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.ContinuousMap.ContinuousMapZero,ContinuousMapZero.mkD,Classical.propDecidable (f 0 = 0)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.ContinuousMap.Interval,ContinuousMap.concat,Classical.propDecidable (f ⊤ = g ⊥)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.DiscreteQuotient,DiscreteQuotient.finsetClopens,Classical.propDecidable (a = b)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.MetricSpace.Gluing,Metric.Sigma.dist,Classical.propDecidable (i = j)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.MetricSpace.PiNat,PiNat.definition._@.Mathlib.Topology.MetricSpace.PiNat.2189032603._hygCtx._hyg.8,Classical.propDecidable (x = y)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.MetricSpace.PiNat,PiNat.definition._@.Mathlib.Topology.MetricSpace.PiNat.2189032603._hygCtx._hyg.8,Classical.propDecidable (x a = y a)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.MetricSpace.PiNat,PiNat.dist,Classical.propDecidable (x = y)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.Order.LeftRightLim,Function.leftLim,Classical.propDecidable (nhdsWithin a (Set.Iio a) = ⊥)
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.Order.LeftRightLim,Function.leftLim,"Classical.propDecidable (∃ y, Filter.Tendsto f (nhdsWithin a (Set.Iio a)) (nhds y))"
+no-instance,no Decidable instance found,Mathlib,Mathlib.Topology.PartitionOfUnity,BumpCovering.single,Classical.propDecidable (a = b)
+not-a-goal,not an instance position,Batteries,Batteries.Data.List.Lemmas,List.Sublist.erase_diff_erase_sublist._f,Classical.propDecidable
+not-a-goal,not an instance position,Init,Init.Data.List.Count,List.count_erase._f,Classical.propDecidable
+not-a-goal,not an instance position,Init,Init.Data.List.Erase,List.erase_eq_eraseP._f,Classical.propDecidable
+not-a-goal,not an instance position,Init,Init.Data.List.Sublist,List.isSublist_iff_sublist._f,Classical.propDecidable
+not-a-goal,not an instance position,Init,Init.Grind.Ring.Field,Lean.Grind.Field.noNatZeroDivisors.ofIsCharPZero,Classical.propDecidable
+not-a-goal,not an instance position,Init,Init.While,_private.Init.While.0.whileM.Pred,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Category.Ring.Under.Limits,CommRingCat.Under.tensorProductFanIsLimit,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Colimit.Ring,Field.DirectLimit.inv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.DirectSum.Finsupp,finsuppLEquivDirectSum,@Classical.decPred
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Field.IsField,IsField.toSemifield,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.GroupWithZero.Range,MonoidWithZeroHom.ValueGroup₀.embedding,@Classical.decPred
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.GroupWithZero.Range,MonoidWithZeroHom.ValueGroup₀.restrict₀,@Classical.decPred
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.GroupWithZero.Units.Basic,Ring.inverse,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.GroupWithZero.Units.Basic,groupWithZeroOfIsUnitOrEqZero,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Homology.DifferentialObject,HomologicalComplex.dgoToHomologicalComplex,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.double,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.evalCompCoyonedaCorepresentable,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.evalCompCoyonedaCorepresentative,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Homology.Double,HomologicalComplex.mkHomFromDouble,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Homology.Embedding.Basic,ComplexShape.Embedding.r,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Homology.Embedding.HomEquiv,ComplexShape.Embedding.liftExtend.f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Lie.Loop,LieAlgebra.LoopAlgebra.toFinsupp,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Lie.Weights.Chain,LieModule.chainTopCoeff,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.MonoidAlgebra.Division,AddMonoidAlgebra.modOf,@Classical.decPred
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.MvPolynomial.Basic,MvPolynomial.coeffs,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.MvPolynomial.Degrees,MvPolynomial.degreeOf,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.MvPolynomial.Degrees,MvPolynomial.degrees,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.MvPolynomial.PDeriv,MvPolynomial.pderiv,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.MvPolynomial.Variables,MvPolynomial.vars,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Order.Nonneg.Lattice,Nonneg.conditionallyCompleteLinearOrder._aux_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Order.Ring.StandardPart,ArchimedeanClass.instFieldFiniteResidueField._aux_48,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Order.Ring.StandardPart,ArchimedeanClass.instFieldFiniteResidueField._aux_50,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Order.Ring.StandardPart,ArchimedeanClass.instFieldFiniteResidueField._aux_52,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Basic,Polynomial.coeffs,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Degree.CardPowDegree,Polynomial.cardPowDegree,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Derivative,_private.Mathlib.Algebra.Polynomial.Derivative.0.Polynomial.iterate_derivative_prod_X_sub_C.match_1_4,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Derivative,_private.Mathlib.Algebra.Polynomial.Derivative.0.Polynomial.iterate_derivative_prod_X_sub_C.match_1_6,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.divByMonic,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.divModByMonicAux._unary,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.modByMonic,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.rootMultiplicity,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Div,Polynomial.rootMultiplicity,@Classical.decPred
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.GroupRingAction,prodXSubSMul,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Inductions,Polynomial.recOnHorner._unary,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.nthRootsFinset,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.rootSet,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.rootSetFintype,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.roots,Classical.dec
+not-a-goal,not an instance position,Mathlib,Mathlib.Algebra.Polynomial.Roots,Polynomial.roots,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point,WeierstrassCurve.Jacobian.Point.toAffine,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point,WeierstrassCurve.Projective.Point.toAffine,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicGeometry.Morphisms.Basic,_private.Mathlib.AlgebraicGeometry.Morphisms.Basic.0.AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top.match_1_2,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicGeometry.ResidueField,AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicGeometry.ResidueField,AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicGeometry.ResidueField,AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_5,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicTopology.DoldKan.FunctorGamma,AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.AlgebraicTopology.DoldKan.SplitSimplicialObject,CategoryTheory.SimplicialObject.Splitting.πSummand,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Basic,BoxIntegral.Prepartition.biUnion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Basic,BoxIntegral.Prepartition.disjUnion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Basic,BoxIntegral.Prepartition.restrict,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Split,BoxIntegral.Box.splitLower,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Split,BoxIntegral.Box.splitUpper,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Split,BoxIntegral.Prepartition.split,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.Partition.Tagged,BoxIntegral.TaggedPrepartition.disjUnion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.BoxIntegral.UnitPartition,BoxIntegral.unitPartition.prepartition,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital,definition._@.Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital.2216632569._hygCtx._hyg.8,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Calculus.DSlope,dslope,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Complex.ValueDistribution.LogCounting.Basic,ValueDistribution.logCounting,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic,ValueDistribution.proximity,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.InnerProductSpace.Orientation,Orientation.definition._@.Mathlib.Analysis.InnerProductSpace.Orientation.2114562672._hygCtx._hyg.2,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.InnerProductSpace.PiL2,OrthonormalBasis.instFunLike,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.InnerProductSpace.l2Space,HilbertBasis.instFunLike,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.InnerProductSpace.l2Space,HilbertBasis.instFunLike.match_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Matrix.Normed,_private.Mathlib.Analysis.Matrix.Normed.0.Matrix.unitOf,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Meromorphic.NormalForm,toMeromorphicNFAt,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis._sizeOf_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.casesOn,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.mk._flat_ctor,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.mk.noConfusion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.noConfusion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.noConfusionType,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,GeneralSchauderBasis.recOn,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Bases,_private.Mathlib.Analysis.Normed.Module.Bases.0.GeneralSchauderBasis.ext.match_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Analysis.Normed.Module.Multilinear.Basic,ContinuousMultilinearMap.iteratedFDeriv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives,CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.largerSubobject,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Category.PartialFun,partialFunEquivPointed,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.FinCategory.Basic,CategoryTheory.discreteHomFintype,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData'.f',Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData'.t'',Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.GlueData,CategoryTheory.GlueData.ofGlueData',Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Bicones,CategoryTheory.BiconeHom.decidableEq,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Bicones,CategoryTheory.finBicone,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Bicones,CategoryTheory.finBiconeHom,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone._sizeOf_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.casesOn,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.mk._flat_ctor,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.mk.noConfusion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.noConfusion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.noConfusionType,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.ofColimitCocone,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.ofLimitCone,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.Biproducts,CategoryTheory.Limits.Bicone.recOn,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits,CategoryTheory.Limits.WidePullbackShape.fintypeHom,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits,CategoryTheory.Limits.WidePushoutShape.fintypeHom,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Limits.Shapes.MultiequalizerPullback,CategoryTheory.Limits.Multicofork.IsColimit.isPushout.multicofork,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Preadditive.Biproducts,CategoryTheory.Biproduct.columnNonzeroOfIso,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Preadditive.HomOrthogonal,CategoryTheory.HomOrthogonal.matrixDecomposition,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Preadditive.Mat,CategoryTheory.Mat_.Hom.id,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Preadditive.Mat,CategoryTheory.Mat_.isoBiproductEmbedding,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Preadditive.Mat,CategoryTheory.instCategoryMatOfSemiring,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.CategoryTheory.Preadditive.Schur,CategoryTheory.instDivisionRingEndOfHasKernelsOfSimple,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Combinatorics.SimpleGraph.Clique,_private.Mathlib.Combinatorics.SimpleGraph.Clique.0.SimpleGraph.is3Clique_iff_exists_cycle_length_three.match_1_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex,SimpleGraph.instFintypeColoring,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.copyCount,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.definition._@.Mathlib.Combinatorics.SimpleGraph.Copy.3082331781._hygCtx._hyg.14,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Combinatorics.SimpleGraph.Copy,SimpleGraph.labelledCopyCount,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Combinatorics.SimpleGraph.Extremal.TuranDensity,SimpleGraph.turanDensityConst,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Combinatorics.SimpleGraph.Paths,SimpleGraph.Walk.IsTrail.isPath_iff_isSubwalk_imp_not_isCycle._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1.stmts,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1.stmts₁._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1.stmts₁._sunfold,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1to1.trSupp,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1to1.writes._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.PostTuringMachine,Turing.TM1to1.writes._sunfold,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2.stmts,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2.stmts₁._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2.stmts₁._sunfold,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2to1.trStmts₁._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2to1.trStmts₁._sunfold,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Computability.TuringMachine.StackTuringMachine,Turing.TM2to1.trSupp,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finset.Finsupp,Finset.finsupp,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.AList,AList.lookupFinsupp,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Basic,Finsupp.curry,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Basic,Finsupp.frange,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Basic,Finsupp.splitSupport,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Defs,Finsupp.embDomain,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Defs,Finsupp.onFinsetSupport,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Defs,Finsupp.zipWith,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Indicator,Finsupp.indicator,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.erase,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.single,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.Single,Finsupp.update,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Finsupp.ToDFinsupp,sigmaFinsuppEquivDFinsupp,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Fintype.EquivFin,Fintype.equivFin,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Fintype.EquivFin,Fintype.equivFinOfCardEq,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Fintype.EquivFin,Fintype.equivOfCardEq,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Fintype.EquivFin,_private.Mathlib.Data.Fintype.EquivFin.0.Infinite.natEmbeddingAux,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Fintype.OfMap,Fintype.ofInjective,Classical.dec
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Fintype.Pi,Function.Embedding.fintype,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.List.Prime,perm_of_prod_eq_prod._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Data.Set.Finite.Basic,Finset.exists_card_eq._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Dynamics.PeriodicPts.Defs,Function.minimalPeriod,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Dynamics.SymbolicDynamics.Basic,SymbolicDynamics.FullShift.Pattern.fromConfig,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Dynamics.SymbolicDynamics.Basic,SymbolicDynamics.FullShift.Pattern.mulShift,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Dynamics.SymbolicDynamics.Basic,SymbolicDynamics.FullShift.Pattern.shift,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.Extension,_private.Mathlib.FieldTheory.Extension.0.IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset.match_1_11,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.instGroupWithZero._aux_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.instGroupWithZero._aux_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.instGroupWithZero._aux_5,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.toSplittingField,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.KummerExtension,AdjoinRootXPowSubCEquivToRootsOfUnity,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.Minpoly.Field,minpoly.Fintype.subtypeProd,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.PolynomialGaloisGroup,Polynomial.Gal.restrictDvd,Classical.dec
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.PurelyInseparable.Exponent,IsPurelyInseparable.elemExponent,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.PurelyInseparable.Exponent,IsPurelyInseparable.elemReduct,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.RatFunc.Basic,RatFunc.numDenom,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.RatFunc.Luroth,RatFunc.Luroth.generator,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.RatFunc.Luroth,_private.Mathlib.FieldTheory.RatFunc.Luroth.0.RatFunc.Luroth.c,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.RatFunc.Luroth,_private.Mathlib.FieldTheory.RatFunc.Luroth.0.RatFunc.Luroth.Φ,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.RatFunc.Valuation,RatFunc.CompletionAtInfty.instField._aux_48,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.SeparableDegree,Polynomial.natSepDegree,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.FieldTheory.SplittingField.IsSplittingField,Polynomial.IsSplittingField.lift,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Geometry.Convex.ConvexSpace.Prod,Finsupp.instConvexSpace,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField,AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField._aux_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField,AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField._aux_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField,AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField._aux_5,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Coxeter.Length,CoxeterSystem.length,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Divisible,divisibleByOfSMulRightSurj,Classical.dec
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Divisible,rootableByOfPowLeftSurj,Classical.dec
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Exponent,AddMonoid.exponent,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Exponent,Monoid.exponent,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Nilpotent,AddGroup.nilpotencyClass,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Nilpotent,Group.nilpotencyClass,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.QuotientGroup.Finite,AddGroup.fintypeOfKerLeRange,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.QuotientGroup.Finite,Group.fintypeOfKerLeRange,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Rank,AddGroup.rank,@Classical.decPred
+not-a-goal,not an instance position,Mathlib,Mathlib.GroupTheory.Rank,Group.rank,@Classical.decPred
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Basis.Defs,Module.fintypeOfFintype,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.DFinsupp,_private.Mathlib.LinearAlgebra.DFinsupp.0.Submodule.mem_iSup_iff_exists_finsupp.match_1_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Determinant,LinearMap.definition._@.Mathlib.LinearAlgebra.Determinant.1959956828._hygCtx._hyg.8,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.DirectSum.Finsupp,finsuppTensorFinsupp,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Dual.Lemmas,Subspace.quotEquivAnnihilator,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.FiniteDimensional.Basic,divisionRingOfFiniteDimensional,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Finsupp.VectorSpace,Finsupp.basis,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.FreeModule.Finite.Quotient,Submodule.quotientEquivPiSpan,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.LinearIndependent.Lemmas,_private.Mathlib.LinearAlgebra.LinearIndependent.Lemmas.0.exists_of_linearIndepOn_of_finite_span.match_1_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.LinearIndependent.Lemmas,_private.Mathlib.LinearAlgebra.LinearIndependent.Lemmas.0.exists_of_linearIndepOn_of_finite_span.match_1_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.LinearIndependent.Lemmas,_private.Mathlib.LinearAlgebra.LinearIndependent.Lemmas.0.exists_of_linearIndepOn_of_finite_span.match_1_5,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Multilinear.Basic,MultilinearMap.iteratedFDeriv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Multilinear.Basis,Basis.multilinearMap,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Orientation,Module.Basis.adjustToOrientation,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.PiTensorProduct.Basis,Basis.piTensorProduct,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.PiTensorProduct.DirectSum,PiTensorProduct.ofDirectSumEquiv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.PiTensorProduct.Dual,PiTensorProduct.dualDistribInvOfBasis,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.RootSystem.Finite.G2,RootPairing.EmbeddedG2.indexEquivAllRoots,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.e,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.h,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic,RootPairing.GeckConstruction.ω,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.TensorProduct.Free,Algebra.TensorProduct.equivFinsuppOfBasis,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.TensorProduct.Free,Algebra.TensorProduct.equivPiOfFiniteBasis,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.LinearAlgebra.Trace,LinearMap.trace,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Logic.Equiv.Fintype,Equiv.setDiffEquiv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Logic.Equiv.List,Fintype.toEncodable,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.MeasureTheory.Constructions.Pi,MeasureTheory.Measure.pi',Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.MeasureTheory.Function.AEEqFun,MeasureTheory.AEEqFun.cast,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.MeasureTheory.Measure.AddContent,MeasureTheory.AddContent.onIocAux,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.MeasureTheory.Measure.AddContent,_private.Mathlib.MeasureTheory.Measure.AddContent.0.MeasureTheory.AddContent.supClosureFun,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.MeasureTheory.Measure.Comap,MeasureTheory.Measure.comap,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.MeasureTheory.Measure.Comap,MeasureTheory.Measure.comapₗ,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.MeasureTheory.Measure.MeasureSpaceDef,MeasureTheory.definition._@.Mathlib.MeasureTheory.Measure.MeasureSpaceDef.2399900266._hygCtx._hyg.8,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.ModelTheory.Algebra.Field.Basic,FirstOrder.Field.fieldOfModelField,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.ClassNumber.Finite,ClassGroup.fintypeOfAdmissibleOfAlgebraic,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.ClassNumber.Finite,ClassGroup.fintypeOfAdmissibleOfFinite,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.ClassNumber.FunctionField,FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.Height.Basic,Height.mulHeight,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.KummerDedekind,KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.MulChar.Basic,MulChar.ofUnitHom,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.MulChar.Basic,MulChar.trivial,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic,NumberField.canonicalEmbedding.latticeBasis,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic,NumberField.mixedEmbedding.matrixToStdBasis,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody,NumberField.mixedEmbedding.convexBodyLT',Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody,_private.Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody.0.NumberField.mixedEmbedding.convexBodyLT'_mem.match_1_8,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.FundamentalCone,NumberField.mixedEmbedding.fundamentalCone,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.compactSet,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.completeFamily,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.equivFinRank,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,NumberField.mixedEmbedding.fundamentalCone.paramSet,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne,_private.Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne.0.NumberField.mixedEmbedding.fundamentalCone.normAtAllPlaces_normLeOne.match_1_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind,NumberField.Ideal.primesOverSpanEquivMonicFactorsMod,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind,_private.Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind.0.NumberField.Ideal.primesOverSpanEquivMonicFactorsModAux,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.InfinitePlace.Basic,NumberField.InfinitePlace.fintype,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.Units.DirichletTheorem,_private.Mathlib.NumberTheory.NumberField.Units.DirichletTheorem.0.NumberField.Units.instDiscrete_unitLattice.match_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.basisOfIsMaxRank,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.equivFinRank,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.regOfFamily,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.NumberField.Units.Regulator,NumberField.Units.regulator,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.Padics.PadicNumbers,Padic.addValuationDef,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.Padics.PadicNumbers,Padic.mulValuation,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.Padics.RingHoms,PadicInt.appr._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.NumberTheory.Padics.RingHoms,PadicInt.appr._sunfold,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.Atoms,IsSimpleOrder.completeBooleanAlgebra,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.Birkhoff,LatticeHom.birkhoffFinset,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.BoundedOrder.Basic,botOrderOrNoBotOrder,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.BoundedOrder.Basic,topOrderOrNoTopOrder,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.InitialSeg,InitialSeg.principalSumRelIso,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.Lattice.Nat,Nat.instSupSet,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.NonemptyFiniteChains,PartialOrder.NonemptyFiniteChains.map,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.PiLex,Pi.Lex.linearOrder,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,LowerSet.instLinearOrder,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.UpperLower.CompleteLattice,UpperSet.instLinearOrder,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Order.WellFoundedSet,Set.PartiallyWellOrderedOn.minBadSeqOfBadSeq,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Probability.Distributions.Uniform,PMF.ofMultiset,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Probability.Distributions.Uniform,PMF.uniformOfFinset,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Probability.ProbabilityMassFunction.Monad,PMF.pure,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Probability.Process.HittingTime,MeasureTheory.hittingAfter,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Probability.Process.HittingTime,MeasureTheory.hittingBtwn,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.AdjoinRoot,AdjoinRoot.instGroupWithZero,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Algebraic.Integral,_private.Mathlib.RingTheory.Algebraic.Integral.0.IsAlgebraic.restrictScalars.match_1_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.DedekindDomain.AdicValuation,IsDedekindDomain.HeightOneSpectrum.intValuationDef,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.DedekindDomain.Different,FractionalIdeal.dual,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.DedekindDomain.Different,_private.Mathlib.RingTheory.DedekindDomain.Different.0.FractionalIdeal.dual.match_3,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.DedekindDomain.Factorization,FractionalIdeal.count,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.DiscreteValuationRing.Basic,IsDiscreteValuationRing.quotient,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.DividedPowers.Basic,dividedPowersBot,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Extension.Cotangent.Basis,_private.Mathlib.RingTheory.Extension.Cotangent.Basis.0.Algebra.Generators.PresentationOfFreeCotangent.Aux.presLeft,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Extension.Presentation.Core,Algebra.SubmersivePresentation.jacobianOfHasCoeffs,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Extension.Presentation.Core,Algebra.SubmersivePresentation.jacobianRelations,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Extension.Presentation.Submersive,Algebra.SubmersivePresentation.aevalDifferentialEquiv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.FractionalIdeal.Operations,FractionalIdeal.instDivNonZeroDivisors,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.HahnSeries.Basic,HahnSeries.order,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.HahnSeries.Basic,HahnSeries.orderTop,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.HahnSeries.Basic,HahnSeries.single,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.HahnSeries.Lex,HahnSeries.instLinearOrderLex,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.divisionRing,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.field,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Ideal.Quotient.Basic,Ideal.Quotient.groupWithZero,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.LaurentSeries,LaurentSeries.instFieldSpaceWithValRatFuncWithZeroMultiplicativeIntPolynomialValuationXRatfuncAdicComplPkg._aux_48,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.LocalRing.Module,_private.Mathlib.RingTheory.LocalRing.Module.0.Module.IsLocalRing.linearIndependent_of_flat.match_1_1,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.LocalRing.ResidueField.Defs,IsLocalRing.ResidueField.field,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Localization.FractionRing,IsFractionRing.definition._@.Mathlib.RingTheory.Localization.FractionRing.1935392398._hygCtx._hyg.2,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Multiplicity,emultiplicity,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous,MvPolynomial.weightedHomogeneousComponent,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.MvPowerSeries.Basic,MvPowerSeries.instMul,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.MvPowerSeries.Basic,MvPowerSeries.monomial,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.MvPowerSeries.Evaluation,MvPowerSeries.eval₂,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.MvPowerSeries.Inverse,MvPowerSeries.inv.aux,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.MvPowerSeries.LexOrder,MvPowerSeries.lexOrder,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.MvPowerSeries.Order,MvPowerSeries.weightedOrder,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.OreLocalization.NonZeroDivisors,OreLocalization.inv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Perfection,ModP.preVal,Classical.dec
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Perfection,PreTilt.valAux,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Polynomial.Content,Polynomial.normalizedGcdMonoid,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Polynomial.Content,Polynomial.primPart,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.PowerBasis,PowerBasis.AlgHom.fintype,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.PowerSeries.Inverse,PowerSeries.Unit_of_divided_by_X_pow_order,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.PowerSeries.Order,PowerSeries.order,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.PowerSeries.WeierstrassPreparation,PowerSeries.weierstrassDiv,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.PowerSeries.WeierstrassPreparation,PowerSeries.weierstrassMod,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.PrincipalIdealDomain,PrincipalIdealRing.factors,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Radical.Basic,UniqueFactorizationMonoid.primeFactors,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots,primitiveRoots,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Smooth.IntegralClosure,_private.Mathlib.RingTheory.Smooth.IntegralClosure.0.exists_derivative_mul_eq_and_isIntegral_coeff.match_1_2,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Spectrum.Prime.RingHom,_private.Mathlib.RingTheory.Spectrum.Prime.RingHom.0.PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite.match_1_4,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.Basic,UniqueFactorizationMonoid.factors_pow._f,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.Defs,UniqueFactorizationMonoid.factors,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.Finite,UniqueFactorizationMonoid.fintypeSubtypeDvd,Classical.decEq
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.UniqueFactorizationDomain.NormalizedFactors,UniqueFactorizationMonoid.strongNormalizationMonoid,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Valuation.ValuationRing,ValuationRing.instLinearOrderIdealOfDecidableLE,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_25,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_27,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_29,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_32,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_34,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.RingTheory.Valuation.ValuationSubring,ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_36,@Classical.decRel
+not-a-goal,not an instance position,Mathlib,Mathlib.Tactic.FieldSimp.Lemmas,Mathlib.Tactic.FieldSimp.zpow',Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.Algebra.UniformField,UniformSpace.Completion.instInvCompletion,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.Category.Profinite.Nobeling.Span,Profinite.NobelingProof.spanFinBasis,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.Compactification.OnePoint.Basic,OnePoint.equivOfIsEmbeddingOfRangeEq,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.Compactification.OnePoint.Sphere,onePointEquivSphereOfFinrankEq,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.ContinuousMap.CompactlySupported,CompactlySupportedContinuousMap.compLeft,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.ContinuousMap.ContinuousMapZero,ContinuousMapZero.mkD,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.ContinuousMap.Interval,ContinuousMap.concat,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.DiscreteQuotient,DiscreteQuotient.finsetClopens,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.MetricSpace.Gluing,Metric.Sigma.dist,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.MetricSpace.PiNat,PiNat.definition._@.Mathlib.Topology.MetricSpace.PiNat.2189032603._hygCtx._hyg.8,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.MetricSpace.PiNat,PiNat.dist,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.Order.LeftRightLim,Function.leftLim,Classical.propDecidable
+not-a-goal,not an instance position,Mathlib,Mathlib.Topology.PartitionOfUnity,BumpCovering.single,Classical.propDecidable
+timeout,synthesis timed out,Mathlib,Mathlib.Algebra.Order.Ring.StandardPart,ArchimedeanClass.instFieldFiniteResidueField._aux_48,Classical.propDecidable (a✝ = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.Algebra.Order.Ring.StandardPart,ArchimedeanClass.instFieldFiniteResidueField._aux_50,Classical.propDecidable (a = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.Algebra.Order.Ring.StandardPart,ArchimedeanClass.instFieldFiniteResidueField._aux_52,Classical.propDecidable (a = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.CategoryTheory.Limits.Bicones,CategoryTheory.finBiconeHom,Classical.propDecidable (a = b)
+timeout,synthesis timed out,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.instGroupWithZero._aux_1,Classical.propDecidable (a✝ = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.instGroupWithZero._aux_3,Classical.propDecidable (a = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure,AlgebraicClosure.instGroupWithZero._aux_5,Classical.propDecidable (a = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.NumberTheory.ClassNumber.Finite,ClassGroup.fintypeOfAdmissibleOfAlgebraic,Classical.propDecidable (a = b)
+timeout,synthesis timed out,Mathlib,Mathlib.RingTheory.AdjoinRoot,AdjoinRoot.instGroupWithZero,Classical.propDecidable (a✝ = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.RingTheory.AdjoinRoot,AdjoinRoot.instGroupWithZero,Classical.propDecidable (a = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.RingTheory.Extension.Cotangent.Basis,_private.Mathlib.RingTheory.Extension.Cotangent.Basis.0.Algebra.Generators.PresentationOfFreeCotangent.Aux.presLeft,Classical.propDecidable (x = 0)
+timeout,synthesis timed out,Mathlib,Mathlib.RingTheory.Extension.Cotangent.Basis,_private.Mathlib.RingTheory.Extension.Cotangent.Basis.0.Algebra.Generators.PresentationOfFreeCotangent.Aux.presLeft,Classical.propDecidable (x = -1)

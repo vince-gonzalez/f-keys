@@ -4,6 +4,7 @@
   "version": "2026-08-12",
   "sha256": "4e2f817ddf0651f0f787a36dc8901afa5eaa2eed159ed2f5fd932f557687ec97",
   "url": "https://f-keys.com/gonzalgo/tactic-bands/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

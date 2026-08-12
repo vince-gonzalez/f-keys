@@ -4,6 +4,7 @@
   "version": "2026-08-11",
   "sha256": "906a39491ab2be7a06c7370cd525e649b9644351c8387abf883bd8cd5ee01987",
   "url": "https://f-keys.com/gonzalgo/generated-proofs/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

@@ -111,6 +111,18 @@ The set.mm Axiom Table: https://f-keys.com/gonzalgo/setmm-axioms/
   syntax constructors and everything unreached. Machine-readable: setmm-axioms.json,
   setmm-axioms.csv (CC-BY-4.0).
 
+The Site Diagnosis Table: https://f-keys.com/gonzalgo/site-diagnosis/
+  765 sites of classical dependence examined for constructive replacement and NOT
+  removed, with what stopped each: 395 had no Decidable instance, 340 were not in
+  a position where an instance is supplied at all, 18 had an instance that itself
+  depends on choice, 12 timed out. The denominator for the Cleanable Table's 275.
+  44.4% were never testable, which is a fact about the shape of the proof term and
+  not about whether the mathematics needs choice -- counting them as failures
+  understates removability, counting them as successes overstates it. The 18
+  "instance exists but needs choice" sites are the sharpest case: any measure that
+  stops at whether an instance exists scores those as wins. Machine-readable:
+  site-diagnosis.json, site-diagnosis.csv (CC-BY-4.0).
+
 Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
 
 Which constant is responsible? Dominator analysis of classical dependence in

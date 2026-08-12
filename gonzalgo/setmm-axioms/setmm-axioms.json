@@ -4,6 +4,7 @@
   "version": "2026-08-12",
   "sha256": "72e4a28dce786db0fff5de715447a23c965b3e0b59024653e995e2e05e92585d",
   "url": "https://f-keys.com/gonzalgo/setmm-axioms/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

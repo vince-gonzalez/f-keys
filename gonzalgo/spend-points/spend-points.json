@@ -4,6 +4,7 @@
   "version": "2026-08-12",
   "sha256": "8c7668803b226410c020aa64f0e95762a9b89b4f81b9b92574f6a1dd4028c880",
   "url": "https://f-keys.com/gonzalgo/spend-points/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "producedBy": {
     "software": "gonzalgo",

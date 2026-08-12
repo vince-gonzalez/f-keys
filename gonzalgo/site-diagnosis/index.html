@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/site-diagnosis/">
+<title>The Site Diagnosis Table — why classical dependencies in Lean resist removal</title>
+<meta name="description" content="765 sites of classical dependence in Lean examined for removal, with the reason each resisted: 395 had no Decidable instance, 340 were not in an instance position at all, 18 needed choice anyway, 12 timed out.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/site-diagnosis/">
+<meta property="og:title" content="The Site Diagnosis Table">
+<meta property="og:description" content="the sites that did not come out, and what stopped each one">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Site Diagnosis Table",
+  "description": "Sites of classical dependence in Lean 4 examined for constructive replacement and not removed, each with the reason: no instance could be synthesised, the occurrence was not in a position where an instance is supplied, the available instance itself depends on choice, or synthesis timed out.",
+  "url": "https://f-keys.com/gonzalgo/site-diagnosis/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Lean 4",
+    "Mathlib",
+    "Classical.propDecidable",
+    "Decidable",
+    "instance synthesis",
+    "axiom of choice",
+    "constructive mathematics",
+    "formal verification",
+    "negative result"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "identifier": "https://doi.org/10.5281/zenodo.21900625",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/",
+    "identifier": "https://doi.org/10.5281/zenodo.21900625"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE SITE DIAGNOSIS TABLE</h1>
+<p class="kicker">the sites that did not come out, and what stopped each one</p>
+
+<p>The <a href="/gonzalgo/cleanable/">Cleanable Table</a> lists what came out. On its own that is a numerator with no denominator, and a numerator with no denominator is how a removal rate gets quoted as though it were a possibility rate. This is the rest.</p>
+<p>Of 765 sites examined, 340 &mdash; 44.4% &mdash; were never testable. The occurrence is not in a position where an instance would be supplied, so there is no proposition to hand to synthesis and nothing to substitute. That is a fact about the shape of the proof term rather than about whether the mathematics needs choice.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; instance synthesis attempted per occurrence, inside the declaration's own context</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>verdict</th><th>what stopped it</th><th>library</th><th>declaration</th><th>proposition</th></tr></thead>
+<tbody>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>Nonneg.conditionallyCompleteLinearOrder._aux_1</td><td class='found'>Classical.propDecidable (sSup (Subtype.val '' t) ∈ Set.Ici a)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>Nonneg.conditionallyCompleteLinearOrder._aux_3</td><td class='found'>Classical.propDecidable (sInf (Subtype.val '' t) ∈ Set.Ici a)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>Pi.Lex.linearOrder</td><td class='found'>Classical.decRel fun x1 x2 => x1 < x2</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>LowerSet.instLinearOrder</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>LowerSet.instLinearOrder</td><td class='found'>Classical.propDecidable (a ≤ b)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>LowerSet.instLinearOrder</td><td class='found'>Classical.propDecidable (a < b)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>UpperSet.instLinearOrder</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>UpperSet.instLinearOrder</td><td class='found'>Classical.propDecidable (a ≤ b)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>UpperSet.instLinearOrder</td><td class='found'>Classical.propDecidable (a < b)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>HahnSeries.instLinearOrderLex</td><td class='found'>Classical.decRel LE.le a b</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>HahnSeries.instLinearOrderLex</td><td class='found'>Classical.decRel LE.le</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>ValuationRing.instLinearOrderIdealOfDecidableLE</td><td class='found'>Classical.propDecidable (a < b)</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_25</td><td class='found'>Classical.decRel LE.le a b</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_27</td><td class='found'>Classical.decRel LE.le a b</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_29</td><td class='found'>Classical.decRel LE.le</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_32</td><td class='found'>Classical.decRel LE.le</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_34</td><td class='found'>Classical.decRel LE.le</td></tr>
+<tr><td>choice-needed</td><td class='found'>instance exists but needs choice</td><td>Mathlib</td><td>ValuationSubring.instLinearOrderedCommGroupWithZeroValueGroup._aux_36</td><td class='found'>Classical.decRel LE.le</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Batteries</td><td>List.Sublist.erase_diff_erase_sublist._f</td><td class='found'>Classical.propDecidable (b = a)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Init</td><td>List.count_erase._f</td><td class='found'>Classical.propDecidable (c = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Init</td><td>List.count_erase._f</td><td class='found'>Classical.propDecidable (b = a)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Init</td><td>List.erase_eq_eraseP._f</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Init</td><td>List.isSublist_iff_sublist._f</td><td class='found'>Classical.propDecidable (head✝¹ = head✝)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Init</td><td>Lean.Grind.Field.noNatZeroDivisors.ofIsCharPZero</td><td class='found'>Classical.propDecidable (b = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Init</td><td>_private.Init.While.0.whileM.Pred</td><td class='found'>Classical.propDecidable (∃ g, whileM.body f g = g)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>CommRingCat.Under.tensorProductFanIsLimit</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Field.DirectLimit.inv</td><td class='found'>Classical.propDecidable (p = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>finsuppLEquivDirectSum</td><td class='found'>Classical.decPred fun m => m ≠ 0</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>IsField.toSemifield</td><td class='found'>Classical.propDecidable (a = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>MonoidWithZeroHom.ValueGroup₀.embedding</td><td class='found'>Classical.decPred fun b => b = 0</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>MonoidWithZeroHom.ValueGroup₀.restrict₀</td><td class='found'>Classical.decPred (fun b => b = 0) (f a)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Ring.inverse</td><td class='found'>Classical.propDecidable (∃ u, ↑u = x)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>groupWithZeroOfIsUnitOrEqZero</td><td class='found'>Classical.propDecidable (a = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.dgoToHomologicalComplex</td><td class='found'>Classical.propDecidable (i + b = j)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.double</td><td class='found'>Classical.propDecidable (k = i₀)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.double</td><td class='found'>Classical.propDecidable (k = i₁)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.double</td><td class='found'>Classical.propDecidable (k' = i₀)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.double</td><td class='found'>Classical.propDecidable (k' = i₁)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.double</td><td class='found'>Classical.propDecidable (i₀ = i₁)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.evalCompCoyonedaCorepresentable</td><td class='found'>Classical.propDecidable (∃ k, c.Rel j k)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.evalCompCoyonedaCorepresentable</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.evalCompCoyonedaCorepresentative</td><td class='found'>Classical.propDecidable (∃ k, c.Rel j k)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.evalCompCoyonedaCorepresentative</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.mkHomFromDouble</td><td class='found'>Classical.propDecidable (k = i₀)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HomologicalComplex.mkHomFromDouble</td><td class='found'>Classical.propDecidable (k = i₁)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>ComplexShape.Embedding.r</td><td class='found'>Classical.propDecidable (∃ i, e.f i = i')</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>ComplexShape.Embedding.liftExtend.f</td><td class='found'>Classical.propDecidable (∃ i, e.f i = i')</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>LieAlgebra.LoopAlgebra.toFinsupp</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>LieModule.chainTopCoeff</td><td class='found'>Classical.propDecidable (α = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>LieModule.chainTopCoeff</td><td class='found'>Classical.propDecidable (LieModule.genWeightSpace M (a • α + ⇑β) = ⊥)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>AddMonoidAlgebra.modOf</td><td class='found'>Classical.decPred (fun g₁ => ∃ g₂, g₁ = g + g₂) a</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>MvPolynomial.coeffs</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>MvPolynomial.degreeOf</td><td class='found'>Classical.decEq σ</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>MvPolynomial.degrees</td><td class='found'>Classical.decEq σ</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>MvPolynomial.pderiv</td><td class='found'>Classical.decEq σ</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>MvPolynomial.vars</td><td class='found'>Classical.decEq σ</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Nonneg.conditionallyCompleteLinearOrder._aux_1</td><td class='found'>Classical.propDecidable t.Nonempty</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Nonneg.conditionallyCompleteLinearOrder._aux_1</td><td class='found'>Classical.propDecidable (BddAbove t)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Nonneg.conditionallyCompleteLinearOrder._aux_3</td><td class='found'>Classical.propDecidable t.Nonempty</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Nonneg.conditionallyCompleteLinearOrder._aux_3</td><td class='found'>Classical.propDecidable (BddBelow t)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.coeffs</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.cardPowDegree</td><td class='found'>Classical.decEq Fq</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>_private.Mathlib.Algebra.Polynomial.Derivative.0.Polynomial.iterate_derivative_prod_X_sub_C.match_1_4</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>_private.Mathlib.Algebra.Polynomial.Derivative.0.Polynomial.iterate_derivative_prod_X_sub_C.match_1_6</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.divByMonic</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.divModByMonicAux._unary</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.modByMonic</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.rootMultiplicity</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.rootMultiplicity</td><td class='found'>Classical.decPred fun n => ¬(Polynomial.X - Polynomial.C a) ^ (n + 1) ∣ p</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>prodXSubSMul</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.recOnHorner._unary</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.recOnHorner._unary</td><td class='found'>Classical.decEq R (p.coeff 0) 0</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.nthRootsFinset</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.rootSet</td><td class='found'>Classical.decEq S</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.rootSetFintype</td><td class='found'>Classical.decEq S</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.roots</td><td class='found'>Classical.dec (p = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Polynomial.roots</td><td class='found'>Classical.decEq R</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>WeierstrassCurve.Jacobian.Point.toAffine</td><td class='found'>Classical.propDecidable (W.Nonsingular P)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>WeierstrassCurve.Jacobian.Point.toAffine</td><td class='found'>Classical.propDecidable (P 2 = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>WeierstrassCurve.Projective.Point.toAffine</td><td class='found'>Classical.propDecidable (W.Nonsingular P)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>WeierstrassCurve.Projective.Point.toAffine</td><td class='found'>Classical.propDecidable (P 2 = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>_private.Mathlib.AlgebraicGeometry.Morphisms.Basic.0.AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top.match_1_2</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_1</td><td class='found'>Classical.propDecidable (a✝ = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_3</td><td class='found'>Classical.propDecidable (a = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>AlgebraicGeometry.Scheme.instFieldCarrierResidueField._aux_5</td><td class='found'>Classical.propDecidable (a = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono</td><td class='found'>Classical.propDecidable (Δ = Δ')</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono</td><td class='found'>Classical.propDecidable (AlgebraicTopology.DoldKan.Isδ₀ i)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>CategoryTheory.SimplicialObject.Splitting.πSummand</td><td class='found'>Classical.propDecidable (B = A)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.Prepartition.biUnion</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.Prepartition.disjUnion</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.Prepartition.restrict</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.Box.splitLower</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.Box.splitUpper</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.Prepartition.split</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.TaggedPrepartition.disjUnion</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.unitPartition.prepartition</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>BoxIntegral.unitPartition.prepartition</td><td class='found'>Classical.propDecidable (I = BoxIntegral.unitPartition.box n a)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>definition._@.Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital.2216632569._hygCtx._hyg.8</td><td class='found'>Classical.propDecidable (p a)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>definition._@.Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital.2216632569._hygCtx._hyg.8</td><td class='found'>Classical.propDecidable (ContinuousOn f (quasispectrum R a))</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>definition._@.Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital.2216632569._hygCtx._hyg.8</td><td class='found'>Classical.propDecidable (f 0 = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>dslope</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>ValueDistribution.logCounting</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>ValueDistribution.proximity</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>Orientation.definition._@.Mathlib.Analysis.InnerProductSpace.Orientation.2114562672._hygCtx._hyg.2</td><td class='found'>Classical.propDecidable (o = positiveOrientation)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>OrthonormalBasis.instFunLike</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HilbertBasis.instFunLike</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>HilbertBasis.instFunLike.match_1</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>_private.Mathlib.Analysis.Matrix.Normed.0.Matrix.unitOf</td><td class='found'>Classical.propDecidable (a = 0)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>toMeromorphicNFAt</td><td class='found'>Classical.propDecidable (MeromorphicAt f x)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>toMeromorphicNFAt</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>GeneralSchauderBasis._sizeOf_1</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>GeneralSchauderBasis.casesOn</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>GeneralSchauderBasis.mk._flat_ctor</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>GeneralSchauderBasis.mk.noConfusion</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>GeneralSchauderBasis.noConfusion</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>GeneralSchauderBasis.noConfusionType</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>GeneralSchauderBasis.recOn</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>_private.Mathlib.Analysis.Normed.Module.Bases.0.GeneralSchauderBasis.ext.match_1</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>ContinuousMultilinearMap.iteratedFDeriv</td><td class='found'>Classical.propDecidable (a = b)</td></tr>
+<tr><td>no-instance</td><td class='found'>no Decidable instance found</td><td>Mathlib</td><td>CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.largerSubobject</td><td class='found'>Classical.propDecidable (A = ⊤)</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Showing the first 120 of 765 rows. Grouped by verdict, so the head of the table is one category. The full set is in the JSON and the CSV.</p>
+<p class="note"><em>proposition</em> is the goal an instance would have had to be found for, where there was one. A <code>not-a-goal</code> row often shows <code>Classical.propDecidable</code> bare or partly applied, which is the case where there is nothing to decide.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="site-diagnosis.json">site-diagnosis.json</a> &middot;
+<a href="site-diagnosis.csv">site-diagnosis.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
+resolves to the current deposit.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>lake env lean -D maxErrors=4000 lean/Substitute.lean</pre>
+<p class="note">Method: <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>.</p>
+
+<h2>What the four verdicts mean for a repair</h2>
+<p><strong>no instance</strong> (395, 51.6%) is the honest negative: the proposition is there, synthesis was asked, and Lean has no constructive way to decide it. These are the sites where the classical dependence is doing real work.</p>
+<p><strong>not an instance position</strong> (340, 44.4%) is not a negative at all. Nothing was tested. Counting these as failures understates removability and counting them as successes overstates it, which is why they are their own category rather than folded into either.</p>
+<p><strong>needs choice anyway</strong> (18) is the sharpest case: an instance exists, and it depends on choice itself, so substituting it moves the dependence rather than removing it. Any measure that stops at whether an instance exists would score these as wins.</p>
+<p><strong>timed out</strong> (12) is unknown, not negative. It is small here, which is the improvement this run represents.</p>
+
+<h2>Why an earlier pass is not used</h2>
+<p>A previous run over the same question returned 404 synthesis timeouts against this run's 12, and had no <code>not-a-goal</code> category at all, so nearly every site it could not clean was recorded as a time limit being hit. It was measuring its own budget. Its numbers are not reproduced here.</p>
+
+<h2>Reading it with the Cleanable Table</h2>
+<p>Together the two tables give the shape of the problem rather than a single rate. Removal succeeded where a decidable proposition sat in an instance position and the constructive instance existed. Where any of those three fails it fails for a different reason, and only one of the three is about mathematics.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/site-diagnosis/">f-keys.com/gonzalgo/site-diagnosis/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>
