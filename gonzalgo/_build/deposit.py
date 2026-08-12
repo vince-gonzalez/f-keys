@@ -148,13 +148,31 @@ def main() -> None:
     build_bundle(meta)
     print(f"  bundle {BUNDLE.name}: {BUNDLE.stat().st_size:,} bytes")
 
-    _, dep = call("POST",
-                  f"{API}/deposit/depositions/{CONCEPT_RECORD}/actions/newversion",
-                  token)
-    draft_url = dep["links"]["latest_draft"]
-    _, draft = call("GET", draft_url, token)
+    # A half-finished draft may already exist — started in the web UI, or left
+    # behind by an interrupted run. Zenodo refuses to open a second one, so
+    # reuse it rather than asking anyone to go clean up by hand.
+    _, published = call("GET", f"{API}/deposit/depositions/{CONCEPT_RECORD}",
+                        token)
+    concept = published.get("conceptrecid")
+    _, siblings = call(
+        "GET",
+        f"{API}/deposit/depositions?q=conceptrecid:{concept}&all_versions=1"
+        f"&size=50&sort=mostrecent", token)
+    drafts = [d for d in siblings if not d.get("submitted")]
+
+    if drafts:
+        draft = drafts[0]
+        print(f"  reusing existing draft {draft['id']}")
+    else:
+        _, dep = call(
+            "POST",
+            f"{API}/deposit/depositions/{CONCEPT_RECORD}/actions/newversion",
+            token)
+        _, draft = call("GET", dep["links"]["latest_draft"], token)
+        print(f"  new draft {draft['id']}")
     draft_id = draft["id"]
-    print(f"  draft {draft_id}")
+    # Re-read: a draft from the listing carries a thinner file record.
+    _, draft = call("GET", f"{API}/deposit/depositions/{draft_id}", token)
 
     # A draft inherits the previous version's files and they CAN be removed here,
     # which is the only place in Zenodo where that is true.
