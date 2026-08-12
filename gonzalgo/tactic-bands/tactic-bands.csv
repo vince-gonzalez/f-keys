@@ -1,0 +1,168 @@
+library,attribution,tactic,proofs,classical,eligible,rate_pct,role,band_low_pct,band_high_pct,band_widest,position,escapes_band,controls_in_band
+Batteries,loose,grind,182,179,149,83.2,candidate,23.1,81.8,refine,above band,true,12
+Batteries,loose,refine,36,11,9,81.8,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,cases,111,39,30,76.9,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,induction,171,68,51,75.0,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,apply,94,54,38,70.4,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,simp_all,32,10,7,70.0,candidate,23.1,81.8,refine,inside band,false,12
+Batteries,loose,simp,616,222,151,68.0,candidate,23.1,81.8,refine,inside band,false,12
+Batteries,loose,omega,24,19,12,63.2,candidate,23.1,81.8,refine,inside band,false,12
+Batteries,loose,rw,229,99,58,58.6,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,exact,133,54,30,55.6,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,unfold,49,18,9,50.0,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,rfl,145,39,19,48.7,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,funext,37,8,3,37.5,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,ext,30,17,6,35.3,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,obtain,22,10,3,30.0,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,intro,34,13,3,23.1,known-negative,23.1,81.8,refine,inside band,false,12
+Batteries,loose,simpa,40,23,5,21.7,not examined,23.1,81.8,refine,below band,false,12
+Batteries,strict,grind,74,74,69,93.2,candidate,83.3,83.3,rw,above band,true,1
+Batteries,strict,rw,28,12,10,83.3,known-negative,83.3,83.3,rw,inside band,false,1
+Batteries,strict,simp,165,57,42,73.7,candidate,83.3,83.3,rw,below band,false,1
+Init,loose,trivial,23,2,2,100.0,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,norm_cast,46,28,28,100.0,candidate,45.0,100.0,trivial,inside band,false,24
+Init,loose,subst,516,175,164,93.7,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,assumption,150,58,52,89.7,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,rcases,923,338,300,88.8,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,constructor,367,153,128,83.7,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,left,38,12,10,83.3,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,intro,866,348,285,81.9,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,right,42,11,9,81.8,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,decide,302,52,41,78.8,candidate,45.0,100.0,trivial,inside band,false,24
+Init,loose,ext,377,141,107,75.9,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,contradiction,103,36,27,75.0,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,rintro,318,113,84,74.3,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,grind,42,32,23,71.9,candidate,45.0,100.0,trivial,inside band,false,24
+Init,loose,cases,1721,220,158,71.8,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,omega,1144,654,462,70.6,candidate,45.0,100.0,trivial,inside band,false,24
+Init,loose,simp_all,838,202,141,69.8,candidate,45.0,100.0,trivial,inside band,false,24
+Init,loose,apply,964,306,210,68.6,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,induction,966,133,91,68.4,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,funext,150,25,17,68.0,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,rfl,1488,398,261,65.6,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,rwa,179,51,33,64.7,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,exact,1285,468,289,61.8,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,refine,324,145,89,61.4,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,rw,3339,1222,735,60.1,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,simpa,831,407,238,58.5,not examined,45.0,100.0,trivial,inside band,false,24
+Init,loose,obtain,285,103,60,58.3,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,show,203,117,67,57.3,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,unfold,143,30,17,56.7,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,loose,simp,8428,3115,1519,48.8,candidate,45.0,100.0,trivial,inside band,false,24
+Init,loose,change,64,20,9,45.0,known-negative,45.0,100.0,trivial,inside band,false,24
+Init,strict,omega,66,35,35,100.0,candidate,0.0,83.3,exact,above band,true,3
+Init,strict,simp_all,39,8,8,100.0,candidate,0.0,83.3,exact,above band,true,3
+Init,strict,exact,22,6,5,83.3,known-negative,0.0,83.3,exact,inside band,false,3
+Init,strict,grind,20,20,16,80.0,candidate,0.0,83.3,exact,inside band,false,3
+Init,strict,rw,788,209,98,46.9,known-negative,0.0,83.3,exact,inside band,false,3
+Init,strict,simpa,160,70,28,40.0,not examined,0.0,83.3,exact,inside band,false,3
+Init,strict,simp,2677,1212,315,26.0,candidate,0.0,83.3,exact,inside band,false,3
+Init,strict,rfl,23,1,0,0.0,known-negative,0.0,83.3,exact,inside band,false,3
+Mathlib,loose,grind,2761,2733,1061,38.8,candidate,5.8,28.2,exfalso,above band,true,30
+Mathlib,loose,decide,338,290,101,34.8,candidate,5.8,28.2,exfalso,above band,true,30
+Mathlib,loose,exfalso,74,71,20,28.2,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,contradiction,172,148,38,25.7,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,tauto,360,324,81,25.0,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,cases,2446,1664,411,24.7,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,right,617,558,120,21.5,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,constructor,2633,2291,493,21.5,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,induction,3418,2561,519,20.3,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,use,1638,1532,309,20.2,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,assumption,301,240,48,20.0,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,rintro,4555,3953,785,19.9,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,rcases,4512,4126,793,19.2,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,obtain,8251,7700,1475,19.2,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,fin_cases,195,194,37,19.1,not examined,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,omega,67,53,10,18.9,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,injection,51,28,5,17.9,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,exact,25561,23555,4085,17.3,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,rwa,3036,2838,472,16.6,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,aesop,1192,956,155,16.2,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,rfl,12979,11098,1793,16.2,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,refine,13164,12517,2011,16.1,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,trivial,319,276,44,15.9,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,intro,8117,7510,1191,15.9,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,simpa,10490,9671,1524,15.8,not examined,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,simp_all,1204,1041,163,15.7,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,left,733,674,103,15.3,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,rw,39322,35239,5214,14.8,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,linear_combination,230,170,25,14.7,not examined,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,subst,880,708,103,14.5,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,simp_rw,5720,5278,759,14.4,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,unfold,739,644,87,13.5,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,simp,38681,32913,4408,13.4,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,apply,9577,8835,1165,13.2,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,show,1287,1220,155,12.7,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,funext,544,425,53,12.5,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,ext,10202,8432,903,10.7,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,nlinarith,78,77,8,10.4,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,change,1334,1246,120,9.6,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,cat_disch,709,638,60,9.4,not examined,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,delta,189,164,14,8.5,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,gcongr,1118,1062,84,7.9,not examined,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,norm_cast,699,663,52,7.8,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,ring_nf,256,246,16,6.5,not examined,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,ring,985,915,55,6.0,candidate,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,exact_mod_cast,175,172,10,5.8,known-negative,5.8,28.2,exfalso,inside band,false,30
+Mathlib,loose,norm_num,412,400,20,5.0,candidate,5.8,28.2,exfalso,below band,false,30
+Mathlib,loose,field_simp,147,147,7,4.8,candidate,5.8,28.2,exfalso,below band,false,30
+Mathlib,loose,linarith,558,556,21,3.8,candidate,5.8,28.2,exfalso,below band,false,30
+Mathlib,loose,positivity,977,975,34,3.5,candidate,5.8,28.2,exfalso,below band,false,30
+Mathlib,loose,push_cast,245,240,7,2.9,not examined,5.8,28.2,exfalso,below band,false,30
+Mathlib,loose,bound,132,131,3,2.3,not examined,5.8,28.2,exfalso,below band,false,30
+Mathlib,strict,induction,29,24,21,87.5,known-negative,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,grind,770,768,483,62.9,candidate,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,decide,77,58,33,56.9,candidate,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,norm_cast,25,25,9,36.0,candidate,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,rwa,125,99,32,32.3,known-negative,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,grw,41,22,6,27.3,not examined,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,simpa,1935,1686,383,22.7,not examined,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,simp_rw,686,554,118,21.3,known-negative,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,classical,109,108,21,19.4,not examined,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,rw,5634,4454,815,18.3,known-negative,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,simp,7822,5995,981,16.4,candidate,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,simp_all,44,31,5,16.1,candidate,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,aesop,180,99,11,11.1,candidate,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,fun_prop,20,19,2,10.5,not examined,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,exact,40,37,3,8.1,known-negative,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,convert!,34,26,2,7.7,not examined,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,cat_disch,83,78,2,2.6,not examined,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,apply,95,81,1,1.2,known-negative,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,linear_combination,23,21,0,0.0,not examined,0.0,87.5,induction,inside band,false,7
+Mathlib,strict,rfl,208,145,0,0.0,known-negative,0.0,87.5,induction,inside band,false,7
+Std,loose,simpa,734,667,512,76.8,not examined,0.0,60.3,assumption,above band,true,22
+Std,loose,grind,89,88,55,62.5,candidate,0.0,60.3,assumption,above band,true,22
+Std,loose,assumption,95,78,47,60.3,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,contradiction,54,16,9,56.2,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,simp,2749,1568,814,51.9,candidate,0.0,60.3,assumption,inside band,false,22
+Std,loose,rw,1747,1075,533,49.6,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,constructor,89,55,27,49.1,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,obtain,47,14,6,42.9,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,rintro,42,19,8,42.1,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,apply,777,517,203,39.3,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,cases,263,106,41,38.7,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,ext,58,26,10,38.5,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,intro,482,283,103,36.4,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,omega,130,78,28,35.9,candidate,0.0,60.3,assumption,inside band,false,22
+Std,loose,simp_all,172,60,21,35.0,candidate,0.0,60.3,assumption,inside band,false,22
+Std,loose,rcases,109,80,27,33.8,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,right,40,23,7,30.4,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,left,41,24,7,29.2,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,exact,1294,965,278,28.8,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,rfl,475,200,56,28.0,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,decide,30,15,4,26.7,candidate,0.0,60.3,assumption,inside band,false,22
+Std,loose,induction,412,99,23,23.2,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,funext,29,12,2,16.7,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,rwa,48,16,2,12.5,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,unfold,178,100,12,12.0,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,refine,247,200,23,11.5,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,subst,30,20,1,5.0,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,loose,trivial,26,1,0,0.0,known-negative,0.0,60.3,assumption,inside band,false,22
+Std,strict,apply,25,20,18,90.0,known-negative,0.0,90.0,apply,inside band,false,3
+Std,strict,simp_to_raw,400,376,329,87.5,not examined,0.0,90.0,apply,inside band,false,3
+Std,strict,simpa,561,546,446,81.7,not examined,0.0,90.0,apply,inside band,false,3
+Std,strict,rw,223,125,75,60.0,known-negative,0.0,90.0,apply,inside band,false,3
+Std,strict,simp,901,481,277,57.6,candidate,0.0,90.0,apply,inside band,false,3
+Std,strict,simp_to_model,1092,1052,605,57.5,not examined,0.0,90.0,apply,inside band,false,3
+Std,strict,simp_all,20,14,3,21.4,candidate,0.0,90.0,apply,inside band,false,3
+Std,strict,rfl,88,33,0,0.0,known-negative,0.0,90.0,apply,inside band,false,3
