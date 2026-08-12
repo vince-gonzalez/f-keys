@@ -213,6 +213,21 @@ The Entry-Point Table: https://f-keys.com/gonzalgo/entry-points/
   under a single gateway lemma, with no theorem changing. Machine-readable:
   entry-points.json, entry-points.csv (CC-BY-4.0).
 
+The Tactic Background Table: https://f-keys.com/gonzalgo/tactic-bands/
+  167 cells: for each Lean tactic in each of four libraries under two attribution
+  rules, the share of its choice-dependent proofs whose STATEMENT is choice-free,
+  shown against the band spanned by known-negative tactics -- tactics that cannot
+  introduce a classical instance, so their rate is the background of the
+  population rather than an effect of the tactic. Mathlib's band is 5.8-28.2%
+  across 30 controls, Lean core's is 45.0-100.0%; the variation within a library
+  is as large as between libraries. Seven of the 15 examined candidates escape
+  their band, four of them grind, which is classical by architecture and not
+  defective. norm_num, the one tactic with a demonstrated avoidable dependence,
+  sits at 5.0% -- BELOW the known-negative floor, beneath rfl and exfalso. One
+  further escape (simpa in Std, 76.8% over 734 proofs) was never examined because
+  it is on neither list. Machine-readable: tactic-bands.json, tactic-bands.csv
+  (CC-BY-4.0).
+
 Supported: Lean 4 (via a declaration-graph extractor), and the Metamath databases
 set.mm, iset.mm, nf.mm, ql.mm and hol.mm — ZFC, intuitionistic logic, New
 Foundations, quantum logic and higher-order logic measured by one program.

@@ -38,5 +38,10 @@
     "history": [],
     "sha256": "8992a894d1cf1eada111bf8cb08f3e956759ae6ad77925701f17ce18938124e6",
     "version": "2026-08-12"
+  },
+  "tactic-bands": {
+    "history": [],
+    "sha256": "4e2f817ddf0651f0f787a36dc8901afa5eaa2eed159ed2f5fd932f557687ec97",
+    "version": "2026-08-12"
   }
 }

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/tactic-bands/">
+<title>The Tactic Background Table — Lean tactic classical-dependence rates and their calibration</title>
+<meta name="description" content="Classical-dependence rates for Lean tactics across four libraries and two attribution rules, each against the band spanned by tactics that cannot introduce a classical instance. The background is 5.8-28.2% in Mathlib and 45.0-100.0% in Lean core.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/tactic-bands/">
+<meta property="og:title" content="The Tactic Background Table">
+<meta property="og:description" content="every rate, against the band that says whether it means anything">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Tactic Background Table",
+  "description": "Rates at which Lean tactics' proofs carry an avoidable classical dependence, across four libraries under two attribution rules, each shown against the band spanned by known-negative tactics in the same library and rule. The band is what makes a rate interpretable, and it is wide.",
+  "url": "https://f-keys.com/gonzalgo/tactic-bands/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Lean 4",
+    "Mathlib",
+    "tactics",
+    "grind",
+    "omega",
+    "norm_num",
+    "axiom of choice",
+    "calibration",
+    "known-negative controls",
+    "formal verification",
+    "negative result"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21853489",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/tactic-bands/tactic-bands.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/tactic-bands/tactic-bands.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE TACTIC BACKGROUND TABLE</h1>
+<p class="kicker">every rate, against the band that says whether it means anything</p>
+
+<p>Scoring a tactic by how often its proofs carry a removable dependence on choice looks like it should find the tactics at fault. The number it produces is mostly a property of the theorems the tactic gets used on.</p>
+<p>The calibration is the whole table. A <em>known-negative</em> is a tactic that cannot introduce a classical instance at all — <code>rfl</code>, <code>intro</code>, <code>exfalso</code> — so whatever rate it shows is the background of its population. In Mathlib that background spans 5.8&ndash;28.2% across 30 controls; in Lean core 45.0&ndash;100.0%. The variation inside one library is as large as the variation between libraries, so no threshold survives normalisation.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; four libraries, two attribution rules, cells with at least 20 proofs</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>library</th><th>rule</th><th>tactic</th><th>role</th><th style="text-align:right">proofs</th><th style="text-align:right">classical</th><th style="text-align:right">eligible</th><th style="text-align:right">rate</th><th>vs band</th></tr></thead>
+<tbody>
+<tr><td>Batteries</td><td class='found'>loose</td><td>grind</td><td class='found'>candidate</td><td class='num'>182</td><td class='num'>179</td><td class='num'>149</td><td class='num'>83.2%</td><td>above band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>refine</td><td class='found'>known-negative</td><td class='num'>36</td><td class='num'>11</td><td class='num'>9</td><td class='num'>81.8%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>cases</td><td class='found'>known-negative</td><td class='num'>111</td><td class='num'>39</td><td class='num'>30</td><td class='num'>76.9%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>induction</td><td class='found'>known-negative</td><td class='num'>171</td><td class='num'>68</td><td class='num'>51</td><td class='num'>75.0%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>apply</td><td class='found'>known-negative</td><td class='num'>94</td><td class='num'>54</td><td class='num'>38</td><td class='num'>70.4%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>simp_all</td><td class='found'>candidate</td><td class='num'>32</td><td class='num'>10</td><td class='num'>7</td><td class='num'>70.0%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>simp</td><td class='found'>candidate</td><td class='num'>616</td><td class='num'>222</td><td class='num'>151</td><td class='num'>68.0%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>omega</td><td class='found'>candidate</td><td class='num'>24</td><td class='num'>19</td><td class='num'>12</td><td class='num'>63.2%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>rw</td><td class='found'>known-negative</td><td class='num'>229</td><td class='num'>99</td><td class='num'>58</td><td class='num'>58.6%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>exact</td><td class='found'>known-negative</td><td class='num'>133</td><td class='num'>54</td><td class='num'>30</td><td class='num'>55.6%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>unfold</td><td class='found'>known-negative</td><td class='num'>49</td><td class='num'>18</td><td class='num'>9</td><td class='num'>50.0%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>rfl</td><td class='found'>known-negative</td><td class='num'>145</td><td class='num'>39</td><td class='num'>19</td><td class='num'>48.7%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>funext</td><td class='found'>known-negative</td><td class='num'>37</td><td class='num'>8</td><td class='num'>3</td><td class='num'>37.5%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>ext</td><td class='found'>known-negative</td><td class='num'>30</td><td class='num'>17</td><td class='num'>6</td><td class='num'>35.3%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>obtain</td><td class='found'>known-negative</td><td class='num'>22</td><td class='num'>10</td><td class='num'>3</td><td class='num'>30.0%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>intro</td><td class='found'>known-negative</td><td class='num'>34</td><td class='num'>13</td><td class='num'>3</td><td class='num'>23.1%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>loose</td><td>simpa</td><td class='found'>not examined</td><td class='num'>40</td><td class='num'>23</td><td class='num'>5</td><td class='num'>21.7%</td><td>below band</td></tr>
+<tr><td>Batteries</td><td class='found'>strict</td><td>grind</td><td class='found'>candidate</td><td class='num'>74</td><td class='num'>74</td><td class='num'>69</td><td class='num'>93.2%</td><td>above band</td></tr>
+<tr><td>Batteries</td><td class='found'>strict</td><td>rw</td><td class='found'>known-negative</td><td class='num'>28</td><td class='num'>12</td><td class='num'>10</td><td class='num'>83.3%</td><td>inside band</td></tr>
+<tr><td>Batteries</td><td class='found'>strict</td><td>simp</td><td class='found'>candidate</td><td class='num'>165</td><td class='num'>57</td><td class='num'>42</td><td class='num'>73.7%</td><td>below band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>trivial</td><td class='found'>known-negative</td><td class='num'>23</td><td class='num'>2</td><td class='num'>2</td><td class='num'>100.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>norm_cast</td><td class='found'>candidate</td><td class='num'>46</td><td class='num'>28</td><td class='num'>28</td><td class='num'>100.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>subst</td><td class='found'>known-negative</td><td class='num'>516</td><td class='num'>175</td><td class='num'>164</td><td class='num'>93.7%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>assumption</td><td class='found'>known-negative</td><td class='num'>150</td><td class='num'>58</td><td class='num'>52</td><td class='num'>89.7%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>rcases</td><td class='found'>known-negative</td><td class='num'>923</td><td class='num'>338</td><td class='num'>300</td><td class='num'>88.8%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>constructor</td><td class='found'>known-negative</td><td class='num'>367</td><td class='num'>153</td><td class='num'>128</td><td class='num'>83.7%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>left</td><td class='found'>known-negative</td><td class='num'>38</td><td class='num'>12</td><td class='num'>10</td><td class='num'>83.3%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>intro</td><td class='found'>known-negative</td><td class='num'>866</td><td class='num'>348</td><td class='num'>285</td><td class='num'>81.9%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>right</td><td class='found'>known-negative</td><td class='num'>42</td><td class='num'>11</td><td class='num'>9</td><td class='num'>81.8%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>decide</td><td class='found'>candidate</td><td class='num'>302</td><td class='num'>52</td><td class='num'>41</td><td class='num'>78.8%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>ext</td><td class='found'>known-negative</td><td class='num'>377</td><td class='num'>141</td><td class='num'>107</td><td class='num'>75.9%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>contradiction</td><td class='found'>known-negative</td><td class='num'>103</td><td class='num'>36</td><td class='num'>27</td><td class='num'>75.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>rintro</td><td class='found'>known-negative</td><td class='num'>318</td><td class='num'>113</td><td class='num'>84</td><td class='num'>74.3%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>grind</td><td class='found'>candidate</td><td class='num'>42</td><td class='num'>32</td><td class='num'>23</td><td class='num'>71.9%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>cases</td><td class='found'>known-negative</td><td class='num'>1,721</td><td class='num'>220</td><td class='num'>158</td><td class='num'>71.8%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>omega</td><td class='found'>candidate</td><td class='num'>1,144</td><td class='num'>654</td><td class='num'>462</td><td class='num'>70.6%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>simp_all</td><td class='found'>candidate</td><td class='num'>838</td><td class='num'>202</td><td class='num'>141</td><td class='num'>69.8%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>apply</td><td class='found'>known-negative</td><td class='num'>964</td><td class='num'>306</td><td class='num'>210</td><td class='num'>68.6%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>induction</td><td class='found'>known-negative</td><td class='num'>966</td><td class='num'>133</td><td class='num'>91</td><td class='num'>68.4%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>funext</td><td class='found'>known-negative</td><td class='num'>150</td><td class='num'>25</td><td class='num'>17</td><td class='num'>68.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>rfl</td><td class='found'>known-negative</td><td class='num'>1,488</td><td class='num'>398</td><td class='num'>261</td><td class='num'>65.6%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>rwa</td><td class='found'>known-negative</td><td class='num'>179</td><td class='num'>51</td><td class='num'>33</td><td class='num'>64.7%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>exact</td><td class='found'>known-negative</td><td class='num'>1,285</td><td class='num'>468</td><td class='num'>289</td><td class='num'>61.8%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>refine</td><td class='found'>known-negative</td><td class='num'>324</td><td class='num'>145</td><td class='num'>89</td><td class='num'>61.4%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>rw</td><td class='found'>known-negative</td><td class='num'>3,339</td><td class='num'>1,222</td><td class='num'>735</td><td class='num'>60.1%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>simpa</td><td class='found'>not examined</td><td class='num'>831</td><td class='num'>407</td><td class='num'>238</td><td class='num'>58.5%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>obtain</td><td class='found'>known-negative</td><td class='num'>285</td><td class='num'>103</td><td class='num'>60</td><td class='num'>58.3%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>show</td><td class='found'>known-negative</td><td class='num'>203</td><td class='num'>117</td><td class='num'>67</td><td class='num'>57.3%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>unfold</td><td class='found'>known-negative</td><td class='num'>143</td><td class='num'>30</td><td class='num'>17</td><td class='num'>56.7%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>simp</td><td class='found'>candidate</td><td class='num'>8,428</td><td class='num'>3,115</td><td class='num'>1,519</td><td class='num'>48.8%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>loose</td><td>change</td><td class='found'>known-negative</td><td class='num'>64</td><td class='num'>20</td><td class='num'>9</td><td class='num'>45.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>omega</td><td class='found'>candidate</td><td class='num'>66</td><td class='num'>35</td><td class='num'>35</td><td class='num'>100.0%</td><td>above band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>simp_all</td><td class='found'>candidate</td><td class='num'>39</td><td class='num'>8</td><td class='num'>8</td><td class='num'>100.0%</td><td>above band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>exact</td><td class='found'>known-negative</td><td class='num'>22</td><td class='num'>6</td><td class='num'>5</td><td class='num'>83.3%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>grind</td><td class='found'>candidate</td><td class='num'>20</td><td class='num'>20</td><td class='num'>16</td><td class='num'>80.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>rw</td><td class='found'>known-negative</td><td class='num'>788</td><td class='num'>209</td><td class='num'>98</td><td class='num'>46.9%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>simpa</td><td class='found'>not examined</td><td class='num'>160</td><td class='num'>70</td><td class='num'>28</td><td class='num'>40.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>simp</td><td class='found'>candidate</td><td class='num'>2,677</td><td class='num'>1,212</td><td class='num'>315</td><td class='num'>26.0%</td><td>inside band</td></tr>
+<tr><td>Init</td><td class='found'>strict</td><td>rfl</td><td class='found'>known-negative</td><td class='num'>23</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0.0%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>grind</td><td class='found'>candidate</td><td class='num'>2,761</td><td class='num'>2,733</td><td class='num'>1,061</td><td class='num'>38.8%</td><td>above band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>decide</td><td class='found'>candidate</td><td class='num'>338</td><td class='num'>290</td><td class='num'>101</td><td class='num'>34.8%</td><td>above band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>exfalso</td><td class='found'>known-negative</td><td class='num'>74</td><td class='num'>71</td><td class='num'>20</td><td class='num'>28.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>contradiction</td><td class='found'>known-negative</td><td class='num'>172</td><td class='num'>148</td><td class='num'>38</td><td class='num'>25.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>tauto</td><td class='found'>candidate</td><td class='num'>360</td><td class='num'>324</td><td class='num'>81</td><td class='num'>25.0%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>cases</td><td class='found'>known-negative</td><td class='num'>2,446</td><td class='num'>1,664</td><td class='num'>411</td><td class='num'>24.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>right</td><td class='found'>known-negative</td><td class='num'>617</td><td class='num'>558</td><td class='num'>120</td><td class='num'>21.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>constructor</td><td class='found'>known-negative</td><td class='num'>2,633</td><td class='num'>2,291</td><td class='num'>493</td><td class='num'>21.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>induction</td><td class='found'>known-negative</td><td class='num'>3,418</td><td class='num'>2,561</td><td class='num'>519</td><td class='num'>20.3%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>use</td><td class='found'>known-negative</td><td class='num'>1,638</td><td class='num'>1,532</td><td class='num'>309</td><td class='num'>20.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>assumption</td><td class='found'>known-negative</td><td class='num'>301</td><td class='num'>240</td><td class='num'>48</td><td class='num'>20.0%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>rintro</td><td class='found'>known-negative</td><td class='num'>4,555</td><td class='num'>3,953</td><td class='num'>785</td><td class='num'>19.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>rcases</td><td class='found'>known-negative</td><td class='num'>4,512</td><td class='num'>4,126</td><td class='num'>793</td><td class='num'>19.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>obtain</td><td class='found'>known-negative</td><td class='num'>8,251</td><td class='num'>7,700</td><td class='num'>1,475</td><td class='num'>19.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>fin_cases</td><td class='found'>not examined</td><td class='num'>195</td><td class='num'>194</td><td class='num'>37</td><td class='num'>19.1%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>omega</td><td class='found'>candidate</td><td class='num'>67</td><td class='num'>53</td><td class='num'>10</td><td class='num'>18.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>injection</td><td class='found'>known-negative</td><td class='num'>51</td><td class='num'>28</td><td class='num'>5</td><td class='num'>17.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>exact</td><td class='found'>known-negative</td><td class='num'>25,561</td><td class='num'>23,555</td><td class='num'>4,085</td><td class='num'>17.3%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>rwa</td><td class='found'>known-negative</td><td class='num'>3,036</td><td class='num'>2,838</td><td class='num'>472</td><td class='num'>16.6%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>aesop</td><td class='found'>candidate</td><td class='num'>1,192</td><td class='num'>956</td><td class='num'>155</td><td class='num'>16.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>rfl</td><td class='found'>known-negative</td><td class='num'>12,979</td><td class='num'>11,098</td><td class='num'>1,793</td><td class='num'>16.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>refine</td><td class='found'>known-negative</td><td class='num'>13,164</td><td class='num'>12,517</td><td class='num'>2,011</td><td class='num'>16.1%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>trivial</td><td class='found'>known-negative</td><td class='num'>319</td><td class='num'>276</td><td class='num'>44</td><td class='num'>15.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>intro</td><td class='found'>known-negative</td><td class='num'>8,117</td><td class='num'>7,510</td><td class='num'>1,191</td><td class='num'>15.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>simpa</td><td class='found'>not examined</td><td class='num'>10,490</td><td class='num'>9,671</td><td class='num'>1,524</td><td class='num'>15.8%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>simp_all</td><td class='found'>candidate</td><td class='num'>1,204</td><td class='num'>1,041</td><td class='num'>163</td><td class='num'>15.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>left</td><td class='found'>known-negative</td><td class='num'>733</td><td class='num'>674</td><td class='num'>103</td><td class='num'>15.3%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>rw</td><td class='found'>known-negative</td><td class='num'>39,322</td><td class='num'>35,239</td><td class='num'>5,214</td><td class='num'>14.8%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>linear_combination</td><td class='found'>not examined</td><td class='num'>230</td><td class='num'>170</td><td class='num'>25</td><td class='num'>14.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>subst</td><td class='found'>known-negative</td><td class='num'>880</td><td class='num'>708</td><td class='num'>103</td><td class='num'>14.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>simp_rw</td><td class='found'>known-negative</td><td class='num'>5,720</td><td class='num'>5,278</td><td class='num'>759</td><td class='num'>14.4%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>unfold</td><td class='found'>known-negative</td><td class='num'>739</td><td class='num'>644</td><td class='num'>87</td><td class='num'>13.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>simp</td><td class='found'>candidate</td><td class='num'>38,681</td><td class='num'>32,913</td><td class='num'>4,408</td><td class='num'>13.4%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>apply</td><td class='found'>known-negative</td><td class='num'>9,577</td><td class='num'>8,835</td><td class='num'>1,165</td><td class='num'>13.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>show</td><td class='found'>known-negative</td><td class='num'>1,287</td><td class='num'>1,220</td><td class='num'>155</td><td class='num'>12.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>funext</td><td class='found'>known-negative</td><td class='num'>544</td><td class='num'>425</td><td class='num'>53</td><td class='num'>12.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>ext</td><td class='found'>known-negative</td><td class='num'>10,202</td><td class='num'>8,432</td><td class='num'>903</td><td class='num'>10.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>nlinarith</td><td class='found'>candidate</td><td class='num'>78</td><td class='num'>77</td><td class='num'>8</td><td class='num'>10.4%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>change</td><td class='found'>known-negative</td><td class='num'>1,334</td><td class='num'>1,246</td><td class='num'>120</td><td class='num'>9.6%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>cat_disch</td><td class='found'>not examined</td><td class='num'>709</td><td class='num'>638</td><td class='num'>60</td><td class='num'>9.4%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>delta</td><td class='found'>known-negative</td><td class='num'>189</td><td class='num'>164</td><td class='num'>14</td><td class='num'>8.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>gcongr</td><td class='found'>not examined</td><td class='num'>1,118</td><td class='num'>1,062</td><td class='num'>84</td><td class='num'>7.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>norm_cast</td><td class='found'>candidate</td><td class='num'>699</td><td class='num'>663</td><td class='num'>52</td><td class='num'>7.8%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>ring_nf</td><td class='found'>not examined</td><td class='num'>256</td><td class='num'>246</td><td class='num'>16</td><td class='num'>6.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>ring</td><td class='found'>candidate</td><td class='num'>985</td><td class='num'>915</td><td class='num'>55</td><td class='num'>6.0%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>exact_mod_cast</td><td class='found'>known-negative</td><td class='num'>175</td><td class='num'>172</td><td class='num'>10</td><td class='num'>5.8%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>norm_num</td><td class='found'>candidate</td><td class='num'>412</td><td class='num'>400</td><td class='num'>20</td><td class='num'>5.0%</td><td>below band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>field_simp</td><td class='found'>candidate</td><td class='num'>147</td><td class='num'>147</td><td class='num'>7</td><td class='num'>4.8%</td><td>below band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>linarith</td><td class='found'>candidate</td><td class='num'>558</td><td class='num'>556</td><td class='num'>21</td><td class='num'>3.8%</td><td>below band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>positivity</td><td class='found'>candidate</td><td class='num'>977</td><td class='num'>975</td><td class='num'>34</td><td class='num'>3.5%</td><td>below band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>push_cast</td><td class='found'>not examined</td><td class='num'>245</td><td class='num'>240</td><td class='num'>7</td><td class='num'>2.9%</td><td>below band</td></tr>
+<tr><td>Mathlib</td><td class='found'>loose</td><td>bound</td><td class='found'>not examined</td><td class='num'>132</td><td class='num'>131</td><td class='num'>3</td><td class='num'>2.3%</td><td>below band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>induction</td><td class='found'>known-negative</td><td class='num'>29</td><td class='num'>24</td><td class='num'>21</td><td class='num'>87.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>grind</td><td class='found'>candidate</td><td class='num'>770</td><td class='num'>768</td><td class='num'>483</td><td class='num'>62.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>decide</td><td class='found'>candidate</td><td class='num'>77</td><td class='num'>58</td><td class='num'>33</td><td class='num'>56.9%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>norm_cast</td><td class='found'>candidate</td><td class='num'>25</td><td class='num'>25</td><td class='num'>9</td><td class='num'>36.0%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>rwa</td><td class='found'>known-negative</td><td class='num'>125</td><td class='num'>99</td><td class='num'>32</td><td class='num'>32.3%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>grw</td><td class='found'>not examined</td><td class='num'>41</td><td class='num'>22</td><td class='num'>6</td><td class='num'>27.3%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>simpa</td><td class='found'>not examined</td><td class='num'>1,935</td><td class='num'>1,686</td><td class='num'>383</td><td class='num'>22.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>simp_rw</td><td class='found'>known-negative</td><td class='num'>686</td><td class='num'>554</td><td class='num'>118</td><td class='num'>21.3%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>classical</td><td class='found'>not examined</td><td class='num'>109</td><td class='num'>108</td><td class='num'>21</td><td class='num'>19.4%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>rw</td><td class='found'>known-negative</td><td class='num'>5,634</td><td class='num'>4,454</td><td class='num'>815</td><td class='num'>18.3%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>simp</td><td class='found'>candidate</td><td class='num'>7,822</td><td class='num'>5,995</td><td class='num'>981</td><td class='num'>16.4%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>simp_all</td><td class='found'>candidate</td><td class='num'>44</td><td class='num'>31</td><td class='num'>5</td><td class='num'>16.1%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>aesop</td><td class='found'>candidate</td><td class='num'>180</td><td class='num'>99</td><td class='num'>11</td><td class='num'>11.1%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>fun_prop</td><td class='found'>not examined</td><td class='num'>20</td><td class='num'>19</td><td class='num'>2</td><td class='num'>10.5%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>exact</td><td class='found'>known-negative</td><td class='num'>40</td><td class='num'>37</td><td class='num'>3</td><td class='num'>8.1%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>convert!</td><td class='found'>not examined</td><td class='num'>34</td><td class='num'>26</td><td class='num'>2</td><td class='num'>7.7%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>cat_disch</td><td class='found'>not examined</td><td class='num'>83</td><td class='num'>78</td><td class='num'>2</td><td class='num'>2.6%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>apply</td><td class='found'>known-negative</td><td class='num'>95</td><td class='num'>81</td><td class='num'>1</td><td class='num'>1.2%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>linear_combination</td><td class='found'>not examined</td><td class='num'>23</td><td class='num'>21</td><td class='num'>0</td><td class='num'>0.0%</td><td>inside band</td></tr>
+<tr><td>Mathlib</td><td class='found'>strict</td><td>rfl</td><td class='found'>known-negative</td><td class='num'>208</td><td class='num'>145</td><td class='num'>0</td><td class='num'>0.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>simpa</td><td class='found'>not examined</td><td class='num'>734</td><td class='num'>667</td><td class='num'>512</td><td class='num'>76.8%</td><td>above band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>grind</td><td class='found'>candidate</td><td class='num'>89</td><td class='num'>88</td><td class='num'>55</td><td class='num'>62.5%</td><td>above band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>assumption</td><td class='found'>known-negative</td><td class='num'>95</td><td class='num'>78</td><td class='num'>47</td><td class='num'>60.3%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>contradiction</td><td class='found'>known-negative</td><td class='num'>54</td><td class='num'>16</td><td class='num'>9</td><td class='num'>56.2%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>simp</td><td class='found'>candidate</td><td class='num'>2,749</td><td class='num'>1,568</td><td class='num'>814</td><td class='num'>51.9%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>rw</td><td class='found'>known-negative</td><td class='num'>1,747</td><td class='num'>1,075</td><td class='num'>533</td><td class='num'>49.6%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>constructor</td><td class='found'>known-negative</td><td class='num'>89</td><td class='num'>55</td><td class='num'>27</td><td class='num'>49.1%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>obtain</td><td class='found'>known-negative</td><td class='num'>47</td><td class='num'>14</td><td class='num'>6</td><td class='num'>42.9%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>rintro</td><td class='found'>known-negative</td><td class='num'>42</td><td class='num'>19</td><td class='num'>8</td><td class='num'>42.1%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>apply</td><td class='found'>known-negative</td><td class='num'>777</td><td class='num'>517</td><td class='num'>203</td><td class='num'>39.3%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>cases</td><td class='found'>known-negative</td><td class='num'>263</td><td class='num'>106</td><td class='num'>41</td><td class='num'>38.7%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>ext</td><td class='found'>known-negative</td><td class='num'>58</td><td class='num'>26</td><td class='num'>10</td><td class='num'>38.5%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>intro</td><td class='found'>known-negative</td><td class='num'>482</td><td class='num'>283</td><td class='num'>103</td><td class='num'>36.4%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>omega</td><td class='found'>candidate</td><td class='num'>130</td><td class='num'>78</td><td class='num'>28</td><td class='num'>35.9%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>simp_all</td><td class='found'>candidate</td><td class='num'>172</td><td class='num'>60</td><td class='num'>21</td><td class='num'>35.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>rcases</td><td class='found'>known-negative</td><td class='num'>109</td><td class='num'>80</td><td class='num'>27</td><td class='num'>33.8%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>right</td><td class='found'>known-negative</td><td class='num'>40</td><td class='num'>23</td><td class='num'>7</td><td class='num'>30.4%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>left</td><td class='found'>known-negative</td><td class='num'>41</td><td class='num'>24</td><td class='num'>7</td><td class='num'>29.2%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>exact</td><td class='found'>known-negative</td><td class='num'>1,294</td><td class='num'>965</td><td class='num'>278</td><td class='num'>28.8%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>rfl</td><td class='found'>known-negative</td><td class='num'>475</td><td class='num'>200</td><td class='num'>56</td><td class='num'>28.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>decide</td><td class='found'>candidate</td><td class='num'>30</td><td class='num'>15</td><td class='num'>4</td><td class='num'>26.7%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>induction</td><td class='found'>known-negative</td><td class='num'>412</td><td class='num'>99</td><td class='num'>23</td><td class='num'>23.2%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>funext</td><td class='found'>known-negative</td><td class='num'>29</td><td class='num'>12</td><td class='num'>2</td><td class='num'>16.7%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>rwa</td><td class='found'>known-negative</td><td class='num'>48</td><td class='num'>16</td><td class='num'>2</td><td class='num'>12.5%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>unfold</td><td class='found'>known-negative</td><td class='num'>178</td><td class='num'>100</td><td class='num'>12</td><td class='num'>12.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>refine</td><td class='found'>known-negative</td><td class='num'>247</td><td class='num'>200</td><td class='num'>23</td><td class='num'>11.5%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>subst</td><td class='found'>known-negative</td><td class='num'>30</td><td class='num'>20</td><td class='num'>1</td><td class='num'>5.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>loose</td><td>trivial</td><td class='found'>known-negative</td><td class='num'>26</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>apply</td><td class='found'>known-negative</td><td class='num'>25</td><td class='num'>20</td><td class='num'>18</td><td class='num'>90.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>simp_to_raw</td><td class='found'>not examined</td><td class='num'>400</td><td class='num'>376</td><td class='num'>329</td><td class='num'>87.5%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>simpa</td><td class='found'>not examined</td><td class='num'>561</td><td class='num'>546</td><td class='num'>446</td><td class='num'>81.7%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>rw</td><td class='found'>known-negative</td><td class='num'>223</td><td class='num'>125</td><td class='num'>75</td><td class='num'>60.0%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>simp</td><td class='found'>candidate</td><td class='num'>901</td><td class='num'>481</td><td class='num'>277</td><td class='num'>57.6%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>simp_to_model</td><td class='found'>not examined</td><td class='num'>1,092</td><td class='num'>1,052</td><td class='num'>605</td><td class='num'>57.5%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>simp_all</td><td class='found'>candidate</td><td class='num'>20</td><td class='num'>14</td><td class='num'>3</td><td class='num'>21.4%</td><td>inside band</td></tr>
+<tr><td>Std</td><td class='found'>strict</td><td>rfl</td><td class='found'>known-negative</td><td class='num'>88</td><td class='num'>33</td><td class='num'>0</td><td class='num'>0.0%</td><td>inside band</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="note"><em>rate</em> is eligible over classical: of the proofs using this tactic that depend on <code>Classical.choice</code>, the share whose statement is choice-free, so the proof introduced the dependence. <em>rule</em> is how a proof is attributed &mdash; <code>strict</code> counts only proofs where the tactic is the sole tactic, <code>loose</code> counts every proof it appears in. <em>role</em> marks whether a tactic is a known-negative control, one of the 15 candidates the paper tests, or a tactic that was measured but never examined.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="tactic-bands.json">tactic-bands.json</a> &middot;
+<a href="tactic-bands.csv">tactic-bands.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>python analysis/final_table.py</pre>
+<p class="note">Code and derived data: <a href="https://doi.org/10.5281/zenodo.21853489">10.5281/zenodo.21853489</a>. The bands here are recomputed from the cells and checked against the ones the archive stores, so a row and its band cannot come from different runs.</p>
+
+<h2>What escapes, and why it does not help</h2>
+<p>7 of the examined candidates rise above their own library's band. Four of the seven are <code>grind</code>, which proves by refuting the negation and is therefore classical by construction rather than by defect. One is <code>omega</code>, whose avoidable dependence is real and independently established &mdash; and <code>simp_all</code> ties it at exactly 100.0% in the same library under the same rule, so even there the rate does not single it out.</p>
+<p><code>norm_num</code> carries a genuinely avoidable dependence, demonstrated by direct construction in the <a href="/gonzalgo/controlled-tactics/">controlled experiment</a>. It sits at 5.0% in Mathlib, below the known-negative floor, beneath <code>rfl</code> and <code>exfalso</code> and every other tactic that cannot introduce choice at all. The instrument ranks the one tactic with a proven defect beneath tactics incapable of the defect.</p>
+<p>Widening the rule does not rescue it. Under <code>strict</code>, <code>induction</code> reaches 87.5% and widens Mathlib's band until nothing escapes at all. The instrument either fires on the wrong tactic or does not fire.</p>
+
+<h2>One cell the paper did not test</h2>
+<p>The published count of seven is over the 15 candidate tactics its script examines. Rates were computed for every tactic meeting the threshold, and one more escapes: <code>simpa</code> in Std under loose at 76.8% against a 60.3% band, over 734 proofs. It is neither a known-negative nor on the candidate list, so nothing in the pipeline looked at it.</p>
+<p>It does not disturb the conclusion — an extra escape that nobody has a mechanism for is more evidence that the rate is not selecting on defectiveness — but it is in the data and belongs on the page rather than in a drawer.</p>
+
+<h2>Why the unit is wrong, not just the statistic</h2>
+<p>In the generated corpus <code>interval_cases</code> scores 100%. Its proofs close with <code>&lt;;&gt; norm_num</code>, and the score belongs to norm_num. A surface tactic inherits the axiom behaviour of whatever it delegates to, so attributing a proof to the tactic named in it is the wrong unit regardless of which statistic is computed over it. That is the finding this table exists to support.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Why Tactic-Level Rates Cannot Attribute Classical Dependencies</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21853489">10.5281/zenodo.21853489</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/tactic-bands/">f-keys.com/gonzalgo/tactic-bands/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>
