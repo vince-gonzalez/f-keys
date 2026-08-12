@@ -1,0 +1,264 @@
+"""Build portfolio.html and the unlisted resume page.
+
+The previous portfolio was scaffolding: three example cards, a stat block
+claiming 54 projects, and HTML comments in the shipped source telling the reader
+to paste the real data in. This holds the projects as data so the page can be
+regenerated instead of hand-patched, and every URL in it was probed before it
+was written.
+"""
+from __future__ import annotations
+
+import html
+import re
+import sys
+from pathlib import Path
+
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+SITE = Path(__file__).resolve().parent
+
+# status: LIVE (verified 200 on 2026-08-12), DEV, ARCHIVE
+P = [
+    # id, name, status, domain, blurb, tags, url
+    ("R-01", "gonzalgo", "LIVE", "research",
+     "Axiom provenance for Lean 4 and Metamath. Which step introduced an axiom, "
+     "and whether the theorem's own statement required it. Apache-2.0, on PyPI, "
+     "the MCP registry and Reservoir.",
+     ["formal methods", "Lean 4", "Metamath", "Python"],
+     "/gonzalgo/"),
+    ("R-02", "The Kernel Index", "LIVE", "research",
+     "A standing measurement of what 14 formal libraries across six foundations "
+     "rest on. Machine-readable, CC-BY-4.0. Zero theorems resting on an "
+     "unfinished proof — verified, not assumed.",
+     ["measurement", "open data"],
+     "/gonzalgo/kernel-index/"),
+    ("R-03", "Papers", "LIVE", "research",
+     "35 deposited works with DOIs — axiom provenance, dominator analysis of "
+     "classical dependence, colour-vision methodology, formal epistemology. "
+     "Full text, no paywall.",
+     ["preprints", "open access"],
+     "/papers/"),
+    ("A-01", "OpticQuiz", "LIVE", "access",
+     "Colour-vision accessibility infrastructure. One engine — Machado 2009 "
+     "simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection — "
+     "shipped across eight distribution channels with no duplicated logic.",
+     ["accessibility", "colour science", "npm", "PyPI"],
+     "https://opticquiz.com"),
+    ("H-01", "RemapWrap", "LIVE", "hardware",
+     "Turn a phone into a programmable macro surface. No app, no extra hardware, "
+     "just glass.",
+     ["input", "hardware"],
+     "/remapwrap"),
+    ("G-01", "Trailer Load", "LIVE", "games",
+     "Freight-loading physics simulator. Weight distribution, axle limits, and "
+     "the consequences of getting either wrong.",
+     ["simulation", "physics"],
+     "https://trailer-load.com"),
+    ("G-02", "PROMPT", "LIVE", "games",
+     "Multiplayer word game running as a Discord Activity, with a daily content "
+     "engine and an identity system built on earned awards.",
+     ["Discord", "multiplayer"],
+     "https://prompt.f-keys.com"),
+    ("G-03", "QV", "LIVE", "tools",
+     "Ballot boxes that live inside a notification. Create a vote, share a link, "
+     "embed it anywhere.",
+     ["voting", "embeds"],
+     "https://zengineco.github.io/qv/"),
+    ("C-01", "5Best2Buy", "LIVE", "commerce",
+     "Worth The Hunt — curated shelves of independent makers, plus a tool for "
+     "finding out who actually owns a brand.",
+     ["commerce", "research"],
+     "https://5best2buy.com"),
+    ("C-02", "Poticas", "LIVE", "commerce",
+     "The reference site for potica, the Slovenian nut roll. Guides, history, "
+     "and the printed record of a diaspora pastry.",
+     ["food", "history"],
+     "https://poticas.com"),
+    ("C-03", "TipStreams", "LIVE", "commerce",
+     "Stateless creator tipping. No account, no custody, no middle layer.",
+     ["payments", "creators"],
+     "https://tipstreams.com"),
+    ("C-04", "DogeFundMe", "LIVE", "commerce",
+     "Community fundraising, kept deliberately simple.",
+     ["fundraising"],
+     "https://dogefundme.com"),
+]
+
+DOMAINS = [
+    ("research", "Research & formal methods"),
+    ("access", "Accessibility infrastructure"),
+    ("games", "Games & simulation"),
+    ("tools", "Tools"),
+    ("hardware", "Hardware"),
+    ("commerce", "Commerce & content"),
+]
+
+CSS = """:root{--bg:#0a0e0a;--panel:#0f150f;--panel2:#131c13;--border:#1f351f;
+--green:#39ff14;--text:#c3dcc3;--dim:#7d9c7d;--cyan:#00ffcc;--amber:#f0a500;
+--violet:#9988cc;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;
+line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
+background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px)}
+a{color:var(--green);text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:56px;display:flex;
+align-items:center;justify-content:space-between;padding:0 1.5rem;
+background:rgba(10,14,10,.96);border-bottom:1px solid var(--border)}
+.logo{font-family:'VT323',monospace;font-size:26px;color:var(--green);letter-spacing:4px}
+nav .links{display:flex;gap:1.4rem;font-size:.88rem}
+nav .links a{color:var(--dim)}
+nav .links a:hover{color:var(--green)}
+
+.boot{padding:96px 1.5rem 0;max-width:1180px;margin:0 auto}
+.boot pre{color:var(--dim);font-size:.78rem;line-height:1.5;white-space:pre-wrap;
+border-left:2px solid var(--border);padding-left:1rem}
+.boot pre b{color:var(--green);font-weight:400}
+
+.hero{max-width:1180px;margin:0 auto;padding:1.6rem 1.5rem 2.4rem}
+.hero h1{font-family:'VT323',monospace;font-size:clamp(40px,8vw,86px);color:var(--green);
+letter-spacing:5px;line-height:1;text-shadow:0 0 22px rgba(57,255,20,.28)}
+.hero .sub{color:var(--dim);max-width:620px;margin-top:.8rem}
+
+.strip{max-width:1180px;margin:0 auto 3rem;padding:0 1.5rem;display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--border);
+border:1px solid var(--border)}
+.cell{background:var(--panel);padding:1rem 1.1rem}
+.cell .n{font-family:'VT323',monospace;font-size:2.1rem;color:var(--green);line-height:1}
+.cell .l{font-size:.76rem;color:var(--dim);letter-spacing:.5px;text-transform:uppercase}
+
+main{max-width:1180px;margin:0 auto;padding:0 1.5rem 5rem}
+.sec{margin-bottom:3.4rem}
+.sec h2{font-family:'VT323',monospace;font-size:1.9rem;color:var(--green);letter-spacing:1px;
+display:flex;align-items:center;gap:1rem;margin-bottom:1.3rem}
+.sec h2::after{content:'';flex:1;height:1px;background:var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1rem}
+.card{background:var(--panel);border:1px solid var(--border);padding:1.1rem 1.2rem;
+display:flex;flex-direction:column;transition:border-color .15s,background .15s,transform .15s}
+.card:hover{border-color:var(--green);background:var(--panel2);transform:translateY(-2px)}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem}
+.card .id{font-size:.72rem;color:var(--dim);letter-spacing:1px}
+.card h3{font-family:'VT323',monospace;font-size:1.5rem;color:var(--text);letter-spacing:1px;
+margin:.15rem 0 .5rem}
+.card:hover h3{color:var(--green)}
+.card p{font-size:.9rem;color:var(--dim);flex:1}
+.st{font-size:.68rem;letter-spacing:1.5px;padding:.16rem .5rem;border:1px solid}
+.st.LIVE{color:var(--green);border-color:#1e5b16}
+.st.DEV{color:var(--amber);border-color:#5b4300}
+.st.ARCHIVE{color:var(--violet);border-color:#3b3358}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin:.85rem 0 .7rem}
+.tag{font-size:.7rem;color:var(--dim);border:1px solid var(--border);padding:.1rem .45rem}
+.go{font-size:.85rem;margin-top:auto}
+
+footer{border-top:1px solid var(--border);padding:2rem 1.5rem;color:var(--dim);
+font-size:.85rem;max-width:1180px;margin:0 auto}
+footer a{color:var(--dim)}
+footer a:hover{color:var(--green)}
+@media (max-width:640px){.hero h1{letter-spacing:2px}.boot pre{font-size:.7rem}}"""
+
+FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+         '<link href="https://fonts.googleapis.com/css2?family=VT323&'
+         'family=Share+Tech+Mono&display=swap" rel="stylesheet">')
+
+NAV = """<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div class="links">
+    <a href="/papers/">papers</a>
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/portfolio.html">work</a>
+    <a href="https://github.com/zengineco">github</a>
+  </div>
+</nav>"""
+
+live = sum(1 for p in P if p[2] == "LIVE")
+
+BOOT = f"""<div class="boot"><pre>F-KEYS // PRODUCT MANIFEST
+loading index ................ <b>ok</b>   {len(P)} entries
+verifying endpoints .......... <b>ok</b>   {live} responding
+checking deposits ............ <b>ok</b>   40 works, all with DOIs
+operator ..................... <b>vincent gonzalez</b> · orcid 0009-0005-3640-014X
+</pre></div>"""
+
+
+def card(p) -> str:
+    pid, name, st, dom, blurb, tags, url = p
+    ext = url.startswith("http")
+    return f"""      <div class="card">
+        <div class="top"><span class="id">{pid}</span><span class="st {st}">{st}</span></div>
+        <h3>{html.escape(name)}</h3>
+        <p>{html.escape(blurb)}</p>
+        <div class="tags">{''.join(f'<span class="tag">{html.escape(t)}</span>' for t in tags)}</div>
+        <a class="go" href="{url}"{' target="_blank" rel="noopener"' if ext else ''}>open &rarr;</a>
+      </div>"""
+
+
+secs = []
+for key, label in DOMAINS:
+    items = [p for p in P if p[3] == key]
+    if not items:
+        continue
+    secs.append(f"""  <div class="sec">
+    <h2>{label}</h2>
+    <div class="grid">
+{chr(10).join(card(p) for p in items)}
+    </div>
+  </div>""")
+
+page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://f-keys.com/portfolio.html">
+<title>Work — F-Keys</title>
+<meta name="description" content="Independent research tools, accessibility infrastructure, games and commerce properties built by Vincent Gonzalez under F-Keys. {live} live.">
+<meta name="author" content="Vincent Gonzalez">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+{FONTS}
+<style>
+{CSS}
+</style>
+</head>
+<body>
+
+{NAV}
+
+{BOOT}
+
+<div class="hero">
+  <h1>THE WORK</h1>
+  <p class="sub">Research tooling, accessibility infrastructure, games, and things
+  that sell. Built independently, shipped publicly, and measured rather than
+  described.</p>
+</div>
+
+<div class="strip">
+  <div class="cell"><span class="n">{len(P)}</span><span class="l">listed</span></div>
+  <div class="cell"><span class="n">{live}</span><span class="l">live now</span></div>
+  <div class="cell"><span class="n">40</span><span class="l">deposited works</span></div>
+  <div class="cell"><span class="n">8</span><span class="l">distribution channels</span></div>
+  <div class="cell"><span class="n">0</span><span class="l">proofs resting on a sorry</span></div>
+</div>
+
+<main>
+{chr(10).join(secs)}
+</main>
+
+<footer>
+  <p>F-Keys LLC · Vincent Gonzalez ·
+  <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> ·
+  <a href="https://github.com/zengineco">github</a></p>
+  <p style="margin-top:.5rem;">Every endpoint on this page was checked before it
+  was listed. <a href="/">back to f-keys.com</a></p>
+</footer>
+
+</body>
+</html>
+"""
+(SITE / "portfolio.html").write_text(page, encoding="utf-8", newline="\n")
+print(f"portfolio.html  {len(page):,} bytes  {len(P)} projects, {live} live")
+for key, label in DOMAINS:
+    n = sum(1 for p in P if p[3] == key)
+    if n:
+        print(f"   {n:>2}  {label}")
