@@ -1,0 +1,2522 @@
+[
+  {
+    "library": "Batteries",
+    "module": "Batteries.Data.Char.AsciiCasing",
+    "declaration": "Char.toLower_eq_of_not_isUpper",
+    "generated_term": "_private.Batteries.Data.Char.AsciiCasing.0.Char.toLower_eq_of_not_isUpper._proof_1_4",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Batteries",
+    "module": "Batteries.Data.String.Lemmas",
+    "declaration": "String.Legacy.Iterator.hasNext_cons_addChar",
+    "generated_term": "_private.Batteries.Data.String.Lemmas.0.String.Legacy.Iterator.hasNext_cons_addChar._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Batteries",
+    "module": "Batteries.Data.String.Lemmas",
+    "declaration": "String.splitAux_of_valid",
+    "generated_term": "_private.Batteries.Data.String.Lemmas.0.String.splitAux_of_valid._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Array.Extract",
+    "declaration": "Array.extract_eq_self_iff",
+    "generated_term": "_private.Init.Data.Array.Extract.0.Array.extract_eq_self_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Array.Lemmas",
+    "declaration": "Array.back?_eq_none_iff",
+    "generated_term": "_private.Init.Data.Array.Lemmas.0.Array.back?_eq_none_iff._proof_1_3",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.carry_succ",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.carry_succ._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.carry_succ",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.carry_succ._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.intMin_udiv_ne_zero_of_ne_zero",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.intMin_udiv_ne_zero_of_ne_zero._proof_1_4",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.saddOverflow_eq",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.saddOverflow_eq._proof_1_8",
+    "occurrences": 10,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.sdivOverflow_eq",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.sdivOverflow_eq._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.sdivOverflow_eq",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.sdivOverflow_eq._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.sdivOverflow_eq",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.sdivOverflow_eq._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.ssubOverflow_eq",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.ssubOverflow_eq._proof_1_4",
+    "occurrences": 14,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.ult_eq_not_carry",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.ult_eq_not_carry._proof_1_7",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Bitblast",
+    "declaration": "BitVec.umulOverflow_eq",
+    "generated_term": "_private.Init.Data.BitVec.Bitblast.0.BitVec.umulOverflow_eq._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.clzAuxRec_eq_iff_of_getLsbD_false",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.clzAuxRec_eq_iff_of_getLsbD_false._proof_1_4",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.clzAuxRec_eq_iff_of_getLsbD_false",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.clzAuxRec_eq_iff_of_getLsbD_false._proof_1_5",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.clzAuxRec_eq_zero_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.clzAuxRec_eq_zero_iff._proof_1_3",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.clzAuxRec_eq_zero_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.clzAuxRec_eq_zero_iff._proof_1_5",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_false_of_clzAuxRec",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_false_of_clzAuxRec._proof_1_3",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_false_of_clzAuxRec",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_false_of_clzAuxRec._proof_1_6",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_intMax",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_intMax._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_intMin",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_intMin._proof_1_2",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_shiftConcat_eq_decide",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_shiftConcat_eq_decide._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_shiftConcat_eq_decide",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_shiftConcat_eq_decide._proof_1_2",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_true_of_eq_clzAuxRec_of_ne_zero",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_true_of_eq_clzAuxRec_of_ne_zero._proof_1_2",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getLsbD_true_of_eq_clzAuxRec_of_ne_zero",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getLsbD_true_of_eq_clzAuxRec_of_ne_zero._proof_1_7",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getMsbD_extractLsb",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getMsbD_extractLsb._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getMsbD_extractLsb",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getMsbD_extractLsb._proof_1_4",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getMsbD_extractLsb'",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getMsbD_extractLsb'._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getMsbD_extractLsb'",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getMsbD_extractLsb'._proof_1_4",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.getMsbD_twoPow",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.getMsbD_twoPow._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.le_add_iff_sub_le",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.le_add_iff_sub_le._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.le_toInt_shiftRight",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.le_toInt_shiftRight._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.msb_one",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.msb_one._proof_1_2",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.msb_setWidth",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.msb_setWidth._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.sdivOverflow_eq_negOverflow_of_eq_allOnes",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.sdivOverflow_eq_negOverflow_of_eq_allOnes._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.setWidth_setWidth",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.setWidth_setWidth._proof_1_1",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.sle_eq_not_slt",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.sle_eq_not_slt._proof_1_5",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.sle_eq_slt_or_eq",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.sle_eq_slt_or_eq._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.sub_le_sub_iff_le",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.sub_le_sub_iff_le._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toInt_mul_toInt_lt_neg_two_pow_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toInt_mul_toInt_lt_neg_two_pow_iff._proof_1_7",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toInt_mul_toInt_lt_neg_two_pow_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toInt_mul_toInt_lt_neg_two_pow_iff._proof_1_8",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toInt_neg_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toInt_neg_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toInt_pos_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toInt_pos_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toInt_shiftRight_lt",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toInt_shiftRight_lt._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toInt_sub_toInt_lt_twoPow_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toInt_sub_toInt_lt_twoPow_iff._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toInt_sub_toInt_lt_twoPow_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toInt_sub_toInt_lt_twoPow_iff._proof_1_4",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.toNat_signExtend_of_le",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.toNat_signExtend_of_le._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.twoPow_le_toInt_sub_toInt_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.twoPow_le_toInt_sub_toInt_iff._proof_1_6",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.two_pow_le_toInt_mul_toInt_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.two_pow_le_toInt_mul_toInt_iff._proof_1_6",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.two_pow_le_toInt_mul_toInt_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.two_pow_le_toInt_mul_toInt_iff._proof_1_7",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.two_pow_le_toInt_mul_toInt_iff",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.two_pow_le_toInt_mul_toInt_iff._proof_1_8",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.uaddOverflow_assoc",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.uaddOverflow_assoc._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.BitVec.Lemmas",
+    "declaration": "BitVec.ult_eq_msb_of_msb_neq",
+    "generated_term": "_private.Init.Data.BitVec.Lemmas.0.BitVec.ult_eq_msb_of_msb_neq._proof_1_3",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.ByteArray.Lemmas",
+    "declaration": "ByteArray.extract_eq_empty_iff",
+    "generated_term": "_private.Init.Data.ByteArray.Lemmas.0.ByteArray.extract_eq_empty_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Fin.Lemmas",
+    "declaration": "Fin.coe_sub_iff_le",
+    "generated_term": "_private.Init.Data.Fin.Lemmas.0.Fin.coe_sub_iff_le._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Fin.Lemmas",
+    "declaration": "Fin.coe_sub_iff_le",
+    "generated_term": "_private.Init.Data.Fin.Lemmas.0.Fin.coe_sub_iff_le._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Fin.Lemmas",
+    "declaration": "Fin.coe_sub_iff_lt",
+    "generated_term": "_private.Init.Data.Fin.Lemmas.0.Fin.coe_sub_iff_lt._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Fin.Lemmas",
+    "declaration": "Fin.coe_sub_iff_lt",
+    "generated_term": "_private.Init.Data.Fin.Lemmas.0.Fin.coe_sub_iff_lt._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Fin.Lemmas",
+    "declaration": "Nat.mod_eq_sub_of_lt_two_mul",
+    "generated_term": "_private.Init.Data.Fin.Lemmas.0.Nat.mod_eq_sub_of_lt_two_mul._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.Cooper",
+    "declaration": "Int.cooper_resolution_dvd_right",
+    "generated_term": "_private.Init.Data.Int.Cooper.0.Int.cooper_resolution_dvd_right._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.add_one_tdiv",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.add_one_tdiv._proof_1_1",
+    "occurrences": 8,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.add_one_tdiv_of_pos",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.add_one_tdiv_of_pos._proof_1_10",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.bmod_neg_iff",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.bmod_neg_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.bmod_neg_iff",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.bmod_neg_iff._proof_1_4",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.ediv_le_iff_le_mul",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.ediv_le_iff_le_mul._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.fdiv_fmod_unique'",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.fdiv_fmod_unique'._proof_1_2",
+    "occurrences": 8,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.le_mul_iff_le_left",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.le_mul_iff_le_left._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.mul_fdiv_self_le",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.mul_fdiv_self_le._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.natAbs_ediv",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.natAbs_ediv._proof_1_4",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.natCast_eq_zero",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.natCast_eq_zero._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.tdiv_tmod_unique",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.tdiv_tmod_unique._proof_1_1",
+    "occurrences": 8,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.tdiv_tmod_unique",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.tdiv_tmod_unique._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.DivMod.Lemmas",
+    "declaration": "Int.tdiv_tmod_unique'",
+    "generated_term": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.tdiv_tmod_unique'._proof_1_2",
+    "occurrences": 9,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.Gcd",
+    "declaration": "Int.eq_zero_of_lcm_eq_zero",
+    "generated_term": "_private.Init.Data.Int.Gcd.0.Int.eq_zero_of_lcm_eq_zero._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.eq_natCast_toNat",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.eq_natCast_toNat._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.lt_toNat",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.lt_toNat._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.mul_le_mul_of_natAbs_le",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.mul_le_mul_of_natAbs_le._proof_1_15",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.natCast_le_zero",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.natCast_le_zero._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.natCast_ne_zero",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.natCast_ne_zero._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.natCast_ne_zero_iff_pos",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.natCast_ne_zero_iff_pos._proof_1_1",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.natCast_nonpos_iff",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.natCast_nonpos_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.natCast_toNat_eq_self",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.natCast_toNat_eq_self._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.neg_lt_self_iff",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.neg_lt_self_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.neg_nonpos_iff",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.neg_nonpos_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.pos_iff_toNat_pos",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.pos_iff_toNat_pos._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.toNat_eq_zero",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.toNat_eq_zero._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.toNat_le",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.toNat_le._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.toNat_lt'",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.toNat_lt'._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.LemmasAux",
+    "declaration": "Int.toNat_lt_toNat",
+    "generated_term": "_private.Init.Data.Int.LemmasAux.0.Int.toNat_lt_toNat._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Int.Pow",
+    "declaration": "Int.pow_lt_pow_of_lt",
+    "generated_term": "_private.Init.Data.Int.Pow.0.Int.pow_lt_pow_of_lt._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.count_range_1'",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.count_range_1'._proof_1_3",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.erase_range'",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.erase_range'._proof_1_6",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.erase_range'",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.erase_range'._proof_1_7",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.erase_range'",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.erase_range'._proof_1_9",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.find?_range'_eq_some",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.find?_range'_eq_some._proof_1_6",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.find?_range'_eq_some",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.find?_range'_eq_some._proof_1_7",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.range'_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.range'_eq_singleton_iff._proof_1_4",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.sum_range'",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.sum_range'._proof_1_4",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Range",
+    "declaration": "List.sum_range'",
+    "generated_term": "_private.Init.Data.List.Nat.Range.0.List.sum_range'._proof_1_5",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.List.Nat.Sum",
+    "declaration": "List.sum_pos_iff_exists_pos_nat",
+    "generated_term": "_private.Init.Data.List.Nat.Sum.0.List.sum_pos_iff_exists_pos_nat._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Bitwise.Lemmas",
+    "declaration": "Nat.testBit_log2",
+    "generated_term": "_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_log2._proof_1_1",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Bitwise.Lemmas",
+    "declaration": "Nat.testBit_log2",
+    "generated_term": "_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_log2._proof_1_2",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Bitwise.Lemmas",
+    "declaration": "Nat.testBit_two_pow_sub_succ",
+    "generated_term": "_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_two_pow_sub_succ._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Div.Lemmas",
+    "declaration": "Nat.div_le_iff_le_mul",
+    "generated_term": "_private.Init.Data.Nat.Div.Lemmas.0.Nat.div_le_iff_le_mul._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Div.Lemmas",
+    "declaration": "Nat.le_mul_iff_le_left",
+    "generated_term": "_private.Init.Data.Nat.Div.Lemmas.0.Nat.le_mul_iff_le_left._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_left",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_left._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_max_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_max_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_min_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_min_iff._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_one_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_one_iff._proof_1_1",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_right",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_right._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_three_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_three_iff._proof_1_1",
+    "occurrences": 10,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_two_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_two_iff._proof_1_1",
+    "occurrences": 8,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_eq_zero",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_eq_zero._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_lt_iff_lt_sub_right",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_lt_iff_lt_sub_right._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.add_pos_iff_pos_or_pos",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.add_pos_iff_pos_or_pos._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.le_add_one_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.le_add_one_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.le_and_le_add_one_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.le_and_le_add_one_iff._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.le_iff_lt_add_one",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.le_iff_lt_add_one._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.left_eq_add",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.left_eq_add._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.lt_sub_iff_add_lt'",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.lt_sub_iff_add_lt'._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.max_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.max_eq_zero_iff._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.min_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.min_eq_zero_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.one_lt_iff_ne_zero_and_ne_one",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.one_lt_iff_ne_zero_and_ne_one._proof_1_3",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.pow_eq_zero",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.pow_eq_zero._proof_1_3",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.pow_lt_pow_iff_pow_mul_le_pow",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.pow_lt_pow_iff_pow_mul_le_pow._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.right_eq_add",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.right_eq_add._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.sub_lt_iff_lt_add",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.sub_lt_iff_lt_add._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.sub_lt_iff_lt_add'",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.sub_lt_iff_lt_add'._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Lemmas",
+    "declaration": "Nat.sub_lt_sub_iff_right",
+    "generated_term": "_private.Init.Data.Nat.Lemmas.0.Nat.sub_lt_sub_iff_right._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Mod",
+    "declaration": "Nat.mul_lt_mul_left",
+    "generated_term": "_private.Init.Data.Nat.Mod.0.Nat.mul_lt_mul_left._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Power2.Lemmas",
+    "declaration": "Nat.and_sub_one_testBit_log2",
+    "generated_term": "_private.Init.Data.Nat.Power2.Lemmas.0.Nat.and_sub_one_testBit_log2._proof_1_2",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.Power2.Lemmas",
+    "declaration": "Nat.and_sub_one_testBit_log2",
+    "generated_term": "_private.Init.Data.Nat.Power2.Lemmas.0.Nat.and_sub_one_testBit_log2._proof_1_3",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Nat.ToString",
+    "declaration": "Nat.toDigits_of_base_le",
+    "generated_term": "_private.Init.Data.Nat.ToString.0.Nat.toDigits_of_base_le._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Lemmas",
+    "declaration": "Std.Legacy.Range.forIn'_loop_eq_forIn'_range'",
+    "generated_term": "_private.Init.Data.Range.Lemmas.0.Std.Legacy.Range.forIn'_loop_eq_forIn'_range'._proof_1_6",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Lemmas",
+    "declaration": "Std.Legacy.Range.forM_loop_eq_forM_range'",
+    "generated_term": "_private.Init.Data.Range.Lemmas.0.Std.Legacy.Range.forM_loop_eq_forM_range'._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Lemmas",
+    "declaration": "Std.Legacy.Range.size_eq",
+    "generated_term": "_private.Init.Data.Range.Lemmas.0.Std.Legacy.Range.size_eq._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Lemmas",
+    "declaration": "Std.Legacy.Range.size_eq",
+    "generated_term": "_private.Init.Data.Range.Lemmas.0.Std.Legacy.Range.size_eq._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Lemmas",
+    "declaration": "Std.Legacy.Range.size_eq",
+    "generated_term": "_private.Init.Data.Range.Lemmas.0.Std.Legacy.Range.size_eq._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.getElem!_toArray_roo_ne_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.getElem!_toArray_roo_ne_zero_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.getElem!_toList_roc_ne_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.getElem!_toList_roc_ne_zero_iff._proof_1_2",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.getElem?_toList_rco",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.getElem?_toList_rco._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toArray_rcc_eq_singleton_append_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toArray_rcc_eq_singleton_append_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toArray_rco_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toArray_rco_eq_singleton_iff._proof_1_1",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toArray_roo_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toArray_roo_eq_singleton_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toList_rcc_eq_cons_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toList_rcc_eq_cons_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toList_rcc_eq_nil_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toList_rcc_eq_nil_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toList_rcc_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toList_rcc_eq_singleton_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toList_rcc_ne_nil_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toList_rcc_ne_nil_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toList_rco_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toList_rco_eq_singleton_iff._proof_1_1",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toList_roc_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toList_roc_eq_singleton_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.toList_roo_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.toList_roo_eq_singleton_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.zero_lt_getElem!_toArray_roc_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.zero_lt_getElem!_toArray_roc_iff._proof_1_2",
+    "occurrences": 8,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.IntLemmas",
+    "declaration": "Int.zero_ne_getElem!_toList_roo_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.IntLemmas.0.Int.zero_ne_getElem!_toList_roo_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Internal.SignedBitVec",
+    "declaration": "BitVec.Signed.sle_iff_rotate_le_rotate",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Internal.SignedBitVec.0.BitVec.Signed.sle_iff_rotate_le_rotate._proof_1_11",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Internal.SignedBitVec",
+    "declaration": "BitVec.Signed.sle_iff_rotate_le_rotate",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Internal.SignedBitVec.0.BitVec.Signed.sle_iff_rotate_le_rotate._proof_1_28",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat._proof_3",
+    "occurrences": 11,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat_1",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat_1._proof_1",
+    "occurrences": 12,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat_2",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat_2._proof_1",
+    "occurrences": 8,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat_3",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat_3._proof_1",
+    "occurrences": 10,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat_4",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat_4._proof_1",
+    "occurrences": 11,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat_5",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat_5._proof_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat_6",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat_6._proof_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.Nat",
+    "declaration": "Std.instLawfulRcoIntersectionNat_7",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.Nat.0.Std.instLawfulRcoIntersectionNat_7._proof_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.getElem!_toArray_roc_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.getElem!_toArray_roc_eq_zero_iff._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.getElem!_toArray_roo_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.getElem!_toArray_roo_eq_zero_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.getElem!_toList_rco_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.getElem!_toList_rco_eq_zero_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.getElem!_toList_rco_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.getElem!_toList_rco_eq_zero_iff._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.getElem!_toList_roc_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.getElem!_toList_roc_eq_zero_iff._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.getElem!_toList_roo_eq_zero_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.getElem!_toList_roo_eq_zero_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toArray_rcc_eq_singleton_append_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toArray_rcc_eq_singleton_append_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toArray_rco_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toArray_rco_eq_singleton_iff._proof_1_1",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_rcc_eq_cons_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_rcc_eq_cons_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_rcc_eq_nil_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_rcc_eq_nil_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_rcc_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_rcc_eq_singleton_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_rcc_ne_nil_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_rcc_ne_nil_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_rco_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_rco_eq_singleton_iff._proof_1_1",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_ric_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_ric_eq_singleton_iff._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_rio_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_rio_eq_singleton_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_roc_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_roc_eq_singleton_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.toList_roo_eq_singleton_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.toList_roo_eq_singleton_iff._proof_1_1",
+    "occurrences": 7,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.zero_lt_getElem!_toArray_roc_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.zero_lt_getElem!_toArray_roc_iff._proof_1_2",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.zero_lt_getElem!_toArray_roo_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.zero_lt_getElem!_toArray_roo_iff._proof_1_1",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.zero_lt_getElem!_toList_rco_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.zero_lt_getElem!_toList_rco_iff._proof_1_1",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.zero_lt_getElem!_toList_roc_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.zero_lt_getElem!_toList_roc_iff._proof_1_2",
+    "occurrences": 4,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.NatLemmas",
+    "declaration": "Nat.zero_lt_getElem!_toList_roo_iff",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.NatLemmas.0.Nat.zero_lt_getElem!_toList_roo_iff._proof_1_1",
+    "occurrences": 3,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.Range.Polymorphic.SInt",
+    "declaration": "HasModel.succMany?_eq",
+    "generated_term": "_private.Init.Data.Range.Polymorphic.SInt.0.HasModel.succMany?_eq._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.SInt.Lemmas",
+    "declaration": "ISize.le_iff_lt_or_eq",
+    "generated_term": "_private.Init.Data.SInt.Lemmas.0.ISize.le_iff_lt_or_eq._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.SInt.Lemmas",
+    "declaration": "Int16.le_iff_lt_or_eq",
+    "generated_term": "_private.Init.Data.SInt.Lemmas.0.Int16.le_iff_lt_or_eq._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.SInt.Lemmas",
+    "declaration": "Int32.le_iff_lt_or_eq",
+    "generated_term": "_private.Init.Data.SInt.Lemmas.0.Int32.le_iff_lt_or_eq._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.SInt.Lemmas",
+    "declaration": "Int64.le_iff_lt_or_eq",
+    "generated_term": "_private.Init.Data.SInt.Lemmas.0.Int64.le_iff_lt_or_eq._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.SInt.Lemmas",
+    "declaration": "Int8.le_iff_lt_or_eq",
+    "generated_term": "_private.Init.Data.SInt.Lemmas.0.Int8.le_iff_lt_or_eq._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Basic",
+    "declaration": "String.Pos.Raw.isValid_push",
+    "generated_term": "_private.Init.Data.String.Basic.0.String.Pos.Raw.isValid_push._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Basic",
+    "declaration": "String.Pos.sliceFrom_inj",
+    "generated_term": "_private.Init.Data.String.Basic.0.String.Pos.sliceFrom_inj._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Basic",
+    "declaration": "String.Pos.slice_inj",
+    "generated_term": "_private.Init.Data.String.Basic.0.String.Pos.slice_inj._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Basic",
+    "declaration": "String.Slice.Pos.sliceFrom_inj",
+    "generated_term": "_private.Init.Data.String.Basic.0.String.Slice.Pos.sliceFrom_inj._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Basic",
+    "declaration": "String.Slice.Pos.slice_inj",
+    "generated_term": "_private.Init.Data.String.Basic.0.String.Slice.Pos.slice_inj._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Decode",
+    "declaration": "ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract",
+    "generated_term": "_private.Init.Data.String.Decode.0.ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Decode",
+    "declaration": "ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract",
+    "generated_term": "_private.Init.Data.String.Decode.0.ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Decode",
+    "declaration": "ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract",
+    "generated_term": "_private.Init.Data.String.Decode.0.ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract._proof_1_6",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Decode",
+    "declaration": "ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract",
+    "generated_term": "_private.Init.Data.String.Decode.0.ByteArray.utf8DecodeChar?_eq_utf8DecodeChar?_extract._proof_1_7",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Basic",
+    "declaration": "String.Slice.slice_eq_self_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Basic.0.String.Slice.slice_eq_self_iff._proof_1_7",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Pos.sliceFrom_le_sliceFrom_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Pos.sliceFrom_le_sliceFrom_iff._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Pos.sliceFrom_lt_sliceFrom_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Pos.sliceFrom_lt_sliceFrom_iff._proof_1_6",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Pos.slice_le_slice_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Pos.slice_le_slice_iff._proof_1_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Pos.slice_lt_slice_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Pos.slice_lt_slice_iff._proof_1_6",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Slice.Pos.sliceFrom_le_sliceFrom_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Slice.Pos.sliceFrom_le_sliceFrom_iff._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Slice.Pos.sliceFrom_lt_sliceFrom_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Slice.Pos.sliceFrom_lt_sliceFrom_iff._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Slice.Pos.slice_le_slice_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Slice.Pos.slice_le_slice_iff._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Order",
+    "declaration": "String.Slice.Pos.slice_lt_slice_iff",
+    "generated_term": "_private.Init.Data.String.Lemmas.Order.0.String.Slice.Pos.slice_lt_slice_iff._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Lemmas.Pattern.String.ForwardSearcher",
+    "declaration": "String.Slice.Pattern.Model.ForwardSliceSearcher.prefixFunctionRecurrence_eq_prefixFunction",
+    "generated_term": "_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.prefixFunctionRecurrence_eq_prefixFunction._proof_1_11",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.PosRaw",
+    "declaration": "String.Pos.Raw.dec_lt_iff",
+    "generated_term": "_private.Init.Data.String.PosRaw.0.String.Pos.Raw.dec_lt_iff._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.PosRaw",
+    "declaration": "String.Pos.Raw.le_dec",
+    "generated_term": "_private.Init.Data.String.PosRaw.0.String.Pos.Raw.le_dec._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Termination",
+    "declaration": "String.Slice.Pos.le_iff_remainingBytes_le",
+    "generated_term": "_private.Init.Data.String.Termination.0.String.Slice.Pos.le_iff_remainingBytes_le._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Termination",
+    "declaration": "String.Slice.Pos.lt_iff_remainingBytes_lt",
+    "generated_term": "_private.Init.Data.String.Termination.0.String.Slice.Pos.lt_iff_remainingBytes_lt._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Data.String.Termination",
+    "declaration": "String.Slice.Pos.remainingBytes_inj",
+    "generated_term": "_private.Init.Data.String.Termination.0.String.Slice.Pos.remainingBytes_inj._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Grind.Ordered.Int",
+    "declaration": "Lean.Grind.instLawfulOrderLTInt",
+    "generated_term": "_private.Init.Grind.Ordered.Int.0.Lean.Grind.instLawfulOrderLTInt._proof_1",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Grind.Ordered.Int",
+    "declaration": "Lean.Grind.instOrderedAddInt",
+    "generated_term": "_private.Init.Grind.Ordered.Int.0.Lean.Grind.instOrderedAddInt._proof_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Grind.Ring.Basic",
+    "declaration": "Lean.Grind.IsCharP.mk'_aux",
+    "generated_term": "_private.Init.Grind.Ring.Basic.0.Lean.Grind.IsCharP.mk'_aux._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Grind.ToInt",
+    "declaration": "Lean.Grind.IntInterval.wrap_eq_self_iff",
+    "generated_term": "_private.Init.Grind.ToInt.0.Lean.Grind.IntInterval.wrap_eq_self_iff._proof_1_10",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Grind.ToInt",
+    "declaration": "Lean.Grind.IntInterval.wrap_eq_self_iff",
+    "generated_term": "_private.Init.Grind.ToInt.0.Lean.Grind.IntInterval.wrap_eq_self_iff._proof_1_5",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.Grind.ToInt",
+    "declaration": "Lean.Grind.IntInterval.wrap_eq_self_iff",
+    "generated_term": "_private.Init.Grind.ToInt.0.Lean.Grind.IntInterval.wrap_eq_self_iff._proof_1_9",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.GrindInstances.Nat",
+    "declaration": "Lean.Grind.instExistsAddOfLTNat",
+    "generated_term": "_private.Init.GrindInstances.Nat.0.Lean.Grind.instExistsAddOfLTNat._proof_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.GrindInstances.Ring.Nat",
+    "declaration": "Lean.Grind.instLawfulOrderLTNat",
+    "generated_term": "_private.Init.GrindInstances.Ring.Nat.0.Lean.Grind.instLawfulOrderLTNat._proof_1",
+    "occurrences": 5,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Init",
+    "module": "Init.GrindInstances.Ring.Nat",
+    "declaration": "Lean.Grind.instOrderedRingNat",
+    "generated_term": "_private.Init.GrindInstances.Ring.Nat.0.Lean.Grind.instOrderedRingNat._proof_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Lean",
+    "module": "Lean.Meta.Sym.Simp.Have",
+    "declaration": "Lean.Meta.Sym.Simp.toHave",
+    "generated_term": "_private.Lean.Meta.Sym.Simp.Have.0.Lean.Meta.Sym.Simp.toHave._proof_1",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Lean",
+    "module": "Lean.Util.Diff",
+    "declaration": "Lean.Diff.diff",
+    "generated_term": "_private.Lean.Util.Diff.0.Lean.Diff.diff._proof_1",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Lean",
+    "module": "Lean.Util.Diff",
+    "declaration": "Lean.Diff.diff",
+    "generated_term": "_private.Lean.Util.Diff.0.Lean.Diff.diff._proof_2",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.Algebra.Group.Fin.Basic",
+    "declaration": "Fin.lt_sub_iff",
+    "generated_term": "_private.Mathlib.Algebra.Group.Fin.Basic.0.Fin.lt_sub_iff._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.Algebra.SkewPolynomial.Basic",
+    "declaration": "SkewPolynomial.coeff_erase",
+    "generated_term": "SkewPolynomial.coeff_erase",
+    "occurrences": 1,
+    "outcome": "kernel rejected",
+    "kernel_reason": "(kernel) declaration type mismatch, 'SkewPolynomial.coeff_erase.subst' has type   ∀ {R : Type u_1} [inst : Semiring R] (p : SkewPolynomial R) (n i : ℕ),     (if"
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts",
+    "declaration": "CategoryTheory.Limits.BinaryBicone.toBiconeFunctor",
+    "generated_term": "CategoryTheory.Limits.BinaryBicone.toBiconeFunctor._proof_1",
+    "occurrences": 7,
+    "outcome": "kernel rejected",
+    "kernel_reason": "(kernel) declaration type mismatch, 'CategoryTheory.Limits.BinaryBicone.toBiconeFunctor._proof_1.subst' has type   ∀ {C : Type u_2} [inst : CategoryTheory.Categ"
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.Data.List.Infix",
+    "declaration": "List.take_isPrefix_take",
+    "generated_term": "_private.Mathlib.Data.List.Infix.0.List.take_isPrefix_take._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.LinearAlgebra.RootSystem.Finite.G2",
+    "declaration": "RootPairing.EmbeddedG2.isOrthogonal_short_and_long_aux",
+    "generated_term": "_private.Mathlib.LinearAlgebra.RootSystem.Finite.G2.0.RootPairing.EmbeddedG2.isOrthogonal_short_and_long_aux._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.Logic.Equiv.Defs",
+    "declaration": "Equiv.propEquivBool",
+    "generated_term": "Equiv.propEquivBool._proof_2",
+    "occurrences": 1,
+    "outcome": "kernel rejected",
+    "kernel_reason": "(kernel) application type mismatch   congrArg Eq Bool.decide_eq_true argument has type   decide (b = true) = b but function has type   (fun p => decide p) ((fun"
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.MeasureTheory.VectorMeasure.Basic",
+    "declaration": "MeasureTheory.VectorMeasure.dirac",
+    "generated_term": "MeasureTheory.VectorMeasure.dirac._proof_1",
+    "occurrences": 1,
+    "outcome": "kernel rejected",
+    "kernel_reason": "(kernel) declaration type mismatch, 'MeasureTheory.VectorMeasure.dirac._proof_1.subst' has type   ∀ {β : Type u_2} {M : Type u_1} [inst : AddCommMonoid M] [inst"
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.Order.Interval.Finset.Box",
+    "declaration": "Int.mem_box",
+    "generated_term": "_private.Mathlib.Order.Interval.Finset.Box.0.Int.mem_box._proof_1_5",
+    "occurrences": 12,
+    "outcome": "still classical",
+    "kernel_reason": null
+  },
+  {
+    "library": "Mathlib",
+    "module": "Mathlib.Tactic.DeriveFintype",
+    "declaration": "Mathlib.Deriving.Fintype.mkFintypeInstanceHandler",
+    "generated_term": "_private.Mathlib.Tactic.DeriveFintype.0.Mathlib.Deriving.Fintype.mkFintypeInstanceHandler._proof_1",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Plausible",
+    "module": "Plausible.Gen",
+    "declaration": "Plausible.Gen.chooseNatLt",
+    "generated_term": "_private.Plausible.Gen.0.Plausible.Gen.chooseNatLt._proof_4",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balanced",
+    "declaration": "Std.DTreeMap.Internal.Impl.balancedAtRoot_one_one",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balanced.0.Std.DTreeMap.Internal.Impl.balancedAtRoot_one_one._proof_1_1",
+    "occurrences": 1,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balanced",
+    "declaration": "Std.DTreeMap.Internal.Impl.balancedAtRoot_one_two",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balanced.0.Std.DTreeMap.Internal.Impl.balancedAtRoot_one_two._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balanced",
+    "declaration": "Std.DTreeMap.Internal.Impl.balancedAtRoot_two_one",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balanced.0.Std.DTreeMap.Internal.Impl.balancedAtRoot_two_one._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balanced",
+    "declaration": "Std.DTreeMap.Internal.Impl.balancedAtRoot_zero_iff",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balanced.0.Std.DTreeMap.Internal.Impl.balancedAtRoot_zero_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balanced",
+    "declaration": "Std.DTreeMap.Internal.Impl.balancedAtRoot_zero_iff'",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balanced.0.Std.DTreeMap.Internal.Impl.balancedAtRoot_zero_iff'._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.BalanceLPrecond.erase",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.BalanceLPrecond.erase._proof_1_1",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.BalancedAtRoot.adjust_left",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.BalancedAtRoot.adjust_left._proof_1_1",
+    "occurrences": 10,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.BalancedAtRoot.erase_left",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.BalancedAtRoot.erase_left._proof_1_1",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balance!_desc",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balance!_desc._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balance!_eq_balanceₘ",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balance!_eq_balanceₘ._proof_1_19",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balance!_eq_balanceₘ",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balance!_eq_balanceₘ._proof_1_9",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanceLErasePrecond_zero_iff",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanceLErasePrecond_zero_iff._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanceLErasePrecond_zero_iff'",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanceLErasePrecond_zero_iff'._proof_1_1",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_doubleL",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_doubleL._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_doubleL",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_doubleL._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_doubleL",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_doubleL._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_doubleR",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_doubleR._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_doubleR",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_doubleR._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_doubleR",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_doubleR._proof_1_3",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_singleL",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_singleL._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_singleL",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_singleL._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_singleR",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_singleR._proof_1_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Balancing",
+    "declaration": "Std.DTreeMap.Internal.Impl.balanced_singleR",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Balancing.0.Std.DTreeMap.Internal.Impl.balanced_singleR._proof_1_2",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Model",
+    "declaration": "Std.DTreeMap.Internal.Impl.updateCell",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Model.0.Std.DTreeMap.Internal.Impl.updateCell._proof_30",
+    "occurrences": 10,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Model",
+    "declaration": "Std.DTreeMap.Internal.Impl.updateCell",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Model.0.Std.DTreeMap.Internal.Impl.updateCell._proof_59",
+    "occurrences": 10,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.erase",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.erase._proof_11",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.erase",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.erase._proof_22",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.insert",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.insert._proof_11",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.insert",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.insert._proof_22",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.insertMax",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.insertMax._proof_5",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.insertMin",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.insertMin._proof_10",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.link",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.link._proof_19",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.link",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.link._proof_29",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.link",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.link._proof_37",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.link2",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.link2._proof_24",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Data.DTreeMap.Internal.Operations",
+    "declaration": "Std.DTreeMap.Internal.Impl.link2",
+    "generated_term": "_private.Std.Data.DTreeMap.Internal.Operations.0.Std.DTreeMap.Internal.Impl.link2._proof_40",
+    "occurrences": 6,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Sat.AIG.Basic",
+    "declaration": "Std.Sat.AIG.mkGate",
+    "generated_term": "_private.Std.Sat.AIG.Basic.0.Std.Sat.AIG.mkGate._proof_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Sat.AIG.Cached",
+    "declaration": "Std.Sat.AIG.mkGateCached",
+    "generated_term": "_private.Std.Sat.AIG.Cached.0.Std.Sat.AIG.mkGateCached._proof_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Tactic.BVDecide.Bitblast.BVExpr.Basic",
+    "declaration": "Std.Tactic.BVDecide.BVExpr.decEq",
+    "generated_term": "_private.Std.Tactic.BVDecide.Bitblast.BVExpr.Basic.0.Std.Tactic.BVDecide.BVExpr.decEq._proof_112",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Tactic.BVDecide.Bitblast.BVExpr.Basic",
+    "declaration": "Std.Tactic.BVDecide.BVExpr.decEq",
+    "generated_term": "_private.Std.Tactic.BVDecide.Bitblast.BVExpr.Basic.0.Std.Tactic.BVDecide.BVExpr.decEq._proof_99",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  },
+  {
+    "library": "Std",
+    "module": "Std.Tactic.BVDecide.LRAT.Internal.Convert",
+    "declaration": "Std.Tactic.BVDecide.LRAT.Internal.CNF.lift",
+    "generated_term": "_private.Std.Tactic.BVDecide.LRAT.Internal.Convert.0.Std.Tactic.BVDecide.LRAT.Internal.CNF.lift._proof_1",
+    "occurrences": 2,
+    "outcome": "removed",
+    "kernel_reason": null
+  }
+]

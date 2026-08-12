@@ -1,4 +1,9 @@
 {
+  "cleanable": {
+    "history": [],
+    "sha256": "073870ae0569b45f4b796065f5964d3d81bd47951981e775337a166abcc68177",
+    "version": "2026-08-12"
+  },
   "controlled-tactics": {
     "history": [],
     "sha256": "8d8d79cabf5b458e1c10c3e629c16d9013c6e7b60b5356c82cee29adbc4ea5e5",
