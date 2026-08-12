@@ -1,0 +1,21 @@
+declaration,theorems_dominated,route_to_axiom,occurrences,testable,synthesised,kernel_verified_choice_free
+Std.DHashMap.Internal.Raw₀.isHashSelf_updateBucket_alter,4899,Classical.propDecidable > Classical.choice,1,0,0,0
+lt_or_eq_of_le,2018,Classical.propDecidable > Classical.choice,1,0,0,0
+Classical.not_not,792,Classical.propDecidable > Classical.choice,1,1,0,0
+_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_two_pow_sub_succ._proof_1_3,520,Classical.propDecidable > Classical.choice,2,2,2,2
+Classical.not_forall,497,Classical.propDecidable > Classical.choice,2,1,0,0
+_private.Init.Data.Nat.Mod.0.Nat.mul_lt_mul_left._proof_1_1,440,Classical.propDecidable > Classical.choice,4,4,4,4
+WellFounded.extrinsicFix,398,Classical.choice,1,1,0,0
+Multiset.add_right_inj,363,Classical.propDecidable > Classical.choice,44,0,0,0
+List.perm_insert_swap,237,Classical.propDecidable > Classical.choice,1,1,0,0
+Std.instMinEqOrOfLawfulOrderLeftLeaningMin,237,Classical.propDecidable > Classical.choice,45,0,0,0
+_private.Init.Data.Int.DivMod.Lemmas.0.Int.natCast_eq_zero._proof_1_1,236,Classical.propDecidable > Classical.choice,2,2,2,2
+Classical.or_iff_not_imp_left,230,Classical.propDecidable > Classical.choice,1,1,0,0
+and_forall_ne,215,Classical.propDecidable > Classical.choice,1,0,0,0
+Classical.or_iff_not_imp_right,,,1,1,0,0
+DerivingHelpers.deriving_lawful_beq_helper_nd,,,1,1,0,0
+HomologicalComplex.Hom.comm,,,1,1,0,0
+by_contradiction,,,1,1,0,0
+not_and_or,,,1,1,0,0
+not_iff_not,,,2,2,0,0
+not_imp_not,,,1,1,0,0

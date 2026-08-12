@@ -180,6 +180,39 @@ The Controlled Tactic Table: https://f-keys.com/gonzalgo/controlled-tactics/
   classical, not defective. aesop matches simp cell for cell on all 27.
   Machine-readable: controlled-tactics.json, controlled-tactics.csv (CC-BY-4.0).
 
+The Spend-Point Table: https://f-keys.com/gonzalgo/spend-points/
+  The 20 largest sites of classical dependence in Mathlib, with the number of
+  declarations in each site's dominator subtree that cite a choice primitive
+  DIRECTLY. Dominance and spending come apart: 15 of the 20 sites contain no
+  direct use of a choice primitive anywhere in their subtree, and between them
+  they dominate 25,992 theorems while spending nothing. Classical.propDecidable
+  has 6,775 spenders and Classical.byContradiction 1,854; between them they hold
+  nearly all direct spending in the library. A repair aimed at a spend point
+  removes a use of the axiom; a repair aimed at a pure dominator only reroutes.
+  Machine-readable: spend-points.json, spend-points.csv (CC-BY-4.0).
+
+The Substitution Ledger: https://f-keys.com/gonzalgo/substitution-ledger/
+  Kernel-verified substitution attempted against the top of the dominance
+  ranking. 114 occurrences of Classical.propDecidable across 20 declarations, 21
+  reachable by the harness, 8 replaced by a constructive Decidable instance the
+  Lean KERNEL accepted, in 3 declarations -- all private Nat/Int lemmas where the
+  proposition is decidable by computation. Nothing at the head of the ranking
+  moved. The other 93 occurrences sit under binders and were not testable outside
+  their declaration's context, so 8 is a floor and not a final answer. This is the
+  only measure in the program that removes rather than ranks or bounds.
+  Machine-readable: substitution-ledger.json, substitution-ledger.csv (CC-BY-4.0).
+
+The Entry-Point Table: https://f-keys.com/gonzalgo/entry-points/
+  Five Metamath databases across five foundations: axioms used, direct entry
+  points into them, and entry points per theorem. The three large databases agree
+  closely -- 0.3758 (set.mm), 0.3782 (iset.mm), 0.4259 (nf.mm) -- across ZFC,
+  intuitionistic logic and New Foundations, which is a fact about engineering
+  practice rather than about logic. Amplification (dependents / entry points) is
+  carried as reported but is NOT a column to rank on: it is a property of how a
+  library was factored, ranging from 1 under inlining to the full dependent count
+  under a single gateway lemma, with no theorem changing. Machine-readable:
+  entry-points.json, entry-points.csv (CC-BY-4.0).
+
 Supported: Lean 4 (via a declaration-graph extractor), and the Metamath databases
 set.mm, iset.mm, nf.mm, ql.mm and hol.mm — ZFC, intuitionistic logic, New
 Foundations, quantum logic and higher-order logic measured by one program.

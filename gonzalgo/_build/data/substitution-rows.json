@@ -1,0 +1,182 @@
+[
+  {
+    "declaration": "Std.DHashMap.Internal.Raw₀.isHashSelf_updateBucket_alter",
+    "theorems_dominated": 4899,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 1,
+    "testable": 0,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "lt_or_eq_of_le",
+    "theorems_dominated": 2018,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 1,
+    "testable": 0,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "Classical.not_not",
+    "theorems_dominated": 792,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_two_pow_sub_succ._proof_1_3",
+    "theorems_dominated": 520,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 2,
+    "testable": 2,
+    "synthesised": 2,
+    "kernel_verified_choice_free": 2
+  },
+  {
+    "declaration": "Classical.not_forall",
+    "theorems_dominated": 497,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 2,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "_private.Init.Data.Nat.Mod.0.Nat.mul_lt_mul_left._proof_1_1",
+    "theorems_dominated": 440,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 4,
+    "testable": 4,
+    "synthesised": 4,
+    "kernel_verified_choice_free": 4
+  },
+  {
+    "declaration": "WellFounded.extrinsicFix",
+    "theorems_dominated": 398,
+    "route_to_axiom": "Classical.choice",
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "Multiset.add_right_inj",
+    "theorems_dominated": 363,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 44,
+    "testable": 0,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "List.perm_insert_swap",
+    "theorems_dominated": 237,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "Std.instMinEqOrOfLawfulOrderLeftLeaningMin",
+    "theorems_dominated": 237,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 45,
+    "testable": 0,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.natCast_eq_zero._proof_1_1",
+    "theorems_dominated": 236,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 2,
+    "testable": 2,
+    "synthesised": 2,
+    "kernel_verified_choice_free": 2
+  },
+  {
+    "declaration": "Classical.or_iff_not_imp_left",
+    "theorems_dominated": 230,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "and_forall_ne",
+    "theorems_dominated": 215,
+    "route_to_axiom": "Classical.propDecidable > Classical.choice",
+    "occurrences": 1,
+    "testable": 0,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "Classical.or_iff_not_imp_right",
+    "theorems_dominated": null,
+    "route_to_axiom": null,
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "DerivingHelpers.deriving_lawful_beq_helper_nd",
+    "theorems_dominated": null,
+    "route_to_axiom": null,
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "HomologicalComplex.Hom.comm",
+    "theorems_dominated": null,
+    "route_to_axiom": null,
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "by_contradiction",
+    "theorems_dominated": null,
+    "route_to_axiom": null,
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "not_and_or",
+    "theorems_dominated": null,
+    "route_to_axiom": null,
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "not_iff_not",
+    "theorems_dominated": null,
+    "route_to_axiom": null,
+    "occurrences": 2,
+    "testable": 2,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  },
+  {
+    "declaration": "not_imp_not",
+    "theorems_dominated": null,
+    "route_to_axiom": null,
+    "occurrences": 1,
+    "testable": 1,
+    "synthesised": 0,
+    "kernel_verified_choice_free": 0
+  }
+]

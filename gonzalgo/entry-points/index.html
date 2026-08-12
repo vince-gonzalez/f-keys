@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/entry-points/">
+<title>The Entry-Point Table — axiom entry points across five Metamath foundations</title>
+<meta name="description" content="Five Metamath databases across ZFC, intuitionistic logic, New Foundations, quantum logic and higher-order logic: axioms used, entry points, and entry points per theorem — the one quantity here that survives refactoring and can be compared across libraries.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/entry-points/">
+<meta property="og:title" content="The Entry-Point Table">
+<meta property="og:description" content="how often a library reaches for its own axioms">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Entry-Point Table",
+  "description": "Axioms used, direct entry points into them, and entry points per theorem, for five Metamath databases spanning five foundations. Entry points per theorem normalises for library size and is the measure that can be compared across databases; amplification is carried as reported but is a property of factorization rather than of mathematics.",
+  "url": "https://f-keys.com/gonzalgo/entry-points/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Metamath",
+    "set.mm",
+    "iset.mm",
+    "New Foundations",
+    "quantum logic",
+    "higher-order logic",
+    "intuitionistic logic",
+    "axioms",
+    "formal verification",
+    "foundations of mathematics"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/entry-points/entry-points.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/entry-points/entry-points.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE ENTRY-POINT TABLE</h1>
+<p class="kicker">how often a library reaches for its own axioms</p>
+
+<p>An axiom is cited directly by a few theorems and inherited by many. The count of direct citations is the entry points, and dividing by the library's size gives a figure that means the same thing in a database of 47,000 theorems and one of 151.</p>
+<p>The three large databases land close together — 0.3758 (set.mm), 0.3782 (iset.mm), 0.4259 (nf.mm) — across ZFC, intuitionistic logic and New Foundations. Three communities with different foundations and no shared plan reach for their axioms at nearly the same rate. The two small databases sit far above, which is what a library looks like before its results are mostly built on earlier results.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Metamath <code>set.mm</code>, <code>iset.mm</code>, <code>nf.mm</code>, <code>ql.mm</code>, <code>hol.mm</code> &middot; each database's own axiom declarations and proof structure</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>database</th><th>foundation</th><th style="text-align:right">theorems</th><th style="text-align:right">axioms used</th><th style="text-align:right">entry points</th><th style="text-align:right">entries / theorem</th><th style="text-align:right">amplification</th></tr></thead>
+<tbody>
+<tr><td>set.mm</td><td class='found'>ZFC set theory, classical first-order logic</td><td class='num'>47,621</td><td class='num'>1,447</td><td class='num'>17,898</td><td class='num'>0.3758</td><td class='num'>292.1</td></tr>
+<tr><td>iset.mm</td><td class='found'>Intuitionistic set theory</td><td class='num'>16,236</td><td class='num'>480</td><td class='num'>6,140</td><td class='num'>0.3782</td><td class='num'>220.5</td></tr>
+<tr><td>nf.mm</td><td class='found'>Quine's New Foundations</td><td class='num'>5,976</td><td class='num'>195</td><td class='num'>2,545</td><td class='num'>0.4259</td><td class='num'>93.5</td></tr>
+<tr><td>hol.mm</td><td class='found'>Higher-order logic</td><td class='num'>151</td><td class='num'>43</td><td class='num'>175</td><td class='num'>1.1589</td><td class='num'>16.7</td></tr>
+<tr><td>ql.mm</td><td class='found'>Quantum logic</td><td class='num'>1,140</td><td class='num'>43</td><td class='num'>2,759</td><td class='num'>2.4202</td><td class='num'>6.3</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="note"><em>entry points</em> counts theorems citing an axiom directly, as opposed to inheriting it through another theorem. <em>entries / theorem</em> is that over the theorem count and is the column to compare across rows. <em>amplification</em> is dependents over entry points, reproduced from the published table; the next section is why it is not a column to rank on.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="entry-points.json">entry-points.json</a> &middot;
+<a href="entry-points.csv">entry-points.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>pip install gonzalgo
+gonzalgo mm set.mm iset.mm nf.mm ql.mm hol.mm</pre>
+<p class="note">The same command produces the Metamath rows of the <a href="/gonzalgo/kernel-index/">Kernel Index</a>; these are its remaining columns.</p>
+
+<h2>What amplification cannot mean</h2>
+<p>Amplification is dependents divided by entry points, and it looks like a measure of how much a foundation yields. It is not. Consider two refactorings that preserve every theorem's statement and every theorem's transitive axiom closure. Inline every citation of a lemma and each dependent now cites the axiom directly, so entry points equal dependents and amplification falls to 1. Introduce a single gateway lemma stating the axiom and reroute every citation through it, and entry points fall to one, sending amplification to the full dependent count.</p>
+<p>So amplification ranges over the whole interval between those two extremes without a single theorem changing. The figures 292&times;, 221&times;, 94&times; here, and 2,256&times; for <code>Classical.choice</code> in Mathlib, describe how four communities chose to organise proofs. That they land in a similar range is a real observation about engineering practice and not one about ZFC.</p>
+<p>This is why the column is present and the table is not sorted on it.</p>
+
+<h2>The extreme case</h2>
+<p>In <code>set.mm</code>, <code>ax-4</code> is cited directly in one proof and inherited by 44,501 theorems — a single proof step carrying an axiom into 93% of the library. Most axioms there are cited directly in three proofs or fewer. Concentration like that is what makes provenance worth computing at all: the theorems that depend on an axiom and the theorems that use it are almost disjoint sets.</p>
+
+<h2>Why no Lean rows</h2>
+<p>Lean's axioms are fixed by the system rather than declared per library, so the nine Lean libraries in the <a href="/gonzalgo/kernel-index/">Kernel Index</a> share one axiom set and the comparison would be against a constant. The single Mathlib figure quoted above is stated in the paper, not derived here.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/entry-points/">f-keys.com/gonzalgo/entry-points/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

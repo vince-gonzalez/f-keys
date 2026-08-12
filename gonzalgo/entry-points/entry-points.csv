@@ -1,0 +1,6 @@
+database,foundation,theorems,axioms_used,entry_points,entries_per_theorem,amplification_as_reported
+set.mm,"ZFC set theory, classical first-order logic",47621,1447,17898,0.3758,292.1
+iset.mm,Intuitionistic set theory,16236,480,6140,0.3782,220.5
+nf.mm,Quine's New Foundations,5976,195,2545,0.4259,93.5
+hol.mm,Higher-order logic,151,43,175,1.1589,16.7
+ql.mm,Quantum logic,1140,43,2759,2.4202,6.3

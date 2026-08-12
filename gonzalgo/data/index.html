@@ -97,6 +97,66 @@
     },
     {
       "@type": "Dataset",
+      "name": "The Spend-Point Table",
+      "url": "https://f-keys.com/gonzalgo/spend-points/",
+      "description": "The 20 largest sites of classical dependence in Mathlib, each with the number of declarations in its dominator subtree that cite a choice primitive directly. Separates sites where the axiom is spent from sites that dominate theorems while inheriting the axiom from further up.",
+      "version": "2026-08-12",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/spend-points/spend-points.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/spend-points/spend-points.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "name": "The Substitution Ledger",
+      "url": "https://f-keys.com/gonzalgo/substitution-ledger/",
+      "description": "Kernel-verified substitution attempted against the 20 largest sites of classical dependence in Mathlib. For each declaration: occurrences of Classical.propDecidable in its proof term, how many the harness could reach, how many had a Decidable instance synthesised, and how many produced a term the kernel accepted.",
+      "version": "2026-08-12",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "name": "The Entry-Point Table",
+      "url": "https://f-keys.com/gonzalgo/entry-points/",
+      "description": "Axioms used, direct entry points into them, and entry points per theorem, for five Metamath databases spanning five foundations. Entry points per theorem normalises for library size and is the measure that can be compared across databases; amplification is carried as reported but is a property of factorization rather than of mathematics.",
+      "version": "2026-08-12",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/entry-points/entry-points.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/entry-points/entry-points.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
       "name": "What machine-generated Lean proofs rest on",
       "url": "https://f-keys.com/gonzalgo/generated-proofs/",
       "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
@@ -207,6 +267,33 @@ moves only when the numbers do.
     270 rows &middot; version 2026-08-12 &middot;
     <a href="https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.json">JSON</a> &middot;
     <a href="https://f-keys.com/gonzalgo/controlled-tactics/controlled-tactics.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/spend-points/">The Spend-Point Table</a></h2>
+  <p>The 20 largest sites of classical dependence in Mathlib, each with the number of declarations in its dominator subtree that cite a choice primitive directly. Separates sites where the axiom is spent from sites that dominate theorems while inheriting the axiom from further up.</p>
+  <p class="meta">
+    20 rows &middot; version 2026-08-12 &middot;
+    <a href="https://f-keys.com/gonzalgo/spend-points/spend-points.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/spend-points/spend-points.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/substitution-ledger/">The Substitution Ledger</a></h2>
+  <p>Kernel-verified substitution attempted against the 20 largest sites of classical dependence in Mathlib. For each declaration: occurrences of Classical.propDecidable in its proof term, how many the harness could reach, how many had a Decidable instance synthesised, and how many produced a term the kernel accepted.</p>
+  <p class="meta">
+    20 rows &middot; version 2026-08-12 &middot;
+    <a href="https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/substitution-ledger/substitution-ledger.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/entry-points/">The Entry-Point Table</a></h2>
+  <p>Axioms used, direct entry points into them, and entry points per theorem, for five Metamath databases spanning five foundations. Entry points per theorem normalises for library size and is the measure that can be compared across databases; amplification is carried as reported but is a property of factorization rather than of mathematics.</p>
+  <p class="meta">
+    5 rows &middot; version 2026-08-12 &middot;
+    <a href="https://f-keys.com/gonzalgo/entry-points/entry-points.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/entry-points/entry-points.csv">CSV</a> &middot; CC-BY-4.0
   </p>
 </div>
 <div class="card">

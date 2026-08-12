@@ -1,0 +1,235 @@
+{
+  "name": "The Substitution Ledger",
+  "description": "Kernel-verified substitution attempted against the 20 largest sites of classical dependence in Mathlib. For each declaration: occurrences of Classical.propDecidable in its proof term, how many the harness could reach, how many had a Decidable instance synthesised, and how many produced a term the kernel accepted.",
+  "version": "2026-08-12",
+  "sha256": "8992a894d1cf1eada111bf8cb08f3e956759ae6ad77925701f17ce18938124e6",
+  "url": "https://f-keys.com/gonzalgo/substitution-ledger/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "producedBy": {
+    "software": "gonzalgo",
+    "url": "https://pypi.org/project/gonzalgo/",
+    "paper": "https://doi.org/10.5281/zenodo.21883963"
+  },
+  "measured": {
+    "Lean 4": "4.32.1 with Mathlib v4.32.1",
+    "target": "Classical.propDecidable",
+    "acceptance": "Lean kernel"
+  },
+  "fields": [
+    "declaration",
+    "theorems_dominated",
+    "route_to_axiom",
+    "occurrences",
+    "testable",
+    "synthesised",
+    "kernel_verified_choice_free"
+  ],
+  "displayed": [
+    {
+      "key": "declaration",
+      "label": "declaration"
+    },
+    {
+      "key": "theorems_dominated",
+      "label": "dominates"
+    },
+    {
+      "key": "occurrences",
+      "label": "occurrences"
+    },
+    {
+      "key": "testable",
+      "label": "testable"
+    },
+    {
+      "key": "synthesised",
+      "label": "synthesised"
+    },
+    {
+      "key": "kernel_verified_choice_free",
+      "label": "choice-free"
+    }
+  ],
+  "rows": [
+    {
+      "declaration": "Std.DHashMap.Internal.Raw₀.isHashSelf_updateBucket_alter",
+      "theorems_dominated": 4899,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 1,
+      "testable": 0,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "lt_or_eq_of_le",
+      "theorems_dominated": 2018,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 1,
+      "testable": 0,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "Classical.not_not",
+      "theorems_dominated": 792,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "_private.Init.Data.Nat.Bitwise.Lemmas.0.Nat.testBit_two_pow_sub_succ._proof_1_3",
+      "theorems_dominated": 520,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 2,
+      "testable": 2,
+      "synthesised": 2,
+      "kernel_verified_choice_free": 2
+    },
+    {
+      "declaration": "Classical.not_forall",
+      "theorems_dominated": 497,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 2,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "_private.Init.Data.Nat.Mod.0.Nat.mul_lt_mul_left._proof_1_1",
+      "theorems_dominated": 440,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 4,
+      "testable": 4,
+      "synthesised": 4,
+      "kernel_verified_choice_free": 4
+    },
+    {
+      "declaration": "WellFounded.extrinsicFix",
+      "theorems_dominated": 398,
+      "route_to_axiom": "Classical.choice",
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "Multiset.add_right_inj",
+      "theorems_dominated": 363,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 44,
+      "testable": 0,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "List.perm_insert_swap",
+      "theorems_dominated": 237,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "Std.instMinEqOrOfLawfulOrderLeftLeaningMin",
+      "theorems_dominated": 237,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 45,
+      "testable": 0,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "_private.Init.Data.Int.DivMod.Lemmas.0.Int.natCast_eq_zero._proof_1_1",
+      "theorems_dominated": 236,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 2,
+      "testable": 2,
+      "synthesised": 2,
+      "kernel_verified_choice_free": 2
+    },
+    {
+      "declaration": "Classical.or_iff_not_imp_left",
+      "theorems_dominated": 230,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "and_forall_ne",
+      "theorems_dominated": 215,
+      "route_to_axiom": "Classical.propDecidable > Classical.choice",
+      "occurrences": 1,
+      "testable": 0,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "Classical.or_iff_not_imp_right",
+      "theorems_dominated": null,
+      "route_to_axiom": null,
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "DerivingHelpers.deriving_lawful_beq_helper_nd",
+      "theorems_dominated": null,
+      "route_to_axiom": null,
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "HomologicalComplex.Hom.comm",
+      "theorems_dominated": null,
+      "route_to_axiom": null,
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "by_contradiction",
+      "theorems_dominated": null,
+      "route_to_axiom": null,
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "not_and_or",
+      "theorems_dominated": null,
+      "route_to_axiom": null,
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "not_iff_not",
+      "theorems_dominated": null,
+      "route_to_axiom": null,
+      "occurrences": 2,
+      "testable": 2,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    },
+    {
+      "declaration": "not_imp_not",
+      "theorems_dominated": null,
+      "route_to_axiom": null,
+      "occurrences": 1,
+      "testable": 1,
+      "synthesised": 0,
+      "kernel_verified_choice_free": 0
+    }
+  ]
+}
