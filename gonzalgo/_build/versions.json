@@ -44,6 +44,11 @@
     "sha256": "9d0bf4f36a423930fe01144235192fb4cb384487499ddda7c47c9a265e977dbb",
     "version": "2026-08-05"
   },
+  "metamath-axioms": {
+    "history": [],
+    "sha256": "d72dc18cd2863adbae44cb82145f8a6e6ee4952e9c25324f890c9b5441416fa1",
+    "version": "2026-08-13"
+  },
   "module-spend": {
     "history": [],
     "sha256": "bb9dc4cbeadaf55e8a908c929b6739be9fa98f5d0b6538914fddbbc2ee6722c4",

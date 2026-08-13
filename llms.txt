@@ -188,6 +188,21 @@ The Module Spend Table: https://f-keys.com/gonzalgo/module-spend/
   Lean 4.33.0 in one 7-second pass, no closure. Machine-readable:
   module-spend.json, module-spend.csv (CC-BY-4.0).
 
+The Metamath Axiom Table: https://f-keys.com/gonzalgo/metamath-axioms/
+  All 4,424 axiomatic assertions across FIVE databases and five foundations --
+  set.mm (ZFC), iset.mm (intuitionistic), nf.mm (New Foundations), ql.mm (quantum
+  logic), hol.mm (higher-order logic) -- 71,213 theorems, one closure engine.
+  ZERO incomplete proofs in any of them; Metamath marks an incomplete step
+  explicitly, so that is checked rather than assumed. Assertions are separated
+  from well-formedness constructors by TYPECODE, not by name: a $a beginning |-
+  asserts something, one beginning class/wff/term/type does not. set.mm's
+  ax-/df- naming agrees with the typecode on all 3,008 of its $a statements
+  (checked), but it is a house style -- ql.mm and hol.mm use term and type
+  typecodes and a set.mm-trained prefix rule misclassifies them outright. Pinned
+  to github.com/metamath/set.mm @ 7ddd528c948a: the databases move, and measured
+  today iset.mm has 38 more theorems than when the earlier tables here were
+  built. Machine-readable: metamath-axioms.json, metamath-axioms.csv (CC-BY-4.0).
+
 Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
 
 Which constant is responsible? Dominator analysis of classical dependence in
