@@ -161,7 +161,7 @@ rests on an unfinished proof                               0     0.0%
 native_decide / compiler-trusted                           0     0.0%
 axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 
-<p>A language model that writes a Lean proof gets one bit of feedback: the proof compiles, or it does not. What the proof ends up standing on is not part of that signal and nobody has measured it.</p>
+<p>A language model that writes a Lean proof gets one bit of feedback: the proof compiles, or it does not. What the proof ends up standing on is not part of that signal, and while the field agrees the check matters, no one had reported what it returns over a corpus.</p>
 
 <p>This is that measurement, over the Goedel-Prover output for the Lean Workbook problems — 10,000 proofs, of which 9,169 still compile under Lean 4.32. The other 831 fail on the version gap and are held out of every figure below.</p>
 
@@ -171,7 +171,7 @@ axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 
 <p>Every proof that compiles proves its theorem. None rests on an unfinished proof, none was obtained by trusting the compiler instead of the kernel, and none cites an axiom outside the three that all of Mathlib rests on.</p>
 
-<p>That has not previously been checkable about a generated corpus. It could be asserted; it could not be shown.</p>
+<p>Tools to check that exist — SorryDB strips sorryAx from agent output, AXLE&#x27;s verify_proof rejects non-whitelisted axioms. What had not been done was running the check across a whole corpus and reporting what it costs.</p>
 
 <h2>Classical dependence, and what it means</h2>
 
@@ -200,6 +200,16 @@ axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 <p>Lean admits a declaration whose proof failed to elaborate, carrying <code>sorryAx</code>. In a report that is indistinguishable from a proof that was genuinely never finished, so the two have to be told apart by the compiler&#x27;s error output rather than by the axiom set.</p>
 
 <p>520 theorems reach <code>sorryAx</code> and every one of them is among the 831 that failed to compile. Of the 9,169 that compiled, none does. Compile failures are held out of every figure here; a corpus targeting Lean 4.27 measured under 4.32 would otherwise report version drift as a property of the proofs.</p>
+
+<h2>Related work</h2>
+
+<p>That compilation is not verification is established. SorryDB (arXiv:2603.02668) removes &lt;code&gt;sorryAx&lt;/code&gt; from agent output and calls it an exploit agents used to get around sorry verification. AXLE (arXiv:2606.26442) states it plainly: a passing compile accepts proofs containing sorry, unsound axioms, or incorrectly restated theorems. And Ammanamanchi, Bhat and Biderman (arXiv:2606.29493) audit five Lean benchmarks, surface 4,833 findings including 398 mechanically certified issues, and recommend that evaluation harnesses verify &lt;code&gt;#print axioms&lt;/code&gt; output.</p>
+
+<p>This note is the measurement that recommendation implies and nobody had taken: what the check costs on a real corpus. The mechanism was already known; the rate was not.</p>
+
+<p>The two sides are complementary rather than competing. Those audits examine the benchmark STATEMENTS — whether a formalisation says what it should. This examines the prover OUTPUT — what a proof of it rests on. A harness can be right about one and blind to the other.</p>
+
+<p>One distinction is worth keeping sharp. Lean issue #8212 documents &lt;code&gt;apply?&lt;/code&gt; emitting a synthetic &lt;code&gt;sorry&lt;/code&gt; without logging an error, so &lt;code&gt;lake build --wfail&lt;/code&gt; exited 0 while the theorem was never added to the environment — the case DeepSeek-Prover-V2 output hit. That is a different failure from the 560 counted here, which ARE in the environment. A harness verifying the declaration exists catches the first and misses the second.</p>
 
 <h2>Method</h2>
 
