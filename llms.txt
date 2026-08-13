@@ -85,8 +85,11 @@ What machine-generated proofs rest on: https://f-keys.com/gonzalgo/generated-pro
   propext/Quot.sound/Classical.choice. 92.7% depend on the axiom of choice, but
   86.1% are bound by the STATEMENT -- the theorems are about the reals, which
   Mathlib builds with choice -- and only 6.5% are avoidable. Separating statement
-  from proof is what makes 92.7% mean something. First published measurement of
-  what a machine-generated proof corpus rests on.
+  from proof is what makes 92.7% mean something. Prior work establishes that compilation is
+  not verification (SorryDB arXiv:2603.02668, AXLE arXiv:2606.26442,
+  Ammanamanchi/Bhat/Biderman arXiv:2606.29493, which recommends checking
+  #print axioms output); this is the measurement of what that check costs on a
+  real corpus, which had not been reported.
 
 
 The Cleanable Table: https://f-keys.com/gonzalgo/cleanable/
@@ -150,6 +153,7 @@ The Version Delta Table: https://f-keys.com/gonzalgo/version-delta/
   version-delta.json, version-delta.csv (CC-BY-4.0).
 
 Kernel Trust Profile (SPECIFICATION, v0.1 draft): https://f-keys.com/gonzalgo/kernel-trust/
+  | DOI https://doi.org/10.5281/zenodo.21913736
   Not a measurement -- a FORMAT other projects emit. CITATION.cff standardises how
   to cite a project and SPDX standardises its licence; there is no standard way to
   say what it RESTS ON. A Kernel Trust Profile is that statement, conventionally

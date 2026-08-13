@@ -86,7 +86,8 @@ BODY = [
     ("", [
         "A language model that writes a Lean proof gets one bit of feedback: the "
         "proof compiles, or it does not. What the proof ends up standing on is "
-        "not part of that signal and nobody has measured it.",
+        "not part of that signal, and while the field agrees the check matters, "
+        "no one had reported what it returns over a corpus.",
         "This is that measurement, over the Goedel-Prover output for the Lean "
         f"Workbook problems — {NUMBERS['corpus']:,} proofs, of which "
         f"{NUMBERS['compiled']:,} still compile under Lean 4.32. The other "
@@ -99,8 +100,10 @@ BODY = [
         "unfinished proof, none was obtained by trusting the compiler instead of "
         "the kernel, and none cites an axiom outside the three that all of "
         "Mathlib rests on.",
-        "That has not previously been checkable about a generated corpus. It "
-        "could be asserted; it could not be shown.",
+        "Tools to check that exist — SorryDB strips sorryAx from agent output, "
+        "AXLE's verify_proof rejects non-whitelisted axioms. What had not been "
+        "done was running the check across a whole corpus and reporting what it "
+        "costs.",
     ]),
     ("Classical dependence, and what it means", [
         "8,496 of the 9,169 — 92.7% — depend on the axiom of choice. Read alone "
@@ -147,6 +150,31 @@ BODY = [
         "failures are held out of every figure here; a corpus targeting Lean "
         "4.27 measured under 4.32 would otherwise report version drift as a "
         "property of the proofs.",
+    ]),
+    ("Related work", [
+        "That compilation is not verification is established. SorryDB "
+        "(arXiv:2603.02668) removes <code>sorryAx</code> from agent output and "
+        "calls it an exploit agents used to get around sorry verification. AXLE "
+        "(arXiv:2606.26442) states it plainly: a passing compile accepts proofs "
+        "containing sorry, unsound axioms, or incorrectly restated theorems. And "
+        "Ammanamanchi, Bhat and Biderman (arXiv:2606.29493) audit five Lean "
+        "benchmarks, surface 4,833 findings including 398 mechanically certified "
+        "issues, and recommend that evaluation harnesses verify "
+        "<code>#print axioms</code> output.",
+        "This note is the measurement that recommendation implies and nobody had "
+        "taken: what the check costs on a real corpus. The mechanism was already "
+        "known; the rate was not.",
+        "The two sides are complementary rather than competing. Those audits "
+        "examine the benchmark STATEMENTS — whether a formalisation says what it "
+        "should. This examines the prover OUTPUT — what a proof of it rests on. A "
+        "harness can be right about one and blind to the other.",
+        "One distinction is worth keeping sharp. Lean issue #8212 documents "
+        "<code>apply?</code> emitting a synthetic <code>sorry</code> without "
+        "logging an error, so <code>lake build --wfail</code> exited 0 while the "
+        "theorem was never added to the environment — the case DeepSeek-Prover-V2 "
+        "output hit. That is a different failure from the 560 counted here, which "
+        "ARE in the environment. A harness verifying the declaration exists "
+        "catches the first and misses the second.",
     ]),
     ("Method", [
         "Axioms come from `Lean.collectAxioms`, the same call behind "
