@@ -186,7 +186,25 @@ def main() -> None:
          "application/octet-stream")
     print(f"  uploaded {BUNDLE.name}")
 
-    prev = draft["metadata"].get("version") or "1.0.0"
+    # The version has to come from the newest PUBLISHED record, not the draft.
+    # A fresh draft inherits metadata from the concept's first version, so
+    # reading it here produced 1.0.0 -> 1.1.0 twice and minted two records
+    # claiming the same version.
+    _, published_all = call(
+        "GET",
+        f"{API}/deposit/depositions?q=conceptrecid:{concept}&all_versions=1"
+        f"&size=100&sort=mostrecent", token)
+    versions = [d["metadata"].get("version") for d in published_all
+                if d.get("submitted") and d["metadata"].get("version")]
+
+    def key(v):
+        try:
+            return tuple(int(x) for x in str(v).lstrip("v").split("."))
+        except Exception:
+            return (0,)
+
+    prev = max(versions, key=key) if versions else "1.0.0"
+    print(f"  published versions: {sorted(set(versions), key=key)} -> newest {prev}")
     if args.version:
         newver = args.version
     else:
