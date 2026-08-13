@@ -22,6 +22,15 @@ TITLE = "What 9,169 machine-generated Lean proofs rest on"
 NUMBERS = {
     "corpus": 10000,
     "compiled": 9169,
+    # The 831 excluded, decomposed. The deposited paper carries this split and
+    # the page did not, so the three-way breakdown was only checkable by
+    # reading a PDF. Collapsing these into one row is the error this note is
+    # about: an unparsable header, a declaration that never entered the
+    # environment, and one admitted carrying sorryAx are three different
+    # events, and only the last is visible to an axiom report.
+    "no_header": 1,
+    "never_entered": 270,
+    "admitted_sorryax": 560,
     "reach": 8496,
     "bound": 7899,
     "eligible": 597,
@@ -43,6 +52,11 @@ def check_numbers(n: dict) -> None:
     the prose claims. A figure nobody can re-derive is a figure nobody can
     correct."""
     fails = []
+    parts = n["no_header"] + n["never_entered"] + n["admitted_sorryax"]
+    if parts != n["held_out"]:
+        fails.append(f"the excluded decomposition {n['no_header']} + "
+                     f"{n['never_entered']} + {n['admitted_sorryax']} = {parts} "
+                     f"!= held_out {n['held_out']}")
     if n["compiled"] + n["held_out"] != n["corpus"]:
         fails.append(f"compiled {n['compiled']} + held_out {n['held_out']} "
                      f"!= corpus {n['corpus']}")
@@ -274,6 +288,12 @@ def rows() -> list[dict]:
         r("corpus", n["corpus"], None,
           "Goedel-Prover proofs of Lean Workbook problems, Apache-2.0"),
         r("compiled under Lean 4.32", n["compiled"], 100.0),
+        r("excluded: no parsable theorem header", n["no_header"], None,
+          "not a declaration"),
+        r("excluded: never entered the environment", n["never_entered"], None,
+          "invisible to an axiom report"),
+        r("excluded: admitted carrying sorryAx", n["admitted_sorryax"], None,
+          "in the environment, counted by a build check"),
         r("held out, failed to compile", n["held_out"], None,
           "corpus targets Lean 4.27; version drift, not a property of the proofs"),
         r("depends on Classical.choice", n["reach"],
@@ -344,6 +364,11 @@ def build() -> str:
         invariants=[
             # The failure this page actually shipped: a row that must be a
             # total was filled with the size of a correction.
+            ("the three exclusion reasons sum to the held-out total",
+             lambda rs: _n(rs, "excluded: no parsable theorem header")
+             + _n(rs, "excluded: never entered the environment")
+             + _n(rs, "excluded: admitted carrying sorryAx")
+             == _n(rs, "held out, failed to compile")),
             ("compiled and held-out sum to the corpus",
              lambda rs: _n(rs, "compiled under Lean 4.32")
              + _n(rs, "held out, failed to compile") == _n(rs, "corpus")),
