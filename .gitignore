@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+
+# agent skills installed at project scope; not part of the site
+.agents/
+.claude/
+skills-lock.json
