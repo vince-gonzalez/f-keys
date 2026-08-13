@@ -1,0 +1,40 @@
+{
+  "revision": "7ddd528c948ae375618ad1ca476b28b9a0eec7d6",
+  "databases": {
+    "set.mm": {
+      "theorems": 47672,
+      "a_statements": 3008,
+      "assertions": 1563,
+      "incomplete_proofs": 0,
+      "entry_points_total": 617934
+    },
+    "iset.mm": {
+      "theorems": 16274,
+      "a_statements": 905,
+      "assertions": 493,
+      "incomplete_proofs": 0,
+      "entry_points_total": 161538
+    },
+    "nf.mm": {
+      "theorems": 5976,
+      "a_statements": 363,
+      "assertions": 201,
+      "incomplete_proofs": 0,
+      "entry_points_total": 32470
+    },
+    "ql.mm": {
+      "theorems": 1140,
+      "a_statements": 77,
+      "assertions": 48,
+      "incomplete_proofs": 0,
+      "entry_points_total": 6688
+    },
+    "hol.mm": {
+      "theorems": 151,
+      "a_statements": 71,
+      "assertions": 47,
+      "incomplete_proofs": 0,
+      "entry_points_total": 937
+    }
+  }
+}

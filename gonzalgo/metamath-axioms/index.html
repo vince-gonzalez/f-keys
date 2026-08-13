@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/metamath-axioms/">
+<title>The Metamath Axiom Table — every axiomatic assertion across five foundations</title>
+<meta name="description" content="All 4,424 axiomatic assertions in set.mm, iset.mm, nf.mm, ql.mm and hol.mm — ZFC, intuitionistic logic, New Foundations, quantum logic and higher-order logic — with the theorems depending on each. Classified by typecode rather than by name, and pinned to a source revision.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/metamath-axioms/">
+<meta property="og:title" content="The Metamath Axiom Table">
+<meta property="og:description" content="five foundations, one engine, one pinned revision">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Metamath Axiom Table",
+  "description": "Every $a statement across five Metamath databases spanning five foundations, with the number of that database's theorems whose proof closure reaches it and the number citing it directly. Assertions are separated from well-formedness constructors by typecode.",
+  "url": "https://f-keys.com/gonzalgo/metamath-axioms/",
+  "version": "2026-08-13",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Metamath",
+    "set.mm",
+    "iset.mm",
+    "New Foundations",
+    "quantum logic",
+    "higher-order logic",
+    "intuitionistic logic",
+    "axioms",
+    "foundations of mathematics",
+    "formal verification"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "identifier": "https://doi.org/10.5281/zenodo.21900625",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/",
+    "identifier": "https://doi.org/10.5281/zenodo.21900625"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/metamath-axioms/metamath-axioms.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/metamath-axioms/metamath-axioms.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE METAMATH AXIOM TABLE</h1>
+<p class="kicker">five foundations, one engine, one pinned revision</p>
+
+<p>Five databases, 71,213 theorems, one closure engine. The comparison is only possible because the same program reads all five; a measure computed by five different tools would be five measures.</p>
+<p>Assertions are separated from syntax constructors by <strong>typecode</strong>, not by name. A <code>$a</code> beginning <code>|-</code> asserts something; one beginning <code>class</code>, <code>wff</code>, <code>term</code> or <code>type</code> says a piece of notation is well formed and carries no mathematical content. Counting them together makes every total meaningless.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a>'s closure engine &middot; github.com/metamath/set.mm @ <code>7ddd528c948a</code>, fetched 2026-08-13 &middot; 71,213 theorems across five databases</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>database</th><th>label</th><th>role</th><th>typecode</th><th style="text-align:right">theorems depending</th><th style="text-align:right">share of db</th><th style="text-align:right">entry points</th></tr></thead>
+<tbody>
+<tr><td>set.mm</td><td>ax-mp</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>47,613</td><td class='num'>99.88%</td><td class='num'>5,317</td></tr>
+<tr><td>set.mm</td><td>wi</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>47,611</td><td class='num'>99.87%</td><td class='num'>11,509</td></tr>
+<tr><td>set.mm</td><td>ax-1</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>47,500</td><td class='num'>99.64%</td><td class='num'>164</td></tr>
+<tr><td>set.mm</td><td>ax-2</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>47,479</td><td class='num'>99.6%</td><td class='num'>13</td></tr>
+<tr><td>set.mm</td><td>wn</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>47,327</td><td class='num'>99.28%</td><td class='num'>8,298</td></tr>
+<tr><td>set.mm</td><td>ax-3</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>47,272</td><td class='num'>99.16%</td><td class='num'>2</td></tr>
+<tr><td>set.mm</td><td>wb</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>47,090</td><td class='num'>98.78%</td><td class='num'>13,206</td></tr>
+<tr><td>set.mm</td><td>df-bi</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>47,087</td><td class='num'>98.77%</td><td class='num'>6</td></tr>
+<tr><td>set.mm</td><td>wa</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>45,916</td><td class='num'>96.32%</td><td class='num'>27,053</td></tr>
+<tr><td>set.mm</td><td>df-an</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>45,887</td><td class='num'>96.26%</td><td class='num'>28</td></tr>
+<tr><td>set.mm</td><td>wal</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>44,872</td><td class='num'>94.13%</td><td class='num'>2,818</td></tr>
+<tr><td>set.mm</td><td>ax-gen</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>44,589</td><td class='num'>93.53%</td><td class='num'>148</td></tr>
+<tr><td>set.mm</td><td>ax-4</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>44,553</td><td class='num'>93.46%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>cv</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>44,462</td><td class='num'>93.27%</td><td class='num'>23,468</td></tr>
+<tr><td>set.mm</td><td>wex</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>44,413</td><td class='num'>93.16%</td><td class='num'>3,684</td></tr>
+<tr><td>set.mm</td><td>df-ex</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>44,367</td><td class='num'>93.07%</td><td class='num'>60</td></tr>
+<tr><td>set.mm</td><td>wceq</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>44,314</td><td class='num'>92.96%</td><td class='num'>28,563</td></tr>
+<tr><td>set.mm</td><td>ax-5</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>44,119</td><td class='num'>92.55%</td><td class='num'>81</td></tr>
+<tr><td>set.mm</td><td>ax-6</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>43,911</td><td class='num'>92.11%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>ax-7</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>43,839</td><td class='num'>91.96%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>wcel</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>43,217</td><td class='num'>90.65%</td><td class='num'>35,918</td></tr>
+<tr><td>set.mm</td><td>ax-9</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>42,450</td><td class='num'>89.05%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>ax-ext</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>42,377</td><td class='num'>88.89%</td><td class='num'>7</td></tr>
+<tr><td>set.mm</td><td>df-cleq</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>42,363</td><td class='num'>88.86%</td><td class='num'>2</td></tr>
+<tr><td>set.mm</td><td>wsb</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>42,256</td><td class='num'>88.64%</td><td class='num'>513</td></tr>
+<tr><td>set.mm</td><td>df-sb</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>42,243</td><td class='num'>88.61%</td><td class='num'>2</td></tr>
+<tr><td>set.mm</td><td>ax-8</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>42,172</td><td class='num'>88.46%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>df-clel</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>42,097</td><td class='num'>88.31%</td><td class='num'>2</td></tr>
+<tr><td>set.mm</td><td>wtru</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>42,052</td><td class='num'>88.21%</td><td class='num'>642</td></tr>
+<tr><td>set.mm</td><td>df-tru</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>42,022</td><td class='num'>88.15%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>cab</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>41,899</td><td class='num'>87.89%</td><td class='num'>1,922</td></tr>
+<tr><td>set.mm</td><td>df-clab</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>41,891</td><td class='num'>87.87%</td><td class='num'>69</td></tr>
+<tr><td>set.mm</td><td>wo</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>41,266</td><td class='num'>86.56%</td><td class='num'>3,618</td></tr>
+<tr><td>set.mm</td><td>df-or</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>41,257</td><td class='num'>86.54%</td><td class='num'>76</td></tr>
+<tr><td>set.mm</td><td>cvv</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>41,031</td><td class='num'>86.07%</td><td class='num'>9,609</td></tr>
+<tr><td>set.mm</td><td>df-v</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>40,756</td><td class='num'>85.49%</td><td class='num'>3</td></tr>
+<tr><td>set.mm</td><td>wss</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>40,166</td><td class='num'>84.25%</td><td class='num'>11,312</td></tr>
+<tr><td>set.mm</td><td>df-ss</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>40,099</td><td class='num'>84.11%</td><td class='num'>108</td></tr>
+<tr><td>set.mm</td><td>w3a</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>39,727</td><td class='num'>83.33%</td><td class='num'>10,467</td></tr>
+<tr><td>set.mm</td><td>df-3an</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>39,703</td><td class='num'>83.28%</td><td class='num'>508</td></tr>
+<tr><td>set.mm</td><td>csn</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>39,334</td><td class='num'>82.51%</td><td class='num'>6,798</td></tr>
+<tr><td>set.mm</td><td>cdif</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>39,296</td><td class='num'>82.43%</td><td class='num'>3,696</td></tr>
+<tr><td>set.mm</td><td>df-dif</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>39,276</td><td class='num'>82.39%</td><td class='num'>4</td></tr>
+<tr><td>set.mm</td><td>wfal</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>39,251</td><td class='num'>82.34%</td><td class='num'>171</td></tr>
+<tr><td>set.mm</td><td>cun</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>39,223</td><td class='num'>82.28%</td><td class='num'>2,929</td></tr>
+<tr><td>set.mm</td><td>df-un</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>39,217</td><td class='num'>82.26%</td><td class='num'>6</td></tr>
+<tr><td>set.mm</td><td>df-fal</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>39,214</td><td class='num'>82.26%</td><td class='num'>8</td></tr>
+<tr><td>set.mm</td><td>c0</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>39,203</td><td class='num'>82.23%</td><td class='num'>6,448</td></tr>
+<tr><td>set.mm</td><td>crab</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>39,201</td><td class='num'>82.23%</td><td class='num'>3,709</td></tr>
+<tr><td>set.mm</td><td>df-rab</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>39,200</td><td class='num'>82.23%</td><td class='num'>193</td></tr>
+<tr><td>set.mm</td><td>df-sn</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>39,190</td><td class='num'>82.21%</td><td class='num'>55</td></tr>
+<tr><td>set.mm</td><td>df-nul</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>39,075</td><td class='num'>81.97%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>cpr</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>38,916</td><td class='num'>81.63%</td><td class='num'>2,365</td></tr>
+<tr><td>set.mm</td><td>df-pr</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>38,878</td><td class='num'>81.55%</td><td class='num'>128</td></tr>
+<tr><td>set.mm</td><td>cop</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>38,738</td><td class='num'>81.26%</td><td class='num'>4,180</td></tr>
+<tr><td>set.mm</td><td>wral</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>38,593</td><td class='num'>80.96%</td><td class='num'>9,676</td></tr>
+<tr><td>set.mm</td><td>df-ral</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>38,510</td><td class='num'>80.78%</td><td class='num'>257</td></tr>
+<tr><td>set.mm</td><td>cif</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>38,472</td><td class='num'>80.7%</td><td class='num'>2,314</td></tr>
+<tr><td>set.mm</td><td>df-if</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>38,466</td><td class='num'>80.69%</td><td class='num'>5</td></tr>
+<tr><td>set.mm</td><td>df-op</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>38,375</td><td class='num'>80.5%</td><td class='num'>2</td></tr>
+<tr><td>set.mm</td><td>wbr</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>38,340</td><td class='num'>80.42%</td><td class='num'>15,127</td></tr>
+<tr><td>set.mm</td><td>df-br</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>38,094</td><td class='num'>79.91%</td><td class='num'>486</td></tr>
+<tr><td>set.mm</td><td>cin</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>37,891</td><td class='num'>79.48%</td><td class='num'>4,422</td></tr>
+<tr><td>set.mm</td><td>df-in</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>37,864</td><td class='num'>79.43%</td><td class='num'>11</td></tr>
+<tr><td>set.mm</td><td>wrex</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>37,850</td><td class='num'>79.4%</td><td class='num'>7,513</td></tr>
+<tr><td>set.mm</td><td>df-rex</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>37,773</td><td class='num'>79.24%</td><td class='num'>428</td></tr>
+<tr><td>set.mm</td><td>copab</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>37,308</td><td class='num'>78.26%</td><td class='num'>797</td></tr>
+<tr><td>set.mm</td><td>df-opab</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>37,307</td><td class='num'>78.26%</td><td class='num'>44</td></tr>
+<tr><td>set.mm</td><td>ax-sep</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>37,213</td><td class='num'>78.06%</td><td class='num'>15</td></tr>
+<tr><td>set.mm</td><td>ax-12</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>36,964</td><td class='num'>77.54%</td><td class='num'>4</td></tr>
+<tr><td>set.mm</td><td>ax-pr</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>36,879</td><td class='num'>77.36%</td><td class='num'>5</td></tr>
+<tr><td>set.mm</td><td>cuni</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>36,669</td><td class='num'>76.92%</td><td class='num'>2,767</td></tr>
+<tr><td>set.mm</td><td>df-uni</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>36,627</td><td class='num'>76.83%</td><td class='num'>6</td></tr>
+<tr><td>set.mm</td><td>wnf</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>36,608</td><td class='num'>76.79%</td><td class='num'>267</td></tr>
+<tr><td>set.mm</td><td>df-nf</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>36,606</td><td class='num'>76.79%</td><td class='num'>19</td></tr>
+<tr><td>set.mm</td><td>cxp</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>36,400</td><td class='num'>76.36%</td><td class='num'>4,373</td></tr>
+<tr><td>set.mm</td><td>ax-10</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>36,213</td><td class='num'>75.96%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>df-xp</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>36,164</td><td class='num'>75.86%</td><td class='num'>60</td></tr>
+<tr><td>set.mm</td><td>ax-11</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,964</td><td class='num'>75.44%</td><td class='num'>22</td></tr>
+<tr><td>set.mm</td><td>cdm</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>35,879</td><td class='num'>75.26%</td><td class='num'>4,837</td></tr>
+<tr><td>set.mm</td><td>ccnv</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>35,814</td><td class='num'>75.13%</td><td class='num'>2,829</td></tr>
+<tr><td>set.mm</td><td>df-dm</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,709</td><td class='num'>74.91%</td><td class='num'>15</td></tr>
+<tr><td>set.mm</td><td>df-cnv</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,703</td><td class='num'>74.89%</td><td class='num'>14</td></tr>
+<tr><td>set.mm</td><td>wne</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>35,594</td><td class='num'>74.66%</td><td class='num'>8,502</td></tr>
+<tr><td>set.mm</td><td>wrel</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>35,500</td><td class='num'>74.47%</td><td class='num'>1,071</td></tr>
+<tr><td>set.mm</td><td>df-rel</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,488</td><td class='num'>74.44%</td><td class='num'>83</td></tr>
+<tr><td>set.mm</td><td>df-ne</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,449</td><td class='num'>74.36%</td><td class='num'>379</td></tr>
+<tr><td>set.mm</td><td>cfv</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>35,326</td><td class='num'>74.1%</td><td class='num'>24,816</td></tr>
+<tr><td>set.mm</td><td>cio</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>35,291</td><td class='num'>74.03%</td><td class='num'>258</td></tr>
+<tr><td>set.mm</td><td>df-iota</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,279</td><td class='num'>74.0%</td><td class='num'>11</td></tr>
+<tr><td>set.mm</td><td>wmo</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>35,139</td><td class='num'>73.71%</td><td class='num'>440</td></tr>
+<tr><td>set.mm</td><td>df-mo</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,113</td><td class='num'>73.66%</td><td class='num'>1</td></tr>
+<tr><td>set.mm</td><td>df-fv</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>35,071</td><td class='num'>73.57%</td><td class='num'>26</td></tr>
+<tr><td>set.mm</td><td>ccom</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>34,812</td><td class='num'>73.02%</td><td class='num'>2,155</td></tr>
+<tr><td>set.mm</td><td>df-co</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>34,738</td><td class='num'>72.87%</td><td class='num'>20</td></tr>
+<tr><td>set.mm</td><td>df-nfc</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>34,720</td><td class='num'>72.83%</td><td class='num'>15</td></tr>
+<tr><td>set.mm</td><td>wnfc</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>34,720</td><td class='num'>72.83%</td><td class='num'>145</td></tr>
+<tr><td>set.mm</td><td>weu</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>34,697</td><td class='num'>72.78%</td><td class='num'>495</td></tr>
+<tr><td>set.mm</td><td>df-eu</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>34,691</td><td class='num'>72.77%</td><td class='num'>63</td></tr>
+<tr><td>set.mm</td><td>cid</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>34,627</td><td class='num'>72.64%</td><td class='num'>1,307</td></tr>
+<tr><td>set.mm</td><td>wfun</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>34,393</td><td class='num'>72.15%</td><td class='num'>1,814</td></tr>
+<tr><td>set.mm</td><td>df-id</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>34,308</td><td class='num'>71.97%</td><td class='num'>19</td></tr>
+<tr><td>set.mm</td><td>df-fun</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>34,222</td><td class='num'>71.79%</td><td class='num'>9</td></tr>
+<tr><td>set.mm</td><td>ax-nul</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>34,083</td><td class='num'>71.49%</td><td class='num'>13</td></tr>
+<tr><td>set.mm</td><td>crn</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>34,065</td><td class='num'>71.46%</td><td class='num'>3,887</td></tr>
+<tr><td>set.mm</td><td>df-rn</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>33,858</td><td class='num'>71.02%</td><td class='num'>83</td></tr>
+<tr><td>set.mm</td><td>cres</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>33,103</td><td class='num'>69.44%</td><td class='num'>3,491</td></tr>
+<tr><td>set.mm</td><td>df-res</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>33,064</td><td class='num'>69.36%</td><td class='num'>59</td></tr>
+<tr><td>set.mm</td><td>cmpt</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>32,721</td><td class='num'>68.64%</td><td class='num'>5,170</td></tr>
+<tr><td>set.mm</td><td>df-mpt</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>32,684</td><td class='num'>68.56%</td><td class='num'>81</td></tr>
+<tr><td>set.mm</td><td>cpw</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>32,642</td><td class='num'>68.47%</td><td class='num'>2,648</td></tr>
+<tr><td>set.mm</td><td>wsbc</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>32,638</td><td class='num'>68.46%</td><td class='num'>716</td></tr>
+<tr><td>set.mm</td><td>df-sbc</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>32,617</td><td class='num'>68.42%</td><td class='num'>41</td></tr>
+<tr><td>set.mm</td><td>df-pw</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>32,543</td><td class='num'>68.26%</td><td class='num'>17</td></tr>
+<tr><td>set.mm</td><td>wfn</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>32,501</td><td class='num'>68.18%</td><td class='num'>3,259</td></tr>
+<tr><td>set.mm</td><td>df-fn</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>32,284</td><td class='num'>67.72%</td><td class='num'>90</td></tr>
+<tr><td>set.mm</td><td>cima</td><td class='found'>syntax constructor</td><td class='found'>class</td><td class='num'>32,058</td><td class='num'>67.25%</td><td class='num'>2,658</td></tr>
+<tr><td>set.mm</td><td>df-ima</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>32,002</td><td class='num'>67.13%</td><td class='num'>196</td></tr>
+<tr><td>set.mm</td><td>wf</td><td class='found'>syntax constructor</td><td class='found'>wff</td><td class='num'>31,785</td><td class='num'>66.67%</td><td class='num'>6,055</td></tr>
+<tr><td>set.mm</td><td>df-f</td><td class='found'>assertion</td><td class='found'>|-</td><td class='num'>31,715</td><td class='num'>66.53%</td><td class='num'>138</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Showing the first 120 of 4,424 rows. Ordered by database, then by dependents. The full set is in the JSON and the CSV.</p>
+<p class="note"><em>dependents</em> counts theorems in that database whose proof closure reaches the statement, including everything inherited. <em>entry points</em> counts theorems whose own proof cites it directly. <em>share of db</em> is dependents over that database's own theorem count, so rows from different databases are comparable.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="metamath-axioms.json">metamath-axioms.json</a> &middot;
+<a href="metamath-axioms.csv">metamath-axioms.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-13
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
+resolves to the current deposit.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>pip install gonzalgo
+gonzalgo mm set.mm iset.mm nf.mm ql.mm hol.mm</pre>
+<p class="note">Databases from github.com/metamath/set.mm at <code>7ddd528c948a</code>. Method: <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>.</p>
+
+<h2>Not one incomplete proof, anywhere</h2>
+<p>Across all five databases and 71,213 theorems, the number whose proof contains a <code>?</code> step is zero. Metamath marks an incomplete proof explicitly, so this is a check rather than an assumption, and it is the claim most worth making about a formal library.</p>
+
+<h2>Why the typecode and not the name</h2>
+<p><code>set.mm</code> names its axioms <code>ax-</code> and its definitions <code>df-</code>, and that rule agrees with the typecode on all 3,008 of its <code>$a</code> statements &mdash; checked, not assumed. It is still a house style. <code>ql.mm</code> and <code>hol.mm</code> use <code>term</code> and <code>type</code> typecodes with different naming, and a set.mm-trained prefix rule misclassifies them outright.</p>
+<p>This is the general point about measuring several libraries with one instrument: the convention you learned from the biggest one is not a property of the format.</p>
+
+<h2>Why the revision is on the page</h2>
+<p>These databases move. Measured today, <code>iset.mm</code> has 38 more theorems and <code>set.mm</code> four more <code>$a</code> statements than when the earlier tables here were built, and those tables recorded no revision &mdash; so their figures cannot be reproduced exactly, only approximately.</p>
+<p>Rule R1 of the <a href="/gonzalgo/kernel-trust/">Kernel Trust Profile</a> exists for this: every number must be derivable by a third party from a named revision. This table names one.</p>
+
+<h2>The foundations, side by side</h2>
+<p><strong>set.mm</strong> 47,672 theorems, 1563 assertions, 3008 $a &middot; <strong>iset.mm</strong> 16,274 theorems, 493 assertions, 905 $a &middot; <strong>nf.mm</strong> 5,976 theorems, 201 assertions, 363 $a &middot; <strong>ql.mm</strong> 1,140 theorems, 48 assertions, 77 $a &middot; <strong>hol.mm</strong> 151 theorems, 47 assertions, 71 $a</p>
+<p>The largest single dependency in each: <code>ax-mp</code> at 99.88% of set.mm, <code>ax-mp</code> at 99.74% of iset.mm, <code>ax-mp</code> at 99.77% of nf.mm, <code>ax-r2</code> at 99.56% of ql.mm, <code>ax-cb1</code> at 81.46% of hol.mm</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/metamath-axioms/">f-keys.com/gonzalgo/metamath-axioms/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>
