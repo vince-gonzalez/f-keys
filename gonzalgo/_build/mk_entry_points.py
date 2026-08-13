@@ -59,7 +59,7 @@ idx = Index(
     lede=[
         "An axiom is cited directly by a few theorems and inherited by many. The "
         "count of direct citations is the entry points, and dividing by the library's "
-        "size gives a figure that means the same thing in a database of 47,000 "
+        "size gives a figure that means the same thing in a database of 47,621 "
         "theorems and one of 151.",
         "The three large databases land close together — "
         + ", ".join(f"{r['entries_per_theorem']:.4f} ({r['database']})" for r in BIG)

@@ -215,7 +215,7 @@ axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 
 <p>Axioms come from <code>Lean.collectAxioms</code>, the same call behind <code>#print axioms</code>, run per theorem inside the environment. Statement axioms are the union over the constants appearing in the theorem&#x27;s type.</p>
 
-<p>Cross-checked against an independent route: serialising the whole 790,000-declaration environment and recomputing reachability outside Lean gives the same answer on the same subset, and that graph was itself traversed in both directions returning identical sets. The kernel&#x27;s own bookkeeping is what is reported here.</p>
+<p>Cross-checked against an independent route: serialising the whole 790,171-declaration environment and recomputing reachability outside Lean gives the same answer on the same subset, and that graph was itself traversed in both directions returning identical sets. The kernel&#x27;s own bookkeeping is what is reported here.</p>
 
 <p>Controls fixed before measuring: a <code>Nat</code> goal closed by <code>omega</code> must show choice in the proof and not the statement, a structural proof must show nothing, and a goal over the reals must show choice in both. All three behave as required.</p>
 

@@ -240,10 +240,29 @@ def update_sitemap(metas: list[dict]) -> None:
     print(f"sitemap: {len(wanted)} index URLs present, {len(locs)} total")
 
 
+def verify_prose() -> None:
+    """Every number in the prose must be derivable from the rows or declared
+    with a source. Runs last, so a build that emits an unbacked figure says so
+    instead of publishing it quietly."""
+    import subprocess
+    r = subprocess.run([sys.executable, str(HERE / "verify_claims.py"), "--strict"],
+                       capture_output=True, text=True, encoding="utf-8")
+    tail = [l for l in (r.stdout or "").splitlines() if "numeric claims" in l]
+    print()
+    print(f"claims: {tail[0].strip() if tail else 'no output'}")
+    if r.returncode:
+        for l in (r.stdout or "").splitlines():
+            if "FLAG" in l:
+                print("  " + l.strip())
+        raise SystemExit("  build stopped: a published figure is neither "
+                         "derivable nor cited")
+
+
 if __name__ == "__main__":
     metas = build_indexes()
     build_hub(metas)
     update_sitemap(metas)
+    verify_prose()
     print("\nsummary")
     for m in metas:
         print(f"  {m['url']}  {m['rows']:>6,} rows  v{m['version']}")
