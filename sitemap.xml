@@ -104,9 +104,9 @@
   <url><loc>https://f-keys.com/gonzalgo/cleanable/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/cleanable/cleanable.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/cleanable/cleanable.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/setmm-axioms/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/setmm-axioms/setmm-axioms.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://f-keys.com/gonzalgo/setmm-axioms/setmm-axioms.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/setmm-axioms/</loc><lastmod>2026-08-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/setmm-axioms/setmm-axioms.json</loc><lastmod>2026-08-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/setmm-axioms/setmm-axioms.csv</loc><lastmod>2026-08-13</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/site-diagnosis/</loc><lastmod>2026-08-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.json</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/site-diagnosis/site-diagnosis.csv</loc><lastmod>2026-08-12</lastmod><priority>0.7</priority></url>
@@ -119,4 +119,7 @@
   <url><loc>https://f-keys.com/gonzalgo/kernel-trust/</loc><lastmod>2026-08-13</lastmod><priority>0.9</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json</loc><lastmod>2026-08-13</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/gonzalgo/kernel-trust/SPEC.md</loc><lastmod>2026-08-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/module-spend/</loc><lastmod>2026-08-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/module-spend/module-spend.json</loc><lastmod>2026-08-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/gonzalgo/module-spend/module-spend.csv</loc><lastmod>2026-08-13</lastmod><priority>0.7</priority></url>
 </urlset>

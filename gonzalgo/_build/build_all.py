@@ -34,6 +34,7 @@ import mk_setmm_axioms  # noqa: E402
 import mk_site_diagnosis  # noqa: E402
 import mk_choice_strength  # noqa: E402
 import mk_version_delta  # noqa: E402
+import mk_module_spend  # noqa: E402
 import buildnote  # noqa: E402
 
 HUB = SITE / "gonzalgo" / "data"
@@ -52,7 +53,8 @@ def build_indexes() -> list[dict]:
              indexlib.build(mk_setmm_axioms.idx),
              indexlib.build(mk_site_diagnosis.idx),
              indexlib.build(mk_choice_strength.idx),
-             indexlib.build(mk_version_delta.idx)]
+             indexlib.build(mk_version_delta.idx),
+             indexlib.build(mk_module_spend.idx)]
 
     # generated-proofs keeps its own hand-written page; only its data comes
     # through indexlib, so build it the way that page expects and take the
