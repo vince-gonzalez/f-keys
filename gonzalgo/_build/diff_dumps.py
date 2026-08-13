@@ -36,19 +36,40 @@ def h(s: str) -> int:
 
 
 def load(path: Path):
-    """name -> (kind, module, stmt_hash, proof_hash). Streamed, never held whole."""
+    """name -> (kind, module, stmt_hash, proof_hash). Streamed, never held whole.
+
+    The module column is optional. The extractor shipped with the package writes
+    four columns; the one in the measured project appends a fifth and says in its
+    own comment that readers taking the first four are unaffected. Requiring five
+    made a four-column dump parse as zero rows, and a differ reports that as the
+    entire library having been deleted — so the count of unparseable rows is
+    tracked and an empty parse is fatal rather than quiet."""
     decls: dict[str, tuple] = {}
     axioms: set[str] = set()
+    malformed = 0
+    has_module = True
     with open(path, encoding="utf-8", errors="replace") as f:
         for line in f:
-            p = line.rstrip("\n").split("\t")
-            if len(p) < 5:
+            p = line.rstrip("\n").rstrip("\r").split("\t")
+            if len(p) < 4:
+                malformed += 1
                 continue
-            kind, name, stmt, proof, module = p[0], p[1], p[2], p[3], p[4]
+            kind, name, stmt, proof = p[0], p[1], p[2], p[3]
+            if len(p) < 5:
+                has_module = False
+                module = None
+            else:
+                module = p[4]
             decls[name] = (kind, module, h(stmt), h(proof))
             if kind == "A":
                 axioms.add(name)
-    return decls, axioms
+    if not decls:
+        raise SystemExit(f"  {path.name}: no parseable rows "
+                         f"({malformed:,} malformed). Wrong file, or a dump "
+                         f"from an extractor with a different column layout.")
+    if malformed:
+        print(f"    {malformed:,} malformed rows skipped in {path.name}")
+    return decls, axioms, has_module
 
 
 def main() -> None:
@@ -61,10 +82,10 @@ def main() -> None:
     args = ap.parse_args()
 
     print(f"  reading {args.old_label} ...")
-    old, old_ax = load(Path(args.old))
+    old, old_ax, old_mod = load(Path(args.old))
     print(f"    {len(old):,} declarations, {len(old_ax)} axioms")
     print(f"  reading {args.new_label} ...")
-    new, new_ax = load(Path(args.new))
+    new, new_ax, new_mod = load(Path(args.new))
     print(f"    {len(new):,} declarations, {len(new_ax)} axioms")
 
     old_names, new_names = set(old), set(new)
@@ -73,7 +94,10 @@ def main() -> None:
 
     stmt_changed = {n for n in kept if old[n][2] != new[n][2]}
     proof_changed = {n for n in kept if old[n][3] != new[n][3]}
-    moved = {n for n in kept if old[n][1] != new[n][1]}
+    # Only meaningful when both dumps carry the module column.
+    both_have_modules = old_mod and new_mod
+    moved = ({n for n in kept if old[n][1] != new[n][1]}
+             if both_have_modules else set())
     # A declaration whose statement moved is a different theorem wearing the
     # same name; one whose proof moved is the same claim, reproved.
     proof_only = proof_changed - stmt_changed
@@ -92,8 +116,11 @@ def main() -> None:
     row("declarations", len(old), len(new))
     for k in ("T", "D", "O", "A"):
         row(KIND[k] + "s", ko[k], kn[k])
-    row("modules", len({v[1] for v in old.values()}),
-        len({v[1] for v in new.values()}))
+    if both_have_modules:
+        row("modules", len({v[1] for v in old.values()}),
+            len({v[1] for v in new.values()}))
+    else:
+        print("    note: one dump has no module column; module rows omitted")
 
     rows.append({"quantity": "declarations added", args.old_label: None,
                  "delta": len(added), args.new_label: len(added),
@@ -107,8 +134,8 @@ def main() -> None:
          "same name, different statement dependencies — a different claim"),
         ("reproved only", proof_only,
          "same statement, different proof dependencies — same claim, new proof"),
-        ("moved module", moved, "same name, relocated"),
-    ):
+    ) + ((("moved module", moved, "same name, relocated"),)
+         if both_have_modules else ()):
         rows.append({"quantity": label, args.old_label: None,
                      args.new_label: None, "delta": len(s),
                      "pct_change": (round(100 * len(s) / len(kept), 2)
