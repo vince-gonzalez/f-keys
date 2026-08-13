@@ -25,6 +25,9 @@ from pathlib import Path
 
 from indexlib import BASE, CSS, LICENSE, ORCID, SERIES_DOI, check_fonts
 
+# Concept DOI: always resolves to the current version of the spec.
+KTP_DOI = "https://doi.org/10.5281/zenodo.21913736"
+
 HERE = Path(__file__).resolve().parent
 SITE = HERE.parents[1]
 KTP = Path(r"C:\Users\Admin\OneDrive\Desktop\universal-cover\ktp")
@@ -141,6 +144,7 @@ def main() -> None:
         "author": {"@type": "Person", "name": "Vincent Gonzalez",
                    "identifier": ORCID},
         "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+        "identifier": KTP_DOI,
         "citation": SERIES_DOI,
         "keywords": ["formal verification", "Lean 4", "Metamath",
                      "trusted computing base", "specification", "provenance",
@@ -194,7 +198,8 @@ h3 { font-family:'VT323',monospace; font-weight:400; font-size:1.35rem; color:va
 <p class="series">
 <a href="SPEC.md">SPEC.md</a> &middot;
 <a href="{schema_src.name}">JSON Schema</a> &middot;
-{len(profiles)} worked profiles below &middot; CC-BY-4.0
+{len(profiles)} worked profiles below &middot; CC-BY-4.0 &middot;
+cite as <a href="{KTP_DOI}">10.5281/zenodo.21913736</a>
 </p>
 
 {md(spec)}
@@ -231,6 +236,10 @@ different measurement is what R1 forbids.
 
 <footer>
   <p>
+    Cite this specification: Gonzalez, V. (2026). <em>Kernel Trust Profile 0.1</em>.
+    Zenodo. <a href="{KTP_DOI}">10.5281/zenodo.21913736</a>
+  </p>
+  <p style="margin-top:.8rem;">
     Method and definitions: Gonzalez, V. (2026).
     <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo.
     <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>

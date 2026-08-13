@@ -111,7 +111,13 @@ The set.mm Axiom Table: https://f-keys.com/gonzalgo/setmm-axioms/
   (99.9%), ax-gen by 44,537. 213 statements are reached by no theorem at all, 8 of
   them axioms. The 1,447 "axioms used" reported for set.mm decomposes here: it is the
   118 axioms plus 1,329 definitions that at least one theorem reaches, excluding
-  syntax constructors and everything unreached. Machine-readable: setmm-axioms.json,
+  syntax constructors and everything unreached. Now also carries ENTRY POINTS per
+  statement -- theorems whose own proof names it directly rather than reaching it
+  through another -- which reproduces the paper's 17,898 for set.mm exactly when
+  restricted to axioms and definitions. The extreme case: ax-4 is cited in exactly
+  ONE proof and reached by 44,501 theorems, 93.4% of the library. The set that
+  uses an axiom and the set that depends on it are almost disjoint, and only one
+  is visible by inspection. Machine-readable: setmm-axioms.json,
   setmm-axioms.csv (CC-BY-4.0).
 
 The Site Diagnosis Table: https://f-keys.com/gonzalgo/site-diagnosis/

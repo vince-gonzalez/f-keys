@@ -30,9 +30,14 @@
     "version": "2026-08-12"
   },
   "generated-proofs": {
-    "history": [],
-    "sha256": "906a39491ab2be7a06c7370cd525e649b9644351c8387abf883bd8cd5ee01987",
-    "version": "2026-08-11"
+    "history": [
+      {
+        "sha256": "906a39491ab2be7a06c7370cd525e649b9644351c8387abf883bd8cd5ee01987",
+        "version": "2026-08-11"
+      }
+    ],
+    "sha256": "49d1fd9ac988a7ad1cd1b205a120e494518d693de6681e9fa8c72afb0094a2a9",
+    "version": "2026-08-13"
   },
   "kernel-index": {
     "history": [],
@@ -40,9 +45,14 @@
     "version": "2026-08-05"
   },
   "setmm-axioms": {
-    "history": [],
-    "sha256": "72e4a28dce786db0fff5de715447a23c965b3e0b59024653e995e2e05e92585d",
-    "version": "2026-08-12"
+    "history": [
+      {
+        "sha256": "72e4a28dce786db0fff5de715447a23c965b3e0b59024653e995e2e05e92585d",
+        "version": "2026-08-12"
+      }
+    ],
+    "sha256": "9d453a5edd7a2f333abd726827d4ca462496931cd10feca226622c336be40320",
+    "version": "2026-08-13"
   },
   "site-diagnosis": {
     "history": [],

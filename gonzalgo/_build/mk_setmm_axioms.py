@@ -61,12 +61,21 @@ idx = Index(
         Column("role", "role", dim=True),
         Column("dependents", "theorems depending", align="right"),
         Column("share_of_library_pct", "share of library", align="right", pct=True),
+        Column("entry_points", "entry points", align="right"),
+        Column("amplification", "amplification", align="right", fmt="{:,.1f}"),
     ],
     rows=rows,
     row_limit=120,
     row_limit_note="The tail is mostly definitions used by a handful of theorems.",
     measured={"Metamath": "set.mm", "theorems": THEOREMS},
     notes=(
+        "<em>entry points</em> counts theorems whose own proof names this "
+        "statement directly, as opposed to reaching it through another theorem. "
+        "<em>amplification</em> is dependents per entry point, left blank where "
+        "nothing cites it directly. Do not rank on amplification &mdash; it is a "
+        "property of how the library was factored, not of the mathematics, and "
+        "the <a href=\"/gonzalgo/entry-points/\">Entry-Point Table</a> gives the "
+        "argument. "
         "<em>theorems depending</em> counts theorems whose proof closure reaches "
         "this statement, so it includes everything inherited through other "
         "theorems rather than only direct citations. A count of 0 means no theorem "
@@ -91,6 +100,14 @@ idx = Index(
             "state a principle for completeness, or keep one for a development that "
             "was never built out — but it is the kind of fact that is easier to "
             "measure than to remember.",
+        ]),
+        ("One proof step, ninety-three percent of the library", [
+            "<code>ax-4</code> is cited directly in exactly one proof and reached "
+            "by 44,501 theorems &mdash; 93.4% of set.mm. That is the whole case "
+            "for computing provenance rather than reading a changelog: the set of "
+            "theorems that <em>use</em> an axiom and the set that <em>depend</em> "
+            "on it are almost disjoint, and only one of them is visible by "
+            "inspection.",
         ]),
         ("Where the 1,447 comes from", [
             "The <a href=\"/gonzalgo/entry-points/\">Entry-Point Table</a> reports "
@@ -134,6 +151,20 @@ idx = Index(
          lambda rs: sum(1 for r in rs if r["dependents"] == 0) == 213
          and sum(1 for r in rs if r["dependents"] == 0
                  and r["role"] == "axiom") == 8),
+        ("entry points on axioms and definitions total the 17,898 the paper reports",
+         lambda rs: sum(r["entry_points"] for r in rs
+                        if r["role"] in ("axiom", "definition")) == 17898),
+        ("ax-4 is cited once and reached by 44,501",
+         lambda rs: (lambda r: r["entry_points"] == 1
+                     and r["dependents"] == 44501)(
+             next(r for r in rs if r["label"] == "ax-4"))),
+        ("amplification is present exactly where something cites it",
+         lambda rs: all((r["amplification"] is not None) == (r["entry_points"] > 0)
+                        for r in rs)),
+        ("amplification recomputes as dependents over entry points",
+         lambda rs: all(abs(round(r["dependents"] / r["entry_points"], 1)
+                            - r["amplification"]) <= 0.05
+                        for r in rs if r["entry_points"])),
         ("ax-mp heads the table at 47,562",
          lambda rs: rs[0]["label"] == "ax-mp" and rs[0]["dependents"] == 47562),
     ],
