@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/module-spend/">
+<title>The Module Spend Table — where Mathlib spends the axiom of choice, by file</title>
+<meta name="description" content="3,261 of Mathlib's 10,599 modules contain a declaration whose proof names a choice primitive directly. 18,109 declarations spend, and only 209 of them cite Classical.choice itself — the rest arrive through byContradiction and propDecidable.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/module-spend/">
+<meta property="og:title" content="The Module Spend Table">
+<meta property="og:description" content="which files spend the axiom, and on which primitive">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Module Spend Table",
+  "description": "Modules containing at least one declaration whose own proof term names a choice primitive directly, with the count broken down by primitive. Spending, as opposed to reach: a module with no direct spend can still be full of theorems that depend on choice through what they import.",
+  "url": "https://f-keys.com/gonzalgo/module-spend/",
+  "version": "2026-08-13",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Lean 4",
+    "Mathlib",
+    "axiom of choice",
+    "Classical.propDecidable",
+    "excluded middle",
+    "module",
+    "formal verification",
+    "provenance",
+    "constructive mathematics"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "identifier": "https://doi.org/10.5281/zenodo.21900625",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/",
+    "identifier": "https://doi.org/10.5281/zenodo.21900625"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/module-spend/module-spend.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/module-spend/module-spend.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE MODULE SPEND TABLE</h1>
+<p class="kicker">which files spend the axiom, and on which primitive</p>
+
+<p>A library-wide figure names no file. 18,109 declarations across 3,261 of Mathlib's 10,599 modules name a choice primitive in their own proof, and this is where they are.</p>
+<p>Only 209 of those cite <code>Classical.choice</code> itself. 9,442 go through <code>Classical.byContradiction</code> and 8,440 through <code>Classical.propDecidable</code> — excluded middle and the decidability fallback. A repair aimed at one does nothing for the others, which is why they are counted apart.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.33.0 with Mathlib v4.33.0 &middot; one streamed pass over 795,218 declarations, no closure computed</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>module</th><th>library</th><th style="text-align:right">declarations</th><th style="text-align:right">spends</th><th style="text-align:right">rate</th><th style="text-align:right">byContradiction</th><th style="text-align:right">propDecidable</th><th style="text-align:right">choice</th></tr></thead>
+<tbody>
+<tr><td>Batteries.Data.List.Lemmas</td><td class='found'>Batteries</td><td class='num'>881</td><td class='num'><strong>168</strong></td><td class='num'>19.1%</td><td class='num'>166</td><td class='num'>2</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Topology.EMetricSpace.BoundedVariation</td><td class='found'>Mathlib</td><td class='num'>268</td><td class='num'><strong>108</strong></td><td class='num'>40.3%</td><td class='num'>104</td><td class='num'>2</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.SpectralObject.HasSpectralSequence</td><td class='found'>Mathlib</td><td class='num'>291</td><td class='num'><strong>85</strong></td><td class='num'>29.2%</td><td class='num'>85</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.AlgebraicTopology.SimplexCategory.DeltaZeroIter</td><td class='found'>Mathlib</td><td class='num'>251</td><td class='num'><strong>85</strong></td><td class='num'>33.9%</td><td class='num'>85</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.BigOperators.Group.Finset.Basic</td><td class='found'>Mathlib</td><td class='num'>373</td><td class='num'><strong>79</strong></td><td class='num'>21.2%</td><td class='num'>41</td><td class='num'>46</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.MeasureTheory.VectorMeasure.Basic</td><td class='found'>Mathlib</td><td class='num'>331</td><td class='num'><strong>69</strong></td><td class='num'>20.8%</td><td class='num'>3</td><td class='num'>67</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.SpectralObject.SpectralSequence</td><td class='found'>Mathlib</td><td class='num'>290</td><td class='num'><strong>64</strong></td><td class='num'>22.1%</td><td class='num'>56</td><td class='num'>8</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Finset.Card</td><td class='found'>Mathlib</td><td class='num'>264</td><td class='num'><strong>63</strong></td><td class='num'>23.9%</td><td class='num'>50</td><td class='num'>15</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic</td><td class='found'>Mathlib</td><td class='num'>257</td><td class='num'><strong>62</strong></td><td class='num'>24.1%</td><td class='num'>0</td><td class='num'>62</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.RingTheory.Polynomial.Resultant.Basic</td><td class='found'>Mathlib</td><td class='num'>235</td><td class='num'><strong>59</strong></td><td class='num'>25.1%</td><td class='num'>51</td><td class='num'>6</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Logic.Basic</td><td class='found'>Mathlib</td><td class='num'>365</td><td class='num'><strong>58</strong></td><td class='num'>15.9%</td><td class='num'>16</td><td class='num'>39</td><td class='num'>1</td></tr>
+<tr><td>Mathlib.Algebra.BigOperators.Finprod</td><td class='found'>Mathlib</td><td class='num'>352</td><td class='num'><strong>57</strong></td><td class='num'>16.2%</td><td class='num'>14</td><td class='num'>43</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.NormalForms</td><td class='found'>Mathlib</td><td class='num'>213</td><td class='num'><strong>57</strong></td><td class='num'>26.8%</td><td class='num'>57</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Topology.Sets.VietorisTopology</td><td class='found'>Mathlib</td><td class='num'>322</td><td class='num'><strong>57</strong></td><td class='num'>17.7%</td><td class='num'>51</td><td class='num'>3</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.GroupTheory.Nilpotent</td><td class='found'>Mathlib</td><td class='num'>432</td><td class='num'><strong>54</strong></td><td class='num'>12.5%</td><td class='num'>18</td><td class='num'>34</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.RingTheory.MvPolynomial.MonomialOrder</td><td class='found'>Mathlib</td><td class='num'>232</td><td class='num'><strong>54</strong></td><td class='num'>23.3%</td><td class='num'>5</td><td class='num'>47</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.SumIntegralComparisons</td><td class='found'>Mathlib</td><td class='num'>85</td><td class='num'><strong>53</strong></td><td class='num'>62.4%</td><td class='num'>53</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Std.Tactic.BVDecide.LRAT.Internal.Formula.RupAddResult</td><td class='found'>Std</td><td class='num'>237</td><td class='num'><strong>53</strong></td><td class='num'>22.4%</td><td class='num'>53</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Finset.Basic</td><td class='found'>Mathlib</td><td class='num'>244</td><td class='num'><strong>52</strong></td><td class='num'>21.3%</td><td class='num'>49</td><td class='num'>5</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.CategoryTheory.Limits.Shapes.Biproducts</td><td class='found'>Mathlib</td><td class='num'>411</td><td class='num'><strong>50</strong></td><td class='num'>12.2%</td><td class='num'>0</td><td class='num'>49</td><td class='num'>1</td></tr>
+<tr><td>Mathlib.Combinatorics.SimpleGraph.Paths</td><td class='found'>Mathlib</td><td class='num'>392</td><td class='num'><strong>50</strong></td><td class='num'>12.8%</td><td class='num'>46</td><td class='num'>7</td><td class='num'>0</td></tr>
+<tr><td>Std.Tactic.BVDecide.LRAT.Internal.Formula.Lemmas</td><td class='found'>Std</td><td class='num'>238</td><td class='num'><strong>50</strong></td><td class='num'>21.0%</td><td class='num'>49</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.Factorizations.CM5a</td><td class='found'>Mathlib</td><td class='num'>201</td><td class='num'><strong>49</strong></td><td class='num'>24.4%</td><td class='num'>48</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.List.Sort</td><td class='found'>Mathlib</td><td class='num'>336</td><td class='num'><strong>48</strong></td><td class='num'>14.3%</td><td class='num'>47</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Finsupp.Single</td><td class='found'>Mathlib</td><td class='num'>154</td><td class='num'><strong>47</strong></td><td class='num'>30.5%</td><td class='num'>34</td><td class='num'>37</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Order.Interval.Set.LinearOrder</td><td class='found'>Mathlib</td><td class='num'>217</td><td class='num'><strong>46</strong></td><td class='num'>21.2%</td><td class='num'>46</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Set.Image</td><td class='found'>Mathlib</td><td class='num'>464</td><td class='num'><strong>45</strong></td><td class='num'>9.7%</td><td class='num'>44</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Init.Data.BitVec.Lemmas</td><td class='found'>Init</td><td class='num'>2,051</td><td class='num'><strong>44</strong></td><td class='num'>2.1%</td><td class='num'>3</td><td class='num'>41</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.List.Basic</td><td class='found'>Mathlib</td><td class='num'>484</td><td class='num'><strong>44</strong></td><td class='num'>9.1%</td><td class='num'>43</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Set.Insert</td><td class='found'>Mathlib</td><td class='num'>203</td><td class='num'><strong>44</strong></td><td class='num'>21.7%</td><td class='num'>44</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.LinearAlgebra.AffineSpace.Combination</td><td class='found'>Mathlib</td><td class='num'>127</td><td class='num'><strong>44</strong></td><td class='num'>34.6%</td><td class='num'>0</td><td class='num'>12</td><td class='num'>32</td></tr>
+<tr><td>Mathlib.Order.ConditionallyCompleteLattice.Basic</td><td class='found'>Mathlib</td><td class='num'>279</td><td class='num'><strong>44</strong></td><td class='num'>15.8%</td><td class='num'>4</td><td class='num'>40</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Set.Prod</td><td class='found'>Mathlib</td><td class='num'>384</td><td class='num'><strong>42</strong></td><td class='num'>10.9%</td><td class='num'>38</td><td class='num'>4</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.NumberTheory.Chebyshev</td><td class='found'>Mathlib</td><td class='num'>266</td><td class='num'><strong>42</strong></td><td class='num'>15.8%</td><td class='num'>42</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.List.Chain</td><td class='found'>Mathlib</td><td class='num'>215</td><td class='num'><strong>41</strong></td><td class='num'>19.1%</td><td class='num'>41</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.AlgebraicTopology.ExtraDegeneracy</td><td class='found'>Mathlib</td><td class='num'>171</td><td class='num'><strong>40</strong></td><td class='num'>23.4%</td><td class='num'>40</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Combinatorics.SimpleGraph.Acyclic</td><td class='found'>Mathlib</td><td class='num'>179</td><td class='num'><strong>40</strong></td><td class='num'>22.3%</td><td class='num'>28</td><td class='num'>14</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Probability.Process.HittingTime</td><td class='found'>Mathlib</td><td class='num'>102</td><td class='num'><strong>40</strong></td><td class='num'>39.2%</td><td class='num'>11</td><td class='num'>32</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Polynomial.RuleOfSigns</td><td class='found'>Mathlib</td><td class='num'>70</td><td class='num'><strong>39</strong></td><td class='num'>55.7%</td><td class='num'>37</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Rpow.IntegralRepresentation</td><td class='found'>Mathlib</td><td class='num'>109</td><td class='num'><strong>39</strong></td><td class='num'>35.8%</td><td class='num'>39</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.NumberTheory.NumberField.CanonicalEmbedding.NormLeOne</td><td class='found'>Mathlib</td><td class='num'>160</td><td class='num'><strong>38</strong></td><td class='num'>23.8%</td><td class='num'>0</td><td class='num'>38</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.HomotopyCategory.MappingCone</td><td class='found'>Mathlib</td><td class='num'>201</td><td class='num'><strong>37</strong></td><td class='num'>18.4%</td><td class='num'>37</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.SpecialFunctions.Artanh</td><td class='found'>Mathlib</td><td class='num'>81</td><td class='num'><strong>37</strong></td><td class='num'>45.7%</td><td class='num'>37</td><td class='num'>2</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.SpecialFunctions.Trigonometric.Chebyshev.RootsExtrema</td><td class='found'>Mathlib</td><td class='num'>76</td><td class='num'><strong>37</strong></td><td class='num'>48.7%</td><td class='num'>31</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.NumberTheory.Modular</td><td class='found'>Mathlib</td><td class='num'>173</td><td class='num'><strong>37</strong></td><td class='num'>21.4%</td><td class='num'>34</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.NumberTheory.Padics.PadicNumbers</td><td class='found'>Mathlib</td><td class='num'>312</td><td class='num'><strong>37</strong></td><td class='num'>11.9%</td><td class='num'>2</td><td class='num'>37</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift</td><td class='found'>Mathlib</td><td class='num'>186</td><td class='num'><strong>36</strong></td><td class='num'>19.4%</td><td class='num'>36</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.MeasureTheory.Function.SimpleFunc</td><td class='found'>Mathlib</td><td class='num'>497</td><td class='num'><strong>36</strong></td><td class='num'>7.2%</td><td class='num'>2</td><td class='num'>35</td><td class='num'>1</td></tr>
+<tr><td>Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE</td><td class='found'>Mathlib</td><td class='num'>237</td><td class='num'><strong>35</strong></td><td class='num'>14.8%</td><td class='num'>35</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Order.SuccPred.Basic</td><td class='found'>Mathlib</td><td class='num'>408</td><td class='num'><strong>35</strong></td><td class='num'>8.6%</td><td class='num'>4</td><td class='num'>31</td><td class='num'>0</td></tr>
+<tr><td>Batteries.Data.Fin.Lemmas</td><td class='found'>Batteries</td><td class='num'>180</td><td class='num'><strong>34</strong></td><td class='num'>18.9%</td><td class='num'>34</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone</td><td class='found'>Mathlib</td><td class='num'>135</td><td class='num'><strong>34</strong></td><td class='num'>25.2%</td><td class='num'>34</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.TotalComplexShift</td><td class='found'>Mathlib</td><td class='num'>100</td><td class='num'><strong>34</strong></td><td class='num'>34.0%</td><td class='num'>34</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.MeasureTheory.Integral.SetToL1</td><td class='found'>Mathlib</td><td class='num'>184</td><td class='num'><strong>34</strong></td><td class='num'>18.5%</td><td class='num'>0</td><td class='num'>34</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Order.SuccPred.Limit</td><td class='found'>Mathlib</td><td class='num'>295</td><td class='num'><strong>34</strong></td><td class='num'>11.5%</td><td class='num'>2</td><td class='num'>30</td><td class='num'>0</td></tr>
+<tr><td>Init.Classical</td><td class='found'>Init</td><td class='num'>67</td><td class='num'><strong>33</strong></td><td class='num'>49.3%</td><td class='num'>0</td><td class='num'>20</td><td class='num'>5</td></tr>
+<tr><td>Mathlib.Algebra.Ring.Int.Parity</td><td class='found'>Mathlib</td><td class='num'>96</td><td class='num'><strong>33</strong></td><td class='num'>34.4%</td><td class='num'>33</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Order.RelSeries</td><td class='found'>Mathlib</td><td class='num'>382</td><td class='num'><strong>33</strong></td><td class='num'>8.6%</td><td class='num'>31</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.HomotopyCategory.HomComplex</td><td class='found'>Mathlib</td><td class='num'>316</td><td class='num'><strong>32</strong></td><td class='num'>10.1%</td><td class='num'>32</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.Analytic.Order</td><td class='found'>Mathlib</td><td class='num'>133</td><td class='num'><strong>32</strong></td><td class='num'>24.1%</td><td class='num'>16</td><td class='num'>16</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.List.Lattice</td><td class='found'>Mathlib</td><td class='num'>112</td><td class='num'><strong>32</strong></td><td class='num'>28.6%</td><td class='num'>32</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.BoxIntegral.Partition.Basic</td><td class='found'>Mathlib</td><td class='num'>221</td><td class='num'><strong>31</strong></td><td class='num'>14.0%</td><td class='num'>0</td><td class='num'>31</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Polynomial.Roots</td><td class='found'>Mathlib</td><td class='num'>210</td><td class='num'><strong>30</strong></td><td class='num'>14.3%</td><td class='num'>5</td><td class='num'>25</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Ring.Parity</td><td class='found'>Mathlib</td><td class='num'>186</td><td class='num'><strong>30</strong></td><td class='num'>16.1%</td><td class='num'>30</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.CategoryTheory.GlueData</td><td class='found'>Mathlib</td><td class='num'>172</td><td class='num'><strong>30</strong></td><td class='num'>17.4%</td><td class='num'>0</td><td class='num'>30</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.CategoryTheory.NatIso</td><td class='found'>Mathlib</td><td class='num'>152</td><td class='num'><strong>30</strong></td><td class='num'>19.7%</td><td class='num'>30</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Finset.Insert</td><td class='found'>Mathlib</td><td class='num'>260</td><td class='num'><strong>30</strong></td><td class='num'>11.5%</td><td class='num'>30</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.List.Cycle</td><td class='found'>Mathlib</td><td class='num'>442</td><td class='num'><strong>30</strong></td><td class='num'>6.8%</td><td class='num'>30</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.CategoryTheory.Functor.Category</td><td class='found'>Mathlib</td><td class='num'>118</td><td class='num'><strong>29</strong></td><td class='num'>24.6%</td><td class='num'>29</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Finsupp.Basic</td><td class='found'>Mathlib</td><td class='num'>373</td><td class='num'><strong>29</strong></td><td class='num'>7.8%</td><td class='num'>7</td><td class='num'>23</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.RingTheory.HahnSeries.Basic</td><td class='found'>Mathlib</td><td class='num'>185</td><td class='num'><strong>29</strong></td><td class='num'>15.7%</td><td class='num'>0</td><td class='num'>29</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Topology.FiberBundle.Trivialization</td><td class='found'>Mathlib</td><td class='num'>355</td><td class='num'><strong>29</strong></td><td class='num'>8.2%</td><td class='num'>0</td><td class='num'>29</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.AlgebraicTopology.SimplicialObject.DeltaZeroIter</td><td class='found'>Mathlib</td><td class='num'>123</td><td class='num'><strong>28</strong></td><td class='num'>22.8%</td><td class='num'>28</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Geometry.Euclidean.Angle.Unoriented.TriangleInequality</td><td class='found'>Mathlib</td><td class='num'>50</td><td class='num'><strong>28</strong></td><td class='num'>56.0%</td><td class='num'>22</td><td class='num'>6</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.GroupTheory.OrderOfElement</td><td class='found'>Mathlib</td><td class='num'>575</td><td class='num'><strong>28</strong></td><td class='num'>4.9%</td><td class='num'>4</td><td class='num'>18</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.GroupTheory.Perm.Fin</td><td class='found'>Mathlib</td><td class='num'>122</td><td class='num'><strong>28</strong></td><td class='num'>23.0%</td><td class='num'>28</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Logic.Function.Basic</td><td class='found'>Mathlib</td><td class='num'>360</td><td class='num'><strong>28</strong></td><td class='num'>7.8%</td><td class='num'>9</td><td class='num'>18</td><td class='num'>4</td></tr>
+<tr><td>Init.Data.Char.Ordinal</td><td class='found'>Init</td><td class='num'>91</td><td class='num'><strong>27</strong></td><td class='num'>29.7%</td><td class='num'>27</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.MvPolynomial.Degrees</td><td class='found'>Mathlib</td><td class='num'>122</td><td class='num'><strong>27</strong></td><td class='num'>22.1%</td><td class='num'>3</td><td class='num'>24</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.AlgebraicTopology.FundamentalGroupoid.Basic</td><td class='found'>Mathlib</td><td class='num'>188</td><td class='num'><strong>27</strong></td><td class='num'>14.4%</td><td class='num'>27</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.Complex.ValueDistribution.LogCounting.Basic</td><td class='found'>Mathlib</td><td class='num'>69</td><td class='num'><strong>27</strong></td><td class='num'>39.1%</td><td class='num'>2</td><td class='num'>25</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Rpow.Basic</td><td class='found'>Mathlib</td><td class='num'>275</td><td class='num'><strong>27</strong></td><td class='num'>9.8%</td><td class='num'>21</td><td class='num'>6</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph</td><td class='found'>Mathlib</td><td class='num'>238</td><td class='num'><strong>27</strong></td><td class='num'>11.3%</td><td class='num'>26</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.DFinsupp.Defs</td><td class='found'>Mathlib</td><td class='num'>358</td><td class='num'><strong>27</strong></td><td class='num'>7.5%</td><td class='num'>23</td><td class='num'>3</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.FieldTheory.RatFunc.Basic</td><td class='found'>Mathlib</td><td class='num'>324</td><td class='num'><strong>27</strong></td><td class='num'>8.3%</td><td class='num'>0</td><td class='num'>27</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Logic.Equiv.Defs</td><td class='found'>Mathlib</td><td class='num'>405</td><td class='num'><strong>27</strong></td><td class='num'>6.7%</td><td class='num'>24</td><td class='num'>3</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Order.KrullDimension</td><td class='found'>Mathlib</td><td class='num'>252</td><td class='num'><strong>27</strong></td><td class='num'>10.7%</td><td class='num'>21</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.HomotopyCategory.KInjective</td><td class='found'>Mathlib</td><td class='num'>56</td><td class='num'><strong>26</strong></td><td class='num'>46.4%</td><td class='num'>26</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Option.NAry</td><td class='found'>Mathlib</td><td class='num'>61</td><td class='num'><strong>26</strong></td><td class='num'>42.6%</td><td class='num'>26</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Geometry.Manifold.IsManifold.Basic</td><td class='found'>Mathlib</td><td class='num'>261</td><td class='num'><strong>26</strong></td><td class='num'>10.0%</td><td class='num'>4</td><td class='num'>22</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.LinearAlgebra.RootSystem.Finite.Lemmas</td><td class='found'>Mathlib</td><td class='num'>71</td><td class='num'><strong>26</strong></td><td class='num'>36.6%</td><td class='num'>23</td><td class='num'>4</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody</td><td class='found'>Mathlib</td><td class='num'>109</td><td class='num'><strong>26</strong></td><td class='num'>23.9%</td><td class='num'>0</td><td class='num'>26</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Order.SupIndep</td><td class='found'>Mathlib</td><td class='num'>114</td><td class='num'><strong>26</strong></td><td class='num'>22.8%</td><td class='num'>16</td><td class='num'>18</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.Meromorphic.NormalForm</td><td class='found'>Mathlib</td><td class='num'>114</td><td class='num'><strong>25</strong></td><td class='num'>21.9%</td><td class='num'>4</td><td class='num'>22</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.SpecialFunctions.Elliptic.Weierstrass</td><td class='found'>Mathlib</td><td class='num'>260</td><td class='num'><strong>25</strong></td><td class='num'>9.6%</td><td class='num'>5</td><td class='num'>21</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Finset.Prod</td><td class='found'>Mathlib</td><td class='num'>140</td><td class='num'><strong>25</strong></td><td class='num'>17.9%</td><td class='num'>24</td><td class='num'>2</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Int.Init</td><td class='found'>Mathlib</td><td class='num'>148</td><td class='num'><strong>25</strong></td><td class='num'>16.9%</td><td class='num'>25</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.List.PeriodicityLemma</td><td class='found'>Mathlib</td><td class='num'>46</td><td class='num'><strong>25</strong></td><td class='num'>54.3%</td><td class='num'>25</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.List.Sigma</td><td class='found'>Mathlib</td><td class='num'>243</td><td class='num'><strong>25</strong></td><td class='num'>10.3%</td><td class='num'>25</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Nat.Log</td><td class='found'>Mathlib</td><td class='num'>152</td><td class='num'><strong>25</strong></td><td class='num'>16.4%</td><td class='num'>25</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Logic.Equiv.Basic</td><td class='found'>Mathlib</td><td class='num'>356</td><td class='num'><strong>25</strong></td><td class='num'>7.0%</td><td class='num'>24</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.MeasureTheory.Function.ConditionalExpectation.Basic</td><td class='found'>Mathlib</td><td class='num'>56</td><td class='num'><strong>25</strong></td><td class='num'>44.6%</td><td class='num'>1</td><td class='num'>25</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.RingTheory.DedekindDomain.Factorization</td><td class='found'>Mathlib</td><td class='num'>127</td><td class='num'><strong>25</strong></td><td class='num'>19.7%</td><td class='num'>2</td><td class='num'>22</td><td class='num'>0</td></tr>
+<tr><td>Init.Data.Nat.Lemmas</td><td class='found'>Init</td><td class='num'>768</td><td class='num'><strong>24</strong></td><td class='num'>3.1%</td><td class='num'>0</td><td class='num'>24</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Algebra.Homology.Embedding.TruncGE</td><td class='found'>Mathlib</td><td class='num'>86</td><td class='num'><strong>24</strong></td><td class='num'>27.9%</td><td class='num'>0</td><td class='num'>24</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital</td><td class='found'>Mathlib</td><td class='num'>529</td><td class='num'><strong>24</strong></td><td class='num'>4.5%</td><td class='num'>0</td><td class='num'>24</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.SpecialFunctions.Trigonometric.Angle</td><td class='found'>Mathlib</td><td class='num'>317</td><td class='num'><strong>24</strong></td><td class='num'>7.6%</td><td class='num'>24</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Computability.TuringMachine.PostTuringMachine</td><td class='found'>Mathlib</td><td class='num'>457</td><td class='num'><strong>24</strong></td><td class='num'>5.3%</td><td class='num'>8</td><td class='num'>21</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Fin.SuccPred</td><td class='found'>Mathlib</td><td class='num'>290</td><td class='num'><strong>24</strong></td><td class='num'>8.3%</td><td class='num'>24</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Set.Sigma</td><td class='found'>Mathlib</td><td class='num'>102</td><td class='num'><strong>24</strong></td><td class='num'>23.5%</td><td class='num'>23</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.GroupTheory.Exponent</td><td class='found'>Mathlib</td><td class='num'>169</td><td class='num'><strong>24</strong></td><td class='num'>14.2%</td><td class='num'>4</td><td class='num'>20</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.LinearAlgebra.RootSystem.Chain</td><td class='found'>Mathlib</td><td class='num'>79</td><td class='num'><strong>24</strong></td><td class='num'>30.4%</td><td class='num'>9</td><td class='num'>15</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Order.Interval.Finset.Gaps</td><td class='found'>Mathlib</td><td class='num'>68</td><td class='num'><strong>24</strong></td><td class='num'>35.3%</td><td class='num'>20</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Probability.Distributions.Uniform</td><td class='found'>Mathlib</td><td class='num'>67</td><td class='num'><strong>24</strong></td><td class='num'>35.8%</td><td class='num'>1</td><td class='num'>23</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Topology.Covering.Basic</td><td class='found'>Mathlib</td><td class='num'>163</td><td class='num'><strong>24</strong></td><td class='num'>14.7%</td><td class='num'>0</td><td class='num'>24</td><td class='num'>0</td></tr>
+<tr><td>Std.Data.DTreeMap.Internal.Balancing</td><td class='found'>Std</td><td class='num'>368</td><td class='num'><strong>24</strong></td><td class='num'>6.5%</td><td class='num'>1</td><td class='num'>23</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.AlgebraicTopology.DoldKan.Faces</td><td class='found'>Mathlib</td><td class='num'>45</td><td class='num'><strong>23</strong></td><td class='num'>51.1%</td><td class='num'>23</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Unital</td><td class='found'>Mathlib</td><td class='num'>556</td><td class='num'><strong>23</strong></td><td class='num'>4.1%</td><td class='num'>1</td><td class='num'>22</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.Data.Set.Card</td><td class='found'>Mathlib</td><td class='num'>445</td><td class='num'><strong>23</strong></td><td class='num'>5.2%</td><td class='num'>13</td><td class='num'>10</td><td class='num'>0</td></tr>
+<tr><td>Mathlib.MeasureTheory.VectorMeasure.SetIntegral</td><td class='found'>Mathlib</td><td class='num'>104</td><td class='num'><strong>23</strong></td><td class='num'>22.1%</td><td class='num'>9</td><td class='num'>15</td><td class='num'>0</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Showing the first 120 of 3,261 rows. Ordered by spends. The tail is long: most spending modules do it once or twice. The full set is in the JSON and the CSV.</p>
+<p class="note"><em>spends</em> counts declarations in the module whose own proof names a primitive; a declaration naming two is counted once here and once under each primitive, so the primitive columns can exceed it. <em>rate</em> is spends over declarations in that module. Modules with no direct spend are omitted &mdash; there are 7,338 of them, and their theorems can still depend on choice through imports.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="module-spend.json">module-spend.json</a> &middot;
+<a href="module-spend.csv">module-spend.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-13
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
+resolves to the current deposit.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>lake env lean -D maxErrors=4000 Split.lean
+python extract_module_spend.py</pre>
+<p class="note">One pass, about seven seconds over a 640 MB dump. The module column comes from the extractor; a dump without it cannot answer this question at all. Method: <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>.</p>
+
+<h2>Spending is not reach</h2>
+<p>This table answers where the axiom is <em>used</em>. It does not say how far each use travels, and the two are wildly different: 324,808 theorems depend on choice while 18,109 declarations spend it. One spend in <code>Mathlib.Logic.Basic</code> can be inherited by a hundred thousand theorems, and one in a leaf file by none.</p>
+<p>The <a href="/gonzalgo/dominator-table/">Dominator Table</a> is the other half — how many theorems each site is responsible for. Read together they say which file to open and whether opening it is worth anything.</p>
+
+<h2>What the primitives mean</h2>
+<p><code>Classical.byContradiction</code> is excluded middle: proving P by refuting its negation. <code>Classical.propDecidable</code> is the decidability fallback, supplied where an instance was wanted and none was synthesised. <code>Classical.choice</code> proper is choosing from a family, and is the rarest of the three by two orders of magnitude.</p>
+<p>That ordering matters for anyone trying to reduce classical dependence. The common cases are not choice in the mathematician's sense at all — they are a proof style and a missing instance.</p>
+
+<h2>Where it concentrates</h2>
+<p>The heaviest single module is <code>Batteries.Data.List.Lemmas</code> at 168 spends across 881 declarations. By library the split is Mathlib 3,099, Init 99, Std 38, Batteries 20, Lean 3, Plausible 2 modules containing at least one spend.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/module-spend/">f-keys.com/gonzalgo/module-spend/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

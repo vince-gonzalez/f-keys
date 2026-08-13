@@ -278,6 +278,26 @@
     },
     {
       "@type": "Dataset",
+      "name": "The Module Spend Table",
+      "url": "https://f-keys.com/gonzalgo/module-spend/",
+      "description": "Modules containing at least one declaration whose own proof term names a choice primitive directly, with the count broken down by primitive. Spending, as opposed to reach: a module with no direct spend can still be full of theorems that depend on choice through what they import.",
+      "version": "2026-08-13",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://f-keys.com/gonzalgo/module-spend/module-spend.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://f-keys.com/gonzalgo/module-spend/module-spend.csv"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
       "name": "What machine-generated Lean proofs rest on",
       "url": "https://f-keys.com/gonzalgo/generated-proofs/",
       "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
@@ -469,6 +489,15 @@ moves only when the numbers do.
     12 rows &middot; version 2026-08-12 &middot;
     <a href="https://f-keys.com/gonzalgo/version-delta/version-delta.json">JSON</a> &middot;
     <a href="https://f-keys.com/gonzalgo/version-delta/version-delta.csv">CSV</a> &middot; CC-BY-4.0
+  </p>
+</div>
+<div class="card">
+  <h2><a href="https://f-keys.com/gonzalgo/module-spend/">The Module Spend Table</a></h2>
+  <p>Modules containing at least one declaration whose own proof term names a choice primitive directly, with the count broken down by primitive. Spending, as opposed to reach: a module with no direct spend can still be full of theorems that depend on choice through what they import.</p>
+  <p class="meta">
+    3,261 rows &middot; version 2026-08-13 &middot;
+    <a href="https://f-keys.com/gonzalgo/module-spend/module-spend.json">JSON</a> &middot;
+    <a href="https://f-keys.com/gonzalgo/module-spend/module-spend.csv">CSV</a> &middot; CC-BY-4.0
   </p>
 </div>
 <div class="card">
