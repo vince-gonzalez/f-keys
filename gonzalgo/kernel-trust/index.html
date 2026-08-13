@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/kernel-trust/">
+<title>Kernel Trust Profile &mdash; a standard way to say what a proof rests on</title>
+<meta name="description" content="A machine-readable declaration of what a body of machine-checked mathematics rests on. CITATION.cff standardises citation, SPDX standardises licence; there is no standard way to say what a library rests on. This is that, with a JSON Schema and fourteen worked profiles.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/kernel-trust/">
+<meta property="og:title" content="Kernel Trust Profile 0.1">
+<meta property="og:description" content="There is no standard way to say what a formal library rests on. This is one.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "Kernel Trust Profile",
+  "headline": "Kernel Trust Profile 0.1 \u2014 a machine-readable declaration of what a body of machine-checked mathematics rests on",
+  "description": "A specification for declaring what a formal library's theorems actually rest on: unfinished proofs, compiler-trusted results, and each axiom reached, with statement and proof dependencies kept apart. CITATION.cff standardises citation and SPDX standardises licence; this does the same for trust assumptions.",
+  "url": "https://f-keys.com/gonzalgo/kernel-trust/",
+  "version": "0.1",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "author": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "citation": "https://doi.org/10.5281/zenodo.21900625",
+  "keywords": [
+    "formal verification",
+    "Lean 4",
+    "Metamath",
+    "trusted computing base",
+    "specification",
+    "provenance",
+    "reproducibility",
+    "CITATION.cff",
+    "SPDX"
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:760px; }
+hr { border:0; border-top:1px solid var(--border); margin:2rem 0; }
+h3 { font-family:'VT323',monospace; font-weight:400; font-size:1.35rem; color:var(--cyan); letter-spacing:1px; margin:1.6rem 0 .6rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>KERNEL TRUST PROFILE</h1>
+<p class="kicker">a standard way to say what a proof rests on &middot; version 0.1, draft</p>
+
+<p class="series">
+<a href="SPEC.md">SPEC.md</a> &middot;
+<a href="kernel-trust-0.1.schema.json">JSON Schema</a> &middot;
+14 worked profiles below &middot; CC-BY-4.0
+</p>
+
+<p><strong>Version 0.1 (draft) — 2026-08-05</strong></p>
+<p>A machine-readable declaration of what a body of machine-checked mathematics rests on.</p>
+<hr>
+<h2>0. The gap this fills</h2>
+<p>A proof assistant reports that a proof checks. It does not report that the theorem is standing on an unfinished proof several files upstream, or that the result was obtained by trusting a compiler rather than a kernel. Both look exactly like success, and neither is visible to anyone downstream.</p>
+<p>There is a standard way to say how to cite a project (<code>CITATION.cff</code>), and a standard way to say what licence it carries (SPDX). There is no standard way to say what it <em>rests on</em>. Every project states it in prose, or not at all.</p>
+<p>A Kernel Trust Profile is that statement, in a fixed shape, computed from the artifact rather than asserted by its author.</p>
+<h2>1. Scope</h2>
+<p>A profile describes one library, at one revision, as measured by one tool at one time. It carries no claim about correctness, quality, or importance, and it is not a certificate. It reports provenance: which trust assumptions the library&#x27;s theorems actually reach.</p>
+<p>Consistency is not in scope and cannot be. A profile scopes the risk; it does not eliminate it.</p>
+<h2>2. Design rules</h2>
+<p>These are the rules that keep a profile from becoming a badge.</p>
+<p><strong>R1. Mechanically recomputable.</strong> Every number MUST be derivable by a third party from the named revision using the named tool. No field may hold a value that only the author could know.</p>
+<p><strong>R2. Absence is not zero.</strong> A profile MUST distinguish &quot;measured, and the count is zero&quot; from &quot;not measured&quot;. <code>null</code> means not measured. Omitting a field means not measured. Writing <code>0</code> is a positive claim and MUST be backed by a measurement.</p>
+<p><strong>R3. Statement and proof stay separate.</strong> Where a dependency is reported, a profile MUST record whether it enters through a theorem&#x27;s <em>statement</em> or only through its <em>proof</em>. Collapsing the two discards the distinction that makes the measurement actionable: a statement dependency changes what was proved, a proof dependency changes only how.</p>
+<p><strong>R4. Reach, not amplification.</strong> Reach — the fraction of a library depending on an assumption — is invariant under inlining and factoring. Amplification is not: factoring a shared step into a lemma changes it without changing anything the library proves. A profile MAY report amplification, MUST report reach, and MUST NOT rank libraries by amplification.</p>
+<p><strong>R5. No composite scores.</strong> A profile MUST NOT contain a single number summarising trustworthiness. A theorem either reaches an unfinished proof or it does not; averaging that against anything else invents precision that the underlying measurement does not have.</p>
+<p><strong>R6. Tool-agnostic.</strong> A profile MUST be emittable by any tool that can compute the declaration graph. Nothing in this specification requires a particular implementation. A format only one program can produce is a file format, not a standard.</p>
+<h2>3. Format</h2>
+<p>A profile is a JSON document, conventionally at the repository root as <code>kernel-trust.json</code>, UTF-8, conforming to the schema in <code>schema/kernel-trust-0.1.schema.json</code>.</p>
+<pre>{
+  &quot;ktp_version&quot;: &quot;0.1&quot;,
+  &quot;generated_at&quot;: &quot;2026-08-05&quot;,
+  &quot;generated_by&quot;: { &quot;tool&quot;: &quot;gonzalgo&quot;, &quot;version&quot;: &quot;0.5.2&quot; },
+  &quot;subject&quot;: {
+    &quot;name&quot;: &quot;Mathlib&quot;,
+    &quot;system&quot;: &quot;Lean 4&quot;,
+    &quot;system_version&quot;: &quot;4.32.1&quot;,
+    &quot;revision&quot;: &quot;a1b2c3d&quot;,
+    &quot;foundation&quot;: &quot;dependent type theory&quot;
+  },
+  &quot;counts&quot;: {
+    &quot;declarations&quot;: 790171,
+    &quot;theorems&quot;: 437429
+  },
+  &quot;unfinished&quot;: {
+    &quot;theorems_reaching&quot;: 0,
+    &quot;axioms&quot;: [&quot;sorryAx&quot;]
+  },
+  &quot;compiler_trusted&quot;: {
+    &quot;theorems_reaching&quot;: 0,
+    &quot;axioms&quot;: [&quot;Lean.ofReduceBool&quot;, &quot;Lean.ofReduceNat&quot;]
+  },
+  &quot;assumptions&quot;: [
+    {
+      &quot;name&quot;: &quot;Classical.choice&quot;,
+      &quot;kind&quot;: &quot;optional&quot;,
+      &quot;entry_points&quot;: 144,
+      &quot;reach&quot;: { &quot;theorems&quot;: 324808, &quot;fraction&quot;: 0.6100 },
+      &quot;via&quot;: &quot;proof&quot;
+    },
+    {
+      &quot;name&quot;: &quot;propext&quot;,
+      &quot;kind&quot;: &quot;foundational&quot;,
+      &quot;entry_points&quot;: null,
+      &quot;reach&quot;: { &quot;theorems&quot;: 437429, &quot;fraction&quot;: 1.0 },
+      &quot;via&quot;: &quot;both&quot;
+    }
+  ]
+}</pre>
+<h3>Fields</h3>
+<p><code>ktp_version</code> (required) — the version of this specification.</p>
+<p><code>generated_at</code> (required) — ISO 8601 date the measurement was taken.</p>
+<p><code>generated_by</code> (required) — <code>tool</code> and <code>version</code>. Identifies what to re-run.</p>
+<p><code>subject</code> (required) — what was measured. <code>revision</code> SHOULD be a commit hash or released version, so R1 is satisfiable.</p>
+<p><code>counts</code> (required) — <code>theorems</code> is the denominator for every <code>fraction</code>.</p>
+<p><code>unfinished</code> (required) — theorems reaching an unfinished proof from anywhere upstream, and the axiom names that signal it. <code>theorems_reaching: 0</code> is the claim most worth making and, under R2, the one that must be measured to be stated.</p>
+<p><code>compiler_trusted</code> (required) — theorems reaching a result obtained by trusting the compiler and runtime rather than the kernel.</p>
+<p><code>assumptions</code> (required, may be empty) — one entry per axiom or assumption reached by any theorem.</p>
+<ul><li><code>kind</code> — <code>foundational</code> (the system&#x27;s own basis, unremarkable), <code>optional</code></li></ul>
+<p>  (removable in principle, e.g. choice), or <code>escape-hatch</code> (unfinished or   compiler-trusting).</p>
+<ul><li><code>entry_points</code> — declarations whose own proof cites it, as opposed to</li></ul>
+<p>  inheriting it. <code>null</code> where not computed.</p>
+<ul><li><code>reach</code> — theorems depending on it at all, and that count over <code>counts.theorems</code>.</li><li><code>via</code> — <code>statement</code>, <code>proof</code>, or <code>both</code>, per R3.</li></ul>
+<h2>4. What a profile does not mean</h2>
+<p>A library reaching 61% of its theorems with the axiom of choice has made a design decision, not an error. Metamath&#x27;s <code>set.mm</code> tiers countable and dependent choice separately on purpose and reaches 1.2%; Lean core does not, and its maintainers have stated that avoiding choice is a deliberate non-goal. Both are coherent. A profile makes the difference legible; it does not adjudicate it.</p>
+<p>Under R5 there is no score, so there is no ranking, so a profile cannot be used as a league table without leaving the specification.</p>
+<h2>5. Versioning</h2>
+<p>Additive changes increment the minor version. Any change to the meaning of an existing field increments the major version. A consumer encountering an unknown <code>ktp_version</code> major MUST NOT interpret the document.</p>
+<h2>6. Prior art</h2>
+<p><code>CITATION.cff</code> standardises citation metadata; SPDX standardises licence identifiers; <code>codemeta.json</code> standardises software description. Each took a thing every project stated in prose and gave it a shape. This does the same for the trust assumptions under a machine-checked result.</p>
+<p>The measurements are defined in <em>Where Formal Libraries Spend Their Axioms</em>, <a href="https://doi.org/10.5281/zenodo.21769846">https://doi.org/10.5281/zenodo.21769846</a>, which also gives the refactoring argument behind R4 and the statement/proof separation behind R3.</p>
+<h2>7. Licence</h2>
+<p>This specification is CC-BY-4.0. Implementations are unencumbered.</p>
+
+<h2>Profiles</h2>
+<p>
+Fourteen libraries, emitted by <code>gonzalgo profile</code> from the Kernel
+Index. These exist to test the specification against data gathered before the
+specification was written &mdash; a format that only fits the numbers you happen
+to have is not a standard.
+</p>
+<div class="wrap">
+<table>
+<thead><tr>
+  <th>library</th><th>system</th><th>foundation</th>
+  <th style="text-align:right">theorems</th>
+  <th style="text-align:right">unfinished</th>
+  <th style="text-align:right">compiler-trusted</th>
+  <th style="text-align:right">assumptions</th>
+  <th style="text-align:right">unmeasured</th>
+</tr></thead>
+<tbody>
+<tr><td><a href="profiles/aesop.json">Aesop</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>771</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/batteries.json">Batteries</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>5,249</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/hol.mm.json">hol.mm</a></td><td>Metamath</td><td class='found'>higher-order logic</td><td class='num'>151</td><td class='num'>0</td><td class='num'>&mdash;</td><td class='num'>0</td><td class='num'>5</td></tr>
+<tr><td><a href="profiles/iset.mm.json">iset.mm</a></td><td>Metamath</td><td class='found'>intuitionistic</td><td class='num'>16,236</td><td class='num'>0</td><td class='num'>&mdash;</td><td class='num'>0</td><td class='num'>5</td></tr>
+<tr><td><a href="profiles/lean-core-init.json">Lean core (Init)</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>45,051</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/lean-core-lean.json">Lean core (Lean)</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>9,281</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/mathlib.json">Mathlib</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>437,429</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/nf.mm.json">nf.mm</a></td><td>Metamath</td><td class='found'>Quine's New Foundations</td><td class='num'>5,976</td><td class='num'>0</td><td class='num'>&mdash;</td><td class='num'>0</td><td class='num'>5</td></tr>
+<tr><td><a href="profiles/plausible.json">Plausible</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>87</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/proofwidgets.json">ProofWidgets</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>165</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/ql.mm.json">ql.mm</a></td><td>Metamath</td><td class='found'>quantum logic</td><td class='num'>1,140</td><td class='num'>0</td><td class='num'>&mdash;</td><td class='num'>0</td><td class='num'>5</td></tr>
+<tr><td><a href="profiles/qq.json">Qq</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>36</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+<tr><td><a href="profiles/set.mm.json">set.mm</a></td><td>Metamath</td><td class='found'>ZFC, classical first-order</td><td class='num'>47,621</td><td class='num'>0</td><td class='num'>&mdash;</td><td class='num'>1</td><td class='num'>5</td></tr>
+<tr><td><a href="profiles/std.json">Std</a></td><td>Lean 4</td><td class='found'>dependent type theory</td><td class='num'>34,510</td><td class='num'>0</td><td class='num'>0</td><td class='num'>3</td><td class='num'>4</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">
+The <em>unmeasured</em> column is the specification working. Rule R2 says absence
+is not zero and <code>null</code> means not measured, so four fields sit null
+across every profile &mdash; system version, revision, url, and the declaration
+count &mdash; because those measurements were never taken. Filling them from a
+different measurement is what R1 forbids.
+</p>
+
+<footer>
+  <p>
+    Method and definitions: Gonzalez, V. (2026).
+    <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo.
+    <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>
+  </p>
+  <p style="margin-top:.8rem;">
+    Vince Gonzalez &middot;
+    <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> &middot;
+    specification CC-BY-4.0, implementations unencumbered
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

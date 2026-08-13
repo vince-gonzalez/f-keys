@@ -149,6 +149,21 @@ The Version Delta Table: https://f-keys.com/gonzalgo/version-delta/
   which makes them different claims wearing old names. Machine-readable:
   version-delta.json, version-delta.csv (CC-BY-4.0).
 
+Kernel Trust Profile (SPECIFICATION, v0.1 draft): https://f-keys.com/gonzalgo/kernel-trust/
+  Not a measurement -- a FORMAT other projects emit. CITATION.cff standardises how
+  to cite a project and SPDX standardises its licence; there is no standard way to
+  say what it RESTS ON. A Kernel Trust Profile is that statement, conventionally
+  kernel-trust.json at a repository root, computed from the artifact rather than
+  asserted by its author. JSON Schema + 14 worked profiles covering Lean 4 and five
+  Metamath databases. Six design rules keep it from becoming a badge: mechanically
+  recomputable by a third party (R1); absence is not zero, null means not measured
+  (R2); statement and proof dependencies stay separate (R3); reach is invariant
+  under refactoring and amplification is not, so profiles MUST report reach and MUST
+  NOT rank by amplification (R4); NO composite trustworthiness score (R5); emittable
+  by any tool that can compute a declaration graph, since a format only one program
+  can produce is a file format and not a standard (R6). Specification CC-BY-4.0,
+  implementations unencumbered.
+
 Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
 
 Which constant is responsible? Dominator analysis of classical dependence in

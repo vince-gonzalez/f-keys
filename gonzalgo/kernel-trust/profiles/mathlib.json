@@ -1,0 +1,67 @@
+{
+  "ktp_version": "0.1",
+  "generated_at": "2026-08-05",
+  "generated_by": {
+    "tool": "gonzalgo",
+    "version": "0.5.2",
+    "url": "https://pypi.org/project/gonzalgo/"
+  },
+  "subject": {
+    "name": "Mathlib",
+    "system": "Lean 4",
+    "system_version": null,
+    "revision": null,
+    "foundation": "dependent type theory",
+    "url": null
+  },
+  "counts": {
+    "theorems": 437429,
+    "declarations": null
+  },
+  "unfinished": {
+    "theorems_reaching": 0,
+    "axioms": [
+      "sorryAx"
+    ]
+  },
+  "compiler_trusted": {
+    "theorems_reaching": 0,
+    "axioms": [
+      "Lean.ofReduceBool",
+      "Lean.ofReduceNat",
+      "Lean.trustCompiler"
+    ]
+  },
+  "assumptions": [
+    {
+      "name": "Classical.choice",
+      "kind": "optional",
+      "entry_points": null,
+      "reach": {
+        "theorems": 291415,
+        "fraction": 0.6662
+      },
+      "via": "proof"
+    },
+    {
+      "name": "propext",
+      "kind": "foundational",
+      "entry_points": null,
+      "reach": {
+        "theorems": 437429,
+        "fraction": 1.0
+      },
+      "via": "both"
+    },
+    {
+      "name": "Quot.sound",
+      "kind": "foundational",
+      "entry_points": null,
+      "reach": {
+        "theorems": 437429,
+        "fraction": 1.0
+      },
+      "via": "both"
+    }
+  ]
+}

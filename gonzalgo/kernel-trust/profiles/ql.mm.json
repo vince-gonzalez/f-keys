@@ -1,0 +1,32 @@
+{
+  "ktp_version": "0.1",
+  "generated_at": "2026-08-05",
+  "generated_by": {
+    "tool": "gonzalgo",
+    "version": "0.5.2",
+    "url": "https://pypi.org/project/gonzalgo/"
+  },
+  "subject": {
+    "name": "ql.mm",
+    "system": "Metamath",
+    "system_version": null,
+    "revision": null,
+    "foundation": "quantum logic",
+    "url": null
+  },
+  "counts": {
+    "theorems": 1140,
+    "declarations": null
+  },
+  "unfinished": {
+    "theorems_reaching": 0,
+    "axioms": [
+      "(incomplete proof: bare ? in a $p)"
+    ]
+  },
+  "compiler_trusted": {
+    "theorems_reaching": null,
+    "axioms": []
+  },
+  "assumptions": []
+}
