@@ -123,6 +123,19 @@ The Site Diagnosis Table: https://f-keys.com/gonzalgo/site-diagnosis/
   stops at whether an instance exists scores those as wins. Machine-readable:
   site-diagnosis.json, site-diagnosis.csv (CC-BY-4.0).
 
+The Choice Strength Table: https://f-keys.com/gonzalgo/choice-strength/
+  set.mm declares three choice principles as separate axioms -- full choice
+  (ax-ac, ax-ac2), countable choice (ax-cc), dependent choice (ax-dc) -- so
+  "depends on choice" does not have to be one bit for this library. 1,528 of
+  47,621 theorems reach one (3.21%), partitioned by the strongest they reach:
+  583 full, 879 countable only, 66 dependent only. The weaker principle carries
+  more of the library: 1,016 theorems reach countable choice against 583
+  reaching choice proper. The Kernel Index's 1.22% for set.mm is full choice
+  only; this is where the difference decomposes. Lean has no counterpart --
+  Classical.choice has no weaker sibling in core, so a Lean library cannot be
+  stratified this way. Machine-readable: choice-strength.json,
+  choice-strength.csv (CC-BY-4.0).
+
 Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
 
 Which constant is responsible? Dominator analysis of classical dependence in
