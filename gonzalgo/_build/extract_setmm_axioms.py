@@ -37,6 +37,16 @@ for reached in clos.values():
     for label in reached:
         dependents[label] += 1
 
+# Direct citations: theorems whose own proof names the statement, as opposed to
+# reaching it through another theorem. The paper's 17,898 entry points for
+# set.mm is this count restricted to axioms and definitions -- syntax
+# constructors are cited constantly and counting them swamps the figure.
+entry = collections.Counter()
+for _thm, rs in d["refs"].items():
+    for r in set(rs):
+        if kind.get(r) == "a":
+            entry[r] += 1
+
 
 def classify(label: str) -> str:
     if label.startswith("ax-"):
@@ -56,6 +66,11 @@ for label, k in kind.items():
         "role": classify(label),
         "dependents": n,
         "share_of_library_pct": round(100 * n / theorems, 2),
+        "entry_points": entry.get(label, 0),
+        # Dependents per direct citation. Meaningless where nothing cites it,
+        # and null says so rather than dividing by zero into infinity.
+        "amplification": (round(n / entry[label], 1)
+                          if entry.get(label) else None),
     })
 
 rows.sort(key=lambda r: (-r["dependents"], r["label"]))
@@ -74,3 +89,11 @@ print(f"  axioms + definitions = "
       f"(the paper's 'axioms used' for set.mm)")
 print(f"  declared and never reached: {len(unused)}")
 print(f"  top: " + ", ".join(f"{r['label']} {r['dependents']:,}" for r in rows[:4]))
+used_ax_df = sum(entry[l] for l in entry
+                 if l.startswith(("ax-", "df-")))
+print(f"  entry points on axioms+definitions: {used_ax_df:,} "
+      f"(the paper reports 17,898 for set.mm)")
+ax4 = next((r for r in rows if r["label"] == "ax-4"), None)
+if ax4:
+    print(f"  ax-4: {ax4['entry_points']} entry point(s), "
+          f"{ax4['dependents']:,} dependents, amplification {ax4['amplification']}")
