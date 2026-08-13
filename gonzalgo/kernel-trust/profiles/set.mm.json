@@ -1,0 +1,43 @@
+{
+  "ktp_version": "0.1",
+  "generated_at": "2026-08-05",
+  "generated_by": {
+    "tool": "gonzalgo",
+    "version": "0.5.2",
+    "url": "https://pypi.org/project/gonzalgo/"
+  },
+  "subject": {
+    "name": "set.mm",
+    "system": "Metamath",
+    "system_version": null,
+    "revision": null,
+    "foundation": "ZFC, classical first-order",
+    "url": null
+  },
+  "counts": {
+    "theorems": 47621,
+    "declarations": null
+  },
+  "unfinished": {
+    "theorems_reaching": 0,
+    "axioms": [
+      "(incomplete proof: bare ? in a $p)"
+    ]
+  },
+  "compiler_trusted": {
+    "theorems_reaching": null,
+    "axioms": []
+  },
+  "assumptions": [
+    {
+      "name": "ax-ac",
+      "kind": "optional",
+      "entry_points": null,
+      "reach": {
+        "theorems": 581,
+        "fraction": 0.0122
+      },
+      "via": "proof"
+    }
+  ]
+}

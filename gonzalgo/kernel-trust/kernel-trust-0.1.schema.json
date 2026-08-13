@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://f-keys.com/ktp/schema/kernel-trust-0.1.schema.json",
+  "title": "Kernel Trust Profile 0.1",
+  "description": "A machine-readable declaration of what a body of machine-checked mathematics rests on. Every value must be recomputable by a third party from the named revision; null means not measured, and 0 is a positive claim.",
+  "type": "object",
+  "required": ["ktp_version", "generated_at", "generated_by", "subject", "counts", "unfinished", "compiler_trusted", "assumptions"],
+  "additionalProperties": false,
+  "properties": {
+    "ktp_version": {
+      "type": "string",
+      "pattern": "^0\\.1$",
+      "description": "Specification version. A consumer must not interpret an unknown major version."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "generated_by": {
+      "type": "object",
+      "required": ["tool", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "tool": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "url": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "required": ["name", "system"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "system": { "type": "string", "minLength": 1, "examples": ["Lean 4", "Metamath", "Coq", "Isabelle"] },
+        "system_version": { "type": ["string", "null"] },
+        "revision": {
+          "type": ["string", "null"],
+          "description": "Commit hash or released version. Required in practice for the profile to be recomputable."
+        },
+        "foundation": { "type": ["string", "null"], "examples": ["ZFC", "dependent type theory", "intuitionistic"] },
+        "url": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "required": ["theorems"],
+      "additionalProperties": false,
+      "properties": {
+        "theorems": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Denominator for every reported fraction."
+        },
+        "declarations": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "unfinished": { "$ref": "#/$defs/hatch" },
+    "compiler_trusted": { "$ref": "#/$defs/hatch" },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "kind", "reach"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "kind": {
+            "enum": ["foundational", "optional", "escape-hatch"],
+            "description": "foundational: the system's own basis. optional: removable in principle. escape-hatch: unfinished or compiler-trusting."
+          },
+          "entry_points": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Declarations whose own proof cites this, as opposed to inheriting it. null means not computed."
+          },
+          "reach": {
+            "type": "object",
+            "required": ["theorems"],
+            "additionalProperties": false,
+            "properties": {
+              "theorems": { "type": "integer", "minimum": 0 },
+              "fraction": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+            }
+          },
+          "via": {
+            "enum": ["statement", "proof", "both", null],
+            "description": "Whether the dependency enters through the theorem statement, only its proof, or both. Collapsing these discards what makes the measurement actionable."
+          },
+          "amplification": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Dependents per entry point. Reportable, but not comparable between libraries: factoring a shared step into a lemma changes it without changing what is proved."
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "hatch": {
+      "type": "object",
+      "required": ["theorems_reaching"],
+      "additionalProperties": false,
+      "properties": {
+        "theorems_reaching": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Theorems reaching this from anywhere upstream. null means not measured; 0 is a positive claim that must be backed by a measurement."
+        },
+        "axioms": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "The axiom names that signal it in this system."
+        }
+      }
+    }
+  }
+}

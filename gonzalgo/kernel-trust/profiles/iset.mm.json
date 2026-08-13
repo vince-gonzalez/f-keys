@@ -1,0 +1,32 @@
+{
+  "ktp_version": "0.1",
+  "generated_at": "2026-08-05",
+  "generated_by": {
+    "tool": "gonzalgo",
+    "version": "0.5.2",
+    "url": "https://pypi.org/project/gonzalgo/"
+  },
+  "subject": {
+    "name": "iset.mm",
+    "system": "Metamath",
+    "system_version": null,
+    "revision": null,
+    "foundation": "intuitionistic",
+    "url": null
+  },
+  "counts": {
+    "theorems": 16236,
+    "declarations": null
+  },
+  "unfinished": {
+    "theorems_reaching": 0,
+    "axioms": [
+      "(incomplete proof: bare ? in a $p)"
+    ]
+  },
+  "compiler_trusted": {
+    "theorems_reaching": null,
+    "axioms": []
+  },
+  "assumptions": []
+}
