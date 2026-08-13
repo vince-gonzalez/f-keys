@@ -1,6 +1,9 @@
 category,proofs,share_of_compiled_pct,note
 corpus,10000,,"Goedel-Prover proofs of Lean Workbook problems, Apache-2.0"
 compiled under Lean 4.32,9169,100.0,
+excluded: no parsable theorem header,1,,not a declaration
+excluded: never entered the environment,270,,invisible to an axiom report
+excluded: admitted carrying sorryAx,560,,"in the environment, counted by a build check"
 "held out, failed to compile",831,,"corpus targets Lean 4.27; version drift, not a property of the proofs"
 depends on Classical.choice,8496,92.7,
 choice dependence bound by the statement,7899,86.1,unavoidable: the theorem is about the reals

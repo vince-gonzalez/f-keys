@@ -1,8 +1,8 @@
 {
   "name": "What machine-generated Lean proofs rest on",
   "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
-  "version": "2026-08-11",
-  "sha256": "906a39491ab2be7a06c7370cd525e649b9644351c8387abf883bd8cd5ee01987",
+  "version": "2026-08-13",
+  "sha256": "49d1fd9ac988a7ad1cd1b205a120e494518d693de6681e9fa8c72afb0094a2a9",
   "url": "https://f-keys.com/gonzalgo/generated-proofs/",
   "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
   "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -51,6 +51,24 @@
       "proofs": 9169,
       "share_of_compiled_pct": 100.0,
       "note": null
+    },
+    {
+      "category": "excluded: no parsable theorem header",
+      "proofs": 1,
+      "share_of_compiled_pct": null,
+      "note": "not a declaration"
+    },
+    {
+      "category": "excluded: never entered the environment",
+      "proofs": 270,
+      "share_of_compiled_pct": null,
+      "note": "invisible to an axiom report"
+    },
+    {
+      "category": "excluded: admitted carrying sorryAx",
+      "proofs": 560,
+      "share_of_compiled_pct": null,
+      "note": "in the environment, counted by a build check"
     },
     {
       "category": "held out, failed to compile",

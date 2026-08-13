@@ -60,7 +60,7 @@
   "name": "What machine-generated Lean proofs rest on",
   "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
   "url": "https://f-keys.com/gonzalgo/generated-proofs/",
-  "version": "2026-08-11",
+  "version": "2026-08-13",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "keywords": [
     "machine-generated proofs",
@@ -149,6 +149,9 @@ footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; co
 
 <pre>corpus                                                10,000
 compiled under Lean 4.32                               9,169   100.0%
+excluded: no parsable theorem header                       1
+excluded: never entered the environment                  270
+excluded: admitted carrying sorryAx                      560
 held out, failed to compile                              831
 depends on Classical.choice                            8,496    92.7%
 choice dependence bound by the statement               7,899    86.1%
@@ -215,7 +218,7 @@ axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 The table above, machine-readable:
 <a href="generated-proofs.json">generated-proofs.json</a> &middot;
 <a href="generated-proofs.csv">generated-proofs.csv</a> &middot; CC-BY-4.0 &middot;
-version 2026-08-11
+version 2026-08-13
 </p>
 <p style="color:var(--dim);font-size:.9rem;border:1px solid var(--border);background:var(--panel);padding:.7rem .9rem;">
 One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
