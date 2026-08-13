@@ -1,4 +1,9 @@
 {
+  "choice-strength": {
+    "history": [],
+    "sha256": "b4fa7bbd8b69998631a472149df11f926139e8845e3405d241642ebe6408110e",
+    "version": "2026-08-12"
+  },
   "cleanable": {
     "history": [],
     "sha256": "073870ae0569b45f4b796065f5964d3d81bd47951981e775337a166abcc68177",

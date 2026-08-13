@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/choice-strength/">
+<title>The Choice Strength Table — full, countable and dependent choice in set.mm</title>
+<meta name="description" content="Every theorem in Metamath's set.mm that depends on a choice principle, labelled with the strongest one it reaches. 583 need full choice, 879 need only countable choice, 66 only dependent choice — more theorems rest on countable choice than on choice proper.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/choice-strength/">
+<meta property="og:title" content="The Choice Strength Table">
+<meta property="og:description" content="not whether a theorem uses choice, but how much of it">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Choice Strength Table",
+  "description": "The 1,528 theorems in Metamath's set.mm whose proofs reach a choice principle, each labelled with the strongest of the three the database declares separately — full choice, countable choice, dependent choice — together with the raw membership in all three.",
+  "url": "https://f-keys.com/gonzalgo/choice-strength/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Metamath",
+    "set.mm",
+    "axiom of choice",
+    "countable choice",
+    "dependent choice",
+    "ZFC",
+    "constructive mathematics",
+    "foundations of mathematics",
+    "formal verification"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "identifier": "https://doi.org/10.5281/zenodo.21900625",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/",
+    "identifier": "https://doi.org/10.5281/zenodo.21900625"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/choice-strength/choice-strength.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/choice-strength/choice-strength.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE CHOICE STRENGTH TABLE</h1>
+<p class="kicker">not whether a theorem uses choice, but how much of it</p>
+
+<p>&ldquo;Depends on choice&rdquo; is usually reported as one bit. <code>set.mm</code> declares three choice principles as separate axioms, so for this library it does not have to be.</p>
+<p>Of 47,621 theorems, 1,528 reach one (3.21%). 583 need full choice. 879 need only countable choice. 66 need only dependent choice. The weaker principle carries more of the library than the strong one does.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Metamath <code>set.mm</code> &middot; proof closure of all 47,621 theorems against <code>ax-ac</code>, <code>ax-ac2</code>, <code>ax-cc</code> and <code>ax-dc</code></p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>theorem</th><th>strongest principle needed</th><th>axioms reached</th></tr></thead>
+<tbody>
+<tr><td>1arithufd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>1arithufdlem1</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>1arithufdlem4</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>2sqr3nconstr</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>abrexctf</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>abrexdom</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>abrexdom2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>abrexdom2jm</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>abrexdomjm</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac2</td><td>full choice</td><td class='found'>ax-ac</td></tr>
+<tr><td>ac3</td><td>full choice</td><td class='found'>ax-ac</td></tr>
+<tr><td>ac4</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac4c</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac5</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac5b</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6c4</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6c5</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6gf</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6mapd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6n</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s3</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s3f</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s4</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s5</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s6</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6s6f</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6sf</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6sf2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac6sg</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac7</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac7g</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac8</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac8prim</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac9</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ac9s</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>aciunf1</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>aciunf1lem</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ackm</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acsdomd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acsexdimd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acsinfd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acsinfdimd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acsmap2d</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acsmapd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acunirnmpt</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acunirnmpt2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>acunirnmpt2f</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>aean</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>aleph1</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>aleph1irr</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>aleph1re</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alephexp2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alephom</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alephreg</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alephsucpw</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alephval2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alexsubALT</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alexsubALTlem2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>alexsubALTlem4</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>algextdeg</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>algextdeglem4</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>algextdeglem6</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>algextdeglem8</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>assafld</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>assalactf1o</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>assarrginv</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>axac</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>axac10</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>axac2</td><td>full choice</td><td class='found'>ax-ac</td></tr>
+<tr><td>axac3</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>axaci</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>axacnd</td><td>full choice</td><td class='found'>ax-ac</td></tr>
+<tr><td>axacndlem4</td><td>full choice</td><td class='found'>ax-ac</td></tr>
+<tr><td>axacndlem5</td><td>full choice</td><td class='found'>ax-ac</td></tr>
+<tr><td>axacprim</td><td>full choice</td><td class='found'>ax-ac</td></tr>
+<tr><td>axdc</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>axdclem2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>bayesth</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>bdayfin</td><td>full choice</td><td class='found'>ax-ac2 ax-dc</td></tr>
+<tr><td>bdayfinbnd</td><td>full choice</td><td class='found'>ax-ac2 ax-dc</td></tr>
+<tr><td>bdayfinbndlem1</td><td>full choice</td><td class='found'>ax-ac2 ax-dc</td></tr>
+<tr><td>bdayfinbndlem2</td><td>full choice</td><td class='found'>ax-ac2 ax-dc</td></tr>
+<tr><td>bdayfinlem</td><td>full choice</td><td class='found'>ax-ac2 ax-dc</td></tr>
+<tr><td>bj-grur1</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>bj-pwcfsdom</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>boolesineq</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>borelmbl</td><td>full choice</td><td class='found'>ax-ac2 ax-cc</td></tr>
+<tr><td>bormflebmf</td><td>full choice</td><td class='found'>ax-ac2 ax-cc</td></tr>
+<tr><td>brdom3</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>brdom4</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>brdom5</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>brdom6disj</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>brdom7disj</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>canth3</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carageniuncl</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carageniuncllem2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>caragensal</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>caragenunicl</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>caratheodory</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>caratheodorylem2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carddom</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carden</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardeq0</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardeqv</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardf</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardid</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardidd</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardidg</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardmin</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardsdom</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cardval</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carsgclctun</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carsgclctunlem2</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carsgclctunlem3</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>carsgsiga</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>ccfldextdgrr</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+<tr><td>cfpwsdom</td><td>full choice</td><td class='found'>ax-ac2</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Showing the first 120 of 1,528 rows. Grouped by principle, strongest first. The full set is in the JSON and the CSV.</p>
+<p class="note"><em>strongest</em> partitions these theorems: a theorem reaching full choice is counted there even if it also reaches the weaker principles. The raw memberships overlap and are in the data &mdash; 583 reach full choice, 1016 reach countable, 88 reach dependent, with 137 theorems in both full and countable alone.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="choice-strength.json">choice-strength.json</a> &middot;
+<a href="choice-strength.csv">choice-strength.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
+resolves to the current deposit.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>pip install gonzalgo
+gonzalgo mm set.mm</pre>
+<p class="note">Method: <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>.</p>
+
+<h2>The weaker axiom does more work</h2>
+<p>1016 theorems reach countable choice against 583 reaching choice proper. Countable choice is the weaker principle and it is load-bearing for more of this library, which is not what a single choice-dependence figure would suggest.</p>
+<p>It also changes what a repair would mean. A theorem resting only on countable choice is already closer to a constructive setting than the same theorem resting on full choice, and reporting both as &ldquo;classical&rdquo; erases the distinction the database went to the trouble of making.</p>
+
+<h2>Why this differs from the Kernel Index figure</h2>
+<p>The <a href="/gonzalgo/kernel-index/">Kernel Index</a> reports set.mm at 1.22%, which is 583 theorems reaching full choice over 47,621. Counting every choice principle gives 1,528, or 3.21%. Neither number is wrong; they answer different questions, and this table is where the difference is visible rather than implicit.</p>
+<p>Lean has no counterpart to this row. <code>Classical.choice</code> is a single axiom with no weaker sibling in the core, so a Lean library cannot be stratified this way at all &mdash; the distinction exists here because set.mm's authors declared the principles separately.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/choice-strength/">f-keys.com/gonzalgo/choice-strength/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>

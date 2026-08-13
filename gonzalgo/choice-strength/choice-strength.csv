@@ -1,0 +1,1529 @@
+theorem,strongest,reaches_full_choice,reaches_countable_choice,reaches_dependent_choice,axioms_reached
+1arithufd,full choice,true,false,false,ax-ac2
+1arithufdlem1,full choice,true,false,false,ax-ac2
+1arithufdlem4,full choice,true,false,false,ax-ac2
+2sqr3nconstr,full choice,true,false,false,ax-ac2
+abrexctf,full choice,true,false,false,ax-ac2
+abrexdom,full choice,true,false,false,ax-ac2
+abrexdom2,full choice,true,false,false,ax-ac2
+abrexdom2jm,full choice,true,false,false,ax-ac2
+abrexdomjm,full choice,true,false,false,ax-ac2
+ac2,full choice,true,false,false,ax-ac
+ac3,full choice,true,false,false,ax-ac
+ac4,full choice,true,false,false,ax-ac2
+ac4c,full choice,true,false,false,ax-ac2
+ac5,full choice,true,false,false,ax-ac2
+ac5b,full choice,true,false,false,ax-ac2
+ac6,full choice,true,false,false,ax-ac2
+ac6c4,full choice,true,false,false,ax-ac2
+ac6c5,full choice,true,false,false,ax-ac2
+ac6gf,full choice,true,false,false,ax-ac2
+ac6mapd,full choice,true,false,false,ax-ac2
+ac6n,full choice,true,false,false,ax-ac2
+ac6s,full choice,true,false,false,ax-ac2
+ac6s2,full choice,true,false,false,ax-ac2
+ac6s3,full choice,true,false,false,ax-ac2
+ac6s3f,full choice,true,false,false,ax-ac2
+ac6s4,full choice,true,false,false,ax-ac2
+ac6s5,full choice,true,false,false,ax-ac2
+ac6s6,full choice,true,false,false,ax-ac2
+ac6s6f,full choice,true,false,false,ax-ac2
+ac6sf,full choice,true,false,false,ax-ac2
+ac6sf2,full choice,true,false,false,ax-ac2
+ac6sg,full choice,true,false,false,ax-ac2
+ac7,full choice,true,false,false,ax-ac2
+ac7g,full choice,true,false,false,ax-ac2
+ac8,full choice,true,false,false,ax-ac2
+ac8prim,full choice,true,false,false,ax-ac2
+ac9,full choice,true,false,false,ax-ac2
+ac9s,full choice,true,false,false,ax-ac2
+aciunf1,full choice,true,false,false,ax-ac2
+aciunf1lem,full choice,true,false,false,ax-ac2
+ackm,full choice,true,false,false,ax-ac2
+acsdomd,full choice,true,false,false,ax-ac2
+acsexdimd,full choice,true,false,false,ax-ac2
+acsinfd,full choice,true,false,false,ax-ac2
+acsinfdimd,full choice,true,false,false,ax-ac2
+acsmap2d,full choice,true,false,false,ax-ac2
+acsmapd,full choice,true,false,false,ax-ac2
+acunirnmpt,full choice,true,false,false,ax-ac2
+acunirnmpt2,full choice,true,false,false,ax-ac2
+acunirnmpt2f,full choice,true,false,false,ax-ac2
+aean,full choice,true,false,false,ax-ac2
+aleph1,full choice,true,false,false,ax-ac2
+aleph1irr,full choice,true,false,false,ax-ac2
+aleph1re,full choice,true,false,false,ax-ac2
+alephexp2,full choice,true,false,false,ax-ac2
+alephom,full choice,true,false,false,ax-ac2
+alephreg,full choice,true,false,false,ax-ac2
+alephsucpw,full choice,true,false,false,ax-ac2
+alephval2,full choice,true,false,false,ax-ac2
+alexsubALT,full choice,true,false,false,ax-ac2
+alexsubALTlem2,full choice,true,false,false,ax-ac2
+alexsubALTlem4,full choice,true,false,false,ax-ac2
+algextdeg,full choice,true,false,false,ax-ac2
+algextdeglem4,full choice,true,false,false,ax-ac2
+algextdeglem6,full choice,true,false,false,ax-ac2
+algextdeglem8,full choice,true,false,false,ax-ac2
+assafld,full choice,true,false,false,ax-ac2
+assalactf1o,full choice,true,false,false,ax-ac2
+assarrginv,full choice,true,false,false,ax-ac2
+axac,full choice,true,false,false,ax-ac2
+axac10,full choice,true,false,false,ax-ac2
+axac2,full choice,true,false,false,ax-ac
+axac3,full choice,true,false,false,ax-ac2
+axaci,full choice,true,false,false,ax-ac2
+axacnd,full choice,true,false,false,ax-ac
+axacndlem4,full choice,true,false,false,ax-ac
+axacndlem5,full choice,true,false,false,ax-ac
+axacprim,full choice,true,false,false,ax-ac
+axdc,full choice,true,false,false,ax-ac2
+axdclem2,full choice,true,false,false,ax-ac2
+bayesth,full choice,true,false,false,ax-ac2
+bdayfin,full choice,true,false,true,ax-ac2 ax-dc
+bdayfinbnd,full choice,true,false,true,ax-ac2 ax-dc
+bdayfinbndlem1,full choice,true,false,true,ax-ac2 ax-dc
+bdayfinbndlem2,full choice,true,false,true,ax-ac2 ax-dc
+bdayfinlem,full choice,true,false,true,ax-ac2 ax-dc
+bj-grur1,full choice,true,false,false,ax-ac2
+bj-pwcfsdom,full choice,true,false,false,ax-ac2
+boolesineq,full choice,true,false,false,ax-ac2
+borelmbl,full choice,true,true,false,ax-ac2 ax-cc
+bormflebmf,full choice,true,true,false,ax-ac2 ax-cc
+brdom3,full choice,true,false,false,ax-ac2
+brdom4,full choice,true,false,false,ax-ac2
+brdom5,full choice,true,false,false,ax-ac2
+brdom6disj,full choice,true,false,false,ax-ac2
+brdom7disj,full choice,true,false,false,ax-ac2
+canth3,full choice,true,false,false,ax-ac2
+carageniuncl,full choice,true,false,false,ax-ac2
+carageniuncllem2,full choice,true,false,false,ax-ac2
+caragensal,full choice,true,false,false,ax-ac2
+caragenunicl,full choice,true,false,false,ax-ac2
+caratheodory,full choice,true,false,false,ax-ac2
+caratheodorylem2,full choice,true,false,false,ax-ac2
+carddom,full choice,true,false,false,ax-ac2
+carden,full choice,true,false,false,ax-ac2
+cardeq0,full choice,true,false,false,ax-ac2
+cardeqv,full choice,true,false,false,ax-ac2
+cardf,full choice,true,false,false,ax-ac2
+cardid,full choice,true,false,false,ax-ac2
+cardidd,full choice,true,false,false,ax-ac2
+cardidg,full choice,true,false,false,ax-ac2
+cardmin,full choice,true,false,false,ax-ac2
+cardsdom,full choice,true,false,false,ax-ac2
+cardval,full choice,true,false,false,ax-ac2
+carsgclctun,full choice,true,false,false,ax-ac2
+carsgclctunlem2,full choice,true,false,false,ax-ac2
+carsgclctunlem3,full choice,true,false,false,ax-ac2
+carsgsiga,full choice,true,false,false,ax-ac2
+ccfldextdgrr,full choice,true,false,false,ax-ac2
+cfpwsdom,full choice,true,false,false,ax-ac2
+cldssbrsiga,full choice,true,false,false,ax-ac2
+cmpcref,full choice,true,false,false,ax-ac2
+cmpfiref,full choice,true,false,false,ax-ac2
+cmppcmp,full choice,true,false,false,ax-ac2
+cndprob01,full choice,true,false,false,ax-ac2
+cndprobin,full choice,true,false,false,ax-ac2
+cndprobnul,full choice,true,false,false,ax-ac2
+cndprobprob,full choice,true,false,false,ax-ac2
+cndprobtot,full choice,true,false,false,ax-ac2
+cnmbfm,full choice,true,false,false,ax-ac2
+coinflippvt,full choice,true,false,false,ax-ac2
+constrcon,full choice,true,false,false,ax-ac2
+constrelextdg2,full choice,true,false,false,ax-ac2
+constrext2chn,full choice,true,false,false,ax-ac2
+constrext2chnlem,full choice,true,false,false,ax-ac2
+constrextdg2,full choice,true,false,false,ax-ac2
+constrextdg2lem,full choice,true,false,false,ax-ac2
+cos9thpinconstr,full choice,true,false,false,ax-ac2
+cos9thpinconstrlem2,full choice,true,false,false,ax-ac2
+ctbssinf,full choice,true,true,false,ax-ac2 ax-cc
+ctvonmbl,full choice,true,true,false,ax-ac2 ax-cc
+cyc3genpm,full choice,true,false,false,ax-ac2
+cyc3genpmlem,full choice,true,false,false,ax-ac2
+decsmf,full choice,true,true,false,ax-ac2 ax-cc
+dflring3,full choice,true,false,false,ax-ac2
+dflring4,full choice,true,false,false,ax-ac2
+dflringlem,full choice,true,false,false,ax-ac2
+dfufd2,full choice,true,false,false,ax-ac2
+dfuniv2,full choice,true,false,false,ax-ac2
+dfz12s2,full choice,true,false,true,ax-ac2 ax-dc
+difelsiga,full choice,true,false,false,ax-ac2
+dimcl,full choice,true,false,false,ax-ac2
+dimkerim,full choice,true,false,false,ax-ac2
+dimlssid,full choice,true,false,false,ax-ac2
+dimpropd,full choice,true,false,false,ax-ac2
+dimval,full choice,true,false,false,ax-ac2
+disjinfi,full choice,true,false,false,ax-ac2
+dmct,full choice,true,false,false,ax-ac2
+dmovnsal,full choice,true,true,false,ax-ac2 ax-cc
+dmvon,full choice,true,true,false,ax-ac2 ax-cc
+dominfac,full choice,true,false,false,ax-ac2
+domtri,full choice,true,false,false,ax-ac2
+drngdimgt0,full choice,true,false,false,ax-ac2
+drngmxidlr,full choice,true,false,false,ax-ac2
+dstfrvclim1,full choice,true,false,false,ax-ac2
+dstfrvinc,full choice,true,false,false,ax-ac2
+dstfrvunirn,full choice,true,false,false,ax-ac2
+dstrvprob,full choice,true,false,false,ax-ac2
+dya2icobrsiga,full choice,true,false,false,ax-ac2
+dya2iocbrsiga,full choice,true,false,false,ax-ac2
+dya2iocct,full choice,true,false,false,ax-ac2
+dynkin,full choice,true,false,false,ax-ac2
+eln0s2,full choice,true,false,false,ax-ac2
+elnanelprv,full choice,true,false,false,ax-ac2
+elrgspnsubrun,full choice,true,false,false,ax-ac2
+elrgspnsubrunlem2,full choice,true,false,false,ax-ac2
+elrspunidl,full choice,true,false,false,ax-ac2
+elwspths2on,full choice,true,false,false,ax-ac2
+elwspths2spth,full choice,true,false,false,ax-ac2
+elwwlks2,full choice,true,false,false,ax-ac2
+elwwlks2on,full choice,true,false,false,ax-ac2
+entri2,full choice,true,false,false,ax-ac2
+entri3,full choice,true,false,false,ax-ac2
+entric,full choice,true,false,false,ax-ac2
+esumiun,full choice,true,false,false,ax-ac2
+eulerpart,full choice,true,false,false,ax-ac2
+eulerpartgbij,full choice,true,false,false,ax-ac2
+eulerpartlem1,full choice,true,false,false,ax-ac2
+eulerpartlemgf,full choice,true,false,false,ax-ac2
+eulerpartlemgs2,full choice,true,false,false,ax-ac2
+eulerpartlemgvv,full choice,true,false,false,ax-ac2
+eulerpartlemn,full choice,true,false,false,ax-ac2
+ex-sategoel,full choice,true,false,false,ax-ac2
+ex-sategoelel,full choice,true,false,false,ax-ac2
+ex-sategoelel12,full choice,true,false,false,ax-ac2
+ex-sategoelelomsuc,full choice,true,false,false,ax-ac2
+extdg1b,full choice,true,false,false,ax-ac2
+extdg1id,full choice,true,false,false,ax-ac2
+extdgcl,full choice,true,false,false,ax-ac2
+extdgfialg,full choice,true,false,false,ax-ac2
+extdgfialglem1,full choice,true,false,false,ax-ac2
+extdggt0,full choice,true,false,false,ax-ac2
+extdgid,full choice,true,false,false,ax-ac2
+extdgmul,full choice,true,false,false,ax-ac2
+fedgmul,full choice,true,false,false,ax-ac2
+ffsrn,full choice,true,false,false,ax-ac2
+ficard,full choice,true,false,false,ax-ac2
+filssufil,full choice,true,false,false,ax-ac2
+filufint,full choice,true,false,false,ax-ac2
+fimact,full choice,true,false,false,ax-ac2
+fin71ac,full choice,true,false,false,ax-ac2
+finextalg,full choice,true,false,false,ax-ac2
+finexttrb,full choice,true,false,false,ax-ac2
+fldext2chn,full choice,true,false,false,ax-ac2
+fldext2rspun,full choice,true,false,false,ax-ac2
+fldextrspundgdvds,full choice,true,false,false,ax-ac2
+fldextrspundgdvdslem,full choice,true,false,false,ax-ac2
+fldextrspundgle,full choice,true,false,false,ax-ac2
+fldextrspundglemul,full choice,true,false,false,ax-ac2
+fldextrspunfld,full choice,true,false,false,ax-ac2
+fldextrspunlem1,full choice,true,false,false,ax-ac2
+fldextrspunlem2,full choice,true,false,false,ax-ac2
+fldextrspunlsp,full choice,true,false,false,ax-ac2
+fldextrspunlsplem,full choice,true,false,false,ax-ac2
+fldlring,full choice,true,false,false,ax-ac2
+fnct,full choice,true,false,false,ax-ac2
+fnpreimac,full choice,true,false,false,ax-ac2
+fnrndomg,full choice,true,false,false,ax-ac2
+fodom,full choice,true,false,false,ax-ac2
+fodomb,full choice,true,false,false,ax-ac2
+fodomg,full choice,true,false,false,ax-ac2
+foresf1o,full choice,true,false,false,ax-ac2
+fpwrelmapffs,full choice,true,false,false,ax-ac2
+fpwrelmapffslem,full choice,true,false,false,ax-ac2
+frgr2wwlkeqm,full choice,true,false,false,ax-ac2
+frlmdim,full choice,true,false,false,ax-ac2
+fsumiunle,full choice,true,false,false,ax-ac2
+fsumiunss,full choice,true,false,false,ax-ac2
+gch-kn,full choice,true,false,false,ax-ac2
+grothprim,full choice,true,true,false,ax-ac2 ax-cc
+grucollcld,full choice,true,false,false,ax-ac2
+gruex,full choice,true,false,false,ax-ac2
+gruina,full choice,true,false,false,ax-ac2
+grumnud,full choice,true,false,false,ax-ac2
+grumnudlem,full choice,true,false,false,ax-ac2
+grumnueq,full choice,true,false,false,ax-ac2
+grur1,full choice,true,false,false,ax-ac2
+grur1a,full choice,true,false,false,ax-ac2
+grurankcld,full choice,true,false,false,ax-ac2
+gruscottcld,full choice,true,false,false,ax-ac2
+grutsk,full choice,true,false,false,ax-ac2
+grutsk1,full choice,true,false,false,ax-ac2
+hausmapdom,full choice,true,true,false,ax-ac2 ax-cc
+hauspwdom,full choice,true,true,false,ax-ac2 ax-cc
+hgt750lema,full choice,true,false,false,ax-ac2
+hgt750leme,full choice,true,false,false,ax-ac2
+hoimbl,full choice,true,true,false,ax-ac2 ax-cc
+hoimbl2,full choice,true,true,false,ax-ac2 ax-cc
+hoimbllem,full choice,true,true,false,ax-ac2 ax-cc
+hspmbl,full choice,true,true,false,ax-ac2 ax-cc
+iccvonmbl,full choice,true,true,false,ax-ac2 ax-cc
+iccvonmbllem,full choice,true,true,false,ax-ac2 ax-cc
+imadomg,full choice,true,false,false,ax-ac2
+imambfm,full choice,true,false,false,ax-ac2
+inaex,full choice,true,false,false,ax-ac2
+inagrud,full choice,true,false,false,ax-ac2
+inaprc,full choice,true,false,false,ax-ac2
+inar1,full choice,true,false,false,ax-ac2
+inatsk,full choice,true,false,false,ax-ac2
+indexdom,full choice,true,false,false,ax-ac2
+inelsiga,full choice,true,false,false,ax-ac2
+infinf,full choice,true,false,false,ax-ac2
+infinfg,full choice,true,false,false,ax-ac2
+infmap,full choice,true,false,false,ax-ac2
+infxpidm,full choice,true,false,false,ax-ac2
+ioovonmbl,full choice,true,true,false,ax-ac2 ax-cc
+islinds4,full choice,true,false,false,ax-ac2
+issmfge,full choice,true,true,false,ax-ac2 ax-cc
+issmfgelem,full choice,true,true,false,ax-ac2 ax-cc
+issmfgt,full choice,true,true,false,ax-ac2 ax-cc
+issmfgtd,full choice,true,true,false,ax-ac2 ax-cc
+issmfgtlem,full choice,true,true,false,ax-ac2 ax-cc
+issmfle,full choice,true,true,false,ax-ac2 ax-cc
+issmfle2d,full choice,true,true,false,ax-ac2 ax-cc
+issmfled,full choice,true,true,false,ax-ac2 ax-cc
+issmflelem,full choice,true,true,false,ax-ac2 ax-cc
+isvonmbl,full choice,true,true,false,ax-ac2 ax-cc
+iundom,full choice,true,false,false,ax-ac2
+kardcard,full choice,true,false,false,ax-ac2
+konigth,full choice,true,false,false,ax-ac2
+konigthlem,full choice,true,false,false,ax-ac2
+krull,full choice,true,false,false,ax-ac2
+krullndrng,full choice,true,false,false,ax-ac2
+lbsex,full choice,true,false,false,ax-ac2
+lbsext,full choice,true,false,false,ax-ac2
+lbslelsp,full choice,true,false,false,ax-ac2
+ldgenpisys,full choice,true,false,false,ax-ac2
+ldsysgenld,full choice,true,false,false,ax-ac2
+lmicdim,full choice,true,false,false,ax-ac2
+lmimdim,full choice,true,false,false,ax-ac2
+locfinref,full choice,true,false,false,ax-ac2
+locfinreflem,full choice,true,false,false,ax-ac2
+lsatdim,full choice,true,false,false,ax-ac2
+lssdimle,full choice,true,false,false,ax-ac2
+lvecdim,full choice,true,false,false,ax-ac2
+lvecdim0,full choice,true,false,false,ax-ac2
+lvecdim0i,full choice,true,false,false,ax-ac2
+lvecendof1f1o,full choice,true,false,false,ax-ac2
+lvecisfrlm,full choice,true,false,false,ax-ac2
+madefi,full choice,true,false,false,ax-ac2
+matdim,full choice,true,false,false,ax-ac2
+mbfmco2,full choice,true,false,false,ax-ac2
+mbfpsssmf,full choice,true,true,false,ax-ac2 ax-cc
+mblvon,full choice,true,true,false,ax-ac2 ax-cc
+meascnbl,full choice,true,false,false,ax-ac2
+measinb,full choice,true,false,false,ax-ac2
+measinb2,full choice,true,false,false,ax-ac2
+measinblem,full choice,true,false,false,ax-ac2
+measiun,full choice,true,false,false,ax-ac2
+measiuns,full choice,true,false,false,ax-ac2
+measssd,full choice,true,false,false,ax-ac2
+measun,full choice,true,false,false,ax-ac2
+measunl,full choice,true,false,false,ax-ac2
+measvuni,full choice,true,false,false,ax-ac2
+measvunilem,full choice,true,false,false,ax-ac2
+measxun2,full choice,true,false,false,ax-ac2
+minregex,full choice,true,false,false,ax-ac2
+minregex2,full choice,true,false,false,ax-ac2
+mpocti,full choice,true,false,false,ax-ac2
+mptct,full choice,true,false,false,ax-ac2
+mptctf,full choice,true,false,false,ax-ac2
+mxidlnzrb,full choice,true,false,false,ax-ac2
+n0cutlt,full choice,true,false,false,ax-ac2
+nlpfvineqsn,full choice,true,false,false,ax-ac2
+nmobndseqiALT,full choice,true,false,false,ax-ac2
+nmounbseqiALT,full choice,true,false,false,ax-ac2
+nsssmfmbf,full choice,true,true,false,ax-ac2 ax-cc
+nsssmfmbflem,full choice,true,true,false,ax-ac2 ax-cc
+numth,full choice,true,false,false,ax-ac2
+numth2,full choice,true,false,false,ax-ac2
+numth3,full choice,true,false,false,ax-ac2
+numthcor,full choice,true,false,false,ax-ac2
+oldfi,full choice,true,false,false,ax-ac2
+oldfib,full choice,true,false,false,ax-ac2
+omeiunle,full choice,true,false,false,ax-ac2
+omeiunlempt,full choice,true,false,false,ax-ac2
+omeiunltfirp,full choice,true,false,false,ax-ac2
+omsmeas,full choice,true,true,false,ax-ac2 ax-cc
+omssubadd,full choice,true,true,false,ax-ac2 ax-cc
+ondomon,full choice,true,false,false,ax-ac2
+onltn0s,full choice,true,false,false,ax-ac2
+onsfi,full choice,true,false,false,ax-ac2
+opnvonmbl,full choice,true,true,false,ax-ac2 ax-cc
+opnvonmbllem2,full choice,true,true,false,ax-ac2 ax-cc
+orrvccel,full choice,true,false,false,ax-ac2
+orvccel,full choice,true,false,false,ax-ac2
+orvcgteel,full choice,true,false,false,ax-ac2
+orvclteel,full choice,true,false,false,ax-ac2
+ovnome,full choice,true,true,false,ax-ac2 ax-cc
+ovnsplit,full choice,true,true,false,ax-ac2 ax-cc
+ovnsubadd,full choice,true,true,false,ax-ac2 ax-cc
+ovnsubadd2,full choice,true,true,false,ax-ac2 ax-cc
+ovnsubadd2lem,full choice,true,true,false,ax-ac2 ax-cc
+ovnsubaddlem1,full choice,true,false,false,ax-ac2
+ovnsubaddlem2,full choice,true,true,false,ax-ac2 ax-cc
+pcmplfinf,full choice,true,false,false,ax-ac2
+permac8prim,full choice,true,false,false,ax-ac2
+pibt2,full choice,true,false,false,ax-ac2
+pmeasadd,full choice,true,false,false,ax-ac2
+prob01,full choice,true,false,false,ax-ac2
+probdif,full choice,true,false,false,ax-ac2
+probdsb,full choice,true,false,false,ax-ac2
+probinc,full choice,true,false,false,ax-ac2
+probmeasb,full choice,true,false,false,ax-ac2
+probtotrnd,full choice,true,false,false,ax-ac2
+probun,full choice,true,false,false,ax-ac2
+probvalrnd,full choice,true,false,false,ax-ac2
+prv0,full choice,true,false,false,ax-ac2
+prv1n,full choice,true,false,false,ax-ac2
+psmeasure,full choice,true,false,false,ax-ac2
+psmeasurelem,full choice,true,false,false,ax-ac2
+ptcls,full choice,true,false,false,ax-ac2
+ptcmp,full choice,true,false,false,ax-ac2
+ptpconn,full choice,true,false,false,ax-ac2
+pwcfsdom,full choice,true,false,false,ax-ac2
+pwinfi3,full choice,true,false,false,ax-ac2
+qusdimsum,full choice,true,false,false,ax-ac2
+r1omALT,full choice,true,false,false,ax-ac2
+r1omtsk,full choice,true,false,false,ax-ac2
+r1tskina,full choice,true,false,false,ax-ac2
+rabfodom,full choice,true,false,false,ax-ac2
+reff,full choice,true,false,false,ax-ac2
+rhmpreimacn,full choice,true,false,false,ax-ac2
+rlmdim,full choice,true,false,false,ax-ac2
+rnct,full choice,true,false,false,ax-ac2
+rr-groth,full choice,true,false,false,ax-ac2
+rr-grothprim,full choice,true,false,false,ax-ac2
+rr-grothprimbi,full choice,true,false,false,ax-ac2
+rr-grothshort,full choice,true,false,false,ax-ac2
+rr-grothshortbi,full choice,true,false,false,ax-ac2
+rrnmbl,full choice,true,true,false,ax-ac2 ax-cc
+rrvadd,full choice,true,false,false,ax-ac2
+rrvmulc,full choice,true,false,false,ax-ac2
+rrvsum,full choice,true,false,false,ax-ac2
+rrxdim,full choice,true,false,false,ax-ac2
+rspectps,full choice,true,false,false,ax-ac2
+rtelextdg2,full choice,true,false,false,ax-ac2
+rtelextdg2lem,full choice,true,false,false,ax-ac2
+s3wwlks2on,full choice,true,false,false,ax-ac2
+sate0fv0,full choice,true,false,false,ax-ac2
+satef,full choice,true,false,false,ax-ac2
+satefvfmla0,full choice,true,false,false,ax-ac2
+satefvfmla1,full choice,true,false,false,ax-ac2
+sategoelfv,full choice,true,false,false,ax-ac2
+sategoelfvb,full choice,true,false,false,ax-ac2
+satfun,full choice,true,false,false,ax-ac2
+satfvel,full choice,true,false,false,ax-ac2
+sdomsdomcard,full choice,true,false,false,ax-ac2
+sge0iun,full choice,true,false,false,ax-ac2
+sge0iunmpt,full choice,true,false,false,ax-ac2
+sge0iunmptlemre,full choice,true,false,false,ax-ac2
+sge0xp,full choice,true,false,false,ax-ac2
+sibfinima,full choice,true,false,false,ax-ac2
+sibfof,full choice,true,false,false,ax-ac2
+sigaclci,full choice,true,false,false,ax-ac2
+sigaclcuni,full choice,true,false,false,ax-ac2
+sigainb,full choice,true,false,false,ax-ac2
+sigaldsys,full choice,true,false,false,ax-ac2
+sigapildsys,full choice,true,false,false,ax-ac2
+sigapisys,full choice,true,false,false,ax-ac2
+sitgaddlemb,full choice,true,false,false,ax-ac2
+sitmcl,full choice,true,false,false,ax-ac2
+sitmf,full choice,true,false,false,ax-ac2
+smf2id,full choice,true,true,false,ax-ac2 ax-cc
+smfadd,full choice,true,true,false,ax-ac2 ax-cc
+smfaddlem2,full choice,true,true,false,ax-ac2 ax-cc
+smfco,full choice,true,true,false,ax-ac2 ax-cc
+smfconst,full choice,true,true,false,ax-ac2 ax-cc
+smfdiv,full choice,true,true,false,ax-ac2 ax-cc
+smfdivdmmbl,full choice,true,true,false,ax-ac2 ax-cc
+smfdivdmmbl2,full choice,true,true,false,ax-ac2 ax-cc
+smfdmmblpimne,full choice,true,true,false,ax-ac2 ax-cc
+smfinf,full choice,true,true,false,ax-ac2 ax-cc
+smfinfdmmbl,full choice,true,true,false,ax-ac2 ax-cc
+smfinfdmmbllem,full choice,true,true,false,ax-ac2 ax-cc
+smfinflem,full choice,true,true,false,ax-ac2 ax-cc
+smfinfmpt,full choice,true,true,false,ax-ac2 ax-cc
+smflim,full choice,true,true,false,ax-ac2 ax-cc
+smflim2,full choice,true,true,false,ax-ac2 ax-cc
+smfliminf,full choice,true,true,false,ax-ac2 ax-cc
+smfliminflem,full choice,true,true,false,ax-ac2 ax-cc
+smfliminfmpt,full choice,true,true,false,ax-ac2 ax-cc
+smflimlem6,full choice,true,true,false,ax-ac2 ax-cc
+smflimmpt,full choice,true,true,false,ax-ac2 ax-cc
+smflimsup,full choice,true,true,false,ax-ac2 ax-cc
+smflimsuplem3,full choice,true,true,false,ax-ac2 ax-cc
+smflimsuplem8,full choice,true,true,false,ax-ac2 ax-cc
+smflimsupmpt,full choice,true,true,false,ax-ac2 ax-cc
+smfmbfcex,full choice,true,true,false,ax-ac2 ax-cc
+smfmul,full choice,true,true,false,ax-ac2 ax-cc
+smfmulc1,full choice,true,true,false,ax-ac2 ax-cc
+smfmullem4,full choice,true,true,false,ax-ac2 ax-cc
+smfneg,full choice,true,true,false,ax-ac2 ax-cc
+smfpimbor1,full choice,true,true,false,ax-ac2 ax-cc
+smfpimbor1lem1,full choice,true,true,false,ax-ac2 ax-cc
+smfpimbor1lem2,full choice,true,true,false,ax-ac2 ax-cc
+smfpimcc,full choice,true,true,false,ax-ac2 ax-cc
+smfpimgtmpt,full choice,true,true,false,ax-ac2 ax-cc
+smfpimgtxr,full choice,true,true,false,ax-ac2 ax-cc
+smfpimgtxrmpt,full choice,true,true,false,ax-ac2 ax-cc
+smfpimgtxrmptf,full choice,true,true,false,ax-ac2 ax-cc
+smfpimioo,full choice,true,true,false,ax-ac2 ax-cc
+smfpimioompt,full choice,true,true,false,ax-ac2 ax-cc
+smfpimltxr,full choice,true,true,false,ax-ac2 ax-cc
+smfpimltxrmpt,full choice,true,true,false,ax-ac2 ax-cc
+smfpimltxrmptf,full choice,true,true,false,ax-ac2 ax-cc
+smfpimne,full choice,true,true,false,ax-ac2 ax-cc
+smfpimne2,full choice,true,true,false,ax-ac2 ax-cc
+smfpreimage,full choice,true,true,false,ax-ac2 ax-cc
+smfpreimagt,full choice,true,true,false,ax-ac2 ax-cc
+smfpreimagtf,full choice,true,true,false,ax-ac2 ax-cc
+smfpreimale,full choice,true,true,false,ax-ac2 ax-cc
+smfrec,full choice,true,true,false,ax-ac2 ax-cc
+smfres,full choice,true,true,false,ax-ac2 ax-cc
+smfresal,full choice,true,true,false,ax-ac2 ax-cc
+smfsup,full choice,true,true,false,ax-ac2 ax-cc
+smfsupdmmbl,full choice,true,true,false,ax-ac2 ax-cc
+smfsupdmmbllem,full choice,true,true,false,ax-ac2 ax-cc
+smfsuplem2,full choice,true,true,false,ax-ac2 ax-cc
+smfsuplem3,full choice,true,true,false,ax-ac2 ax-cc
+smfsupmpt,full choice,true,true,false,ax-ac2 ax-cc
+smfsupxr,full choice,true,true,false,ax-ac2 ax-cc
+snvonmbl,full choice,true,true,false,ax-ac2 ax-cc
+ssdifidl,full choice,true,false,false,ax-ac2
+ssdifidlprm,full choice,true,false,false,ax-ac2
+ssmxidl,full choice,true,false,false,ax-ac2
+subsaliuncl,full choice,true,true,false,ax-ac2 ax-cc
+subsalsal,full choice,true,true,false,ax-ac2 ax-cc
+subsaluni,full choice,true,true,false,ax-ac2 ax-cc
+sxbrsiga,full choice,true,false,false,ax-ac2
+sxbrsigalem1,full choice,true,false,false,ax-ac2
+sxbrsigalem2,full choice,true,false,false,ax-ac2
+sxbrsigalem4,full choice,true,false,false,ax-ac2
+sxbrsigalem5,full choice,true,false,false,ax-ac2
+sxbrsigalem6,full choice,true,false,false,ax-ac2
+tgoldbachgt,full choice,true,true,false,ax-ac2 ax-cc
+tgoldbachgtd,full choice,true,true,false,ax-ac2 ax-cc
+tgoldbachgtda,full choice,true,true,false,ax-ac2 ax-cc
+tgoldbachgtde,full choice,true,true,false,ax-ac2 ax-cc
+tngdim,full choice,true,false,false,ax-ac2
+totprob,full choice,true,false,false,ax-ac2
+totprobd,full choice,true,false,false,ax-ac2
+trisecnconstr,full choice,true,false,false,ax-ac2
+tskcard,full choice,true,false,false,ax-ac2
+tskint,full choice,true,false,false,ax-ac2
+tskmap,full choice,true,false,false,ax-ac2
+tskun,full choice,true,false,false,ax-ac2
+tskuni,full choice,true,false,false,ax-ac2
+tskurn,full choice,true,false,false,ax-ac2
+tskwun,full choice,true,false,false,ax-ac2
+tskxp,full choice,true,false,false,ax-ac2
+ttukey,full choice,true,false,false,ax-ac2
+ufilen,full choice,true,false,false,ax-ac2
+ufileu,full choice,true,false,false,ax-ac2
+ufinffr,full choice,true,false,false,ax-ac2
+umgrwwlks2on,full choice,true,false,false,ax-ac2
+unidifsnel,full choice,true,false,false,ax-ac2
+unidifsnne,full choice,true,false,false,ax-ac2
+unidmvon,full choice,true,true,false,ax-ac2 ax-cc
+unidom,full choice,true,false,false,ax-ac2
+uniimadom,full choice,true,false,false,ax-ac2
+uniimadomf,full choice,true,false,false,ax-ac2
+unirnfdomd,full choice,true,false,false,ax-ac2
+unsnen,full choice,true,false,false,ax-ac2
+vitali2,full choice,true,true,false,ax-ac2 ax-cc
+von0val,full choice,true,true,false,ax-ac2 ax-cc
+voncl,full choice,true,true,false,ax-ac2 ax-cc
+voncmpl,full choice,true,true,false,ax-ac2 ax-cc
+vonct,full choice,true,true,false,ax-ac2 ax-cc
+vonhoi,full choice,true,true,false,ax-ac2 ax-cc
+vonhoire,full choice,true,true,false,ax-ac2 ax-cc
+vonicc,full choice,true,true,false,ax-ac2 ax-cc
+vonicclem1,full choice,true,true,false,ax-ac2 ax-cc
+vonicclem2,full choice,true,true,false,ax-ac2 ax-cc
+vonioo,full choice,true,true,false,ax-ac2 ax-cc
+vonioolem1,full choice,true,true,false,ax-ac2 ax-cc
+vonioolem2,full choice,true,true,false,ax-ac2 ax-cc
+vonmblss,full choice,true,true,false,ax-ac2 ax-cc
+vonmblss2,full choice,true,true,false,ax-ac2 ax-cc
+vonmea,full choice,true,true,false,ax-ac2 ax-cc
+vonn0hoi,full choice,true,true,false,ax-ac2 ax-cc
+vonn0icc,full choice,true,true,false,ax-ac2 ax-cc
+vonn0icc2,full choice,true,true,false,ax-ac2 ax-cc
+vonn0ioo,full choice,true,true,false,ax-ac2 ax-cc
+vonn0ioo2,full choice,true,true,false,ax-ac2 ax-cc
+vonsn,full choice,true,true,false,ax-ac2 ax-cc
+vonvol,full choice,true,true,false,ax-ac2 ax-cc
+vonvol2,full choice,true,true,false,ax-ac2 ax-cc
+vonvolmbl,full choice,true,true,false,ax-ac2 ax-cc
+vonvolmbl2,full choice,true,true,false,ax-ac2 ax-cc
+vonxrcl,full choice,true,true,false,ax-ac2 ax-cc
+wdomac,full choice,true,false,false,ax-ac2
+weth,full choice,true,false,false,ax-ac2
+wfac8prim,full choice,true,false,false,ax-ac2
+wlkiswwlksupgr2,full choice,true,false,false,ax-ac2
+wlkiswwlkupgr,full choice,true,false,false,ax-ac2
+wlklnwwlklnupgr2,full choice,true,false,false,ax-ac2
+wlklnwwlknupgr,full choice,true,false,false,ax-ac2
+wwlks2onsym,full choice,true,false,false,ax-ac2
+zarcls1,full choice,true,false,false,ax-ac2
+zarclssn,full choice,true,false,false,ax-ac2
+zarcmp,full choice,true,false,false,ax-ac2
+zarcmplem,full choice,true,false,false,ax-ac2
+zarmxt1,full choice,true,false,false,ax-ac2
+zart0,full choice,true,false,false,ax-ac2
+zartop,full choice,true,false,false,ax-ac2
+zartopn,full choice,true,false,false,ax-ac2
+zartopon,full choice,true,false,false,ax-ac2
+zfac,full choice,true,false,false,ax-ac
+zfcndac,full choice,true,false,false,ax-ac
+zorn,full choice,true,false,false,ax-ac2
+zorn2,full choice,true,false,false,ax-ac2
+zornn0,full choice,true,false,false,ax-ac2
+0bdop,countable choice,false,true,false,ax-cc
+0cnop,countable choice,false,true,false,ax-cc
+0hmop,countable choice,false,true,false,ax-cc
+0leop,countable choice,false,true,false,ax-cc
+0leopj,countable choice,false,true,true,ax-cc ax-dc
+0lnop,countable choice,false,true,false,ax-cc
+1stccn,countable choice,false,true,false,ax-cc
+1stccnp,countable choice,false,true,false,ax-cc
+1stcelcls,countable choice,false,true,false,ax-cc
+1stckgen,countable choice,false,true,false,ax-cc
+2ndcctbss,countable choice,false,true,false,ax-cc
+2ndcsep,countable choice,false,true,false,ax-cc
+3factsumint,countable choice,false,true,false,ax-cc
+3factsumint1,countable choice,false,true,false,ax-cc
+3factsumint3,countable choice,false,true,false,ax-cc
+3oai,countable choice,false,true,false,ax-cc
+3oalem5,countable choice,false,true,false,ax-cc
+5oai,countable choice,false,true,false,ax-cc
+acncc,countable choice,false,true,false,ax-cc
+adj0,countable choice,false,true,false,ax-cc
+adjbd1o,countable choice,false,true,false,ax-cc
+adjbdln,countable choice,false,true,false,ax-cc
+adjbdlnb,countable choice,false,true,false,ax-cc
+adjcoi,countable choice,false,true,false,ax-cc
+adjeq0,countable choice,false,true,false,ax-cc
+aks4d1,countable choice,false,true,false,ax-cc
+aks4d1p2,countable choice,false,true,false,ax-cc
+aks4d1p3,countable choice,false,true,false,ax-cc
+aks4d1p4,countable choice,false,true,false,ax-cc
+aks4d1p5,countable choice,false,true,false,ax-cc
+aks4d1p6,countable choice,false,true,false,ax-cc
+aks4d1p7,countable choice,false,true,false,ax-cc
+aks4d1p7d1,countable choice,false,true,false,ax-cc
+aks4d1p8,countable choice,false,true,false,ax-cc
+aks4d1p9,countable choice,false,true,false,ax-cc
+areaquad,countable choice,false,true,false,ax-cc
+arearect,countable choice,false,true,false,ax-cc
+atabs2i,countable choice,false,true,false,ax-cc
+atabsi,countable choice,false,true,false,ax-cc
+atcv0eq,countable choice,false,true,false,ax-cc
+atcv1,countable choice,false,true,false,ax-cc
+atcvat2,countable choice,false,true,false,ax-cc
+atcvat2i,countable choice,false,true,false,ax-cc
+atcvat3i,countable choice,false,true,false,ax-cc
+atcvat4i,countable choice,false,true,false,ax-cc
+atcvati,countable choice,false,true,false,ax-cc
+atcvatlem,countable choice,false,true,false,ax-cc
+atdmd,countable choice,false,true,false,ax-cc
+atdmd2,countable choice,false,true,false,ax-cc
+atexch,countable choice,false,true,false,ax-cc
+atmd,countable choice,false,true,false,ax-cc
+atmd2,countable choice,false,true,false,ax-cc
+atnemeq0,countable choice,false,true,false,ax-cc
+atnssm0,countable choice,false,true,false,ax-cc
+atom1d,countable choice,false,true,false,ax-cc
+atoml2i,countable choice,false,true,false,ax-cc
+atomli,countable choice,false,true,false,ax-cc
+atord,countable choice,false,true,false,ax-cc
+atordi,countable choice,false,true,false,ax-cc
+atssma,countable choice,false,true,false,ax-cc
+axcc2,countable choice,false,true,false,ax-cc
+axcc2lem,countable choice,false,true,false,ax-cc
+axcc3,countable choice,false,true,false,ax-cc
+axcc4,countable choice,false,true,false,ax-cc
+axcc4dom,countable choice,false,true,false,ax-cc
+axccd,countable choice,false,true,false,ax-cc
+axccd2,countable choice,false,true,false,ax-cc
+axccdom,countable choice,false,true,false,ax-cc
+axgroth3,countable choice,false,true,false,ax-cc
+axgroth4,countable choice,false,true,false,ax-cc
+axpjcl,countable choice,false,true,false,ax-cc
+axpjpj,countable choice,false,true,false,ax-cc
+bddibl,countable choice,false,true,false,ax-cc
+bddmulibl,countable choice,false,true,false,ax-cc
+bdopadj,countable choice,false,true,false,ax-cc
+bdopcoi,countable choice,false,true,false,ax-cc
+bdopssadj,countable choice,false,true,false,ax-cc
+bra11,countable choice,false,true,false,ax-cc
+bracnln,countable choice,false,true,false,ax-cc
+bracnlnval,countable choice,false,true,false,ax-cc
+bracnvbra,countable choice,false,true,false,ax-cc
+ch1dle,countable choice,false,true,false,ax-cc
+chabs1,countable choice,false,true,false,ax-cc
+chabs1i,countable choice,false,true,false,ax-cc
+chcon1i,countable choice,false,true,false,ax-cc
+chcon2i,countable choice,false,true,false,ax-cc
+chcon3i,countable choice,false,true,false,ax-cc
+chcv1,countable choice,false,true,false,ax-cc
+chcv2,countable choice,false,true,false,ax-cc
+chdmj1,countable choice,false,true,false,ax-cc
+chdmj1i,countable choice,false,true,false,ax-cc
+chdmj2,countable choice,false,true,false,ax-cc
+chdmj2i,countable choice,false,true,false,ax-cc
+chdmj3,countable choice,false,true,false,ax-cc
+chdmj3i,countable choice,false,true,false,ax-cc
+chdmj4,countable choice,false,true,false,ax-cc
+chdmj4i,countable choice,false,true,false,ax-cc
+chdmm1,countable choice,false,true,false,ax-cc
+chdmm1i,countable choice,false,true,false,ax-cc
+chdmm2,countable choice,false,true,false,ax-cc
+chdmm2i,countable choice,false,true,false,ax-cc
+chdmm3,countable choice,false,true,false,ax-cc
+chdmm3i,countable choice,false,true,false,ax-cc
+chdmm4,countable choice,false,true,false,ax-cc
+chdmm4i,countable choice,false,true,false,ax-cc
+chirred,countable choice,false,true,false,ax-cc
+chirredi,countable choice,false,true,false,ax-cc
+chirredlem1,countable choice,false,true,false,ax-cc
+chirredlem2,countable choice,false,true,false,ax-cc
+chirredlem3,countable choice,false,true,false,ax-cc
+chirredlem4,countable choice,false,true,false,ax-cc
+chj0,countable choice,false,true,false,ax-cc
+chj00i,countable choice,false,true,false,ax-cc
+chj0i,countable choice,false,true,false,ax-cc
+chj12,countable choice,false,true,false,ax-cc
+chj12i,countable choice,false,true,false,ax-cc
+chj4,countable choice,false,true,false,ax-cc
+chj4i,countable choice,false,true,false,ax-cc
+chjass,countable choice,false,true,false,ax-cc
+chjassi,countable choice,false,true,false,ax-cc
+chjatom,countable choice,false,true,false,ax-cc
+chjidm,countable choice,false,true,false,ax-cc
+chjidmi,countable choice,false,true,false,ax-cc
+chjjdiri,countable choice,false,true,false,ax-cc
+chlejb1,countable choice,false,true,false,ax-cc
+chlejb1i,countable choice,false,true,false,ax-cc
+chlejb2,countable choice,false,true,false,ax-cc
+chlub,countable choice,false,true,false,ax-cc
+chlubi,countable choice,false,true,false,ax-cc
+chlubii,countable choice,false,true,false,ax-cc
+chnle,countable choice,false,true,false,ax-cc
+chnlei,countable choice,false,true,false,ax-cc
+chpssati,countable choice,false,true,false,ax-cc
+chpsscon1,countable choice,false,true,false,ax-cc
+chpsscon2,countable choice,false,true,false,ax-cc
+chpsscon3,countable choice,false,true,false,ax-cc
+chrelat2,countable choice,false,true,false,ax-cc
+chrelat2i,countable choice,false,true,false,ax-cc
+chrelat3,countable choice,false,true,false,ax-cc
+chrelat3i,countable choice,false,true,false,ax-cc
+chrelat4i,countable choice,false,true,false,ax-cc
+chrelati,countable choice,false,true,false,ax-cc
+chsscon1,countable choice,false,true,false,ax-cc
+chsscon1i,countable choice,false,true,false,ax-cc
+chsscon3,countable choice,false,true,false,ax-cc
+chsscon3i,countable choice,false,true,false,ax-cc
+chsup0,countable choice,false,true,false,ax-cc
+chsupid,countable choice,false,true,false,ax-cc
+chsupsn,countable choice,false,true,false,ax-cc
+chsupval2,countable choice,false,true,false,ax-cc
+circlemeth,countable choice,false,true,false,ax-cc
+circlemethhgt,countable choice,false,true,false,ax-cc
+circlemethnat,countable choice,false,true,false,ax-cc
+circlevma,countable choice,false,true,false,ax-cc
+cm0,countable choice,false,true,false,ax-cc
+cm2j,countable choice,false,true,false,ax-cc
+cm2ji,countable choice,false,true,false,ax-cc
+cm2mi,countable choice,false,true,false,ax-cc
+cmbr2i,countable choice,false,true,false,ax-cc
+cmbr3,countable choice,false,true,false,ax-cc
+cmbr3i,countable choice,false,true,false,ax-cc
+cmbr4i,countable choice,false,true,false,ax-cc
+cmcm,countable choice,false,true,false,ax-cc
+cmcm2,countable choice,false,true,false,ax-cc
+cmcm2i,countable choice,false,true,false,ax-cc
+cmcm2ii,countable choice,false,true,false,ax-cc
+cmcm3,countable choice,false,true,false,ax-cc
+cmcm3i,countable choice,false,true,false,ax-cc
+cmcm3ii,countable choice,false,true,false,ax-cc
+cmcm4i,countable choice,false,true,false,ax-cc
+cmcmi,countable choice,false,true,false,ax-cc
+cmcmii,countable choice,false,true,false,ax-cc
+cmcmlem,countable choice,false,true,false,ax-cc
+cmdmdi,countable choice,false,true,false,ax-cc
+cmidi,countable choice,false,true,false,ax-cc
+cmj1i,countable choice,false,true,false,ax-cc
+cmj2i,countable choice,false,true,false,ax-cc
+cmm1i,countable choice,false,true,false,ax-cc
+cmm2i,countable choice,false,true,false,ax-cc
+cmmdi,countable choice,false,true,false,ax-cc
+cnbdibl,countable choice,false,true,false,ax-cc
+cncombf,countable choice,false,true,false,ax-cc
+cniccibl,countable choice,false,true,false,ax-cc
+cnioobibld,countable choice,false,true,false,ax-cc
+cnlnadj,countable choice,false,true,false,ax-cc
+cnlnadjeu,countable choice,false,true,false,ax-cc
+cnlnadjeui,countable choice,false,true,false,ax-cc
+cnlnadji,countable choice,false,true,false,ax-cc
+cnlnadjlem3,countable choice,false,true,false,ax-cc
+cnlnadjlem4,countable choice,false,true,false,ax-cc
+cnlnadjlem5,countable choice,false,true,false,ax-cc
+cnlnadjlem6,countable choice,false,true,false,ax-cc
+cnlnadjlem7,countable choice,false,true,false,ax-cc
+cnlnadjlem8,countable choice,false,true,false,ax-cc
+cnlnadjlem9,countable choice,false,true,false,ax-cc
+cnlnssadj,countable choice,false,true,false,ax-cc
+cnvbrabra,countable choice,false,true,false,ax-cc
+cnvbracl,countable choice,false,true,false,ax-cc
+cnvbramul,countable choice,false,true,false,ax-cc
+cnvbraval,countable choice,false,true,false,ax-cc
+csmdsymi,countable choice,false,true,false,ax-cc
+cssbn,countable choice,false,true,false,ax-cc
+csschl,countable choice,false,true,false,ax-cc
+cvati,countable choice,false,true,false,ax-cc
+cvbr4i,countable choice,false,true,false,ax-cc
+cvcon3,countable choice,false,true,false,ax-cc
+cvdmd,countable choice,false,true,false,ax-cc
+cvexch,countable choice,false,true,false,ax-cc
+cvexchi,countable choice,false,true,false,ax-cc
+cvexchlem,countable choice,false,true,false,ax-cc
+cvmd,countable choice,false,true,false,ax-cc
+cvmdi,countable choice,false,true,false,ax-cc
+cvp,countable choice,false,true,false,ax-cc
+df0op2,countable choice,false,true,false,ax-cc
+dfch2,countable choice,false,true,false,ax-cc
+dfiop2,countable choice,false,true,false,ax-cc
+dfpjop,countable choice,false,true,true,ax-cc ax-dc
+dirkeritg,countable choice,false,true,false,ax-cc
+dmdbr2,countable choice,false,true,false,ax-cc
+dmdbr3,countable choice,false,true,false,ax-cc
+dmdbr4,countable choice,false,true,false,ax-cc
+dmdbr4ati,countable choice,false,true,false,ax-cc
+dmdbr5,countable choice,false,true,false,ax-cc
+dmdbr5ati,countable choice,false,true,false,ax-cc
+dmdbr6ati,countable choice,false,true,false,ax-cc
+dmdbr7ati,countable choice,false,true,false,ax-cc
+dmdcompli,countable choice,false,true,false,ax-cc
+dmdi4,countable choice,false,true,false,ax-cc
+dmdmd,countable choice,false,true,false,ax-cc
+dmdoc1i,countable choice,false,true,false,ax-cc
+dmdoc2i,countable choice,false,true,false,ax-cc
+dmdsym,countable choice,false,true,false,ax-cc
+dmvlsiga,countable choice,false,true,false,ax-cc
+dmvolsal,countable choice,false,true,false,ax-cc
+dominf,countable choice,false,true,false,ax-cc
+domtriom,countable choice,false,true,false,ax-cc
+domtriomlem,countable choice,false,true,false,ax-cc
+eighmorth,countable choice,false,true,false,ax-cc
+eighmre,countable choice,false,true,false,ax-cc
+eigvalcl,countable choice,false,true,false,ax-cc
+eigvec1,countable choice,false,true,false,ax-cc
+eleigvec2,countable choice,false,true,false,ax-cc
+eleigveccl,countable choice,false,true,false,ax-cc
+elmbfmvol2,countable choice,false,true,false,ax-cc
+elpjch,countable choice,false,true,true,ax-cc ax-dc
+elpjhmop,countable choice,false,true,true,ax-cc ax-dc
+elpjidm,countable choice,false,true,true,ax-cc ax-dc
+elpjrn,countable choice,false,true,true,ax-cc ax-dc
+elspansn,countable choice,false,true,false,ax-cc
+elspansn2,countable choice,false,true,false,ax-cc
+elspansn3,countable choice,false,true,false,ax-cc
+elspansn4,countable choice,false,true,false,ax-cc
+elspansn5,countable choice,false,true,false,ax-cc
+elspansni,countable choice,false,true,false,ax-cc
+etransc,countable choice,false,true,false,ax-cc
+etransclem18,countable choice,false,true,false,ax-cc
+etransclem23,countable choice,false,true,false,ax-cc
+etransclem46,countable choice,false,true,false,ax-cc
+etransclem47,countable choice,false,true,false,ax-cc
+etransclem48,countable choice,false,true,false,ax-cc
+ex-ovoliunnfl,countable choice,false,true,false,ax-cc
+fdvnegge,countable choice,false,true,false,ax-cc
+fdvneggt,countable choice,false,true,false,ax-cc
+fdvposle,countable choice,false,true,false,ax-cc
+fdvposlt,countable choice,false,true,false,ax-cc
+fh1,countable choice,false,true,false,ax-cc
+fh1i,countable choice,false,true,false,ax-cc
+fh2,countable choice,false,true,false,ax-cc
+fh2i,countable choice,false,true,false,ax-cc
+fh3i,countable choice,false,true,false,ax-cc
+fh4i,countable choice,false,true,false,ax-cc
+fin41,countable choice,false,true,false,ax-cc
+fourier,countable choice,false,true,false,ax-cc
+fourier2,countable choice,false,true,false,ax-cc
+fourierclim,countable choice,false,true,false,ax-cc
+fourierclimd,countable choice,false,true,false,ax-cc
+fouriercn,countable choice,false,true,false,ax-cc
+fouriercnp,countable choice,false,true,false,ax-cc
+fourierd,countable choice,false,true,false,ax-cc
+fourierdlem100,countable choice,false,true,false,ax-cc
+fourierdlem101,countable choice,false,true,false,ax-cc
+fourierdlem103,countable choice,false,true,false,ax-cc
+fourierdlem104,countable choice,false,true,false,ax-cc
+fourierdlem105,countable choice,false,true,false,ax-cc
+fourierdlem107,countable choice,false,true,false,ax-cc
+fourierdlem108,countable choice,false,true,false,ax-cc
+fourierdlem109,countable choice,false,true,false,ax-cc
+fourierdlem110,countable choice,false,true,false,ax-cc
+fourierdlem111,countable choice,false,true,false,ax-cc
+fourierdlem112,countable choice,false,true,false,ax-cc
+fourierdlem113,countable choice,false,true,false,ax-cc
+fourierdlem114,countable choice,false,true,false,ax-cc
+fourierdlem115,countable choice,false,true,false,ax-cc
+fourierdlem16,countable choice,false,true,false,ax-cc
+fourierdlem21,countable choice,false,true,false,ax-cc
+fourierdlem22,countable choice,false,true,false,ax-cc
+fourierdlem30,countable choice,false,true,false,ax-cc
+fourierdlem39,countable choice,false,true,false,ax-cc
+fourierdlem47,countable choice,false,true,false,ax-cc
+fourierdlem69,countable choice,false,true,false,ax-cc
+fourierdlem73,countable choice,false,true,false,ax-cc
+fourierdlem81,countable choice,false,true,false,ax-cc
+fourierdlem82,countable choice,false,true,false,ax-cc
+fourierdlem83,countable choice,false,true,false,ax-cc
+fourierdlem84,countable choice,false,true,false,ax-cc
+fourierdlem87,countable choice,false,true,false,ax-cc
+fourierdlem88,countable choice,false,true,false,ax-cc
+fourierdlem92,countable choice,false,true,false,ax-cc
+fourierdlem93,countable choice,false,true,false,ax-cc
+fourierdlem95,countable choice,false,true,false,ax-cc
+fouriersw,countable choice,false,true,false,ax-cc
+ftc1,countable choice,false,true,false,ax-cc
+ftc1a,countable choice,false,true,false,ax-cc
+ftc1cn,countable choice,false,true,false,ax-cc
+ftc1lem4,countable choice,false,true,false,ax-cc
+ftc1lem5,countable choice,false,true,false,ax-cc
+ftc1lem6,countable choice,false,true,false,ax-cc
+ftc2,countable choice,false,true,false,ax-cc
+ftc2ditg,countable choice,false,true,false,ax-cc
+ftc2ditglem,countable choice,false,true,false,ax-cc
+ftc2re,countable choice,false,true,false,ax-cc
+goeqi,countable choice,false,true,false,ax-cc
+golem1,countable choice,false,true,false,ax-cc
+golem2,countable choice,false,true,false,ax-cc
+h1da,countable choice,false,true,false,ax-cc
+h1datom,countable choice,false,true,false,ax-cc
+h1datomi,countable choice,false,true,false,ax-cc
+h1de2ci,countable choice,false,true,false,ax-cc
+h1de2ctlem,countable choice,false,true,false,ax-cc
+hatomic,countable choice,false,true,false,ax-cc
+hatomici,countable choice,false,true,false,ax-cc
+hatomistici,countable choice,false,true,false,ax-cc
+heibor,countable choice,false,true,false,ax-cc
+heibor1,countable choice,false,true,false,ax-cc
+heiborlem10,countable choice,false,true,false,ax-cc
+heiborlem3,countable choice,false,true,false,ax-cc
+hgt750lem,countable choice,false,true,false,ax-cc
+hh0oi,countable choice,false,true,false,ax-cc
+hhcms,countable choice,false,true,false,ax-cc
+hhhl,countable choice,false,true,false,ax-cc
+hhssbnOLD,countable choice,false,true,false,ax-cc
+hhsscms,countable choice,false,true,false,ax-cc
+hilcms,countable choice,false,true,false,ax-cc
+hilhl,countable choice,false,true,false,ax-cc
+hmopbdoptHIL,countable choice,false,true,true,ax-cc ax-dc
+hmopd,countable choice,false,true,false,ax-cc
+hmopidmch,countable choice,false,true,true,ax-cc ax-dc
+hmopidmchi,countable choice,false,true,true,ax-cc ax-dc
+hmopidmpj,countable choice,false,true,true,ax-cc ax-dc
+hmopidmpji,countable choice,false,true,true,ax-cc ax-dc
+ho01i,countable choice,false,true,false,ax-cc
+ho02i,countable choice,false,true,false,ax-cc
+ho0coi,countable choice,false,true,false,ax-cc
+ho0f,countable choice,false,true,false,ax-cc
+ho0sub,countable choice,false,true,false,ax-cc
+ho0subi,countable choice,false,true,false,ax-cc
+ho0val,countable choice,false,true,false,ax-cc
+hoadd32,countable choice,false,true,false,ax-cc
+hoadd4,countable choice,false,true,false,ax-cc
+hoaddass,countable choice,false,true,false,ax-cc
+hoaddcom,countable choice,false,true,false,ax-cc
+hoaddrid,countable choice,false,true,false,ax-cc
+hoaddridi,countable choice,false,true,false,ax-cc
+hoaddsub,countable choice,false,true,false,ax-cc
+hoaddsubass,countable choice,false,true,false,ax-cc
+hoaddsubassi,countable choice,false,true,false,ax-cc
+hoaddsubi,countable choice,false,true,false,ax-cc
+hocsubdir,countable choice,false,true,false,ax-cc
+hoddi,countable choice,false,true,false,ax-cc
+hodid,countable choice,false,true,false,ax-cc
+hodidi,countable choice,false,true,false,ax-cc
+hoico1,countable choice,false,true,false,ax-cc
+hoico2,countable choice,false,true,false,ax-cc
+hoid1i,countable choice,false,true,false,ax-cc
+hoid1ri,countable choice,false,true,false,ax-cc
+hoif,countable choice,false,true,false,ax-cc
+hoival,countable choice,false,true,false,ax-cc
+honegsub,countable choice,false,true,false,ax-cc
+honegsubdi,countable choice,false,true,false,ax-cc
+honegsubdi2,countable choice,false,true,false,ax-cc
+honpcani,countable choice,false,true,false,ax-cc
+honpncani,countable choice,false,true,false,ax-cc
+hopncani,countable choice,false,true,false,ax-cc
+hosd1i,countable choice,false,true,false,ax-cc
+hosd2i,countable choice,false,true,false,ax-cc
+hosub4,countable choice,false,true,false,ax-cc
+hosubadd4,countable choice,false,true,false,ax-cc
+hosubcl,countable choice,false,true,false,ax-cc
+hosubdi,countable choice,false,true,false,ax-cc
+hosubeq0i,countable choice,false,true,false,ax-cc
+hosubid1,countable choice,false,true,false,ax-cc
+hosubneg,countable choice,false,true,false,ax-cc
+hosubsub,countable choice,false,true,false,ax-cc
+hosubsub2,countable choice,false,true,false,ax-cc
+hosubsub4,countable choice,false,true,false,ax-cc
+hst0,countable choice,false,true,false,ax-cc
+hstle,countable choice,false,true,false,ax-cc
+hstles,countable choice,false,true,false,ax-cc
+hstoh,countable choice,false,true,false,ax-cc
+hstrbi,countable choice,false,true,false,ax-cc
+hstri,countable choice,false,true,false,ax-cc
+hstrlem3,countable choice,false,true,false,ax-cc
+hstrlem3a,countable choice,false,true,false,ax-cc
+hstrlem4,countable choice,false,true,false,ax-cc
+hstrlem5,countable choice,false,true,false,ax-cc
+hstrlem6,countable choice,false,true,false,ax-cc
+hsupval2,countable choice,false,true,false,ax-cc
+iblabs,countable choice,false,true,false,ax-cc
+iblabslem,countable choice,false,true,false,ax-cc
+ibladd,countable choice,false,true,false,ax-cc
+ibladdlem,countable choice,false,true,false,ax-cc
+iblcncfioo,countable choice,false,true,false,ax-cc
+ibliccsinexp,countable choice,false,true,false,ax-cc
+iblidicc,countable choice,false,true,false,ax-cc
+iblioosinexp,countable choice,false,true,false,ax-cc
+iblmulc2,countable choice,false,true,false,ax-cc
+iblsub,countable choice,false,true,false,ax-cc
+iblulm,countable choice,false,true,false,ax-cc
+icccmpALT,countable choice,false,true,false,ax-cc
+idhmop,countable choice,false,true,false,ax-cc
+idleop,countable choice,false,true,false,ax-cc
+intlewftc,countable choice,false,true,false,ax-cc
+iscmet2,countable choice,false,true,false,ax-cc
+iscmet3,countable choice,false,true,false,ax-cc
+iscmet3i,countable choice,false,true,false,ax-cc
+ismbf3d,countable choice,false,true,false,ax-cc
+itg1climres,countable choice,false,true,false,ax-cc
+itg2add,countable choice,false,true,false,ax-cc
+itg2addlem,countable choice,false,true,false,ax-cc
+itg2cn,countable choice,false,true,false,ax-cc
+itg2cnlem1,countable choice,false,true,false,ax-cc
+itg2const2,countable choice,false,true,false,ax-cc
+itg2gt0,countable choice,false,true,false,ax-cc
+itg2i1fseq,countable choice,false,true,false,ax-cc
+itg2i1fseq2,countable choice,false,true,false,ax-cc
+itg2i1fseq3,countable choice,false,true,false,ax-cc
+itg2mono,countable choice,false,true,false,ax-cc
+itg2monolem1,countable choice,false,true,false,ax-cc
+itg2monolem3,countable choice,false,true,false,ax-cc
+itg2seq,countable choice,false,true,false,ax-cc
+itgabs,countable choice,false,true,false,ax-cc
+itgadd,countable choice,false,true,false,ax-cc
+itgaddlem1,countable choice,false,true,false,ax-cc
+itgaddlem2,countable choice,false,true,false,ax-cc
+itgcn,countable choice,false,true,false,ax-cc
+itgcoscmulx,countable choice,false,true,false,ax-cc
+itgexpif,countable choice,false,true,false,ax-cc
+itgfsum,countable choice,false,true,false,ax-cc
+itggt0,countable choice,false,true,false,ax-cc
+itgiccshift,countable choice,false,true,false,ax-cc
+itgioocnicc,countable choice,false,true,false,ax-cc
+itgmulc2,countable choice,false,true,false,ax-cc
+itgmulc2lem1,countable choice,false,true,false,ax-cc
+itgmulc2lem2,countable choice,false,true,false,ax-cc
+itgparts,countable choice,false,true,false,ax-cc
+itgperiod,countable choice,false,true,false,ax-cc
+itgpowd,countable choice,false,true,false,ax-cc
+itgsbtaddcnst,countable choice,false,true,false,ax-cc
+itgsin0pi,countable choice,false,true,false,ax-cc
+itgsin0pilem1,countable choice,false,true,false,ax-cc
+itgsincmulx,countable choice,false,true,false,ax-cc
+itgsinexp,countable choice,false,true,false,ax-cc
+itgsinexplem1,countable choice,false,true,false,ax-cc
+itgsub,countable choice,false,true,false,ax-cc
+itgsubst,countable choice,false,true,false,ax-cc
+itgsubsticc,countable choice,false,true,false,ax-cc
+itgsubsticclem,countable choice,false,true,false,ax-cc
+itgsubstlem,countable choice,false,true,false,ax-cc
+itgulm,countable choice,false,true,false,ax-cc
+itgulm2,countable choice,false,true,false,ax-cc
+iunctb,countable choice,false,true,false,ax-cc
+iunctb2,countable choice,false,true,false,ax-cc
+iunmbl,countable choice,false,true,false,ax-cc
+iunmbl2,countable choice,false,true,false,ax-cc
+jpi,countable choice,false,true,false,ax-cc
+jplem1,countable choice,false,true,false,ax-cc
+jplem2,countable choice,false,true,false,ax-cc
+kbass6,countable choice,false,true,false,ax-cc
+kbpj,countable choice,false,true,false,ax-cc
+largei,countable choice,false,true,false,ax-cc
+lcmineqlem,countable choice,false,true,false,ax-cc
+lcmineqlem10,countable choice,false,true,false,ax-cc
+lcmineqlem12,countable choice,false,true,false,ax-cc
+lcmineqlem13,countable choice,false,true,false,ax-cc
+lcmineqlem15,countable choice,false,true,false,ax-cc
+lcmineqlem16,countable choice,false,true,false,ax-cc
+lcmineqlem19,countable choice,false,true,false,ax-cc
+lcmineqlem2,countable choice,false,true,false,ax-cc
+lcmineqlem20,countable choice,false,true,false,ax-cc
+lcmineqlem21,countable choice,false,true,false,ax-cc
+lcmineqlem22,countable choice,false,true,false,ax-cc
+lcmineqlem23,countable choice,false,true,false,ax-cc
+lcmineqlem3,countable choice,false,true,false,ax-cc
+lcmineqlem6,countable choice,false,true,false,ax-cc
+lecm,countable choice,false,true,false,ax-cc
+lecmi,countable choice,false,true,false,ax-cc
+lecmii,countable choice,false,true,false,ax-cc
+ledi,countable choice,false,true,false,ax-cc
+ledii,countable choice,false,true,false,ax-cc
+lediri,countable choice,false,true,false,ax-cc
+lejdii,countable choice,false,true,false,ax-cc
+lejdiri,countable choice,false,true,false,ax-cc
+leop,countable choice,false,true,false,ax-cc
+leop2,countable choice,false,true,false,ax-cc
+leop3,countable choice,false,true,false,ax-cc
+leopadd,countable choice,false,true,false,ax-cc
+leopmul,countable choice,false,true,false,ax-cc
+leopmul2i,countable choice,false,true,false,ax-cc
+leopmuli,countable choice,false,true,false,ax-cc
+leopnmid,countable choice,false,true,false,ax-cc
+leoppos,countable choice,false,true,false,ax-cc
+leoprf,countable choice,false,true,false,ax-cc
+leoprf2,countable choice,false,true,false,ax-cc
+leopsq,countable choice,false,true,false,ax-cc
+leoptr,countable choice,false,true,false,ax-cc
+leoptri,countable choice,false,true,false,ax-cc
+lhe4.4ex1a,countable choice,false,true,false,ax-cc
+lncnbd,countable choice,false,true,false,ax-cc
+lncnopbd,countable choice,false,true,false,ax-cc
+lnopcnbd,countable choice,false,true,false,ax-cc
+lnopcnre,countable choice,false,true,false,ax-cc
+lnopco0i,countable choice,false,true,false,ax-cc
+lnopeq,countable choice,false,true,false,ax-cc
+lnopeq0i,countable choice,false,true,false,ax-cc
+lnopeqi,countable choice,false,true,false,ax-cc
+logdivsqrle,countable choice,false,true,false,ax-cc
+mayete3i,countable choice,false,true,false,ax-cc
+mayetes3i,countable choice,false,true,false,ax-cc
+mbfadd,countable choice,false,true,false,ax-cc
+mbfaddlem,countable choice,false,true,false,ax-cc
+mbfimaopn,countable choice,false,true,false,ax-cc
+mbfimaopn2,countable choice,false,true,false,ax-cc
+mbfimaopnlem,countable choice,false,true,false,ax-cc
+mbfinf,countable choice,false,true,false,ax-cc
+mbflim,countable choice,false,true,false,ax-cc
+mbflimlem,countable choice,false,true,false,ax-cc
+mbflimsup,countable choice,false,true,false,ax-cc
+mbfmul,countable choice,false,true,false,ax-cc
+mbfmulc2,countable choice,false,true,false,ax-cc
+mbfmullem,countable choice,false,true,false,ax-cc
+mbfmullem2,countable choice,false,true,false,ax-cc
+mbfmvolf,countable choice,false,true,false,ax-cc
+mbfresmf,countable choice,false,true,false,ax-cc
+mbfsub,countable choice,false,true,false,ax-cc
+mbfsup,countable choice,false,true,false,ax-cc
+mbfulm,countable choice,false,true,false,ax-cc
+mdbr2,countable choice,false,true,false,ax-cc
+mdbr4,countable choice,false,true,false,ax-cc
+mdcompli,countable choice,false,true,false,ax-cc
+mddmd,countable choice,false,true,false,ax-cc
+mddmdin0i,countable choice,false,true,false,ax-cc
+mdexchi,countable choice,false,true,false,ax-cc
+mdoc1i,countable choice,false,true,false,ax-cc
+mdoc2i,countable choice,false,true,false,ax-cc
+mdsl0,countable choice,false,true,false,ax-cc
+mdsl1i,countable choice,false,true,false,ax-cc
+mdsl2bi,countable choice,false,true,false,ax-cc
+mdsl2i,countable choice,false,true,false,ax-cc
+mdsl3,countable choice,false,true,false,ax-cc
+mdsldmd1i,countable choice,false,true,false,ax-cc
+mdslj1i,countable choice,false,true,false,ax-cc
+mdslj2i,countable choice,false,true,false,ax-cc
+mdslle1i,countable choice,false,true,false,ax-cc
+mdslle2i,countable choice,false,true,false,ax-cc
+mdslmd1i,countable choice,false,true,false,ax-cc
+mdslmd1lem1,countable choice,false,true,false,ax-cc
+mdslmd1lem2,countable choice,false,true,false,ax-cc
+mdslmd1lem3,countable choice,false,true,false,ax-cc
+mdslmd1lem4,countable choice,false,true,false,ax-cc
+mdslmd2i,countable choice,false,true,false,ax-cc
+mdslmd3i,countable choice,false,true,false,ax-cc
+mdslmd4i,countable choice,false,true,false,ax-cc
+mdsym,countable choice,false,true,false,ax-cc
+mdsymi,countable choice,false,true,false,ax-cc
+mdsymlem1,countable choice,false,true,false,ax-cc
+mdsymlem2,countable choice,false,true,false,ax-cc
+mdsymlem3,countable choice,false,true,false,ax-cc
+mdsymlem4,countable choice,false,true,false,ax-cc
+mdsymlem5,countable choice,false,true,false,ax-cc
+mdsymlem6,countable choice,false,true,false,ax-cc
+mdsymlem7,countable choice,false,true,false,ax-cc
+mdsymlem8,countable choice,false,true,false,ax-cc
+met2ndc,countable choice,false,true,false,ax-cc
+metcld,countable choice,false,true,false,ax-cc
+metcld2,countable choice,false,true,false,ax-cc
+metcn4,countable choice,false,true,false,ax-cc
+metcnp4,countable choice,false,true,false,ax-cc
+metelcls,countable choice,false,true,false,ax-cc
+minveco,countable choice,false,true,false,ax-cc
+minvecolem5,countable choice,false,true,false,ax-cc
+minvecolem7,countable choice,false,true,false,ax-cc
+nmbdoplb,countable choice,false,true,false,ax-cc
+nmlnop0,countable choice,false,true,false,ax-cc
+nmlnop0iALT,countable choice,false,true,false,ax-cc
+nmlnop0iHIL,countable choice,false,true,false,ax-cc
+nmlnopgt0i,countable choice,false,true,false,ax-cc
+nmlnopne0,countable choice,false,true,false,ax-cc
+nmobndseqi,countable choice,false,true,false,ax-cc
+nmop0,countable choice,false,true,false,ax-cc
+nmop0h,countable choice,false,true,false,ax-cc
+nmopadji,countable choice,false,true,false,ax-cc
+nmopadjlei,countable choice,false,true,false,ax-cc
+nmopadjlem,countable choice,false,true,false,ax-cc
+nmopcoadj0i,countable choice,false,true,false,ax-cc
+nmopcoadj2i,countable choice,false,true,false,ax-cc
+nmopcoadji,countable choice,false,true,false,ax-cc
+nmopcoi,countable choice,false,true,false,ax-cc
+nmopleid,countable choice,false,true,false,ax-cc
+nmoptri2i,countable choice,false,true,false,ax-cc
+nmounbseqi,countable choice,false,true,false,ax-cc
+nonbooli,countable choice,false,true,false,ax-cc
+normcan,countable choice,false,true,false,ax-cc
+ococ,countable choice,false,true,false,ax-cc
+ococi,countable choice,false,true,false,ax-cc
+ococin,countable choice,false,true,false,ax-cc
+omlsi,countable choice,false,true,false,ax-cc
+omlsii,countable choice,false,true,false,ax-cc
+opnmblALT,countable choice,false,true,false,ax-cc
+opsqrlem1,countable choice,false,true,false,ax-cc
+opsqrlem2,countable choice,false,true,false,ax-cc
+opsqrlem4,countable choice,false,true,false,ax-cc
+opsqrlem5,countable choice,false,true,false,ax-cc
+opsqrlem6,countable choice,false,true,false,ax-cc
+osum,countable choice,false,true,false,ax-cc
+osumcor2i,countable choice,false,true,false,ax-cc
+osumcori,countable choice,false,true,false,ax-cc
+osumi,countable choice,false,true,false,ax-cc
+ovoliun,countable choice,false,true,false,ax-cc
+ovoliun2,countable choice,false,true,false,ax-cc
+ovoliunlem3,countable choice,false,true,false,ax-cc
+ovoliunnul,countable choice,false,true,false,ax-cc
+pj0i,countable choice,false,true,false,ax-cc
+pj11,countable choice,false,true,false,ax-cc
+pj11i,countable choice,false,true,false,ax-cc
+pj2cocli,countable choice,false,true,false,ax-cc
+pj3cor1i,countable choice,false,true,false,ax-cc
+pj3i,countable choice,false,true,false,ax-cc
+pj3lem1,countable choice,false,true,false,ax-cc
+pj3si,countable choice,false,true,false,ax-cc
+pjaddi,countable choice,false,true,false,ax-cc
+pjaddii,countable choice,false,true,false,ax-cc
+pjadj2,countable choice,false,true,true,ax-cc ax-dc
+pjadj2coi,countable choice,false,true,false,ax-cc
+pjadj3,countable choice,false,true,true,ax-cc ax-dc
+pjadjcoi,countable choice,false,true,false,ax-cc
+pjadji,countable choice,false,true,false,ax-cc
+pjadjii,countable choice,false,true,false,ax-cc
+pjbdlni,countable choice,false,true,false,ax-cc
+pjch,countable choice,false,true,false,ax-cc
+pjch1,countable choice,false,true,false,ax-cc
+pjchi,countable choice,false,true,false,ax-cc
+pjci,countable choice,false,true,false,ax-cc
+pjcji,countable choice,false,true,false,ax-cc
+pjcjt2,countable choice,false,true,false,ax-cc
+pjclem1,countable choice,false,true,false,ax-cc
+pjclem2,countable choice,false,true,false,ax-cc
+pjclem3,countable choice,false,true,false,ax-cc
+pjclem4,countable choice,false,true,false,ax-cc
+pjclem4a,countable choice,false,true,false,ax-cc
+pjcli,countable choice,false,true,false,ax-cc
+pjclii,countable choice,false,true,false,ax-cc
+pjcmul1i,countable choice,false,true,true,ax-cc ax-dc
+pjcmul2i,countable choice,false,true,true,ax-cc ax-dc
+pjcocli,countable choice,false,true,false,ax-cc
+pjcofni,countable choice,false,true,false,ax-cc
+pjcohcli,countable choice,false,true,false,ax-cc
+pjcohocli,countable choice,false,true,false,ax-cc
+pjcoi,countable choice,false,true,false,ax-cc
+pjcompi,countable choice,false,true,false,ax-cc
+pjddii,countable choice,false,true,false,ax-cc
+pjdifnormi,countable choice,false,true,false,ax-cc
+pjdifnormii,countable choice,false,true,false,ax-cc
+pjds3i,countable choice,false,true,false,ax-cc
+pjdsi,countable choice,false,true,false,ax-cc
+pjeq,countable choice,false,true,false,ax-cc
+pjfi,countable choice,false,true,false,ax-cc
+pjfn,countable choice,false,true,false,ax-cc
+pjfoi,countable choice,false,true,false,ax-cc
+pjhcl,countable choice,false,true,false,ax-cc
+pjhcli,countable choice,false,true,false,ax-cc
+pjhclii,countable choice,false,true,false,ax-cc
+pjhf,countable choice,false,true,false,ax-cc
+pjhfo,countable choice,false,true,false,ax-cc
+pjhmop,countable choice,false,true,false,ax-cc
+pjhmopi,countable choice,false,true,false,ax-cc
+pjhmopidm,countable choice,false,true,true,ax-cc ax-dc
+pjhth,countable choice,false,true,false,ax-cc
+pjhtheu,countable choice,false,true,false,ax-cc
+pjhtheu2,countable choice,false,true,false,ax-cc
+pjhthlem2,countable choice,false,true,false,ax-cc
+pjid,countable choice,false,true,false,ax-cc
+pjidmco,countable choice,false,true,false,ax-cc
+pjidmcoi,countable choice,false,true,false,ax-cc
+pjidmi,countable choice,false,true,false,ax-cc
+pjige0,countable choice,false,true,false,ax-cc
+pjige0i,countable choice,false,true,false,ax-cc
+pjimai,countable choice,false,true,false,ax-cc
+pjin1i,countable choice,false,true,false,ax-cc
+pjin2i,countable choice,false,true,false,ax-cc
+pjin3i,countable choice,false,true,false,ax-cc
+pjini,countable choice,false,true,false,ax-cc
+pjinormi,countable choice,false,true,false,ax-cc
+pjinormii,countable choice,false,true,false,ax-cc
+pjinvari,countable choice,false,true,false,ax-cc
+pjjsi,countable choice,false,true,false,ax-cc
+pjlnopi,countable choice,false,true,false,ax-cc
+pjmf1,countable choice,false,true,false,ax-cc
+pjmuli,countable choice,false,true,false,ax-cc
+pjmulii,countable choice,false,true,false,ax-cc
+pjnel,countable choice,false,true,false,ax-cc
+pjneli,countable choice,false,true,false,ax-cc
+pjnmopi,countable choice,false,true,false,ax-cc
+pjnorm,countable choice,false,true,false,ax-cc
+pjnorm2,countable choice,false,true,false,ax-cc
+pjnormi,countable choice,false,true,false,ax-cc
+pjnormssi,countable choice,false,true,false,ax-cc
+pjo,countable choice,false,true,false,ax-cc
+pjoc1,countable choice,false,true,false,ax-cc
+pjoc1i,countable choice,false,true,false,ax-cc
+pjoc2,countable choice,false,true,false,ax-cc
+pjoc2i,countable choice,false,true,false,ax-cc
+pjoccl,countable choice,false,true,false,ax-cc
+pjoccoi,countable choice,false,true,false,ax-cc
+pjoci,countable choice,false,true,false,ax-cc
+pjocini,countable choice,false,true,false,ax-cc
+pjococi,countable choice,false,true,false,ax-cc
+pjocvec,countable choice,false,true,false,ax-cc
+pjoi0,countable choice,false,true,false,ax-cc
+pjoi0i,countable choice,false,true,false,ax-cc
+pjoml,countable choice,false,true,false,ax-cc
+pjoml2,countable choice,false,true,false,ax-cc
+pjoml2i,countable choice,false,true,false,ax-cc
+pjoml3,countable choice,false,true,false,ax-cc
+pjoml3i,countable choice,false,true,false,ax-cc
+pjoml4i,countable choice,false,true,false,ax-cc
+pjoml5,countable choice,false,true,false,ax-cc
+pjoml5i,countable choice,false,true,false,ax-cc
+pjoml6i,countable choice,false,true,false,ax-cc
+pjomli,countable choice,false,true,false,ax-cc
+pjop,countable choice,false,true,false,ax-cc
+pjopi,countable choice,false,true,false,ax-cc
+pjopyth,countable choice,false,true,false,ax-cc
+pjopythi,countable choice,false,true,false,ax-cc
+pjordi,countable choice,false,true,false,ax-cc
+pjorthcoi,countable choice,false,true,false,ax-cc
+pjorthi,countable choice,false,true,false,ax-cc
+pjpj0i,countable choice,false,true,false,ax-cc
+pjpjhth,countable choice,false,true,false,ax-cc
+pjpjhthi,countable choice,false,true,false,ax-cc
+pjpji,countable choice,false,true,false,ax-cc
+pjpo,countable choice,false,true,false,ax-cc
+pjpoi,countable choice,false,true,false,ax-cc
+pjpyth,countable choice,false,true,false,ax-cc
+pjpythi,countable choice,false,true,false,ax-cc
+pjrn,countable choice,false,true,false,ax-cc
+pjrni,countable choice,false,true,false,ax-cc
+pjs14i,countable choice,false,true,false,ax-cc
+pjscji,countable choice,false,true,false,ax-cc
+pjsdi2i,countable choice,false,true,false,ax-cc
+pjsdii,countable choice,false,true,false,ax-cc
+pjspansn,countable choice,false,true,false,ax-cc
+pjss1coi,countable choice,false,true,false,ax-cc
+pjss2coi,countable choice,false,true,false,ax-cc
+pjss2i,countable choice,false,true,false,ax-cc
+pjssdif1i,countable choice,false,true,false,ax-cc
+pjssdif2i,countable choice,false,true,false,ax-cc
+pjssge0i,countable choice,false,true,false,ax-cc
+pjssge0ii,countable choice,false,true,false,ax-cc
+pjsslem,countable choice,false,true,false,ax-cc
+pjssmi,countable choice,false,true,false,ax-cc
+pjssmii,countable choice,false,true,false,ax-cc
+pjssposi,countable choice,false,true,false,ax-cc
+pjssumi,countable choice,false,true,false,ax-cc
+pjsubi,countable choice,false,true,false,ax-cc
+pjsubii,countable choice,false,true,false,ax-cc
+pjsumi,countable choice,false,true,false,ax-cc
+pjtoi,countable choice,false,true,false,ax-cc
+pjvec,countable choice,false,true,false,ax-cc
+pjvi,countable choice,false,true,false,ax-cc
+qlax1i,countable choice,false,true,false,ax-cc
+qlax3i,countable choice,false,true,false,ax-cc
+qlax5i,countable choice,false,true,false,ax-cc
+qlaxr3i,countable choice,false,true,false,ax-cc
+reheibor,countable choice,false,true,false,ax-cc
+riesz1,countable choice,false,true,false,ax-cc
+riesz2,countable choice,false,true,false,ax-cc
+riesz3i,countable choice,false,true,false,ax-cc
+riesz4,countable choice,false,true,false,ax-cc
+riesz4i,countable choice,false,true,false,ax-cc
+rnbra,countable choice,false,true,false,ax-cc
+rrncms,countable choice,false,true,false,ax-cc
+rrnheibor,countable choice,false,true,false,ax-cc
+salexct,countable choice,false,true,false,ax-cc
+salexct3,countable choice,false,true,false,ax-cc
+salgencntex,countable choice,false,true,false,ax-cc
+salgensscntex,countable choice,false,true,false,ax-cc
+sh1dle,countable choice,false,true,false,ax-cc
+shatomici,countable choice,false,true,false,ax-cc
+shatomistici,countable choice,false,true,false,ax-cc
+shjshseli,countable choice,false,true,false,ax-cc
+shjshsi,countable choice,false,true,false,ax-cc
+shlub,countable choice,false,true,false,ax-cc
+shlubi,countable choice,false,true,false,ax-cc
+spanpr,countable choice,false,true,false,ax-cc
+spansn,countable choice,false,true,false,ax-cc
+spansna,countable choice,false,true,false,ax-cc
+spansnch,countable choice,false,true,false,ax-cc
+spansnchi,countable choice,false,true,false,ax-cc
+spansncol,countable choice,false,true,false,ax-cc
+spansncv,countable choice,false,true,false,ax-cc
+spansncv2,countable choice,false,true,false,ax-cc
+spansncvi,countable choice,false,true,false,ax-cc
+spansneleq,countable choice,false,true,false,ax-cc
+spansneleqi,countable choice,false,true,false,ax-cc
+spansni,countable choice,false,true,false,ax-cc
+spansnid,countable choice,false,true,false,ax-cc
+spansnj,countable choice,false,true,false,ax-cc
+spansnji,countable choice,false,true,false,ax-cc
+spansnm0i,countable choice,false,true,false,ax-cc
+spansnmul,countable choice,false,true,false,ax-cc
+spansnpji,countable choice,false,true,false,ax-cc
+spansnscl,countable choice,false,true,false,ax-cc
+spansnsh,countable choice,false,true,false,ax-cc
+spansnss,countable choice,false,true,false,ax-cc
+spansnss2,countable choice,false,true,false,ax-cc
+spanunsni,countable choice,false,true,false,ax-cc
+sqwvfoura,countable choice,false,true,false,ax-cc
+sqwvfourb,countable choice,false,true,false,ax-cc
+ssdmd1,countable choice,false,true,false,ax-cc
+ssdmd2,countable choice,false,true,false,ax-cc
+sshhococi,countable choice,false,true,false,ax-cc
+sshjval2,countable choice,false,true,false,ax-cc
+ssmd1,countable choice,false,true,false,ax-cc
+ssmd2,countable choice,false,true,false,ax-cc
+stcltrlem1,countable choice,false,true,false,ax-cc
+stcltrlem2,countable choice,false,true,false,ax-cc
+stcltrthi,countable choice,false,true,false,ax-cc
+stirling,countable choice,false,true,false,ax-cc
+stirlinglem15,countable choice,false,true,false,ax-cc
+stirlingr,countable choice,false,true,false,ax-cc
+stji1i,countable choice,false,true,false,ax-cc
+strb,countable choice,false,true,false,ax-cc
+stri,countable choice,false,true,false,ax-cc
+strlem3,countable choice,false,true,false,ax-cc
+strlem3a,countable choice,false,true,false,ax-cc
+strlem4,countable choice,false,true,false,ax-cc
+strlem5,countable choice,false,true,false,ax-cc
+strlem6,countable choice,false,true,false,ax-cc
+sumdmdi,countable choice,false,true,false,ax-cc
+sumdmdii,countable choice,false,true,false,ax-cc
+sumdmdlem,countable choice,false,true,false,ax-cc
+sumdmdlem2,countable choice,false,true,false,ax-cc
+sumspansn,countable choice,false,true,false,ax-cc
+supcvg,countable choice,false,true,false,ax-cc
+superpos,countable choice,false,true,false,ax-cc
+unictb,countable choice,false,true,false,ax-cc
+unierri,countable choice,false,true,false,ax-cc
+unopbd,countable choice,false,true,false,ax-cc
+vitali,countable choice,false,true,false,ax-cc
+vitalilem4,countable choice,false,true,false,ax-cc
+vitalilem5,countable choice,false,true,false,ax-cc
+voliun,countable choice,false,true,false,ax-cc
+voliune,countable choice,false,true,false,ax-cc
+voliunlem2,countable choice,false,true,false,ax-cc
+voliunlem3,countable choice,false,true,false,ax-cc
+voliunsge0,countable choice,false,true,false,ax-cc
+voliunsge0lem,countable choice,false,true,false,ax-cc
+volivth,countable choice,false,true,false,ax-cc
+volmea,countable choice,false,true,false,ax-cc
+volmeas,countable choice,false,true,false,ax-cc
+volsup,countable choice,false,true,false,ax-cc
+volsup2,countable choice,false,true,false,ax-cc
+wallispi,countable choice,false,true,false,ax-cc
+wallispi2,countable choice,false,true,false,ax-cc
+wallispilem1,countable choice,false,true,false,ax-cc
+wallispilem2,countable choice,false,true,false,ax-cc
+wallispilem3,countable choice,false,true,false,ax-cc
+wallispilem4,countable choice,false,true,false,ax-cc
+wallispilem5,countable choice,false,true,false,ax-cc
+0reno,dependent choice,false,false,true,ax-dc
+1reno,dependent choice,false,false,true,ax-dc
+addhalfcut,dependent choice,false,false,true,ax-dc
+axcc,dependent choice,false,false,true,ax-dc
+axcclem,dependent choice,false,false,true,ax-dc
+axdc2,dependent choice,false,false,true,ax-dc
+axdc2lem,dependent choice,false,false,true,ax-dc
+axdc3,dependent choice,false,false,true,ax-dc
+axdc3lem,dependent choice,false,false,true,ax-dc
+axdc3lem2,dependent choice,false,false,true,ax-dc
+axdc3lem4,dependent choice,false,false,true,ax-dc
+axdc4,dependent choice,false,false,true,ax-dc
+axdc4lem,dependent choice,false,false,true,ax-dc
+axdc4uz,dependent choice,false,false,true,ax-dc
+axdc4uzlem,dependent choice,false,false,true,ax-dc
+bcth,dependent choice,false,false,true,ax-dc
+bcth2,dependent choice,false,false,true,ax-dc
+bcth3,dependent choice,false,false,true,ax-dc
+bcthlem5,dependent choice,false,false,true,ax-dc
+bdaypw2bnd,dependent choice,false,false,true,ax-dc
+bdaypw2n0bnd,dependent choice,false,false,true,ax-dc
+bdaypw2n0bndlem,dependent choice,false,false,true,ax-dc
+dcomex,dependent choice,false,false,true,ax-dc
+divdivs1d,dependent choice,false,false,true,ax-dc
+divmuldivsd,dependent choice,false,false,true,ax-dc
+divmuls,dependent choice,false,false,true,ax-dc
+divmulsd,dependent choice,false,false,true,ax-dc
+divsassd,dependent choice,false,false,true,ax-dc
+divscan1d,dependent choice,false,false,true,ax-dc
+divscan2d,dependent choice,false,false,true,ax-dc
+divscan3d,dependent choice,false,false,true,ax-dc
+divscl,dependent choice,false,false,true,ax-dc
+divscld,dependent choice,false,false,true,ax-dc
+divsdird,dependent choice,false,false,true,ax-dc
+divsrecd,dependent choice,false,false,true,ax-dc
+elreno2,dependent choice,false,false,true,ax-dc
+htth,dependent choice,false,false,true,ax-dc
+htthlem,dependent choice,false,false,true,ax-dc
+ltdivmuls2d,dependent choice,false,false,true,ax-dc
+ltdivmulsd,dependent choice,false,false,true,ax-dc
+ltmuldivs2d,dependent choice,false,false,true,ax-dc
+ltmuldivsd,dependent choice,false,false,true,ax-dc
+nnsrecgt0d,dependent choice,false,false,true,ax-dc
+noseqex,dependent choice,false,false,true,ax-dc
+om2noseqoi,dependent choice,false,false,true,ax-dc
+precsex,dependent choice,false,false,true,ax-dc
+precsexlem10,dependent choice,false,false,true,ax-dc
+precsexlem11,dependent choice,false,false,true,ax-dc
+pw2cut,dependent choice,false,false,true,ax-dc
+pw2cutp1,dependent choice,false,false,true,ax-dc
+readdscl,dependent choice,false,false,true,ax-dc
+recsex,dependent choice,false,false,true,ax-dc
+recsexd,dependent choice,false,false,true,ax-dc
+recut,dependent choice,false,false,true,ax-dc
+remulscl,dependent choice,false,false,true,ax-dc
+remulscllem1,dependent choice,false,false,true,ax-dc
+renegscl,dependent choice,false,false,true,ax-dc
+sdc,dependent choice,false,false,true,ax-dc
+sdclem1,dependent choice,false,false,true,ax-dc
+seqsex,dependent choice,false,false,true,ax-dc
+ubth,dependent choice,false,false,true,ax-dc
+ubthlem1,dependent choice,false,false,true,ax-dc
+ubthlem3,dependent choice,false,false,true,ax-dc
+z12bday,dependent choice,false,false,true,ax-dc
+z12bdaylem,dependent choice,false,false,true,ax-dc
+z12bdaylem2,dependent choice,false,false,true,ax-dc
