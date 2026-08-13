@@ -1,0 +1,173 @@
+{
+  "name": "The Version Delta Table",
+  "description": "Declaration-graph differences between two Mathlib releases, measured by the same extractor on both sides. Separates declarations added and removed from those that kept their name — and among those, separates a changed statement from a changed proof.",
+  "version": "2026-08-12",
+  "sha256": "74ae0e693e534c1a64e8380e56243137a613904a8324c128021cf06059219218",
+  "url": "https://f-keys.com/gonzalgo/version-delta/",
+  "seriesDoi": "https://doi.org/10.5281/zenodo.21900625",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "producedBy": {
+    "software": "gonzalgo",
+    "url": "https://pypi.org/project/gonzalgo/",
+    "paper": "https://doi.org/10.5281/zenodo.21769846"
+  },
+  "measured": {
+    "from": "Lean 4.32.1, Mathlib v4.32.1",
+    "to": "Lean 4.33.0, Mathlib v4.33.0",
+    "extractor": "the same on both sides"
+  },
+  "fields": [
+    "quantity",
+    "from_version",
+    "to_version",
+    "old_value",
+    "new_value",
+    "delta",
+    "pct_change",
+    "note"
+  ],
+  "displayed": [
+    {
+      "key": "quantity",
+      "label": "quantity"
+    },
+    {
+      "key": "old_value",
+      "label": "v4.32.1"
+    },
+    {
+      "key": "new_value",
+      "label": "v4.33.0"
+    },
+    {
+      "key": "delta",
+      "label": "delta"
+    },
+    {
+      "key": "note",
+      "label": "note"
+    }
+  ],
+  "rows": [
+    {
+      "quantity": "declarations",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 790171,
+      "new_value": 795218,
+      "delta": 5047,
+      "pct_change": 0.64,
+      "note": ""
+    },
+    {
+      "quantity": "theorems",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 532605,
+      "new_value": 535601,
+      "delta": 2996,
+      "pct_change": 0.56,
+      "note": ""
+    },
+    {
+      "quantity": "definitions",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 228875,
+      "new_value": 230757,
+      "delta": 1882,
+      "pct_change": 0.82,
+      "note": ""
+    },
+    {
+      "quantity": "others",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 28676,
+      "new_value": 28845,
+      "delta": 169,
+      "pct_change": 0.59,
+      "note": ""
+    },
+    {
+      "quantity": "axioms",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 15,
+      "new_value": 15,
+      "delta": 0,
+      "pct_change": 0.0,
+      "note": ""
+    },
+    {
+      "quantity": "modules",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 10511,
+      "new_value": 10599,
+      "delta": 88,
+      "pct_change": 0.84,
+      "note": ""
+    },
+    {
+      "quantity": "declarations added",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": null,
+      "new_value": 12432,
+      "delta": 12432,
+      "pct_change": null,
+      "note": "present in the new version only"
+    },
+    {
+      "quantity": "declarations removed",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 7385,
+      "new_value": null,
+      "delta": -7385,
+      "pct_change": null,
+      "note": "present in the old version only"
+    },
+    {
+      "quantity": "statements changed",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": null,
+      "new_value": null,
+      "delta": 15994,
+      "pct_change": 2.04,
+      "note": "same name, different statement dependencies — a different claim"
+    },
+    {
+      "quantity": "reproved only",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": null,
+      "new_value": null,
+      "delta": 24172,
+      "pct_change": 3.09,
+      "note": "same statement, different proof dependencies — same claim, new proof"
+    },
+    {
+      "quantity": "moved module",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": null,
+      "new_value": null,
+      "delta": 835,
+      "pct_change": 0.11,
+      "note": "same name, relocated"
+    },
+    {
+      "quantity": "axiom roster",
+      "from_version": "v4.32.1",
+      "to_version": "v4.33.0",
+      "old_value": 15,
+      "new_value": 15,
+      "delta": 0,
+      "pct_change": 0.0,
+      "note": "unchanged: Classical.choice, Lean.ofReduceBool, Lean.ofReduceNat, Lean.trustCompiler, Quot.lcInv, Quot.sound, isScalarObj, lcAny, lcCast, lcErased, lcProof, lcUnreachable, lcVoid, propext, sorryAx"
+    }
+  ]
+}

@@ -63,5 +63,10 @@
     "history": [],
     "sha256": "4e2f817ddf0651f0f787a36dc8901afa5eaa2eed159ed2f5fd932f557687ec97",
     "version": "2026-08-12"
+  },
+  "version-delta": {
+    "history": [],
+    "sha256": "74ae0e693e534c1a64e8380e56243137a613904a8324c128021cf06059219218",
+    "version": "2026-08-12"
   }
 }
