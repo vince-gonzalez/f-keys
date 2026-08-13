@@ -136,6 +136,19 @@ The Choice Strength Table: https://f-keys.com/gonzalgo/choice-strength/
   stratified this way. Machine-readable: choice-strength.json,
   choice-strength.csv (CC-BY-4.0).
 
+The Version Delta Table: https://f-keys.com/gonzalgo/version-delta/
+  What moved in Mathlib between v4.32.1 and v4.33.0, measured with the same
+  extractor on both sides. THE AXIOM ROSTER DID NOT CHANGE -- 15 axioms before
+  and after, none added, none removed. That is the sentence anyone depending on
+  Mathlib wants and it could not be stated before, because stating it needs two
+  measurements rather than a changelog. Declarations 790,171 -> 795,218;
+  theorems 532,605 -> 535,601; modules 10,511 -> 10,599. The rows a text diff
+  cannot produce: 24,172 theorems kept their exact statement and changed proof
+  dependencies, against 2,996 net new theorems, so proof churn runs about 8x
+  library growth; and 15,994 kept their name while their statement changed,
+  which makes them different claims wearing old names. Machine-readable:
+  version-delta.json, version-delta.csv (CC-BY-4.0).
+
 Papers, full text and PDFs, no paywall: https://f-keys.com/papers/
 
 Which constant is responsible? Dominator analysis of classical dependence in

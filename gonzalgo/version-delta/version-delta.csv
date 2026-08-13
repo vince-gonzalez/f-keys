@@ -1,0 +1,13 @@
+quantity,from_version,to_version,old_value,new_value,delta,pct_change,note
+declarations,v4.32.1,v4.33.0,790171,795218,5047,0.64,
+theorems,v4.32.1,v4.33.0,532605,535601,2996,0.56,
+definitions,v4.32.1,v4.33.0,228875,230757,1882,0.82,
+others,v4.32.1,v4.33.0,28676,28845,169,0.59,
+axioms,v4.32.1,v4.33.0,15,15,0,0.0,
+modules,v4.32.1,v4.33.0,10511,10599,88,0.84,
+declarations added,v4.32.1,v4.33.0,,12432,12432,,present in the new version only
+declarations removed,v4.32.1,v4.33.0,7385,,-7385,,present in the old version only
+statements changed,v4.32.1,v4.33.0,,,15994,2.04,"same name, different statement dependencies — a different claim"
+reproved only,v4.32.1,v4.33.0,,,24172,3.09,"same statement, different proof dependencies — same claim, new proof"
+moved module,v4.32.1,v4.33.0,,,835,0.11,"same name, relocated"
+axiom roster,v4.32.1,v4.33.0,15,15,0,0.0,"unchanged: Classical.choice, Lean.ofReduceBool, Lean.ofReduceNat, Lean.trustCompiler, Quot.lcInv, Quot.sound, isScalarObj, lcAny, lcCast, lcErased, lcProof, lcUnreachable, lcVoid, propext, sorryAx"

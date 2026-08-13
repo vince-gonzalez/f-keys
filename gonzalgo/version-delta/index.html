@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/version-delta/">
+<title>The Version Delta Table — Mathlib v4.32.1 to v4.33.0, measured</title>
+<meta name="description" content="What changed in Mathlib's declaration graph between v4.32.1 and v4.33.0: the axiom roster held at 15, 5,047 declarations were added net, and 24,172 theorems kept their statement while their proof changed.">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/gonzalgo/version-delta/">
+<meta property="og:title" content="The Version Delta Table">
+<meta property="og:description" content="what moved in Mathlib between two releases">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Version Delta Table",
+  "description": "Declaration-graph differences between two Mathlib releases, measured by the same extractor on both sides. Separates declarations added and removed from those that kept their name — and among those, separates a changed statement from a changed proof.",
+  "url": "https://f-keys.com/gonzalgo/version-delta/",
+  "version": "2026-08-12",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "Lean 4",
+    "Mathlib",
+    "formal verification",
+    "software evolution",
+    "trusted computing base",
+    "axioms",
+    "library versioning",
+    "dependency graph",
+    "reproducibility"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "identifier": "https://doi.org/10.5281/zenodo.21900625",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/",
+    "identifier": "https://doi.org/10.5281/zenodo.21900625"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/version-delta/version-delta.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/version-delta/version-delta.csv"
+    }
+  ]
+}
+</script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+  </div>
+</nav>
+<main>
+
+<h1>THE VERSION DELTA TABLE</h1>
+<p class="kicker">what moved in Mathlib between two releases</p>
+
+<p>Every other measurement here is a snapshot. This is the first that needed two, and it answers a question that could not be asked before: what happens to a formal library's trusted base when it ships a release.</p>
+<p>For v4.32.1 to v4.33.0 the answer is that the trusted base did not move. The axiom roster is the same 15 axioms on both sides. Everything else grew.</p>
+<p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 against Lean 4.33.0 with Mathlib v4.33.0 (tag <code>db584cd6</code>) &middot; the same extractor on both sides</p>
+
+<div class="wrap">
+<table>
+<thead><tr><th>quantity</th><th style="text-align:right">v4.32.1</th><th style="text-align:right">v4.33.0</th><th style="text-align:right">delta</th><th>note</th></tr></thead>
+<tbody>
+<tr><td>declarations</td><td class='num'>790,171</td><td class='num'>795,218</td><td class='num'>+5,047</td><td class='found'>&mdash;</td></tr>
+<tr><td>theorems</td><td class='num'>532,605</td><td class='num'>535,601</td><td class='num'>+2,996</td><td class='found'>&mdash;</td></tr>
+<tr><td>definitions</td><td class='num'>228,875</td><td class='num'>230,757</td><td class='num'>+1,882</td><td class='found'>&mdash;</td></tr>
+<tr><td>others</td><td class='num'>28,676</td><td class='num'>28,845</td><td class='num'>+169</td><td class='found'>&mdash;</td></tr>
+<tr><td>axioms</td><td class='num'>15</td><td class='num'>15</td><td class='num'>+0</td><td class='found'>&mdash;</td></tr>
+<tr><td>modules</td><td class='num'>10,511</td><td class='num'>10,599</td><td class='num'>+88</td><td class='found'>&mdash;</td></tr>
+<tr><td>declarations added</td><td class='num'>&mdash;</td><td class='num'>12,432</td><td class='num'>+12,432</td><td class='found'>present in the new version only</td></tr>
+<tr><td>declarations removed</td><td class='num'>7,385</td><td class='num'>&mdash;</td><td class='num'>-7,385</td><td class='found'>present in the old version only</td></tr>
+<tr><td>statements changed</td><td class='num'>&mdash;</td><td class='num'>&mdash;</td><td class='num'>+15,994</td><td class='found'>same name, different statement dependencies — a different claim</td></tr>
+<tr><td>reproved only</td><td class='num'>&mdash;</td><td class='num'>&mdash;</td><td class='num'>+24,172</td><td class='found'>same statement, different proof dependencies — same claim, new proof</td></tr>
+<tr><td>moved module</td><td class='num'>&mdash;</td><td class='num'>&mdash;</td><td class='num'>+835</td><td class='found'>same name, relocated</td></tr>
+<tr><td>axiom roster</td><td class='num'>15</td><td class='num'>15</td><td class='num'>+0</td><td class='found'>unchanged: Classical.choice, Lean.ofReduceBool, Lean.ofReduceNat, Lean.trustCompiler, Quot.lcInv, Quot.sound, isScalarObj, lcAny, lcCast, lcErased, lcProof, lcUnreachable, lcVoid, propext, sorryAx</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="note"><em>statements changed</em> and <em>reproved only</em> are both computed over declarations present in both releases under the same name. A changed statement means the declaration's type dependencies moved, so it is a different claim wearing an old name. <em>reproved only</em> means the statement held and the proof dependencies moved.</p>
+
+<h2>Get the data</h2>
+<p>
+<a href="version-delta.json">version-delta.json</a> &middot;
+<a href="version-delta.csv">version-delta.csv</a> &middot; CC-BY-4.0 &middot;
+version 2026-08-12
+</p>
+<p class="series">
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+measurements of what formal libraries rest on, remeasured as the libraries move.
+Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
+resolves to the current deposit.
+</p>
+
+<h2>Reproduce it</h2>
+<pre>lake env lean -D maxErrors=4000 Split.lean   # once per release
+python diff_dumps.py OLD.tsv NEW.tsv --old-label v4.32.1 --new-label v4.33.0</pre>
+<p class="note">A Mathlib dump takes roughly twenty minutes and 650 MB per side. Method: <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a>.</p>
+
+<h2>The trusted base held</h2>
+<p>The axiom roster is identical across the release: 15 axioms, none added, none removed. That is the sentence anyone depending on Mathlib wants and nobody could state before, because stating it requires measuring both sides with the same instrument rather than reading a changelog.</p>
+<p>It is also the row most worth re-running every release. An axiom appearing is the one change to a library that no test suite catches and no diff summarises.</p>
+
+<h2>Proofs churn faster than the library grows</h2>
+<p>24,172 theorems kept their exact statement and got different proof dependencies. Net new theorems over the same release: 2,996. Proof churn runs roughly 8x growth.</p>
+<p>Neither number is visible to a text diff. A diff sees a file changed; it cannot see that a theorem's proof dependencies moved while its statement stood still. That distinction is the whole reason to compute this from a provenance dump.</p>
+<p>It also bounds how stale a provenance measurement gets. Any figure about what proofs rest on is measuring a population that turns over at this rate, which is the argument for republishing per release rather than citing a number from a year ago.</p>
+
+<h2>What this does not say</h2>
+<p>It does not say the reproved theorems changed what they rest on. A different proof can reach exactly the same axioms. Establishing that requires computing the closure on both sides, which is a separate and much more expensive measurement than this one.</p>
+<p>Two dumps from different extractors cannot be compared, so both labels are recorded in the data. The comparison here used one extractor across both releases.</p>
+
+<footer>
+  <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
+  <p style="margin-top:.8rem;">
+    Maintained at <a href="https://f-keys.com/gonzalgo/version-delta/">f-keys.com/gonzalgo/version-delta/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
+  </p>
+  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
+</footer>
+</main>
+</body>
+</html>
