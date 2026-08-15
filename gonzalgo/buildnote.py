@@ -181,7 +181,7 @@ BODY = [
         "`#print axioms`, run per theorem inside the environment. Statement "
         "axioms are the union over the constants appearing in the theorem's type.",
         "Cross-checked against an independent route: serialising the whole "
-        "790,000-declaration environment and recomputing reachability outside "
+        "790,171-declaration environment and recomputing reachability outside "
         "Lean gives the same answer on the same subset, and that graph was "
         "itself traversed in both directions returning identical sets. The "
         "kernel's own bookkeeping is what is reported here.",
