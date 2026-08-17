@@ -1,0 +1,29 @@
+name: brand gate
+
+# Zengine was dissolved 2026-07-15. This fails the build if the retired
+# name reappears in anything a human reads. Machine identifiers (the
+# zengineco GitHub org, live *.github.io URLs, published artifact names)
+# are allowed by explicit exception inside the script.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  brand-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check for retired brand names in human-visible text
+        run: python tools/brand-gate.py
+
+      - name: Show what is allowed by exception
+        if: failure()
+        run: python tools/brand-gate.py --list-allowed
