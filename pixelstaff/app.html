@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIXEL STAFF — 8-BIT COMPOSER</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
+
+  :root {
+    --bg:        #1a0a2e;
+    --bg2:       #0d0520;
+    --panel:     #2a1040;
+    --border:    #ff6b00;
+    --border2:   #ffcc00;
+    --accent:    #ff6b00;
+    --accent2:   #ffcc00;
+    --green:     #00ff88;
+    --red:       #ff2244;
+    --blue:      #00ccff;
+    --purple:    #cc44ff;
+    --white:     #fff8e8;
+    --dim:       #7755aa;
+    --staff-bg:  #110828;
+    --cell-h:    14px;
+    --cell-w:    20px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; image-rendering: pixelated; }
+
+  body {
+    background: var(--bg2);
+    color: var(--white);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+
+  /* ── SCANLINE OVERLAY ── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── TITLE BAR ── */
+  #titlebar {
+    background: var(--bg);
+    border-bottom: 3px solid var(--border);
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 0 var(--accent2);
+  }
+  #titlebar .logo {
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 var(--accent), -1px -1px 0 #ff2244;
+  }
+  #titlebar .sub {
+    color: var(--dim);
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .pixel-badge {
+    background: var(--accent);
+    color: #000;
+    padding: 2px 6px;
+    font-size: 6px;
+    border: 2px solid var(--accent2);
+    margin-left: auto;
+  }
+
+  /* ── TOOLBAR ── */
+  #toolbar {
+    background: var(--panel);
+    border-bottom: 3px solid var(--border);
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    background: var(--bg);
+    color: var(--white);
+    border: 2px solid var(--border);
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: none;
+    outline: none;
+    position: relative;
+  }
+  .btn:hover { background: var(--accent); color: #000; border-color: var(--accent2); }
+  .btn:active { transform: translate(1px,1px); }
+  .btn.active { background: var(--accent2); color: #000; border-color: #fff; }
+  .btn.danger { border-color: var(--red); }
+  .btn.danger:hover { background: var(--red); color: #fff; }
+  .btn.go { border-color: var(--green); color: var(--green); }
+  .btn.go:hover { background: var(--green); color: #000; }
+  .btn.go.playing { background: var(--green); color: #000; }
+  .btn.export-btn { border-color: var(--blue); color: var(--blue); }
+  .btn.export-btn:hover { background: var(--blue); color: #000; }
+
+  .sep { width: 2px; height: 20px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
+
+  .knob-group { display: flex; align-items: center; gap: 4px; }
+  .knob-label { font-size: 6px; color: var(--dim); }
+  .knob-val { font-size: 7px; color: var(--accent2); min-width: 28px; text-align: center; }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 60px; height: 6px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px; height: 14px;
+    background: var(--accent);
+    border: 2px solid var(--accent2);
+    cursor: pointer;
+  }
+
+  select {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    background: var(--bg);
+    color: var(--white);
+    border: 2px solid var(--border);
+    padding: 3px 4px;
+    cursor: pointer;
+    outline: none;
+  }
+  select:hover { border-color: var(--accent2); }
+
+  /* ── MAIN AREA ── */
+  #main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* ── PIANO KEYS SIDEBAR ── */
+  #piano-sidebar {
+    width: 54px;
+    background: var(--bg);
+    border-right: 3px solid var(--border);
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+  }
+  #piano-keys {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+  .piano-key {
+    height: var(--cell-h);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 4px;
+    font-size: 5px;
+    border-bottom: 1px solid #221040;
+    cursor: pointer;
+    position: relative;
+  }
+  .piano-key.white-key {
+    background: linear-gradient(90deg, #ddd8cc 0%, #fff8e8 60%, #e8e0d0 100%);
+    color: #333;
+  }
+  .piano-key.black-key {
+    background: linear-gradient(90deg, #1a1020 0%, #2a1840 60%, #111018 100%);
+    color: var(--accent2);
+    border-left: 3px solid #000;
+  }
+  .piano-key:hover { filter: brightness(1.3); }
+  .piano-key.active-key { background: var(--accent) !important; color: #000 !important; }
+  .piano-key .key-label { font-family: 'Press Start 2P', monospace; }
+
+  /* ── STAFF SCROLL AREA ── */
+  #staff-container {
+    flex: 1;
+    overflow: auto;
+    background: var(--staff-bg);
+    position: relative;
+    cursor: crosshair;
+  }
+  #staff-container::-webkit-scrollbar { height: 10px; width: 10px; }
+  #staff-container::-webkit-scrollbar-track { background: var(--bg2); border: 2px solid var(--border); }
+  #staff-container::-webkit-scrollbar-thumb { background: var(--accent); border: 2px solid var(--accent2); }
+
+  #staff-canvas {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    image-rendering: pixelated;
+  }
+
+  /* ── PLAYHEAD ── */
+  #playhead {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    background: var(--accent2);
+    pointer-events: none;
+    z-index: 10;
+    display: none;
+    box-shadow: 0 0 6px var(--accent2);
+  }
+
+  /* ── STATUS BAR ── */
+  #statusbar {
+    background: var(--bg);
+    border-top: 3px solid var(--border);
+    padding: 4px 8px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .stat { font-size: 6px; color: var(--dim); }
+  .stat span { color: var(--accent2); }
+
+  /* ── EXPORT MODAL ── */
+  #modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  #modal-overlay.open { display: flex; }
+  #modal {
+    background: var(--panel);
+    border: 3px solid var(--border);
+    box-shadow: 4px 4px 0 var(--accent2), 8px 8px 0 rgba(0,0,0,0.5);
+    padding: 16px;
+    width: 340px;
+    max-width: 95vw;
+  }
+  #modal h2 { font-size: 9px; color: var(--accent2); margin-bottom: 12px; border-bottom: 2px solid var(--border); padding-bottom: 6px; }
+  #modal p { font-size: 6px; color: var(--dim); margin-bottom: 10px; line-height: 1.8; }
+  .modal-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  #progress-bar-wrap { background: var(--bg); border: 2px solid var(--border); height: 12px; margin: 8px 0; display: none; }
+  #progress-bar { height: 100%; background: var(--green); width: 0%; transition: width 0.1s; }
+  #modal-status { font-size: 6px; color: var(--green); min-height: 10px; }
+
+  /* ── TOOL CURSOR ── */
+  .tool-erase #staff-container { cursor: cell; }
+</style>
+</head>
+<body>
+
+<!-- TITLE BAR -->
+<div id="titlebar">
+  <div class="logo">PIXEL STAFF</div>
+  <div class="sub">8-BIT COMPOSER // NO TIME SIGNATURES // INFINITE CANVAS</div>
+  <div class="pixel-badge">NES MODE</div>
+</div>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <!-- TRANSPORT -->
+  <button class="btn go" id="btn-play" title="Play/Stop (Space)">▶ PLAY</button>
+  <button class="btn danger" id="btn-stop" title="Stop">■ STOP</button>
+  <button class="btn" id="btn-rewind" title="Rewind">◀◀ REW</button>
+  <div class="sep"></div>
+
+  <!-- TOOLS -->
+  <button class="btn active" id="tool-draw" title="Draw tool (D)">✏ DRAW</button>
+  <button class="btn" id="tool-erase" title="Erase tool (E)">✕ ERASE</button>
+  <div class="sep"></div>
+
+  <!-- WAVEFORM -->
+  <div class="knob-group">
+    <span class="knob-label">WAVE</span>
+    <select id="sel-wave">
+      <option value="square">SQUARE</option>
+      <option value="sawtooth">SAW</option>
+      <option value="triangle">TRI</option>
+      <option value="sine">SINE</option>
+    </select>
+  </div>
+  <div class="sep"></div>
+
+  <!-- TEMPO -->
+  <div class="knob-group">
+    <span class="knob-label">BPM</span>
+    <input type="range" id="rng-bpm" min="40" max="300" value="120">
+    <span class="knob-val" id="val-bpm">120</span>
+  </div>
+  <div class="sep"></div>
+
+  <!-- NOTE LENGTH (visual width) -->
+  <div class="knob-group">
+    <span class="knob-label">NOTE LEN</span>
+    <select id="sel-notelen">
+      <option value="1">1x</option>
+      <option value="2" selected>2x</option>
+      <option value="4">4x</option>
+      <option value="8">8x</option>
+    </select>
+  </div>
+  <div class="sep"></div>
+
+  <!-- VOLUME -->
+  <div class="knob-group">
+    <span class="knob-label">VOL</span>
+    <input type="range" id="rng-vol" min="0" max="100" value="70">
+    <span class="knob-val" id="val-vol">70%</span>
+  </div>
+  <div class="sep"></div>
+
+  <!-- EXTEND CANVAS -->
+  <button class="btn" id="btn-extend">+ EXTEND</button>
+  <button class="btn danger" id="btn-clear">CLR ALL</button>
+  <div class="sep"></div>
+
+  <!-- EXPORT -->
+  <button class="btn export-btn" id="btn-wav">⬇ WAV</button>
+  <button class="btn export-btn" id="btn-m4r">⬇ RINGTONE</button>
+</div>
+
+<!-- MAIN AREA -->
+<div id="main">
+  <div id="piano-sidebar">
+    <div id="piano-keys"></div>
+  </div>
+  <div id="staff-container">
+    <canvas id="staff-canvas"></canvas>
+    <div id="playhead"></div>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div id="statusbar">
+  <div class="stat">NOTES: <span id="stat-notes">0</span></div>
+  <div class="stat">COLS: <span id="stat-cols">200</span></div>
+  <div class="stat">CURSOR: <span id="stat-cursor">--</span></div>
+  <div class="stat">TOOL: <span id="stat-tool">DRAW</span></div>
+  <div class="stat">PLAYPOS: <span id="stat-playpos">0</span></div>
+  <div class="stat" style="margin-left:auto;color:#ff6b00;">SPACE=PLAY  D=DRAW  E=ERASE</div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div id="modal-overlay">
+  <div id="modal">
+    <h2 id="modal-title">EXPORT</h2>
+    <p id="modal-desc">Rendering audio...</p>
+    <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+    <div id="modal-status"></div>
+    <div class="modal-btns" id="modal-btns">
+      <button class="btn danger" id="modal-close">✕ CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  PIXEL STAFF — core engine
+// ═══════════════════════════════════════════════════════════════
+
+const CELL_H = 14;
+const CELL_W = 20;
+const NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+
+// Build full note list from C8 down to C1 (96 notes, piano-roll style top=high)
+const NOTES = [];
+for (let oct = 8; oct >= 1; oct--) {
+  for (let n = 11; n >= 0; n--) {
+    NOTES.push({ name: NOTE_NAMES[n], octave: oct, semitone: n,
+      isBlack: [1,3,6,8,10].includes(n),
+      freq: 440 * Math.pow(2, (oct - 4) + (n - 9) / 12)
+    });
+  }
+}
+const ROWS = NOTES.length; // 96
+
+let COLS = 200;
+let notes = {}; // key: "row,col" => { wave, len }
+let currentTool = 'draw';
+let currentWave = 'square';
+let currentLen = 2;
+let bpm = 120;
+let volume = 0.70;
+let isPlaying = false;
+let playCol = 0;
+let playTimer = null;
+let isPainting = false;
+let paintMode = null; // 'add' or 'remove'
+let scrollSyncY = true;
+let audioCtx = null;
+let activeNodes = [];
+
+// ── Canvas setup ─────────────────────────────────────────────
+const canvas = document.getElementById('staff-canvas');
+const ctx = canvas.getContext('2d');
+const container = document.getElementById('staff-container');
+const playhead = document.getElementById('playhead');
+
+function canvasWidth()  { return COLS * CELL_W + 1; }
+function canvasHeight() { return ROWS * CELL_H + 1; }
+
+function resizeCanvas() {
+  canvas.width  = canvasWidth();
+  canvas.height = canvasHeight();
+  playhead.style.height = canvasHeight() + 'px';
+  drawAll();
+}
+
+// ── Color scheme ──────────────────────────────────────────────
+const COLOR_STAFF_LINE = '#2a1050';
+const COLOR_OCTAVE_LINE = '#3a1870';
+const COLOR_C_LINE = '#4a2080';
+const COLOR_NOTE = '#ff6b00';
+const COLOR_NOTE_SHINE = '#ffcc00';
+const COLOR_NOTE_SHADOW = '#aa3300';
+const COLOR_BLACK_ROW = '#0d0520';
+const COLOR_WHITE_ROW = '#110828';
+const COLOR_PLAYHEAD_COL = 'rgba(255,200,0,0.07)';
+
+function drawAll() {
+  const W = canvasWidth(), H = canvasHeight();
+  ctx.clearRect(0, 0, W, H);
+
+  // Row backgrounds
+  for (let r = 0; r < ROWS; r++) {
+    ctx.fillStyle = NOTES[r].isBlack ? COLOR_BLACK_ROW : COLOR_WHITE_ROW;
+    ctx.fillRect(0, r * CELL_H, W, CELL_H);
+  }
+
+  // Playhead column highlight
+  if (isPlaying) {
+    ctx.fillStyle = COLOR_PLAYHEAD_COL;
+    ctx.fillRect(playCol * CELL_W, 0, CELL_W, H);
+  }
+
+  // Grid lines — columns
+  ctx.strokeStyle = COLOR_STAFF_LINE;
+  ctx.lineWidth = 1;
+  for (let c = 0; c <= COLS; c++) {
+    const x = c * CELL_W + 0.5;
+    // Heavier every 4 cols (feels like beat grouping without forcing time sig)
+    ctx.strokeStyle = c % 16 === 0 ? '#3a1870' : c % 4 === 0 ? '#261050' : COLOR_STAFF_LINE;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+
+  // Grid lines — rows
+  for (let r = 0; r <= ROWS; r++) {
+    const y = r * CELL_H + 0.5;
+    const note = NOTES[r];
+    if (note && note.semitone === 0) {
+      // C note — bright line
+      ctx.strokeStyle = COLOR_C_LINE;
+      ctx.lineWidth = 2;
+    } else if (note && note.semitone === 7) {
+      ctx.strokeStyle = COLOR_OCTAVE_LINE;
+      ctx.lineWidth = 1;
+    } else {
+      ctx.strokeStyle = COLOR_STAFF_LINE;
+      ctx.lineWidth = 1;
+    }
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+
+  // Draw notes
+  for (const key in notes) {
+    const [r, c] = key.split(',').map(Number);
+    const n = notes[key];
+    const len = n.len || 2;
+    const x = c * CELL_W + 1;
+    const y = r * CELL_H + 1;
+    const w = len * CELL_W - 2;
+    const h = CELL_H - 2;
+
+    // Shadow
+    ctx.fillStyle = COLOR_NOTE_SHADOW;
+    ctx.fillRect(x+2, y+2, w, h);
+    // Body
+    ctx.fillStyle = COLOR_NOTE;
+    ctx.fillRect(x, y, w, h);
+    // Shine stripe
+    ctx.fillStyle = COLOR_NOTE_SHINE;
+    ctx.fillRect(x+1, y+1, w-2, 2);
+    // Left edge
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.fillRect(x, y, 2, h);
+  }
+}
+
+// ── Piano keyboard sidebar ────────────────────────────────────
+function buildPiano() {
+  const sidebar = document.getElementById('piano-sidebar');
+  const keysDiv = document.getElementById('piano-keys');
+  keysDiv.innerHTML = '';
+  for (let r = 0; r < ROWS; r++) {
+    const n = NOTES[r];
+    const div = document.createElement('div');
+    div.className = 'piano-key ' + (n.isBlack ? 'black-key' : 'white-key');
+    div.style.height = CELL_H + 'px';
+    div.dataset.row = r;
+    if (n.semitone === 0) {
+      const lbl = document.createElement('span');
+      lbl.className = 'key-label';
+      lbl.textContent = n.name + n.octave;
+      div.appendChild(lbl);
+    }
+    div.addEventListener('mousedown', () => previewNote(r));
+    div.addEventListener('mouseenter', (e) => { if (e.buttons === 1) previewNote(r); });
+    keysDiv.appendChild(div);
+  }
+  sidebar.style.height = '100%';
+}
+
+function syncPianoScroll() {
+  document.getElementById('piano-keys').style.top = -container.scrollTop + 'px';
+}
+container.addEventListener('scroll', syncPianoScroll);
+
+function highlightKey(row) {
+  document.querySelectorAll('.piano-key').forEach(k => k.classList.remove('active-key'));
+  const k = document.querySelector(`.piano-key[data-row="${row}"]`);
+  if (k) k.classList.add('active-key');
+  setTimeout(() => k && k.classList.remove('active-key'), 200);
+}
+
+// ── Note interaction ──────────────────────────────────────────
+function getCell(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left + container.scrollLeft;
+  const y = e.clientY - rect.top  + container.scrollTop;
+  return [Math.floor(y / CELL_H), Math.floor(x / CELL_W)];
+}
+
+function applyCell(r, c) {
+  if (r < 0 || r >= ROWS || c < 0 || c >= COLS) return;
+  const key = `${r},${c}`;
+  if (currentTool === 'draw') {
+    if (paintMode === 'remove') {
+      delete notes[key];
+    } else {
+      notes[key] = { wave: currentWave, len: currentLen };
+    }
+  } else {
+    delete notes[key];
+  }
+  updateStats();
+  drawAll();
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  if (e.button !== 0) return;
+  const [r, c] = getCell(e);
+  const key = `${r},${c}`;
+  isPainting = true;
+  if (currentTool === 'draw') {
+    paintMode = notes[key] ? 'remove' : 'add';
+  } else {
+    paintMode = 'remove';
+  }
+  applyCell(r, c);
+  if (currentTool === 'draw' && paintMode === 'add') previewNote(r);
+});
+canvas.addEventListener('mousemove', (e) => {
+  if (!isPainting) {
+    const [r, c] = getCell(e);
+    if (r >= 0 && r < ROWS) document.getElementById('stat-cursor').textContent = NOTES[r].name + NOTES[r].octave + ' col:' + c;
+    return;
+  }
+  const [r, c] = getCell(e);
+  applyCell(r, c);
+});
+canvas.addEventListener('mouseup',    () => { isPainting = false; });
+canvas.addEventListener('mouseleave', () => { isPainting = false; });
+
+// ── Audio preview ─────────────────────────────────────────────
+function ensureAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function previewNote(row) {
+  ensureAudio();
+  highlightKey(row);
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = currentWave;
+  osc.frequency.value = NOTES[row].freq;
+  gain.gain.setValueAtTime(volume * 0.4, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+}
+
+// ── Playback engine ───────────────────────────────────────────
+function startPlayback() {
+  ensureAudio();
+  isPlaying = true;
+  document.getElementById('btn-play').textContent = '▐▐ PAUSE';
+  document.getElementById('btn-play').classList.add('playing');
+  playhead.style.display = 'block';
+  schedulePlay();
+}
+
+function stopPlayback() {
+  isPlaying = false;
+  clearTimeout(playTimer);
+  activeNodes.forEach(n => { try { n.stop(); } catch(e){} });
+  activeNodes = [];
+  document.getElementById('btn-play').textContent = '▶ PLAY';
+  document.getElementById('btn-play').classList.remove('playing');
+  playhead.style.display = 'none';
+  drawAll();
+}
+
+function schedulePlay() {
+  if (!isPlaying) return;
+  const colMs = (60000 / bpm) / 4; // each col = 1/16 note duration at current BPM
+
+  // Collect notes at playCol
+  for (let r = 0; r < ROWS; r++) {
+    const key = `${r},${playCol}`;
+    if (notes[key]) {
+      const n = notes[key];
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = n.wave || 'square';
+      osc.frequency.value = NOTES[r].freq;
+      const dur = ((n.len || 2) * colMs) / 1000 * 0.9;
+      gain.gain.setValueAtTime(volume * 0.5, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(); osc.stop(audioCtx.currentTime + dur);
+      activeNodes.push(osc);
+    }
+  }
+
+  // Update playhead position
+  const px = playCol * CELL_W;
+  playhead.style.left = px + 'px';
+  playhead.style.height = canvasHeight() + 'px';
+  document.getElementById('stat-playpos').textContent = playCol;
+
+  // Auto-scroll to keep playhead visible
+  if (px < container.scrollLeft || px > container.scrollLeft + container.clientWidth - CELL_W * 4) {
+    container.scrollLeft = Math.max(0, px - 40);
+  }
+
+  drawAll();
+
+  playCol++;
+  if (playCol >= COLS) playCol = 0;
+
+  playTimer = setTimeout(schedulePlay, colMs);
+}
+
+// ── Controls ──────────────────────────────────────────────────
+document.getElementById('btn-play').addEventListener('click', () => {
+  if (isPlaying) stopPlayback();
+  else startPlayback();
+});
+document.getElementById('btn-stop').addEventListener('click', () => {
+  stopPlayback(); playCol = 0;
+  playhead.style.left = '0px';
+  document.getElementById('stat-playpos').textContent = '0';
+});
+document.getElementById('btn-rewind').addEventListener('click', () => {
+  playCol = 0;
+  playhead.style.left = '0px';
+  document.getElementById('stat-playpos').textContent = '0';
+});
+
+document.getElementById('tool-draw').addEventListener('click', () => setTool('draw'));
+document.getElementById('tool-erase').addEventListener('click', () => setTool('erase'));
+
+function setTool(t) {
+  currentTool = t;
+  document.getElementById('tool-draw').classList.toggle('active', t === 'draw');
+  document.getElementById('tool-erase').classList.toggle('active', t === 'erase');
+  document.getElementById('stat-tool').textContent = t.toUpperCase();
+  document.body.className = t === 'erase' ? 'tool-erase' : '';
+}
+
+document.getElementById('sel-wave').addEventListener('change', e => { currentWave = e.target.value; });
+document.getElementById('sel-notelen').addEventListener('change', e => { currentLen = parseInt(e.target.value); });
+
+document.getElementById('rng-bpm').addEventListener('input', e => {
+  bpm = parseInt(e.target.value);
+  document.getElementById('val-bpm').textContent = bpm;
+});
+document.getElementById('rng-vol').addEventListener('input', e => {
+  volume = parseInt(e.target.value) / 100;
+  document.getElementById('val-vol').textContent = e.target.value + '%';
+});
+
+document.getElementById('btn-extend').addEventListener('click', () => {
+  COLS += 100;
+  document.getElementById('stat-cols').textContent = COLS;
+  resizeCanvas();
+});
+document.getElementById('btn-clear').addEventListener('click', () => {
+  if (!confirm('Clear all notes?')) return;
+  notes = {};
+  updateStats(); drawAll();
+});
+
+function updateStats() {
+  document.getElementById('stat-notes').textContent = Object.keys(notes).length;
+  document.getElementById('stat-cols').textContent = COLS;
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+  if (e.code === 'Space') { e.preventDefault(); document.getElementById('btn-play').click(); }
+  if (e.key === 'd' || e.key === 'D') setTool('draw');
+  if (e.key === 'e' || e.key === 'E') setTool('erase');
+});
+
+// ── WAV EXPORT ────────────────────────────────────────────────
+function showModal(title, desc) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-desc').textContent = desc;
+  document.getElementById('modal-status').textContent = '';
+  document.getElementById('progress-bar-wrap').style.display = 'none';
+  document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function setModalStatus(txt) { document.getElementById('modal-status').textContent = txt; }
+function setProgress(pct) {
+  document.getElementById('progress-bar-wrap').style.display = 'block';
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('modal-overlay').classList.remove('open');
+});
+
+async function renderToBuffer(forceMaxCols) {
+  const colMs = (60000 / bpm) / 4;
+  const sampleRate = 44100;
+  const offCtx = new OfflineAudioContext(2, sampleRate * (COLS * colMs / 1000 + 1), sampleRate);
+
+  let scheduled = 0;
+  for (let c = 0; c < COLS; c++) {
+    const tSec = (c * colMs) / 1000;
+    for (let r = 0; r < ROWS; r++) {
+      const key = `${r},${c}`;
+      if (notes[key]) {
+        const n = notes[key];
+        const dur = ((n.len || 2) * colMs / 1000) * 0.92;
+        const osc = offCtx.createOscillator();
+        const gain = offCtx.createGain();
+        osc.type = n.wave || 'square';
+        osc.frequency.value = NOTES[r].freq;
+        gain.gain.setValueAtTime(volume * 0.5, tSec);
+        gain.gain.exponentialRampToValueAtTime(0.001, tSec + dur);
+        osc.connect(gain); gain.connect(offCtx.destination);
+        osc.start(tSec); osc.stop(tSec + dur);
+        scheduled++;
+      }
+    }
+    if (c % 50 === 0) setProgress(Math.round(c / COLS * 70));
+  }
+
+  setModalStatus('Rendering ' + scheduled + ' notes...');
+  setProgress(75);
+  const rendered = await offCtx.startRendering();
+  setProgress(95);
+  return rendered;
+}
+
+function audioBufferToWav(buffer) {
+  const numCh = buffer.numberOfChannels;
+  const sampleRate = buffer.sampleRate;
+  const numFrames = buffer.length;
+  const bitsPerSample = 16;
+  const blockAlign = numCh * (bitsPerSample / 8);
+  const byteRate = sampleRate * blockAlign;
+  const dataSize = numFrames * blockAlign;
+  const ab = new ArrayBuffer(44 + dataSize);
+  const view = new DataView(ab);
+
+  function writeStr(o, s) { for (let i = 0; i < s.length; i++) view.setUint8(o + i, s.charCodeAt(i)); }
+  writeStr(0,'RIFF'); view.setUint32(4, 36+dataSize, true);
+  writeStr(8,'WAVE'); writeStr(12,'fmt ');
+  view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+  view.setUint16(22, numCh, true); view.setUint32(24, sampleRate, true);
+  view.setUint32(28, byteRate, true); view.setUint16(32, blockAlign, true);
+  view.setUint16(34, bitsPerSample, true); writeStr(36,'data');
+  view.setUint32(40, dataSize, true);
+
+  // Interleave channels
+  let offset = 44;
+  for (let i = 0; i < numFrames; i++) {
+    for (let ch = 0; ch < numCh; ch++) {
+      const sample = Math.max(-1, Math.min(1, buffer.getChannelData(ch)[i]));
+      view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+      offset += 2;
+    }
+  }
+  return ab;
+}
+
+document.getElementById('btn-wav').addEventListener('click', async () => {
+  showModal('EXPORT WAV', 'Building your 8-bit track as a WAV audio file.');
+  try {
+    const buf = await renderToBuffer();
+    const wav = audioBufferToWav(buf);
+    const blob = new Blob([wav], { type: 'audio/wav' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'pixelstaff-track.wav'; a.click();
+    URL.revokeObjectURL(url);
+    setProgress(100);
+    setModalStatus('✔ WAV EXPORTED!');
+  } catch(err) {
+    setModalStatus('ERROR: ' + err.message);
+  }
+});
+
+// ── RINGTONE (.m4r) EXPORT ────────────────────────────────────
+// We render to WAV then encode to AAC-in-M4A renamed .m4r.
+// Since pure JS AAC encoding isn't available, we export a WAV
+// and provide instructions + direct download.
+// For a true .m4r we use MediaRecorder to encode to audio/mp4 where supported.
+document.getElementById('btn-m4r').addEventListener('click', async () => {
+  showModal('EXPORT RINGTONE', 'Building ringtone. Max 30 sec for iPhone compatibility.');
+
+  // Clamp to 30-sec worth of columns
+  const colMs = (60000 / bpm) / 4;
+  const maxCols = Math.min(COLS, Math.floor(30000 / colMs));
+
+  try {
+    const buf = await renderToBuffer();
+    // Try MediaRecorder approach for m4a/mp4
+    const wavData = audioBufferToWav(buf);
+    const wavBlob = new Blob([wavData], { type: 'audio/wav' });
+
+    // Check if MediaRecorder supports audio/mp4
+    const canMp4 = typeof MediaRecorder !== 'undefined' &&
+                   (MediaRecorder.isTypeSupported('audio/mp4') ||
+                    MediaRecorder.isTypeSupported('audio/aac'));
+
+    if (canMp4) {
+      // Play wav through AudioContext, capture with MediaRecorder
+      const encCtx = new AudioContext();
+      const arrayBuf = await wavBlob.arrayBuffer();
+      const decoded = await encCtx.decodeAudioData(arrayBuf);
+      const dest = encCtx.createMediaStreamDestination();
+      const src = encCtx.createBufferSource();
+      src.buffer = decoded;
+      src.connect(dest);
+
+      const mimeType = MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : 'audio/aac';
+      const recorder = new MediaRecorder(dest.stream, { mimeType });
+      const chunks = [];
+      recorder.ondataavailable = e => chunks.push(e.data);
+      recorder.onstop = () => {
+        const blob = new Blob(chunks, { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'pixelstaff-ringtone.m4r'; a.click();
+        URL.revokeObjectURL(url);
+        setProgress(100);
+        setModalStatus('✔ RINGTONE EXPORTED! Add to iTunes/Finder to sync to iPhone.');
+        encCtx.close();
+      };
+      recorder.start();
+      src.start();
+      setTimeout(() => { recorder.stop(); src.stop(); }, decoded.duration * 1000 + 200);
+      setModalStatus('Encoding to M4A...');
+      setProgress(90);
+    } else {
+      // Fallback: export WAV with rename instructions
+      const url = URL.createObjectURL(wavBlob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'pixelstaff-ringtone.m4r'; a.click();
+      URL.revokeObjectURL(url);
+      setProgress(100);
+      setModalStatus('WAV saved as .m4r. Open in GarageBand or iTunes to convert.');
+      document.getElementById('modal-desc').textContent =
+        'Your browser exported a WAV renamed .m4r. For best results: open in GarageBand on iPhone (Share → Ringtone) or drag into iTunes/Music app on Mac.';
+    }
+  } catch(err) {
+    setModalStatus('ERROR: ' + err.message);
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────────────
+buildPiano();
+resizeCanvas();
+updateStats();
+</script>
+</body>
+</html>

@@ -9,13 +9,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F-Keys — Hardware. Software. Ideas Brought to Life.</title>
-<meta name="description" content="Independent hardware, software, and internet products built by Vincent Gonzalez.">
+<meta name="description" content="Independent hardware, software, and internet products built by Vincent Gonzalez. Apps, games, tools, hardware, and research.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0a0e0a; --panel: #111911; --border: #1f351f;
-  --green: #39ff14; --text: #c3dcc3; --dim: #8fae8f;
+  --green: #39ff14; --cyan: #00ffcc; --amber: #ffb000;
+  --text: #c3dcc3; --dim: #8fae8f;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -34,6 +35,10 @@ nav {
   padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
 }
 .logo { font-family: 'VT323', monospace; font-weight: 400; font-size: 28px; color: var(--green); letter-spacing: 4px; }
+.nav-links { display: flex; gap: 1.6rem; font-size: 0.9rem; flex-wrap: wrap; }
+.nav-links a { color: var(--dim); text-decoration: none; }
+.nav-links a:hover { color: var(--green); }
+
 .hero {
   min-height: 100vh; display: flex; align-items: center; padding: 0 2rem;
   text-align: center; position: relative;
@@ -48,38 +53,63 @@ nav {
 .btn {
   font-family: 'VT323', monospace; font-weight: 400; font-size: 1.4rem; padding: 14px 36px;
   border: 2px solid var(--green); color: var(--green); background: transparent;
-  cursor: pointer; transition: all 0.2s;
+  cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
 }
 .btn:hover { background: var(--green); color: #0a0e0a; box-shadow: 0 0 20px rgba(57,255,20,0.5); }
-.btn-secondary { border-color: #00ffcc; color: #00ffcc; }
+.btn-secondary { border-color: var(--cyan); color: var(--cyan); }
+.btn-secondary:hover { background: var(--cyan); color: #0a0e0a; box-shadow: 0 0 20px rgba(0,255,204,0.4); }
 
-.featured { padding: 6rem 2rem; background: var(--panel); }
+.section { padding: 5rem 2rem; }
+.section.alt { background: var(--panel); }
+.section-head { max-width: 1200px; margin: 0 auto; }
+.section-head h2 {
+  font-family: 'VT323', monospace; font-weight: 400; font-size: 2.2rem;
+  color: var(--green); letter-spacing: 3px;
+}
+.section-head p { color: var(--dim); margin-top: 0.25rem; }
+
 .grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem; max-width: 1200px; margin: 3rem auto 0;
+  gap: 2rem; max-width: 1200px; margin: 2.5rem auto 0;
 }
 .card {
   background: #0d120d; border: 1px solid var(--border); padding: 2rem;
   transition: transform 0.2s, border-color 0.2s;
+  display: flex; flex-direction: column;
 }
+.section.alt .card { background: #0a0f0a; }
 .card:hover { transform: translateY(-8px); border-color: var(--green); }
-.card h3 { font-family: 'VT323', monospace; font-weight: 400; font-size: 1.8rem; color: var(--green); margin-bottom: 0.5rem; }
-.card p { color: var(--dim); margin-bottom: 1.5rem; }
+.card h3 { font-family: 'VT323', monospace; font-weight: 400; font-size: 1.8rem; color: var(--green); margin-bottom: 0.4rem; }
+.card p { color: var(--dim); margin-bottom: 1.5rem; flex: 1; }
+.card a.go { color: var(--green); text-decoration: none; }
+.card a.go:hover { text-decoration: underline; }
 
-.about, footer { padding: 4rem 2rem; max-width: 800px; margin: 0 auto; }
+.badge {
+  display: inline-block; font-size: 0.68rem; letter-spacing: 2px;
+  padding: 2px 8px; border: 1px solid; margin-bottom: 0.9rem; align-self: flex-start;
+}
+.badge.ready    { color: var(--green); border-color: var(--green); }
+.badge.platform { color: var(--cyan);  border-color: var(--cyan); }
+.badge.setup    { color: var(--amber); border-color: var(--amber); }
+
+.about { padding: 4rem 2rem; max-width: 800px; margin: 0 auto; }
+footer { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
 ul { list-style: none; }
-footer a { color: var(--green); }
+footer a { color: var(--green); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="logo">F-KEYS</div>
-  <div style="display:flex;gap:2rem;font-size:0.9rem;">
-    <a href="#products" style="color:var(--dim)">Products</a>
-    <a href="/papers/" style="color:var(--dim)">Papers</a>
-    <a href="portfolio.html" style="color:var(--dim)">Portfolio</a>
-    <a href="#about" style="color:var(--dim)">About</a>
+  <div class="nav-links">
+    <a href="#apps">Apps</a>
+    <a href="#games">Games</a>
+    <a href="#tools">Tools</a>
+    <a href="#hardware">Hardware</a>
+    <a href="#research">Research</a>
+    <a href="portfolio.html">Portfolio</a>
   </div>
 </nav>
 
@@ -91,61 +121,244 @@ footer a { color: var(--green); }
       Independent products built by Vincent Gonzalez.
     </p>
     <div class="cta-row">
-      <a href="#products" class="btn">Explore Products →</a>
+      <a href="#apps" class="btn">Explore Products →</a>
       <a href="portfolio.html" class="btn btn-secondary">View Portfolio</a>
     </div>
   </div>
 </section>
 
-<section id="products" class="featured">
-  <h2 style="text-align:center;font-family:'VT323',monospace; font-weight: 400;font-size:2.2rem;margin-bottom:1rem;color:var(--green);">Featured Products</h2>
-  
+<!-- ── APPS ────────────────────────────────────────────────── -->
+<section id="apps" class="section alt">
+  <div class="section-head">
+    <h2>APPS</h2>
+    <p>Things you sit in front of and use.</p>
+  </div>
   <div class="grid">
+
+    <div class="card">
+      <span class="badge ready">PLAY NOW</span>
+      <h3>Key-J</h3>
+      <p>Every keystroke plays a note. Turn on global capture and it works in any app on
+         your PC — the notes land on a staff as you go, and the session exports as a WAV.</p>
+      <a class="go" href="/keyj/">Learn More →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge ready">PLAY NOW</span>
+      <h3>Pixel Staff</h3>
+      <p>An 8-bit composer with no DAW anywhere in it. Draw notes on a piano roll, pick a
+         waveform per channel, and leave with a WAV or a ringtone for your phone.</p>
+      <a class="go" href="/pixelstaff/">Learn More →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge ready">PLAY NOW</span>
+      <h3>OpticQuiz</h3>
+      <p>Vision and colour tests that run entirely in your browser, scored honestly.
+         Nothing you do on the page leaves it.</p>
+      <a class="go" href="https://opticquiz.com" target="_blank" rel="noopener">Visit →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge ready">PLAY NOW</span>
+      <h3>QV</h3>
+      <p>Live ballots. Put a question to a room, watch the count move as people answer,
+         and skip the account entirely.</p>
+      <a class="go" href="/qv/">Learn More →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge setup">ALPHA</span>
+      <h3>RemapWrap</h3>
+      <p>Turn any smartphone into a programmable macro controller that sends real
+         OS-level keystrokes. Scan a QR code — no app and no dongle.</p>
+      <a class="go" href="/remapwrap">Learn More →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── GAMES ───────────────────────────────────────────────── -->
+<section id="games" class="section">
+  <div class="section-head">
+    <h2>GAMES</h2>
+    <p>Things you play.</p>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <span class="badge ready">PLAY NOW</span>
+      <h3>Trailer Load</h3>
+      <p>Warehouse load training that plays like a game. Stack a 53-foot trailer against
+         real constraints — weight, column integrity, what shifts when the truck moves.</p>
+      <a class="go" href="https://trailer-load.com" target="_blank" rel="noopener">Visit →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge platform">IN DISCORD</span>
+      <h3>PROMPT</h3>
+      <p>A multiplayer word game inside Discord, played in a 90s CRT monitor. Answer the
+         prompt, fool the room, argue your case when someone calls it.</p>
+      <a class="go" href="https://prompt.f-keys.com" target="_blank" rel="noopener">Play →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge platform">IN DISCORD</span>
+      <h3>DaisuPop</h3>
+      <p>A dice popper for Discord. Everyone in the room watches the same dice resolve
+         at the same moment.</p>
+      <a class="go" href="https://dp.f-keys.com" target="_blank" rel="noopener">Play →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge platform">IN FORTNITE</span>
+      <h3>MICDROP</h3>
+      <p>A live open-mic arena. You get 120 seconds to win the crowd, or three boos and
+         a sad trombone play you off. Island code <strong>1534-0440-5810</strong>.</p>
+      <a class="go" href="/micdrop/">Learn More →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge setup">ALPHA</span>
+      <h3>FyteCraft</h3>
+      <p>An RTS built around combat rather than base-building, with its own economy and
+         a roster of fighters. Early, and openly so.</p>
+      <a class="go" href="https://github.com/zengineco/fytecraft.com" target="_blank" rel="noopener">See the Work →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TOOLS ───────────────────────────────────────────────── -->
+<section id="tools" class="section alt">
+  <div class="section-head">
+    <h2>TOOLS</h2>
+    <p>Things that do the work for you.</p>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <span class="badge ready">PLAY NOW</span>
+      <h3>WikiPolish</h3>
+      <p>Grammar scout for Wikipedia. Point it at an article and it reads the live text
+         and flags the language problems — a first edit nobody will revert.</p>
+      <a class="go" href="/wikipolish/">Learn More →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge setup">NEEDS SETUP</span>
+      <h3>LeadSeer</h3>
+      <p>Finds the local businesses that still have no website. Search by ZIP and
+         category, filter out the chains, export the list.</p>
+      <a class="go" href="/leadseer/">Learn More →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge setup">NEEDS SETUP</span>
+      <h3>PlumHUD</h3>
+      <p>A miner fleet monitor that polls every rig at once, keeps the history in a local
+         database, and messages you the moment one stops earning.</p>
+      <a class="go" href="/plumhud/">Learn More →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── HARDWARE ────────────────────────────────────────────── -->
+<section id="hardware" class="section">
+  <div class="section-head">
+    <h2>HARDWARE</h2>
+    <p>Software that makes a box do one thing forever.</p>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <span class="badge setup">NEEDS SETUP</span>
+      <h3>Stream Sniper</h3>
+      <p>Give a spare mini PC a list of channels and it shows a clock until one goes
+         live, then puts them fullscreen on the TV with the ads stripped out.</p>
+      <a class="go" href="/streamsniper/">Learn More →</a>
+    </div>
+
+    <div class="card">
+      <span class="badge setup">NEEDS SETUP</span>
+      <h3>Moonbeam</h3>
+      <p>An educational, lottery-style Bitcoin miner on an ESP32. Open firmware, a web
+         dashboard, and a printable enclosure.</p>
+      <a class="go" href="/moonbeam/">Learn More →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── RESEARCH ────────────────────────────────────────────── -->
+<section id="research" class="section alt">
+  <div class="section-head">
+    <h2>RESEARCH</h2>
+    <p>Things you read.</p>
+  </div>
+  <div class="grid">
+
     <div class="card">
       <h3>gonzalgo</h3>
-      <p>What does your proof actually rest on? Finds Lean 4 theorems standing on an inherited <code>sorry</code> or on <code>native_decide</code>. <em>kernel &gt; sorry</em></p>
-      <a href="/gonzalgo/" style="color:var(--green)">Learn More →</a>
+      <p>What does your proof actually rest on? Finds Lean 4 theorems standing on an
+         inherited <code>sorry</code> or on <code>native_decide</code>, and names the
+         tactic that put them there. <em>kernel &gt; sorry</em></p>
+      <a class="go" href="/gonzalgo/">Learn More →</a>
     </div>
+
     <div class="card">
       <h3>Papers</h3>
-      <p>Where formal libraries spend their axioms, and why tactic-level rates cannot attribute them. Full text, DOIs, reproduction archives.</p>
-      <a href="/papers/" style="color:var(--green)">Read →</a>
+      <p>Where formal libraries spend their axioms, and why tactic-level rates cannot
+         attribute them. Full text, DOIs, reproduction archives.</p>
+      <a class="go" href="/papers/">Read →</a>
     </div>
+
     <div class="card">
-      <h3>RemapWrap</h3>
-      <p>Turn your phone into programmable hardware.</p>
-      <a href="/remapwrap" style="color:var(--green)">Learn More →</a>
+      <h3>Modulign</h3>
+      <p>A dimensional address grammar for observable reality. DAG-OR v3, with a
+         companion paper applying the standard to the Gettier problem.</p>
+      <a class="go" href="https://modulign.org" target="_blank" rel="noopener">Visit →</a>
     </div>
-    <div class="card">
-      <h3>OpticQuiz</h3>
-      <p>Privacy-first color vision testing and accessibility infrastructure.</p>
-      <a href="https://opticquiz.com" style="color:var(--green)" target="_blank">Visit →</a>
-    </div>
-    <div class="card">
-      <h3>Trailer Load</h3>
-      <p>Realistic trailer loading simulator.</p>
-      <a href="https://trailer-load.com" style="color:var(--green)" target="_blank">Visit →</a>
-    </div>
-    <div class="card">
-      <h3>TipStreams</h3>
-      <p>Stateless creator monetization.</p>
-      <a href="https://tipstreams.com" style="color:var(--green)" target="_blank">Visit →</a>
-    </div>
+
+  </div>
+</section>
+
+<!-- ── PROPERTIES ──────────────────────────────────────────── -->
+<section id="properties" class="section">
+  <div class="section-head">
+    <h2>PROPERTIES</h2>
+    <p>Sites that stand on their own.</p>
+  </div>
+  <div class="grid">
+
     <div class="card">
       <h3>5Best2Buy</h3>
-      <p>Curated products worth finding.</p>
-      <a href="https://www.5best2buy.com" style="color:var(--green)" target="_blank">Visit →</a>
+      <p>A sourcing map for independent American food. Shelves rank the makers, and the
+         recipes work backward to what you'd need to buy.</p>
+      <a class="go" href="https://www.5best2buy.com" target="_blank" rel="noopener">Visit →</a>
     </div>
-    <div class="card">
-      <h3>DogeFundMe</h3>
-      <p>Community fundraising platform.</p>
-      <a href="https://dogefundme.com" style="color:var(--green)" target="_blank">Visit →</a>
-    </div>
+
     <div class="card">
       <h3>Poticas</h3>
-      <p>Traditional Slovenian baking.</p>
-      <a href="https://poticas.com" style="color:var(--green)" target="_blank">Visit →</a>
+      <p>The home of potica. How it's made, where the regional versions part ways, and
+         who still ships one worth eating.</p>
+      <a class="go" href="https://poticas.com" target="_blank" rel="noopener">Visit →</a>
     </div>
+
+    <div class="card">
+      <h3>TipStreams</h3>
+      <p>Branded tip pages, multi-processor routing, and OBS overlays for streamers.
+         The widget is on npm and never touches the money.</p>
+      <a class="go" href="https://tipstreams.com" target="_blank" rel="noopener">Visit →</a>
+    </div>
+
+    <div class="card">
+      <h3>FunDoge</h3>
+      <p>Free isometric mini-golf in the browser.</p>
+      <a class="go" href="https://dogefundme.com" target="_blank" rel="noopener">Visit →</a>
+    </div>
+
   </div>
 </section>
 
@@ -165,16 +378,29 @@ footer a { color: var(--green); }
 </section>
 
 <footer>
-  <p style="text-align:center;margin-bottom:1rem;">Products</p>
-  <div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;font-size:0.95rem;">
-    <a href="/gonzalgo/">gonzalgo</a>
+  <p style="text-align:center;margin-bottom:1.5rem;color:var(--dim);">Products</p>
+  <div style="display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;font-size:0.95rem;">
+    <a href="/keyj/">Key-J</a>
+    <a href="/pixelstaff/">Pixel Staff</a>
+    <a href="/qv/">QV</a>
     <a href="/remapwrap">RemapWrap</a>
-    <a href="https://opticquiz.com" target="_blank">OpticQuiz</a>
-    <a href="https://tipstreams.com" target="_blank">TipStreams</a>
-    <a href="https://trailer-load.com" target="_blank">Trailer Load</a>
-    <a href="https://www.5best2buy.com" target="_blank">5Best2Buy</a>
-    <a href="https://poticas.com" target="_blank">Poticas</a>
-    <a href="https://dogefundme.com" target="_blank">DogeFundMe</a>
+    <a href="https://opticquiz.com" target="_blank" rel="noopener">OpticQuiz</a>
+    <a href="https://trailer-load.com" target="_blank" rel="noopener">Trailer Load</a>
+    <a href="https://prompt.f-keys.com" target="_blank" rel="noopener">PROMPT</a>
+    <a href="https://dp.f-keys.com" target="_blank" rel="noopener">DaisuPop</a>
+    <a href="/micdrop/">MICDROP</a>
+    <a href="/wikipolish/">WikiPolish</a>
+    <a href="/leadseer/">LeadSeer</a>
+    <a href="/plumhud/">PlumHUD</a>
+    <a href="/streamsniper/">Stream Sniper</a>
+    <a href="/moonbeam/">Moonbeam</a>
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/papers/">Papers</a>
+    <a href="https://modulign.org" target="_blank" rel="noopener">Modulign</a>
+    <a href="https://www.5best2buy.com" target="_blank" rel="noopener">5Best2Buy</a>
+    <a href="https://poticas.com" target="_blank" rel="noopener">Poticas</a>
+    <a href="https://tipstreams.com" target="_blank" rel="noopener">TipStreams</a>
+    <a href="https://dogefundme.com" target="_blank" rel="noopener">FunDoge</a>
   </div>
   <p style="text-align:center;margin-top:3rem;font-size:0.8rem;color:var(--dim);">
     © 2026 F-Keys • Built by Vincent Gonzalez

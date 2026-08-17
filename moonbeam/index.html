@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonbeam — F-Keys</title>
+<meta name="description" content="An educational lottery-style Bitcoin miner on an ESP32. Open firmware, a web dashboard, and an STL for the enclosure. Learn SHA-256 by building the thing that does it.">
+<link rel="canonical" href="https://f-keys.com/moonbeam/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e0a; --panel: #111911; --border: #1f351f;
+  --green: #39ff14; --cyan: #00ffcc; --text: #c3dcc3; --dim: #8fae8f;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Share Tech Mono', monospace;
+  line-height: 1.6; overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+  pointer-events: none; z-index: 9000;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  background: rgba(10,14,10,0.95); border-bottom: 1px solid var(--border);
+  padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-family: 'VT323', monospace; font-weight: 400; font-size: 24px; color: var(--green); letter-spacing: 3px; }
+.back-link { color: var(--dim); text-decoration: none; }
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 2rem 4rem; }
+.hero-content { max-width: 820px; margin: 0 auto; text-align: center; }
+.hero h1 {
+  font-family: 'VT323', monospace; font-weight: 400; font-size: clamp(52px, 10vw, 96px);
+  color: var(--green); letter-spacing: 6px; margin-bottom: 1rem;
+}
+.tagline { font-size: 1.5rem; color: var(--dim); margin-bottom: 2.5rem; }
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; max-width: 1100px; margin: 4rem auto;
+}
+.feature-card { background: var(--panel); border: 1px solid var(--border); padding: 2rem; transition: all 0.2s; }
+.feature-card:hover { border-color: var(--green); transform: translateY(-4px); }
+.btn {
+  font-family: 'VT323', monospace; font-weight: 400; font-size: 1.4rem; padding: 14px 36px;
+  border: 2px solid var(--green); color: var(--green); background: transparent;
+  cursor: pointer; display: inline-block; margin: 0.5rem; text-decoration: none;
+}
+.btn:hover { background: var(--green); color: #0a0e0a; }
+.note {
+  max-width: 700px; margin: 3rem auto 0; background: #0d120d;
+  border: 1px solid var(--border); border-left: 3px solid var(--cyan); padding: 1.5rem 2rem;
+}
+footer { text-align: center; padding: 3rem 2rem; color: var(--dim); border-top: 1px solid var(--border); }
+footer a { color: var(--green); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">F-KEYS / MOONBEAM</div>
+  <a href="/" class="back-link">← Back to F-Keys</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>MOONBEAM</h1>
+    <p class="tagline">A LOTTERY TICKET<br>THAT HUMS.</p>
+    <p style="max-width:580px;margin:0 auto 2rem;color:var(--dim);">
+      A Bitcoin miner on a chip that costs less than dinner. Moonbeam will almost
+      certainly never win anything, and that isn't the point — it's a small machine
+      that teaches you exactly what mining is by doing it on your desk.
+    </p>
+
+    <div>
+      <a href="https://github.com/zengineco/Moonbeam-NerdMiner" class="btn" target="_blank" rel="noopener">BUILD ONE</a>
+    </div>
+
+    <div class="note">
+      <p style="color:var(--cyan);margin-bottom:0.5rem;">What "lottery-inspired" means</p>
+      <p style="color:var(--dim);font-size:0.95rem;">
+        A solo miner this size has odds against it that are difficult to describe
+        without a lot of zeroes. Moonbeam is built to be understood and enjoyed,
+        not to earn. Treat any other outcome as a surprise.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="features" style="padding:6rem 2rem;background:var(--panel);">
+  <h2 style="text-align:center;font-family:'VT323',monospace;font-weight:400;font-size:2.5rem;color:var(--green);margin-bottom:3rem;">WHAT'S IN THE BOX</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3 style="color:var(--green);">OPEN FIRMWARE</h3>
+      <p>The whole miner, readable. If you want to know what SHA-256 actually is,
+         this is a version small enough to follow end to end.</p>
+    </div>
+    <div class="feature-card">
+      <h3 style="color:var(--green);">WEB DASHBOARD</h3>
+      <p>Watch hashrate and status from a browser on your own network.</p>
+    </div>
+    <div class="feature-card">
+      <h3 style="color:var(--green);">HARDWARE DESIGN</h3>
+      <p>The build is documented, based on an ESP32 — cheap, common, and forgiving
+         of a first attempt.</p>
+    </div>
+    <div class="feature-card">
+      <h3 style="color:var(--green);">PRINTABLE ENCLOSURE</h3>
+      <p>An STL for the case, so it ends up looking like an object rather than a
+         board with wires coming out of it.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Moonbeam is a product of <a href="/">F-Keys</a></p>
+  <p style="margin-top:1rem;font-size:0.9rem;">© 2026 F-Keys • Vincent Gonzalez</p>
+</footer>
+
+</body>
+</html>
