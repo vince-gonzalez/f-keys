@@ -4,16 +4,15 @@
     "zones": []
   },
   "date": "2026-08-18",
-  "generated_at": "2026-08-18 07:07 UTC",
+  "generated_at": "2026-08-18 16:32 UTC",
   "github": [
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-18T07:07:28Z",
+      "pushed_at": "2026-08-18T16:30:03Z",
       "repo": "f-keys",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
@@ -21,8 +20,7 @@
       "open_issues": 0,
       "pushed_at": "2026-08-13T06:47:24Z",
       "repo": "gonzalgo",
-      "stars": 2,
-      "traffic_error": "HTTP 403"
+      "stars": 2
     },
     {
       "archived": false,
@@ -30,8 +28,7 @@
       "open_issues": 0,
       "pushed_at": "2026-08-15T13:51:19Z",
       "repo": "opticquiz.com",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
@@ -39,26 +36,23 @@
       "open_issues": 0,
       "pushed_at": "2026-08-13T14:52:41Z",
       "repo": "tip-widget",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-16T19:54:31Z",
+      "pushed_at": "2026-08-18T16:30:06Z",
       "repo": "poticas",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-17T04:48:52Z",
+      "pushed_at": "2026-08-18T16:29:59Z",
       "repo": "5best2buy.com",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
@@ -66,44 +60,39 @@
       "open_issues": 1,
       "pushed_at": "2026-08-10T18:49:51Z",
       "repo": "trailer-load.com",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-13T17:20:56Z",
+      "pushed_at": "2026-08-18T16:30:11Z",
       "repo": "tipstreams.com",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-07-04T23:57:51Z",
+      "pushed_at": "2026-08-18T16:30:08Z",
       "repo": "prompt-game",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-06-30T19:02:44Z",
+      "pushed_at": "2026-08-18T16:32:02Z",
       "repo": "daisupop",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-01T17:03:58Z",
+      "pushed_at": "2026-08-18T16:30:09Z",
       "repo": "qv",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
@@ -111,8 +100,7 @@
       "open_issues": 0,
       "pushed_at": "2026-04-06T03:09:36Z",
       "repo": "fytecraft.com",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
@@ -120,8 +108,7 @@
       "open_issues": 0,
       "pushed_at": "2026-04-17T18:14:22Z",
       "repo": "modulign.org",
-      "stars": 1,
-      "traffic_error": "HTTP 403"
+      "stars": 1
     },
     {
       "archived": false,
@@ -129,8 +116,7 @@
       "open_issues": 0,
       "pushed_at": "2025-08-30T22:59:38Z",
       "repo": "Moonbeam-NerdMiner",
-      "stars": 2,
-      "traffic_error": "HTTP 403"
+      "stars": 2
     }
   ],
   "mode": "daily",
@@ -172,6 +158,7 @@
       "weekly": 9
     }
   ],
+  "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here.",
   "summary": {
     "github_stars": 16,
     "npm_weekly": 349,
@@ -181,82 +168,82 @@
     "pypi_weekly": 108,
     "zenodo_downloads": 359,
     "zenodo_records": 35,
-    "zenodo_views": 859
+    "zenodo_views": 868
   },
   "uptime": [
     {
       "error": null,
-      "ms": 196,
+      "ms": 246,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
     },
     {
       "error": null,
-      "ms": 201,
+      "ms": 233,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
     },
     {
       "error": null,
-      "ms": 162,
+      "ms": 537,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
     },
     {
       "error": null,
-      "ms": 82,
+      "ms": 300,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
     },
     {
       "error": null,
-      "ms": 321,
+      "ms": 434,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
     },
     {
       "error": null,
-      "ms": 223,
+      "ms": 349,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
     },
     {
       "error": null,
-      "ms": 204,
+      "ms": 207,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
     },
     {
       "error": null,
-      "ms": 571,
+      "ms": 440,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
     },
     {
       "error": null,
-      "ms": 184,
+      "ms": 274,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
     },
     {
       "error": null,
-      "ms": 138,
+      "ms": 159,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
     },
     {
       "error": null,
-      "ms": 240,
+      "ms": 402,
       "name": "zengin.es",
       "up": true,
       "url": "https://zengin.es"
@@ -310,16 +297,16 @@
         "id": "19557382",
         "title": "Dimensional Address as Rigid Designation: How DAG-OR Grounds Reference Without Metaphysical Posit",
         "unique_downloads": 15,
-        "unique_views": 27,
-        "views": 27
+        "unique_views": 28,
+        "views": 28
       },
       {
         "downloads": 11,
         "id": "19559602",
         "title": "Modulign Standard:  Automated Classifier Certification Framework",
         "unique_downloads": 11,
-        "unique_views": 25,
-        "views": 25
+        "unique_views": 26,
+        "views": 26
       },
       {
         "downloads": 8,
@@ -334,8 +321,8 @@
         "id": "19578570",
         "title": "THE CLASSIFICATION DEFICIT Article 50 of the EU AI Act, the Epistemic Gap It Cannot Close, and the Formal Standard That Does",
         "unique_downloads": 24,
-        "unique_views": 33,
-        "views": 34
+        "unique_views": 34,
+        "views": 35
       },
       {
         "downloads": 12,
@@ -358,16 +345,16 @@
         "id": "19642557",
         "title": "Architecture, Epistemic Enforcement, and Empirical Implementation of a Universal Classification System for Sensor-Heterogeneous Environments",
         "unique_downloads": 13,
-        "unique_views": 25,
-        "views": 26
+        "unique_views": 26,
+        "views": 27
       },
       {
         "downloads": 12,
         "id": "19643322",
         "title": "Inter-Rater Reliability of Automated Modulign Standard Classifiers",
         "unique_downloads": 11,
-        "unique_views": 15,
-        "views": 16
+        "unique_views": 16,
+        "views": 17
       },
       {
         "downloads": 6,
@@ -382,16 +369,16 @@
         "id": "19644070",
         "title": "On The Record: Toward a Formal Epistemology of Journalistic Attestation",
         "unique_downloads": 8,
-        "unique_views": 31,
-        "views": 32
+        "unique_views": 33,
+        "views": 34
       },
       {
         "downloads": 6,
         "id": "19726226",
         "title": "The Epistemology of Observation: A Formal Certification Framework for Human and Automated Classifiers in DAG-OR",
         "unique_downloads": 5,
-        "unique_views": 14,
-        "views": 15
+        "unique_views": 16,
+        "views": 17
       },
       {
         "downloads": 7,

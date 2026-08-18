@@ -51,7 +51,37 @@ jobs:
             python tools/snapshot.py
           fi
 
-      - name: Commit the snapshot
+      # The full snapshot, including owner-only GitHub traffic, goes to a
+      # private repo. Without the secret this step says so and moves on -
+      # a missing token must never fail the run or lose the public page.
+      - name: Publish full snapshot to the private repo
+        env:
+          KPI_PRIVATE_TOKEN: ${{ secrets.KPI_PRIVATE_TOKEN }}
+        run: |
+          if [ -z "$KPI_PRIVATE_TOKEN" ]; then
+            echo "KPI_PRIVATE_TOKEN not set - skipping the private push."
+            echo "The public snapshot below is unaffected."
+            exit 0
+          fi
+          AUTH=$(printf 'x-access-token:%s' "$KPI_PRIVATE_TOKEN" | base64 -w0)
+          git clone --depth 1 \
+            -c http.extraHeader="Authorization: Basic $AUTH" \
+            https://github.com/vince-gonzalez/kpi-private.git _private
+          mkdir -p _private/data
+          cp -r .private-snapshot/. _private/
+          cd _private
+          git config user.name  "kpi-snapshot"
+          git config user.email "noreply@f-keys.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No change in the private snapshot."
+          else
+            git commit -q -m "Snapshot $(date -u +%Y-%m-%d)"
+            git -c http.extraHeader="Authorization: Basic $AUTH" push origin HEAD
+            echo "Pushed to vince-gonzalez/kpi-private."
+          fi
+
+      - name: Commit the public snapshot
         run: |
           git config user.name  "kpi-snapshot"
           git config user.email "noreply@f-keys.com"
