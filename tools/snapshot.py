@@ -49,9 +49,16 @@ try:
 except (AttributeError, ValueError):
     pass
 
-ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATUS_DIR = os.path.join(ROOT, "status")
-DATA_DIR   = os.path.join(STATUS_DIR, "data")
+ROOT        = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATUS_DIR  = os.path.join(ROOT, "status")
+DATA_DIR    = os.path.join(STATUS_DIR, "data")
+
+# This repo is public, so status/ is public. GitHub repo traffic is
+# owner-only data, so the full snapshot goes to a PRIVATE repo and the
+# published copy has those fields removed. Everything else in the
+# snapshot (npm, PyPI, Zenodo, stars, uptime) was already public data.
+PRIVATE_OUT   = os.environ.get("PRIVATE_OUT", os.path.join(ROOT, ".private-snapshot"))
+PRIVATE_FIELDS = ("views_14d", "unique_views_14d", "traffic_error")
 UA         = "fkeys-snapshot/1.0 (+https://f-keys.com)"
 
 # ── WHAT WE TRACK ────────────────────────────────────────────
@@ -230,6 +237,18 @@ def summarise(snap):
     }
 
 
+# ── REDACTION ────────────────────────────────────────────────
+def redact(snap):
+    """Copy of the snapshot with owner-only fields removed, for publishing."""
+    pub = json.loads(json.dumps(snap))
+    for repo in pub.get("github", []):
+        for f in PRIVATE_FIELDS:
+            repo.pop(f, None)
+    pub["redacted"] = ("GitHub repo traffic is owner-only and lives in the "
+                       "private KPI repo, not here.")
+    return pub
+
+
 # ── RENDER ───────────────────────────────────────────────────
 def row(label, value, delta=None):
     d = ""
@@ -266,11 +285,14 @@ def render(snap, prev):
         f"<td class='num'>{r['views']} <span class='dim'>/ {r.get('downloads') or 0} dl</span></td></tr>"
         for r in top_papers) or "<tr><td colspan=2 class='dim'>no data</td></tr>"
 
+    has_traffic = any(r.get("views_14d") is not None for r in snap["github"])
     repo_rows = "".join(
         f"<tr><td>{r['repo']}</td><td class='num'>"
-        f"{r.get('views_14d') if r.get('views_14d') is not None else '—'}"
-        f" <span class='dim'>/ {r.get('stars') or 0}★</span></td></tr>"
-        for r in sorted(snap["github"], key=lambda r: -(r.get("views_14d") or 0)))
+        + (f"{r.get('views_14d') if r.get('views_14d') is not None else '—'} " if has_traffic else "")
+        + f"<span class='dim'>{r.get('stars') or 0}★</span></td></tr>"
+        for r in sorted(snap["github"],
+                        key=lambda r: (-(r.get("views_14d") or 0), -(r.get("stars") or 0))))
+    repo_title = "REPOS — 14d views / stars" if has_traffic else "REPOS — stars"
 
     errs = []
     for x in snap["npm"] + snap["pypi"]:
@@ -338,7 +360,7 @@ a{{color:var(--green)}}
     <div class="card"><h2>PROPERTIES</h2><table>{up_rows}</table></div>
     <div class="card"><h2>PACKAGES / WEEK</h2><table>{pkg_rows}</table></div>
     <div class="card"><h2>PAPERS — views / downloads</h2><table>{paper_rows}</table></div>
-    <div class="card"><h2>REPOS — 14d views / stars</h2><table>{repo_rows}</table></div>
+    <div class="card"><h2>{repo_title}</h2><table>{repo_rows}</table></div>
     <div class="card"><h2>MOVEMENT</h2><table>
       {row('Package installs/wk', s['package_weekly'], dl('package_weekly'))}
       {row('Paper views',         s['zenodo_views'],   dl('zenodo_views'))}
@@ -392,12 +414,22 @@ def main():
 
     prev = load_prev(today, 7 if weekly else 1)
 
+    # PRIVATE: the complete snapshot, including owner-only repo traffic.
+    priv_data = os.path.join(PRIVATE_OUT, "data")
+    os.makedirs(priv_data, exist_ok=True)
+    for path in (os.path.join(priv_data, f"{today.isoformat()}.json"),
+                 os.path.join(PRIVATE_OUT, "latest.json")):
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(snap, f, indent=2, sort_keys=True)
+
+    # PUBLIC: same snapshot with the owner-only fields stripped.
+    pub = redact(snap)
     with open(os.path.join(DATA_DIR, f"{today.isoformat()}.json"), "w", encoding="utf-8") as f:
-        json.dump(snap, f, indent=2, sort_keys=True)
+        json.dump(pub, f, indent=2, sort_keys=True)
     with open(os.path.join(STATUS_DIR, "latest.json"), "w", encoding="utf-8") as f:
-        json.dump(snap, f, indent=2, sort_keys=True)
+        json.dump(pub, f, indent=2, sort_keys=True)
     with open(os.path.join(STATUS_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(snap, prev))
+        f.write(render(pub, prev))
 
     s = snap["summary"]
     print()
