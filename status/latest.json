@@ -1,0 +1,564 @@
+{
+  "cloudflare": {
+    "error": "skipped: no CF_API_TOKEN / CF_ACCOUNT_ID",
+    "zones": []
+  },
+  "date": "2026-08-18",
+  "generated_at": "2026-08-18 07:05 UTC",
+  "github": [
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-17T17:51:33Z",
+      "repo": "f-keys",
+      "stars": 1,
+      "unique_views_14d": 3,
+      "views_14d": 11
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-13T06:47:24Z",
+      "repo": "gonzalgo",
+      "stars": 2,
+      "unique_views_14d": 11,
+      "views_14d": 35
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-15T13:51:19Z",
+      "repo": "opticquiz.com",
+      "stars": 1,
+      "unique_views_14d": 3,
+      "views_14d": 36
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-13T14:52:41Z",
+      "repo": "tip-widget",
+      "stars": 1,
+      "unique_views_14d": 3,
+      "views_14d": 6
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-16T19:54:31Z",
+      "repo": "poticas",
+      "stars": 1,
+      "unique_views_14d": 2,
+      "views_14d": 5
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-17T04:48:52Z",
+      "repo": "5best2buy.com",
+      "stars": 1,
+      "unique_views_14d": 2,
+      "views_14d": 7
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 1,
+      "pushed_at": "2026-08-10T18:49:51Z",
+      "repo": "trailer-load.com",
+      "stars": 1,
+      "unique_views_14d": 2,
+      "views_14d": 5
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-13T17:20:56Z",
+      "repo": "tipstreams.com",
+      "stars": 1,
+      "unique_views_14d": 2,
+      "views_14d": 5
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-07-04T23:57:51Z",
+      "repo": "prompt-game",
+      "stars": 1,
+      "unique_views_14d": 2,
+      "views_14d": 5
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-06-30T19:02:44Z",
+      "repo": "daisupop",
+      "stars": 1,
+      "unique_views_14d": 0,
+      "views_14d": 0
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-08-01T17:03:58Z",
+      "repo": "qv",
+      "stars": 1,
+      "unique_views_14d": 2,
+      "views_14d": 5
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-04-06T03:09:36Z",
+      "repo": "fytecraft.com",
+      "stars": 1,
+      "unique_views_14d": 0,
+      "views_14d": 0
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-04-17T18:14:22Z",
+      "repo": "modulign.org",
+      "stars": 1,
+      "unique_views_14d": 0,
+      "views_14d": 0
+    },
+    {
+      "archived": false,
+      "forks": 0,
+      "open_issues": 0,
+      "pushed_at": "2025-08-30T22:59:38Z",
+      "repo": "Moonbeam-NerdMiner",
+      "stars": 2,
+      "unique_views_14d": 0,
+      "views_14d": 0
+    }
+  ],
+  "mode": "daily",
+  "npm": [
+    {
+      "error": null,
+      "package": "@f-keys/tip-widget",
+      "weekly": 289
+    },
+    {
+      "error": null,
+      "package": "opticquiz-eye",
+      "weekly": 37
+    },
+    {
+      "error": null,
+      "package": "opticquiz-cvd",
+      "weekly": 9
+    },
+    {
+      "error": null,
+      "package": "opticquiz-cvd-mcp",
+      "weekly": 14
+    }
+  ],
+  "pypi": [
+    {
+      "daily": 4,
+      "error": null,
+      "monthly": 871,
+      "package": "gonzalgo",
+      "weekly": 99
+    },
+    {
+      "daily": 1,
+      "error": null,
+      "monthly": 151,
+      "package": "opticquiz-cvd",
+      "weekly": 9
+    }
+  ],
+  "summary": {
+    "github_stars": 16,
+    "npm_weekly": 349,
+    "package_weekly": 457,
+    "properties_total": 11,
+    "properties_up": 11,
+    "pypi_weekly": 108,
+    "zenodo_downloads": 359,
+    "zenodo_records": 35,
+    "zenodo_views": 859
+  },
+  "uptime": [
+    {
+      "error": null,
+      "ms": 257,
+      "name": "f-keys.com",
+      "up": true,
+      "url": "https://f-keys.com"
+    },
+    {
+      "error": null,
+      "ms": 209,
+      "name": "opticquiz.com",
+      "up": true,
+      "url": "https://opticquiz.com"
+    },
+    {
+      "error": null,
+      "ms": 540,
+      "name": "poticas.com",
+      "up": true,
+      "url": "https://poticas.com"
+    },
+    {
+      "error": null,
+      "ms": 231,
+      "name": "5best2buy.com",
+      "up": true,
+      "url": "https://www.5best2buy.com"
+    },
+    {
+      "error": null,
+      "ms": 474,
+      "name": "trailer-load.com",
+      "up": true,
+      "url": "https://trailer-load.com"
+    },
+    {
+      "error": null,
+      "ms": 341,
+      "name": "tipstreams.com",
+      "up": true,
+      "url": "https://tipstreams.com"
+    },
+    {
+      "error": null,
+      "ms": 239,
+      "name": "dogefundme.com",
+      "up": true,
+      "url": "https://dogefundme.com"
+    },
+    {
+      "error": null,
+      "ms": 432,
+      "name": "modulign.org",
+      "up": true,
+      "url": "https://modulign.org"
+    },
+    {
+      "error": null,
+      "ms": 218,
+      "name": "prompt.f-keys.com",
+      "up": true,
+      "url": "https://prompt.f-keys.com"
+    },
+    {
+      "error": null,
+      "ms": 195,
+      "name": "dp.f-keys.com",
+      "up": true,
+      "url": "https://dp.f-keys.com"
+    },
+    {
+      "error": null,
+      "ms": 371,
+      "name": "zengin.es",
+      "up": true,
+      "url": "https://zengin.es"
+    }
+  ],
+  "zenodo": {
+    "error": null,
+    "records": [
+      {
+        "downloads": 22,
+        "id": "19348704",
+        "title": "MODULIGN Standard, A Dimensional Address Grammar for Observable Reality",
+        "unique_downloads": 19,
+        "unique_views": 55,
+        "views": 57
+      },
+      {
+        "downloads": 20,
+        "id": "19350848",
+        "title": "The Formal Logic of Modulign",
+        "unique_downloads": 20,
+        "unique_views": 44,
+        "views": 44
+      },
+      {
+        "downloads": 18,
+        "id": "19351055",
+        "title": "Synthetic Content As Epistemic Category",
+        "unique_downloads": 17,
+        "unique_views": 52,
+        "views": 53
+      },
+      {
+        "downloads": 17,
+        "id": "19351250",
+        "title": "Modulign As Evidence",
+        "unique_downloads": 16,
+        "unique_views": 47,
+        "views": 48
+      },
+      {
+        "downloads": 25,
+        "id": "19432926",
+        "title": "Structural Dissolution of the Gettier Problem through Address-Theoretic Epistemology",
+        "unique_downloads": 23,
+        "unique_views": 39,
+        "views": 39
+      },
+      {
+        "downloads": 15,
+        "id": "19557382",
+        "title": "Dimensional Address as Rigid Designation: How DAG-OR Grounds Reference Without Metaphysical Posit",
+        "unique_downloads": 15,
+        "unique_views": 27,
+        "views": 27
+      },
+      {
+        "downloads": 11,
+        "id": "19559602",
+        "title": "Modulign Standard:  Automated Classifier Certification Framework",
+        "unique_downloads": 11,
+        "unique_views": 25,
+        "views": 25
+      },
+      {
+        "downloads": 8,
+        "id": "19559689",
+        "title": "Public Commitment Document",
+        "unique_downloads": 7,
+        "unique_views": 18,
+        "views": 18
+      },
+      {
+        "downloads": 29,
+        "id": "19578570",
+        "title": "THE CLASSIFICATION DEFICIT Article 50 of the EU AI Act, the Epistemic Gap It Cannot Close, and the Formal Standard That Does",
+        "unique_downloads": 24,
+        "unique_views": 33,
+        "views": 34
+      },
+      {
+        "downloads": 12,
+        "id": "19642385",
+        "title": "Chain of Custody Formalisation in Digital Forensics: The Modulign ^EVID Architecture as a Registry-Based Evidentiary Framework",
+        "unique_downloads": 11,
+        "unique_views": 25,
+        "views": 27
+      },
+      {
+        "downloads": 10,
+        "id": "19642437",
+        "title": "AI-Generated Evidence Admissibility:  A Formal Classification Framework for Synthetic Content",
+        "unique_downloads": 10,
+        "unique_views": 28,
+        "views": 29
+      },
+      {
+        "downloads": 14,
+        "id": "19642557",
+        "title": "Architecture, Epistemic Enforcement, and Empirical Implementation of a Universal Classification System for Sensor-Heterogeneous Environments",
+        "unique_downloads": 13,
+        "unique_views": 25,
+        "views": 26
+      },
+      {
+        "downloads": 12,
+        "id": "19643322",
+        "title": "Inter-Rater Reliability of Automated Modulign Standard Classifiers",
+        "unique_downloads": 11,
+        "unique_views": 15,
+        "views": 16
+      },
+      {
+        "downloads": 6,
+        "id": "19644043",
+        "title": "Version 3.1 Amendment Document",
+        "unique_downloads": 6,
+        "unique_views": 15,
+        "views": 16
+      },
+      {
+        "downloads": 8,
+        "id": "19644070",
+        "title": "On The Record: Toward a Formal Epistemology of Journalistic Attestation",
+        "unique_downloads": 8,
+        "unique_views": 31,
+        "views": 32
+      },
+      {
+        "downloads": 6,
+        "id": "19726226",
+        "title": "The Epistemology of Observation: A Formal Certification Framework for Human and Automated Classifiers in DAG-OR",
+        "unique_downloads": 5,
+        "unique_views": 14,
+        "views": 15
+      },
+      {
+        "downloads": 7,
+        "id": "19726393",
+        "title": "Federated Classification Infrastructure: Registry Governance, Node Architecture, and Decentralized Stewardship for DAG-OR",
+        "unique_downloads": 6,
+        "unique_views": 16,
+        "views": 17
+      },
+      {
+        "downloads": 6,
+        "id": "19726401",
+        "title": "The Modulign Correction Protocol: Formal Specification for Append-Only Error Resolution in DAG-OR",
+        "unique_downloads": 5,
+        "unique_views": 8,
+        "views": 10
+      },
+      {
+        "downloads": 7,
+        "id": "19726407",
+        "title": "The Human Attestation Protocol: Confrontation Clause Compliance for Automated Classifications in DAG-OR",
+        "unique_downloads": 6,
+        "unique_views": 15,
+        "views": 17
+      },
+      {
+        "downloads": 6,
+        "id": "19726994",
+        "title": "Modulign: Architecture, Implementation, and Applications of a Dimensional Address Grammar for Observable Reality",
+        "unique_downloads": 4,
+        "unique_views": 15,
+        "views": 18
+      },
+      {
+        "downloads": 15,
+        "id": "20013336",
+        "title": "Competitive Context as a Jailbreak Accelerant: Inter-Model Rivalry as a Novel Adversarial Vector in Large Language Model Safety",
+        "unique_downloads": 15,
+        "unique_views": 18,
+        "views": 19
+      },
+      {
+        "downloads": 4,
+        "id": "21302923",
+        "title": "Potica in America: Naming, Transmission, and the Printed Record of a Diaspora Pastry",
+        "unique_downloads": 4,
+        "unique_views": 5,
+        "views": 5
+      },
+      {
+        "downloads": 7,
+        "id": "21310577",
+        "title": "A Procedural Method for Generating Pseudoisochromatic Plates in the Browser, and the Calibration Limits of Screen-Based Colour-Vision Screening",
+        "unique_downloads": 7,
+        "unique_views": 76,
+        "views": 79
+      },
+      {
+        "downloads": 5,
+        "id": "21568684",
+        "title": "A certified opaque barrier for the unit disc of length 4.79984937\u2026",
+        "unique_downloads": 5,
+        "unique_views": 11,
+        "views": 11
+      },
+      {
+        "downloads": 4,
+        "id": "21629398",
+        "title": "First-Return Walks on Vertex-Transitive Graphs",
+        "unique_downloads": 4,
+        "unique_views": 6,
+        "views": 6
+      },
+      {
+        "downloads": 4,
+        "id": "21701338",
+        "title": "A machine-checked proof of opacity for a Faber\u2013Mycielski barrier",
+        "unique_downloads": 4,
+        "unique_views": 9,
+        "views": 10
+      },
+      {
+        "downloads": 6,
+        "id": "21701519",
+        "title": "Rigorous areas for the classical Lebesgue universal covering ladder",
+        "unique_downloads": 6,
+        "unique_views": 13,
+        "views": 13
+      },
+      {
+        "downloads": 7,
+        "id": "21702301",
+        "title": "The added-vector code of the odd-sign construction is maximal in dimensions 20 and 21",
+        "unique_downloads": 7,
+        "unique_views": 12,
+        "views": 18
+      },
+      {
+        "downloads": 7,
+        "id": "21729367",
+        "title": "Maximality of the added-vector codes in the Cohn-Li kissing constructions",
+        "unique_downloads": 7,
+        "unique_views": 10,
+        "views": 21
+      },
+      {
+        "downloads": 3,
+        "id": "21729548",
+        "title": "Certified upper bounds for Fejes T\u00f3th's point-goalie problem at n = 4 and 5",
+        "unique_downloads": 3,
+        "unique_views": 5,
+        "views": 5
+      },
+      {
+        "downloads": 11,
+        "id": "21769846",
+        "title": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
+        "unique_downloads": 10,
+        "unique_views": 60,
+        "views": 74
+      },
+      {
+        "downloads": 8,
+        "id": "21853489",
+        "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
+        "unique_downloads": 7,
+        "unique_views": 14,
+        "views": 15
+      },
+      {
+        "downloads": 5,
+        "id": "21876790",
+        "title": "Pseudoisochromatic plate design type is recoverable from delivered colour and dot geometry alone",
+        "unique_downloads": 3,
+        "unique_views": 1,
+        "views": 2
+      },
+      {
+        "downloads": 8,
+        "id": "21883963",
+        "title": "Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib",
+        "unique_downloads": 3,
+        "unique_views": 3,
+        "views": 7
+      },
+      {
+        "downloads": 6,
+        "id": "21884471",
+        "title": "Eligibility Discriminates Among Theorems and Not Among the Constants They Rest On",
+        "unique_downloads": 4,
+        "unique_views": 5,
+        "views": 6
+      }
+    ]
+  }
+}
