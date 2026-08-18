@@ -100,7 +100,14 @@ def walk(root):
 
 
 def main():
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Defaults to the repo this script lives in. Pass a path to check any
+    # other property with the same rules, e.g.
+    #   python tools/brand-gate.py ../wikiscout
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if args:
+        root = os.path.abspath(args[0])
+    else:
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     if "--list-allowed" in sys.argv:
         print("Allowed by exception:\n")

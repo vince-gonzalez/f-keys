@@ -1,0 +1,71 @@
+name: kpi snapshot
+
+# Daily and weekly KPI snapshot across every F-Keys property.
+# Results are COMMITTED, so git itself becomes the time series -
+# no database, and every day is diffable against the last.
+#
+# Timing note: GitHub's scheduled runs are best-effort and routinely
+# fire 5-60 minutes late under load. If exact 00:00 UTC ever matters,
+# move the trigger to a Cloudflare Cron Trigger and keep this script.
+
+on:
+  schedule:
+    - cron: '0 0 * * *'     # daily,  00:00 UTC
+    - cron: '5 0 * * 1'     # weekly, Monday 00:05 UTC (adds 7-day deltas)
+  workflow_dispatch:
+    inputs:
+      weekly:
+        description: 'Run in weekly mode (7-day deltas)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: kpi-snapshot
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Collect snapshot
+        env:
+          # GH_TOKEN_KPI is an optional PAT with repo:read. Without it the
+          # run still works - cross-repo traffic reports "skipped" and
+          # everything else (npm, PyPI, Zenodo, uptime, stars) still lands.
+          GH_TOKEN: ${{ secrets.GH_TOKEN_KPI || github.token }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: |
+          if [ "${{ github.event.schedule }}" = "5 0 * * 1" ] || [ "${{ inputs.weekly }}" = "true" ]; then
+            python tools/snapshot.py --weekly
+          else
+            python tools/snapshot.py
+          fi
+
+      - name: Commit the snapshot
+        run: |
+          git config user.name  "kpi-snapshot"
+          git config user.email "noreply@f-keys.com"
+          git add status/
+          if git diff --staged --quiet; then
+            echo "No change in the numbers today - nothing to commit."
+            exit 0
+          fi
+          SUMMARY=$(python -c "
+          import json
+          s = json.load(open('status/latest.json', encoding='utf-8'))['summary']
+          print(f\"{s['properties_up']}/{s['properties_total']} up · \"
+                f\"{s['package_weekly']} installs/wk · \"
+                f\"{s['zenodo_views']} paper views · {s['github_stars']} stars\")
+          ")
+          git commit -m "Snapshot $(date -u +%Y-%m-%d): $SUMMARY"
+          git push
