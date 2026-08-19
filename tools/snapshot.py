@@ -542,10 +542,13 @@ def render(snap, prev):
     bots = (cf.get("bots_24h") or {})
     if bots:
         btotal = sum(bots.values()) or 1
+        # Re-sort here: the snapshot is written with sort_keys=True for stable
+        # diffs, which alphabetises these and buries the large buckets.
+        ranked = sorted(bots.items(), key=lambda kv: -kv[1])
         mix_rows = "".join(
             f"<tr><td>{k}</td><td class='num'>{fmt(v)}"
             f" <span class='dim'>{round(100.0*v/btotal,1)}%</span></td></tr>"
-            for k, v in list(bots.items())[:8])
+            for k, v in ranked[:9])
         mix_html = ("<table>" + mix_rows + "</table>"
                     "<p class='dim' style='margin-top:.9rem;font-size:.8rem'>"
                     "24-hour sample — the only window the free plan allows for this "
