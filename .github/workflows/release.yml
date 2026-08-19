@@ -6,6 +6,7 @@ name: release
 #
 #   keyj      -> Electron installers, built per platform, attached to a Release
 #   moonbeam  -> Python wheel + sdist, published to PyPI and attached too
+#   plumhud   -> the same
 #
 # Adding a product means adding a job condition, not another workflow.
 
@@ -122,7 +123,8 @@ jobs:
           # Proving the artifact works beats proving the source works.
           python -m venv /tmp/verify
           /tmp/verify/bin/python -m pip install --quiet dist/*.whl
-          /tmp/verify/bin/moonbeam --help > /dev/null
+          # the console script is named after the product
+          /tmp/verify/bin/${{ needs.identify.outputs.product }} --help > /dev/null
           echo "console script runs from the built wheel"
 
       - name: Publish to PyPI
@@ -173,25 +175,41 @@ jobs:
             echo "No artifacts were produced - refusing to publish an empty release."
             exit 1
           fi
-          if [ "$PRODUCT" = "plumhud" ]; then
-            TITLE="PlumHUD $VERSION"
-            NOTES=$(printf '%s
-'               'Miner fleet monitor - overlay HUD, alerts and history.' ''               '```' 'pip install plumhud' 'plumhud' '```' ''               'v4 stops inventing missing readings and stops writing your'               'config to whatever folder you launched from.')
-          elif [ "$PRODUCT" = "moonbeam" ]; then
-            TITLE="Moonbeam $VERSION"
-            NOTES=$(printf '%s\n' \
-              'Find the NerdMiners on your network and read their vitals.' '' \
-              '```' 'pip install moonbeam-miner' 'moonbeam' '```' '' \
-              'No dependencies. A dash means the miner did not report that' \
-              'field - never a stand-in number.')
-          else
-            TITLE="Key-J $VERSION"
-            NOTES=$(printf '%s\n' \
-              'Key-J turns your keyboard into an instrument.' '' \
-              '**Windows** - download the `.exe` and run it.' \
-              '**Linux** - download the `.AppImage`, `chmod +x`, run it.' '' \
-              'Browser version: https://f-keys.com/keyj/')
-          fi
+          case "$PRODUCT" in
+            plumhud)
+              TITLE="PlumHUD $VERSION"
+              NOTES="Miner fleet monitor - overlay HUD, alerts and history.
+
+\`\`\`
+pip install plumhud
+plumhud
+\`\`\`
+
+v4 stops inventing missing readings, and stops writing your config to
+whatever folder you launched from."
+              ;;
+            moonbeam)
+              TITLE="Moonbeam $VERSION"
+              NOTES="Find the NerdMiners on your network and read their vitals.
+
+\`\`\`
+pip install moonbeam-miner
+moonbeam
+\`\`\`
+
+No dependencies. A dash means the miner did not report that field -
+never a stand-in number."
+              ;;
+            *)
+              TITLE="Key-J $VERSION"
+              NOTES="Key-J turns your keyboard into an instrument.
+
+**Windows** - download the .exe and run it.
+**Linux** - download the .AppImage, chmod +x, run it.
+
+Browser version: https://f-keys.com/keyj/"
+              ;;
+          esac
           gh release create "$TAG" release/* --title "$TITLE" --notes "$NOTES" \
             --repo "$GITHUB_REPOSITORY" \
             || gh release upload "$TAG" release/* --clobber --repo "$GITHUB_REPOSITORY"
