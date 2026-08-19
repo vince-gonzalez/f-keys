@@ -58,7 +58,8 @@ DATA_DIR    = os.path.join(STATUS_DIR, "data")
 # published copy has those fields removed. Everything else in the
 # snapshot (npm, PyPI, Zenodo, stars, uptime) was already public data.
 PRIVATE_OUT   = os.environ.get("PRIVATE_OUT", os.path.join(ROOT, ".private-snapshot"))
-PRIVATE_FIELDS = ("views_14d", "unique_views_14d", "traffic_error")
+PRIVATE_FIELDS = ("views_14d", "unique_views_14d", "traffic_error",
+                  "clones_14d", "unique_cloners_14d")
 UA         = "fkeys-snapshot/1.0 (+https://f-keys.com)"
 
 # ── WHAT WE TRACK ────────────────────────────────────────────
@@ -134,12 +135,18 @@ def collect_uptime():
 
 
 def collect_npm():
+    today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
     out = []
     for pkg in NPM_PACKAGES:
         d, err = fetch_json(f"https://api.npmjs.org/downloads/point/last-week/{pkg}")
-        out.append({"package": pkg,
-                    "weekly": (d or {}).get("downloads") if not err else None,
-                    "error": err})
+        entry = {"package": pkg,
+                 "weekly": (d or {}).get("downloads") if not err else None,
+                 "error": err}
+        # npm has no all-time endpoint; a wide point range is the way to get it.
+        a, aerr = fetch_json(
+            f"https://api.npmjs.org/downloads/point/2015-01-01:{today}/{pkg}", tries=2)
+        entry["all_time"] = (a or {}).get("downloads") if not aerr else None
+        out.append(entry)
     return out
 
 
@@ -148,11 +155,21 @@ def collect_pypi():
     for pkg in PYPI_PACKAGES:
         d, err = fetch_json(f"https://pypistats.org/api/packages/{pkg}/recent")
         data = (d or {}).get("data", {}) if not err else {}
-        out.append({"package": pkg,
-                    "daily":   data.get("last_day"),
-                    "weekly":  data.get("last_week"),
-                    "monthly": data.get("last_month"),
-                    "error": err})
+        entry = {"package": pkg,
+                 "daily":   data.get("last_day"),
+                 "weekly":  data.get("last_week"),
+                 "monthly": data.get("last_month"),
+                 "error": err}
+        # /overall returns both categories. with_mirrors is roughly 3x the
+        # real figure because mirror bots re-download constantly, so only
+        # without_mirrors is reported here.
+        o, oerr = fetch_json(f"https://pypistats.org/api/packages/{pkg}/overall", tries=2)
+        if not oerr:
+            entry["all_time"] = sum(r["downloads"] for r in (o.get("data") or [])
+                                    if r.get("category") == "without_mirrors")
+        else:
+            entry["all_time"] = None
+        out.append(entry)
     return out
 
 
@@ -182,6 +199,15 @@ def collect_github():
             else:
                 entry["views_14d"] = t.get("count")
                 entry["unique_views_14d"] = t.get("uniques")
+            # Clones are the stronger signal for a package: people install it
+            # rather than read about it. gonzalgo ran 828 clones against 35
+            # page views the first time this was measured.
+            c, cerr = fetch_json(
+                f"https://api.github.com/repos/{GITHUB_OWNER}/{repo}/traffic/clones",
+                headers=auth, tries=1)
+            if not cerr:
+                entry["clones_14d"] = c.get("count")
+                entry["unique_cloners_14d"] = c.get("uniques")
         else:
             entry["traffic_error"] = "skipped: no token"
         out.append(entry)
@@ -257,8 +283,30 @@ query ($zoneTag: String!, $since: Date!, $until: Date!) {
         orderBy: [date_DESC]
       ) {
         dimensions { date }
-        sum { requests pageViews }
+        sum {
+          requests
+          pageViews
+          threats
+          countryMap { clientCountryName requests }
+        }
         uniq { uniques }
+      }
+    }
+  }
+}
+"""
+
+
+BOT_QUERY = """
+query ($zoneTag: String!, $since: Time!, $until: Time!) {
+  viewer {
+    zones(filter: {zoneTag: $zoneTag}) {
+      httpRequestsAdaptiveGroups(
+        limit: 100,
+        filter: {datetime_geq: $since, datetime_leq: $until}
+      ) {
+        count
+        dimensions { verifiedBotCategory }
       }
     }
   }
@@ -316,13 +364,46 @@ def collect_cloudflare(days=7):
         except (KeyError, IndexError, TypeError):
             sites.append({"site": name, "error": "no data returned"})
             continue
+        countries = {}
+        for g in groups:
+            for c in (g["sum"].get("countryMap") or []):
+                countries[c["clientCountryName"]] = (
+                    countries.get(c["clientCountryName"], 0) + (c["requests"] or 0))
+        top = sorted(countries.items(), key=lambda kv: -kv[1])[:5]
+        total_c = sum(countries.values()) or 1
+
         sites.append({
             "site": name,
             "page_views": sum((g["sum"]["pageViews"] or 0) for g in groups),
             "uniques":    sum((g["uniq"]["uniques"] or 0) for g in groups),
             "requests":   sum((g["sum"]["requests"] or 0) for g in groups),
+            "threats":    sum((g["sum"].get("threats") or 0) for g in groups),
             "days_returned": len(groups),
+            "top_countries": [
+                {"country": k, "requests": v, "pct": round(100.0 * v / total_c, 1)}
+                for k, v in top],
         })
+
+    # Verified-bot breakdown. The adaptive dataset is capped at 24h windows on
+    # the Free plan, so this is a one-day sample. Run daily it accumulates into
+    # the time series that a 7-day query cannot give us.
+    now  = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
+    bsince = (now - datetime.timedelta(hours=23)).isoformat().replace("+00:00", "Z")
+    buntil = now.isoformat().replace("+00:00", "Z")
+    bots, bot_err = {}, None
+    for zid, name in zones:
+        data, err = cf_graphql(token, BOT_QUERY,
+                               {"zoneTag": zid, "since": bsince, "until": buntil})
+        if err:
+            bot_err = bot_err or err
+            continue
+        try:
+            rows = data["viewer"]["zones"][0]["httpRequestsAdaptiveGroups"]
+        except (KeyError, IndexError, TypeError):
+            continue
+        for r in rows:
+            cat = (r["dimensions"].get("verifiedBotCategory") or "").strip()
+            bots[cat or "Unverified"] = bots.get(cat or "Unverified", 0) + (r["count"] or 0)
 
     ok = [s for s in sites if "error" not in s]
     sites.sort(key=lambda s: -(s.get("uniques") or 0))
@@ -334,7 +415,13 @@ def collect_cloudflare(days=7):
         "totals": {
             "page_views": sum(s["page_views"] for s in ok) if ok else None,
             "uniques":    sum(s["uniques"] for s in ok) if ok else None,
+            "threats":    sum(s.get("threats") or 0 for s in ok) if ok else None,
         },
+        # "Unverified" is NOT the same as human - it is everything Cloudflare
+        # could not positively identify as a known bot, which includes both
+        # real people and the credential scanners that spoof AI user agents.
+        "bots_24h": dict(sorted(bots.items(), key=lambda kv: -kv[1])),
+        "bots_error": bot_err,
     }
 
 
@@ -404,7 +491,11 @@ def render(snap, prev):
                         "Add CF_API_TOKEN and this fills with per-site visitors.</p>")
     else:
         traffic_html = "<table>" + "".join(
-            (f"<tr><td>{x['site']}</td><td class='num'>"
+            (f"<tr><td>{x['site']}"
+             + (f"<br><span class='dim' style='font-size:.8rem'>"
+                f"{x['top_countries'][0]['country']} {x['top_countries'][0]['pct']}%</span>"
+                if x.get("top_countries") else "")
+             + f"</td><td class='num'>"
              f"{fmt(x.get('uniques'))} <span class='dim'>/ {fmt(x.get('page_views'))} pv</span>"
              "</td></tr>") if "error" not in x else
             (f"<tr><td>{x['site']}</td><td class='num dim'>{x['error']}</td></tr>")
@@ -428,7 +519,8 @@ def render(snap, prev):
         for x in snap["uptime"])
 
     pkg_rows = "".join(
-        f"<tr><td>{x['package']}</td><td class='num'>{x['weekly'] if x['weekly'] is not None else '—'}</td></tr>"
+        f"<tr><td>{x['package']}</td><td class='num'>{fmt(x.get('weekly'))}"
+        f" <span class='dim'>/ {fmt(x.get('all_time'))} all time</span></td></tr>"
         for x in snap["npm"] + snap["pypi"])
 
     top_papers = sorted([r for r in snap["zenodo"]["records"] if r.get("views")],
@@ -446,6 +538,23 @@ def render(snap, prev):
         for r in sorted(snap["github"],
                         key=lambda r: (-(r.get("views_14d") or 0), -(r.get("stars") or 0))))
     repo_title = "REPOS — 14d views / stars" if has_traffic else "REPOS — stars"
+
+    bots = (cf.get("bots_24h") or {})
+    if bots:
+        btotal = sum(bots.values()) or 1
+        mix_rows = "".join(
+            f"<tr><td>{k}</td><td class='num'>{fmt(v)}"
+            f" <span class='dim'>{round(100.0*v/btotal,1)}%</span></td></tr>"
+            for k, v in list(bots.items())[:8])
+        mix_html = ("<table>" + mix_rows + "</table>"
+                    "<p class='dim' style='margin-top:.9rem;font-size:.8rem'>"
+                    "24-hour sample — the only window the free plan allows for this "
+                    "dataset. <strong>Unverified</strong> is not the same as human: it "
+                    "is everything Cloudflare could not positively identify, which "
+                    "includes real people and the scanners that spoof AI user agents."
+                    "</p>")
+    else:
+        mix_html = ("<p class='dim'>" + (cf.get("bots_error") or "no sample yet") + "</p>")
 
     errs = []
     for x in snap["npm"] + snap["pypi"]:
@@ -513,7 +622,8 @@ a{{color:var(--green)}}
 
   <div class="grid">
     <div class="card"><h2>TRAFFIC — visitors / page views, 7d</h2>{traffic_html}</div>
-    <div class="card"><h2>PACKAGES / WEEK</h2><table>{pkg_rows}</table></div>
+    <div class="card"><h2>PACKAGES — week / all time</h2><table>{pkg_rows}</table></div>
+    <div class="card"><h2>TRAFFIC MIX — who is actually asking</h2>{mix_html}</div>
     <div class="card"><h2>PAPERS — views / downloads</h2><table>{paper_rows}</table></div>
     <div class="card"><h2>{repo_title}</h2><table>{repo_rows}</table></div>
     <div class="card"><h2>MOVEMENT</h2><table>
