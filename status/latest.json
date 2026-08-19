@@ -1,21 +1,100 @@
 {
   "cloudflare": {
     "days": 7,
-    "error": "skipped: no CF_API_TOKEN",
-    "sites": [],
+    "error": null,
+    "sites": [
+      {
+        "days_returned": 7,
+        "page_views": 19165,
+        "requests": 37562,
+        "site": "5best2buy.com",
+        "uniques": 7229
+      },
+      {
+        "days_returned": 7,
+        "page_views": 4220,
+        "requests": 79921,
+        "site": "f-keys.com",
+        "uniques": 2050
+      },
+      {
+        "days_returned": 7,
+        "page_views": 2492,
+        "requests": 18991,
+        "site": "opticquiz.com",
+        "uniques": 1846
+      },
+      {
+        "days_returned": 7,
+        "page_views": 1489,
+        "requests": 13121,
+        "site": "poticas.com",
+        "uniques": 1593
+      },
+      {
+        "days_returned": 7,
+        "page_views": 557,
+        "requests": 25262,
+        "site": "zengine.org",
+        "uniques": 1390
+      },
+      {
+        "days_returned": 7,
+        "page_views": 610,
+        "requests": 7434,
+        "site": "trailer-load.com",
+        "uniques": 1095
+      },
+      {
+        "days_returned": 7,
+        "page_views": 392,
+        "requests": 10098,
+        "site": "sympolar.com",
+        "uniques": 665
+      },
+      {
+        "days_returned": 7,
+        "page_views": 268,
+        "requests": 7298,
+        "site": "epistemend.org",
+        "uniques": 643
+      },
+      {
+        "days_returned": 7,
+        "page_views": 565,
+        "requests": 4647,
+        "site": "dogefundme.com",
+        "uniques": 629
+      },
+      {
+        "days_returned": 7,
+        "page_views": 0,
+        "requests": 97,
+        "site": "goy-slop.org",
+        "uniques": 7
+      },
+      {
+        "error": "HTTP 502",
+        "site": "tipstreams.com"
+      }
+    ],
     "totals": {
-      "page_views": null,
-      "uniques": null
+      "page_views": 29758,
+      "uniques": 17147
+    },
+    "window": {
+      "since": "2026-08-12",
+      "until": "2026-08-18"
     }
   },
   "date": "2026-08-19",
-  "generated_at": "2026-08-19 15:54 UTC",
+  "generated_at": "2026-08-19 16:11 UTC",
   "github": [
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-19T09:07:59Z",
+      "pushed_at": "2026-08-19T16:00:07Z",
       "repo": "f-keys",
       "stars": 1
     },
@@ -168,11 +247,11 @@
     "github_stars": 16,
     "npm_weekly": 341,
     "package_weekly": 456,
-    "page_views_7d": null,
+    "page_views_7d": 29758,
     "properties_total": 11,
     "properties_up": 11,
     "pypi_weekly": 115,
-    "visitors_7d": null,
+    "visitors_7d": 17147,
     "zenodo_downloads": 360,
     "zenodo_records": 35,
     "zenodo_views": 903
@@ -180,77 +259,77 @@
   "uptime": [
     {
       "error": null,
-      "ms": 358,
+      "ms": 301,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
     },
     {
       "error": null,
-      "ms": 328,
+      "ms": 301,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
     },
     {
       "error": null,
-      "ms": 499,
+      "ms": 6291,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
     },
     {
       "error": null,
-      "ms": 291,
+      "ms": 2059,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
     },
     {
       "error": null,
-      "ms": 529,
+      "ms": 444,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
     },
     {
       "error": null,
-      "ms": 258,
+      "ms": 275,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
     },
     {
       "error": null,
-      "ms": 319,
+      "ms": 207,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
     },
     {
       "error": null,
-      "ms": 625,
+      "ms": 671,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
     },
     {
       "error": null,
-      "ms": 298,
+      "ms": 211,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
     },
     {
       "error": null,
-      "ms": 227,
+      "ms": 209,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
     },
     {
       "error": null,
-      "ms": 310,
+      "ms": 388,
       "name": "zengin.es",
       "up": true,
       "url": "https://zengin.es"
