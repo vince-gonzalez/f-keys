@@ -212,26 +212,39 @@ def collect_zenodo():
     return {"error": None, "records": records}
 
 
-def cf_graphql(token, query, variables):
-    """POST to Cloudflare's GraphQL analytics endpoint."""
+def cf_graphql(token, query, variables, tries=3):
+    """
+    POST to Cloudflare's GraphQL analytics endpoint, with retries.
+
+    The first live run lost tipstreams.com to a single transient 502 while
+    every other zone succeeded. One blip should not silently drop a site
+    from the numbers, so 5xx and timeouts are retried; 4xx is not, because
+    a bad token or a malformed query will not fix itself.
+    """
     body = json.dumps({"query": query, "variables": variables}).encode("utf-8")
-    req = urllib.request.Request(
-        "https://api.cloudflare.com/client/v4/graphql",
-        data=body,
-        headers={"Authorization": f"Bearer {token}",
-                 "Content-Type": "application/json",
-                 "User-Agent": UA},
-        method="POST")
-    try:
-        with urllib.request.urlopen(req, timeout=30) as r:
-            d = json.loads(r.read().decode("utf-8", "replace"))
-    except urllib.error.HTTPError as e:
-        return None, f"HTTP {e.code}"
-    except Exception as e:
-        return None, type(e).__name__
-    if d.get("errors"):
-        return None, str(d["errors"][0].get("message"))[:90]
-    return d.get("data"), None
+    last = ""
+    for attempt in range(tries):
+        req = urllib.request.Request(
+            "https://api.cloudflare.com/client/v4/graphql",
+            data=body,
+            headers={"Authorization": f"Bearer {token}",
+                     "Content-Type": "application/json",
+                     "User-Agent": UA},
+            method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                d = json.loads(r.read().decode("utf-8", "replace"))
+            if d.get("errors"):
+                return None, str(d["errors"][0].get("message"))[:90]
+            return d.get("data"), None
+        except urllib.error.HTTPError as e:
+            last = f"HTTP {e.code}"
+            if 400 <= e.code < 500:
+                return None, last
+        except Exception as e:
+            last = type(e).__name__
+        time.sleep(2.0 * (attempt + 1))
+    return None, last
 
 
 ZONE_TRAFFIC_QUERY = """
