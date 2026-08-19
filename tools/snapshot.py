@@ -212,11 +212,117 @@ def collect_zenodo():
     return {"error": None, "records": records}
 
 
-def collect_cloudflare():
-    if not (os.environ.get("CF_API_TOKEN") and os.environ.get("CF_ACCOUNT_ID")):
-        return {"error": "skipped: no CF_API_TOKEN / CF_ACCOUNT_ID", "zones": []}
-    # Slot intentionally left unwired until a token exists. See README.
-    return {"error": "token present but collector not yet wired", "zones": []}
+def cf_graphql(token, query, variables):
+    """POST to Cloudflare's GraphQL analytics endpoint."""
+    body = json.dumps({"query": query, "variables": variables}).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.cloudflare.com/client/v4/graphql",
+        data=body,
+        headers={"Authorization": f"Bearer {token}",
+                 "Content-Type": "application/json",
+                 "User-Agent": UA},
+        method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            d = json.loads(r.read().decode("utf-8", "replace"))
+    except urllib.error.HTTPError as e:
+        return None, f"HTTP {e.code}"
+    except Exception as e:
+        return None, type(e).__name__
+    if d.get("errors"):
+        return None, str(d["errors"][0].get("message"))[:90]
+    return d.get("data"), None
+
+
+ZONE_TRAFFIC_QUERY = """
+query ($zoneTag: String!, $since: Date!, $until: Date!) {
+  viewer {
+    zones(filter: {zoneTag: $zoneTag}) {
+      httpRequests1dGroups(
+        limit: 40,
+        filter: {date_geq: $since, date_leq: $until},
+        orderBy: [date_DESC]
+      ) {
+        dimensions { date }
+        sum { requests pageViews }
+        uniq { uniques }
+      }
+    }
+  }
+}
+"""
+
+
+def collect_cloudflare(days=7):
+    """
+    Per-site page views and unique visitors from Cloudflare.
+
+    Free-plan constraints, learned the hard way and worth not relearning:
+      - GraphQL rejects multi-zone filters ("too many zones"), so this
+        queries ONE zone per request rather than batching.
+      - httpRequests1dGroups is the daily dataset that works on Free.
+        httpRequestsAdaptiveGroups (user agent, path, referer) is capped
+        at 24h windows, so it is no use for a 7-day view.
+      - There is no referrer data on Free, so click-through is invisible.
+      - These counts include automated traffic. Uniques is closer to
+        people than page views, but neither is a clean human number.
+    """
+    token = os.environ.get("CF_API_TOKEN")
+    if not token:
+        return {"error": "skipped: no CF_API_TOKEN", "sites": [],
+                "totals": {"page_views": None, "uniques": None}, "days": days}
+
+    # Enumerate zones so a new property appears here without a code change.
+    zones, page = [], 1
+    while True:
+        d, err = fetch_json(
+            f"https://api.cloudflare.com/client/v4/zones?per_page=50&page={page}",
+            headers={"Authorization": f"Bearer {token}"}, tries=2)
+        if err:
+            return {"error": f"zone list: {err}", "sites": [],
+                    "totals": {"page_views": None, "uniques": None}, "days": days}
+        zones.extend([(z["id"], z["name"]) for z in d.get("result", [])])
+        info = d.get("result_info") or {}
+        if page >= (info.get("total_pages") or 1):
+            break
+        page += 1
+
+    today = datetime.datetime.now(datetime.timezone.utc).date()
+    since = (today - datetime.timedelta(days=days)).isoformat()
+    until = (today - datetime.timedelta(days=1)).isoformat()
+
+    sites = []
+    for zid, name in zones:
+        data, err = cf_graphql(token, ZONE_TRAFFIC_QUERY,
+                               {"zoneTag": zid, "since": since, "until": until})
+        if err:
+            sites.append({"site": name, "error": err})
+            continue
+        try:
+            groups = data["viewer"]["zones"][0]["httpRequests1dGroups"]
+        except (KeyError, IndexError, TypeError):
+            sites.append({"site": name, "error": "no data returned"})
+            continue
+        sites.append({
+            "site": name,
+            "page_views": sum((g["sum"]["pageViews"] or 0) for g in groups),
+            "uniques":    sum((g["uniq"]["uniques"] or 0) for g in groups),
+            "requests":   sum((g["sum"]["requests"] or 0) for g in groups),
+            "days_returned": len(groups),
+        })
+
+    ok = [s for s in sites if "error" not in s]
+    sites.sort(key=lambda s: -(s.get("uniques") or 0))
+    return {
+        "error": None if ok else "no zone returned data",
+        "days": days,
+        "window": {"since": since, "until": until},
+        "sites": sites,
+        "totals": {
+            "page_views": sum(s["page_views"] for s in ok) if ok else None,
+            "uniques":    sum(s["uniques"] for s in ok) if ok else None,
+        },
+    }
 
 
 # ── TOTALS ───────────────────────────────────────────────────
@@ -224,7 +330,11 @@ def summarise(snap):
     npm_total  = sum(x["weekly"] or 0 for x in snap["npm"])
     pypi_total = sum(x["weekly"] or 0 for x in snap["pypi"])
     recs       = snap["zenodo"]["records"]
+    cf = snap.get("cloudflare", {}) or {}
+    cft = cf.get("totals", {}) or {}
     return {
+        "visitors_7d":       cft.get("uniques"),
+        "page_views_7d":     cft.get("page_views"),
         "properties_up":     sum(1 for p in snap["uptime"] if p["up"]),
         "properties_total":  len(snap["uptime"]),
         "npm_weekly":        npm_total,
@@ -250,6 +360,11 @@ def redact(snap):
 
 
 # ── RENDER ───────────────────────────────────────────────────
+def fmt(n):
+    """Thousands separators, and an em dash when a source gave us nothing."""
+    return "—" if n is None else f"{n:,}"
+
+
 def row(label, value, delta=None):
     d = ""
     if delta is not None and delta != 0:
@@ -267,6 +382,31 @@ def render(snap, prev):
         if not p or p.get(key) is None or s.get(key) is None:
             return None
         return s[key] - p[key]
+
+    cf = snap.get("cloudflare", {}) or {}
+    cf_sites = cf.get("sites", []) or []
+    if cf.get("error"):
+        traffic_html = (f"<p class='dim'>{cf['error']}</p>"
+                        "<p class='dim' style='margin-top:.6rem;font-size:.82rem'>"
+                        "Add CF_API_TOKEN and this fills with per-site visitors.</p>")
+    else:
+        traffic_html = "<table>" + "".join(
+            (f"<tr><td>{x['site']}</td><td class='num'>"
+             f"{fmt(x.get('uniques'))} <span class='dim'>/ {fmt(x.get('page_views'))} pv</span>"
+             "</td></tr>") if "error" not in x else
+            (f"<tr><td>{x['site']}</td><td class='num dim'>{x['error']}</td></tr>")
+            for x in cf_sites) + "</table>"
+
+    # Uptime is a one-line strip now, not a headline. It matters when it breaks
+    # and not otherwise.
+    down = [x["name"] for x in snap["uptime"] if not x["up"]]
+    slow = sorted((x for x in snap["uptime"] if x["up"]), key=lambda x: -x["ms"])[:1]
+    if down:
+        uptime_strip = ("<span class='down'>DOWN: " + ", ".join(down) + "</span>")
+    else:
+        s0 = slow[0] if slow else None
+        uptime_strip = (f"<span class='ok'>All {len(snap['uptime'])} properties responding</span>"
+                        + (f" <span class='dim'>· slowest {s0['name']} {s0['ms']}ms</span>" if s0 else ""))
 
     up_rows = "".join(
         f"<tr><td>{x['name']}</td><td class='num'>"
@@ -339,6 +479,7 @@ td{{padding:5px 0;border-bottom:1px solid rgba(31,53,31,.5);vertical-align:top}}
 td.num{{text-align:right;white-space:nowrap;padding-left:1rem}}
 .ok{{color:var(--green)}} .down{{color:var(--red)}} .up{{color:var(--cyan)}} .dim{{color:var(--dim)}}
 .errs{{list-style:none;color:var(--amber);font-size:.85rem}}
+.strip{{font-size:.85rem;margin:-1.8rem 0 2.5rem}}
 footer{{margin-top:3rem;color:var(--dim);font-size:.8rem;text-align:center}}
 a{{color:var(--green)}}
 </style>
@@ -346,18 +487,19 @@ a{{color:var(--green)}}
 <body>
 <div class="wrap">
   <h1>STATUS</h1>
-  <p class="sub">Snapshot generated {snap['generated_at']} · <a href="/">back to F-Keys</a></p>
+  <p class="sub">Snapshot generated {snap['generated_at']} · <a href="/">back to F-Keys</a> · <a href="/log/">log</a></p>
+  <p class="strip">{uptime_strip}</p>
 
   <div class="kpis">
-    <div class="kpi"><div class="v">{s['properties_up']}/{s['properties_total']}</div><div class="l">Sites up</div></div>
+    <div class="kpi"><div class="v">{fmt(s['visitors_7d'])}</div><div class="l">Visitors · 7d</div></div>
+    <div class="kpi"><div class="v">{fmt(s['page_views_7d'])}</div><div class="l">Page views · 7d</div></div>
     <div class="kpi"><div class="v">{s['package_weekly']}</div><div class="l">Package installs / wk</div></div>
     <div class="kpi"><div class="v">{s['zenodo_views']}</div><div class="l">Paper views</div></div>
     <div class="kpi"><div class="v">{s['zenodo_downloads']}</div><div class="l">Paper downloads</div></div>
-    <div class="kpi"><div class="v">{s['github_stars']}</div><div class="l">GitHub stars</div></div>
   </div>
 
   <div class="grid">
-    <div class="card"><h2>PROPERTIES</h2><table>{up_rows}</table></div>
+    <div class="card"><h2>TRAFFIC — visitors / page views, 7d</h2>{traffic_html}</div>
     <div class="card"><h2>PACKAGES / WEEK</h2><table>{pkg_rows}</table></div>
     <div class="card"><h2>PAPERS — views / downloads</h2><table>{paper_rows}</table></div>
     <div class="card"><h2>{repo_title}</h2><table>{repo_rows}</table></div>
