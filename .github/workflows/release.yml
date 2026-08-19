@@ -1,15 +1,13 @@
 name: release
 
-# Turns a git tag into downloadable files.
+# Turns a git tag into things people can actually install.
 #
-# Tag format:  <product>-v<version>     e.g.  keyj-v1.0.0
-# The product segment selects which recipe below runs, so adding a second
-# product means adding a case to the build step and a matrix entry - not
-# writing another workflow.
+# Tag format:  <product>-v<version>     e.g.  keyj-v1.1.0, moonbeam-v1.0.0
 #
-# Why this exists: across ten repos the portfolio had exactly one
-# downloadable asset. Software nobody can download cannot be installed,
-# recommended, or sold.
+#   keyj      -> Electron installers, built per platform, attached to a Release
+#   moonbeam  -> Python wheel + sdist, published to PyPI and attached too
+#
+# Adding a product means adding a job condition, not another workflow.
 
 on:
   push:
@@ -18,9 +16,9 @@ on:
   workflow_dispatch:
     inputs:
       product:
-        description: 'Product to build (keyj)'
+        description: 'Product to build'
         type: choice
-        options: [keyj]
+        options: [keyj, moonbeam]
         default: keyj
       version:
         description: 'Version, without the v (e.g. 1.0.0)'
@@ -40,20 +38,20 @@ jobs:
       - id: parse
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            PRODUCT="${{ inputs.product }}"
-            VERSION="${{ inputs.version }}"
+            PRODUCT="${{ inputs.product }}"; VERSION="${{ inputs.version }}"
           else
             REF="${GITHUB_REF#refs/tags/}"
-            PRODUCT="${REF%%-v*}"
-            VERSION="${REF##*-v}"
+            PRODUCT="${REF%%-v*}"; VERSION="${REF##*-v}"
           fi
           echo "product=$PRODUCT" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "tag=${PRODUCT}-v${VERSION}"  >> "$GITHUB_OUTPUT"
+          echo "tag=${PRODUCT}-v${VERSION}" >> "$GITHUB_OUTPUT"
           echo "Building $PRODUCT $VERSION"
 
-  build:
+  # ── Electron products ───────────────────────────────────────
+  desktop:
     needs: identify
+    if: needs.identify.outputs.product == 'keyj'
     strategy:
       fail-fast: false
       matrix:
@@ -65,56 +63,103 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Build Key-J
-        if: needs.identify.outputs.product == 'keyj'
         shell: bash
         working-directory: keyj/desktop
         run: |
           npm install --no-audit --no-fund
-          # uiohook-napi is a native module, so each platform builds on its
-          # own runner. --publish never keeps electron-builder from trying
-          # to create the release itself; the upload step below owns that.
+          # uiohook-napi is native, so each platform builds on its own runner.
           if [ "${{ matrix.label }}" = "windows" ]; then
             npx electron-builder --win --x64 --publish never
           else
             npx electron-builder --linux --x64 --publish never
           fi
-
-      - name: List what was produced
-        shell: bash
-        run: |
-          echo "Artifacts in keyj/desktop/dist:"
-          ls -la keyj/desktop/dist/ 2>/dev/null || echo "  (no dist directory)"
-
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ needs.identify.outputs.product }}-${{ matrix.label }}
+          name: dist-${{ matrix.label }}
           path: |
             keyj/desktop/dist/*.exe
             keyj/desktop/dist/*.AppImage
           if-no-files-found: warn
 
-  publish:
-    needs: [identify, build]
+  # ── Python products ─────────────────────────────────────────
+  python-package:
+    needs: identify
+    if: needs.identify.outputs.product == 'moonbeam'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
+      - name: Refuse to ship a version the package does not claim
+        working-directory: moonbeam
+        run: |
+          # Tagging v1.0.1 while pyproject still says 1.0.0 would publish the
+          # wrong version under the right name, and PyPI is append-only.
+          DECLARED=$(grep -m1 '^version' pyproject.toml | cut -d'"' -f2)
+          TAGGED="${{ needs.identify.outputs.version }}"
+          echo "pyproject: $DECLARED   tag: $TAGGED"
+          if [ "$DECLARED" != "$TAGGED" ]; then
+            echo "::error::pyproject.toml says $DECLARED but the tag says $TAGGED."
+            exit 1
+          fi
+
+      - name: Build the wheel and sdist
+        working-directory: moonbeam
+        run: |
+          python -m pip install --quiet --upgrade build twine
+          python -m build
+          python -m twine check dist/*
+
+      - name: Install the built wheel and run the command
+        working-directory: moonbeam
+        run: |
+          # Proving the artifact works beats proving the source works.
+          python -m venv /tmp/verify
+          /tmp/verify/bin/python -m pip install --quiet dist/*.whl
+          /tmp/verify/bin/moonbeam --help > /dev/null
+          echo "console script runs from the built wheel"
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        working-directory: moonbeam
+        run: |
+          if [ -z "$TWINE_PASSWORD" ]; then
+            echo "PYPI_TOKEN not set - skipping the upload."
+            echo "The GitHub release below still gets the files."
+            exit 0
+          fi
+          python -m twine upload --non-interactive --skip-existing dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-python
+          path: moonbeam/dist/*
+          if-no-files-found: warn
+
+  # ── One release, whatever was produced ──────────────────────
+  publish:
+    needs: [identify, desktop, python-package]
+    if: always() && needs.identify.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
-
       - name: Collect the files
         run: |
           mkdir -p release
-          find artifacts -type f \( -name '*.exe' -o -name '*.AppImage' \) \
-            -exec cp {} release/ \;
-          echo "Publishing:"
+          find artifacts -type f \
+            \( -name '*.exe' -o -name '*.AppImage' -o -name '*.whl' -o -name '*.tar.gz' \) \
+            -exec cp {} release/ \; 2>/dev/null || true
           ls -la release/
 
       - name: Publish the release
@@ -122,29 +167,27 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ needs.identify.outputs.tag }}
           VERSION: ${{ needs.identify.outputs.version }}
+          PRODUCT: ${{ needs.identify.outputs.product }}
         run: |
           if [ -z "$(ls -A release/ 2>/dev/null)" ]; then
             echo "No artifacts were produced - refusing to publish an empty release."
-            echo "An empty release is what this pipeline exists to prevent."
             exit 1
           fi
-          NOTES=$(cat <<'EOF'
-          Key-J turns your keyboard into an instrument. Every keystroke plays a
-          note, the notes land on a staff as you go, and the session exports as
-          a WAV.
-
-          **Windows** — download the `.exe` and run it.
-          **Linux** — download the `.AppImage`, `chmod +x`, and run it.
-
-          Global capture lets Key-J hear your keys in any application. On
-          Windows that may need an administrator terminal.
-
-          Prefer no install? The browser version runs at
-          https://f-keys.com/keyj/
-          EOF
-          )
-          gh release create "$TAG" release/* \
-            --title "Key-J $VERSION" \
-            --notes "$NOTES" \
+          if [ "$PRODUCT" = "moonbeam" ]; then
+            TITLE="Moonbeam $VERSION"
+            NOTES=$(printf '%s\n' \
+              'Find the NerdMiners on your network and read their vitals.' '' \
+              '```' 'pip install moonbeam-miner' 'moonbeam' '```' '' \
+              'No dependencies. A dash means the miner did not report that' \
+              'field - never a stand-in number.')
+          else
+            TITLE="Key-J $VERSION"
+            NOTES=$(printf '%s\n' \
+              'Key-J turns your keyboard into an instrument.' '' \
+              '**Windows** - download the `.exe` and run it.' \
+              '**Linux** - download the `.AppImage`, `chmod +x`, run it.' '' \
+              'Browser version: https://f-keys.com/keyj/')
+          fi
+          gh release create "$TAG" release/* --title "$TITLE" --notes "$NOTES" \
             --repo "$GITHUB_REPOSITORY" \
             || gh release upload "$TAG" release/* --clobber --repo "$GITHUB_REPOSITORY"
