@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plumhud"
+version = "4.0.0"
+description = "Miner fleet monitor - a borderless overlay HUD, alerts, and history."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Vincent Gonzalez" }]
+keywords = ["bitcoin", "mining", "nerdminer", "bitaxe", "hud", "monitor", "axeos"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Win32 (MS Windows)",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: System :: Monitoring",
+]
+dependencies = ["moonbeam-miner>=1.0.0"]
+
+[project.optional-dependencies]
+charts = ["matplotlib>=3.8.0"]
+logo = ["Pillow>=10.0.0"]
+
+[project.urls]
+Homepage = "https://f-keys.com/plumhud/"
+Source = "https://github.com/zengineco/f-keys/tree/main/plumhud"
+
+[project.scripts]
+plumhud = "plumhud.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
