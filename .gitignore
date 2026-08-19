@@ -11,3 +11,6 @@ skills-lock.json
 moonbeam/build/
 moonbeam/dist/
 moonbeam/src/*.egg-info/
+plumhud/build/
+plumhud/dist/
+plumhud/src/*.egg-info/
