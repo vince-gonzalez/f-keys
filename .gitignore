@@ -8,5 +8,6 @@ skills-lock.json
 
 # full snapshot incl. owner-only traffic; goes to the private repo
 .private-snapshot/
+moonbeam/build/
 moonbeam/dist/
 moonbeam/src/*.egg-info/
