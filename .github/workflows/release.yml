@@ -1,0 +1,150 @@
+name: release
+
+# Turns a git tag into downloadable files.
+#
+# Tag format:  <product>-v<version>     e.g.  keyj-v1.0.0
+# The product segment selects which recipe below runs, so adding a second
+# product means adding a case to the build step and a matrix entry - not
+# writing another workflow.
+#
+# Why this exists: across ten repos the portfolio had exactly one
+# downloadable asset. Software nobody can download cannot be installed,
+# recommended, or sold.
+
+on:
+  push:
+    tags:
+      - '*-v*'
+  workflow_dispatch:
+    inputs:
+      product:
+        description: 'Product to build (keyj)'
+        type: choice
+        options: [keyj]
+        default: keyj
+      version:
+        description: 'Version, without the v (e.g. 1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  identify:
+    runs-on: ubuntu-latest
+    outputs:
+      product: ${{ steps.parse.outputs.product }}
+      version: ${{ steps.parse.outputs.version }}
+      tag: ${{ steps.parse.outputs.tag }}
+    steps:
+      - id: parse
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PRODUCT="${{ inputs.product }}"
+            VERSION="${{ inputs.version }}"
+          else
+            REF="${GITHUB_REF#refs/tags/}"
+            PRODUCT="${REF%%-v*}"
+            VERSION="${REF##*-v}"
+          fi
+          echo "product=$PRODUCT" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=${PRODUCT}-v${VERSION}"  >> "$GITHUB_OUTPUT"
+          echo "Building $PRODUCT $VERSION"
+
+  build:
+    needs: identify
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            label: windows
+          - os: ubuntu-latest
+            label: linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build Key-J
+        if: needs.identify.outputs.product == 'keyj'
+        shell: bash
+        working-directory: keyj/desktop
+        run: |
+          npm install --no-audit --no-fund
+          # uiohook-napi is a native module, so each platform builds on its
+          # own runner. --publish never keeps electron-builder from trying
+          # to create the release itself; the upload step below owns that.
+          if [ "${{ matrix.label }}" = "windows" ]; then
+            npx electron-builder --win --x64 --publish never
+          else
+            npx electron-builder --linux --x64 --publish never
+          fi
+
+      - name: List what was produced
+        shell: bash
+        run: |
+          echo "Artifacts in keyj/desktop/dist:"
+          ls -la keyj/desktop/dist/ 2>/dev/null || echo "  (no dist directory)"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ needs.identify.outputs.product }}-${{ matrix.label }}
+          path: |
+            keyj/desktop/dist/*.exe
+            keyj/desktop/dist/*.AppImage
+          if-no-files-found: warn
+
+  publish:
+    needs: [identify, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Collect the files
+        run: |
+          mkdir -p release
+          find artifacts -type f \( -name '*.exe' -o -name '*.AppImage' \) \
+            -exec cp {} release/ \;
+          echo "Publishing:"
+          ls -la release/
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.identify.outputs.tag }}
+          VERSION: ${{ needs.identify.outputs.version }}
+        run: |
+          if [ -z "$(ls -A release/ 2>/dev/null)" ]; then
+            echo "No artifacts were produced - refusing to publish an empty release."
+            echo "An empty release is what this pipeline exists to prevent."
+            exit 1
+          fi
+          NOTES=$(cat <<'EOF'
+          Key-J turns your keyboard into an instrument. Every keystroke plays a
+          note, the notes land on a staff as you go, and the session exports as
+          a WAV.
+
+          **Windows** — download the `.exe` and run it.
+          **Linux** — download the `.AppImage`, `chmod +x`, and run it.
+
+          Global capture lets Key-J hear your keys in any application. On
+          Windows that may need an administrator terminal.
+
+          Prefer no install? The browser version runs at
+          https://f-keys.com/keyj/
+          EOF
+          )
+          gh release create "$TAG" release/* \
+            --title "Key-J $VERSION" \
+            --notes "$NOTES" \
+            --repo "$GITHUB_REPOSITORY" \
+            || gh release upload "$TAG" release/* --clobber --repo "$GITHUB_REPOSITORY"

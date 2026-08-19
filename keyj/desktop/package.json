@@ -1,7 +1,7 @@
 {
   "name": "key-j",
   "version": "1.0.0",
-  "description": "Key-J — Musical Keystroke Studio",
+  "description": "Key-J \u2014 Musical Keystroke Studio",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -12,15 +12,16 @@
   "build": {
     "appId": "com.doobedder.key-j",
     "productName": "Key-J",
-    "copyright": "Copyright © 2025 DooBedder",
-    "files": ["src/**/*", "assets/**/*", "package.json"],
+    "copyright": "Copyright \u00a9 2025 DooBedder",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
     "win": {
-      "target": "nsis",
-      "icon": "assets/icon.ico"
+      "target": "nsis"
     },
     "mac": {
-      "target": "dmg",
-      "icon": "assets/icon.icns"
+      "target": "dmg"
     },
     "linux": {
       "target": "AppImage"
@@ -30,7 +31,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
-    }
+    },
+    "artifactName": "Key-J-${version}-${os}-${arch}.${ext}"
   },
   "devDependencies": {
     "electron": "^28.0.0",
