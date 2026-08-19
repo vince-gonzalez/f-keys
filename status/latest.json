@@ -1,21 +1,411 @@
 {
   "cloudflare": {
+    "bots_24h": {
+      "AI Assistant": 36,
+      "AI Crawler": 558,
+      "AI Search": 3778,
+      "Accessibility": 1,
+      "Advertising & Marketing": 91,
+      "Archiver": 7,
+      "Monitoring & Analytics": 2,
+      "Page Preview": 48,
+      "Search Engine Crawler": 1044,
+      "Search Engine Optimization": 797,
+      "Unverified": 35964
+    },
+    "bots_error": null,
     "days": 7,
-    "error": "skipped: no CF_API_TOKEN",
-    "sites": [],
+    "error": null,
+    "sites": [
+      {
+        "days_returned": 7,
+        "page_views": 19165,
+        "requests": 37562,
+        "site": "5best2buy.com",
+        "threats": 27,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 61.3,
+            "requests": 23035
+          },
+          {
+            "country": "BE",
+            "pct": 6.3,
+            "requests": 2364
+          },
+          {
+            "country": "RU",
+            "pct": 5.4,
+            "requests": 2017
+          },
+          {
+            "country": "NL",
+            "pct": 3.6,
+            "requests": 1334
+          },
+          {
+            "country": "CA",
+            "pct": 3.2,
+            "requests": 1187
+          }
+        ],
+        "uniques": 7229
+      },
+      {
+        "days_returned": 7,
+        "page_views": 4220,
+        "requests": 79921,
+        "site": "f-keys.com",
+        "threats": 41,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 30.5,
+            "requests": 24387
+          },
+          {
+            "country": "HK",
+            "pct": 11.1,
+            "requests": 8872
+          },
+          {
+            "country": "IT",
+            "pct": 9.8,
+            "requests": 7839
+          },
+          {
+            "country": "ES",
+            "pct": 8.7,
+            "requests": 6988
+          },
+          {
+            "country": "IN",
+            "pct": 8.6,
+            "requests": 6876
+          }
+        ],
+        "uniques": 2050
+      },
+      {
+        "days_returned": 7,
+        "page_views": 2492,
+        "requests": 18991,
+        "site": "opticquiz.com",
+        "threats": 71,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 31.2,
+            "requests": 5924
+          },
+          {
+            "country": "MX",
+            "pct": 9.2,
+            "requests": 1755
+          },
+          {
+            "country": "NL",
+            "pct": 8.7,
+            "requests": 1655
+          },
+          {
+            "country": "JP",
+            "pct": 6.0,
+            "requests": 1138
+          },
+          {
+            "country": "DE",
+            "pct": 5.0,
+            "requests": 945
+          }
+        ],
+        "uniques": 1846
+      },
+      {
+        "days_returned": 7,
+        "page_views": 1489,
+        "requests": 13121,
+        "site": "poticas.com",
+        "threats": 42,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 43.2,
+            "requests": 5668
+          },
+          {
+            "country": "NL",
+            "pct": 11.6,
+            "requests": 1528
+          },
+          {
+            "country": "BR",
+            "pct": 5.1,
+            "requests": 670
+          },
+          {
+            "country": "HK",
+            "pct": 4.5,
+            "requests": 595
+          },
+          {
+            "country": "DE",
+            "pct": 4.4,
+            "requests": 577
+          }
+        ],
+        "uniques": 1593
+      },
+      {
+        "days_returned": 7,
+        "page_views": 557,
+        "requests": 25262,
+        "site": "zengine.org",
+        "threats": 33,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 43.4,
+            "requests": 10967
+          },
+          {
+            "country": "MX",
+            "pct": 5.4,
+            "requests": 1372
+          },
+          {
+            "country": "CH",
+            "pct": 5.1,
+            "requests": 1284
+          },
+          {
+            "country": "NO",
+            "pct": 5.1,
+            "requests": 1284
+          },
+          {
+            "country": "PL",
+            "pct": 4.5,
+            "requests": 1135
+          }
+        ],
+        "uniques": 1390
+      },
+      {
+        "days_returned": 7,
+        "page_views": 610,
+        "requests": 7434,
+        "site": "trailer-load.com",
+        "threats": 20,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 47.9,
+            "requests": 3563
+          },
+          {
+            "country": "NO",
+            "pct": 5.9,
+            "requests": 438
+          },
+          {
+            "country": "NL",
+            "pct": 5.3,
+            "requests": 392
+          },
+          {
+            "country": "BR",
+            "pct": 5.2,
+            "requests": 388
+          },
+          {
+            "country": "CH",
+            "pct": 5.1,
+            "requests": 376
+          }
+        ],
+        "uniques": 1095
+      },
+      {
+        "days_returned": 7,
+        "page_views": 602,
+        "requests": 16378,
+        "site": "tipstreams.com",
+        "threats": 45,
+        "top_countries": [
+          {
+            "country": "FR",
+            "pct": 26.9,
+            "requests": 4410
+          },
+          {
+            "country": "US",
+            "pct": 26.0,
+            "requests": 4264
+          },
+          {
+            "country": "JP",
+            "pct": 10.6,
+            "requests": 1732
+          },
+          {
+            "country": "IT",
+            "pct": 4.8,
+            "requests": 782
+          },
+          {
+            "country": "CA",
+            "pct": 3.7,
+            "requests": 601
+          }
+        ],
+        "uniques": 821
+      },
+      {
+        "days_returned": 7,
+        "page_views": 392,
+        "requests": 10098,
+        "site": "sympolar.com",
+        "threats": 43,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 28.1,
+            "requests": 2842
+          },
+          {
+            "country": "SG",
+            "pct": 18.7,
+            "requests": 1893
+          },
+          {
+            "country": "BE",
+            "pct": 12.7,
+            "requests": 1282
+          },
+          {
+            "country": "CH",
+            "pct": 6.6,
+            "requests": 670
+          },
+          {
+            "country": "PL",
+            "pct": 5.4,
+            "requests": 544
+          }
+        ],
+        "uniques": 665
+      },
+      {
+        "days_returned": 7,
+        "page_views": 268,
+        "requests": 7298,
+        "site": "epistemend.org",
+        "threats": 35,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 30.1,
+            "requests": 2196
+          },
+          {
+            "country": "SG",
+            "pct": 22.0,
+            "requests": 1608
+          },
+          {
+            "country": "ID",
+            "pct": 9.4,
+            "requests": 686
+          },
+          {
+            "country": "ES",
+            "pct": 4.8,
+            "requests": 350
+          },
+          {
+            "country": "SE",
+            "pct": 4.7,
+            "requests": 345
+          }
+        ],
+        "uniques": 643
+      },
+      {
+        "days_returned": 7,
+        "page_views": 565,
+        "requests": 4647,
+        "site": "dogefundme.com",
+        "threats": 7,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 43.4,
+            "requests": 2019
+          },
+          {
+            "country": "CN",
+            "pct": 15.7,
+            "requests": 728
+          },
+          {
+            "country": "MY",
+            "pct": 9.1,
+            "requests": 421
+          },
+          {
+            "country": "FR",
+            "pct": 4.5,
+            "requests": 207
+          },
+          {
+            "country": "CH",
+            "pct": 4.3,
+            "requests": 199
+          }
+        ],
+        "uniques": 629
+      },
+      {
+        "days_returned": 7,
+        "page_views": 0,
+        "requests": 97,
+        "site": "goy-slop.org",
+        "threats": 0,
+        "top_countries": [
+          {
+            "country": "RU",
+            "pct": 97.9,
+            "requests": 95
+          },
+          {
+            "country": "US",
+            "pct": 2.1,
+            "requests": 2
+          }
+        ],
+        "uniques": 7
+      }
+    ],
     "totals": {
-      "page_views": null,
-      "uniques": null
+      "page_views": 30360,
+      "threats": 364,
+      "uniques": 17968
+    },
+    "window": {
+      "since": "2026-08-12",
+      "until": "2026-08-18"
     }
   },
   "date": "2026-08-19",
-  "generated_at": "2026-08-19 16:30 UTC",
+  "generated_at": "2026-08-19 16:35 UTC",
   "github": [
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-19T16:14:13Z",
+      "pushed_at": "2026-08-19T16:35:13Z",
       "repo": "f-keys",
       "stars": 1
     },
@@ -174,11 +564,11 @@
     "github_stars": 16,
     "npm_weekly": 341,
     "package_weekly": 456,
-    "page_views_7d": null,
+    "page_views_7d": 30360,
     "properties_total": 11,
     "properties_up": 11,
     "pypi_weekly": 115,
-    "visitors_7d": null,
+    "visitors_7d": 17968,
     "zenodo_downloads": 360,
     "zenodo_records": 35,
     "zenodo_views": 903
@@ -186,77 +576,77 @@
   "uptime": [
     {
       "error": null,
-      "ms": 295,
+      "ms": 194,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
     },
     {
       "error": null,
-      "ms": 219,
+      "ms": 140,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
     },
     {
       "error": null,
-      "ms": 424,
+      "ms": 133,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
     },
     {
       "error": null,
-      "ms": 187,
+      "ms": 120,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
     },
     {
       "error": null,
-      "ms": 551,
+      "ms": 313,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
     },
     {
       "error": null,
-      "ms": 331,
+      "ms": 131,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
     },
     {
       "error": null,
-      "ms": 327,
+      "ms": 148,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
     },
     {
       "error": null,
-      "ms": 694,
+      "ms": 494,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
     },
     {
       "error": null,
-      "ms": 195,
+      "ms": 65,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
     },
     {
       "error": null,
-      "ms": 236,
+      "ms": 49,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
     },
     {
       "error": null,
-      "ms": 319,
+      "ms": 314,
       "name": "zengin.es",
       "up": true,
       "url": "https://zengin.es"
