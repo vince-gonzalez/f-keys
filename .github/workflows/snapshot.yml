@@ -79,16 +79,20 @@ jobs:
         run: |
           if [ -z "$KPI_PRIVATE_TOKEN" ]; then
             echo "KPI_PRIVATE_TOKEN not set - skipping the private push."
-            echo "The public snapshot below is unaffected."
+            echo "The public snapshot above is unaffected."
             exit 0
           fi
-          AUTH=$(printf 'x-access-token:%s' "$KPI_PRIVATE_TOKEN" | base64 -w0)
-          git clone --depth 1 \
-            -c http.extraHeader="Authorization: Basic $AUTH" \
-            https://github.com/vince-gonzalez/kpi-private.git _private
-          mkdir -p _private/data
-          cp -r .private-snapshot/. _private/
-          cd _private
+          # Clone OUTSIDE the workspace. A git command run inside the checked
+          # out repo inherits its config, which carries the Authorization
+          # header actions/checkout installs for github.com; a second header
+          # makes the request 400 with "Duplicate header". Working from
+          # RUNNER_TEMP sidesteps it entirely rather than trying to unset it.
+          PRIV="$RUNNER_TEMP/kpi-private"
+          rm -rf "$PRIV"
+          git clone --depth 1             "https://x-access-token:${KPI_PRIVATE_TOKEN}@github.com/vince-gonzalez/kpi-private.git"             "$PRIV"
+          mkdir -p "$PRIV/data"
+          cp -r "$GITHUB_WORKSPACE/.private-snapshot/." "$PRIV/"
+          cd "$PRIV"
           git config user.name  "kpi-snapshot"
           git config user.email "noreply@f-keys.com"
           git add -A
@@ -96,6 +100,6 @@ jobs:
             echo "No change in the private snapshot."
           else
             git commit -q -m "Snapshot $(date -u +%Y-%m-%d)"
-            git -c "$CLEAR" -c http.extraHeader="Authorization: Basic $AUTH" push origin HEAD
+            git push origin HEAD
             echo "Pushed to vince-gonzalez/kpi-private."
           fi
