@@ -175,41 +175,49 @@ jobs:
             echo "No artifacts were produced - refusing to publish an empty release."
             exit 1
           fi
+          # Notes are written a line at a time. Multi-line strings inside a
+          # YAML block scalar must stay indented, and anything that dedents
+          # silently produces an invalid workflow.
+          NOTES_FILE=notes.md
           case "$PRODUCT" in
             plumhud)
               TITLE="PlumHUD $VERSION"
-              NOTES="Miner fleet monitor - overlay HUD, alerts and history.
-
-\`\`\`
-pip install plumhud
-plumhud
-\`\`\`
-
-v4 stops inventing missing readings, and stops writing your config to
-whatever folder you launched from."
+              {
+                echo "Miner fleet monitor - overlay HUD, alerts and history."
+                echo
+                echo '```'
+                echo "pip install plumhud"
+                echo "plumhud"
+                echo '```'
+                echo
+                echo "v4 stops inventing missing readings, and stops writing"
+                echo "your config to whatever folder you launched from."
+              } > "$NOTES_FILE"
               ;;
             moonbeam)
               TITLE="Moonbeam $VERSION"
-              NOTES="Find the NerdMiners on your network and read their vitals.
-
-\`\`\`
-pip install moonbeam-miner
-moonbeam
-\`\`\`
-
-No dependencies. A dash means the miner did not report that field -
-never a stand-in number."
+              {
+                echo "Find the NerdMiners on your network and read their vitals."
+                echo
+                echo '```'
+                echo "pip install moonbeam-miner"
+                echo "moonbeam"
+                echo '```'
+                echo
+                echo "No dependencies. A dash means the miner did not report"
+                echo "that field - never a stand-in number."
+              } > "$NOTES_FILE"
               ;;
             *)
               TITLE="Key-J $VERSION"
-              NOTES="Key-J turns your keyboard into an instrument.
-
-**Windows** - download the .exe and run it.
-**Linux** - download the .AppImage, chmod +x, run it.
-
-Browser version: https://f-keys.com/keyj/"
+              {
+                echo "Key-J turns your keyboard into an instrument."
+                echo
+                echo "**Windows** - download the .exe and run it."
+                echo "**Linux** - download the .AppImage, chmod +x, run it."
+                echo
+                echo "Browser version: https://f-keys.com/keyj/"
+              } > "$NOTES_FILE"
               ;;
           esac
-          gh release create "$TAG" release/* --title "$TITLE" --notes "$NOTES" \
-            --repo "$GITHUB_REPOSITORY" \
-            || gh release upload "$TAG" release/* --clobber --repo "$GITHUB_REPOSITORY"
+          gh release create "$TAG" release/* --title "$TITLE"             --notes-file "$NOTES_FILE" --repo "$GITHUB_REPOSITORY"             || gh release upload "$TAG" release/* --clobber --repo "$GITHUB_REPOSITORY"
