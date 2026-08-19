@@ -1,0 +1,45 @@
+name: build log
+
+# Renders log/entries.md into log/index.html and commits the result.
+# Writing an entry is: open entries.md, add a dated block, push. Nothing
+# to run locally, no build step to remember.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'log/entries.md'
+      - 'tools/buildlog.py'
+  workflow_dispatch:
+
+concurrency:
+  group: build-log
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build-log:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Render the log
+        run: python tools/buildlog.py
+
+      - name: Commit the rendered page
+        run: |
+          git config user.name  "build-log"
+          git config user.email "noreply@f-keys.com"
+          git add log/index.html
+          if git diff --staged --quiet; then
+            echo "Rendered page already matches entries.md."
+            exit 0
+          fi
+          git commit -m "Render the log"
+          git push
