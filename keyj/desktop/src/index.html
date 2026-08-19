@@ -921,5 +921,344 @@ window.addEventListener('load',()=>{
 });
 document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{once:true});
 </script>
+
+<script>
+/* ============================================================
+   Key-J v1.1 — sequence mode, tone presets, MIDI import
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHY THIS EXISTS
+   v1.0 is an authoring tool: bind every key, then improvise.
+   The common want is the opposite — play a run you already know.
+   Sequence mode removes pitch from the problem so the player
+   supplies rhythm and feel, which is the musical part.
+
+   WORKFLOW STACK
+     1. Insert a drive stage between master and the analyser
+     2. Wrap playNote so a loaded sequence overrides the keymap
+     3. Parse sequences from typed note names or a MIDI file
+     4. Presets set every sound parameter at once
+
+   DESIGN RULE
+     Any key advances the sequence. There is nothing to configure
+     and nothing to memorise.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var SEQ = { on: false, notes: [], pos: 0, name: '' };
+  var MAX_MIDI_BYTES = 1024 * 1024;   // a MIDI file this large is pathological
+  var driveShaper = null;
+  var driveAmount = 0;
+
+  // ── Pitch helpers ──────────────────────────────────────────
+  var NOTE_OFFSETS = { c: -9, d: -7, e: -5, f: -4, g: -2, a: 0, b: 2 };
+
+  function noteNameToFreq(name) {
+    var m = /^([A-Ga-g])([#b]?)(-?\d+)$/.exec(String(name).trim());
+    if (!m) return null;
+    var semi = NOTE_OFFSETS[m[1].toLowerCase()];
+    if (m[2] === '#') semi += 1;
+    if (m[2] === 'b') semi -= 1;
+    semi += (parseInt(m[3], 10) - 4) * 12;      // relative to A4
+    return 440 * Math.pow(2, semi / 12);
+  }
+
+  function midiToName(n) {
+    var names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    return names[n % 12] + (Math.floor(n / 12) - 1);
+  }
+
+  function midiToFreq(n) { return 440 * Math.pow(2, (n - 69) / 12); }
+
+  // ── Sequence sources ───────────────────────────────────────
+  function parseTypedSequence(text) {
+    var tokens = String(text).split(/[\s,|]+/).filter(Boolean);
+    var out = [], bad = [];
+    tokens.forEach(function (t) {
+      var f = noteNameToFreq(t);
+      if (f) out.push({ name: t.toUpperCase(), freq: f });
+      else bad.push(t);
+    });
+    return { notes: out, bad: bad };
+  }
+
+  /* Minimal MIDI reader: header, then note-on events in play order.
+     Velocity-zero note-ons are note-offs and are skipped. Only pitch
+     order matters here because the player supplies the rhythm. */
+  function parseMidi(buffer) {
+    var dv = new DataView(buffer), pos = 0;
+    function u32() { var v = dv.getUint32(pos); pos += 4; return v; }
+    function u16() { var v = dv.getUint16(pos); pos += 2; return v; }
+    function u8()  { var v = dv.getUint8(pos);  pos += 1; return v; }
+    function str(n) { var s = ''; for (var i = 0; i < n; i++) s += String.fromCharCode(u8()); return s; }
+    function varLen() {
+      var v = 0, c;
+      do { c = u8(); v = (v << 7) | (c & 0x7f); } while (c & 0x80);
+      return v;
+    }
+
+    if (str(4) !== 'MThd') throw new Error('not a MIDI file');
+    u32(); u16();
+    var tracks = u16();
+    u16();
+
+    var events = [];
+    for (var t = 0; t < tracks; t++) {
+      if (pos >= dv.byteLength) break;
+      if (str(4) !== 'MTrk') break;
+      var len = u32(), end = pos + len, time = 0, running = 0;
+      while (pos < end && pos < dv.byteLength) {
+        time += varLen();
+        var b = u8();
+        if (b < 0x80) { pos--; b = running; } else { running = b; }
+        var type = b & 0xf0;
+        if (b === 0xff) {                       // meta
+          u8();
+          pos += varLen();
+        } else if (b === 0xf0 || b === 0xf7) {  // sysex
+          pos += varLen();
+        } else if (type === 0x90) {             // note on
+          var note = u8(), vel = u8();
+          if (vel > 0) events.push({ time: time, note: note });
+        } else if (type === 0x80 || type === 0xa0 || type === 0xb0 || type === 0xe0) {
+          pos += 2;
+        } else if (type === 0xc0 || type === 0xd0) {
+          pos += 1;
+        } else {
+          break;                                // unparseable, stop this track
+        }
+      }
+      pos = end;
+    }
+
+    events.sort(function (a, b) { return a.time - b.time; });
+    return events.map(function (e) {
+      return { name: midiToName(e.note), freq: midiToFreq(e.note) };
+    });
+  }
+
+  function loadSequence(notes, label) {
+    SEQ.notes = notes;
+    SEQ.pos = 0;
+    SEQ.name = label || '';
+    SEQ.on = notes.length > 0;
+    render();
+  }
+
+  // ── Tone presets ───────────────────────────────────────────
+  /* Sliders cannot tell you which combination sounds like a guitar.
+     A named preset can. Each sets every parameter at once. */
+  var PRESETS = {
+    'Clean Guitar':   { waveform: 'triangle', attack: 0.006, release: 0.60, reverb: 0.18, drive: 0.15, playStyle: 'normal' },
+    'Overdrive Lead': { waveform: 'sawtooth', attack: 0.004, release: 0.75, reverb: 0.22, drive: 0.55, playStyle: 'normal' },
+    'Shred':          { waveform: 'sawtooth', attack: 0.002, release: 0.45, reverb: 0.15, drive: 0.80, playStyle: 'vibrato' },
+    'Bell':           { waveform: 'sine',     attack: 0.002, release: 1.60, reverb: 0.45, drive: 0.00, playStyle: 'normal' },
+    'Chip':           { waveform: 'square',   attack: 0.001, release: 0.18, reverb: 0.05, drive: 0.00, playStyle: 'staccato' },
+    'Pluck':          { waveform: 'triangle', attack: 0.001, release: 0.30, reverb: 0.12, drive: 0.10, playStyle: 'staccato' },
+    'Pad':            { waveform: 'sine',     attack: 0.220, release: 1.80, reverb: 0.55, drive: 0.00, playStyle: 'normal' }
+  };
+
+  function makeDriveCurve(amount) {
+    var k = amount * 100, n = 2048, curve = new Float32Array(n);
+    for (var i = 0; i < n; i++) {
+      var x = (i * 2) / n - 1;
+      curve[i] = ((1 + k) * x) / (1 + k * Math.abs(x));
+    }
+    return curve;
+  }
+
+  function ensureDriveStage() {
+    if (driveShaper || typeof masterGain === 'undefined' || !masterGain) return;
+    if (typeof analyser === 'undefined' || !analyser) return;
+    driveShaper = AC.createWaveShaper();
+    driveShaper.curve = makeDriveCurve(0);
+    driveShaper.oversample = '2x';
+    try { masterGain.disconnect(analyser); } catch (e) { /* not connected yet */ }
+    masterGain.connect(driveShaper);
+    driveShaper.connect(analyser);
+  }
+
+  function setDrive(amount) {
+    driveAmount = amount;
+    ensureDriveStage();
+    if (driveShaper) driveShaper.curve = makeDriveCurve(amount);
+  }
+
+  function applyPreset(name) {
+    var p = PRESETS[name];
+    if (!p) return;
+    state.waveform  = p.waveform;
+    state.attack    = p.attack;
+    state.release   = p.release;
+    state.reverb    = p.reverb;
+    state.playStyle = p.playStyle;
+    setDrive(p.drive);
+
+    // Keep the existing controls honest about what is now set.
+    var ids = { attackSlider: p.attack * 1000, releaseSlider: p.release * 1000,
+                reverbSlider: p.reverb * 100 };
+    Object.keys(ids).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.value = ids[id];
+    });
+    if (reverbNode) reverbNode.gain.value = p.reverb;
+    document.querySelectorAll('[data-preset]').forEach(function (b) {
+      b.classList.toggle('on', b.getAttribute('data-preset') === name);
+    });
+    if (typeof setStatus === 'function') setStatus('Tone: ' + name);
+  }
+
+  // ── Sequence mode hooks into playNote ──────────────────────
+  var origPlayNote = playNote;
+  playNote = function (key) {
+    if (SEQ.on && SEQ.notes.length) {
+      var n = SEQ.notes[SEQ.pos % SEQ.notes.length];
+      // Overriding the binding is what makes ANY key play the right
+      // note. buildKeyBindings() restores the keymap when the mode ends.
+      keyBindings[key] = { note: n.name, freq: n.freq };
+      SEQ.pos++;
+      render();
+    }
+    return origPlayNote.apply(this, arguments);
+  };
+
+  function resetSequence() { SEQ.pos = 0; render(); }
+
+  function toggleSequence(on) {
+    SEQ.on = on && SEQ.notes.length > 0;
+    if (!SEQ.on && typeof buildKeyBindings === 'function') buildKeyBindings();
+    render();
+  }
+
+  // ── UI ─────────────────────────────────────────────────────
+  function render() {
+    var st = document.getElementById('kj-seq-status');
+    if (!st) return;
+    if (!SEQ.notes.length) {
+      st.textContent = 'No sequence loaded.';
+    } else {
+      var nxt = SEQ.notes[SEQ.pos % SEQ.notes.length];
+      st.innerHTML = '<strong>' + SEQ.notes.length + ' notes</strong>'
+        + (SEQ.name ? ' — ' + SEQ.name : '')
+        + '<br>position ' + ((SEQ.pos % SEQ.notes.length) + 1)
+        + ' — next: <strong>' + nxt.name + '</strong>';
+    }
+    var tg = document.getElementById('kj-seq-toggle');
+    if (tg) {
+      tg.textContent = SEQ.on ? 'SEQUENCE: ON' : 'SEQUENCE: OFF';
+      tg.classList.toggle('on', SEQ.on);
+    }
+  }
+
+  function buildUI() {
+    var css = document.createElement('style');
+    css.textContent =
+      '#kj-v11{position:fixed;right:12px;bottom:12px;width:310px;z-index:9999;' +
+      'background:#111911;border:1px solid #1f351f;font-family:inherit;font-size:12px;color:#c3dcc3}' +
+      '#kj-v11 h4{background:#0d120d;color:#39ff14;padding:7px 10px;font-weight:400;letter-spacing:2px;' +
+      'font-size:12px;cursor:pointer;display:flex;justify-content:space-between}' +
+      '#kj-v11 .body{padding:10px;display:block}' +
+      '#kj-v11.collapsed .body{display:none}' +
+      '#kj-v11 .row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}' +
+      '#kj-v11 button{background:transparent;border:1px solid #1f351f;color:#8fae8f;' +
+      'padding:4px 7px;font-family:inherit;font-size:11px;cursor:pointer}' +
+      '#kj-v11 button:hover{border-color:#39ff14;color:#39ff14}' +
+      '#kj-v11 button.on{background:#39ff14;color:#0a0e0a;border-color:#39ff14}' +
+      '#kj-v11 textarea{width:100%;height:52px;background:#0a0e0a;border:1px solid #1f351f;' +
+      'color:#c3dcc3;font-family:inherit;font-size:11px;padding:5px;resize:vertical}' +
+      '#kj-v11 .status{background:#0a0e0a;border:1px solid #1f351f;padding:6px;margin-bottom:8px;min-height:34px}' +
+      '#kj-v11 label{display:block;color:#8fae8f;margin:6px 0 3px;letter-spacing:1px}';
+    document.head.appendChild(css);
+
+    var box = document.createElement('div');
+    box.id = 'kj-v11';
+    box.innerHTML =
+      '<h4><span>SEQUENCE &amp; TONE</span><span id="kj-fold">–</span></h4><div class="body">' +
+      '<label>TONE</label><div class="row" id="kj-presets"></div>' +
+      '<label>SEQUENCE — any key plays the next note</label>' +
+      '<div class="status" id="kj-seq-status">No sequence loaded.</div>' +
+      '<div class="row">' +
+        '<button id="kj-seq-toggle">SEQUENCE: OFF</button>' +
+        '<button id="kj-seq-reset">RESTART</button>' +
+        '<button id="kj-seq-clear">CLEAR</button>' +
+      '</div>' +
+      '<label>TYPE NOTES</label>' +
+      '<textarea id="kj-seq-text" placeholder="E5 G5 B5 E6 G6 B6 E6 B5 G5"></textarea>' +
+      '<div class="row"><button id="kj-seq-load">LOAD TYPED</button>' +
+      '<button id="kj-midi-btn">IMPORT MIDI</button></div>' +
+      '<input type="file" id="kj-midi" accept=".mid,.midi" style="display:none">' +
+      '</div>';
+    document.body.appendChild(box);
+
+    var pr = document.getElementById('kj-presets');
+    Object.keys(PRESETS).forEach(function (name) {
+      var b = document.createElement('button');
+      b.textContent = name;
+      b.setAttribute('data-preset', name);
+      b.onclick = function () { applyPreset(name); };
+      pr.appendChild(b);
+    });
+
+    document.querySelector('#kj-v11 h4').onclick = function () {
+      box.classList.toggle('collapsed');
+      document.getElementById('kj-fold').textContent =
+        box.classList.contains('collapsed') ? '+' : '–';
+    };
+    document.getElementById('kj-seq-toggle').onclick = function () { toggleSequence(!SEQ.on); };
+    document.getElementById('kj-seq-reset').onclick = resetSequence;
+    document.getElementById('kj-seq-clear').onclick = function () {
+      loadSequence([], '');
+      toggleSequence(false);
+    };
+    document.getElementById('kj-seq-load').onclick = function () {
+      var r = parseTypedSequence(document.getElementById('kj-seq-text').value);
+      if (!r.notes.length) {
+        document.getElementById('kj-seq-status').textContent =
+          'No valid notes. Use names like E5, F#4, Bb3.';
+        return;
+      }
+      loadSequence(r.notes, 'typed');
+      toggleSequence(true);
+      if (r.bad.length) {
+        document.getElementById('kj-seq-status').innerHTML +=
+          '<br><span style="color:#ffb000">skipped: ' + r.bad.slice(0, 6).join(' ') + '</span>';
+      }
+    };
+    document.getElementById('kj-midi-btn').onclick = function () {
+      document.getElementById('kj-midi').click();
+    };
+    document.getElementById('kj-midi').onchange = function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (!f) return;
+      var status = document.getElementById('kj-seq-status');
+      if (f.size > MAX_MIDI_BYTES) {
+        status.textContent = 'That file is over 1 MB. MIDI this size is not a melody.';
+        return;
+      }
+      var fr = new FileReader();
+      fr.onload = function () {
+        try {
+          var notes = parseMidi(fr.result);
+          if (!notes.length) { status.textContent = 'No notes found in that file.'; return; }
+          loadSequence(notes, f.name);
+          toggleSequence(true);
+        } catch (err) {
+          status.textContent = 'Could not read that file: ' + err.message;
+        }
+      };
+      fr.readAsArrayBuffer(f);
+    };
+
+    render();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildUI);
+  } else {
+    buildUI();
+  }
+})();
+</script>
 </body>
 </html>
