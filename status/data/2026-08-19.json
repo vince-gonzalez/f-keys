@@ -2,16 +2,16 @@
   "cloudflare": {
     "bots_24h": {
       "AI Assistant": 36,
-      "AI Crawler": 558,
-      "AI Search": 3778,
+      "AI Crawler": 555,
+      "AI Search": 3775,
       "Accessibility": 1,
       "Advertising & Marketing": 91,
       "Archiver": 7,
       "Monitoring & Analytics": 2,
       "Page Preview": 48,
-      "Search Engine Crawler": 1044,
+      "Search Engine Crawler": 1046,
       "Search Engine Optimization": 797,
-      "Unverified": 35964
+      "Unverified": 35909
     },
     "bots_error": null,
     "days": 7,
@@ -399,13 +399,13 @@
     }
   },
   "date": "2026-08-19",
-  "generated_at": "2026-08-19 16:35 UTC",
+  "generated_at": "2026-08-19 16:37 UTC",
   "github": [
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-19T16:35:13Z",
+      "pushed_at": "2026-08-19T16:37:31Z",
       "repo": "f-keys",
       "stars": 1
     },
@@ -576,77 +576,77 @@
   "uptime": [
     {
       "error": null,
-      "ms": 194,
+      "ms": 240,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
     },
     {
       "error": null,
-      "ms": 140,
+      "ms": 231,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
     },
     {
       "error": null,
-      "ms": 133,
+      "ms": 581,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
     },
     {
       "error": null,
-      "ms": 120,
+      "ms": 164,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
     },
     {
       "error": null,
-      "ms": 313,
+      "ms": 458,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
     },
     {
       "error": null,
-      "ms": 131,
+      "ms": 334,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
     },
     {
       "error": null,
-      "ms": 148,
+      "ms": 202,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
     },
     {
       "error": null,
-      "ms": 494,
+      "ms": 395,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
     },
     {
       "error": null,
-      "ms": 65,
+      "ms": 248,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
     },
     {
       "error": null,
-      "ms": 49,
+      "ms": 220,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
     },
     {
       "error": null,
-      "ms": 314,
+      "ms": 425,
       "name": "zengin.es",
       "up": true,
       "url": "https://zengin.es"
