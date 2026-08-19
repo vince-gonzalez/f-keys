@@ -51,6 +51,25 @@ jobs:
             python tools/snapshot.py
           fi
 
+      - name: Commit the public snapshot
+        run: |
+          git config user.name  "kpi-snapshot"
+          git config user.email "noreply@f-keys.com"
+          git add status/
+          if git diff --staged --quiet; then
+            echo "No change in the numbers today - nothing to commit."
+            exit 0
+          fi
+          SUMMARY=$(python -c "
+          import json
+          s = json.load(open('status/latest.json', encoding='utf-8'))['summary']
+          print(f\"{s['properties_up']}/{s['properties_total']} up · \"
+                f\"{s['package_weekly']} installs/wk · \"
+                f\"{s['zenodo_views']} paper views · {s['github_stars']} stars\")
+          ")
+          git commit -m "Snapshot $(date -u +%Y-%m-%d): $SUMMARY"
+          git push
+
       # The full snapshot, including owner-only GitHub traffic, goes to a
       # private repo. Without the secret this step says so and moves on -
       # a missing token must never fail the run or lose the public page.
@@ -77,25 +96,6 @@ jobs:
             echo "No change in the private snapshot."
           else
             git commit -q -m "Snapshot $(date -u +%Y-%m-%d)"
-            git -c http.extraHeader="Authorization: Basic $AUTH" push origin HEAD
+            git -c "$CLEAR" -c http.extraHeader="Authorization: Basic $AUTH" push origin HEAD
             echo "Pushed to vince-gonzalez/kpi-private."
           fi
-
-      - name: Commit the public snapshot
-        run: |
-          git config user.name  "kpi-snapshot"
-          git config user.email "noreply@f-keys.com"
-          git add status/
-          if git diff --staged --quiet; then
-            echo "No change in the numbers today - nothing to commit."
-            exit 0
-          fi
-          SUMMARY=$(python -c "
-          import json
-          s = json.load(open('status/latest.json', encoding='utf-8'))['summary']
-          print(f\"{s['properties_up']}/{s['properties_total']} up · \"
-                f\"{s['package_weekly']} installs/wk · \"
-                f\"{s['zenodo_views']} paper views · {s['github_stars']} stars\")
-          ")
-          git commit -m "Snapshot $(date -u +%Y-%m-%d): $SUMMARY"
-          git push
