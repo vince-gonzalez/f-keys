@@ -121,7 +121,10 @@ except ImportError:
 # token into whatever directory that was, including repositories.
 from . import paths as _paths               # noqa: E402
 from .paths import CONFIG_FILE, DB_FILE     # noqa: E402
-LOGO_FILE          = "./assets/logo.png"     # Logo PNG path
+LOGO_FILE          = _paths.logo()            # packaged plum, or None
+#   was "./assets/logo.png" - relative to the launch directory, so the
+#   logo was never found unless you happened to start from the right
+#   folder, and app.py skips a logo it cannot find without saying so.
 POLL_TIMEOUT       = 2.5                     # Seconds to wait on one miner
 POLL_INTERVAL      = 5                       # Seconds between full fleet polls
 SCAN_TIMEOUT       = 1.0                     # TCP ping timeout per host (seconds)
@@ -842,7 +845,7 @@ class HUDWindow(tk.Toplevel):
 
     def _load_logo(self):
         """Load and resize logo PNG. Silently skips if missing or PIL not installed."""
-        if not PIL_OK or not os.path.exists(LOGO_FILE):
+        if not PIL_OK or not LOGO_FILE or not os.path.exists(LOGO_FILE):
             return
         try:
             img = Image.open(LOGO_FILE).convert("RGBA").resize((58, 58), Image.LANCZOS)
@@ -1878,7 +1881,7 @@ def _try_start_tray(app):
         return
     try:
         img = (PilImg.open(LOGO_FILE).resize((64, 64)).convert("RGBA")
-               if os.path.exists(LOGO_FILE)
+               if LOGO_FILE and os.path.exists(LOGO_FILE)
                else PilImg.new("RGBA", (64, 64), (180, 80, 220, 255)))
     except Exception:
         img = PilImg.new("RGBA", (64, 64), (180, 80, 220, 255))
