@@ -55,3 +55,21 @@ jobs:
           python-version: '3.12'
       - name: Banner font and width
         run: python tools/readme.py --verify
+
+  # keyj-cli and keyj/app.html are two implementations of the same
+  # conversions. Key-J has already shipped three defects that existed only
+  # because two copies of one thing drifted, so this diffs them: the real
+  # functions are lifted out of app.html, run under node, and compared.
+  keyj-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Python and JavaScript agree
+        working-directory: keyj-cli
+        run: python tests/test_parity.py

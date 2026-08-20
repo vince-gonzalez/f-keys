@@ -111,7 +111,7 @@ jobs:
   # ── Python products ─────────────────────────────────────────
   python-package:
     needs: identify
-    if: needs.identify.outputs.product == 'moonbeam' || needs.identify.outputs.product == 'plumhud'
+    if: needs.identify.outputs.product == 'moonbeam' || needs.identify.outputs.product == 'plumhud' || needs.identify.outputs.product == 'keyj-cli'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -145,8 +145,13 @@ jobs:
           # Proving the artifact works beats proving the source works.
           python -m venv /tmp/verify
           /tmp/verify/bin/python -m pip install --quiet dist/*.whl
-          # the console script is named after the product
-          /tmp/verify/bin/${{ needs.identify.outputs.product }} --help > /dev/null
+          # The script name is read from the package rather than assumed to
+          # equal the directory: keyj-cli installs a command called `keyj`,
+          # and reading it checks what the wheel declares instead of what
+          # this workflow expects it to.
+          SCRIPT=$(python -c "import re,io;b=io.open('pyproject.toml',encoding='utf-8').read().split('[project.scripts]',1)[1];print(re.search(r'^[ \\t]*([A-Za-z0-9_.-]+)[ \\t]*=',b,re.M).group(1))")
+          echo "console script: $SCRIPT"
+          "/tmp/verify/bin/$SCRIPT" --help > /dev/null
           echo "console script runs from the built wheel"
 
       - name: Publish to PyPI
