@@ -13,7 +13,7 @@
     "appId": "com.fkeys.keyj",
     "productName": "Key-J",
     "license": "SEE LICENSE IN ../LICENSE",
-    "copyright": "Copyright \u00a9 2026 Vincent Gonzalez",
+    "copyright": "Copyright \u00a9 2026 F-Keys Creative LLC",
     "files": [
       "src/**/*",
       "package.json"
