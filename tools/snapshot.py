@@ -80,7 +80,10 @@ PROPERTIES = [
 ]
 
 NPM_PACKAGES  = ["@f-keys/tip-widget", "opticquiz-eye", "opticquiz-cvd", "opticquiz-cvd-mcp"]
-PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd"]
+PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
+                 "keyj"]
+# Three of these were shipped and then never added here, so the status page
+# reported two of five packages and read as complete.
 
 GITHUB_OWNER = "zengineco"
 GITHUB_REPOS = [

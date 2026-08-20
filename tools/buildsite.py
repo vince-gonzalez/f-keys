@@ -137,10 +137,28 @@ which is the part that made entering a sequence miserable.</p>
 <h2>Also</h2>
 <p>Seven tone presets from clean guitar to shred. MIDI import. Six play styles, four
 waveforms, remappable keys and scale switching.</p>
+<h2>On the command line</h2>
+<p>Once a song is in, the workbench is in the way. <code>pip install keyj</code> gives you
+the same converter and the same player without the window.</p>
+<pre><b>pip install keyj</b>
+keyj tab solo.txt -o song.txt    tablature in, note names out
+keyj render song.txt out.wav     the sequence, at a tempo
+keyj show song.txt               what is in a sequence
+keyj play song.txt               any keystroke plays the next note</pre>
+<p><code>tab</code>, <code>render</code> and <code>show</code> are standard library only and
+never touch your keyboard. <code>play</code> is the one part that needs a global hook, so it
+is a separate install: <code>pip install "keyj[play]"</code>. It runs in the foreground and
+stops when you stop it &mdash; nothing is added to startup.</p>
+<p>It never learns which key you pressed. In sequence mode any key advances, so the player
+asks whether a key went down and discards everything else. There is no keystroke buffer in
+it, which is the difference between an instrument and a keylogger.</p>
+<p>The CLI is MIT. The desktop and browser apps are not &mdash; see
+<a href="https://github.com/zengineco/f-keys/blob/main/keyj/LICENSE">the licence</a>.</p>
 <div class="btnrow">
   <a class="btn default" href="/keyj/app.html">Open in browser</a>
   <a class="btn" href="https://github.com/zengineco/f-keys/releases/latest">Download</a>
   <a class="btn" href="/keyj/manual/">Manual</a>
+  <a class="btn" href="https://pypi.org/project/keyj/">PyPI</a>
 </div>"""),
 
  "pixelstaff": dict(
@@ -220,7 +238,7 @@ Past searches persist with session stats.</p>
 
  "plumhud": dict(
   title="PlumHUD", tagline="Watch the fleet, not the screen.",
-  facts=[("Version","4.0.0"),("Licence","MIT"),("Install","pip install plumhud"),
+  facts=[("Version","4.1.0"),("Licence","MIT"),("Install","pip install plumhud"),
          ("Requires","Python 3.8+, Tk"),("Depends on","moonbeam-miner")],
   body="""
 <h2>What it does</h2>
