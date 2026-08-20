@@ -79,3 +79,32 @@ def migrate_legacy():
         return legacy
     except OSError:
         return None
+
+
+# ── packaged assets ──────────────────────────────────────────
+#
+# LOGO_FILE used to be the literal string "./assets/logo.png", resolved
+# against whatever directory the user happened to launch from. That is the
+# same fault this module was written to fix for the config file, one level
+# over: the logo was not missing, it was being looked for in the wrong
+# place, and app.py silently skips a logo it cannot find. So plumhud has
+# shipped with no plum in it since it shipped.
+#
+# The logo travels inside the package now, and this returns where it landed.
+
+def asset(name):
+    """Absolute path to a file packaged under plumhud/assets/."""
+    try:
+        from importlib.resources import files          # Python 3.9+
+        return str(files(__package__).joinpath("assets", name))
+    except Exception:                                   # 3.8, or a zip import
+        import os
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "assets", name)
+
+
+def logo():
+    """The plum, or None if it did not travel with this install."""
+    import os
+    p = asset("logo.png")
+    return p if os.path.exists(p) else None

@@ -25,6 +25,9 @@ function createWindow() {
     minWidth: 1280,
     minHeight: 620,
     title: 'Key-J',
+    // Without this the taskbar and Alt-Tab show Electron's default icon,
+    // which is what shipped through 1.4.2.
+    icon: path.join(__dirname, '..', 'build', 'icon.ico'),
     backgroundColor: '#0a0a0e',
     frame: false,           // custom titlebar inside renderer
     titleBarStyle: 'hidden',
@@ -89,10 +92,17 @@ function createWindow() {
 
 // ── Tray ───────────────────────────────────────────────────────
 function createTray() {
-  // Tiny 16x16 inline PNG (musical note icon) as base64
-  const iconDataURL = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAV0lEQVQ4jWNgGAXY4D8DA8N/CmCgRAPVDeD/TxIWZhiQZQBVDeD/TxJGYQMGqg/4TxKGYQOGqk/+TxIGYYOGqs/5TxIGYUOGqs/9TxIGYcOGqs8FAJSqCrWqDrZEAAAAAElFTkSuQmCC`;
-  const icon = nativeImage.createFromDataURL(iconDataURL);
-
+  // The real Key-J mark, packaged beside this file. It shipped for four
+  // versions with a generated 16x16 placeholder here and Electron's default
+  // icon everywhere else, which is the first thing anyone sees.
+  let icon;
+  try {
+    icon = nativeImage.createFromPath(path.join(__dirname, 'tray.png'));
+    if (icon.isEmpty()) throw new Error('tray.png did not load');
+  } catch (err) {
+    console.error('tray icon:', err);
+    icon = nativeImage.createEmpty();
+  }
   tray = new Tray(icon);
   tray.setToolTip('Key-J — Musical Keystroke Studio');
   updateTrayMenu();
