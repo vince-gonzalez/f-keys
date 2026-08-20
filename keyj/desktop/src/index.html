@@ -3610,6 +3610,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
 
     var tick = function () { paint(scroller, label); };
     window.addEventListener('resize', tick);
+    scroller.addEventListener('scroll', tick, { passive: true });
 
     // The keys are built after this block runs, so measure again once they exist.
     if (typeof ResizeObserver === 'function') {
@@ -3637,10 +3638,26 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     }
   }, true);
 
-  // The panel inserts itself and may be rebuilt, so keep checking rather than
-  // assuming one successful build is the last word.
-  setInterval(build, 400);
-  build();
+  /* The panel inserts itself and may be rebuilt, so keep checking rather than
+     assuming one successful build is the last word.
+
+     This also repaints, rather than leaving the shading to the scroll event
+     alone. Depending on one event to keep a visual state truthful means that
+     if the event does not arrive - a rebuilt node, a synthetic scroll, a
+     platform that batches them away - the shading silently lies about which
+     way the keyboard continues. A cheap read twice a second cannot. */
+  function sweep() {
+    build();
+    var kb = document.getElementById('kb');
+    if (!kb || !kb.offsetParent) return;        // hidden tab: nothing to paint
+    var scroller = kb.querySelector('.scroll');
+    if (scroller) {
+      paint(scroller, scroller.parentNode.querySelector('.kb-more'));
+    }
+  }
+
+  setInterval(sweep, 400);
+  sweep();
 
   window.KeyJKeys = { repaint: function () { build(); } };
 })();
