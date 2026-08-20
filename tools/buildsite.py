@@ -309,22 +309,29 @@ averaging them in.</p>
 
  "remapwrap": dict(
   title="RemapWrap", tagline="Your glass. Your rules.",
-  facts=[("Status","Alpha"),("Runtime","Node.js"),("Phone needs","A browser"),
-         ("Install","None on the phone")],
+  facts=[("Status","Specified, not built"),("Runtime","Node.js (planned)"),
+         ("Phone needs","A browser"),("Source","Not published")],
   body="""
-<h2>What it does</h2>
-<p>Runs a small local server that pairs with your phone over a QR code. The phone becomes a
-drag-and-drop grid of keys that inject real OS-level keystrokes, so it drives software that
-already exists on the machine without knowing anything about RemapWrap.</p>
-<p>Layouts are JSON, editable live and portable between machines. Haptics fire on press so
-the glass reports back.</p>
-<h2>Running it</h2>
-<pre>npm install
-<b>node remapwrap-server.js</b>
-scan the QR with your phone</pre>
-<p class="muted">There is no packaged installer yet. Run it from source until the alpha is
-built.</p>
-<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/remapwrap">Get the source</a></div>"""),
+<h2>The idea</h2>
+<p>A small local server pairs with your phone over a QR code. The phone becomes a
+drag-and-drop grid of keys that inject real OS-level keystrokes, so it drives software already
+on the machine without that software knowing RemapWrap exists. Layouts are JSON, editable
+live and portable between machines. Haptics fire on press, so the glass reports back.</p>
+<p>From nothing to a working deck in the time it takes to scan a code, on hardware you
+already own.</p>
+
+<h2>Where it actually is</h2>
+<p><b>There is no code published for this.</b> This page used to carry install instructions
+&mdash; <code>npm install</code>, then run the server &mdash; for a file that does not exist
+in any repository, and a "get the source" link to a folder containing only this page. That
+was wrong and it is removed.</p>
+<p>What exists is the design above and the knowledge that the hard parts are solvable: the
+pairing, the keystroke injection, and the layout format. What does not exist is a line of it
+written down anywhere public.</p>
+<p>It is on this site because it is a real intention, not to suggest you can run it today.
+When there is something to run, this page will say so and link to it.</p>
+"""),
+
 }
 
 
