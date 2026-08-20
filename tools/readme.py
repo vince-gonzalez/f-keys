@@ -111,25 +111,48 @@ def banner(name, tagline="", width=WIDTH):
     return "\n".join(out)
 
 
-def signature():
+def spaced(word):
+    """Letterspaced small caps. The house wordmark under the block letters."""
+    return "·   " + "  ".join(word.upper()) + "   ·"
+
+
+def signature(width=60):
     """
-    The same footer on every repository. A reader who lands on any one of
-    them should be able to tell, without hunting, who made it, what it is
-    part of, and where the rest lives.
+    The mark at the foot of every repository: F-KEYS in the same block font
+    the banners use, the company name spaced out beneath it, then who made it.
+    A reader landing on one repository can tell whose shelf it came off.
     """
-    return "\n".join([
-        "---",
-        "",
-        "```",
-        "  Vincent Gonzalez",
-        "  F-Keys  ·  https://f-keys.com",
-        "  ORCID 0009-0005-3640-014X",
-        "```",
-        "",
-        "Part of [F-Keys](https://f-keys.com) — independent hardware, software",
-        "and internet products. See the [working log](https://f-keys.com/log/)",
-        "and [live status](https://f-keys.com/status/).",
-    ])
+    body = letters("F-KEYS")
+    span = max(len(r) for r in body)
+    if span > width - 6:
+        width = span + 6
+
+    def line(t=""):
+        pad = width - len(t)
+        left = pad // 2
+        return "║" + " " * left + t + " " * (pad - left) + "║"
+
+    out = ["---", "", "```"]
+    out.append("╔" + "═" * width + "╗")
+    out.append(line())
+    out += [line(r + " " * (span - len(r))) for r in body]
+    out.append(line())
+    out.append(line(spaced("Creative")))
+    out.append(line())
+    out.append(line("─" * (width - 20)))
+    out.append(line())
+    out.append(line("Vincent Gonzalez"))
+    out.append(line("f-keys.com"))
+    out.append(line("ORCID 0009-0005-3640-014X"))
+    out.append(line())
+    out.append("╚" + "═" * width + "╝")
+    out.append("```")
+    out += ["",
+            "Part of [F-Keys](https://f-keys.com) — independent hardware, "
+            "software",
+            "and internet products. See the [working log](https://f-keys.com/log/)",
+            "and [live status](https://f-keys.com/status/)."]
+    return "\n".join(out)
 
 
 def skeleton(name, tagline, body, badges=None):
