@@ -6,6 +6,53 @@ underneath it. Blank line between paragraphs. `**bold**`, `` `code` `` and
 
 CI renders this into `log/index.html` on push. Do not edit that file by hand.
 
+## 2026-08-20
+
+Spent the day taking Key-J apart. It had shipped, it was live, and it was
+close to unusable, which I already knew and had said out loud.
+
+The count of things wrong with it is the part worth writing down. Selecting
+Vibrato killed the app, because one line starting an oscillator was
+duplicated and the exception left every key pressed under it permanently
+dead. Export produced one audible second out of thirty-five, because the
+session held every note typed before Record at time zero and normalisation
+then scaled the rest into silence. Release was declared in seconds where
+everything reading it expected milliseconds, so notes clicked off until you
+touched the slider, and every tone preset quietly undid it again. Notes were
+plotted five staff positions too high, so the whole top octave was drawn off
+the top of the picture. And global capture — the entire reason a desktop
+build exists — had never once played the right note: the keycode table was
+written in macOS codes for a library that emits its own, and of twenty-four
+letter mappings, zero were correct.
+
+Most of those came from the same place. The browser build and the desktop
+build were two separate implementations of the same product, so a fix to one
+never touched the other and nobody noticed the drift. There is one renderer
+now, and the desktop copy is generated from it with a check that fails the
+build if they diverge.
+
+Then it went out: installers for Windows and Linux, `pip install keyj` on
+PyPI, and a winget manifest submitted. Two things nearly went out wrong. The
+Windows app identifier was still a personal handle from before any of this
+was a company, which Windows writes into the uninstall registry and which
+every future installer has to match — changed with an hour to spare and no
+downloads on the clock. And installing silently over a running copy exited
+zero while leaving half the old version on disk, which is precisely what a
+package manager does by default.
+
+The thing I keep circling is that I measured everything I could measure and
+missed what anyone sees first. The app shipped through four versions with the
+default Electron icon, and PlumHUD has been looking for its logo down a
+relative path since the day it was released, so the plum has never once
+appeared. Both are fixed. Neither was hard. They were just never checked,
+because checking them was nobody's idea of rigour.
+
+Key-J is proprietary from 1.6.0. MIT was never a decision I made; it was
+inherited from the top of the repository and then copied outward. The source
+stays readable, because a program that installs a global keyboard hook should
+be auditable by whoever runs it. Readable and free to resell are different
+things, and now the licence says which one this is.
+
 ## 2026-08-19
 
 Filed the LLC, though not under the name I wanted. An unrelated F Key LLC has
