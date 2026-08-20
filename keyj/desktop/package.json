@@ -21,15 +21,13 @@
       "target": "nsis",
       "icon": "build/icon.ico"
     },
-    "linux": {
-      "icon": "build/icon.png",
-      "category": "AudioVideo"
-    },
     "mac": {
       "target": "dmg"
     },
     "linux": {
-      "target": "AppImage"
+      "target": "AppImage",
+      "icon": "build/icon.png",
+      "category": "AudioVideo"
     },
     "nsis": {
       "include": "build/installer.nsh",
