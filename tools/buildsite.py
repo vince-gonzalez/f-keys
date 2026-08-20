@@ -113,7 +113,7 @@ CATEGORIES = [
 PAGES = {
  "keyj": dict(
   title="Key-J", tagline="Every keystroke plays a note, in any application.",
-  facts=[("Version","1.4.0"),("Licence","MIT"),("Platforms","Browser, Windows, Linux"),
+  facts=[("Version","1.4.1"),("Licence","MIT"),("Platforms","Browser, Windows, Linux"),
          ("Source","zengineco/f-keys")],
   body="""
 <h2>What it does</h2>
