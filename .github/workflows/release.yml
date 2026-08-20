@@ -84,6 +84,11 @@ jobs:
             exit 1
           fi
 
+      - name: Refuse to build a stale renderer
+        shell: bash
+        working-directory: keyj/desktop
+        run: node sync-renderer.js --check
+
       - name: Build Key-J
         shell: bash
         working-directory: keyj/desktop

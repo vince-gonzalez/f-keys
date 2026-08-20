@@ -1,230 +1,577 @@
 <!DOCTYPE html>
+<!--
+  GENERATED FILE - DO NOT EDIT.
+
+  This is keyj/app.html, copied by keyj/desktop/sync-renderer.js.
+  Edit app.html and run `node sync-renderer.js`. Editing this file
+  directly recreates the two-codebase problem it exists to remove.
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'none';">
-<title>Key-J</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>Key-J — Musical Keystroke Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0e;--panel:#111118;--border:#1e1e2e;--accent:#e8c84a;--accent2:#4ae8b0;--accent3:#e84a7a;--purple:#a088ff;--text:#d8d8e8;--muted:#555568;--key-bg:#16161e;--key-active:#24243a;--shadow:0 4px 32px rgba(0,0,0,.7);--lock:#ff9f43;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;height:100vh;display:flex;flex-direction:column;overflow:hidden;user-select:none;}
+  :root {
+    --bg: #0a0a0e;
+    --panel: #111118;
+    --border: #222230;
+    --accent: #e8c84a;
+    --accent2: #4ae8b0;
+    --accent3: #e84a7a;
+    --text: #d8d8e8;
+    --muted: #555568;
+    --staff-line: #2a2a3a;
+    --key-bg: #18181f;
+    --key-active: #2a2a40;
+    --shadow: 0 4px 24px rgba(0,0,0,0.6);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    user-select: none;
+  }
 
-/* TITLEBAR */
-.titlebar{height:36px;background:#0d0d12;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;-webkit-app-region:drag;flex-shrink:0;gap:10px;position:relative;z-index:50;}
-.titlebar-btns{display:flex;gap:6px;-webkit-app-region:no-drag;flex-shrink:0;}
-.tb-btn{width:12px;height:12px;border-radius:50%;border:none;cursor:pointer;transition:filter .1s;}
-.tb-btn:hover{filter:brightness(1.3);}
-.tb-close{background:#e84a7a;}.tb-min{background:#e8c84a;}.tb-max{background:#4ae8b0;}
-.titlebar-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--accent);letter-spacing:.1em;-webkit-app-region:no-drag;position:absolute;left:50%;transform:translateX(-50%);}
-.global-toggle{margin-left:auto;display:flex;align-items:center;gap:8px;-webkit-app-region:no-drag;}
-.global-label{font-size:.55rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);}
-.toggle-switch{position:relative;width:36px;height:18px;cursor:pointer;}
-.toggle-switch input{opacity:0;width:0;height:0;}
-.toggle-track{position:absolute;inset:0;background:var(--border);border-radius:9px;transition:background .2s;}
-.toggle-track::after{content:'';position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--muted);transition:all .2s;}
-.toggle-switch input:checked+.toggle-track{background:var(--accent2);}
-.toggle-switch input:checked+.toggle-track::after{left:20px;background:#000;}
-.hook-badge{font-size:.52rem;padding:2px 7px;border-radius:3px;border:1px solid var(--border);color:var(--muted);text-transform:uppercase;letter-spacing:.1em;transition:all .2s;}
-.hook-badge.active{border-color:var(--accent2);color:var(--accent2);background:rgba(74,232,176,.08);}
-.hook-badge.unavail{border-color:var(--accent3);color:var(--accent3);}
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-shadow: 0 0 30px rgba(232,200,74,0.4);
+    line-height: 1;
+  }
+  .logo span { color: var(--accent3); }
+  .tagline {
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .header-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .pill-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: all 0.15s;
+  }
+  .pill-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .pill-btn.danger:hover { border-color: var(--accent3); color: var(--accent3); }
+  .pill-btn.export-btn {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+  .pill-btn.export-btn:hover { background: #f5d96a; }
+  .pill-btn.rec { border-color: var(--accent3); color: var(--accent3); }
+  .pill-btn.rec.active { background: var(--accent3); color: #fff; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
 
-/* LAYOUT */
-.app-body{flex:1;display:grid;grid-template-columns:268px 1fr 220px;overflow:hidden;}
+  /* ── MAIN LAYOUT ── */
+  .main {
+    display: grid;
+    grid-template-columns: 280px 1fr 220px;
+    grid-template-rows: 1fr auto;
+    flex: 1;
+    overflow: hidden;
+    gap: 0;
+  }
 
-/* LEFT */
-.panel-left{border-right:1px solid var(--border);background:var(--panel);display:flex;flex-direction:column;overflow:hidden;}
-.panel-title{font-size:.55rem;text-transform:uppercase;letter-spacing:.22em;color:var(--muted);padding:9px 14px 7px;border-bottom:1px solid var(--border);flex-shrink:0;}
-.keymap-scroll{flex:1;overflow-y:auto;padding:6px 8px;}
-.keymap-scroll::-webkit-scrollbar{width:3px;}
-.keymap-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.key-row{display:flex;align-items:center;gap:7px;padding:4px 6px;border-radius:5px;cursor:pointer;transition:background .08s;border:1px solid transparent;}
-.key-row:hover{background:var(--key-active);}
-.key-row.active-key{background:var(--key-active);border-color:var(--accent);}
-.key-badge{width:26px;height:26px;background:var(--key-bg);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent);flex-shrink:0;transition:all .07s;box-shadow:0 2px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);}
-.key-row.active-key .key-badge{background:var(--accent);color:#000;transform:translateY(1px);}
-.key-info{flex:1;min-width:0;}
-.key-note{font-size:.75rem;font-weight:700;color:var(--text);line-height:1.2;}
-.key-freq{font-size:.55rem;color:var(--muted);}
-.key-tag{font-size:.5rem;padding:2px 5px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0;border:1px solid;}
-.tag-q{color:var(--accent2);border-color:rgba(74,232,176,.25);background:rgba(74,232,176,.07);}
-.tag-a{color:var(--accent);border-color:rgba(232,200,74,.25);background:rgba(232,200,74,.07);}
-.tag-z{color:var(--purple);border-color:rgba(160,136,255,.25);background:rgba(160,136,255,.07);}
-.tag-1{color:var(--accent3);border-color:rgba(232,74,122,.25);background:rgba(232,74,122,.07);}
-.scale-bar{padding:8px 10px;border-top:1px solid var(--border);flex-shrink:0;}
-.scale-label{font-size:.55rem;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:5px;}
-.scale-chips{display:flex;gap:5px;flex-wrap:wrap;}
-.scale-chip{font-size:.55rem;padding:3px 7px;border-radius:3px;border:1px solid var(--border);cursor:pointer;color:var(--muted);transition:all .1s;font-family:'Space Mono',monospace;}
-.scale-chip:hover{color:var(--text);border-color:var(--muted);}
-.scale-chip.active{border-color:var(--accent);color:var(--accent);background:rgba(232,200,74,.08);}
-.octave-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-top:1px solid var(--border);background:var(--bg);flex-shrink:0;}
-.octave-label{font-size:.55rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);flex:1;}
-.oct-btn{width:24px;height:24px;background:var(--key-bg);border:1px solid var(--border);color:var(--text);font-size:.9rem;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .1s;font-family:'Space Mono',monospace;}
-.oct-btn:hover{border-color:var(--accent);color:var(--accent);}
-.oct-display{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--accent);min-width:18px;text-align:center;}
+  /* ── LEFT PANEL: KEY MAP ── */
+  .panel-left {
+    border-right: 1px solid var(--border);
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .panel-title {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    padding: 10px 16px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .keymap-scroll {
+    overflow-y: auto;
+    flex: 1;
+    padding: 10px;
+  }
+  .keymap-scroll::-webkit-scrollbar { width: 4px; }
+  .keymap-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-/* CENTER */
-.panel-center{display:flex;flex-direction:column;overflow:hidden;background:var(--bg);}
-.staff-area{height:110px;flex-shrink:0;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0d0d12 0%,var(--bg) 100%);position:relative;overflow:hidden;}
-#staffCanvas{width:100%;height:100%;display:block;}
-.note-flash{position:absolute;top:8px;right:14px;font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--accent);opacity:0;transition:opacity .04s;text-shadow:0 0 30px rgba(232,200,74,.5);pointer-events:none;line-height:1;}
-.note-flash.visible{opacity:1;}
-/* Melody Lock next-note bubble */
-.lock-bubble{position:absolute;top:8px;left:60px;background:rgba(255,159,67,.1);border:1px solid var(--lock);border-radius:6px;padding:3px 10px;display:none;align-items:center;gap:7px;}
-.lock-bubble.show{display:flex;}
-.lb-label{font-size:.48rem;text-transform:uppercase;letter-spacing:.18em;color:var(--lock);}
-.lb-note{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--lock);line-height:1;}
-.lb-pos{font-size:.48rem;color:rgba(255,159,67,.5);}
-.viz-area{flex:1;position:relative;overflow:hidden;}
-#vizCanvas{width:100%;height:100%;display:block;}
-.beat-row{display:flex;align-items:center;gap:14px;padding:6px 14px;border-top:1px solid var(--border);background:var(--panel);flex-shrink:0;}
-.beat-info{font-size:.6rem;color:var(--muted);}
-.beat-val{color:var(--accent);font-weight:700;}
-.viz-btns{margin-left:auto;display:flex;gap:5px;}
-.vz-btn{font-size:.54rem;padding:3px 7px;border:1px solid var(--border);background:transparent;color:var(--muted);border-radius:3px;cursor:pointer;font-family:'Space Mono',monospace;text-transform:uppercase;transition:all .1s;}
-.vz-btn.active{border-color:var(--accent);color:var(--accent);}
+  .key-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.1s;
+    border: 1px solid transparent;
+  }
+  .key-row:hover { background: var(--key-active); }
+  .key-row.active-key { background: var(--key-active); border-color: var(--accent); }
+  .key-badge {
+    width: 28px; height: 28px;
+    background: var(--key-bg);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: all 0.08s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .key-row.active-key .key-badge {
+    background: var(--accent);
+    color: #000;
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .key-info { flex: 1; min-width: 0; }
+  .key-note { font-size: 0.8rem; font-weight: 700; color: var(--text); }
+  .key-freq { font-size: 0.6rem; color: var(--muted); }
+  .key-style {
+    font-size: 0.55rem;
+    color: var(--accent2);
+    background: rgba(74,232,176,0.08);
+    border: 1px solid rgba(74,232,176,0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
 
-/* RIGHT */
-.panel-right{border-left:1px solid var(--border);background:var(--panel);display:flex;flex-direction:column;overflow:hidden;}
-.ctrl-section{padding:10px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
-.ctrl-label{font-size:.54rem;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:8px;display:block;}
-.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
-.stog{font-size:.54rem;padding:6px 4px;text-align:center;border:1px solid var(--border);border-radius:4px;cursor:pointer;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);transition:all .1s;background:transparent;font-family:'Space Mono',monospace;}
-.stog:hover{border-color:var(--accent);color:var(--accent);}
-.stog.sel{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700;}
-.stog.sel.v{background:var(--accent2);border-color:var(--accent2);color:#000;}
-.stog.sel.t{background:var(--accent3);border-color:var(--accent3);color:#fff;}
-.stog.sel.a{background:var(--purple);border-color:var(--purple);color:#000;}
-.stog.sel.l{background:#5588ff;border-color:#5588ff;color:#fff;}
-.slider-row{display:flex;flex-direction:column;gap:7px;}
-.slider-item{display:flex;align-items:center;gap:7px;}
-.slider-item label{font-size:.54rem;color:var(--muted);width:50px;text-transform:uppercase;letter-spacing:.07em;flex-shrink:0;}
-input[type=range]{flex:1;-webkit-appearance:none;height:2px;background:var(--border);border-radius:2px;outline:none;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--accent);cursor:pointer;}
-.sro{font-size:.56rem;color:var(--accent);width:28px;text-align:right;flex-shrink:0;}
+  /* Style badge variants */
+  .style-staccato { color: var(--accent); background: rgba(232,200,74,0.08); border-color: rgba(232,200,74,0.2); }
+  .style-hold { color: var(--accent2); background: rgba(74,232,176,0.08); border-color: rgba(74,232,176,0.2); }
+  .style-flat { color: #a088ff; background: rgba(160,136,255,0.08); border-color: rgba(160,136,255,0.2); }
+  .style-sharp { color: var(--accent3); background: rgba(232,74,122,0.08); border-color: rgba(232,74,122,0.2); }
 
-/* MELODY LOCK SECTION */
-.lock-section{padding:10px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
-.lock-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.lock-title-row{display:flex;align-items:center;gap:5px;}
-.lock-icon-txt{font-size:.75rem;}
-.lock-title{font-size:.54rem;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);}
-.lock-toggle-wrap{display:flex;align-items:center;gap:6px;}
-.lock-sw{position:relative;width:36px;height:18px;cursor:pointer;}
-.lock-sw input{opacity:0;width:0;height:0;}
-.lock-track{position:absolute;inset:0;background:var(--border);border-radius:9px;transition:background .2s;}
-.lock-track::after{content:'';position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--muted);transition:all .2s;}
-.lock-sw input:checked+.lock-track{background:var(--lock);}
-.lock-sw input:checked+.lock-track::after{left:20px;background:#000;}
-.lock-on{font-size:.5rem;color:var(--lock);text-transform:uppercase;letter-spacing:.12em;opacity:0;transition:opacity .2s;}
-.lock-on.show{opacity:1;}
-.lock-select{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:.6rem;padding:5px 7px;border-radius:4px;outline:none;margin-bottom:6px;cursor:pointer;}
-.lock-select:focus{border-color:var(--lock);}
-.lock-input-wrap{position:relative;}
-.lock-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:.6rem;padding:5px 50px 5px 7px;border-radius:4px;outline:none;}
-.lock-input:focus{border-color:var(--lock);}
-.lock-hint{font-size:.46rem;color:var(--muted);margin-top:3px;line-height:1.4;}
-.lock-err{font-size:.46rem;color:var(--accent3);margin-top:3px;display:none;}
-.lock-err.show{display:block;}
-.lock-set-btn{position:absolute;right:3px;top:3px;background:var(--lock);border:none;color:#000;font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;padding:2px 7px;border-radius:3px;cursor:pointer;text-transform:uppercase;}
-.lock-set-btn:hover{background:#ffb55a;}
-/* Sequence strip */
-.lock-strip{display:flex;gap:3px;flex-wrap:wrap;margin-top:7px;min-height:20px;}
-.lchip{font-size:.48rem;padding:2px 4px;border-radius:3px;border:1px solid var(--border);color:var(--muted);cursor:default;}
-.lchip.cur{border-color:var(--lock);color:var(--lock);background:rgba(255,159,67,.12);font-weight:700;}
-.lchip.done{color:#2a2a3a;border-color:#1a1a28;}
-/* Behaviour */
-.lock-beh-row{display:flex;gap:5px;margin-top:7px;}
-.lbeh{flex:1;font-size:.5rem;padding:4px 2px;text-align:center;border:1px solid var(--border);border-radius:3px;cursor:pointer;color:var(--muted);background:transparent;font-family:'Space Mono',monospace;text-transform:uppercase;transition:all .1s;}
-.lbeh:hover{border-color:var(--lock);color:var(--lock);}
-.lbeh.sel{background:var(--lock);color:#000;border-color:var(--lock);font-weight:700;}
-.lock-reset{width:100%;margin-top:5px;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:.5rem;padding:4px;border-radius:3px;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;transition:all .1s;}
-.lock-reset:hover{border-color:var(--lock);color:var(--lock);}
+  /* Octave selector */
+  .octave-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .octave-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); flex: 1; }
+  .oct-btn {
+    width: 26px; height: 26px;
+    background: var(--key-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.1s;
+  }
+  .oct-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .oct-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    min-width: 20px;
+    text-align: center;
+  }
 
-/* SESSION LOG */
-.seq-scroll{flex:1;overflow-y:auto;padding:6px 10px;}
-.seq-scroll::-webkit-scrollbar{width:3px;}
-.seq-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.seq-entry{display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.56rem;color:var(--muted);}
-.seq-entry:last-child{border-bottom:none;}
-.seq-idx{color:var(--border);width:18px;flex-shrink:0;font-size:.48rem;}
-.seq-note{color:var(--accent);font-weight:700;width:26px;}
-.seq-dur{color:var(--accent2);width:28px;}
-.seq-sty{color:var(--muted);font-size:.48rem;}
-.seq-ltag{font-size:.42rem;color:var(--lock);border:1px solid rgba(255,159,67,.3);padding:1px 4px;border-radius:2px;}
-.seq-empty{font-size:.6rem;color:var(--border);padding:20px 0;text-align:center;}
+  /* Scale selector */
+  .scale-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .scale-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); width: 100%; margin-bottom: 4px; }
+  .scale-chip {
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.1s;
+  }
+  .scale-chip:hover { color: var(--text); border-color: var(--muted); }
+  .scale-chip.active { border-color: var(--accent); color: var(--accent); background: rgba(232,200,74,0.08); }
 
-/* BOTTOM BAR */
-.bottom-bar{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:6px 16px;border-top:1px solid var(--border);background:#0d0d12;flex-shrink:0;}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 6px var(--accent2);flex-shrink:0;}
-.status-dot.rec{background:var(--accent3);box-shadow:0 0 6px var(--accent3);animation:pulse .9s infinite;}
-.status-dot.locked{background:var(--lock);box-shadow:0 0 6px var(--lock);animation:pulse 1.4s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.status-text{font-size:.58rem;color:var(--muted);flex:1;}
-.br{display:flex;gap:10px;align-items:center;}
-.stat{font-size:.58rem;color:var(--muted);}
-.abn{font-size:.56rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;background:transparent;color:var(--text);cursor:pointer;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.1em;transition:all .12s;}
-.abn:hover{border-color:var(--accent);color:var(--accent);}
-.abn.rec-btn{border-color:var(--accent3);color:var(--accent3);}
-.abn.rec-btn.active{background:var(--accent3);color:#fff;animation:pulse .9s infinite;}
-.abn.exp{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700;}
-.abn.exp:hover{background:#f5d96a;}
-.abn.play:hover{border-color:var(--accent2);color:var(--accent2);}
-.abn.clr:hover{border-color:var(--accent3);color:var(--accent3);}
+  /* ── CENTER: STAFF + VISUALIZER ── */
+  .panel-center {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+  }
 
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity .15s;}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:24px;width:380px;box-shadow:var(--shadow);transform:translateY(8px);transition:transform .15s;}
-.modal-overlay.open .modal{transform:none;}
-.modal h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--accent);letter-spacing:.06em;margin-bottom:12px;}
-.modal p{font-size:.68rem;color:var(--muted);line-height:1.7;margin-bottom:12px;}
-.modal label{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;display:block;margin-bottom:5px;}
-.modal input[type=text],.modal select{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:.72rem;padding:7px 9px;border-radius:4px;outline:none;margin-bottom:10px;}
-.modal input:focus,.modal select:focus{border-color:var(--accent);}
-.mrow{display:flex;gap:7px;margin-top:12px;}
-.mcanc{background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;font-family:'Space Mono',monospace;font-size:.62rem;padding:7px 14px;border-radius:4px;}
-.mcanc:hover{border-color:var(--accent3);color:var(--accent3);}
-.mconf{background:var(--accent);color:#000;border:none;cursor:pointer;font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;padding:7px 18px;border-radius:4px;}
-.mconf:hover{background:#f5d96a;}
+  /* Staff notation */
+  .staff-area {
+    position: relative;
+    height: 120px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0d0d12 0%, var(--bg) 100%);
+    overflow: hidden;
+  }
+  #staffCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Waveform / Piano roll */
+  .viz-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  #vizCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Current note display */
+  .note-flash {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.05s;
+    text-shadow: 0 0 40px rgba(232,200,74,0.6);
+    pointer-events: none;
+    line-height: 1;
+  }
+  .note-flash.visible { opacity: 1; }
+
+  /* Beat counter */
+  .beat-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    border-top: 1px solid var(--border);
+    background: var(--panel);
+    flex-shrink: 0;
+  }
+  .beat-info { font-size: 0.65rem; color: var(--muted); }
+  .beat-val { color: var(--accent); font-weight: 700; }
+  .waveform-toggle {
+    margin-left: auto;
+    display: flex; gap: 6px;
+  }
+  .wv-btn {
+    font-size: 0.58rem;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    transition: all 0.1s;
+  }
+  .wv-btn.active { border-color: var(--accent); color: var(--accent); }
+
+  /* ── RIGHT PANEL: CONTROLS ── */
+  .panel-right {
+    border-left: 1px solid var(--border);
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .ctrl-section {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ctrl-label {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .knob-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .knob-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+  .knob {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #2a2a3a, #111118);
+    border: 2px solid var(--border);
+    position: relative;
+    cursor: ns-resize;
+    transition: border-color 0.1s;
+  }
+  .knob:hover { border-color: var(--accent); }
+  .knob::after {
+    content: '';
+    position: absolute;
+    top: 5px; left: 50%;
+    transform: translateX(-50%);
+    width: 3px; height: 10px;
+    background: var(--accent);
+    border-radius: 2px;
+    transform-origin: bottom center;
+  }
+  .knob-name { font-size: 0.55rem; color: var(--muted); text-align: center; text-transform: uppercase; letter-spacing: 0.1em; }
+  .knob-val { font-size: 0.65rem; color: var(--accent); font-weight: 700; }
+
+  /* Sliders */
+  .slider-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .slider-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .slider-item label { font-size: 0.58rem; color: var(--muted); width: 56px; text-transform: uppercase; letter-spacing: 0.08em; flex-shrink: 0; }
+  input[type=range] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+  .slider-readout { font-size: 0.6rem; color: var(--accent); width: 30px; text-align: right; flex-shrink: 0; }
+
+  /* Play style toggles */
+  .style-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .style-toggle {
+    font-size: 0.58rem;
+    padding: 7px 4px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    transition: all 0.1s;
+    background: transparent;
+    font-family: 'Space Mono', monospace;
+  }
+  .style-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .style-toggle.sel { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+  .style-toggle.sel.vibrato { background: var(--accent2); border-color: var(--accent2); color: #000; }
+  .style-toggle.sel.tremolo { background: var(--accent3); border-color: var(--accent3); }
+  .style-toggle.sel.arp { background: #a088ff; border-color: #a088ff; color: #000; }
+
+  /* Sequence panel */
+  .seq-panel {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  .seq-panel::-webkit-scrollbar { width: 4px; }
+  .seq-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .seq-entry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.6rem;
+    color: var(--muted);
+  }
+  .seq-entry:last-child { border-bottom: none; }
+  .seq-idx { color: var(--border); width: 18px; flex-shrink: 0; font-size: 0.5rem; }
+  .seq-note { color: var(--accent); font-weight: 700; width: 26px; }
+  .seq-dur { color: var(--accent2); width: 30px; }
+  .seq-style-tag { color: var(--muted); font-size: 0.5rem; }
+  .seq-empty { font-size: 0.62rem; color: var(--border); padding: 20px 0; text-align: center; }
+
+  /* ── BOTTOM BAR ── */
+  .bottom-bar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+    border-top: 1px solid var(--border);
+    background: var(--panel);
+    flex-shrink: 0;
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 8px var(--accent2);
+    flex-shrink: 0;
+  }
+  .status-dot.recording { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); animation: pulse 1s infinite; }
+  .status-text { font-size: 0.62rem; color: var(--muted); flex: 1; }
+  .note-count { font-size: 0.62rem; color: var(--muted); }
+  .note-count span { color: var(--accent); font-weight: 700; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    width: 400px;
+    box-shadow: var(--shadow);
+    transform: translateY(10px);
+    transition: transform 0.2s;
+  }
+  .modal-overlay.open .modal { transform: none; }
+  .modal h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+  .modal p { font-size: 0.72rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .modal-row { display: flex; gap: 8px; margin-top: 16px; }
+  .modal label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; display: block; margin-bottom: 6px; }
+  .modal input[type=text], .modal select {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    padding: 8px 10px;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 12px;
+  }
+  .modal input[type=text]:focus, .modal select:focus { border-color: var(--accent); }
+  .modal-close { background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer; font-family: 'Space Mono', monospace; font-size: 0.65rem; padding: 8px 16px; border-radius: 5px; }
+  .modal-close:hover { border-color: var(--accent3); color: var(--accent3); }
+  .modal-confirm { background: var(--accent); color: #000; border: none; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 0.65rem; font-weight: 700; padding: 8px 20px; border-radius: 5px; }
+  .modal-confirm:hover { background: #f5d96a; }
+
+  /* Tooltip */
+  .tooltip {
+    position: fixed;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.6rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+    z-index: 200;
+    white-space: nowrap;
+  }
+  .tooltip.show { opacity: 1; }
 </style>
 </head>
 <body>
 
-<div class="titlebar">
-  <div class="titlebar-btns">
-    <button class="tb-btn tb-close" onclick="window.keyJBridge&&window.keyJBridge.close()"></button>
-    <button class="tb-btn tb-min"   onclick="window.keyJBridge&&window.keyJBridge.minimize()"></button>
-    <button class="tb-btn tb-max"   onclick="window.keyJBridge&&window.keyJBridge.maximize()"></button>
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="logo">Key<span>-J</span></div>
+    <div class="tagline">Musical Keystroke Studio</div>
   </div>
-  <div class="titlebar-title">KEY-J</div>
-  <div class="global-toggle">
-    <span class="global-label">Global Capture</span>
-    <label class="toggle-switch">
-      <input type="checkbox" id="globalToggle" onchange="onGlobalToggle(this.checked)">
-      <div class="toggle-track"></div>
-    </label>
-    <span class="hook-badge" id="hookBadge">Window Only</span>
+  <div class="header-controls">
+    <button class="pill-btn rec" id="recBtn" onclick="toggleRecording()">⏺ Record</button>
+    <button class="pill-btn" onclick="playback()">▶ Play</button>
+    <button class="pill-btn" onclick="showExportModal()">Export MP3</button>
+    <button class="pill-btn danger" onclick="clearSession()">✕ Clear</button>
+    <button class="pill-btn" onclick="showHelp()">?</button>
   </div>
-</div>
+</header>
 
-<div class="app-body">
+<!-- MAIN -->
+<div class="main">
 
-  <!-- LEFT -->
+  <!-- LEFT: KEY MAP -->
   <div class="panel-left">
     <div class="panel-title">Key Map — Click to Re-Bind</div>
     <div class="keymap-scroll" id="keyMapList"></div>
     <div class="scale-bar">
       <div class="scale-label">Scale</div>
-      <div class="scale-chips">
-        <div class="scale-chip active" onclick="setScale('chromatic',this)">Chrom</div>
-        <div class="scale-chip" onclick="setScale('major',this)">Major</div>
-        <div class="scale-chip" onclick="setScale('minor',this)">Minor</div>
-        <div class="scale-chip" onclick="setScale('pentatonic',this)">Penta</div>
-        <div class="scale-chip" onclick="setScale('blues',this)">Blues</div>
-        <div class="scale-chip" onclick="setScale('dorian',this)">Dorian</div>
-        <div class="scale-chip" onclick="setScale('wholetone',this)">Whole</div>
-      </div>
+      <div class="scale-chip active" onclick="setScale('chromatic',this)">Chrom</div>
+      <div class="scale-chip" onclick="setScale('major',this)">Major</div>
+      <div class="scale-chip" onclick="setScale('minor',this)">Minor</div>
+      <div class="scale-chip" onclick="setScale('pentatonic',this)">Penta</div>
+      <div class="scale-chip" onclick="setScale('blues',this)">Blues</div>
+      <div class="scale-chip" onclick="setScale('dorian',this)">Dorian</div>
     </div>
     <div class="octave-bar">
       <span class="octave-label">Octave</span>
@@ -238,112 +585,78 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;heigh
   <div class="panel-center">
     <div class="staff-area">
       <canvas id="staffCanvas"></canvas>
-      <div class="lock-bubble" id="lockBubble">
-        <span class="lb-label">Next</span>
-        <span class="lb-note" id="lbNote">C4</span>
-        <span class="lb-pos"  id="lbPos">1/8</span>
-      </div>
       <div class="note-flash" id="noteFlash">C4</div>
     </div>
-    <div class="viz-area"><canvas id="vizCanvas"></canvas></div>
+    <div class="viz-area">
+      <canvas id="vizCanvas"></canvas>
+    </div>
     <div class="beat-row">
-      <div class="beat-info">Notes: <span class="beat-val" id="noteCountD">0</span></div>
-      <div class="beat-info">Duration: <span class="beat-val" id="durD">0.0s</span></div>
-      <div class="beat-info">Last: <span class="beat-val" id="lastND">—</span></div>
-      <div class="viz-btns">
-        <button class="vz-btn active" onclick="setViz('wave',this)">Wave</button>
-        <button class="vz-btn" onclick="setViz('roll',this)">Roll</button>
-        <button class="vz-btn" onclick="setViz('fft',this)">FFT</button>
+      <div class="beat-info">Notes: <span class="beat-val" id="noteCountHdr">0</span></div>
+      <div class="beat-info">Duration: <span class="beat-val" id="durDisplay">0.0s</span></div>
+      <div class="beat-info">Last: <span class="beat-val" id="lastNoteDisplay">—</span></div>
+      <div class="waveform-toggle">
+        <button class="wv-btn active" id="btnWave" onclick="setVizMode('wave',this)">Wave</button>
+        <button class="wv-btn" id="btnRoll" onclick="setVizMode('roll',this)">Roll</button>
+        <button class="wv-btn" id="btnSpectrum" onclick="setVizMode('spectrum',this)">FFT</button>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT -->
+  <!-- RIGHT: CONTROLS -->
   <div class="panel-right">
-
-    <!-- MELODY LOCK -->
-    <div class="lock-section">
-      <div class="lock-header">
-        <div class="lock-title-row">
-          <span class="lock-icon-txt">🔒</span>
-          <span class="lock-title">Melody Lock</span>
-        </div>
-        <div class="lock-toggle-wrap">
-          <span class="lock-on" id="lockOnBadge">ON</span>
-          <label class="lock-sw">
-            <input type="checkbox" id="lockToggle" onchange="onLockToggle(this.checked)">
-            <div class="lock-track"></div>
-          </label>
-        </div>
-      </div>
-      <select class="lock-select" id="lockPreset" onchange="onPresetChange(this.value)">
-        <option value="">— Choose a preset jingle —</option>
-        <option value="happy_birthday">🎂 Happy Birthday</option>
-        <option value="jingle_bells">🔔 Jingle Bells</option>
-        <option value="twinkle">⭐ Twinkle Twinkle</option>
-        <option value="mario">🍄 Mario Theme</option>
-        <option value="beethoven">🎵 Ode to Joy</option>
-        <option value="scales_c">📈 C Major Scale</option>
-        <option value="chromatic_run">🌈 Chromatic Run</option>
-        <option value="custom">✏️ Custom (type below)</option>
-      </select>
-      <div class="lock-input-wrap">
-        <input class="lock-input" id="lockInput" type="text"
-          placeholder="C4 E4 G4 C5 A4 G4…"
-          oninput="onLockInput()"
-          onkeydown="if(event.key==='Enter')applyLock()">
-        <button class="lock-set-btn" onclick="applyLock()">Set</button>
-      </div>
-      <div class="lock-hint">Space-separated: C4 D4 E4 F#4 G4 — sharps ok, flats: Bb=A#</div>
-      <div class="lock-err" id="lockErr">⚠ Unknown notes — check format (e.g. C#4 not C4#)</div>
-      <div class="lock-strip" id="lockStrip"></div>
-      <div class="lock-beh-row">
-        <button class="lbeh sel" id="bLoop"   onclick="setLockBeh('loop',this)">↻ Loop</button>
-        <button class="lbeh"     id="bOnce"   onclick="setLockBeh('once',this)">→ Once</button>
-        <button class="lbeh"     id="bBounce" onclick="setLockBeh('bounce',this)">⇄ Bounce</button>
-      </div>
-      <button class="lock-reset" onclick="resetLock()">↺ Reset to Note 1</button>
-    </div>
-
-    <!-- PLAY STYLE -->
     <div class="ctrl-section">
       <span class="ctrl-label">Play Style</span>
       <div class="style-grid">
-        <button class="stog sel"  id="sN" onclick="setStyle('normal',this)">Normal</button>
-        <button class="stog"      id="sS" onclick="setStyle('staccato',this)">Staccato</button>
-        <button class="stog v"    id="sV" onclick="setStyle('vibrato',this)">Vibrato</button>
-        <button class="stog t"    id="sT" onclick="setStyle('tremolo',this)">Tremolo</button>
-        <button class="stog a"    id="sA" onclick="setStyle('arpeggio',this)">Arpeggio</button>
-        <button class="stog l"    id="sL" onclick="setStyle('legato',this)">Legato</button>
+        <button class="style-toggle sel" id="sNormal" onclick="setPlayStyle('normal',this)">Normal</button>
+        <button class="style-toggle" id="sStaccato" onclick="setPlayStyle('staccato',this)">Staccato</button>
+        <button class="style-toggle vibrato" id="sVibrato" onclick="setPlayStyle('vibrato',this)">Vibrato</button>
+        <button class="style-toggle tremolo" id="sTremolo" onclick="setPlayStyle('tremolo',this)">Tremolo</button>
+        <button class="style-toggle arp" id="sArp" onclick="setPlayStyle('arpeggio',this)">Arpeggio</button>
+        <button class="style-toggle" id="sLegato" onclick="setPlayStyle('legato',this)">Legato</button>
       </div>
     </div>
-
-    <!-- WAVEFORM -->
+    <div class="ctrl-section">
+      <span class="ctrl-label">Sound</span>
+      <div class="slider-row">
+        <div class="slider-item">
+          <label>Attack</label>
+          <input type="range" min="1" max="200" value="10" id="attackSlider" oninput="updateParam('attack',this)">
+          <span class="slider-readout" id="attackVal">10</span>
+        </div>
+        <div class="slider-item">
+          <label>Release</label>
+          <input type="range" min="50" max="2000" value="400" id="releaseSlider" oninput="updateParam('release',this)">
+          <span class="slider-readout" id="releaseVal">400</span>
+        </div>
+        <div class="slider-item">
+          <label>Volume</label>
+          <input type="range" min="0" max="100" value="75" id="volumeSlider" oninput="updateParam('volume',this)">
+          <span class="slider-readout" id="volumeVal">75</span>
+        </div>
+        <div class="slider-item">
+          <label>Reverb</label>
+          <input type="range" min="0" max="100" value="20" id="reverbSlider" oninput="updateParam('reverb',this)">
+          <span class="slider-readout" id="reverbVal">20</span>
+        </div>
+        <div class="slider-item">
+          <label>Pitch ±</label>
+          <input type="range" min="-12" max="12" value="0" id="detuneSl" oninput="updateParam('detune',this)">
+          <span class="slider-readout" id="detuneVal">0</span>
+        </div>
+      </div>
+    </div>
     <div class="ctrl-section">
       <span class="ctrl-label">Waveform</span>
       <div class="style-grid">
-        <button class="stog sel" id="wSi" onclick="setWave('sine',this)">Sine</button>
-        <button class="stog"     id="wSa" onclick="setWave('sawtooth',this)">Saw</button>
-        <button class="stog"     id="wSq" onclick="setWave('square',this)">Square</button>
-        <button class="stog"     id="wTr" onclick="setWave('triangle',this)">Triangle</button>
+        <button class="style-toggle sel" id="wSine" onclick="setWaveform('sine',this)">Sine</button>
+        <button class="style-toggle" id="wSawtooth" onclick="setWaveform('sawtooth',this)">Saw</button>
+        <button class="style-toggle" id="wSquare" onclick="setWaveform('square',this)">Square</button>
+        <button class="style-toggle" id="wTriangle" onclick="setWaveform('triangle',this)">Triangle</button>
       </div>
     </div>
-
-    <!-- SOUND SHAPING -->
-    <div class="ctrl-section">
-      <span class="ctrl-label">Sound Shaping</span>
-      <div class="slider-row">
-        <div class="slider-item"><label>Attack</label><input type="range" min="1" max="300" value="10" oninput="upP('attack',this)"><span class="sro" id="attackVal">10</span></div>
-        <div class="slider-item"><label>Release</label><input type="range" min="50" max="3000" value="400" oninput="upP('release',this)"><span class="sro" id="releaseVal">400</span></div>
-        <div class="slider-item"><label>Volume</label><input type="range" min="0" max="100" value="75" oninput="upP('volume',this)"><span class="sro" id="volumeVal">75</span></div>
-        <div class="slider-item"><label>Reverb</label><input type="range" min="0" max="100" value="20" oninput="upP('reverb',this)"><span class="sro" id="reverbVal">20</span></div>
-        <div class="slider-item"><label>Detune</label><input type="range" min="-24" max="24" value="0" oninput="upP('detune',this)"><span class="sro" id="detuneVal">0</span></div>
-      </div>
-    </div>
-
-    <div class="panel-title" style="padding:8px 12px 6px;flex-shrink:0;">Session Log</div>
-    <div class="seq-scroll" id="seqScroll">
-      <div class="seq-empty" id="seqEmpty">No notes yet — start typing!</div>
+    <div class="panel-title" style="padding:10px 12px 6px;">Session Log</div>
+    <div class="seq-panel" id="seqPanel">
+      <div class="seq-empty" id="seqEmpty">No notes yet. Start typing!</div>
     </div>
   </div>
 
@@ -351,13 +664,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;heigh
   <div class="bottom-bar">
     <div class="status-dot" id="statusDot"></div>
     <div class="status-text" id="statusText">Key-J ready — press any key to play</div>
-    <div class="br">
-      <div class="stat">Notes: <span id="noteCountB" style="color:var(--accent);font-weight:700">0</span></div>
-      <button class="abn rec-btn" id="recBtn" onclick="toggleRec()">⏺ Rec</button>
-      <button class="abn play" onclick="doPlayback()">▶ Play</button>
-      <button class="abn exp" onclick="showExport()">Export WAV</button>
-      <button class="abn clr" onclick="clearSession()">✕ Clear</button>
-    </div>
+    <div class="note-count">Notes: <span id="noteCountBot">0</span></div>
   </div>
 </div>
 
@@ -365,17 +672,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;heigh
 <div class="modal-overlay" id="exportModal">
   <div class="modal">
     <h2>Export Session</h2>
-    <p>Renders your full session to a 44.1kHz stereo WAV. Drop into Audacity or any online converter for MP3.</p>
+    <p>Your session will be rendered and downloaded as a WAV file (high-quality, no lossy compression). You can convert to MP3 using any free tool (Audacity, ffmpeg, online converter).</p>
     <label>Filename</label>
     <input type="text" id="exportName" value="Key-J_Session">
-    <label>Normalize peaks</label>
+    <label>Normalize</label>
     <select id="exportNorm">
-      <option value="1">Yes — peak normalize to 0dBFS</option>
-      <option value="0">No — keep raw levels</option>
+      <option value="1">Yes — normalize peak to 0dB</option>
+      <option value="0">No — keep as recorded</option>
     </select>
-    <div class="mrow">
-      <button class="mcanc" onclick="closeModal('exportModal')">Cancel</button>
-      <button class="mconf" onclick="doExport()">Download</button>
+    <div class="modal-row">
+      <button class="modal-close" onclick="closeModal('exportModal')">Cancel</button>
+      <button class="modal-confirm" onclick="doExport()">Download WAV</button>
+    </div>
+  </div>
+</div>
+
+<!-- HELP MODAL -->
+<div class="modal-overlay" id="helpModal">
+  <div class="modal">
+    <h2>Key-J Guide</h2>
+    <p><b style="color:var(--accent)">Every key on your keyboard</b> plays a musical note. The current scale/octave determines which notes are mapped to which keys.</p>
+    <p><b style="color:var(--accent)">Tap</b> a key for staccato. <b style="color:var(--accent)">Hold</b> a key for sustained notes. The app remembers every note and where you left off.</p>
+    <p><b style="color:var(--accent)">Play Styles:</b> Staccato = short & punchy. Vibrato = pitch wobble. Tremolo = amplitude flutter. Arpeggio = chord spread. Legato = smooth crossfade.</p>
+    <p><b style="color:var(--accent)">Re-bind keys:</b> Click any key in the left panel to change its note assignment.</p>
+    <p><b style="color:var(--accent)">Export:</b> Exports your entire session as a WAV file. No time limit.</p>
+    <div class="modal-row" style="justify-content:flex-end">
+      <button class="modal-confirm" onclick="closeModal('helpModal')">Got it</button>
     </div>
   </div>
 </div>
@@ -384,542 +706,836 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;heigh
 <div class="modal-overlay" id="rebindModal">
   <div class="modal">
     <h2>Re-Bind Key</h2>
-    <p id="rebindMsg">Select a new note for this key.</p>
-    <label>Assign Note</label>
+    <p id="rebindMsg">Press any key to assign a new note...</p>
+    <label>Note Name</label>
     <select id="rebindNote"></select>
-    <div class="mrow">
-      <button class="mcanc" onclick="closeModal('rebindModal')">Cancel</button>
-      <button class="mconf" onclick="confirmRebind()">Save</button>
+    <div class="modal-row">
+      <button class="modal-close" onclick="closeModal('rebindModal')">Cancel</button>
+      <button class="modal-confirm" onclick="confirmRebind()">Save</button>
     </div>
   </div>
 </div>
 
+<div class="tooltip" id="tooltip"></div>
+
 <script>
-// ════════════════════════════════════════
-// KEY-J ENGINE
-// ════════════════════════════════════════
-const AC = new (window.AudioContext||window.webkitAudioContext)();
+// ════════════════════════════════════════════════════════════════
+// KEY-J CORE ENGINE
+// ════════════════════════════════════════════════════════════════
 
-const S = {
-  octave:4, scale:'chromatic', style:'normal', wave:'sine',
-  attack:.010, release:400, volume:.75, reverb:.20, detune:0,
-  recording:false, globalCapture:false, hookAvailable:false
+const AC = new (window.AudioContext || window.webkitAudioContext)();
+
+// ── State ──────────────────────────────────────────────────────
+let state = {
+  octave: 4,
+  scale: 'chromatic',
+  playStyle: 'normal',
+  waveform: 'sine',
+  attack: 0.010,          // seconds; the slider is ms and updateParam divides
+  release: 400,           // MILLISECONDS. Everything that reads this divides
+                          // by 1000, and the slider writes 50-2000 raw, so a
+                          // seconds value here meant a 0.4ms release until
+                          // the slider was touched: every note clicked off.
+  volume: 0.75,
+  reverb: 0.20,
+  detune: 0,
+  recording: false,
+  isPlaying: false
 };
 
-let sessionNotes=[], sessionStart=null;
-let activeKeys={}, activeNotes={};
-let noteCount=0, vizMode='wave';
-let masterGain, reverbConv, reverbGain, analyser;
+let sessionNotes = [];        // { note, freq, startTime, duration, style }
+let sessionStart = null;
+let activeKeys = {};          // key → { osc, gainNode, startAC }
+let activeNotes = {};         // key → { note, freq, startAC }
+let noteCount = 0;
+let vizMode = 'wave';
+let reverbNode = null;
+let reverbConv = null;
+let masterGain = null;
+let analyser = null;
 
-// ── MELODY LOCK STATE ─────────────────────
-const ML = {
-  enabled:   false,
-  sequence:  [],    // [{note,freq}]
-  pos:       0,
-  behaviour: 'loop',
-  bounceDir: 1,
-  done:      false
-};
-
-// ── JINGLE PRESETS ────────────────────────
-const PRESETS = {
-  happy_birthday: 'C4 C4 D4 C4 F4 E4 C4 C4 D4 C4 G4 F4 C4 C4 C5 A4 F4 E4 D4 A#4 A#4 A4 F4 G4 F4',
-  jingle_bells:   'E4 E4 E4 E4 E4 E4 E4 G4 C4 D4 E4 F4 F4 F4 F4 F4 E4 E4 E4 E4 D4 D4 E4 D4 G4',
-  twinkle:        'C4 C4 G4 G4 A4 A4 G4 F4 F4 E4 E4 D4 D4 C4 G4 G4 F4 F4 E4 E4 D4 G4 G4 F4 F4 E4 E4 D4 C4 C4 G4 G4 A4 A4 G4 F4 F4 E4 E4 D4 D4 C4',
-  mario:          'E5 E5 E5 C5 E5 G5 G4 C5 G4 E4 A4 B4 A#4 A4 G4 E5 G5 A5 F5 G5 E5 C5 D5 B4',
-  beethoven:      'E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 E4 D4 D4 E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 D4 C4 C4',
-  scales_c:       'C4 D4 E4 F4 G4 A4 B4 C5 D5 E5 F5 G5 A5 B5 C6',
-  chromatic_run:  'C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 F5 F#5 G5'
-};
-
-// ── NOTE DATA ─────────────────────────────
-const NNAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+// ── Note/Scale definitions ─────────────────────────────────────
+const NOTE_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 const SCALES = {
-  chromatic: [0,1,2,3,4,5,6,7,8,9,10,11],
-  major:     [0,2,4,5,7,9,11,12,14,16,17,19],
-  minor:     [0,2,3,5,7,8,10,12,14,15,17,19],
-  pentatonic:[0,2,4,7,9,12,14,16,19,21,24,26],
-  blues:     [0,3,5,6,7,10,12,15,17,18,19,22],
-  dorian:    [0,2,3,5,7,9,10,12,14,15,17,19],
-  wholetone: [0,2,4,6,8,10,12,14,16,18,20,22]
+  chromatic:   [0,1,2,3,4,5,6,7,8,9,10,11],
+  major:       [0,2,4,5,7,9,11,12,14,16,17,19],
+  minor:       [0,2,3,5,7,8,10,12,14,15,17,19],
+  pentatonic:  [0,2,4,7,9,12,14,16,19,21,24,26],
+  blues:       [0,3,5,6,7,10,12,15,17,18,19,22],
+  dorian:      [0,2,3,5,7,9,10,12,14,15,17,19]
 };
-const KEY_ROWS=[['q','w','e','r','t','y','u','i','o','p'],['a','s','d','f','g','h','j','k','l'],['z','x','c','v','b','n','m'],['1','2','3','4','5','6','7','8','9','0']];
-const ALL_KEYS=KEY_ROWS.flat();
-let keyBindings={};
 
-function buildBindings(){
-  const scale=SCALES[S.scale]||SCALES.chromatic;
-  keyBindings={};
-  ALL_KEYS.forEach((k,i)=>{
-    const step=scale[i%scale.length], extraOct=Math.floor(i/scale.length);
-    const semi=(S.octave+extraOct)*12+step;
-    const freq=440*Math.pow(2,(semi-69)/12);
-    const noteOct=Math.floor(semi/12)-1;
-    keyBindings[k]={note:NNAMES[semi%12]+noteOct, freq, semi};
+// Full keyboard row mapping (in order)
+const KEY_ROWS = [
+  ['q','w','e','r','t','y','u','i','o','p'],
+  ['a','s','d','f','g','h','j','k','l'],
+  ['z','x','c','v','b','n','m'],
+  ['1','2','3','4','5','6','7','8','9','0']
+];
+const ALL_KEYS = KEY_ROWS.flat();
+
+let keyBindings = {}; // key → { note, freq, semitone }
+
+function buildKeyBindings() {
+  const scale = SCALES[state.scale];
+  const oct = state.octave;
+  keyBindings = {};
+  ALL_KEYS.forEach((k, i) => {
+    const scaleStep = scale[i % scale.length];
+    const extraOct = Math.floor(i / scale.length);
+    const semitone = (oct + extraOct) * 12 + scaleStep;
+    const freq = 440 * Math.pow(2, (semitone - 69) / 12);
+    const noteOct = Math.floor(semitone / 12) - 1;
+    const noteName = NOTE_NAMES[semitone % 12] + noteOct;
+    keyBindings[k] = { note: noteName, freq, semitone };
   });
   renderKeyMap();
 }
 
-// ── AUDIO ─────────────────────────────────
-function initAudio(){
-  masterGain=AC.createGain(); masterGain.gain.value=S.volume;
-  reverbConv=AC.createConvolver(); reverbGain=AC.createGain(); reverbGain.gain.value=S.reverb;
-  buildIR();
-  analyser=AC.createAnalyser(); analyser.fftSize=2048;
-  masterGain.connect(analyser); analyser.connect(AC.destination);
-  masterGain.connect(reverbConv); reverbConv.connect(reverbGain); reverbGain.connect(AC.destination);
-}
-function buildIR(){
-  const sr=AC.sampleRate,len=sr*2.5,buf=AC.createBuffer(2,len,sr);
-  for(let c=0;c<2;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);}
-  reverbConv.buffer=buf;
+function freqToNoteName(freq) {
+  const semitone = Math.round(12 * Math.log2(freq / 440) + 69);
+  const oct = Math.floor(semitone / 12) - 1;
+  return NOTE_NAMES[semitone % 12] + oct;
 }
 
-// ── NOTE PARSING ──────────────────────────
-function parseNote(s){
-  const aliases={'Bb':'A#','Eb':'D#','Ab':'G#','Db':'C#','Gb':'F#','Cb':'B','Fb':'E'};
-  let t=s.trim();
-  for(const[f,sh]of Object.entries(aliases))if(t.startsWith(f)){t=sh+t.slice(f.length);break;}
-  const m=t.match(/^([A-G]#?)(-?\d+)$/); if(!m)return null;
-  const idx=NNAMES.indexOf(m[1]); if(idx===-1)return null;
-  const oct=parseInt(m[2],10), semi=(oct+1)*12+idx;
-  return {note:t, freq:440*Math.pow(2,(semi-69)/12)};
-}
-function parseSeq(str){
-  const tokens=str.trim().split(/\s+/).filter(Boolean);
-  const ok=[],bad=[];
-  for(const t of tokens){const r=parseNote(t);r?ok.push(r):bad.push(t);}
-  return{ok,bad};
+// ── Audio Setup ────────────────────────────────────────────────
+async function initAudio() {
+  masterGain = AC.createGain();
+  masterGain.gain.value = state.volume;
+
+  // Reverb (convolver with noise IR)
+  reverbConv = AC.createConvolver();
+  reverbNode = AC.createGain();
+  reverbNode.gain.value = state.reverb;
+  buildReverbIR();
+
+  analyser = AC.createAnalyser();
+  analyser.fftSize = 2048;
+
+  masterGain.connect(analyser);
+  analyser.connect(AC.destination);
+
+  reverbConv.connect(reverbNode);
+  reverbNode.connect(AC.destination);
 }
 
-// ── MELODY LOCK LOGIC ─────────────────────
-function resolveNote(key){
-  if(ML.enabled&&ML.sequence.length>0&&!ML.done) return ML.sequence[ML.pos];
-  return keyBindings[key]||null;
-}
-
-function advanceLock(){
-  if(!ML.enabled||ML.sequence.length===0)return;
-  if(ML.behaviour==='loop'){
-    ML.pos=(ML.pos+1)%ML.sequence.length;
-  }else if(ML.behaviour==='once'){
-    ML.pos++;
-    if(ML.pos>=ML.sequence.length){ML.pos=ML.sequence.length-1;ML.done=true;setStatus('🔒 Sequence finished. Hit "Reset" to replay.');}
-  }else if(ML.behaviour==='bounce'){
-    ML.pos+=ML.bounceDir;
-    if(ML.pos>=ML.sequence.length-1){ML.pos=ML.sequence.length-1;ML.bounceDir=-1;}
-    if(ML.pos<=0){ML.pos=0;ML.bounceDir=1;}
+function buildReverbIR() {
+  const sr = AC.sampleRate;
+  const len = sr * 2.5;
+  const buf = AC.createBuffer(2, len, sr);
+  for (let ch = 0; ch < 2; ch++) {
+    const d = buf.getChannelData(ch);
+    for (let i = 0; i < len; i++) {
+      d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3);
+    }
   }
-  updateLockUI();
+  reverbConv.buffer = buf;
+  masterGain.connect(reverbConv);
 }
 
-// ── MELODY LOCK UI ────────────────────────
-function onLockToggle(on){
-  ML.enabled=on; ML.done=false;
-  document.getElementById('lockOnBadge').classList.toggle('show',on);
-  document.getElementById('lockBubble').classList.toggle('show',on&&ML.sequence.length>0);
-  const dot=document.getElementById('statusDot');
-  dot.className='status-dot'+(on?' locked':'');
-  updateLockUI();
-  setStatus(on&&ML.sequence.length>0
-    ?`🔒 Melody Lock ON — every key plays the next note in sequence (${ML.sequence.length} notes).`
-    :on?'🔒 Melody Lock ON — load a preset or type a sequence.'
-    :'Melody Lock OFF — back to normal key bindings.');
-}
+// ── Sound Playback ─────────────────────────────────────────────
+function playNote(key) {
+  if (activeKeys[key]) return;
+  if (AC.state === 'suspended') AC.resume();
 
-function onPresetChange(val){
-  if(!val)return;
-  if(val==='custom'){document.getElementById('lockInput').focus();return;}
-  const str=PRESETS[val]||'';
-  document.getElementById('lockInput').value=str;
-  loadSeq(str);
-}
-function onLockInput(){
-  const str=document.getElementById('lockInput').value;
-  const{bad}=parseSeq(str);
-  document.getElementById('lockErr').classList.toggle('show',bad.length>0&&str.trim().length>0);
-}
-function applyLock(){loadSeq(document.getElementById('lockInput').value);}
-function loadSeq(str){
-  const{ok,bad}=parseSeq(str);
-  document.getElementById('lockErr').classList.toggle('show',bad.length>0);
-  if(ok.length===0)return;
-  ML.sequence=ok; ML.pos=0; ML.done=false; ML.bounceDir=1;
-  updateLockUI();
-  setStatus(ML.enabled
-    ?`🔒 Loaded ${ok.length} notes. Starting from note 1.`
-    :`Sequence loaded (${ok.length} notes). Enable Melody Lock to use it.`);
-  if(ML.enabled)document.getElementById('lockBubble').classList.add('show');
-}
-function updateLockUI(){
-  // Render strip
-  const strip=document.getElementById('lockStrip'); strip.innerHTML='';
-  ML.sequence.forEach((n,i)=>{
-    const chip=document.createElement('span');
-    chip.className='lchip'+(i===ML.pos&&!ML.done?' cur':(i<ML.pos||ML.done?' done':''));
-    chip.textContent=n.note;
-    chip.title=`Note ${i+1}: ${n.note} — ${n.freq.toFixed(1)}Hz`;
-    strip.appendChild(chip);
-  });
-  // Update bubble
-  if(ML.sequence.length>0&&!ML.done){
-    const cur=ML.sequence[ML.pos];
-    document.getElementById('lbNote').textContent=cur.note;
-    document.getElementById('lbPos').textContent=`${ML.pos+1}/${ML.sequence.length}`;
-    document.getElementById('lockBubble').classList.toggle('show',ML.enabled);
+  const bind = keyBindings[key];
+  if (!bind) return;
+
+  const { note, freq } = bind;
+  const detunedFreq = freq * Math.pow(2, state.detune / 12);
+  const now = AC.currentTime;
+  const atk = state.attack;
+
+  const osc = AC.createOscillator();
+  const gainNode = AC.createGain();
+
+  osc.type = state.waveform;
+  osc.frequency.value = detunedFreq;
+
+  gainNode.gain.setValueAtTime(0, now);
+  gainNode.gain.linearRampToValueAtTime(state.volume, now + atk);
+
+  // Play style modifiers
+  if (state.playStyle === 'vibrato') {
+    const vibLFO = AC.createOscillator();
+    const vibGain = AC.createGain();
+    vibLFO.frequency.value = 5.5;
+    vibGain.gain.value = 8;
+    vibLFO.connect(vibGain);
+    vibGain.connect(osc.frequency);
+    vibLFO.start(now);
+    activeKeys[key] = { osc, gainNode, vibLFO };
+  } else if (state.playStyle === 'tremolo') {
+    const tremLFO = AC.createOscillator();
+    const tremGain = AC.createGain();
+    tremLFO.frequency.value = 7;
+    tremGain.gain.value = 0.3;
+    tremLFO.connect(tremGain);
+    tremGain.connect(gainNode.gain);
+    tremLFO.start(now);
+    activeKeys[key] = { osc, gainNode, tremLFO };
+  } else if (state.playStyle === 'arpeggio') {
+    // Play chord tones rapidly
+    [1, 5/4, 3/2, 2].forEach((ratio, i) => {
+      const arpOsc = AC.createOscillator();
+      const arpGain = AC.createGain();
+      arpOsc.type = state.waveform;
+      arpOsc.frequency.value = detunedFreq * ratio;
+      arpGain.gain.setValueAtTime(0, now + i * 0.06);
+      arpGain.gain.linearRampToValueAtTime(state.volume * 0.5, now + i * 0.06 + atk);
+      arpOsc.connect(arpGain);
+      arpGain.connect(masterGain);
+      arpOsc.start(now + i * 0.06);
+      arpOsc.stop(now + i * 0.06 + 0.3);
+    });
+    activeKeys[key] = { osc, gainNode };
   } else {
-    document.getElementById('lockBubble').classList.remove('show');
+    activeKeys[key] = { osc, gainNode };
   }
-}
-function setLockBeh(beh,el){
-  ML.behaviour=beh;
-  document.querySelectorAll('.lbeh').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');
-}
-function resetLock(){
-  ML.pos=0; ML.done=false; ML.bounceDir=1;
-  updateLockUI();
-  setStatus('🔒 Position reset to note 1.');
+
+  osc.connect(gainNode);
+  gainNode.connect(masterGain);
+  osc.start(now);
+
+  if (state.playStyle === 'staccato') {
+    const stDur = 0.12;
+    gainNode.gain.linearRampToValueAtTime(0, now + stDur);
+    osc.stop(now + stDur + 0.02);
+    setTimeout(() => releaseNote(key, true), stDur * 1000);
+  }
+
+  activeNotes[key] = { note, freq, startAC: now };
+  flashNote(note);
+  markKeyActive(key, true);
+  setStatus(`Playing: ${note} (${freq.toFixed(1)} Hz) — ${state.playStyle}`);
 }
 
-// ── PLAY NOTE ─────────────────────────────
-function playNote(key){
-  if(activeKeys[key])return;
-  if(AC.state==='suspended')AC.resume();
-  const bind=resolveNote(key); if(!bind)return;
-  const{note,freq}=bind;
-  const df=freq*Math.pow(2,S.detune/12), now=AC.currentTime;
-  const osc=AC.createOscillator(), gain=AC.createGain(), extras=[];
-  osc.type=S.wave; osc.frequency.value=df;
-  gain.gain.setValueAtTime(0,now);
-  gain.gain.linearRampToValueAtTime(S.volume,now+S.attack);
-  if(S.style==='vibrato'){const l=AC.createOscillator(),g=AC.createGain();l.frequency.value=5.5;g.gain.value=9;l.connect(g);g.connect(osc.frequency);l.start(now);extras.push(l);}
-  if(S.style==='tremolo'){const l=AC.createOscillator(),g=AC.createGain();l.frequency.value=7;g.gain.value=.35;l.connect(g);g.connect(gain.gain);l.start(now);extras.push(l);}
-  if(S.style==='arpeggio'){[1,5/4,3/2,2].forEach((r,i)=>{const ao=AC.createOscillator(),ag=AC.createGain();ao.type=S.wave;ao.frequency.value=df*r;ag.gain.setValueAtTime(0,now+i*.065);ag.gain.linearRampToValueAtTime(S.volume*.45,now+i*.065+S.attack);ag.gain.exponentialRampToValueAtTime(.001,now+i*.065+.35);ao.connect(ag);ag.connect(masterGain);ao.start(now+i*.065);ao.stop(now+i*.065+.4);});}
-  osc.connect(gain); gain.connect(masterGain); osc.start(now);
-  if(S.style==='staccato'){gain.gain.exponentialRampToValueAtTime(.001,now+.11);osc.stop(now+.13);setTimeout(()=>finishNote(key,true),120);}
-  activeKeys[key]={osc,gain,extras};
-  activeNotes[key]={note,freq,startAC:now,locked:ML.enabled&&ML.sequence.length>0};
-  // Advance lock position on keydown (each key press = consume one note)
-  if(ML.enabled&&ML.sequence.length>0&&!ML.done)advanceLock();
-  flashNote(note); markActive(key,true);
-  setStatus(`${ML.enabled?'🔒 ':''}${note}  (${freq.toFixed(1)}Hz)  —  ${S.style}`);
-}
+function releaseNote(key, fromStaccato = false) {
+  const act = activeKeys[key];
+  const noteInfo = activeNotes[key];
+  if (!act || !noteInfo) return;
 
-function releaseNote(key){finishNote(key,false);}
-function finishNote(key,fromStacc){
-  const act=activeKeys[key],info=activeNotes[key]; if(!act||!info)return;
-  const now=AC.currentTime, rel=S.release/1000;
-  if(!fromStacc){
-    const rt=S.style==='legato'?rel*1.6:rel;
-    act.gain.gain.cancelScheduledValues(now);
-    act.gain.gain.setValueAtTime(act.gain.gain.value,now);
-    act.gain.gain.exponentialRampToValueAtTime(.001,now+rt);
-    try{act.osc.stop(now+rt+.05);}catch(e){}
-    act.extras.forEach(x=>{try{x.stop(now+rt);}catch(e){}});
+  const now = AC.currentTime;
+  const rel = state.release / 1000;
+
+  if (!fromStaccato) {
+    if (state.playStyle === 'legato') {
+      act.gainNode.gain.linearRampToValueAtTime(0, now + rel * 1.5);
+    } else {
+      act.gainNode.gain.exponentialRampToValueAtTime(0.001, now + rel);
+    }
+    try { act.osc.stop(now + rel + 0.05); } catch(e) {}
+    if (act.vibLFO) try { act.vibLFO.stop(now + rel); } catch(e) {}
+    if (act.tremLFO) try { act.tremLFO.stop(now + rel); } catch(e) {}
   }
-  const dur=now-info.startAC;
-  const entry={
-    note:info.note,freq:info.freq,
-    duration:Math.max(dur,.05),
-    style:S.style, locked:!!info.locked,
-    time:sessionStart!=null?(now-sessionStart)
-      :(sessionNotes.length?sessionNotes[sessionNotes.length-1].time+sessionNotes[sessionNotes.length-1].duration+.02:0)
+
+  const duration = now - noteInfo.startAC;
+  const noteEntry = {
+    note: noteInfo.note,
+    freq: noteInfo.freq,
+    duration: Math.max(duration, 0.05),
+    style: state.playStyle,
+    time: sessionStart ? (AC.currentTime - sessionStart) : 0
   };
-  sessionNotes.push(entry); noteCount++;
-  addLog(entry); updateCounters(); pushStaff(entry);
-  delete activeKeys[key]; delete activeNotes[key]; markActive(key,false);
+
+  sessionNotes.push(noteEntry);
+  noteCount++;
+  addToSessionLog(noteEntry);
+  updateCounters();
+  updateStaff(noteEntry);
+
+  delete activeKeys[key];
+  delete activeNotes[key];
+  markKeyActive(key, false);
 }
 
-// ── PLAYBACK ──────────────────────────────
-function doPlayback(){
-  if(!sessionNotes.length){setStatus('Nothing recorded yet.');return;}
-  if(AC.state==='suspended')AC.resume();
-  setStatus('▶ Playing back…');
-  sessionNotes.forEach(n=>{
-    setTimeout(()=>{
-      const osc=AC.createOscillator(),g=AC.createGain();
-      osc.type=S.wave;osc.frequency.value=n.freq;
-      g.gain.setValueAtTime(0,AC.currentTime);
-      g.gain.linearRampToValueAtTime(S.volume*.8,AC.currentTime+S.attack);
-      g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+n.duration+S.release/1000);
-      osc.connect(g);g.connect(masterGain);
-      osc.start(AC.currentTime);osc.stop(AC.currentTime+n.duration+S.release/1000+.1);
+// ── Playback ───────────────────────────────────────────────────
+function playback() {
+  if (!sessionNotes.length) { setStatus('Nothing to play back yet.'); return; }
+  if (AC.state === 'suspended') AC.resume();
+
+  setStatus('▶ Playing back session...');
+  let cursor = 0;
+  sessionNotes.forEach((n, i) => {
+    const delay = n.time;
+    setTimeout(() => {
+      const osc = AC.createOscillator();
+      const g = AC.createGain();
+      osc.type = state.waveform;
+      osc.frequency.value = n.freq;
+      g.gain.setValueAtTime(0, AC.currentTime);
+      g.gain.linearRampToValueAtTime(state.volume * 0.8, AC.currentTime + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, AC.currentTime + n.duration + state.release / 1000);
+      osc.connect(g); g.connect(masterGain);
+      osc.start(AC.currentTime);
+      osc.stop(AC.currentTime + n.duration + state.release / 1000 + 0.1);
       flashNote(n.note);
-    },n.time*1000);
+    }, delay * 1000);
   });
-  const last=sessionNotes[sessionNotes.length-1];
-  setTimeout(()=>setStatus('Key-J ready'),(last.time+last.duration+2)*1000);
+  const totalDur = sessionNotes[sessionNotes.length-1]?.time || 0;
+  setTimeout(() => setStatus('Key-J ready'), (totalDur + 2) * 1000);
 }
 
-// ── EXPORT ────────────────────────────────
-function showExport(){if(!sessionNotes.length){setStatus('Play some notes first!');return;}openModal('exportModal');}
-async function doExport(){
-  closeModal('exportModal');
-  const norm=document.getElementById('exportNorm').value==='1';
-  const fn=(document.getElementById('exportName').value||'Key-J_Session').replace(/[^a-zA-Z0-9_\-]/g,'_');
-  setStatus('Rendering…');
-  const total=sessionNotes.reduce((a,n)=>Math.max(a,n.time+n.duration+3),3);
-  const sr=44100, off=new OfflineAudioContext(2,Math.ceil(sr*total),sr);
-  const mg=off.createGain(); mg.gain.value=S.volume;
-  const rv=off.createConvolver(),rg=off.createGain(); rg.gain.value=S.reverb*.5;
-  const ib=off.createBuffer(2,sr*2,sr);
-  for(let c=0;c<2;c++){const d=ib.getChannelData(c);for(let i=0;i<sr*2;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/(sr*2),3);}
-  rv.buffer=ib; mg.connect(off.destination); mg.connect(rv); rv.connect(rg); rg.connect(off.destination);
-  sessionNotes.forEach(n=>{
-    const t=n.time,dur=n.duration,rel=S.release/1000;
-    const osc=off.createOscillator(),g=off.createGain();
-    osc.type=S.wave; osc.frequency.value=n.freq*Math.pow(2,S.detune/12);
-    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.8,t+S.attack);
-    g.gain.exponentialRampToValueAtTime(.001,t+dur+rel);
-    osc.connect(g); g.connect(mg); osc.start(t); osc.stop(t+dur+rel+.1);
-    if(n.style==='vibrato'){const l=off.createOscillator(),lg=off.createGain();l.frequency.value=5.5;lg.gain.value=9;l.connect(lg);lg.connect(osc.frequency);l.start(t);l.stop(t+dur+rel+.1);}
-  });
-  const rend=await off.startRendering();
-  const wav=buf2wav(rend,norm);
-  const blob=new Blob([wav],{type:'audio/wav'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download=fn+'.wav';a.click();
-  URL.revokeObjectURL(url);
-  setStatus(`Exported: ${fn}.wav — ${sessionNotes.length} notes, ${total.toFixed(1)}s`);
+// ── Recording / Offline render + export ───────────────────────
+function toggleRecording() {
+  state.recording = !state.recording;
+  const btn = document.getElementById('recBtn');
+  const dot = document.getElementById('statusDot');
+  if (state.recording) {
+    sessionStart = AC.currentTime;
+    btn.classList.add('active');
+    btn.textContent = '⏹ Stop Rec';
+    dot.classList.add('recording');
+    setStatus('● Recording... every keystroke is captured.');
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = '⏺ Record';
+    dot.classList.remove('recording');
+    setStatus('Recording stopped. Export when ready.');
+  }
 }
-function buf2wav(buf,norm){
-  const nC=buf.numberOfChannels,sr=buf.sampleRate,len=buf.length;
-  const ch=[];let peak=0;
-  for(let c=0;c<nC;c++){ch.push(buf.getChannelData(c));for(let i=0;i<len;i++)peak=Math.max(peak,Math.abs(ch[c][i]));}
-  const sc=(norm&&peak>0)?.98/peak:1;
-  const ab=new ArrayBuffer(44+len*nC*2);const v=new DataView(ab);
-  const w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
-  w(0,'RIFF');v.setUint32(4,36+len*nC*2,true);w(8,'WAVE');
-  w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,nC,true);
-  v.setUint32(24,sr,true);v.setUint32(28,sr*nC*2,true);v.setUint16(32,nC*2,true);v.setUint16(34,16,true);
-  w(36,'data');v.setUint32(40,len*nC*2,true);
-  let off=44;
-  for(let i=0;i<len;i++)for(let c=0;c<nC;c++){const s=Math.max(-1,Math.min(1,ch[c][i]*sc));v.setInt16(off,s<0?s*0x8000:s*0x7FFF,true);off+=2;}
+
+function showExportModal() {
+  if (!sessionNotes.length) { setStatus('Play some notes first!'); return; }
+  openModal('exportModal');
+}
+
+async function doExport() {
+  closeModal('exportModal');
+  if (!sessionNotes.length) return;
+  setStatus('Rendering audio... please wait.');
+
+  const normalize = document.getElementById('exportNorm').value === '1';
+  const filename = (document.getElementById('exportName').value || 'Key-J_Session').replace(/[^a-zA-Z0-9_\-]/g, '_');
+
+  const totalDur = sessionNotes.reduce((acc, n) => Math.max(acc, n.time + n.duration + 2.5), 2);
+  const sr = 44100;
+  const offCtx = new OfflineAudioContext(2, Math.ceil(sr * totalDur), sr);
+
+  // Offline reverb
+  const offReverb = offCtx.createConvolver();
+  const offRevGain = offCtx.createGain();
+  offRevGain.gain.value = state.reverb * 0.5;
+  const irLen = sr * 2;
+  const irBuf = offCtx.createBuffer(2, irLen, sr);
+  for (let ch = 0; ch < 2; ch++) {
+    const d = irBuf.getChannelData(ch);
+    for (let i = 0; i < irLen; i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/irLen, 3);
+  }
+  offReverb.buffer = irBuf;
+  offReverb.connect(offRevGain); offRevGain.connect(offCtx.destination);
+
+  const offMaster = offCtx.createGain();
+  offMaster.gain.value = state.volume;
+  offMaster.connect(offCtx.destination);
+  offMaster.connect(offReverb);
+
+  sessionNotes.forEach(n => {
+    const t = n.time;
+    const dur = n.duration;
+    const rel = state.release / 1000;
+    const osc = offCtx.createOscillator();
+    const g = offCtx.createGain();
+    osc.type = state.waveform;
+    osc.frequency.value = n.freq * Math.pow(2, state.detune/12);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.8, t + state.attack);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur + rel);
+    osc.connect(g); g.connect(offMaster);
+    osc.start(t);
+    osc.stop(t + dur + rel + 0.1);
+
+    if (n.style === 'vibrato') {
+      const lfo = offCtx.createOscillator();
+      const lg = offCtx.createGain();
+      lfo.frequency.value = 5.5; lg.gain.value = 8;
+      lfo.connect(lg); lg.connect(osc.frequency);
+      lfo.start(t); lfo.stop(t + dur + rel + 0.1);
+    }
+  });
+
+  const rendered = await offCtx.startRendering();
+  const wav = audioBufferToWav(rendered, normalize);
+  const blob = new Blob([wav], { type: 'audio/wav' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename + '.wav';
+  a.click();
+  URL.revokeObjectURL(url);
+  setStatus(`Exported: ${filename}.wav (${sessionNotes.length} notes, ${totalDur.toFixed(1)}s)`);
+}
+
+function audioBufferToWav(buffer, normalize) {
+  const numCh = buffer.numberOfChannels;
+  const sr = buffer.sampleRate;
+  const len = buffer.length;
+  const channels = [];
+  let peak = 0;
+  for (let c = 0; c < numCh; c++) {
+    channels.push(buffer.getChannelData(c));
+    for (let i = 0; i < len; i++) peak = Math.max(peak, Math.abs(channels[c][i]));
+  }
+  const scale = (normalize && peak > 0) ? (0.98 / peak) : 1;
+  const dataLen = len * numCh * 2;
+  const ab = new ArrayBuffer(44 + dataLen);
+  const view = new DataView(ab);
+  const w = (o, s) => { for (let i=0;i<s.length;i++) view.setUint8(o+i, s.charCodeAt(i)); };
+  const u32 = (o,v) => view.setUint32(o,v,true);
+  const u16 = (o,v) => view.setUint16(o,v,true);
+  w(0,'RIFF'); u32(4,36+dataLen); w(8,'WAVE');
+  w(12,'fmt '); u32(16,16); u16(20,1); u16(22,numCh);
+  u32(24,sr); u32(28,sr*numCh*2); u16(32,numCh*2); u16(34,16);
+  w(36,'data'); u32(40,dataLen);
+  let offset = 44;
+  for (let i = 0; i < len; i++) {
+    for (let c = 0; c < numCh; c++) {
+      const s = Math.max(-1, Math.min(1, channels[c][i] * scale));
+      view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+      offset += 2;
+    }
+  }
   return ab;
 }
 
-// ── KEYBOARD ──────────────────────────────
-document.addEventListener('keydown',e=>{
-  if(e.repeat)return;
-  const t=document.activeElement.tagName.toLowerCase();
-  if(t==='input'||t==='select')return;
-  e.preventDefault(); playNote(e.key.toLowerCase());
+// ── Keyboard Events ────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.repeat) return;
+  const tagName = document.activeElement.tagName.toLowerCase();
+  if (tagName === 'input' || tagName === 'select') return;
+  e.preventDefault();
+  const key = e.key.toLowerCase();
+  if (keyBindings[key]) playNote(key);
 });
-document.addEventListener('keyup',e=>releaseNote(e.key.toLowerCase()));
 
-// ── GLOBAL HOOK ───────────────────────────
-if(window.keyJBridge){
-  window.keyJBridge.onGlobalKeydown(({key})=>{if(key&&!document.hasFocus())playNote(key);});
-  window.keyJBridge.onGlobalKeyup(({key})=>{if(key&&!document.hasFocus())releaseNote(key);});
-  window.keyJBridge.onGlobalCaptureStatus(({enabled})=>{S.globalCapture=enabled;document.getElementById('globalToggle').checked=enabled;updateHookBadge();});
-  window.keyJBridge.onHookStatus(({available})=>{S.hookAvailable=available;updateHookBadge();if(!available)setStatus('⚠ Global hook unavailable — window-focused mode only.');});
-}
-async function onGlobalToggle(checked){
-  if(!window.keyJBridge)return;
-  if(!S.hookAvailable&&checked){setStatus('⚠ Global hook not available.');document.getElementById('globalToggle').checked=false;return;}
-  const r=await window.keyJBridge.toggleGlobalCapture(checked);
-  S.globalCapture=r.enabled; updateHookBadge();
-  setStatus(r.enabled?'🎹 Global capture ON — works in any app.':'Global capture OFF.');
-}
-function updateHookBadge(){
-  const b=document.getElementById('hookBadge');
-  if(!S.hookAvailable){b.textContent='Unavailable';b.className='hook-badge unavail';return;}
-  if(S.globalCapture){b.textContent='GLOBAL';b.className='hook-badge active';}
-  else{b.textContent='Window Only';b.className='hook-badge';}
+document.addEventListener('keyup', e => {
+  const key = e.key.toLowerCase();
+  if (keyBindings[key]) releaseNote(key);
+});
+
+// ── Staff Canvas ───────────────────────────────────────────────
+let staffNotes = []; // { x, semitone, note, duration }
+let staffScrollX = 0;
+const STAFF_LEDGER_COUNT = 5;
+
+function resizeCanvases() {
+  const sc = document.getElementById('staffCanvas');
+  const vc = document.getElementById('vizCanvas');
+  sc.width = sc.offsetWidth * devicePixelRatio;
+  sc.height = sc.offsetHeight * devicePixelRatio;
+  vc.width = vc.offsetWidth * devicePixelRatio;
+  vc.height = vc.offsetHeight * devicePixelRatio;
 }
 
-// ── STAFF ─────────────────────────────────
-let staffNotes=[],staffX=0;
-function pushStaff(entry){
-  const semi=Math.round(12*Math.log2(entry.freq/440)+69);
-  const ds=[0,0,1,1,2,3,3,4,4,5,5,6];
-  const diaPos=Math.floor(semi/12)*7+ds[semi%12];
-  staffNotes.push({semi,relC4:diaPos-(4*7+2),note:entry.note,dur:entry.duration,style:entry.style,locked:entry.locked,x:staffX});
-  staffX+=Math.max(22,entry.duration*55+18);
+function updateStaff(entry) {
+  const semitone = Math.round(12 * Math.log2(entry.freq / 440) + 69);
+  const relToC4 = semitone - 60; // steps from C4
+  staffNotes.push({ semitone, relToC4, note: entry.note, duration: entry.duration, x: staffScrollX });
+  staffScrollX += Math.max(20, entry.duration * 60 + 20);
   drawStaff();
 }
-function drawStaff(){
-  const cv=document.getElementById('staffCanvas');if(!cv)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  ctx.clearRect(0,0,W,H);
-  const st=H*.18,ls=H*.1;
-  ctx.strokeStyle='#2a2a3a';ctx.lineWidth=1;
-  for(let i=0;i<5;i++){const y=st+i*ls;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-  ctx.fillStyle='#4a4a7a';ctx.font=`${H*.85}px serif`;ctx.fillText('𝄞',6,st+ls*4.5);
-  for(let x=60;x<W;x+=100){ctx.strokeStyle='#2a2a3a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,st);ctx.lineTo(x,st+ls*4);ctx.stroke();}
-  const sx=58,vW=W-sx-8,ms=Math.max(0,staffX-vW);
-  const COLORS={normal:'#e8c84a',staccato:'#e84a7a',vibrato:'#4ae8b0',tremolo:'#ff8844',arpeggio:'#a088ff',legato:'#5588ff'};
-  staffNotes.forEach(n=>{
-    const x=sx+n.x-ms;if(x<sx-20||x>W+20)return;
-    const sp=n.relC4-2,ys=ls/2,y=st+ls*4-sp*ys;
-    const rw=Math.max(ls*.44,Math.min(ls*.58,n.dur*8)),rh=ls*.36;
-    if(sp<=-2)for(let lp=-2;lp>=sp;lp-=2){ctx.strokeStyle='#2a2a3a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x-ls*.65,st+ls*4-lp*ys);ctx.lineTo(x+ls*.65,st+ls*4-lp*ys);ctx.stroke();}
-    if(sp>=10)for(let lp=10;lp<=sp;lp+=2){ctx.strokeStyle='#2a2a3a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x-ls*.65,st+ls*4-lp*ys);ctx.lineTo(x+ls*.65,st+ls*4-lp*ys);ctx.stroke();}
-    const col=n.locked?'#ff9f43':(COLORS[n.style]||'#e8c84a');
-    ctx.fillStyle=col;ctx.beginPath();ctx.ellipse(x,y,rw,rh,-.28,0,Math.PI*2);ctx.fill();
-    if(n.dur>.35){ctx.fillStyle='#0a0a0e';ctx.beginPath();ctx.ellipse(x,y,rw*.52,rh*.48,-.28,0,Math.PI*2);ctx.fill();}
-    if(n.note.includes('#')){ctx.fillStyle=col;ctx.font=`${ls*.9}px serif`;ctx.fillText('♯',x-rw-8,y+ls*.3);}
-    const sd=sp<4?1:-1,sl=ls*3;
-    ctx.strokeStyle=col;ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(x+rw*(sd>0?.88:-.88),y);ctx.lineTo(x+rw*(sd>0?.88:-.88),y-sd*sl);ctx.stroke();
-    if(n.dur>.45){ctx.fillStyle=col;ctx.beginPath();ctx.arc(x+rw+4,y-2,2,0,Math.PI*2);ctx.fill();}
-    if(n.style==='staccato'){ctx.fillStyle='#e84a7a';ctx.beginPath();ctx.arc(x,y-sd*ls*.5,2.5,0,Math.PI*2);ctx.fill();}
+
+function drawStaff() {
+  const canvas = document.getElementById('staffCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const dpr = devicePixelRatio;
+  ctx.clearRect(0, 0, W, H);
+
+  const staffTop = H * 0.15;
+  const lineSpacing = H * 0.1;
+  const clefColor = '#5555aa';
+  const lineColor = '#2a2a4a';
+  const noteColor = '#e8c84a';
+  const noteHoleColor = '#0a0a0e';
+
+  // Draw 5 staff lines
+  ctx.strokeStyle = lineColor;
+  ctx.lineWidth = 1 * dpr;
+  for (let i = 0; i < 5; i++) {
+    const y = staffTop + i * lineSpacing;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(W, y);
+    ctx.stroke();
+  }
+
+  // Treble clef symbol (simplified)
+  ctx.fillStyle = clefColor;
+  ctx.font = `${H * 0.85}px serif`;
+  ctx.fillText('𝄞', 8 * dpr, staffTop + lineSpacing * 4.5);
+
+  // Draw notes
+  const startX = 60 * dpr;
+  const viewWidth = W - startX - 10 * dpr;
+  const maxScroll = Math.max(0, staffScrollX * dpr - viewWidth);
+  const scrollOffset = maxScroll;
+
+  staffNotes.forEach(n => {
+    const x = startX + n.x * dpr - scrollOffset;
+    if (x < startX - 30 || x > W + 30) return;
+
+    // Map semitone to staff position (C4 = middle of staff roughly)
+    // E4 = first line from bottom (rel=4), F4 = first space, G4...
+    // Staff line positions (from bottom): E4, G4, B4, D5, F5
+    // Space positions: F4, A4, C5, E5
+    const staffLineNotes = [64, 67, 71, 74, 77]; // E4 G4 B4 D5 F5 (semitones)
+    // Position: 0 = bottom line (E4), each step = half line spacing
+    const pos4E = 60 + 4; // E4 = 64
+    const posFromE4 = n.semitone - 64;
+    const yStep = lineSpacing / 2;
+
+    // Convert semitone to diatonic step (rough)
+    const diatonicSteps = [0,0,1,1,2,3,3,4,4,5,5,6]; // chromatic to diatonic index
+    const noteOct = Math.floor(n.semitone / 12);
+    const noteChroma = n.semitone % 12;
+    const diaPos = noteOct * 7 + diatonicSteps[noteChroma];
+    const refDiaPos = 4 * 7 + 2; // C4 diatonic pos
+    const posFromC4 = diaPos - refDiaPos;
+    // C4 sits on ledger line below staff; bottom staff line is E4 (+2)
+    const bottomLine = 2;
+    const staffPos = posFromC4 - bottomLine; // 0 = bottom line
+    const y = staffTop + lineSpacing * 4 - staffPos * yStep;
+
+    const w2 = Math.min(lineSpacing * 0.55, Math.max(lineSpacing * 0.45, n.duration * 10 * dpr));
+    const h2 = lineSpacing * 0.38;
+
+    // Ledger lines if needed
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = 1 * dpr;
+    if (staffPos <= -2) {
+      for (let lp = -2; lp >= staffPos; lp -= 2) {
+        const ly = staffTop + lineSpacing * 4 - lp * yStep;
+        ctx.beginPath();
+        ctx.moveTo(x - lineSpacing * 0.7, ly);
+        ctx.lineTo(x + lineSpacing * 0.7, ly);
+        ctx.stroke();
+      }
+    }
+    if (staffPos >= 10) {
+      for (let lp = 10; lp <= staffPos; lp += 2) {
+        const ly = staffTop + lineSpacing * 4 - lp * yStep;
+        ctx.beginPath();
+        ctx.moveTo(x - lineSpacing * 0.7, ly);
+        ctx.lineTo(x + lineSpacing * 0.7, ly);
+        ctx.stroke();
+      }
+    }
+
+    // Note head
+    ctx.fillStyle = noteColor;
+    ctx.beginPath();
+    ctx.ellipse(x, y, w2, h2, -0.3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Hollow for half/whole notes (duration > 0.3)
+    if (n.duration > 0.3) {
+      ctx.fillStyle = noteHoleColor;
+      ctx.beginPath();
+      ctx.ellipse(x, y, w2 * 0.55, h2 * 0.5, -0.3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Stem
+    ctx.strokeStyle = noteColor;
+    ctx.lineWidth = 1.5 * dpr;
+    const stemDir = staffPos < 4 ? 1 : -1;
+    const stemLen = lineSpacing * 3;
+    ctx.beginPath();
+    ctx.moveTo(x + w2 * (stemDir > 0 ? 0.9 : -0.9), y);
+    ctx.lineTo(x + w2 * (stemDir > 0 ? 0.9 : -0.9), y - stemDir * stemLen);
+    ctx.stroke();
+
+    // Dots for duration
+    if (n.duration > 0.5) {
+      ctx.fillStyle = noteColor;
+      ctx.beginPath();
+      ctx.arc(x + w2 + 4 * dpr, y - 2 * dpr, 2 * dpr, 0, Math.PI * 2);
+      ctx.fill();
+    }
   });
 }
 
-// ── VIZ ───────────────────────────────────
-function startViz(){function f(){drawViz();requestAnimationFrame(f);}f();}
-function drawViz(){
-  const cv=document.getElementById('vizCanvas');if(!cv||!analyser)return;
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  const wc=ML.enabled?'#ff9f43':'#e8c84a';
-  if(vizMode==='wave'){
-    ctx.fillStyle='rgba(10,10,14,0.25)';ctx.fillRect(0,0,W,H);
-    const d=new Float32Array(analyser.fftSize);analyser.getFloatTimeDomainData(d);
-    ctx.strokeStyle=wc;ctx.lineWidth=1.8;ctx.shadowColor=wc;ctx.shadowBlur=6;
-    ctx.beginPath();const step=W/d.length;d.forEach((v,i)=>{const x=i*step,y=H/2+v*H*.44;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
-    ctx.stroke();ctx.shadowBlur=0;
-  }else if(vizMode==='fft'){
-    ctx.fillStyle='rgba(10,10,14,0.35)';ctx.fillRect(0,0,W,H);
-    const d=new Uint8Array(analyser.frequencyBinCount);analyser.getByteFrequencyData(d);
-    const bars=Math.min(200,d.length),bw=W/bars;
-    for(let i=0;i<bars;i++){const v=d[i]/255,bh=v*H,hue=ML.enabled?(20+v*60):(40+v*240);ctx.fillStyle=`hsla(${hue},75%,55%,.9)`;ctx.fillRect(i*bw,H-bh,bw-1,bh);}
-  }else{
-    ctx.fillStyle='rgba(10,10,14,0.55)';ctx.fillRect(0,0,W,H);
-    const now=AC.currentTime,ws=5;
-    ctx.strokeStyle='#18182a';ctx.lineWidth=1;
-    for(let i=0;i<24;i++){const y=(i/24)*H;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-    sessionNotes.forEach(n=>{
-      if(!sessionStart)return;
-      const el=now-sessionStart,x1=W-(el-n.time)*(W/ws),x2=W-(el-(n.time+n.duration))*(W/ws);
-      if(x2<0||x1>W)return;
-      const semi=Math.round(12*Math.log2(n.freq/440)+69),yP=H-((semi-48)/36)*H;
-      const COLORS={normal:'#e8c84a',staccato:'#e84a7a',vibrato:'#4ae8b0',tremolo:'#ff8844',arpeggio:'#a088ff',legato:'#5588ff'};
-      ctx.fillStyle=n.locked?'#ff9f43':(COLORS[n.style]||'#e8c84a');
-      ctx.fillRect(Math.max(0,x1),yP-5,Math.max(3,x2-x1),10);
+// ── Visualizer ─────────────────────────────────────────────────
+let vizAnim;
+let pianoRollEntries = [];
+
+function startViz() {
+  cancelAnimationFrame(vizAnim);
+  function frame() {
+    drawViz();
+    vizAnim = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+function drawViz() {
+  const canvas = document.getElementById('vizCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  ctx.fillStyle = 'rgba(10,10,14,0.3)';
+  ctx.fillRect(0, 0, W, H);
+
+  if (!analyser) return;
+
+  if (vizMode === 'wave') {
+    const data = new Float32Array(analyser.fftSize);
+    analyser.getFloatTimeDomainData(data);
+    ctx.strokeStyle = '#e8c84a';
+    ctx.lineWidth = 2 * devicePixelRatio;
+    ctx.shadowColor = '#e8c84a';
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    const step = W / data.length;
+    data.forEach((v, i) => {
+      const x = i * step;
+      const y = H / 2 + v * H * 0.45;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+  } else if (vizMode === 'spectrum') {
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(data);
+    const bars = Math.min(256, data.length);
+    const bw = W / bars;
+    for (let i = 0; i < bars; i++) {
+      const v = data[i] / 255;
+      const bh = v * H;
+      const hue = 50 + v * 280;
+      ctx.fillStyle = `hsl(${hue}, 80%, 55%)`;
+      ctx.fillRect(i * bw, H - bh, bw - 1, bh);
+    }
+
+  } else if (vizMode === 'roll') {
+    // Piano roll: notes scroll left
+    ctx.fillStyle = 'rgba(10,10,14,0.6)';
+    ctx.fillRect(0,0,W,H);
+    // Horizontal guide lines
+    ctx.strokeStyle = '#1a1a28';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 24; i++) {
+      const y = (i / 24) * H;
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+    const now = AC.currentTime;
+    const window = 4; // seconds of visible roll
+    sessionNotes.forEach(n => {
+      const t = n.time;
+      const endT = t + n.duration;
+      const xStart = W - (now - t) * (W / window) * devicePixelRatio;
+      const xEnd = W - (now - endT) * (W / window) * devicePixelRatio;
+      if (xEnd < 0 || xStart > W) return;
+      const semitone = Math.round(12 * Math.log2(n.freq / 440) + 69);
+      const minSemi = 48, maxSemi = 84;
+      const yPos = H - ((semitone - minSemi) / (maxSemi - minSemi)) * H;
+      const hue = ((semitone - 48) / 36) * 200 + 20;
+      ctx.fillStyle = `hsla(${hue}, 80%, 60%, 0.85)`;
+      ctx.fillRect(Math.max(0, xStart), yPos - 4, Math.max(3, xEnd - xStart), 8);
     });
   }
 }
 
-// ── UI HELPERS ────────────────────────────
-function flashNote(note){
-  const el=document.getElementById('noteFlash');el.textContent=note;el.classList.add('visible');
-  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('visible'),380);
-  document.getElementById('lastND').textContent=note;
-}
-function markActive(key,on){const el=document.getElementById('kr-'+key);if(el)el.classList.toggle('active-key',on);}
-function setStatus(msg){document.getElementById('statusText').textContent=msg;}
-function updateCounters(){
-  const tot=sessionNotes.reduce((a,n)=>a+n.duration,0);
-  document.getElementById('noteCountD').textContent=noteCount;
-  document.getElementById('noteCountB').textContent=noteCount;
-  document.getElementById('durD').textContent=tot.toFixed(1)+'s';
-}
-function addLog(n){
-  const sc=document.getElementById('seqScroll');
-  const em=document.getElementById('seqEmpty');if(em)em.remove();
-  const d=document.createElement('div');d.className='seq-entry';
-  const lt=n.locked?'<span class="seq-ltag">🔒</span>':'';
-  d.innerHTML=`<span class="seq-idx">#${noteCount}</span><span class="seq-note">${n.note}</span><span class="seq-dur">${n.duration.toFixed(2)}s</span><span class="seq-sty">${n.style}</span>${lt}`;
-  sc.appendChild(d);sc.scrollTop=sc.scrollHeight;
+// ── UI Helpers ─────────────────────────────────────────────────
+function flashNote(note) {
+  const el = document.getElementById('noteFlash');
+  el.textContent = note;
+  el.classList.add('visible');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('visible'), 400);
+  document.getElementById('lastNoteDisplay').textContent = note;
 }
 
-// ── KEY MAP UI ────────────────────────────
-function rtag(key){
-  if(KEY_ROWS[0].includes(key))return{cls:'tag-q',l:'Top'};
-  if(KEY_ROWS[1].includes(key))return{cls:'tag-a',l:'Mid'};
-  if(KEY_ROWS[2].includes(key))return{cls:'tag-z',l:'Low'};
-  return{cls:'tag-1',l:'Num'};
+function markKeyActive(key, active) {
+  const el = document.getElementById('kr-' + key);
+  if (el) el.classList.toggle('active-key', active);
 }
-function renderKeyMap(){
-  const list=document.getElementById('keyMapList');list.innerHTML='';
-  ALL_KEYS.forEach(k=>{
-    const b=keyBindings[k];if(!b)return;
-    const t=rtag(k);
-    const row=document.createElement('div');row.className='key-row';row.id='kr-'+k;
-    // In lock mode, show the currently-queued lock note in orange
-    const dn=(ML.enabled&&ML.sequence.length>0)
-      ?`<span style="color:var(--lock)">${ML.sequence[ML.pos]?.note||b.note}</span>`
-      :b.note;
-    row.innerHTML=`<div class="key-badge">${k.toUpperCase()}</div><div class="key-info"><div class="key-note">${dn}</div><div class="key-freq">${b.freq.toFixed(1)}Hz</div></div><span class="key-tag ${t.cls}">${t.l}</span>`;
-    row.onclick=()=>startRebind(k);
+
+function setStatus(msg) {
+  document.getElementById('statusText').textContent = msg;
+}
+
+function updateCounters() {
+  const total = sessionNotes.reduce((a, n) => a + n.duration, 0);
+  document.getElementById('noteCountHdr').textContent = noteCount;
+  document.getElementById('noteCountBot').textContent = noteCount;
+  document.getElementById('durDisplay').textContent = total.toFixed(1) + 's';
+}
+
+function addToSessionLog(n) {
+  const panel = document.getElementById('seqPanel');
+  const empty = document.getElementById('seqEmpty');
+  if (empty) empty.remove();
+
+  const div = document.createElement('div');
+  div.className = 'seq-entry';
+  div.innerHTML = `
+    <span class="seq-idx">#${noteCount}</span>
+    <span class="seq-note">${n.note}</span>
+    <span class="seq-dur">${n.duration.toFixed(2)}s</span>
+    <span class="seq-style-tag">${n.style}</span>
+  `;
+  panel.appendChild(div);
+  panel.scrollTop = panel.scrollHeight;
+}
+
+// ── Key Map UI ─────────────────────────────────────────────────
+function renderKeyMap() {
+  const list = document.getElementById('keyMapList');
+  list.innerHTML = '';
+
+  const styleForKey = (k) => {
+    const row = KEY_ROWS.findIndex(r => r.includes(k));
+    if (row === 0) return { label: 'Normal', cls: 'style-hold' };
+    if (row === 1) return { label: 'Staccato', cls: 'style-staccato' };
+    if (row === 2) return { label: 'Flat', cls: 'style-flat' };
+    return { label: 'Sharp', cls: 'style-sharp' };
+  };
+
+  ALL_KEYS.forEach(k => {
+    const bind = keyBindings[k];
+    if (!bind) return;
+    const s = styleForKey(k);
+    const row = document.createElement('div');
+    row.className = 'key-row';
+    row.id = 'kr-' + k;
+    row.innerHTML = `
+      <div class="key-badge">${k.toUpperCase()}</div>
+      <div class="key-info">
+        <div class="key-note">${bind.note}</div>
+        <div class="key-freq">${bind.freq.toFixed(1)} Hz</div>
+      </div>
+      <span class="key-style ${s.cls}">${s.label}</span>
+    `;
+    row.onclick = () => startRebind(k);
     list.appendChild(row);
   });
 }
 
-// ── REBIND ────────────────────────────────
-let rebindKey=null;
-function startRebind(key){
-  rebindKey=key;const b=keyBindings[key];
-  document.getElementById('rebindMsg').textContent=`Re-assigning: [${key.toUpperCase()}]  —  currently ${b.note}`;
-  const sel=document.getElementById('rebindNote');sel.innerHTML='';
-  for(let o=2;o<=7;o++){NNAMES.forEach(n=>{
-    const name=n+o,semi=(o+1)*12+NNAMES.indexOf(n),freq=440*Math.pow(2,(semi-69)/12);
-    const opt=document.createElement('option');
-    opt.value=JSON.stringify({note:name,freq,semi});
-    opt.textContent=`${name}  (${freq.toFixed(1)} Hz)`;
-    if(name===b.note)opt.selected=true;
-    sel.appendChild(opt);
-  });}
+// ── Re-bind ────────────────────────────────────────────────────
+let rebindTarget = null;
+
+function startRebind(key) {
+  rebindTarget = key;
+  const bind = keyBindings[key];
+  document.getElementById('rebindMsg').textContent = `Re-assigning key: [${key.toUpperCase()}] — currently ${bind.note}`;
+
+  const sel = document.getElementById('rebindNote');
+  sel.innerHTML = '';
+  for (let oct = 2; oct <= 7; oct++) {
+    NOTE_NAMES.forEach(n => {
+      const opt = document.createElement('option');
+      const noteName = n + oct;
+      const semitone = (oct + 1) * 12 + NOTE_NAMES.indexOf(n);
+      const freq = 440 * Math.pow(2, (semitone - 69) / 12);
+      opt.value = JSON.stringify({ note: noteName, freq, semitone });
+      opt.textContent = noteName + ' (' + freq.toFixed(1) + ' Hz)';
+      if (noteName === bind.note) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  }
   openModal('rebindModal');
 }
-function confirmRebind(){
-  if(!rebindKey)return;
-  const val=JSON.parse(document.getElementById('rebindNote').value);
-  keyBindings[rebindKey]=val;closeModal('rebindModal');renderKeyMap();
-  setStatus(`Re-bound [${rebindKey.toUpperCase()}] → ${val.note}`);
+
+function confirmRebind() {
+  if (!rebindTarget) return;
+  const val = JSON.parse(document.getElementById('rebindNote').value);
+  keyBindings[rebindTarget] = val;
+  closeModal('rebindModal');
+  renderKeyMap();
+  setStatus(`Re-bound [${rebindTarget.toUpperCase()}] → ${val.note}`);
 }
 
-// ── SCALE / OCTAVE ────────────────────────
-function setScale(n,el){S.scale=n;document.querySelectorAll('.scale-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');buildBindings();}
-function changeOctave(d){S.octave=Math.max(1,Math.min(7,S.octave+d));document.getElementById('octDisplay').textContent=S.octave;buildBindings();}
-
-// ── STYLE / WAVE / PARAMS ─────────────────
-function setStyle(n,el){S.style=n;document.querySelectorAll('#sN,#sS,#sV,#sT,#sA,#sL').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');}
-function setWave(t,el){S.wave=t;document.querySelectorAll('#wSi,#wSa,#wSq,#wTr').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');}
-function upP(p,el){
-  const v=parseFloat(el.value);document.getElementById(p+'Val').textContent=v;
-  if(p==='attack')S.attack=v/1000;
-  else if(p==='release')S.release=v;
-  else if(p==='volume'){S.volume=v/100;if(masterGain)masterGain.gain.value=S.volume;}
-  else if(p==='reverb'){S.reverb=v/100;if(reverbGain)reverbGain.gain.value=S.reverb;}
-  else if(p==='detune')S.detune=v;
+// ── Scale / Octave ─────────────────────────────────────────────
+function setScale(name, el) {
+  state.scale = name;
+  document.querySelectorAll('.scale-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  buildKeyBindings();
 }
 
-// ── REC / CLEAR ───────────────────────────
-function toggleRec(){
-  S.recording=!S.recording;
-  const btn=document.getElementById('recBtn'),dot=document.getElementById('statusDot');
-  if(S.recording){sessionStart=AC.currentTime;btn.classList.add('active');btn.textContent='⏹ Stop';dot.className='status-dot rec';setStatus('● Recording — every keystroke is captured.');}
-  else{btn.classList.remove('active');btn.textContent='⏺ Rec';dot.className='status-dot'+(ML.enabled?' locked':'');setStatus('Recording stopped. Export when ready.');}
-}
-function clearSession(){
-  if(!sessionNotes.length)return;if(!confirm('Clear entire session?'))return;
-  sessionNotes=[];noteCount=0;staffNotes=[];staffX=0;sessionStart=null;
-  document.getElementById('seqScroll').innerHTML='<div class="seq-empty" id="seqEmpty">No notes yet — start typing!</div>';
-  updateCounters();setStatus('Session cleared.');drawStaff();
+function changeOctave(d) {
+  state.octave = Math.max(1, Math.min(7, state.octave + d));
+  document.getElementById('octDisplay').textContent = state.octave;
+  buildKeyBindings();
 }
 
-// ── VIZ MODE ──────────────────────────────
-function setViz(m,el){vizMode=m;document.querySelectorAll('.vz-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+// ── Play Style / Waveform ──────────────────────────────────────
+function setPlayStyle(style, el) {
+  state.playStyle = style;
+  document.querySelectorAll('.style-toggle').forEach(b => {
+    if (['sNormal','sStaccato','sVibrato','sTremolo','sArp','sLegato'].includes(b.id)) b.classList.remove('sel');
+  });
+  el.classList.add('sel');
+}
 
-// ── MODALS ────────────────────────────────
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+function setWaveform(type, el) {
+  state.waveform = type;
+  document.querySelectorAll('.style-toggle').forEach(b => {
+    if (['wSine','wSawtooth','wSquare','wTriangle'].includes(b.id)) b.classList.remove('sel');
+  });
+  el.classList.add('sel');
+}
 
-// ── CANVAS RESIZE ─────────────────────────
-function resizeCanvases(){['staffCanvas','vizCanvas'].forEach(id=>{const c=document.getElementById(id);if(!c)return;const d=window.devicePixelRatio||1;c.width=c.offsetWidth*d;c.height=c.offsetHeight*d;});}
-window.addEventListener('resize',()=>{resizeCanvases();drawStaff();});
+// ── Params ─────────────────────────────────────────────────────
+function updateParam(param, el) {
+  const v = parseFloat(el.value);
+  document.getElementById(param + 'Val').textContent = v;
+  if (param === 'attack') state.attack = v / 1000;
+  else if (param === 'release') state.release = v;
+  else if (param === 'volume') { state.volume = v / 100; if (masterGain) masterGain.gain.value = state.volume; }
+  else if (param === 'reverb') { state.reverb = v / 100; if (reverbNode) reverbNode.gain.value = state.reverb; }
+  else if (param === 'detune') state.detune = v;
+}
 
-// ── BOOT ──────────────────────────────────
-window.addEventListener('load',()=>{
-  initAudio();buildBindings();resizeCanvases();startViz();
-  if(window.keyJBridge){window.keyJBridge.getGlobalCaptureStatus().then(r=>{S.globalCapture=r.enabled;S.hookAvailable=true;updateHookBadge();});}
-  setStatus('Key-J ready — press any key to play  |  Enable Melody Lock to use a preset jingle');
+// ── Viz mode ───────────────────────────────────────────────────
+function setVizMode(mode, el) {
+  vizMode = mode;
+  document.querySelectorAll('.wv-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── Clear ──────────────────────────────────────────────────────
+function clearSession() {
+  if (!sessionNotes.length) return;
+  if (!confirm('Clear all notes from this session?')) return;
+  sessionNotes = [];
+  noteCount = 0;
+  staffNotes = [];
+  staffScrollX = 0;
+  document.getElementById('seqPanel').innerHTML = '<div class="seq-empty" id="seqEmpty">No notes yet. Start typing!</div>';
+  updateCounters();
+  setStatus('Session cleared. Ready for new keys.');
+  drawStaff();
+}
+
+// ── Modal ──────────────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function showHelp() { openModal('helpModal'); }
+function showExportModal() {
+  if (!sessionNotes.length) { setStatus('Play some notes first!'); return; }
+  openModal('exportModal');
+}
+
+// ── Init ───────────────────────────────────────────────────────
+window.addEventListener('load', async () => {
+  await initAudio();
+  buildKeyBindings();
+  resizeCanvases();
+  startViz();
+  setStatus('Key-J ready — press any key to play  |  Click a key in the panel to re-bind it');
 });
-document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{once:true});
+
+window.addEventListener('resize', () => {
+  resizeCanvases();
+  drawStaff();
+});
+
+// Wake AudioContext on first user interaction
+document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resume(); }, { once: true });
 </script>
 
 
@@ -2421,6 +3037,243 @@ document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{
   }
 
   window.KeyJExport = { toText: toText, fromText: fromText, render: render, tone: tone };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });
+  } else { setTimeout(build, 0); }
+})();
+
+/* ============================================================
+   Key-J v1.8 — one renderer, and it says what it can do
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHY THIS EXISTS
+
+   app.html and desktop/src/index.html were two hand-maintained
+   implementations of the same product. That is where the last
+   three defects came from: Vibrato crashed one build and not the
+   other, every tone button was dead on the desktop because
+   applyPreset wrote to an object that build does not have, and
+   nobody noticed either because fixing one file never touched
+   the other.
+
+   So there is one renderer now. This file is it, and the desktop
+   build is a generated copy - see desktop/sync-renderer.js. What
+   was genuinely desktop-only was the window chrome and the
+   global-capture switch, and both are built here at runtime when
+   the Electron bridge is present.
+
+   THE QUESTION THIS ANSWERS
+
+   "How do I turn it on?" A browser cannot see keystrokes outside
+   its own tab, and should not be able to - that is a keylogger.
+   So the browser build plays what you type into the page, and
+   that is its ceiling, permanently. The desktop build has the
+   global hook. Nothing in either build ever said so, which is
+   why the answer felt missing rather than absent.
+
+   One slot in the header now states which build you are holding
+   and what it can do: GLOBAL or WINDOW ONLY on the desktop, and
+   in the browser, what the desktop build would add.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var BRIDGE = (typeof window !== 'undefined') && window.keyJBridge;
+  var DOWNLOAD = 'https://github.com/zengineco/f-keys/releases/latest';
+
+  var STATE = {
+    hookAvailable: false,   // the native hook loaded in the main process
+    capturing: false        // and the user has switched it on
+  };
+
+  function css(text) {
+    var s = document.createElement('style');
+    s.textContent = text;
+    document.head.appendChild(s);
+  }
+
+  function el(id) { return document.getElementById(id); }
+
+  /* ── the chrome, only when there is a frameless window ──────── */
+
+  function titlebar() {
+    css(
+      '.kj-tb{height:34px;background:#0d0d12;border-bottom:1px solid #222230;' +
+        'display:flex;align-items:center;padding:0 12px;-webkit-app-region:drag;' +
+        'flex-shrink:0;gap:10px;position:relative;z-index:60}' +
+      '.kj-tb-btns{display:flex;gap:6px;-webkit-app-region:no-drag}' +
+      '.kj-tb-btn{width:12px;height:12px;border-radius:50%;border:none;cursor:pointer}' +
+      '.kj-tb-btn:hover{filter:brightness(1.3)}' +
+      '.kj-tb-close{background:#e84a7a}.kj-tb-min{background:#e8c84a}' +
+      '.kj-tb-max{background:#4ae8b0}' +
+      '.kj-tb-title{font-family:"Bebas Neue",sans-serif;font-size:1rem;color:#e8c84a;' +
+        'letter-spacing:.1em;position:absolute;left:50%;transform:translateX(-50%)}'
+    );
+    var bar = document.createElement('div');
+    bar.className = 'kj-tb';
+    bar.innerHTML =
+      '<div class="kj-tb-btns">' +
+        '<button class="kj-tb-btn kj-tb-close" id="kj-win-close" title="Close"></button>' +
+        '<button class="kj-tb-btn kj-tb-min" id="kj-win-min" title="Minimise"></button>' +
+        '<button class="kj-tb-btn kj-tb-max" id="kj-win-max" title="Maximise"></button>' +
+      '</div>' +
+      '<div class="kj-tb-title">KEY-J</div>';
+    document.body.insertBefore(bar, document.body.firstChild);
+
+    el('kj-win-close').onclick = function () { BRIDGE.close(); };
+    el('kj-win-min').onclick = function () { BRIDGE.minimize(); };
+    el('kj-win-max').onclick = function () { BRIDGE.maximize(); };
+  }
+
+  /* ── the slot that says what this build can do ──────────────── */
+
+  function slot() {
+    css(
+      '.kj-mode{display:flex;align-items:center;gap:9px;margin-right:14px;' +
+        '-webkit-app-region:no-drag}' +
+      '.kj-mode-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;' +
+        'color:#949cb0;white-space:nowrap}' +
+      '.kj-sw{position:relative;width:36px;height:18px;cursor:pointer;flex-shrink:0}' +
+      '.kj-sw input{opacity:0;width:0;height:0;position:absolute}' +
+      '.kj-sw-track{position:absolute;inset:0;background:#33333f;border-radius:9px;' +
+        'transition:background .18s}' +
+      '.kj-sw-track::after{content:"";position:absolute;left:2px;top:2px;width:14px;' +
+        'height:14px;border-radius:50%;background:#949cb0;transition:all .18s}' +
+      '.kj-sw input:checked+.kj-sw-track{background:#4ae8b0}' +
+      '.kj-sw input:checked+.kj-sw-track::after{left:20px;background:#0a0a0e}' +
+      '.kj-sw input:focus-visible+.kj-sw-track{outline:2px solid #e8c84a;outline-offset:2px}' +
+      '.kj-badge{font-size:11px;padding:3px 8px;border-radius:3px;border:1px solid #33333f;' +
+        'color:#949cb0;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}' +
+      '.kj-badge.on{border-color:#4ae8b0;color:#4ae8b0;background:rgba(74,232,176,.08)}' +
+      '.kj-badge.off{border-color:#e8a04a;color:#e8a04a}' +
+      '.kj-badge a{color:inherit}' +
+      '.kj-why{font-size:11px;color:#949cb0;margin-right:12px;max-width:340px;' +
+        'line-height:1.45}' +
+      '.kj-why a{color:#e8c84a}'
+    );
+
+    var host = document.querySelector('.header-controls');
+    if (!host) return;
+    var mode = document.createElement('div');
+    mode.className = 'kj-mode';
+
+    if (BRIDGE) {
+      mode.innerHTML =
+        '<span class="kj-mode-label">Global capture</span>' +
+        '<label class="kj-sw">' +
+          '<input type="checkbox" id="kj-global" aria-label="Global capture">' +
+          '<div class="kj-sw-track"></div>' +
+        '</label>' +
+        '<span class="kj-badge off" id="kj-badge">Window only</span>';
+    } else {
+      // The browser cannot do this, so it offers the build that can.
+      mode.innerHTML =
+        '<span class="kj-why">Notes play while this tab is focused &mdash; a browser ' +
+          'cannot read keys outside its own page. The desktop app plays over ' +
+          'every application.</span>' +
+        '<span class="kj-badge off"><a href="' + DOWNLOAD + '" target="_blank" ' +
+          'rel="noopener">Get the desktop app</a></span>';
+    }
+    host.insertBefore(mode, host.firstChild);
+  }
+
+  function paintBadge() {
+    var b = el('kj-badge');
+    if (!b) return;
+    if (!STATE.hookAvailable) {
+      b.className = 'kj-badge off';
+      b.textContent = 'Hook unavailable';
+      b.title = 'The native key hook did not load, so only this window is heard.';
+      return;
+    }
+    b.className = 'kj-badge ' + (STATE.capturing ? 'on' : 'off');
+    b.textContent = STATE.capturing ? 'Global' : 'Window only';
+    b.title = STATE.capturing
+      ? 'Key-J is hearing every application.'
+      : 'Key-J only hears this window.';
+  }
+
+  /* ── the bridge ─────────────────────────────────────────────── */
+
+  function wire() {
+    // A global key event also arrives as a normal keydown when this window
+    // has focus, so playing both would double every note.
+    BRIDGE.onGlobalKeydown(function (d) {
+      if (d && d.key && !document.hasFocus() && typeof playNote === 'function') {
+        playNote(d.key);
+      }
+    });
+    BRIDGE.onGlobalKeyup(function (d) {
+      if (d && d.key && !document.hasFocus() && typeof releaseNote === 'function') {
+        releaseNote(d.key);
+      }
+    });
+    BRIDGE.onGlobalCaptureStatus(function (d) {
+      STATE.capturing = !!(d && d.enabled);
+      var c = el('kj-global');
+      if (c) c.checked = STATE.capturing;
+      paintBadge();
+    });
+    BRIDGE.onHookStatus(function (d) {
+      STATE.hookAvailable = !!(d && d.available);
+      paintBadge();
+    });
+
+    var box = el('kj-global');
+    if (box) {
+      box.onchange = function () {
+        var want = box.checked;
+        if (want && !STATE.hookAvailable) {
+          box.checked = false;
+          paintBadge();
+          if (typeof setStatus === 'function') {
+            setStatus('The native key hook did not load, so only this window is heard.');
+          }
+          return;
+        }
+        Promise.resolve(BRIDGE.toggleGlobalCapture(want)).then(function (r) {
+          STATE.capturing = !!(r && r.enabled);
+          box.checked = STATE.capturing;
+          paintBadge();
+          if (typeof setStatus === 'function') {
+            setStatus(STATE.capturing
+              ? 'Global capture on. Key-J now sounds while you type anywhere.'
+              : 'Global capture off. Only this window is heard.');
+          }
+        }).catch(function (err) {
+          console.error('toggleGlobalCapture:', err);
+          box.checked = false;
+          paintBadge();
+        });
+      };
+    }
+
+    // Ask for the truth rather than assuming a default.
+    Promise.resolve(BRIDGE.getGlobalCaptureStatus()).then(function (r) {
+      STATE.hookAvailable = true;
+      STATE.capturing = !!(r && r.enabled);
+      var c = el('kj-global');
+      if (c) c.checked = STATE.capturing;
+      paintBadge();
+    }).catch(function (err) {
+      console.error('getGlobalCaptureStatus:', err);
+      STATE.hookAvailable = false;
+      paintBadge();
+    });
+  }
+
+  function build() {
+    if (document.querySelector('.kj-mode')) return;
+    if (BRIDGE) titlebar();
+    slot();
+    if (BRIDGE) { wire(); paintBadge(); }
+  }
+
+  window.KeyJBuild = {
+    isDesktop: function () { return !!BRIDGE; },
+    state: function () { return { hook: STATE.hookAvailable, capturing: STATE.capturing }; }
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });

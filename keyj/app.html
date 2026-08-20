@@ -3035,6 +3035,243 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });
   } else { setTimeout(build, 0); }
 })();
+
+/* ============================================================
+   Key-J v1.8 — one renderer, and it says what it can do
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHY THIS EXISTS
+
+   app.html and desktop/src/index.html were two hand-maintained
+   implementations of the same product. That is where the last
+   three defects came from: Vibrato crashed one build and not the
+   other, every tone button was dead on the desktop because
+   applyPreset wrote to an object that build does not have, and
+   nobody noticed either because fixing one file never touched
+   the other.
+
+   So there is one renderer now. This file is it, and the desktop
+   build is a generated copy - see desktop/sync-renderer.js. What
+   was genuinely desktop-only was the window chrome and the
+   global-capture switch, and both are built here at runtime when
+   the Electron bridge is present.
+
+   THE QUESTION THIS ANSWERS
+
+   "How do I turn it on?" A browser cannot see keystrokes outside
+   its own tab, and should not be able to - that is a keylogger.
+   So the browser build plays what you type into the page, and
+   that is its ceiling, permanently. The desktop build has the
+   global hook. Nothing in either build ever said so, which is
+   why the answer felt missing rather than absent.
+
+   One slot in the header now states which build you are holding
+   and what it can do: GLOBAL or WINDOW ONLY on the desktop, and
+   in the browser, what the desktop build would add.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var BRIDGE = (typeof window !== 'undefined') && window.keyJBridge;
+  var DOWNLOAD = 'https://github.com/zengineco/f-keys/releases/latest';
+
+  var STATE = {
+    hookAvailable: false,   // the native hook loaded in the main process
+    capturing: false        // and the user has switched it on
+  };
+
+  function css(text) {
+    var s = document.createElement('style');
+    s.textContent = text;
+    document.head.appendChild(s);
+  }
+
+  function el(id) { return document.getElementById(id); }
+
+  /* ── the chrome, only when there is a frameless window ──────── */
+
+  function titlebar() {
+    css(
+      '.kj-tb{height:34px;background:#0d0d12;border-bottom:1px solid #222230;' +
+        'display:flex;align-items:center;padding:0 12px;-webkit-app-region:drag;' +
+        'flex-shrink:0;gap:10px;position:relative;z-index:60}' +
+      '.kj-tb-btns{display:flex;gap:6px;-webkit-app-region:no-drag}' +
+      '.kj-tb-btn{width:12px;height:12px;border-radius:50%;border:none;cursor:pointer}' +
+      '.kj-tb-btn:hover{filter:brightness(1.3)}' +
+      '.kj-tb-close{background:#e84a7a}.kj-tb-min{background:#e8c84a}' +
+      '.kj-tb-max{background:#4ae8b0}' +
+      '.kj-tb-title{font-family:"Bebas Neue",sans-serif;font-size:1rem;color:#e8c84a;' +
+        'letter-spacing:.1em;position:absolute;left:50%;transform:translateX(-50%)}'
+    );
+    var bar = document.createElement('div');
+    bar.className = 'kj-tb';
+    bar.innerHTML =
+      '<div class="kj-tb-btns">' +
+        '<button class="kj-tb-btn kj-tb-close" id="kj-win-close" title="Close"></button>' +
+        '<button class="kj-tb-btn kj-tb-min" id="kj-win-min" title="Minimise"></button>' +
+        '<button class="kj-tb-btn kj-tb-max" id="kj-win-max" title="Maximise"></button>' +
+      '</div>' +
+      '<div class="kj-tb-title">KEY-J</div>';
+    document.body.insertBefore(bar, document.body.firstChild);
+
+    el('kj-win-close').onclick = function () { BRIDGE.close(); };
+    el('kj-win-min').onclick = function () { BRIDGE.minimize(); };
+    el('kj-win-max').onclick = function () { BRIDGE.maximize(); };
+  }
+
+  /* ── the slot that says what this build can do ──────────────── */
+
+  function slot() {
+    css(
+      '.kj-mode{display:flex;align-items:center;gap:9px;margin-right:14px;' +
+        '-webkit-app-region:no-drag}' +
+      '.kj-mode-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;' +
+        'color:#949cb0;white-space:nowrap}' +
+      '.kj-sw{position:relative;width:36px;height:18px;cursor:pointer;flex-shrink:0}' +
+      '.kj-sw input{opacity:0;width:0;height:0;position:absolute}' +
+      '.kj-sw-track{position:absolute;inset:0;background:#33333f;border-radius:9px;' +
+        'transition:background .18s}' +
+      '.kj-sw-track::after{content:"";position:absolute;left:2px;top:2px;width:14px;' +
+        'height:14px;border-radius:50%;background:#949cb0;transition:all .18s}' +
+      '.kj-sw input:checked+.kj-sw-track{background:#4ae8b0}' +
+      '.kj-sw input:checked+.kj-sw-track::after{left:20px;background:#0a0a0e}' +
+      '.kj-sw input:focus-visible+.kj-sw-track{outline:2px solid #e8c84a;outline-offset:2px}' +
+      '.kj-badge{font-size:11px;padding:3px 8px;border-radius:3px;border:1px solid #33333f;' +
+        'color:#949cb0;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}' +
+      '.kj-badge.on{border-color:#4ae8b0;color:#4ae8b0;background:rgba(74,232,176,.08)}' +
+      '.kj-badge.off{border-color:#e8a04a;color:#e8a04a}' +
+      '.kj-badge a{color:inherit}' +
+      '.kj-why{font-size:11px;color:#949cb0;margin-right:12px;max-width:340px;' +
+        'line-height:1.45}' +
+      '.kj-why a{color:#e8c84a}'
+    );
+
+    var host = document.querySelector('.header-controls');
+    if (!host) return;
+    var mode = document.createElement('div');
+    mode.className = 'kj-mode';
+
+    if (BRIDGE) {
+      mode.innerHTML =
+        '<span class="kj-mode-label">Global capture</span>' +
+        '<label class="kj-sw">' +
+          '<input type="checkbox" id="kj-global" aria-label="Global capture">' +
+          '<div class="kj-sw-track"></div>' +
+        '</label>' +
+        '<span class="kj-badge off" id="kj-badge">Window only</span>';
+    } else {
+      // The browser cannot do this, so it offers the build that can.
+      mode.innerHTML =
+        '<span class="kj-why">Notes play while this tab is focused &mdash; a browser ' +
+          'cannot read keys outside its own page. The desktop app plays over ' +
+          'every application.</span>' +
+        '<span class="kj-badge off"><a href="' + DOWNLOAD + '" target="_blank" ' +
+          'rel="noopener">Get the desktop app</a></span>';
+    }
+    host.insertBefore(mode, host.firstChild);
+  }
+
+  function paintBadge() {
+    var b = el('kj-badge');
+    if (!b) return;
+    if (!STATE.hookAvailable) {
+      b.className = 'kj-badge off';
+      b.textContent = 'Hook unavailable';
+      b.title = 'The native key hook did not load, so only this window is heard.';
+      return;
+    }
+    b.className = 'kj-badge ' + (STATE.capturing ? 'on' : 'off');
+    b.textContent = STATE.capturing ? 'Global' : 'Window only';
+    b.title = STATE.capturing
+      ? 'Key-J is hearing every application.'
+      : 'Key-J only hears this window.';
+  }
+
+  /* ── the bridge ─────────────────────────────────────────────── */
+
+  function wire() {
+    // A global key event also arrives as a normal keydown when this window
+    // has focus, so playing both would double every note.
+    BRIDGE.onGlobalKeydown(function (d) {
+      if (d && d.key && !document.hasFocus() && typeof playNote === 'function') {
+        playNote(d.key);
+      }
+    });
+    BRIDGE.onGlobalKeyup(function (d) {
+      if (d && d.key && !document.hasFocus() && typeof releaseNote === 'function') {
+        releaseNote(d.key);
+      }
+    });
+    BRIDGE.onGlobalCaptureStatus(function (d) {
+      STATE.capturing = !!(d && d.enabled);
+      var c = el('kj-global');
+      if (c) c.checked = STATE.capturing;
+      paintBadge();
+    });
+    BRIDGE.onHookStatus(function (d) {
+      STATE.hookAvailable = !!(d && d.available);
+      paintBadge();
+    });
+
+    var box = el('kj-global');
+    if (box) {
+      box.onchange = function () {
+        var want = box.checked;
+        if (want && !STATE.hookAvailable) {
+          box.checked = false;
+          paintBadge();
+          if (typeof setStatus === 'function') {
+            setStatus('The native key hook did not load, so only this window is heard.');
+          }
+          return;
+        }
+        Promise.resolve(BRIDGE.toggleGlobalCapture(want)).then(function (r) {
+          STATE.capturing = !!(r && r.enabled);
+          box.checked = STATE.capturing;
+          paintBadge();
+          if (typeof setStatus === 'function') {
+            setStatus(STATE.capturing
+              ? 'Global capture on. Key-J now sounds while you type anywhere.'
+              : 'Global capture off. Only this window is heard.');
+          }
+        }).catch(function (err) {
+          console.error('toggleGlobalCapture:', err);
+          box.checked = false;
+          paintBadge();
+        });
+      };
+    }
+
+    // Ask for the truth rather than assuming a default.
+    Promise.resolve(BRIDGE.getGlobalCaptureStatus()).then(function (r) {
+      STATE.hookAvailable = true;
+      STATE.capturing = !!(r && r.enabled);
+      var c = el('kj-global');
+      if (c) c.checked = STATE.capturing;
+      paintBadge();
+    }).catch(function (err) {
+      console.error('getGlobalCaptureStatus:', err);
+      STATE.hookAvailable = false;
+      paintBadge();
+    });
+  }
+
+  function build() {
+    if (document.querySelector('.kj-mode')) return;
+    if (BRIDGE) titlebar();
+    slot();
+    if (BRIDGE) { wire(); paintBadge(); }
+  }
+
+  window.KeyJBuild = {
+    isDesktop: function () { return !!BRIDGE; },
+    state: function () { return { hook: STATE.hookAvailable, capturing: STATE.capturing }; }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });
+  } else { setTimeout(build, 0); }
+})();
 </script>
 </body>
 </html>
