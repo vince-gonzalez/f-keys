@@ -3347,13 +3347,21 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     return clefCache;
   }
 
-  /* semitone -> staff position, 0 being the bottom line (E4). */
+  /* semitone -> staff position, 0 being the bottom line, E4.
+
+     The original arithmetic used Math.floor(semitone / 12) as the octave.
+     For MIDI that is one too high - middle C is 60, and 60/12 is 5, because
+     MIDI octave is floor(n / 12) - 1. Seven diatonic steps of error, less
+     two from a second adjustment, put every note FIVE staff positions above
+     where it belongs. C4 came out at +3, three positions above the bottom
+     line, when C4 sits one ledger line below the staff at -2. Combined with
+     a staff pinned to the top of the canvas, that is why notes vanished. */
   var DIATONIC = [0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6];
+  var E4 = 30;                           // 4 * 7 + 2, the diatonic index of E4
   function staffPosition(semitone) {
-    var oct = Math.floor(semitone / 12);
-    var chroma = semitone % 12;
-    var dia = oct * 7 + DIATONIC[chroma];
-    return (dia - (4 * 7 + 2)) - 2;      // relative to C4, then to E4
+    var oct = Math.floor(semitone / 12) - 1;
+    var dia = oct * 7 + DIATONIC[semitone % 12];
+    return dia - E4;
   }
 
   drawStaff = function () {
@@ -3393,18 +3401,21 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     var viewWidth = W - startX - 10 * dpr;
     var scroll = Math.max(0, staffScrollX * dpr - viewWidth);
 
-    // what fits between the top and bottom of the canvas
-    var maxPos = Math.floor((bottom - 0) / half);
-    var minPos = Math.ceil((bottom - H) / half);
+    /* Where a note that will not fit gets pinned. Inset by a space and a
+       third so the chevron and the name have somewhere to go - pinning to
+       the very edge drew the marker off the canvas it was warning about. */
+    var inset = space * 1.35;
+    var yHigh = inset, yLow = H - inset;
 
     staffNotes.forEach(function (n) {
       var x = startX + n.x * dpr - scroll;
       if (x < startX - 30 || x > W + 30) return;
 
       var pos = staffPosition(n.semitone);
-      var off = pos > maxPos ? 1 : (pos < minPos ? -1 : 0);
-      var drawPos = off ? (off > 0 ? maxPos : minPos) : pos;
-      var y = bottom - drawPos * half;
+      var y = bottom - pos * half;
+      var off = 0;
+      if (y < yHigh) { off = 1; y = yHigh; }
+      else if (y > yLow) { off = -1; y = yLow; }
 
       var rx = Math.min(space * 0.55, Math.max(space * 0.45, n.duration * 10 * dpr));
       var ry = space * 0.38;
@@ -3441,17 +3452,20 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
         // it went that way, and this is what it was
         ctx.strokeStyle = WARN;
         ctx.lineWidth = Math.max(1, dpr * 1.2);
-        var tip = y - off * space * 0.95;
+        // the chevron points off the canvas, the name stays on it
+        var tip = y - off * space * 0.9;
         ctx.beginPath();
-        ctx.moveTo(x - rx * 0.7, tip + off * space * 0.35);
+        ctx.moveTo(x - rx * 0.7, tip + off * space * 0.3);
         ctx.lineTo(x, tip);
-        ctx.lineTo(x + rx * 0.7, tip + off * space * 0.35);
+        ctx.lineTo(x + rx * 0.7, tip + off * space * 0.3);
         ctx.stroke();
         ctx.fillStyle = WARN;
-        ctx.font = (space * 0.62) + 'px ui-monospace, monospace';
+        ctx.font = (space * 0.6) + 'px ui-monospace, monospace';
         ctx.textAlign = 'center';
-        ctx.fillText(n.note, x, tip - off * space * 0.25 + (off > 0 ? 0 : space * 0.55));
+        ctx.textBaseline = 'middle';
+        ctx.fillText(n.note, x, y + off * space * 0.85);
         ctx.textAlign = 'start';
+        ctx.textBaseline = 'alphabetic';
         return;
       }
 
