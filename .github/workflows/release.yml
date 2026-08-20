@@ -239,6 +239,26 @@ jobs:
                 echo "your config to whatever folder you launched from."
               } > "$NOTES_FILE"
               ;;
+            keyj-cli)
+              TITLE="keyj $VERSION"
+              {
+                echo "Key-J on the command line. Tablature in, notes out, and"
+                echo "any keystroke plays the next one."
+                echo
+                echo '```'
+                echo "pip install keyj"
+                echo "keyj tab solo.txt -o song.txt"
+                echo "keyj render song.txt out.wav --bpm 140"
+                echo '```'
+                echo
+                echo "tab, render and show are standard library only and never"
+                echo "touch your keyboard. The live player is opt-in:"
+                echo "pip install 'keyj[play]' - and it never reads WHICH key"
+                echo "you pressed, only that one was."
+                echo
+                echo "Manual: https://f-keys.com/keyj/manual/"
+              } > "$NOTES_FILE"
+              ;;
             moonbeam)
               TITLE="Moonbeam $VERSION"
               {
