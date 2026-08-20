@@ -4,79 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Log — F-Keys</title>
-<meta name="description" content="A working record of what gets built at F-Keys, kept by Vince Gonzalez.">
+<meta name="description" content="A working record of what gets built at F-Keys.">
 <link rel="canonical" href="https://f-keys.com/log/">
 <meta name="robots" content="index, follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f;
-        --green:#39ff14; --cyan:#00ffcc; --text:#c3dcc3; --dim:#8fae8f; }
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;
-     line-height:1.75;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px)}
-nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:60px;padding:0 2rem;
-    background:rgba(10,14,10,.95);border-bottom:1px solid var(--border);
-    display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:'VT323',monospace;font-size:24px;color:var(--green);letter-spacing:3px}
-.back{color:var(--dim);text-decoration:none}
-.back:hover{color:var(--green)}
-main{max-width:720px;margin:0 auto;padding:8rem 1.5rem 6rem}
-h1{font-family:'VT323',monospace;font-weight:400;font-size:clamp(48px,9vw,76px);
-   color:var(--green);letter-spacing:6px;line-height:1}
-.standfirst{color:var(--dim);margin:.75rem 0 4rem;max-width:34rem}
-.entry{padding-bottom:3rem;margin-bottom:3rem;border-bottom:1px solid var(--border)}
-.entry:last-of-type{border-bottom:0;margin-bottom:0}
-time{display:block;font-family:'VT323',monospace;font-size:1.5rem;color:var(--cyan);
-     letter-spacing:2px;margin-bottom:1rem}
-.entry p{margin-bottom:1rem}
-.entry p:last-child{margin-bottom:0}
-code{color:var(--cyan)}
-a{color:var(--green)}
-.dim{color:var(--dim)}
-footer{border-top:1px solid var(--border);margin-top:4rem;padding-top:1.5rem;
-       color:var(--dim);font-size:.85rem;text-align:center}
-footer a{color:var(--green);text-decoration:none}
-</style>
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:title" content="Log — F-Keys">
+<meta property="og:description" content="A working record of what gets built at F-Keys.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/win98.css">
 </head>
 <body>
+<div class="window raised">
 
-<nav>
-  <div class="logo">F-KEYS / LOG</div>
-  <a href="/" class="back">← Back to F-Keys</a>
-</nav>
+  <div class="titlebar">
+    <span class="t"><span>F-Keys\Log</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+  </div>
 
-<main>
-  <h1>LOG</h1>
-  <p class="standfirst">A working record. What got built, what broke, and what
-     turned out to be true.</p>
+  <nav class="menubar">
+    <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
+    <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
+    <a href="/about.html"><u>H</u>elp</a>
+  </nav>
 
-    <article class="entry">
-      <time datetime="2026-08-19">19 August 2026</time>
+  <div class="toolbar groove">
+    <a class="tool" href="/">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
+  </div>
+
+  <div class="addressbar">
+    <span class="lbl">Address</span>
+    <span class="path sunken"><span>&#128193; F-Keys\Log</span></span>
+  </div>
+
+  <div class="panes">
+    <aside class="tree sunken">
+<ul>
+<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+</li>
+<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+</li>
+<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+</li>
+<li><a href="/about.html"><span class="ic">&#128220;</span>About</a></li>
+<li><a href="/log/"><span class="ic">&#128220;</span>Log</a></li>
+<li><a href="/status/"><span class="ic">&#128220;</span>Status</a></li>
+<li><a href="/papers/"><span class="ic">&#128220;</span>Papers</a></li>
+</ul></li></ul>
+    </aside>
+    <section class="content sunken">
+<div class="doc"><h1>Log</h1><p class="sub">A working record. What got built, what broke, and what turned out to be true.</p><article class="entry"><time datetime="2026-08-19">19 August 2026</time>
       <p>Filed the LLC, though not under the name I wanted. An unrelated F Key LLC has been active in Florida since 2021, which meant F-Keys LLC wasn&#x27;t distinguishable on the record and July&#x27;s filing was refused. Re-filed as <strong>F-Keys Creative LLC</strong> at no cost.</p>
       <p>Spent a while convinced this meant redoing a month of branding, before working out that a registered entity name and a trading name are separate things. The brand is unchanged. The filing cabinet just has a longer label on it.</p>
-      <p>The snapshot ran on its own for the first time overnight — 464 package installs for the week, up seven from the day before.</p>
-    </article>
-    <article class="entry">
-      <time datetime="2026-08-18">18 August 2026</time>
+      <p>The snapshot ran on its own for the first time overnight — 464 package installs for the week, up seven from the day before.</p></article>
+<article class="entry"><time datetime="2026-08-18">18 August 2026</time>
       <p>Built a daily snapshot, because the numbers were arriving in six places I never looked at. The first run reported 457 package installs a week across six packages, and 35 papers with 859 views and 359 downloads. I would have guessed lower on every one of those. <code>@f-keys/tip-widget</code> on its own is 289 a week, which is 289 more than I thought it was.</p>
       <p>Swept the dissolved company name out of everything a person reads — 65 occurrences across twelve files. Most of it was cosmetic. Two things were not. FunDoge&#x27;s terms and privacy pages still named the dissolved entity as the data controller, the IP owner, the party shielded by the limitation of liability, and the indemnitee. A liability clause protecting a company that no longer exists protects nobody. And WikiPolish was stamping a dead domain into the edit summary of every Wikipedia edit made through it, which would have written it into a permanent public record every time the tool worked. Checked the account history first — it had never actually fired. Caught it before it wrote anything.</p>
       <p>Found two forgotten repositories still publishing the retired version of DogeFundMe, both displaying live wallet addresses and asking people to send to them. Turned their pages off.</p>
-      <p>Put a check into CI so the old name can&#x27;t quietly return. It removes the allowed identifiers from a line first and only then looks for the brand word, because the GitHub org and a classifier named in a published paper both have to survive. A blanket find-and-replace would have broken working links on eight pages.</p>
-    </article>
-    <article class="entry">
-      <time datetime="2026-08-17">17 August 2026</time>
+      <p>Put a check into CI so the old name can&#x27;t quietly return. It removes the allowed identifiers from a line first and only then looks for the brand word, because the GitHub org and a classifier named in a published paper both have to survive. A blanket find-and-replace would have broken working links on eight pages.</p></article>
+<article class="entry"><time datetime="2026-08-17">17 August 2026</time>
       <p>Rebuilt f-keys.com. The old page was one undifferentiated grid, and the version before it, on the old domain, had 23 cards of which 17 pointed at nothing. It&#x27;s six sections now — apps, games, tools, hardware, research, properties — and every card carries a status badge, so something in alpha can be visible and honest at the same time rather than hidden or oversold.</p>
       <p>Recovering Key-J turned into a rescue. Its Electron entry point was gone from the working folder and survived in exactly one zip, inside a directory named &quot;zip to sort&quot;. The entire desktop app depended on that file. It lives in a repository now, along with the browser build.</p>
-      <p>Pointed the old company domain at f-keys.com. One redirect, no DNS records touched, email left intact.</p>
-    </article>
+      <p>Pointed the old company domain at f-keys.com. One redirect, no DNS records touched, email left intact.</p></article></div>
+    </section>
+  </div>
 
-  <footer>
-    <p>Kept by Vince Gonzalez · <a href="/">F-Keys</a> · <a href="/status/">status</a></p>
-  </footer>
-</main>
+  <div class="statusbar">
+    <span class="cell groove">3 entries</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
 
+</div>
 </body>
 </html>

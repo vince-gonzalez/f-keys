@@ -1,409 +1,21 @@
 {
   "cloudflare": {
-    "bots_24h": {
-      "AI Assistant": 42,
-      "AI Crawler": 559,
-      "AI Search": 3763,
-      "Advertising & Marketing": 91,
-      "Archiver": 6,
-      "Page Preview": 48,
-      "Search Engine Crawler": 1046,
-      "Search Engine Optimization": 457,
-      "Unverified": 32532
-    },
-    "bots_error": null,
     "days": 7,
-    "error": null,
-    "sites": [
-      {
-        "days_returned": 7,
-        "page_views": 21173,
-        "requests": 43767,
-        "site": "5best2buy.com",
-        "threats": 33,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 63.8,
-            "requests": 27920
-          },
-          {
-            "country": "RU",
-            "pct": 4.7,
-            "requests": 2057
-          },
-          {
-            "country": "BE",
-            "pct": 4.5,
-            "requests": 1984
-          },
-          {
-            "country": "NL",
-            "pct": 3.1,
-            "requests": 1344
-          },
-          {
-            "country": "BR",
-            "pct": 3.1,
-            "requests": 1341
-          }
-        ],
-        "uniques": 7605
-      },
-      {
-        "days_returned": 7,
-        "page_views": 5711,
-        "requests": 86566,
-        "site": "f-keys.com",
-        "threats": 37,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 37.4,
-            "requests": 32334
-          },
-          {
-            "country": "HK",
-            "pct": 10.3,
-            "requests": 8944
-          },
-          {
-            "country": "IT",
-            "pct": 9.2,
-            "requests": 7983
-          },
-          {
-            "country": "ES",
-            "pct": 8.1,
-            "requests": 7024
-          },
-          {
-            "country": "IN",
-            "pct": 8.1,
-            "requests": 6975
-          }
-        ],
-        "uniques": 2363
-      },
-      {
-        "days_returned": 7,
-        "page_views": 2720,
-        "requests": 21637,
-        "site": "opticquiz.com",
-        "threats": 69,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 34.1,
-            "requests": 7381
-          },
-          {
-            "country": "MX",
-            "pct": 9.4,
-            "requests": 2024
-          },
-          {
-            "country": "FR",
-            "pct": 9.0,
-            "requests": 1940
-          },
-          {
-            "country": "NL",
-            "pct": 6.4,
-            "requests": 1374
-          },
-          {
-            "country": "JP",
-            "pct": 4.1,
-            "requests": 896
-          }
-        ],
-        "uniques": 1992
-      },
-      {
-        "days_returned": 7,
-        "page_views": 1478,
-        "requests": 15385,
-        "site": "poticas.com",
-        "threats": 32,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 37.3,
-            "requests": 5733
-          },
-          {
-            "country": "NL",
-            "pct": 8.3,
-            "requests": 1271
-          },
-          {
-            "country": "SG",
-            "pct": 7.5,
-            "requests": 1151
-          },
-          {
-            "country": "BR",
-            "pct": 6.7,
-            "requests": 1036
-          },
-          {
-            "country": "HK",
-            "pct": 5.5,
-            "requests": 843
-          }
-        ],
-        "uniques": 1631
-      },
-      {
-        "days_returned": 7,
-        "page_views": 461,
-        "requests": 26264,
-        "site": "zengine.org",
-        "threats": 27,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 42.5,
-            "requests": 11151
-          },
-          {
-            "country": "CH",
-            "pct": 5.6,
-            "requests": 1465
-          },
-          {
-            "country": "MX",
-            "pct": 5.4,
-            "requests": 1420
-          },
-          {
-            "country": "PL",
-            "pct": 5.1,
-            "requests": 1340
-          },
-          {
-            "country": "NO",
-            "pct": 4.9,
-            "requests": 1286
-          }
-        ],
-        "uniques": 1286
-      },
-      {
-        "days_returned": 7,
-        "page_views": 580,
-        "requests": 9625,
-        "site": "trailer-load.com",
-        "threats": 20,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 40.5,
-            "requests": 3894
-          },
-          {
-            "country": "CA",
-            "pct": 14.5,
-            "requests": 1396
-          },
-          {
-            "country": "BR",
-            "pct": 5.8,
-            "requests": 560
-          },
-          {
-            "country": "CH",
-            "pct": 5.6,
-            "requests": 538
-          },
-          {
-            "country": "NO",
-            "pct": 4.6,
-            "requests": 438
-          }
-        ],
-        "uniques": 1157
-      },
-      {
-        "days_returned": 7,
-        "page_views": 630,
-        "requests": 18002,
-        "site": "tipstreams.com",
-        "threats": 42,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 27.3,
-            "requests": 4912
-          },
-          {
-            "country": "FR",
-            "pct": 24.6,
-            "requests": 4431
-          },
-          {
-            "country": "JP",
-            "pct": 10.3,
-            "requests": 1862
-          },
-          {
-            "country": "MX",
-            "pct": 5.2,
-            "requests": 929
-          },
-          {
-            "country": "CA",
-            "pct": 4.8,
-            "requests": 861
-          }
-        ],
-        "uniques": 862
-      },
-      {
-        "days_returned": 7,
-        "page_views": 377,
-        "requests": 11288,
-        "site": "sympolar.com",
-        "threats": 45,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 27.9,
-            "requests": 3152
-          },
-          {
-            "country": "SG",
-            "pct": 17.1,
-            "requests": 1925
-          },
-          {
-            "country": "BE",
-            "pct": 11.4,
-            "requests": 1282
-          },
-          {
-            "country": "CH",
-            "pct": 8.8,
-            "requests": 994
-          },
-          {
-            "country": "PL",
-            "pct": 4.8,
-            "requests": 543
-          }
-        ],
-        "uniques": 653
-      },
-      {
-        "days_returned": 7,
-        "page_views": 587,
-        "requests": 6378,
-        "site": "dogefundme.com",
-        "threats": 10,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 32.2,
-            "requests": 2053
-          },
-          {
-            "country": "FR",
-            "pct": 22.7,
-            "requests": 1448
-          },
-          {
-            "country": "CN",
-            "pct": 14.0,
-            "requests": 890
-          },
-          {
-            "country": "MY",
-            "pct": 6.6,
-            "requests": 421
-          },
-          {
-            "country": "PL",
-            "pct": 4.8,
-            "requests": 306
-          }
-        ],
-        "uniques": 637
-      },
-      {
-        "days_returned": 7,
-        "page_views": 233,
-        "requests": 8076,
-        "site": "epistemend.org",
-        "threats": 29,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 30.7,
-            "requests": 2482
-          },
-          {
-            "country": "SG",
-            "pct": 20.2,
-            "requests": 1634
-          },
-          {
-            "country": "ID",
-            "pct": 6.4,
-            "requests": 520
-          },
-          {
-            "country": "IT",
-            "pct": 4.3,
-            "requests": 348
-          },
-          {
-            "country": "ES",
-            "pct": 4.3,
-            "requests": 348
-          }
-        ],
-        "uniques": 602
-      },
-      {
-        "days_returned": 7,
-        "page_views": 0,
-        "requests": 97,
-        "site": "goy-slop.org",
-        "threats": 0,
-        "top_countries": [
-          {
-            "country": "RU",
-            "pct": 97.9,
-            "requests": 95
-          },
-          {
-            "country": "US",
-            "pct": 2.1,
-            "requests": 2
-          }
-        ],
-        "uniques": 7
-      }
-    ],
+    "error": "skipped: no CF_API_TOKEN",
+    "sites": [],
     "totals": {
-      "page_views": 33950,
-      "threats": 344,
-      "uniques": 18795
-    },
-    "window": {
-      "since": "2026-08-13",
-      "until": "2026-08-19"
+      "page_views": null,
+      "uniques": null
     }
   },
   "date": "2026-08-20",
-  "generated_at": "2026-08-20 01:35 UTC",
+  "generated_at": "2026-08-20 12:49 UTC",
   "github": [
     {
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-19T19:11:45Z",
+      "pushed_at": "2026-08-20T09:55:36Z",
       "repo": "f-keys",
       "stars": 1
     },
@@ -419,7 +31,7 @@
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-15T13:51:19Z",
+      "pushed_at": "2026-08-20T11:25:18Z",
       "repo": "opticquiz.com",
       "stars": 1
     },
@@ -483,7 +95,7 @@
       "archived": false,
       "forks": 0,
       "open_issues": 0,
-      "pushed_at": "2026-08-19T17:36:12Z",
+      "pushed_at": "2026-08-20T11:37:56Z",
       "repo": "qv",
       "stars": 1
     },
@@ -493,7 +105,7 @@
       "open_issues": 0,
       "pushed_at": "2026-08-18T16:35:31Z",
       "repo": "fytecraft.com",
-      "stars": 1
+      "stars": 0
     },
     {
       "archived": false,
@@ -515,16 +127,16 @@
   "mode": "daily",
   "npm": [
     {
-      "all_time": 390,
+      "all_time": 398,
       "error": null,
       "package": "@f-keys/tip-widget",
-      "weekly": 298
+      "weekly": 306
     },
     {
-      "all_time": 676,
+      "all_time": 681,
       "error": null,
       "package": "opticquiz-eye",
-      "weekly": 29
+      "weekly": 24
     },
     {
       "all_time": 243,
@@ -536,17 +148,17 @@
       "all_time": 352,
       "error": null,
       "package": "opticquiz-cvd-mcp",
-      "weekly": 8
+      "weekly": 7
     }
   ],
   "pypi": [
     {
       "all_time": 888,
-      "daily": 1,
-      "error": null,
-      "monthly": 888,
+      "daily": null,
+      "error": "HTTP 429",
+      "monthly": null,
       "package": "gonzalgo",
-      "weekly": 88
+      "weekly": null
     },
     {
       "all_time": 384,
@@ -559,92 +171,92 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here.",
   "summary": {
-    "github_stars": 16,
-    "npm_weekly": 341,
-    "package_weekly": 437,
-    "page_views_7d": 33950,
+    "github_stars": 15,
+    "npm_weekly": 343,
+    "package_weekly": 351,
+    "page_views_7d": null,
     "properties_total": 11,
     "properties_up": 11,
-    "pypi_weekly": 96,
-    "visitors_7d": 18795,
-    "zenodo_downloads": 360,
+    "pypi_weekly": 8,
+    "visitors_7d": null,
+    "zenodo_downloads": 363,
     "zenodo_records": 35,
-    "zenodo_views": 909
+    "zenodo_views": 916
   },
   "uptime": [
     {
       "error": null,
-      "ms": 164,
+      "ms": 172,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
     },
     {
       "error": null,
-      "ms": 196,
+      "ms": 548,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
     },
     {
       "error": null,
-      "ms": 288,
+      "ms": 164,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
     },
     {
       "error": null,
-      "ms": 145,
+      "ms": 139,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
     },
     {
       "error": null,
-      "ms": 389,
+      "ms": 175,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
     },
     {
       "error": null,
-      "ms": 230,
+      "ms": 201,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
     },
     {
       "error": null,
-      "ms": 139,
+      "ms": 122,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
     },
     {
       "error": null,
-      "ms": 453,
+      "ms": 284,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
     },
     {
       "error": null,
-      "ms": 141,
+      "ms": 136,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
     },
     {
       "error": null,
-      "ms": 71,
+      "ms": 76,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
     },
     {
       "error": null,
-      "ms": 139,
+      "ms": 252,
       "name": "zengin.es",
       "up": true,
       "url": "https://zengin.es"
@@ -666,16 +278,16 @@
         "id": "19350848",
         "title": "The Formal Logic of Modulign",
         "unique_downloads": 20,
-        "unique_views": 45,
-        "views": 45
+        "unique_views": 46,
+        "views": 46
       },
       {
         "downloads": 18,
         "id": "19351055",
         "title": "Synthetic Content As Epistemic Category",
         "unique_downloads": 17,
-        "unique_views": 54,
-        "views": 55
+        "unique_views": 56,
+        "views": 57
       },
       {
         "downloads": 17,
@@ -706,8 +318,8 @@
         "id": "19559602",
         "title": "Modulign Standard:  Automated Classifier Certification Framework",
         "unique_downloads": 11,
-        "unique_views": 27,
-        "views": 27
+        "unique_views": 28,
+        "views": 28
       },
       {
         "downloads": 8,
@@ -794,16 +406,16 @@
         "id": "19726401",
         "title": "The Modulign Correction Protocol: Formal Specification for Append-Only Error Resolution in DAG-OR",
         "unique_downloads": 5,
-        "unique_views": 9,
-        "views": 11
+        "unique_views": 10,
+        "views": 12
       },
       {
         "downloads": 7,
         "id": "19726407",
         "title": "The Human Attestation Protocol: Confrontation Clause Compliance for Automated Classifications in DAG-OR",
         "unique_downloads": 6,
-        "unique_views": 15,
-        "views": 17
+        "unique_views": 16,
+        "views": 18
       },
       {
         "downloads": 6,
@@ -902,12 +514,12 @@
         "views": 74
       },
       {
-        "downloads": 8,
+        "downloads": 11,
         "id": "21853489",
         "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
-        "unique_downloads": 7,
-        "unique_views": 16,
-        "views": 17
+        "unique_downloads": 10,
+        "unique_views": 17,
+        "views": 18
       },
       {
         "downloads": 5,

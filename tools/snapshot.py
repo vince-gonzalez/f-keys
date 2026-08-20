@@ -44,6 +44,8 @@ import datetime
 import urllib.request
 import urllib.error
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except (AttributeError, ValueError):
@@ -573,77 +575,41 @@ def render(snap, prev):
     err_html = ("<ul class='errs'>" + "".join(f"<li>{e}</li>" for e in errs) + "</ul>") \
         if errs else "<p class='dim'>All sources reported.</p>"
 
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Status — F-Keys</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root {{ --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14;
-        --cyan:#00ffcc; --amber:#ffb000; --red:#ff4444; --text:#c3dcc3; --dim:#8fae8f; }}
-*{{margin:0;padding:0;box-sizing:border-box}}
-body{{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;
-     line-height:1.6;padding:2rem 1rem 4rem}}
-.wrap{{max-width:1100px;margin:0 auto}}
-h1{{font-family:'VT323',monospace;font-weight:400;font-size:3rem;color:var(--green);letter-spacing:5px}}
-.sub{{color:var(--dim);margin-bottom:2.5rem}}
-.kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:3rem}}
-.kpi{{background:var(--panel);border:1px solid var(--border);padding:1.2rem}}
-.kpi .v{{font-family:'VT323',monospace;font-size:2.6rem;color:var(--green);line-height:1}}
-.kpi .l{{font-size:.8rem;color:var(--dim);letter-spacing:2px;text-transform:uppercase}}
-.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}}
-.card{{background:var(--panel);border:1px solid var(--border);padding:1.5rem;overflow-x:auto}}
-.card h2{{font-family:'VT323',monospace;font-weight:400;font-size:1.5rem;color:var(--green);
-         letter-spacing:2px;margin-bottom:1rem}}
-table{{width:100%;border-collapse:collapse;font-size:.9rem}}
-td{{padding:5px 0;border-bottom:1px solid rgba(31,53,31,.5);vertical-align:top}}
-td.num{{text-align:right;white-space:nowrap;padding-left:1rem}}
-.ok{{color:var(--green)}} .down{{color:var(--red)}} .up{{color:var(--cyan)}} .dim{{color:var(--dim)}}
-.errs{{list-style:none;color:var(--amber);font-size:.85rem}}
-.strip{{font-size:.85rem;margin:-1.8rem 0 2.5rem}}
-footer{{margin-top:3rem;color:var(--dim);font-size:.8rem;text-align:center}}
-a{{color:var(--green)}}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <h1>STATUS</h1>
-  <p class="sub">Snapshot generated {snap['generated_at']} · <a href="/">back to F-Keys</a> · <a href="/log/">log</a></p>
-  <p class="strip">{uptime_strip}</p>
+    import buildsite as B
 
-  <div class="kpis">
-    <div class="kpi"><div class="v">{fmt(s['visitors_7d'])}</div><div class="l">Visitors · 7d</div></div>
-    <div class="kpi"><div class="v">{fmt(s['page_views_7d'])}</div><div class="l">Page views · 7d</div></div>
-    <div class="kpi"><div class="v">{s['package_weekly']}</div><div class="l">Package installs / wk</div></div>
-    <div class="kpi"><div class="v">{s['zenodo_views']}</div><div class="l">Paper views</div></div>
-    <div class="kpi"><div class="v">{s['zenodo_downloads']}</div><div class="l">Paper downloads</div></div>
-  </div>
+    cards = (
+        '<div class="doc"><h1>Status</h1>'
+        '<p class="sub">Generated {gen}. {strip}</p>'
+        '<table class="facts">'
+        '<tr><th>Visitors &middot; 7d</th><td>{v}</td></tr>'
+        '<tr><th>Page views &middot; 7d</th><td>{pv}</td></tr>'
+        '<tr><th>Package installs / wk</th><td>{pk}</td></tr>'
+        '<tr><th>Paper views</th><td>{pvw}</td></tr>'
+        '<tr><th>Paper downloads</th><td>{pd}</td></tr>'
+        '</table>'
+        '<h2>Traffic &mdash; visitors / page views, 7d</h2>{traffic}'
+        '<h2>Packages &mdash; week / all time</h2><table class="facts">{pkg}</table>'
+        '<h2>Who is asking &mdash; 24h sample</h2>{mix}'
+        '<h2>Papers &mdash; views / downloads</h2><table class="facts">{papers}</table>'
+        '<h2>Sources not reporting</h2>{errs}'
+        '</div>'
+    ).format(gen=snap["generated_at"], strip=re.sub(r"<[^>]+>", "", uptime_strip),
+             v=fmt(s.get("visitors_7d")), pv=fmt(s.get("page_views_7d")),
+             pk=s["package_weekly"], pvw=s["zenodo_views"], pd=s["zenodo_downloads"],
+             traffic=traffic_html,
+             pkg="".join("<tr><th>{}</th><td>{} / {} all time</td></tr>".format(
+                 x["package"], fmt(x.get("weekly")), fmt(x.get("all_time")))
+                 for x in snap["npm"] + snap["pypi"]),
+             mix=mix_html,
+             papers="".join("<tr><th>{}</th><td>{} views / {} downloads</td></tr>".format(
+                 (r["title"] or "")[:58], fmt(r.get("views")), fmt(r.get("downloads")))
+                 for r in top_papers) or "<tr><td>no data</td></tr>",
+             errs=err_html)
 
-  <div class="grid">
-    <div class="card"><h2>TRAFFIC — visitors / page views, 7d</h2>{traffic_html}</div>
-    <div class="card"><h2>PACKAGES — week / all time</h2><table>{pkg_rows}</table></div>
-    <div class="card"><h2>TRAFFIC MIX — who is actually asking</h2>{mix_html}</div>
-    <div class="card"><h2>PAPERS — views / downloads</h2><table>{paper_rows}</table></div>
-    <div class="card"><h2>{repo_title}</h2><table>{repo_rows}</table></div>
-    <div class="card"><h2>MOVEMENT</h2><table>
-      {row('Package installs/wk', s['package_weekly'], dl('package_weekly'))}
-      {row('Paper views',         s['zenodo_views'],   dl('zenodo_views'))}
-      {row('Paper downloads',     s['zenodo_downloads'], dl('zenodo_downloads'))}
-      {row('GitHub stars',        s['github_stars'],   dl('github_stars'))}
-    </table><p class="dim" style="margin-top:.8rem;font-size:.8rem">
-      {'vs ' + prev['date'] if prev else 'no earlier snapshot to compare'}</p></div>
-    <div class="card"><h2>SOURCES NOT REPORTING</h2>{err_html}</div>
-  </div>
-
-  <footer>F-Keys · generated by tools/snapshot.py · history in status/data/</footer>
-</div>
-</body>
-</html>
-"""
+    return B.shell("Status \u2014 F-Keys", "F-Keys\\Status", cards, "live numbers",
+                   description="Measured traffic, installs and paper activity "
+                               "across every F-Keys property.",
+                   canonical="https://f-keys.com/status/")
 
 
 # ── MAIN ─────────────────────────────────────────────────────

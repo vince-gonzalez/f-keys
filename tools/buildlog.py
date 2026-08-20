@@ -35,6 +35,8 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except (AttributeError, ValueError):
@@ -100,81 +102,29 @@ def parse(md):
 
 
 def render(entries):
+    """
+    Wrap the entries in the shared Explorer shell. The log used to carry its
+    own stylesheet, which is exactly how it drifted into looking like a
+    different site from the rest of f-keys.com.
+    """
+    import buildsite as B
+
     items = []
     for iso, blocks in entries:
-        body = "\n      ".join(f"<p>{inline(b)}</p>" for b in blocks)
+        body = "\n      ".join("<p>{}</p>".format(inline(b)) for b in blocks)
         items.append(
-            f'''    <article class="entry">
-      <time datetime="{iso}">{pretty_date(iso)}</time>
-      {body}
-    </article>''')
-    body = "\n".join(items) or '    <p class="dim">Nothing logged yet.</p>'
+            '<article class="entry"><time datetime="{}">{}</time>\n      {}</article>'
+            .format(iso, pretty_date(iso), body))
+    inner = "\n".join(items) or '<p class="muted">Nothing logged yet.</p>'
 
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log — F-Keys</title>
-<meta name="description" content="A working record of what gets built at F-Keys, kept by Vince Gonzalez.">
-<link rel="canonical" href="https://f-keys.com/log/">
-<meta name="robots" content="index, follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root {{ --bg:#0a0e0a; --panel:#111911; --border:#1f351f;
-        --green:#39ff14; --cyan:#00ffcc; --text:#c3dcc3; --dim:#8fae8f; }}
-*{{margin:0;padding:0;box-sizing:border-box}}
-body{{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;
-     line-height:1.75;overflow-x:hidden}}
-body::before{{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px)}}
-nav{{position:fixed;top:0;left:0;right:0;z-index:10000;height:60px;padding:0 2rem;
-    background:rgba(10,14,10,.95);border-bottom:1px solid var(--border);
-    display:flex;align-items:center;justify-content:space-between}}
-.logo{{font-family:'VT323',monospace;font-size:24px;color:var(--green);letter-spacing:3px}}
-.back{{color:var(--dim);text-decoration:none}}
-.back:hover{{color:var(--green)}}
-main{{max-width:720px;margin:0 auto;padding:8rem 1.5rem 6rem}}
-h1{{font-family:'VT323',monospace;font-weight:400;font-size:clamp(48px,9vw,76px);
-   color:var(--green);letter-spacing:6px;line-height:1}}
-.standfirst{{color:var(--dim);margin:.75rem 0 4rem;max-width:34rem}}
-.entry{{padding-bottom:3rem;margin-bottom:3rem;border-bottom:1px solid var(--border)}}
-.entry:last-of-type{{border-bottom:0;margin-bottom:0}}
-time{{display:block;font-family:'VT323',monospace;font-size:1.5rem;color:var(--cyan);
-     letter-spacing:2px;margin-bottom:1rem}}
-.entry p{{margin-bottom:1rem}}
-.entry p:last-child{{margin-bottom:0}}
-code{{color:var(--cyan)}}
-a{{color:var(--green)}}
-.dim{{color:var(--dim)}}
-footer{{border-top:1px solid var(--border);margin-top:4rem;padding-top:1.5rem;
-       color:var(--dim);font-size:.85rem;text-align:center}}
-footer a{{color:var(--green);text-decoration:none}}
-</style>
-</head>
-<body>
+    doc = ('<div class="doc"><h1>Log</h1>'
+           '<p class="sub">A working record. What got built, what broke, and '
+           'what turned out to be true.</p>' + inner + '</div>')
 
-<nav>
-  <div class="logo">F-KEYS / LOG</div>
-  <a href="/" class="back">← Back to F-Keys</a>
-</nav>
-
-<main>
-  <h1>LOG</h1>
-  <p class="standfirst">A working record. What got built, what broke, and what
-     turned out to be true.</p>
-
-{body}
-
-  <footer>
-    <p>Kept by Vince Gonzalez · <a href="/">F-Keys</a> · <a href="/status/">status</a></p>
-  </footer>
-</main>
-
-</body>
-</html>
-"""
+    return B.shell("Log \u2014 F-Keys", "F-Keys\\Log", doc,
+                   "{} entr{}".format(len(entries), "y" if len(entries) == 1 else "ies"),
+                   description="A working record of what gets built at F-Keys.",
+                   canonical="https://f-keys.com/log/")
 
 
 def main():

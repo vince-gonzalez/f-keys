@@ -4,150 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stream Sniper — F-Keys</title>
-<meta name="description" content="Turns a spare mini PC into a set-top box for one thing: the moment your channel goes live, it's fullscreen on the TV. Standby clock the rest of the time.">
+<meta name="description" content="They go live. It is on the TV.">
 <link rel="canonical" href="https://f-keys.com/streamsniper/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0a0e0a; --panel: #111911; --border: #1f351f;
-  --green: #39ff14; --cyan: #00ffcc; --text: #c3dcc3; --dim: #8fae8f;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background: var(--bg); color: var(--text);
-  font-family: 'Share Tech Mono', monospace;
-  line-height: 1.6; overflow-x: hidden;
-}
-body::before {
-  content: ''; position: fixed; inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
-  pointer-events: none; z-index: 9000;
-}
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-  background: rgba(10,14,10,0.95); border-bottom: 1px solid var(--border);
-  padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
-}
-.logo { font-family: 'VT323', monospace; font-weight: 400; font-size: 24px; color: var(--green); letter-spacing: 3px; }
-.back-link { color: var(--dim); text-decoration: none; }
-.hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 2rem 4rem; }
-.hero-content { max-width: 820px; margin: 0 auto; text-align: center; }
-.hero h1 {
-  font-family: 'VT323', monospace; font-weight: 400; font-size: clamp(46px, 9vw, 88px);
-  color: var(--green); letter-spacing: 5px; margin-bottom: 1rem;
-}
-.tagline { font-size: 1.5rem; color: var(--dim); margin-bottom: 2.5rem; }
-.terminal {
-  background: var(--panel); border: 1px solid var(--border);
-  padding: 20px 24px; margin: 2rem auto; max-width: 640px;
-  text-align: left; font-size: 14px;
-}
-.t-prompt { color: var(--green); }
-.t-out.ok { color: #00c97a; }
-.t-out.dim { color: var(--dim); }
-.features-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem; max-width: 1100px; margin: 4rem auto;
-}
-.feature-card { background: var(--panel); border: 1px solid var(--border); padding: 2rem; transition: all 0.2s; }
-.feature-card:hover { border-color: var(--green); transform: translateY(-4px); }
-.btn {
-  font-family: 'VT323', monospace; font-weight: 400; font-size: 1.4rem; padding: 14px 36px;
-  border: 2px solid var(--green); color: var(--green); background: transparent;
-  cursor: pointer; display: inline-block; margin: 0.5rem; text-decoration: none;
-}
-.btn:hover { background: var(--green); color: #0a0e0a; }
-footer { text-align: center; padding: 3rem 2rem; color: var(--dim); border-top: 1px solid var(--border); }
-footer a { color: var(--green); }
-</style>
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:title" content="Stream Sniper — F-Keys">
+<meta property="og:description" content="They go live. It is on the TV.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/win98.css">
 </head>
 <body>
+<div class="window raised">
 
-<nav>
-  <div class="logo">F-KEYS / STREAM SNIPER</div>
-  <a href="/" class="back-link">← Back to F-Keys</a>
-</nav>
-
-<section class="hero">
-  <div class="hero-content">
-    <h1>STREAM SNIPER</h1>
-    <p class="tagline">THEY GO LIVE.<br>IT'S ON THE TV.</p>
-    <p style="max-width:580px;margin:0 auto 2rem;color:var(--dim);">
-      Point a spare mini PC at the television and give it a list of Twitch channels.
-      It shows a clock until someone goes live, then puts them fullscreen with the
-      ads stripped out. When the stream ends, the clock comes back.
-    </p>
-
-    <div class="terminal">
-      <div><span class="t-out dim">20:00  💤 all 3 offline — next check in 300s</span></div>
-      <div><span class="t-out ok">20:05  🟢 channel detected — going live!</span></div>
-      <div><span class="t-out ok">20:05  Stream launched (PID 4821)</span></div>
-      <div><span class="t-out dim">22:31  🔴 ended — returning to standby</span></div>
-    </div>
-
-    <div>
-      <a href="https://github.com/zengineco/f-keys/tree/main/streamsniper" class="btn" target="_blank" rel="noopener">GET STREAM SNIPER</a>
-    </div>
+  <div class="titlebar">
+    <span class="t"><span>F-Keys\Hardware\Stream Sniper</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
   </div>
-</section>
 
-<section id="features" style="padding:6rem 2rem;background:var(--panel);">
-  <h2 style="text-align:center;font-family:'VT323',monospace;font-weight:400;font-size:2.5rem;color:var(--green);margin-bottom:3rem;">HOW IT BEHAVES</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <h3 style="color:var(--green);">YOUR CHANNELS</h3>
-      <p>One username per line in a text file. Order is priority — if two are live,
-         the one nearer the top gets the screen.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">NEVER INTERRUPTS</h3>
-      <p>A stream that's already playing runs to the end. Nobody higher in the list
-         can cut in halfway through.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">NO ADS IN THE PATH</h3>
-      <p>Plays through Streamlink into VLC with low latency, which keeps the
-         pre-roll out of the way.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">STANDBY CLOCK</h3>
-      <p>A fullscreen clock while everything is offline, so the screen is never
-         just a black rectangle or a desktop.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">STARTS ITSELF</h3>
-      <p>Installs as a systemd service and comes up on boot. Power cut, then power
-         back, and it carries on.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">EDIT AND WALK AWAY</h3>
-      <p>Changing the channel list applies at the next check. No restart, no terminal.</p>
-    </div>
+  <nav class="menubar">
+    <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
+    <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
+    <a href="/about.html"><u>H</u>elp</a>
+  </nav>
+
+  <div class="toolbar groove">
+    <a class="tool" href="/hardware.html">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/hardware.html">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
   </div>
-</section>
 
-<section id="install" style="padding:6rem 2rem;">
-  <h2 style="text-align:center;font-family:'VT323',monospace;font-weight:400;font-size:2.5rem;color:var(--green);">SETTING IT UP</h2>
-  <div style="max-width:700px;margin:3rem auto;background:#0d120d;border:1px solid var(--border);padding:2rem;">
-    <ol style="font-size:1.1rem;line-height:2.2;">
-      <li>A mini PC on Ubuntu or Debian, plugged into a display</li>
-      <li><code style="background:#000;color:var(--green);">bash install.sh</code></li>
-      <li>Type the channel names when it asks</li>
-      <li><code style="background:#000;color:var(--green);">sudo systemctl start streamsniper@$USER</code></li>
-    </ol>
-    <p style="margin-top:1.5rem;font-size:0.95rem;color:var(--dim);">
-      The installer pulls in Streamlink, VLC, and pygame, then registers the service
-      so it starts on every boot. Change the list any time in
-      <code>~/.streamsniper/channels.txt</code>.
-    </p>
+  <div class="addressbar">
+    <span class="lbl">Address</span>
+    <span class="path sunken"><span>&#128193; F-Keys\Hardware\Stream Sniper</span></span>
   </div>
-</section>
 
-<footer>
-  <p>Stream Sniper is a product of <a href="/">F-Keys</a></p>
-  <p style="margin-top:1rem;font-size:0.9rem;">© 2026 F-Keys • Vincent Gonzalez</p>
-</footer>
+  <div class="panes">
+    <aside class="tree sunken">
+<ul>
+<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<ul class="kids">
+<li><a class="on" href="/streamsniper/"><span class="ic">&#128196;</span>Stream Sniper</a></li>
+<li><a class="" href="/moonbeam/"><span class="ic">&#128196;</span>Moonbeam</a></li>
+</ul>
+</li>
+<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+</li>
+<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+</li>
+<li><a href="/about.html"><span class="ic">&#128220;</span>About</a></li>
+<li><a href="/log/"><span class="ic">&#128220;</span>Log</a></li>
+<li><a href="/status/"><span class="ic">&#128220;</span>Status</a></li>
+<li><a href="/papers/"><span class="ic">&#128220;</span>Papers</a></li>
+</ul></li></ul>
+    </aside>
+    <section class="content sunken">
+<div class="doc"><h1>Stream Sniper</h1><p class="sub">They go live. It is on the TV.</p><table class="facts"><tr><th>Licence</th><td>MIT</td></tr><tr><th>Platform</th><td>Debian or Ubuntu</td></tr><tr><th>Needs</th><td>Streamlink, VLC, pygame</td></tr><tr><th>Starts</th><td>systemd, on boot</td></tr></table>
+<h2>What it does</h2>
+<p>Point a spare mini PC at the television and give it a list of Twitch channels. It shows
+a clock until someone goes live, then puts them fullscreen with the ads out of the path.
+When the stream ends, the clock comes back.</p>
+<h2>How it behaves</h2>
+<p>One username per line in a text file, and order is priority: if two are live, the one
+nearer the top gets the screen. A stream already playing runs to the end, so nobody higher
+in the list can cut in halfway through. Edits apply at the next check, with no restart.</p>
+<pre>bash install.sh
+<b>sudo systemctl start streamsniper@USER</b></pre>
+<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/streamsniper">Get the source</a></div></div>
+    </section>
+  </div>
 
+  <div class="statusbar">
+    <span class="cell groove">1 item</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
+
+</div>
 </body>
 </html>

@@ -3,68 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
 <title>Status — F-Keys</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14;
-        --cyan:#00ffcc; --amber:#ffb000; --red:#ff4444; --text:#c3dcc3; --dim:#8fae8f; }
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;
-     line-height:1.6;padding:2rem 1rem 4rem}
-.wrap{max-width:1100px;margin:0 auto}
-h1{font-family:'VT323',monospace;font-weight:400;font-size:3rem;color:var(--green);letter-spacing:5px}
-.sub{color:var(--dim);margin-bottom:2.5rem}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:3rem}
-.kpi{background:var(--panel);border:1px solid var(--border);padding:1.2rem}
-.kpi .v{font-family:'VT323',monospace;font-size:2.6rem;color:var(--green);line-height:1}
-.kpi .l{font-size:.8rem;color:var(--dim);letter-spacing:2px;text-transform:uppercase}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
-.card{background:var(--panel);border:1px solid var(--border);padding:1.5rem;overflow-x:auto}
-.card h2{font-family:'VT323',monospace;font-weight:400;font-size:1.5rem;color:var(--green);
-         letter-spacing:2px;margin-bottom:1rem}
-table{width:100%;border-collapse:collapse;font-size:.9rem}
-td{padding:5px 0;border-bottom:1px solid rgba(31,53,31,.5);vertical-align:top}
-td.num{text-align:right;white-space:nowrap;padding-left:1rem}
-.ok{color:var(--green)} .down{color:var(--red)} .up{color:var(--cyan)} .dim{color:var(--dim)}
-.errs{list-style:none;color:var(--amber);font-size:.85rem}
-.strip{font-size:.85rem;margin:-1.8rem 0 2.5rem}
-footer{margin-top:3rem;color:var(--dim);font-size:.8rem;text-align:center}
-a{color:var(--green)}
-</style>
+<meta name="description" content="Measured traffic, installs and paper activity across every F-Keys property.">
+<link rel="canonical" href="https://f-keys.com/status/">
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:title" content="Status — F-Keys">
+<meta property="og:description" content="Measured traffic, installs and paper activity across every F-Keys property.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/win98.css">
 </head>
 <body>
-<div class="wrap">
-  <h1>STATUS</h1>
-  <p class="sub">Snapshot generated 2026-08-20 01:35 UTC · <a href="/">back to F-Keys</a> · <a href="/log/">log</a></p>
-  <p class="strip"><span class='ok'>All 11 properties responding</span> <span class='dim'>· slowest modulign.org 453ms</span></p>
+<div class="window raised">
 
-  <div class="kpis">
-    <div class="kpi"><div class="v">18,795</div><div class="l">Visitors · 7d</div></div>
-    <div class="kpi"><div class="v">33,950</div><div class="l">Page views · 7d</div></div>
-    <div class="kpi"><div class="v">437</div><div class="l">Package installs / wk</div></div>
-    <div class="kpi"><div class="v">909</div><div class="l">Paper views</div></div>
-    <div class="kpi"><div class="v">360</div><div class="l">Paper downloads</div></div>
+  <div class="titlebar">
+    <span class="t"><span>F-Keys\Status</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
   </div>
 
-  <div class="grid">
-    <div class="card"><h2>TRAFFIC — visitors / page views, 7d</h2><table><tr><td>5best2buy.com<br><span class='dim' style='font-size:.8rem'>US 63.8%</span></td><td class='num'>7,605 <span class='dim'>/ 21,173 pv</span></td></tr><tr><td>f-keys.com<br><span class='dim' style='font-size:.8rem'>US 37.4%</span></td><td class='num'>2,363 <span class='dim'>/ 5,711 pv</span></td></tr><tr><td>opticquiz.com<br><span class='dim' style='font-size:.8rem'>US 34.1%</span></td><td class='num'>1,992 <span class='dim'>/ 2,720 pv</span></td></tr><tr><td>poticas.com<br><span class='dim' style='font-size:.8rem'>US 37.3%</span></td><td class='num'>1,631 <span class='dim'>/ 1,478 pv</span></td></tr><tr><td>zengine.org<br><span class='dim' style='font-size:.8rem'>US 42.5%</span></td><td class='num'>1,286 <span class='dim'>/ 461 pv</span></td></tr><tr><td>trailer-load.com<br><span class='dim' style='font-size:.8rem'>US 40.5%</span></td><td class='num'>1,157 <span class='dim'>/ 580 pv</span></td></tr><tr><td>tipstreams.com<br><span class='dim' style='font-size:.8rem'>US 27.3%</span></td><td class='num'>862 <span class='dim'>/ 630 pv</span></td></tr><tr><td>sympolar.com<br><span class='dim' style='font-size:.8rem'>US 27.9%</span></td><td class='num'>653 <span class='dim'>/ 377 pv</span></td></tr><tr><td>dogefundme.com<br><span class='dim' style='font-size:.8rem'>US 32.2%</span></td><td class='num'>637 <span class='dim'>/ 587 pv</span></td></tr><tr><td>epistemend.org<br><span class='dim' style='font-size:.8rem'>US 30.7%</span></td><td class='num'>602 <span class='dim'>/ 233 pv</span></td></tr><tr><td>goy-slop.org<br><span class='dim' style='font-size:.8rem'>RU 97.9%</span></td><td class='num'>7 <span class='dim'>/ 0 pv</span></td></tr></table></div>
-    <div class="card"><h2>PACKAGES — week / all time</h2><table><tr><td>@f-keys/tip-widget</td><td class='num'>298 <span class='dim'>/ 390 all time</span></td></tr><tr><td>opticquiz-eye</td><td class='num'>29 <span class='dim'>/ 676 all time</span></td></tr><tr><td>opticquiz-cvd</td><td class='num'>6 <span class='dim'>/ 243 all time</span></td></tr><tr><td>opticquiz-cvd-mcp</td><td class='num'>8 <span class='dim'>/ 352 all time</span></td></tr><tr><td>gonzalgo</td><td class='num'>88 <span class='dim'>/ 888 all time</span></td></tr><tr><td>opticquiz-cvd</td><td class='num'>8 <span class='dim'>/ 384 all time</span></td></tr></table></div>
-    <div class="card"><h2>TRAFFIC MIX — who is actually asking</h2><table><tr><td>Unverified</td><td class='num'>32,532 <span class='dim'>84.4%</span></td></tr><tr><td>AI Search</td><td class='num'>3,763 <span class='dim'>9.8%</span></td></tr><tr><td>Search Engine Crawler</td><td class='num'>1,046 <span class='dim'>2.7%</span></td></tr><tr><td>AI Crawler</td><td class='num'>559 <span class='dim'>1.5%</span></td></tr><tr><td>Search Engine Optimization</td><td class='num'>457 <span class='dim'>1.2%</span></td></tr><tr><td>Advertising & Marketing</td><td class='num'>91 <span class='dim'>0.2%</span></td></tr><tr><td>Page Preview</td><td class='num'>48 <span class='dim'>0.1%</span></td></tr><tr><td>AI Assistant</td><td class='num'>42 <span class='dim'>0.1%</span></td></tr><tr><td>Archiver</td><td class='num'>6 <span class='dim'>0.0%</span></td></tr></table><p class='dim' style='margin-top:.9rem;font-size:.8rem'>24-hour sample — the only window the free plan allows for this dataset. <strong>Unverified</strong> is not the same as human: it is everything Cloudflare could not positively identify, which includes real people and the scanners that spoof AI user agents.</p></div>
-    <div class="card"><h2>PAPERS — views / downloads</h2><table><tr><td title="A Procedural Method for Generating Pseudoisochromatic Plates in the Browser, and the Calibration Limits of Screen-Based Colour-Vision Screening">A Procedural Method for Generating Pseudoisochromatic Plat</td><td class='num'>79 <span class='dim'>/ 7 dl</span></td></tr><tr><td title="Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega">Where Formal Libraries Spend Their Axioms: A Cross-Foundat</td><td class='num'>74 <span class='dim'>/ 12 dl</span></td></tr><tr><td title="MODULIGN Standard, A Dimensional Address Grammar for Observable Reality">MODULIGN Standard, A Dimensional Address Grammar for Obser</td><td class='num'>59 <span class='dim'>/ 22 dl</span></td></tr><tr><td title="Synthetic Content As Epistemic Category">Synthetic Content As Epistemic Category</td><td class='num'>55 <span class='dim'>/ 18 dl</span></td></tr><tr><td title="Modulign As Evidence">Modulign As Evidence</td><td class='num'>49 <span class='dim'>/ 17 dl</span></td></tr><tr><td title="The Formal Logic of Modulign">The Formal Logic of Modulign</td><td class='num'>45 <span class='dim'>/ 20 dl</span></td></tr><tr><td title="Structural Dissolution of the Gettier Problem through Address-Theoretic Epistemology">Structural Dissolution of the Gettier Problem through Addr</td><td class='num'>40 <span class='dim'>/ 25 dl</span></td></tr><tr><td title="THE CLASSIFICATION DEFICIT Article 50 of the EU AI Act, the Epistemic Gap It Cannot Close, and the Formal Standard That Does">THE CLASSIFICATION DEFICIT Article 50 of the EU AI Act, th</td><td class='num'>36 <span class='dim'>/ 29 dl</span></td></tr></table></div>
-    <div class="card"><h2>REPOS — stars</h2><table><tr><td>gonzalgo</td><td class='num'><span class='dim'>2★</span></td></tr><tr><td>Moonbeam-NerdMiner</td><td class='num'><span class='dim'>2★</span></td></tr><tr><td>f-keys</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>opticquiz.com</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>tip-widget</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>poticas</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>5best2buy.com</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>trailer-load.com</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>tipstreams.com</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>prompt-game</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>daisupop</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>qv</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>fytecraft.com</td><td class='num'><span class='dim'>1★</span></td></tr><tr><td>modulign.org</td><td class='num'><span class='dim'>1★</span></td></tr></table></div>
-    <div class="card"><h2>MOVEMENT</h2><table>
-      <tr><td>Package installs/wk</td><td class='num'>437 <span class="down">-19</span></td></tr>
-      <tr><td>Paper views</td><td class='num'>909 <span class="up">+6</span></td></tr>
-      <tr><td>Paper downloads</td><td class='num'>360</td></tr>
-      <tr><td>GitHub stars</td><td class='num'>16</td></tr>
-    </table><p class="dim" style="margin-top:.8rem;font-size:.8rem">
-      vs 2026-08-19</p></div>
-    <div class="card"><h2>SOURCES NOT REPORTING</h2><p class='dim'>All sources reported.</p></div>
+  <nav class="menubar">
+    <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
+    <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
+    <a href="/about.html"><u>H</u>elp</a>
+  </nav>
+
+  <div class="toolbar groove">
+    <a class="tool" href="/">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
   </div>
 
-  <footer>F-Keys · generated by tools/snapshot.py · history in status/data/</footer>
+  <div class="addressbar">
+    <span class="lbl">Address</span>
+    <span class="path sunken"><span>&#128193; F-Keys\Status</span></span>
+  </div>
+
+  <div class="panes">
+    <aside class="tree sunken">
+<ul>
+<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+</li>
+<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+</li>
+<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+</li>
+<li><a href="/about.html"><span class="ic">&#128220;</span>About</a></li>
+<li><a href="/log/"><span class="ic">&#128220;</span>Log</a></li>
+<li><a href="/status/"><span class="ic">&#128220;</span>Status</a></li>
+<li><a href="/papers/"><span class="ic">&#128220;</span>Papers</a></li>
+</ul></li></ul>
+    </aside>
+    <section class="content sunken">
+<div class="doc"><h1>Status</h1><p class="sub">Generated 2026-08-20 12:49 UTC. All 11 properties responding · slowest opticquiz.com 548ms</p><table class="facts"><tr><th>Visitors &middot; 7d</th><td>—</td></tr><tr><th>Page views &middot; 7d</th><td>—</td></tr><tr><th>Package installs / wk</th><td>351</td></tr><tr><th>Paper views</th><td>916</td></tr><tr><th>Paper downloads</th><td>363</td></tr></table><h2>Traffic &mdash; visitors / page views, 7d</h2><p class='dim'>skipped: no CF_API_TOKEN</p><p class='dim' style='margin-top:.6rem;font-size:.82rem'>Add CF_API_TOKEN and this fills with per-site visitors.</p><h2>Packages &mdash; week / all time</h2><table class="facts"><tr><th>@f-keys/tip-widget</th><td>306 / 398 all time</td></tr><tr><th>opticquiz-eye</th><td>24 / 681 all time</td></tr><tr><th>opticquiz-cvd</th><td>6 / 243 all time</td></tr><tr><th>opticquiz-cvd-mcp</th><td>7 / 352 all time</td></tr><tr><th>gonzalgo</th><td>— / 888 all time</td></tr><tr><th>opticquiz-cvd</th><td>8 / 384 all time</td></tr></table><h2>Who is asking &mdash; 24h sample</h2><p class='dim'>no sample yet</p><h2>Papers &mdash; views / downloads</h2><table class="facts"><tr><th>A Procedural Method for Generating Pseudoisochromatic Plat</th><td>79 views / 7 downloads</td></tr><tr><th>Where Formal Libraries Spend Their Axioms: A Cross-Foundat</th><td>74 views / 12 downloads</td></tr><tr><th>MODULIGN Standard, A Dimensional Address Grammar for Obser</th><td>59 views / 22 downloads</td></tr><tr><th>Synthetic Content As Epistemic Category</th><td>57 views / 18 downloads</td></tr><tr><th>Modulign As Evidence</th><td>49 views / 17 downloads</td></tr><tr><th>The Formal Logic of Modulign</th><td>46 views / 20 downloads</td></tr><tr><th>Structural Dissolution of the Gettier Problem through Addr</th><td>40 views / 25 downloads</td></tr><tr><th>THE CLASSIFICATION DEFICIT Article 50 of the EU AI Act, th</th><td>36 views / 29 downloads</td></tr></table><h2>Sources not reporting</h2><ul class='errs'><li>gonzalgo: HTTP 429</li><li>cloudflare: skipped: no CF_API_TOKEN</li></ul></div>
+    </section>
+  </div>
+
+  <div class="statusbar">
+    <span class="cell groove">live numbers</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
+
 </div>
 </body>
 </html>
