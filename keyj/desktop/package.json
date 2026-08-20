@@ -1,6 +1,6 @@
 {
   "name": "key-j",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Key-J \u2014 Musical Keystroke Studio",
   "main": "src/main.js",
   "scripts": {
@@ -27,6 +27,7 @@
       "target": "AppImage"
     },
     "nsis": {
+      "include": "build/installer.nsh",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
