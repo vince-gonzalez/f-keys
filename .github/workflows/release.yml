@@ -67,6 +67,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Refuse to ship a version the package does not claim
+        shell: bash
+        working-directory: keyj/desktop
+        run: |
+          # The Python branch has had this check since day one. The desktop
+          # branch did not, so tagging v1.4.0 while package.json still said
+          # 1.3.0 would have produced installers named 1.3.0 under a 1.4.0
+          # release - the wrong version under the right name.
+          DECLARED=$(node -p "require('./package.json').version")
+          TAGGED="${{ needs.identify.outputs.version }}"
+          echo "package.json: $DECLARED   tag: $TAGGED"
+          if [ "$DECLARED" != "$TAGGED" ]; then
+            echo "::error::package.json says $DECLARED but the tag says $TAGGED."
+            exit 1
+          fi
+
       - name: Build Key-J
         shell: bash
         working-directory: keyj/desktop
