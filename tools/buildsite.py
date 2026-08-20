@@ -308,29 +308,38 @@ averaging them in.</p>
 </div>"""),
 
  "remapwrap": dict(
-  title="RemapWrap", tagline="Your glass. Your rules.",
-  facts=[("Status","Specified, not built"),("Runtime","Node.js (planned)"),
-         ("Phone needs","A browser"),("Source","Not published")],
+  title="RemapWrap", tagline="Your phone is already the extra row of keys.",
+  facts=[("Version","0.1.0 alpha"),("Runtime","Node.js 16+"),
+         ("Phone needs","A browser"),("Install","None on the phone"),
+         ("Source","zengineco/f-keys")],
   body="""
-<h2>The idea</h2>
-<p>A small local server pairs with your phone over a QR code. The phone becomes a
-drag-and-drop grid of keys that inject real OS-level keystrokes, so it drives software already
-on the machine without that software knowing RemapWrap exists. Layouts are JSON, editable
-live and portable between machines. Haptics fire on press, so the glass reports back.</p>
-<p>From nothing to a working deck in the time it takes to scan a code, on hardware you
-already own.</p>
+<h2>What it does</h2>
+<p>Runs a small server on your PC. Scan the QR code with your phone and the phone becomes a
+drag-and-drop grid of keys that fire <b>real OS-level keystrokes</b>. The software you are
+driving does not know RemapWrap exists, which is the whole point: it works with everything,
+because it is indistinguishable from a keyboard.</p>
+<p>No app on the phone. No hardware. A Stream Deck costs $150 and lives in a drawer; this is
+the device already in your hand.</p>
 
-<h2>Where it actually is</h2>
-<p><b>There is no code published for this.</b> This page used to carry install instructions
-&mdash; <code>npm install</code>, then run the server &mdash; for a file that does not exist
-in any repository, and a "get the source" link to a folder containing only this page. That
-was wrong and it is removed.</p>
-<p>What exists is the design above and the knowledge that the hard parts are solvable: the
-pairing, the keystroke injection, and the layout format. What does not exist is a line of it
-written down anywhere public.</p>
-<p>It is on this site because it is a real intention, not to suggest you can run it today.
-When there is something to run, this page will say so and link to it.</p>
-"""),
+<h2>The company is named after this</h2>
+<p>RemapWrap began as <b>F-Keys</b> &mdash; an extra row of keys, on glass you already own.
+The name outgrew the product and became the company. The product then went missing for five
+months, surviving in a single zip file in a folder called "zip to sort".</p>
+
+<h2>Running it</h2>
+<pre>npm install
+<b>npm start</b>
+scan the QR with your phone</pre>
+<p>Both devices need to be on the same network. Ports 7331 and 7332 must be open locally.
+Keystroke injection is handled by <code>@nut-tree-fork/nut-js</code>.</p>
+
+<h2>Alpha, and said plainly</h2>
+<p>This is v0.1.0 and has never been packaged. It runs from source, layouts are JSON edited
+live, and nothing about it has been hardened. It is published because a design that exists
+only in a zip file is a design that gets lost &mdash; and this one nearly was.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/remapwrap">Get the source</a>
+</div>"""),
 
 }
 
