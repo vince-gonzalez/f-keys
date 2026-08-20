@@ -2136,7 +2136,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
         'padding-bottom:4px;gap:2px}',
       '#kb .w.lit{background:linear-gradient(#ffe89a,#ffd23f)}',
       '#kb .b.lit{background:linear-gradient(#ffd23f,#c9a12c)}',
-      '#kb .kb-nm{font-size:9.5px;color:#6d7185;pointer-events:none;letter-spacing:.2px}',
+      '#kb .kb-nm{font-size:10.5px;color:#33364a;pointer-events:none;letter-spacing:.2px}',
       '#kb .b .kb-nm{color:#9aa0b5}',
       '#kb .kb-bind{font-size:11px;font-weight:700;color:#14141a;background:#c7cad8;' +
         'border-radius:2px;min-width:15px;text-align:center;padding:0 3px;pointer-events:none;' +
@@ -2238,6 +2238,362 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', build);
   } else { build(); }
+})();
+</script>
+
+<script>
+/* ============================================================
+   Key-J v1.4 — the grid
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHY THIS EXISTS
+   Tablature is hard to obtain and miserable to type. But you can
+   almost always SEE it - in a lesson video, in a book, in a
+   screenshot. What was missing was a fast way to put what you
+   see into the app.
+
+   The grid looks like tab, so you transcribe by eye: glance at
+   the source, click the same position, type the same number.
+   No note names, no octave arithmetic, no ASCII alignment.
+
+   ONE WIDGET, TWO DICTIONARIES
+     Fret mode  - row + fret number resolves to a pitch through
+                  the tuning. Guitar, bass, ukulele, banjo.
+     Drum mode  - the row IS the instrument. A hit maps straight
+                  to its General MIDI note. No arithmetic at all,
+                  which makes drums the easier of the two.
+
+   It also exports ASCII tab, so what you transcribe once becomes
+   a file you own rather than something trapped in a text box.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  function nm(n) { return NAMES[((n % 12) + 12) % 12] + (Math.floor(n / 12) - 1); }
+  function fq(n) { return 440 * Math.pow(2, (n - 69) / 12); }
+
+  /* Rows are listed top to bottom exactly as they appear in tab:
+     highest string first, and for drums roughly high to low. */
+  var KITS = {
+    'Guitar — Standard':  { type: 'fret', rows: ['e','B','G','D','A','E'], open: [64,59,55,50,45,40] },
+    'Guitar — Drop D':    { type: 'fret', rows: ['e','B','G','D','A','D'], open: [64,59,55,50,45,38] },
+    'Guitar — Eb':        { type: 'fret', rows: ['e','B','G','D','A','E'], open: [63,58,54,49,44,39] },
+    'Guitar — DADGAD':    { type: 'fret', rows: ['D','A','G','D','A','D'], open: [62,57,55,50,45,38] },
+    'Guitar — 7 string':  { type: 'fret', rows: ['e','B','G','D','A','E','B'], open: [64,59,55,50,45,40,35] },
+    'Bass — 4 string':    { type: 'fret', rows: ['G','D','A','E'], open: [43,38,33,28] },
+    'Bass — 5 string':    { type: 'fret', rows: ['G','D','A','E','B'], open: [43,38,33,28,23] },
+    'Ukulele — GCEA':     { type: 'fret', rows: ['A','E','C','G'], open: [69,64,60,67] },
+    'Drums — Kit':        { type: 'drum',
+                            rows: ['CR','RD','HH','OH','T1','T2','SD','FT','BD'],
+                            midi: [ 49,  51,  42,  46,  48,  45,  38,  41,  36],
+                            full: ['Crash','Ride','Hi-hat','Open hat','High tom',
+                                   'Mid tom','Snare','Floor tom','Kick'] }
+  };
+
+  var kitName = 'Guitar — Standard';
+  var COLS = 16;
+  var cells = [];        // [row][col] -> input
+
+  function kit() { return KITS[kitName]; }
+
+  /* ── reading the grid ────────────────────────────────────── */
+  function readNotes() {
+    var k = kit(), out = [], skipped = 0;
+    for (var c = 0; c < COLS; c++) {
+      var col = [];
+      for (var r = 0; r < k.rows.length; r++) {
+        var v = (cells[r][c].value || '').trim();
+        if (!v) continue;
+        if (k.type === 'drum') {
+          col.push({ row: r, midi: k.midi[r] });
+        } else {
+          if (!/^\d{1,2}$/.test(v)) { skipped++; continue; }
+          var fret = parseInt(v, 10);
+          if (fret > 24) { skipped++; continue; }
+          col.push({ row: r, midi: k.open[r] + fret });
+        }
+      }
+      // within one column, lowest row last: a chord rolls upward
+      col.sort(function (a, b) { return b.row - a.row; });
+      col.forEach(function (e) { out.push({ name: nm(e.midi), freq: fq(e.midi) }); });
+    }
+    return { notes: out, skipped: skipped };
+  }
+
+  function toAscii() {
+    var k = kit(), lines = [];
+    for (var r = 0; r < k.rows.length; r++) {
+      var s = (k.rows[r] + '  ').slice(0, 2) + '|';
+      for (var c = 0; c < COLS; c++) {
+        var v = (cells[r][c].value || '').trim();
+        if (k.type === 'drum') { s += v ? 'x-' : '--'; }
+        else { s += v ? (v.length === 1 ? '-' + v : v) : '--'; }
+        s += '-';
+      }
+      lines.push(s + '|');
+    }
+    return lines.join('\n');
+  }
+
+  /* ── building it ─────────────────────────────────────────── */
+  function styles() {
+    var css = document.createElement('style');
+    css.textContent = [
+      '#kg{background:#14141a;border:1px solid #2b2b38;border-radius:3px;margin-bottom:12px;' +
+        'color:#e6e8f0;font-size:12.5px}',
+      '#kg h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#8c93aa;' +
+        'font-weight:600;padding:9px 14px;border-bottom:1px solid #2b2b38}',
+      '#kg .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:11px 14px 0}',
+      '#kg select{background:#0c0c11;color:#e6e8f0;border:1px solid #33333f;border-radius:2px;' +
+        'padding:6px 8px;font-family:inherit;font-size:12.5px}',
+      '#kg button{background:#1d1d26;color:#d7dae6;border:1px solid #3a3a48;border-radius:2px;' +
+        'padding:6px 12px;font-family:inherit;font-size:12px;cursor:pointer}',
+      '#kg button:hover{border-color:#ffd23f;color:#ffd23f}',
+      '#kg button.primary{background:#ffd23f;color:#14141a;border-color:#ffd23f;font-weight:600}',
+      '#kg .wrap{overflow-x:auto;padding:12px 14px}',
+      '#kg table{border-collapse:collapse;font-family:ui-monospace,Consolas,monospace}',
+      '#kg th{color:#9aa0b5;font-weight:600;font-size:12px;text-align:right;padding:0 8px 0 0;' +
+        'white-space:nowrap}',
+      '#kg td{padding:0}',
+      '#kg input{width:26px;height:24px;text-align:center;background:#0c0c11;color:#ffd23f;' +
+        'border:1px solid #262633;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;' +
+        'padding:0}',
+      '#kg input:focus{outline:none;border-color:#ffd23f;background:#1a1a22}',
+      '#kg input.hit{background:#ffd23f;color:#14141a;font-weight:700}',
+      '#kg .status{color:#9aa0b5;font-size:11.5px;padding:0 14px 12px}',
+      '#kg .ascii{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#e6e8f0;' +
+        'background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;padding:10px;' +
+        'margin:0 14px 12px;white-space:pre;overflow-x:auto;display:none;line-height:1.45}'
+    ].join('\n');
+    document.head.appendChild(css);
+  }
+
+  function drawGrid() {
+    var k = kit();
+    var tbl = document.getElementById('kg-table');
+    tbl.innerHTML = '';
+    cells = [];
+    for (var r = 0; r < k.rows.length; r++) {
+      var tr = document.createElement('tr');
+      var th = document.createElement('th');
+      th.textContent = k.rows[r];
+      if (k.full) th.title = k.full[r];
+      tr.appendChild(th);
+      var rowCells = [];
+      for (var c = 0; c < COLS; c++) {
+        var td = document.createElement('td');
+        var inp = document.createElement('input');
+        inp.maxLength = 2;
+        inp.dataset.r = r; inp.dataset.c = c;
+        inp.setAttribute('aria-label', k.rows[r] + ' step ' + (c + 1));
+        td.appendChild(inp);
+        tr.appendChild(td);
+        rowCells.push(inp);
+      }
+      cells.push(rowCells);
+      tbl.appendChild(tr);
+    }
+    bindCells();
+    status('');
+  }
+
+  function bindCells() {
+    var k = kit();
+    cells.forEach(function (row) {
+      row.forEach(function (inp) {
+        inp.onmousedown = function (e) {
+          if (k.type !== 'drum') return;
+          e.preventDefault();
+          this.value = this.value ? '' : 'x';
+          this.classList.toggle('hit', !!this.value);
+          this.focus();
+        };
+        inp.oninput = function () {
+          if (k.type === 'drum') {
+            this.value = this.value ? 'x' : '';
+          } else {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);
+            if (parseInt(this.value, 10) > 24) this.value = '24';
+          }
+          this.classList.toggle('hit', k.type === 'drum' && !!this.value);
+        };
+        inp.onkeydown = function (e) {
+          var r = +this.dataset.r, c = +this.dataset.c, t = null;
+          if (e.key === 'ArrowRight') t = cells[r][c + 1];
+          else if (e.key === 'ArrowLeft') t = cells[r][c - 1];
+          else if (e.key === 'ArrowDown') t = cells[r + 1] && cells[r + 1][c];
+          else if (e.key === 'ArrowUp') t = cells[r - 1] && cells[r - 1][c];
+          if (t) { e.preventDefault(); t.focus(); t.select(); }
+        };
+      });
+    });
+  }
+
+  function status(msg) {
+    var el = document.getElementById('kg-status');
+    if (el) el.innerHTML = msg || ('Click a cell and type a fret number. ' +
+      'Arrow keys move. ' + kit().rows.length + ' rows, ' + COLS + ' steps.');
+  }
+
+  function build() {
+    styles();
+    var host = document.querySelector('.panel-center');
+    if (!host) return;
+    var box = document.createElement('section');
+    box.id = 'kg';
+    box.innerHTML =
+      '<h3>Grid</h3>' +
+      '<div class="bar">' +
+        '<select id="kg-kit"></select>' +
+        '<button id="kg-more">+8 steps</button>' +
+        '<button id="kg-clear">Clear</button>' +
+        '<button id="kg-ascii">Show ASCII</button>' +
+        '<button id="kg-use" class="primary">Use as sequence</button>' +
+      '</div>' +
+      '<div class="wrap"><table id="kg-table"></table></div>' +
+      '<pre class="ascii" id="kg-out"></pre>' +
+      '<p class="status" id="kg-status"></p>';
+    host.insertBefore(box, document.getElementById('kj') || null);
+
+    var sel = document.getElementById('kg-kit');
+    Object.keys(KITS).forEach(function (k) {
+      var o = document.createElement('option'); o.value = k; o.textContent = k;
+      sel.appendChild(o);
+    });
+    sel.value = kitName;
+    sel.onchange = function () { kitName = this.value; drawGrid(); };
+
+    document.getElementById('kg-more').onclick = function () {
+      var old = cells.map(function (row) { return row.map(function (i) { return i.value; }); });
+      COLS += 8; drawGrid();
+      old.forEach(function (row, r) {
+        row.forEach(function (v, c) {
+          if (cells[r] && cells[r][c]) {
+            cells[r][c].value = v;
+            cells[r][c].classList.toggle('hit', kit().type === 'drum' && !!v);
+          }
+        });
+      });
+    };
+    document.getElementById('kg-clear').onclick = function () { drawGrid(); };
+    document.getElementById('kg-ascii').onclick = function () {
+      var out = document.getElementById('kg-out');
+      var showing = out.style.display === 'block';
+      out.style.display = showing ? 'none' : 'block';
+      this.textContent = showing ? 'Show ASCII' : 'Hide ASCII';
+      if (!showing) out.textContent = toAscii();
+    };
+    document.getElementById('kg-use').onclick = function () {
+      var r = readNotes();
+      if (!r.notes.length) {
+        status('<span style="color:#ffb454">Nothing in the grid yet.</span>');
+        return;
+      }
+      var box = document.getElementById('kj-typed');
+      if (box) box.value = r.notes.map(function (n) { return n.name; }).join(' ');
+      var load = document.getElementById('kj-load-typed');
+      if (load) load.click();
+      status(r.notes.length + ' notes sent to the sequence' +
+        (r.skipped ? ' <span style="color:#ffb454">(' + r.skipped +
+                     ' cell(s) skipped as unreadable)</span>' : '') + '.');
+    };
+
+    drawGrid();
+    window.KeyJGrid = { readNotes: readNotes, toAscii: toAscii, KITS: KITS,
+                        setKit: function (n) { kitName = n; drawGrid(); },
+                        set: function (r, c, v) { cells[r][c].value = v;
+                          cells[r][c].classList.toggle('hit', kit().type === 'drum' && !!v); } };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', build);
+  } else { build(); }
+})();
+</script>
+
+<script>
+/* ============================================================
+   Key-J v1.5 — one tool at a time
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   The keyboard, the grid and the tab importer are three tools.
+   Stacked, they pushed the page back to 4072px - the same
+   disease that made the original layout unusable, reintroduced
+   by adding good things carelessly.
+
+   Tabs fix it structurally rather than by trimming: one tool is
+   visible, the page stays one screen, and adding a fourth tool
+   later costs no height at all.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var TABS = [
+    { id: 'kb', label: 'Keyboard' },
+    { id: 'kg', label: 'Grid' },
+    { id: 'kj', label: 'Tab & Sequence' }
+  ];
+
+  function styles() {
+    var css = document.createElement('style');
+    css.textContent = [
+      '#kt{display:flex;gap:3px;margin-bottom:-1px;padding-left:2px;flex-wrap:wrap}',
+      '#kt button{background:#1a1a22;color:#9aa0b5;border:1px solid #2b2b38;' +
+        'border-bottom:none;border-radius:3px 3px 0 0;padding:8px 16px;' +
+        'font-family:inherit;font-size:12.5px;cursor:pointer;position:relative}',
+      '#kt button:hover{color:#ffd23f}',
+      '#kt button.on{background:#14141a;color:#ffd23f;font-weight:600;' +
+        'border-color:#3a3a48;z-index:2}',
+      '.panel-center > section.kt-hidden{display:none}',
+      /* the visible tool gets a fixed ceiling so no single panel can
+         stretch the page the way the visualiser used to */
+      '#kb,#kg,#kj{max-height:520px;overflow-y:auto;margin-bottom:0!important}'
+    ].join('\n');
+    document.head.appendChild(css);
+  }
+
+  function build() {
+    var host = document.querySelector('.panel-center');
+    if (!host) return;
+    var present = TABS.filter(function (t) { return document.getElementById(t.id); });
+    if (present.length < 2) return;            // nothing to switch between
+
+    styles();
+    var bar = document.createElement('div');
+    bar.id = 'kt';
+    host.insertBefore(bar, document.getElementById(present[0].id));
+
+    function show(id) {
+      present.forEach(function (t) {
+        var el = document.getElementById(t.id);
+        el.classList.toggle('kt-hidden', t.id !== id);
+      });
+      Array.prototype.forEach.call(bar.children, function (b) {
+        b.classList.toggle('on', b.dataset.tab === id);
+      });
+      try { localStorage.setItem('keyj_tab', id); } catch (e) {}
+    }
+
+    present.forEach(function (t) {
+      var b = document.createElement('button');
+      b.textContent = t.label;
+      b.dataset.tab = t.id;
+      b.onclick = function () { show(t.id); };
+      bar.appendChild(b);
+    });
+
+    var saved = null;
+    try { saved = localStorage.getItem('keyj_tab'); } catch (e) {}
+    show(present.some(function (t) { return t.id === saved; }) ? saved : present[0].id);
+
+    window.KeyJTabs = { show: show, ids: present.map(function (t) { return t.id; }) };
+  }
+
+  // run after the three panels have inserted themselves
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });
+  } else { setTimeout(build, 0); }
 })();
 </script>
 </body>
