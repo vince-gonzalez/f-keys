@@ -1,0 +1,191 @@
+/* ============================================================
+   F-Keys — shared chrome
+   www.f-keys.com
+   ------------------------------------------------------------
+   ONE stylesheet for every page. Before this, each page carried
+   a private copy of its own CSS, which is why the homepage and
+   the product pages drifted into two different websites.
+   Uniformity has to be structural, not remembered.
+
+   The shell is Windows Explorer: fixed tree on the left, a
+   details table on the right, identical on all thirteen pages.
+   A table has fixed columns, so nothing can come out ragged.
+   ============================================================ */
+
+:root{
+  --desktop:#008080;
+  --face:#d4d0c8;          /* Win98 face, warmer than 3.1 silver */
+  --hi:#ffffff;
+  --sh:#808080;
+  --dk:#000000;
+  --title-a:#0a246a;       /* active title gradient             */
+  --title-b:#a6caf0;
+  --title-off:#808080;
+  --sel:#0a246a;
+  --sel-txt:#ffffff;
+  --ink:#000000;
+  --dim:#404040;
+  --field:#ffffff;         /* list / text field background      */
+  --ok:#006000;
+  --warn:#8a4b00;
+  --plat:#00007b;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{height:100%}
+body{
+  background:var(--desktop);
+  font-family:Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  font-size:11px;
+  color:var(--ink);
+  padding:18px;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+
+/* ── bevels ──────────────────────────────────────────────── */
+.raised{border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);
+  box-shadow:inset 1px 1px 0 var(--face),inset -1px -1px 0 var(--sh)}
+.sunken{border:2px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh);
+  box-shadow:inset 1px 1px 0 var(--dk),inset -1px -1px 0 var(--face)}
+.groove{border:1px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh)}
+
+/* ── the window ──────────────────────────────────────────── */
+.window{
+  background:var(--face);padding:3px;
+  max-width:1180px;margin:0 auto;
+  display:flex;flex-direction:column;min-height:calc(100vh - 36px);
+}
+.titlebar{
+  background:linear-gradient(90deg,var(--title-a),var(--title-b));
+  color:#fff;font-weight:700;font-size:11px;
+  padding:3px 3px 3px 6px;display:flex;align-items:center;
+  justify-content:space-between;gap:8px;
+}
+.titlebar .t{display:flex;align-items:center;gap:6px;min-width:0}
+.titlebar .t span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbtns{display:flex;gap:2px;flex:0 0 auto}
+.tbtn{width:16px;height:14px;background:var(--face);color:var(--ink);
+  font-size:9px;line-height:12px;text-align:center;font-weight:700;
+  border:1px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi)}
+
+/* ── menus + toolbar ─────────────────────────────────────── */
+.menubar{display:flex;gap:1px;padding:2px 1px;flex-wrap:wrap}
+.menubar a{padding:3px 7px}
+.menubar a:hover{background:var(--sel);color:#fff}
+.menubar u{text-decoration:underline}
+
+.toolbar{display:flex;align-items:center;gap:3px;padding:3px 2px;flex-wrap:wrap}
+.tool{padding:3px 9px;display:flex;align-items:center;gap:5px;color:var(--ink)}
+.tool:hover{border:1px solid;border-color:var(--hi) var(--sh) var(--sh) var(--hi);
+  padding:2px 8px}
+.tool.off{color:var(--sh);pointer-events:none}
+.sep{width:2px;height:20px;margin:0 3px;border-left:1px solid var(--sh);
+  border-right:1px solid var(--hi)}
+
+.addressbar{display:flex;align-items:center;gap:6px;padding:2px 3px 4px}
+.addressbar .lbl{color:var(--dim);flex:0 0 auto}
+.addressbar .path{flex:1 1 auto;background:var(--field);padding:3px 6px;
+  display:flex;align-items:center;gap:5px;min-width:0}
+.addressbar .path span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ── the two panes ───────────────────────────────────────── */
+.panes{display:flex;gap:3px;flex:1 1 auto;min-height:0}
+.tree{width:196px;flex:0 0 196px;background:var(--field);padding:6px 4px;
+  overflow:auto}
+.content{flex:1 1 auto;background:var(--field);overflow:auto;min-width:0}
+
+.tree ul{list-style:none}
+.tree li{line-height:17px;white-space:nowrap}
+.tree a{display:block;padding:1px 4px 1px 2px}
+.tree a:hover{text-decoration:underline}
+.tree a.on{background:var(--sel);color:var(--sel-txt)}
+.tree .kids{margin-left:13px;border-left:1px dotted var(--sh);padding-left:7px}
+.tree .root{font-weight:700}
+.ic{display:inline-block;width:15px;text-align:center;color:var(--title-a)}
+.tree a.on .ic{color:#fff}
+
+/* ── details table ───────────────────────────────────────── */
+table.details{width:100%;border-collapse:collapse;font-size:11px}
+table.details thead th{
+  background:var(--face);text-align:left;font-weight:400;padding:3px 7px;
+  border:1px solid;border-color:var(--hi) var(--sh) var(--sh) var(--hi);
+  position:sticky;top:0;z-index:2;white-space:nowrap}
+/* Every row is exactly one line tall. Explorer truncates a long value
+   rather than wrapping it, and wrapping is what makes a list look ragged:
+   rows measured 46 to 98 pixels before this. Fixed layout plus ellipsis
+   makes the grid regular no matter what the text says. */
+table.details{table-layout:fixed}
+table.details tbody td{padding:4px 7px;border-bottom:1px solid #ececec;
+  vertical-align:middle;height:22px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* table-layout:fixed takes its widths from the header row, so they have
+   to be declared there. Setting them on the body cell does nothing. */
+.col-name{width:210px}
+table.details tbody tr:hover{background:var(--sel);color:var(--sel-txt)}
+table.details tbody tr:hover .st,
+table.details tbody tr:hover .muted{color:#cfe3ff}
+table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.muted{color:var(--dim)}
+.st{white-space:nowrap;font-size:10.5px}
+.st-ready{color:var(--ok)}
+.st-plat{color:var(--plat)}
+.st-setup{color:var(--warn)}
+.col-type{width:104px;white-space:nowrap}
+.col-status{width:112px}
+
+/* ── document pane (product pages) ───────────────────────── */
+.doc{padding:16px 20px 26px;max-width:760px}
+.doc h1{font-size:17px;margin-bottom:2px;letter-spacing:.2px}
+.doc .sub{color:var(--dim);margin-bottom:14px}
+.doc h2{font-size:12px;margin:18px 0 6px;padding-bottom:3px;
+  border-bottom:1px solid #d8d8d8;letter-spacing:.3px;text-transform:uppercase;
+  color:var(--title-a)}
+.doc p{line-height:1.65;margin-bottom:9px}
+.doc ul,.doc ol{margin:0 0 10px 20px;line-height:1.75}
+.doc code{font-family:'Lucida Console',Consolas,monospace;font-size:10.5px;
+  background:#f2f2f2;padding:1px 4px;border:1px solid #ddd}
+.doc pre{font-family:'Lucida Console',Consolas,monospace;font-size:10.5px;
+  background:#000;color:#c0c0c0;padding:9px 11px;margin-bottom:11px;
+  overflow-x:auto;line-height:1.55}
+.doc pre b{color:#fff;font-weight:400}
+.doc .facts{border-collapse:collapse;margin-bottom:12px;width:100%}
+.doc .facts th{text-align:left;font-weight:400;color:var(--dim);
+  padding:3px 12px 3px 0;white-space:nowrap;vertical-align:top;width:130px}
+.doc .facts td{padding:3px 0;vertical-align:top}
+.doc .note{background:#ffffe1;border:1px solid #c0c000;padding:8px 11px;
+  margin-bottom:12px;line-height:1.6}
+
+.btnrow{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 4px}
+.btn{background:var(--face);padding:5px 16px;color:var(--ink);
+  border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);
+  box-shadow:inset 1px 1px 0 var(--face),inset -1px -1px 0 var(--sh);
+  font-family:inherit;font-size:11px;cursor:pointer}
+.btn:active{border-color:var(--sh) var(--hi) var(--hi) var(--sh);
+  box-shadow:none;padding:6px 15px 4px 17px}
+.btn.default{font-weight:700}
+
+/* ── status bar ──────────────────────────────────────────── */
+.statusbar{display:flex;gap:3px;padding:3px 1px 1px;flex:0 0 auto}
+.statusbar .cell{padding:2px 7px;flex:0 0 auto;color:var(--ink)}
+.statusbar .cell.grow{flex:1 1 auto}
+.statusbar a{color:var(--ink)}
+.statusbar a:hover{text-decoration:underline}
+
+/* ── narrow screens: the tree becomes a strip on top ─────── */
+@media (max-width:760px){
+  body{padding:0}
+  .window{min-height:100vh;max-width:none}
+  .panes{flex-direction:column}
+  .tree{width:auto;flex:0 0 auto;max-height:132px}
+  .tree .kids{margin-left:9px}
+  .col-type{display:none}
+  table.details thead th.col-type{display:none}
+  .doc{padding:13px 14px 22px}
+  .addressbar .lbl{display:none}
+}
+@media (max-width:520px){
+  .col-status{width:auto}
+  .hide-xs{display:none}
+}
