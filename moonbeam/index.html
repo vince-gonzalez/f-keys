@@ -4,121 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moonbeam — F-Keys</title>
-<meta name="description" content="An educational lottery-style Bitcoin miner on an ESP32. Open firmware, a web dashboard, and an STL for the enclosure. Learn SHA-256 by building the thing that does it.">
+<meta name="description" content="Find the NerdMiners on your network.">
 <link rel="canonical" href="https://f-keys.com/moonbeam/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0a0e0a; --panel: #111911; --border: #1f351f;
-  --green: #39ff14; --cyan: #00ffcc; --text: #c3dcc3; --dim: #8fae8f;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background: var(--bg); color: var(--text);
-  font-family: 'Share Tech Mono', monospace;
-  line-height: 1.6; overflow-x: hidden;
-}
-body::before {
-  content: ''; position: fixed; inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
-  pointer-events: none; z-index: 9000;
-}
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-  background: rgba(10,14,10,0.95); border-bottom: 1px solid var(--border);
-  padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
-}
-.logo { font-family: 'VT323', monospace; font-weight: 400; font-size: 24px; color: var(--green); letter-spacing: 3px; }
-.back-link { color: var(--dim); text-decoration: none; }
-.hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 2rem 4rem; }
-.hero-content { max-width: 820px; margin: 0 auto; text-align: center; }
-.hero h1 {
-  font-family: 'VT323', monospace; font-weight: 400; font-size: clamp(52px, 10vw, 96px);
-  color: var(--green); letter-spacing: 6px; margin-bottom: 1rem;
-}
-.tagline { font-size: 1.5rem; color: var(--dim); margin-bottom: 2.5rem; }
-.features-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem; max-width: 1100px; margin: 4rem auto;
-}
-.feature-card { background: var(--panel); border: 1px solid var(--border); padding: 2rem; transition: all 0.2s; }
-.feature-card:hover { border-color: var(--green); transform: translateY(-4px); }
-.btn {
-  font-family: 'VT323', monospace; font-weight: 400; font-size: 1.4rem; padding: 14px 36px;
-  border: 2px solid var(--green); color: var(--green); background: transparent;
-  cursor: pointer; display: inline-block; margin: 0.5rem; text-decoration: none;
-}
-.btn:hover { background: var(--green); color: #0a0e0a; }
-.note {
-  max-width: 700px; margin: 3rem auto 0; background: #0d120d;
-  border: 1px solid var(--border); border-left: 3px solid var(--cyan); padding: 1.5rem 2rem;
-}
-footer { text-align: center; padding: 3rem 2rem; color: var(--dim); border-top: 1px solid var(--border); }
-footer a { color: var(--green); }
-</style>
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:title" content="Moonbeam — F-Keys">
+<meta property="og:description" content="Find the NerdMiners on your network.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/win98.css">
 </head>
 <body>
+<div class="window raised">
 
-<nav>
-  <div class="logo">F-KEYS / MOONBEAM</div>
-  <a href="/" class="back-link">← Back to F-Keys</a>
-</nav>
-
-<section class="hero">
-  <div class="hero-content">
-    <h1>MOONBEAM</h1>
-    <p class="tagline">A LOTTERY TICKET<br>THAT HUMS.</p>
-    <p style="max-width:580px;margin:0 auto 2rem;color:var(--dim);">
-      A Bitcoin miner on a chip that costs less than dinner. Moonbeam will almost
-      certainly never win anything, and that isn't the point — it's a small machine
-      that teaches you exactly what mining is by doing it on your desk.
-    </p>
-
-    <div>
-      <a href="https://github.com/zengineco/Moonbeam-NerdMiner" class="btn" target="_blank" rel="noopener">BUILD ONE</a>
-    </div>
-
-    <div class="note">
-      <p style="color:var(--cyan);margin-bottom:0.5rem;">What "lottery-inspired" means</p>
-      <p style="color:var(--dim);font-size:0.95rem;">
-        A solo miner this size has odds against it that are difficult to describe
-        without a lot of zeroes. Moonbeam is built to be understood and enjoyed,
-        not to earn. Treat any other outcome as a surprise.
-      </p>
-    </div>
+  <div class="titlebar">
+    <span class="t"><span>F-Keys\Hardware\Moonbeam</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
   </div>
-</section>
 
-<section id="features" style="padding:6rem 2rem;background:var(--panel);">
-  <h2 style="text-align:center;font-family:'VT323',monospace;font-weight:400;font-size:2.5rem;color:var(--green);margin-bottom:3rem;">WHAT'S IN THE BOX</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <h3 style="color:var(--green);">OPEN FIRMWARE</h3>
-      <p>The whole miner, readable. If you want to know what SHA-256 actually is,
-         this is a version small enough to follow end to end.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">WEB DASHBOARD</h3>
-      <p>Watch hashrate and status from a browser on your own network.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">HARDWARE DESIGN</h3>
-      <p>The build is documented, based on an ESP32 — cheap, common, and forgiving
-         of a first attempt.</p>
-    </div>
-    <div class="feature-card">
-      <h3 style="color:var(--green);">PRINTABLE ENCLOSURE</h3>
-      <p>An STL for the case, so it ends up looking like an object rather than a
-         board with wires coming out of it.</p>
-    </div>
+  <nav class="menubar">
+    <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
+    <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
+    <a href="/about.html"><u>H</u>elp</a>
+  </nav>
+
+  <div class="toolbar groove">
+    <a class="tool" href="/hardware.html">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/hardware.html">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
   </div>
-</section>
 
-<footer>
-  <p>Moonbeam is a product of <a href="/">F-Keys</a></p>
-  <p style="margin-top:1rem;font-size:0.9rem;">© 2026 F-Keys • Vincent Gonzalez</p>
-</footer>
+  <div class="addressbar">
+    <span class="lbl">Address</span>
+    <span class="path sunken"><span>&#128193; F-Keys\Hardware\Moonbeam</span></span>
+  </div>
 
+  <div class="panes">
+    <aside class="tree sunken">
+<ul>
+<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<ul class="kids">
+<li><a class="" href="/streamsniper/"><span class="ic">&#128196;</span>Stream Sniper</a></li>
+<li><a class="on" href="/moonbeam/"><span class="ic">&#128196;</span>Moonbeam</a></li>
+</ul>
+</li>
+<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+</li>
+<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+</li>
+<li><a href="/about.html"><span class="ic">&#128220;</span>About</a></li>
+<li><a href="/log/"><span class="ic">&#128220;</span>Log</a></li>
+<li><a href="/status/"><span class="ic">&#128220;</span>Status</a></li>
+<li><a href="/papers/"><span class="ic">&#128220;</span>Papers</a></li>
+</ul></li></ul>
+    </aside>
+    <section class="content sunken">
+<div class="doc"><h1>Moonbeam</h1><p class="sub">Find the NerdMiners on your network.</p><table class="facts"><tr><th>Version</th><td>1.0.0</td></tr><tr><th>Licence</th><td>MIT</td></tr><tr><th>Install</th><td>pip install moonbeam-miner</td></tr><tr><th>Requires</th><td>Python 3.8+</td></tr><tr><th>Dependencies</th><td>None</td></tr></table>
+<h2>What it does</h2>
+<p>Sweeps your subnet for ESP-Miner and AxeOS devices, NerdMiner and Bitaxe and relatives,
+and reads their vitals in a terminal. Whatever answers is remembered, so the next run just
+polls them.</p>
+<pre><b>pip install moonbeam-miner</b>
+moonbeam            the miners it knows, polled now
+moonbeam scan       sweep the subnet
+moonbeam watch      refresh until you stop it
+moonbeam show ip    everything one miner reported</pre>
+<h2>A dash means the miner did not say</h2>
+<p>It does not mean zero, and it is never a plausible number standing in for one that never
+arrived. The summary counts how many devices declined to report rather than quietly
+averaging them in.</p>
+<p>Standard library only, so the install cannot fail on someone else's package.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/moonbeam-miner/">View on PyPI</a>
+  <a class="btn" href="https://github.com/zengineco/f-keys/tree/main/moonbeam">Source</a>
+</div></div>
+    </section>
+  </div>
+
+  <div class="statusbar">
+    <span class="cell groove">1 item</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
+
+</div>
 </body>
 </html>

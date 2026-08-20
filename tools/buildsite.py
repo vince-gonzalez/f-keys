@@ -56,7 +56,7 @@ CATALOGUE = [
     ("qv", "QV", "apps", "Web app", READY,
      "Live ballots. Put a question to a room and watch the count move.", "/qv/"),
     ("remapwrap", "RemapWrap", "apps", "Application", ALPHA,
-     "Any smartphone becomes a programmable macro pad. No app, no dongle.", "/remapwrap"),
+     "Any smartphone becomes a programmable macro pad. No app, no dongle.", "/remapwrap/"),
 
     ("trailer-load", "Trailer Load", "games", "Simulator", READY,
      "Warehouse load training that plays like a game. Institutional licensing.", "https://trailer-load.com"),
@@ -107,7 +107,235 @@ CATEGORIES = [
     ("properties", "Properties", "Sites that stand on their own."),
 ]
 
-EXTRA_NODES = [("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers")]
+
+
+# ── long-form detail, one entry per product ──────────────────
+PAGES = {
+ "keyj": dict(
+  title="Key-J", tagline="Every keystroke plays a note, in any application.",
+  facts=[("Version","1.2.0"),("Licence","MIT"),("Platforms","Browser, Windows, Linux"),
+         ("Source","zengineco/f-keys")],
+  body="""
+<h2>What it does</h2>
+<p>Your keyboard becomes an instrument. Every keystroke plays a note, the notes land
+on a staff as you go, and the session exports as a WAV. With global capture on it
+hears your keys in any application.</p>
+<h2>Tablature import</h2>
+<p>Paste guitar tablature, choose a tuning, and Key-J converts the frets to notes.
+Sequence mode then plays that run one note per keystroke, so the pitches are handled
+and what is left to you is timing and feel.</p>
+<p>Eight tunings including drop D, Eb, DADGAD, seven-string and bass, with a capo
+offset. Hammer-ons, slides and bends are read as the notes they land on. A block with
+the wrong number of strings produces no notes and says how many it found, rather than
+guessing a tuning silently.</p>
+<h2>Also</h2>
+<p>Seven tone presets from clean guitar to shred. MIDI import. Six play styles, four
+waveforms, remappable keys and scale switching.</p>
+<div class="btnrow">
+  <a class="btn default" href="/keyj/app.html">Open in browser</a>
+  <a class="btn" href="https://github.com/zengineco/f-keys/releases/latest">Download</a>
+</div>"""),
+
+ "pixelstaff": dict(
+  title="Pixel Staff", tagline="An 8-bit composer with no DAW anywhere in it.",
+  facts=[("Licence","MIT"),("Platform","Browser"),("Install","None"),("Exports","WAV, ringtone")],
+  body="""
+<h2>What it does</h2>
+<p>Draw notes onto a 96-row piano roll, pick a waveform per channel, set the tempo and
+press play. When it sounds right, take it away as a WAV or as a ringtone.</p>
+<h2>Controls</h2>
+<p>Draw and erase, play, stop and rewind, tempo in BPM, zoom from 1x to 8x, extend the
+board and clear it. Square, saw, triangle and sine per channel.</p>
+<p>One page, no dependencies. It opens and it works.</p>
+<div class="btnrow"><a class="btn default" href="/pixelstaff/app.html">Open Pixel Staff</a></div>"""),
+
+ "qv": dict(
+  title="QV", tagline="Live ballots. One tap, one vote, no account.",
+  facts=[("Version","0.1.0"),("Platform","Browser"),("Accounts","None required")],
+  body="""
+<h2>What it does</h2>
+<p>Put a question to a room and watch the count move as people answer. A voter token
+is issued on arrival, so there is nothing to sign up for and nothing to remember.</p>
+<h2>Also</h2>
+<p>Opt in to be told when a new ballot opens, so a room can be gathered without chasing
+anyone. Creators can apply to run ballots for their own audience.</p>
+<div class="btnrow"><a class="btn default" href="https://zengineco.github.io/qv/">Open QV</a></div>"""),
+
+ "micdrop": dict(
+  title="MICDROP", tagline="Grab the mic. Survive the room.",
+  facts=[("Island code","1534-0440-5810"),("Creator","d00b"),("Platform","Fortnite (UEFN)"),
+         ("Support","vincegonzalez@me.com")],
+  body="""
+<h2>What it does</h2>
+<p>A live open-mic arena. Take the stage for 120 seconds and win the crowd, or eat three
+boos and get buzzed off to a sad trombone. Out in the crowd you laugh, boo, throw
+tomatoes and work the soundboard; spam it and it is off to club jail.</p>
+<p>Stack up sets and climb from Open Mic Rookie to Legend of the Mic. Public rooms for
+strangers, private ones for bombing among friends.</p>
+<h2>Support</h2>
+<p>Use Fortnite's in-game reporting for player conduct, since that reaches Epic's
+moderation directly. For anything else, write in and a person reads it.</p>
+<p class="muted">Not affiliated with or endorsed by Epic Games. Fortnite and UEFN are
+trademarks of Epic Games, Inc.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://www.fortnite.com/@d00b/1534-0440-5810">Play now</a>
+  <a class="btn" href="mailto:vincegonzalez@me.com">Contact</a>
+</div>"""),
+
+ "wikipolish": dict(
+  title="WikiPolish", tagline="Grammar scout for Wikipedia.",
+  facts=[("Platform","Browser"),("Install","None"),("Reads","Wikipedia API"),
+         ("Checks","LanguageTool")],
+  body="""
+<h2>What it does</h2>
+<p>The hardest part of becoming a Wikipedia editor is finding a first edit you are sure
+about. Point WikiPolish at an article and it pulls the current text straight from the
+Wikipedia API, runs it through LanguageTool, and shows each language problem where it
+occurs.</p>
+<p>Language fixes are the safest way in: uncontroversial, easy to justify, and genuinely
+useful to the encyclopedia.</p>
+<div class="btnrow"><a class="btn default" href="https://zengineco.github.io/wikiscout/">Open WikiPolish</a></div>"""),
+
+ "leadseer": dict(
+  title="LeadSeer", tagline="Find who is not online yet.",
+  facts=[("Licence","MIT"),("Runtime","Node 18+"),("Needs","Google Maps API key"),
+         ("Builds","Electron desktop, React browser")],
+  body="""
+<h2>What it does</h2>
+<p>Every town has businesses doing fine without a website. LeadSeer asks Google Places
+which ones they are, filters out the chains, and hands you the list.</p>
+<h2>Filters</h2>
+<p>Search by category and ZIP. Exclude chains, set a minimum review count and rating, or
+narrow to high-value results. Export to CSV, or save automatically after every search.
+Past searches persist with session stats.</p>
+<p>It runs on your own API key, so the quota and the data are yours.</p>
+<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/LeadSeer">Get LeadSeer</a></div>"""),
+
+ "plumhud": dict(
+  title="PlumHUD", tagline="Watch the fleet, not the screen.",
+  facts=[("Version","4.0.0"),("Licence","MIT"),("Install","pip install plumhud"),
+         ("Requires","Python 3.8+, Tk"),("Depends on","moonbeam-miner")],
+  body="""
+<h2>What it does</h2>
+<p>A borderless overlay HUD that sits on top of whatever you are doing, with four display
+modes, an opacity slider and five skins. A five-tab command center for miners, analytics,
+alerts, skin and settings. Every poll is written to a local database with thirty-day
+retention.</p>
+<h2>Alerts</h2>
+<p>Rules for offline, hashrate below a floor, temperature above a ceiling and reject
+spikes, delivered to Discord or Telegram with a per-rule cooldown.</p>
+<h2>What version 4 changed</h2>
+<p>Nothing is invented any more. Version 3 filled missing readings with random numbers, so
+a miner that answered without a hashrate displayed a believable figure you had no way to
+identify as fake. A field the miner did not send is now shown as a dash and stored as
+null, and alert rules stay quiet rather than reporting an absent measurement as a low one.</p>
+<p>The config also stopped moving. It lives in one per-user directory, created owner-only,
+because it holds a Discord webhook and a Telegram token.</p>
+<pre><b>pip install plumhud</b>
+plumhud          the overlay HUD
+plumhud check    poll once, print, exit
+plumhud where    where config and history live</pre>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/plumhud/">View on PyPI</a>
+  <a class="btn" href="https://github.com/zengineco/f-keys/tree/main/plumhud">Source</a>
+</div>"""),
+
+ "streamsniper": dict(
+  title="Stream Sniper", tagline="They go live. It is on the TV.",
+  facts=[("Licence","MIT"),("Platform","Debian or Ubuntu"),
+         ("Needs","Streamlink, VLC, pygame"),("Starts","systemd, on boot")],
+  body="""
+<h2>What it does</h2>
+<p>Point a spare mini PC at the television and give it a list of Twitch channels. It shows
+a clock until someone goes live, then puts them fullscreen with the ads out of the path.
+When the stream ends, the clock comes back.</p>
+<h2>How it behaves</h2>
+<p>One username per line in a text file, and order is priority: if two are live, the one
+nearer the top gets the screen. A stream already playing runs to the end, so nobody higher
+in the list can cut in halfway through. Edits apply at the next check, with no restart.</p>
+<pre>bash install.sh
+<b>sudo systemctl start streamsniper@USER</b></pre>
+<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/streamsniper">Get the source</a></div>"""),
+
+ "moonbeam": dict(
+  title="Moonbeam", tagline="Find the NerdMiners on your network.",
+  facts=[("Version","1.0.0"),("Licence","MIT"),("Install","pip install moonbeam-miner"),
+         ("Requires","Python 3.8+"),("Dependencies","None")],
+  body="""
+<h2>What it does</h2>
+<p>Sweeps your subnet for ESP-Miner and AxeOS devices, NerdMiner and Bitaxe and relatives,
+and reads their vitals in a terminal. Whatever answers is remembered, so the next run just
+polls them.</p>
+<pre><b>pip install moonbeam-miner</b>
+moonbeam            the miners it knows, polled now
+moonbeam scan       sweep the subnet
+moonbeam watch      refresh until you stop it
+moonbeam show ip    everything one miner reported</pre>
+<h2>A dash means the miner did not say</h2>
+<p>It does not mean zero, and it is never a plausible number standing in for one that never
+arrived. The summary counts how many devices declined to report rather than quietly
+averaging them in.</p>
+<p>Standard library only, so the install cannot fail on someone else's package.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/moonbeam-miner/">View on PyPI</a>
+  <a class="btn" href="https://github.com/zengineco/f-keys/tree/main/moonbeam">Source</a>
+</div>"""),
+
+ "remapwrap": dict(
+  title="RemapWrap", tagline="Your glass. Your rules.",
+  facts=[("Status","Alpha"),("Runtime","Node.js"),("Phone needs","A browser"),
+         ("Install","None on the phone")],
+  body="""
+<h2>What it does</h2>
+<p>Runs a small local server that pairs with your phone over a QR code. The phone becomes a
+drag-and-drop grid of keys that inject real OS-level keystrokes, so it drives software that
+already exists on the machine without knowing anything about RemapWrap.</p>
+<p>Layouts are JSON, editable live and portable between machines. Haptics fire on press so
+the glass reports back.</p>
+<h2>Running it</h2>
+<pre>npm install
+<b>node remapwrap-server.js</b>
+scan the QR with your phone</pre>
+<p class="muted">There is no packaged installer yet. Run it from source until the alpha is
+built.</p>
+<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/remapwrap">Get the source</a></div>"""),
+}
+
+
+ABOUT_DOC = """
+<div class="doc"><h1>About F-Keys</h1>
+<p class="sub">Independent products built by Vincent Gonzalez.</p>
+<table class="facts">
+<tr><th>Entity</th><td>F-Keys Creative LLC (Florida)</td></tr>
+<tr><th>Trading as</th><td>F-Keys</td></tr>
+<tr><th>ORCID</th><td>0009-0005-3640-014X</td></tr>
+<tr><th>Contact</th><td>vincegonzalez@me.com</td></tr>
+</table>
+<h2>What this is</h2>
+<p>F-Keys is Vince Gonzalez, working alone. Twenty-two products are live, from
+browser games to formal proof tooling, and each is built end to end by the same
+person: architecture, both ends, database, deployment, documentation.</p>
+<h2>The recurring interest</h2>
+<p>Provenance - what a result actually rests on. gonzalgo reads a compiled Lean 4
+or Metamath library and reports which axioms a theorem spends rather than quietly
+inherits. OpticQuiz runs one colour-vision engine across eight distribution
+channels, with its JavaScript and Python implementations verified identical to six
+decimal places, and publishes the calibration limits that keep its own results
+honest.</p>
+<p>More than thirty works are deposited with DOIs. The packages are installed
+several hundred times a week.</p>
+<h2>Current interests</h2>
+<p>Accessibility &middot; hardware interfaces &middot; creator tools &middot; gaming
+&middot; formal methods &middot; the open web.</p>
+<div class="btnrow">
+  <a class="btn default" href="/papers/">Read the papers</a>
+  <a class="btn" href="/log/">Working log</a>
+  <a class="btn" href="/status/">Status</a>
+</div>
+</div>
+"""
+
+EXTRA_NODES = [("/about.html", "About"), ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers")]
 
 
 def esc(s):
@@ -167,7 +395,7 @@ def shell(title, path_label, body, count_label, active_cat=None,
   <nav class="menubar">
     <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
     <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
-    <a href="/#about"><u>H</u>elp</a>
+    <a href="/about.html"><u>H</u>elp</a>
   </nav>
 
   <div class="toolbar groove">
@@ -245,8 +473,36 @@ def main():
             f"{len(rows)} object(s)", active_cat=cid,
             description=hint, canonical=f"https://f-keys.com/{cid}.html")))
 
+
+    written.append(("about.html", shell(
+        "About \u2014 F-Keys", "F-Keys\\About", ABOUT_DOC, "1 item",
+        description="F-Keys is Vince Gonzalez, working alone. Twenty-two live "
+                    "products and more than thirty deposited works.",
+        canonical="https://f-keys.com/about.html")))
+
+    # one document per product that has long-form detail
+    for slug, page in PAGES.items():
+        row = next((c for c in CATALOGUE if c[0] == slug), None)
+        cat = row[2] if row else None
+        facts = "".join(
+            "<tr><th>{}</th><td>{}</td></tr>".format(esc(k), esc(v))
+            for k, v in page["facts"])
+        doc = ('<div class="doc"><h1>{}</h1><p class="sub">{}</p>'
+               '<table class="facts">{}</table>{}</div>').format(
+                   esc(page["title"]), esc(page["tagline"]), facts, page["body"])
+        label = dict((c[0], c[1]) for c in CATEGORIES) if False else None
+        catname = next((c[1] for c in CATEGORIES if c[0] == cat), "")
+        written.append((os.path.join(slug, "index.html"), shell(
+            page["title"] + " \u2014 F-Keys",
+            "F-Keys\\{}\\{}".format(catname, page["title"]),
+            doc, "1 item", active_cat=cat, active_slug=slug,
+            description=page["tagline"],
+            canonical="https://f-keys.com/{}/".format(slug))))
+
     for name, content in written:
-        with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
+        target = os.path.join(ROOT, name)
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        with open(target, "w", encoding="utf-8") as f:
             f.write(content)
 
     print(f"buildsite: {len(written)} pages")
