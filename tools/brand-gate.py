@@ -56,6 +56,11 @@ ALLOWED = [
      "GitHub org namespace: repo paths and Action refs (uses: zengineco/...)"),
     (re.compile(r"\bzengineco\b", re.I),
      "the GitHub org account name itself"),
+    (re.compile("zengine" + chr(92) + ".org", re.I),
+     "a DNS zone he still owns, reported by name in measured Cloudflare "
+     "data. It takes real traffic and redirects to f-keys.com, so renaming "
+     "it inside a measurement would make the snapshot wrong. The word "
+     "Zengine alone, and zengine.site, still fail."),
     (re.compile(r"ZengineCamBot"),
      "classifier under test in a published paper, DOI 10.5281/zenodo.19643322 - "
      "renaming it here would make the site contradict the deposited record"),

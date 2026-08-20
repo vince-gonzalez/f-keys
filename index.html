@@ -10,406 +10,266 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F-Keys — Hardware. Software. Ideas Brought to Life.</title>
 <meta name="description" content="Independent hardware, software, and internet products built by Vincent Gonzalez. Apps, games, tools, hardware, and research.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<meta property="og:title" content="F-Keys">
+<meta property="og:description" content="Independent hardware, software and internet products by Vincent Gonzalez.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com">
 <style>
-:root {
-  --bg: #0a0e0a; --panel: #111911; --border: #1f351f;
-  --green: #39ff14; --cyan: #00ffcc; --amber: #ffb000;
-  --text: #c3dcc3; --dim: #8fae8f;
+/* ============================================================
+   F-Keys — Program Manager
+   The catalogue as a desktop, because a list of links is not a
+   body of work. Icons open on a single click: the look is 1992,
+   the behaviour is the web, and that is deliberate.
+   ============================================================ */
+:root{
+  --desktop:#008080;
+  --face:#c0c0c0;       /* window face                */
+  --hi:#ffffff;         /* bevel highlight            */
+  --sh:#808080;         /* bevel shadow               */
+  --dk:#000000;         /* bevel outer                */
+  --title:#000080;      /* active title bar           */
+  --title2:#1084d0;
+  --ink:#000000;
+  --dim:#404040;
+  --sel:#000080;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background: var(--bg); color: var(--text);
-  font-family: 'Share Tech Mono', monospace;
-  line-height: 1.6; overflow-x: hidden;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--desktop);
+  font-family:'MS Sans Serif',Tahoma,Geneva,Verdana,sans-serif;
+  font-size:13px;color:var(--ink);
+  min-height:100vh;padding:0 0 46px;
+  -webkit-font-smoothing:none;
 }
-body::before {
-  content: ''; position: fixed; inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
-  pointer-events: none; z-index: 9000;
-}
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-  background: rgba(10,14,10,0.95); border-bottom: 1px solid var(--border);
-  padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
-}
-.logo { font-family: 'VT323', monospace; font-weight: 400; font-size: 28px; color: var(--green); letter-spacing: 4px; }
-.nav-links { display: flex; gap: 1.6rem; font-size: 0.9rem; flex-wrap: wrap; }
-.nav-links a { color: var(--dim); text-decoration: none; }
-.nav-links a:hover { color: var(--green); }
+a{color:inherit;text-decoration:none}
 
-.hero {
-  min-height: 100vh; display: flex; align-items: center; padding: 0 2rem;
-  text-align: center; position: relative;
-}
-.hero-content { max-width: 820px; margin: 0 auto; }
-.hero h1 {
-  font-family: 'VT323', monospace; font-weight: 400; font-size: clamp(48px, 10vw, 92px);
-  color: var(--green); margin-bottom: 1rem; letter-spacing: 6px;
-}
-.tagline { font-size: 1.4rem; color: var(--dim); margin-bottom: 2.5rem; }
-.cta-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
-.btn {
-  font-family: 'VT323', monospace; font-weight: 400; font-size: 1.4rem; padding: 14px 36px;
-  border: 2px solid var(--green); color: var(--green); background: transparent;
-  cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
-}
-.btn:hover { background: var(--green); color: #0a0e0a; box-shadow: 0 0 20px rgba(57,255,20,0.5); }
-.btn-secondary { border-color: var(--cyan); color: var(--cyan); }
-.btn-secondary:hover { background: var(--cyan); color: #0a0e0a; box-shadow: 0 0 20px rgba(0,255,204,0.4); }
+/* ── bevels ─────────────────────────────────────────── */
+.out{border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);
+     box-shadow:inset 1px 1px 0 var(--face),inset -1px -1px 0 var(--sh)}
+.in{border:2px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh)}
 
-.section { padding: 5rem 2rem; }
-.section.alt { background: var(--panel); }
-.section-head { max-width: 1200px; margin: 0 auto; }
-.section-head h2 {
-  font-family: 'VT323', monospace; font-weight: 400; font-size: 2.2rem;
-  color: var(--green); letter-spacing: 3px;
-}
-.section-head p { color: var(--dim); margin-top: 0.25rem; }
+/* ── menu bar ───────────────────────────────────────── */
+.menubar{background:var(--face);padding:3px 6px;display:flex;gap:2px;
+  border-bottom:1px solid var(--sh);position:sticky;top:0;z-index:500;flex-wrap:wrap}
+.menubar b{font-weight:700;padding:2px 9px;margin-right:6px}
+.menubar a{padding:2px 9px}
+.menubar a:hover{background:var(--sel);color:#fff}
+.menubar u{text-decoration:underline}
 
-.grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem; max-width: 1200px; margin: 2.5rem auto 0;
-}
-.card {
-  background: #0d120d; border: 1px solid var(--border); padding: 2rem;
-  transition: transform 0.2s, border-color 0.2s;
-  display: flex; flex-direction: column;
-}
-.section.alt .card { background: #0a0f0a; }
-.card:hover { transform: translateY(-8px); border-color: var(--green); }
-.card h3 { font-family: 'VT323', monospace; font-weight: 400; font-size: 1.8rem; color: var(--green); margin-bottom: 0.4rem; }
-.card p { color: var(--dim); margin-bottom: 1.5rem; flex: 1; }
-.card a.go { color: var(--green); text-decoration: none; }
-.card a.go:hover { text-decoration: underline; }
+/* ── windows ────────────────────────────────────────── */
+.desk{padding:14px;display:grid;gap:14px;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  max-width:1400px;margin:0 auto;align-items:start}
+.win{background:var(--face);padding:2px}
+.titlebar{
+  background:linear-gradient(90deg,var(--title),var(--title2));
+  color:#fff;font-weight:700;padding:3px 4px 3px 7px;
+  display:flex;align-items:center;justify-content:space-between;
+  letter-spacing:.2px;font-size:12.5px}
+.tbtns{display:flex;gap:2px}
+.tbtn{width:17px;height:15px;background:var(--face);color:var(--ink);
+  font-size:9px;line-height:13px;text-align:center;
+  border:1px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi)}
+.client{padding:11px;background:var(--face)}
+.hint{font-size:11.5px;color:var(--dim);margin-bottom:9px}
 
-.badge {
-  display: inline-block; font-size: 0.68rem; letter-spacing: 2px;
-  padding: 2px 8px; border: 1px solid; margin-bottom: 0.9rem; align-self: flex-start;
-}
-.badge.ready    { color: var(--green); border-color: var(--green); }
-.badge.platform { color: var(--cyan);  border-color: var(--cyan); }
-.badge.setup    { color: var(--amber); border-color: var(--amber); }
+/* ── program icons ──────────────────────────────────── */
+.icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:5px}
+.ico{display:block;text-align:center;padding:7px 3px 6px;border:1px dotted transparent}
+.ico:hover{background:var(--sel);color:#fff;border-color:#fff}
+.ico:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+.glyph{
+  width:34px;height:32px;margin:0 auto 5px;background:var(--face);
+  border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;line-height:1;color:var(--title)}
+.ico:hover .glyph{color:var(--title)}
+.nm{font-size:11.5px;line-height:1.25;word-break:break-word}
+.bd{display:block;font-size:9.5px;margin-top:3px;letter-spacing:.3px}
+.b-ready{color:#006000}.b-plat{color:#000080}.b-setup{color:#803000}
+.ico:hover .bd{color:#c0f0c0}
 
-.about { padding: 4rem 2rem; max-width: 800px; margin: 0 auto; }
-footer { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
-ul { list-style: none; }
-footer a { color: var(--green); text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+/* ── about + status line ────────────────────────────── */
+.para{margin-bottom:8px;line-height:1.55}
+.list{list-style:none;columns:2;font-size:12px;line-height:1.9}
+.statusbar{position:fixed;left:0;right:0;bottom:0;background:var(--face);
+  border-top:1px solid var(--hi);padding:4px 8px;display:flex;gap:8px;
+  align-items:center;font-size:11.5px;z-index:600}
+.statusbar .cell{padding:2px 8px;flex:0 0 auto}
+.statusbar .grow{flex:1 1 auto}
+.start{font-weight:700;padding:2px 10px}
+
+@media (max-width:620px){
+  .desk{grid-template-columns:1fr;padding:9px;gap:9px}
+  .icons{grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+  .statusbar .hide-sm{display:none}
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">F-KEYS</div>
-  <div class="nav-links">
-    <a href="#apps">Apps</a>
-    <a href="#games">Games</a>
-    <a href="#tools">Tools</a>
-    <a href="#hardware">Hardware</a>
-    <a href="#research">Research</a>
-    <a href="/log/">Log</a>
-    <a href="portfolio.html">Portfolio</a>
-  </div>
-</nav>
+<div class="menubar out">
+  <b>F-KEYS</b>
+  <a href="#apps"><u>A</u>pps</a>
+  <a href="#games"><u>G</u>ames</a>
+  <a href="#tools"><u>T</u>ools</a>
+  <a href="#hardware"><u>H</u>ardware</a>
+  <a href="#research"><u>R</u>esearch</a>
+  <a href="/log/"><u>L</u>og</a>
+  <a href="/status/">Status</a>
+  <a href="portfolio.html">Portfolio</a>
+</div>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>F-KEYS</h1>
-    <p class="tagline">Hardware.<br>Software.<br>Ideas brought to life.</p>
-    <p style="max-width:520px;margin:0 auto 3rem;color:var(--dim);">
-      Independent products built by Vincent Gonzalez.
-    </p>
-    <div class="cta-row">
-      <a href="#apps" class="btn">Explore Products →</a>
-      <a href="portfolio.html" class="btn btn-secondary">View Portfolio</a>
+<main class="desk">
+
+  <!-- ── APPS ───────────────────────────────────────── -->
+  <section class="win out" id="apps">
+    <div class="titlebar"><span>Apps</span>
+      <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">□</span></span></div>
+    <div class="client">
+      <p class="hint">Things you sit in front of and use.</p>
+      <div class="icons">
+        <a class="ico" href="/keyj/"><span class="glyph">♪</span>
+          <span class="nm">Key-J<span class="bd b-ready">PLAY NOW</span></span></a>
+        <a class="ico" href="/pixelstaff/"><span class="glyph">▦</span>
+          <span class="nm">Pixel Staff<span class="bd b-ready">PLAY NOW</span></span></a>
+        <a class="ico" href="https://opticquiz.com" target="_blank" rel="noopener"><span class="glyph">◉</span>
+          <span class="nm">OpticQuiz<span class="bd b-ready">PLAY NOW</span></span></a>
+        <a class="ico" href="/qv/"><span class="glyph">☑</span>
+          <span class="nm">QV<span class="bd b-ready">PLAY NOW</span></span></a>
+        <a class="ico" href="/remapwrap"><span class="glyph">▣</span>
+          <span class="nm">RemapWrap<span class="bd b-setup">ALPHA</span></span></a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── APPS ────────────────────────────────────────────────── -->
-<section id="apps" class="section alt">
-  <div class="section-head">
-    <h2>APPS</h2>
-    <p>Things you sit in front of and use.</p>
-  </div>
-  <div class="grid">
-
-    <div class="card">
-      <span class="badge ready">PLAY NOW</span>
-      <h3>Key-J</h3>
-      <p>Every keystroke plays a note. Turn on global capture and it works in any app on
-         your PC — the notes land on a staff as you go, and the session exports as a WAV.</p>
-      <a class="go" href="/keyj/">Learn More →</a>
+  <!-- ── GAMES ──────────────────────────────────────── -->
+  <section class="win out" id="games">
+    <div class="titlebar"><span>Games</span>
+      <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">□</span></span></div>
+    <div class="client">
+      <p class="hint">Things you play.</p>
+      <div class="icons">
+        <a class="ico" href="https://trailer-load.com" target="_blank" rel="noopener"><span class="glyph">▤</span>
+          <span class="nm">Trailer Load<span class="bd b-ready">PLAY NOW</span></span></a>
+        <a class="ico" href="https://prompt.f-keys.com" target="_blank" rel="noopener"><span class="glyph">▮</span>
+          <span class="nm">PROMPT<span class="bd b-plat">IN DISCORD</span></span></a>
+        <a class="ico" href="https://dp.f-keys.com" target="_blank" rel="noopener"><span class="glyph">⚄</span>
+          <span class="nm">DaisuPop<span class="bd b-plat">IN DISCORD</span></span></a>
+        <a class="ico" href="/micdrop/"><span class="glyph">🎤</span>
+          <span class="nm">MICDROP<span class="bd b-plat">IN FORTNITE</span></span></a>
+        <a class="ico" href="https://github.com/zengineco/fytecraft.com" target="_blank" rel="noopener"><span class="glyph">⚔</span>
+          <span class="nm">FyteCraft<span class="bd b-setup">ALPHA</span></span></a>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <span class="badge ready">PLAY NOW</span>
-      <h3>Pixel Staff</h3>
-      <p>An 8-bit composer with no DAW anywhere in it. Draw notes on a piano roll, pick a
-         waveform per channel, and leave with a WAV or a ringtone for your phone.</p>
-      <a class="go" href="/pixelstaff/">Learn More →</a>
+  <!-- ── TOOLS ──────────────────────────────────────── -->
+  <section class="win out" id="tools">
+    <div class="titlebar"><span>Tools</span>
+      <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">□</span></span></div>
+    <div class="client">
+      <p class="hint">Things that do the work for you.</p>
+      <div class="icons">
+        <a class="ico" href="/wikipolish/"><span class="glyph">✎</span>
+          <span class="nm">WikiPolish<span class="bd b-ready">PLAY NOW</span></span></a>
+        <a class="ico" href="/leadseer/"><span class="glyph">⌕</span>
+          <span class="nm">LeadSeer<span class="bd b-setup">NEEDS SETUP</span></span></a>
+        <a class="ico" href="/plumhud/"><span class="glyph">▥</span>
+          <span class="nm">PlumHUD<span class="bd b-setup">pip install</span></span></a>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <span class="badge ready">PLAY NOW</span>
-      <h3>OpticQuiz</h3>
-      <p>Vision and colour tests that run entirely in your browser, scored honestly.
-         Nothing you do on the page leaves it.</p>
-      <a class="go" href="https://opticquiz.com" target="_blank" rel="noopener">Visit →</a>
+  <!-- ── HARDWARE ───────────────────────────────────── -->
+  <section class="win out" id="hardware">
+    <div class="titlebar"><span>Hardware</span>
+      <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">□</span></span></div>
+    <div class="client">
+      <p class="hint">Software that makes a box do one thing forever.</p>
+      <div class="icons">
+        <a class="ico" href="/streamsniper/"><span class="glyph">📡</span>
+          <span class="nm">Stream Sniper<span class="bd b-setup">NEEDS SETUP</span></span></a>
+        <a class="ico" href="/moonbeam/"><span class="glyph">₿</span>
+          <span class="nm">Moonbeam<span class="bd b-setup">pip install</span></span></a>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <span class="badge ready">PLAY NOW</span>
-      <h3>QV</h3>
-      <p>Live ballots. Put a question to a room, watch the count move as people answer,
-         and skip the account entirely.</p>
-      <a class="go" href="/qv/">Learn More →</a>
+  <!-- ── RESEARCH ───────────────────────────────────── -->
+  <section class="win out" id="research">
+    <div class="titlebar"><span>Research</span>
+      <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">□</span></span></div>
+    <div class="client">
+      <p class="hint">Things you read. Every claim carries a DOI.</p>
+      <div class="icons">
+        <a class="ico" href="/gonzalgo/"><span class="glyph">∴</span>
+          <span class="nm">gonzalgo</span></a>
+        <a class="ico" href="/papers/"><span class="glyph">▤</span>
+          <span class="nm">Papers</span></a>
+        <a class="ico" href="https://modulign.org" target="_blank" rel="noopener"><span class="glyph">◈</span>
+          <span class="nm">Modulign</span></a>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <span class="badge setup">ALPHA</span>
-      <h3>RemapWrap</h3>
-      <p>Turn any smartphone into a programmable macro controller that sends real
-         OS-level keystrokes. Scan a QR code — no app and no dongle.</p>
-      <a class="go" href="/remapwrap">Learn More →</a>
+  <!-- ── PROPERTIES ─────────────────────────────────── -->
+  <section class="win out" id="properties">
+    <div class="titlebar"><span>Properties</span>
+      <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">□</span></span></div>
+    <div class="client">
+      <p class="hint">Sites that stand on their own.</p>
+      <div class="icons">
+        <a class="ico" href="https://www.5best2buy.com" target="_blank" rel="noopener"><span class="glyph">★</span>
+          <span class="nm">5Best2Buy</span></a>
+        <a class="ico" href="https://poticas.com" target="_blank" rel="noopener"><span class="glyph">◍</span>
+          <span class="nm">Poticas</span></a>
+        <a class="ico" href="https://tipstreams.com" target="_blank" rel="noopener"><span class="glyph">▩</span>
+          <span class="nm">TipStreams</span></a>
+        <a class="ico" href="https://dogefundme.com" target="_blank" rel="noopener"><span class="glyph">⛳</span>
+          <span class="nm">FunDoge</span></a>
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- ── GAMES ───────────────────────────────────────────────── -->
-<section id="games" class="section">
-  <div class="section-head">
-    <h2>GAMES</h2>
-    <p>Things you play.</p>
-  </div>
-  <div class="grid">
-
-    <div class="card">
-      <span class="badge ready">PLAY NOW</span>
-      <h3>Trailer Load</h3>
-      <p>Warehouse load training that plays like a game. Stack a 53-foot trailer against
-         real constraints — weight, column integrity, what shifts when the truck moves.</p>
-      <a class="go" href="https://trailer-load.com" target="_blank" rel="noopener">Visit →</a>
+  <!-- ── ABOUT ──────────────────────────────────────── -->
+  <section class="win out" id="about">
+    <div class="titlebar"><span>About F-Keys</span>
+      <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">□</span></span></div>
+    <div class="client">
+      <div class="in" style="padding:11px;background:#fff">
+        <p class="para">F-Keys is Vince Gonzalez, working alone.</p>
+        <p class="para">Twenty-one products are live, from browser games to formal
+          proof tooling, and each is built end to end by the same person —
+          architecture, both ends, database, deployment, documentation.</p>
+        <p class="para">The recurring interest is provenance: what a result actually
+          rests on. gonzalgo reads a compiled Lean 4 or Metamath library and reports
+          which axioms a theorem spends rather than quietly inherits. OpticQuiz runs
+          one colour-vision engine across eight distribution channels, with its
+          JavaScript and Python implementations verified identical to six decimal
+          places, and publishes the calibration limits that keep its own results
+          honest.</p>
+        <p class="para">More than thirty works are deposited with DOIs. The packages
+          are installed several hundred times a week.</p>
+      </div>
+      <p class="hint" style="margin:10px 0 5px">Current interests</p>
+      <ul class="list">
+        <li>Accessibility</li><li>Hardware interfaces</li>
+        <li>Creator tools</li><li>Gaming</li>
+        <li>Formal methods</li><li>Open Web</li>
+      </ul>
     </div>
+  </section>
 
-    <div class="card">
-      <span class="badge platform">IN DISCORD</span>
-      <h3>PROMPT</h3>
-      <p>A multiplayer word game inside Discord, played in a 90s CRT monitor. Answer the
-         prompt, fool the room, argue your case when someone calls it.</p>
-      <a class="go" href="https://prompt.f-keys.com" target="_blank" rel="noopener">Play →</a>
-    </div>
+</main>
 
-    <div class="card">
-      <span class="badge platform">IN DISCORD</span>
-      <h3>DaisuPop</h3>
-      <p>A dice popper for Discord. Everyone in the room watches the same dice resolve
-         at the same moment.</p>
-      <a class="go" href="https://dp.f-keys.com" target="_blank" rel="noopener">Play →</a>
-    </div>
-
-    <div class="card">
-      <span class="badge platform">IN FORTNITE</span>
-      <h3>MICDROP</h3>
-      <p>A live open-mic arena. You get 120 seconds to win the crowd, or three boos and
-         a sad trombone play you off. Island code <strong>1534-0440-5810</strong>.</p>
-      <a class="go" href="/micdrop/">Learn More →</a>
-    </div>
-
-    <div class="card">
-      <span class="badge setup">ALPHA</span>
-      <h3>FyteCraft</h3>
-      <p>An RTS built around combat rather than base-building, with its own economy and
-         a roster of fighters. Early, and openly so.</p>
-      <a class="go" href="https://github.com/zengineco/fytecraft.com" target="_blank" rel="noopener">See the Work →</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── TOOLS ───────────────────────────────────────────────── -->
-<section id="tools" class="section alt">
-  <div class="section-head">
-    <h2>TOOLS</h2>
-    <p>Things that do the work for you.</p>
-  </div>
-  <div class="grid">
-
-    <div class="card">
-      <span class="badge ready">PLAY NOW</span>
-      <h3>WikiPolish</h3>
-      <p>Grammar scout for Wikipedia. Point it at an article and it reads the live text
-         and flags the language problems — a first edit nobody will revert.</p>
-      <a class="go" href="/wikipolish/">Learn More →</a>
-    </div>
-
-    <div class="card">
-      <span class="badge setup">NEEDS SETUP</span>
-      <h3>LeadSeer</h3>
-      <p>Finds the local businesses that still have no website. Search by ZIP and
-         category, filter out the chains, export the list.</p>
-      <a class="go" href="/leadseer/">Learn More →</a>
-    </div>
-
-    <div class="card">
-      <span class="badge setup">NEEDS SETUP</span>
-      <h3>PlumHUD</h3>
-      <p>A miner fleet monitor that polls every rig at once, keeps the history in a local
-         database, and messages you the moment one stops earning.</p>
-      <a class="go" href="/plumhud/">Learn More →</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── HARDWARE ────────────────────────────────────────────── -->
-<section id="hardware" class="section">
-  <div class="section-head">
-    <h2>HARDWARE</h2>
-    <p>Software that makes a box do one thing forever.</p>
-  </div>
-  <div class="grid">
-
-    <div class="card">
-      <span class="badge setup">NEEDS SETUP</span>
-      <h3>Stream Sniper</h3>
-      <p>Give a spare mini PC a list of channels and it shows a clock until one goes
-         live, then puts them fullscreen on the TV with the ads stripped out.</p>
-      <a class="go" href="/streamsniper/">Learn More →</a>
-    </div>
-
-    <div class="card">
-      <span class="badge setup">NEEDS SETUP</span>
-      <h3>Moonbeam</h3>
-      <p>An educational, lottery-style Bitcoin miner on an ESP32. Open firmware, a web
-         dashboard, and a printable enclosure.</p>
-      <a class="go" href="/moonbeam/">Learn More →</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── RESEARCH ────────────────────────────────────────────── -->
-<section id="research" class="section alt">
-  <div class="section-head">
-    <h2>RESEARCH</h2>
-    <p>Things you read.</p>
-  </div>
-  <div class="grid">
-
-    <div class="card">
-      <h3>gonzalgo</h3>
-      <p>What does your proof actually rest on? Finds Lean 4 theorems standing on an
-         inherited <code>sorry</code> or on <code>native_decide</code>, and names the
-         tactic that put them there. <em>kernel &gt; sorry</em></p>
-      <a class="go" href="/gonzalgo/">Learn More →</a>
-    </div>
-
-    <div class="card">
-      <h3>Papers</h3>
-      <p>Where formal libraries spend their axioms, and why tactic-level rates cannot
-         attribute them. Full text, DOIs, reproduction archives.</p>
-      <a class="go" href="/papers/">Read →</a>
-    </div>
-
-    <div class="card">
-      <h3>Modulign</h3>
-      <p>A dimensional address grammar for observable reality. DAG-OR v3, with a
-         companion paper applying the standard to the Gettier problem.</p>
-      <a class="go" href="https://modulign.org" target="_blank" rel="noopener">Visit →</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── PROPERTIES ──────────────────────────────────────────── -->
-<section id="properties" class="section">
-  <div class="section-head">
-    <h2>PROPERTIES</h2>
-    <p>Sites that stand on their own.</p>
-  </div>
-  <div class="grid">
-
-    <div class="card">
-      <h3>5Best2Buy</h3>
-      <p>A sourcing map for independent American food. Shelves rank the makers, and the
-         recipes work backward to what you'd need to buy.</p>
-      <a class="go" href="https://www.5best2buy.com" target="_blank" rel="noopener">Visit →</a>
-    </div>
-
-    <div class="card">
-      <h3>Poticas</h3>
-      <p>The home of potica. How it's made, where the regional versions part ways, and
-         who still ships one worth eating.</p>
-      <a class="go" href="https://poticas.com" target="_blank" rel="noopener">Visit →</a>
-    </div>
-
-    <div class="card">
-      <h3>TipStreams</h3>
-      <p>Branded tip pages, multi-processor routing, and OBS overlays for streamers.
-         The widget is on npm and never touches the money.</p>
-      <a class="go" href="https://tipstreams.com" target="_blank" rel="noopener">Visit →</a>
-    </div>
-
-    <div class="card">
-      <h3>FunDoge</h3>
-      <p>Free isometric mini-golf in the browser.</p>
-      <a class="go" href="https://dogefundme.com" target="_blank" rel="noopener">Visit →</a>
-    </div>
-
-  </div>
-</section>
-
-<section id="about" class="about">
-  <h2 style="font-family:'VT323',monospace; font-weight: 400;color:var(--green);margin-bottom:1.5rem;">About F-Keys</h2>
-  <p>F-Keys develops independent hardware, software and internet products.</p>
-  <p style="margin-top:1.5rem;">Founded by Vincent Gonzalez.</p>
-  <p style="margin-top:2rem;">Current interests include:</p>
-  <ul style="margin-top:1rem;columns:2;gap:3rem;">
-    <li>Accessibility</li>
-    <li>Hardware interfaces</li>
-    <li>Creator tools</li>
-    <li>Gaming</li>
-    <li>AI</li>
-    <li>Open Web</li>
-  </ul>
-</section>
-
-<footer>
-  <p style="text-align:center;margin-bottom:1.5rem;color:var(--dim);">Products</p>
-  <div style="display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;font-size:0.95rem;">
-    <a href="/keyj/">Key-J</a>
-    <a href="/pixelstaff/">Pixel Staff</a>
-    <a href="/qv/">QV</a>
-    <a href="/remapwrap">RemapWrap</a>
-    <a href="https://opticquiz.com" target="_blank" rel="noopener">OpticQuiz</a>
-    <a href="https://trailer-load.com" target="_blank" rel="noopener">Trailer Load</a>
-    <a href="https://prompt.f-keys.com" target="_blank" rel="noopener">PROMPT</a>
-    <a href="https://dp.f-keys.com" target="_blank" rel="noopener">DaisuPop</a>
-    <a href="/micdrop/">MICDROP</a>
-    <a href="/wikipolish/">WikiPolish</a>
-    <a href="/leadseer/">LeadSeer</a>
-    <a href="/plumhud/">PlumHUD</a>
-    <a href="/streamsniper/">Stream Sniper</a>
-    <a href="/moonbeam/">Moonbeam</a>
-    <a href="/gonzalgo/">gonzalgo</a>
-    <a href="/papers/">Papers</a>
-    <a href="https://modulign.org" target="_blank" rel="noopener">Modulign</a>
-    <a href="https://www.5best2buy.com" target="_blank" rel="noopener">5Best2Buy</a>
-    <a href="https://poticas.com" target="_blank" rel="noopener">Poticas</a>
-    <a href="https://tipstreams.com" target="_blank" rel="noopener">TipStreams</a>
-    <a href="https://dogefundme.com" target="_blank" rel="noopener">FunDoge</a>
-  </div>
-  <p style="text-align:center;margin-top:2rem;font-size:0.9rem;">
-    <a href="/log/">Log</a> &nbsp;·&nbsp; <a href="/status/">Status</a>
-  </p>
-  <p style="text-align:center;margin-top:3rem;font-size:0.8rem;color:var(--dim);">
-    © 2026 F-Keys • Built by Vincent Gonzalez
-  </p>
-</footer>
+<div class="statusbar">
+  <span class="start out">F-Keys</span>
+  <span class="cell in hide-sm">21 products</span>
+  <span class="cell in hide-sm"><a href="/status/">Status</a></span>
+  <span class="cell in"><a href="/log/">Log</a></span>
+  <span class="cell in grow">© 2026 F-Keys &nbsp;·&nbsp; Vincent Gonzalez</span>
+</div>
 
 </body>
 </html>
