@@ -1104,13 +1104,13 @@ document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{
 
   /* ── tone presets ───────────────────────────────────────────── */
   var PRESETS = {
-    'Clean Guitar':   { waveform: 'triangle', attack: 0.006, release: 0.60, reverb: 0.18, drive: 0.15, playStyle: 'normal' },
-    'Overdrive Lead': { waveform: 'sawtooth', attack: 0.004, release: 0.75, reverb: 0.22, drive: 0.55, playStyle: 'normal' },
-    'Shred':          { waveform: 'sawtooth', attack: 0.002, release: 0.45, reverb: 0.15, drive: 0.80, playStyle: 'vibrato' },
-    'Bell':           { waveform: 'sine',     attack: 0.002, release: 1.60, reverb: 0.45, drive: 0.00, playStyle: 'normal' },
-    'Chip':           { waveform: 'square',   attack: 0.001, release: 0.18, reverb: 0.05, drive: 0.00, playStyle: 'staccato' },
-    'Pluck':          { waveform: 'triangle', attack: 0.001, release: 0.30, reverb: 0.12, drive: 0.10, playStyle: 'staccato' },
-    'Pad':            { waveform: 'sine',     attack: 0.220, release: 1.80, reverb: 0.55, drive: 0.00, playStyle: 'normal' }
+    'Clean Guitar':   { waveform: 'triangle', attack: 0.006, release: 600, reverb: 0.18, drive: 0.15, playStyle: 'normal' },
+    'Overdrive Lead': { waveform: 'sawtooth', attack: 0.004, release: 750, reverb: 0.22, drive: 0.55, playStyle: 'normal' },
+    'Shred':          { waveform: 'sawtooth', attack: 0.002, release: 450, reverb: 0.15, drive: 0.80, playStyle: 'vibrato' },
+    'Bell':           { waveform: 'sine',     attack: 0.002, release: 1600, reverb: 0.45, drive: 0.00, playStyle: 'normal' },
+    'Chip':           { waveform: 'square',   attack: 0.001, release: 180, reverb: 0.05, drive: 0.00, playStyle: 'staccato' },
+    'Pluck':          { waveform: 'triangle', attack: 0.001, release: 300, reverb: 0.12, drive: 0.10, playStyle: 'staccato' },
+    'Pad':            { waveform: 'sine',     attack: 0.220, release: 1800, reverb: 0.55, drive: 0.00, playStyle: 'normal' }
   };
   var shaper = null;
   function driveCurve(amount) {
@@ -1127,10 +1127,26 @@ document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{
     }
     if (shaper) shaper.curve = driveCurve(a);
   }
+  /* The two builds name the same object differently - app.html has `state`
+     with .waveform and .playStyle, the desktop build has `S` with .wave and
+     .style. This wrote to `state` unconditionally, so on the desktop build
+     every tone button threw ReferenceError and did nothing at all. */
+  function tuneState() {
+    if (typeof state !== 'undefined' && state) return state;
+    if (typeof S !== 'undefined' && S) return S;
+    return null;
+  }
   function applyPreset(name) {
     var p = PRESETS[name]; if (!p) return;
-    state.waveform = p.waveform; state.attack = p.attack;
-    state.release = p.release; state.reverb = p.reverb; state.playStyle = p.playStyle;
+    var s = tuneState(); if (!s) return;
+    s.waveform = p.waveform; s.wave = p.waveform;
+    s.attack = p.attack; s.release = p.release; s.reverb = p.reverb;
+    s.playStyle = p.playStyle; s.style = p.playStyle;
+    // the release slider and its readout should agree with what was applied
+    var sl = document.getElementById('releaseSlider');
+    if (sl) sl.value = p.release;
+    var ro = document.getElementById('releaseVal');
+    if (ro) ro.textContent = p.release;
     setDrive(p.drive);
     if (typeof reverbNode !== 'undefined' && reverbNode) reverbNode.gain.value = p.reverb;
     Array.prototype.forEach.call(document.querySelectorAll('[data-preset]'), function (b) {
