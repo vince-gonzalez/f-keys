@@ -1198,7 +1198,6 @@ document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{
         'padding:9px 11px;max-height:76px;overflow:auto;word-break:break-word;line-height:1.7}',
       '#kj .warn{color:#ffb454}',
       '#kj .note{color:#9aa0b5;font-size:11.5px;margin-top:2px}',
-      '@media (max-width:1100px){#kj .body{grid-template-columns:1fr}}',
       /* The page was 1900px tall because the key map listed every key with no
          cap (1676px) and the visualiser container held 1277px. Grid rows
          stretch to the tallest column, so both had to be bounded before the
@@ -1987,6 +1986,98 @@ document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });
   } else { setTimeout(build, 0); }
+})();
+
+/* ============================================================
+   Key-J v1.6 — a desktop instrument, laid out for a desktop
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHAT WAS WRONG, MEASURED
+
+     At 1280 x 720, an ordinary laptop, the sequence panel ran
+     from 569px to 819px and the status bar from 819 to 853. The
+     window ends at 720 and the body is overflow:hidden, so those
+     were not merely below the fold - there was no scrollbar to
+     reach them. The sequence panel is where the notes you have
+     entered are listed. You could type a run and never see it.
+
+     The cause is one word. body carries min-height:100vh, which
+     is a floor and not a height, so .main was free to grow to
+     its content (739px) instead of being handed what was left
+     (607px). Nothing inside .main was broken: all three rails
+     already scroll internally and were waiting for a definite
+     height that never arrived.
+
+     Two fixed caps from v1.2 were the matching fault upward. The
+     key map stopped at 420px and the sequence panel at 300px, so
+     on a tall window they left 184px of dead rail while on a
+     short one they were still too big. A number written in
+     advance is wrong at both ends.
+
+   WHAT THIS DOES
+
+     1. Gives body a height rather than a floor, so every rail
+        gets the space that exists and scrolls within it.
+     2. Drops the two caps. The panels flex into what is left.
+     3. Puts a floor under the window instead of a breakpoint
+        above it. Below 1280 the layout stops compressing and the
+        page scrolls sideways, so a control is never cropped.
+     4. Removes the mobile reflow. Key-J is played on a physical
+        keyboard, so a phone gets the desktop layout scaled down
+        rather than a rearranged one that could not be played.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  /* The design floor. Below this the rails would start eating the
+     centre column, so the page scrolls instead of compressing. */
+  var FLOOR = 1280;
+
+  function styles() {
+    var css = document.createElement('style');
+    css.textContent = [
+      /* 1 - a height, not a floor. This is the whole clipping fix. */
+      'body{height:100vh!important;min-height:0!important;' +
+        'overflow-x:auto!important;overflow-y:hidden!important}',
+      'header,.bottom-bar{flex-shrink:0!important}',
+      /* a flex item will not shrink below its content unless told */
+      '.main{min-height:0!important}',
+
+      /* 2 - the rails take what is left instead of a fixed number */
+      '.keymap-scroll{max-height:none!important;min-height:120px!important}',
+      '.seq-panel{max-height:none!important;min-height:110px!important}',
+
+      /* 3 - the floor, applied to all three full-width bands so they
+         stay aligned with each other when the page scrolls */
+      'header{min-width:' + FLOOR + 'px!important}',
+      '.main{min-width:' + FLOOR + 'px!important}',
+      '.bottom-bar{min-width:' + FLOOR + 'px!important}',
+
+      /* 4 - the importer keeps both columns at every width */
+      '#kj .body{grid-template-columns:1fr 1fr!important}'
+    ].join('\n');
+    document.head.appendChild(css);
+  }
+
+  /* The viewport tag ships as width=device-width, which asks a phone
+     to reflow a layout that has nowhere to reflow to. Pinning it to
+     the design floor renders the real thing, scaled. */
+  function viewport() {
+    try {
+      var m = document.querySelector('meta[name=viewport]');
+      if (!m) {
+        m = document.createElement('meta');
+        m.setAttribute('name', 'viewport');
+        document.head.appendChild(m);
+      }
+      m.setAttribute('content', 'width=' + FLOOR + ', initial-scale=1');
+    } catch (err) {
+      console.error('viewport:', err);
+    }
+  }
+
+  styles();
+  viewport();
 })();
 </script>
 </body>

@@ -17,10 +17,13 @@ let isQuitting = false;
 // ── Create Window ──────────────────────────────────────────────
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1100,
-    height: 720,
-    minWidth: 860,
-    minHeight: 560,
+    // v1.6: the renderer's design floor is 1280. Opening at 1100 with a
+    // 860 minimum meant the app launched already scrolled sideways and
+    // could be dragged narrower than its own layout.
+    width: 1360,
+    height: 860,
+    minWidth: 1280,
+    minHeight: 620,
     title: 'Key-J',
     backgroundColor: '#0a0a0e',
     frame: false,           // custom titlebar inside renderer
