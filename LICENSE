@@ -2,6 +2,12 @@ MIT License
 
 Copyright (c) 2026 Vincent Gonzalez
 
+EXCEPTION: Key-J is not covered by this licence. Everything under keyj/ is
+governed by keyj/LICENSE, from Key-J version 1.6.0 onward. Key-J releases up
+to and including 1.5.0 were published under the terms below and that grant
+stands for those versions. The Key-J command line tool on PyPI (`keyj`)
+remains MIT.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
