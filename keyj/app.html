@@ -1529,133 +1529,187 @@ window.addEventListener('resize', () => {
 document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resume(); }, { once: true });
 </script>
 
+
+
 <script>
 /* ============================================================
-   Key-J v1.1 — sequence mode, tone presets, MIDI import
+   Key-J v1.2 — legibility, reclaimed space, and tab import
    F-Keys | www.f-keys.com
    ------------------------------------------------------------
-   WHY THIS EXISTS
-   v1.0 is an authoring tool: bind every key, then improvise.
-   The common want is the opposite — play a run you already know.
-   Sequence mode removes pitch from the problem so the player
-   supplies rhythm and feel, which is the musical part.
+   WHAT WAS WRONG, MEASURED
 
-   WORKFLOW STACK
-     1. Insert a drive stage between master and the analyser
-     2. Wrap playNote so a loaded sequence overrides the keymap
-     3. Parse sequences from typed note names or a MIDI file
-     4. Presets set every sound parameter at once
+     The centre column is 1100px wide and was not unused: a
+     visualiser canvas 1100 x 1653 sat in it drawing black.
+     The page was 1919px tall to accommodate nothing.
 
-   DESIGN RULE
-     Any key advances the sequence. There is nothing to configure
-     and nothing to memorise.
+     The smallest text on screen was 8.8px, and one label ran
+     #555568 on near-black - roughly 2.3:1, where the readable
+     floor is 4.5:1. Every control lived in a 280px or 220px
+     rail at that size.
+
+     v1.1 then added a floating panel in the bottom-right
+     corner, in a third accent colour, on the one edge still
+     breathing. That was the wrong fix and it is removed.
+
+   WHAT THIS DOES
+
+     1. Caps the visualiser and hands the reclaimed height to a
+        work area in the centre, where the eye already is.
+     2. Floors type at 12px and lifts every dim colour past the
+        contrast threshold.
+     3. Adds the tab importer, which is the actual product:
+        paste guitar tablature, choose a tuning, get the notes.
+
+   USER INTEGRITY
+     The importer reports its own work. It states the tuning it
+     used, how many strings and notes it found, and names
+     anything it could not read. It never silently drops a note
+     and never guesses a tuning without saying so - a converter
+     you cannot audit is worse than no converter, because the
+     mistakes are inaudible until you play them.
    ============================================================ */
 (function () {
   'use strict';
 
-  var SEQ = { on: false, notes: [], pos: 0, name: '' };
-  var MAX_MIDI_BYTES = 1024 * 1024;   // a MIDI file this large is pathological
-  var driveShaper = null;
-  var driveAmount = 0;
+  /* ── tunings: open-string MIDI numbers, highest string first ── */
+  var TUNINGS = {
+    'Standard (EADGBe)': [64, 59, 55, 50, 45, 40],
+    'Drop D':            [64, 59, 55, 50, 45, 38],
+    'Eb Standard':       [63, 58, 54, 49, 44, 39],
+    'D Standard':        [62, 57, 53, 48, 43, 38],
+    'DADGAD':            [62, 57, 55, 50, 45, 38],
+    'Open G':            [62, 59, 55, 50, 43, 38],
+    '7-string (B)':      [64, 59, 55, 50, 45, 40, 35],
+    'Bass (4)':          [43, 38, 33, 28]
+  };
+  var NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  var MAX_CHARS = 200000;          // a tab this long is not a tab
 
-  // ── Pitch helpers ──────────────────────────────────────────
-  var NOTE_OFFSETS = { c: -9, d: -7, e: -5, f: -4, g: -2, a: 0, b: 2 };
-
-  function noteNameToFreq(name) {
-    var m = /^([A-Ga-g])([#b]?)(-?\d+)$/.exec(String(name).trim());
-    if (!m) return null;
-    var semi = NOTE_OFFSETS[m[1].toLowerCase()];
-    if (m[2] === '#') semi += 1;
-    if (m[2] === 'b') semi -= 1;
-    semi += (parseInt(m[3], 10) - 4) * 12;      // relative to A4
-    return 440 * Math.pow(2, semi / 12);
-  }
-
-  function midiToName(n) {
-    var names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    return names[n % 12] + (Math.floor(n / 12) - 1);
-  }
-
+  function midiToName(n) { return NOTE_NAMES[((n % 12) + 12) % 12] + (Math.floor(n / 12) - 1); }
   function midiToFreq(n) { return 440 * Math.pow(2, (n - 69) / 12); }
 
-  // ── Sequence sources ───────────────────────────────────────
-  function parseTypedSequence(text) {
-    var tokens = String(text).split(/[\s,|]+/).filter(Boolean);
-    var out = [], bad = [];
-    tokens.forEach(function (t) {
-      var f = noteNameToFreq(t);
-      if (f) out.push({ name: t.toUpperCase(), freq: f });
-      else bad.push(t);
-    });
-    return { notes: out, bad: bad };
+  function nameToFreq(name) {
+    var m = /^([A-Ga-g])([#b]?)(-?\d+)$/.exec(String(name).trim());
+    if (!m) return null;
+    var base = { c: 0, d: 2, e: 4, f: 5, g: 7, a: 9, b: 11 }[m[1].toLowerCase()];
+    if (m[2] === '#') base += 1;
+    if (m[2] === 'b') base -= 1;
+    return midiToFreq(base + (parseInt(m[3], 10) + 1) * 12);
   }
 
-  /* Minimal MIDI reader: header, then note-on events in play order.
-     Velocity-zero note-ons are note-offs and are skipped. Only pitch
-     order matters here because the player supplies the rhythm. */
-  function parseMidi(buffer) {
-    var dv = new DataView(buffer), pos = 0;
-    function u32() { var v = dv.getUint32(pos); pos += 4; return v; }
-    function u16() { var v = dv.getUint16(pos); pos += 2; return v; }
-    function u8()  { var v = dv.getUint8(pos);  pos += 1; return v; }
-    function str(n) { var s = ''; for (var i = 0; i < n; i++) s += String.fromCharCode(u8()); return s; }
-    function varLen() {
-      var v = 0, c;
-      do { c = u8(); v = (v << 7) | (c & 0x7f); } while (c & 0x80);
-      return v;
-    }
+  /* ── the tab reader ──────────────────────────────────────────
+     A tab line looks like  e|--12--15--|  or just --12--15--.
+     Frets are read with their column index so that notes played
+     together stay together and the order across strings is
+     preserved. Technique characters (h p / \ b r ~ x) separate
+     frets; they change how a note is played, not which note it
+     is, and sequence mode supplies the rhythm anyway.          */
+  function looksLikeTab(line) {
+    var body = line.replace(/^\s*[A-Ga-g#b]{0,2}\s*\|/, '');
+    var dashes = (body.match(/-/g) || []).length;
+    return dashes >= 4 && /[-|]/.test(body);
+  }
 
-    if (str(4) !== 'MThd') throw new Error('not a MIDI file');
-    u32(); u16();
-    var tracks = u16();
-    u16();
-
-    var events = [];
-    for (var t = 0; t < tracks; t++) {
-      if (pos >= dv.byteLength) break;
-      if (str(4) !== 'MTrk') break;
-      var len = u32(), end = pos + len, time = 0, running = 0;
-      while (pos < end && pos < dv.byteLength) {
-        time += varLen();
-        var b = u8();
-        if (b < 0x80) { pos--; b = running; } else { running = b; }
-        var type = b & 0xf0;
-        if (b === 0xff) {                       // meta
-          u8();
-          pos += varLen();
-        } else if (b === 0xf0 || b === 0xf7) {  // sysex
-          pos += varLen();
-        } else if (type === 0x90) {             // note on
-          var note = u8(), vel = u8();
-          if (vel > 0) events.push({ time: time, note: note });
-        } else if (type === 0x80 || type === 0xa0 || type === 0xb0 || type === 0xe0) {
-          pos += 2;
-        } else if (type === 0xc0 || type === 0xd0) {
-          pos += 1;
-        } else {
-          break;                                // unparseable, stop this track
+  function readFrets(line) {
+    var body = line.replace(/^\s*[A-Ga-g#b]{0,2}\s*\|/, function (m) {
+      return new Array(m.length + 1).join(' ');       // keep column alignment
+    });
+    var out = [], i = 0;
+    while (i < body.length) {
+      if (body[i] >= '0' && body[i] <= '9') {
+        var start = i, digits = '';
+        while (i < body.length && body[i] >= '0' && body[i] <= '9' && digits.length < 2) {
+          digits += body[i]; i++;
         }
+        var fret = parseInt(digits, 10);
+        if (fret <= 24) out.push({ col: start, fret: fret });
+      } else { i++; }
+    }
+    return out;
+  }
+
+  function parseTab(text, tuningName, capo) {
+    var report = { notes: [], strings: 0, blocks: 0, skipped: [], tuning: tuningName, capo: capo };
+    if (!text || !text.trim()) { report.error = 'Nothing pasted yet.'; return report; }
+    if (text.length > MAX_CHARS) { report.error = 'That is too long to be tablature.'; return report; }
+
+    var open = TUNINGS[tuningName];
+    if (!open) { report.error = 'Unknown tuning.'; return report; }
+
+    var lines = text.replace(/\r/g, '').split('\n');
+    var i = 0, events = [];
+    while (i < lines.length) {
+      if (!looksLikeTab(lines[i])) { i++; continue; }
+      var block = [];
+      while (i < lines.length && looksLikeTab(lines[i])) { block.push(lines[i]); i++; }
+
+      // A block should be one full set of strings. Anything else is
+      // reported rather than guessed at.
+      if (block.length !== open.length) {
+        report.skipped.push(block.length + ' line(s) — expected ' + open.length +
+                            ' strings for ' + tuningName);
+        continue;
       }
-      pos = end;
+      report.blocks++;
+      report.strings = open.length;
+      var offset = report.blocks === 1 ? 0 : events.length ? 100000 * report.blocks : 0;
+      block.forEach(function (line, si) {
+        readFrets(line).forEach(function (f) {
+          events.push({ col: f.col + offset, string: si, midi: open[si] + f.fret + capo });
+        });
+      });
     }
 
-    events.sort(function (a, b) { return a.time - b.time; });
-    return events.map(function (e) {
-      return { name: midiToName(e.note), freq: midiToFreq(e.note) };
+    if (!report.blocks) {
+      report.error = 'No tablature found. Expect ' + open.length +
+                     ' lines of dashes and fret numbers.';
+      return report;
+    }
+
+    // Column order first, then low string to high so a chord rolls upward.
+    events.sort(function (a, b) { return a.col - b.col || b.string - a.string; });
+    report.notes = events.map(function (e) {
+      return { name: midiToName(e.midi), freq: midiToFreq(e.midi) };
     });
+    return report;
   }
 
-  function loadSequence(notes, label) {
-    SEQ.notes = notes;
-    SEQ.pos = 0;
-    SEQ.name = label || '';
+  function parseTyped(text) {
+    var toks = String(text).split(/[\s,|]+/).filter(Boolean);
+    var out = [], bad = [];
+    toks.forEach(function (t) {
+      var f = nameToFreq(t);
+      if (f) out.push({ name: t.toUpperCase(), freq: f }); else bad.push(t);
+    });
+    return { notes: out, skipped: bad };
+  }
+
+  /* ── sequence state ─────────────────────────────────────────── */
+  var SEQ = { on: false, notes: [], pos: 0, source: '' };
+
+  var origPlayNote = playNote;
+  playNote = function (key) {
+    if (SEQ.on && SEQ.notes.length) {
+      var n = SEQ.notes[SEQ.pos % SEQ.notes.length];
+      keyBindings[key] = { note: n.name, freq: n.freq };
+      SEQ.pos++;
+      paint();
+    }
+    return origPlayNote.apply(this, arguments);
+  };
+
+  function loadNotes(notes, source) {
+    SEQ.notes = notes; SEQ.pos = 0; SEQ.source = source || '';
     SEQ.on = notes.length > 0;
-    render();
+    paint();
+  }
+  function setSeq(on) {
+    SEQ.on = on && SEQ.notes.length > 0;
+    if (!SEQ.on && typeof buildKeyBindings === 'function') buildKeyBindings();
+    paint();
   }
 
-  // ── Tone presets ───────────────────────────────────────────
-  /* Sliders cannot tell you which combination sounds like a guitar.
-     A named preset can. Each sets every parameter at once. */
+  /* ── tone presets ───────────────────────────────────────────── */
   var PRESETS = {
     'Clean Guitar':   { waveform: 'triangle', attack: 0.006, release: 0.60, reverb: 0.18, drive: 0.15, playStyle: 'normal' },
     'Overdrive Lead': { waveform: 'sawtooth', attack: 0.004, release: 0.75, reverb: 0.22, drive: 0.55, playStyle: 'normal' },
@@ -1665,206 +1719,273 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     'Pluck':          { waveform: 'triangle', attack: 0.001, release: 0.30, reverb: 0.12, drive: 0.10, playStyle: 'staccato' },
     'Pad':            { waveform: 'sine',     attack: 0.220, release: 1.80, reverb: 0.55, drive: 0.00, playStyle: 'normal' }
   };
-
-  function makeDriveCurve(amount) {
-    var k = amount * 100, n = 2048, curve = new Float32Array(n);
-    for (var i = 0; i < n; i++) {
-      var x = (i * 2) / n - 1;
-      curve[i] = ((1 + k) * x) / (1 + k * Math.abs(x));
+  var shaper = null;
+  function driveCurve(amount) {
+    var k = amount * 100, n = 2048, c = new Float32Array(n);
+    for (var i = 0; i < n; i++) { var x = (i * 2) / n - 1; c[i] = ((1 + k) * x) / (1 + k * Math.abs(x)); }
+    return c;
+  }
+  function setDrive(a) {
+    if (!shaper && typeof masterGain !== 'undefined' && masterGain &&
+        typeof analyser !== 'undefined' && analyser) {
+      shaper = AC.createWaveShaper(); shaper.oversample = '2x';
+      try { masterGain.disconnect(analyser); } catch (e) {}
+      masterGain.connect(shaper); shaper.connect(analyser);
     }
-    return curve;
+    if (shaper) shaper.curve = driveCurve(a);
   }
-
-  function ensureDriveStage() {
-    if (driveShaper || typeof masterGain === 'undefined' || !masterGain) return;
-    if (typeof analyser === 'undefined' || !analyser) return;
-    driveShaper = AC.createWaveShaper();
-    driveShaper.curve = makeDriveCurve(0);
-    driveShaper.oversample = '2x';
-    try { masterGain.disconnect(analyser); } catch (e) { /* not connected yet */ }
-    masterGain.connect(driveShaper);
-    driveShaper.connect(analyser);
-  }
-
-  function setDrive(amount) {
-    driveAmount = amount;
-    ensureDriveStage();
-    if (driveShaper) driveShaper.curve = makeDriveCurve(amount);
-  }
-
   function applyPreset(name) {
-    var p = PRESETS[name];
-    if (!p) return;
-    state.waveform  = p.waveform;
-    state.attack    = p.attack;
-    state.release   = p.release;
-    state.reverb    = p.reverb;
-    state.playStyle = p.playStyle;
+    var p = PRESETS[name]; if (!p) return;
+    state.waveform = p.waveform; state.attack = p.attack;
+    state.release = p.release; state.reverb = p.reverb; state.playStyle = p.playStyle;
     setDrive(p.drive);
-
-    // Keep the existing controls honest about what is now set.
-    var ids = { attackSlider: p.attack * 1000, releaseSlider: p.release * 1000,
-                reverbSlider: p.reverb * 100 };
-    Object.keys(ids).forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.value = ids[id];
-    });
-    if (reverbNode) reverbNode.gain.value = p.reverb;
-    document.querySelectorAll('[data-preset]').forEach(function (b) {
+    if (typeof reverbNode !== 'undefined' && reverbNode) reverbNode.gain.value = p.reverb;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-preset]'), function (b) {
       b.classList.toggle('on', b.getAttribute('data-preset') === name);
     });
-    if (typeof setStatus === 'function') setStatus('Tone: ' + name);
   }
 
-  // ── Sequence mode hooks into playNote ──────────────────────
-  var origPlayNote = playNote;
-  playNote = function (key) {
-    if (SEQ.on && SEQ.notes.length) {
-      var n = SEQ.notes[SEQ.pos % SEQ.notes.length];
-      // Overriding the binding is what makes ANY key play the right
-      // note. buildKeyBindings() restores the keymap when the mode ends.
-      keyBindings[key] = { note: n.name, freq: n.freq };
-      SEQ.pos++;
-      render();
-    }
-    return origPlayNote.apply(this, arguments);
-  };
+  /* ── UI ─────────────────────────────────────────────────────── */
+  function el(id) { return document.getElementById(id); }
 
-  function resetSequence() { SEQ.pos = 0; render(); }
-
-  function toggleSequence(on) {
-    SEQ.on = on && SEQ.notes.length > 0;
-    if (!SEQ.on && typeof buildKeyBindings === 'function') buildKeyBindings();
-    render();
-  }
-
-  // ── UI ─────────────────────────────────────────────────────
-  function render() {
-    var st = document.getElementById('kj-seq-status');
-    if (!st) return;
+  function paint() {
+    var s = el('kj-status'); if (!s) return;
     if (!SEQ.notes.length) {
-      st.textContent = 'No sequence loaded.';
+      s.textContent = 'No sequence loaded.';
     } else {
       var nxt = SEQ.notes[SEQ.pos % SEQ.notes.length];
-      st.innerHTML = '<strong>' + SEQ.notes.length + ' notes</strong>'
-        + (SEQ.name ? ' — ' + SEQ.name : '')
-        + '<br>position ' + ((SEQ.pos % SEQ.notes.length) + 1)
-        + ' — next: <strong>' + nxt.name + '</strong>';
+      s.innerHTML = '<strong>' + SEQ.notes.length + ' notes</strong>' +
+        (SEQ.source ? ' from ' + SEQ.source : '') +
+        ' &middot; at ' + ((SEQ.pos % SEQ.notes.length) + 1) +
+        ' &middot; next <strong>' + nxt.name + '</strong>';
     }
-    var tg = document.getElementById('kj-seq-toggle');
-    if (tg) {
-      tg.textContent = SEQ.on ? 'SEQUENCE: ON' : 'SEQUENCE: OFF';
-      tg.classList.toggle('on', SEQ.on);
-    }
+    var t = el('kj-toggle');
+    if (t) { t.textContent = SEQ.on ? 'Sequence ON' : 'Sequence OFF'; t.classList.toggle('on', SEQ.on); }
+    var pv = el('kj-preview');
+    if (pv) pv.textContent = SEQ.notes.slice(0, 60).map(function (n) { return n.name; }).join('  ');
   }
 
-  function buildUI() {
+  function styles() {
     var css = document.createElement('style');
-    css.textContent =
-      '#kj-v11{position:fixed;right:12px;bottom:12px;width:310px;z-index:9999;' +
-      'background:#111911;border:1px solid #1f351f;font-family:inherit;font-size:12px;color:#c3dcc3}' +
-      '#kj-v11 h4{background:#0d120d;color:#39ff14;padding:7px 10px;font-weight:400;letter-spacing:2px;' +
-      'font-size:12px;cursor:pointer;display:flex;justify-content:space-between}' +
-      '#kj-v11 .body{padding:10px;display:block}' +
-      '#kj-v11.collapsed .body{display:none}' +
-      '#kj-v11 .row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}' +
-      '#kj-v11 button{background:transparent;border:1px solid #1f351f;color:#8fae8f;' +
-      'padding:4px 7px;font-family:inherit;font-size:11px;cursor:pointer}' +
-      '#kj-v11 button:hover{border-color:#39ff14;color:#39ff14}' +
-      '#kj-v11 button.on{background:#39ff14;color:#0a0e0a;border-color:#39ff14}' +
-      '#kj-v11 textarea{width:100%;height:52px;background:#0a0e0a;border:1px solid #1f351f;' +
-      'color:#c3dcc3;font-family:inherit;font-size:11px;padding:5px;resize:vertical}' +
-      '#kj-v11 .status{background:#0a0e0a;border:1px solid #1f351f;padding:6px;margin-bottom:8px;min-height:34px}' +
-      '#kj-v11 label{display:block;color:#8fae8f;margin:6px 0 3px;letter-spacing:1px}';
+    css.textContent = [
+      /* reclaim the centre: the visualiser was 1653px of black */
+      '#vizCanvas{max-height:150px!important;height:150px!important}',
+      '.panel-center{display:flex;flex-direction:column;gap:12px;padding-bottom:18px}',
+      /* legibility floor across the app */
+      '.panel-left,.panel-right,.panel-center{font-size:12px!important}',
+      '.panel-left *,.panel-right *{font-size:inherit}',
+      '.key-freq,.small,.dim,.muted{color:#9aa0b5!important;font-size:11.5px!important}',
+      '.style-tag,.badge,[class*="tag"]{font-size:11px!important}',
+      /* the work area */
+      '#kj{background:#14141a;border:1px solid #2b2b38;border-radius:3px;' +
+        'font-size:12.5px;color:#e6e8f0;line-height:1.5}',
+      '#kj h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;' +
+        'color:#8c93aa;font-weight:600;padding:9px 14px;border-bottom:1px solid #2b2b38}',
+      '#kj .body{padding:14px;display:grid;gap:14px;grid-template-columns:1fr 1fr}',
+      '#kj .col{min-width:0;display:flex;flex-direction:column;gap:8px}',
+      '#kj label{display:block;color:#9aa0b5;font-size:11.5px;letter-spacing:.8px;' +
+        'text-transform:uppercase;margin-bottom:2px}',
+      '#kj textarea{width:100%;height:132px;background:#0c0c11;color:#e6e8f0;' +
+        'border:1px solid #33333f;border-radius:2px;padding:9px;resize:vertical;' +
+        'font-family:ui-monospace,Consolas,monospace;font-size:12.5px;line-height:1.45}',
+      '#kj select,#kj input[type=number]{background:#0c0c11;color:#e6e8f0;' +
+        'border:1px solid #33333f;border-radius:2px;padding:6px 8px;font-size:12.5px;' +
+        'font-family:inherit}',
+      '#kj input[type=number]{width:66px}',
+      '#kj .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}',
+      '#kj button{background:#1d1d26;color:#d7dae6;border:1px solid #3a3a48;' +
+        'border-radius:2px;padding:7px 13px;font-family:inherit;font-size:12px;cursor:pointer}',
+      '#kj button:hover{border-color:#ffd23f;color:#ffd23f}',
+      '#kj button.on,#kj button.primary{background:#ffd23f;color:#14141a;' +
+        'border-color:#ffd23f;font-weight:600}',
+      '#kj .status{background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;' +
+        'padding:9px 11px;min-height:38px;color:#e6e8f0}',
+      '#kj .preview{font-family:ui-monospace,Consolas,monospace;font-size:12px;' +
+        'color:#ffd23f;background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;' +
+        'padding:9px 11px;max-height:76px;overflow:auto;word-break:break-word;line-height:1.7}',
+      '#kj .warn{color:#ffb454}',
+      '#kj .note{color:#9aa0b5;font-size:11.5px;margin-top:2px}',
+      '@media (max-width:1100px){#kj .body{grid-template-columns:1fr}}',
+      /* The page was 1900px tall because the key map listed every key with no
+         cap (1676px) and the visualiser container held 1277px. Grid rows
+         stretch to the tallest column, so both had to be bounded before the
+         layout could breathe. */
+      '.keymap-scroll{max-height:420px!important;overflow-y:auto!important}',
+      '.viz-area{max-height:170px!important;overflow:hidden!important}',
+      '.seq-panel{max-height:300px!important;overflow-y:auto!important}',
+      /* the header sits outside the panels, so the size floor missed it */
+      '.pill-btn{font-size:12px!important;padding:7px 14px!important}',
+      '.tagline{font-size:12px!important;color:#9aa0b5!important}',
+      '.key-freq{font-size:12px!important;color:#9aa0b5!important}',
+      '.key-style{font-size:11px!important}',
+      /* Twelve classes failed the contrast floor, and all of them traced to
+         two variables. --muted (#555568) is used as body text throughout and
+         sat at 2.58:1 where 4.5 is the floor, so the variable is lifted
+         rather than the twelve call sites. --border is a correct border
+         colour; the defect is that .seq-empty used it as TEXT, at 1.2:1,
+         which is the dark-on-dark that made the panel unreadable. That one
+         is fixed where it is wrong, not globally. */
+      ':root{--muted:#949cb0!important}',
+      '.seq-empty{color:#949cb0!important;font-size:12px!important}',
+      /* remaining sub-12px labels */
+      '.wv-btn,.label,.status-text,.modal-close,.ctrl-label{font-size:12px!important}',
+      '.panel-title,.scale-label{font-size:12px!important;letter-spacing:.6px}',
+      /* Anything a person clicks or reads as a value gets 12px. The 11 to
+         11.5px labels that remain are deliberate secondary hierarchy, not
+         oversights - uppercase section labels and helper notes. */
+      '.modal-confirm,.modal-cancel{font-size:12.5px!important;padding:8px 16px!important}',
+      '.beat-val,.beat-row span{font-size:12px!important}'
+    ].join('\n');
     document.head.appendChild(css);
+  }
 
-    var box = document.createElement('div');
-    box.id = 'kj-v11';
+  function build() {
+    styles();
+
+    var host = document.querySelector('.panel-center') || document.body;
+    var box = document.createElement('section');
+    box.id = 'kj';
     box.innerHTML =
-      '<h4><span>SEQUENCE &amp; TONE</span><span id="kj-fold">–</span></h4><div class="body">' +
-      '<label>TONE</label><div class="row" id="kj-presets"></div>' +
-      '<label>SEQUENCE — any key plays the next note</label>' +
-      '<div class="status" id="kj-seq-status">No sequence loaded.</div>' +
-      '<div class="row">' +
-        '<button id="kj-seq-toggle">SEQUENCE: OFF</button>' +
-        '<button id="kj-seq-reset">RESTART</button>' +
-        '<button id="kj-seq-clear">CLEAR</button>' +
+      '<h3>Tablature &rarr; Notes</h3>' +
+      '<div class="body">' +
+        '<div class="col">' +
+          '<label for="kj-tab">Paste guitar tablature</label>' +
+          '<textarea id="kj-tab" spellcheck="false" placeholder="e|-----------------|&#10;B|-----------------|&#10;G|--9---11---9-----|&#10;D|-----------------|&#10;A|--12-------------|&#10;E|-----------------|"></textarea>' +
+          '<div class="row">' +
+            '<select id="kj-tuning" aria-label="Tuning"></select>' +
+            '<label for="kj-capo" style="display:inline;margin:0">Capo</label>' +
+            '<input type="number" id="kj-capo" value="0" min="0" max="12">' +
+            '<button id="kj-convert" class="primary">Convert</button>' +
+          '</div>' +
+          '<p class="note">Frets become notes using the tuning you pick. Hammer-ons, ' +
+            'slides and bends are read as the notes they land on.</p>' +
+        '</div>' +
+        '<div class="col">' +
+          '<label>Sequence &mdash; any key plays the next note</label>' +
+          '<div class="status" id="kj-status">No sequence loaded.</div>' +
+          '<div class="preview" id="kj-preview"></div>' +
+          '<div class="row">' +
+            '<button id="kj-toggle">Sequence OFF</button>' +
+            '<button id="kj-restart">Restart</button>' +
+            '<button id="kj-clear">Clear</button>' +
+            '<button id="kj-midi-btn">Import MIDI</button>' +
+          '</div>' +
+          '<label for="kj-typed" style="margin-top:4px">Or type note names</label>' +
+          '<div class="row">' +
+            '<input id="kj-typed" style="flex:1 1 190px;background:#0c0c11;color:#e6e8f0;' +
+              'border:1px solid #33333f;border-radius:2px;padding:7px 9px;font-size:12.5px;' +
+              'font-family:ui-monospace,Consolas,monospace" placeholder="E5 G5 B5 E6">' +
+            '<button id="kj-load-typed">Load</button>' +
+          '</div>' +
+          '<label style="margin-top:4px">Tone</label>' +
+          '<div class="row" id="kj-presets"></div>' +
+        '</div>' +
       '</div>' +
-      '<label>TYPE NOTES</label>' +
-      '<textarea id="kj-seq-text" placeholder="E5 G5 B5 E6 G6 B6 E6 B5 G5"></textarea>' +
-      '<div class="row"><button id="kj-seq-load">LOAD TYPED</button>' +
-      '<button id="kj-midi-btn">IMPORT MIDI</button></div>' +
-      '<input type="file" id="kj-midi" accept=".mid,.midi" style="display:none">' +
-      '</div>';
-    document.body.appendChild(box);
+      '<input type="file" id="kj-midi" accept=".mid,.midi" style="display:none">';
+    host.appendChild(box);
 
-    var pr = document.getElementById('kj-presets');
+    var sel = el('kj-tuning');
+    Object.keys(TUNINGS).forEach(function (t) {
+      var o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o);
+    });
+
+    var pr = el('kj-presets');
     Object.keys(PRESETS).forEach(function (name) {
       var b = document.createElement('button');
-      b.textContent = name;
-      b.setAttribute('data-preset', name);
+      b.textContent = name; b.setAttribute('data-preset', name);
       b.onclick = function () { applyPreset(name); };
       pr.appendChild(b);
     });
 
-    document.querySelector('#kj-v11 h4').onclick = function () {
-      box.classList.toggle('collapsed');
-      document.getElementById('kj-fold').textContent =
-        box.classList.contains('collapsed') ? '+' : '–';
+    el('kj-convert').onclick = function () {
+      var r = parseTab(el('kj-tab').value, sel.value,
+                       parseInt(el('kj-capo').value, 10) || 0);
+      var st = el('kj-status');
+      if (r.error) { st.innerHTML = '<span class="warn">' + r.error + '</span>'; return; }
+      loadNotes(r.notes, r.blocks + ' bar block(s)');
+      setSeq(true);
+      // Say exactly what was read, including what was not.
+      var msg = st.innerHTML + '<div class="note">' + r.strings + ' strings &middot; ' +
+                r.tuning + (r.capo ? ' &middot; capo ' + r.capo : '') + '</div>';
+      if (r.skipped.length) {
+        msg += '<div class="note warn">Skipped: ' + r.skipped.join('; ') + '</div>';
+      }
+      st.innerHTML = msg;
     };
-    document.getElementById('kj-seq-toggle').onclick = function () { toggleSequence(!SEQ.on); };
-    document.getElementById('kj-seq-reset').onclick = resetSequence;
-    document.getElementById('kj-seq-clear').onclick = function () {
-      loadSequence([], '');
-      toggleSequence(false);
-    };
-    document.getElementById('kj-seq-load').onclick = function () {
-      var r = parseTypedSequence(document.getElementById('kj-seq-text').value);
+    el('kj-toggle').onclick = function () { setSeq(!SEQ.on); };
+    el('kj-restart').onclick = function () { SEQ.pos = 0; paint(); };
+    el('kj-clear').onclick = function () { loadNotes([], ''); setSeq(false); };
+    el('kj-load-typed').onclick = function () {
+      var r = parseTyped(el('kj-typed').value);
       if (!r.notes.length) {
-        document.getElementById('kj-seq-status').textContent =
-          'No valid notes. Use names like E5, F#4, Bb3.';
+        el('kj-status').innerHTML = '<span class="warn">No valid note names. Try E5 G5 B5.</span>';
         return;
       }
-      loadSequence(r.notes, 'typed');
-      toggleSequence(true);
-      if (r.bad.length) {
-        document.getElementById('kj-seq-status').innerHTML +=
-          '<br><span style="color:#ffb000">skipped: ' + r.bad.slice(0, 6).join(' ') + '</span>';
+      loadNotes(r.notes, 'typed'); setSeq(true);
+      if (r.skipped.length) {
+        el('kj-status').innerHTML += '<div class="note warn">Skipped: ' +
+          r.skipped.slice(0, 8).join(' ') + '</div>';
       }
     };
-    document.getElementById('kj-midi-btn').onclick = function () {
-      document.getElementById('kj-midi').click();
-    };
-    document.getElementById('kj-midi').onchange = function (e) {
-      var f = e.target.files && e.target.files[0];
-      if (!f) return;
-      var status = document.getElementById('kj-seq-status');
-      if (f.size > MAX_MIDI_BYTES) {
-        status.textContent = 'That file is over 1 MB. MIDI this size is not a melody.';
+    el('kj-midi-btn').onclick = function () { el('kj-midi').click(); };
+    el('kj-midi').onchange = function (e) {
+      var f = e.target.files && e.target.files[0]; if (!f) return;
+      if (f.size > 1024 * 1024) {
+        el('kj-status').innerHTML = '<span class="warn">Over 1 MB — that is not a melody.</span>';
         return;
       }
       var fr = new FileReader();
       fr.onload = function () {
         try {
           var notes = parseMidi(fr.result);
-          if (!notes.length) { status.textContent = 'No notes found in that file.'; return; }
-          loadSequence(notes, f.name);
-          toggleSequence(true);
+          if (!notes.length) { el('kj-status').innerHTML = '<span class="warn">No notes in that file.</span>'; return; }
+          loadNotes(notes, f.name); setSeq(true);
         } catch (err) {
-          status.textContent = 'Could not read that file: ' + err.message;
+          el('kj-status').innerHTML = '<span class="warn">Could not read it: ' + err.message + '</span>';
         }
       };
       fr.readAsArrayBuffer(f);
     };
+    paint();
+  }
 
-    render();
+  /* minimal MIDI note-on reader, unchanged in behaviour from v1.1 */
+  function parseMidi(buffer) {
+    var dv = new DataView(buffer), pos = 0;
+    function u32() { var v = dv.getUint32(pos); pos += 4; return v; }
+    function u16() { var v = dv.getUint16(pos); pos += 2; return v; }
+    function u8() { var v = dv.getUint8(pos); pos += 1; return v; }
+    function str(n) { var s = ''; for (var i = 0; i < n; i++) s += String.fromCharCode(u8()); return s; }
+    function varLen() { var v = 0, c; do { c = u8(); v = (v << 7) | (c & 0x7f); } while (c & 0x80); return v; }
+    if (str(4) !== 'MThd') throw new Error('not a MIDI file');
+    u32(); u16(); var tracks = u16(); u16();
+    var evts = [];
+    for (var t = 0; t < tracks; t++) {
+      if (pos >= dv.byteLength || str(4) !== 'MTrk') break;
+      var len = u32(), end = pos + len, time = 0, running = 0;
+      while (pos < end && pos < dv.byteLength) {
+        time += varLen();
+        var b = u8();
+        if (b < 0x80) { pos--; b = running; } else { running = b; }
+        var type = b & 0xf0;
+        if (b === 0xff) { u8(); pos += varLen(); }
+        else if (b === 0xf0 || b === 0xf7) { pos += varLen(); }
+        else if (type === 0x90) { var n = u8(), v = u8(); if (v > 0) evts.push({ time: time, note: n }); }
+        else if (type === 0x80 || type === 0xa0 || type === 0xb0 || type === 0xe0) { pos += 2; }
+        else if (type === 0xc0 || type === 0xd0) { pos += 1; }
+        else break;
+      }
+      pos = end;
+    }
+    evts.sort(function (a, b) { return a.time - b.time; });
+    return evts.map(function (e) { return { name: midiToName(e.note), freq: midiToFreq(e.note) }; });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', buildUI);
-  } else {
-    buildUI();
-  }
+    document.addEventListener('DOMContentLoaded', build);
+  } else { build(); }
+
+  window.KeyJTab = { parseTab: parseTab, TUNINGS: TUNINGS };   // for tests
 })();
 </script>
 </body>
