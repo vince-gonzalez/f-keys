@@ -105,6 +105,9 @@ function startHook() {
   try {
     const { UiohookKey, uIOhook } = require('uiohook-napi');
     uiohook = uIOhook;
+    CODE_TO_CHAR = buildKeycodeMap(UiohookKey);
+    console.log('[Key-J] keycode map built from UiohookKey:',
+                Object.keys(CODE_TO_CHAR).length, 'keys');
 
     uiohook.on('keydown', (e) => {
       if (!globalCaptureEnabled) return;
@@ -142,33 +145,45 @@ function toggleGlobalCapture(enable) {
   mainWindow && mainWindow.webContents.send('global-capture-status', { enabled: globalCaptureEnabled });
 }
 
-// Minimal keycode → character map (uiohook uses iokit/X11 codes)
-// Extended as needed. Most printable ASCII keys.
-const KEYCODE_MAP = {
-  // Row 0: numbers
-  11:['1','!'], 12:['2','@'], 13:['3','#'], 14:['4','$'], 15:['5','%'],
-  16:['6','^'], 17:['7','&'], 18:['8','*'], 19:['9','('], 20:['0',')'],
-  // Row 1: qwerty
-  16:['q'], 23:['w'], 8:['e'], 15:['r'], 17:['t'], 16:['y'], 32:['u'],
-  34:['i'], 31:['o'], 35:['p'],
-  // Row 2: asdf
-  0:['a'], 1:['s'], 2:['d'], 3:['f'], 5:['g'], 4:['h'], 38:['j'],
-  40:['k'], 37:['l'],
-  // Row 3: zxcv
-  6:['z'], 7:['x'], 8:['c'], 9:['v'], 11:['b'], 45:['n'], 46:['m'],
+
+// ── Keycode -> character ───────────────────────────────────────
+//
+// This was a hand-written table of guessed numbers, and every entry in it
+// was wrong. It used macOS iokit codes (A = 0) while uiohook-napi emits its
+// own constants on every platform (A = 30). The object literal also had
+// duplicate keys - 16 was assigned three times - so six of the thirty-six
+// entries were silently discarded by the parser before anything ran.
+//
+// The net effect: global capture, which is the entire reason this app exists
+// as a desktop build, played the wrong note for the handful of codes that
+// happened to collide and nothing at all for the rest.
+//
+// So the table is not written by hand any more. UiohookKey is the library's
+// own name -> code map; inverting it is correct by construction and cannot
+// drift when the library changes.
+let CODE_TO_CHAR = null;
+
+const PUNCTUATION = {
+  Space: ' ', Comma: ',', Period: '.', Semicolon: ';', Quote: "'",
+  Slash: '/', Backslash: String.fromCharCode(92), Minus: '-', Equal: '=',
+  BracketLeft: '[', BracketRight: ']', Backquote: '`'
 };
 
-// Better approach: use the key string from uiohook directly (it provides it)
+function buildKeycodeMap(UiohookKey) {
+  const out = {};
+  Object.keys(UiohookKey).forEach((name) => {
+    const code = UiohookKey[name];
+    let ch = null;
+    if (/^[A-Z]$/.test(name)) ch = name.toLowerCase();      // A -> a
+    else if (/^[0-9]$/.test(name)) ch = name;               // 7 -> 7
+    else if (PUNCTUATION[name]) ch = PUNCTUATION[name];
+    if (ch !== null) out[code] = ch;
+  });
+  return out;
+}
+
 function keycodeToChar(keycode) {
-  // uiohook-napi provides keycode as a number; we map common ones
-  const map = {
-    16:  'q', 23: 'w',  8: 'e', 15: 'r', 17: 't', 16: 'y', 32: 'u',
-    34:  'i', 31: 'o', 35: 'p',  0: 'a',  1: 's',  2: 'd',  3: 'f',
-     5:  'g',  4: 'h', 38: 'j', 40: 'k', 37: 'l',  6: 'z',  7: 'x',
-     8:  'c',  9: 'v', 11: 'b', 45: 'n', 46: 'm', 18: '1', 19: '2',
-    20:  '3', 21: '4', 23: '5', 22: '6', 26: '7', 28: '8', 25: '9', 29: '0'
-  };
-  return map[keycode] || null;
+  return (CODE_TO_CHAR && CODE_TO_CHAR[keycode]) || null;
 }
 
 // ── IPC Handlers ───────────────────────────────────────────────
