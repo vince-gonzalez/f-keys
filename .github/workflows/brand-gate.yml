@@ -1,4 +1,4 @@
-name: brand gate
+name: gates
 
 # Zengine was dissolved 2026-07-15. This fails the build if the retired
 # name reappears in anything a human reads. Machine identifiers (the
@@ -27,3 +27,31 @@ jobs:
       - name: Show what is allowed by exception
         if: failure()
         run: python tools/brand-gate.py --list-allowed
+
+  # Key-J shipped three defects that existed only because app.html and
+  # desktop/src/index.html were maintained as two copies. index.html is a
+  # generated file now, and this fails if someone edits it directly or
+  # forgets to regenerate it.
+  renderer-in-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Key-J renderer matches app.html
+        working-directory: keyj/desktop
+        run: node sync-renderer.js --check
+
+  # The README standard is a tool, so it is checked rather than trusted:
+  # the glyphs against the published gonzalgo banner, and every product
+  # name rendering in the same box.
+  readme-standard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Banner font and width
+        run: python tools/readme.py --verify
