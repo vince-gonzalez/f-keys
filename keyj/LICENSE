@@ -1,0 +1,49 @@
+Key-J — Proprietary Licence
+Copyright (c) 2026 F-Keys Creative LLC. All rights reserved.
+
+APPLIES TO
+    This licence governs Key-J: everything under keyj/ in this repository,
+    the Key-J desktop application, and the Key-J browser application served
+    at https://f-keys.com/keyj/. It replaces the MIT licence at the root of
+    this repository for these files, from version 1.6.0 onward.
+
+    Versions of Key-J released up to and including 1.5.0 were published
+    under the MIT licence. That grant is irrevocable for those versions and
+    is not withdrawn here. This licence governs 1.6.0 and later.
+
+    The Key-J command line tool distributed on PyPI as `keyj` is separately
+    licensed under the MIT licence and is not covered by this document.
+
+WHAT YOU MAY DO
+    Run Key-J on any number of machines you own or control.
+    Use anything you create with it - recordings, exports, sequences -
+    for any purpose, commercial or otherwise, with no obligation to
+    F-Keys Creative LLC. Your music is yours.
+    Read this source. It is published so that a program which installs a
+    global keyboard hook can be audited by the people running it.
+
+WHAT YOU MAY NOT DO
+    Copy, modify or redistribute this software, or any substantial part of
+    it, as part of another product.
+    Sell, sublicense, rent or host it as a service.
+    Remove or alter the F-Keys marks, this notice, or the attribution in
+    the application.
+
+WHY IT IS READABLE BUT NOT FREE
+    Key-J installs a global keyboard hook. Nobody should be asked to trust
+    that blindly, so the source stays readable and auditable. Readable is
+    not the same as licensed: you are welcome to check what it does, and
+    not to ship it as your own.
+
+NO WARRANTY
+    This software is provided "as is", without warranty of any kind, express
+    or implied, including but not limited to the warranties of
+    merchantability, fitness for a particular purpose and noninfringement.
+    In no event shall the authors or copyright holders be liable for any
+    claim, damages or other liability, whether in an action of contract,
+    tort or otherwise, arising from, out of or in connection with the
+    software or the use or other dealings in the software.
+
+CONTACT
+    Licensing enquiries: vincegonzalez@me.com
+    https://f-keys.com/keyj/

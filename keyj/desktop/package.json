@@ -1,6 +1,6 @@
 {
   "name": "key-j",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Key-J \u2014 Musical Keystroke Studio",
   "main": "src/main.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "build": {
     "appId": "com.fkeys.keyj",
     "productName": "Key-J",
+    "license": "SEE LICENSE IN ../LICENSE",
     "copyright": "Copyright \u00a9 2026 Vincent Gonzalez",
     "files": [
       "src/**/*",
