@@ -113,7 +113,7 @@ CATEGORIES = [
 PAGES = {
  "keyj": dict(
   title="Key-J", tagline="Every keystroke plays a note, in any application.",
-  facts=[("Version","1.2.0"),("Licence","MIT"),("Platforms","Browser, Windows, Linux"),
+  facts=[("Version","1.3.0"),("Licence","MIT"),("Platforms","Browser, Windows, Linux"),
          ("Source","zengineco/f-keys")],
   body="""
 <h2>What it does</h2>
@@ -128,6 +128,12 @@ and what is left to you is timing and feel.</p>
 offset. Hammer-ons, slides and bends are read as the notes they land on. A block with
 the wrong number of strings produces no notes and says how many it found, rather than
 guessing a tuning silently.</p>
+<h2>The keyboard</h2>
+<p>An on-screen keyboard shows which computer key plays which note, printed on the
+key it triggers, so a wrong binding is visible rather than something you find by
+ear. Keys light as they sound, from a keystroke or from a sequence.</p>
+<p>Turn Build on and click keys to enter a run without typing a single note name -
+which is the part that made entering a sequence miserable.</p>
 <h2>Also</h2>
 <p>Seven tone presets from clean guitar to shred. MIDI import. Six play styles, four
 waveforms, remappable keys and scale switching.</p>

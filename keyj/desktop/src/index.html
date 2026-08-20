@@ -1381,5 +1381,257 @@ document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{
   window.KeyJTab = { parseTab: parseTab, TUNINGS: TUNINGS };   // for tests
 })();
 </script>
+
+<script>
+/* ============================================================
+   Key-J v1.3 — the on-screen keyboard
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHY THIS EXISTS
+   Note names are an abstraction you have to translate into.
+   Hunting for E3 or F#5 in a text field is the single worst
+   thing about entering a sequence, and no amount of better
+   typing fixes it, because the problem is the translation
+   rather than the keystrokes.
+
+   A keyboard removes the translation. You see which key is
+   F#5 because it is the one that lights up.
+
+   IT DOES THREE JOBS
+     1. Shows the mapping - the bound computer key is printed
+        on the piano key it triggers, so a wrong binding is
+        visible rather than something you discover by ear.
+     2. Lights while playing - from a real keystroke, from
+        sequence mode, from anywhere.
+     3. Builds sequences by clicking, so a run can be entered
+        without ever typing a note name.
+
+   USER INTEGRITY
+     Clicking a key sounds it at the pitch it claims. The label,
+     the light and the note that plays come from one number, so
+     the display cannot disagree with what you hear.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var LOW = 36, HIGH = 96;                 // C2 to C7
+  var NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  var BLACK = { 1: 1, 3: 1, 6: 1, 8: 1, 10: 1 };
+
+  function name(n) { return NAMES[n % 12] + (Math.floor(n / 12) - 1); }
+  function freq(n) { return 440 * Math.pow(2, (n - 69) / 12); }
+  function isBlack(n) { return !!BLACK[n % 12]; }
+
+  var building = false;
+  var built = [];
+  var keyEls = {};          // midi -> element
+  var boundFor = {};        // midi -> computer key
+
+  /* ── which computer key currently triggers this pitch ─────── */
+  function refreshBindings() {
+    boundFor = {};
+    if (typeof keyBindings !== 'object' || !keyBindings) return;
+    Object.keys(keyBindings).forEach(function (k) {
+      var b = keyBindings[k];
+      if (!b || typeof b.freq !== 'number') return;
+      var midi = Math.round(69 + 12 * Math.log(b.freq / 440) / Math.LN2);
+      if (boundFor[midi] === undefined) boundFor[midi] = k;
+    });
+    Object.keys(keyEls).forEach(function (m) {
+      var lbl = keyEls[m].querySelector('.kb-bind');
+      if (lbl) lbl.textContent = boundFor[m] ? boundFor[m].toUpperCase() : '';
+    });
+  }
+
+  function light(midi, on) {
+    var el = keyEls[midi];
+    if (el) el.classList.toggle('lit', !!on);
+  }
+
+  /* Light from whatever actually played, so the display and the
+     sound cannot disagree. */
+  function lightByFreq(f, on) {
+    if (typeof f !== 'number') return;
+    light(Math.round(69 + 12 * Math.log(f / 440) / Math.LN2), on);
+  }
+
+  var _play = playNote;
+  playNote = function (key) {
+    var r = _play.apply(this, arguments);
+    var b = keyBindings[key];
+    if (b) lightByFreq(b.freq, true);
+    return r;
+  };
+  if (typeof releaseNote === 'function') {
+    var _rel = releaseNote;
+    releaseNote = function (key) {
+      var b = keyBindings[key];
+      if (b) lightByFreq(b.freq, false);
+      return _rel.apply(this, arguments);
+    };
+  }
+
+  /* ── sounding a pitch directly, from a click ──────────────── */
+  function audition(midi) {
+    if (typeof AC === 'undefined') return;
+    if (AC.state === 'suspended') AC.resume();
+    var now = AC.currentTime;
+    var osc = AC.createOscillator(), g = AC.createGain();
+    osc.type = (typeof state !== 'undefined' && state.waveform) || 'sine';
+    osc.frequency.value = freq(midi);
+    var vol = (typeof state !== 'undefined' && state.volume) || 0.6;
+    g.gain.setValueAtTime(0, now);
+    g.gain.linearRampToValueAtTime(vol, now + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + 0.42);
+    osc.connect(g);
+    g.connect(typeof masterGain !== 'undefined' && masterGain ? masterGain : AC.destination);
+    osc.start(now);
+    osc.stop(now + 0.45);
+    light(midi, true);
+    setTimeout(function () { light(midi, false); }, 220);
+  }
+
+  function paintBuilt() {
+    var out = document.getElementById('kb-built');
+    if (!out) return;
+    out.textContent = built.length
+      ? built.map(function (m) { return name(m); }).join('  ')
+      : 'Nothing yet. Turn on Build and click keys.';
+    var n = document.getElementById('kb-count');
+    if (n) n.textContent = built.length + (built.length === 1 ? ' note' : ' notes');
+  }
+
+  function styles() {
+    var css = document.createElement('style');
+    css.textContent = [
+      '#kb{background:#14141a;border:1px solid #2b2b38;border-radius:3px;margin-bottom:12px;' +
+        'color:#e6e8f0;font-size:12.5px}',
+      '#kb h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#8c93aa;' +
+        'font-weight:600;padding:9px 14px;border-bottom:1px solid #2b2b38;display:flex;' +
+        'justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}',
+      '#kb .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px 0}',
+      '#kb button{background:#1d1d26;color:#d7dae6;border:1px solid #3a3a48;border-radius:2px;' +
+        'padding:6px 12px;font-family:inherit;font-size:12px;cursor:pointer}',
+      '#kb button:hover{border-color:#ffd23f;color:#ffd23f}',
+      '#kb button.on{background:#ffd23f;color:#14141a;border-color:#ffd23f;font-weight:600}',
+      '#kb .built{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#ffd23f;' +
+        'background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;padding:8px 11px;' +
+        'margin:10px 14px 0;max-height:56px;overflow:auto;line-height:1.7;word-break:break-word}',
+      '#kb .scroll{overflow-x:auto;padding:12px 14px 14px}',
+      '#kb .keys{position:relative;height:112px;min-width:760px}',
+      '#kb .w{position:absolute;top:0;height:112px;background:linear-gradient(#fbfbfd,#e6e7ee);' +
+        'border:1px solid #2b2b38;border-radius:0 0 3px 3px;box-sizing:border-box;cursor:pointer;' +
+        'display:flex;flex-direction:column;justify-content:flex-end;align-items:center;' +
+        'padding-bottom:5px;gap:3px}',
+      '#kb .b{position:absolute;top:0;height:70px;background:linear-gradient(#3a3a46,#15151c);' +
+        'border:1px solid #000;border-radius:0 0 3px 3px;box-sizing:border-box;cursor:pointer;' +
+        'z-index:3;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;' +
+        'padding-bottom:4px;gap:2px}',
+      '#kb .w.lit{background:linear-gradient(#ffe89a,#ffd23f)}',
+      '#kb .b.lit{background:linear-gradient(#ffd23f,#c9a12c)}',
+      '#kb .kb-nm{font-size:9.5px;color:#6d7185;pointer-events:none;letter-spacing:.2px}',
+      '#kb .b .kb-nm{color:#9aa0b5}',
+      '#kb .kb-bind{font-size:11px;font-weight:700;color:#14141a;background:#c7cad8;' +
+        'border-radius:2px;min-width:15px;text-align:center;padding:0 3px;pointer-events:none;' +
+        'line-height:14px;height:14px}',
+      '#kb .b .kb-bind{background:#4a4d5e;color:#e6e8f0}',
+      '#kb .w.lit .kb-nm,#kb .b.lit .kb-nm{color:#3a2f00}',
+      '#kb .hint{color:#9aa0b5;font-size:11.5px;padding:0 14px 12px}'
+    ].join('\n');
+    document.head.appendChild(css);
+  }
+
+  function build() {
+    styles();
+    var host = document.querySelector('.panel-center');
+    if (!host) return;
+
+    var box = document.createElement('section');
+    box.id = 'kb';
+    box.innerHTML =
+      '<h3><span>Keyboard</span><span id="kb-count" style="font-weight:400;' +
+        'text-transform:none;letter-spacing:0">0 notes</span></h3>' +
+      '<div class="bar">' +
+        '<button id="kb-build">Build: off</button>' +
+        '<button id="kb-undo">Undo</button>' +
+        '<button id="kb-clearb">Clear</button>' +
+        '<button id="kb-use">Use as sequence</button>' +
+      '</div>' +
+      '<div class="built" id="kb-built">Nothing yet. Turn on Build and click keys.</div>' +
+      '<div class="scroll"><div class="keys" id="kb-keys"></div></div>' +
+      '<p class="hint">The letter on a key is the computer key that plays it. Keys light ' +
+        'as they sound, from a keystroke or from a sequence.</p>';
+    host.insertBefore(box, host.firstChild ? host.firstChild.nextSibling : null);
+
+    var keys = document.getElementById('kb-keys');
+    var W = 26, x = 0, whites = [];
+    for (var m = LOW; m <= HIGH; m++) if (!isBlack(m)) whites.push(m);
+
+    // whites first so blacks can sit on top
+    whites.forEach(function (m, i) {
+      var d = document.createElement('div');
+      d.className = 'w';
+      d.style.left = (i * W) + 'px';
+      d.style.width = W + 'px';
+      d.dataset.midi = m;
+      d.innerHTML = '<span class="kb-bind"></span><span class="kb-nm">' +
+                    (m % 12 === 0 ? name(m) : '') + '</span>';
+      keys.appendChild(d);
+      keyEls[m] = d;
+    });
+    keys.style.width = (whites.length * W) + 'px';
+    keys.style.minWidth = (whites.length * W) + 'px';
+
+    for (var n = LOW; n <= HIGH; n++) {
+      if (!isBlack(n)) continue;
+      var below = n - 1;                              // white immediately left
+      var idx = whites.indexOf(below);
+      if (idx < 0) continue;
+      var b = document.createElement('div');
+      b.className = 'b';
+      b.style.left = (idx * W + W * 0.66) + 'px';
+      b.style.width = Math.round(W * 0.68) + 'px';
+      b.dataset.midi = n;
+      b.innerHTML = '<span class="kb-bind"></span><span class="kb-nm"></span>';
+      keys.appendChild(b);
+      keyEls[n] = b;
+    }
+
+    keys.addEventListener('mousedown', function (e) {
+      var t = e.target.closest('.w,.b');
+      if (!t) return;
+      var midi = parseInt(t.dataset.midi, 10);
+      audition(midi);
+      if (building) { built.push(midi); paintBuilt(); }
+    });
+
+    document.getElementById('kb-build').onclick = function () {
+      building = !building;
+      this.textContent = 'Build: ' + (building ? 'on' : 'off');
+      this.classList.toggle('on', building);
+    };
+    document.getElementById('kb-undo').onclick = function () { built.pop(); paintBuilt(); };
+    document.getElementById('kb-clearb').onclick = function () { built = []; paintBuilt(); };
+    document.getElementById('kb-use').onclick = function () {
+      if (!built.length) return;
+      var notes = built.map(function (m) { return { name: name(m), freq: freq(m) }; });
+      // hand it to the sequence panel the same way tab import does
+      var box = document.getElementById('kj-typed');
+      if (box) box.value = notes.map(function (n) { return n.name; }).join(' ');
+      var load = document.getElementById('kj-load-typed');
+      if (load) load.click();
+    };
+
+    refreshBindings();
+    setInterval(refreshBindings, 1500);   // scale/octave changes rebind
+    paintBuilt();
+    window.KeyJBoard = { light: light, name: name, freq: freq, keyEls: keyEls };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', build);
+  } else { build(); }
+})();
+</script>
 </body>
 </html>
