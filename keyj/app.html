@@ -3272,6 +3272,226 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });
   } else { setTimeout(build, 0); }
 })();
+
+/* ============================================================
+   Key-J v1.9 — the staff, centred, with nothing falling off it
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHAT WAS WRONG, MEASURED
+
+   The staff was drawn from 15% to 55% of the canvas height: five
+   lines pinned near the top with 54 pixels of nothing underneath
+   and 18 above. Notes are plotted upward from the bottom line, so
+   the room they needed was exactly the room that was not there.
+
+   At that geometry a note leaves the canvas above staff position
+   11. Position 12 is C6. Key-J's key map runs to C7, so every
+   note in the top octave was drawn off the top of the picture and
+   simply never seen.
+
+   WHAT THIS DOES
+
+   1. Centres the staff. Ten half-spaces of height, the staff
+      occupying the middle four, which leaves the same three
+      spaces above as below - room for three ledger lines each way
+      instead of three below and none above.
+
+   2. Sizes the clef by measuring it. The old font was 101px of
+      serif in a 119px box, chosen by eye. This measures the
+      glyph's real ink height and scales until it spans the staff,
+      so it fits whatever font the machine actually has.
+
+   3. Stops losing notes. C2 and C7 cannot both sit on one treble
+      staff at a readable size, so anything past the drawable
+      range is pinned to the edge, drawn hollow in the warn colour
+      with a chevron pointing the way it went, and its name
+      written beside it. A note that cannot be placed is reported,
+      never dropped - the same rule the tab importer follows.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  if (typeof drawStaff !== 'function') return;
+
+  var LINE = '#2a2a4a';
+  var CLEF = '#5555aa';
+  var NOTE = '#e8c84a';
+  var HOLE = '#0a0a0e';
+  var WARN = '#e8a04a';
+
+  /* Ten half-spaces: three above the staff, four of staff, three below. */
+  var UNITS = 10;
+  var TOP_UNITS = 3;
+
+  /* Measure the clef rather than guessing an em size. The glyph's ink is
+     a fraction of the font size that varies by font, so a number chosen
+     by eye is wrong on any machine but the one it was chosen on. */
+  var clefCache = { key: '', size: 0, ascent: 0, descent: 0 };
+  function fitClef(ctx, target) {
+    var key = target.toFixed(1);
+    if (clefCache.key === key) return clefCache;
+    var size = target, m, h, i;
+    for (i = 0; i < 5; i++) {
+      ctx.font = size + 'px serif';
+      m = ctx.measureText('𝄞');
+      h = (m.actualBoundingBoxAscent || 0) + (m.actualBoundingBoxDescent || 0);
+      if (!h) { break; }                 // no metrics: keep the last guess
+      if (Math.abs(h - target) < 0.5) break;
+      size = size * (target / h);
+    }
+    clefCache = {
+      key: key, size: size,
+      ascent: (m && m.actualBoundingBoxAscent) || size * 0.7,
+      descent: (m && m.actualBoundingBoxDescent) || size * 0.2
+    };
+    return clefCache;
+  }
+
+  /* semitone -> staff position, 0 being the bottom line (E4). */
+  var DIATONIC = [0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6];
+  function staffPosition(semitone) {
+    var oct = Math.floor(semitone / 12);
+    var chroma = semitone % 12;
+    var dia = oct * 7 + DIATONIC[chroma];
+    return (dia - (4 * 7 + 2)) - 2;      // relative to C4, then to E4
+  }
+
+  drawStaff = function () {
+    var canvas = document.getElementById('staffCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height;
+    var dpr = window.devicePixelRatio || 1;
+    ctx.clearRect(0, 0, W, H);
+    if (!H) return;
+
+    var space = H / UNITS;               // one line-to-line spacing
+    var top = TOP_UNITS * space;         // top staff line
+    var bottom = top + space * 4;        // bottom staff line
+    var half = space / 2;                // one staff position
+
+    ctx.strokeStyle = LINE;
+    ctx.lineWidth = Math.max(1, dpr);
+    for (var i = 0; i < 5; i++) {
+      var ly = top + i * space;
+      ctx.beginPath();
+      ctx.moveTo(0, ly);
+      ctx.lineTo(W, ly);
+      ctx.stroke();
+    }
+
+    // the clef spans the staff and a little beyond, as engraved music does
+    var fit = fitClef(ctx, space * 6.2);
+    ctx.fillStyle = CLEF;
+    ctx.font = fit.size + 'px serif';
+    var mid = (top + bottom) / 2;
+    ctx.fillText('𝄞', 8 * dpr, mid + (fit.ascent - fit.descent) / 2);
+
+    if (typeof staffNotes === 'undefined' || !staffNotes.length) return;
+
+    var startX = 60 * dpr;
+    var viewWidth = W - startX - 10 * dpr;
+    var scroll = Math.max(0, staffScrollX * dpr - viewWidth);
+
+    // what fits between the top and bottom of the canvas
+    var maxPos = Math.floor((bottom - 0) / half);
+    var minPos = Math.ceil((bottom - H) / half);
+
+    staffNotes.forEach(function (n) {
+      var x = startX + n.x * dpr - scroll;
+      if (x < startX - 30 || x > W + 30) return;
+
+      var pos = staffPosition(n.semitone);
+      var off = pos > maxPos ? 1 : (pos < minPos ? -1 : 0);
+      var drawPos = off ? (off > 0 ? maxPos : minPos) : pos;
+      var y = bottom - drawPos * half;
+
+      var rx = Math.min(space * 0.55, Math.max(space * 0.45, n.duration * 10 * dpr));
+      var ry = space * 0.38;
+
+      // ledger lines, only for notes actually on the staff's coordinates
+      if (!off) {
+        ctx.strokeStyle = LINE;
+        ctx.lineWidth = Math.max(1, dpr);
+        var lp;
+        for (lp = -2; lp >= pos; lp -= 2) { ledger(lp); }
+        for (lp = 10; lp <= pos; lp += 2) { ledger(lp); }
+      }
+      function ledger(lp) {
+        var yy = bottom - lp * half;
+        ctx.beginPath();
+        ctx.moveTo(x - space * 0.7, yy);
+        ctx.lineTo(x + space * 0.7, yy);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = off ? WARN : NOTE;
+      ctx.beginPath();
+      ctx.ellipse(x, y, rx, ry, -0.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (off || n.duration > 0.3) {
+        ctx.fillStyle = HOLE;
+        ctx.beginPath();
+        ctx.ellipse(x, y, rx * 0.55, ry * 0.5, -0.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      if (off) {
+        // it went that way, and this is what it was
+        ctx.strokeStyle = WARN;
+        ctx.lineWidth = Math.max(1, dpr * 1.2);
+        var tip = y - off * space * 0.95;
+        ctx.beginPath();
+        ctx.moveTo(x - rx * 0.7, tip + off * space * 0.35);
+        ctx.lineTo(x, tip);
+        ctx.lineTo(x + rx * 0.7, tip + off * space * 0.35);
+        ctx.stroke();
+        ctx.fillStyle = WARN;
+        ctx.font = (space * 0.62) + 'px ui-monospace, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(n.note, x, tip - off * space * 0.25 + (off > 0 ? 0 : space * 0.55));
+        ctx.textAlign = 'start';
+        return;
+      }
+
+      ctx.strokeStyle = NOTE;
+      ctx.lineWidth = 1.5 * dpr;
+      var dir = pos < 4 ? 1 : -1;
+      ctx.beginPath();
+      ctx.moveTo(x + rx * (dir > 0 ? 0.9 : -0.9), y);
+      ctx.lineTo(x + rx * (dir > 0 ? 0.9 : -0.9), y - dir * space * 3);
+      ctx.stroke();
+
+      if (n.duration > 0.5) {
+        ctx.fillStyle = NOTE;
+        ctx.beginPath();
+        ctx.arc(x + rx + 4 * dpr, y - 2 * dpr, 2 * dpr, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+  };
+
+  /* The canvas is sized from its box, so a resized window needs a redraw
+     or the staff stays at the old scale until the next note. */
+  var t = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(t);
+    t = setTimeout(function () {
+      try {
+        if (typeof resizeCanvases === 'function') resizeCanvases();
+        clefCache.key = '';
+        drawStaff();
+      } catch (err) { console.error('staff resize:', err); }
+    }, 120);
+  });
+
+  window.KeyJStaff = { position: staffPosition, draw: function () { drawStaff(); } };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(drawStaff, 0); });
+  } else { setTimeout(drawStaff, 0); }
+})();
 </script>
 </body>
 </html>
