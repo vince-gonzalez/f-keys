@@ -18,7 +18,12 @@
       "package.json"
     ],
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "category": "AudioVideo"
     },
     "mac": {
       "target": "dmg"
@@ -26,7 +31,6 @@
     "linux": {
       "target": "AppImage"
     },
-    "icon": "build/icon.ico",
     "nsis": {
       "include": "build/installer.nsh",
       "installerIcon": "build/icon.ico",
