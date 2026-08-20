@@ -855,7 +855,6 @@ function playNote(key) {
     vibGain.connect(osc.frequency);
     vibLFO.start(now);
     activeKeys[key] = { osc, gainNode, vibLFO };
-    vibLFO.start(now);
   } else if (state.playStyle === 'tremolo') {
     const tremLFO = AC.createOscillator();
     const tremGain = AC.createGain();
@@ -1985,6 +1984,17 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
   } else { build(); }
 
   window.KeyJTab = { parseTab: parseTab, TUNINGS: TUNINGS };   // for tests
+
+  // v1.7 needs the sequence itself to save, load and render it. SEQ was
+  // private to this block, which is why the exporter could only reach the
+  // typing log and not the thing the user actually built.
+  window.KeyJSeq = {
+    notes:  function () { return SEQ.notes.slice(); },
+    source: function () { return SEQ.source; },
+    load:   loadNotes,
+    set:    setSeq,
+    parse:  parseTyped
+  };
 })();
 </script>
 
@@ -2685,6 +2695,326 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
 
   styles();
   viewport();
+})();
+
+/* ============================================================
+   Key-J v1.7 — the sequence is the thing you export
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   THREE DEFECTS, MEASURED
+
+   1. Selecting Vibrato killed the app.
+
+      playNote called vibLFO.start(now) twice, three lines apart -
+      a duplicated line. The second throws InvalidStateError, which
+      was uncaught, so the keydown handler aborted before it reached
+      activeNotes[key]. releaseNote then bailed on the missing entry
+      and left the key in activeKeys forever, and playNote opens with
+      "if (activeKeys[key]) return". Every key pressed under Vibrato
+      became permanently dead. Vibrato is the third style button,
+      which is why it looked like "more than twice".
+
+      The line is gone. playNote is also wrapped now, so a future
+      audio error cannot silently disable typing: the key is released
+      from activeKeys and the failure is reported rather than stuck.
+
+   2. Export produced one note out of thirty-five seconds.
+
+      sessionNotes holds the whole page session, not the recording.
+      Notes played before Record land at time 0 because sessionStart
+      was still null, so hundreds of them stack into one instant.
+      Rendered, that instant peaked at 49.4 where a single note peaks
+      at 0.8; normalisation then scaled the file by 0.0198 and every
+      real note fell to 0.002 RMS. Measured on a reconstruction of a
+      976-note session: exactly one second of thirty-five was audible.
+
+      That is a recording of typing, which is not what anyone wants
+      out of this app anyway. Export now renders THE SEQUENCE - the
+      notes built from a tab, the grid or the keyboard - evenly at a
+      tempo you choose, through the tone you chose.
+
+   3. The button said MP3 and produced a WAV.
+
+   WHAT IS NEW
+
+     Save .txt   the sequence as note names, wrapped, with a header
+     Load .txt   the same file back, or any list of note names
+     Export WAV  the sequence rendered at a tempo
+
+   The text is deliberately plain, so the file you save is the same
+   thing you can paste into the note box. Comment lines are stripped
+   on the way in, which means the whole file pastes as-is.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  /* ── the two renderers keep different state ──────────────────
+     app.html uses state.waveform, the desktop build uses S.wave.
+     They are separate implementations of the same product, so this
+     reads whichever is present rather than assuming one.          */
+  function tone() {
+    var s = (typeof state !== 'undefined' && state) ? state
+          : (typeof S !== 'undefined' && S) ? S : {};
+    function n(v, d) { return (typeof v === 'number' && isFinite(v)) ? v : d; }
+    return {
+      wave:    s.waveform || s.wave || 'sine',
+      attack:  n(s.attack, 0.006),
+      release: n(s.release, 400) / 1000,
+      reverb:  n(s.reverb, 0.15),
+      drive:   n(s.drive, 0),
+      volume:  n(s.volume, 0.7),
+      detune:  n(s.detune, 0)
+    };
+  }
+
+  function encoder() {
+    if (typeof audioBufferToWav === 'function') return audioBufferToWav;
+    if (typeof buf2wav === 'function') return buf2wav;
+    return null;
+  }
+
+  function seq() {
+    return (window.KeyJSeq && window.KeyJSeq.notes()) || [];
+  }
+
+  /* ── text, both directions ──────────────────────────────────── */
+
+  function toText(notes, source) {
+    var out = ['# Key-J sequence - ' + notes.length + ' notes' +
+               (source ? ' from ' + source : ''),
+               '# Paste this whole file into "Or type note names", or use Load .txt'];
+    var line = [];
+    notes.forEach(function (nt, i) {
+      line.push(nt.name);
+      if (line.length === 16 || i === notes.length - 1) {
+        out.push(line.join(' '));
+        line = [];
+      }
+    });
+    return out.join('\n') + '\n';
+  }
+
+  /* A saved file has a header. Stripping comments here is what makes
+     the file and the paste box the same input. */
+  function stripComments(text) {
+    return String(text).split(/\r?\n/)
+      .filter(function (l) { return l.trim().charAt(0) !== '#'; })
+      .join(' ');
+  }
+
+  function fromText(text) {
+    if (!window.KeyJSeq) return { notes: [], skipped: [] };
+    return window.KeyJSeq.parse(stripComments(text));
+  }
+
+  function download(name, data, mime) {
+    try {
+      var blob = (data instanceof Blob) ? data : new Blob([data], { type: mime });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      return true;
+    } catch (err) {
+      console.error('download:', err);
+      return false;
+    }
+  }
+
+  /* ── render the sequence, not the typing ────────────────────── */
+
+  function driveCurve(amount) {
+    var k = amount * 100, n = 2048, c = new Float32Array(n), i, x;
+    for (i = 0; i < n; i++) { x = (i * 2) / n - 1; c[i] = ((1 + k) * x) / (1 + k * Math.abs(x)); }
+    return c;
+  }
+
+  function render(notes, bpm) {
+    var t = tone();
+    var sr = 44100;
+    var step = 60 / Math.max(30, Math.min(300, bpm));   // one note per beat
+    var hold = step * 0.9;
+    var tail = t.release + t.reverb * 2 + 0.5;
+    var total = notes.length * step + tail;
+    var off = new OfflineAudioContext(2, Math.ceil(sr * total), sr);
+
+    var master = off.createGain();
+    // Headroom for overlap: the release of one note runs under the next.
+    master.gain.value = Math.min(0.9, t.volume) * 0.8;
+
+    var sink = master;
+    if (t.drive > 0.01) {
+      var shaper = off.createWaveShaper();
+      shaper.curve = driveCurve(t.drive);
+      shaper.oversample = '4x';
+      master.connect(shaper);
+      sink = shaper;
+    }
+    sink.connect(off.destination);
+
+    if (t.reverb > 0.01) {
+      var conv = off.createConvolver();
+      var wet = off.createGain();
+      wet.gain.value = t.reverb * 0.5;
+      var irLen = Math.floor(sr * 1.6);
+      var ir = off.createBuffer(2, irLen, sr);
+      for (var ch = 0; ch < 2; ch++) {
+        var d = ir.getChannelData(ch);
+        for (var i = 0; i < irLen; i++) {
+          d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / irLen, 3);
+        }
+      }
+      conv.buffer = ir;
+      sink.connect(conv); conv.connect(wet); wet.connect(off.destination);
+    }
+
+    notes.forEach(function (nt, i) {
+      var at = i * step;
+      var osc = off.createOscillator();
+      var g = off.createGain();
+      osc.type = t.wave;
+      osc.frequency.value = nt.freq * Math.pow(2, t.detune / 12);
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.linearRampToValueAtTime(0.8, at + Math.min(t.attack, hold * 0.5));
+      g.gain.exponentialRampToValueAtTime(0.0001, at + hold + t.release);
+      osc.connect(g); g.connect(master);
+      osc.start(at);
+      osc.stop(at + hold + t.release + 0.05);
+    });
+
+    return off.startRendering();
+  }
+
+  /* ── the controls ───────────────────────────────────────────── */
+
+  function el(id) { return document.getElementById(id); }
+
+  function say(html, warn) {
+    var s = el('kj17-status');
+    if (s) s.innerHTML = warn ? '<span class="warn">' + html + '</span>' : html;
+  }
+
+  function build() {
+    var presets = el('kj-presets');
+    if (!presets || el('kj17-row')) return;
+
+    var wrap = document.createElement('div');
+    wrap.id = 'kj17-row';
+    wrap.innerHTML =
+      '<label style="margin-top:8px">Render and save the sequence</label>' +
+      '<div class="row">' +
+        '<button id="kj17-savetxt">Save .txt</button>' +
+        '<button id="kj17-loadtxt">Load .txt</button>' +
+        '<span style="color:#9aa0b5">BPM</span>' +
+        '<input type="number" id="kj17-bpm" value="140" min="30" max="300">' +
+        '<button id="kj17-wav" class="primary">Export WAV</button>' +
+      '</div>' +
+      '<div class="note" id="kj17-status">The sequence, one note per beat, ' +
+        'through the tone above. Not a recording of your typing.</div>' +
+      '<input type="file" id="kj17-file" accept=".txt,text/plain" style="display:none">';
+    presets.parentNode.insertBefore(wrap, presets.nextSibling);
+
+    el('kj17-savetxt').onclick = function () {
+      var n = seq();
+      if (!n.length) { say('Nothing to save - load a tab or type note names first.', 1); return; }
+      var name = 'Key-J_sequence_' + n.length + '_notes.txt';
+      if (download(name, toText(n, window.KeyJSeq.source()), 'text/plain')) {
+        say('Saved <strong>' + name + '</strong>. It pastes straight back in.');
+      } else {
+        say('The browser refused the download.', 1);
+      }
+    };
+
+    el('kj17-loadtxt').onclick = function () { el('kj17-file').click(); };
+
+    el('kj17-file').onchange = function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (!f) return;
+      if (f.size > 512 * 1024) { say('Over 512 KB - that is not a melody.', 1); return; }
+      var r = new FileReader();
+      r.onload = function () {
+        try {
+          var got = fromText(r.result);
+          if (!got.notes.length) { say('No note names in that file.', 1); return; }
+          window.KeyJSeq.load(got.notes, f.name);
+          window.KeyJSeq.set(true);
+          say('Loaded <strong>' + got.notes.length + ' notes</strong> from ' + f.name +
+              (got.skipped && got.skipped.length
+                 ? ' &middot; skipped ' + got.skipped.length : ''));
+        } catch (err) {
+          console.error('loadtxt:', err);
+          say('That file could not be read.', 1);
+        }
+      };
+      r.onerror = function () { say('That file could not be read.', 1); };
+      r.readAsText(f);
+      e.target.value = '';
+    };
+
+    el('kj17-wav').onclick = function () {
+      var n = seq();
+      if (!n.length) { say('Nothing to render - load a tab or type note names first.', 1); return; }
+      var enc = encoder();
+      if (!enc) { say('No WAV encoder on this build.', 1); return; }
+      var bpm = parseInt(el('kj17-bpm').value, 10) || 140;
+      say('Rendering ' + n.length + ' notes at ' + bpm + ' BPM...');
+      render(n, bpm).then(function (buf) {
+        var name = 'Key-J_' + n.length + 'notes_' + bpm + 'bpm.wav';
+        // normalise: one note at a time, so the peak is a real peak
+        if (download(name, new Blob([enc(buf, true)], { type: 'audio/wav' }))) {
+          say('Exported <strong>' + name + '</strong> &middot; ' +
+              buf.duration.toFixed(1) + 's, ' + n.length + ' notes.');
+        } else {
+          say('The browser refused the download.', 1);
+        }
+      }).catch(function (err) {
+        console.error('render:', err);
+        say('Render failed: ' + err.message, 1);
+      });
+    };
+
+    /* The existing note box should accept a whole saved file too. */
+    var load = el('kj-load-typed');
+    if (load && !load.dataset.kj17) {
+      load.dataset.kj17 = '1';
+      var box = el('kj-typed');
+      var prev = load.onclick;
+      load.onclick = function () {
+        if (box && box.value.indexOf('#') !== -1) box.value = stripComments(box.value);
+        return prev && prev.apply(this, arguments);
+      };
+    }
+
+    /* It downloads a WAV. It has never made an MP3. */
+    [].forEach.call(document.querySelectorAll('.pill-btn'), function (b) {
+      if (/export\s*mp3/i.test(b.textContent)) b.textContent = 'Export Session';
+    });
+  }
+
+  /* ── the guard: an audio error must not disable a key ────────── */
+  if (typeof playNote === 'function') {
+    var inner = playNote;
+    playNote = function (key) {
+      try {
+        return inner.apply(this, arguments);
+      } catch (err) {
+        console.error('playNote:', err);
+        // Without this the key stays in activeKeys and never sounds again.
+        try { if (typeof activeKeys !== 'undefined') delete activeKeys[key]; } catch (e) {}
+        try { if (typeof activeNotes !== 'undefined') delete activeNotes[key]; } catch (e) {}
+        if (typeof setStatus === 'function') {
+          setStatus('That note failed to play (' + err.message + ') - the key still works.');
+        }
+      }
+    };
+  }
+
+  window.KeyJExport = { toText: toText, fromText: fromText, render: render, tone: tone };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); });
+  } else { setTimeout(build, 0); }
 })();
 </script>
 </body>
