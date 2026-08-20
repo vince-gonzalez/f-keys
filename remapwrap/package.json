@@ -1,0 +1,18 @@
+{
+  "name": "remapwrap",
+  "version": "0.1.0",
+  "description": "Your phone as an extra row of keys. Scan a QR code, tap, fire real keystrokes.",
+  "main": "remapwrap-server.js",
+  "scripts": {
+    "start": "node remapwrap-server.js"
+  },
+  "license": "SEE LICENSE IN ../LICENSE",
+  "dependencies": {
+    "ws": "^8.18.0",
+    "qrcode": "^1.5.4",
+    "@nut-tree-fork/nut-js": "^4.2.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

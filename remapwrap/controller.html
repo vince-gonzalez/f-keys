@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+// ============================================================
+// WORKFLOW STACK
+// File:        controller.html
+// Brand:       F-Keys
+// Author:      Vincent Gonzalez | (c) 2026 F-Keys Creative LLC | www.f-keys.com
+// Version:     v0.1.0
+// Description: F-Keys Mobile Controller — touch-optimized keypad
+//              served to phone browser via remapwrap-server.js.
+//              Sends keypress events to PC via WebSocket.
+// Boot Order:
+//   1. DOM ready → initController()
+//   2. SERVER_IP injected by server at serve time
+//   3. connectWebSocket() → register as 'controller'
+//   4. Await layout from dashboard (or use defaults)
+//   5. renderKeys() → draw button grid
+//   6. Touch events → sendKeypress()
+// External Deps:
+//   - Google Fonts (Bebas Neue)
+//   - WebSocket: ws://[server-ip]:7332
+// Layout Target: 360–430px mobile portrait
+// Browser Target: Chrome/Safari mobile (latest)
+// ============================================================
+
+// ASSET MANIFEST
+// Google Fonts: Bebas Neue
+// WebSocket: ws://[SERVER_IP]:[WS_PORT]
+// ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>F-KEYS CONTROLLER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #080c0f;
+    --bg2:      #0d1318;
+    --bg3:      #111820;
+    --border:   #1e2d3d;
+    --accent:   #66DD03;
+    --accent2:  #00c8ff;
+    --accent3:  #ff4e6a;
+    --text:     #c8d8e8;
+    --text-dim: #4a6070;
+    --font:     'Bebas Neue', Impact, fantasy;
+    --glow:     0 0 16px rgba(102,221,3,0.5);
+    --glow2:    0 0 12px rgba(0,200,255,0.4);
+    --radius:   8px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bot: env(safe-area-inset-bottom, 0px);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%; width: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  /* ── Scanline overlay ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 6px
+    );
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* ── Header bar ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(10px + var(--safe-top)) 16px 10px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .logo {
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-shadow: var(--glow);
+  }
+  .conn-badge {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: all 0.3s;
+  }
+  .conn-badge.on  { border-color: var(--accent);  color: var(--accent);  box-shadow: var(--glow); }
+  .conn-badge.err { border-color: var(--accent3); color: var(--accent3); }
+
+  /* ── Key grid wrapper ── */
+  .grid-wrap {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 12px;
+    overflow: hidden;
+  }
+
+  .key-grid {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+    grid-template-columns: repeat(var(--cols, 4), 1fr);
+    grid-template-rows: repeat(var(--rows, 3), 1fr);
+  }
+
+  /* ── Key button ── */
+  .key-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    transition: border-color 0.1s, background 0.1s, transform 0.08s;
+    -webkit-user-select: none;
+    overflow: hidden;
+  }
+
+  .key-btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: var(--radius);
+    background: radial-gradient(circle at 50% 50%, rgba(102,221,3,0.18), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .key-btn.pressed {
+    border-color: var(--accent);
+    transform: scale(0.93);
+    box-shadow: var(--glow);
+  }
+  .key-btn.pressed::after { opacity: 1; }
+
+  .key-label {
+    font-size: clamp(13px, 3.5vw, 20px);
+    letter-spacing: 1px;
+    line-height: 1;
+    text-align: center;
+    padding: 0 4px;
+    color: var(--text);
+  }
+  .key-sub {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(8px, 2vw, 11px);
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 8px 16px calc(8px + var(--safe-bot));
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .footer-brand {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+  .ping-disp {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  /* ── App wrapper ── */
+  .app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div class="logo">F-KEYS</div>
+    <div class="conn-badge" id="conn-badge">CONNECTING…</div>
+  </div>
+
+  <div class="grid-wrap">
+    <div class="key-grid" id="key-grid"></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">(c) 2026 F-Keys Creative LLC</div>
+    <div class="ping-disp" id="ping-disp">-- ms</div>
+  </div>
+
+</div>
+
+<script>
+/* ===== CONFIG BLOCK ===== */
+/* __SERVER_IP_INJECT__ */   // Replaced at serve time by remapwrap-server.js
+var CFG = {
+  WS_PORT:       typeof WS_PORT     !== 'undefined' ? WS_PORT     : 7332,
+  SERVER_IP:     typeof SERVER_IP   !== 'undefined' ? SERVER_IP   : window.location.hostname,
+  PING_INTERVAL: 5000,
+  HAPTIC_MS:     40,
+  DEV_MODE:      true,
+};
+/* ===== END CONFIG BLOCK ===== */
+
+// ── State ──────────────────────────────────────────────────────
+var ws          = null;
+var pingTimer   = null;
+var pingStart   = 0;
+var pressTimers = {};   // per-key hold timers (future: long-press)
+
+// Default layout (overwritten by dashboard push)
+var layout = {
+  cols: 4,
+  rows: 3,
+  keys: [
+    { id: 'k1',  label: 'COPY',      sub: 'ctrl+c',    action: 'ctrl+c'   },
+    { id: 'k2',  label: 'PASTE',     sub: 'ctrl+v',    action: 'ctrl+v'   },
+    { id: 'k3',  label: 'UNDO',      sub: 'ctrl+z',    action: 'ctrl+z'   },
+    { id: 'k4',  label: 'SAVE',      sub: 'ctrl+s',    action: 'ctrl+s'   },
+    { id: 'k5',  label: 'MUTE',      sub: 'vol mute',  action: 'mute'     },
+    { id: 'k6',  label: 'VOL +',     sub: 'vol up',    action: 'volumeup' },
+    { id: 'k7',  label: 'VOL −',     sub: 'vol dn',    action: 'volumedown'},
+    { id: 'k8',  label: 'PLAY',      sub: 'media',     action: 'playpause'},
+    { id: 'k9',  label: 'FULL SCR',  sub: 'f11',       action: 'f11'      },
+    { id: 'k10', label: 'REFRESH',   sub: 'f5',        action: 'f5'       },
+    { id: 'k11', label: 'SCREENSHOT',sub: 'win+shift+s',action:'win+shift+s'},
+    { id: 'k12', label: 'CLOSE TAB', sub: 'ctrl+w',    action: 'ctrl+w'   },
+  ]
+};
+
+// ── Init ───────────────────────────────────────────────────────
+window.onload = function() {
+  renderKeys();
+  connectWS();
+};
+
+// ── WebSocket ──────────────────────────────────────────────────
+function connectWS() {
+  // READS: CFG
+  // WRITES: ws, pingTimer
+  var url = 'ws://' + CFG.SERVER_IP + ':' + CFG.WS_PORT;
+  setBadge('CONNECTING…', '');
+
+  try { ws = new WebSocket(url); } catch(e) { setBadge('ERROR', 'err'); return; }
+
+  ws.onopen = function() {
+    setBadge('LIVE', 'on');
+    ws.send(JSON.stringify({ type: 'register', role: 'controller' }));
+    startPing();
+    log('Connected to ' + url);
+  };
+
+  ws.onmessage = function(evt) {
+    try {
+      var msg = JSON.parse(evt.data);
+      handleMessage(msg);
+    } catch(e) { log('Parse error: ' + e); }
+  };
+
+  ws.onclose = function() {
+    setBadge('OFFLINE', 'err');
+    stopPing();
+    setTimeout(connectWS, 3000);
+  };
+
+  ws.onerror = function() { setBadge('ERROR', 'err'); };
+}
+
+function handleMessage(msg) {
+  if (msg.type === 'registered') { log('Registered as controller'); return; }
+  if (msg.type === 'pong') {
+    var lat = Date.now() - pingStart;
+    document.getElementById('ping-disp').textContent = lat + ' ms';
+    return;
+  }
+  if (msg.type === 'layout') {
+    layout = msg.layout;
+    renderKeys();
+    log('Layout received from dashboard');
+    return;
+  }
+}
+
+// ── Ping ───────────────────────────────────────────────────────
+function startPing() {
+  stopPing();
+  pingTimer = setInterval(function() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      pingStart = Date.now();
+      ws.send(JSON.stringify({ type: 'ping' }));
+    }
+  }, CFG.PING_INTERVAL);
+}
+function stopPing() { if (pingTimer) { clearInterval(pingTimer); pingTimer = null; } }
+
+// ── Render keys ────────────────────────────────────────────────
+function renderKeys() {
+  // READS: layout
+  // WRITES: #key-grid DOM
+  var grid = document.getElementById('key-grid');
+  grid.style.setProperty('--cols', layout.cols || 4);
+  grid.style.setProperty('--rows', layout.rows || 3);
+  grid.innerHTML = '';
+
+  (layout.keys || []).forEach(function(key) {
+    var btn = document.createElement('div');
+    btn.className = 'key-btn';
+    btn.dataset.id     = key.id;
+    btn.dataset.label  = key.label;
+    btn.dataset.action = key.action || '';
+    if (key.color) btn.style.background = key.color;
+
+    btn.innerHTML =
+      '<span class="key-label">' + escHtml(key.label) + '</span>' +
+      (key.sub ? '<span class="key-sub">' + escHtml(key.sub) + '</span>' : '');
+
+    // Touch events
+    btn.addEventListener('touchstart', onTouchStart, { passive: false });
+    btn.addEventListener('touchend',   onTouchEnd,   { passive: false });
+    btn.addEventListener('touchcancel',onTouchEnd,   { passive: false });
+
+    // Mouse fallback (desktop testing)
+    btn.addEventListener('mousedown', function(e) { pressKey(btn); });
+    btn.addEventListener('mouseup',   function(e) { releaseKey(btn, true); });
+
+    grid.appendChild(btn);
+  });
+}
+
+// ── Touch handlers ─────────────────────────────────────────────
+function onTouchStart(e) {
+  e.preventDefault();
+  pressKey(this);
+}
+function onTouchEnd(e) {
+  e.preventDefault();
+  releaseKey(this, true);
+}
+
+function pressKey(btn) {
+  // READS: btn dataset
+  // WRITES: DOM class, pressTimers
+  btn.classList.add('pressed');
+  triggerHaptic(CFG.HAPTIC_MS);
+}
+
+function releaseKey(btn, fire) {
+  // READS: btn dataset
+  // WRITES: DOM class, WebSocket
+  btn.classList.remove('pressed');
+  if (fire) sendKeypress(btn.dataset.id, btn.dataset.label, btn.dataset.action);
+}
+
+// ── Send keypress to server ────────────────────────────────────
+function sendKeypress(id, label, action) {
+  // READS: ws
+  // WRITES: WebSocket send
+  if (!ws || ws.readyState !== WebSocket.OPEN) { log('Not connected'); return; }
+  ws.send(JSON.stringify({
+    type:   'keypress',
+    id:     id,
+    label:  label,
+    action: action,
+    ts:     Date.now()
+  }));
+  log('SEND: ' + label + ' → ' + action);
+}
+
+// ── Haptic feedback ────────────────────────────────────────────
+function triggerHaptic(ms) {
+  // READS: navigator.vibrate
+  if (navigator.vibrate) navigator.vibrate(ms);
+}
+
+// ── UI helpers ─────────────────────────────────────────────────
+function setBadge(text, cls) {
+  var b = document.getElementById('conn-badge');
+  b.textContent = text;
+  b.className = 'conn-badge' + (cls ? ' ' + cls : '');
+}
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function log(msg) {
+  if (CFG.DEV_MODE) console.log('[FKEYS-CTRL] ' + msg);
+}
+
+/*
+CHANGE LOG v0.1.0
+- Initial build. Touch-optimized keypad for mobile browser.
+- WebSocket auto-connects to injected server IP.
+- Layout received from dashboard via layout_push message.
+- Touch feedback: CSS press animation + haptic vibrate.
+- Ping/pong latency display in footer.
+- Auto-reconnect on disconnect.
+
+NEXT STEPS
+- Long-press alternate action per key
+- Swipe gesture support (up/down/left/right per key)
+- Landscape mode layout variant
+- Visual "sent" confirmation flash per key
+*/
+</script>
+</body>
+</html>

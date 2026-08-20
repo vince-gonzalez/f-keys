@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+// ============================================================
+// WORKFLOW STACK
+// File:        dashboard.html
+// Brand:       F-Keys
+// Author:      Vincent Gonzalez | (c) 2026 F-Keys Creative LLC | www.f-keys.com
+// Version:     v0.1.0
+// Description: F-Keys PC Dashboard — layout builder, connection
+//              monitor, live keypress feed. Open on PC browser.
+// Boot Order:
+//   1. DOM ready → initDashboard()
+//   2. connectWebSocket() → register as 'dashboard'
+//   3. fetchQR() → render pairing QR
+//   4. renderLayout() → draw default button grid
+//   5. WebSocket onmessage → handleServerMessage()
+// External Deps:
+//   - Google Fonts (Bebas Neue, Share Tech Mono)
+//   - qrcode server endpoint (remapwrap-server.js /qr)
+// Layout Target: 1280px+ desktop
+// Browser Target: Chrome / Edge (latest)
+// ============================================================
+
+// ASSET MANIFEST
+// Google Fonts: Bebas Neue, Share Tech Mono
+// WebSocket: ws://[server-ip]:7332
+// QR endpoint: http://[server-ip]:7331/qr
+// ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F-KEYS DASHBOARD v0.1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  /* ── CSS Variables ── */
+  :root {
+    --bg:         #080c0f;
+    --bg2:        #0d1318;
+    --bg3:        #111820;
+    --panel:      #131b24;
+    --border:     #1e2d3d;
+    --accent:     #66DD03;
+    --accent2:    #00c8ff;
+    --accent3:    #ff4e6a;
+    --text:       #c8d8e8;
+    --text-dim:   #4a6070;
+    --text-bright:#f0f8ff;
+    --font-display: 'Bebas Neue', Impact, fantasy;
+    --font-mono:    'Share Tech Mono', 'Courier New', monospace;
+    --glow:       0 0 12px rgba(102,221,3,0.4);
+    --glow2:      0 0 12px rgba(0,200,255,0.35);
+    --radius:     6px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* ── Scanline overlay ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.06) 2px,
+      rgba(0,0,0,0.06) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── Header ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-shadow: var(--glow);
+  }
+  .version {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+  }
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    display: inline-block;
+    margin-right: 6px;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .status-dot.on  { background: var(--accent);  box-shadow: var(--glow); }
+  .status-dot.on2 { background: var(--accent2); box-shadow: var(--glow2); }
+  .status-dot.err { background: var(--accent3); }
+
+  /* ── Main layout ── */
+  .main {
+    display: grid;
+    grid-template-columns: 280px 1fr 240px;
+    grid-template-rows: 1fr;
+    flex: 1;
+    min-height: 0;
+    gap: 0;
+  }
+
+  /* ── Panels ── */
+  .panel {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .panel:last-child { border-right: none; border-left: 1px solid var(--border); }
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--accent2);
+    padding: 12px 16px 8px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .panel-body { flex: 1; overflow-y: auto; padding: 14px; }
+  .panel-body::-webkit-scrollbar { width: 4px; }
+  .panel-body::-webkit-scrollbar-track { background: transparent; }
+  .panel-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── Center canvas ── */
+  .canvas-area {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .canvas-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  .canvas-body {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  /* ── Buttons / Controls ── */
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    color: var(--text);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .btn.accent { border-color: var(--accent); color: var(--accent); }
+  .btn.accent:hover { box-shadow: var(--glow); }
+  .btn.danger { border-color: var(--accent3); color: var(--accent3); }
+
+  /* ── Key grid ── */
+  .key-grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(var(--cols, 4), 1fr);
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .key-btn {
+    position: relative;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 72px;
+    padding: 10px 8px;
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s, transform 0.08s;
+    user-select: none;
+  }
+  .key-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .key-btn.selected { border-color: var(--accent); box-shadow: var(--glow); }
+  .key-btn.flash {
+    background: rgba(102,221,3,0.18);
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+    transform: scale(0.96);
+  }
+  .key-btn .key-label { font-size: 15px; line-height: 1; }
+  .key-btn .key-sub   { font-family: var(--font-mono); font-size: 9px; color: var(--text-dim); letter-spacing: 1px; }
+  .key-btn .key-edit  {
+    position: absolute; top: 4px; right: 6px;
+    font-size: 9px; color: var(--text-dim);
+    opacity: 0; transition: opacity 0.15s;
+  }
+  .key-btn:hover .key-edit { opacity: 1; }
+
+  /* ── QR card ── */
+  .qr-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .qr-card img {
+    width: 100%;
+    max-width: 200px;
+    image-rendering: pixelated;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto 10px;
+    background: #fff;
+    padding: 4px;
+  }
+  .qr-label { font-size: 10px; color: var(--text-dim); letter-spacing: 1.5px; }
+  .qr-url   { font-size: 9px;  color: var(--accent2); margin-top: 4px; word-break: break-all; }
+
+  /* ── Edit panel fields ── */
+  .field-group { margin-bottom: 14px; }
+  .field-label { font-size: 10px; color: var(--text-dim); letter-spacing: 1.5px; margin-bottom: 5px; }
+  .field-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text-bright);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field-input:focus { border-color: var(--accent2); }
+  .field-input::placeholder { color: var(--text-dim); }
+
+  select.field-input { cursor: pointer; }
+  option { background: var(--bg3); }
+
+  /* ── Live feed ── */
+  .feed-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    animation: feedIn 0.2s ease;
+  }
+  @keyframes feedIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+  .feed-key {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--accent);
+    min-width: 70px;
+  }
+  .feed-action { color: var(--accent2); font-size: 10px; }
+  .feed-time   { color: var(--text-dim); font-size: 9px;  margin-left: auto; }
+
+  /* ── Connection IP input ── */
+  .connect-row {
+    display: flex; gap: 8px; align-items: center; margin-bottom: 14px;
+  }
+  .connect-row .field-input { flex: 1; }
+
+  /* ── No-select on editor panel ── */
+  .edit-empty {
+    color: var(--text-dim);
+    font-size: 11px;
+    line-height: 1.8;
+    padding: 6px 0;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 8px 24px;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  footer a { color: var(--text-dim); text-decoration: none; }
+  footer a:hover { color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-left">
+    <div class="logo">F-KEYS</div>
+    <div class="version">v0.1.0 ALPHA</div>
+  </div>
+  <div class="status-bar">
+    <span><span class="status-dot" id="dot-server"></span><span id="lbl-server">SERVER</span></span>
+    <span><span class="status-dot" id="dot-ctrl"></span><span id="lbl-ctrl">CONTROLLER</span></span>
+    <span id="ping-display" style="color:var(--text-dim)">-- ms</span>
+  </div>
+</header>
+
+<!-- ── Main ── -->
+<div class="main">
+
+  <!-- Left: Pairing + grid config -->
+  <div class="panel">
+    <div class="panel-title">PAIRING</div>
+    <div class="panel-body">
+
+      <div class="connect-row">
+        <input class="field-input" id="server-ip" placeholder="Server IP (auto)" />
+        <button class="btn accent" onclick="connectWebSocket()">CONNECT</button>
+      </div>
+
+      <div class="qr-card">
+        <img id="qr-img" src="" alt="QR loading..." />
+        <div class="qr-label">SCAN WITH PHONE</div>
+        <div class="qr-url" id="qr-url">connecting…</div>
+      </div>
+
+      <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
+        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:12px;">GRID CONFIG</div>
+        <div class="field-group">
+          <div class="field-label">COLUMNS</div>
+          <input class="field-input" id="cfg-cols" type="number" min="1" max="8" value="4" oninput="applyGridConfig()" />
+        </div>
+        <div class="field-group">
+          <div class="field-label">ROWS</div>
+          <input class="field-input" id="cfg-rows" type="number" min="1" max="8" value="3" oninput="applyGridConfig()" />
+        </div>
+        <button class="btn accent" style="width:100%; margin-top:4px;" onclick="pushLayoutToControllers()">▶ PUSH TO PHONE</button>
+        <button class="btn" style="width:100%; margin-top:8px;" onclick="exportLayout()">EXPORT LAYOUT JSON</button>
+        <button class="btn" style="width:100%; margin-top:8px;" onclick="importLayoutClick()">IMPORT LAYOUT JSON</button>
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importLayout(event)" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Center: Key canvas -->
+  <div class="canvas-area">
+    <div class="canvas-toolbar">
+      <button class="btn accent" onclick="addKey()">+ ADD KEY</button>
+      <button class="btn" onclick="removeSelected()">− REMOVE</button>
+      <button class="btn" onclick="clearAll()">CLEAR ALL</button>
+      <span style="font-size:10px; color:var(--text-dim); margin-left:8px;">CLICK KEY TO EDIT</span>
+    </div>
+    <div class="canvas-body">
+      <div class="key-grid" id="key-grid"></div>
+    </div>
+  </div>
+
+  <!-- Right: Key editor + live feed -->
+  <div class="panel" style="border-left:1px solid var(--border);">
+    <div class="panel-title">KEY EDITOR</div>
+    <div class="panel-body" id="editor-panel">
+      <div class="edit-empty">Select a key on the canvas to edit its label, icon, and action mapping.</div>
+    </div>
+
+    <div class="panel-title" style="border-top:1px solid var(--border);">LIVE FEED</div>
+    <div class="panel-body" id="live-feed" style="max-height:260px; overflow-y:auto;">
+      <div class="edit-empty">Waiting for input…</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <span>www.f-keys.com | (c) 2026 F-Keys Creative LLC</span>
+  <span>F-KEYS "THE CANVAS" — ALPHA BUILD</span>
+  <span id="footer-status">IDLE</span>
+</footer>
+
+<script>
+/* ===== CONFIG BLOCK ===== */
+var CFG = {
+  WS_PORT:      7332,
+  HTTP_PORT:    7331,
+  PING_INTERVAL: 4000,
+  MAX_FEED:     40,
+  DEV_MODE:     true,
+};
+/* ===== END CONFIG BLOCK ===== */
+
+// ── State ──────────────────────────────────────────────────────
+var ws = null;
+var pingTimer = null;
+var pingStart = 0;
+var selectedKeyId = null;
+var controllerConnected = false;
+
+// Default layout
+var layout = [
+  { id: 'k1',  label: 'COPY',      sub: 'ctrl+c',    action: 'ctrl+c'  },
+  { id: 'k2',  label: 'PASTE',     sub: 'ctrl+v',    action: 'ctrl+v'  },
+  { id: 'k3',  label: 'UNDO',      sub: 'ctrl+z',    action: 'ctrl+z'  },
+  { id: 'k4',  label: 'SAVE',      sub: 'ctrl+s',    action: 'ctrl+s'  },
+  { id: 'k5',  label: 'MUTE',      sub: 'vol mute',  action: 'mute'    },
+  { id: 'k6',  label: 'VOL +',     sub: 'vol up',    action: 'volumeup'},
+  { id: 'k7',  label: 'VOL −',     sub: 'vol dn',    action: 'volumedown'},
+  { id: 'k8',  label: 'PLAY',      sub: 'media',     action: 'playpause'},
+  { id: 'k9',  label: 'FULL SCR',  sub: 'f11',       action: 'f11'     },
+  { id: 'k10', label: 'REFRESH',   sub: 'f5',        action: 'f5'      },
+  { id: 'k11', label: 'SCREENSHOT',sub: 'win+shift+s',action:'win+shift+s'},
+  { id: 'k12', label: 'CLOSE TAB', sub: 'ctrl+w',    action: 'ctrl+w'  },
+];
+
+var serverIP = '127.0.0.1';
+
+// ── Init ───────────────────────────────────────────────────────
+window.onload = function() {
+  detectServerIP(function(ip) {
+    serverIP = ip;
+    document.getElementById('server-ip').value = ip;
+    loadQR(ip);
+    connectWebSocket(ip);
+    renderGrid();
+  });
+};
+
+function detectServerIP(cb) {
+  // Try /ip endpoint on same host first
+  var host = window.location.hostname || '127.0.0.1';
+  fetch('http://' + host + ':' + CFG.HTTP_PORT + '/ip')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { cb(d.ip); })
+    .catch(function() { cb(host); });
+}
+
+function loadQR(ip) {
+  var qrSrc = 'http://' + ip + ':' + CFG.HTTP_PORT + '/qr';
+  var controllerURL = 'http://' + ip + ':' + CFG.HTTP_PORT + '/controller';
+  document.getElementById('qr-img').src = qrSrc;
+  document.getElementById('qr-url').textContent = controllerURL;
+}
+
+// ── WebSocket ──────────────────────────────────────────────────
+function connectWebSocket(ip) {
+  // READS: CFG, serverIP
+  // WRITES: ws, pingTimer
+  if (ws) { try { ws.close(); } catch(e){} }
+
+  var host = ip || document.getElementById('server-ip').value || serverIP;
+  serverIP = host;
+  var url = 'ws://' + host + ':' + CFG.WS_PORT;
+  setStatus('server', 'connecting');
+
+  try {
+    ws = new WebSocket(url);
+  } catch(e) {
+    setStatus('server', 'error');
+    log('WebSocket create error: ' + e.message);
+    return;
+  }
+
+  ws.onopen = function() {
+    setStatus('server', 'on');
+    setFooter('CONNECTED — ' + host);
+    ws.send(JSON.stringify({ type: 'register', role: 'dashboard' }));
+    startPing();
+    loadQR(host);
+  };
+
+  ws.onmessage = function(evt) {
+    try {
+      var msg = JSON.parse(evt.data);
+      handleServerMessage(msg);
+    } catch(e) {
+      log('Message parse error: ' + e.message);
+    }
+  };
+
+  ws.onclose = function() {
+    setStatus('server', 'off');
+    setStatus('ctrl', 'off');
+    setFooter('DISCONNECTED');
+    stopPing();
+    // Auto-reconnect after 3s
+    setTimeout(function() { connectWebSocket(host); }, 3000);
+  };
+
+  ws.onerror = function(e) {
+    setStatus('server', 'error');
+    log('WebSocket error');
+  };
+}
+
+function handleServerMessage(msg) {
+  // READS: msg, layout
+  // WRITES: controllerConnected, live feed DOM
+
+  if (msg.type === 'registered') {
+    log('Registered as dashboard');
+    return;
+  }
+  if (msg.type === 'pong') {
+    var latency = Date.now() - pingStart;
+    document.getElementById('ping-display').textContent = latency + ' ms';
+    return;
+  }
+  if (msg.type === 'controller_connected') {
+    controllerConnected = true;
+    setStatus('ctrl', 'on2');
+    pushLayoutToControllers();
+    addFeedItem('SYSTEM', 'Controller connected', '');
+    return;
+  }
+  if (msg.type === 'controller_disconnected') {
+    controllerConnected = false;
+    setStatus('ctrl', 'off');
+    addFeedItem('SYSTEM', 'Controller disconnected', '');
+    return;
+  }
+  if (msg.type === 'keypress') {
+    flashKey(msg.id);
+    addFeedItem(msg.label, msg.action, formatTime(msg.ts));
+    return;
+  }
+}
+
+// ── Ping ───────────────────────────────────────────────────────
+function startPing() {
+  stopPing();
+  pingTimer = setInterval(function() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      pingStart = Date.now();
+      ws.send(JSON.stringify({ type: 'ping' }));
+    }
+  }, CFG.PING_INTERVAL);
+}
+function stopPing() {
+  if (pingTimer) { clearInterval(pingTimer); pingTimer = null; }
+}
+
+// ── Grid render ────────────────────────────────────────────────
+function renderGrid() {
+  // READS: layout, selectedKeyId
+  // WRITES: #key-grid DOM
+  var cols = parseInt(document.getElementById('cfg-cols').value) || 4;
+  var grid = document.getElementById('key-grid');
+  grid.style.setProperty('--cols', cols);
+  grid.innerHTML = '';
+
+  layout.forEach(function(key) {
+    var btn = document.createElement('div');
+    btn.className = 'key-btn' + (key.id === selectedKeyId ? ' selected' : '');
+    btn.dataset.id = key.id;
+    btn.innerHTML =
+      '<span class="key-label">' + escHtml(key.label) + '</span>' +
+      '<span class="key-sub">'   + escHtml(key.sub || key.action || '') + '</span>' +
+      '<span class="key-edit">✎</span>';
+    btn.onclick = function() { selectKey(key.id); };
+    grid.appendChild(btn);
+  });
+}
+
+function applyGridConfig() {
+  renderGrid();
+}
+
+function flashKey(id) {
+  // READS: id
+  // WRITES: DOM class
+  var el = document.querySelector('.key-btn[data-id="' + id + '"]');
+  if (!el) return;
+  el.classList.add('flash');
+  setTimeout(function() { el.classList.remove('flash'); }, 200);
+}
+
+// ── Key editing ────────────────────────────────────────────────
+function selectKey(id) {
+  selectedKeyId = id;
+  renderGrid();
+  renderEditor(id);
+}
+
+function renderEditor(id) {
+  // READS: layout
+  // WRITES: #editor-panel DOM
+  var key = layout.find(function(k) { return k.id === id; });
+  if (!key) return;
+
+  var panel = document.getElementById('editor-panel');
+  panel.innerHTML =
+    '<div class="field-group">' +
+      '<div class="field-label">LABEL</div>' +
+      '<input class="field-input" id="ed-label" value="' + escAttr(key.label) + '" oninput="updateKey(\'label\', this.value)" />' +
+    '</div>' +
+    '<div class="field-group">' +
+      '<div class="field-label">SUBTITLE / HINT</div>' +
+      '<input class="field-input" id="ed-sub" value="' + escAttr(key.sub || '') + '" oninput="updateKey(\'sub\', this.value)" />' +
+    '</div>' +
+    '<div class="field-group">' +
+      '<div class="field-label">ACTION (keystroke)</div>' +
+      '<input class="field-input" id="ed-action" value="' + escAttr(key.action || '') + '" placeholder="e.g. ctrl+c, f5, mute" oninput="updateKey(\'action\', this.value)" />' +
+      '<div style="font-size:9px; color:var(--text-dim); margin-top:4px;">Use + to combine: ctrl+shift+s</div>' +
+    '</div>' +
+    '<div class="field-group">' +
+      '<div class="field-label">BACKGROUND COLOR</div>' +
+      '<input type="color" class="field-input" id="ed-color" value="' + escAttr(key.color || '#111820') + '" style="height:34px; cursor:pointer;" oninput="updateKey(\'color\', this.value)" />' +
+    '</div>' +
+    '<button class="btn danger" style="width:100%; margin-top:8px;" onclick="removeSelected()">REMOVE KEY</button>';
+}
+
+function updateKey(field, value) {
+  // READS: selectedKeyId, layout
+  // WRITES: layout, DOM
+  var key = layout.find(function(k) { return k.id === selectedKeyId; });
+  if (!key) return;
+  key[field] = value;
+
+  // Live update the key button appearance
+  var btn = document.querySelector('.key-btn[data-id="' + selectedKeyId + '"]');
+  if (btn) {
+    if (field === 'label') btn.querySelector('.key-label').textContent = value;
+    if (field === 'sub')   btn.querySelector('.key-sub').textContent   = value;
+    if (field === 'color') btn.style.background = value;
+  }
+}
+
+function addKey() {
+  var uid = 'k' + Date.now();
+  layout.push({ id: uid, label: 'NEW', sub: '', action: '' });
+  renderGrid();
+  selectKey(uid);
+}
+
+function removeSelected() {
+  if (!selectedKeyId) return;
+  layout = layout.filter(function(k) { return k.id !== selectedKeyId; });
+  selectedKeyId = null;
+  document.getElementById('editor-panel').innerHTML = '<div class="edit-empty">Select a key to edit.</div>';
+  renderGrid();
+}
+
+function clearAll() {
+  if (!confirm('Clear all keys?')) return;
+  layout = [];
+  selectedKeyId = null;
+  document.getElementById('editor-panel').innerHTML = '<div class="edit-empty">Canvas cleared.</div>';
+  renderGrid();
+}
+
+// ── Layout push / export / import ─────────────────────────────
+function pushLayoutToControllers() {
+  if (!ws || ws.readyState !== WebSocket.OPEN) { log('Not connected'); return; }
+  var cols = parseInt(document.getElementById('cfg-cols').value) || 4;
+  var rows = parseInt(document.getElementById('cfg-rows').value) || 3;
+  ws.send(JSON.stringify({ type: 'layout_push', layout: { keys: layout, cols: cols, rows: rows } }));
+  addFeedItem('SYSTEM', 'Layout pushed to controller', '');
+  log('Layout pushed');
+}
+
+function exportLayout() {
+  var cols = parseInt(document.getElementById('cfg-cols').value) || 4;
+  var rows = parseInt(document.getElementById('cfg-rows').value) || 3;
+  var data = JSON.stringify({ keys: layout, cols: cols, rows: rows }, null, 2);
+  var blob = new Blob([data], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'fkeys-layout.json';
+  a.click();
+}
+
+function importLayoutClick() {
+  document.getElementById('import-file').click();
+}
+
+function importLayout(evt) {
+  var file = evt.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      if (data.keys) {
+        layout = data.keys;
+        if (data.cols) document.getElementById('cfg-cols').value = data.cols;
+        if (data.rows) document.getElementById('cfg-rows').value = data.rows;
+        selectedKeyId = null;
+        renderGrid();
+        addFeedItem('SYSTEM', 'Layout imported', '');
+      }
+    } catch(err) {
+      alert('Invalid layout JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ── Live feed ──────────────────────────────────────────────────
+function addFeedItem(label, action, time) {
+  var feed = document.getElementById('live-feed');
+  // Remove empty placeholder
+  var empty = feed.querySelector('.edit-empty');
+  if (empty) empty.remove();
+
+  var div = document.createElement('div');
+  div.className = 'feed-item';
+  div.innerHTML =
+    '<span class="feed-key">' + escHtml(label)  + '</span>' +
+    '<span class="feed-action">' + escHtml(action) + '</span>' +
+    '<span class="feed-time">'   + escHtml(time || formatTime(Date.now())) + '</span>';
+  feed.insertBefore(div, feed.firstChild);
+
+  // Trim overflow
+  var items = feed.querySelectorAll('.feed-item');
+  if (items.length > CFG.MAX_FEED) items[items.length - 1].remove();
+}
+
+// ── UI helpers ─────────────────────────────────────────────────
+function setStatus(which, state) {
+  var dot = document.getElementById('dot-' + which);
+  if (!dot) return;
+  dot.className = 'status-dot';
+  if (state === 'on')         { dot.classList.add('on'); }
+  else if (state === 'on2')   { dot.classList.add('on2'); }
+  else if (state === 'error') { dot.classList.add('err'); }
+}
+function setFooter(msg) {
+  document.getElementById('footer-status').textContent = msg;
+}
+function formatTime(ts) {
+  return new Date(ts).toTimeString().slice(0,8);
+}
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escAttr(str) {
+  return String(str).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function log(msg) {
+  if (CFG.DEV_MODE) console.log('[FKEYS-DASH] ' + msg);
+}
+
+/*
+CHANGE LOG v0.1.0
+- Initial build. Layout builder with 12 default keys.
+- WebSocket connection to remapwrap-server.js with auto-reconnect.
+- QR code display for phone pairing.
+- Key editor panel (label, subtitle, action, color).
+- Live keypress feed with animation.
+- Export/import layout as JSON.
+- Push layout to connected controllers.
+
+NEXT STEPS
+- Persist layout to localStorage between sessions
+- Drag-to-reorder keys
+- Multi-action per key (tap vs long-press)
+- Color theming per key with gradient support
+*/
+</script>
+</body>
+</html>
