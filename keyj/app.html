@@ -548,6 +548,8 @@
     <button class="pill-btn danger" onclick="clearSession()">✕ Clear</button>
     <a class="pill-btn" href="https://f-keys.com/keyj/manual/" target="_blank" rel="noopener"
        style="text-decoration:none">Manual</a>
+    <a class="pill-btn" href="https://f-keys.com/keyj/privacy/" target="_blank"
+       rel="noopener" style="text-decoration:none">Privacy</a>
     <button class="pill-btn" onclick="showHelp()">?</button>
   </div>
 </header>
@@ -3516,6 +3518,114 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { setTimeout(drawStaff, 0); });
   } else { setTimeout(drawStaff, 0); }
+})();
+
+/* ============================================================
+   Key-J v2.0 — the keyboard says when it continues
+   F-Keys | www.f-keys.com
+   ------------------------------------------------------------
+   WHAT WAS WRONG, MEASURED
+
+   The on-screen keyboard is 61 keys and needs 964px. At the
+   window's design floor the centre column gives it 780, so
+   roughly a fifth of the instrument is off the side with nothing
+   to say so. A scrollbar appears on hover on Windows and not at
+   all on a trackpad, so the common case is a keyboard that looks
+   like it simply stops at G6.
+
+   WHAT THIS DOES
+
+   Darkens the edge the keys continue past, and only that edge.
+   Both edges when there is more in both directions, neither when
+   the whole instrument fits. The shadow is drawn inside the
+   scroller with box-shadow rather than by adding elements, so
+   nothing moves and no layout changes.
+
+   The scrollbar is also made permanently visible rather than
+   left to the platform, because an affordance that appears only
+   after you already guessed is not an affordance.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  function styles() {
+    var css = document.createElement('style');
+    css.textContent = [
+      /* the edge the keys run past */
+      '#kb .scroll{scroll-behavior:smooth;transition:box-shadow .15s}',
+      '#kb .scroll.more-right{box-shadow:inset -30px 0 24px -24px rgba(0,0,0,.95)}',
+      '#kb .scroll.more-left{box-shadow:inset 30px 0 24px -24px rgba(0,0,0,.95)}',
+      '#kb .scroll.more-left.more-right{box-shadow:inset 30px 0 24px -24px rgba(0,0,0,.95),' +
+        'inset -30px 0 24px -24px rgba(0,0,0,.95)}',
+      /* and a scrollbar that does not wait to be discovered */
+      '#kb .scroll{scrollbar-width:thin;scrollbar-color:#3a3a48 #14141a}',
+      '#kb .scroll::-webkit-scrollbar{height:9px}',
+      '#kb .scroll::-webkit-scrollbar-track{background:#14141a;border-radius:5px}',
+      '#kb .scroll::-webkit-scrollbar-thumb{background:#3a3a48;border-radius:5px}',
+      '#kb .scroll::-webkit-scrollbar-thumb:hover{background:#4d4d5e}',
+      /* a plain count, so the size of what is off-screen is knowable */
+      '#kb .kb-more{font-size:11.5px;color:#9aa0b5;padding:0 14px 8px;letter-spacing:.3px}'
+    ].join('\n');
+    document.head.appendChild(css);
+  }
+
+  function paint(scroller, label) {
+    var max = scroller.scrollWidth - scroller.clientWidth;
+    if (max <= 2) {
+      scroller.classList.remove('more-left', 'more-right');
+      if (label) label.textContent = '';
+      return;
+    }
+    var x = scroller.scrollLeft;
+    scroller.classList.toggle('more-left', x > 2);
+    scroller.classList.toggle('more-right', x < max - 2);
+    if (label) {
+      // how much instrument is off the side, in keys rather than pixels
+      var white = scroller.querySelectorAll('.w').length || 36;
+      var perKey = scroller.scrollWidth / white;
+      var hiddenKeys = Math.round(max / perKey);
+      label.textContent = hiddenKeys > 0
+        ? 'Scroll sideways — about ' + hiddenKeys + ' more keys either side of the view.'
+        : '';
+    }
+  }
+
+  function build() {
+    var kb = document.getElementById('kb');
+    if (!kb) return false;
+    var scroller = kb.querySelector('.scroll');
+    if (!scroller || scroller.dataset.kj20) return !!scroller;
+    scroller.dataset.kj20 = '1';
+
+    var label = document.createElement('div');
+    label.className = 'kb-more';
+    scroller.parentNode.insertBefore(label, scroller.nextSibling);
+
+    var tick = function () { paint(scroller, label); };
+    scroller.addEventListener('scroll', tick, { passive: true });
+    window.addEventListener('resize', tick);
+
+    // The keys are built after this block runs, so measure again once they exist.
+    if (typeof ResizeObserver === 'function') {
+      try { new ResizeObserver(tick).observe(scroller); } catch (err) {
+        console.error('kb observer:', err);
+      }
+    }
+    tick();
+    setTimeout(tick, 250);
+    return true;
+  }
+
+  styles();
+
+  // The keyboard panel inserts itself, and the tab strip may keep it hidden,
+  // so retry briefly rather than assuming it is present on first paint.
+  var tries = 0;
+  var timer = setInterval(function () {
+    if (build() || ++tries > 40) clearInterval(timer);
+  }, 100);
+
+  window.KeyJKeys = { repaint: function () { build(); } };
 })();
 </script>
 </body>

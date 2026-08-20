@@ -159,6 +159,7 @@ it, which is the difference between an instrument and a keylogger.</p>
   <a class="btn" href="https://github.com/zengineco/f-keys/releases/latest">Download</a>
   <a class="btn" href="/keyj/manual/">Manual</a>
   <a class="btn" href="https://pypi.org/project/keyj/">PyPI</a>
+  <a class="btn" href="/keyj/privacy/">Privacy</a>
 </div>"""),
 
  "pixelstaff": dict(
@@ -472,10 +473,91 @@ a tone with a longer tail such as Bell or Pad.</td></tr>
 often the block has a different number of string lines than the tuning expects.</td></tr>
 </table>
 
+<h2>What it can see</h2>
+<p>With Global Capture on, Key-J receives a signal each time any key is pressed
+anywhere. It holds which key is currently down so it can release the note, and
+discards it. Nothing is written to disk, nothing is sent anywhere, and the
+switch starts off every time the app launches. The
+<a href="/keyj/privacy/">privacy page</a> says all of this in detail, including
+how to check it rather than believe it.</p>
+
 <h2>The key map</h2>
 <p>The left rail lists every key and the note it plays, and <b>clicking a row rebinds
 it</b>. Scale and octave sit underneath: pick a scale and the whole keyboard is
 constrained to it, which makes playing something that sounds wrong difficult.</p>
+"""
+
+
+# Key-J installs a global keyboard hook. A product that does that owes
+# its buyer a plain account of what it does with what it sees, and every
+# app store requires one before it will list it.
+KEYJ_PRIVACY = """
+<h2>The short version</h2>
+<p>Key-J does not collect anything. No account, no telemetry, no analytics, no
+crash reports, no network calls of any kind while it runs. Nothing you type is
+stored, and nothing leaves your machine.</p>
+<p>That is worth stating in detail rather than in a sentence, because Key-J
+installs a global keyboard hook, and you should not have to take that on
+trust.</p>
+
+<h2>What the desktop application can see</h2>
+<p>With <b>Global Capture</b> switched on, Key-J receives a signal from the
+operating system each time any key is pressed or released, in any application.
+That is what makes it play while you type elsewhere, and there is no version of
+that feature which sees less.</p>
+<p>What it does with that signal is the part that matters:</p>
+<table class="facts">
+<tr><th>Held in memory</th><td>Which key is currently down, so the note can be
+released when you let go. Discarded immediately after.</td></tr>
+<tr><th>Written to disk</th><td>Nothing. No log, no history, no buffer of
+keystrokes.</td></tr>
+<tr><th>Sent anywhere</th><td>Nothing. The application makes no outbound network
+requests.</td></tr>
+</table>
+<p><b>Global Capture starts switched off</b> every time the application launches,
+and the header shows which state it is in: <b>Window only</b> or <b>Global</b>.
+It is never enabled without you enabling it.</p>
+
+<h2>Sequence mode does not need to know what you typed</h2>
+<p>When a sequence is loaded, every key plays the next note of it, so which key
+you pressed stops being information Key-J needs. The command line player takes
+this further and never reads the key identity at all &mdash; it asks whether a
+key went down and discards the rest. There is no keystroke buffer in it to
+leak, subpoena or lose.</p>
+
+<h2>What the browser version can see</h2>
+<p>Only what you type into its own page. A web page cannot read keystrokes
+outside itself; that is a boundary enforced by the browser, not a promise made
+by us. Sequences and settings are kept in your browser's local storage on your
+own machine.</p>
+
+<h2>Files Key-J writes</h2>
+<table class="facts">
+<tr><th>Settings</th><td>Your tone, tuning and last-used tab, in the standard
+per-user application data directory.</td></tr>
+<tr><th>Exports</th><td>Only where you choose to save them.</td></tr>
+</table>
+<p>Uninstalling removes the application. Anything you exported is yours and stays
+where you put it.</p>
+
+<h2>Verifying this rather than believing it</h2>
+<p>The Key-J source is published. It is not free to copy &mdash; see
+<a href="https://github.com/zengineco/f-keys/blob/main/keyj/LICENSE">the
+licence</a> &mdash; but it is readable precisely so that a program which installs
+a keyboard hook can be audited by the people running it. The global hook lives in
+<code>keyj/desktop/src/main.js</code>; the handler is a few lines long and you can
+read every one of them.</p>
+<p>You can also check from the outside: run Key-J with any network monitor and
+watch it make no requests.</p>
+
+<h2>Children</h2>
+<p>Key-J is not directed at children under 13 and collects no information from
+anyone, of any age.</p>
+
+<h2>Changes and contact</h2>
+<p>If this ever stops being true, this page changes before the behaviour does.
+Questions: <a href="mailto:vincegonzalez@me.com">vincegonzalez@me.com</a>.</p>
+<p class="sub">F-Keys Creative LLC &middot; last reviewed 20 August 2026</p>
 """
 
 def tree(active_cat=None, active_slug=None):
@@ -633,6 +715,19 @@ def main():
             doc, "1 item", active_cat=cat, active_slug=slug,
             description=page["tagline"],
             canonical="https://f-keys.com/{}/".format(slug))))
+
+    written.append((os.path.join("keyj", "privacy", "index.html"), shell(
+        "Key-J Privacy \u2014 F-Keys",
+        "F-Keys\\Apps\\Key-J\\Privacy",
+        '<div class="doc"><h1>Key-J Privacy</h1>'
+        '<p class="sub">What a program with a global keyboard hook does '
+        'with what it can see.</p>' + KEYJ_PRIVACY +
+        '<div class="btnrow"><a class="btn default" href="/keyj/">Key-J</a>'
+        '<a class="btn" href="/keyj/manual/">Manual</a></div></div>',
+        "1 item", active_cat="apps", active_slug="keyj",
+        description="Key-J collects nothing. What the global keyboard hook "
+                    "sees, what is kept, and how to verify it.",
+        canonical="https://f-keys.com/keyj/privacy/")))
 
     # the manual, one level under the Key-J document
     written.append((os.path.join("keyj", "manual", "index.html"), shell(
