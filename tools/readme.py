@@ -75,7 +75,15 @@ F = {
 " ": ["    ", "    ", "    ", "    ", "    ", "    "],
 }
 
-WIDTH = 76          # inside the box, matching the gonzalgo banner
+WIDTH = 92          # inside the box.
+#
+# Chosen, not inherited. The gonzalgo banner was 76 and the box grows
+# when a name does not fit, so POTICAS came out 78 wide and AUTHORECON
+# 92 - eleven repositories, five different widths, which is the drift
+# this file exists to stop. AUTHORECON is the widest name in the
+# portfolio at 88 columns of glyph and cannot be broken at a space,
+# so 92 is that plus padding. Names with spaces that would exceed it
+# stack instead. --widths reports any name that would break the box.
 
 
 def letters(text):
@@ -88,11 +96,37 @@ def letters(text):
     return rows
 
 
+def rows(name, width):
+    """
+    The block letters, stacked onto as many lines as the box needs.
+
+    STREAM SNIPER is thirteen characters and wants 103 columns, where every
+    other name in the portfolio fits in 88. Widening the box for one product
+    would have made QV sit alone in a canyon, so a name that does not fit
+    breaks at its spaces instead and the box stays the same everywhere.
+    """
+    words, out = name.split(" "), []
+    line_words = []
+
+    def flush():
+        if line_words:
+            out.append(letters(" ".join(line_words)))
+            del line_words[:]
+
+    for w in words:
+        trial = " ".join(line_words + [w])
+        if line_words and max(len(r) for r in letters(trial)) > width - 4:
+            flush()
+        line_words.append(w)
+    flush()
+    return out
+
+
 def banner(name, tagline="", width=WIDTH):
     """The boxed header. Returns a fenced block ready to paste into a README."""
-    body = letters(name)
-    span = max(len(r) for r in body)
-    if span > width - 4:
+    blocks = rows(name, width)
+    span = max(max(len(r) for r in b) for b in blocks)
+    if span > width - 4:          # a single word longer than the box
         width = span + 4
 
     def line(s=""):
@@ -101,7 +135,11 @@ def banner(name, tagline="", width=WIDTH):
         return "║" + " " * left + s + " " * (pad - left) + "║"
 
     out = ["```", "╔" + "═" * width + "╗", line()]
-    out += [line(r + " " * (span - len(r))) for r in body]
+    for i, b in enumerate(blocks):
+        if i:
+            out.append(line())
+        w = max(len(r) for r in b)
+        out += [line(r + " " * (w - len(r))) for r in b]
     out.append(line())
     if tagline:
         out.append(line(tagline))
@@ -188,9 +226,34 @@ def verify():
     return 0 if ok else 1
 
 
+# ── the width is checked too, not just the glyphs ────────────
+PORTFOLIO = ["POTICAS", "TIPSTREAMS", "TIP WIDGET", "PROMPT", "DAISUPOP",
+             "QV", "MODULIGN", "MOONBEAM", "AUTHORECON", "SHOWDOWN",
+             "PLUMHUD", "STREAM SNIPER", "KEY-J", "GONZALGO", "OPTICQUIZ",
+             "LEADSEER", "F-KEYS", "FYTECRAFT", "LOCK IN", "5BEST2BUY",
+             "WIKIPOLISH", "EPISTEMEND", "PIXEL STAFF"]
+
+
+def widths():
+    """Every name in the portfolio must render in the same box."""
+    seen = {}
+    for n in PORTFOLIO:
+        w = max(len(l) for l in banner(n, "x").splitlines())
+        seen.setdefault(w, []).append(n)
+    for w in sorted(seen):
+        print("  %d  %s" % (w, ", ".join(seen[w])))
+    if len(seen) == 1:
+        print("  every banner is the same width")
+        return 0
+    print("  WIDTHS DRIFT - raise WIDTH to fit the widest name above")
+    return 1
+
+
 if __name__ == "__main__":
     if "--verify" in sys.argv:
-        sys.exit(verify())
+        sys.exit(verify() or widths())
+    if "--widths" in sys.argv:
+        sys.exit(widths())
     if "--banner" in sys.argv:
         i = sys.argv.index("--banner")
         nm = sys.argv[i + 1]
