@@ -12,7 +12,7 @@
   "build": {
     "appId": "com.fkeys.keyj",
     "productName": "Key-J",
-    "copyright": "Copyright \u00a9 2025 DooBedder",
+    "copyright": "Copyright \u00a9 2026 Vincent Gonzalez",
     "files": [
       "src/**/*",
       "package.json"
