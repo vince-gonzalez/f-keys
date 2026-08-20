@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key-J Privacy — F-Keys</title>
+<meta name="description" content="Key-J collects nothing. What the global keyboard hook sees, what is kept, and how to verify it.">
+<link rel="canonical" href="https://f-keys.com/keyj/privacy/">
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<meta property="og:title" content="Key-J Privacy — F-Keys">
+<meta property="og:description" content="Key-J collects nothing. What the global keyboard hook sees, what is kept, and how to verify it.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/win98.css">
+</head>
+<body>
+<div class="window raised">
+
+  <div class="titlebar">
+    <span class="t"><span>F-Keys\Apps\Key-J\Privacy</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+  </div>
+
+  <nav class="menubar">
+    <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
+    <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
+    <a href="/about.html"><u>H</u>elp</a>
+  </nav>
+
+  <div class="toolbar groove">
+    <a class="tool" href="/apps.html">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/apps.html">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
+  </div>
+
+  <div class="addressbar">
+    <span class="lbl">Address</span>
+    <span class="path sunken"><span>&#128193; F-Keys\Apps\Key-J\Privacy</span></span>
+  </div>
+
+  <div class="panes">
+    <aside class="tree sunken">
+<ul>
+<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+<ul class="kids">
+<li><a class="on" href="/keyj/"><span class="ic">&#128196;</span>Key-J</a></li>
+<li><a class="" href="/pixelstaff/"><span class="ic">&#128196;</span>Pixel Staff</a></li>
+<li><a class="" href="https://opticquiz.com"><span class="ic">&#128196;</span>OpticQuiz</a></li>
+<li><a class="" href="/qv/"><span class="ic">&#128196;</span>QV</a></li>
+<li><a class="" href="/remapwrap/"><span class="ic">&#128196;</span>RemapWrap</a></li>
+</ul>
+</li>
+<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+</li>
+<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+</li>
+<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+</li>
+<li><a href="/about.html"><span class="ic">&#128220;</span>About</a></li>
+<li><a href="/log/"><span class="ic">&#128220;</span>Log</a></li>
+<li><a href="/status/"><span class="ic">&#128220;</span>Status</a></li>
+<li><a href="/papers/"><span class="ic">&#128220;</span>Papers</a></li>
+</ul></li></ul>
+    </aside>
+    <section class="content sunken">
+<div class="doc"><h1>Key-J Privacy</h1><p class="sub">What a program with a global keyboard hook does with what it can see.</p>
+<h2>The short version</h2>
+<p>Key-J does not collect anything. No account, no telemetry, no analytics, no
+crash reports, no network calls of any kind while it runs. Nothing you type is
+stored, and nothing leaves your machine.</p>
+<p>That is worth stating in detail rather than in a sentence, because Key-J
+installs a global keyboard hook, and you should not have to take that on
+trust.</p>
+
+<h2>What the desktop application can see</h2>
+<p>With <b>Global Capture</b> switched on, Key-J receives a signal from the
+operating system each time any key is pressed or released, in any application.
+That is what makes it play while you type elsewhere, and there is no version of
+that feature which sees less.</p>
+<p>What it does with that signal is the part that matters:</p>
+<table class="facts">
+<tr><th>Held in memory</th><td>Which key is currently down, so the note can be
+released when you let go. Discarded immediately after.</td></tr>
+<tr><th>Written to disk</th><td>Nothing. No log, no history, no buffer of
+keystrokes.</td></tr>
+<tr><th>Sent anywhere</th><td>Nothing. The application makes no outbound network
+requests.</td></tr>
+</table>
+<p><b>Global Capture starts switched off</b> every time the application launches,
+and the header shows which state it is in: <b>Window only</b> or <b>Global</b>.
+It is never enabled without you enabling it.</p>
+
+<h2>Sequence mode does not need to know what you typed</h2>
+<p>When a sequence is loaded, every key plays the next note of it, so which key
+you pressed stops being information Key-J needs. The command line player takes
+this further and never reads the key identity at all &mdash; it asks whether a
+key went down and discards the rest. There is no keystroke buffer in it to
+leak, subpoena or lose.</p>
+
+<h2>What the browser version can see</h2>
+<p>Only what you type into its own page. A web page cannot read keystrokes
+outside itself; that is a boundary enforced by the browser, not a promise made
+by us. Sequences and settings are kept in your browser's local storage on your
+own machine.</p>
+
+<h2>Files Key-J writes</h2>
+<table class="facts">
+<tr><th>Settings</th><td>Your tone, tuning and last-used tab, in the standard
+per-user application data directory.</td></tr>
+<tr><th>Exports</th><td>Only where you choose to save them.</td></tr>
+</table>
+<p>Uninstalling removes the application. Anything you exported is yours and stays
+where you put it.</p>
+
+<h2>Verifying this rather than believing it</h2>
+<p>The Key-J source is published. It is not free to copy &mdash; see
+<a href="https://github.com/zengineco/f-keys/blob/main/keyj/LICENSE">the
+licence</a> &mdash; but it is readable precisely so that a program which installs
+a keyboard hook can be audited by the people running it. The global hook lives in
+<code>keyj/desktop/src/main.js</code>; the handler is a few lines long and you can
+read every one of them.</p>
+<p>You can also check from the outside: run Key-J with any network monitor and
+watch it make no requests.</p>
+
+<h2>Children</h2>
+<p>Key-J is not directed at children under 13 and collects no information from
+anyone, of any age.</p>
+
+<h2>Changes and contact</h2>
+<p>If this ever stops being true, this page changes before the behaviour does.
+Questions: <a href="mailto:vincegonzalez@me.com">vincegonzalez@me.com</a>.</p>
+<p class="sub">F-Keys Creative LLC &middot; last reviewed 20 August 2026</p>
+<div class="btnrow"><a class="btn default" href="/keyj/">Key-J</a><a class="btn" href="/keyj/manual/">Manual</a></div></div>
+    </section>
+  </div>
+
+  <div class="statusbar">
+    <span class="cell groove">1 item</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
+
+</div>
+</body>
+</html>
