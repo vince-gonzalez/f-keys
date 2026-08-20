@@ -1,4 +1,19 @@
-# moonbeam
+```
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║  ███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗██████╗ ███████╗ █████╗ ███╗   ███╗  ║
+║  ████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║██╔══██╗██╔════╝██╔══██╗████╗ ████║  ║
+║  ██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║██████╔╝█████╗  ███████║██╔████╔██║  ║
+║  ██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║██╔══██╗██╔══╝  ██╔══██║██║╚██╔╝██║  ║
+║  ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝███████╗██║  ██║██║ ╚═╝ ██║  ║
+║  ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝  ║
+║                                                                              ║
+║             what are the miners on this network actually doing?              ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+```
+
+[![PyPI](https://img.shields.io/pypi/v/moonbeam-miner)](https://pypi.org/project/moonbeam-miner/) [![Python](https://img.shields.io/pypi/pyversions/moonbeam-miner)](https://pypi.org/project/moonbeam-miner/) [![License](https://img.shields.io/pypi/l/moonbeam-miner)](LICENSE) [![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](pyproject.toml)
 
 Find the NerdMiners on your network and read their vitals, from the terminal.
 
@@ -58,4 +73,14 @@ for m in scan():
     print(m["alias"], m["hashrate"])
 ```
 
-MIT licensed. Part of [F-Keys](https://f-keys.com).
+---
+
+```
+  Vincent Gonzalez
+  F-Keys  ·  https://f-keys.com
+  ORCID 0009-0005-3640-014X
+```
+
+Part of [F-Keys](https://f-keys.com) — independent hardware, software
+and internet products. See the [working log](https://f-keys.com/log/)
+and [live status](https://f-keys.com/status/).

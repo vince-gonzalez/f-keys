@@ -1,4 +1,19 @@
-# PlumHUD
+```
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║       ██████╗ ██╗     ██╗   ██╗███╗   ███╗██╗  ██╗██╗   ██╗██████╗         ║
+║       ██╔══██╗██║     ██║   ██║████╗ ████║██║  ██║██║   ██║██╔══██╗        ║
+║       ██████╔╝██║     ██║   ██║██╔████╔██║███████║██║   ██║██║  ██║        ║
+║       ██╔═══╝ ██║     ██║   ██║██║╚██╔╝██║██╔══██║██║   ██║██║  ██║        ║
+║       ██║     ███████╗╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╔╝██████╔╝        ║
+║       ╚═╝     ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝         ║
+║                                                                            ║
+║                      watch the fleet, not the screen                       ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+```
+
+[![PyPI](https://img.shields.io/pypi/v/plumhud)](https://pypi.org/project/plumhud/) [![Python](https://img.shields.io/pypi/pyversions/plumhud)](https://pypi.org/project/plumhud/) [![License](https://img.shields.io/pypi/l/plumhud)](LICENSE)
 
 Miner fleet monitor — a borderless overlay HUD that sits on top of whatever
 you're doing, with alerts and history.
@@ -66,4 +81,14 @@ Python 3.8+, and Tk for the window (bundled with Python on Windows and macOS;
 `apt install python3-tk` on Debian and Ubuntu). `plumhud check` needs no
 display at all.
 
-MIT licensed. Part of [F-Keys](https://f-keys.com).
+---
+
+```
+  Vincent Gonzalez
+  F-Keys  ·  https://f-keys.com
+  ORCID 0009-0005-3640-014X
+```
+
+Part of [F-Keys](https://f-keys.com) — independent hardware, software
+and internet products. See the [working log](https://f-keys.com/log/)
+and [live status](https://f-keys.com/status/).

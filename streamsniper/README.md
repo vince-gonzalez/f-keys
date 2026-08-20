@@ -1,6 +1,19 @@
-# 📡 StreamSniper
+```
+╔═════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                                         ║
+║  ███████╗████████╗██████╗ ███████╗ █████╗ ███╗   ███╗    ███████╗███╗   ██╗██╗██████╗ ███████╗██████╗   ║
+║  ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██╔══██╗████╗ ████║    ██╔════╝████╗  ██║██║██╔══██╗██╔════╝██╔══██╗  ║
+║  ███████╗   ██║   ██████╔╝█████╗  ███████║██╔████╔██║    ███████╗██╔██╗ ██║██║██████╔╝█████╗  ██████╔╝  ║
+║  ╚════██║   ██║   ██╔══██╗██╔══╝  ██╔══██║██║╚██╔╝██║    ╚════██║██║╚██╗██║██║██╔═══╝ ██╔══╝  ██╔══██╗  ║
+║  ███████║   ██║   ██║  ██║███████╗██║  ██║██║ ╚═╝ ██║    ███████║██║ ╚████║██║██║     ███████╗██║  ██║  ║
+║  ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝    ╚══════╝╚═╝  ╚═══╝╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝  ║
+║                                                                                                         ║
+║                                      they go live, it is on the TV                                      ║
+║                                                                                                         ║
+╚═════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+```
 
-> Watches the Twitch channels you name and launches the first one that goes live, fullscreen, ad-free. Shows a standby clock when everything is offline. Shuts down cleanly when the stream ends.
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![Platform](https://img.shields.io/badge/platform-Debian%20%7C%20Ubuntu-lightgrey)](https://f-keys.com/streamsniper/)
 
 ---
 
@@ -189,3 +202,15 @@ The systemd service already starts automatically after that.
 ---
 
 *StreamSniper — built for the one-device, one-purpose lifestyle.*
+
+---
+
+```
+  Vincent Gonzalez
+  F-Keys  ·  https://f-keys.com
+  ORCID 0009-0005-3640-014X
+```
+
+Part of [F-Keys](https://f-keys.com) — independent hardware, software
+and internet products. See the [working log](https://f-keys.com/log/)
+and [live status](https://f-keys.com/status/).
