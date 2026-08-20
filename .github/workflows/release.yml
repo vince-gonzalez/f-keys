@@ -186,6 +186,24 @@ jobs:
             -exec cp {} release/ \; 2>/dev/null || true
           ls -la release/
 
+      - name: Refuse a release that is missing a platform
+        env:
+          PRODUCT: ${{ needs.identify.outputs.product }}
+        run: |
+          # A matrix leg failing used to produce a published release holding
+          # one of the two installers, which reads as a complete release to
+          # anyone downloading it. Half a release is worse than none.
+          if [ "$PRODUCT" = "keyj" ]; then
+            MISSING=""
+            ls release/*.exe      >/dev/null 2>&1 || MISSING="$MISSING Windows(.exe)"
+            ls release/*.AppImage >/dev/null 2>&1 || MISSING="$MISSING Linux(.AppImage)"
+            if [ -n "$MISSING" ]; then
+              echo "::error::Key-J release is missing:$MISSING - refusing to publish."
+              exit 1
+            fi
+            echo "  both installers present"
+          fi
+
       - name: Publish the release
         env:
           GH_TOKEN: ${{ github.token }}

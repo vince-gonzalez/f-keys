@@ -47,12 +47,20 @@ function build() {
   return src.slice(0, i + 1) + HEADER + src.slice(i + 1);
 }
 
+// Windows checks this repository out with CRLF - .gitattributes pins only
+// .sh and .py to LF - so a byte comparison against an LF-joined header failed
+// on the Windows runner and passed on Linux, for files with identical content.
+// The check is about content, so it compares content.
+function normalise(text) {
+  return text === null ? null : text.replace(/\r\n/g, '\n');
+}
+
 function main() {
   const wanted = build();
   const check = process.argv.indexOf('--check') !== -1;
   const current = fs.existsSync(TARGET) ? fs.readFileSync(TARGET, 'utf8') : null;
 
-  if (current === wanted) {
+  if (normalise(current) === normalise(wanted)) {
     console.log('  renderer is in sync');
     return 0;
   }
