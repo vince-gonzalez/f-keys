@@ -140,6 +140,7 @@ waveforms, remappable keys and scale switching.</p>
 <div class="btnrow">
   <a class="btn default" href="/keyj/app.html">Open in browser</a>
   <a class="btn" href="https://github.com/zengineco/f-keys/releases/latest">Download</a>
+  <a class="btn" href="/keyj/manual/">Manual</a>
 </div>"""),
 
  "pixelstaff": dict(
@@ -349,6 +350,116 @@ def esc(s):
 
 
 # ── the shell ────────────────────────────────────────────────
+
+# The Key-J manual. Written because an FL Studio veteran needed a solid
+# session of tinkering to find sequence mode, and a feature nobody can
+# find is a feature nobody has.
+KEYJ_MANUAL = """
+<h2>Which Key-J are you holding</h2>
+<p>There are two, and the difference decides what the app can do at all.</p>
+<table class="facts">
+<tr><th>In a browser</th><td>Notes play while the Key-J tab has focus. Nothing else.</td></tr>
+<tr><th>The desktop app</th><td>Notes play while you type in any application, once
+Global Capture is switched on.</td></tr>
+</table>
+<p>A browser cannot see keystrokes outside its own page, and it should not be able
+to &mdash; a page that could read what you type into your bank would be a keylogger.
+So the browser version is not a crippled desktop version, it is at its permanent
+ceiling. The header tells you which one you have.</p>
+
+<h2>Turning it on</h2>
+<p><b>Browser:</b> click anywhere on the page and type. There is no switch, because
+there is nothing to switch.</p>
+<p><b>Desktop:</b> the titlebar carries a <b>Global Capture</b> toggle with a badge
+beside it. The badge reads <b>Window only</b> until you flip it, then <b>Global</b>.
+If it reads <b>Hook unavailable</b>, the native key hook did not load and only the
+Key-J window will be heard &mdash; on Linux that usually means the app needs
+permission to read input devices, on Windows that a security tool blocked it.</p>
+<p>Closing the window does not quit the desktop app. It keeps running in the tray so
+your keys keep playing. Quit from the tray menu.</p>
+
+<h2>The three tools</h2>
+<p>The centre of the window is tabbed, and one tool shows at a time. That is
+deliberate: stacked, the three of them made the page four thousand pixels tall.</p>
+<table class="facts">
+<tr><th>Keyboard</th><td>Sixty-one keys, C2 to C7. Click them to hear them, or turn on
+<b>Build</b> and click a run in.</td></tr>
+<tr><th>Grid</th><td>A step grid with nine kits, drums among them. Draw a pattern, then
+<b>Use as sequence</b>.</td></tr>
+<tr><th>Tab &amp; Sequence</th><td>Paste guitar tablature, or type note names. This is
+where a song gets in.</td></tr>
+</table>
+
+<h2>Sequence mode, which is the part people miss</h2>
+<p>Normally each key holds a fixed pitch: Q is one note, W is the next. That is fine
+for noise and useless for a song.</p>
+<p><b>With a sequence loaded, every key plays the next note of it.</b> Which key you
+press stops mattering. You are no longer playing pitches, you are playing
+<em>rhythm</em>, and the melody is already handled. That is how typing an email
+produces a solo.</p>
+<p>The status line shows how many notes are loaded, where you are in them and what
+comes next. <b>Restart</b> returns to the first note. <b>Sequence OFF</b> puts the
+fixed bindings back.</p>
+
+<h2>Getting a song in</h2>
+<p><b>From tablature.</b> Paste it in, pick the tuning, set a capo if there is one,
+press <b>Convert</b>. Eight tunings including drop D, E flat, DADGAD, seven string
+and bass.</p>
+<p>The importer states what it read: the tuning it used, how many strings it found,
+how many notes it produced, and the name of anything it could not read. A block with
+the wrong number of lines produces no notes and says so rather than guessing, because
+a wrong note you cannot see is worse than a missing one you can.</p>
+<p>What it cannot catch is a tab that is internally consistent and simply wrong. Bad
+frets convert cleanly into bad notes, and nothing but your ear will find that.</p>
+<p><b>From note names.</b> Type or paste them into the note box:
+<code>E5 G5 B5 E6</code>. Sharps and flats both work.</p>
+<p><b>From a file.</b> <b>Load .txt</b> takes a saved sequence, or any list of note
+names. <b>Import MIDI</b> takes a MIDI file and uses its note order.</p>
+<p><b>From the keyboard or the grid.</b> Click a run in, then <b>Use as sequence</b>.</p>
+
+<h2>Saving what you built</h2>
+<table class="facts">
+<tr><th>Save .txt</th><td>The sequence as note names. The file pastes straight back
+into the note box, so saving and loading are one format.</td></tr>
+<tr><th>Export WAV</th><td>The sequence rendered one note per beat at the BPM you set,
+through the tone you chose.</td></tr>
+<tr><th>Export Session</th><td>A recording of what you actually typed, with your
+timing. A different thing, and rarely the one you want.</td></tr>
+</table>
+<p>Export WAV renders the <em>sequence</em>. Export Session renders <em>your typing</em>.
+If you imported a tab and want to hear the song, you want Export WAV.</p>
+
+<h2>Sound</h2>
+<p>Seven tone presets, four waveforms, and sliders for attack, release, volume, reverb
+and pitch. Six play styles: normal, staccato, vibrato, tremolo, arpeggio, legato. The
+tone you have set is the tone the WAV export uses.</p>
+
+<h2>The staff</h2>
+<p>Notes land on a treble staff as you play, scrolling to keep the newest in view.
+Key-J spans C2 to C7, which no single treble staff shows at a readable size, so a note
+outside the drawable range is pinned to the edge in orange with an arrow pointing the
+way it went and its name beside it. A note that will not fit is reported, not dropped.</p>
+
+<h2>When something is wrong</h2>
+<table class="facts">
+<tr><th>No sound at all</th><td>Browsers will not start audio until you interact with
+the page. Click the page, then type.</td></tr>
+<tr><th>Nothing plays outside the window</th><td>You are in the browser version, or
+Global Capture is off. Check the badge in the header.</td></tr>
+<tr><th>Every key plays the same run</th><td>Sequence mode is on, and that is what it
+does. Press <b>Sequence OFF</b> for fixed pitches.</td></tr>
+<tr><th>Notes cut off sharply</th><td>Release is low. Raise the Release slider, or pick
+a tone with a longer tail such as Bell or Pad.</td></tr>
+<tr><th>The tab imported nothing</th><td>The status line names what it skipped. Most
+often the block has a different number of string lines than the tuning expects.</td></tr>
+</table>
+
+<h2>The key map</h2>
+<p>The left rail lists every key and the note it plays, and <b>clicking a row rebinds
+it</b>. Scale and octave sit underneath: pick a scale and the whole keyboard is
+constrained to it, which makes playing something that sounds wrong difficult.</p>
+"""
+
 def tree(active_cat=None, active_slug=None):
     out = ['<ul>', '<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>',
            '<ul class="kids">']
@@ -504,6 +615,20 @@ def main():
             doc, "1 item", active_cat=cat, active_slug=slug,
             description=page["tagline"],
             canonical="https://f-keys.com/{}/".format(slug))))
+
+    # the manual, one level under the Key-J document
+    written.append((os.path.join("keyj", "manual", "index.html"), shell(
+        "Key-J Manual \u2014 F-Keys",
+        "F-Keys\\Apps\\Key-J\\Manual",
+        '<div class="doc"><h1>Key-J Manual</h1>'
+        '<p class="sub">What it does, how to switch it on, and what to check '
+        'when it does not.</p>' + KEYJ_MANUAL +
+        '<div class="btnrow"><a class="btn default" href="/keyj/app.html">'
+        'Open Key-J</a><a class="btn" href="/keyj/">Product page</a></div></div>',
+        "1 item", active_cat="apps", active_slug="keyj",
+        description="How to use Key-J: sequence mode, tablature import, global "
+                    "capture, and what to check when something is not working.",
+        canonical="https://f-keys.com/keyj/manual/")))
 
     for name, content in written:
         target = os.path.join(ROOT, name)

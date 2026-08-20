@@ -44,6 +44,36 @@ function createWindow() {
     mainWindow.show();
   });
 
+  // ── External links ───────────────────────────────────────────
+  //
+  // There was no handler here, so a target=_blank link opened a fresh
+  // BrowserWindow inside the app: no chrome, no way back, and a remote page
+  // running in a window this app owns. The manual lives on f-keys.com, so
+  // http and https go to the system browser and everything else is refused.
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    try {
+      const p = new URL(url).protocol;
+      if (p === 'https:' || p === 'http:') shell.openExternal(url);
+    } catch (err) {
+      console.error('setWindowOpenHandler:', err);
+    }
+    return { action: 'deny' };
+  });
+
+  // The renderer is a local file and should stay one. Navigating the main
+  // window to a remote page would hand that page the preload bridge.
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    if (!url.startsWith('file://')) {
+      event.preventDefault();
+      try {
+        const p = new URL(url).protocol;
+        if (p === 'https:' || p === 'http:') shell.openExternal(url);
+      } catch (err) {
+        console.error('will-navigate:', err);
+      }
+    }
+  });
+
   // Hide to tray instead of quitting
   mainWindow.on('close', (e) => {
     if (!isQuitting) {
