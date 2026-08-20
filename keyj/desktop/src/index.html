@@ -3592,7 +3592,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
       var perKey = scroller.scrollWidth / white;
       var hiddenKeys = Math.round(max / perKey);
       label.textContent = hiddenKeys > 0
-        ? 'Scroll sideways — about ' + hiddenKeys + ' more keys either side of the view.'
+        ? 'Scroll sideways — about ' + hiddenKeys + ' more keys off the side.'
         : '';
     }
   }
@@ -3609,7 +3609,6 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     scroller.parentNode.insertBefore(label, scroller.nextSibling);
 
     var tick = function () { paint(scroller, label); };
-    scroller.addEventListener('scroll', tick, { passive: true });
     window.addEventListener('resize', tick);
 
     // The keys are built after this block runs, so measure again once they exist.
@@ -3625,12 +3624,23 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
 
   styles();
 
-  // The keyboard panel inserts itself, and the tab strip may keep it hidden,
-  // so retry briefly rather than assuming it is present on first paint.
-  var tries = 0;
-  var timer = setInterval(function () {
-    if (build() || ++tries > 40) clearInterval(timer);
-  }, 100);
+  /* Scroll events do not bubble, but they do capture. Listening on the
+     document means the handler survives the keyboard rebuilding its own DOM -
+     which it does on an octave or scale change. Binding directly to the
+     element attached once, to a node that was later replaced, and the shading
+     then froze at whatever it said on first paint. */
+  document.addEventListener('scroll', function (e) {
+    var t = e.target;
+    if (t && t.classList && t.classList.contains('scroll') &&
+        t.parentNode && t.closest && t.closest('#kb')) {
+      paint(t, t.parentNode.querySelector('.kb-more'));
+    }
+  }, true);
+
+  // The panel inserts itself and may be rebuilt, so keep checking rather than
+  // assuming one successful build is the last word.
+  setInterval(build, 400);
+  build();
 
   window.KeyJKeys = { repaint: function () { build(); } };
 })();
