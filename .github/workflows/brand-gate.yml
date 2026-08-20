@@ -73,3 +73,11 @@ jobs:
       - name: Python and JavaScript agree
         working-directory: keyj-cli
         run: python tests/test_parity.py
+
+      # `keyj play` installs a system-wide keyboard listener, and four places
+      # claim it never learns which key you pressed. This asserts that as a
+      # property rather than repeating it as a promise: the function a key
+      # press calls takes no key, so the process cannot retain one.
+      - name: The live player, and the claim it makes
+        working-directory: keyj-cli
+        run: python tests/test_play.py
