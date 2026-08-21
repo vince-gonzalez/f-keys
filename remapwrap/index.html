@@ -77,13 +77,34 @@
 <div class="doc"><h1>RemapWrap</h1><p class="sub">Your phone is already the extra row of keys.</p><table class="facts"><tr><th>Version</th><td>0.1.0 alpha</td></tr><tr><th>Runtime</th><td>Node.js 16+</td></tr><tr><th>Phone needs</th><td>A browser</td></tr><tr><th>Install</th><td>None on the phone</td></tr><tr><th>Source</th><td>zengineco/f-keys</td></tr></table>
 <p><img src="/remapwrap/assets/logo-256.png" alt="RemapWrap"
    style="width:132px;height:132px;float:right;margin:0 0 14px 20px"></p>
-<h2>What it does</h2>
-<p>Runs a small server on your PC. Scan the QR code with your phone and the phone becomes a
-drag-and-drop grid of keys that fire <b>real OS-level keystrokes</b>. The software you are
-driving does not know RemapWrap exists, which is the whole point: it works with everything,
-because it is indistinguishable from a keyboard.</p>
-<p>No app on the phone. No hardware. A Stream Deck costs $150 and lives in a drawer; this is
-the device already in your hand.</p>
+<h2>Zero to a deck in fifteen seconds</h2>
+<p>Run the server, scan the QR code, and the phone in your hand is a control surface that
+fires real OS-level keystrokes. The software you are driving never knows RemapWrap exists,
+which is the point: it works with everything, because it is indistinguishable from a
+keyboard.</p>
+<p>A Stream Deck is a hundred and fifty dollars and a drawer you have to find it in. This
+is the glass you are already holding.</p>
+
+<h2>Then sixty seconds to make it yours</h2>
+<p>The default layout is the fifteen-second answer. The real one is a mock screen you draw
+on: drop a control anywhere, size it, colour it, and decide what it sends.</p>
+<table class="facts">
+<tr><th>Buttons</th><td>Any shape and size, from a single key to a full-width bar</td></tr>
+<tr><th>Sliders</th><td>Continuous values &mdash; a volume, a zoom, an exposure</td></tr>
+<tr><th>Dials</th><td>Rotary control, for the things a knob suits better than a bar</td></tr>
+<tr><th>Scrollers</th><td>Wheel input, for timelines and long documents</td></tr>
+<tr><th>Trackpad</th><td>An area that moves the pointer, because the phone already tracks a finger</td></tr>
+</table>
+<p>Every input a mouse has, on a surface with no fixed shape. A deck for editing does not
+have to look anything like a deck for streaming, and neither has to look like a keyboard.</p>
+
+<h2>Where it actually is</h2>
+<p><b>The alpha is buttons.</b> The recovered v0.1.0 pairs over a QR code, serves a grid of
+keys, fires them through the OS, and buzzes the phone on press. Layouts are JSON, edited
+live in the dashboard. That much works today.</p>
+<p>The sliders, dials, scrollers and trackpad above are the design and are not written yet.
+They are on this page because they are what the product is for, and marked plainly so
+nobody downloads the alpha expecting them.</p>
 
 <h2>The company is named after this</h2>
 <p>RemapWrap began as <b>F-Keys</b> &mdash; an extra row of keys, on glass you already own.
@@ -94,13 +115,8 @@ months, surviving in a single zip file in a folder called "zip to sort".</p>
 <pre>npm install
 <b>npm start</b>
 scan the QR with your phone</pre>
-<p>Both devices need to be on the same network. Ports 7331 and 7332 must be open locally.
-Keystroke injection is handled by <code>@nut-tree-fork/nut-js</code>.</p>
-
-<h2>Alpha, and said plainly</h2>
-<p>This is v0.1.0 and has never been packaged. It runs from source, layouts are JSON edited
-live, and nothing about it has been hardened. It is published because a design that exists
-only in a zip file is a design that gets lost &mdash; and this one nearly was.</p>
+<p>Both devices on the same network. Ports 7331 and 7332 open locally. Keystroke injection
+via <code>@nut-tree-fork/nut-js</code>.</p>
 <div class="btnrow">
   <a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/remapwrap">Get the source</a>
 </div></div>
