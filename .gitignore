@@ -14,3 +14,4 @@ moonbeam/src/*.egg-info/
 plumhud/build/
 plumhud/dist/
 plumhud/src/*.egg-info/
+unclaimed-works.txt

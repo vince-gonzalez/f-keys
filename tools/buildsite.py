@@ -313,6 +313,8 @@ averaging them in.</p>
          ("Phone needs","A browser"),("Install","None on the phone"),
          ("Source","zengineco/f-keys")],
   body="""
+<p><img src="/remapwrap/assets/logo-256.png" alt="RemapWrap"
+   style="width:132px;height:132px;float:right;margin:0 0 14px 20px"></p>
 <h2>What it does</h2>
 <p>Runs a small server on your PC. Scan the QR code with your phone and the phone becomes a
 drag-and-drop grid of keys that fire <b>real OS-level keystrokes</b>. The software you are
