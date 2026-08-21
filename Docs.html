@@ -14,9 +14,9 @@
 //   1. Fonts load
 //   2. DOM ready → initScroll(), initDocNav()
 //   3. Scroll spy → highlight active doc section in sidebar
-// External Deps:
-//   - Google Fonts: VT323, Share Tech Mono
-//   - Google AdSense: ca-pub-8826956454892311
+// External Deps: none. VT323 and Share Tech Mono were loaded from
+//   fonts.googleapis.com, which reported every reader's IP to Google.
+//   Both are OFL 1.1 and are now served from /assets/fonts.css.
 // Layout Target: sidebar + content, 768px+. Single col mobile.
 // Browser Target: Chrome / Firefox / Safari / Edge (latest)
 // ============================================================
@@ -26,12 +26,8 @@
 <meta name="description" content="F-Keys Documentation — Quick-start guide, config reference, action strings, troubleshooting.">
 <title>Docs — F-Keys</title>
 
-<!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8826956454892311" crossorigin="anonymous"></script>
-
 <!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="/assets/fonts.css" rel="stylesheet">
 
 <style>
 :root {
@@ -449,17 +445,6 @@ code {
 
       <div class="doc-h3">Step 6 — Press a button</div>
       <p class="doc-p">Tap any button on your phone. The dashboard live feed lights up showing the keypress, and the action fires as a real OS-level keystroke on your PC.</p>
-    </div>
-
-    <!-- Ad -->
-    <div style="margin: 16px 0;">
-      <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-8826956454892311"
-         data-ad-slot="auto"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- ─── Files ─── -->
