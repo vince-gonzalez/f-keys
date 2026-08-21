@@ -1,0 +1,9 @@
+{
+  "floor_px": 13,
+  "exceptions": [
+    {
+      "selector": "sub,sup",
+      "reason": "Subscripts and superscripts in mathematical notation. Rendering them at body size defeats what a subscript means. Applies only to the contrast formula on /contrast-checker/; prose never qualifies."
+    }
+  ]
+}
