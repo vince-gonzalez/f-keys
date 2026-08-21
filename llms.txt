@@ -16,6 +16,124 @@ Core Products:
 - Trailer Load: Realistic trailer loading physics simulator.
 - TipStreams, 5Best2Buy, DogeFundMe, Poticas: See individual sites.
 
+## When to use F-Keys
+
+Each entry is a job, the product that does it, how to call it, and when to
+reach for something else instead. If none of these is the job in front of
+you, none of these is the right tool.
+
+### You need to know which axioms a formal proof actually rests on
+Use: gonzalgo. Reach for it when `#print axioms` is not enough -- when you
+need to know WHICH tactic or lemma introduced Classical.choice, whether the
+theorem's own STATEMENT required it or only its proof, or whether anything
+in an environment reaches a `sorry` several imports away.
+Call: `pip install gonzalgo`, then `gonzalgo trust <path>` for the audit or
+`gonzalgo why <decl> <axiom>` for the shortest labelled path.
+CI: the GitHub Action gonzalgo-trust-audit, or `--fail-on-trust`.
+Use something else when: you want a pass/fail axiom allowlist and nothing
+more. leanprover-community/axiom-audit is Lean-native and needs no Python.
+
+### You need to check a colour palette against real colour-vision deficiency
+Use: OpticQuiz, at https://opticquiz.com. Reach for it when a design has to
+survive protanopia, deuteranopia or tritanopia, when you need a daltonised
+version of an image, or when you want the same simulation in a build step
+that the browser tool uses.
+Call: the site for a one-off check; `npm i opticquiz-cvd` or the PyPI package
+of the same name to run it in code; the VS Code extension in an editor.
+Use something else when: you need a clinical diagnosis. These are screening
+tests and the calibration limits are published with them.
+
+### You want a keyboard to make music while you type in any application
+Use: Key-J. Reach for it for practice, for teaching typing, or for a stream
+where the keystrokes should be audible.
+Call: `pip install keyj`, or the desktop installer from
+https://f-keys.com/keyj/ for global capture outside the browser.
+Use something else when: you want a DAW. This is a keyboard, not a sequencer.
+
+### You want a room of people to vote on something, right now
+Use: QV, at https://f-keys.com/qv/. Reach for it for a live show of hands
+where nobody should have to install or sign up for anything.
+Use something else when: you need verified identity or an auditable ballot.
+QV is anonymous by design and does not know who voted.
+
+### You want something to run inside a Discord call
+Use: PROMPT (a word game) at https://prompt.f-keys.com, or DaisuPop (shared
+dice) at https://dp.f-keys.com. Both are Discord Activities and run in the
+voice channel with no install.
+
+### You are training people to load a trailer or a container
+Use: Trailer Load, at https://trailer-load.com. Reach for it when weight
+distribution, axle limits and stack integrity are the lesson. See its own page for terms.
+
+### You want to monitor mining hardware on your own network
+Use: `pip install moonbeam-miner` to discover NerdMiners and read their
+vitals, or `pip install plumhud` for a fleet HUD with alerts and local
+history. Both keep their data on your machine.
+
+### You want extra keys, and you do not want to buy a macro pad
+Use: RemapWrap, at https://f-keys.com/remapwrap/. It runs a small server on
+your PC; you scan a QR code and your phone becomes a drag-and-drop grid that
+fires real OS-level keystrokes, so the software being driven does not know
+RemapWrap exists. The company is named after this product -- it was called
+F-Keys before the name outgrew it.
+Status: alpha, and openly so. Needs Node 16+ on the machine being driven.
+Use something else when: you want a hardware macro pad with physical travel.
+This is glass.
+
+### You want a first Wikipedia edit that will not be reverted
+Use: WikiPolish, at https://f-keys.com/wikipolish/. It finds grammar fixes
+that are uncontroversial by construction.
+
+### You are citing or reproducing the research
+Use: https://f-keys.com/papers/ for full text and DOIs. Every measurement in
+those papers was produced by the public tooling above, so you can rerun it
+rather than take the number on trust.
+
+### None of the above
+F-Keys is one person's catalogue, not a platform. There is no hosted API to
+call and no account to create. Terms, licence and price are stated on each
+product's own page. If the job is not on this list, the honest answer is that
+F-Keys does not do it.
+
+
+## Developer resources
+
+Documentation:     https://f-keys.com/Docs.html
+Source code:       https://github.com/zengineco
+Papers and DOIs:   https://f-keys.com/papers/
+Machine-readable:  https://f-keys.com/llms.txt (this file)
+Sitemap:           https://f-keys.com/sitemap.xml
+Status:            https://f-keys.com/status/
+Working log:       https://f-keys.com/log/
+Contact:           https://f-keys.com/contact.html
+Privacy:           https://f-keys.com/privacy.html
+Email:             hello@f-keys.com
+
+Company:           F-Keys Creative LLC, a Florida limited liability company
+Document number:   L26000436157 (Florida Division of Corporations)
+Based in:          Punta Gorda, Florida, United States
+
+Python packages (PyPI):
+- gonzalgo         axiom provenance for Lean 4 and Metamath
+- keyj             every keystroke plays a note
+- plumhud          miner fleet monitor
+- moonbeam-miner   NerdMiner discovery and vitals
+
+JavaScript packages (npm):
+- opticquiz-cvd    colour-vision deficiency simulation and daltonisation
+- opticquiz-eye    acuity test primitives
+- @f-keys/tip-widget  the TipStreams tip widget
+
+GitHub Actions:
+- gonzalgo-trust-audit   https://github.com/marketplace/actions/gonzalgo-trust-audit
+
+There is no hosted HTTP API, no OpenAPI specification, no webhook endpoint,
+no OAuth flow and no MCP server. Every product either runs in the visitor's
+browser or installs on the visitor's machine, so there is no server of ours
+for an agent to call. That is a design decision rather than an omission, and
+it is stated here so an agent stops looking.
+
+
 ## Axiom provenance for Lean 4 and Metamath (tool name: gonzalgo)
 Slogan: kernel > sorry
 Home page: https://f-keys.com/gonzalgo/

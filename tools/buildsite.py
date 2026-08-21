@@ -24,6 +24,7 @@ Run:  python tools/buildsite.py
 """
 
 import html
+import json
 import os
 import sys
 
@@ -216,7 +217,7 @@ launch empty.</p>
   title="MICDROP", tagline="Grab the mic. Survive the room.",
   facts=[("Island code","1534-0440-5810"),("Creator","d00b"),
          ("Platform","Fortnite, built in UEFN"),("Players","Open lobby"),
-         ("Support","vincegonzalez@me.com")],
+         ("Support","hello@f-keys.com")],
   body="""
 <h2>What it is</h2>
 <p>A live open-mic arena inside Fortnite. One player takes the stage, the rest are the
@@ -438,7 +439,7 @@ ABOUT_DOC = """
 <tr><th>Entity</th><td>F-Keys Creative LLC (Florida)</td></tr>
 <tr><th>Trading as</th><td>F-Keys</td></tr>
 <tr><th>ORCID</th><td>0009-0005-3640-014X</td></tr>
-<tr><th>Contact</th><td>vincegonzalez@me.com</td></tr>
+<tr><th>Contact</th><td>hello@f-keys.com</td></tr>
 </table>
 <h2>What this is</h2>
 <p>F-Keys is Vince Gonzalez, working alone. Twenty-two products are live, from
@@ -464,7 +465,291 @@ several hundred times a week.</p>
 </div>
 """
 
-EXTRA_NODES = [("/about.html", "About"), ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers")]
+# -- the homepage document ------------------------------------
+# An agent was asked what F-Keys is and had to visit eight pages to
+# assemble an answer, because the homepage was a bare table with no
+# heading and no prose. This is the answer in one place: what the
+# catalogue is, who each shelf is for, and what any of it costs.
+HOME_DOC = """
+<div class="doc" style="padding-bottom:6px">
+<h1>F-Keys</h1>
+<p class="sub">Hardware. Software. Ideas brought to life.</p>
+<p>F-Keys is the working catalogue of <b>Vincent Gonzalez</b>, an independent
+builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-two
+products are live, and each one was designed, written, deployed and documented
+by the same person &mdash; architecture, both ends, database, release notes. The
+table below is the whole company.</p>
+<p>The name came from a product. <a href="/remapwrap/">RemapWrap</a> was called
+F-Keys first &mdash; an extra row of function keys, on glass you already own
+&mdash; and the name outgrew it. The product then went missing for five months
+and survives because it was in a zip file in a folder called &ldquo;zip to
+sort&rdquo;.</p>
+
+<h2>What is on the shelves</h2>
+<p>Six of them, sorted the way a file manager would sort them.
+<a href="/apps.html">Apps</a> are things you run: a keyboard that plays notes in
+any program, an 8-bit composer, colour-vision tests, live ballots for a room.
+<a href="/games.html">Games</a> holds a warehouse-loading simulator, two Discord
+activities and a Fortnite island. <a href="/tools.html">Tools</a> are small
+single-purpose programs for people who already know what they want.
+<a href="/hardware.html">Hardware</a> turns a spare machine into an appliance.
+<a href="/research.html">Research</a> is the formal-methods work &mdash; papers
+with DOIs and the tooling the measurements run on.
+<a href="/properties.html">Properties</a> lists the standalone sites.</p>
+
+<h2>Who it is for</h2>
+<p>There is no single customer, because these are not one product line. A Lean 4
+axiom auditor, a colour-vision test and a Discord word game share no market at
+all. In practice the people who end up here are <b>developers and proof
+engineers</b> who need to know what a theorem actually rests on, <b>designers and
+accessibility teams</b> checking colour against a real engine rather than a
+guess, <b>musicians and typists</b> who want a keyboard to make sound,
+<b>streamers and Discord communities</b> looking for something to run in a room
+full of people, and <b>trainers</b> who want load planning to behave like the
+physical thing.</p>
+
+<p>Each product page carries its own terms, licence and price. Nothing is assumed
+to match the last one. <a href="/contact.html">Contact</a> for licensing, or
+<a href="/privacy.html">Privacy</a> for what this site does and does not collect.</p>
+</div>
+"""
+
+# -- contact --------------------------------------------------
+# One of the three pages an agent checks before it will describe a
+# business as real. The filing details are here rather than in prose so
+# that a reader and a parser get the identical facts.
+CONTACT_DOC = """
+<div class="doc"><h1>Contact</h1>
+<p class="sub">One person reads this. There is no support queue and no ticket
+number.</p>
+<table class="facts">
+<tr><th>Email</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
+<tr><th>Entity</th><td>F-Keys Creative LLC, a Florida limited liability company</td></tr>
+<tr><th>Document number</th><td>L26000436157, filed 18 August 2026, status active</td></tr>
+<tr><th>Based in</th><td>Punta Gorda, Florida, United States</td></tr>
+<tr><th>Registered agent</th><td>Vincent Gonzalez. The registered address is
+on file with the
+<a href="https://search.sunbiz.org/Inquiry/CorporationSearch/ByName" rel="noopener">Florida
+Division of Corporations</a> under the document number above.</td></tr>
+<tr><th>ORCID</th><td><a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">0009-0005-3640-014X</a></td></tr>
+<tr><th>Source code</th><td><a href="https://github.com/zengineco" rel="noopener">github.com/zengineco</a></td></tr>
+</table>
+
+<h2>What to write about</h2>
+<p><b>A bug, or something that will not run.</b> Say which product, which
+operating system, and what you saw instead. Every product page lists what it
+needs; if the answer is on that page the reply will just point at it, which is
+faster for both of us.</p>
+<p><b>Licensing.</b> Trailer Load is licensed to institutions for training use.
+Anything else you want to use commercially, ask &mdash; the published source is
+MIT and the answer is usually yes and costs nothing.</p>
+<p><b>The research.</b> Questions about the axiom-provenance work, the papers, or
+a measurement you want reproduced are welcome and get a real answer. The tooling
+is public, so you can check the numbers without asking.</p>
+<p><b>Press, or a correction.</b> If something on this site is wrong, saying so
+is the fastest way to get it fixed. Corrections go in the
+<a href="/log/">working log</a> with a date.</p>
+
+<h2>What not to expect</h2>
+<p>There is no phone line, because there is no one to answer it. Replies come
+from one person between builds, so a few days is normal and a week is not
+unusual. Nothing here is sold through a reseller, so an email offering to
+represent F-Keys will not get a reply.</p>
+<div class="btnrow">
+  <a class="btn default" href="mailto:hello@f-keys.com">Send an email</a>
+  <a class="btn" href="/about.html">About</a>
+  <a class="btn" href="/privacy.html">Privacy</a>
+</div>
+</div>
+"""
+
+# -- privacy --------------------------------------------------
+# Every claim on this page is a property of the source rather than a
+# promise: the AdSense tag was removed from Docs.html so that "no
+# advertising" is true, and tools/test_site.py fails the build if an ad
+# tag, a tracker or a cookie write reappears anywhere in the tree.
+PRIVACY_DOC = """
+<div class="doc"><h1>Privacy</h1>
+<p class="sub">This site does not want your data, and the shortest way to say so
+is to describe every byte it does receive.</p>
+
+<h2>The short version</h2>
+<table class="facts">
+<tr><th>Advertising</th><td>None. No ad network, no ad tags, no affiliate tracking.</td></tr>
+<tr><th>Analytics</th><td>None. No Google Analytics, no tag manager, no pixel, and
+no first-party analytics script of any kind.</td></tr>
+<tr><th>Cookies</th><td>None. This site sets no cookies, so there is no consent
+banner to dismiss.</td></tr>
+<tr><th>Accounts</th><td>None. Nothing on f-keys.com asks you to sign up or sign in.</td></tr>
+<tr><th>Third-party code</th><td>None. No page on this site loads anything from
+another company's server &mdash; not a script, not a stylesheet, not a font.</td></tr>
+</table>
+<p>These are checkable rather than promised. The site is a folder of static files
+in a public repository, and a test in that repository fails the build if an ad
+tag, a tracking script or a cookie write appears anywhere in it.</p>
+
+<h2>What the servers see anyway</h2>
+<p>The pages are served by GitHub Pages through Cloudflare. Both keep ordinary
+web-server logs, which means your IP address, the page you asked for, your
+browser's user-agent string and the time are recorded by those companies as a
+side effect of the request being delivered at all. F-Keys does not receive those
+logs, cannot query them, and does not know who visited. Their handling is
+governed by
+<a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" rel="noopener">GitHub's privacy statement</a>
+and
+<a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">Cloudflare's privacy policy</a>.</p>
+
+<h2>The fonts are ours too</h2>
+<p>The <a href="/Docs.html">Docs</a> page used to load two typefaces from Google
+Fonts. A font request looks harmless and is not: it reports the IP address of
+everyone who opens the page, on every visit, to a company whose business is
+knowing things about people. Both faces are under the SIL Open Font License,
+which permits hosting them, so they are served from this domain and that request
+no longer leaves. Nothing else on this site loads from a third party either.</p>
+
+<h2>The products are not this site</h2>
+<p>Several products store their settings in your own browser or on your own
+machine, where they never leave it and are not visible here. Where a product does
+more than that it carries its own privacy document, and the strongest claims are
+tested rather than asserted &mdash; <a href="/keyj/privacy/">Key-J</a> installs a
+system-wide keyboard hook, so its page describes exactly what that hook can see,
+and a test in the repository asserts that the function a keypress calls cannot
+retain a key. Products hosted elsewhere, and the separate
+<a href="/properties.html">properties</a>, are governed by their own policies
+rather than this one.</p>
+
+<h2>Your rights, and how little there is to exercise them on</h2>
+<p>Rights of access, correction, deletion and portability under the GDPR, the
+CCPA and similar laws attach to personal data held by the operator. F-Keys holds
+none from this site: there is no database, no mailing list gathered here, and no
+profile of you. If you send an email it exists in a mailbox until you ask for it
+to be deleted, and asking is enough. This site is not directed at children and
+collects nothing from anyone, of any age.</p>
+<p>Questions, or a challenge to any claim above, go to
+<a href="mailto:hello@f-keys.com">hello@f-keys.com</a>. If a claim here
+ever stops being true, the page changes first and the change is dated in the
+<a href="/log/">working log</a>.</p>
+<div class="btnrow">
+  <a class="btn default" href="/contact.html">Contact</a>
+  <a class="btn" href="/about.html">About</a>
+</div>
+</div>
+"""
+
+# -- the 404 --------------------------------------------------
+# A missing path already returned a real 404; what it did not return was
+# anything to do next. An agent that follows a stale link gets the same
+# recovery list a person would: where the map is, and where the machine-
+# readable summary of the whole site lives.
+NOT_FOUND_DOC = """
+<div class="doc"><h1>404 &mdash; that page is not here</h1>
+<p class="sub">The address is wrong, or the page moved and something still points
+at where it used to be.</p>
+<h2>Where to look next</h2>
+<ul>
+<li><b><a href="/">f-keys.com</a></b> &mdash; every product in one table.</li>
+<li><b><a href="/sitemap.xml">/sitemap.xml</a></b> &mdash; every URL on this
+site, for crawlers and agents.</li>
+<li><b><a href="/llms.txt">/llms.txt</a></b> &mdash; the whole catalogue as plain
+text, including what each product is for and when to reach for it.</li>
+<li><b><a href="/Docs.html">/Docs.html</a></b> &mdash; setup, configuration and
+troubleshooting.</li>
+<li><b><a href="/contact.html">/contact.html</a></b> &mdash; a person, if the
+link that sent you here was ours.</li>
+</ul>
+<h2>By shelf</h2>
+<ul>
+<li><a href="/apps.html">/apps.html</a> &mdash; things you run</li>
+<li><a href="/games.html">/games.html</a> &mdash; games and simulators</li>
+<li><a href="/tools.html">/tools.html</a> &mdash; single-purpose programs</li>
+<li><a href="/hardware.html">/hardware.html</a> &mdash; appliances</li>
+<li><a href="/research.html">/research.html</a> &mdash; papers and proof tooling</li>
+<li><a href="/properties.html">/properties.html</a> &mdash; the standalone sites</li>
+</ul>
+<div class="btnrow">
+  <a class="btn default" href="/">Back to the catalogue</a>
+  <a class="btn" href="/llms.txt">llms.txt</a>
+  <a class="btn" href="/sitemap.xml">sitemap.xml</a>
+</div>
+</div>
+"""
+
+EXTRA_NODES = [("/about.html", "About"), ("/Docs.html", "Docs"),
+               ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
+               ("/contact.html", "Contact"), ("/privacy.html", "Privacy")]
+
+# ── the identity the machines read ───────────────────────────
+# An agent asked what F-Keys is and had to assemble the answer from eight
+# pages. These are the same facts as the About page, in the one shape a
+# parser will take without reading prose: schema.org JSON-LD, emitted by
+# shell() so no page can carry a different version of them.
+SITE = "https://f-keys.com"
+OG_IMAGE = SITE + "/assets/og.png"
+
+LEGAL_NAME = "F-Keys Creative LLC"
+FOUNDER = "Vincent Gonzalez"
+EMAIL = "hello@f-keys.com"
+ORCID = "https://orcid.org/0009-0005-3640-014X"
+GH_ORG = "https://github.com/zengineco"
+
+# Filed with the Florida Division of Corporations 2026-08-18,
+# document L26000436157. Kept here so the schema and the Contact page
+# cannot drift from the filing or from each other.
+#
+# The street line is deliberately absent. The filing is public record and
+# names it, but the registered address is a home, and a website with
+# schema.org markup is a different amount of reach than a state database
+# nobody reads. Locality, region and country are enough to say where the
+# company answers from and enough for the schema to validate; anyone who
+# needs the full address can get it from the Division of Corporations or
+# by asking.
+ADDRESS = {
+    "addressLocality": "Punta Gorda",
+    "addressRegion": "FL",
+    "postalCode": "33955",
+    "addressCountry": "US",
+}
+
+
+def jsonld(obj):
+    """One script tag, stable key order, no trailing whitespace."""
+    return '''<script type="application/ld+json">
+{}
+</script>'''.format(json.dumps(obj, indent=2, ensure_ascii=False))
+
+
+def organization():
+    return {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": SITE + "/#organization",
+        "name": "F-Keys",
+        "legalName": LEGAL_NAME,
+        "alternateName": "F-Keys Creative LLC",
+        "url": SITE,
+        "logo": SITE + "/assets/fkeys-logo.png",
+        "image": OG_IMAGE,
+        "description": "Independent hardware, software and internet products "
+                       "built by Vincent Gonzalez. Apps, games, tools, "
+                       "hardware and research.",
+        "email": EMAIL,
+        "founder": {
+            "@type": "Person",
+            "name": FOUNDER,
+            "identifier": ORCID,
+            "sameAs": [ORCID, GH_ORG],
+        },
+        "foundingDate": "2026-08-18",
+        "address": dict({"@type": "PostalAddress"}, **ADDRESS),
+        "contactPoint": [{
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": EMAIL,
+            "areaServed": "Worldwide",
+            "availableLanguage": ["English"],
+        }],
+        "sameAs": [GH_ORG, ORCID],
+    }
 
 
 def esc(s):
@@ -674,7 +959,7 @@ anyone, of any age.</p>
 
 <h2>Changes and contact</h2>
 <p>If this ever stops being true, this page changes before the behaviour does.
-Questions: <a href="mailto:vincegonzalez@me.com">vincegonzalez@me.com</a>.</p>
+Questions: <a href="mailto:hello@f-keys.com">hello@f-keys.com</a>.</p>
 <p class="sub">F-Keys Creative LLC &middot; last reviewed 20 August 2026</p>
 """
 
@@ -701,8 +986,12 @@ def tree(active_cat=None, active_slug=None):
 
 
 def shell(title, path_label, body, count_label, active_cat=None,
-          active_slug=None, description="", canonical=""):
+          active_slug=None, description="", canonical="", ld=None,
+          noindex=False):
     up = "/" if active_cat is None else f"/{active_cat}.html"
+    ld_block = jsonld(ld) if ld else ""
+    robots = "noindex, follow" if noindex else "index, follow"
+    og_url = canonical or SITE
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -711,13 +1000,26 @@ def shell(title, path_label, body, count_label, active_cat=None,
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 {f'<link rel="canonical" href="{esc(canonical)}">' if canonical else ''}
-<meta name="robots" content="index, follow">
+<meta name="robots" content="{robots}">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="F-Keys">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:type" content="website">
+<meta property="og:url" content="{esc(og_url)}">
+<meta property="og:image" content="{esc(OG_IMAGE)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(description)}">
+<meta name="twitter:image" content="{esc(OG_IMAGE)}">
 <link rel="stylesheet" href="/win98.css">
+{ld_block}
 </head>
 <body>
 <div class="window raised">
@@ -786,17 +1088,67 @@ def details_table(rows):
     return "\n".join(out)
 
 
+# schema.org wants a category from its own vocabulary rather than the
+# word the catalogue uses in the Type column, so the two are mapped here
+# instead of guessed at from the blurb.
+APP_CATEGORY = {
+    "keyj": "MultimediaApplication",
+    "pixelstaff": "MultimediaApplication",
+    "qv": "UtilitiesApplication",
+    "micdrop": "GameApplication",
+    "wikipolish": "UtilitiesApplication",
+    "leadseer": "BusinessApplication",
+    "plumhud": "UtilitiesApplication",
+    "streamsniper": "MultimediaApplication",
+    "moonbeam": "DeveloperApplication",
+    "remapwrap": "UtilitiesApplication",
+}
+
+
+def software(slug, page, row):
+    """A product page, as the thing a parser is looking for.
+
+    Every field is lifted from the facts table the page already shows, so
+    the schema cannot claim a version or a licence the page contradicts.
+    """
+    facts = dict(page["facts"])
+    obj = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": page["title"],
+        "url": "{}/{}/".format(SITE, slug),
+        "description": page["tagline"],
+        "applicationCategory": APP_CATEGORY.get(slug, "UtilitiesApplication"),
+        "image": OG_IMAGE,
+        "author": {"@type": "Person", "name": FOUNDER, "sameAs": [ORCID]},
+        "publisher": {"@id": SITE + "/#organization"},
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+        },
+    }
+    if facts.get("Platforms"):
+        obj["operatingSystem"] = facts["Platforms"]
+    if facts.get("Version"):
+        obj["softwareVersion"] = facts["Version"]
+    if facts.get("Licence"):
+        obj["license"] = facts["Licence"]
+    return obj
+
+
 def main():
     written = []
 
     # index: everything, grouped by category heading rows
-    body = [details_table(CATALOGUE)]
+    body = [HOME_DOC, details_table(CATALOGUE)]
     written.append(("index.html", shell(
         "F-Keys — Hardware. Software. Ideas Brought to Life.",
         "F-Keys", "\n".join(body), f"{len(CATALOGUE)} object(s)",
         description="Independent hardware, software and internet products built by "
                     "Vincent Gonzalez. Apps, games, tools, hardware and research.",
-        canonical="https://f-keys.com")))
+        canonical="https://f-keys.com", ld=organization())))
 
     # one page per category
     for cid, label, hint in CATEGORIES:
@@ -813,7 +1165,28 @@ def main():
         "About \u2014 F-Keys", "F-Keys\\About", ABOUT_DOC, "1 item",
         description="F-Keys is Vince Gonzalez, working alone. Twenty-two live "
                     "products and more than thirty deposited works.",
-        canonical="https://f-keys.com/about.html")))
+        canonical="https://f-keys.com/about.html", ld=organization())))
+
+    written.append(("contact.html", shell(
+        "Contact \u2014 F-Keys", "F-Keys\\Contact", CONTACT_DOC, "1 item",
+        description="Reach F-Keys Creative LLC: email, the Florida filing, the "
+                    "principal address, and what is worth writing about.",
+        canonical="https://f-keys.com/contact.html", ld=organization())))
+
+    written.append(("privacy.html", shell(
+        "Privacy \u2014 F-Keys", "F-Keys\\Privacy", PRIVACY_DOC, "1 item",
+        description="No advertising, no analytics, no cookies and no accounts. "
+                    "What the servers log anyway, and the one third-party request.",
+        canonical="https://f-keys.com/privacy.html")))
+
+    # GitHub Pages serves this file with a real 404 status. It is excluded
+    # from the index because a soft 404 in search results is worse than no
+    # result at all.
+    written.append(("404.html", shell(
+        "404 \u2014 F-Keys", "F-Keys\\Not found", NOT_FOUND_DOC, "0 objects",
+        description="That page is not here. The sitemap, llms.txt and every "
+                    "category page, so an agent can recover the path it wanted.",
+        noindex=True)))
 
     # one document per product that has long-form detail
     for slug, page in PAGES.items():
@@ -832,7 +1205,8 @@ def main():
             "F-Keys\\{}\\{}".format(catname, page["title"]),
             doc, "1 item", active_cat=cat, active_slug=slug,
             description=page["tagline"],
-            canonical="https://f-keys.com/{}/".format(slug))))
+            canonical="https://f-keys.com/{}/".format(slug),
+            ld=software(slug, page, row))))
 
     written.append((os.path.join("keyj", "privacy", "index.html"), shell(
         "Key-J Privacy \u2014 F-Keys",

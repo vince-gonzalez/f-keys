@@ -3,62 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stream Sniper — F-Keys</title>
-<meta name="description" content="They go live. It is on the TV.">
-<link rel="canonical" href="https://f-keys.com/streamsniper/">
-<meta name="robots" content="index, follow">
+<title>404 — F-Keys</title>
+<meta name="description" content="That page is not here. The sitemap, llms.txt and every category page, so an agent can recover the path it wanted.">
+
+<meta name="robots" content="noindex, follow">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:site_name" content="F-Keys">
-<meta property="og:title" content="Stream Sniper — F-Keys">
-<meta property="og:description" content="They go live. It is on the TV.">
+<meta property="og:title" content="404 — F-Keys">
+<meta property="og:description" content="That page is not here. The sitemap, llms.txt and every category page, so an agent can recover the path it wanted.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://f-keys.com/streamsniper/">
+<meta property="og:url" content="https://f-keys.com">
 <meta property="og:image" content="https://f-keys.com/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Stream Sniper — F-Keys">
-<meta name="twitter:description" content="They go live. It is on the TV.">
+<meta name="twitter:title" content="404 — F-Keys">
+<meta name="twitter:description" content="That page is not here. The sitemap, llms.txt and every category page, so an agent can recover the path it wanted.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
 <link rel="stylesheet" href="/win98.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Stream Sniper",
-  "url": "https://f-keys.com/streamsniper/",
-  "description": "They go live. It is on the TV.",
-  "applicationCategory": "MultimediaApplication",
-  "image": "https://f-keys.com/assets/og.png",
-  "author": {
-    "@type": "Person",
-    "name": "Vincent Gonzalez",
-    "sameAs": [
-      "https://orcid.org/0009-0005-3640-014X"
-    ]
-  },
-  "publisher": {
-    "@id": "https://f-keys.com/#organization"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  },
-  "license": "MIT"
-}
-</script>
+
 </head>
 <body>
 <div class="window raised">
 
   <div class="titlebar">
-    <span class="t"><span>F-Keys\Hardware\Stream Sniper</span></span>
+    <span class="t"><span>F-Keys\Not found</span></span>
     <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
   </div>
 
@@ -69,9 +42,9 @@
   </nav>
 
   <div class="toolbar groove">
-    <a class="tool" href="/hardware.html">&#8592; Back</a>
+    <a class="tool" href="/">&#8592; Back</a>
     <span class="tool off">Forward &#8594;</span>
-    <a class="tool" href="/hardware.html">&#8593; Up</a>
+    <a class="tool" href="/">&#8593; Up</a>
     <span class="sep"></span>
     <a class="tool" href="/">Home</a>
     <a class="tool hide-xs" href="/status/">Status</a>
@@ -80,7 +53,7 @@
 
   <div class="addressbar">
     <span class="lbl">Address</span>
-    <span class="path sunken"><span>&#128193; F-Keys\Hardware\Stream Sniper</span></span>
+    <span class="path sunken"><span>&#128193; F-Keys\Not found</span></span>
   </div>
 
   <div class="panes">
@@ -95,10 +68,6 @@
 <li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
 </li>
 <li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
-<ul class="kids">
-<li><a class="on" href="/streamsniper/"><span class="ic">&#128196;</span>Stream Sniper</a></li>
-<li><a class="" href="/moonbeam/"><span class="ic">&#128196;</span>Moonbeam</a></li>
-</ul>
 </li>
 <li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
 </li>
@@ -114,23 +83,43 @@
 </ul></li></ul>
     </aside>
     <section class="content sunken">
-<div class="doc"><h1>Stream Sniper</h1><p class="sub">They go live. It is on the TV.</p><table class="facts"><tr><th>Licence</th><td>MIT</td></tr><tr><th>Platform</th><td>Debian or Ubuntu</td></tr><tr><th>Needs</th><td>Streamlink, VLC, pygame</td></tr><tr><th>Starts</th><td>systemd, on boot</td></tr></table>
-<h2>What it does</h2>
-<p>Point a spare mini PC at the television and give it a list of Twitch channels. It shows
-a clock until someone goes live, then puts them fullscreen with the ads out of the path.
-When the stream ends, the clock comes back.</p>
-<h2>How it behaves</h2>
-<p>One username per line in a text file, and order is priority: if two are live, the one
-nearer the top gets the screen. A stream already playing runs to the end, so nobody higher
-in the list can cut in halfway through. Edits apply at the next check, with no restart.</p>
-<pre>bash install.sh
-<b>sudo systemctl start streamsniper@USER</b></pre>
-<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/streamsniper">Get the source</a></div></div>
+
+<div class="doc"><h1>404 &mdash; that page is not here</h1>
+<p class="sub">The address is wrong, or the page moved and something still points
+at where it used to be.</p>
+<h2>Where to look next</h2>
+<ul>
+<li><b><a href="/">f-keys.com</a></b> &mdash; every product in one table.</li>
+<li><b><a href="/sitemap.xml">/sitemap.xml</a></b> &mdash; every URL on this
+site, for crawlers and agents.</li>
+<li><b><a href="/llms.txt">/llms.txt</a></b> &mdash; the whole catalogue as plain
+text, including what each product is for and when to reach for it.</li>
+<li><b><a href="/Docs.html">/Docs.html</a></b> &mdash; setup, configuration and
+troubleshooting.</li>
+<li><b><a href="/contact.html">/contact.html</a></b> &mdash; a person, if the
+link that sent you here was ours.</li>
+</ul>
+<h2>By shelf</h2>
+<ul>
+<li><a href="/apps.html">/apps.html</a> &mdash; things you run</li>
+<li><a href="/games.html">/games.html</a> &mdash; games and simulators</li>
+<li><a href="/tools.html">/tools.html</a> &mdash; single-purpose programs</li>
+<li><a href="/hardware.html">/hardware.html</a> &mdash; appliances</li>
+<li><a href="/research.html">/research.html</a> &mdash; papers and proof tooling</li>
+<li><a href="/properties.html">/properties.html</a> &mdash; the standalone sites</li>
+</ul>
+<div class="btnrow">
+  <a class="btn default" href="/">Back to the catalogue</a>
+  <a class="btn" href="/llms.txt">llms.txt</a>
+  <a class="btn" href="/sitemap.xml">sitemap.xml</a>
+</div>
+</div>
+
     </section>
   </div>
 
   <div class="statusbar">
-    <span class="cell groove">1 item</span>
+    <span class="cell groove">0 objects</span>
     <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
     <span class="cell groove">F-Keys</span>
   </div>
