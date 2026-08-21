@@ -112,10 +112,32 @@ function createTray() {
   });
 }
 
+// ── Updates ────────────────────────────────────────────────────
+//
+// There is deliberately no auto-updater here, and three reasons for that:
+//
+//   1. This repository releases several products. An updater asking GitHub
+//      for "the latest release" gets whatever shipped last, which today is
+//      PlumHUD 4.1.0. It would offer Key-J users a miner dashboard.
+//
+//   2. A silent install over a running Key-J exits 0 and leaves a mixed
+//      install - Windows holds the executable and the app bundle open, so
+//      those keep the old version while everything else is replaced. That is
+//      measured, not theoretical, and it is what an updater does by default.
+//
+//   3. The privacy page says Key-J makes no outbound network requests. An
+//      updater polling a release feed would make that false, and a claim
+//      like that is worth more than the convenience of not clicking.
+//
+// So checking for an update opens the releases page in the system browser.
+// No request is made unless the user asks for one, and the request is made
+// by their browser rather than by this app.
+const RELEASES_URL = 'https://github.com/zengineco/f-keys/releases/latest';
+
 function updateTrayMenu() {
   const menu = Menu.buildFromTemplate([
     {
-      label: 'Key-J',
+      label: 'Key-J ' + app.getVersion(),
       enabled: false
     },
     { type: 'separator' },
@@ -126,6 +148,15 @@ function updateTrayMenu() {
     {
       label: 'Show Window',
       click: () => { mainWindow.show(); mainWindow.focus(); }
+    },
+    { type: 'separator' },
+    {
+      label: 'Manual',
+      click: () => { shell.openExternal('https://f-keys.com/keyj/manual/'); }
+    },
+    {
+      label: 'Check for updates\u2026',
+      click: () => { shell.openExternal(RELEASES_URL); }
     },
     { type: 'separator' },
     {
