@@ -16,6 +16,8 @@
 [![status](https://img.shields.io/badge/status-alpha-e8a04a)](https://f-keys.com/remapwrap/)
 [![node](https://img.shields.io/badge/node-16%2B-3c873a)](https://nodejs.org)
 
+<img src="assets/logo.png" alt="RemapWrap" width="160" align="right">
+
 **The company is named after this.** RemapWrap began as *F-Keys* &mdash; an extra
 row of keys, on glass you already own &mdash; and the name outgrew the product.
 The product then went missing for five months, surviving in one zip file in a
