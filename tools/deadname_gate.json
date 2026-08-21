@@ -1,0 +1,44 @@
+{
+  "forbidden": [
+    "zengine"
+  ],
+  "allowed": [
+    {
+      "pattern": "github\\.com/zengineco\\b",
+      "reason": "GitHub org URL - renaming breaks every repo and Pages link"
+    },
+    {
+      "pattern": "zengineco\\.github\\.io",
+      "reason": "live GitHub Pages origins (QV, WikiPolish) linked from f-keys.com"
+    },
+    {
+      "pattern": "\\bzengineco/[\\w.\\-]+",
+      "reason": "GitHub org namespace: repo paths and Action refs (uses: zengineco/...)"
+    },
+    {
+      "pattern": "\\bzengineco\\b",
+      "reason": "the GitHub org account name itself"
+    },
+    {
+      "pattern": "zengine\\.org",
+      "reason": "a DNS zone he still owns, reported by name in measured Cloudflare data. It takes real traffic and redirects to f-keys.com, so renaming it inside a measurement would make the snapshot wrong. The word Zengine alone, and zengine.site, still fail."
+    },
+    {
+      "pattern": "ZengineCamBot",
+      "reason": "classifier under test in a published paper, DOI 10.5281/zenodo.19643322 - renaming it here would make the site contradict the deposited record"
+    }
+  ],
+  "skip": [
+    "node_modules",
+    ".git",
+    "dist",
+    "build",
+    "__pycache__",
+    "vendor",
+    ".venv",
+    "tools/brand-gate.py",
+    "tools/deadname_gate.py",
+    "tools/deadname_gate.json",
+    ".github/workflows/brand-gate.yml"
+  ]
+}

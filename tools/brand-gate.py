@@ -74,6 +74,11 @@ SKIP_FILES = {"skills-lock.json"}          # tooling lockfile, not published
 SKIP_PATHS = {
     "tools/brand-gate.py",
     ".github/workflows/brand-gate.yml",
+    # deadname_gate is this gate generalised, and its config names the
+    # retired word in order to forbid it. A file that must contain the word
+    # to do its job is skipped for the same reason this file is.
+    "tools/deadname_gate.py",
+    "tools/deadname_gate.json",
 }
 
 TEXT_EXT = {
