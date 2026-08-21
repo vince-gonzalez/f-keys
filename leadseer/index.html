@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LeadSeer — F-Keys</title>
-<meta name="description" content="Find who is not online yet.">
+<meta name="description" content="Which businesses near you have no website at all?">
 <link rel="canonical" href="https://f-keys.com/leadseer/">
 <meta name="robots" content="index, follow">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
 <meta property="og:title" content="LeadSeer — F-Keys">
-<meta property="og:description" content="Find who is not online yet.">
+<meta property="og:description" content="Which businesses near you have no website at all?">
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="/win98.css">
 </head>
@@ -72,16 +72,33 @@
 </ul></li></ul>
     </aside>
     <section class="content sunken">
-<div class="doc"><h1>LeadSeer</h1><p class="sub">Find who is not online yet.</p><table class="facts"><tr><th>Licence</th><td>MIT</td></tr><tr><th>Runtime</th><td>Node 18+</td></tr><tr><th>Needs</th><td>Google Maps API key</td></tr><tr><th>Builds</th><td>Electron desktop, React browser</td></tr></table>
+<div class="doc"><h1>LeadSeer</h1><p class="sub">Which businesses near you have no website at all?</p><table class="facts"><tr><th>Status</th><td>Archived, working</td></tr><tr><th>Runtime</th><td>Node 18+, Electron</td></tr><tr><th>Needs</th><td>A Google Places API key</td></tr><tr><th>Install</th><td>Run from source</td></tr><tr><th>Source</th><td>zengineco/LeadSeer</td></tr></table>
 <h2>What it does</h2>
-<p>Every town has businesses doing fine without a website. LeadSeer asks Google Places
-which ones they are, filters out the chains, and hands you the list.</p>
-<h2>Filters</h2>
-<p>Search by category and ZIP. Exclude chains, set a minimum review count and rating, or
-narrow to high-value results. Export to CSV, or save automatically after every search.
-Past searches persist with session stats.</p>
-<p>It runs on your own API key, so the quota and the data are yours.</p>
-<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/LeadSeer">Get LeadSeer</a></div></div>
+<p>Search a place and a trade &mdash; plumbers in Toledo, salons in Sarasota &mdash; and
+LeadSeer asks the Google Places API for every match, then keeps only the ones whose record
+has no website on it.</p>
+<p>That absence is the whole qualification. A business with no website cannot already have
+a web designer, which makes it the shortest possible answer to "who would actually take
+this call". Everything else about lead lists is guessing; this is a field that is either
+empty or not.</p>
+
+<h2>What comes back</h2>
+<p>Name, phone, address and a Google Maps link for each result, with the ones missing a
+website surfaced first. Searches are kept in a local history so you can return to a town
+without paying for the same lookups twice, and the list exports to a file.</p>
+
+<h2>The key is yours</h2>
+<p>LeadSeer has no server and no account. It calls Google Places with <b>your</b> API key,
+stored in a local config, so the quota and the billing are yours and nothing routes through
+anyone else. That is also the catch: without a key it cannot search at all.</p>
+
+<h2>Archived, and honest about it</h2>
+<p>It works and it is not being developed. There has never been a packaged installer &mdash;
+it runs from source with Node and Electron. The code stays readable because a tool that
+answers a real question is worth keeping.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://github.com/zengineco/LeadSeer">Get the source</a>
+</div></div>
     </section>
   </div>
 

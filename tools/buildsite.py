@@ -176,66 +176,139 @@ board and clear it. Square, saw, triangle and sine per channel.</p>
 <div class="btnrow"><a class="btn default" href="/pixelstaff/app.html">Open Pixel Staff</a></div>"""),
 
  "qv": dict(
-  title="QV", tagline="Live ballots. One tap, one vote, no account.",
-  facts=[("Version","0.1.0"),("Platform","Browser"),("Accounts","None required")],
+  title="QV", tagline="One tap, one vote, live needle. The ballot comes to you.",
+  facts=[("Version","0.5.0 \u2014 Ballot Box"),("Platform","Browser, PWA"),
+         ("Accounts","None"),("Embeds","One script tag"),
+         ("Source","zengineco/qv")],
   body="""
-<h2>What it does</h2>
-<p>Put a question to a room and watch the count move as people answer. A voter token
-is issued on arrival, so there is nothing to sign up for and nothing to remember.</p>
-<h2>Also</h2>
-<p>Opt in to be told when a new ballot opens, so a room can be gathered without chasing
-anyone. Creators can apply to run ballots for their own audience.</p>
-<div class="btnrow"><a class="btn default" href="https://zengineco.github.io/qv/">Open QV</a></div>"""),
+<h2>What it is</h2>
+<p>A QV ballot is one question &mdash; yes or no, this or that &mdash; that anybody can
+answer in a single tap. No account, no app, no sign-up. The result is a needle that moves
+the moment anyone anywhere votes.</p>
+
+<h2>The ballot comes to you</h2>
+<p>Subscribe to channels &mdash; <code>#food</code>, <code>#politics</code>,
+<code>#ohio</code>, whatever exists &mdash; and new ballots arrive as notifications. On
+Chrome, Edge, Firefox and Android <b>you vote from the notification's own buttons without
+opening anything</b>. That is the part that makes it different from a poll: answering costs
+one tap from wherever you already were.</p>
+<p>On iPhone it works through Add to Home Screen, which is Apple's requirement for web push
+rather than a choice.</p>
+
+<h2>Where a ballot can live</h2>
+<table class="facts">
+<tr><th>The feed</th><td>Vote in place, filter by channel, page through</td></tr>
+<tr><th>Its own page</th><td>Vote, change your vote, watch the needle, copy the link</td></tr>
+<tr><th>Any website</th><td>One script tag puts a live ballot on someone else's page</td></tr>
+<tr><th>A notification</th><td>Vote from the buttons, without opening a page at all</td></tr>
+</table>
+
+<h2>For whoever is asking</h2>
+<p>The creator terminal publishes and closes ballots and watches tallies live, behind a
+creator key. Bulk seeding fills a channel from a question set, so a new channel does not
+launch empty.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://zengineco.github.io/qv/">Open QV</a>
+  <a class="btn" href="https://github.com/zengineco/qv">Source</a>
+</div>"""),
 
  "micdrop": dict(
   title="MICDROP", tagline="Grab the mic. Survive the room.",
-  facts=[("Island code","1534-0440-5810"),("Creator","d00b"),("Platform","Fortnite (UEFN)"),
+  facts=[("Island code","1534-0440-5810"),("Creator","d00b"),
+         ("Platform","Fortnite, built in UEFN"),("Players","Open lobby"),
          ("Support","vincegonzalez@me.com")],
   body="""
-<h2>What it does</h2>
-<p>A live open-mic arena. Take the stage for 120 seconds and win the crowd, or eat three
-boos and get buzzed off to a sad trombone. Out in the crowd you laugh, boo, throw
-tomatoes and work the soundboard; spam it and it is off to club jail.</p>
-<p>Stack up sets and climb from Open Mic Rookie to Legend of the Mic. Public rooms for
-strangers, private ones for bombing among friends.</p>
-<h2>Support</h2>
-<p>Use Fortnite's in-game reporting for player conduct, since that reaches Epic's
-moderation directly. For anything else, write in and a person reads it.</p>
-<p class="muted">Not affiliated with or endorsed by Epic Games. Fortnite and UEFN are
-trademarks of Epic Games, Inc.</p>
+<h2>What it is</h2>
+<p>A live open-mic arena inside Fortnite. One player takes the stage, the rest are the
+room, and the room decides. Built in UEFN and playable from any Fortnite client with the
+island code.</p>
+
+<h2>How a set goes</h2>
+<p>You get the stage and a clock. The crowd reacts while you are on it, and the reaction is
+the score &mdash; there is no jury and no rubric, only whether the room stayed with you.
+Then the mic moves and you are part of the crowd deciding somebody else's set.</p>
+
+<h2>The real material is the voice chat</h2>
+<p>MICDROP does not synthesise comedy or hand you prompts. The joke is whatever you say
+into your own microphone, which means the island is scaffolding for a thing people were
+already doing in party chat, with a stage and a scoreboard attached.</p>
+<p>It also means the island cannot moderate what is said. Fortnite's own voice controls are
+the only mute that exists, and that is Epic's layer rather than something a creator can
+build. Play it with people you would already be in a call with.</p>
+
+<h2>Playing it</h2>
+<pre>Fortnite &rarr; Search by island code
+<b>1534-0440-5810</b></pre>
 <div class="btnrow">
   <a class="btn default" href="https://www.fortnite.com/@d00b/1534-0440-5810">Play now</a>
-  <a class="btn" href="mailto:vincegonzalez@me.com">Contact</a>
 </div>"""),
 
  "wikipolish": dict(
-  title="WikiPolish", tagline="Grammar scout for Wikipedia.",
-  facts=[("Platform","Browser"),("Install","None"),("Reads","Wikipedia API"),
-         ("Checks","LanguageTool")],
+  title="WikiPolish", tagline="Ten good edits is the hard part. This finds them.",
+  facts=[("Status","Live"),("Platform","Browser"),("Install","None"),
+         ("Reads","Wikipedia API"),("Account","Your own Wikipedia login")],
   body="""
+<h2>The problem it solves</h2>
+<p>A new Wikipedia account cannot do much. Ten edits and four days turns it into an
+autoconfirmed one, which is when the encyclopedia starts trusting you. The barrier is not
+the ten edits &mdash; it is finding ten changes you are genuinely sure are improvements,
+in an encyclopedia where being wrong in public is the thing everyone fears.</p>
+
 <h2>What it does</h2>
-<p>The hardest part of becoming a Wikipedia editor is finding a first edit you are sure
-about. Point WikiPolish at an article and it pulls the current text straight from the
-Wikipedia API, runs it through LanguageTool, and shows each language problem where it
-occurs.</p>
-<p>Language fixes are the safest way in: uncontroversial, easy to justify, and genuinely
-useful to the encyclopedia.</p>
-<div class="btnrow"><a class="btn default" href="https://zengineco.github.io/wikiscout/">Open WikiPolish</a></div>"""),
+<p>Type an article, or press <b>Shuffle</b> and take whatever comes. WikiPolish pulls the
+live text through the Wikipedia API and reads it back to you looking for the small,
+defensible things: grammar, agreement, punctuation, the sentence that says the opposite of
+what it meant.</p>
+<p>Each finding links straight to the edit view for that article, so the fix happens on
+Wikipedia in your own account, under your own name, with your own judgement. Nothing is
+edited for you.</p>
+
+<h2>It counts</h2>
+<p><b>Log Edit</b> records the ones you actually made, so ten stops being a number you are
+trying to remember and becomes a number you can see. <b>Next Article</b> keeps the queue
+moving when one turns out to be already clean.</p>
+
+<h2>Why it was built</h2>
+<p>To get its author autoconfirmed, which it did. That is the whole provenance: someone
+who wanted to contribute, could not find a safe first edit, and wrote the thing that finds
+them.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://zengineco.github.io/wikiscout/">Open WikiPolish</a>
+  <a class="btn" href="https://github.com/zengineco/wikiscout">Source</a>
+</div>"""),
 
  "leadseer": dict(
-  title="LeadSeer", tagline="Find who is not online yet.",
-  facts=[("Licence","MIT"),("Runtime","Node 18+"),("Needs","Google Maps API key"),
-         ("Builds","Electron desktop, React browser")],
+  title="LeadSeer", tagline="Which businesses near you have no website at all?",
+  facts=[("Status","Archived, working"),("Runtime","Node 18+, Electron"),
+         ("Needs","A Google Places API key"),("Install","Run from source"),
+         ("Source","zengineco/LeadSeer")],
   body="""
 <h2>What it does</h2>
-<p>Every town has businesses doing fine without a website. LeadSeer asks Google Places
-which ones they are, filters out the chains, and hands you the list.</p>
-<h2>Filters</h2>
-<p>Search by category and ZIP. Exclude chains, set a minimum review count and rating, or
-narrow to high-value results. Export to CSV, or save automatically after every search.
-Past searches persist with session stats.</p>
-<p>It runs on your own API key, so the quota and the data are yours.</p>
-<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/LeadSeer">Get LeadSeer</a></div>"""),
+<p>Search a place and a trade &mdash; plumbers in Toledo, salons in Sarasota &mdash; and
+LeadSeer asks the Google Places API for every match, then keeps only the ones whose record
+has no website on it.</p>
+<p>That absence is the whole qualification. A business with no website cannot already have
+a web designer, which makes it the shortest possible answer to "who would actually take
+this call". Everything else about lead lists is guessing; this is a field that is either
+empty or not.</p>
+
+<h2>What comes back</h2>
+<p>Name, phone, address and a Google Maps link for each result, with the ones missing a
+website surfaced first. Searches are kept in a local history so you can return to a town
+without paying for the same lookups twice, and the list exports to a file.</p>
+
+<h2>The key is yours</h2>
+<p>LeadSeer has no server and no account. It calls Google Places with <b>your</b> API key,
+stored in a local config, so the quota and the billing are yours and nothing routes through
+anyone else. That is also the catch: without a key it cannot search at all.</p>
+
+<h2>Archived, and honest about it</h2>
+<p>It works and it is not being developed. There has never been a packaged installer &mdash;
+it runs from source with Node and Electron. The code stays readable because a tool that
+answers a real question is worth keeping.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://github.com/zengineco/LeadSeer">Get the source</a>
+</div>"""),
 
  "plumhud": dict(
   title="PlumHUD", tagline="Watch the fleet, not the screen.",
