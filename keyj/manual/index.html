@@ -149,6 +149,12 @@ timing. A different thing, and rarely the one you want.</td></tr>
 <p>Export WAV renders the <em>sequence</em>. Export Session renders <em>your typing</em>.
 If you imported a tab and want to hear the song, you want Export WAV.</p>
 
+<h2>Updates</h2>
+<p>Key-J does not check for updates on its own, and that is deliberate: it makes
+no network requests at all, which is a promise worth more than the convenience.
+The tray menu has <b>Check for updates</b>, which opens the releases page in your
+browser when you ask it to.</p>
+
 <h2>Sound</h2>
 <p>Seven tone presets, four waveforms, and sliders for attack, release, volume, reverb
 and pitch. Six play styles: normal, staccato, vibrato, tremolo, arpeggio, legato. The
@@ -172,6 +178,15 @@ does. Press <b>Sequence OFF</b> for fixed pitches.</td></tr>
 a tone with a longer tail such as Bell or Pad.</td></tr>
 <tr><th>The tab imported nothing</th><td>The status line names what it skipped. Most
 often the block has a different number of string lines than the tuning expects.</td></tr>
+<tr><th>Two Key-J entries in Add/Remove Programs</th><td>Only if you installed
+1.4.0. That build carried a different application identifier, which Windows uses
+to recognise an upgrade, so anything newer installs beside it rather than over
+it. Uninstall both, then install the current version once. Nothing installed
+from 1.4.1 onward does this.</td></tr>
+<tr><th>The installer says it cannot continue</th><td>Key-J is running. Close it
+&mdash; including from the tray &mdash; and install again. It stops rather than
+replacing the files it can reach and leaving the ones Windows has open, which
+would give you half of each version.</td></tr>
 </table>
 
 <h2>What it can see</h2>
