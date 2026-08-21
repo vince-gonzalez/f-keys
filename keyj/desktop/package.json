@@ -3,6 +3,7 @@
   "version": "1.6.0",
   "description": "Key-J \u2014 Musical Keystroke Studio",
   "main": "src/main.js",
+  "license": "SEE LICENSE IN ../LICENSE",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win --x64",
@@ -12,7 +13,6 @@
   "build": {
     "appId": "com.fkeys.keyj",
     "productName": "Key-J",
-    "license": "SEE LICENSE IN ../LICENSE",
     "copyright": "Copyright \u00a9 2026 F-Keys Creative LLC",
     "files": [
       "src/**/*",
