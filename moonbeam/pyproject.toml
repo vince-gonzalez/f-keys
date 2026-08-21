@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "moonbeam-miner"
-version = "1.0.0"
+version = "1.0.1"
 description = "Find the NerdMiners on your network and read their vitals, from the terminal."
 readme = "README.md"
 requires-python = ">=3.8"

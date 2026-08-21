@@ -1,0 +1,1679 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "F-Keys published data",
+    "version": "1.0.0",
+    "summary": "Read-only static datasets. Not a hosted API.",
+    "description": "F-Keys does not run a hosted API. Nothing here takes a parameter, no request\nis authenticated, there are no write operations, and there is no rate limit\nbecause there is no server of ours in the path - every file below is static\nand served from a CDN.\n\nWhat this document describes is the read-only data surface that already\nexists: the published gonzalgo measurement tables, the Kernel Trust Profile\nschema and the profiles conforming to it, and the daily status snapshot. It\nis here so an agent can find those files and know their shape without\nscraping HTML.\n\nEvery path in this specification is generated from a file that exists in the\nrepository. If a dataset is removed, it leaves this document on the next\nbuild rather than remaining as a promise.\n\nEach measurement table is a single JSON object carrying its own name,\ndescription, version, sha256, licence and series DOI alongside its rows, so a\nconsumer can cite it and verify it did not change underneath them.\n\nPages on this site also serve `text/markdown` when the request asks for it\nvia `Accept`, per acceptmarkdown.com.\n",
+    "contact": {
+      "name": "F-Keys",
+      "email": "hello@f-keys.com",
+      "url": "https://f-keys.com/contact.html"
+    },
+    "license": {
+      "name": "CC BY 4.0",
+      "identifier": "CC-BY-4.0"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://f-keys.com",
+      "description": "Static files over HTTPS"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://f-keys.com/developers.html",
+    "description": "Developer resources"
+  },
+  "tags": [
+    {
+      "name": "Measurement tables",
+      "description": "Published measurements of what formal mathematical libraries rest on. Each table carries its own version, sha256 and series DOI."
+    },
+    {
+      "name": "Status",
+      "description": "The daily snapshot behind the status page: uptime, package installs, paper views and aggregate site traffic."
+    }
+  ],
+  "paths": {
+    "/gonzalgo/choice-strength/choice-strength.json": {
+      "get": {
+        "summary": "The Choice Strength Table",
+        "description": "The 1,528 theorems in Metamath's set.mm whose proofs reach a choice principle, each labelled with the strongest of the three the database declares separately — full choice, countable choice, dependent choice — together with the raw membership in all three. 1528 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_choice_strength_choice_strength",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Choice Strength Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/cleanable/cleanable.json": {
+      "get": {
+        "summary": "The Cleanable Table",
+        "description": "Declarations in Lean 4 core, Std, Batteries, Mathlib and Plausible where a rewrite removing a classical dependence was attempted, with the module, the compiler-generated proof term carrying the dependence, the outcome, and the kernel's reason where it refused. 280 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_cleanable_cleanable",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cleanable Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/controlled-tactics/controlled-tactics.json": {
+      "get": {
+        "summary": "The Controlled Tactic Table",
+        "description": "A controlled experiment over Lean tactics. 27 arithmetic goals over Nat and Int, each put to ten tactics, with the axiom set recorded for every cell. Holding the goal fixed and varying only the tactic separates a classical dependence introduced by the proof from one required by the statement. 270 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_controlled_tactics_controlled_tactics",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Controlled Tactic Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/dominator-table/dominator-table.json": {
+      "get": {
+        "summary": "The Dominator Table",
+        "description": "Sites of classical dependence in Mathlib ranked by how many theorems each is uniquely responsible for — the number that would stop depending on the axiom of choice if that site alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom, with chains of constants that free the same theorems collapsed to a single site. 1500 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_dominator_table_dominator_table",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Dominator Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/entry-points/entry-points.json": {
+      "get": {
+        "summary": "The Entry-Point Table",
+        "description": "Axioms used, direct entry points into them, and entry points per theorem, for five Metamath databases spanning five foundations. Entry points per theorem normalises for library size and is the measure that can be compared across databases; amplification is carried as reported but is a property of factorization rather than of mathematics. 5 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_entry_points_entry_points",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Entry-Point Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/generated-proofs/generated-proofs.json": {
+      "get": {
+        "summary": "What machine-generated Lean proofs rest on",
+        "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds. 13 rows, version 2026-08-13.",
+        "operationId": "gonzalgo_generated_proofs_generated_proofs",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "What machine-generated Lean proofs rest on",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-index/kernel-index.json": {
+      "get": {
+        "summary": "The Kernel Index",
+        "description": "What formal mathematical libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, and on an optional axiom. Measured by one program across two proof systems and six foundations. 14 rows, version 2026-08-05.",
+        "operationId": "gonzalgo_kernel_index_kernel_index",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kernel Index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json": {
+      "get": {
+        "summary": "Kernel Trust Profile 0.1",
+        "description": "A machine-readable declaration of what a body of machine-checked mathematics rests on. Every value must be recomputable by a third party from the named revision; null means not measured, and 0 is a positive claim.",
+        "operationId": "gonzalgo_kernel_trust_kernel_trust_0.1.schema",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile 0.1",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/aesop.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Aesop",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_aesop",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Aesop",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/batteries.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Batteries",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_batteries",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Batteries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/hol.mm.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: hol.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_hol.mm",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: hol.mm",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/iset.mm.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: iset.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_iset.mm",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: iset.mm",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/lean-core-init.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Lean core (Init)",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_lean_core_init",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Lean core (Init)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/lean-core-lean.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Lean core (Lean)",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_lean_core_lean",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Lean core (Lean)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/mathlib.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Mathlib",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_mathlib",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Mathlib",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/nf.mm.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: nf.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_nf.mm",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: nf.mm",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/plausible.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Plausible",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_plausible",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Plausible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/proofwidgets.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: ProofWidgets",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_proofwidgets",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: ProofWidgets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/ql.mm.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: ql.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_ql.mm",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: ql.mm",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/qq.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Qq",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_qq",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Qq",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/set.mm.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: set.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_set.mm",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: set.mm",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/kernel-trust/profiles/std.json": {
+      "get": {
+        "summary": "Kernel Trust Profile: Std",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on.",
+        "operationId": "gonzalgo_kernel_trust_profiles_std",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "Kernel Trust Profile: Std",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/metamath-axioms/metamath-axioms.json": {
+      "get": {
+        "summary": "The Metamath Axiom Table",
+        "description": "Every $a statement across five Metamath databases spanning five foundations, with the number of that database's theorems whose proof closure reaches it and the number citing it directly. Assertions are separated from well-formedness constructors by typecode. 4424 rows, version 2026-08-13.",
+        "operationId": "gonzalgo_metamath_axioms_metamath_axioms",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Metamath Axiom Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/module-spend/module-spend.json": {
+      "get": {
+        "summary": "The Module Spend Table",
+        "description": "Modules containing at least one declaration whose own proof term names a choice primitive directly, with the count broken down by primitive. Spending, as opposed to reach: a module with no direct spend can still be full of theorems that depend on choice through what they import. 3261 rows, version 2026-08-13.",
+        "operationId": "gonzalgo_module_spend_module_spend",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Module Spend Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/setmm-axioms/setmm-axioms.json": {
+      "get": {
+        "summary": "The set.mm Axiom Table",
+        "description": "Every $a statement in Metamath's set.mm — logical axioms, definitions and syntax constructors kept apart — with the number of the library's 47,621 theorems whose proof closure reaches it, and that count as a share of the library. 3004 rows, version 2026-08-13.",
+        "operationId": "gonzalgo_setmm_axioms_setmm_axioms",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The set.mm Axiom Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/site-diagnosis/site-diagnosis.json": {
+      "get": {
+        "summary": "The Site Diagnosis Table",
+        "description": "Sites of classical dependence in Lean 4 examined for constructive replacement and not removed, each with the reason: no instance could be synthesised, the occurrence was not in a position where an instance is supplied, the available instance itself depends on choice, or synthesis timed out. 765 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_site_diagnosis_site_diagnosis",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Site Diagnosis Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/spend-points/spend-points.json": {
+      "get": {
+        "summary": "The Spend-Point Table",
+        "description": "The 20 largest sites of classical dependence in Mathlib, each with the number of declarations in its dominator subtree that cite a choice primitive directly. Separates sites where the axiom is spent from sites that dominate theorems while inheriting the axiom from further up. 20 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_spend_points_spend_points",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Spend-Point Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/substitution-ledger/substitution-ledger.json": {
+      "get": {
+        "summary": "The Substitution Ledger",
+        "description": "Kernel-verified substitution attempted against the 20 largest sites of classical dependence in Mathlib. For each declaration: occurrences of Classical.propDecidable in its proof term, how many the harness could reach, how many had a Decidable instance synthesised, and how many produced a term the kernel accepted. 20 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_substitution_ledger_substitution_ledger",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Substitution Ledger",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/tactic-bands/tactic-bands.json": {
+      "get": {
+        "summary": "The Tactic Background Table",
+        "description": "Rates at which Lean tactics' proofs carry an avoidable classical dependence, across four libraries under two attribution rules, each shown against the band spanned by known-negative tactics in the same library and rule. The band is what makes a rate interpretable, and it is wide. 167 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_tactic_bands_tactic_bands",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Tactic Background Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gonzalgo/version-delta/version-delta.json": {
+      "get": {
+        "summary": "The Version Delta Table",
+        "description": "Declaration-graph differences between two Mathlib releases, measured by the same extractor on both sides. Separates declarations added and removed from those that kept their name — and among those, separates a changed statement from a changed proof. 12 rows, version 2026-08-12.",
+        "operationId": "gonzalgo_version_delta_version_delta",
+        "tags": [
+          "Measurement tables"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Version Delta Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status/latest.json": {
+      "get": {
+        "summary": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
+        "operationId": "status_latest",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status/data/2026-08-18.json": {
+      "get": {
+        "summary": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
+        "operationId": "status_data_2026_08_18",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status/data/2026-08-19.json": {
+      "get": {
+        "summary": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
+        "operationId": "status_data_2026_08_19",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status/data/2026-08-20.json": {
+      "get": {
+        "summary": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
+        "operationId": "status_data_2026_08_20",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status/data/2026-08-21.json": {
+      "get": {
+        "summary": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
+        "operationId": "status_data_2026_08_21",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Dataset": {
+        "type": "object",
+        "description": "A published measurement table.",
+        "required": [
+          "name",
+          "version",
+          "sha256",
+          "rows"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "description": "The measurement date."
+          },
+          "sha256": {
+            "type": "string",
+            "description": "Checksum of the rows, so a consumer can tell whether the table changed."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "seriesDoi": {
+            "type": "string",
+            "format": "uri"
+          },
+          "license": {
+            "type": "string",
+            "format": "uri"
+          },
+          "producedBy": {
+            "type": "object"
+          },
+          "measured": {
+            "type": "object"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "Document": {
+        "type": "object",
+        "description": "A JSON document whose shape is given by its own $schema or ktp_version field."
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message",
+              "status"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Stable machine-readable identifier."
+              },
+              "message": {
+                "type": "string"
+              },
+              "status": {
+                "type": "integer"
+              },
+              "hints": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Where to look instead."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
