@@ -1,0 +1,29 @@
+# ============================================================
+# f-keys-markdown — Accept negotiation in front of GitHub Pages
+# F-Keys | www.f-keys.com
+# ------------------------------------------------------------
+# The origin is GitHub Pages, which serves files and does not
+# negotiate. Cloudflare already proxies f-keys.com, so the
+# Worker sits on the route it is already passing through and
+# costs nothing extra to reach.
+#
+# Deploy:  cd worker && npx wrangler deploy
+# Check:   curl -sSI -H "Accept: text/markdown" https://f-keys.com/
+#          -> content-type: text/markdown; charset=utf-8
+#          -> vary: Accept, Accept-Encoding
+# ============================================================
+
+name = "f-keys-markdown"
+main = "index.js"
+compatibility_date = "2026-08-21"
+
+# The apex and every path under it. The Worker passes through
+# anything it does not negotiate, so this being broad is not
+# the same as it being invasive.
+routes = [
+  { pattern = "f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "www.f-keys.com/*", zone_name = "f-keys.com" },
+]
+
+# Nothing here is per-environment: there is one site.
+workers_dev = false

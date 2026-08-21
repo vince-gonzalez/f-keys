@@ -56,6 +56,63 @@ jobs:
       - name: Banner font and width
         run: python tools/readme.py --verify
 
+  # The Privacy page says there is no advertising, no analytics and no
+  # cookie on f-keys.com. An ad tag pasted into one hand-maintained page
+  # turns that into a lie nobody notices, so it is asserted against the
+  # files that are served rather than promised. The same job covers the
+  # homepage heading, the share image, the structured data and the
+  # recovery links on the 404.
+  site-claims:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: The claims this site makes about itself
+        run: python tools/test_site.py
+
+      # buildmd reads the built HTML, so a page whose markdown was not
+      # regenerated is a page where the two disagree about what it says.
+      - name: Markdown variants match the pages
+        run: python tools/buildmd.py --check
+
+      # The Contact page publishes hello@f-keys.com. That only works while
+      # the domain accepts mail, and a contact address that bounces fails
+      # silently - nobody tells you the email they sent went nowhere.
+      - name: The contact domain still accepts mail
+        run: |
+          dig +short MX f-keys.com | grep -q . \
+            || { echo "f-keys.com has no MX record; hello@f-keys.com bounces"; exit 1; }
+          dig +short MX f-keys.com
+
+      # A font request reports the reader's IP to a third party before any
+      # of the page's own content renders. Sixty-one pages did it. This
+      # fails if one starts again, and if the desktop app's mirrored copy
+      # goes missing, which would break its typography silently.
+      - name: No page reaches Google for a typeface
+        run: python tools/fonts.py --verify
+
+      - name: Share card and favicons
+        run: |
+          pip install --quiet pillow
+          python tools/ogimage.py --verify
+
+  # GitHub Pages cannot negotiate on Accept, so a Worker does it. The two
+  # ways it can go wrong are both silent: reading `text/markdown;q=0` as a
+  # request hands every browser a text file, and a wrong path mapping
+  # hands an agent the wrong page with no way to tell.
+  markdown-negotiation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Accept negotiation, against a fake origin
+        working-directory: worker
+        run: node test_worker.mjs
+
   # keyj-cli and keyj/app.html are two implementations of the same
   # conversions. Key-J has already shipped three defects that existed only
   # because two copies of one thing drifted, so this diffs them: the real

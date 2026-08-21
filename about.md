@@ -1,0 +1,41 @@
+# About F-Keys
+
+> F-Keys is Vince Gonzalez, working alone. Twenty-two live products and more than thirty deposited works.
+
+Canonical: https://f-keys.com/about.html
+
+Independent products built by Vincent Gonzalez.
+
+| Field | Value |
+| --- | --- |
+| Entity | F-Keys Creative LLC (Florida) |
+| Trading as | F-Keys |
+| ORCID | 0009-0005-3640-014X |
+| Contact | hello@f-keys.com |
+
+## What this is
+
+F-Keys is Vince Gonzalez, working alone. Twenty-two products are live, from
+browser games to formal proof tooling, and each is built end to end by the same
+person: architecture, both ends, database, deployment, documentation.
+
+## The recurring interest
+
+Provenance - what a result actually rests on. gonzalgo reads a compiled Lean 4
+or Metamath library and reports which axioms a theorem spends rather than quietly
+inherits. OpticQuiz runs one colour-vision engine across eight distribution
+channels, with its JavaScript and Python implementations verified identical to six
+decimal places, and publishes the calibration limits that keep its own results
+honest.
+
+More than thirty works are deposited with DOIs. The packages are installed
+several hundred times a week.
+
+## Current interests
+
+Accessibility · hardware interfaces · creator tools · gaming
+· formal methods · the open web.
+
+---
+
+More: [all products](https://f-keys.com) - [llms.txt](https://f-keys.com/llms.txt) - [sitemap](https://f-keys.com/sitemap.xml)

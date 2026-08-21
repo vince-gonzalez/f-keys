@@ -1,0 +1,13 @@
+{
+  "name": "f-keys-markdown",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Accept: text/markdown negotiation in front of GitHub Pages for f-keys.com",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test_worker.mjs",
+    "deploy": "wrangler deploy"
+  },
+  "license": "MIT"
+}
