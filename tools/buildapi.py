@@ -63,7 +63,18 @@ SOURCES = [
 
 # The Kernel Trust Profiles are the product rather than a detail of
 # it, so profiles/ is walked like everything else.
-SKIP_DIRS = {"__pycache__", "_build", "node_modules"}
+#
+# status/data is the exception. A scheduled Action writes one dated
+# snapshot there every morning, so documenting them one path at a time
+# would add an operation a day, grow the spec without bound, and make it
+# stale by 01:36 UTC daily - a build breaking every night on nothing.
+# The endpoint is status/latest.json; the archive is a naming convention,
+# described once in that operation rather than enumerated.
+SKIP_DIRS = {"__pycache__", "_build", "node_modules", "data"}
+
+ARCHIVE_NOTE = (" Prior days are archived at /status/data/YYYY-MM-DD.json "
+                "using the same shape; this file is a copy of the most "
+                "recent one.")
 
 
 def read(path):
@@ -119,7 +130,8 @@ def describe(doc, path):
     if "summary" in doc and "uptime" in doc:
         return ("Status snapshot",
                 "Uptime, package installs, publication views and aggregate "
-                "traffic. Repository traffic is owner-only and is not here.")
+                "traffic. Repository traffic is owner-only and is not here."
+                + ARCHIVE_NOTE)
     return os.path.basename(path), ""
 
 

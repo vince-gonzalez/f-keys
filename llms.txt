@@ -129,7 +129,7 @@ JavaScript packages (npm):
 GitHub Actions:
 - gonzalgo-trust-audit   https://github.com/marketplace/actions/gonzalgo-trust-audit
 
-Published data (35 documents, described in https://f-keys.com/openapi.json):
+Published data (all of it described in https://f-keys.com/openapi.json):
 - 13 gonzalgo measurement tables, each one JSON object carrying its own
   version, sha256, licence and series DOI beside its rows. CC BY 4.0.
 - The Kernel Trust Profile 0.1 JSON Schema and 14 profiles conforming to it,

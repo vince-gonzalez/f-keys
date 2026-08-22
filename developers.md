@@ -4,15 +4,15 @@
 
 Canonical: https://f-keys.com/developers.html
 
-Four command-line tools, six packages, and thirty-five JSON
-documents. Everything here is a thing you install or a file you fetch, and
-there is nothing to sign up for.
+Four command-line tools, six packages, and a shelf of published
+JSON. Everything here is a thing you install or a file you fetch, and there is
+nothing to sign up for.
 
 ## Start here
 
 | Field | Value |
 | --- | --- |
-| OpenAPI | [/openapi.json](https://f-keys.com/openapi.json) — all 35 documents, each with a typed schema naming its columns |
+| OpenAPI | [/openapi.json](https://f-keys.com/openapi.json) — every published document, each with a typed schema naming its columns |
 | For agents | [/llms.txt](https://f-keys.com/llms.txt) — the whole catalogue as plain text, including when to reach for each thing |
 | Site map | [/sitemap.xml](https://f-keys.com/sitemap.xml) |
 | Product docs | [/Docs.html](https://f-keys.com/Docs.html) — setup, configuration and troubleshooting |
@@ -96,7 +96,7 @@ something unfinished.
 
 ## The published data
 
-Thirty-five JSON documents, every one described in
+Every published document is described in
 [openapi.json](https://f-keys.com/openapi.json) with a typed schema that names its
 columns — so a function-calling agent knows a table has a
 library string and a theorems integer before it
