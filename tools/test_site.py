@@ -307,6 +307,41 @@ def openapi():
                 fail("openapi", "{} declares {}, but nothing here accepts a "
                                 "write".format(url, method.upper()))
 
+    # Function calling turns an operation into a signature, and an
+    # untyped `object` gives it nothing to fill in. Every response must
+    # resolve to a schema that actually names its properties, and every
+    # operationId must be unique or two tools collide under one name.
+    schemas = spec.get("components", {}).get("schemas", {})
+    seen = {}
+    for url, ops in (spec.get("paths") or {}).items():
+        op = ops.get("get") or {}
+        oid = op.get("operationId")
+        if not oid:
+            fail("openapi", url + " has no operationId")
+        elif oid in seen:
+            fail("openapi", "operationId {!r} is used by both {} and {}"
+                            .format(oid, seen[oid], url))
+        else:
+            seen[oid] = url
+        if not op.get("description") and not op.get("summary"):
+            fail("openapi", url + " has neither a summary nor a description")
+
+        try:
+            ref = op["responses"]["200"]["content"]["application/json"][
+                "schema"]["$ref"]
+        except (KeyError, TypeError):
+            fail("openapi", url + " has no JSON response schema")
+            continue
+        target = schemas.get(ref.split("/")[-1], {})
+        if not target.get("properties"):
+            fail("openapi", "{} resolves to {}, which names no properties"
+                            .format(url, ref))
+
+    # what an integrator is entitled to rely on, stated rather than implied
+    for key in ("x-versioning", "x-rate-limit"):
+        if not spec.get(key):
+            fail("openapi", "does not declare " + key)
+
     if spec.get("components", {}).get("securitySchemes") or spec.get("security"):
         fail("openapi", "declares authentication, but there is nothing to "
                         "authenticate against")
@@ -316,10 +351,35 @@ def openapi():
             fail("openapi", "names a server that is not this site: " +
                  str(server.get("url")))
 
-    # the developer page is the human-readable half and must name the spec
+    # The developer page is the human-readable half. An audit called it
+    # thin, which it was: it named the packages but never said what
+    # authentication is required, what the rate limit is, or what happens
+    # when a path is withdrawn - the three things anyone decides to
+    # integrate on.
     dev = os.path.join(ROOT, "developers.html")
-    if os.path.exists(dev) and "/openapi.json" not in read(dev):
+    if not os.path.exists(dev):
+        fail("openapi", "no developers.html")
+        return
+    page = read(dev)
+    if "/openapi.json" not in page:
         fail("openapi", "developers.html does not link the specification")
+
+    text = visible_text(page)
+    if len(text) < 3000:
+        fail("openapi", "developers.html is {} chars; a page that does not "
+                        "answer auth, limits and versioning is thin"
+                        .format(len(text)))
+    for heading, why in [
+        ("Authentication", "what credentials are needed"),
+        ("Rate limits", "whether to throttle"),
+        ("Versioning and deprecation", "what happens when a path is withdrawn"),
+        ("The command line", "how to drive it without an integration"),
+    ]:
+        if heading not in page:
+            fail("openapi", "developers.html does not answer {} ({})"
+                            .format(why, heading))
+    if "curl " not in page:
+        fail("openapi", "developers.html shows no example request")
 
 
 def agent_instructions():

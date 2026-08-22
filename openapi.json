@@ -50,7 +50,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoChoiceStrength"
                 }
               }
             }
@@ -94,7 +94,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoCleanable"
                 }
               }
             }
@@ -138,7 +138,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoControlledTactics"
                 }
               }
             }
@@ -182,7 +182,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoDominatorTable"
                 }
               }
             }
@@ -226,7 +226,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoEntryPoints"
                 }
               }
             }
@@ -270,7 +270,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoGeneratedProofs"
                 }
               }
             }
@@ -314,7 +314,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoKernelIndex"
                 }
               }
             }
@@ -358,7 +358,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustKernelTrust01Schema"
                 }
               }
             }
@@ -402,7 +402,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesAesop"
                 }
               }
             }
@@ -446,7 +446,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesBatteries"
                 }
               }
             }
@@ -490,7 +490,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesHolMm"
                 }
               }
             }
@@ -534,7 +534,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesIsetMm"
                 }
               }
             }
@@ -578,7 +578,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesLeanCoreInit"
                 }
               }
             }
@@ -622,7 +622,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesLeanCoreLean"
                 }
               }
             }
@@ -666,7 +666,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesMathlib"
                 }
               }
             }
@@ -710,7 +710,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesNfMm"
                 }
               }
             }
@@ -754,7 +754,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesPlausible"
                 }
               }
             }
@@ -798,7 +798,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesProofwidgets"
                 }
               }
             }
@@ -842,7 +842,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesQlMm"
                 }
               }
             }
@@ -886,7 +886,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesQq"
                 }
               }
             }
@@ -930,7 +930,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesSetMm"
                 }
               }
             }
@@ -974,7 +974,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/GonzalgoKernelTrustProfilesStd"
                 }
               }
             }
@@ -1018,7 +1018,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoMetamathAxioms"
                 }
               }
             }
@@ -1062,7 +1062,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoModuleSpend"
                 }
               }
             }
@@ -1106,7 +1106,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoSetmmAxioms"
                 }
               }
             }
@@ -1150,7 +1150,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoSiteDiagnosis"
                 }
               }
             }
@@ -1194,7 +1194,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoSpendPoints"
                 }
               }
             }
@@ -1238,7 +1238,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoSubstitutionLedger"
                 }
               }
             }
@@ -1282,7 +1282,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoTacticBands"
                 }
               }
             }
@@ -1326,7 +1326,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/GonzalgoVersionDelta"
                 }
               }
             }
@@ -1370,7 +1370,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/StatusData20260818"
                 }
               }
             }
@@ -1414,7 +1414,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/StatusData20260819"
                 }
               }
             }
@@ -1458,7 +1458,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/StatusData20260820"
                 }
               }
             }
@@ -1502,7 +1502,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/StatusData20260821"
                 }
               }
             }
@@ -1546,7 +1546,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/StatusLatest"
                 }
               }
             }
@@ -1579,15 +1579,8 @@
   },
   "components": {
     "schemas": {
-      "Dataset": {
+      "GonzalgoChoiceStrength": {
         "type": "object",
-        "description": "A published measurement table.",
-        "required": [
-          "name",
-          "version",
-          "sha256",
-          "rows"
-        ],
         "properties": {
           "name": {
             "type": "string"
@@ -1596,30 +1589,57 @@
             "type": "string"
           },
           "version": {
-            "type": "string",
-            "description": "The measurement date."
+            "type": "string"
           },
           "sha256": {
-            "type": "string",
-            "description": "Checksum of the rows, so a consumer can tell whether the table changed."
+            "type": "string"
           },
           "url": {
-            "type": "string",
-            "format": "uri"
+            "type": "string"
           },
           "seriesDoi": {
-            "type": "string",
-            "format": "uri"
+            "type": "string"
           },
           "license": {
-            "type": "string",
-            "format": "uri"
+            "type": "string"
           },
           "producedBy": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
           },
           "measured": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "Metamath": {
+                "type": "string"
+              },
+              "theorems": {
+                "type": "integer"
+              },
+              "principles": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Metamath",
+              "principles",
+              "theorems"
+            ]
           },
           "fields": {
             "type": "array",
@@ -1627,17 +1647,6011 @@
               "type": "string"
             }
           },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
           "rows": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "theorem": {
+                  "type": "string",
+                  "title": "theorem"
+                },
+                "strongest": {
+                  "type": "string",
+                  "title": "strongest principle needed"
+                },
+                "reaches_full_choice": {
+                  "type": "boolean"
+                },
+                "reaches_countable_choice": {
+                  "type": "boolean"
+                },
+                "reaches_dependent_choice": {
+                  "type": "boolean"
+                },
+                "axioms_reached": {
+                  "type": "string",
+                  "title": "axioms reached"
+                }
+              },
+              "required": [
+                "axioms_reached",
+                "reaches_countable_choice",
+                "reaches_dependent_choice",
+                "reaches_full_choice",
+                "strongest",
+                "theorem"
+              ]
             }
           }
-        }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Choice Strength Table",
+        "description": "The 1,528 theorems in Metamath's set.mm whose proofs reach a choice principle, each labelled with the strongest of the three the database declares separately — full choice, countable choice, dependent choice — together with the raw membership in all three. 1528 rows, version 2026-08-12."
       },
-      "Document": {
+      "GonzalgoCleanable": {
         "type": "object",
-        "description": "A JSON document whose shape is given by its own $schema or ktp_version field."
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "acceptance": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "acceptance",
+              "target"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "library": {
+                  "type": "string",
+                  "title": "library"
+                },
+                "module": {
+                  "type": "string",
+                  "title": "module"
+                },
+                "declaration": {
+                  "type": "string",
+                  "title": "declaration"
+                },
+                "generated_term": {
+                  "type": "string"
+                },
+                "occurrences": {
+                  "type": "integer",
+                  "title": "occurrences"
+                },
+                "outcome": {
+                  "type": "string",
+                  "title": "outcome"
+                }
+              },
+              "required": [
+                "declaration",
+                "generated_term",
+                "library",
+                "module",
+                "occurrences",
+                "outcome"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Cleanable Table",
+        "description": "Declarations in Lean 4 core, Std, Batteries, Mathlib and Plausible where a rewrite removing a classical dependence was attempted, with the module, the compiler-generated proof term carrying the dependence, the outcome, and the kernel's reason where it refused. 280 rows, version 2026-08-12."
+      },
+      "GonzalgoControlledTactics": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "design": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "design"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "family": {
+                  "type": "string"
+                },
+                "goal_index": {
+                  "type": "integer"
+                },
+                "goal": {
+                  "type": "string",
+                  "title": "goal"
+                },
+                "shape": {
+                  "type": "string",
+                  "title": "shape"
+                },
+                "tactic": {
+                  "type": "string",
+                  "title": "tactic"
+                },
+                "closed": {
+                  "type": "boolean",
+                  "title": "closed"
+                },
+                "classical": {
+                  "type": "boolean",
+                  "title": "classical"
+                },
+                "axioms": {
+                  "type": "string",
+                  "title": "axioms"
+                }
+              },
+              "required": [
+                "axioms",
+                "classical",
+                "closed",
+                "family",
+                "goal",
+                "goal_index",
+                "shape",
+                "tactic"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Controlled Tactic Table",
+        "description": "A controlled experiment over Lean tactics. 27 arithmetic goals over Nat and Int, each put to ten tactics, with the axiom set recorded for every cell. Holding the goal fixed and varying only the tactic separates a classical dependence introduced by the proof from one required by the statement. 270 rows, version 2026-08-12."
+      },
+      "GonzalgoDominatorTable": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "graph": {
+                "type": "string"
+              },
+              "axiom": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "axiom",
+              "graph",
+              "unit"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rank": {
+                  "type": "integer",
+                  "title": "#"
+                },
+                "site": {
+                  "type": "string",
+                  "title": "site"
+                },
+                "kind": {
+                  "type": "string",
+                  "title": "kind"
+                },
+                "theorems_dominated": {
+                  "type": "integer",
+                  "title": "theorems dominated"
+                },
+                "area": {
+                  "type": "string",
+                  "title": "area"
+                },
+                "eligible": {
+                  "type": "boolean",
+                  "title": "eligible"
+                },
+                "chain_length": {
+                  "type": "integer"
+                },
+                "chain": {
+                  "type": "string"
+                },
+                "constant_alone": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "area",
+                "chain",
+                "chain_length",
+                "eligible",
+                "kind",
+                "rank",
+                "site",
+                "theorems_dominated"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Dominator Table",
+        "description": "Sites of classical dependence in Mathlib ranked by how many theorems each is uniquely responsible for — the number that would stop depending on the axiom of choice if that site alone were rebuilt. Computed as a dominator tree over the reversed dependency graph rooted at the axiom, with chains of constants that free the same theorems collapsed to a single site. 1500 rows, version 2026-08-12."
+      },
+      "GonzalgoEntryPoints": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Metamath": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Metamath"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "database": {
+                  "type": "string",
+                  "title": "database"
+                },
+                "foundation": {
+                  "type": "string",
+                  "title": "foundation"
+                },
+                "theorems": {
+                  "type": "integer",
+                  "title": "theorems"
+                },
+                "axioms_used": {
+                  "type": "integer",
+                  "title": "axioms used"
+                },
+                "entry_points": {
+                  "type": "integer",
+                  "title": "entry points"
+                },
+                "entries_per_theorem": {
+                  "type": "number",
+                  "title": "entries / theorem"
+                },
+                "amplification_as_reported": {
+                  "type": "number",
+                  "title": "amplification"
+                }
+              },
+              "required": [
+                "amplification_as_reported",
+                "axioms_used",
+                "database",
+                "entries_per_theorem",
+                "entry_points",
+                "foundation",
+                "theorems"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Entry-Point Table",
+        "description": "Axioms used, direct entry points into them, and entry points per theorem, for five Metamath databases spanning five foundations. Entry points per theorem normalises for library size and is the measure that can be compared across databases; amplification is carried as reported but is a property of factorization rather than of mathematics. 5 rows, version 2026-08-12."
+      },
+      "GonzalgoGeneratedProofs": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "corpus": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "corpus"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string",
+                  "title": "category"
+                },
+                "proofs": {
+                  "type": "integer",
+                  "title": "proofs"
+                },
+                "note": {
+                  "type": "string",
+                  "title": "note"
+                },
+                "share_of_compiled_pct": {
+                  "type": "number",
+                  "title": "share"
+                }
+              },
+              "required": [
+                "category",
+                "proofs"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "What machine-generated Lean proofs rest on",
+        "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds. 13 rows, version 2026-08-13."
+      },
+      "GonzalgoKernelIndex": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "Metamath": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "Metamath"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "library": {
+                  "type": "string",
+                  "title": "library"
+                },
+                "system": {
+                  "type": "string",
+                  "title": "system"
+                },
+                "foundation": {
+                  "type": "string",
+                  "title": "foundation"
+                },
+                "theorems": {
+                  "type": "integer",
+                  "title": "theorems"
+                },
+                "unfinished_theorems": {
+                  "type": "integer",
+                  "title": "unfinished"
+                },
+                "compiler_trusting_theorems": {
+                  "type": "integer",
+                  "title": "compiler-trusted"
+                },
+                "optional_axiom": {
+                  "type": "string"
+                },
+                "optional_reach": {
+                  "type": "integer"
+                },
+                "optional_reach_pct": {
+                  "type": "number",
+                  "title": "optional axiom"
+                },
+                "axioms_used": {
+                  "type": "integer"
+                },
+                "entry_points": {
+                  "type": "integer"
+                },
+                "entries_per_theorem": {
+                  "type": "number"
+                },
+                "amplification": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "foundation",
+                "library",
+                "optional_reach",
+                "system",
+                "theorems",
+                "unfinished_theorems"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Kernel Index",
+        "description": "What formal mathematical libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, and on an optional axiom. Measured by one program across two proof systems and six foundations. 14 rows, version 2026-08-05."
+      },
+      "GonzalgoKernelTrustKernelTrust01Schema": {
+        "type": "object",
+        "properties": {
+          "$schema": {
+            "type": "string"
+          },
+          "$id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "required": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "ktp_version": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "description",
+                  "pattern",
+                  "type"
+                ]
+              },
+              "generated_at": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "format": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "format",
+                  "pattern",
+                  "type"
+                ]
+              },
+              "generated_by": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "required": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "properties": {
+                    "type": "object",
+                    "properties": {
+                      "tool": {
+                        "type": "object"
+                      },
+                      "version": {
+                        "type": "object"
+                      },
+                      "url": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "tool",
+                      "url",
+                      "version"
+                    ]
+                  }
+                },
+                "required": [
+                  "additionalProperties",
+                  "properties",
+                  "required",
+                  "type"
+                ]
+              },
+              "subject": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "required": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "properties": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "object"
+                      },
+                      "system": {
+                        "type": "object"
+                      },
+                      "system_version": {
+                        "type": "object"
+                      },
+                      "revision": {
+                        "type": "object"
+                      },
+                      "foundation": {
+                        "type": "object"
+                      },
+                      "url": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "foundation",
+                      "name",
+                      "revision",
+                      "system",
+                      "system_version",
+                      "url"
+                    ]
+                  }
+                },
+                "required": [
+                  "additionalProperties",
+                  "properties",
+                  "required",
+                  "type"
+                ]
+              },
+              "counts": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "required": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "properties": {
+                    "type": "object",
+                    "properties": {
+                      "theorems": {
+                        "type": "object"
+                      },
+                      "declarations": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "declarations",
+                      "theorems"
+                    ]
+                  }
+                },
+                "required": [
+                  "additionalProperties",
+                  "properties",
+                  "required",
+                  "type"
+                ]
+              },
+              "unfinished": {
+                "type": "object",
+                "properties": {
+                  "$ref": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "$ref"
+                ]
+              },
+              "compiler_trusted": {
+                "type": "object",
+                "properties": {
+                  "$ref": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "$ref"
+                ]
+              },
+              "assumptions": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "required": {
+                        "type": "array"
+                      },
+                      "additionalProperties": {
+                        "type": "boolean"
+                      },
+                      "properties": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "additionalProperties",
+                      "properties",
+                      "required",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "items",
+                  "type"
+                ]
+              }
+            },
+            "required": [
+              "assumptions",
+              "compiler_trusted",
+              "counts",
+              "generated_at",
+              "generated_by",
+              "ktp_version",
+              "subject",
+              "unfinished"
+            ]
+          },
+          "$defs": {
+            "type": "object",
+            "properties": {
+              "hatch": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "required": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "properties": {
+                    "type": "object",
+                    "properties": {
+                      "theorems_reaching": {
+                        "type": "object"
+                      },
+                      "axioms": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "axioms",
+                      "theorems_reaching"
+                    ]
+                  }
+                },
+                "required": [
+                  "additionalProperties",
+                  "properties",
+                  "required",
+                  "type"
+                ]
+              }
+            },
+            "required": [
+              "hatch"
+            ]
+          }
+        },
+        "required": [
+          "$defs",
+          "$id",
+          "$schema",
+          "additionalProperties",
+          "description",
+          "properties",
+          "required",
+          "title",
+          "type"
+        ],
+        "title": "Kernel Trust Profile 0.1",
+        "description": "A machine-readable declaration of what a body of machine-checked mathematics rests on. Every value must be recomputable by a third party from the named revision; null means not measured, and 0 is a positive claim."
+      },
+      "GonzalgoKernelTrustProfilesAesop": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Aesop",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesBatteries": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Batteries",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesHolMm": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "axioms": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "axioms"
+            ]
+          },
+          "assumptions": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: hol.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesIsetMm": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "axioms": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "axioms"
+            ]
+          },
+          "assumptions": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: iset.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesLeanCoreInit": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Lean core (Init)",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesLeanCoreLean": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Lean core (Lean)",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesMathlib": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Mathlib",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesNfMm": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "axioms": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "axioms"
+            ]
+          },
+          "assumptions": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: nf.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesPlausible": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Plausible",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesProofwidgets": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: ProofWidgets",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesQlMm": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "axioms": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "axioms"
+            ]
+          },
+          "assumptions": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: ql.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesQq": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Qq",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesSetMm": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "axioms": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "axioms"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: set.mm",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoKernelTrustProfilesStd": {
+        "type": "object",
+        "properties": {
+          "ktp_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "generated_by": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "tool",
+              "url",
+              "version"
+            ]
+          },
+          "subject": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "system": {
+                "type": "string"
+              },
+              "foundation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "foundation",
+              "name",
+              "system"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "theorems"
+            ]
+          },
+          "unfinished": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "compiler_trusted": {
+            "type": "object",
+            "properties": {
+              "theorems_reaching": {
+                "type": "integer"
+              },
+              "axioms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "axioms",
+              "theorems_reaching"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "reach": {
+                  "type": "object",
+                  "properties": {
+                    "theorems": {
+                      "type": "integer"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "fraction",
+                    "theorems"
+                  ]
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "reach",
+                "via"
+              ]
+            }
+          }
+        },
+        "required": [
+          "assumptions",
+          "compiler_trusted",
+          "counts",
+          "generated_at",
+          "generated_by",
+          "ktp_version",
+          "subject",
+          "unfinished"
+        ],
+        "title": "Kernel Trust Profile: Std",
+        "description": "A Kernel Trust Profile conforming to kernel-trust-0.1, reporting what one library's proofs depend on."
+      },
+      "GonzalgoMetamathAxioms": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "databases": {
+                "type": "string"
+              },
+              "revision": {
+                "type": "string"
+              },
+              "fetched": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "databases",
+              "fetched",
+              "revision"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string",
+                  "title": "label"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "database": {
+                  "type": "string",
+                  "title": "database"
+                },
+                "foundation": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string",
+                  "title": "label"
+                },
+                "typecode": {
+                  "type": "string",
+                  "title": "typecode"
+                },
+                "role": {
+                  "type": "string",
+                  "title": "role"
+                },
+                "dependents": {
+                  "type": "integer",
+                  "title": "theorems depending"
+                },
+                "share_of_db_pct": {
+                  "type": "number",
+                  "title": "share of db"
+                },
+                "entry_points": {
+                  "type": "integer",
+                  "title": "entry points"
+                },
+                "source_revision": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "database",
+                "dependents",
+                "entry_points",
+                "foundation",
+                "label",
+                "role",
+                "share_of_db_pct",
+                "source_revision",
+                "typecode"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Metamath Axiom Table",
+        "description": "Every $a statement across five Metamath databases spanning five foundations, with the number of that database's theorems whose proof closure reaches it and the number citing it directly. Assertions are separated from well-formedness constructors by typecode. 4424 rows, version 2026-08-13."
+      },
+      "GonzalgoModuleSpend": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "modules measured": {
+                "type": "integer"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "modules measured",
+              "unit"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "module": {
+                  "type": "string",
+                  "title": "module"
+                },
+                "library": {
+                  "type": "string",
+                  "title": "library"
+                },
+                "declarations": {
+                  "type": "integer",
+                  "title": "declarations"
+                },
+                "theorems": {
+                  "type": "integer"
+                },
+                "spends": {
+                  "type": "integer",
+                  "title": "spends"
+                },
+                "spend_rate_pct": {
+                  "type": "number",
+                  "title": "rate"
+                },
+                "choice": {
+                  "type": "integer",
+                  "title": "choice"
+                },
+                "propDecidable": {
+                  "type": "integer",
+                  "title": "propDecidable"
+                },
+                "byContradiction": {
+                  "type": "integer",
+                  "title": "byContradiction"
+                },
+                "em": {
+                  "type": "integer"
+                },
+                "indefiniteDescription": {
+                  "type": "integer"
+                },
+                "byCases": {
+                  "type": "integer"
+                },
+                "statement_names_primitive": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "byCases",
+                "byContradiction",
+                "choice",
+                "declarations",
+                "em",
+                "indefiniteDescription",
+                "library",
+                "module",
+                "propDecidable",
+                "spend_rate_pct",
+                "spends",
+                "statement_names_primitive",
+                "theorems"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Module Spend Table",
+        "description": "Modules containing at least one declaration whose own proof term names a choice primitive directly, with the count broken down by primitive. Spending, as opposed to reach: a module with no direct spend can still be full of theorems that depend on choice through what they import. 3261 rows, version 2026-08-13."
+      },
+      "GonzalgoSetmmAxioms": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Metamath": {
+                "type": "string"
+              },
+              "theorems": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "Metamath",
+              "theorems"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string",
+                  "title": "label"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "title": "label"
+                },
+                "role": {
+                  "type": "string",
+                  "title": "role"
+                },
+                "dependents": {
+                  "type": "integer",
+                  "title": "theorems depending"
+                },
+                "share_of_library_pct": {
+                  "type": "number",
+                  "title": "share of library"
+                },
+                "entry_points": {
+                  "type": "integer",
+                  "title": "entry points"
+                },
+                "amplification": {
+                  "type": "number",
+                  "title": "amplification"
+                }
+              },
+              "required": [
+                "amplification",
+                "dependents",
+                "entry_points",
+                "label",
+                "role",
+                "share_of_library_pct"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The set.mm Axiom Table",
+        "description": "Every $a statement in Metamath's set.mm — logical axioms, definitions and syntax constructors kept apart — with the number of the library's 47,621 theorems whose proof closure reaches it, and that count as a share of the library. 3004 rows, version 2026-08-13."
+      },
+      "GonzalgoSiteDiagnosis": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "sites": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "sites",
+              "target"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "verdict": {
+                  "type": "string",
+                  "title": "verdict"
+                },
+                "meaning": {
+                  "type": "string",
+                  "title": "what stopped it"
+                },
+                "library": {
+                  "type": "string",
+                  "title": "library"
+                },
+                "module": {
+                  "type": "string"
+                },
+                "declaration": {
+                  "type": "string",
+                  "title": "declaration"
+                },
+                "proposition": {
+                  "type": "string",
+                  "title": "proposition"
+                }
+              },
+              "required": [
+                "declaration",
+                "library",
+                "meaning",
+                "module",
+                "proposition",
+                "verdict"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Site Diagnosis Table",
+        "description": "Sites of classical dependence in Lean 4 examined for constructive replacement and not removed, each with the reason: no instance could be synthesised, the occurrence was not in a position where an instance is supplied, the available instance itself depends on choice, or synthesis timed out. 765 rows, version 2026-08-12."
+      },
+      "GonzalgoSpendPoints": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "axiom": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "axiom"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rank": {
+                  "type": "integer",
+                  "title": "#"
+                },
+                "site": {
+                  "type": "string",
+                  "title": "site"
+                },
+                "theorems_dominated": {
+                  "type": "integer",
+                  "title": "theorems dominated"
+                },
+                "subtree_constants": {
+                  "type": "integer",
+                  "title": "subtree"
+                },
+                "spenders": {
+                  "type": "integer",
+                  "title": "spenders"
+                },
+                "spends_directly": {
+                  "type": "boolean"
+                },
+                "primitives": {
+                  "type": "string",
+                  "title": "primitives cited"
+                },
+                "example_dependents": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "example_dependents",
+                "primitives",
+                "rank",
+                "site",
+                "spenders",
+                "spends_directly",
+                "subtree_constants",
+                "theorems_dominated"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Spend-Point Table",
+        "description": "The 20 largest sites of classical dependence in Mathlib, each with the number of declarations in its dominator subtree that cite a choice primitive directly. Separates sites where the axiom is spent from sites that dominate theorems while inheriting the axiom from further up. 20 rows, version 2026-08-12."
+      },
+      "GonzalgoSubstitutionLedger": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "acceptance": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "acceptance",
+              "target"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "declaration": {
+                  "type": "string",
+                  "title": "declaration"
+                },
+                "theorems_dominated": {
+                  "type": "integer",
+                  "title": "dominates"
+                },
+                "route_to_axiom": {
+                  "type": "string"
+                },
+                "occurrences": {
+                  "type": "integer",
+                  "title": "occurrences"
+                },
+                "testable": {
+                  "type": "integer",
+                  "title": "testable"
+                },
+                "synthesised": {
+                  "type": "integer",
+                  "title": "synthesised"
+                },
+                "kernel_verified_choice_free": {
+                  "type": "integer",
+                  "title": "choice-free"
+                }
+              },
+              "required": [
+                "declaration",
+                "kernel_verified_choice_free",
+                "occurrences",
+                "synthesised",
+                "testable"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Substitution Ledger",
+        "description": "Kernel-verified substitution attempted against the 20 largest sites of classical dependence in Mathlib. For each declaration: occurrences of Classical.propDecidable in its proof term, how many the harness could reach, how many had a Decidable instance synthesised, and how many produced a term the kernel accepted. 20 rows, version 2026-08-12."
+      },
+      "GonzalgoTacticBands": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "Lean 4": {
+                "type": "string"
+              },
+              "libraries": {
+                "type": "string"
+              },
+              "threshold": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Lean 4",
+              "libraries",
+              "threshold"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "library": {
+                  "type": "string",
+                  "title": "library"
+                },
+                "attribution": {
+                  "type": "string",
+                  "title": "rule"
+                },
+                "tactic": {
+                  "type": "string",
+                  "title": "tactic"
+                },
+                "proofs": {
+                  "type": "integer",
+                  "title": "proofs"
+                },
+                "classical": {
+                  "type": "integer",
+                  "title": "classical"
+                },
+                "eligible": {
+                  "type": "integer",
+                  "title": "eligible"
+                },
+                "rate_pct": {
+                  "type": "number",
+                  "title": "rate"
+                },
+                "role": {
+                  "type": "string",
+                  "title": "role"
+                },
+                "band_low_pct": {
+                  "type": "number"
+                },
+                "band_high_pct": {
+                  "type": "number"
+                },
+                "band_widest": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "string",
+                  "title": "vs band"
+                },
+                "escapes_band": {
+                  "type": "boolean"
+                },
+                "controls_in_band": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "attribution",
+                "band_high_pct",
+                "band_low_pct",
+                "band_widest",
+                "classical",
+                "controls_in_band",
+                "eligible",
+                "escapes_band",
+                "library",
+                "position",
+                "proofs",
+                "rate_pct",
+                "role",
+                "tactic"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Tactic Background Table",
+        "description": "Rates at which Lean tactics' proofs carry an avoidable classical dependence, across four libraries under two attribution rules, each shown against the band spanned by known-negative tactics in the same library and rule. The band is what makes a rate interpretable, and it is wide. 167 rows, version 2026-08-12."
+      },
+      "GonzalgoVersionDelta": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "seriesDoi": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "producedBy": {
+            "type": "object",
+            "properties": {
+              "software": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "paper": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "paper",
+              "software",
+              "url"
+            ]
+          },
+          "measured": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "extractor": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "extractor",
+              "from",
+              "to"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "type": "string",
+                  "title": "quantity"
+                },
+                "from_version": {
+                  "type": "string"
+                },
+                "to_version": {
+                  "type": "string"
+                },
+                "old_value": {
+                  "type": "integer",
+                  "title": "v4.32.1"
+                },
+                "new_value": {
+                  "type": "integer",
+                  "title": "v4.33.0"
+                },
+                "delta": {
+                  "type": "integer",
+                  "title": "delta"
+                },
+                "pct_change": {
+                  "type": "number"
+                },
+                "note": {
+                  "type": "string",
+                  "title": "note"
+                }
+              },
+              "required": [
+                "delta",
+                "from_version",
+                "note",
+                "quantity",
+                "to_version"
+              ]
+            }
+          }
+        },
+        "required": [
+          "description",
+          "displayed",
+          "fields",
+          "license",
+          "measured",
+          "name",
+          "producedBy",
+          "rows",
+          "seriesDoi",
+          "sha256",
+          "url",
+          "version"
+        ],
+        "title": "The Version Delta Table",
+        "description": "Declaration-graph differences between two Mathlib releases, measured by the same extractor on both sides. Separates declarations added and removed from those that kept their name — and among those, separates a changed statement from a changed proof. 12 rows, version 2026-08-12."
+      },
+      "StatusData20260818": {
+        "type": "object",
+        "properties": {
+          "cloudflare": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string"
+              },
+              "zones": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "error",
+              "zones"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "github": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "archived": {
+                  "type": "boolean"
+                },
+                "forks": {
+                  "type": "integer"
+                },
+                "open_issues": {
+                  "type": "integer"
+                },
+                "pushed_at": {
+                  "type": "string"
+                },
+                "repo": {
+                  "type": "string"
+                },
+                "stars": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "archived",
+                "forks",
+                "open_issues",
+                "pushed_at",
+                "repo",
+                "stars"
+              ]
+            }
+          },
+          "mode": {
+            "type": "string"
+          },
+          "npm": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "pypi": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "daily": {
+                  "type": "integer"
+                },
+                "monthly": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "daily",
+                "monthly",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "redacted": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "github_stars": {
+                "type": "integer"
+              },
+              "npm_weekly": {
+                "type": "integer"
+              },
+              "package_weekly": {
+                "type": "integer"
+              },
+              "properties_total": {
+                "type": "integer"
+              },
+              "properties_up": {
+                "type": "integer"
+              },
+              "pypi_weekly": {
+                "type": "integer"
+              },
+              "zenodo_downloads": {
+                "type": "integer"
+              },
+              "zenodo_records": {
+                "type": "integer"
+              },
+              "zenodo_views": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "github_stars",
+              "npm_weekly",
+              "package_weekly",
+              "properties_total",
+              "properties_up",
+              "pypi_weekly",
+              "zenodo_downloads",
+              "zenodo_records",
+              "zenodo_views"
+            ]
+          },
+          "uptime": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ms": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "up": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ms",
+                "name",
+                "up",
+                "url"
+              ]
+            }
+          },
+          "zenodo": {
+            "type": "object",
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "downloads": {
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "unique_downloads": {
+                      "type": "integer"
+                    },
+                    "unique_views": {
+                      "type": "integer"
+                    },
+                    "views": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "downloads",
+                    "id",
+                    "title",
+                    "unique_downloads",
+                    "unique_views",
+                    "views"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "records"
+            ]
+          }
+        },
+        "required": [
+          "cloudflare",
+          "date",
+          "generated_at",
+          "github",
+          "mode",
+          "npm",
+          "pypi",
+          "redacted",
+          "summary",
+          "uptime",
+          "zenodo"
+        ],
+        "title": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here."
+      },
+      "StatusData20260819": {
+        "type": "object",
+        "properties": {
+          "cloudflare": {
+            "type": "object",
+            "properties": {
+              "bots_24h": {
+                "type": "object",
+                "properties": {
+                  "AI Assistant": {
+                    "type": "integer"
+                  },
+                  "AI Crawler": {
+                    "type": "integer"
+                  },
+                  "AI Search": {
+                    "type": "integer"
+                  },
+                  "Accessibility": {
+                    "type": "integer"
+                  },
+                  "Advertising & Marketing": {
+                    "type": "integer"
+                  },
+                  "Archiver": {
+                    "type": "integer"
+                  },
+                  "Monitoring & Analytics": {
+                    "type": "integer"
+                  },
+                  "Page Preview": {
+                    "type": "integer"
+                  },
+                  "Search Engine Crawler": {
+                    "type": "integer"
+                  },
+                  "Search Engine Optimization": {
+                    "type": "integer"
+                  },
+                  "Unverified": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "AI Assistant",
+                  "AI Crawler",
+                  "AI Search",
+                  "Accessibility",
+                  "Advertising & Marketing",
+                  "Archiver",
+                  "Monitoring & Analytics",
+                  "Page Preview",
+                  "Search Engine Crawler",
+                  "Search Engine Optimization",
+                  "Unverified"
+                ]
+              },
+              "days": {
+                "type": "integer"
+              },
+              "sites": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "days_returned": {
+                      "type": "integer"
+                    },
+                    "page_views": {
+                      "type": "integer"
+                    },
+                    "requests": {
+                      "type": "integer"
+                    },
+                    "site": {
+                      "type": "string"
+                    },
+                    "threats": {
+                      "type": "integer"
+                    },
+                    "top_countries": {
+                      "type": "array"
+                    },
+                    "uniques": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "days_returned",
+                    "page_views",
+                    "requests",
+                    "site",
+                    "threats",
+                    "top_countries",
+                    "uniques"
+                  ]
+                }
+              },
+              "totals": {
+                "type": "object",
+                "properties": {
+                  "page_views": {
+                    "type": "integer"
+                  },
+                  "threats": {
+                    "type": "integer"
+                  },
+                  "uniques": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "page_views",
+                  "threats",
+                  "uniques"
+                ]
+              },
+              "window": {
+                "type": "object",
+                "properties": {
+                  "since": {
+                    "type": "string"
+                  },
+                  "until": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "since",
+                  "until"
+                ]
+              }
+            },
+            "required": [
+              "bots_24h",
+              "days",
+              "sites",
+              "totals",
+              "window"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "github": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "archived": {
+                  "type": "boolean"
+                },
+                "forks": {
+                  "type": "integer"
+                },
+                "open_issues": {
+                  "type": "integer"
+                },
+                "pushed_at": {
+                  "type": "string"
+                },
+                "repo": {
+                  "type": "string"
+                },
+                "stars": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "archived",
+                "forks",
+                "open_issues",
+                "pushed_at",
+                "repo",
+                "stars"
+              ]
+            }
+          },
+          "mode": {
+            "type": "string"
+          },
+          "npm": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "pypi": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "daily": {
+                  "type": "integer"
+                },
+                "monthly": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "daily",
+                "monthly",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "redacted": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "github_stars": {
+                "type": "integer"
+              },
+              "npm_weekly": {
+                "type": "integer"
+              },
+              "package_weekly": {
+                "type": "integer"
+              },
+              "page_views_7d": {
+                "type": "integer"
+              },
+              "properties_total": {
+                "type": "integer"
+              },
+              "properties_up": {
+                "type": "integer"
+              },
+              "pypi_weekly": {
+                "type": "integer"
+              },
+              "visitors_7d": {
+                "type": "integer"
+              },
+              "zenodo_downloads": {
+                "type": "integer"
+              },
+              "zenodo_records": {
+                "type": "integer"
+              },
+              "zenodo_views": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "github_stars",
+              "npm_weekly",
+              "package_weekly",
+              "page_views_7d",
+              "properties_total",
+              "properties_up",
+              "pypi_weekly",
+              "visitors_7d",
+              "zenodo_downloads",
+              "zenodo_records",
+              "zenodo_views"
+            ]
+          },
+          "uptime": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ms": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "up": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ms",
+                "name",
+                "up",
+                "url"
+              ]
+            }
+          },
+          "zenodo": {
+            "type": "object",
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "downloads": {
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "unique_downloads": {
+                      "type": "integer"
+                    },
+                    "unique_views": {
+                      "type": "integer"
+                    },
+                    "views": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "downloads",
+                    "id",
+                    "title",
+                    "unique_downloads",
+                    "unique_views",
+                    "views"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "records"
+            ]
+          }
+        },
+        "required": [
+          "cloudflare",
+          "date",
+          "generated_at",
+          "github",
+          "mode",
+          "npm",
+          "pypi",
+          "redacted",
+          "summary",
+          "uptime",
+          "zenodo"
+        ],
+        "title": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here."
+      },
+      "StatusData20260820": {
+        "type": "object",
+        "properties": {
+          "cloudflare": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "type": "integer"
+              },
+              "error": {
+                "type": "string"
+              },
+              "sites": {
+                "type": "array"
+              },
+              "totals": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "required": [
+              "days",
+              "error",
+              "sites",
+              "totals"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "github": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "archived": {
+                  "type": "boolean"
+                },
+                "forks": {
+                  "type": "integer"
+                },
+                "open_issues": {
+                  "type": "integer"
+                },
+                "pushed_at": {
+                  "type": "string"
+                },
+                "repo": {
+                  "type": "string"
+                },
+                "stars": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "archived",
+                "forks",
+                "open_issues",
+                "pushed_at",
+                "repo",
+                "stars"
+              ]
+            }
+          },
+          "mode": {
+            "type": "string"
+          },
+          "npm": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "pypi": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "error": {
+                  "type": "string"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "daily": {
+                  "type": "integer"
+                },
+                "monthly": {
+                  "type": "integer"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "package"
+              ]
+            }
+          },
+          "redacted": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "github_stars": {
+                "type": "integer"
+              },
+              "npm_weekly": {
+                "type": "integer"
+              },
+              "package_weekly": {
+                "type": "integer"
+              },
+              "properties_total": {
+                "type": "integer"
+              },
+              "properties_up": {
+                "type": "integer"
+              },
+              "pypi_weekly": {
+                "type": "integer"
+              },
+              "zenodo_downloads": {
+                "type": "integer"
+              },
+              "zenodo_records": {
+                "type": "integer"
+              },
+              "zenodo_views": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "github_stars",
+              "npm_weekly",
+              "package_weekly",
+              "properties_total",
+              "properties_up",
+              "pypi_weekly",
+              "zenodo_downloads",
+              "zenodo_records",
+              "zenodo_views"
+            ]
+          },
+          "uptime": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ms": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "up": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ms",
+                "name",
+                "up",
+                "url"
+              ]
+            }
+          },
+          "zenodo": {
+            "type": "object",
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "downloads": {
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "unique_downloads": {
+                      "type": "integer"
+                    },
+                    "unique_views": {
+                      "type": "integer"
+                    },
+                    "views": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "downloads",
+                    "id",
+                    "title",
+                    "unique_downloads",
+                    "unique_views",
+                    "views"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "records"
+            ]
+          }
+        },
+        "required": [
+          "cloudflare",
+          "date",
+          "generated_at",
+          "github",
+          "mode",
+          "npm",
+          "pypi",
+          "redacted",
+          "summary",
+          "uptime",
+          "zenodo"
+        ],
+        "title": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here."
+      },
+      "StatusData20260821": {
+        "type": "object",
+        "properties": {
+          "cloudflare": {
+            "type": "object",
+            "properties": {
+              "bots_24h": {
+                "type": "object",
+                "properties": {
+                  "AI Assistant": {
+                    "type": "integer"
+                  },
+                  "AI Crawler": {
+                    "type": "integer"
+                  },
+                  "AI Search": {
+                    "type": "integer"
+                  },
+                  "Advertising & Marketing": {
+                    "type": "integer"
+                  },
+                  "Feed Fetcher": {
+                    "type": "integer"
+                  },
+                  "Monitoring & Analytics": {
+                    "type": "integer"
+                  },
+                  "Page Preview": {
+                    "type": "integer"
+                  },
+                  "Search Engine Crawler": {
+                    "type": "integer"
+                  },
+                  "Search Engine Optimization": {
+                    "type": "integer"
+                  },
+                  "Security": {
+                    "type": "integer"
+                  },
+                  "Unverified": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "AI Assistant",
+                  "AI Crawler",
+                  "AI Search",
+                  "Advertising & Marketing",
+                  "Feed Fetcher",
+                  "Monitoring & Analytics",
+                  "Page Preview",
+                  "Search Engine Crawler",
+                  "Search Engine Optimization",
+                  "Security",
+                  "Unverified"
+                ]
+              },
+              "days": {
+                "type": "integer"
+              },
+              "sites": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "days_returned": {
+                      "type": "integer"
+                    },
+                    "page_views": {
+                      "type": "integer"
+                    },
+                    "requests": {
+                      "type": "integer"
+                    },
+                    "site": {
+                      "type": "string"
+                    },
+                    "threats": {
+                      "type": "integer"
+                    },
+                    "top_countries": {
+                      "type": "array"
+                    },
+                    "uniques": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "days_returned",
+                    "page_views",
+                    "requests",
+                    "site",
+                    "threats",
+                    "top_countries",
+                    "uniques"
+                  ]
+                }
+              },
+              "totals": {
+                "type": "object",
+                "properties": {
+                  "page_views": {
+                    "type": "integer"
+                  },
+                  "threats": {
+                    "type": "integer"
+                  },
+                  "uniques": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "page_views",
+                  "threats",
+                  "uniques"
+                ]
+              },
+              "window": {
+                "type": "object",
+                "properties": {
+                  "since": {
+                    "type": "string"
+                  },
+                  "until": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "since",
+                  "until"
+                ]
+              }
+            },
+            "required": [
+              "bots_24h",
+              "days",
+              "sites",
+              "totals",
+              "window"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "github": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "archived": {
+                  "type": "boolean"
+                },
+                "forks": {
+                  "type": "integer"
+                },
+                "open_issues": {
+                  "type": "integer"
+                },
+                "pushed_at": {
+                  "type": "string"
+                },
+                "repo": {
+                  "type": "string"
+                },
+                "stars": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "archived",
+                "forks",
+                "open_issues",
+                "pushed_at",
+                "repo",
+                "stars"
+              ]
+            }
+          },
+          "mode": {
+            "type": "string"
+          },
+          "npm": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "pypi": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "daily": {
+                  "type": "integer"
+                },
+                "monthly": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "daily",
+                "monthly",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "redacted": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "github_stars": {
+                "type": "integer"
+              },
+              "npm_weekly": {
+                "type": "integer"
+              },
+              "package_weekly": {
+                "type": "integer"
+              },
+              "page_views_7d": {
+                "type": "integer"
+              },
+              "properties_total": {
+                "type": "integer"
+              },
+              "properties_up": {
+                "type": "integer"
+              },
+              "pypi_weekly": {
+                "type": "integer"
+              },
+              "visitors_7d": {
+                "type": "integer"
+              },
+              "zenodo_downloads": {
+                "type": "integer"
+              },
+              "zenodo_records": {
+                "type": "integer"
+              },
+              "zenodo_views": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "github_stars",
+              "npm_weekly",
+              "package_weekly",
+              "page_views_7d",
+              "properties_total",
+              "properties_up",
+              "pypi_weekly",
+              "visitors_7d",
+              "zenodo_downloads",
+              "zenodo_records",
+              "zenodo_views"
+            ]
+          },
+          "uptime": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ms": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "up": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ms",
+                "name",
+                "up",
+                "url"
+              ]
+            }
+          },
+          "zenodo": {
+            "type": "object",
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "downloads": {
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "unique_downloads": {
+                      "type": "integer"
+                    },
+                    "unique_views": {
+                      "type": "integer"
+                    },
+                    "views": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "downloads",
+                    "id",
+                    "title",
+                    "unique_downloads",
+                    "unique_views",
+                    "views"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "records"
+            ]
+          }
+        },
+        "required": [
+          "cloudflare",
+          "date",
+          "generated_at",
+          "github",
+          "mode",
+          "npm",
+          "pypi",
+          "redacted",
+          "summary",
+          "uptime",
+          "zenodo"
+        ],
+        "title": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here."
+      },
+      "StatusLatest": {
+        "type": "object",
+        "properties": {
+          "cloudflare": {
+            "type": "object",
+            "properties": {
+              "bots_24h": {
+                "type": "object",
+                "properties": {
+                  "AI Assistant": {
+                    "type": "integer"
+                  },
+                  "AI Crawler": {
+                    "type": "integer"
+                  },
+                  "AI Search": {
+                    "type": "integer"
+                  },
+                  "Advertising & Marketing": {
+                    "type": "integer"
+                  },
+                  "Feed Fetcher": {
+                    "type": "integer"
+                  },
+                  "Monitoring & Analytics": {
+                    "type": "integer"
+                  },
+                  "Page Preview": {
+                    "type": "integer"
+                  },
+                  "Search Engine Crawler": {
+                    "type": "integer"
+                  },
+                  "Search Engine Optimization": {
+                    "type": "integer"
+                  },
+                  "Security": {
+                    "type": "integer"
+                  },
+                  "Unverified": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "AI Assistant",
+                  "AI Crawler",
+                  "AI Search",
+                  "Advertising & Marketing",
+                  "Feed Fetcher",
+                  "Monitoring & Analytics",
+                  "Page Preview",
+                  "Search Engine Crawler",
+                  "Search Engine Optimization",
+                  "Security",
+                  "Unverified"
+                ]
+              },
+              "days": {
+                "type": "integer"
+              },
+              "sites": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "days_returned": {
+                      "type": "integer"
+                    },
+                    "page_views": {
+                      "type": "integer"
+                    },
+                    "requests": {
+                      "type": "integer"
+                    },
+                    "site": {
+                      "type": "string"
+                    },
+                    "threats": {
+                      "type": "integer"
+                    },
+                    "top_countries": {
+                      "type": "array"
+                    },
+                    "uniques": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "days_returned",
+                    "page_views",
+                    "requests",
+                    "site",
+                    "threats",
+                    "top_countries",
+                    "uniques"
+                  ]
+                }
+              },
+              "totals": {
+                "type": "object",
+                "properties": {
+                  "page_views": {
+                    "type": "integer"
+                  },
+                  "threats": {
+                    "type": "integer"
+                  },
+                  "uniques": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "page_views",
+                  "threats",
+                  "uniques"
+                ]
+              },
+              "window": {
+                "type": "object",
+                "properties": {
+                  "since": {
+                    "type": "string"
+                  },
+                  "until": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "since",
+                  "until"
+                ]
+              }
+            },
+            "required": [
+              "bots_24h",
+              "days",
+              "sites",
+              "totals",
+              "window"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string"
+          },
+          "github": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "archived": {
+                  "type": "boolean"
+                },
+                "forks": {
+                  "type": "integer"
+                },
+                "open_issues": {
+                  "type": "integer"
+                },
+                "pushed_at": {
+                  "type": "string"
+                },
+                "repo": {
+                  "type": "string"
+                },
+                "stars": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "archived",
+                "forks",
+                "open_issues",
+                "pushed_at",
+                "repo",
+                "stars"
+              ]
+            }
+          },
+          "mode": {
+            "type": "string"
+          },
+          "npm": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "pypi": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_time": {
+                  "type": "integer"
+                },
+                "daily": {
+                  "type": "integer"
+                },
+                "monthly": {
+                  "type": "integer"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "weekly": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "all_time",
+                "daily",
+                "monthly",
+                "package",
+                "weekly"
+              ]
+            }
+          },
+          "redacted": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "github_stars": {
+                "type": "integer"
+              },
+              "npm_weekly": {
+                "type": "integer"
+              },
+              "package_weekly": {
+                "type": "integer"
+              },
+              "page_views_7d": {
+                "type": "integer"
+              },
+              "properties_total": {
+                "type": "integer"
+              },
+              "properties_up": {
+                "type": "integer"
+              },
+              "pypi_weekly": {
+                "type": "integer"
+              },
+              "visitors_7d": {
+                "type": "integer"
+              },
+              "zenodo_downloads": {
+                "type": "integer"
+              },
+              "zenodo_records": {
+                "type": "integer"
+              },
+              "zenodo_views": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "github_stars",
+              "npm_weekly",
+              "package_weekly",
+              "page_views_7d",
+              "properties_total",
+              "properties_up",
+              "pypi_weekly",
+              "visitors_7d",
+              "zenodo_downloads",
+              "zenodo_records",
+              "zenodo_views"
+            ]
+          },
+          "uptime": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ms": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "up": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ms",
+                "name",
+                "up",
+                "url"
+              ]
+            }
+          },
+          "zenodo": {
+            "type": "object",
+            "properties": {
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "downloads": {
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "unique_downloads": {
+                      "type": "integer"
+                    },
+                    "unique_views": {
+                      "type": "integer"
+                    },
+                    "views": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "downloads",
+                    "id",
+                    "title",
+                    "unique_downloads",
+                    "unique_views",
+                    "views"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "records"
+            ]
+          }
+        },
+        "required": [
+          "cloudflare",
+          "date",
+          "generated_at",
+          "github",
+          "mode",
+          "npm",
+          "pypi",
+          "redacted",
+          "summary",
+          "uptime",
+          "zenodo"
+        ],
+        "title": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here."
       },
       "Error": {
         "type": "object",
@@ -1663,6 +7677,9 @@
               "status": {
                 "type": "integer"
               },
+              "path": {
+                "type": "string"
+              },
               "hints": {
                 "type": "array",
                 "items": {
@@ -1675,5 +7692,28 @@
         }
       }
     }
+  },
+  "x-versioning": {
+    "strategy": "per-resource",
+    "summary": "URLs are stable and unversioned. Each document carries its own version and sha256, so a consumer pins to content rather than to a path.",
+    "detail": "There is no /v1/ prefix because there is no server to route one. A measurement table is republished at the same URL when it is re-measured, and its `version` (the measurement date) and `sha256` both change. Pin to the sha256 if you need a fixed snapshot, or to the series DOI in `seriesDoi`, which resolves to an immutable Zenodo deposit for that release.",
+    "breakingChangePolicy": "Fields are added, not removed or retyped. A field that must go is announced in the working log at https://f-keys.com/log/ and kept for at least 180 days after that entry.",
+    "deprecation": {
+      "signal": "A path scheduled for removal is served with the `Deprecation` and `Sunset` headers of RFC 8594 and RFC 9745, and is listed under x-versioning.deprecated here.",
+      "noticePeriod": "P180D"
+    },
+    "deprecated": [],
+    "changeLog": "https://f-keys.com/log/"
+  },
+  "x-rate-limit": {
+    "enforced": false,
+    "summary": "No rate limit. These are static files on a CDN; there is no quota, no API key and no 429.",
+    "detail": "No RateLimit or Retry-After headers are returned, because there is nothing behind them to enforce. Fetch as needed, and prefer the ETag and Last-Modified the CDN already sends so a repeat fetch costs a 304. If a request is ever refused it is the CDN's own abuse protection, not a published quota.",
+    "conditionalRequests": [
+      "ETag",
+      "If-None-Match",
+      "Last-Modified",
+      "If-Modified-Since"
+    ]
   }
 }

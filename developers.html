@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Developer resources — F-Keys</title>
+<title>F-Keys Developer Resources — API, CLI, and published data</title>
 <meta name="description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
 <link rel="canonical" href="https://f-keys.com/developers.html">
 <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:site_name" content="F-Keys">
-<meta property="og:title" content="Developer resources — F-Keys">
+<meta property="og:title" content="F-Keys Developer Resources — API, CLI, and published data">
 <meta property="og:description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/developers.html">
@@ -21,7 +21,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Developer resources — F-Keys">
+<meta name="twitter:title" content="F-Keys Developer Resources — API, CLI, and published data">
 <meta name="twitter:description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
 <link rel="stylesheet" href="/win98.css">
@@ -131,88 +131,158 @@
     </aside>
     <section class="content sunken">
 
-<div class="doc"><h1>Developer resources</h1>
-<p class="sub">Everything here is a package you install or a file you fetch.
-There is nothing to sign up for.</p>
+<div class="doc"><h1>F-Keys developer resources</h1>
+<p class="sub">Four command-line tools, six packages, and thirty-five JSON
+documents. Everything here is a thing you install or a file you fetch, and
+there is nothing to sign up for.</p>
 
 <h2>Start here</h2>
 <table class="facts">
-<tr><th>OpenAPI</th><td><a href="/openapi.json">/openapi.json</a> &mdash; every
-published dataset, its shape and its licence</td></tr>
+<tr><th>OpenAPI</th><td><a href="/openapi.json">/openapi.json</a> &mdash; all 35
+documents, each with a typed schema naming its columns</td></tr>
 <tr><th>For agents</th><td><a href="/llms.txt">/llms.txt</a> &mdash; the whole
 catalogue as plain text, including when to reach for each thing</td></tr>
 <tr><th>Site map</th><td><a href="/sitemap.xml">/sitemap.xml</a></td></tr>
-<tr><th>Documentation</th><td><a href="/Docs.html">/Docs.html</a> &mdash; setup,
+<tr><th>Product docs</th><td><a href="/Docs.html">/Docs.html</a> &mdash; setup,
 configuration and troubleshooting</td></tr>
 <tr><th>Source</th><td><a href="https://github.com/zengineco" rel="noopener">github.com/zengineco</a></td></tr>
 <tr><th>Questions</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
 </table>
 
-<h2>There are no API keys, and that is not an omission</h2>
-<p>Every F-Keys product either runs in your browser or installs on your
-machine. None of them calls a server of ours, because there is no server of
-ours &mdash; this site is a folder of static files behind a CDN. So there is
-nothing to authenticate, no rate limit to raise, no sandbox to provision and
-no quota to buy.</p>
-<p>What that buys you: the packages work offline, they keep working if this
-site goes away, and nothing you compute with them is reported back here. What
-it costs you: there is no endpoint to POST to. If you need one, the source is
-public and the licence is permissive for most of it.</p>
+<h2>Authentication</h2>
+<p><b>There is none, and none is required.</b> No API key, no token, no OAuth
+flow, no signup. Every request below works from a cold start with no
+credentials and no headers:</p>
+<pre>curl https://f-keys.com/gonzalgo/kernel-index/kernel-index.json</pre>
+<p>This is not a free tier with a paid one behind it. Every F-Keys product runs
+in your browser or installs on your machine, so nothing calls a server of ours
+&mdash; this site is a folder of static files behind a CDN. There is nothing to
+authenticate against because there is nothing running.</p>
+<p>What that buys you: the packages work offline, they keep working if this site
+goes away, and nothing you compute is reported back here. What it costs you:
+there is no endpoint to POST to. If you need one, the source is public.</p>
 
-<h2>Install</h2>
+<h2>Rate limits</h2>
+<p><b>None.</b> No quota, no <code>429</code>, and deliberately no
+<code>RateLimit</code> headers &mdash; publishing a limit nobody enforces would
+tell you to throttle against a number that does not exist.</p>
+<p>The CDN already sends <code>ETag</code> and <code>Last-Modified</code>, so
+use them and a repeat fetch costs you a <code>304</code> and no body:</p>
+<pre>curl -H "If-None-Match: &quot;&lt;etag&gt;&quot;" \
+     https://f-keys.com/status/latest.json</pre>
+
+<h2>Versioning and deprecation</h2>
+<p><b>The URLs are permanent; the data carries the version.</b> There is no
+<code>/v1/</code> prefix because there is no server to route one.</p>
 <table class="facts">
-<tr><th>gonzalgo</th><td><code>pip install gonzalgo</code> &mdash; axiom
-provenance for Lean 4 and Metamath</td></tr>
-<tr><th>keyj</th><td><code>pip install keyj</code> &mdash; tablature to notes,
-render, and play</td></tr>
-<tr><th>plumhud</th><td><code>pip install plumhud</code> &mdash; miner fleet
-monitor</td></tr>
-<tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
-NerdMiner discovery and vitals</td></tr>
-<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code> &mdash;
-colour-vision simulation and daltonisation</td></tr>
-<tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
-&mdash; the TipStreams widget</td></tr>
+<tr><th>Pin to content</th><td>Every document carries a <code>version</code>
+(the measurement date) and a <code>sha256</code>. Re-measuring republishes the
+same URL with both changed, so comparing either tells you whether anything moved
+under you.</td></tr>
+<tr><th>Pin to a release</th><td>Each table carries a <code>seriesDoi</code>
+resolving to an immutable Zenodo deposit. Cite that, not this page.</td></tr>
+<tr><th>Breaking changes</th><td>Fields are added, never removed or retyped. A
+field that has to go is announced in the <a href="/log/">working log</a> and
+kept for at least <b>180 days</b> after that entry.</td></tr>
+<tr><th>Deprecation signal</th><td>A path scheduled for removal is served with
+the <code>Deprecation</code> and <code>Sunset</code> headers of RFC 8594 and RFC
+9745, and listed under <code>x-versioning.deprecated</code> in
+<a href="/openapi.json">openapi.json</a>. That list is currently empty.</td></tr>
 </table>
 
-<h2>In your pipeline</h2>
-<p>The <a href="https://github.com/marketplace/actions/gonzalgo-trust-audit" rel="noopener">gonzalgo-trust-audit</a>
-Action fails a build when a proof rests on something unfinished. Three lines of
-workflow, or <code>--fail-on-trust</code> if you would rather call the CLI
-yourself.</p>
+<h2>The command line</h2>
+<p>Four of these are real CLIs, not libraries with a script attached. Each does
+its whole job from a terminal, which is the point: an agent can drive them
+without an integration.</p>
+<pre><b>pip install gonzalgo</b>
+gonzalgo trust <i>path</i>              every theorem reaching a sorry
+gonzalgo why <i>decl</i> <i>axiom</i>          shortest labelled path to an axiom
+gonzalgo trust <i>path</i> --fail-on-trust  exit non-zero in CI</pre>
+<pre><b>pip install keyj</b>
+keyj tab solo.txt -o song.txt    tablature in, note names out
+keyj render song.txt out.wav     the sequence, at a tempo
+keyj show song.txt               what is in a sequence</pre>
+<pre><b>pip install moonbeam-miner</b>
+moonbeam scan                    find the NerdMiners on this network
+moonbeam watch                   their vitals, live</pre>
+<pre><b>pip install plumhud</b>
+plumhud                          the overlay HUD
+plumhud --history                what the fleet has been doing</pre>
+<p>In a pipeline, the
+<a href="https://github.com/marketplace/actions/gonzalgo-trust-audit" rel="noopener">gonzalgo-trust-audit</a>
+Action is three lines of workflow and fails the build when a proof rests on
+something unfinished.</p>
+
+<h2>Packages</h2>
+<table class="facts">
+<tr><th>gonzalgo</th><td><code>pip install gonzalgo</code> &mdash; axiom
+provenance for Lean 4 and Metamath. Apache-2.0.</td></tr>
+<tr><th>keyj</th><td><code>pip install keyj</code> &mdash; tablature to notes,
+render, and play.</td></tr>
+<tr><th>plumhud</th><td><code>pip install plumhud</code> &mdash; miner fleet
+monitor.</td></tr>
+<tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
+NerdMiner discovery and vitals.</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code> &mdash;
+colour-vision simulation and daltonisation.</td></tr>
+<tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
+&mdash; the TipStreams widget.</td></tr>
+</table>
 
 <h2>The published data</h2>
-<p>Thirty-five JSON documents are served from this domain and described in
-<a href="/openapi.json">openapi.json</a>. They are static files: fetch them,
-cache them, mirror them.</p>
+<p>Thirty-five JSON documents, every one described in
+<a href="/openapi.json">openapi.json</a> with a typed schema that names its
+columns &mdash; so a function-calling agent knows a table has a
+<code>library</code> string and a <code>theorems</code> integer before it
+fetches half a megabyte to find out.</p>
 <table class="facts">
 <tr><th>Measurement tables</th><td>Thirteen tables behind the papers &mdash; the
 <a href="/gonzalgo/kernel-index/">Kernel Index</a>, the
-<a href="/gonzalgo/dominator-table/">Dominator Table</a> and the rest. Each is
-one object carrying its own <code>version</code>, <code>sha256</code>,
-<code>licence</code> and series DOI beside its rows, so you can cite it and
-tell whether it changed under you.</td></tr>
+<a href="/gonzalgo/dominator-table/">Dominator Table</a> and the rest. One
+object each, carrying its <code>version</code>, <code>sha256</code>,
+<code>license</code> and <code>seriesDoi</code> beside its <code>rows</code>.
+CC BY 4.0.</td></tr>
 <tr><th>Kernel Trust Profile</th><td>The
-<a href="/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json">0.1 schema</a>
-and fourteen profiles conforming to it, one per library measured.</td></tr>
+<a href="/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json">0.1 schema</a> and
+fourteen profiles conforming to it, one per library measured.</td></tr>
 <tr><th>Status</th><td><a href="/status/latest.json">/status/latest.json</a>
 &mdash; the daily snapshot behind the <a href="/status/">status page</a>.
 Repository traffic is owner-only and is not in it.</td></tr>
 </table>
-<p>The measurement data is CC BY 4.0. Cite the series DOI in the file rather
-than this page, so the citation points at a version.</p>
+<pre># the whole surface, as an agent would discover it
+curl https://f-keys.com/openapi.json | jq '.paths | keys'
+
+# one table, and the columns it declares
+curl -s https://f-keys.com/gonzalgo/kernel-index/kernel-index.json | jq '.rows[0]'
+
+# check whether it moved since you last looked
+curl -s https://f-keys.com/gonzalgo/kernel-index/kernel-index.json | jq -r '.version, .sha256'</pre>
 
 <h2>The site itself is machine-readable</h2>
-<p>Every page here serves <b>Markdown</b> to anything that asks for it. Send
+<p>Every page here serves <b>Markdown</b> to anything that asks. Send
 <code>Accept: text/markdown</code> and you get the content without the window
 around it, per <a href="https://acceptmarkdown.com" rel="noopener">acceptmarkdown.com</a>,
 with <code>Vary: Accept</code> set so a cache cannot hand you the wrong one.</p>
 <pre>curl -H "Accept: text/markdown" https://f-keys.com/keyj/</pre>
-<p>A path that does not exist returns a real <b>404</b>, and returns it in the
-format you asked for. Send <code>Accept: application/json</code> and the error
-is JSON with a stable <code>code</code>, a message and hints, rather than an
-HTML page you would have to parse to discover you had failed.</p>
-<pre>curl -H "Accept: application/json" https://f-keys.com/no-such-path</pre>
+<p>A path that does not exist returns a real <b>404</b> in the format you asked
+for. Anything under a data path &mdash; a <code>.json</code> URL,
+<code>/api</code>, <code>/v1</code> &mdash; errors as JSON even when the client
+sends no <code>Accept</code> at all, because most of them do not:</p>
+<pre>curl https://f-keys.com/gonzalgo/no-such-table.json
+
+{
+  "error": {
+    "code": "not_found",
+    "message": "No resource exists at /gonzalgo/no-such-table.json",
+    "status": 404,
+    "path": "/gonzalgo/no-such-table.json",
+    "hints": [ "..." ]
+  }
+}</pre>
+<p>The <code>code</code> is stable and machine-readable, the
+<code>hints</code> name the three places a lost agent can recover from, and the
+envelope is the one under <code>components.schemas.Error</code> in the
+specification.</p>
 <div class="btnrow">
   <a class="btn default" href="/openapi.json">openapi.json</a>
   <a class="btn" href="/llms.txt">llms.txt</a>

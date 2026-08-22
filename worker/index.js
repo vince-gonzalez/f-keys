@@ -81,6 +81,25 @@ function wantsJson(accept) {
   return q.json > 0 && q.json >= q.html && q.json >= q.markdown;
 }
 
+/* Paths whose answer is data whatever the request says it will take. A
+   client fetching a .json URL is not asking for a web page, and most of
+   them - curl, requests, fetch - send `Accept: * /*` rather than naming
+   a type, so waiting to be asked in so many words means answering a
+   machine with markup. */
+var DATA_PATH = /(\.json$)|(^\/api(\/|$))|(^\/v\d+(\/|$))/i;
+
+/* Explicitly preferring HTML is still honoured: a browser that lands on
+   a broken .json link should see the page, not a blob. */
+function prefersHtml(accept) {
+  var q = quality(accept);
+  return q.html > 0 && q.html >= q.json && q.html >= q.markdown;
+}
+
+function shouldErrorAsJson(pathname, accept) {
+  if (wantsJson(accept)) { return true; }
+  return DATA_PATH.test(pathname) && !prefersHtml(accept);
+}
+
 /* The shape openapi.json documents under components.schemas.Error. The
    hints are the three places a lost agent can actually recover from. */
 function jsonError(pathname, status, code, message) {
@@ -184,7 +203,8 @@ async function handle(request) {
 
   /* A JSON file that exists is served by the origin as JSON already;
      this is only for the case where nothing is there. */
-  if (htmlResponse.status === 404 && wantsJson(request.headers.get("Accept"))) {
+  if (htmlResponse.status === 404 &&
+      shouldErrorAsJson(url.pathname, request.headers.get("Accept"))) {
     return jsonError(url.pathname, 404, "not_found",
                      "No resource exists at " + url.pathname);
   }

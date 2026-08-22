@@ -123,6 +123,107 @@ def describe(doc, path):
     return os.path.basename(path), ""
 
 
+MAX_DEPTH = 4
+SAMPLE = 40
+
+
+def json_type(value):
+    if value is None:
+        return None                      # carries no type information
+    if isinstance(value, bool):
+        return "boolean"
+    if isinstance(value, int):
+        return "integer"
+    if isinstance(value, float):
+        return "number"
+    if isinstance(value, str):
+        return "string"
+    if isinstance(value, list):
+        return "array"
+    return "object"
+
+
+def infer(value, depth=0, labels=None):
+    """A typed schema read off the data itself.
+
+    An agent doing function calling needs to know a table has a `library`
+    column of strings before it fetches half a megabyte to find out. The
+    types are not asserted from a spec written alongside the data, they
+    are read out of the data, so they cannot describe a column that is
+    not there.
+    """
+    kind = json_type(value)
+
+    if kind == "object" and depth < MAX_DEPTH:
+        props, required = {}, []
+        for key, item in value.items():
+            if json_type(item) is None:
+                continue
+            props[key] = infer(item, depth + 1, labels)
+            if labels and key in labels:
+                props[key]["title"] = labels[key]
+            required.append(key)
+        out = {"type": "object", "properties": props}
+        if required:
+            out["required"] = sorted(required)
+        return out
+
+    if kind == "array" and depth < MAX_DEPTH:
+        items = [v for v in value[:SAMPLE] if json_type(v) is not None]
+        if not items:
+            return {"type": "array"}
+        if all(isinstance(v, dict) for v in items):
+            # union the keys across the sample, so a column that is only
+            # populated on some rows is described but not made required
+            props, counts = {}, {}
+            for row in items:
+                for key, item in row.items():
+                    if json_type(item) is None:
+                        continue
+                    if key not in props:
+                        props[key] = infer(item, depth + 2, labels)
+                        if labels and key in labels:
+                            props[key]["title"] = labels[key]
+                    counts[key] = counts.get(key, 0) + 1
+            required = sorted(k for k, c in counts.items() if c == len(items))
+            schema = {"type": "object", "properties": props}
+            if required:
+                schema["required"] = required
+            return {"type": "array", "items": schema}
+        return {"type": "array", "items": infer(items[0], depth + 1, labels)}
+
+    if kind in (None, "object", "array"):
+        return {"type": kind or "object"}
+    return {"type": kind}
+
+
+def schema_name(path):
+    """A stable, unique name per document, for $ref and for the tools
+    that turn an operation into a function signature."""
+    rel = os.path.relpath(path, ROOT).replace("\\", "/")
+    rel = rel[:-len(".json")] if rel.endswith(".json") else rel
+    parts = [p for p in rel.replace(".", "_").split("/") if p]
+    # drop the directory when it just repeats the file name
+    if len(parts) >= 2 and parts[-1] == parts[-2]:
+        parts = parts[:-1]
+    return "".join(w.capitalize() for p in parts
+                   for w in p.replace("-", "_").split("_"))
+
+
+def dataset_schema(doc, title, blurb):
+    """The envelope and its rows, typed, with the table's own column
+    labels carried through as titles."""
+    labels = {}
+    for col in (doc.get("displayed") or []):
+        if isinstance(col, dict) and col.get("key") and col.get("label"):
+            labels[col["key"]] = col["label"]
+    schema = infer(doc, labels=labels)
+    schema["title"] = title
+    if blurb:
+        schema["description"] = blurb.strip()
+    return schema
+
+
 ERROR_RESPONSE = {
     "description": "The path does not exist. Returned as JSON when the "
                    "request asks for it, so an agent does not have to "
@@ -145,12 +246,15 @@ ERROR_RESPONSE = {
 
 
 def paths(found):
-    out = {}
-    # and the paths themselves go out in one fixed order, so the document
-    # does not depend on how the tree happened to be walked
+    """Each operation, and the component schema it refers to."""
+    out, schemas = {}, {}
+    # the paths go out in one fixed order, so the document does not depend
+    # on how the tree happened to be walked
     for top, path, doc in sorted(found, key=lambda f: url_for(f[1])):
         title, blurb = describe(doc, path)
         tag = next(t for s, t, _b in SOURCES if s == top)
+        name = schema_name(path)
+        schemas[name] = dataset_schema(doc, title, blurb)
         out[url_for(path)] = {"get": {
             "summary": title,
             "description": blurb.strip(),
@@ -161,14 +265,13 @@ def paths(found):
             "responses": {
                 "200": {
                     "description": title,
-                    "content": {"application/json": {"schema": {
-                        "$ref": "#/components/schemas/Dataset"
-                        if "rows" in doc else "#/components/schemas/Document"}}},
+                    "content": {"application/json": {
+                        "schema": {"$ref": "#/components/schemas/" + name}}},
                 },
                 "404": ERROR_RESPONSE,
             },
         }}
-    return out
+    return out, schemas
 
 
 DESCRIPTION = """\
@@ -196,8 +299,76 @@ via `Accept`, per acceptmarkdown.com.
 """
 
 
+# -- what an integrator is entitled to rely on ----------------
+# An agent will not build against a surface that can change without
+# warning, and the honest answer here is unusual enough to be worth
+# stating in the document rather than leaving to inference: the URLs
+# are permanent, and it is the DATA that carries the version.
+VERSIONING = {
+    "strategy": "per-resource",
+    "summary": "URLs are stable and unversioned. Each document carries its "
+               "own version and sha256, so a consumer pins to content "
+               "rather than to a path.",
+    "detail": "There is no /v1/ prefix because there is no server to route "
+              "one. A measurement table is republished at the same URL when "
+              "it is re-measured, and its `version` (the measurement date) "
+              "and `sha256` both change. Pin to the sha256 if you need a "
+              "fixed snapshot, or to the series DOI in `seriesDoi`, which "
+              "resolves to an immutable Zenodo deposit for that release.",
+    "breakingChangePolicy": "Fields are added, not removed or retyped. A "
+                            "field that must go is announced in the working "
+                            "log at " + SITE + "/log/ and kept for at least "
+                            "180 days after that entry.",
+    "deprecation": {
+        "signal": "A path scheduled for removal is served with the "
+                  "`Deprecation` and `Sunset` headers of RFC 8594 and RFC "
+                  "9745, and is listed under x-versioning.deprecated here.",
+        "noticePeriod": "P180D",
+    },
+    "deprecated": [],
+    "changeLog": SITE + "/log/",
+}
+
+# There is no rate limit to report, and inventing a RateLimit header for
+# a limit that does not exist would tell an agent to throttle against a
+# number nobody enforces. Saying so is more useful than a fiction.
+RATE_LIMIT = {
+    "enforced": False,
+    "summary": "No rate limit. These are static files on a CDN; there is no "
+               "quota, no API key and no 429.",
+    "detail": "No RateLimit or Retry-After headers are returned, because "
+              "there is nothing behind them to enforce. Fetch as needed, "
+              "and prefer the ETag and Last-Modified the CDN already sends "
+              "so a repeat fetch costs a 304. If a request is ever refused "
+              "it is the CDN's own abuse protection, not a published quota.",
+    "conditionalRequests": ["ETag", "If-None-Match", "Last-Modified",
+                            "If-Modified-Since"],
+}
+
+
 def spec():
     found = datasets()
+    documented, schemas = paths(found)
+
+    # the generic envelope stays as the shape all the measurement tables
+    # share; the per-dataset schemas above it carry the actual columns
+    schemas["Error"] = {
+        "type": "object",
+        "required": ["error"],
+        "properties": {"error": {
+            "type": "object",
+            "required": ["code", "message", "status"],
+            "properties": {
+                "code": {"type": "string",
+                         "description": "Stable machine-readable identifier."},
+                "message": {"type": "string"},
+                "status": {"type": "integer"},
+                "path": {"type": "string"},
+                "hints": {"type": "array", "items": {"type": "string"},
+                          "description": "Where to look instead."},
+            }}},
+    }
+
     return {
         "openapi": "3.1.0",
         "info": {
@@ -207,61 +378,17 @@ def spec():
             "description": DESCRIPTION,
             "contact": {"name": "F-Keys", "email": "hello@f-keys.com",
                         "url": SITE + "/contact.html"},
-            "license": {"name": "CC BY 4.0",
-                        "identifier": "CC-BY-4.0"},
+            "license": {"name": "CC BY 4.0", "identifier": "CC-BY-4.0"},
         },
         "servers": [{"url": SITE, "description": "Static files over HTTPS"}],
         "externalDocs": {"url": SITE + "/developers.html",
                          "description": "Developer resources"},
         "tags": [{"name": t, "description": b} for _s, t, b in SOURCES],
-        "paths": paths(found),
-        "components": {"schemas": {
-            "Dataset": {
-                "type": "object",
-                "description": "A published measurement table.",
-                "required": ["name", "version", "sha256", "rows"],
-                "properties": {
-                    "name": {"type": "string"},
-                    "description": {"type": "string"},
-                    "version": {"type": "string",
-                                "description": "The measurement date."},
-                    "sha256": {"type": "string",
-                               "description": "Checksum of the rows, so a "
-                                              "consumer can tell whether the "
-                                              "table changed."},
-                    "url": {"type": "string", "format": "uri"},
-                    "seriesDoi": {"type": "string", "format": "uri"},
-                    "license": {"type": "string", "format": "uri"},
-                    "producedBy": {"type": "object"},
-                    "measured": {"type": "object"},
-                    "fields": {"type": "array", "items": {"type": "string"}},
-                    "rows": {"type": "array", "items": {"type": "object"}},
-                },
-            },
-            "Document": {"type": "object",
-                         "description": "A JSON document whose shape is "
-                                        "given by its own $schema or "
-                                        "ktp_version field."},
-            "Error": {
-                "type": "object",
-                "required": ["error"],
-                "properties": {"error": {
-                    "type": "object",
-                    "required": ["code", "message", "status"],
-                    "properties": {
-                        "code": {"type": "string",
-                                 "description": "Stable machine-readable "
-                                                "identifier."},
-                        "message": {"type": "string"},
-                        "status": {"type": "integer"},
-                        "hints": {"type": "array",
-                                  "items": {"type": "string"},
-                                  "description": "Where to look instead."},
-                    }}},
-            },
-        }},
+        "paths": documented,
+        "components": {"schemas": schemas},
+        "x-versioning": VERSIONING,
+        "x-rate-limit": RATE_LIMIT,
     }
-
 
 def render():
     return json.dumps(spec(), indent=2, ensure_ascii=False) + "\n"

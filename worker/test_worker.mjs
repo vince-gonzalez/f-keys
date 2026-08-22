@@ -127,7 +127,21 @@ var jsonCases = [
   ["json preferred by q", "/nope", "text/html;q=0.2, application/json;q=0.9",
    "not_found"],
   ["json refused by q=0", "/nope", "text/html, application/json;q=0", null],
-  ["a browser still gets html", "/nope", "text/html", null]
+  ["a browser still gets html", "/nope", "text/html", null],
+
+  /* curl, requests and fetch all send `Accept: * /*` unless told
+     otherwise, so an auditor probing for JSON errors never names the
+     type. A .json path answering that with markup is the whole defect
+     this exists to prevent. */
+  [".json under */*", "/nope.json", "*/*", "not_found"],
+  [".json with no Accept at all", "/nope.json", null, "not_found"],
+  ["/api under */*", "/api/v1/thing", "*/*", "not_found"],
+  ["/v1 under */*", "/v1/anything", "*/*", "not_found"],
+
+  /* but a page path is still a page, and an explicit browser request
+     for a .json path still gets the page rather than a blob */
+  ["a page path under */* stays html", "/nope", "*/*", null],
+  ["a browser on a .json path", "/nope.json", "text/html", null]
 ];
 
 for (var i = 0; i < cases.length; i++) {
