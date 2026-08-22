@@ -83,7 +83,11 @@ def datasets():
         if not os.path.isdir(base):
             continue
         for cwd, dirs, names in os.walk(base):
-            dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+            # os.walk hands back directories in filesystem order, which is
+            # not the same order on Windows and on the Linux runner. Sorting
+            # here makes the generated spec byte-identical on both, so
+            # --check is comparing content rather than platform.
+            dirs[:] = sorted(d for d in dirs if d not in SKIP_DIRS)
             for n in sorted(names):
                 if not n.endswith(".json"):
                     continue
@@ -142,7 +146,9 @@ ERROR_RESPONSE = {
 
 def paths(found):
     out = {}
-    for top, path, doc in found:
+    # and the paths themselves go out in one fixed order, so the document
+    # does not depend on how the tree happened to be walked
+    for top, path, doc in sorted(found, key=lambda f: url_for(f[1])):
         title, blurb = describe(doc, path)
         tag = next(t for s, t, _b in SOURCES if s == top)
         out[url_for(path)] = {"get": {

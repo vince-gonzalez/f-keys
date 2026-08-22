@@ -1356,50 +1356,6 @@
         }
       }
     },
-    "/status/latest.json": {
-      "get": {
-        "summary": "Status snapshot",
-        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
-        "operationId": "status_latest",
-        "tags": [
-          "Status"
-        ],
-        "responses": {
-          "200": {
-            "description": "Status snapshot",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Document"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "example": {
-                  "error": {
-                    "code": "not_found",
-                    "message": "No resource exists at /gonzalgo/nope.json",
-                    "status": 404,
-                    "hints": [
-                      "Every published path is listed in https://f-keys.com/openapi.json",
-                      "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/status/data/2026-08-18.json": {
       "get": {
         "summary": "Status snapshot",
@@ -1537,6 +1493,50 @@
         "summary": "Status snapshot",
         "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
         "operationId": "status_data_2026_08_21",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The path does not exist. Returned as JSON when the request asks for it, so an agent does not have to parse an HTML error page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No resource exists at /gonzalgo/nope.json",
+                    "status": 404,
+                    "hints": [
+                      "Every published path is listed in https://f-keys.com/openapi.json",
+                      "The full site map is at https://f-keys.com/sitemap.xml",
+                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status/latest.json": {
+      "get": {
+        "summary": "Status snapshot",
+        "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here.",
+        "operationId": "status_latest",
         "tags": [
           "Status"
         ],
