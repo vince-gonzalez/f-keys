@@ -69,6 +69,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      # the status-page parity step below runs the browser renderer under
+      # node, so this job needs both runtimes
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: The claims this site makes about itself
         run: python tools/test_site.py
 
@@ -98,6 +103,13 @@ jobs:
       # goes missing, which would break its typography silently.
       - name: No page reaches Google for a typeface
         run: python tools/fonts.py --verify
+
+      # The status page is rendered twice - into the HTML here, and in
+      # the browser by status/status.js when it re-reads latest.json.
+      # Drift between them would only show to a reader with JavaScript
+      # on, comparing against a page they cannot see.
+      - name: The server and the browser render the same status page
+        run: python tools/test_statuspage.py
 
       - name: Share card and favicons
         run: |

@@ -189,3 +189,24 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
   .col-status{width:auto}
   .hide-xs{display:none}
 }
+
+/* ── the status page ──────────────────────────────────────────
+   These utility classes were emitted by the status renderer and
+   never defined, so every number on that page rendered as plain
+   body text. The wide tables also need somewhere to overflow:
+   without .scroll the repository table pushes the window past
+   the viewport on a phone and the whole page scrolls sideways. */
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dim{color:var(--dim)}
+.ok{color:var(--ok);font-weight:700}
+.down{color:#a00000;font-weight:700}
+.up{color:var(--ok)}
+.scroll{overflow-x:auto;max-width:100%;margin:0 0 4px}
+.scroll table{min-width:100%}
+table.details th.num,table.details td.num{text-align:right}
+.spark{display:block;margin-left:auto;overflow:visible}
+.spark polyline{fill:none;stroke:var(--sel);stroke-width:1.5;
+  vector-effect:non-scaling-stroke}
+.errs{margin:.4rem 0 0 1.1rem}
+.errs li{font-size:11px;color:var(--dim)}
+#live-note{font-size:11px;margin:.2rem 0 .6rem}

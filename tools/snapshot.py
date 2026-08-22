@@ -80,17 +80,35 @@ PROPERTIES = [
 ]
 
 NPM_PACKAGES  = ["@f-keys/tip-widget", "opticquiz-eye", "opticquiz-cvd", "opticquiz-cvd-mcp"]
-PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
-                 "keyj"]
-# Three of these were shipped and then never added here, so the status page
-# reported two of five packages and read as complete.
 
-GITHUB_OWNER = "zengineco"
+# A package that is published and untracked reads, on this page, exactly
+# like a package that does not exist. mmforge, certivl and ishihara were
+# all live on PyPI and absent here, which is the same failure the note
+# below already recorded once.
+PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
+                 "keyj", "mmforge", "certivl", "ishihara"]
+
+# Repositories are owner-qualified now. gonzalgo moved to the personal
+# account and only kept reporting because GitHub redirects transferred
+# repos - a redirect is not a reason to keep the wrong name written down.
+GITHUB_OWNER = "zengineco"          # kept for anything still unqualified
 GITHUB_REPOS = [
-    "f-keys", "gonzalgo", "opticquiz.com", "tip-widget", "poticas",
-    "5best2buy.com", "trailer-load.com", "tipstreams.com", "prompt-game",
-    "daisupop", "qv", "fytecraft.com", "modulign.org", "Moonbeam-NerdMiner",
+    "zengineco/f-keys", "zengineco/opticquiz.com", "zengineco/tip-widget",
+    "zengineco/poticas", "zengineco/5best2buy.com",
+    "zengineco/trailer-load.com", "zengineco/tipstreams.com",
+    "zengineco/prompt-game", "zengineco/daisupop", "zengineco/qv",
+    "zengineco/fytecraft.com", "zengineco/modulign.org",
+    "zengineco/Moonbeam-NerdMiner",
+    "vince-gonzalez/gonzalgo", "vince-gonzalez/certivl",
+    "vince-gonzalez/ishihara", "vince-gonzalez/mmforge",
+    "vince-gonzalez/apriori", "vince-gonzalez/loadbearing",
+    "vince-gonzalez/certified-covers", "vince-gonzalez/epistemend.org",
 ]
+
+# How many days of history the page draws its trends from. The dated
+# files in status/data are the time series; this is how far back the
+# published summary reaches into them.
+HISTORY_DAYS = 60
 
 PAPERS_URL = "https://f-keys.com/papers/"
 
@@ -145,8 +163,19 @@ def collect_npm():
     for pkg in NPM_PACKAGES:
         d, err = fetch_json(f"https://api.npmjs.org/downloads/point/last-week/{pkg}")
         entry = {"package": pkg,
+                 "registry": "npm",
+                 "url": f"https://www.npmjs.com/package/{pkg}",
                  "weekly": (d or {}).get("downloads") if not err else None,
                  "error": err}
+        meta, merr = fetch_json(
+            "https://registry.npmjs.org/" + pkg.replace("/", "%2f"), tries=2)
+        if not merr and meta:
+            latest = ((meta.get("dist-tags") or {}).get("latest"))
+            entry["version"] = latest
+            entry["summary"] = meta.get("description")
+            entry["license"] = (meta.get("versions", {}).get(latest, {})
+                                .get("license") if latest else None)
+            entry["released"] = (meta.get("time") or {}).get(latest)
         # npm has no all-time endpoint; a wide point range is the way to get it.
         a, aerr = fetch_json(
             f"https://api.npmjs.org/downloads/point/2015-01-01:{today}/{pkg}", tries=2)
@@ -161,10 +190,24 @@ def collect_pypi():
         d, err = fetch_json(f"https://pypistats.org/api/packages/{pkg}/recent")
         data = (d or {}).get("data", {}) if not err else {}
         entry = {"package": pkg,
+                 "registry": "PyPI",
+                 "url": f"https://pypi.org/project/{pkg}/",
                  "daily":   data.get("last_day"),
                  "weekly":  data.get("last_week"),
                  "monthly": data.get("last_month"),
                  "error": err}
+        # A download count with no version beside it does not say whether
+        # anyone is installing something current.
+        meta, merr = fetch_json(f"https://pypi.org/pypi/{pkg}/json", tries=2)
+        if not merr and meta:
+            info = meta.get("info") or {}
+            entry["version"] = info.get("version")
+            entry["summary"] = info.get("summary")
+            entry["license"] = info.get("license") or None
+            entry["requires_python"] = info.get("requires_python")
+            releases = (meta.get("releases") or {}).get(info.get("version")) or []
+            entry["released"] = (releases[0].get("upload_time_iso_8601")
+                                 if releases else None)
         # /overall returns both categories. with_mirrors is roughly 3x the
         # real figure because mirror bots re-download constantly, so only
         # without_mirrors is reported here.
@@ -183,17 +226,31 @@ def collect_github():
     auth  = {"Authorization": f"Bearer {token}"} if token else None
     out = []
     for repo in GITHUB_REPOS:
-        entry = {"repo": repo}
-        d, err = fetch_json(f"https://api.github.com/repos/{GITHUB_OWNER}/{repo}", headers=auth)
+        full = repo if "/" in repo else f"{GITHUB_OWNER}/{repo}"
+        entry = {"repo": full.split("/")[-1], "full_name": full,
+                 "owner": full.split("/")[0]}
+        d, err = fetch_json(f"https://api.github.com/repos/{full}", headers=auth)
         if err:
             entry["error"] = err
             out.append(entry)
             continue
+        lic = (d.get("license") or {}).get("spdx_id")
         entry.update({"stars": d.get("stargazers_count"),
                       "forks": d.get("forks_count"),
                       "open_issues": d.get("open_issues_count"),
+                      "watchers": d.get("subscribers_count"),
                       "pushed_at": d.get("pushed_at"),
-                      "archived": d.get("archived")})
+                      "created_at": d.get("created_at"),
+                      "archived": d.get("archived"),
+                      "language": d.get("language"),
+                      # NOASSERTION is what GitHub returns for a licence it
+                      # cannot identify, which is not the same as having one
+                      "license": None if lic in (None, "NOASSERTION") else lic,
+                      "description": d.get("description"),
+                      "homepage": d.get("homepage") or None,
+                      "topics": d.get("topics") or [],
+                      "size_kb": d.get("size"),
+                      "url": d.get("html_url")})
         if token:
             # Traffic needs push access; absent that it 403s, which is fine.
             t, terr = fetch_json(
@@ -431,6 +488,37 @@ def collect_cloudflare(days=7):
 
 
 # ── TOTALS ───────────────────────────────────────────────────
+def collect_history(today):
+    """The dated files in status/data already are a time series; nothing
+    had ever read them back. A number on its own says what today is. The
+    same number beside the last sixty days says which direction the work
+    is going, which is the only thing a reader actually wants from it."""
+    series = []
+    for n in range(HISTORY_DAYS, -1, -1):
+        day = (today - datetime.timedelta(days=n)).isoformat()
+        path = os.path.join(DATA_DIR, day + ".json")
+        if not os.path.exists(path):
+            continue
+        try:
+            with open(path, encoding="utf-8") as f:
+                d = json.load(f)
+        except (ValueError, OSError):
+            continue
+        s = d.get("summary") or {}
+        series.append({
+            "date": d.get("date") or day,
+            "visitors_7d": s.get("visitors_7d"),
+            "page_views_7d": s.get("page_views_7d"),
+            "package_weekly": s.get("package_weekly"),
+            "zenodo_views": s.get("zenodo_views"),
+            "zenodo_downloads": s.get("zenodo_downloads"),
+            "github_stars": s.get("github_stars"),
+            "properties_up": s.get("properties_up"),
+            "properties_total": s.get("properties_total"),
+        })
+    return series
+
+
 def summarise(snap):
     npm_total  = sum(x["weekly"] or 0 for x in snap["npm"])
     pypi_total = sum(x["weekly"] or 0 for x in snap["pypi"])
@@ -449,7 +537,32 @@ def summarise(snap):
         "zenodo_views":      sum(r.get("views") or 0 for r in recs),
         "zenodo_downloads":  sum(r.get("downloads") or 0 for r in recs),
         "github_stars":      sum(r.get("stars") or 0 for r in snap["github"]),
+        "github_forks":      sum(r.get("forks") or 0 for r in snap["github"]),
+        "github_repos":      len([r for r in snap["github"] if not r.get("error")]),
+        "open_issues":       sum(r.get("open_issues") or 0 for r in snap["github"]),
+        "packages_total":    len(snap["npm"]) + len(snap["pypi"]),
+        "npm_all_time":      sum(x.get("all_time") or 0 for x in snap["npm"]),
+        "pypi_all_time":     sum(x.get("all_time") or 0 for x in snap["pypi"]),
+        "package_all_time":  (sum(x.get("all_time") or 0 for x in snap["npm"]) +
+                              sum(x.get("all_time") or 0 for x in snap["pypi"])),
+        "pypi_monthly":      sum(x.get("monthly") or 0 for x in snap["pypi"]),
+        # A repository with no licence cannot legally be reused, which is
+        # a fact about the work rather than about the page reporting it.
+        "repos_unlicensed":  len([r for r in snap["github"]
+                                  if not r.get("error") and not r.get("license")]),
+        "repos_archived":    len([r for r in snap["github"] if r.get("archived")]),
+        "median_response_ms": _median([p["ms"] for p in snap["uptime"] if p["up"]]),
+        "threats_7d":        cft.get("threats"),
+        "bot_requests_24h":  sum((cf.get("bots_24h") or {}).values()) or None,
     }
+
+
+def _median(values):
+    vals = sorted(v for v in values if v is not None)
+    if not vals:
+        return None
+    mid = len(vals) // 2
+    return vals[mid] if len(vals) % 2 else (vals[mid - 1] + vals[mid]) // 2
 
 
 # ── REDACTION ────────────────────────────────────────────────
@@ -579,39 +692,58 @@ def render(snap, prev):
         if errs else "<p class='dim'>All sources reported.</p>"
 
     import buildsite as B
+    import statuspage as SP
+
+    spec_json = json.dumps({
+        "sections": [{"id": s[0], "source": s[3], "columns": s[4]}
+                     for s in SP.SECTIONS],
+        "headline": [{"key": k, "format": f} for _l, k, f in SP.HEADLINE],
+    }, sort_keys=True)
+
+    tables = "".join(SP.render_table(sec, snap) for sec in SP.SECTIONS)
 
     cards = (
         '<div class="doc"><h1>Status</h1>'
-        '<p class="sub">Generated {gen}. {strip}</p>'
-        '<table class="facts">'
-        '<tr><th>Visitors &middot; 7d</th><td>{v}</td></tr>'
-        '<tr><th>Page views &middot; 7d</th><td>{pv}</td></tr>'
-        '<tr><th>Package installs / wk</th><td>{pk}</td></tr>'
-        '<tr><th>Paper views</th><td>{pvw}</td></tr>'
-        '<tr><th>Paper downloads</th><td>{pd}</td></tr>'
-        '</table>'
-        '<h2>Traffic &mdash; visitors / page views, 7d</h2>{traffic}'
-        '<h2>Packages &mdash; week / all time</h2><table class="facts">{pkg}</table>'
-        '<h2>Who is asking &mdash; 24h sample</h2>{mix}'
-        '<h2>Papers &mdash; views / downloads</h2><table class="facts">{papers}</table>'
-        '<h2>Sources not reporting</h2>{errs}'
+        '<p class="sub">Every number on this page is measured, not estimated, '
+        'and the file behind it is public at '
+        '<a href="/status/latest.json">/status/latest.json</a>. '
+        'Built {gen_open}{gen}{gen_close}. {strip}</p>'
+        '<p id="live-note" class="dim">Re-reading the snapshot&hellip;</p>'
+        '{headline}'
+        '<h2 id="trend">Trend</h2>'
+        '<p class="dim">Each dated file under status/data is one run; git is '
+        'the time series. These are the last {days} of them.</p>'
+        '{trends}'
+        '{tables}'
+        '<h2 id="mix">Who is asking &mdash; 24h sample</h2>{mix}'
+        '<h2 id="sources">Sources not reporting</h2>{errs}'
+        '<p class="dim">Repository traffic is owner-only and is not in the '
+        'published file. Everything else here was already public: registry '
+        'download counts, Zenodo record statistics, GitHub metadata, and '
+        'aggregate Cloudflare analytics for properties we operate. No '
+        'visitor is identified and nothing on this page came from a cookie.</p>'
+        '<div class="btnrow">'
+        '<a class="btn default" href="/status/latest.json">latest.json</a>'
+        '<a class="btn" href="/openapi.json">openapi.json</a>'
+        '<a class="btn" href="/log/">Working log</a>'
         '</div>'
-    ).format(gen=snap["generated_at"], strip=re.sub(r"<[^>]+>", "", uptime_strip),
-             v=fmt(s.get("visitors_7d")), pv=fmt(s.get("page_views_7d")),
-             pk=s["package_weekly"], pvw=s["zenodo_views"], pd=s["zenodo_downloads"],
-             traffic=traffic_html,
-             pkg="".join("<tr><th>{}</th><td>{} / {} all time</td></tr>".format(
-                 x["package"], fmt(x.get("weekly")), fmt(x.get("all_time")))
-                 for x in snap["npm"] + snap["pypi"]),
-             mix=mix_html,
-             papers="".join("<tr><th>{}</th><td>{} views / {} downloads</td></tr>".format(
-                 (r["title"] or "")[:58], fmt(r.get("views")), fmt(r.get("downloads")))
-                 for r in top_papers) or "<tr><td>no data</td></tr>",
-             errs=err_html)
+        '</div>'
+        '<script type="application/json" id="status-spec">{spec}</script>'
+        '<script src="/status/status.js" defer></script>'
+    ).format(gen=snap["generated_at"],
+             gen_open='<span id="generated-at">', gen_close='</span>',
+             strip=re.sub(r"<[^>]+>", "", uptime_strip),
+             headline=SP.render_headline(snap),
+             trends=SP.render_trends(snap),
+             days=len(snap.get("history") or []),
+             tables=tables, mix=mix_html, errs=err_html,
+             spec=spec_json)
 
-    return B.shell("Status \u2014 F-Keys", "F-Keys\\Status", cards, "live numbers",
-                   description="Measured traffic, installs and paper activity "
-                               "across every F-Keys property.",
+    return B.shell("Status \u2014 F-Keys", "F-Keys\\Status", cards,
+                   "live numbers",
+                   description="Measured traffic, installs, repositories, "
+                               "package versions and paper activity across "
+                               "every F-Keys property. Re-read on each load.",
                    canonical="https://f-keys.com/status/")
 
 
@@ -648,6 +780,9 @@ def main():
     print("collecting zenodo...");     snap["zenodo"]     = collect_zenodo()
     print("collecting cloudflare..."); snap["cloudflare"] = collect_cloudflare()
     snap["summary"] = summarise(snap)
+    # written last, and from the files on disk, so today's own row is
+    # appended by the write below rather than guessed at here
+    snap["history"] = collect_history(today)
 
     prev = load_prev(today, 7 if weekly else 1)
 

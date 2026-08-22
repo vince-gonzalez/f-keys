@@ -6691,11 +6691,26 @@
                           "archived": {
                             "type": "boolean"
                           },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
                           "forks": {
                             "type": "integer"
                           },
+                          "full_name": {
+                            "type": "string"
+                          },
+                          "language": {
+                            "type": "string"
+                          },
                           "open_issues": {
                             "type": "integer"
+                          },
+                          "owner": {
+                            "type": "string"
                           },
                           "pushed_at": {
                             "type": "string"
@@ -6703,17 +6718,94 @@
                           "repo": {
                             "type": "string"
                           },
+                          "size_kb": {
+                            "type": "integer"
+                          },
                           "stars": {
                             "type": "integer"
+                          },
+                          "topics": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "traffic_error": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "watchers": {
+                            "type": "integer"
+                          },
+                          "license": {
+                            "type": "string"
+                          },
+                          "homepage": {
+                            "type": "string"
                           }
                         },
                         "required": [
                           "archived",
+                          "created_at",
+                          "description",
                           "forks",
+                          "full_name",
                           "open_issues",
+                          "owner",
                           "pushed_at",
                           "repo",
-                          "stars"
+                          "size_kb",
+                          "stars",
+                          "topics",
+                          "traffic_error",
+                          "url",
+                          "watchers"
+                        ]
+                      }
+                    },
+                    "history": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string"
+                          },
+                          "github_stars": {
+                            "type": "integer"
+                          },
+                          "package_weekly": {
+                            "type": "integer"
+                          },
+                          "properties_total": {
+                            "type": "integer"
+                          },
+                          "properties_up": {
+                            "type": "integer"
+                          },
+                          "zenodo_downloads": {
+                            "type": "integer"
+                          },
+                          "zenodo_views": {
+                            "type": "integer"
+                          },
+                          "page_views_7d": {
+                            "type": "integer"
+                          },
+                          "visitors_7d": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "date",
+                          "github_stars",
+                          "package_weekly",
+                          "properties_total",
+                          "properties_up",
+                          "zenodo_downloads",
+                          "zenodo_views"
                         ]
                       }
                     },
@@ -6728,7 +6820,25 @@
                           "all_time": {
                             "type": "integer"
                           },
+                          "license": {
+                            "type": "string"
+                          },
                           "package": {
+                            "type": "string"
+                          },
+                          "registry": {
+                            "type": "string"
+                          },
+                          "released": {
+                            "type": "string"
+                          },
+                          "summary": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "version": {
                             "type": "string"
                           },
                           "weekly": {
@@ -6737,7 +6847,13 @@
                         },
                         "required": [
                           "all_time",
+                          "license",
                           "package",
+                          "registry",
+                          "released",
+                          "summary",
+                          "url",
+                          "version",
                           "weekly"
                         ]
                       }
@@ -6750,25 +6866,52 @@
                           "all_time": {
                             "type": "integer"
                           },
-                          "error": {
-                            "type": "string"
-                          },
-                          "package": {
-                            "type": "string"
-                          },
                           "daily": {
                             "type": "integer"
                           },
                           "monthly": {
                             "type": "integer"
                           },
+                          "package": {
+                            "type": "string"
+                          },
+                          "registry": {
+                            "type": "string"
+                          },
+                          "released": {
+                            "type": "string"
+                          },
+                          "requires_python": {
+                            "type": "string"
+                          },
+                          "summary": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "version": {
+                            "type": "string"
+                          },
                           "weekly": {
                             "type": "integer"
+                          },
+                          "license": {
+                            "type": "string"
                           }
                         },
                         "required": [
                           "all_time",
-                          "package"
+                          "daily",
+                          "monthly",
+                          "package",
+                          "registry",
+                          "released",
+                          "requires_python",
+                          "summary",
+                          "url",
+                          "version",
+                          "weekly"
                         ]
                       }
                     },
@@ -6778,13 +6921,37 @@
                     "summary": {
                       "type": "object",
                       "properties": {
+                        "bot_requests_24h": {
+                          "type": "integer"
+                        },
+                        "github_forks": {
+                          "type": "integer"
+                        },
+                        "github_repos": {
+                          "type": "integer"
+                        },
                         "github_stars": {
+                          "type": "integer"
+                        },
+                        "median_response_ms": {
+                          "type": "integer"
+                        },
+                        "npm_all_time": {
                           "type": "integer"
                         },
                         "npm_weekly": {
                           "type": "integer"
                         },
+                        "open_issues": {
+                          "type": "integer"
+                        },
+                        "package_all_time": {
+                          "type": "integer"
+                        },
                         "package_weekly": {
+                          "type": "integer"
+                        },
+                        "packages_total": {
                           "type": "integer"
                         },
                         "page_views_7d": {
@@ -6796,7 +6963,22 @@
                         "properties_up": {
                           "type": "integer"
                         },
+                        "pypi_all_time": {
+                          "type": "integer"
+                        },
+                        "pypi_monthly": {
+                          "type": "integer"
+                        },
                         "pypi_weekly": {
+                          "type": "integer"
+                        },
+                        "repos_archived": {
+                          "type": "integer"
+                        },
+                        "repos_unlicensed": {
+                          "type": "integer"
+                        },
+                        "threats_7d": {
                           "type": "integer"
                         },
                         "visitors_7d": {
@@ -6813,13 +6995,26 @@
                         }
                       },
                       "required": [
+                        "bot_requests_24h",
+                        "github_forks",
+                        "github_repos",
                         "github_stars",
+                        "median_response_ms",
+                        "npm_all_time",
                         "npm_weekly",
+                        "open_issues",
+                        "package_all_time",
                         "package_weekly",
+                        "packages_total",
                         "page_views_7d",
                         "properties_total",
                         "properties_up",
+                        "pypi_all_time",
+                        "pypi_monthly",
                         "pypi_weekly",
+                        "repos_archived",
+                        "repos_unlicensed",
+                        "threats_7d",
                         "visitors_7d",
                         "zenodo_downloads",
                         "zenodo_records",
@@ -6900,6 +7095,7 @@
                     "date",
                     "generated_at",
                     "github",
+                    "history",
                     "mode",
                     "npm",
                     "pypi",
