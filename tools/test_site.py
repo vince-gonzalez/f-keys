@@ -57,7 +57,8 @@ SKIP_DIRS = {".git", ".github", "node_modules", "dist", "build",
 # The pages this site generates, which are the ones these rules govern.
 GENERATED = ["index.html", "apps.html", "games.html", "tools.html",
              "hardware.html", "research.html", "properties.html",
-             "about.html", "contact.html", "privacy.html", "404.html"]
+             "about.html", "contact.html", "privacy.html", "developers.html",
+             "404.html"]
 
 MIN_TEXT = 500
 
@@ -275,6 +276,48 @@ def contact_is_reachable():
         fail("contact", "llms.txt does not carry the contact address")
 
 
+def openapi():
+    """A specification is a promise an agent cannot check before it acts
+    on it. Every path in this one must be a file that exists, and it must
+    not claim an authentication scheme, a server or a write operation
+    that F-Keys does not have."""
+    path = os.path.join(ROOT, "openapi.json")
+    if not os.path.exists(path):
+        fail("openapi", "no openapi.json")
+        return
+    try:
+        spec = json.loads(read(path))
+    except ValueError as e:
+        fail("openapi", "does not parse: {}".format(e))
+        return
+
+    if not spec.get("paths"):
+        fail("openapi", "documents no paths")
+
+    for url, ops in (spec.get("paths") or {}).items():
+        local = os.path.join(ROOT, url.lstrip("/").replace("/", os.sep))
+        if not os.path.isfile(local):
+            fail("openapi", "documents a path with no file behind it: " + url)
+        for method in ops:
+            if method.lower() != "get":
+                fail("openapi", "{} declares {}, but nothing here accepts a "
+                                "write".format(url, method.upper()))
+
+    if spec.get("components", {}).get("securitySchemes") or spec.get("security"):
+        fail("openapi", "declares authentication, but there is nothing to "
+                        "authenticate against")
+
+    for server in spec.get("servers") or []:
+        if not str(server.get("url", "")).startswith("https://f-keys.com"):
+            fail("openapi", "names a server that is not this site: " +
+                 str(server.get("url")))
+
+    # the developer page is the human-readable half and must name the spec
+    dev = os.path.join(ROOT, "developers.html")
+    if os.path.exists(dev) and "/openapi.json" not in read(dev):
+        fail("openapi", "developers.html does not link the specification")
+
+
 def agent_instructions():
     path = os.path.join(ROOT, "llms.txt")
     s = read(path)
@@ -283,7 +326,9 @@ def agent_instructions():
     if "## Developer resources" not in s:
         fail("llms.txt", "no developer resources section")
     for url in ("https://f-keys.com/Docs.html",
-                "https://f-keys.com/contact.html"):
+                "https://f-keys.com/contact.html",
+                "https://f-keys.com/developers.html",
+                "https://f-keys.com/openapi.json"):
         if url not in s:
             fail("llms.txt", "does not list " + url)
 
@@ -336,6 +381,7 @@ def main():
     structured()
     anchors()
     contact_is_reachable()
+    openapi()
     recovery()
     agent_instructions()
     sitemap()

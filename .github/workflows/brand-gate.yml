@@ -77,6 +77,12 @@ jobs:
       - name: Markdown variants match the pages
         run: python tools/buildmd.py --check
 
+      # openapi.json is generated from the files it documents. A stale one
+      # describes a dataset that has moved or gone, which an agent cannot
+      # detect until it fetches the path and gets nothing.
+      - name: The specification matches the data
+        run: python tools/buildapi.py --check
+
       # The Contact page publishes hello@f-keys.com. That only works while
       # the domain accepts mail, and a contact address that bounces fails
       # silently - nobody tells you the email they sent went nowhere.

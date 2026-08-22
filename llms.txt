@@ -98,6 +98,8 @@ F-Keys does not do it.
 
 ## Developer resources
 
+Developer index:   https://f-keys.com/developers.html
+OpenAPI:           https://f-keys.com/openapi.json
 Documentation:     https://f-keys.com/Docs.html
 Source code:       https://github.com/zengineco
 Papers and DOIs:   https://f-keys.com/papers/
@@ -127,11 +129,28 @@ JavaScript packages (npm):
 GitHub Actions:
 - gonzalgo-trust-audit   https://github.com/marketplace/actions/gonzalgo-trust-audit
 
-There is no hosted HTTP API, no OpenAPI specification, no webhook endpoint,
-no OAuth flow and no MCP server. Every product either runs in the visitor's
-browser or installs on the visitor's machine, so there is no server of ours
-for an agent to call. That is a design decision rather than an omission, and
-it is stated here so an agent stops looking.
+Published data (35 documents, described in https://f-keys.com/openapi.json):
+- 13 gonzalgo measurement tables, each one JSON object carrying its own
+  version, sha256, licence and series DOI beside its rows. CC BY 4.0.
+- The Kernel Trust Profile 0.1 JSON Schema and 14 profiles conforming to it,
+  at https://f-keys.com/gonzalgo/kernel-trust/
+- https://f-keys.com/status/latest.json -- the daily snapshot. Repository
+  traffic is owner-only and is not in it.
+
+Content negotiation:
+- `Accept: text/markdown` returns any page as Markdown, per
+  acceptmarkdown.com, with `Vary: Accept` set.
+- `Accept: application/json` returns errors as JSON with a stable `code`,
+  a message and hints, rather than an HTML page.
+- A path that does not exist returns a real 404 in whichever of those
+  formats was asked for.
+
+There is no hosted HTTP API, no webhook endpoint, no OAuth flow, no API key,
+no rate limit and no MCP server. The OpenAPI document above describes static
+files, not a service: every product either runs in the visitor's browser or
+installs on the visitor's machine, so there is no server of ours for an agent
+to call and nothing to authenticate against. That is a design decision rather
+than an omission, and it is stated here so an agent stops looking.
 
 
 ## Axiom provenance for Lean 4 and Metamath (tool name: gonzalgo)

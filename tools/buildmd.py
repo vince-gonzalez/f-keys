@@ -179,7 +179,7 @@ def targets():
     sys.path.insert(0, os.path.join(ROOT, "tools"))
     import buildsite
     names = ["index.html", "about.html", "contact.html", "privacy.html",
-             "404.html"]
+             "developers.html", "404.html"]
     names += [c[0] + ".html" for c in buildsite.CATEGORIES]
     names += [os.path.join(s, "index.html") for s in buildsite.PAGES]
     names += [os.path.join("keyj", "privacy", "index.html"),

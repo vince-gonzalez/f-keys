@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer resources — F-Keys</title>
+<meta name="description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
+<link rel="canonical" href="https://f-keys.com/developers.html">
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="F-Keys">
+<meta property="og:title" content="Developer resources — F-Keys">
+<meta property="og:description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/developers.html">
+<meta property="og:image" content="https://f-keys.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Developer resources — F-Keys">
+<meta name="twitter:description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
+<meta name="twitter:image" content="https://f-keys.com/assets/og.png">
+<link rel="stylesheet" href="/win98.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://f-keys.com/#organization",
+  "name": "F-Keys",
+  "legalName": "F-Keys Creative LLC",
+  "alternateName": "F-Keys Creative LLC",
+  "url": "https://f-keys.com",
+  "logo": "https://f-keys.com/assets/fkeys-logo.png",
+  "image": "https://f-keys.com/assets/og.png",
+  "description": "Independent hardware, software and internet products built by Vincent Gonzalez. Apps, games, tools, hardware and research.",
+  "email": "hello@f-keys.com",
+  "founder": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X",
+    "sameAs": [
+      "https://orcid.org/0009-0005-3640-014X",
+      "https://github.com/zengineco"
+    ]
+  },
+  "foundingDate": "2026-08-18",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Punta Gorda",
+    "addressRegion": "FL",
+    "postalCode": "33955",
+    "addressCountry": "US"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "hello@f-keys.com",
+      "areaServed": "Worldwide",
+      "availableLanguage": [
+        "English"
+      ]
+    }
+  ],
+  "sameAs": [
+    "https://github.com/zengineco",
+    "https://orcid.org/0009-0005-3640-014X"
+  ]
+}
+</script>
+</head>
+<body>
+<div class="window raised">
+
+  <div class="titlebar">
+    <span class="t"><span>F-Keys\Developers</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+  </div>
+
+  <nav class="menubar">
+    <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
+    <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
+    <a href="/about.html"><u>H</u>elp</a>
+  </nav>
+
+  <div class="toolbar groove">
+    <a class="tool" href="/">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
+  </div>
+
+  <div class="addressbar">
+    <span class="lbl">Address</span>
+    <span class="path sunken"><span>&#128193; F-Keys\Developers</span></span>
+  </div>
+
+  <div class="panes">
+    <aside class="tree sunken">
+<ul>
+<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+</li>
+<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+</li>
+<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+</li>
+<li><a href="/about.html"><span class="ic">&#128220;</span>About</a></li>
+<li><a href="/Docs.html"><span class="ic">&#128220;</span>Docs</a></li>
+<li><a href="/developers.html"><span class="ic">&#128220;</span>Developers</a></li>
+<li><a href="/log/"><span class="ic">&#128220;</span>Log</a></li>
+<li><a href="/status/"><span class="ic">&#128220;</span>Status</a></li>
+<li><a href="/papers/"><span class="ic">&#128220;</span>Papers</a></li>
+<li><a href="/contact.html"><span class="ic">&#128220;</span>Contact</a></li>
+<li><a href="/privacy.html"><span class="ic">&#128220;</span>Privacy</a></li>
+</ul></li></ul>
+    </aside>
+    <section class="content sunken">
+
+<div class="doc"><h1>Developer resources</h1>
+<p class="sub">Everything here is a package you install or a file you fetch.
+There is nothing to sign up for.</p>
+
+<h2>Start here</h2>
+<table class="facts">
+<tr><th>OpenAPI</th><td><a href="/openapi.json">/openapi.json</a> &mdash; every
+published dataset, its shape and its licence</td></tr>
+<tr><th>For agents</th><td><a href="/llms.txt">/llms.txt</a> &mdash; the whole
+catalogue as plain text, including when to reach for each thing</td></tr>
+<tr><th>Site map</th><td><a href="/sitemap.xml">/sitemap.xml</a></td></tr>
+<tr><th>Documentation</th><td><a href="/Docs.html">/Docs.html</a> &mdash; setup,
+configuration and troubleshooting</td></tr>
+<tr><th>Source</th><td><a href="https://github.com/zengineco" rel="noopener">github.com/zengineco</a></td></tr>
+<tr><th>Questions</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
+</table>
+
+<h2>There are no API keys, and that is not an omission</h2>
+<p>Every F-Keys product either runs in your browser or installs on your
+machine. None of them calls a server of ours, because there is no server of
+ours &mdash; this site is a folder of static files behind a CDN. So there is
+nothing to authenticate, no rate limit to raise, no sandbox to provision and
+no quota to buy.</p>
+<p>What that buys you: the packages work offline, they keep working if this
+site goes away, and nothing you compute with them is reported back here. What
+it costs you: there is no endpoint to POST to. If you need one, the source is
+public and the licence is permissive for most of it.</p>
+
+<h2>Install</h2>
+<table class="facts">
+<tr><th>gonzalgo</th><td><code>pip install gonzalgo</code> &mdash; axiom
+provenance for Lean 4 and Metamath</td></tr>
+<tr><th>keyj</th><td><code>pip install keyj</code> &mdash; tablature to notes,
+render, and play</td></tr>
+<tr><th>plumhud</th><td><code>pip install plumhud</code> &mdash; miner fleet
+monitor</td></tr>
+<tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
+NerdMiner discovery and vitals</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code> &mdash;
+colour-vision simulation and daltonisation</td></tr>
+<tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
+&mdash; the TipStreams widget</td></tr>
+</table>
+
+<h2>In your pipeline</h2>
+<p>The <a href="https://github.com/marketplace/actions/gonzalgo-trust-audit" rel="noopener">gonzalgo-trust-audit</a>
+Action fails a build when a proof rests on something unfinished. Three lines of
+workflow, or <code>--fail-on-trust</code> if you would rather call the CLI
+yourself.</p>
+
+<h2>The published data</h2>
+<p>Thirty-five JSON documents are served from this domain and described in
+<a href="/openapi.json">openapi.json</a>. They are static files: fetch them,
+cache them, mirror them.</p>
+<table class="facts">
+<tr><th>Measurement tables</th><td>Thirteen tables behind the papers &mdash; the
+<a href="/gonzalgo/kernel-index/">Kernel Index</a>, the
+<a href="/gonzalgo/dominator-table/">Dominator Table</a> and the rest. Each is
+one object carrying its own <code>version</code>, <code>sha256</code>,
+<code>licence</code> and series DOI beside its rows, so you can cite it and
+tell whether it changed under you.</td></tr>
+<tr><th>Kernel Trust Profile</th><td>The
+<a href="/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json">0.1 schema</a>
+and fourteen profiles conforming to it, one per library measured.</td></tr>
+<tr><th>Status</th><td><a href="/status/latest.json">/status/latest.json</a>
+&mdash; the daily snapshot behind the <a href="/status/">status page</a>.
+Repository traffic is owner-only and is not in it.</td></tr>
+</table>
+<p>The measurement data is CC BY 4.0. Cite the series DOI in the file rather
+than this page, so the citation points at a version.</p>
+
+<h2>The site itself is machine-readable</h2>
+<p>Every page here serves <b>Markdown</b> to anything that asks for it. Send
+<code>Accept: text/markdown</code> and you get the content without the window
+around it, per <a href="https://acceptmarkdown.com" rel="noopener">acceptmarkdown.com</a>,
+with <code>Vary: Accept</code> set so a cache cannot hand you the wrong one.</p>
+<pre>curl -H "Accept: text/markdown" https://f-keys.com/keyj/</pre>
+<p>A path that does not exist returns a real <b>404</b>, and returns it in the
+format you asked for. Send <code>Accept: application/json</code> and the error
+is JSON with a stable <code>code</code>, a message and hints, rather than an
+HTML page you would have to parse to discover you had failed.</p>
+<pre>curl -H "Accept: application/json" https://f-keys.com/no-such-path</pre>
+<div class="btnrow">
+  <a class="btn default" href="/openapi.json">openapi.json</a>
+  <a class="btn" href="/llms.txt">llms.txt</a>
+  <a class="btn" href="/Docs.html">Docs</a>
+  <a class="btn" href="/contact.html">Contact</a>
+</div>
+</div>
+
+    </section>
+  </div>
+
+  <div class="statusbar">
+    <span class="cell groove">1 item</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
+
+</div>
+</body>
+</html>

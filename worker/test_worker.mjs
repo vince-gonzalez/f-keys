@@ -116,9 +116,56 @@ var cases = [
    { status: 404, type: HTML, vary: VARY, body: "<html>not found</html>" }]
 ];
 
+/* An agent that asked for JSON cannot parse an HTML error page to find
+   out that it failed. These check the envelope openapi.json documents,
+   and that html still wins a tie so a browser never gets JSON. */
+var JSON_TYPE = "application/json; charset=utf-8";
+
+var jsonCases = [
+  ["a missing .json path", "/nope.json", "application/json", "not_found"],
+  ["a missing page, json", "/nope", "application/json", "not_found"],
+  ["json preferred by q", "/nope", "text/html;q=0.2, application/json;q=0.9",
+   "not_found"],
+  ["json refused by q=0", "/nope", "text/html, application/json;q=0", null],
+  ["a browser still gets html", "/nope", "text/html", null]
+];
+
 for (var i = 0; i < cases.length; i++) {
   var c = cases[i];
   check(c[0], await get(c[1], c[2]), c[3]);
+}
+
+for (var k = 0; k < jsonCases.length; k++) {
+  var jc = jsonCases[k];
+  var res = await get(jc[1], jc[2]);
+
+  if (jc[3] === null) {
+    check(jc[0], { type: res.type, status: res.status },
+                 { type: HTML, status: 404 });
+    continue;
+  }
+
+  var parsed = null;
+  try { parsed = JSON.parse(res.body); } catch (e) { parsed = null; }
+  var err = parsed && parsed.error;
+
+  check(jc[0], {
+    status: res.status,
+    type: res.type,
+    vary: res.vary,
+    code: err && err.code,
+    path: err && err.path,
+    message: !!(err && err.message),
+    hints: !!(err && err.hints && err.hints.length >= 3)
+  }, {
+    status: 404,
+    type: JSON_TYPE,
+    vary: VARY,
+    code: jc[3],
+    path: jc[1],
+    message: true,
+    hints: true
+  });
 }
 
 if (failures.length) {
@@ -129,4 +176,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("test_worker: " + cases.length + " cases ok");
+console.log("test_worker: " + (cases.length + jsonCases.length) + " cases ok");

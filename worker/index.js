@@ -38,10 +38,10 @@ var VARY = "Accept, Accept-Encoding";
 /* Accept: text/markdown, text/html;q=0.9 means markdown. Accept:
    text/html, text/markdown;q=0.1 does not, and treating a q=0 entry as
    a request is the usual way this gets written wrong. */
-function wantsMarkdown(accept) {
-  if (!accept) { return false; }
+function quality(accept) {
+  var best = { markdown: 0, json: 0, html: 0 };
+  if (!accept) { return best; }
 
-  var best = { markdown: 0, html: 0 };
   var parts = accept.split(",");
 
   for (var i = 0; i < parts.length; i++) {
@@ -59,12 +59,51 @@ function wantsMarkdown(accept) {
 
     if (type === "text/markdown" || type === "text/x-markdown") {
       best.markdown = Math.max(best.markdown, q);
+    } else if (type === "application/json" || type === "application/ld+json") {
+      best.json = Math.max(best.json, q);
     } else if (type === "text/html" || type === "application/xhtml+xml") {
       best.html = Math.max(best.html, q);
     }
   }
 
-  return best.markdown > 0 && best.markdown >= best.html;
+  return best;
+}
+
+function wantsMarkdown(accept) {
+  var q = quality(accept);
+  return q.markdown > 0 && q.markdown >= q.html && q.markdown >= q.json;
+}
+
+/* An agent that asked for JSON and got an HTML error page has to parse
+   the page to find out it failed, which it cannot reliably do. */
+function wantsJson(accept) {
+  var q = quality(accept);
+  return q.json > 0 && q.json >= q.html && q.json >= q.markdown;
+}
+
+/* The shape openapi.json documents under components.schemas.Error. The
+   hints are the three places a lost agent can actually recover from. */
+function jsonError(pathname, status, code, message) {
+  var body = {
+    error: {
+      code: code,
+      message: message,
+      status: status,
+      path: pathname,
+      hints: [
+        "Every published path is listed in https://f-keys.com/openapi.json",
+        "The full site map is at https://f-keys.com/sitemap.xml",
+        "A plain-text catalogue is at https://f-keys.com/llms.txt",
+        "Developer resources: https://f-keys.com/developers.html"
+      ]
+    }
+  };
+  var headers = new Headers();
+  headers.set("Content-Type", "application/json; charset=utf-8");
+  headers.set("Vary", VARY);
+  headers.set("Cache-Control", "no-store");
+  return new Response(JSON.stringify(body, null, 2) + "\n",
+                      { status: status, statusText: "Not Found", headers: headers });
 }
 
 /* The .md that buildmd.py wrote beside this page, or null when the path
@@ -142,6 +181,14 @@ async function handle(request) {
   }
 
   if (!htmlResponse) { htmlResponse = await fetch(request); }
+
+  /* A JSON file that exists is served by the origin as JSON already;
+     this is only for the case where nothing is there. */
+  if (htmlResponse.status === 404 && wantsJson(request.headers.get("Accept"))) {
+    return jsonError(url.pathname, 404, "not_found",
+                     "No resource exists at " + url.pathname);
+  }
+
   return withVary(htmlResponse, null);
 }
 

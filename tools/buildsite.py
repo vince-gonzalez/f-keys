@@ -674,7 +674,107 @@ link that sent you here was ours.</li>
 </div>
 """
 
-EXTRA_NODES = [("/about.html", "About"), ("/Docs.html", "Docs"),
+# -- developer resources --------------------------------------
+# An audit asked for a developer portal with API keys and a sandbox.
+# There is no API to key, and inventing one would be a lie an agent
+# could not detect until it tried a call. What there IS is a real
+# developer surface - four packages, an Action, and 35 published JSON
+# datasets - which was scattered across ten pages and named nowhere.
+# This is that surface in one place, under the name someone would
+# search for.
+DEVELOPERS_DOC = """
+<div class="doc"><h1>Developer resources</h1>
+<p class="sub">Everything here is a package you install or a file you fetch.
+There is nothing to sign up for.</p>
+
+<h2>Start here</h2>
+<table class="facts">
+<tr><th>OpenAPI</th><td><a href="/openapi.json">/openapi.json</a> &mdash; every
+published dataset, its shape and its licence</td></tr>
+<tr><th>For agents</th><td><a href="/llms.txt">/llms.txt</a> &mdash; the whole
+catalogue as plain text, including when to reach for each thing</td></tr>
+<tr><th>Site map</th><td><a href="/sitemap.xml">/sitemap.xml</a></td></tr>
+<tr><th>Documentation</th><td><a href="/Docs.html">/Docs.html</a> &mdash; setup,
+configuration and troubleshooting</td></tr>
+<tr><th>Source</th><td><a href="https://github.com/zengineco" rel="noopener">github.com/zengineco</a></td></tr>
+<tr><th>Questions</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
+</table>
+
+<h2>There are no API keys, and that is not an omission</h2>
+<p>Every F-Keys product either runs in your browser or installs on your
+machine. None of them calls a server of ours, because there is no server of
+ours &mdash; this site is a folder of static files behind a CDN. So there is
+nothing to authenticate, no rate limit to raise, no sandbox to provision and
+no quota to buy.</p>
+<p>What that buys you: the packages work offline, they keep working if this
+site goes away, and nothing you compute with them is reported back here. What
+it costs you: there is no endpoint to POST to. If you need one, the source is
+public and the licence is permissive for most of it.</p>
+
+<h2>Install</h2>
+<table class="facts">
+<tr><th>gonzalgo</th><td><code>pip install gonzalgo</code> &mdash; axiom
+provenance for Lean 4 and Metamath</td></tr>
+<tr><th>keyj</th><td><code>pip install keyj</code> &mdash; tablature to notes,
+render, and play</td></tr>
+<tr><th>plumhud</th><td><code>pip install plumhud</code> &mdash; miner fleet
+monitor</td></tr>
+<tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
+NerdMiner discovery and vitals</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code> &mdash;
+colour-vision simulation and daltonisation</td></tr>
+<tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
+&mdash; the TipStreams widget</td></tr>
+</table>
+
+<h2>In your pipeline</h2>
+<p>The <a href="https://github.com/marketplace/actions/gonzalgo-trust-audit" rel="noopener">gonzalgo-trust-audit</a>
+Action fails a build when a proof rests on something unfinished. Three lines of
+workflow, or <code>--fail-on-trust</code> if you would rather call the CLI
+yourself.</p>
+
+<h2>The published data</h2>
+<p>Thirty-five JSON documents are served from this domain and described in
+<a href="/openapi.json">openapi.json</a>. They are static files: fetch them,
+cache them, mirror them.</p>
+<table class="facts">
+<tr><th>Measurement tables</th><td>Thirteen tables behind the papers &mdash; the
+<a href="/gonzalgo/kernel-index/">Kernel Index</a>, the
+<a href="/gonzalgo/dominator-table/">Dominator Table</a> and the rest. Each is
+one object carrying its own <code>version</code>, <code>sha256</code>,
+<code>licence</code> and series DOI beside its rows, so you can cite it and
+tell whether it changed under you.</td></tr>
+<tr><th>Kernel Trust Profile</th><td>The
+<a href="/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json">0.1 schema</a>
+and fourteen profiles conforming to it, one per library measured.</td></tr>
+<tr><th>Status</th><td><a href="/status/latest.json">/status/latest.json</a>
+&mdash; the daily snapshot behind the <a href="/status/">status page</a>.
+Repository traffic is owner-only and is not in it.</td></tr>
+</table>
+<p>The measurement data is CC BY 4.0. Cite the series DOI in the file rather
+than this page, so the citation points at a version.</p>
+
+<h2>The site itself is machine-readable</h2>
+<p>Every page here serves <b>Markdown</b> to anything that asks for it. Send
+<code>Accept: text/markdown</code> and you get the content without the window
+around it, per <a href="https://acceptmarkdown.com" rel="noopener">acceptmarkdown.com</a>,
+with <code>Vary: Accept</code> set so a cache cannot hand you the wrong one.</p>
+<pre>curl -H "Accept: text/markdown" https://f-keys.com/keyj/</pre>
+<p>A path that does not exist returns a real <b>404</b>, and returns it in the
+format you asked for. Send <code>Accept: application/json</code> and the error
+is JSON with a stable <code>code</code>, a message and hints, rather than an
+HTML page you would have to parse to discover you had failed.</p>
+<pre>curl -H "Accept: application/json" https://f-keys.com/no-such-path</pre>
+<div class="btnrow">
+  <a class="btn default" href="/openapi.json">openapi.json</a>
+  <a class="btn" href="/llms.txt">llms.txt</a>
+  <a class="btn" href="/Docs.html">Docs</a>
+  <a class="btn" href="/contact.html">Contact</a>
+</div>
+</div>
+"""
+
+EXTRA_NODES = [("/about.html", "About"), ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
                ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
                ("/contact.html", "Contact"), ("/privacy.html", "Privacy")]
 
@@ -1172,6 +1272,16 @@ def main():
         description="Reach F-Keys Creative LLC: email, the Florida filing, the "
                     "principal address, and what is worth writing about.",
         canonical="https://f-keys.com/contact.html", ld=organization())))
+
+    written.append(("developers.html", shell(
+        "Developer resources \u2014 F-Keys", "F-Keys\\Developers",
+        DEVELOPERS_DOC, "1 item",
+        description="F-Keys developer resources: the OpenAPI description of "
+                    "35 published datasets, the PyPI and npm packages, the "
+                    "gonzalgo GitHub Action, llms.txt, and Markdown and JSON "
+                    "content negotiation. No API keys, because there is no "
+                    "hosted API.",
+        canonical="https://f-keys.com/developers.html", ld=organization())))
 
     written.append(("privacy.html", shell(
         "Privacy \u2014 F-Keys", "F-Keys\\Privacy", PRIVACY_DOC, "1 item",
