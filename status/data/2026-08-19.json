@@ -159,41 +159,6 @@
       },
       {
         "days_returned": 7,
-        "page_views": 557,
-        "requests": 25262,
-        "site": "zengine.org",
-        "threats": 33,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 43.4,
-            "requests": 10967
-          },
-          {
-            "country": "MX",
-            "pct": 5.4,
-            "requests": 1372
-          },
-          {
-            "country": "CH",
-            "pct": 5.1,
-            "requests": 1284
-          },
-          {
-            "country": "NO",
-            "pct": 5.1,
-            "requests": 1284
-          },
-          {
-            "country": "PL",
-            "pct": 4.5,
-            "requests": 1135
-          }
-        ],
-        "uniques": 1390
-      },
-      {
-        "days_returned": 7,
         "page_views": 610,
         "requests": 7434,
         "site": "trailer-load.com",
@@ -264,41 +229,6 @@
       },
       {
         "days_returned": 7,
-        "page_views": 392,
-        "requests": 10098,
-        "site": "sympolar.com",
-        "threats": 43,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 28.1,
-            "requests": 2842
-          },
-          {
-            "country": "SG",
-            "pct": 18.7,
-            "requests": 1893
-          },
-          {
-            "country": "BE",
-            "pct": 12.7,
-            "requests": 1282
-          },
-          {
-            "country": "CH",
-            "pct": 6.6,
-            "requests": 670
-          },
-          {
-            "country": "PL",
-            "pct": 5.4,
-            "requests": 544
-          }
-        ],
-        "uniques": 665
-      },
-      {
-        "days_returned": 7,
         "page_views": 268,
         "requests": 7298,
         "site": "epistemend.org",
@@ -366,28 +296,9 @@
           }
         ],
         "uniques": 629
-      },
-      {
-        "days_returned": 7,
-        "page_views": 0,
-        "requests": 97,
-        "site": "goy-slop.org",
-        "threats": 0,
-        "top_countries": [
-          {
-            "country": "RU",
-            "pct": 97.9,
-            "requests": 95
-          },
-          {
-            "country": "US",
-            "pct": 2.1,
-            "requests": 2
-          }
-        ],
-        "uniques": 7
       }
     ],
+    "sites_omitted": 3,
     "totals": {
       "page_views": 30360,
       "threats": 364,
@@ -559,7 +470,7 @@
       "weekly": 12
     }
   ],
-  "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here.",
+  "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
     "github_stars": 16,
     "npm_weekly": 341,

@@ -410,6 +410,58 @@ def openapi():
         fail("openapi", "developers.html shows no example request")
 
 
+def published_zones():
+    """The status page prints per-property traffic, and the data behind it
+    comes from Cloudflare, which returns EVERY zone on the account - not a
+    list of F-Keys properties. Three domains that are nobody's business
+    were published on a public page because the renderer printed whatever
+    the API handed it.
+
+    A public page must publish from a list of what may be published. This
+    asserts that: every site named in the status data and on the status
+    page is one the snapshot's own allowlist permits."""
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import snapshot
+
+    allowed = snapshot.PUBLISHABLE_SITES
+    files = [os.path.join(ROOT, "status", "latest.json")]
+    data_dir = os.path.join(ROOT, "status", "data")
+    if os.path.isdir(data_dir):
+        files += [os.path.join(data_dir, n) for n in sorted(os.listdir(data_dir))
+                  if n.endswith(".json")]
+
+    seen = set()
+    for path in files:
+        if not os.path.exists(path):
+            continue
+        try:
+            doc = json.loads(read(path))
+        except ValueError:
+            fail("zones", rel(path) + " does not parse")
+            continue
+        for site in ((doc.get("cloudflare") or {}).get("sites") or []):
+            name = site.get("site")
+            if not name:
+                continue
+            seen.add(name)
+            if name not in allowed:
+                fail("zones", "{} publishes {!r}, which is not a property "
+                              "this site publishes".format(rel(path), name))
+
+    # and the rendered page, in case it is ever written from something
+    # other than those files
+    page = os.path.join(ROOT, "status", "index.html")
+    if os.path.exists(page):
+        source = read(page)
+        # the first cell of every traffic row is the site name
+        for body in re.findall(r'data-body="traffic">(.*?)</tbody>',
+                               source, flags=re.S):
+            for cell in re.findall(r'<td class="">([^<]+)</td>', body):
+                if cell.strip() and cell.strip() not in allowed:
+                    fail("zones", "status/index.html shows {!r} in the "
+                                  "traffic table".format(cell.strip()))
+
+
 def agent_instructions():
     path = os.path.join(ROOT, "llms.txt")
     s = read(path)
@@ -482,6 +534,7 @@ def main():
     structured()
     anchors()
     contact_is_reachable()
+    published_zones()
     openapi()
     recovery()
     agent_instructions()

@@ -6634,6 +6634,9 @@
                             ]
                           }
                         },
+                        "sites_omitted": {
+                          "type": "integer"
+                        },
                         "totals": {
                           "type": "object",
                           "properties": {
@@ -6673,6 +6676,7 @@
                         "bots_24h",
                         "days",
                         "sites",
+                        "sites_omitted",
                         "totals",
                         "window"
                       ]

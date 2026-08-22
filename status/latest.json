@@ -194,41 +194,6 @@
       },
       {
         "days_returned": 7,
-        "page_views": 251,
-        "requests": 29652,
-        "site": "zengine.org",
-        "threats": 13,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 36.3,
-            "requests": 10765
-          },
-          {
-            "country": "FR",
-            "pct": 10.8,
-            "requests": 3196
-          },
-          {
-            "country": "MX",
-            "pct": 7.2,
-            "requests": 2132
-          },
-          {
-            "country": "PL",
-            "pct": 5.2,
-            "requests": 1540
-          },
-          {
-            "country": "IT",
-            "pct": 5.0,
-            "requests": 1476
-          }
-        ],
-        "uniques": 1147
-      },
-      {
-        "days_returned": 7,
         "page_views": 689,
         "requests": 19214,
         "site": "tipstreams.com",
@@ -299,41 +264,6 @@
       },
       {
         "days_returned": 7,
-        "page_views": 325,
-        "requests": 8906,
-        "site": "sympolar.com",
-        "threats": 22,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 18.3,
-            "requests": 1630
-          },
-          {
-            "country": "SG",
-            "pct": 13.5,
-            "requests": 1201
-          },
-          {
-            "country": "CH",
-            "pct": 11.2,
-            "requests": 994
-          },
-          {
-            "country": "KR",
-            "pct": 6.3,
-            "requests": 563
-          },
-          {
-            "country": "BR",
-            "pct": 5.7,
-            "requests": 507
-          }
-        ],
-        "uniques": 622
-      },
-      {
-        "days_returned": 7,
         "page_views": 592,
         "requests": 7236,
         "site": "dogefundme.com",
@@ -366,23 +296,9 @@
           }
         ],
         "uniques": 607
-      },
-      {
-        "days_returned": 7,
-        "page_views": 0,
-        "requests": 93,
-        "site": "goy-slop.org",
-        "threats": 0,
-        "top_countries": [
-          {
-            "country": "RU",
-            "pct": 100.0,
-            "requests": 93
-          }
-        ],
-        "uniques": 7
       }
     ],
+    "sites_omitted": 3,
     "totals": {
       "page_views": 41698,
       "threats": 278,
@@ -1133,7 +1049,7 @@
       "weekly": 158
     }
   ],
-  "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here.",
+  "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
     "bot_requests_24h": 44832,
     "github_forks": 0,

@@ -79,6 +79,29 @@ PROPERTIES = [
     ("zengin.es",         "https://zengin.es"),
 ]
 
+# ── WHAT MAY BE PUBLISHED ────────────────────────────────────
+# Cloudflare returns every zone on the account, and the status page
+# printed all of them. That is not a list of F-Keys properties, it is a
+# list of every domain the account holder owns - including ones that are
+# nobody's business, and the retired brand. A public page must publish
+# from a list of what may be published, never from whatever an API
+# happened to return.
+#
+# PROPERTIES above is that list. Anything Cloudflare reports that is not
+# on it is dropped before it is written to disk, so it never reaches
+# status/latest.json, the dated history, or the page.
+PUBLISHABLE_SITES = set(name for name, _url in PROPERTIES) | {
+    # measured properties that are public and intentionally listed but
+    # are not uptime targets
+    "epistemend.org",
+}
+
+
+def publishable(sites):
+    """Drop any zone that is not an F-Keys property we publish."""
+    return [x for x in (sites or []) if x.get("site") in PUBLISHABLE_SITES]
+
+
 NPM_PACKAGES  = ["@f-keys/tip-widget", "opticquiz-eye", "opticquiz-cvd", "opticquiz-cvd-mcp"]
 
 # A package that is published and untracked reads, on this page, exactly
@@ -572,8 +595,21 @@ def redact(snap):
     for repo in pub.get("github", []):
         for f in PRIVATE_FIELDS:
             repo.pop(f, None)
+    # Cloudflare reports every zone on the account. Only the properties
+    # F-Keys publishes may appear in a public file; the rest are domains
+    # the account happens to hold and are nobody's business.
+    cf = pub.get("cloudflare")
+    if isinstance(cf, dict) and isinstance(cf.get("sites"), list):
+        kept = publishable(cf["sites"])
+        dropped = len(cf["sites"]) - len(kept)
+        cf["sites"] = kept
+        if dropped:
+            cf["sites_omitted"] = dropped
+
     pub["redacted"] = ("GitHub repo traffic is owner-only and lives in the "
-                       "private KPI repo, not here.")
+                       "private KPI repo, not here. Cloudflare zones that "
+                       "are not published F-Keys properties are omitted "
+                       "from this file entirely.")
     return pub
 
 
