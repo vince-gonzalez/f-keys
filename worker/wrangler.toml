@@ -25,5 +25,15 @@ routes = [
   { pattern = "www.f-keys.com/*", zone_name = "f-keys.com" },
 ]
 
+# The maintenance status page is gated with HTTP Basic auth. The password
+# is a secret, never a literal in this repository, which is public:
+#
+#   cd worker && npx wrangler secret put STATUS_PASSWORD
+#
+# With no secret set the Worker denies that path outright rather than
+# falling back to a default. Nothing behind it is sensitive - it is the
+# workshop rather than the shop front - but a gate whose password sits
+# in the file beside it is not a gate.
+
 # Nothing here is per-environment: there is one site.
 workers_dev = false

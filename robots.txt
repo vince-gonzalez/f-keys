@@ -17,5 +17,11 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+# The maintenance view of the status page. Password-gated at the edge,
+# and asked not to be indexed here as well - a 401 in search results
+# helps nobody.
+User-agent: *
+Disallow: /status/detail/
+
 # Sitemap
 Sitemap: https://f-keys.com/sitemap.xml

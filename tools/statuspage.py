@@ -129,6 +129,26 @@ SECTIONS = [
       ("Downloads", "downloads", "num", "num")]),
 ]
 
+# ── what the world sees, and what is ours ────────────────────
+# The public page is the one a stranger, a journalist or a potential
+# customer lands on. It carries the work: what is shipped, what it is
+# being installed at, what is being read. It does NOT carry the internal
+# maintenance view - twenty-one "skipped: no token" lines and a column
+# counting repositories with no licence are true, useful, and nobody
+# else's business on a front page.
+#
+# Nothing here is secret. The detail page is gated because it is
+# unflattering, not because it is sensitive; anything actually sensitive
+# is excluded from the published snapshot altogether by
+# snapshot.PUBLISHABLE_SITES rather than hidden behind a password.
+PUBLIC_SECTIONS = ("packages", "uptime", "traffic", "papers")
+
+PUBLIC_HEADLINE = ("visitors_7d", "page_views_7d", "properties_up",
+                   "median_response_ms", "packages_total", "package_weekly",
+                   "package_all_time", "github_repos", "zenodo_records",
+                   "zenodo_views", "zenodo_downloads")
+
+
 # The headline figures, in the order they read. (label, key, format)
 HEADLINE = [
     ("Visitors · 7d", "visitors_7d", "num"),
@@ -195,6 +215,10 @@ def esc(s):
 
 
 # ── 3. the server side ───────────────────────────────────────
+def sections_for(public):
+    return [x for x in SECTIONS if not public or x[0] in PUBLIC_SECTIONS]
+
+
 def render_table(section, snap):
     sid, heading, note, source, cols = section
     rows = sort_rows(sid, rows_for(snap, source))
@@ -214,10 +238,11 @@ def render_table(section, snap):
         body="".join(body) or '<tr><td class="dim">no data</td></tr>')
 
 
-def render_headline(snap):
+def render_headline(snap, public=False):
     s = snap.get("summary") or {}
     out = []
-    for label, key, fmt in HEADLINE:
+    rows = [r for r in HEADLINE if not public or r[1] in PUBLIC_HEADLINE]
+    for label, key, fmt in rows:
         out.append('<tr><th>{}</th><td class="num" data-k="{}" data-f="{}">{}</td></tr>'
                    .format(esc(label), key, fmt, esc(FORMATS[fmt](s.get(key)))))
     return '<table class="facts">' + "".join(out) + "</table>"

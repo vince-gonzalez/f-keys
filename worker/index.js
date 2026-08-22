@@ -175,9 +175,70 @@ function stripVersion(pathname) {
   return { version: m[1], pathname: rest === "" ? "/" : rest };
 }
 
+/* The maintenance view of the status page.
+
+   Nothing behind this is secret - the snapshot it renders is a file in a
+   public repository, and raw.githubusercontent.com will serve that file
+   to anyone who asks. The gate exists because the page is the workshop
+   rather than the shop front, not because the contents are sensitive.
+   Anything that genuinely must not be published is excluded from the
+   snapshot at the source by snapshot.PUBLISHABLE_SITES.
+
+   The password is a Worker secret, never a literal in this file, because
+   this file is public:
+
+       cd worker && npx wrangler secret put STATUS_PASSWORD
+
+   With no secret set this denies everything rather than falling back to
+   a default. A gate whose password is printed beside it is not a gate. */
+var GATED = /^\/status\/detail(\/|$)/i;
+
+function unauthorised(reason) {
+  var headers = new Headers();
+  headers.set("WWW-Authenticate",
+              'Basic realm="F-Keys status", charset="UTF-8"');
+  headers.set("Content-Type", "text/plain; charset=utf-8");
+  headers.set("Cache-Control", "no-store");
+  return new Response(reason + "\n\nThe public status page is at " +
+                      "https://f-keys.com/status/\n",
+                      { status: 401, headers: headers });
+}
+
+function authorised(request, env) {
+  var expected = env && env.STATUS_PASSWORD;
+  if (!expected) { return "no password is configured for this Worker"; }
+
+  var header = request.headers.get("Authorization") || "";
+  if (header.slice(0, 6).toLowerCase() !== "basic ") {
+    return "this page needs a password";
+  }
+
+  var decoded;
+  try { decoded = atob(header.slice(6).trim()); } catch (e) { decoded = ""; }
+  var password = decoded.slice(decoded.indexOf(":") + 1);
+
+  /* Compared over the whole length rather than short-circuiting on the
+     first wrong character. */
+  if (password.length !== expected.length) { return "that password is wrong"; }
+  var diff = 0, i;
+  for (i = 0; i < expected.length; i++) {
+    diff |= password.charCodeAt(i) ^ expected.charCodeAt(i);
+  }
+  return diff === 0 ? null : "that password is wrong";
+}
+
 /* The version prefix is peeled off here and nowhere else, so everything
    below only ever sees a real path. */
-async function handle(request) {
+async function handle(request, env) {
+  var gate = new URL(request.url);
+  if (GATED.test(gate.pathname)) {
+    var refused = authorised(request, env);
+    if (refused) { return unauthorised(refused); }
+  }
+  return route(request);
+}
+
+async function route(request) {
   var url = new URL(request.url);
   var versioned = stripVersion(url.pathname);
 
@@ -277,5 +338,5 @@ async function serve(request, url, versioned, asked) {
 }
 
 export default {
-  fetch: handle
+  fetch: function (request, env) { return handle(request, env); }
 };

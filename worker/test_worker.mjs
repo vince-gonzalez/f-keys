@@ -229,6 +229,52 @@ for (var k = 0; k < jsonCases.length; k++) {
   });
 }
 
+/* The maintenance page is gated. The three things that must hold: with
+   no secret configured it denies rather than falling open, a wrong
+   password is refused, and the right one passes through to the normal
+   pipeline. */
+ORIGIN["/status/detail/"] = "<html>detail</html>";
+ORIGIN["/status/"] = "<html>status</html>";
+
+async function gated(path, password, env) {
+  var headers = {Accept: "text/html"};
+  if (password !== null && password !== undefined) {
+    headers.Authorization = "Basic " + Buffer.from("x:" + password).toString("base64");
+  }
+  var res = await worker.fetch(
+    new Request("https://f-keys.com" + path, { headers: headers }), env);
+  return { status: res.status, auth: res.headers.get("WWW-Authenticate"),
+           body: (await res.text()).slice(0, 40) };
+}
+
+var NO_SECRET = {};
+var WITH_SECRET = { STATUS_PASSWORD: "slop" };
+
+check("no secret configured -> denied, not open",
+      (await gated("/status/detail/", "slop", NO_SECRET)).status, 401);
+
+check("no credentials -> challenged",
+      (await gated("/status/detail/", null, WITH_SECRET)).status, 401);
+
+check("the challenge names Basic auth",
+      ((await gated("/status/detail/", null, WITH_SECRET)).auth || "").slice(0, 5),
+      "Basic");
+
+check("a wrong password -> denied",
+      (await gated("/status/detail/", "sloppy", WITH_SECRET)).status, 401);
+
+check("a wrong password of equal length -> denied",
+      (await gated("/status/detail/", "slap", WITH_SECRET)).status, 401);
+
+check("the right password -> served",
+      await gated("/status/detail/", "slop", WITH_SECRET),
+      { status: 200, auth: null, body: "<html>detail</html>" });
+
+check("the public status page is never gated",
+      (await gated("/status/", null, NO_SECRET)).status, 200);
+
+var gateChecks = 7;
+
 if (failures.length) {
   console.log("test_worker: " + failures.length + " FAILED\n");
   for (var f = 0; f < failures.length; f++) {
@@ -237,4 +283,6 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("test_worker: " + (cases.length + jsonCases.length + versionChecks) + " cases ok");
+console.log("test_worker: " +
+            (cases.length + jsonCases.length + versionChecks + gateChecks) +
+            " cases ok");

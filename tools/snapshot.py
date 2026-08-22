@@ -730,57 +730,91 @@ def render(snap, prev):
     import buildsite as B
     import statuspage as SP
 
-    spec_json = json.dumps({
-        "sections": [{"id": s[0], "source": s[3], "columns": s[4]}
-                     for s in SP.SECTIONS],
-        "headline": [{"key": k, "format": f} for _l, k, f in SP.HEADLINE],
-    }, sort_keys=True)
+    def page(public):
+        sections = SP.sections_for(public)
+        spec_json = json.dumps({
+            "sections": [{"id": s[0], "source": s[3], "columns": s[4]}
+                         for s in sections],
+        }, sort_keys=True)
+        tables = "".join(SP.render_table(sec, snap) for sec in sections)
 
-    tables = "".join(SP.render_table(sec, snap) for sec in SP.SECTIONS)
+        if public:
+            head = (
+                '<div class="doc"><h1>Status</h1>'
+                '<p class="sub">Everything F-Keys has shipped, and what it is '
+                'actually doing. Every number here is measured rather than '
+                'estimated, and the file behind it is public at '
+                '<a href="/status/latest.json">/status/latest.json</a>. '
+                'Built {gen_open}{gen}{gen_close}. {strip}</p>'
+                '<p id="live-note" class="dim">Re-reading the snapshot&hellip;</p>')
+            tail = (
+                '<h2 id="mix">Who is asking &mdash; 24h sample</h2>{mix}'
+                '<p class="dim">Repository traffic is owner-only and is not in '
+                'the published file, and only F-Keys properties appear in it. '
+                'Everything else here was already public: registry download '
+                'counts, Zenodo record statistics, GitHub metadata, and '
+                'aggregate Cloudflare analytics for properties we operate. No '
+                'visitor is identified and nothing on this page came from a '
+                'cookie.</p>'
+                '<div class="btnrow">'
+                '<a class="btn default" href="/status/latest.json">latest.json</a>'
+                '<a class="btn" href="/openapi.json">openapi.json</a>'
+                '<a class="btn" href="/log/">Working log</a>'
+                '</div>')
+            title = "Status \u2014 F-Keys"
+            path_label = "F-Keys\\Status"
+            canonical = "https://f-keys.com/status/"
+            desc = ("What F-Keys has shipped and what it is doing: traffic, "
+                    "package installs, published records and uptime across "
+                    "every property. Measured, and re-read on each load.")
+            noindex = False
+        else:
+            head = (
+                '<div class="doc"><h1>Status &mdash; full</h1>'
+                '<p class="sub">The maintenance view: every repository, every '
+                'licence gap, and every source that failed to report. The '
+                'public page is at <a href="/status/">/status/</a>. '
+                'Built {gen_open}{gen}{gen_close}. {strip}</p>'
+                '<p id="live-note" class="dim">Re-reading the snapshot&hellip;</p>')
+            tail = (
+                '<h2 id="mix">Who is asking &mdash; 24h sample</h2>{mix}'
+                '<h2 id="sources">Sources not reporting</h2>{errs}'
+                '<p class="dim">Nothing on this page is secret. It is behind a '
+                'password because it is the workshop rather than the shop '
+                'front, and the snapshot it reads is a file in a public '
+                'repository. Anything that genuinely must not be published is '
+                'excluded from that file at the source, not hidden here.</p>'
+                '<div class="btnrow">'
+                '<a class="btn default" href="/status/">Public status</a>'
+                '<a class="btn" href="/status/latest.json">latest.json</a>'
+                '</div>')
+            title = "Status, full \u2014 F-Keys"
+            path_label = "F-Keys\\Status\\Full"
+            canonical = ""
+            desc = "The full maintenance view of the F-Keys snapshot."
+            noindex = True
 
-    cards = (
-        '<div class="doc"><h1>Status</h1>'
-        '<p class="sub">Every number on this page is measured, not estimated, '
-        'and the file behind it is public at '
-        '<a href="/status/latest.json">/status/latest.json</a>. '
-        'Built {gen_open}{gen}{gen_close}. {strip}</p>'
-        '<p id="live-note" class="dim">Re-reading the snapshot&hellip;</p>'
-        '{headline}'
-        '<h2 id="trend">Trend</h2>'
-        '<p class="dim">Each dated file under status/data is one run; git is '
-        'the time series. These are the last {days} of them.</p>'
-        '{trends}'
-        '{tables}'
-        '<h2 id="mix">Who is asking &mdash; 24h sample</h2>{mix}'
-        '<h2 id="sources">Sources not reporting</h2>{errs}'
-        '<p class="dim">Repository traffic is owner-only and is not in the '
-        'published file. Everything else here was already public: registry '
-        'download counts, Zenodo record statistics, GitHub metadata, and '
-        'aggregate Cloudflare analytics for properties we operate. No '
-        'visitor is identified and nothing on this page came from a cookie.</p>'
-        '<div class="btnrow">'
-        '<a class="btn default" href="/status/latest.json">latest.json</a>'
-        '<a class="btn" href="/openapi.json">openapi.json</a>'
-        '<a class="btn" href="/log/">Working log</a>'
-        '</div>'
-        '</div>'
-        '<script type="application/json" id="status-spec">{spec}</script>'
-        '<script src="/status/status.js" defer></script>'
-    ).format(gen=snap["generated_at"],
-             gen_open='<span id="generated-at">', gen_close='</span>',
-             strip=re.sub(r"<[^>]+>", "", uptime_strip),
-             headline=SP.render_headline(snap),
-             trends=SP.render_trends(snap),
-             days=len(snap.get("history") or []),
-             tables=tables, mix=mix_html, errs=err_html,
-             spec=spec_json)
+        body = (head + '{headline}'
+                '<h2 id="trend">Trend</h2>'
+                '<p class="dim">Each dated file under status/data is one run; '
+                'git is the time series. These are the last {days} of them.</p>'
+                '{trends}{tables}' + tail + '</div>'
+                '<script type="application/json" id="status-spec">{spec}</script>'
+                '<script src="/status/status.js" defer></script>'
+                ).format(gen=snap["generated_at"],
+                         gen_open='<span id="generated-at">',
+                         gen_close='</span>',
+                         strip=re.sub(r"<[^>]+>", "", uptime_strip),
+                         headline=SP.render_headline(snap, public=public),
+                         trends=SP.render_trends(snap),
+                         days=len(snap.get("history") or []),
+                         tables=tables, mix=mix_html, errs=err_html,
+                         spec=spec_json)
 
-    return B.shell("Status \u2014 F-Keys", "F-Keys\\Status", cards,
-                   "live numbers",
-                   description="Measured traffic, installs, repositories, "
-                               "package versions and paper activity across "
-                               "every F-Keys property. Re-read on each load.",
-                   canonical="https://f-keys.com/status/")
+        return B.shell(title, path_label, body, "live numbers",
+                       description=desc, canonical=canonical, noindex=noindex)
+
+    return {"public": page(True), "detail": page(False)}
 
 
 # ── MAIN ─────────────────────────────────────────────────────
@@ -836,8 +870,13 @@ def main():
         json.dump(pub, f, indent=2, sort_keys=True)
     with open(os.path.join(STATUS_DIR, "latest.json"), "w", encoding="utf-8") as f:
         json.dump(pub, f, indent=2, sort_keys=True)
+    pages = render(pub, prev)
     with open(os.path.join(STATUS_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render(pub, prev))
+        f.write(pages["public"])
+    detail_dir = os.path.join(STATUS_DIR, "detail")
+    os.makedirs(detail_dir, exist_ok=True)
+    with open(os.path.join(detail_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(pages["detail"])
 
     s = snap["summary"]
     print()
