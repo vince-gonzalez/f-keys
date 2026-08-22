@@ -144,8 +144,11 @@ Rate limits: none. No quota, no 429, and deliberately no RateLimit headers,
 because publishing a limit nobody enforces would be worse than silence. The
 CDN sends ETag and Last-Modified; use them and a repeat fetch costs a 304.
 
-Versioning: the URLs are permanent and the DATA carries the version. There is
-no /v1/ prefix because there is no server to route one. Every document has a
+Versioning: every document is served twice, byte for byte -- at its bare path
+and under /v1. What is served under /v1 keeps the shape it has today; a
+breaking change appears as /v2 while /v1 keeps serving the old shape.
+Responses under a version prefix carry `X-API-Version: v1`, and an unknown
+version answers 404 with the code `unknown_version`. Every document has a
 `version` (the measurement date) and a `sha256`; re-measuring republishes the
 same URL with both changed. Pin to the sha256 for a fixed snapshot, or to the
 `seriesDoi`, which resolves to an immutable Zenodo deposit.

@@ -51,15 +51,34 @@ Versioning and deprecation
 **The URLs are permanent; the data carries the version.** There is no
 /v1/ prefix because there is no server to route one.
 
-| Field | Value |
-| --- | --- |
-| Pin to content | Every document carries a version (the measurement date) and a sha256. Re-measuring republishes the same URL with both changed, so comparing either tells you whether anything moved under you. |
-| Pin to a release | Each table carries a seriesDoi resolving to an immutable Zenodo deposit. Cite that, not this page. |
-| Breaking changes | Fields are added, never removed or retyped. A field that has to go is announced in the [working log](https://f-keys.com/log/) and kept for at least **180 days** after that entry. |
-| Deprecation signal | A path scheduled for removal is served with the Deprecation and Sunset headers of RFC 8594 and RFC 9745, and listed under x-versioning.deprecated in [openapi.json](https://f-keys.com/openapi.json). That list is currently empty. |
+Every document is served twice, byte for byte: at its bare path, and
+under /v1. Integrate against whichever suits you.
 
-## The command line
+# the same bytes, and the second carries a version stamp
+curl https://f-keys.com/gonzalgo/kernel-index/kernel-index.json
+curl -i https://f-keys.com/v1/gonzalgo/kernel-index/kernel-index.json | grep -i x-api-version
 
+Under /v1What is served there keeps the shape it has today.
+A breaking change appears as /v2 while /v1 keeps
+serving the old shape. Responses carry X-API-Version: v1, and a
+version that does not exist answers 404 with the code
+unknown_version rather than looking like a typo.
+Pin to contentEvery document carries a version
+(the measurement date) and a sha256. Re-measuring republishes the
+same URL with both changed, so comparing either tells you whether anything moved
+under you.
+Pin to a releaseEach table carries a seriesDoi
+resolving to an immutable Zenodo deposit. Cite that, not this page.
+Breaking changesFields are added, never removed or retyped. A
+field that has to go is announced in the [working log](https://f-keys.com/log/) and
+kept for at least **180 days** after that entry.
+Deprecation signalA path scheduled for removal is served with
+the Deprecation and Sunset headers of RFC 8594 and RFC
+9745, and listed under x-versioning.deprecated in
+[openapi.json](https://f-keys.com/openapi.json). That list is currently empty.
+
+
+The command line
 Four of these are real CLIs, not libraries with a script attached. Each does
 its whole job from a terminal, which is the point: an agent can drive them
 without an integration.

@@ -174,7 +174,17 @@ use them and a repeat fetch costs you a <code>304</code> and no body:</p>
 <h2>Versioning and deprecation</h2>
 <p><b>The URLs are permanent; the data carries the version.</b> There is no
 <code>/v1/</code> prefix because there is no server to route one.</p>
+<p>Every document is served twice, byte for byte: at its bare path, and
+under <code>/v1</code>. Integrate against whichever suits you.</p>
+<pre># the same bytes, and the second carries a version stamp
+curl https://f-keys.com/gonzalgo/kernel-index/kernel-index.json
+curl -i https://f-keys.com/v1/gonzalgo/kernel-index/kernel-index.json | grep -i x-api-version</pre>
 <table class="facts">
+<tr><th>Under /v1</th><td>What is served there keeps the shape it has today.
+A breaking change appears as <code>/v2</code> while <code>/v1</code> keeps
+serving the old shape. Responses carry <code>X-API-Version: v1</code>, and a
+version that does not exist answers <code>404</code> with the code
+<code>unknown_version</code> rather than looking like a typo.</td></tr>
 <tr><th>Pin to content</th><td>Every document carries a <code>version</code>
 (the measurement date) and a <code>sha256</code>. Re-measuring republishes the
 same URL with both changed, so comparing either tells you whether anything moved

@@ -222,7 +222,43 @@ def schema_name(path):
                    for w in p.replace("-", "_").split("_"))
 
 
+# A JSON Schema document describes other documents, so its own contents
+# are keywords rather than data. Inferring it produced a property
+# literally named `$ref` whose value was an object, which is the one
+# shape a resolver walking this file must never meet. It gets described
+# by hand as what it is.
+META_SCHEMA = {
+    "type": "object",
+    "title": "JSON Schema document",
+    "description": "A JSON Schema (draft 2020-12). Its keys are schema "
+                   "keywords, not data fields - fetch it and hand it to a "
+                   "validator rather than reading it as a record.",
+    "required": ["$schema", "title"],
+    "properties": {
+        "$schema": {"type": "string", "format": "uri",
+                    "description": "The draft this document conforms to."},
+        "$id": {"type": "string", "format": "uri"},
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "type": {"type": "string"},
+        "required": {"type": "array", "items": {"type": "string"}},
+        "properties": {"type": "object",
+                       "description": "The fields a conforming document "
+                                      "carries. Keywords, not values."},
+        "$defs": {"type": "object"},
+        "additionalProperties": {"type": "boolean"},
+    },
+}
+
+
 def dataset_schema(doc, title, blurb):
+    if "$schema" in doc:
+        out = dict(META_SCHEMA)
+        out["title"] = title
+        if blurb:
+            out["description"] = blurb.strip() + " " + META_SCHEMA["description"]
+        return out
+
     """The envelope and its rows, typed, with the table's own column
     labels carried through as titles."""
     labels = {}
@@ -236,12 +272,39 @@ def dataset_schema(doc, title, blurb):
     return schema
 
 
-ERROR_RESPONSE = {
+ERROR_SCHEMA = {
+    "type": "object",
+    "title": "Error",
+    "required": ["error"],
+    "properties": {"error": {
+        "type": "object",
+        "required": ["code", "message", "status"],
+        "properties": {
+            "code": {"type": "string",
+                     "description": "Stable machine-readable identifier."},
+            "message": {"type": "string"},
+            "status": {"type": "integer"},
+            "path": {"type": "string"},
+            "hints": {"type": "array", "items": {"type": "string"},
+                      "description": "Where to look instead."},
+        }}},
+}
+
+
+def error_response():
+    """A fresh copy per operation: inline schemas must not be
+    shared objects, or json.dumps writes one and the readers that
+    do resolve see aliasing that is not in the document."""
+    import copy
+    return copy.deepcopy(_ERROR_RESPONSE)
+
+
+_ERROR_RESPONSE = {
     "description": "The path does not exist. Returned as JSON when the "
                    "request asks for it, so an agent does not have to "
                    "parse an HTML error page.",
     "content": {"application/json": {
-        "schema": {"$ref": "#/components/schemas/Error"},
+        "schema": ERROR_SCHEMA,
         "example": {
             "error": {
                 "code": "not_found",
@@ -258,7 +321,15 @@ ERROR_RESPONSE = {
 
 
 def paths(found):
-    """Each operation, and the component schema it refers to."""
+    """Each operation, carrying its schema inline.
+
+    These were $refs into components/schemas, which is the tidier
+    OpenAPI and the wrong choice here. The tools that turn an operation
+    into a function signature - and the readiness checkers that imitate
+    them - overwhelmingly do not dereference, so a $ref reads as an
+    argument with no type. Every operation is self-contained instead:
+    one fetch of one object tells a caller the whole shape.
+    """
     out, schemas = {}, {}
     # the paths go out in one fixed order, so the document does not depend
     # on how the tree happened to be walked
@@ -278,9 +349,9 @@ def paths(found):
                 "200": {
                     "description": title,
                     "content": {"application/json": {
-                        "schema": {"$ref": "#/components/schemas/" + name}}},
+                        "schema": schemas[name]}},
                 },
-                "404": ERROR_RESPONSE,
+                "404": error_response(),
             },
         }}
     return out, schemas
@@ -317,16 +388,20 @@ via `Accept`, per acceptmarkdown.com.
 # stating in the document rather than leaving to inference: the URLs
 # are permanent, and it is the DATA that carries the version.
 VERSIONING = {
-    "strategy": "per-resource",
-    "summary": "URLs are stable and unversioned. Each document carries its "
-               "own version and sha256, so a consumer pins to content "
-               "rather than to a path.",
-    "detail": "There is no /v1/ prefix because there is no server to route "
-              "one. A measurement table is republished at the same URL when "
-              "it is re-measured, and its `version` (the measurement date) "
-              "and `sha256` both change. Pin to the sha256 if you need a "
-              "fixed snapshot, or to the series DOI in `seriesDoi`, which "
-              "resolves to an immutable Zenodo deposit for that release.",
+    "strategy": "url-path",
+    "current": "v1",
+    "summary": "Every document is served both at its bare path and under "
+               "/v1, byte for byte. Integrate against /v1 for a stable "
+               "shape, or against the bare path and pin on the sha256 each "
+               "document carries.",
+    "detail": "A measurement table is republished at the same URL when it is "
+              "re-measured, and its `version` (the measurement date) and "
+              "`sha256` both change - the numbers move, the shape does not. "
+              "If a shape ever has to change, it appears under /v2 and /v1 "
+              "keeps serving the old shape for the notice period. Responses "
+              "under a version prefix carry `X-API-Version`. An unknown "
+              "version answers 404 with the code `unknown_version` rather "
+              "than looking like a mistyped path.",
     "breakingChangePolicy": "Fields are added, not removed or retyped. A "
                             "field that must go is announced in the working "
                             "log at " + SITE + "/log/ and kept for at least "
@@ -360,26 +435,7 @@ RATE_LIMIT = {
 
 def spec():
     found = datasets()
-    documented, schemas = paths(found)
-
-    # the generic envelope stays as the shape all the measurement tables
-    # share; the per-dataset schemas above it carry the actual columns
-    schemas["Error"] = {
-        "type": "object",
-        "required": ["error"],
-        "properties": {"error": {
-            "type": "object",
-            "required": ["code", "message", "status"],
-            "properties": {
-                "code": {"type": "string",
-                         "description": "Stable machine-readable identifier."},
-                "message": {"type": "string"},
-                "status": {"type": "integer"},
-                "path": {"type": "string"},
-                "hints": {"type": "array", "items": {"type": "string"},
-                          "description": "Where to look instead."},
-            }}},
-    }
+    documented, _schemas = paths(found)
 
     return {
         "openapi": "3.1.0",
@@ -392,12 +448,26 @@ def spec():
                         "url": SITE + "/contact.html"},
             "license": {"name": "CC BY 4.0", "identifier": "CC-BY-4.0"},
         },
-        "servers": [{"url": SITE, "description": "Static files over HTTPS"}],
+        "servers": [
+            {"url": SITE + "/v1",
+             "description": "Version 1. The same documents as the bare paths, "
+                            "under a prefix that carries a promise: what is "
+                            "served here keeps the shape it has today, and a "
+                            "breaking change appears as /v2 while /v1 is "
+                            "served with Deprecation and Sunset headers for "
+                            "180 days. Responses carry X-API-Version: v1."},
+            {"url": SITE,
+             "description": "The same files without the version prefix. "
+                            "Identical bytes; pin on each document's own "
+                            "sha256 or seriesDoi instead of on a path."},
+        ],
         "externalDocs": {"url": SITE + "/developers.html",
                          "description": "Developer resources"},
         "tags": [{"name": t, "description": b} for _s, t, b in SOURCES],
         "paths": documented,
-        "components": {"schemas": schemas},
+        # deliberately empty: every schema is inline on its
+        # operation, so nothing here needs resolving
+        "components": {"schemas": {}},
         "x-versioning": VERSIONING,
         "x-rate-limit": RATE_LIMIT,
     }

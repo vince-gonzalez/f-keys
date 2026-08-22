@@ -327,20 +327,48 @@ def openapi():
             fail("openapi", url + " has neither a summary nor a description")
 
         try:
-            ref = op["responses"]["200"]["content"]["application/json"][
-                "schema"]["$ref"]
+            schema = op["responses"]["200"]["content"]["application/json"][
+                "schema"]
         except (KeyError, TypeError):
             fail("openapi", url + " has no JSON response schema")
             continue
-        target = schemas.get(ref.split("/")[-1], {})
-        if not target.get("properties"):
-            fail("openapi", "{} resolves to {}, which names no properties"
-                            .format(url, ref))
+        # Inline, not a $ref. The tools that turn an operation into a
+        # function signature do not dereference, so a $ref reads to them
+        # as an argument with no type at all - which is how this scored
+        # zero typed schemas while every schema was in fact present.
+        if "$ref" in schema:
+            fail("openapi", url + " answers with a $ref; function-calling "
+                                  "converters do not resolve those")
+        elif not schema.get("properties"):
+            fail("openapi", url + " has a response schema that names no "
+                                  "properties")
+
+    # A $ref anywhere in the document defeats the point of inlining, and
+    # one arrived by accident: the Kernel Trust meta-schema contains the
+    # word as data, so type-inferring it produced a property literally
+    # named $ref whose value was an object - the one shape a resolver
+    # walking this file must never meet.
+    stack = [spec]
+    while stack:
+        node = stack.pop()
+        if isinstance(node, dict):
+            if "$ref" in node:
+                fail("openapi", "contains a $ref: " + repr(node["$ref"])[:60])
+            stack.extend(node.values())
+        elif isinstance(node, list):
+            stack.extend(node)
 
     # what an integrator is entitled to rely on, stated rather than implied
     for key in ("x-versioning", "x-rate-limit"):
         if not spec.get(key):
             fail("openapi", "does not declare " + key)
+
+    # the version prefix is a promise; it has to be declared where a tool
+    # reading only the servers block will see it
+    if not any(str(s.get("url", "")).rstrip("/").endswith("/v1")
+               for s in spec.get("servers") or []):
+        fail("openapi", "no versioned server; x-versioning claims url-path "
+                        "but nothing in servers carries a prefix")
 
     if spec.get("components", {}).get("securitySchemes") or spec.get("security"):
         fail("openapi", "declares authentication, but there is nothing to "

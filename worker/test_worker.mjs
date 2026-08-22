@@ -149,6 +149,53 @@ for (var i = 0; i < cases.length; i++) {
   check(c[0], await get(c[1], c[2]), c[3]);
 }
 
+/* /v1 is a promise, so it is held to one: the same bytes as the bare
+   path, stamped with the version, and a version that does not exist
+   says so rather than 404ing like a typo. */
+async function head(path, accept) {
+  var headers = {};
+  if (accept) { headers.Accept = accept; }
+  var res = await worker.fetch(
+    new Request("https://f-keys.com" + path, { headers: headers }));
+  return {
+    status: res.status,
+    type: res.headers.get("Content-Type"),
+    version: res.headers.get("X-API-Version"),
+    body: await res.text()
+  };
+}
+
+check("/v1/ serves the same bytes as /",
+      await head("/v1/", "text/html"),
+      { status: 200, type: HTML, version: "v1", body: "<html>home</html>" });
+
+check("/v1 with no slash",
+      await head("/v1", "text/html"),
+      { status: 200, type: HTML, version: "v1", body: "<html>home</html>" });
+
+check("/v1 negotiates markdown like the bare path",
+      await head("/v1/keyj/", "text/markdown"),
+      { status: 200, type: MD, version: "v1", body: "# Key-J\n" });
+
+check("the bare path carries no version stamp",
+      (await head("/", "text/html")).version, null);
+
+var unknown = await head("/v2/keyj/", "text/html");
+var parsedUnknown = JSON.parse(unknown.body);
+check("an unknown version says so, in JSON",
+      { status: unknown.status, type: unknown.type,
+        code: parsedUnknown.error.code },
+      { status: 404, type: JSON_TYPE, code: "unknown_version" });
+
+var missing = await head("/v1/nope", "*/*");
+var parsedMissing = JSON.parse(missing.body);
+check("a miss under /v1 reports the path the caller used",
+      { status: missing.status, type: missing.type,
+        path: parsedMissing.error.path },
+      { status: 404, type: JSON_TYPE, path: "/v1/nope" });
+
+var versionChecks = 6;
+
 for (var k = 0; k < jsonCases.length; k++) {
   var jc = jsonCases[k];
   var res = await get(jc[1], jc[2]);
@@ -190,4 +237,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("test_worker: " + (cases.length + jsonCases.length) + " cases ok");
+console.log("test_worker: " + (cases.length + jsonCases.length + versionChecks) + " cases ok");

@@ -151,9 +151,71 @@ function withVary(response, contentType) {
   });
 }
 
+/* A version prefix that resolves to the same bytes as the bare path.
+
+   There is no server here to route a /v1/, so the usual objection is
+   that the prefix would be decoration. It is not, because the promise
+   behind it is one a folder of static files can actually keep: what is
+   served under /v1 keeps the shape it has today. If a document ever has
+   to change shape, /v2 appears beside it and /v1 is served with the
+   Deprecation and Sunset headers of RFC 8594 and RFC 9745 for the 180
+   days the policy commits to.
+
+   Callers who would rather track the data than a path can keep using
+   the bare URL and pin on the sha256 each document carries. Both are
+   supported; the prefix exists so that an integrator who wants the
+   guarantee has somewhere to point at. */
+var VERSION_PREFIX = /^\/v(\d+)(\/|$)/;
+var CURRENT_VERSION = "1";
+
+function stripVersion(pathname) {
+  var m = pathname.match(VERSION_PREFIX);
+  if (!m) { return null; }
+  var rest = pathname.slice(m[0].length - (m[2] === "/" ? 1 : 0));
+  return { version: m[1], pathname: rest === "" ? "/" : rest };
+}
+
+/* The version prefix is peeled off here and nowhere else, so everything
+   below only ever sees a real path. */
 async function handle(request) {
   var url = new URL(request.url);
+  var versioned = stripVersion(url.pathname);
 
+  if (!versioned) { return serve(request, url); }
+
+  if (versioned.version !== CURRENT_VERSION) {
+    return jsonError(url.pathname, 404, "unknown_version",
+                     "Version v" + versioned.version + " does not exist. " +
+                     "The current version is v" + CURRENT_VERSION + ".");
+  }
+
+  var bare = new URL(url.toString());
+  bare.pathname = versioned.pathname;
+
+  /* Anything asked for under /v1 is the data surface by definition, so
+     a miss there answers as JSON whatever the Accept header says - the
+     bare path might be an HTML page, but nobody reaches it through a
+     version prefix to read it in a browser. */
+  var response = await serve(new Request(bare.toString(), {
+    method: request.method,
+    headers: request.headers,
+    redirect: "manual"
+  }), bare, true, url.pathname);
+
+  var stamped = new Headers(response.headers);
+  stamped.set("X-API-Version", "v" + versioned.version);
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: stamped
+  });
+}
+
+/* `asked` is the path the client actually typed. Under a version
+   prefix that differs from the path we fetch, and an error that
+   reports a URL the caller never used is a worse answer than no
+   error at all. */
+async function serve(request, url, versioned, asked) {
   if (request.method !== "GET" && request.method !== "HEAD") {
     return fetch(request);
   }
@@ -204,9 +266,11 @@ async function handle(request) {
   /* A JSON file that exists is served by the origin as JSON already;
      this is only for the case where nothing is there. */
   if (htmlResponse.status === 404 &&
-      shouldErrorAsJson(url.pathname, request.headers.get("Accept"))) {
-    return jsonError(url.pathname, 404, "not_found",
-                     "No resource exists at " + url.pathname);
+      (versioned ||
+       shouldErrorAsJson(url.pathname, request.headers.get("Accept")))) {
+    var shown = asked || url.pathname;
+    return jsonError(shown, 404, "not_found",
+                     "No resource exists at " + shown);
   }
 
   return withVary(htmlResponse, null);
