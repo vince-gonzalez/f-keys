@@ -26,9 +26,13 @@ WORKFLOW STACK
   6. anchors      - about / contact / privacy are real pages
   7. contact      - the role address, never the personal one
   8. recovery     - the 404 points somewhere useful
-  9. llms.txt     - when-to-use guidance is present
- 10. sitemap      - every URL it lists is a file that exists
- 11. generated    - the output still matches the generator
+  9. openapi     - every documented path is a file, and the spec
+                    claims no auth, no server and no write that
+                    F-Keys does not actually have
+ 10. llms.txt     - when-to-use guidance is present
+ 11. sitemap      - every URL it lists is a file that exists
+ 12. generated    - EVERY page buildsite writes still matches it,
+                    not just the ones at the root
 
 Run:  python tools/test_site.py
 ============================================================
@@ -338,8 +342,16 @@ def generated_is_current():
     """buildsite.py is the source of truth; a hand-edit to a generated
     page is silently reverted by the next build, so it is caught here
     instead of in production."""
+    # Every page buildsite writes, not just the ones at the root. A change
+    # to the shell - a new node in the navigation tree, say - rewrites all
+    # of them, and checking only the root once let twelve product pages
+    # ship with a different navigation while this reported ok.
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import buildmd
+    names = buildmd.targets()
+
     before = {n: read(os.path.join(ROOT, n))
-              for n in GENERATED if os.path.exists(os.path.join(ROOT, n))}
+              for n in names if os.path.exists(os.path.join(ROOT, n))}
     r = subprocess.run([sys.executable, os.path.join(ROOT, "tools",
                                                      "buildsite.py")],
                        capture_output=True, text=True, cwd=ROOT)
@@ -350,7 +362,8 @@ def generated_is_current():
         if read(os.path.join(ROOT, name)) != old:
             fail("generated",
                  "{} differs from what buildsite.py produces - it was "
-                 "edited by hand, or the build was not re-run".format(name))
+                 "edited by hand, or the build was not re-run"
+                 .format(name.replace("\\", "/")))
 
 
 # ── 8. the map matches the territory ─────────────────────────
