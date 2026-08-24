@@ -1,6 +1,9 @@
 __pycache__/
 *.pyc
 
+# installed dependencies; 36MB of them reached a commit once
+node_modules/
+
 # agent skills installed at project scope; not part of the site
 .agents/
 .claude/
