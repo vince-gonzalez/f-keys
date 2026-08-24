@@ -223,10 +223,8 @@
   .canvas-body {
     flex: 1;
     overflow: auto;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 24px;
+    display: block;
+    padding: 12px;
   }
 
   /* ── Buttons / Controls ── */
@@ -257,16 +255,55 @@
   .btn.danger { color: var(--accent3); font-weight: 700; }
 
   /* ── Key grid ── */
+  /* ── the workbench ────────────────────────────────────────────
+     A board of cells that controls are placed on, not flowed into.
+     The field is drawn so the person can see what they are snapping
+     to; without it a drop looks arbitrary. */
   .key-grid {
-    display: grid;
-    gap: 8px;
-    grid-template-columns: repeat(var(--cols, 4), 1fr);
+    position: relative;
     width: 100%;
-    max-width: 720px;
+    height: 100%;
+    min-height: 460px;
+    background-color: var(--field);
+    background-image:
+      linear-gradient(to right,  rgba(0,0,0,.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,.10) 1px, transparent 1px);
+    background-size:
+      calc(100% / var(--cols, 24)) calc(100% / var(--rows, 14));
+    border: 2px solid;
+    border-color: var(--border-dark) var(--border-light)
+                  var(--border-light) var(--border-dark);
   }
 
+  #ghost {
+    position: absolute; display: none; pointer-events: none;
+    border: 2px dashed var(--accent);
+    background: rgba(10,36,106,.14);
+    z-index: 5;
+  }
+  #ghost.bad {
+    border-color: var(--accent3);
+    background: rgba(168,0,0,.16);
+  }
+
+  .grip {
+    position: absolute; right: 0; bottom: 0;
+    width: 15px; height: 15px; cursor: nwse-resize;
+    background: linear-gradient(135deg, transparent 46%,
+                var(--border-dark) 46%, var(--border-dark) 60%,
+                transparent 60%, transparent 72%,
+                var(--border-dark) 72%, var(--border-dark) 86%,
+                transparent 86%);
+    opacity: 0; z-index: 3;
+  }
+  .key-btn:hover .grip, .key-btn.selected .grip { opacity: 1; }
+  .key-btn.dragging { opacity: .55; z-index: 4; }
+
+  /* A slider is read down its length, so its label turns with it. */
+  .kind-slider .key-label { writing-mode: vertical-rl; }
+
   .key-btn {
-    position: relative;
+    position: absolute;
     background: var(--bg2);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -371,6 +408,10 @@
 
   .pro-row { display: flex; gap: 8px; align-items: center; }
   .pro-row .field-input { flex: 1; opacity: .5; cursor: not-allowed; }
+  .size-read {
+    font-family: var(--font-mono); font-size: 14px;
+    color: var(--text); display: block; padding: 9px 0;
+  }
   .pro-tag {
     font-family: var(--font-mono); font-size: 13px; letter-spacing: 1px;
     color: var(--accent); border: 1px solid var(--accent);
@@ -473,14 +514,14 @@
       </div>
 
       <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
-        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">GRID CONFIG</div>
+        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">BOARD SIZE</div>
         <div class="field-group">
           <div class="field-label">COLUMNS</div>
-          <input class="field-input" id="cfg-cols" type="number" min="1" max="8" value="4" oninput="applyGridConfig()" />
+          <input class="field-input" id="cfg-cols" type="number" min="6" max="48" value="24" oninput="applyGridConfig()" />
         </div>
         <div class="field-group">
           <div class="field-label">ROWS</div>
-          <input class="field-input" id="cfg-rows" type="number" min="1" max="8" value="3" oninput="applyGridConfig()" />
+          <input class="field-input" id="cfg-rows" type="number" min="4" max="32" value="16" oninput="applyGridConfig()" />
         </div>
         <button class="btn accent" style="width:100%; margin-top:4px;" onclick="pushLayoutToControllers()">▶ PUSH TO PHONE</button>
         <button class="btn" style="width:100%; margin-top:8px;" onclick="exportLayout()">EXPORT LAYOUT JSON</button>
@@ -493,7 +534,7 @@
   <!-- Center: Key canvas -->
   <div class="canvas-area">
     <div class="canvas-toolbar">
-      <button class="btn accent" onclick="addKey()">+ ADD KEY</button>
+      <select class="field-input" id="add-type" style="width:auto; display:inline-block; margin-right:6px;"><option value="key">Key</option><option value="toggle">Toggle</option><option value="pad">Pad</option><option value="dial">Dial</option><option value="slider">Slider</option></select><button class="btn accent" onclick="addKey(document.getElementById('add-type').value)">+ ADD</button>
       <button class="btn" onclick="removeSelected()">− REMOVE</button>
       <button class="btn" onclick="clearAll()">CLEAR ALL</button>
       <span style="font-size:13px; color:var(--text-dim); margin-left:8px;">CLICK KEY TO EDIT</span>
@@ -543,7 +584,66 @@ var pingStart = 0;
 var selectedKeyId = null;
 var controllerConnected = false;
 
-  // ── What a control can be ──────────────────────────────────────
+  // ── The workbench ──────────────────────────────────────────────
+//
+// The surface is a field of cells, and a control says where it sits and
+// how many it covers. A fixed grid could not express "ten sliders down the
+// left", and a slider is not the same shape as a key, so position and size
+// belong to the control rather than to the container.
+//
+// Cells rather than pixels: a layout built on a laptop has to arrive on a
+// phone at a different size and still be the same layout.
+var GRID = { cols: 24, rows: 16 };
+
+var SHAPES = [
+  ['rect',    'Square corners'],
+  ['rounded', 'Rounded'],
+  ['pill',    'Pill'],
+  ['circle',  'Circle']
+];
+
+// What a new control of each type looks like before anybody moves it.
+var TYPE_DEFAULTS = {
+  key:    { w: 4, h: 4, shape: 'rounded' },
+  toggle: { w: 4, h: 4, shape: 'rounded' },
+  pad:    { w: 4, h: 4, shape: 'rect'    },
+  dial:   { w: 4, h: 4, shape: 'circle'  },
+  slider: { w: 3, h: 8, shape: 'pill'    }
+};
+
+function overlaps(a, b) {
+  return a.x < b.x + b.w && a.x + a.w > b.x &&
+         a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
+// Where a control would collide, and with what. Returns the first clash so
+// the workbench can name what is in the way rather than refusing silently.
+function clashAt(box, ignoreId) {
+  for (var i = 0; i < layout.length; i++) {
+    var k = layout[i];
+    if (k.id === ignoreId) { continue; }
+    if (overlaps(box, k)) { return k; }
+  }
+  return null;
+}
+
+function inBounds(box) {
+  return box.x >= 0 && box.y >= 0 &&
+         box.x + box.w <= GRID.cols && box.y + box.h <= GRID.rows;
+}
+
+// The first free space big enough, scanning across and then down, so a new
+// control lands somewhere sensible instead of on top of something.
+function firstFree(w, h) {
+  for (var y = 0; y + h <= GRID.rows; y++) {
+    for (var x = 0; x + w <= GRID.cols; x++) {
+      if (!clashAt({ x: x, y: y, w: w, h: h }, null)) { return { x: x, y: y }; }
+    }
+  }
+  return null;
+}
+
+// ── What a control can be ──────────────────────────────────────
   //
   // Type decides everything below it. A dial cannot fire a keystroke and a
   // key cannot report a position, so the behaviours and commands offered
@@ -653,31 +753,31 @@ var controllerConnected = false;
   // middle positions are the volume controls, which are always continuous.
   var layout = [
     { id: 'k1',  type: 'toggle', behaviour: 'latch',    command: 'audio.mic.mute',
-      label: 'MUTE MIC',  sub: 'microphone',  color: '#2a1216', lit: true },
+      label: 'MUTE MIC',  sub: 'microphone',  color: '#2a1216', lit: true, shape: 'rounded', x: 1, y: 1, w: 4, h: 4 },
     { id: 'k2',  type: 'key',    behaviour: 'press',    command: 'obs.scene',
-      arg: 'Be Right Back', label: 'BRB',  sub: 'scene',  color: '#161a2a' },
+      arg: 'Be Right Back', label: 'BRB',  sub: 'scene',  color: '#161a2a', shape: 'rounded', x: 6, y: 1, w: 4, h: 4 },
     { id: 'k3',  type: 'key',    behaviour: 'press',    command: 'obs.scene',
-      arg: 'Live',        label: 'LIVE',      sub: 'scene',       color: '#12211a' },
+      arg: 'Live',        label: 'LIVE',      sub: 'scene',       color: '#12211a', shape: 'rounded', x: 11, y: 1, w: 4, h: 4 },
     { id: 'k4',  type: 'key',    behaviour: 'press',    command: 'capture.clip',
-      label: 'CLIP THAT', sub: 'last 30s',    color: '#1c1626' },
+      label: 'CLIP THAT', sub: 'last 30s',    color: '#1c1626', shape: 'rounded', x: 16, y: 1, w: 4, h: 4 },
   
     { id: 'k5',  type: 'key',    behaviour: 'press',    command: 'stream.ad',
-      arg: '180',         label: 'AD BREAK',  sub: '3 minutes',   color: '#241a10' },
+      arg: '180',         label: 'AD BREAK',  sub: '3 minutes',   color: '#241a10', shape: 'rounded', x: 1, y: 6, w: 4, h: 4 },
     { id: 'k6',  type: 'dial',   behaviour: 'relative', command: 'audio.mic.gain',
-      label: 'MIC GAIN',  sub: 'dial',        color: '#111820' },
+      label: 'MIC GAIN',  sub: 'dial',        color: '#111820', shape: 'circle', x: 6, y: 6, w: 4, h: 4 },
     { id: 'k7',  type: 'dial',   behaviour: 'relative', command: 'audio.master',
-      label: 'MASTER',    sub: 'dial',        color: '#111820' },
+      label: 'MASTER',    sub: 'dial',        color: '#111820', shape: 'circle', x: 11, y: 6, w: 4, h: 4 },
     { id: 'k8',  type: 'toggle', behaviour: 'latch',    command: 'obs.record',
-      label: 'RECORD',    sub: 'local file',  color: '#2a1216', lit: true },
+      label: 'RECORD',    sub: 'local file',  color: '#2a1216', lit: true, shape: 'rounded', x: 16, y: 6, w: 4, h: 4 },
   
     { id: 'k9',  type: 'pad',    behaviour: 'trigger',  command: 'sound.play',
-      arg: 'airhorn.wav', label: 'AIRHORN',   sub: 'soundboard',  color: '#1a1426' },
+      arg: 'airhorn.wav', label: 'AIRHORN',   sub: 'soundboard',  color: '#1a1426', shape: 'rect', x: 1, y: 11, w: 4, h: 4 },
     { id: 'k10', type: 'pad',    behaviour: 'trigger',  command: 'sound.play',
-      arg: 'applause.wav',label: 'APPLAUSE',  sub: 'soundboard',  color: '#1a1426' },
+      arg: 'applause.wav',label: 'APPLAUSE',  sub: 'soundboard',  color: '#1a1426', shape: 'rect', x: 6, y: 11, w: 4, h: 4 },
     { id: 'k11', type: 'key',    behaviour: 'hold',     command: 'audio.mic.ptt',
-      label: 'PUSH TALK', sub: 'hold',        color: '#101a1e' },
+      label: 'PUSH TALK', sub: 'hold',        color: '#101a1e', shape: 'rounded', x: 11, y: 11, w: 4, h: 4 },
     { id: 'k12', type: 'toggle', behaviour: 'latch',    command: 'obs.stream',
-      label: 'STREAM',    sub: 'go live',     color: '#12211a', lit: true }
+      label: 'STREAM',    sub: 'go live',     color: '#12211a', lit: true, shape: 'rounded', x: 16, y: 11, w: 4, h: 4 }
   ];
 
 var serverIP = '127.0.0.1';
@@ -826,29 +926,201 @@ function inkFor(background) {
   return lum > 0.179 ? '#000000' : '#ffffff';
 }
 
+function cellSize() {
+  var board = document.getElementById('key-grid');
+  var r = board.getBoundingClientRect();
+  return { w: r.width / GRID.cols, h: r.height / GRID.rows, rect: r };
+}
+
+function shapeRadius(key) {
+  var c = cellSize();
+  if (key.shape === 'circle') { return '50%'; }
+  if (key.shape === 'pill') {
+    return Math.min(key.w * c.w, key.h * c.h) / 2 + 'px';
+  }
+  if (key.shape === 'rounded') { return '10px'; }
+  return '0';
+}
+
 function renderGrid() {
   // READS: layout, selectedKeyId
   // WRITES: #key-grid DOM
-  var cols = parseInt(document.getElementById('cfg-cols').value) || 4;
-  var grid = document.getElementById('key-grid');
-  grid.style.setProperty('--cols', cols);
-  grid.innerHTML = '';
+  //
+  // Every control is placed rather than flowed. A grid could only ever
+  // produce a grid, and the point of a workbench is that somebody can put
+  // ten sliders down one side if that is the instrument they are building.
+  var board = document.getElementById('key-grid');
+  board.innerHTML = '';
+  board.style.setProperty('--cols', GRID.cols);
+  board.style.setProperty('--rows', GRID.rows);
 
   layout.forEach(function(key) {
-    var btn = document.createElement('div');
-    btn.className = 'key-btn' + (key.id === selectedKeyId ? ' selected' : '');
-    btn.dataset.id = key.id;
-    btn.innerHTML =
+    var el = document.createElement('div');
+    el.className = 'key-btn shape-' + (key.shape || 'rounded') +
+                   ' kind-' + (key.type || 'key') +
+                   (key.id === selectedKeyId ? ' selected' : '');
+    el.dataset.id = key.id;
+    el.style.left   = (key.x / GRID.cols * 100) + '%';
+    el.style.top    = (key.y / GRID.rows * 100) + '%';
+    el.style.width  = (key.w / GRID.cols * 100) + '%';
+    el.style.height = (key.h / GRID.rows * 100) + '%';
+    el.style.borderRadius = shapeRadius(key);
+    if (key.color) {
+      el.style.background = key.color;
+      el.style.color = inkFor(key.color);
+    }
+
+    el.innerHTML =
       '<span class="key-label">' + escHtml(key.label) + '</span>' +
-      '<span class="key-sub">'   + escHtml(key.sub || key.action || '') + '</span>' +
-      '<span class="key-edit">✎</span>';
-    btn.onclick = function() { selectKey(key.id); };
-    grid.appendChild(btn);
+      '<span class="key-sub">' + escHtml(key.sub || '') + '</span>' +
+      '<span class="grip" title="Drag to resize"></span>';
+
+    el.addEventListener('pointerdown', function(e) {
+      if (e.target.classList.contains('grip')) {
+        beginResize(e, key, el);
+      } else {
+        beginMove(e, key, el);
+      }
+    });
+
+    board.appendChild(el);
   });
 }
 
+// ── moving and resizing ──────────────────────────────────────────
+
+function snap(v) { return Math.round(v); }
+
+function showGhost(box, bad) {
+  var g = document.getElementById('ghost');
+  if (!g) {
+    g = document.createElement('div');
+    g.id = 'ghost';
+    document.getElementById('key-grid').appendChild(g);
+  }
+  g.style.display = 'block';
+  g.style.left   = (box.x / GRID.cols * 100) + '%';
+  g.style.top    = (box.y / GRID.rows * 100) + '%';
+  g.style.width  = (box.w / GRID.cols * 100) + '%';
+  g.style.height = (box.h / GRID.rows * 100) + '%';
+  g.className = bad ? 'bad' : '';
+}
+
+function hideGhost() {
+  var g = document.getElementById('ghost');
+  if (g) { g.style.display = 'none'; }
+}
+
+function drag(e, onMove) {
+  // One drag helper for both jobs. Pointer events cover mouse, pen and
+  // touch without three code paths that drift apart.
+  e.preventDefault();
+  var start = { x: e.clientX, y: e.clientY };
+  var cell = cellSize();
+
+  function move(ev) {
+    onMove((ev.clientX - start.x) / cell.w, (ev.clientY - start.y) / cell.h,
+           false);
+  }
+  function up(ev) {
+    onMove((ev.clientX - start.x) / cell.w, (ev.clientY - start.y) / cell.h,
+           true);
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerup', up);
+  }
+  window.addEventListener('pointermove', move);
+  window.addEventListener('pointerup', up);
+}
+
+function beginMove(e, key, el) {
+  selectKey(key.id);
+  var from = { x: key.x, y: key.y, w: key.w, h: key.h };
+  el.classList.add('dragging');
+
+  drag(e, function(dx, dy, done) {
+    var box = { x: snap(from.x + dx), y: snap(from.y + dy),
+                w: from.w, h: from.h };
+    box.x = Math.max(0, Math.min(GRID.cols - box.w, box.x));
+    box.y = Math.max(0, Math.min(GRID.rows - box.h, box.y));
+    var clash = clashAt(box, key.id);
+
+    if (!done) { showGhost(box, !!clash); return; }
+
+    hideGhost();
+    el.classList.remove('dragging');
+    if (clash) {
+      // Refusing without saying what is in the way is the same as
+      // refusing for no reason.
+      say('"' + key.label + '" will not fit there; "' + clash.label +
+          '" is in the way.');
+    } else {
+      key.x = box.x; key.y = box.y;
+      pushLayoutToControllers();
+    }
+    renderGrid();
+  });
+}
+
+function beginResize(e, key, el) {
+  e.stopPropagation();
+  selectKey(key.id);
+  var from = { x: key.x, y: key.y, w: key.w, h: key.h };
+
+  drag(e, function(dx, dy, done) {
+    var w = Math.max(2, snap(from.w + dx));
+    var h = Math.max(2, snap(from.h + dy));
+    // A circle has one dimension by definition; letting it be resized
+    // into an ellipse would make the shape a lie.
+    if (key.shape === 'circle') { w = h = Math.max(w, h); }
+    var box = { x: from.x, y: from.y, w: w, h: h };
+    if (!inBounds(box)) {
+      box.w = Math.min(box.w, GRID.cols - box.x);
+      box.h = Math.min(box.h, GRID.rows - box.y);
+    }
+    var clash = clashAt(box, key.id);
+
+    if (!done) { showGhost(box, !!clash); return; }
+
+    hideGhost();
+    if (clash) {
+      say('"' + key.label + '" cannot grow into "' + clash.label + '".');
+    } else {
+      key.w = box.w; key.h = box.h;
+      pushLayoutToControllers();
+    }
+    renderGrid();
+  });
+}
+
+function say(message) {
+  var bar = document.getElementById('footer-status');
+  if (bar) {
+    bar.textContent = message;
+    clearTimeout(say._t);
+    say._t = setTimeout(function() { bar.textContent = 'READY'; }, 4000);
+  }
+  log(message);
+}
+
 function applyGridConfig() {
+  // Shrinking the board can strand a control outside it, so the size only
+  // changes if everything still fits. Silently deleting somebody's layout
+  // to honour a number in a box is not a trade worth making.
+  var cols = parseInt(document.getElementById('cfg-cols').value) || GRID.cols;
+  var rows = parseInt(document.getElementById('cfg-rows').value) || GRID.rows;
+  var stranded = layout.filter(function(k) {
+    return k.x + k.w > cols || k.y + k.h > rows;
+  });
+  if (stranded.length) {
+    say(stranded.length + ' control(s) would fall outside a ' + cols + ' by ' +
+        rows + ' board. Move them first.');
+    document.getElementById('cfg-cols').value = GRID.cols;
+    document.getElementById('cfg-rows').value = GRID.rows;
+    return;
+  }
+  GRID.cols = cols; GRID.rows = rows;
   renderGrid();
+  pushLayoutToControllers();
 }
 
 function flashKey(id) {
@@ -949,6 +1221,13 @@ function renderEditor(id) {
         '" oninput="updateKey(\'color\', this.value)" />') +
     '</div>';
 
+  html += '<div class="field-split">' +
+    row('SHAPE', '', '<select class="field-input" onchange="changeShape(this.value)">' +
+        opts(SHAPES, key.shape || 'rounded') + '</select>') +
+    row('SIZE', '', '<span class="size-read">' + key.w + ' x ' + key.h +
+        '</span>') +
+    '</div>';
+
   html += row('SUBTITLE', 'small line under the label',
     '<input class="field-input" value="' + escAttr(key.sub || '') +
     '" oninput="updateKey(\'sub\', this.value)" />');
@@ -1006,6 +1285,26 @@ function changeType(type) {
   pushLayoutToControllers();
 }
 
+function changeShape(shape) {
+  var key = layout.find(function(k) { return k.id === selectedKeyId; });
+  if (!key) { return; }
+  key.shape = shape;
+  // A circle is one dimension. Squaring it off here rather than drawing an
+  // ellipse and calling it a circle.
+  if (shape === 'circle' && key.w !== key.h) {
+    var side = Math.max(key.w, key.h);
+    var box = { x: key.x, y: key.y, w: side, h: side };
+    if (inBounds(box) && !clashAt(box, key.id)) {
+      key.w = key.h = side;
+    } else {
+      key.w = key.h = Math.min(key.w, key.h);
+    }
+  }
+  renderGrid();
+  renderEditor(key.id);
+  pushLayoutToControllers();
+}
+
 function changeCommand(command) {
   var key = layout.find(function(k) { return k.id === selectedKeyId; });
   if (!key) { return; }
@@ -1032,11 +1331,27 @@ function updateKey(field, value) {
   }
 }
 
-function addKey() {
+function addKey(type) {
+  type = type || 'key';
+  var d = TYPE_DEFAULTS[type] || TYPE_DEFAULTS.key;
+  var spot = firstFree(d.w, d.h);
+  if (!spot) {
+    say('No room left on the board for another ' + type + '.');
+    return;
+  }
+  var behaviours = BEHAVIOURS[type] || [];
+  var groups = commandsFor(type);
   var uid = 'k' + Date.now();
-  layout.push({ id: uid, label: 'NEW', sub: '', action: '' });
+  layout.push({
+    id: uid, type: type,
+    behaviour: behaviours.length ? behaviours[0][0] : '',
+    command: (groups[0] && groups[0].items[0][0]) || '',
+    label: type.toUpperCase(), sub: '', color: '#c8c4bc',
+    x: spot.x, y: spot.y, w: d.w, h: d.h, shape: d.shape
+  });
   renderGrid();
   selectKey(uid);
+  pushLayoutToControllers();
 }
 
 function removeSelected() {
@@ -1058,16 +1373,14 @@ function clearAll() {
 // ── Layout push / export / import ─────────────────────────────
 function pushLayoutToControllers() {
   if (!ws || ws.readyState !== WebSocket.OPEN) { log('Not connected'); return; }
-  var cols = parseInt(document.getElementById('cfg-cols').value) || 4;
-  var rows = parseInt(document.getElementById('cfg-rows').value) || 3;
+  var cols = GRID.cols, rows = GRID.rows;
   ws.send(JSON.stringify({ type: 'layout_push', layout: { keys: layout, cols: cols, rows: rows } }));
   addFeedItem('SYSTEM', 'Layout pushed to controller', '');
   log('Layout pushed');
 }
 
 function exportLayout() {
-  var cols = parseInt(document.getElementById('cfg-cols').value) || 4;
-  var rows = parseInt(document.getElementById('cfg-rows').value) || 3;
+  var cols = GRID.cols, rows = GRID.rows;
   var data = JSON.stringify({ keys: layout, cols: cols, rows: rows }, null, 2);
   var blob = new Blob([data], { type: 'application/json' });
   var a = document.createElement('a');

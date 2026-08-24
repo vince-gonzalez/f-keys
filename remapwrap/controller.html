@@ -258,6 +258,7 @@
     padding: 0 4px;
     color: inherit;   /* the key computes its own ink; see inkFor */
   }
+  [data-type=slider] .key-label { writing-mode: vertical-rl; }
   .key-sub {
     color: inherit;   /* the key decides the ink; see inkFor */
     opacity: .75;
@@ -448,8 +449,10 @@ function renderKeys() {
   // and a slider was the same button again. A dial you cannot turn is not
   // a dial.
   var grid = document.getElementById('key-grid');
-  grid.style.setProperty('--cols', layout.cols || 4);
-  grid.style.setProperty('--rows', layout.rows || 3);
+  var cols = layout.cols || 24;
+  var rows = layout.rows || 14;
+  grid.style.setProperty('--cols', cols);
+  grid.style.setProperty('--rows', rows);
   grid.innerHTML = '';
 
   (layout.keys || []).forEach(function(key) {
@@ -459,6 +462,21 @@ function renderKeys() {
       : buildButton(key, type);
     el.dataset.id = key.id;
     el.dataset.type = type;
+
+    // The phone honours where the control was put. A layout that arrives
+    // as a flat list in a different order is a different instrument, and
+    // muscle memory is most of the point of a control surface.
+    if (typeof key.x === 'number') {
+      el.style.position = 'absolute';
+      el.style.left   = (key.x / cols * 100) + '%';
+      el.style.top    = (key.y / rows * 100) + '%';
+      el.style.width  = (key.w / cols * 100) + '%';
+      el.style.height = (key.h / rows * 100) + '%';
+      if (key.shape === 'circle')      { el.style.borderRadius = '50%'; }
+      else if (key.shape === 'pill')   { el.style.borderRadius = '999px'; }
+      else if (key.shape === 'rect')   { el.style.borderRadius = '0'; }
+      else                             { el.style.borderRadius = '10px'; }
+    }
     grid.appendChild(el);
   });
 }
