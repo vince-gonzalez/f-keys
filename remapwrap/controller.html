@@ -5,10 +5,10 @@
 // ============================================================
 // WORKFLOW STACK
 // File:        controller.html
-// Brand:       F-Keys
+// Product:     RemapWrap  (F-Keys Creative LLC)
 // Author:      Vincent Gonzalez | (c) 2026 F-Keys Creative LLC | www.f-keys.com
 // Version:     v0.1.0
-// Description: F-Keys Mobile Controller — touch-optimized keypad
+// Description: RemapWrap controller — touch-optimized keypad
 //              served to phone browser via remapwrap-server.js.
 //              Sends keypress events to PC via WebSocket.
 // Boot Order:
@@ -35,7 +35,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>F-KEYS CONTROLLER</title>
+<title>RemapWrap - Controller</title>
 <style>
   :root {
     /* ── ca. 2001, and legible on purpose ────────────────────────
@@ -124,6 +124,7 @@
     text-shadow: var(--glow);
   }
   .conn-badge {
+    color: var(--text);
     font-family: 'Courier New', monospace;
     font-size: 13px;
     letter-spacing: 1.5px;
@@ -242,8 +243,10 @@
     background: var(--accent); opacity: .55;
   }
   .value-read {
+    /* The reading sits in a dark well, not on the key face, so it takes
+       white rather than inheriting the ink the key chose for its label. */
     position: relative; font-family: var(--font-mono);
-    font-size: 17px; font-weight: 700; color: var(--text-bright);
+    font-size: 17px; font-weight: 700; color: #ffffff;
     text-shadow: 0 1px 3px rgba(0,0,0,.9);
   }
 
@@ -253,12 +256,13 @@
     line-height: 1;
     text-align: center;
     padding: 0 4px;
-    color: var(--text);
+    color: inherit;   /* the key computes its own ink; see inkFor */
   }
   .key-sub {
+    color: inherit;   /* the key decides the ink; see inkFor */
+    opacity: .75;
     font-family: 'Courier New', monospace;
-    font-size: clamp(13px, 2vw, 11px);
-    color: var(--text-dim);
+    font-size: clamp(13px, 2vw, 15px);
     letter-spacing: 0.5px;
     text-align: center;
   }
@@ -298,7 +302,7 @@
 <div class="app">
 
   <div class="header">
-    <div class="logo">F-KEYS</div>
+    <div class="logo">RemapWrap</div>
     <div class="conn-badge" id="conn-badge">CONNECTING…</div>
   </div>
 
@@ -417,6 +421,24 @@ function startPing() {
 function stopPing() { if (pingTimer) { clearInterval(pingTimer); pingTimer = null; } }
 
 // ── Render keys ────────────────────────────────────────────────
+/*
+  A key can be any colour the person building the layout picks, so the
+  label works out its own ink rather than trusting a theme. Black on a
+  dark key measured 1.2:1 - invisible - because the palette changed under
+  colours chosen for the old one. This cannot happen again whatever
+  colour anybody chooses.
+*/
+function inkFor(background) {
+  var m = String(background || '').match(/[0-9a-f]{2}/gi);
+  if (!m || m.length < 3) { return 'var(--text)'; }
+  var lum = ['0.2126', '0.7152', '0.0722'].map(Number).reduce(function(a, w, i) {
+    var c = parseInt(m[i], 16) / 255;
+    return a + w * (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+  }, 0);
+  // 0.179 is where white and black swap places against a surface.
+  return lum > 0.179 ? '#000000' : '#ffffff';
+}
+
 function renderKeys() {
   // READS: layout
   // WRITES: #key-grid DOM
@@ -447,7 +469,10 @@ function buildButton(key, type) {
   btn.dataset.label = key.label;
   btn.dataset.command = key.command || key.action || '';
   btn.dataset.behaviour = key.behaviour || 'press';
-  if (key.color) { btn.style.background = key.color; }
+  if (key.color) {
+    btn.style.background = key.color;
+    btn.style.color = inkFor(key.color);
+  }
 
   btn.innerHTML =
     (key.lit ? '<span class="lamp"></span>' : '') +
@@ -508,7 +533,10 @@ function fireControl(key, el) {
 function buildValueControl(key, type) {
   var wrap = document.createElement('div');
   wrap.className = 'key-btn value-ctl type-' + type;
-  if (key.color) { wrap.style.background = key.color; }
+  if (key.color) {
+    wrap.style.background = key.color;
+    wrap.style.color = inkFor(key.color);
+  }
   if (typeof key.value !== 'number') { key.value = 50; }
 
   wrap.innerHTML =

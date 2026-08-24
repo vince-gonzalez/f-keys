@@ -5,10 +5,10 @@
 // ============================================================
 // WORKFLOW STACK
 // File:        dashboard.html
-// Brand:       F-Keys
+// Product:     RemapWrap  (F-Keys Creative LLC)
 // Author:      Vincent Gonzalez | (c) 2026 F-Keys Creative LLC | www.f-keys.com
 // Version:     v0.1.0
-// Description: F-Keys PC Dashboard — layout builder, connection
+// Description: RemapWrap dashboard — layout builder, connection
 //              monitor, live keypress feed. Open on PC browser.
 // Boot Order:
 //   1. DOM ready → initDashboard()
@@ -31,7 +31,7 @@
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>F-KEYS DASHBOARD v0.1.0</title>
+<title>RemapWrap - Dashboard</title>
 <style>
   /* ── CSS Variables ── */
   :root {
@@ -185,12 +185,17 @@
   }
   .panel:last-child { border-right: none; border-left: 1px solid var(--border); }
   .panel-title {
+    /* A title bar: white on the blue gradient, which is both the idiom
+       and the only way white text is readable here. It was dark ink on
+       chrome at 4.37:1, just under the floor. */
     font-family: var(--font-display);
     font-size: 14px;
-    letter-spacing: 3px;
-    color: var(--accent2);
-    padding: 12px 16px 8px;
-    border-bottom: 1px solid var(--border);
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--text-invert);
+    background: linear-gradient(90deg, var(--title-a), var(--title-b));
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border-dark);
     flex-shrink: 0;
   }
   .panel-body { flex: 1; overflow-y: auto; padding: 14px; }
@@ -230,17 +235,26 @@
     font-size: 13px;
     letter-spacing: 1px;
     padding: 6px 14px;
-    border: 1px solid var(--border);
-    background: var(--bg3);
+    /* Raised chrome with black on it. This drew its background from
+       the readout colour, which is black, so every button on the page
+       was dark text on black. */
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark)
+                  var(--border-dark) var(--border-light);
+    background: var(--bg2);
     color: var(--text);
-    border-radius: var(--radius);
+    border-radius: 0;
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
   }
-  .btn:hover { border-color: var(--accent2); color: var(--accent2); }
-  .btn.accent { border-color: var(--accent); color: var(--accent); }
+  .btn:hover { background: #dedad2; }
+  .btn:active {
+    border-color: var(--border-dark) var(--border-light)
+                  var(--border-light) var(--border-dark);
+  }
+  .btn.accent { color: var(--accent); font-weight: 700; }
   .btn.accent:hover { box-shadow: var(--glow); }
-  .btn.danger { border-color: var(--accent3); color: var(--accent3); }
+  .btn.danger { color: var(--accent3); font-weight: 700; }
 
   /* ── Key grid ── */
   .key-grid {
@@ -280,7 +294,7 @@
     transform: scale(0.96);
   }
   .key-btn .key-label { font-size: 15px; line-height: 1; }
-  .key-btn .key-sub   { font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); letter-spacing: 1px; }
+  .key-btn .key-sub   { font-family: var(--font-mono); font-size: 13px; color: inherit; opacity: .75; letter-spacing: 1px; }
   .key-btn .key-edit  {
     position: absolute; top: 4px; right: 6px;
     font-size: 13px; color: var(--text-dim);
@@ -307,17 +321,21 @@
     background: #fff;
     padding: 4px;
   }
-  .qr-label { font-size: 13px; color: var(--text-dim); letter-spacing: 1.5px; }
-  .qr-url   { font-size: 13px;  color: var(--accent2); margin-top: 4px; word-break: break-all; }
+  .qr-label { font-size: 13px; color: var(--text-invert); letter-spacing: 1.5px; }
+  .qr-url   { font-size: 13px;  color: var(--lcd); margin-top: 4px; word-break: break-all; }
 
   /* ── Edit panel fields ── */
   .field-group { margin-bottom: 14px; }
-  .field-label { font-size: 13px; color: var(--text-dim); letter-spacing: 1.5px; margin-bottom: 5px; }
+  .field-label { font-size: 13px; color: var(--text); letter-spacing: 1.5px; margin-bottom: 5px; }
   .field-input {
     width: 100%;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    color: var(--text-bright);
+    /* Sunken and white, the way a field has looked since 1995, so it
+       reads as somewhere you type. Black on white is 21:1. */
+    background: var(--field);
+    border: 2px solid;
+    border-color: var(--border-dark) var(--border-light)
+                  var(--border-light) var(--border-dark);
+    color: var(--text);
     font-family: var(--font-mono);
     font-size: 13px;
     padding: 7px 10px;
@@ -325,7 +343,8 @@
     outline: none;
     transition: border-color 0.2s;
   }
-  .field-input:focus { border-color: var(--accent2); }
+  .field-input:focus { outline: 2px solid var(--accent); outline-offset: -4px; }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   /* The editor rows. Nothing here goes below 13px; a control surface is
      read at arm's length, on a desk, often in a dark room. */
@@ -335,8 +354,8 @@
   }
   select.field-input {
     appearance: none; -webkit-appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, var(--text-dim) 50%),
-                      linear-gradient(135deg, var(--text-dim) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, transparent 50%, var(--text) 50%),
+                      linear-gradient(135deg, var(--text) 50%, transparent 50%);
     background-position: calc(100% - 16px) 52%, calc(100% - 11px) 52%;
     background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
     padding-right: 30px; cursor: pointer; font-size: 14px;
@@ -364,7 +383,7 @@
   .field-input::placeholder { color: var(--text-dim); }
 
   select.field-input { cursor: pointer; }
-  option { background: var(--bg3); }
+  option, optgroup { background: var(--field); color: var(--text); }
 
   /* ── Live feed ── */
   .feed-item {
@@ -424,7 +443,7 @@
 <!-- ── Header ── -->
 <header>
   <div class="header-left">
-    <div class="logo">F-KEYS</div>
+    <div class="logo">RemapWrap</div>
     <div class="version">v0.1.0 ALPHA</div>
   </div>
   <div class="status-bar">
@@ -502,7 +521,7 @@
 <!-- Footer -->
 <footer>
   <span>www.f-keys.com | (c) 2026 F-Keys Creative LLC</span>
-  <span>F-KEYS "THE CANVAS" — ALPHA BUILD</span>
+  <span>RemapWrap - the workbench - alpha</span>
   <span id="footer-status">IDLE</span>
 </footer>
 
@@ -789,6 +808,24 @@ function stopPing() {
 }
 
 // ── Grid render ────────────────────────────────────────────────
+/*
+  A key can be any colour the person building the layout picks, so the
+  label works out its own ink rather than trusting a theme. Black on a
+  dark key measured 1.2:1 - invisible - because the palette changed under
+  colours chosen for the old one. This cannot happen again whatever
+  colour anybody chooses.
+*/
+function inkFor(background) {
+  var m = String(background || '').match(/[0-9a-f]{2}/gi);
+  if (!m || m.length < 3) { return 'var(--text)'; }
+  var lum = ['0.2126', '0.7152', '0.0722'].map(Number).reduce(function(a, w, i) {
+    var c = parseInt(m[i], 16) / 255;
+    return a + w * (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+  }, 0);
+  // 0.179 is where white and black swap places against a surface.
+  return lum > 0.179 ? '#000000' : '#ffffff';
+}
+
 function renderGrid() {
   // READS: layout, selectedKeyId
   // WRITES: #key-grid DOM

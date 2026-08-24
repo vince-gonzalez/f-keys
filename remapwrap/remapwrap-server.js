@@ -1,10 +1,10 @@
 // ============================================================
 // WORKFLOW STACK
 // File:        remapwrap-server.js
-// Brand:       F-Keys
+// Product:     RemapWrap  (F-Keys Creative LLC)
 // Author:      Vincent Gonzalez | (c) 2026 F-Keys Creative LLC | www.f-keys.com
 // Version:     v0.1.0
-// Description: F-Keys WebSocket bridge — relays phone button
+// Description: RemapWrap bridge — relays phone button
 //              presses to PC dashboard and fires keystrokes.
 // Boot Order:
 //   1. Load config
@@ -66,7 +66,7 @@ try {
 
 // ── Utility ───────────────────────────────────────────────────
 function log(msg) {
-  if (CONFIG.DEV_MODE) console.log('[F-KEYS ' + timestamp() + '] ' + msg);
+  if (CONFIG.DEV_MODE) console.log('[RemapWrap ' + timestamp() + '] ' + msg);
 }
 function timestamp() {
   return new Date().toTimeString().slice(0,8);
@@ -240,7 +240,7 @@ wss.on('connection', function(ws, req) {
       log('Unknown message type: ' + msg.type);
 
     } catch (e) {
-      console.error('[F-KEYS] Message parse error:', e.message);
+      console.error('[RemapWrap] Message parse error:', e.message);
     }
   });
 
@@ -254,7 +254,7 @@ wss.on('connection', function(ws, req) {
   });
 
   ws.on('error', function(err) {
-    console.error('[F-KEYS] WebSocket error:', err.message);
+    console.error('[RemapWrap] WebSocket error:', err.message);
   });
 });
 
@@ -262,7 +262,7 @@ wss.on('listening', function() {
   var ip = getLocalIP();
   log('WebSocket server listening on port ' + CONFIG.WS_PORT);
   console.log('\n╔══════════════════════════════════════════════╗');
-  console.log('║         F-KEYS SERVER v0.1.0 RUNNING         ║');
+  console.log('║        RemapWrap  SERVER  v0.1.0  RUNNING    ║');
   console.log('╠══════════════════════════════════════════════╣');
   console.log('║  Dashboard:  http://' + ip + ':' + CONFIG.HTTP_PORT + '/        ');
   console.log('║  Controller: http://' + ip + ':' + CONFIG.HTTP_PORT + '/controller');
@@ -274,7 +274,7 @@ wss.on('listening', function() {
 });
 
 wss.on('error', function(err) {
-  console.error('[F-KEYS] WSS error:', err.message);
+  console.error('[RemapWrap] WSS error:', err.message);
 });
 
 // ── Broadcast helpers ─────────────────────────────────────────
@@ -311,10 +311,10 @@ function fireKeystroke(action) {
     keyboard.pressKey.apply(keyboard, keys).then(function() {
       return keyboard.releaseKey.apply(keyboard, keys);
     }).catch(function(e) {
-      console.error('[F-KEYS] fireKeystroke error:', e.message);
+      console.error('[RemapWrap] fireKeystroke error:', e.message);
     });
   } catch(e) {
-    console.error('[F-KEYS] fireKeystroke error:', e.message);
+    console.error('[RemapWrap] fireKeystroke error:', e.message);
   }
 }
 
