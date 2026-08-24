@@ -44,6 +44,13 @@ var os      = require('os');
 var WebSocket = require('ws');
 var QRCode  = require('qrcode');
 
+var MIME = {
+  '.css': 'text/css', '.png': 'image/png', '.ico': 'image/x-icon',
+  '.svg': 'image/svg+xml', '.woff2': 'font/woff2',
+  '.woff': 'font/woff', '.js': 'text/javascript',
+  '.json': 'application/json'
+};
+
 // ── Keystroke injection (optional — gracefully degrades) ──────
 var keyboard = null;
 var Key = null;
@@ -75,7 +82,7 @@ function getLocalIP() {
   return candidates[0] || '127.0.0.1';
 }
 
-// ── HTTP Server (serves controller.html + /qr endpoint) ───────
+// ── HTTP Server (dashboard, controller, assets, QR) ───────────
 var httpServer = http.createServer(function(req, res) {
   // READS: CONFIG.HTTP_PORT, local filesystem
   // WRITES: HTTP response
@@ -96,20 +103,46 @@ var httpServer = http.createServer(function(req, res) {
     return;
   }
 
-  // Serve controller.html
-  var filePath = path.join(__dirname, 'controller.html');
-  fs.readFile(filePath, function(err, data) {
+  // Serve the assets both pages ask for: the mark, the icon, the fonts.
+  // Nothing served these, so every page load fetched assets/fonts.css and
+  // got the controller HTML back with a 200 on it.
+  if (req.url.indexOf('/assets/') === 0) {
+    var safe = path.normalize(req.url).replace(/^(\.\.[\/\\])+/, '');
+    var assetPath = path.join(__dirname, safe);
+    if (assetPath.indexOf(path.join(__dirname, 'assets')) !== 0) {
+      res.writeHead(403); res.end('no'); return;
+    }
+    fs.readFile(assetPath, function(err, buf) {
+      if (err) { res.writeHead(404); res.end('not found'); return; }
+      res.writeHead(200, { 'Content-Type': MIME[path.extname(assetPath)] ||
+                                           'application/octet-stream' });
+      res.end(buf);
+    });
+    return;
+  }
+
+  // The dashboard is the PC side and the controller is the phone side, and
+  // until now every address served the phone side - including the one the
+  // startup banner tells you to open. The layout builder, which is the
+  // larger half of the product, could not be reached at all.
+  var page = (req.url === '/controller' || req.url.indexOf('/controller?') === 0)
+    ? 'controller.html'
+    : (req.url === '/' || req.url === '/dashboard' ? 'dashboard.html' : null);
+
+  if (!page) { res.writeHead(404); res.end('not found'); return; }
+
+  fs.readFile(path.join(__dirname, page), function(err, data) {
     if (err) {
       res.writeHead(404);
-      res.end('controller.html not found — make sure it is in the same folder as remapwrap-server.js');
+      res.end(page + ' not found - it belongs beside remapwrap-server.js');
       return;
     }
-    // Inject server IP so controller auto-connects
+    // The controller carries a marker for this; the dashboard asks /ip.
     var injected = data.toString().replace(
       '/* __SERVER_IP_INJECT__ */',
       'var SERVER_IP = "' + getLocalIP() + '"; var WS_PORT = ' + CONFIG.WS_PORT + ';'
     );
-    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(injected);
   });
 });
