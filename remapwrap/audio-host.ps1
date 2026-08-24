@@ -67,12 +67,18 @@ interface ISimpleAudioVolume {
 
 [Guid("BFB7FF88-7239-4FC9-8FA2-07C950BE9C6D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 interface IAudioSessionControl2 {
-  int NotImpl0(); int NotImpl1();
+  // IAudioSessionControl has NINE methods and the count has to be exact.
+  // Declaring ten put GetProcessId on IsSystemSoundsSession, which returns
+  // a status rather than a process id, so every session reported pid 0 and
+  // the whole list came back empty. COM does not complain about this; it
+  // just answers the wrong question.
+  int GetState(out int state);
   int GetDisplayName(out IntPtr name); int SetDisplayName(string v, ref Guid ctx);
-  int GetIconPath(out IntPtr p); int SetIconPath(string v, ref Guid ctx);
-  int GetGroupingParam(out Guid g); int SetGroupingParam(ref Guid g, ref Guid ctx);
+  int GetIconPath(out IntPtr p);       int SetIconPath(string v, ref Guid ctx);
+  int GetGroupingParam(out Guid g);    int SetGroupingParam(ref Guid g, ref Guid ctx);
   int RegisterAudioSessionNotification(IntPtr n);
   int UnregisterAudioSessionNotification(IntPtr n);
+  // IAudioSessionControl2 starts here
   int GetSessionIdentifier(out IntPtr id);
   int GetSessionInstanceIdentifier(out IntPtr id);
   int GetProcessId(out uint pid);
@@ -152,10 +158,14 @@ public class RwAudio {
     return e;
   }
 
+  // An application can hold several sessions - one playing and others
+  // idle - so the active one is reported. Taking the first found reported
+  // Discord at 0% while it was actually sitting at 53%.
   public static string[] List() {
     var e = Sessions();
     int n; e.GetCount(out n);
-    var names = new List<string>();
+    var best = new Dictionary<string, string>();
+    var active = new Dictionary<string, bool>();
     for (int i = 0; i < n; i++) {
       IAudioSessionControl2 s;
       if (e.GetSession(i, out s) != 0) { continue; }
@@ -163,11 +173,19 @@ public class RwAudio {
       if (s.GetProcessId(out pid) != 0 || pid == 0) { continue; }
       try {
         var p = System.Diagnostics.Process.GetProcessById((int)pid);
+        int state; s.GetState(out state);          // 1 = rendering audio
         float v; ((ISimpleAudioVolume)s).GetMasterVolume(out v);
-        names.Add(p.ProcessName + "\t" + (int)Math.Round(v * 100));
+        var name = p.ProcessName;
+        var playing = (state == 1);
+        if (!best.ContainsKey(name) || (playing && !active[name])) {
+          best[name] = name + "\t" + (int)Math.Round(v * 100) +
+                       "\t" + (playing ? "playing" : "idle");
+          active[name] = playing;
+        }
       } catch { }
     }
-    return names.ToArray();
+    var outp = new List<string>(best.Values);
+    return outp.ToArray();
   }
 
   public static bool SetSession(string name, float pct) {

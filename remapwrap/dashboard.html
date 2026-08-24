@@ -695,9 +695,10 @@ function firstFree(w, h) {
       ['audio.mic.gain',  'Microphone gain',       { continuous: true }],
       ['audio.master',    'Master volume',         { continuous: true }],
       ['audio.desktop',   'Desktop volume',        { continuous: true }],
-      ['audio.game',      'Game volume',           { continuous: true }],
-      ['audio.chat',      'Voice chat volume',     { continuous: true }],
-      ['audio.duck',      'Duck game audio',       { latching: true }]
+      ['audio.app',       'Volume of one app…',    { continuous: true,
+                                                    arg: 'application' }],
+      ['audio.duck',      'Duck one app…',         { latching: true,
+                                                    arg: 'application' }]
     ]},
     { group: 'Soundboard', items: [
       ['sound.play',      'Play sound…',           { arg: 'file' }],
@@ -1205,6 +1206,7 @@ function renderEditor(id) {
       scene: 'Scene name in OBS', seconds: 'Length in seconds',
       file: 'sound file', keys: 'ctrl+shift+s', text: 'text to type',
       target: 'app path or https://', direction: 'left or right',
+      application: 'process name, e.g. Discord',
       transport: 'play, next, previous', steps: 'one step per line'
     };
     html += row(meta.arg.toUpperCase(), '',

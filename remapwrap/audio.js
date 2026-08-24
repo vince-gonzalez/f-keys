@@ -121,16 +121,17 @@ var CONTINUOUS = {
   'audio.master':   function (v) { return send('master.set', { value: v }); },
   'audio.mic.gain': function (v) { return send('mic.gain',   { value: v }); },
   'audio.desktop':  function (v) { return send('master.set', { value: v }); },
-  'audio.game':     function (v) { return send('session.set',
-                                    { name: 'game', value: v }); },
-  'audio.chat':     function (v) { return send('session.set',
-                                    { name: 'Discord', value: v }); }
+  // The application is named by whoever builds the layout. Hardcoding
+  // "Discord" and "game" meant the two most useful dials on the board only
+  // worked for people running exactly what I guessed they were running.
+  'audio.app':      function (v, arg) { return send('session.set',
+                                    { name: arg || '', value: v }); }
 };
 
 var SWITCHED = {
   'audio.mic.mute': function (on) { return send('mic.mute',    { value: on }); },
-  'audio.duck':     function (on) { return send('session.set',
-                                     { name: 'game', value: on ? 20 : 100 }); }
+  'audio.duck':     function (on, arg) { return send('session.set',
+                                     { name: arg || '', value: on ? 20 : 100 }); }
 };
 
 function handles(command) {
@@ -143,10 +144,10 @@ function apply(msg) {
   var command = msg.command;
 
   if (msg.type === 'value' && CONTINUOUS[command]) {
-    return CONTINUOUS[command](Number(msg.value));
+    return CONTINUOUS[command](Number(msg.value), msg.arg);
   }
   if (msg.type === 'toggle' && SWITCHED[command]) {
-    return SWITCHED[command](!!msg.state);
+    return SWITCHED[command](!!msg.state, msg.arg);
   }
   // Push to talk is a mute held open, which is the inverse of the state
   // the phone reports: pressed means unmuted.
