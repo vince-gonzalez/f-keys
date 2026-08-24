@@ -1,0 +1,371 @@
+{
+  "floor": 4.5,
+  "_note": "A pair below the floor has to be written down here with a reason, so that an exception is argued once rather than every time somebody reads the page.",
+  "exceptions": [
+    {
+      "ink": "border",
+      "on": "bg",
+      "reason": "a hairline between panels, not text; it separates surfaces and is never read"
+    },
+    {
+      "ink": "border",
+      "on": "bg2",
+      "reason": "as above"
+    },
+    {
+      "ink": "border",
+      "on": "bg3",
+      "reason": "as above"
+    },
+    {
+      "ink": "border",
+      "on": "panel",
+      "reason": "as above"
+    },
+    {
+      "ink": "border",
+      "on": "field",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-light",
+      "on": "bg",
+      "reason": "the raised edge of a bevel; a highlight, not a mark to read"
+    },
+    {
+      "ink": "border-light",
+      "on": "bg2",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-light",
+      "on": "bg3",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-light",
+      "on": "panel",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-light",
+      "on": "field",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-dark",
+      "on": "bg",
+      "reason": "the sunken edge of a bevel; a shadow, not a mark to read"
+    },
+    {
+      "ink": "border-dark",
+      "on": "bg2",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-dark",
+      "on": "bg3",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-dark",
+      "on": "panel",
+      "reason": "as above"
+    },
+    {
+      "ink": "border-dark",
+      "on": "field",
+      "reason": "as above"
+    },
+    {
+      "ink": "sh",
+      "on": "face",
+      "reason": "the bevel shadow in the Windows 98 chrome; an edge, never text"
+    },
+    {
+      "ink": "sh",
+      "on": "field",
+      "reason": "the bevel shadow in the Windows 98 chrome; an edge, never text"
+    },
+    {
+      "ink": "sh",
+      "on": "bg",
+      "reason": "the bevel shadow in the Windows 98 chrome; an edge, never text"
+    },
+    {
+      "ink": "sh",
+      "on": "bg2",
+      "reason": "the bevel shadow in the Windows 98 chrome; an edge, never text"
+    },
+    {
+      "ink": "sh",
+      "on": "bg3",
+      "reason": "the bevel shadow in the Windows 98 chrome; an edge, never text"
+    },
+    {
+      "ink": "sh",
+      "on": "panel",
+      "reason": "the bevel shadow in the Windows 98 chrome; an edge, never text"
+    },
+    {
+      "ink": "sh",
+      "on": "desktop",
+      "reason": "the bevel shadow in the Windows 98 chrome; an edge, never text"
+    },
+    {
+      "ink": "title-off",
+      "on": "face",
+      "reason": "an inactive title bar, which is grey by definition in this idiom"
+    },
+    {
+      "ink": "title-off",
+      "on": "field",
+      "reason": "an inactive title bar, which is grey by definition in this idiom"
+    },
+    {
+      "ink": "title-off",
+      "on": "bg",
+      "reason": "an inactive title bar, which is grey by definition in this idiom"
+    },
+    {
+      "ink": "title-off",
+      "on": "bg2",
+      "reason": "an inactive title bar, which is grey by definition in this idiom"
+    },
+    {
+      "ink": "title-off",
+      "on": "bg3",
+      "reason": "an inactive title bar, which is grey by definition in this idiom"
+    },
+    {
+      "ink": "title-off",
+      "on": "panel",
+      "reason": "an inactive title bar, which is grey by definition in this idiom"
+    },
+    {
+      "ink": "title-off",
+      "on": "desktop",
+      "reason": "an inactive title bar, which is grey by definition in this idiom"
+    },
+    {
+      "ink": "dk",
+      "on": "face",
+      "reason": "the hard outer edge of a bevel"
+    },
+    {
+      "ink": "dk",
+      "on": "field",
+      "reason": "the hard outer edge of a bevel"
+    },
+    {
+      "ink": "dk",
+      "on": "bg",
+      "reason": "the hard outer edge of a bevel"
+    },
+    {
+      "ink": "dk",
+      "on": "bg2",
+      "reason": "the hard outer edge of a bevel"
+    },
+    {
+      "ink": "dk",
+      "on": "bg3",
+      "reason": "the hard outer edge of a bevel"
+    },
+    {
+      "ink": "dk",
+      "on": "panel",
+      "reason": "the hard outer edge of a bevel"
+    },
+    {
+      "ink": "dk",
+      "on": "desktop",
+      "reason": "the hard outer edge of a bevel"
+    },
+    {
+      "ink": "hi",
+      "on": "face",
+      "reason": "the raised highlight of a bevel"
+    },
+    {
+      "ink": "hi",
+      "on": "field",
+      "reason": "the raised highlight of a bevel"
+    },
+    {
+      "ink": "hi",
+      "on": "bg",
+      "reason": "the raised highlight of a bevel"
+    },
+    {
+      "ink": "hi",
+      "on": "bg2",
+      "reason": "the raised highlight of a bevel"
+    },
+    {
+      "ink": "hi",
+      "on": "bg3",
+      "reason": "the raised highlight of a bevel"
+    },
+    {
+      "ink": "hi",
+      "on": "panel",
+      "reason": "the raised highlight of a bevel"
+    },
+    {
+      "ink": "hi",
+      "on": "desktop",
+      "reason": "the raised highlight of a bevel"
+    },
+    {
+      "ink": "title-b",
+      "on": "face",
+      "reason": "the light end of the title-bar gradient; a surface, and the text on it is white"
+    },
+    {
+      "ink": "title-b",
+      "on": "field",
+      "reason": "the light end of the title-bar gradient; a surface, and the text on it is white"
+    },
+    {
+      "ink": "title-b",
+      "on": "bg",
+      "reason": "the light end of the title-bar gradient; a surface, and the text on it is white"
+    },
+    {
+      "ink": "title-b",
+      "on": "bg2",
+      "reason": "the light end of the title-bar gradient; a surface, and the text on it is white"
+    },
+    {
+      "ink": "title-b",
+      "on": "bg3",
+      "reason": "the light end of the title-bar gradient; a surface, and the text on it is white"
+    },
+    {
+      "ink": "title-b",
+      "on": "panel",
+      "reason": "the light end of the title-bar gradient; a surface, and the text on it is white"
+    },
+    {
+      "ink": "title-b",
+      "on": "desktop",
+      "reason": "the light end of the title-bar gradient; a surface, and the text on it is white"
+    },
+    {
+      "ink": "border2",
+      "on": "face",
+      "reason": "a second hairline weight; a rule between blocks, never text"
+    },
+    {
+      "ink": "border2",
+      "on": "field",
+      "reason": "a second hairline weight; a rule between blocks, never text"
+    },
+    {
+      "ink": "border2",
+      "on": "bg",
+      "reason": "a second hairline weight; a rule between blocks, never text"
+    },
+    {
+      "ink": "border2",
+      "on": "bg2",
+      "reason": "a second hairline weight; a rule between blocks, never text"
+    },
+    {
+      "ink": "border2",
+      "on": "bg3",
+      "reason": "a second hairline weight; a rule between blocks, never text"
+    },
+    {
+      "ink": "border2",
+      "on": "panel",
+      "reason": "a second hairline weight; a rule between blocks, never text"
+    },
+    {
+      "ink": "border2",
+      "on": "desktop",
+      "reason": "a second hairline weight; a rule between blocks, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "face",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "field",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "bg",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "bg2",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "bg3",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "panel",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "desktop",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "staff-line",
+      "on": "sel",
+      "reason": "a rule drawn on the stave; a line, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "face",
+      "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "field",
+      "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "bg",
+      "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "bg2",
+      "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "bg3",
+      "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "panel",
+      "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "desktop",
+      "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "key-active",
+      "on": "sel",
+      "reason": "the lit state of a piano key; a fill, never text"
+    }
+  ]
+}

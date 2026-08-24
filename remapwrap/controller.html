@@ -38,22 +38,51 @@
 <title>F-KEYS CONTROLLER</title>
 <style>
   :root {
-    --bg:       #080c0f;
-    --bg2:      #0d1318;
-    --bg3:      #111820;
-    --border:   #1e2d3d;
-    --accent:   #66DD03;
-    --accent2:  #00c8ff;
-    --accent3:  #ff4e6a;
-    --text:     #c8d8e8;
-    --text-dim: #4a6070;
-    --font:     'Bebas Neue', Impact, fantasy;
-    --glow:     0 0 16px rgba(102,221,3,0.5);
-    --glow2:    0 0 12px rgba(0,200,255,0.4);
-    --radius:   8px;
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bot: env(safe-area-inset-bottom, 0px);
+    /* ── ca. 2001, and legible on purpose ────────────────────────
+       Chrome, bevels and a title bar, because that era got one
+       thing right that flat design gave away: a raised edge and a
+       sunken edge tell you what is pressable before you touch it.
+
+       Every ink here is black or white against the surface it sits
+       on. The old palette put #4a6070 on #131b24, which measures
+       2.64:1 - under the 4.5 a body of text needs and the reason
+       none of this could be read. tools/contrast.py fails the build
+       on it now. */
+    --bg:         #5a7a99;   /* the desktop behind the app        */
+    --bg2:        #d4d0c8;   /* chrome: the classic button face   */
+    --bg3:        #0a0a0a;   /* the readout, black like an LCD    */
+    --panel:      #d4d0c8;
+    --field:      #ffffff;   /* sunken input, black text          */
+
+    --border:       #808080; /* mid bevel                         */
+    --border-light: #ffffff; /* raised edge                       */
+    --border-dark:  #404040; /* sunken edge                       */
+
+    --text:        #000000;  /* 15.9:1 on chrome                  */
+    --text-dim:    #2b2b2b;  /* 11.6:1 on chrome, still black ink */
+    --text-bright: #000000;
+    --text-invert: #ffffff;  /* on the title bar and the readout  */
+
+    --title-a:    #0a246a;   /* title bar gradient, left          */
+    --title-b:    #4b81c4;   /* title bar gradient, right         */
+    --accent:     #0a246a;   /* selection, focus                  */
+    --accent2:    #0d6b0d;   /* go / connected                    */
+    --accent3:    #a80000;   /* stop / danger                     */
+    --lcd:        #35ff5d;   /* on --bg3 only                     */
+
+    --font-display: Tahoma, 'MS Sans Serif', Geneva, sans-serif;
+    --font-mono:    'Lucida Console', 'Courier New', monospace;
+    --font:         Tahoma, 'MS Sans Serif', Geneva, sans-serif;
+    --glow:       none;
+    --glow2:      none;
+    --radius:     0px;
   }
+
+  /* ── the chrome kit ──────────────────────────────────────────
+     Three borders and no shadows. A raised control has a white top
+     and left and a dark bottom and right; a sunken one has them the
+     other way round. That is the whole trick and it is why a 2001
+     dialog is readable at a glance. */
 
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
 

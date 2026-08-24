@@ -57,6 +57,15 @@ jobs:
           python-version: '3.12'
       - name: Nothing renders below the floor
         run: python tools/typefloor.py
+      # And nothing renders in a colour that cannot be read on any
+      # surface the file declares. Dark grey on navy measured 2.64:1
+      # where body text needs 4.5, and was reported by a reader
+      # rather than caught by anything.
+      - name: Nothing renders unreadable
+        run: python tools/contrast.py
+      - name: What is unreadable, and against what
+        if: failure()
+        run: python tools/contrast.py --list
       - name: What is below it, and why
         if: failure()
         run: python tools/typefloor.py --list
