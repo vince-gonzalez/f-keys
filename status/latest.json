@@ -3,13 +3,13 @@
     "bots_24h": {
       "AI Assistant": 36,
       "AI Crawler": 419,
-      "AI Search": 9825,
+      "AI Search": 9827,
       "Advertising & Marketing": 14,
       "Feed Fetcher": 1,
       "Page Preview": 35,
-      "Search Engine Crawler": 980,
-      "Search Engine Optimization": 347,
-      "Unverified": 28505
+      "Search Engine Crawler": 979,
+      "Search Engine Optimization": 348,
+      "Unverified": 28851
     },
     "bots_error": null,
     "days": 7,
@@ -308,7 +308,7 @@
     }
   },
   "date": "2026-08-24",
-  "generated_at": "2026-08-24 01:41 UTC",
+  "generated_at": "2026-08-24 01:51 UTC",
   "github": [
     {
       "archived": false,
@@ -321,7 +321,7 @@
       "license": null,
       "open_issues": 0,
       "owner": "zengineco",
-      "pushed_at": "2026-08-23T06:00:36Z",
+      "pushed_at": "2026-08-24T01:42:42Z",
       "repo": "f-keys",
       "size_kb": 13471,
       "stars": 1,
@@ -851,9 +851,20 @@
       "visitors_7d": 20405,
       "zenodo_downloads": 383,
       "zenodo_views": 930
+    },
+    {
+      "date": "2026-08-24",
+      "github_stars": 17,
+      "package_weekly": 2070,
+      "page_views_7d": 47016,
+      "properties_total": 11,
+      "properties_up": 11,
+      "visitors_7d": 19593,
+      "zenodo_downloads": 431,
+      "zenodo_views": 976
     }
   ],
-  "mode": "daily",
+  "mode": "weekly",
   "npm": [
     {
       "all_time": 419,
@@ -1028,11 +1039,11 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 40162,
+    "bot_requests_24h": 40510,
     "github_forks": 0,
     "github_repos": 21,
     "github_stars": 17,
-    "median_response_ms": 157,
+    "median_response_ms": 322,
     "npm_all_time": 1716,
     "npm_weekly": 80,
     "open_issues": 1,
@@ -1056,77 +1067,77 @@
   "uptime": [
     {
       "error": null,
-      "ms": 136,
+      "ms": 374,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
     },
     {
       "error": null,
-      "ms": 152,
+      "ms": 534,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
     },
     {
       "error": null,
-      "ms": 198,
+      "ms": 368,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
     },
     {
       "error": null,
-      "ms": 75,
+      "ms": 155,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
     },
     {
       "error": null,
-      "ms": 285,
+      "ms": 518,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
     },
     {
       "error": null,
-      "ms": 221,
+      "ms": 274,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
     },
     {
       "error": null,
-      "ms": 227,
+      "ms": 322,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
     },
     {
       "error": null,
-      "ms": 384,
+      "ms": 505,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
     },
     {
       "error": null,
-      "ms": 157,
+      "ms": 224,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
     },
     {
       "error": null,
-      "ms": 138,
+      "ms": 199,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
     },
     {
       "error": null,
-      "ms": 118,
+      "ms": 312,
       "name": "zengin.es",
       "up": true,
       "url": "https://zengin.es"
