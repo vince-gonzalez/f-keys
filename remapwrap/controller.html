@@ -160,6 +160,64 @@
   }
   .key-btn.pressed::after { opacity: 1; }
 
+  /* ── the control types ────────────────────────────────────────
+     Everything here is sized for a thumb on glass, at arm's length,
+     often in a dark room. Nothing below 13px. */
+
+  /* A toggle shows its state without being touched. */
+  .lamp {
+    position: absolute; top: 9px; right: 9px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--text-dim); opacity: .35; transition: none;
+  }
+  .key-btn.on .lamp { background: var(--accent); opacity: 1;
+                      box-shadow: 0 0 9px var(--accent); }
+  .key-btn.on { border-color: var(--accent); }
+
+  /* A pad reads as something you strike, not something you click. */
+  .key-btn.type-pad { border-radius: 12px; border-width: 2px; }
+  .key-btn.type-pad.pressed { transform: scale(.94); }
+
+  /* Dials and sliders carry a face and a reading. */
+  .value-ctl { touch-action: none; user-select: none; -webkit-user-select: none; }
+  .value-ctl.active { border-color: var(--accent); }
+
+  .dial-face {
+    position: relative; width: 62px; height: 62px; margin: 0 auto 6px;
+    border-radius: 50%; background: rgba(0,0,0,.35);
+    border: 2px solid rgba(255,255,255,.10);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dial-arc {
+    position: absolute; inset: -2px; border-radius: 50%;
+    -webkit-mask: radial-gradient(circle, transparent 60%, #000 62%);
+    mask: radial-gradient(circle, transparent 60%, #000 62%);
+  }
+  .dial-pointer {
+    position: absolute; inset: 0; border-radius: 50%;
+  }
+  .dial-pointer::after {
+    content: ''; position: absolute; left: 50%; top: 6px;
+    width: 3px; height: 15px; margin-left: -1.5px; border-radius: 2px;
+    background: var(--text-bright);
+  }
+
+  .slider-face {
+    position: relative; width: 42px; height: 62px; margin: 0 auto 6px;
+    border-radius: 8px; background: rgba(0,0,0,.35);
+    border: 2px solid rgba(255,255,255,.10); overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slider-fill {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: var(--accent); opacity: .55;
+  }
+  .value-read {
+    position: relative; font-family: var(--font-mono);
+    font-size: 17px; font-weight: 700; color: var(--text-bright);
+    text-shadow: 0 1px 3px rgba(0,0,0,.9);
+  }
+
   .key-label {
     font-size: clamp(13px, 3.5vw, 20px);
     letter-spacing: 1px;
@@ -333,44 +391,228 @@ function stopPing() { if (pingTimer) { clearInterval(pingTimer); pingTimer = nul
 function renderKeys() {
   // READS: layout
   // WRITES: #key-grid DOM
+  //
+  // A control is drawn as the thing it is. Every type used to arrive here
+  // as a button, so a dial was a button labelled MASTER that fired once
+  // and a slider was the same button again. A dial you cannot turn is not
+  // a dial.
   var grid = document.getElementById('key-grid');
   grid.style.setProperty('--cols', layout.cols || 4);
   grid.style.setProperty('--rows', layout.rows || 3);
   grid.innerHTML = '';
 
   (layout.keys || []).forEach(function(key) {
-    var btn = document.createElement('div');
-    btn.className = 'key-btn';
-    btn.dataset.id     = key.id;
-    btn.dataset.label  = key.label;
-    btn.dataset.action = key.action || '';
-    if (key.color) btn.style.background = key.color;
-
-    btn.innerHTML =
-      '<span class="key-label">' + escHtml(key.label) + '</span>' +
-      (key.sub ? '<span class="key-sub">' + escHtml(key.sub) + '</span>' : '');
-
-    // Touch events
-    btn.addEventListener('touchstart', onTouchStart, { passive: false });
-    btn.addEventListener('touchend',   onTouchEnd,   { passive: false });
-    btn.addEventListener('touchcancel',onTouchEnd,   { passive: false });
-
-    // Mouse fallback (desktop testing)
-    btn.addEventListener('mousedown', function(e) { pressKey(btn); });
-    btn.addEventListener('mouseup',   function(e) { releaseKey(btn, true); });
-
-    grid.appendChild(btn);
+    var type = key.type || 'key';
+    var el = (type === 'dial' || type === 'slider')
+      ? buildValueControl(key, type)
+      : buildButton(key, type);
+    el.dataset.id = key.id;
+    el.dataset.type = type;
+    grid.appendChild(el);
   });
 }
 
-// ── Touch handlers ─────────────────────────────────────────────
-function onTouchStart(e) {
-  e.preventDefault();
-  pressKey(this);
+function buildButton(key, type) {
+  var btn = document.createElement('div');
+  btn.className = 'key-btn type-' + type + (key.state ? ' on' : '');
+  btn.dataset.label = key.label;
+  btn.dataset.command = key.command || key.action || '';
+  btn.dataset.behaviour = key.behaviour || 'press';
+  if (key.color) { btn.style.background = key.color; }
+
+  btn.innerHTML =
+    (key.lit ? '<span class="lamp"></span>' : '') +
+    '<span class="key-label">' + escHtml(key.label) + '</span>' +
+    (key.sub ? '<span class="key-sub">' + escHtml(key.sub) + '</span>' : '');
+
+  // A pad fires the moment it is struck. Waiting for release is right for
+  // a key and wrong for a soundboard, where the delay is audible.
+  var fireOnDown = (type === 'pad');
+
+  btn.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    pressKey(btn);
+    if (fireOnDown) { fireControl(key, btn); }
+  }, { passive: false });
+
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    btn.classList.remove('pressed');
+    if (!fireOnDown) { fireControl(key, btn); }
+  }, { passive: false });
+
+  btn.addEventListener('touchcancel', function() {
+    btn.classList.remove('pressed');
+  });
+
+  btn.addEventListener('mousedown', function() {
+    pressKey(btn);
+    if (fireOnDown) { fireControl(key, btn); }
+  });
+  btn.addEventListener('mouseup', function() {
+    btn.classList.remove('pressed');
+    if (!fireOnDown) { fireControl(key, btn); }
+  });
+
+  return btn;
 }
-function onTouchEnd(e) {
-  e.preventDefault();
-  releaseKey(this, true);
+
+function fireControl(key, el) {
+  // A toggle carries its own state, so the phone reports what the state
+  // became rather than that something was pressed. Nothing downstream has
+  // to remember which way it was.
+  if ((key.type || 'key') === 'toggle') {
+    key.state = !key.state;
+    el.classList.toggle('on', !!key.state);
+    triggerHaptic(key.state ? 30 : CFG.HAPTIC_MS);
+    send({ type: 'toggle', id: key.id, label: key.label,
+           command: key.command, state: !!key.state });
+    return;
+  }
+  send({ type: 'keypress', id: key.id, label: key.label,
+         command: key.command, action: key.action || key.command,
+         behaviour: key.behaviour || 'press' });
+}
+
+// ── dials and sliders ────────────────────────────────────────────
+
+function buildValueControl(key, type) {
+  var wrap = document.createElement('div');
+  wrap.className = 'key-btn value-ctl type-' + type;
+  if (key.color) { wrap.style.background = key.color; }
+  if (typeof key.value !== 'number') { key.value = 50; }
+
+  wrap.innerHTML =
+    '<div class="' + (type === 'dial' ? 'dial-face' : 'slider-face') + '">' +
+      (type === 'dial'
+        ? '<div class="dial-arc"></div><div class="dial-pointer"></div>'
+        : '<div class="slider-fill"></div>') +
+      '<span class="value-read">' + Math.round(key.value) + '</span>' +
+    '</div>' +
+    '<span class="key-label">' + escHtml(key.label) + '</span>' +
+    (key.sub ? '<span class="key-sub">' + escHtml(key.sub) + '</span>' : '');
+
+  paintValue(wrap, key);
+  attachValueDrag(wrap, key, type);
+  return wrap;
+}
+
+function paintValue(wrap, key) {
+  var v = Math.max(0, Math.min(100, key.value));
+  var read = wrap.querySelector('.value-read');
+  if (read) { read.textContent = Math.round(v); }
+
+  var arc = wrap.querySelector('.dial-arc');
+  if (arc) {
+    // 270 degrees of travel, the way a real pot is cut, starting at the
+    // seven o'clock position rather than straight up.
+    var deg = 135 + (v / 100) * 270;
+    arc.style.background =
+      'conic-gradient(from 135deg, var(--accent) 0deg, var(--accent) ' +
+      ((v / 100) * 270) + 'deg, transparent ' + ((v / 100) * 270) + 'deg)';
+    var pointer = wrap.querySelector('.dial-pointer');
+    if (pointer) { pointer.style.transform = 'rotate(' + deg + 'deg)'; }
+  }
+
+  var fill = wrap.querySelector('.slider-fill');
+  if (fill) { fill.style.height = v + '%'; }
+}
+
+function attachValueDrag(wrap, key, type) {
+  var dragging = false;
+  var lastAngle = null;
+  var lastSent = 0;
+  var detent = (key.behaviour === 'detent');
+
+  function pointOf(e) {
+    var t = (e.touches && e.touches[0]) || (e.changedTouches && e.changedTouches[0]) || e;
+    return { x: t.clientX, y: t.clientY };
+  }
+
+  function angleAt(p, rect) {
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    return Math.atan2(p.y - cy, p.x - cx) * 180 / Math.PI;
+  }
+
+  function begin(e) {
+    dragging = true;
+    wrap.classList.add('active');
+    lastAngle = null;
+    if (e.cancelable) { e.preventDefault(); }
+  }
+
+  function move(e) {
+    if (!dragging) { return; }
+    if (e.cancelable) { e.preventDefault(); }
+    var p = pointOf(e);
+    var rect = wrap.getBoundingClientRect();
+    var before = key.value;
+
+    if (type === 'dial') {
+      var a = angleAt(p, rect);
+      if (lastAngle !== null) {
+        var d = a - lastAngle;
+        // Crossing the join reads as a 350 degree jump; it is 10 the
+        // other way, and without this the value snaps end to end.
+        if (d > 180) { d -= 360; }
+        if (d < -180) { d += 360; }
+        key.value = Math.max(0, Math.min(100, key.value + (d / 270) * 100));
+      }
+      lastAngle = a;
+    } else {
+      // A slider follows the finger rather than accumulating: where you
+      // put it is where it is.
+      var pct = 100 - ((p.y - rect.top) / rect.height) * 100;
+      key.value = Math.max(0, Math.min(100, pct));
+    }
+
+    if (detent) { key.value = Math.round(key.value / 10) * 10; }
+    if (Math.round(key.value) !== Math.round(before)) {
+      paintValue(wrap, key);
+      // A drag is hundreds of events and the network does not need all of
+      // them; the value is sent at most every 40ms and always on release.
+      var now = Date.now();
+      if (now - lastSent > 40) {
+        lastSent = now;
+        sendValue(key);
+      }
+      if (detent) { triggerHaptic(8); }
+    }
+  }
+
+  function end(e) {
+    if (!dragging) { return; }
+    dragging = false;
+    wrap.classList.remove('active');
+    lastAngle = null;
+    if (e && e.cancelable) { e.preventDefault(); }
+    sendValue(key);
+    triggerHaptic(CFG.HAPTIC_MS);
+  }
+
+  wrap.addEventListener('touchstart', begin, { passive: false });
+  wrap.addEventListener('touchmove',  move,  { passive: false });
+  wrap.addEventListener('touchend',   end,   { passive: false });
+  wrap.addEventListener('touchcancel', end,  { passive: false });
+
+  wrap.addEventListener('mousedown', function(e) {
+    begin(e);
+    function mm(ev) { move(ev); }
+    function mu(ev) {
+      end(ev);
+      window.removeEventListener('mousemove', mm);
+      window.removeEventListener('mouseup', mu);
+    }
+    window.addEventListener('mousemove', mm);
+    window.addEventListener('mouseup', mu);
+  });
+}
+
+function sendValue(key) {
+  send({ type: 'value', id: key.id, label: key.label,
+         command: key.command, behaviour: key.behaviour,
+         value: Math.round(key.value) });
 }
 
 function pressKey(btn) {
@@ -388,6 +630,23 @@ function releaseKey(btn, fire) {
 }
 
 // ── Send keypress to server ────────────────────────────────────
+/*
+  One way out to the server, so a dial, a toggle and a key are the same
+  code path with a different type on the message. sendKeypress is kept
+  because the pairing handshake and the older callers still use it.
+*/
+function send(msg) {
+  // READS: ws
+  // WRITES: WebSocket send
+  if (!ws || ws.readyState !== WebSocket.OPEN) { log('Not connected'); return; }
+  msg.ts = Date.now();
+  ws.send(JSON.stringify(msg));
+  log('SEND: ' + (msg.label || msg.id) + ' -> ' +
+      (msg.type === 'value' ? msg.value
+        : msg.type === 'toggle' ? (msg.state ? 'on' : 'off')
+        : (msg.command || msg.action || '')));
+}
+
 function sendKeypress(id, label, action) {
   // READS: ws
   // WRITES: WebSocket send
