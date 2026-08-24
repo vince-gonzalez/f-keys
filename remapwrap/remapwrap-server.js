@@ -43,6 +43,7 @@ var path    = require('path');
 var os      = require('os');
 var WebSocket = require('ws');
 var QRCode  = require('qrcode');
+var audio   = require('./audio');
 
 var MIME = {
   '.css': 'text/css', '.png': 'image/png', '.ico': 'image/x-icon',
@@ -172,6 +173,10 @@ function portTaken(which, port) {
 httpServer.on('error', portTaken('HTTP', CONFIG.HTTP_PORT));
 httpServer.listen(CONFIG.HTTP_PORT, function() {
   log('HTTP server listening on port ' + CONFIG.HTTP_PORT);
+  // Started here rather than on first use, so the compile cost is paid
+  // while the QR code is still being scanned instead of on the first
+  // turn of a dial.
+  audio.start(log);
 });
 
 // ── WebSocket Server ──────────────────────────────────────────
@@ -217,6 +222,10 @@ wss.on('connection', function(ws, req) {
         // Relay to all dashboards for visual feedback
         broadcastToDashboards({ type: 'keypress', id: msg.id, label: msg.label, action: msg.action, ts: Date.now() });
 
+        // Audio owns some of the catalogue now. Anything it claims goes
+        // there; the rest is still a key combination.
+        if (fireCommand(msg)) { return; }
+
         // Fire keystroke if nut-js is loaded and action is mapped
         if (keyboard && msg.action && msg.action !== 'none') {
           fireKeystroke(msg.action);
@@ -228,6 +237,37 @@ wss.on('connection', function(ws, req) {
       if (msg.type === 'layout_push') {
         log('Layout push from dashboard → controllers');
         broadcastToControllers({ type: 'layout', layout: msg.layout });
+        return;
+      }
+
+      // ── A dial or a slider reporting where it was left ──────
+      if (msg.type === 'value') {
+        if (audio.handles(msg.command)) {
+          audio.apply(msg).then(function (r) {
+            if (!r.ok) { log('Audio: ' + msg.command + ' - ' + r.result); }
+          });
+          broadcastToDashboards({ type: 'feed', label: msg.label,
+                                  action: msg.command + ' = ' + msg.value,
+                                  id: msg.id, ts: Date.now() });
+        } else {
+          log('No handler yet for ' + msg.command + ' (value)');
+        }
+        return;
+      }
+
+      // ── A toggle reporting what it became ───────────────────
+      if (msg.type === 'toggle') {
+        if (audio.handles(msg.command)) {
+          audio.apply(msg).then(function (r) {
+            if (!r.ok) { log('Audio: ' + msg.command + ' - ' + r.result); }
+          });
+        } else {
+          log('No handler yet for ' + msg.command + ' (toggle)');
+        }
+        broadcastToDashboards({ type: 'feed', label: msg.label,
+                                action: msg.command + ' ' +
+                                        (msg.state ? 'on' : 'off'),
+                                id: msg.id, ts: Date.now() });
         return;
       }
 
@@ -295,6 +335,19 @@ function broadcastToControllers(obj) {
 }
 
 // ── Keystroke injection ───────────────────────────────────────
+function fireCommand(msg) {
+  // The catalogue has grown past keystrokes. Anything audio owns goes to
+  // the audio host; everything else is still a key combination, which is
+  // what this started as and what most commands still are.
+  if (audio.handles(msg.command)) {
+    audio.apply(msg).then(function (r) {
+      if (!r.ok) { log('Audio: ' + msg.command + ' - ' + r.result); }
+    });
+    return true;
+  }
+  return false;
+}
+
 function fireKeystroke(action) {
   // READS: keyboard, Key, action string
   // WRITES: OS keyboard state via nut-js
@@ -369,3 +422,7 @@ NEXT STEPS
 - Explore robotjs as alternate injector (simpler install on some systems)
 - Add UDP fast-path for dial/slider real-time inputs
 */
+
+// The audio host is a child process; it goes when this does.
+process.on('exit', function () { audio.stop(); });
+process.on('SIGINT', function () { audio.stop(); process.exit(0); });
