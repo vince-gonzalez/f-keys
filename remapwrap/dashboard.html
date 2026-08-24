@@ -99,7 +99,7 @@
     text-shadow: var(--glow);
   }
   .version {
-    font-size: 10px;
+    font-size: 13px;
     color: var(--text-dim);
     letter-spacing: 2px;
     padding: 2px 8px;
@@ -110,7 +110,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 1px;
   }
   .status-dot {
@@ -187,7 +187,7 @@
   /* ── Buttons / Controls ── */
   .btn {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 1px;
     padding: 6px 14px;
     border: 1px solid var(--border);
@@ -240,10 +240,10 @@
     transform: scale(0.96);
   }
   .key-btn .key-label { font-size: 15px; line-height: 1; }
-  .key-btn .key-sub   { font-family: var(--font-mono); font-size: 9px; color: var(--text-dim); letter-spacing: 1px; }
+  .key-btn .key-sub   { font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); letter-spacing: 1px; }
   .key-btn .key-edit  {
     position: absolute; top: 4px; right: 6px;
-    font-size: 9px; color: var(--text-dim);
+    font-size: 13px; color: var(--text-dim);
     opacity: 0; transition: opacity 0.15s;
   }
   .key-btn:hover .key-edit { opacity: 1; }
@@ -267,25 +267,60 @@
     background: #fff;
     padding: 4px;
   }
-  .qr-label { font-size: 10px; color: var(--text-dim); letter-spacing: 1.5px; }
-  .qr-url   { font-size: 9px;  color: var(--accent2); margin-top: 4px; word-break: break-all; }
+  .qr-label { font-size: 13px; color: var(--text-dim); letter-spacing: 1.5px; }
+  .qr-url   { font-size: 13px;  color: var(--accent2); margin-top: 4px; word-break: break-all; }
 
   /* ── Edit panel fields ── */
   .field-group { margin-bottom: 14px; }
-  .field-label { font-size: 10px; color: var(--text-dim); letter-spacing: 1.5px; margin-bottom: 5px; }
+  .field-label { font-size: 13px; color: var(--text-dim); letter-spacing: 1.5px; margin-bottom: 5px; }
   .field-input {
     width: 100%;
     background: var(--bg3);
     border: 1px solid var(--border);
     color: var(--text-bright);
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 13px;
     padding: 7px 10px;
     border-radius: var(--radius);
     outline: none;
     transition: border-color 0.2s;
   }
   .field-input:focus { border-color: var(--accent2); }
+
+  /* The editor rows. Nothing here goes below 13px; a control surface is
+     read at arm's length, on a desk, often in a dark room. */
+  .field-hint {
+    font-size: 13px; color: var(--text-dim); letter-spacing: 0;
+    text-transform: none; opacity: .8; font-weight: 400;
+  }
+  select.field-input {
+    appearance: none; -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-dim) 50%),
+                      linear-gradient(135deg, var(--text-dim) 50%, transparent 50%);
+    background-position: calc(100% - 16px) 52%, calc(100% - 11px) 52%;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+    padding-right: 30px; cursor: pointer; font-size: 14px;
+  }
+  select.field-input optgroup { background: var(--bg); font-size: 13px; }
+  select.field-input option   { background: var(--bg); font-size: 14px; }
+
+  /* Label and colour decide the same thing - what the key looks like - so
+     they sit on one row instead of a scroll apart. */
+  .field-split { display: grid; grid-template-columns: 1fr 84px; gap: 10px; }
+  .field-split .field-group { margin-bottom: 0; }
+  .field-colour { height: 38px; padding: 3px; cursor: pointer; }
+
+  .pro-row { display: flex; gap: 8px; align-items: center; }
+  .pro-row .field-input { flex: 1; opacity: .5; cursor: not-allowed; }
+  .pro-tag {
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 1px;
+    color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 3px; padding: 3px 8px; white-space: nowrap;
+  }
+  .check { display: flex; gap: 9px; align-items: center; cursor: pointer;
+           font-size: 14px; color: var(--text); }
+  .check input { width: 17px; height: 17px; accent-color: var(--accent);
+                 cursor: pointer; }
   .field-input::placeholder { color: var(--text-dim); }
 
   select.field-input { cursor: pointer; }
@@ -298,7 +333,7 @@
     gap: 8px;
     padding: 6px 0;
     border-bottom: 1px solid var(--border);
-    font-size: 11px;
+    font-size: 13px;
     animation: feedIn 0.2s ease;
   }
   @keyframes feedIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
@@ -308,8 +343,8 @@
     color: var(--accent);
     min-width: 70px;
   }
-  .feed-action { color: var(--accent2); font-size: 10px; }
-  .feed-time   { color: var(--text-dim); font-size: 9px;  margin-left: auto; }
+  .feed-action { color: var(--accent2); font-size: 13px; }
+  .feed-time   { color: var(--text-dim); font-size: 13px;  margin-left: auto; }
 
   /* ── Connection IP input ── */
   .connect-row {
@@ -320,7 +355,7 @@
   /* ── No-select on editor panel ── */
   .edit-empty {
     color: var(--text-dim);
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.8;
     padding: 6px 0;
   }
@@ -333,7 +368,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 10px;
+    font-size: 13px;
     color: var(--text-dim);
     letter-spacing: 1px;
     flex-shrink: 0;
@@ -379,7 +414,7 @@
       </div>
 
       <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
-        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:12px;">GRID CONFIG</div>
+        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">GRID CONFIG</div>
         <div class="field-group">
           <div class="field-label">COLUMNS</div>
           <input class="field-input" id="cfg-cols" type="number" min="1" max="8" value="4" oninput="applyGridConfig()" />
@@ -402,7 +437,7 @@
       <button class="btn accent" onclick="addKey()">+ ADD KEY</button>
       <button class="btn" onclick="removeSelected()">− REMOVE</button>
       <button class="btn" onclick="clearAll()">CLEAR ALL</button>
-      <span style="font-size:10px; color:var(--text-dim); margin-left:8px;">CLICK KEY TO EDIT</span>
+      <span style="font-size:13px; color:var(--text-dim); margin-left:8px;">CLICK KEY TO EDIT</span>
     </div>
     <div class="canvas-body">
       <div class="key-grid" id="key-grid"></div>
@@ -449,21 +484,142 @@ var pingStart = 0;
 var selectedKeyId = null;
 var controllerConnected = false;
 
-// Default layout
-var layout = [
-  { id: 'k1',  label: 'COPY',      sub: 'ctrl+c',    action: 'ctrl+c'  },
-  { id: 'k2',  label: 'PASTE',     sub: 'ctrl+v',    action: 'ctrl+v'  },
-  { id: 'k3',  label: 'UNDO',      sub: 'ctrl+z',    action: 'ctrl+z'  },
-  { id: 'k4',  label: 'SAVE',      sub: 'ctrl+s',    action: 'ctrl+s'  },
-  { id: 'k5',  label: 'MUTE',      sub: 'vol mute',  action: 'mute'    },
-  { id: 'k6',  label: 'VOL +',     sub: 'vol up',    action: 'volumeup'},
-  { id: 'k7',  label: 'VOL −',     sub: 'vol dn',    action: 'volumedown'},
-  { id: 'k8',  label: 'PLAY',      sub: 'media',     action: 'playpause'},
-  { id: 'k9',  label: 'FULL SCR',  sub: 'f11',       action: 'f11'     },
-  { id: 'k10', label: 'REFRESH',   sub: 'f5',        action: 'f5'      },
-  { id: 'k11', label: 'SCREENSHOT',sub: 'win+shift+s',action:'win+shift+s'},
-  { id: 'k12', label: 'CLOSE TAB', sub: 'ctrl+w',    action: 'ctrl+w'  },
-];
+  // ── What a control can be ──────────────────────────────────────
+  //
+  // Type decides everything below it. A dial cannot fire a keystroke and a
+  // key cannot report a position, so the behaviours and commands offered
+  // depend on the type chosen first. This is why the type selector is the
+  // first row of the editor rather than a checkbox somewhere further down.
+  var TYPES = [
+    { id: 'key',    name: 'Key',    hint: 'fires while pressed' },
+    { id: 'toggle', name: 'Toggle', hint: 'latches on and off, and can light' },
+    { id: 'pad',    name: 'Pad',    hint: 'soundboard trigger' },
+    { id: 'dial',   name: 'Dial',   hint: 'rotary, reports a value' },
+    { id: 'slider', name: 'Slider', hint: 'linear, reports a value' }
+  ];
+  
+  // How the control behaves when it is used. A double-press and a hold are
+  // different bindings on the same key, which is the distinction a gaming or
+  // studio surface lives on.
+  var BEHAVIOURS = {
+    key:    [['press', 'Single press'], ['double', 'Double press'],
+             ['hold', 'Hold to repeat'], ['long', 'Long press (500ms)']],
+    toggle: [['latch', 'Latch on / off'], ['momentary', 'Hold to keep on']],
+    pad:    [['trigger', 'Trigger'], ['retrigger', 'Retrigger from start'],
+             ['choke', 'Trigger and choke others']],
+    dial:   [['relative', 'Relative steps'], ['absolute', 'Absolute position'],
+             ['detent', 'Stepped with detents']],
+    slider: [['absolute', 'Absolute position'], ['relative', 'Relative steps']]
+  };
+  
+  // The command catalogue. Free text was the old field and it meant a typo
+  // was indistinguishable from a binding, so this is a closed list grouped
+  // the way a streamer thinks about a desk.
+  //
+  // `continuous` commands report a value and are the only ones a dial or a
+  // slider may be bound to. `latching` commands have an on state, so a
+  // toggle bound to one can be lit while it is on.
+  var COMMANDS = [
+    { group: 'Stream', items: [
+      ['obs.stream',      'Start / stop stream',   { latching: true }],
+      ['obs.record',      'Start / stop recording',{ latching: true }],
+      ['obs.replay',      'Save replay buffer'],
+      ['obs.scene',       'Switch scene…',         { arg: 'scene' }],
+      ['obs.transition',  'Trigger transition'],
+      ['obs.studio',      'Toggle studio mode',    { latching: true }],
+      ['stream.marker',   'Place stream marker'],
+      ['stream.ad',       'Run commercial break',  { arg: 'seconds' }]
+    ]},
+    { group: 'Audio', items: [
+      ['audio.mic.mute',  'Mute microphone',       { latching: true }],
+      ['audio.mic.ptt',   'Push to talk'],
+      ['audio.mic.gain',  'Microphone gain',       { continuous: true }],
+      ['audio.master',    'Master volume',         { continuous: true }],
+      ['audio.desktop',   'Desktop volume',        { continuous: true }],
+      ['audio.game',      'Game volume',           { continuous: true }],
+      ['audio.chat',      'Voice chat volume',     { continuous: true }],
+      ['audio.duck',      'Duck game audio',       { latching: true }]
+    ]},
+    { group: 'Soundboard', items: [
+      ['sound.play',      'Play sound…',           { arg: 'file' }],
+      ['sound.stop',      'Stop all sounds']
+    ]},
+    { group: 'Capture', items: [
+      ['capture.clip',    'Clip the last 30s'],
+      ['capture.shot',    'Screenshot region'],
+      ['capture.window',  'Screenshot window']
+    ]},
+    { group: 'Windows', items: [
+      ['win.keystroke',   'Send keystroke…',       { arg: 'keys' }],
+      ['win.text',        'Type text…',            { arg: 'text' }],
+      ['win.launch',      'Launch app or URL…',    { arg: 'target' }],
+      ['win.desktop',     'Switch virtual desktop',{ arg: 'direction' }],
+      ['win.media',       'Media transport…',      { arg: 'transport' }]
+    ]},
+    { group: 'Macro', items: [
+      ['macro.sequence',  'Run a sequence…',       { arg: 'steps' }]
+    ]}
+  ];
+  
+  function commandMeta(id) {
+    for (var g = 0; g < COMMANDS.length; g++) {
+      for (var i = 0; i < COMMANDS[g].items.length; i++) {
+        if (COMMANDS[g].items[i][0] === id) {
+          return COMMANDS[g].items[i][2] || {};
+        }
+      }
+    }
+    return {};
+  }
+  
+  function commandsFor(type) {
+    // A dial or a slider reports a value, so it can only drive something
+    // that accepts one. Offering it "screenshot region" would be offering a
+    // binding that cannot fire.
+    var wantContinuous = (type === 'dial' || type === 'slider');
+    var out = [];
+    COMMANDS.forEach(function(g) {
+      var items = g.items.filter(function(it) {
+        var meta = it[2] || {};
+        return wantContinuous ? !!meta.continuous : !meta.continuous;
+      });
+      if (items.length) { out.push({ group: g.group, items: items }); }
+    });
+    return out;
+  }
+  
+  // Real defaults. Nobody reaches for their phone to paste when a keyboard
+  // is under their hands; a streamer reaches for it to go to a break, mute a
+  // microphone or fire a sound without alt-tabbing out of a game. The two
+  // middle positions are the volume controls, which are always continuous.
+  var layout = [
+    { id: 'k1',  type: 'toggle', behaviour: 'latch',    command: 'audio.mic.mute',
+      label: 'MUTE MIC',  sub: 'microphone',  color: '#2a1216', lit: true },
+    { id: 'k2',  type: 'key',    behaviour: 'press',    command: 'obs.scene',
+      arg: 'Be Right Back', label: 'BRB',  sub: 'scene',  color: '#161a2a' },
+    { id: 'k3',  type: 'key',    behaviour: 'press',    command: 'obs.scene',
+      arg: 'Live',        label: 'LIVE',      sub: 'scene',       color: '#12211a' },
+    { id: 'k4',  type: 'key',    behaviour: 'press',    command: 'capture.clip',
+      label: 'CLIP THAT', sub: 'last 30s',    color: '#1c1626' },
+  
+    { id: 'k5',  type: 'key',    behaviour: 'press',    command: 'stream.ad',
+      arg: '180',         label: 'AD BREAK',  sub: '3 minutes',   color: '#241a10' },
+    { id: 'k6',  type: 'dial',   behaviour: 'relative', command: 'audio.mic.gain',
+      label: 'MIC GAIN',  sub: 'dial',        color: '#111820' },
+    { id: 'k7',  type: 'dial',   behaviour: 'relative', command: 'audio.master',
+      label: 'MASTER',    sub: 'dial',        color: '#111820' },
+    { id: 'k8',  type: 'toggle', behaviour: 'latch',    command: 'obs.record',
+      label: 'RECORD',    sub: 'local file',  color: '#2a1216', lit: true },
+  
+    { id: 'k9',  type: 'pad',    behaviour: 'trigger',  command: 'sound.play',
+      arg: 'airhorn.wav', label: 'AIRHORN',   sub: 'soundboard',  color: '#1a1426' },
+    { id: 'k10', type: 'pad',    behaviour: 'trigger',  command: 'sound.play',
+      arg: 'applause.wav',label: 'APPLAUSE',  sub: 'soundboard',  color: '#1a1426' },
+    { id: 'k11', type: 'key',    behaviour: 'hold',     command: 'audio.mic.ptt',
+      label: 'PUSH TALK', sub: 'hold',        color: '#101a1e' },
+    { id: 'k12', type: 'toggle', behaviour: 'latch',    command: 'obs.stream',
+      label: 'STREAM',    sub: 'go live',     color: '#12211a', lit: true }
+  ];
 
 var serverIP = '127.0.0.1';
 
@@ -634,32 +790,153 @@ function selectKey(id) {
   renderEditor(id);
 }
 
+function opts(pairs, chosen) {
+  return pairs.map(function(p) {
+    return '<option value="' + escAttr(p[0]) + '"' +
+           (p[0] === chosen ? ' selected' : '') + '>' + escHtml(p[1]) +
+           '</option>';
+  }).join('');
+}
+
+function commandOptions(type, chosen) {
+  return commandsFor(type).map(function(g) {
+    return '<optgroup label="' + escAttr(g.group) + '">' +
+      g.items.map(function(it) {
+        return '<option value="' + escAttr(it[0]) + '"' +
+               (it[0] === chosen ? ' selected' : '') + '>' +
+               escHtml(it[1]) + '</option>';
+      }).join('') + '</optgroup>';
+  }).join('');
+}
+
+function row(label, hint, body) {
+  return '<div class="field-group">' +
+    '<div class="field-label">' + escHtml(label) +
+    (hint ? ' <span class="field-hint">' + escHtml(hint) + '</span>' : '') +
+    '</div>' + body + '</div>';
+}
+
 function renderEditor(id) {
   // READS: layout
   // WRITES: #editor-panel DOM
+  //
+  // The order is the order a person decides in. What is this control, how
+  // does it behave, what does it do, then what does it look like. Every
+  // row below the first depends on the first, so changing the type
+  // rewrites the rest rather than leaving a dial bound to a screenshot.
   var key = layout.find(function(k) { return k.id === id; });
-  if (!key) return;
+  if (!key) { return; }
 
   var panel = document.getElementById('editor-panel');
-  panel.innerHTML =
-    '<div class="field-group">' +
-      '<div class="field-label">LABEL</div>' +
-      '<input class="field-input" id="ed-label" value="' + escAttr(key.label) + '" oninput="updateKey(\'label\', this.value)" />' +
-    '</div>' +
-    '<div class="field-group">' +
-      '<div class="field-label">SUBTITLE / HINT</div>' +
-      '<input class="field-input" id="ed-sub" value="' + escAttr(key.sub || '') + '" oninput="updateKey(\'sub\', this.value)" />' +
-    '</div>' +
-    '<div class="field-group">' +
-      '<div class="field-label">ACTION (keystroke)</div>' +
-      '<input class="field-input" id="ed-action" value="' + escAttr(key.action || '') + '" placeholder="e.g. ctrl+c, f5, mute" oninput="updateKey(\'action\', this.value)" />' +
-      '<div style="font-size:9px; color:var(--text-dim); margin-top:4px;">Use + to combine: ctrl+shift+s</div>' +
-    '</div>' +
-    '<div class="field-group">' +
-      '<div class="field-label">BACKGROUND COLOR</div>' +
-      '<input type="color" class="field-input" id="ed-color" value="' + escAttr(key.color || '#111820') + '" style="height:34px; cursor:pointer;" oninput="updateKey(\'color\', this.value)" />' +
-    '</div>' +
-    '<button class="btn danger" style="width:100%; margin-top:8px;" onclick="removeSelected()">REMOVE KEY</button>';
+  var meta = commandMeta(key.command);
+  var continuous = (key.type === 'dial' || key.type === 'slider');
+  var typeHint = (TYPES.find(function(t) { return t.id === key.type; }) || {}).hint || '';
+
+  var html = '';
+
+  html += row('TYPE', typeHint,
+    '<select class="field-input" id="ed-type" onchange="changeType(this.value)">' +
+      opts(TYPES.map(function(t) { return [t.id, t.name]; }), key.type) +
+    '</select>');
+
+  html += row('ACTION', 'how it fires',
+    '<select class="field-input" id="ed-behaviour" onchange="updateKey(\'behaviour\', this.value)">' +
+      opts(BEHAVIOURS[key.type] || [], key.behaviour) +
+    '</select>');
+
+  html += row('COMMAND', continuous ? 'values only' : '',
+    '<select class="field-input" id="ed-command" onchange="changeCommand(this.value)">' +
+      commandOptions(key.type, key.command) +
+    '</select>');
+
+  // Only the commands that need one ask for one, and the placeholder says
+  // what kind of thing it wants rather than "value".
+  if (meta.arg) {
+    var placeholders = {
+      scene: 'Scene name in OBS', seconds: 'Length in seconds',
+      file: 'sound file', keys: 'ctrl+shift+s', text: 'text to type',
+      target: 'app path or https://', direction: 'left or right',
+      transport: 'play, next, previous', steps: 'one step per line'
+    };
+    html += row(meta.arg.toUpperCase(), '',
+      '<input class="field-input" id="ed-arg" value="' + escAttr(key.arg || '') +
+      '" placeholder="' + escAttr(placeholders[meta.arg] || '') +
+      '" oninput="updateKey(\'arg\', this.value)" />');
+  }
+
+  html += '<div class="field-split">' +
+    row('LABEL', '', '<input class="field-input" value="' + escAttr(key.label || '') +
+        '" oninput="updateKey(\'label\', this.value)" />') +
+    row('COLOUR', '', '<input type="color" class="field-input field-colour" value="' +
+        escAttr(key.color || '#111820') +
+        '" oninput="updateKey(\'color\', this.value)" />') +
+    '</div>';
+
+  html += row('SUBTITLE', 'small line under the label',
+    '<input class="field-input" value="' + escAttr(key.sub || '') +
+    '" oninput="updateKey(\'sub\', this.value)" />');
+
+  // An image replaces the label and the colour rather than sitting beside
+  // them, so the editor says so instead of leaving three fields fighting
+  // over the same face.
+  html += row('IMAGE', 'replaces the label and colour',
+    '<div class="pro-row">' +
+      '<input class="field-input" value="' + escAttr(key.image || '') +
+      '" placeholder="not in this edition" disabled />' +
+      '<span class="pro-tag">PRO</span>' +
+    '</div>');
+
+  if (key.type === 'toggle' || meta.latching) {
+    html += row('WHEN ACTIVE', '',
+      '<label class="check"><input type="checkbox" ' +
+      (key.lit ? 'checked ' : '') +
+      'onchange="updateKey(\'lit\', this.checked)" /> ' +
+      '<span>Light the key while it is on</span></label>');
+  }
+
+  html += '<button class="btn danger" style="width:100%; margin-top:12px;" ' +
+          'onclick="removeSelected()">REMOVE CONTROL</button>';
+
+  panel.innerHTML = html;
+}
+
+function changeType(type) {
+  // Changing the type invalidates what sits under it. A dial cannot keep a
+  // key's "double press", and a key bound to master volume would be a
+  // binding that never fires, so both are moved to the first valid option
+  // rather than left pointing at nothing.
+  var key = layout.find(function(k) { return k.id === selectedKeyId; });
+  if (!key) { return; }
+  key.type = type;
+
+  var behaviours = BEHAVIOURS[type] || [];
+  if (!behaviours.some(function(b) { return b[0] === key.behaviour; })) {
+    key.behaviour = behaviours.length ? behaviours[0][0] : '';
+  }
+
+  var groups = commandsFor(type);
+  var valid = [];
+  groups.forEach(function(g) {
+    g.items.forEach(function(it) { valid.push(it[0]); });
+  });
+  if (valid.indexOf(key.command) === -1) {
+    key.command = valid[0] || '';
+    key.arg = '';
+  }
+
+  renderGrid();
+  renderEditor(key.id);
+  pushLayoutToControllers();
+}
+
+function changeCommand(command) {
+  var key = layout.find(function(k) { return k.id === selectedKeyId; });
+  if (!key) { return; }
+  key.command = command;
+  key.arg = '';
+  renderGrid();
+  renderEditor(key.id);
+  pushLayoutToControllers();
 }
 
 function updateKey(field, value) {

@@ -43,6 +43,25 @@ jobs:
         working-directory: keyj/desktop
         run: node sync-renderer.js --check
 
+  # A 13px floor, because six point type is not a style choice and the
+  # person who has to read it has reported it more than once. The tool
+  # existed and caught every violation the first time it was pointed at a
+  # folder; what was missing was anything that pointed it there. A gate
+  # nobody pulls is not a gate.
+  type-floor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Nothing renders below the floor
+        run: python tools/typefloor.py
+      - name: What is below it, and why
+        if: failure()
+        run: python tools/typefloor.py --list
+
+
   # The README standard is a tool, so it is checked rather than trusted:
   # the glyphs against the published gonzalgo banner, and every product
   # name rendering in the same box.

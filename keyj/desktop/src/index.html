@@ -1811,39 +1811,39 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
       '#vizCanvas{max-height:150px!important;height:150px!important}',
       '.panel-center{display:flex;flex-direction:column;gap:12px;padding-bottom:18px}',
       /* legibility floor across the app */
-      '.panel-left,.panel-right,.panel-center{font-size:12px!important}',
+      '.panel-left,.panel-right,.panel-center{font-size:13px!important}',
       '.panel-left *,.panel-right *{font-size:inherit}',
-      '.key-freq,.small,.dim,.muted{color:#9aa0b5!important;font-size:11.5px!important}',
-      '.style-tag,.badge,[class*="tag"]{font-size:11px!important}',
+      '.key-freq,.small,.dim,.muted{color:#9aa0b5!important;font-size:13px!important}',
+      '.style-tag,.badge,[class*="tag"]{font-size:13px!important}',
       /* the work area */
       '#kj{background:#14141a;border:1px solid #2b2b38;border-radius:3px;' +
-        'font-size:12.5px;color:#e6e8f0;line-height:1.5}',
-      '#kj h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;' +
+        'font-size:13px;color:#e6e8f0;line-height:1.5}',
+      '#kj h3{font-size:13px;letter-spacing:1.6px;text-transform:uppercase;' +
         'color:#8c93aa;font-weight:600;padding:9px 14px;border-bottom:1px solid #2b2b38}',
       '#kj .body{padding:14px;display:grid;gap:14px;grid-template-columns:1fr 1fr}',
       '#kj .col{min-width:0;display:flex;flex-direction:column;gap:8px}',
-      '#kj label{display:block;color:#9aa0b5;font-size:11.5px;letter-spacing:.8px;' +
+      '#kj label{display:block;color:#9aa0b5;font-size:13px;letter-spacing:.8px;' +
         'text-transform:uppercase;margin-bottom:2px}',
       '#kj textarea{width:100%;height:132px;background:#0c0c11;color:#e6e8f0;' +
         'border:1px solid #33333f;border-radius:2px;padding:9px;resize:vertical;' +
-        'font-family:ui-monospace,Consolas,monospace;font-size:12.5px;line-height:1.45}',
+        'font-family:ui-monospace,Consolas,monospace;font-size:13px;line-height:1.45}',
       '#kj select,#kj input[type=number]{background:#0c0c11;color:#e6e8f0;' +
-        'border:1px solid #33333f;border-radius:2px;padding:6px 8px;font-size:12.5px;' +
+        'border:1px solid #33333f;border-radius:2px;padding:6px 8px;font-size:13px;' +
         'font-family:inherit}',
       '#kj input[type=number]{width:66px}',
       '#kj .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}',
       '#kj button{background:#1d1d26;color:#d7dae6;border:1px solid #3a3a48;' +
-        'border-radius:2px;padding:7px 13px;font-family:inherit;font-size:12px;cursor:pointer}',
+        'border-radius:2px;padding:7px 13px;font-family:inherit;font-size:13px;cursor:pointer}',
       '#kj button:hover{border-color:#ffd23f;color:#ffd23f}',
       '#kj button.on,#kj button.primary{background:#ffd23f;color:#14141a;' +
         'border-color:#ffd23f;font-weight:600}',
       '#kj .status{background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;' +
         'padding:9px 11px;min-height:38px;color:#e6e8f0}',
-      '#kj .preview{font-family:ui-monospace,Consolas,monospace;font-size:12px;' +
+      '#kj .preview{font-family:ui-monospace,Consolas,monospace;font-size:13px;' +
         'color:#ffd23f;background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;' +
         'padding:9px 11px;max-height:76px;overflow:auto;word-break:break-word;line-height:1.7}',
       '#kj .warn{color:#ffb454}',
-      '#kj .note{color:#9aa0b5;font-size:11.5px;margin-top:2px}',
+      '#kj .note{color:#9aa0b5;font-size:13px;margin-top:2px}',
       /* The page was 1900px tall because the key map listed every key with no
          cap (1676px) and the visualiser container held 1277px. Grid rows
          stretch to the tallest column, so both had to be bounded before the
@@ -1852,10 +1852,10 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
       '.viz-area{max-height:170px!important;overflow:hidden!important}',
       '.seq-panel{max-height:300px!important;overflow-y:auto!important}',
       /* the header sits outside the panels, so the size floor missed it */
-      '.pill-btn{font-size:12px!important;padding:7px 14px!important}',
-      '.tagline{font-size:12px!important;color:#9aa0b5!important}',
-      '.key-freq{font-size:12px!important;color:#9aa0b5!important}',
-      '.key-style{font-size:11px!important}',
+      '.pill-btn{font-size:13px!important;padding:7px 14px!important}',
+      '.tagline{font-size:13px!important;color:#9aa0b5!important}',
+      '.key-freq{font-size:13px!important;color:#9aa0b5!important}',
+      '.key-style{font-size:13px!important}',
       /* Twelve classes failed the contrast floor, and all of them traced to
          two variables. --muted (#555568) is used as body text throughout and
          sat at 2.58:1 where 4.5 is the floor, so the variable is lifted
@@ -1864,15 +1864,15 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
          which is the dark-on-dark that made the panel unreadable. That one
          is fixed where it is wrong, not globally. */
       ':root{--muted:#949cb0!important}',
-      '.seq-empty{color:#949cb0!important;font-size:12px!important}',
+      '.seq-empty{color:#949cb0!important;font-size:13px!important}',
       /* remaining sub-12px labels */
-      '.wv-btn,.label,.status-text,.modal-close,.ctrl-label{font-size:12px!important}',
-      '.panel-title,.scale-label{font-size:12px!important;letter-spacing:.6px}',
+      '.wv-btn,.label,.status-text,.modal-close,.ctrl-label{font-size:13px!important}',
+      '.panel-title,.scale-label{font-size:13px!important;letter-spacing:.6px}',
       /* Anything a person clicks or reads as a value gets 12px. The 11 to
          11.5px labels that remain are deliberate secondary hierarchy, not
          oversights - uppercase section labels and helper notes. */
-      '.modal-confirm,.modal-cancel{font-size:12.5px!important;padding:8px 16px!important}',
-      '.beat-val,.beat-row span{font-size:12px!important}'
+      '.modal-confirm,.modal-cancel{font-size:13px!important;padding:8px 16px!important}',
+      '.beat-val,.beat-row span{font-size:13px!important}'
     ].join('\n');
     document.head.appendChild(css);
   }
@@ -1911,7 +1911,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
           '<label for="kj-typed" style="margin-top:4px">Or type note names</label>' +
           '<div class="row">' +
             '<input id="kj-typed" style="flex:1 1 190px;background:#0c0c11;color:#e6e8f0;' +
-              'border:1px solid #33333f;border-radius:2px;padding:7px 9px;font-size:12.5px;' +
+              'border:1px solid #33333f;border-radius:2px;padding:7px 9px;font-size:13px;' +
               'font-family:ui-monospace,Consolas,monospace" placeholder="E5 G5 B5 E6">' +
             '<button id="kj-load-typed">Load</button>' +
           '</div>' +
@@ -2161,16 +2161,16 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     var css = document.createElement('style');
     css.textContent = [
       '#kb{background:#14141a;border:1px solid #2b2b38;border-radius:3px;margin-bottom:12px;' +
-        'color:#e6e8f0;font-size:12.5px}',
-      '#kb h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#8c93aa;' +
+        'color:#e6e8f0;font-size:13px}',
+      '#kb h3{font-size:13px;letter-spacing:1.6px;text-transform:uppercase;color:#8c93aa;' +
         'font-weight:600;padding:9px 14px;border-bottom:1px solid #2b2b38;display:flex;' +
         'justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}',
       '#kb .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px 0}',
       '#kb button{background:#1d1d26;color:#d7dae6;border:1px solid #3a3a48;border-radius:2px;' +
-        'padding:6px 12px;font-family:inherit;font-size:12px;cursor:pointer}',
+        'padding:6px 12px;font-family:inherit;font-size:13px;cursor:pointer}',
       '#kb button:hover{border-color:#ffd23f;color:#ffd23f}',
       '#kb button.on{background:#ffd23f;color:#14141a;border-color:#ffd23f;font-weight:600}',
-      '#kb .built{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#ffd23f;' +
+      '#kb .built{font-family:ui-monospace,Consolas,monospace;font-size:13px;color:#ffd23f;' +
         'background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;padding:8px 11px;' +
         'margin:10px 14px 0;max-height:56px;overflow:auto;line-height:1.7;word-break:break-word}',
       '#kb .scroll{overflow-x:auto;padding:12px 14px 14px}',
@@ -2185,14 +2185,14 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
         'padding-bottom:4px;gap:2px}',
       '#kb .w.lit{background:linear-gradient(#ffe89a,#ffd23f)}',
       '#kb .b.lit{background:linear-gradient(#ffd23f,#c9a12c)}',
-      '#kb .kb-nm{font-size:10.5px;color:#33364a;pointer-events:none;letter-spacing:.2px}',
+      '#kb .kb-nm{font-size:13px;color:#33364a;pointer-events:none;letter-spacing:.2px}',
       '#kb .b .kb-nm{color:#9aa0b5}',
-      '#kb .kb-bind{font-size:11px;font-weight:700;color:#14141a;background:#c7cad8;' +
+      '#kb .kb-bind{font-size:13px;font-weight:700;color:#14141a;background:#c7cad8;' +
         'border-radius:2px;min-width:15px;text-align:center;padding:0 3px;pointer-events:none;' +
         'line-height:14px;height:14px}',
       '#kb .b .kb-bind{background:#4a4d5e;color:#e6e8f0}',
       '#kb .w.lit .kb-nm,#kb .b.lit .kb-nm{color:#3a2f00}',
-      '#kb .hint{color:#9aa0b5;font-size:11.5px;padding:0 14px 12px}'
+      '#kb .hint{color:#9aa0b5;font-size:13px;padding:0 14px 12px}'
     ].join('\n');
     document.head.appendChild(css);
   }
@@ -2390,28 +2390,28 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     var css = document.createElement('style');
     css.textContent = [
       '#kg{background:#14141a;border:1px solid #2b2b38;border-radius:3px;margin-bottom:12px;' +
-        'color:#e6e8f0;font-size:12.5px}',
-      '#kg h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#8c93aa;' +
+        'color:#e6e8f0;font-size:13px}',
+      '#kg h3{font-size:13px;letter-spacing:1.6px;text-transform:uppercase;color:#8c93aa;' +
         'font-weight:600;padding:9px 14px;border-bottom:1px solid #2b2b38}',
       '#kg .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:11px 14px 0}',
       '#kg select{background:#0c0c11;color:#e6e8f0;border:1px solid #33333f;border-radius:2px;' +
-        'padding:6px 8px;font-family:inherit;font-size:12.5px}',
+        'padding:6px 8px;font-family:inherit;font-size:13px}',
       '#kg button{background:#1d1d26;color:#d7dae6;border:1px solid #3a3a48;border-radius:2px;' +
-        'padding:6px 12px;font-family:inherit;font-size:12px;cursor:pointer}',
+        'padding:6px 12px;font-family:inherit;font-size:13px;cursor:pointer}',
       '#kg button:hover{border-color:#ffd23f;color:#ffd23f}',
       '#kg button.primary{background:#ffd23f;color:#14141a;border-color:#ffd23f;font-weight:600}',
       '#kg .wrap{overflow-x:auto;padding:12px 14px}',
       '#kg table{border-collapse:collapse;font-family:ui-monospace,Consolas,monospace}',
-      '#kg th{color:#9aa0b5;font-weight:600;font-size:12px;text-align:right;padding:0 8px 0 0;' +
+      '#kg th{color:#9aa0b5;font-weight:600;font-size:13px;text-align:right;padding:0 8px 0 0;' +
         'white-space:nowrap}',
       '#kg td{padding:0}',
       '#kg input{width:26px;height:24px;text-align:center;background:#0c0c11;color:#ffd23f;' +
-        'border:1px solid #262633;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;' +
+        'border:1px solid #262633;font-family:ui-monospace,Consolas,monospace;font-size:13px;' +
         'padding:0}',
       '#kg input:focus{outline:none;border-color:#ffd23f;background:#1a1a22}',
       '#kg input.hit{background:#ffd23f;color:#14141a;font-weight:700}',
-      '#kg .status{color:#9aa0b5;font-size:11.5px;padding:0 14px 12px}',
-      '#kg .ascii{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#e6e8f0;' +
+      '#kg .status{color:#9aa0b5;font-size:13px;padding:0 14px 12px}',
+      '#kg .ascii{font-family:ui-monospace,Consolas,monospace;font-size:13px;color:#e6e8f0;' +
         'background:#0c0c11;border:1px solid #2b2b38;border-radius:2px;padding:10px;' +
         'margin:0 14px 12px;white-space:pre;overflow-x:auto;display:none;line-height:1.45}'
     ].join('\n');
@@ -2590,7 +2590,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
       '#kt{display:flex;gap:3px;margin-bottom:-1px;padding-left:2px;flex-wrap:wrap}',
       '#kt button{background:#1a1a22;color:#9aa0b5;border:1px solid #2b2b38;' +
         'border-bottom:none;border-radius:3px 3px 0 0;padding:8px 16px;' +
-        'font-family:inherit;font-size:12.5px;cursor:pointer;position:relative}',
+        'font-family:inherit;font-size:13px;cursor:pointer;position:relative}',
       '#kt button:hover{color:#ffd23f}',
       '#kt button.on{background:#14141a;color:#ffd23f;font-weight:600;' +
         'border-color:#3a3a48;z-index:2}',
@@ -3146,7 +3146,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     css(
       '.kj-mode{display:flex;align-items:center;gap:9px;margin-right:14px;' +
         '-webkit-app-region:no-drag}' +
-      '.kj-mode-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;' +
+      '.kj-mode-label{font-size:13px;text-transform:uppercase;letter-spacing:.14em;' +
         'color:#949cb0;white-space:nowrap}' +
       '.kj-sw{position:relative;width:36px;height:18px;cursor:pointer;flex-shrink:0}' +
       '.kj-sw input{opacity:0;width:0;height:0;position:absolute}' +
@@ -3157,12 +3157,12 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
       '.kj-sw input:checked+.kj-sw-track{background:#4ae8b0}' +
       '.kj-sw input:checked+.kj-sw-track::after{left:20px;background:#0a0a0e}' +
       '.kj-sw input:focus-visible+.kj-sw-track{outline:2px solid #e8c84a;outline-offset:2px}' +
-      '.kj-badge{font-size:11px;padding:3px 8px;border-radius:3px;border:1px solid #33333f;' +
+      '.kj-badge{font-size:13px;padding:3px 8px;border-radius:3px;border:1px solid #33333f;' +
         'color:#949cb0;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}' +
       '.kj-badge.on{border-color:#4ae8b0;color:#4ae8b0;background:rgba(74,232,176,.08)}' +
       '.kj-badge.off{border-color:#e8a04a;color:#e8a04a}' +
       '.kj-badge a{color:inherit}' +
-      '.kj-why{font-size:11px;color:#949cb0;margin-right:12px;max-width:340px;' +
+      '.kj-why{font-size:13px;color:#949cb0;margin-right:12px;max-width:340px;' +
         'line-height:1.45}' +
       '.kj-why a{color:#e8c84a}'
     );
@@ -3572,7 +3572,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
       '#kb .scroll::-webkit-scrollbar-thumb{background:#3a3a48;border-radius:5px}',
       '#kb .scroll::-webkit-scrollbar-thumb:hover{background:#4d4d5e}',
       /* a plain count, so the size of what is off-screen is knowable */
-      '#kb .kb-more{font-size:11.5px;color:#9aa0b5;padding:0 14px 8px;letter-spacing:.3px}'
+      '#kb .kb-more{font-size:13px;color:#9aa0b5;padding:0 14px 8px;letter-spacing:.3px}'
     ].join('\n');
     document.head.appendChild(css);
   }

@@ -37,7 +37,7 @@ html,body{height:100%}
 body{
   background:var(--desktop);
   font-family:Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
-  font-size:11px;
+  font-size:13px;
   color:var(--ink);
   padding:18px;
   -webkit-font-smoothing:antialiased;
@@ -59,7 +59,7 @@ a{color:inherit;text-decoration:none}
 }
 .titlebar{
   background:linear-gradient(90deg,var(--title-a),var(--title-b));
-  color:#fff;font-weight:700;font-size:11px;
+  color:#fff;font-weight:700;font-size:13px;
   padding:3px 3px 3px 6px;display:flex;align-items:center;
   justify-content:space-between;gap:8px;
 }
@@ -67,7 +67,7 @@ a{color:inherit;text-decoration:none}
 .titlebar .t span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tbtns{display:flex;gap:2px;flex:0 0 auto}
 .tbtn{width:16px;height:14px;background:var(--face);color:var(--ink);
-  font-size:9px;line-height:12px;text-align:center;font-weight:700;
+  font-size:13px;line-height:12px;text-align:center;font-weight:700;
   border:1px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi)}
 
 /* ── menus + toolbar ─────────────────────────────────────── */
@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 .tree a.on .ic{color:#fff}
 
 /* ── details table ───────────────────────────────────────── */
-table.details{width:100%;border-collapse:collapse;font-size:11px}
+table.details{width:100%;border-collapse:collapse;font-size:13px}
 table.details thead th{
   background:var(--face);text-align:left;font-weight:400;padding:3px 7px;
   border:1px solid;border-color:var(--hi) var(--sh) var(--sh) var(--hi);
@@ -128,7 +128,7 @@ table.details tbody tr:hover .st,
 table.details tbody tr:hover .muted{color:#cfe3ff}
 table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .muted{color:var(--dim)}
-.st{white-space:nowrap;font-size:10.5px}
+.st{white-space:nowrap;font-size:13px}
 .st-ready{color:var(--ok)}
 .st-plat{color:var(--plat)}
 .st-setup{color:var(--warn)}
@@ -139,14 +139,14 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .doc{padding:16px 20px 26px;max-width:760px}
 .doc h1{font-size:17px;margin-bottom:2px;letter-spacing:.2px}
 .doc .sub{color:var(--dim);margin-bottom:14px}
-.doc h2{font-size:12px;margin:18px 0 6px;padding-bottom:3px;
+.doc h2{font-size:13px;margin:18px 0 6px;padding-bottom:3px;
   border-bottom:1px solid #d8d8d8;letter-spacing:.3px;text-transform:uppercase;
   color:var(--title-a)}
 .doc p{line-height:1.65;margin-bottom:9px}
 .doc ul,.doc ol{margin:0 0 10px 20px;line-height:1.75}
-.doc code{font-family:'Lucida Console',Consolas,monospace;font-size:10.5px;
+.doc code{font-family:'Lucida Console',Consolas,monospace;font-size:13px;
   background:#f2f2f2;padding:1px 4px;border:1px solid #ddd}
-.doc pre{font-family:'Lucida Console',Consolas,monospace;font-size:10.5px;
+.doc pre{font-family:'Lucida Console',Consolas,monospace;font-size:13px;
   background:#000;color:#c0c0c0;padding:9px 11px;margin-bottom:11px;
   overflow-x:auto;line-height:1.55}
 .doc pre b{color:#fff;font-weight:400}
@@ -161,7 +161,7 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .btn{background:var(--face);padding:5px 16px;color:var(--ink);
   border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);
   box-shadow:inset 1px 1px 0 var(--face),inset -1px -1px 0 var(--sh);
-  font-family:inherit;font-size:11px;cursor:pointer}
+  font-family:inherit;font-size:13px;cursor:pointer}
 .btn:active{border-color:var(--sh) var(--hi) var(--hi) var(--sh);
   box-shadow:none;padding:6px 15px 4px 17px}
 .btn.default{font-weight:700}
@@ -208,5 +208,5 @@ table.details th.num,table.details td.num{text-align:right}
 .spark polyline{fill:none;stroke:var(--sel);stroke-width:1.5;
   vector-effect:non-scaling-stroke}
 .errs{margin:.4rem 0 0 1.1rem}
-.errs li{font-size:11px;color:var(--dim)}
-#live-note{font-size:11px;margin:.2rem 0 .6rem}
+.errs li{font-size:13px;color:var(--dim)}
+#live-note{font-size:13px;margin:.2rem 0 .6rem}

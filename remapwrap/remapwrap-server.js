@@ -147,12 +147,36 @@ var httpServer = http.createServer(function(req, res) {
   });
 });
 
+/*
+  A port already in use is the commonest way to start this twice, and it
+  ended the process with an unhandled 'error' event and eleven lines of
+  stack. The person reading that is the person who left it running in
+  another window.
+*/
+function portTaken(which, port) {
+  return function(err) {
+    if (err && err.code === 'EADDRINUSE') {
+      log('Port ' + port + ' (' + which + ') is already in use.');
+      log('RemapWrap is probably already running - open ' +
+          'http://' + getLocalIP() + ':' + CONFIG.HTTP_PORT + '/ and use that one.');
+      log('If it is not, close whatever holds port ' + port + ' and start again.');
+    } else if (err && err.code === 'EACCES') {
+      log('Not allowed to open port ' + port + '. Try a port above 1024.');
+    } else {
+      log('Could not start the ' + which + ' server: ' + (err && err.message));
+    }
+    process.exit(1);
+  };
+}
+
+httpServer.on('error', portTaken('HTTP', CONFIG.HTTP_PORT));
 httpServer.listen(CONFIG.HTTP_PORT, function() {
   log('HTTP server listening on port ' + CONFIG.HTTP_PORT);
 });
 
 // ── WebSocket Server ──────────────────────────────────────────
 var wss = new WebSocket.Server({ port: CONFIG.WS_PORT });
+wss.on('error', portTaken('WebSocket', CONFIG.WS_PORT));
 var dashboardClients = [];   // PC dashboard connections
 var controllerClients = [];  // Phone controller connections
 
