@@ -354,10 +354,9 @@ function fireKeystroke(action) {
   // DEPENDS ON: keyboard (nut-js), Key enum
   try {
     // action format examples: "ctrl+c", "f5", "ctrl+shift+t", "volumeup"
-    var parts = action.toLowerCase().split('+');
-    var keys = parts.map(function(part) {
-      return resolveKey(part);
-    }).filter(Boolean);
+    var keys = parseCombo(action)
+                 .map(resolveKey)
+                 .filter(function (k) { return k !== null; });
 
     if (keys.length === 0) { log('No valid keys resolved for action: ' + action); return; }
 
@@ -371,38 +370,77 @@ function fireKeystroke(action) {
   }
 }
 
-function resolveKey(part) {
-  // READS: Key enum from nut-js
-  // Maps common string names to nut-js Key constants
-  var map = {
-    'ctrl': Key.LeftControl, 'control': Key.LeftControl,
-    'shift': Key.LeftShift,
-    'alt': Key.LeftAlt,
-    'win': Key.LeftSuper, 'cmd': Key.LeftSuper, 'super': Key.LeftSuper,
-    'enter': Key.Return, 'return': Key.Return,
-    'space': Key.Space,
-    'tab': Key.Tab,
-    'esc': Key.Escape, 'escape': Key.Escape,
-    'backspace': Key.Backspace,
-    'delete': Key.Delete,
-    'up': Key.Up, 'down': Key.Down, 'left': Key.Left, 'right': Key.Right,
-    'f1': Key.F1, 'f2': Key.F2, 'f3': Key.F3, 'f4': Key.F4,
-    'f5': Key.F5, 'f6': Key.F6, 'f7': Key.F7, 'f8': Key.F8,
-    'f9': Key.F9, 'f10': Key.F10, 'f11': Key.F11, 'f12': Key.F12,
-    'volumeup': Key.AudioVolUp, 'volumedown': Key.AudioVolDown,
-    'mute': Key.AudioMute, 'playpause': Key.AudioPlay,
-    'home': Key.Home, 'end': Key.End, 'pageup': Key.PageUp, 'pagedown': Key.PageDown,
-    'a': Key.A, 'b': Key.B, 'c': Key.C, 'd': Key.D, 'e': Key.E,
-    'f': Key.F, 'g': Key.G, 'h': Key.H, 'i': Key.I, 'j': Key.J,
-    'k': Key.K, 'l': Key.L, 'm': Key.M, 'n': Key.N, 'o': Key.O,
-    'p': Key.P, 'q': Key.Q, 'r': Key.R, 's': Key.S, 't': Key.T,
-    'u': Key.U, 'v': Key.V, 'w': Key.W, 'x': Key.X, 'y': Key.Y, 'z': Key.Z,
-    '0': Key.Num0, '1': Key.Num1, '2': Key.Num2, '3': Key.Num3, '4': Key.Num4,
-    '5': Key.Num5, '6': Key.Num6, '7': Key.Num7, '8': Key.Num8, '9': Key.Num9,
+// ── The keyboard, all of it ───────────────────────────────────
+// Hand-typing this map got about seventy of the hundred and thirty-seven
+// keys nut-js can press, and the ones it missed were not exotic: INSERT and
+// = were both absent, which is what somebody binding "copy, paste, insert"
+// at a desk reaches for first. So the table is built from the enum rather
+// than transcribed from it, and it cannot fall behind the library again.
+var KEYS = (function () {
+  var table = {};
+  Object.keys(Key).forEach(function (name) {
+    if (!isNaN(Number(name))) { return; }          // reverse numeric entries
+    table[name.toLowerCase()] = Key[name];
+  });
+
+  // What people actually type, mapped onto what the enum calls it.
+  var alias = {
+    'control': 'leftcontrol', 'ctrl': 'leftcontrol', 'lctrl': 'leftcontrol',
+    'rctrl': 'rightcontrol', 'shift': 'leftshift', 'lshift': 'leftshift',
+    'rshift': 'rightshift', 'alt': 'leftalt', 'lalt': 'leftalt',
+    'ralt': 'rightalt', 'altgr': 'rightalt',
+    'win': 'leftsuper', 'cmd': 'leftsuper', 'super': 'leftsuper',
+    'meta': 'leftsuper', 'windows': 'leftsuper',
+    'esc': 'escape', 'enter': 'return', 'ins': 'insert', 'del': 'delete',
+    'pgup': 'pageup', 'pgdn': 'pagedown', 'pgdown': 'pagedown',
+    'caps': 'capslock', 'printscreen': 'print', 'prtsc': 'print',
+    'menu': 'menu', 'apps': 'menu', 'break': 'pause',
+    'volumeup': 'audiovolup', 'volup': 'audiovolup',
+    'volumedown': 'audiovoldown', 'voldown': 'audiovoldown',
+    'mute': 'audiomute', 'playpause': 'audioplay', 'play': 'audioplay',
+    'next': 'audionext', 'prev': 'audioprev', 'previous': 'audioprev',
+    'stop': 'audiostop',
+    // Punctuation, by the character somebody would print on the key.
+    '=': 'equal', 'plus': 'add', '-': 'minus', '_': 'minus',
+    ',': 'comma', '.': 'period', '/': 'slash', ';': 'semicolon',
+    "'": 'quote', '[': 'leftbracket', ']': 'rightbracket',
+    '\\': 'backslash', '`': 'grave', '~': 'grave',
+    'space': 'space', 'spacebar': 'space',
+    // Numpad, written the way a label reads.
+    'numpadplus': 'add', 'numpadminus': 'subtract',
+    'numpadtimes': 'multiply', 'numpaddivide': 'divide',
+    'numpaddot': 'decimal', 'numpadenter': 'enter'
   };
-  var resolved = map[part];
-  if (!resolved) log('WARN: unresolved key token "' + part + '"');
-  return resolved || null;
+  Object.keys(alias).forEach(function (from) {
+    var to = table[alias[from]];
+    if (to !== undefined) { table[from] = to; }
+  });
+  return table;
+})();
+
+function parseCombo(action) {
+  // Splitting on "+" loses the plus key itself: "ctrl++" became ctrl and two
+  // empty tokens. A trailing separator is the key, not a separator.
+  var s = String(action || '').trim().toLowerCase();
+  if (!s) { return []; }
+  if (s === '+') { return ['plus']; }
+  var tail = null;
+  if (s.charAt(s.length - 1) === '+') {
+    tail = 'plus';
+    s = s.slice(0, -1);
+    if (s.charAt(s.length - 1) === '+') { s = s.slice(0, -1); }
+  }
+  var parts = s.split('+')
+               .map(function (t) { return t.trim(); })
+               .filter(function (t) { return t !== ''; });
+  if (tail) { parts.push(tail); }
+  return parts;
+}
+
+function resolveKey(part) {
+  var resolved = KEYS[part];
+  if (resolved === undefined) { log('WARN: unresolved key token "' + part + '"'); }
+  return resolved === undefined ? null : resolved;
 }
 
 /* ===== LAST STABLE: none — initial build ===== */
