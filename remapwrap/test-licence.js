@@ -13,7 +13,7 @@ function ok(n, c) { if (!c) { fail.push(n); }
 // machine. Without it these cases cannot run, and a test that cannot run
 // must say so rather than fail as though the code were broken.
 var KEY_PATH = process.env.REMAPWRAP_SIGNING_KEY ||
-               'C:/tmp/remapwrap-signing/PRIVATE-KEY.txt';
+               'C:/Users/Admin/.remapwrap-signing/PRIVATE-KEY.txt';
 if (!fs.existsSync(KEY_PATH)) {
   console.log('  skipped: no signing key at ' + KEY_PATH);
   console.log('  set REMAPWRAP_SIGNING_KEY to run these.');

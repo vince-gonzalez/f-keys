@@ -39,7 +39,7 @@ async function hostReady() {
 }
 
 var KEY_PATH = process.env.REMAPWRAP_SIGNING_KEY ||
-               'C:/tmp/remapwrap-signing/PRIVATE-KEY.txt';
+               'C:/Users/Admin/.remapwrap-signing/PRIVATE-KEY.txt';
 if (!fs.existsSync(KEY_PATH)) {
   console.log('  skipped: no signing key at ' + KEY_PATH); process.exit(0);
 }
