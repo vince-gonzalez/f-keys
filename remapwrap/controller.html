@@ -514,6 +514,48 @@ input[type=range].sheet-input { padding: 0; }
   .key-btn.timer-done { animation: none; outline: 4px solid var(--accent);
                         outline-offset: -4px; }
 }
+
+/* ── Meters ────────────────────────────────────────────────────
+   A thin bar along the bottom of the control it belongs to. No
+   transition: a meter is supposed to jump, and easing it would be
+   drawing a level that was never there. */
+.meter-bar {
+  position: absolute;
+  left: 6px; right: 6px; bottom: 5px;
+  height: 5px;
+  background: rgba(0,0,0,0.45);
+  border-radius: 3px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.meter-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--lcd);
+}
+/* Loud enough to clip is the one thing a meter has to shout about. */
+.meter-fill[style*="9"] { background: var(--accent); }
+.meter-bar.meter-lost {
+  background: repeating-linear-gradient(90deg,
+    rgba(255,255,255,0.28) 0 4px, transparent 4px 8px);
+}
+
+/* ── Symbol keys ───────────────────────────────────────────────
+   The picture is the word. The label stays underneath it rather than
+   being removed: a symbol board is used by people who cannot read the
+   word AND by helpers who can, and by a screen reader that has to say
+   something. It sits on a slab so it stays legible over any artwork. */
+.key-btn.has-image .key-label {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 3px 4px;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+}
+.key-btn.has-image .key-sub { display: none; }
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -852,6 +894,10 @@ function handleMessage(msg) {
   }
   if (msg.type === 'ack') {
     confirmPress(msg.id, msg.ok);
+    return;
+  }
+  if (msg.type === 'meters') {
+    paintMeters(msg.meters || {});
     return;
   }
   if (msg.type === 'timers') {
@@ -1419,6 +1465,13 @@ function repaintFace(el, key) {
     el.style.background = face.color;
     el.style.color = inkFor(face.color);
   }
+  if (face.image) {
+    el.classList.add('has-image');
+    el.style.backgroundImage = 'url("' + face.image.replace(/"/g, '%22') + '")';
+  } else {
+    el.classList.remove('has-image');
+    el.style.backgroundImage = '';
+  }
   el.setAttribute('aria-label', face.label + (face.sub ? ', ' + face.sub : ''));
 }
 
@@ -1428,7 +1481,8 @@ function faceFor(key) {
   return {
     label: (alt && alt.label !== undefined) ? alt.label : (key.label || ''),
     sub:   (alt && alt.sub !== undefined) ? alt.sub : (key.sub || ''),
-    color: (alt && alt.color) ? alt.color : (key.color || '')
+    color: (alt && alt.color) ? alt.color : (key.color || ''),
+    image: (alt && alt.image !== undefined) ? alt.image : (key.image || '')
   };
 }
 
@@ -1464,6 +1518,19 @@ function buildButton(key, type) {
     btn.style.color = inkFor(face.color);
   }
   btn.setAttribute('aria-label', face.label + (face.sub ? ', ' + face.sub : ''));
+
+  // An image supersedes the label and the colour, which is what a symbol
+  // board is: the picture IS the word. The label is still set on the
+  // element, because a symbol somebody cannot read needs a name a screen
+  // reader can say, and dropping it would make the key silent to the one
+  // person most likely to need it spoken.
+  if (face.image) {
+    btn.classList.add('has-image');
+    btn.style.backgroundImage = 'url("' + face.image.replace(/"/g, '%22') + '")';
+    btn.style.backgroundSize = 'contain';
+    btn.style.backgroundRepeat = 'no-repeat';
+    btn.style.backgroundPosition = 'center';
+  }
 
   btn.innerHTML =
     (key.lit ? '<span class="lamp"></span>' : '') +
@@ -1602,6 +1669,59 @@ function wireCompose() {
   if (send_) { send_.addEventListener('click', function () { sendCompose('type'); }); }
   if (say) { say.addEventListener('click', function () { sendCompose('say'); }); }
   if (close) { close.addEventListener('click', closeCompose); }
+}
+
+// ── Meters ───────────────────────────────────────────────────────
+// Drawn on the control it belongs to rather than somewhere separate: the
+// question a meter answers is "is this one working", and the answer
+// belongs next to the thing it is about.
+//
+// Which meter a control gets is decided by what it is bound to, so a
+// layout does not have to say. A microphone control shows what the
+// microphone hears; a master or desktop control shows what is playing.
+var meterFor = {
+  'audio.mic.gain': 'peakIn',
+  'audio.mic.mute': 'peakIn',
+  'audio.mic.ptt':  'peakIn',
+  'audio.master':   'peakOut',
+  'audio.desktop':  'peakOut'
+};
+
+function paintMeters(peaks) {
+  (layout.keys || []).forEach(function (key) {
+    var which = meterFor[key.command];
+    if (!which) { return; }
+    var value = peaks[which];
+    var el = document.querySelector('[data-id="' + key.id + '"]');
+    if (!el) { return; }
+
+    var bar = el.querySelector('.meter-bar');
+    if (value === undefined || value === null) {
+      // Not entitled to this meter, or the device could not be read. Either
+      // way, showing an empty bar would be claiming silence.
+      if (bar) { bar.parentNode.removeChild(bar); }
+      return;
+    }
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'meter-bar';
+      // Decoration. The reading a screen reader needs is the value on the
+      // control, and a bar jumping fifteen times a second announced would
+      // be unusable.
+      bar.setAttribute('aria-hidden', 'true');
+      bar.innerHTML = '<span class="meter-fill"></span>';
+      el.appendChild(bar);
+    }
+    var fill = bar.querySelector('.meter-fill');
+    if (value < 0) {
+      // -1 is "could not read", which is not the same as silence.
+      bar.classList.add('meter-lost');
+      if (fill) { fill.style.width = '0%'; }
+      return;
+    }
+    bar.classList.remove('meter-lost');
+    if (fill) { fill.style.width = Math.max(0, Math.min(100, value)) + '%'; }
+  });
 }
 
 // ── Timers ───────────────────────────────────────────────────────

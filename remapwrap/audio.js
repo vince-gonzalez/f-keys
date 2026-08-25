@@ -193,7 +193,11 @@ function readState() {
       'audio.mic.gain': num(v.mic),
       'audio.mic.mute': bool(v.micmuted),
       masterMuted:      bool(v.mmuted),
-      foreground:       typeof v.fore === 'string' ? v.fore : null
+      foreground:       typeof v.fore === 'string' ? v.fore : null,
+      // -1 means the device could not be read this time round, which is
+      // different from silence and must not be drawn as silence.
+      peakOut:          num(v.peakout),
+      peakIn:           num(v.peakin)
     };
   }).catch(function () { return null; });
 }

@@ -104,6 +104,19 @@ interface IMMDevice {
                [MarshalAs(UnmanagedType.IUnknown)] out object o);
 }
 
+// IAudioMeterInformation has FOUR methods after IUnknown and the order is
+// the order below. Getting this wrong is silent: declaring one too many
+// put GetProcessId on IsSystemSoundsSession last time and every session
+// reported pid 0, with no error anywhere. Only GetPeakValue is called, but
+// all four are declared so nothing after it can be reached by accident.
+[Guid("C02216F6-8C67-4B5B-9D00-D008E73E0064"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+interface IAudioMeterInformation {
+  int GetPeakValue(out float peak);
+  int GetMeteringChannelCount(out uint count);
+  int GetChannelsPeakValues(uint count, [Out] float[] peaks);
+  int QueryHardwareSupport(out uint mask);
+}
+
 [Guid("A95664D2-9614-4F35-A746-DE8DB63617E6"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 interface IMMDeviceEnumerator {
   int EnumAudioEndpoints(int f, int s, out IntPtr c);
@@ -153,6 +166,20 @@ public class RwAudio {
     var iid = typeof(IAudioEndpointVolume).GUID; object o;
     Marshal.ThrowExceptionForHR(Device(flow).Activate(ref iid, 23, IntPtr.Zero, out o));
     return (IAudioEndpointVolume)o;
+  }
+
+  static IAudioMeterInformation Meter(int flow) {
+    var iid = typeof(IAudioMeterInformation).GUID; object o;
+    Marshal.ThrowExceptionForHR(Device(flow).Activate(ref iid, 23, IntPtr.Zero, out o));
+    return (IAudioMeterInformation)o;
+  }
+
+  // What is coming out of, or going into, the device right now. Nothing
+  // to do with the volume setting: a muted device at full volume reads
+  // zero, and that is the point - this is the level, not the dial.
+  public static float Peak(int flow) {
+    float p; Marshal.ThrowExceptionForHR(Meter(flow).GetPeakValue(out p));
+    return p * 100f;
   }
 
   public static float Get(int flow) {
@@ -293,6 +320,15 @@ while ($true) {
         Reply $id $true $null
       }
       'foreground'   { Reply $id $true ([RwWindow]::Foreground()) }
+      'meters' {
+        # Asked fifteen times a second, so it does the least it can: two
+        # numbers and nothing else. The full state reading is far too much
+        # to repeat at this rate.
+        Reply $id $true @{
+          o = $(try { [math]::Round([RwAudio]::Peak(0), 1) } catch { -1 })
+          i = $(try { [math]::Round([RwAudio]::Peak(1), 1) } catch { -1 })
+        }
+      }
       'speak' {
         # Asynchronous on purpose. A long sentence must not freeze every
         # other key on the board while it is being said, and somebody who
@@ -338,6 +374,11 @@ while ($true) {
           mic     = [math]::Round([RwAudio]::Get(1))
           micmuted= [RwAudio]::GetMute(1)
           fore    = [RwWindow]::Foreground()
+          # Levels, not settings. Wrapped because a device can disappear
+          # between one reading and the next - a headset unplugged mid
+          # sentence must not take the whole poll down with it.
+          peakout = $(try { [math]::Round([RwAudio]::Peak(0), 1) } catch { -1 })
+          peakin  = $(try { [math]::Round([RwAudio]::Peak(1), 1) } catch { -1 })
         }
       }
       'ping'         { Reply $id $true "pong" }

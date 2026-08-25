@@ -211,7 +211,10 @@ function pollState() {
       // it, so it does not leave the PC.
       var forPhone = {};
       Object.keys(state).forEach(function (k) {
-        if (k !== 'foreground') { forPhone[k] = state[k]; }
+        if (k === 'foreground') { return; }
+        if (k === 'peakOut' && !FEATURES.meters) { return; }
+        if (k === 'peakIn' && !FEATURES.micMeter) { return; }
+        forPhone[k] = state[k];
       });
       broadcastToControllers({ type: 'state', state: forPhone });
     }
@@ -370,6 +373,31 @@ function checkTimers() {
     }
   });
   if (changed) { pushTimers(); }
+}
+
+// ── Meters ────────────────────────────────────────────────────
+// The state poll runs twice a second, which is right for a volume setting
+// and useless for a level - a meter updated every 500ms does not look like
+// a meter, it looks like a fault. This runs at 15Hz, sends nothing but the
+// two numbers, and only while a phone is attached.
+var meterTimer = null;
+
+function pollMeters() {
+  if (!controllerClients.length) { return; }
+  if (!FEATURES.meters && !FEATURES.micMeter) { return; }
+  audio.send('meters', {}).then(function (r) {
+    if (!r || !r.ok || !r.result) { return; }
+    var out = {};
+    if (FEATURES.meters) { out.peakOut = Number(r.result.o); }
+    if (FEATURES.micMeter) { out.peakIn = Number(r.result.i); }
+    broadcastToControllers({ type: 'meters', meters: out });
+  }).catch(function () { /* a device came and went */ });
+}
+
+function startMeters() {
+  if (meterTimer) { return; }
+  meterTimer = setInterval(pollMeters, 66);
+  if (meterTimer.unref) { meterTimer.unref(); }
 }
 
 // ── HTTP Server (dashboard, controller, assets, QR) ───────────
@@ -722,6 +750,7 @@ httpServer.listen(CONFIG.HTTP_PORT, function() {
   audio.start(log);
   loadActiveOnStart();
   startStatePolling();
+  startMeters();
 });
 
 // ── WebSocket Server ──────────────────────────────────────────

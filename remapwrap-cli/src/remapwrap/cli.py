@@ -23,7 +23,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-from . import generate
+from . import elgato, generate
 from .layout import LayoutError, check, describe, load, save
 
 try:
@@ -73,6 +73,11 @@ def main(argv=None):
     p.add_argument("--no-mic", action="store_true")
     p.add_argument("-o", "--out")
 
+    p = sub.add_parser("elgato", help="import a Stream Deck profile")
+    p.add_argument("profile", help=".streamDeckProfile, a folder, or a manifest.json")
+    p.add_argument("-o", "--out")
+    p.add_argument("--name")
+
     p = sub.add_parser("deck", help="a key per label:keystroke")
     p.add_argument("pairs", nargs="+", metavar="LABEL:KEYS")
     p.add_argument("-o", "--out")
@@ -104,6 +109,33 @@ def main(argv=None):
             return _write(generate.mixer(args.apps,
                                          master=not args.no_master,
                                          mic=not args.no_mic), args.out)
+
+        if args.cmd == "elgato":
+            profile, report = elgato.read(args.profile, args.name)
+            # The report is printed before anything is written, because the
+            # thing somebody most needs to know is what did NOT come across.
+            for line in report:
+                print("  {}".format(line))
+            print("")
+            problems = check(profile["pages"][0] and
+                             {"cols": profile["pages"][0]["cols"],
+                              "rows": profile["pages"][0]["rows"],
+                              "keys": profile["pages"][0]["keys"]})
+            if problems:
+                print("  The first page would not work:")
+                for pr in problems:
+                    print("    {}".format(pr))
+                return 1
+            if args.out:
+                save(profile, args.out)
+                print("  wrote {}".format(args.out))
+                print("  {} page(s), {} key(s)".format(
+                    len(profile["pages"]),
+                    sum(len(pg["keys"]) for pg in profile["pages"])))
+            else:
+                import json as _json
+                print(_json.dumps(profile, indent=1, ensure_ascii=False))
+            return 0
 
         if args.cmd == "deck":
             pairs = []

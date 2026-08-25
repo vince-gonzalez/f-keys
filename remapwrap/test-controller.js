@@ -43,8 +43,19 @@ function makeDom() {
     this.dataset = {};
     this._text = '';
     this._html = '';
+    // className and classList are two views of one thing in a real DOM.
+    // Keeping them separate here meant an element created with className
+    // was invisible to a class selector, and the test reported a missing
+    // meter bar that was there all along.
+    var set = [];
+    Object.defineProperty(this, 'className', {
+      get: function () { return set.join(' '); },
+      set: function (v) {
+        set.length = 0;
+        String(v).split(/\s+/).filter(Boolean).forEach(function (c) { set.push(c); });
+      }
+    });
     this.classList = (function (self) {
-      var set = [];
       return {
         add: function () { [].forEach.call(arguments, function (c) {
           if (set.indexOf(c) === -1) { set.push(c); } }); },
@@ -65,6 +76,13 @@ function makeDom() {
   El.prototype.addEventListener = function (k, fn) {
     (this._events[k] = this._events[k] || []).push(fn); };
   El.prototype.removeEventListener = function () {};
+  El.prototype.removeChild = function (c) {
+    var i = this.children.indexOf(c);
+    if (i > -1) { this.children.splice(i, 1); }
+    c._detached = true;
+    c.parentNode = null;
+    return c;
+  };
   El.prototype.dispatch = function (k, ev) {
     (this._events[k] || []).forEach(function (fn) { fn(ev || { target: this }); }, this); };
   El.prototype.closest = function (sel) {
@@ -526,6 +544,54 @@ dom.document.getElementById('compose-text').value = '';
 var beforeEmpty = sent.length;
 sandbox.sendCompose('type');
 ok('an empty box sends nothing', sent.length === beforeEmpty);
+
+// ── Symbol keys ───────────────────────────────────────────────
+// imageKeys was named in the licence as a free feature and shown to
+// buyers in the dashboard, and the phone could not draw an image at all.
+// That is a feature advertised and not built, which is why there is a
+// test for it now rather than a note.
+var PIX = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 8, rows: 4, keys: [
+    { id: 'sym', type: 'key', command: 'speak.text', arg: 'I want a drink',
+      label: 'DRINK', image: PIX, x: 0, y: 0, w: 4, h: 4 }
+  ]}
+});
+var symEl = dom.document.querySelector('[data-id="sym"]');
+ok('a symbol key draws its picture', symEl &&
+   symEl.classList.contains('has-image'));
+// The whole reason a symbol board exists is that the person using it may
+// not read the word. The word still has to be there for a screen reader,
+// or the key is silent to exactly the person most likely to need it said.
+ok('and keeps a name a screen reader can say',
+   /DRINK/.test(symEl.getAttribute('aria-label') || ''),
+   symEl.getAttribute('aria-label'));
+
+// ── Meters ────────────────────────────────────────────────────
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 8, rows: 4, keys: [
+    { id: 'mg', type: 'dial', command: 'audio.mic.gain', label: 'MIC',
+      x: 0, y: 0, w: 4, h: 4, shape: 'circle' },
+    { id: 'ms', type: 'dial', command: 'audio.master', label: 'OUT',
+      x: 4, y: 0, w: 4, h: 4, shape: 'circle' }
+  ]}
+});
+sandbox.paintMeters({ peakIn: 40 });
+var mg = dom.document.querySelector('[data-id="mg"]');
+var ms = dom.document.querySelector('[data-id="ms"]');
+ok('a microphone control gets the microphone meter',
+   !!mg.querySelector('.meter-bar'));
+ok('and a control with no meter sent gets none',
+   !ms.querySelector('.meter-bar'));
+
+sandbox.paintMeters({ peakIn: -1 });
+ok('a device that could not be read is not drawn as silence',
+   mg.querySelector('.meter-bar').classList.contains('meter-lost'));
+
+sandbox.paintMeters({});
+ok('no entitlement means no bar at all', !mg.querySelector('.meter-bar'));
 
 console.log('  ---');
 console.log('  ' + (fail.length ? fail.length + ' FAILED' : 'all pass'));

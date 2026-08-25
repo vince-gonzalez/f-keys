@@ -20,6 +20,16 @@
      speech        the computer says what a key is for
      scanning      switch access, dwell, repeat guard
      devices       as many as somebody needs, not two
+     micMeter      a live picture of what the microphone hears
+
+   micMeter is free for a reason worth writing down. For a streamer a
+   level meter is a production convenience. For somebody deaf or hard of
+   hearing it is the only way to know the microphone is picking them up
+   at all - they cannot check by listening. Charging for the one thing
+   that answers "can they hear me" would be charging for the answer.
+
+   The output meter stays paid: watching what is already playing is
+   monitoring, and somebody who cannot hear it has nothing to monitor.
 
    along with unlimited keys, profiles, pages, free placement,
    any shape, and every command.
@@ -29,7 +39,7 @@
    What an organisation wants, rather than what a person needs:
 
      autoSwitch    the surface follows the foreground window
-     meters        live audio levels rather than the setting
+     meters        a live picture of what is playing out
      commercial    use inside a business or institution
 
    Free for a person, paid for an organisation. It is the model
@@ -61,14 +71,14 @@ var PUBLIC_KEY_B64 = 'MCowBQYDK2VwAyEA+bu6W/pxo1+yKr5FUiJP7frxPHG/WcTHKgBAVwb/c8
 var FREE = {
   keys: Infinity, profiles: Infinity, pages: Infinity,
   devices: Infinity,
-  imageKeys: true, speech: true, scanning: true,
+  imageKeys: true, speech: true, scanning: true, micMeter: true,
   autoSwitch: false, meters: false, commercial: false
 };
 
 var PRO = {
   keys: Infinity, profiles: Infinity, pages: Infinity,
   devices: Infinity,
-  imageKeys: true, speech: true, scanning: true,
+  imageKeys: true, speech: true, scanning: true, micMeter: true,
   autoSwitch: true, meters: true, commercial: true
 };
 
