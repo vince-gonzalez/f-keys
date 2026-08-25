@@ -491,6 +491,35 @@
     font-size: 22px; font-weight: 700; letter-spacing: 4px;
     color: var(--lcd);
   }
+
+  /* ---- First run ---- */
+  #first-run {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 18px;
+    background: var(--accent);
+    color: #000;
+    border-bottom: 2px solid var(--border-dark);
+  }
+  #first-run.showing { display: flex; }
+  .fr-step {
+    font-size: 15px;
+    line-height: 1.45;
+    font-weight: 700;
+  }
+  .fr-dismiss {
+    flex: 0 0 auto;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    background: #000;
+    color: #fff;
+    border: 2px outset #555;
+    cursor: pointer;
+  }
+  .fr-dismiss:active { border-style: inset; }
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -498,6 +527,15 @@
 <body>
 
 <!-- ── Header ── -->
+<!-- First run. A stranger opening this saw PAIRING, BOARD SIZE, PROFILES,
+     THIS COPY, KEY EDITOR and LIVE FEED with no indication of what to do
+     first, and reached for a README. This says the one next thing and
+     nothing else, and it goes away for good once it has been followed. -->
+<div id="first-run">
+  <div class="fr-step" id="fr-text">Getting ready…</div>
+  <button class="fr-dismiss" id="fr-dismiss" type="button"
+          aria-label="Hide these hints">HIDE</button>
+</div>
 <header>
   <div class="header-left">
     <div class="logo">RemapWrap</div>
@@ -951,7 +989,10 @@ function saveProfile() {
     schema: 1, name: name, match: match,
     pages: [{ name: 'Page 1', cols: GRID.cols, rows: GRID.rows, keys: layout }]
   }).then(function (d) {
-    if (d && d.ok) { setFeed('Saved ' + d.file); refreshProfiles(); }
+    if (d && d.ok) {
+      setFeed('Saved ' + d.file);
+      refreshProfiles().then(updateFirstRun);
+    }
     else { setFeed('Could not save: ' + ((d && d.error) || 'unknown')); }
   });
 }
@@ -1053,6 +1094,52 @@ function setFeed(text) {
   feed.insertBefore(row, feed.firstChild);
 }
 
+// ---- First run -------------------------------------------------
+// One sentence, naming the single next thing. It is recalculated whenever
+// anything changes, and it disappears permanently once a phone has
+// connected and a profile has been saved - at which point the person has
+// done everything this could tell them.
+var FR_DONE = 'remapwrap.firstRunDone';
+var frPhoneSeen = false;
+
+function firstRunState() {
+  try { if (localStorage.getItem(FR_DONE) === '1') { return null; } }
+  catch (e) { /* private mode: show the hints, they cost nothing */ }
+
+  if (!frPhoneSeen) {
+    return 'Scan the QR code on the left with your phone\u2019s camera. ' +
+           'There is nothing to install.';
+  }
+  var saved = document.getElementById('profile-list');
+  var hasProfile = saved && saved.value && saved.value !== '';
+  if (!hasProfile) {
+    return 'Your phone is connected. Drag the keys around, then give this ' +
+           'board a name under PROFILES and save it.';
+  }
+  return null;
+}
+
+function updateFirstRun() {
+  var bar = document.getElementById('first-run');
+  var text = document.getElementById('fr-text');
+  if (!bar || !text) { return; }
+  var step = firstRunState();
+  if (step) {
+    text.textContent = step;
+    bar.classList.add('showing');
+  } else {
+    bar.classList.remove('showing');
+    // Nothing left to say means nothing left to say again.
+    try { localStorage.setItem(FR_DONE, '1'); } catch (e) { /* fine */ }
+  }
+}
+
+function dismissFirstRun() {
+  try { localStorage.setItem(FR_DONE, '1'); } catch (e) { /* fine */ }
+  var bar = document.getElementById('first-run');
+  if (bar) { bar.classList.remove('showing'); }
+}
+
 function showPin() {
   // /pin is refused to anything that is not this machine, so the dashboard
   // can simply ask for it. It is never injected into this page - only
@@ -1069,7 +1156,11 @@ function loadQR(ip) {
   document.getElementById('qr-img').src = qrSrc;
   document.getElementById('qr-url').textContent = controllerURL;
   showPin();
-    refreshLicence().then(refreshProfiles);
+    refreshLicence().then(refreshProfiles).then(updateFirstRun);
+    loadKeyTable();
+    var frBtn = document.getElementById('fr-dismiss');
+    if (frBtn) { frBtn.addEventListener('click', dismissFirstRun); }
+    updateFirstRun();
 }
 
 // ── WebSocket ──────────────────────────────────────────────────
@@ -1136,6 +1227,7 @@ function handleServerMessage(msg) {
     document.getElementById('ping-display').textContent = latency + ' ms';
     return;
   }
+  if (msg.type === 'controller_connected') { frPhoneSeen = true; updateFirstRun(); }
   if (msg.type === 'controller_connected') {
     controllerConnected = true;
     setStatus('ctrl', 'on2');
@@ -1428,6 +1520,128 @@ function row(label, hint, body) {
     '</div>' + body + '</div>';
 }
 
+// ---- The keyboard, as the PC understands it --------------------
+// Fetched rather than duplicated. There is one table and the server owns
+// it; a second copy in this file is exactly how the first one fell behind.
+var KNOWN_KEYS = null;
+
+function loadKeyTable() {
+  return fetch('/keys').then(function (r) { return r.json(); })
+    .then(function (d) { if (d && d.ok) { KNOWN_KEYS = d.keys; } })
+    .catch(function () { /* validation stays quiet rather than lying */ });
+}
+
+function comboTokens(text) {
+  var v = String(text || '').trim().toLowerCase();
+  if (!v) { return []; }
+  if (v === '+') { return ['plus']; }
+  var tail = null;
+  if (v.charAt(v.length - 1) === '+') {
+    tail = 'plus';
+    v = v.slice(0, -1);
+    if (v.charAt(v.length - 1) === '+') { v = v.slice(0, -1); }
+  }
+  var parts = v.split('+').map(function (x) { return x.trim(); })
+               .filter(function (x) { return x !== ''; });
+  if (tail) { parts.push(tail); }
+  return parts;
+}
+
+function checkCombo() {
+  var box = document.getElementById('ed-arg');
+  var note = document.getElementById('ed-keys-note');
+  if (!box || !note) { return; }
+  var text = box.value;
+  if (!text) { note.textContent = 'Press the button, or type it.';
+               note.style.color = 'var(--text-dim)'; return; }
+  if (!KNOWN_KEYS) { note.textContent = ''; return; }
+
+  var bad = comboTokens(text).filter(function (tk) {
+    return KNOWN_KEYS.indexOf(tk) === -1;
+  });
+  if (bad.length) {
+    // Naming the token beats "invalid": the person can see their own typo.
+    note.textContent = 'This PC has no key called ' +
+      bad.map(function (b) { return '"' + b + '"'; }).join(' or ') +
+      '. It would do nothing.';
+    note.style.color = 'var(--accent3)';
+  } else {
+    note.textContent = 'Good — this PC can press that.';
+    note.style.color = 'var(--lcd)';
+  }
+}
+
+var capturing = false;
+
+function captureCombo() {
+  var btn = document.getElementById('ed-capture');
+  var box = document.getElementById('ed-arg');
+  var note = document.getElementById('ed-keys-note');
+  if (!btn || !box) { return; }
+
+  if (capturing) { stopCapture(); return; }
+  capturing = true;
+  btn.textContent = 'PRESS NOW — ESC TO CANCEL';
+  note.textContent = 'Hold the modifiers, then the key.';
+  note.style.color = 'var(--lcd)';
+
+  function onKey(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.key === 'Escape') { stopCapture(); return; }
+
+    var parts = [];
+    if (e.ctrlKey) { parts.push('ctrl'); }
+    if (e.shiftKey) { parts.push('shift'); }
+    if (e.altKey) { parts.push('alt'); }
+    if (e.metaKey) { parts.push('win'); }
+
+    // A modifier on its own is somebody still reaching for the real key.
+    var k = e.key;
+    if (k === 'Control' || k === 'Shift' || k === 'Alt' || k === 'Meta') { return; }
+
+    var named = {
+      ' ': 'space', 'Escape': 'esc', 'Enter': 'enter', 'Tab': 'tab',
+      'Backspace': 'backspace', 'Delete': 'delete', 'Insert': 'insert',
+      'ArrowUp': 'up', 'ArrowDown': 'down', 'ArrowLeft': 'left',
+      'ArrowRight': 'right', 'PageUp': 'pgup', 'PageDown': 'pgdown',
+      'Home': 'home', 'End': 'end', 'CapsLock': 'capslock',
+      'PrintScreen': 'printscreen', 'ContextMenu': 'menu', 'Pause': 'pause'
+    };
+    parts.push(named[k] || k.toLowerCase());
+
+    box.value = parts.join('+');
+    updateKey('arg', box.value);
+    stopCapture();
+    checkCombo();
+  }
+
+  document._rwCapture = onKey;
+  window.addEventListener('keydown', onKey, true);
+}
+
+function stopCapture() {
+  capturing = false;
+  var btn = document.getElementById('ed-capture');
+  if (btn) { btn.textContent = 'PRESS THE KEYS'; }
+  if (document._rwCapture) {
+    window.removeEventListener('keydown', document._rwCapture, true);
+    document._rwCapture = null;
+  }
+}
+
+// The editor is rebuilt from scratch on every selection, so the button and
+// the check have to be re-attached each time rather than bound once.
+function wireKeyCapture() {
+  var btn = document.getElementById('ed-capture');
+  var box = document.getElementById('ed-arg');
+  if (btn) { btn.addEventListener('click', captureCombo); }
+  if (box && btn) {
+    box.addEventListener('input', checkCombo);
+    checkCombo();
+  }
+}
+
 function renderEditor(id) {
   // READS: layout
   // WRITES: #editor-panel DOM
@@ -1471,10 +1685,23 @@ function renderEditor(id) {
       application: 'process name, e.g. Discord',
       transport: 'play, next, previous', steps: 'one step per line'
     };
-    html += row(meta.arg.toUpperCase(), '',
+    var argHtml =
       '<input class="field-input" id="ed-arg" value="' + escAttr(key.arg || '') +
       '" placeholder="' + escAttr(placeholders[meta.arg] || '') +
-      '" oninput="updateKey(\'arg\', this.value)" />');
+      '" oninput="updateKey(\'arg\', this.value)" />';
+
+    // Typing a shortcut into a box accepts "ctrl+shft+m" without a word of
+    // complaint and the key silently does nothing on the phone. Pressing
+    // the keys cannot be misspelled, and anything typed by hand is checked
+    // against the same table the PC presses from.
+    if (meta.arg === 'keys') {
+      argHtml +=
+        '<button class="btn" id="ed-capture" style="width:100%; margin-top:8px;">' +
+        'PRESS THE KEYS</button>' +
+        '<div id="ed-keys-note" style="font-size:13px; margin-top:6px; ' +
+        'line-height:1.4; color:var(--text-dim);"></div>';
+    }
+    html += row(meta.arg.toUpperCase(), '', argHtml);
   }
 
   html += '<div class="field-split">' +
@@ -1518,6 +1745,8 @@ function renderEditor(id) {
           'onclick="removeSelected()">REMOVE CONTROL</button>';
 
   panel.innerHTML = html;
+
+  wireKeyCapture();
 }
 
 function changeType(type) {

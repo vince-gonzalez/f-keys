@@ -508,6 +508,19 @@ var httpServer = http.createServer(function(req, res) {
     return;
   }
 
+  // The editor needs to know what a real key is called, and there must be
+  // exactly one answer to that. Shipping a second list in the dashboard is
+  // how the first one drifted seventy keys behind the library.
+  if (req.url === '/keys') {
+    if (!isLocal(req.socket.remoteAddress)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false })); return;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ ok: true, keys: Object.keys(KEYS).sort() }));
+    return;
+  }
+
   if (req.url === '/ip') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ip: getLocalIP(), wsPort: CONFIG.WS_PORT, httpPort: CONFIG.HTTP_PORT }));
