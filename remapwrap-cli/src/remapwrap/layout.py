@@ -74,6 +74,10 @@ COMMANDS = {
     "capture.clip", "capture.shot", "capture.window",
     "win.keystroke", "win.text", "win.launch", "win.desktop", "win.media",
     "macro.sequence",
+    # The computer says what a key is for. This is the command that makes a
+    # board of keys a way of talking rather than only a way of pressing
+    # things, and it is why the free tier looks the way it does.
+    "speak.text", "speak.stop",
 }
 
 #: Named so nobody proposes them twice, and deliberately not in COMMANDS.
@@ -100,6 +104,7 @@ IMPLEMENTED = {
     "win.keystroke", "win.text", "win.launch", "win.desktop", "win.media",
     "capture.clip", "capture.shot", "capture.window",
     "macro.sequence",
+    "speak.text", "speak.stop",
 }
 
 DEFAULT_SIZE = {

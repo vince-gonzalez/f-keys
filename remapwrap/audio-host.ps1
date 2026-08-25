@@ -237,6 +237,11 @@ public class RwAudio {
 
 Add-Type -TypeDefinition $source -Language CSharp
 Add-Type -AssemblyName presentationCore
+# Speech is what turns a board of keys into a way of talking. Loaded with
+# everything else so the cost is paid once, at start, rather than the first
+# time somebody needs to say something.
+Add-Type -AssemblyName System.Speech
+$script:voice = New-Object System.Speech.Synthesis.SpeechSynthesizer
 
 # Sounds are kept so a pad can retrigger one without reloading it, and so
 # "stop all" has something to stop.
@@ -288,6 +293,24 @@ while ($true) {
         Reply $id $true $null
       }
       'foreground'   { Reply $id $true ([RwWindow]::Foreground()) }
+      'speak' {
+        # Asynchronous on purpose. A long sentence must not freeze every
+        # other key on the board while it is being said, and somebody who
+        # presses a second key means "say that instead".
+        $script:voice.SpeakAsyncCancelAll()
+        if ($m.rate -ne $null) { $script:voice.Rate = [int]$m.rate }
+        if ($m.volume -ne $null) { $script:voice.Volume = [int]$m.volume }
+        if ($m.voice) {
+          try { $script:voice.SelectVoice([string]$m.voice) } catch { }
+        }
+        $script:voice.SpeakAsync([string]$m.text) | Out-Null
+        Reply $id $true $null
+      }
+      'speak.stop'   { $script:voice.SpeakAsyncCancelAll(); Reply $id $true $null }
+      'voices'       {
+        Reply $id $true (@($script:voice.GetInstalledVoices() |
+          ForEach-Object { $_.VoiceInfo.Name }))
+      }
       'state' {
         # Everything the phone needs, in one reply. Asking four times
         # twice a second put twenty four round trips a second through a

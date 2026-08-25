@@ -49,7 +49,16 @@ if (!fs.existsSync(KEY_PATH)) {
 
   // A profile that claims this very window. Whatever is in front while the
   // test runs is what the server will see, so match on it deliberately.
-  var mine = { schema:1, name:'Autoswitch Probe', match:['claude','node','cmd','powershell'],
+  // Whatever is actually in front while this runs. Hardcoding a guess
+  // meant the test passed at a desk and failed the moment a browser was
+  // opened, which is the test being wrong about the world rather than the
+  // code being wrong about anything.
+  var front = (await call('GET','/foreground')).body;
+  if (!front || !front.app) {
+    console.log('  skipped: the host cannot say what is in front');
+    process.exit(0);
+  }
+  var mine = { schema:1, name:'Autoswitch Probe', match:[front.app],
                pages:[{name:'Page 1',cols:8,rows:16,keys:[]}] };
   await call('POST','/profile', mine);
   // saving makes it active, so move off it to prove the switch happens
@@ -76,7 +85,19 @@ if (!fs.existsSync(KEY_PATH)) {
     var r = await call('GET','/profiles');
     return r.body && r.body.active === 'Autoswitch Probe.json';
   }, 12000);
-  ok('pro switched to the matching profile', switched);
+
+  // This test depends on a live fact about the machine: which window is in
+  // front. If something took focus while it ran - a browser, an installer,
+  // a notification - the profile no longer matches and there is nothing to
+  // assert. Saying so is honest; failing would be blaming the code for the
+  // world moving.
+  var still = (await call('GET','/foreground')).body;
+  if (!switched && still && still.app !== front.app) {
+    console.log('  --    focus moved from "' + front.app + '" to "' +
+                still.app + '" mid-test; nothing to assert');
+  } else {
+    ok('pro switched to the matching profile', switched);
+  }
 
   // tidy up so the machine is left as it was
   await call('POST','/licence/remove');

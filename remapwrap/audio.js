@@ -202,6 +202,14 @@ function stop() {
   if (host) { try { host.stdin.end(); } catch (e) { /* already gone */ } }
 }
 
+function speak(text) { return send('speak', { text: text }); }
+function speakStop() { return send('speak.stop', {}); }
+function voices() { return send('voices', {}); }
+
 module.exports = { start: start, send: send, apply: apply,
+                   speak: speak, speakStop: speakStop, voices: voices,
+                   // Exported so a test can ask what this module claims
+                   // rather than being told in a second list.
+                   CONTINUOUS: CONTINUOUS, SWITCHED: SWITCHED,
                    handles: handles, stop: stop, readState: readState,
                    isReady: function () { return ready; } };

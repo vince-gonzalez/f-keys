@@ -46,15 +46,12 @@ if (!fs.existsSync(KEY_PATH)) {
   var free = await call('GET','/licence');
   ok('a fresh install is free', free.body && free.body.tier==='free');
   ok('free reports no auto switch', free.body.features.autoSwitch===false);
-  ok('free reports a device ceiling of 2', free.body.features.devices===2);
+  ok('free reports no device ceiling', free.body.features.devices===null);
 
-  // two phones allowed, third refused
-  var a = await phone(tok), b = await phone(tok);
-  ok('the first phone connects', a.r==='in');
-  ok('the second phone connects', b.r==='in');
-  var c = await phone(tok);
-  ok('the third is refused on free', c.r==='full');
-  try{a.ws.close();b.ws.close();}catch(e){}
+  // A household with three phones is not a licensing event.
+  var a = await phone(tok), b = await phone(tok), c = await phone(tok);
+  ok('a third phone connects on free', c.r==='in');
+  try{a.ws.close();b.ws.close();c.ws.close();}catch(e){}
 
   var bad = await call('POST','/licence',{key:'not-a-key'});
   ok('a junk key is rejected', bad.status===400);
@@ -67,13 +64,14 @@ if (!fs.existsSync(KEY_PATH)) {
 
   var now = await call('GET','/licence');
   ok('the copy is pro without restarting', now.body.tier==='pro');
-  ok('pro has no device ceiling', now.body.features.devices===null);
   ok('pro unlocks auto switching', now.body.features.autoSwitch===true);
   ok('the buyer is named', now.body.name==='Tier Test');
 
-  var d=await phone(tok), e=await phone(tok), f=await phone(tok);
-  ok('a third phone connects on pro', f.r==='in');
-  try{d.ws.close();e.ws.close();f.ws.close();}catch(err){}
+  // Paying must never remove something. Both tiers report the same
+  // accessibility answers, and if that ever stops being true this fails.
+  var paid = now.body.features;
+  ok('paying does not take the free features away',
+     paid.autoSwitch===true && paid.devices===null);
 
   ok('the licence survives on disk', store.readSettings().licence===key);
 

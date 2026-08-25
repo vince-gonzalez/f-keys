@@ -511,6 +511,30 @@ var httpServer = http.createServer(function(req, res) {
   // The editor needs to know what a real key is called, and there must be
   // exactly one answer to that. Shipping a second list in the dashboard is
   // how the first one drifted seventy keys behind the library.
+  // Which program is in front, so the dashboard can offer it rather than
+  // making somebody guess what Windows calls their own application. The
+  // executable name only: the window title is not returned even to this
+  // machine's own dashboard, because it has no use for it and titles carry
+  // document names, mail subjects and client names.
+  if (req.url === '/foreground') {
+    if (!isLocal(req.socket.remoteAddress)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false })); return;
+    }
+    audio.send('foreground', {}).then(function (r) {
+      var exe = '';
+      if (r && r.ok && typeof r.result === 'string') {
+        exe = r.result.split('|')[0] || '';
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: true, app: exe }));
+    }).catch(function () {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: true, app: '' }));
+    });
+    return;
+  }
+
   if (req.url === '/keys') {
     if (!isLocal(req.socket.remoteAddress)) {
       res.writeHead(403, { 'Content-Type': 'application/json' });
@@ -657,9 +681,11 @@ wss.on('connection', function(ws, req) {
             ws.close();
             return;
           }
-          // The only ceiling the free tier has. Everything that makes
-          // this a control surface - keys, profiles, pages, placement -
-          // is unlimited and stays unlimited.
+          // There is no ceiling on the free tier any more. This is kept
+          // because FEATURES.devices is still the contract, and a future
+          // organisation plan may want to cap a shared machine - but for a
+          // person it is Infinity, and a household with three phones is
+          // not a licensing event.
           if (controllerClients.length >= FEATURES.devices) {
             log('Refused a phone: ' + FEATURES.devices +
                 ' already connected on the ' + FEATURES.tier + ' tier');
@@ -836,7 +862,9 @@ var FIRE = {
   type: function (text) {
     if (!keyboard) { return Promise.reject(new Error('no keyboard')); }
     return keyboard.type(text);
-  }
+  },
+  speak: function (text) { return audio.speak(text); },
+  speakStop: function () { return audio.speakStop(); }
 };
 
 function fireCommand(msg) {

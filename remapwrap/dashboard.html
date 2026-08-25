@@ -632,6 +632,7 @@
           <div class="field-label">SWITCH TO IT FOR THESE APPS</div>
           <input class="field-input" id="profile-match" type="text"
                  placeholder="photoshop, Adobe Photoshop" />
+          <button class="btn btn-block" data-act="useFrontApp">USE THE APP IN FRONT</button>
           <div id="match-note" style="font-size:13px; color:var(--text-dim); margin-top:6px;"></div>
         </div>
         <div class="field-group">
@@ -855,6 +856,10 @@ function firstFree(w, h) {
       ['capture.window',  'Screenshot window']
     ]},
     { group: 'Windows', items: [
+      // Speech is the command that makes a board of keys a way of
+      // talking rather than only a way of pressing things.
+      ['speak.text',      'Say something…',        { arg: 'say' }],
+      ['speak.stop',      'Stop talking'],
       ['win.keystroke',   'Send keystroke…',       { arg: 'keys' }],
       ['win.text',        'Type text…',            { arg: 'text' }],
       ['win.launch',      'Launch app or URL…',    { arg: 'target' }],
@@ -1096,14 +1101,18 @@ function refreshLicence() {
 
     if (d.tier === 'pro') {
       line.textContent = 'PRO' + (d.name ? ' - ' + d.name : '');
-      note.textContent = 'Following the foreground window, artwork on keys, ' +
-                         'live meters, and any number of phones.';
+      note.textContent = 'Following the foreground window, live audio ' +
+                         'meters, and licensed for use inside an ' +
+                         'organisation.';
       remove.style.display = '';
     } else {
       line.textContent = 'FREE';
-      note.textContent = 'Unlimited keys, profiles and pages, every command, ' +
-                         'two phones at once. Paid adds following the ' +
-                         'foreground window, artwork on keys and live meters.' +
+      note.textContent = 'Everything a person needs: unlimited keys, ' +
+                         'profiles and pages, symbols on keys, speech, ' +
+                         'switch access, every command, any number of ' +
+                         'phones. Paid adds following the foreground ' +
+                         'window, live meters, and use inside an ' +
+                         'organisation.' +
                          (d.reason && d.reason !== 'No licence key.'
                            ? '  (' + d.reason + ')' : '');
       remove.style.display = 'none';
@@ -1129,6 +1138,22 @@ function removeLicence() {
   api('POST', '/licence/remove').then(function () {
     setFeed('Licence removed. This copy is free again.');
     refreshLicence();
+  });
+}
+
+function useFrontApp() {
+  // Nobody knows that Photoshop is "photoshop" and Chrome is "chrome"
+  // until they are told, and guessing wrong produces a profile that never
+  // switches with nothing to explain why.
+  api('GET', '/foreground').then(function (d) {
+    if (!d || !d.ok || !d.app) { setFeed('Could not tell what is in front.'); return; }
+    var box = document.getElementById('profile-match');
+    var have = (box.value || '').split(',').map(function (x) { return x.trim(); })
+                 .filter(Boolean);
+    if (have.indexOf(d.app) === -1) { have.push(d.app); }
+    box.value = have.join(', ');
+    updateMatchNote();
+    setFeed('Added "' + d.app + '" — switch to this profile when that is in front.');
   });
 }
 
@@ -1883,6 +1908,7 @@ function renderEditor(id) {
       scene: 'Scene name in OBS', seconds: 'Length in seconds',
       file: 'sound file', keys: 'ctrl+shift+s', text: 'text to type',
       target: 'app path or https://', direction: 'left or right',
+      say: 'what the computer should say',
       application: 'process name, e.g. Discord',
       transport: 'play, next, previous', steps: 'one step per line'
     };

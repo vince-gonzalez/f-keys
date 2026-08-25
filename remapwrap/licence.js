@@ -4,23 +4,38 @@
    ------------------------------------------------------------
    WHAT IS FREE
 
-   Everything that makes RemapWrap a control surface. Unlimited
-   keys, unlimited profiles, unlimited pages, free placement, any
-   shape, every command, and two phones at once. The competitor
-   people compare us to charges to go past six buttons and to
-   arrange them freely; that is exactly what is given away here,
-   and it stays given away.
+   Everything a person needs to use their own computer.
+
+   That is the whole line, and it moved on purpose. This is
+   assistive software that also happens to suit streamers, which
+   means the features somebody depends on cannot sit behind a
+   payment - and images are the clearest case. For a streamer,
+   artwork on a key is a flourish. For somebody who does not read,
+   the symbol IS the word, and charging for it would be charging
+   for vocabulary.
+
+   So free now includes what used to be paid:
+
+     imageKeys     symbols and artwork on a key
+     speech        the computer says what a key is for
+     scanning      switch access, dwell, repeat guard
+     devices       as many as somebody needs, not two
+
+   along with unlimited keys, profiles, pages, free placement,
+   any shape, and every command.
 
    WHAT IS PAID
 
-   Things that either cost money to run or only a working
-   professional wants:
+   What an organisation wants, rather than what a person needs:
 
      autoSwitch    the surface follows the foreground window
-     imageKeys     artwork on a key instead of a label
      meters        live audio levels rather than the setting
-     manyDevices   more than two phones at once
      commercial    use inside a business or institution
+
+   Free for a person, paid for an organisation. It is the model
+   assistive software has used for a long time, for the reason
+   that a school district has a budget and a family often does
+   not.
 
    HOW IT IS CHECKED, HONESTLY
 
@@ -45,14 +60,16 @@ var PUBLIC_KEY_B64 = 'MCowBQYDK2VwAyEA+bu6W/pxo1+yKr5FUiJP7frxPHG/WcTHKgBAVwb/c8
 
 var FREE = {
   keys: Infinity, profiles: Infinity, pages: Infinity,
-  devices: 2,
-  autoSwitch: false, imageKeys: false, meters: false, commercial: false
+  devices: Infinity,
+  imageKeys: true, speech: true, scanning: true,
+  autoSwitch: false, meters: false, commercial: false
 };
 
 var PRO = {
   keys: Infinity, profiles: Infinity, pages: Infinity,
   devices: Infinity,
-  autoSwitch: true, imageKeys: true, meters: true, commercial: true
+  imageKeys: true, speech: true, scanning: true,
+  autoSwitch: true, meters: true, commercial: true
 };
 
 function publicKey() {

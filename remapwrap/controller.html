@@ -426,6 +426,71 @@
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* ── Scanning and settings ─────────────────────────────────────
+   The highlight has to be unmistakable from across a room and must
+   not rely on colour alone, because the person using scanning may
+   also have low vision. Outline plus a lift, not a tint. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.key-btn.scanning {
+  outline: 6px solid var(--accent);
+  outline-offset: -3px;
+  z-index: 5;
+  box-shadow: 0 0 0 3px #000, 0 0 22px var(--accent);
+}
+.settings-btn {
+  position: fixed; right: 10px; bottom: 10px; z-index: 900;
+  width: 52px; height: 52px;          /* comfortably over the 44px floor */
+  font-size: 24px; line-height: 1;
+  color: var(--text-bright);
+  background: var(--panel);
+  border: 2px outset var(--border);
+  cursor: pointer;
+}
+.sheet {
+  position: fixed; inset: 0; z-index: 950;
+  background: rgba(0,0,0,0.8);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.sheet[hidden] { display: none; }
+.sheet-inner {
+  width: 100%; max-width: 520px;
+  max-height: 88vh; overflow-y: auto;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-top-color: var(--border-light);
+  padding: 20px 18px calc(20px + env(safe-area-inset-bottom, 0px));
+}
+.sheet-title {
+  font-family: var(--font-display), var(--font);
+  font-size: 20px; font-weight: 700; letter-spacing: 1px;
+  color: var(--text-bright); margin-bottom: 18px;
+}
+.sheet-field { margin-bottom: 20px; }
+.sheet-label {
+  display: block; font-size: 14px; letter-spacing: 1px;
+  color: var(--text); margin-bottom: 8px;
+}
+.sheet-input {
+  display: block; width: 100%; box-sizing: border-box;
+  min-height: 48px; font-size: 16px;
+  color: var(--text-bright); background: var(--field);
+  border: 2px inset var(--border);
+  padding: 10px;
+}
+input[type=range].sheet-input { padding: 0; }
+.sheet-note { font-size: 14px; line-height: 1.45; color: var(--text); margin-top: 6px; }
+.sheet-done {
+  display: block; width: 100%; min-height: 52px;
+  font-family: var(--font-display), var(--font);
+  font-size: 18px; font-weight: 700; letter-spacing: 1px;
+  color: var(--text-bright); background: var(--bg2);
+  border: 2px outset var(--border); cursor: pointer;
+}
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -459,6 +524,57 @@
        one tab is furniture rather than navigation. -->
   <nav class="page-strip" id="page-strip" role="tablist"
        aria-label="Pages in this profile" hidden></nav>
+
+  <!-- Announced to a screen reader as the highlight moves. Visually
+       hidden, because the highlight itself is the visual version. -->
+  <div id="scan-say" class="sr-only" role="status" aria-live="polite"></div>
+
+  <!-- Settings live on the phone rather than the PC, because the person
+       who needs scanning is the person holding this, and asking them to
+       walk to a computer to turn on the thing that lets them use the
+       computer is the wrong way round. -->
+  <button id="settings-open" class="settings-btn" type="button"
+          aria-label="Accessibility settings">&#9881;</button>
+
+  <div id="settings-sheet" class="sheet" role="dialog" aria-modal="true"
+       aria-label="Accessibility settings" hidden>
+    <div class="sheet-inner">
+      <div class="sheet-title">ACCESSIBILITY</div>
+
+      <div class="sheet-field">
+        <label class="sheet-label" for="scan-mode">SELECTION</label>
+        <select id="scan-mode" class="sheet-input">
+          <option value="off">Touch the key I want</option>
+          <option value="auto">Scan on its own, I press to choose</option>
+          <option value="step">I press to move, hold to choose</option>
+        </select>
+        <div class="sheet-note" id="scan-mode-note"></div>
+      </div>
+
+      <div class="sheet-field" id="scan-rate-field">
+        <label class="sheet-label" for="scan-rate">HOW LONG ON EACH KEY</label>
+        <input id="scan-rate" class="sheet-input" type="range"
+               min="400" max="4000" step="100" value="1200">
+        <div class="sheet-note" id="scan-rate-note">1.2 seconds</div>
+      </div>
+
+      <div class="sheet-field">
+        <label class="sheet-label" for="dwell-ms">HOLD TO CHOOSE</label>
+        <input id="dwell-ms" class="sheet-input" type="range"
+               min="0" max="2000" step="100" value="600">
+        <div class="sheet-note" id="dwell-note">0.6 seconds</div>
+      </div>
+
+      <div class="sheet-field">
+        <label class="sheet-label" for="repeat-guard">IGNORE A SECOND PRESS WITHIN</label>
+        <input id="repeat-guard" class="sheet-input" type="range"
+               min="0" max="1500" step="50" value="0">
+        <div class="sheet-note" id="repeat-note">off</div>
+      </div>
+
+      <button id="settings-close" class="sheet-done" type="button">DONE</button>
+    </div>
+  </div>
 
   <div class="grid-wrap">
     <div class="key-grid" id="key-grid"></div>
@@ -538,6 +654,8 @@ document.addEventListener('visibilitychange', function () {
 // Some browsers only grant the lock after a gesture, so ask again on the
 // first touch as well as at load.
 document.addEventListener('DOMContentLoaded', function () {
+  loadAccess();
+  wireSettings();
   holdScreenAwake();
   var once = function () {
     holdScreenAwake();
@@ -696,10 +814,249 @@ function handleMessage(msg) {
     if (typeof msg.page === 'number') { pageIndex = msg.page; }
     renderPages();
     renderKeys();
+    scanStart();          // the surface changed; the sweep follows it
     log('Layout received' +
         (pageCount > 1 ? ' (page ' + (pageIndex + 1) + ' of ' + pageCount + ')' : ''));
     return;
   }
+}
+
+// ── Scanning, dwell and repeat guard ─────────────────────────────
+// Touching the key you want assumes you can reliably touch the key you
+// want. Scanning is how somebody with one reliable movement uses a surface
+// of forty keys: the highlight travels, and a single press - anywhere on
+// the glass, or on a switch that presents itself as a keyboard - takes
+// whatever is lit.
+//
+// Everything here is on the phone rather than the PC, because the person
+// who needs it is the person holding this, and making them walk to a
+// computer to switch on the thing that lets them use the computer is the
+// wrong way round.
+var SCAN_KEY = 'remapwrap.access';
+var access = {
+  mode: 'off',          // off | auto | step
+  rate: 1200,           // ms on each key when scanning on its own
+  dwell: 600,           // ms to hold before a hold counts as a choice
+  guard: 0              // ms during which a second press is ignored
+};
+var scanAt = -1;
+var scanTimer = null;
+var lastFire = 0;
+
+function loadAccess() {
+  try {
+    var raw = localStorage.getItem(SCAN_KEY);
+    if (raw) { access = Object.assign(access, JSON.parse(raw)); }
+  } catch (e) { /* private mode, or a settings string somebody edited */ }
+}
+
+function saveAccess() {
+  try { localStorage.setItem(SCAN_KEY, JSON.stringify(access)); }
+  catch (e) { /* nothing to do; it works for this session */ }
+}
+
+function scannable() {
+  // Pages first, then keys, so somebody scanning can change page without
+  // help. A surface they cannot leave is a surface they are stuck on.
+  var out = [];
+  var strip = document.getElementById('page-strip');
+  if (strip && !strip.hidden) {
+    strip.children && [].forEach.call(strip.children, function (t) { out.push(t); });
+  }
+  var grid = document.getElementById('key-grid');
+  if (grid) { [].forEach.call(grid.children, function (k) { out.push(k); }); }
+  return out;
+}
+
+function announce(text) {
+  var el = document.getElementById('scan-say');
+  if (el) { el.textContent = text; }
+}
+
+function paintScan() {
+  var items = scannable();
+  items.forEach(function (el, i) {
+    el.classList.toggle('scanning', i === scanAt);
+  });
+  var live = items[scanAt];
+  if (live) {
+    announce((live.getAttribute('aria-label') || live.textContent || 'key') +
+             ', ' + (scanAt + 1) + ' of ' + items.length);
+  }
+}
+
+function scanStep() {
+  var items = scannable();
+  if (!items.length) { return; }
+  scanAt = (scanAt + 1) % items.length;
+  paintScan();
+}
+
+function scanStop() {
+  if (scanTimer) { clearInterval(scanTimer); scanTimer = null; }
+  scanAt = -1;
+  scannable().forEach(function (el) { el.classList.remove('scanning'); });
+}
+
+function scanStart() {
+  scanStop();
+  if (access.mode === 'off') { return; }
+  scanAt = -1;
+  scanStep();
+  if (access.mode === 'auto') {
+    scanTimer = setInterval(scanStep, access.rate);
+  }
+}
+
+function scanChoose() {
+  var items = scannable();
+  var el = items[scanAt];
+  if (!el) { return; }
+
+  // Tremor produces two presses where one was meant. The guard is off by
+  // default because it costs speed, and available because for some people
+  // it is the difference between usable and not.
+  var now = Date.now();
+  if (access.guard && (now - lastFire) < access.guard) { return; }
+  lastFire = now;
+
+  if (el.classList.contains('page-tab')) {
+    goToPage(parseInt(el.getAttribute('data-page'), 10));
+    // The strip is rebuilt, so start the sweep again rather than point at
+    // an element that no longer exists.
+    scanStart();
+    return;
+  }
+  activateElement(el);
+}
+
+// One place that "press this" goes through, whatever asked for it: a
+// finger, a switch, the scanner, or a keyboard.
+function activateElement(el) {
+  if (!el) { return; }
+  var type = el.dataset.type;
+  if (type === 'dial' || type === 'slider') {
+    // A value control has no single action to fire. Scanning selects it and
+    // the next two presses move it, which is how switch users expect a
+    // continuous control to behave.
+    el.classList.add('scan-holding');
+    announce('selected, press to increase');
+    return;
+  }
+  pressKey(el);
+  releaseKey(el, true);
+}
+
+// ── the switch itself ────────────────────────────────────────────
+// A switch on a phone is one of two things: a tap anywhere on the glass,
+// or a Bluetooth switch that presents as a keyboard and sends space or
+// enter. Both are handled the same way.
+var holdStart = 0;
+var holdTimer = null;
+
+function switchDown() {
+  if (access.mode === 'off') { return; }
+  holdStart = Date.now();
+  if (access.mode === 'step' && access.dwell > 0) {
+    holdTimer = setTimeout(function () {
+      holdTimer = null;
+      scanChoose();                 // held long enough: that is a choice
+    }, access.dwell);
+  }
+}
+
+function switchUp() {
+  if (access.mode === 'off') { return; }
+  var held = Date.now() - holdStart;
+  if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+
+  if (access.mode === 'auto') {
+    scanChoose();
+    return;
+  }
+  // step: a short press moves on, a long one already chose on the timer
+  if (access.dwell === 0 || held < access.dwell) { scanStep(); }
+}
+
+document.addEventListener('keydown', function (e) {
+  if (access.mode === 'off') { return; }
+  if (e.repeat) { return; }
+  if (e.key !== ' ' && e.key !== 'Enter') { return; }
+  if (document.getElementById('settings-sheet') &&
+      !document.getElementById('settings-sheet').hidden) { return; }
+  e.preventDefault();
+  switchDown();
+});
+document.addEventListener('keyup', function (e) {
+  if (access.mode === 'off') { return; }
+  if (e.key !== ' ' && e.key !== 'Enter') { return; }
+  e.preventDefault();
+  switchUp();
+});
+
+// ── settings ─────────────────────────────────────────────────────
+function openSettings() {
+  var sheet = document.getElementById('settings-sheet');
+  if (sheet) { sheet.hidden = false; }
+  scanStop();                        // do not scan the settings away
+}
+
+function closeSettings() {
+  var sheet = document.getElementById('settings-sheet');
+  if (sheet) { sheet.hidden = true; }
+  saveAccess();
+  scanStart();
+}
+
+function describeMode() {
+  return {
+    off: 'Keys work the way they look: touch the one you want.',
+    auto: 'The highlight moves on its own. Press anywhere, or a switch, ' +
+          'to choose what is lit.',
+    step: 'Press to move the highlight along. Hold to choose what is lit.'
+  }[access.mode] || '';
+}
+
+function syncSettings() {
+  var mode = document.getElementById('scan-mode');
+  var rate = document.getElementById('scan-rate');
+  var dwell = document.getElementById('dwell-ms');
+  var guard = document.getElementById('repeat-guard');
+  if (!mode) { return; }
+  mode.value = access.mode;
+  rate.value = access.rate;
+  dwell.value = access.dwell;
+  guard.value = access.guard;
+  document.getElementById('scan-mode-note').textContent = describeMode();
+  document.getElementById('scan-rate-note').textContent =
+    (access.rate / 1000).toFixed(1) + ' seconds';
+  document.getElementById('dwell-note').textContent =
+    access.dwell === 0 ? 'off' : (access.dwell / 1000).toFixed(1) + ' seconds';
+  document.getElementById('repeat-note').textContent =
+    access.guard === 0 ? 'off' : (access.guard / 1000).toFixed(2) + ' seconds';
+  document.getElementById('scan-rate-field').hidden = access.mode !== 'auto';
+}
+
+function wireSettings() {
+  var open = document.getElementById('settings-open');
+  var done = document.getElementById('settings-close');
+  var mode = document.getElementById('scan-mode');
+  var rate = document.getElementById('scan-rate');
+  var dwell = document.getElementById('dwell-ms');
+  var guard = document.getElementById('repeat-guard');
+  if (!open || !mode) { return; }
+
+  open.addEventListener('click', function () { syncSettings(); openSettings(); });
+  done.addEventListener('click', closeSettings);
+  mode.addEventListener('change', function () {
+    access.mode = mode.value; saveAccess(); syncSettings(); scanStart(); });
+  rate.addEventListener('input', function () {
+    access.rate = parseInt(rate.value, 10); syncSettings(); scanStart(); });
+  dwell.addEventListener('input', function () {
+    access.dwell = parseInt(dwell.value, 10); syncSettings(); });
+  guard.addEventListener('input', function () {
+    access.guard = parseInt(guard.value, 10); syncSettings(); });
+  syncSettings();
 }
 
 // ── Pages ────────────────────────────────────────────────────────

@@ -40,7 +40,7 @@ var AS_KEYSTROKE = {
 
 var HANDLED = ['win.text', 'win.launch', 'win.desktop', 'win.media',
                'capture.clip', 'capture.shot', 'capture.window',
-               'macro.sequence'];
+               'macro.sequence', 'speak.text', 'speak.stop'];
 
 function handles(command) { return HANDLED.indexOf(command) !== -1; }
 
@@ -53,6 +53,21 @@ function handles(command) { return HANDLED.indexOf(command) !== -1; }
 function apply(msg, fire, log) {
   var command = msg.command;
   var arg = msg.arg === undefined ? '' : String(msg.arg);
+
+  // Speech is why a board of keys can be a way of talking rather than only
+  // a way of pressing things. A person who cannot speak, or cannot type
+  // fast enough to be part of a conversation, presses a key and the
+  // computer says the sentence.
+  if (command === 'speak.text') {
+    if (!arg) { return done(false, 'nothing to say'); }
+    return fire.speak(arg)
+      .then(function () { return done(true, 'said ' + arg.length + ' characters'); })
+      .catch(function (e) { return done(false, e.message); });
+  }
+  if (command === 'speak.stop') {
+    return fire.speakStop().then(function () { return done(true, 'stopped'); })
+      .catch(function (e) { return done(false, e.message); });
+  }
 
   if (command === 'win.text') {
     if (!arg) { return done(false, 'nothing to type'); }

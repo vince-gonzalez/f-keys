@@ -82,6 +82,31 @@ for (var a = 0; a < geom.length; a++) {
 ok('no two default keys overlap', overlapping.length === 0,
    overlapping.length ? '-> ' + overlapping.join(', ') : '');
 
+// ── the phone's own starter board ─────────────────────────────
+// controller.html carries a fallback layout so a phone shows something
+// before the dashboard pushes anything. It was never checked. It happens
+// to be twelve plain keystrokes and it happens to work, and "happens to"
+// is not a standard.
+var ctl = fs.readFileSync(path.join(__dirname, 'controller.html'), 'utf8');
+var fb = ctl.slice(ctl.indexOf('var layout = {'), ctl.indexOf('};', ctl.indexOf('var layout = {')));
+var actions = (fb.match(/action:\s*'([^']+)'/g) || [])
+  .map(function (x) { return x.replace(/action:\s*'/, '').replace(/'$/, ''); });
+
+// Resolved against the real table in the real server file, the same way
+// test-keymap does, rather than a list written here.
+var src = fs.readFileSync(path.join(__dirname, 'remapwrap-server.js'), 'utf8');
+var Key = require('@nut-tree-fork/nut-js').Key;
+var log = function () {};
+eval(src.slice(src.indexOf('var KEYS = (function'), src.indexOf('/* ===== LAST STABLE')));
+
+var deadFallback = actions.filter(function (a) {
+  return parseCombo(a).some(function (t) { return KEYS[t] === undefined; });
+});
+ok('every key on the phone starter board resolves',
+   deadFallback.length === 0,
+   deadFallback.length ? '-> ' + deadFallback.join(', ')
+                       : '(' + actions.length + ' keys)');
+
 // ── what the editor offers ────────────────────────────────────
 var offered = [];
 var re2 = /\['([a-z]+\.[a-z.]+)',\s*'/g;
@@ -93,6 +118,24 @@ ok('every command the editor offers does something',
    deadOffers.length === 0,
    deadOffers.length ? '-> ' + deadOffers.join(', ')
                      : '(' + offered.length + ' offered)');
+
+// ── and the other direction ───────────────────────────────────
+// Everything offered must run, which is checked above. The inverse is just
+// as important and was missing: a command that runs and that nothing
+// exposes is work nobody can reach. speak.text was built, worked, and was
+// invisible in both the editor and the package, and this file passed.
+var runnable = ['win.keystroke']
+  .concat(system.HANDLED)
+  .concat(Object.keys(audio.CONTINUOUS || {}))
+  .concat(Object.keys(audio.SWITCHED || {}))
+  .concat(['sound.play', 'sound.stop', 'audio.mic.ptt']);
+runnable = runnable.filter(function (c, i) { return runnable.indexOf(c) === i; });
+
+var unreachable = runnable.filter(function (c) { return offered.indexOf(c) === -1; });
+ok('every command that runs is offered somewhere',
+   unreachable.length === 0,
+   unreachable.length ? '-> ' + unreachable.join(', ')
+                      : '(' + runnable.length + ' runnable)');
 
 // ── the Python package must agree ─────────────────────────────
 // Two implementations of one catalogue disagree exactly where one of them

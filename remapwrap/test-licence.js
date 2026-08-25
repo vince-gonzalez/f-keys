@@ -29,19 +29,36 @@ var real = lic.sign({ name: 'A Buyer', tier: 'pro', issued: '2026-08-25' }, PRIV
 var f = lic.features(real);
 ok('a signed pro key reads as pro', f.tier === 'pro' && f.licensed);
 ok('pro unlocks auto switching', f.autoSwitch === true);
-ok('pro unlocks image keys', f.imageKeys === true);
 ok('pro unlocks meters', f.meters === true);
-ok('pro removes the device limit', f.devices === Infinity);
+ok('pro is licensed for an organisation', f.commercial === true);
 ok('the buyer name survives', f.name === 'A Buyer');
 
 // ── no key at all ──
 var none = lic.features(null);
 ok('no key is the free tier', none.tier === 'free' && !none.licensed);
-ok('free still has unlimited keys', none.keys === Infinity);
-ok('free still has unlimited profiles', none.profiles === Infinity);
-ok('free still has unlimited pages', none.pages === Infinity);
-ok('free allows two phones', none.devices === 2);
+ok('free has unlimited keys', none.keys === Infinity);
+ok('free has unlimited profiles', none.profiles === Infinity);
+ok('free has unlimited pages', none.pages === Infinity);
+ok('free has no device limit', none.devices === Infinity);
+
+// The reason this product exists in the shape it does. Somebody who does
+// not read needs the symbol; somebody who cannot speak needs the voice;
+// somebody with one reliable movement needs scanning. None of the three
+// may ever sit behind a payment, and a test is a stronger promise than a
+// paragraph.
+ok('free has symbols on keys', none.imageKeys === true);
+ok('free has speech', none.speech === true);
+ok('free has switch access', none.scanning === true);
+
 ok('free does not auto switch', none.autoSwitch === false);
+ok('free does not carry a commercial licence', none.commercial === false);
+
+// Paying must never take something away.
+ok('nothing free is missing from paid',
+   Object.keys(lic.FREE).every(function (k) {
+     return lic.FREE[k] === false || lic.PRO[k] === lic.FREE[k] ||
+            lic.PRO[k] === true;
+   }));
 
 // ── forgery: same claim, no signature ──
 function b64url(o) { return Buffer.from(JSON.stringify(o)).toString('base64')
