@@ -537,6 +537,40 @@
       </div>
 
       <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
+        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">PROFILES</div>
+        <!-- A profile is a file on disk. Everything here is also doable by
+             dropping a .json into the profiles folder, which is how a board
+             written by the Python package arrives. -->
+        <select class="field-input" id="profile-list" style="width:100%;"
+                onchange="activateProfile(this.value)"></select>
+        <div class="field-group" style="margin-top:8px;">
+          <div class="field-label">PROFILE NAME</div>
+          <input class="field-input" id="profile-name" type="text"
+                 placeholder="Streaming" maxlength="64" />
+        </div>
+        <div class="field-group">
+          <div class="field-label">SWITCH TO IT FOR THESE APPS</div>
+          <input class="field-input" id="profile-match" type="text"
+                 placeholder="photoshop, Adobe Photoshop" />
+          <div id="match-note" style="font-size:13px; color:var(--text-dim); margin-top:6px;"></div>
+        </div>
+        <button class="btn accent" style="width:100%; margin-top:4px;" onclick="saveProfile()">SAVE PROFILE</button>
+        <button class="btn" style="width:100%; margin-top:8px;" onclick="newProfile()">NEW, EMPTY</button>
+        <button class="btn" style="width:100%; margin-top:8px;" onclick="deleteProfile()">DELETE THIS PROFILE</button>
+        <button class="btn" style="width:100%; margin-top:8px;" onclick="openProfilesFolder()">WHERE ARE THE FILES?</button>
+      </div>
+
+      <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
+        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">THIS COPY</div>
+        <div id="tier-line" style="font-size:15px; color:var(--text-bright); margin-bottom:6px;">…</div>
+        <div id="tier-note" style="font-size:13px; color:var(--text-dim); line-height:1.45; margin-bottom:10px;"></div>
+        <input class="field-input" id="licence-key" type="text"
+               placeholder="paste a licence key" style="width:100%;" />
+        <button class="btn" style="width:100%; margin-top:8px;" onclick="applyLicence()">UNLOCK</button>
+        <button class="btn" style="width:100%; margin-top:8px;" onclick="removeLicence()" id="licence-remove">REMOVE LICENCE FROM THIS PC</button>
+      </div>
+
+      <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
         <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">BOARD SIZE</div>
         <div class="field-group">
           <div class="field-label">COLUMNS</div>
@@ -826,6 +860,191 @@ function detectServerIP(cb) {
     .catch(function() { cb(host); });
 }
 
+var PROFILE_PATH_TAIL = '\\RemapWrap\\profiles';
+
+// ---- Profiles ---------------------------------------------------
+// The board on screen and the file on disk are the same thing in two
+// places. Everything here is also reachable by putting a .json in the
+// profiles folder, which is how a board written by the Python package
+// arrives without anybody importing anything.
+var currentProfileFile = null;
+var FEATURES = { autoSwitch: false, tier: 'free' };
+
+function api(method, path, body) {
+  return fetch(path, {
+    method: method,
+    headers: body ? { 'Content-Type': 'application/json' } : {},
+    body: body ? JSON.stringify(body) : undefined
+  }).then(function (r) { return r.json().catch(function () { return null; }); });
+}
+
+function refreshProfiles() {
+  return api('GET', '/profiles').then(function (d) {
+    if (!d || !d.ok) { return; }
+    var sel = document.getElementById('profile-list');
+    sel.innerHTML = '';
+    if (!d.profiles.length) {
+      var none = document.createElement('option');
+      none.textContent = '(nothing saved yet)';
+      none.value = '';
+      sel.appendChild(none);
+    }
+    d.profiles.forEach(function (p) {
+      var o = document.createElement('option');
+      o.value = p.file;
+      o.textContent = p.unreadable
+        ? p.name + '  - unreadable'
+        : p.name + '  ' + p.keys + ' key' + (p.keys === 1 ? '' : 's') +
+          (p.pages > 1 ? ', ' + p.pages + ' pages' : '');
+      if (p.file === d.active) { o.selected = true; }
+      sel.appendChild(o);
+    });
+    currentProfileFile = d.active;
+    return d;
+  });
+}
+
+function activateProfile(file) {
+  if (!file) { return; }
+  api('POST', '/profile/activate?file=' + encodeURIComponent(file))
+    .then(function (d) {
+      if (!d || !d.ok) { return; }
+      currentProfileFile = file;
+      loadProfileIntoBoard(d.profile);
+    });
+}
+
+function loadProfileIntoBoard(doc) {
+  if (!doc || !doc.pages || !doc.pages.length) { return; }
+  var page = doc.pages[0];
+  GRID.cols = page.cols; GRID.rows = page.rows;
+  document.getElementById('cfg-cols').value = page.cols;
+  document.getElementById('cfg-rows').value = page.rows;
+  document.getElementById('profile-name').value = doc.name || '';
+  document.getElementById('profile-match').value = (doc.match || []).join(', ');
+  layout.length = 0;
+  (page.keys || []).forEach(function (k) { layout.push(k); });
+  renderGrid();
+  updateMatchNote();
+}
+
+function saveProfile() {
+  var name = (document.getElementById('profile-name').value || '').trim();
+  if (!name) {
+    // Saving over "Untitled" repeatedly is how people lose work.
+    document.getElementById('profile-name').focus();
+    setFeed('Give the profile a name first.');
+    return;
+  }
+  var match = (document.getElementById('profile-match').value || '')
+    .split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+
+  api('POST', '/profile', {
+    schema: 1, name: name, match: match,
+    pages: [{ name: 'Page 1', cols: GRID.cols, rows: GRID.rows, keys: layout }]
+  }).then(function (d) {
+    if (d && d.ok) { setFeed('Saved ' + d.file); refreshProfiles(); }
+    else { setFeed('Could not save: ' + ((d && d.error) || 'unknown')); }
+  });
+}
+
+function newProfile() {
+  layout.length = 0;
+  document.getElementById('profile-name').value = '';
+  document.getElementById('profile-match').value = '';
+  currentProfileFile = null;
+  renderGrid();
+  updateMatchNote();
+  setFeed('Empty board. Name it and save when you are ready.');
+}
+
+function deleteProfile() {
+  var sel = document.getElementById('profile-list');
+  var file = sel.value;
+  if (!file) { return; }
+  if (!window.confirm('Delete this profile? The file is removed from disk.')) { return; }
+  api('POST', '/profile/delete?file=' + encodeURIComponent(file))
+    .then(function () { refreshProfiles(); setFeed('Deleted ' + file); });
+}
+
+function openProfilesFolder() {
+  setFeed('Profiles live in %APPDATA%' + PROFILE_PATH_TAIL +
+          ' - drop a .json in there and it appears here.');
+}
+
+// ---- Which half of the product this is --------------------------
+function refreshLicence() {
+  return api('GET', '/licence').then(function (d) {
+    if (!d || !d.ok) { return; }
+    FEATURES = d.features || {};
+    FEATURES.tier = d.tier;
+    var line = document.getElementById('tier-line');
+    var note = document.getElementById('tier-note');
+    var remove = document.getElementById('licence-remove');
+
+    if (d.tier === 'pro') {
+      line.textContent = 'PRO' + (d.name ? ' - ' + d.name : '');
+      note.textContent = 'Following the foreground window, artwork on keys, ' +
+                         'live meters, and any number of phones.';
+      remove.style.display = '';
+    } else {
+      line.textContent = 'FREE';
+      note.textContent = 'Unlimited keys, profiles and pages, every command, ' +
+                         'two phones at once. Paid adds following the ' +
+                         'foreground window, artwork on keys and live meters.' +
+                         (d.reason && d.reason !== 'No licence key.'
+                           ? '  (' + d.reason + ')' : '');
+      remove.style.display = 'none';
+    }
+    updateMatchNote();
+  });
+}
+
+function applyLicence() {
+  var box = document.getElementById('licence-key');
+  var key = (box.value || '').trim();
+  if (!key) { box.focus(); return; }
+  api('POST', '/licence', { key: key }).then(function (d) {
+    if (d && d.ok) { box.value = ''; setFeed('Unlocked - thank you.'); }
+    else { setFeed((d && d.error) || 'That key was not accepted.'); }
+    refreshLicence();
+  });
+}
+
+function removeLicence() {
+  if (!window.confirm('Take the licence off this PC? Your key still works ' +
+                      'and can go on another machine.')) { return; }
+  api('POST', '/licence/remove').then(function () {
+    setFeed('Licence removed. This copy is free again.');
+    refreshLicence();
+  });
+}
+
+function updateMatchNote() {
+  var note = document.getElementById('match-note');
+  if (!note) { return; }
+  var has = (document.getElementById('profile-match').value || '').trim();
+  if (!FEATURES.autoSwitch) {
+    note.textContent = has
+      ? 'Saved, but following the foreground window is a paid feature.'
+      : 'Following the foreground window is a paid feature.';
+  } else {
+    note.textContent = has
+      ? 'This profile takes over when one of those is in front.'
+      : 'Name a program and this profile appears when you switch to it.';
+  }
+}
+
+function setFeed(text) {
+  var feed = document.getElementById('live-feed');
+  if (!feed) { return; }
+  var row = document.createElement('div');
+  row.style.fontSize = '13px';
+  row.style.padding = '3px 0';
+  row.textContent = text;
+  feed.insertBefore(row, feed.firstChild);
+}
+
 function showPin() {
   // /pin is refused to anything that is not this machine, so the dashboard
   // can simply ask for it. It is never injected into this page - only
@@ -842,6 +1061,7 @@ function loadQR(ip) {
   document.getElementById('qr-img').src = qrSrc;
   document.getElementById('qr-url').textContent = controllerURL;
   showPin();
+    refreshLicence().then(refreshProfiles);
 }
 
 // ── WebSocket ──────────────────────────────────────────────────
