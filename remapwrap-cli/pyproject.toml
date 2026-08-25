@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "remapwrap"
+version = "0.1.2"
+description = "Build RemapWrap control surfaces from what you already have: a folder of samples, a list of applications, a set of shortcuts."
+readme = "README.md"
+requires-python = ">=3.8"
+# Matches the LICENSE already in this repository, which remapwrap's
+# package.json also points at. Not a new decision.
+license = { text = "MIT" }
+authors = [{ name = "Vincent Gonzalez" }]
+keywords = ["stream deck", "control surface", "soundboard", "hotkeys",
+            "midi", "streaming", "accessibility", "layout"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Multimedia :: Sound/Audio",
+  "Topic :: Utilities",
+]
+# The layout is a JSON document and Python already reads JSON.
+dependencies = []
+
+[project.urls]
+Homepage = "https://f-keys.com/remapwrap/"
+Source = "https://github.com/zengineco/f-keys/tree/main/remapwrap-cli"
+Issues = "https://github.com/zengineco/f-keys/issues"
+
+[project.scripts]
+remapwrap = "remapwrap.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
