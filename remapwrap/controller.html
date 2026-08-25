@@ -564,6 +564,10 @@ function handleMessage(msg) {
     document.getElementById('ping-disp').textContent = lat + ' ms';
     return;
   }
+  if (msg.type === 'state') {
+    applyState(msg.state);
+    return;
+  }
   if (msg.type === 'layout') {
     layout = msg.layout;
     renderKeys();
@@ -741,6 +745,34 @@ function buildValueControl(key, type) {
   return wrap;
 }
 
+// ── What the machine says is true ────────────────────────────────
+// Until now a dial only remembered where it was last dragged, so touching
+// the volume keys on the keyboard made every reading on the phone a lie.
+// The PC reports the real figures twice a second; a control that is being
+// turned right now is left alone, because arguing with a thumb mid-turn
+// is worse than being briefly out of date.
+function applyState(state) {
+  if (!state) { return; }
+  (layout.keys || []).forEach(function (key) {
+    var incoming = state[key.command];
+    if (incoming === null || incoming === undefined) { return; }
+
+    var el = document.querySelector('[data-id="' + key.id + '"]');
+    if (!el || el.dataset.holding === '1') { return; }
+
+    if (typeof incoming === 'boolean') {
+      key.state = incoming;
+      el.classList.toggle('on', incoming);
+      return;
+    }
+
+    key.value = incoming;
+    if (el.dataset.type === 'dial' || el.dataset.type === 'slider') {
+      paintValue(el, key);
+    }
+  });
+}
+
 function paintValue(wrap, key) {
   var v = Math.max(0, Math.min(100, key.value));
   var read = wrap.querySelector('.value-read');
@@ -781,6 +813,9 @@ function attachValueDrag(wrap, key, type) {
 
   function begin(e) {
     dragging = true;
+    // While a thumb is on this control the PC's reading is stale by
+    // definition. Marking it held stops applyState fighting the drag.
+    wrap.dataset.holding = '1';
     wrap.classList.add('active');
     lastAngle = null;
     if (e.cancelable) { e.preventDefault(); }
@@ -828,6 +863,7 @@ function attachValueDrag(wrap, key, type) {
   function end(e) {
     if (!dragging) { return; }
     dragging = false;
+    wrap.dataset.holding = '0';
     wrap.classList.remove('active');
     lastAngle = null;
     if (e && e.cancelable) { e.preventDefault(); }

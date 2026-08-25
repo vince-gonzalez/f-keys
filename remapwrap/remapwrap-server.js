@@ -173,6 +173,38 @@ function loadActiveOnStart() {
   }
 }
 
+// ── Telling the phone what is actually true ───────────────────
+// Polled rather than pushed because Windows does not offer to tell us.
+// Twice a second is under the threshold where a person notices a dial
+// lagging, and it only runs while somebody is looking - a surface with no
+// phone attached has nobody to be honest to.
+var lastState = null;
+var stateTimer = null;
+
+function statesDiffer(a, b) {
+  if (!a || !b) { return true; }
+  return Object.keys(b).some(function (k) { return a[k] !== b[k]; });
+}
+
+function pollState() {
+  if (!controllerClients.length) { return; }
+  audio.readState().then(function (state) {
+    if (!state) { return; }
+    // Only speak when something changed. A phone does not need the same
+    // sentence twice a second for an hour.
+    if (statesDiffer(lastState, state)) {
+      lastState = state;
+      broadcastToControllers({ type: 'state', state: state });
+    }
+  });
+}
+
+function startStatePolling() {
+  if (stateTimer) { return; }
+  stateTimer = setInterval(pollState, 500);
+  if (stateTimer.unref) { stateTimer.unref(); }
+}
+
 // ── HTTP Server (dashboard, controller, assets, QR) ───────────
 var httpServer = http.createServer(function(req, res) {
   // READS: CONFIG.HTTP_PORT, local filesystem
@@ -471,6 +503,7 @@ httpServer.listen(CONFIG.HTTP_PORT, function() {
   // turn of a dial.
   audio.start(log);
   loadActiveOnStart();
+  startStatePolling();
 });
 
 // ── WebSocket Server ──────────────────────────────────────────
@@ -532,6 +565,9 @@ wss.on('connection', function(ws, req) {
           // Hand it the live board straight away instead of an empty
           // grid it keeps until somebody touches the dashboard.
           if (activeProfile) { setTimeout(function () { pushPage(activePage); }, 60); }
+          // A phone that just arrived has no idea where anything is.
+          lastState = null;
+          setTimeout(pollState, 120);
         }
         ws.send(JSON.stringify({ type: 'registered', role: clientType, serverTime: Date.now() }));
         return;

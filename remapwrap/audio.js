@@ -166,10 +166,42 @@ function apply(msg) {
   return Promise.resolve({ ok: false, result: 'not an audio command' });
 }
 
+// ── Reading the machine, not guessing at it ──────────────────
+// The host has been able to answer these since it was written and nothing
+// ever asked. A dial that only remembers where it was last dragged is
+// wrong the moment somebody touches the volume keys on their keyboard,
+// and a mute button that does not know it is muted is worse than no
+// button. This is the difference between a remote control and a control
+// surface.
+function readState() {
+  return Promise.all([
+    send('master.get', {}),
+    send('master.muted', {}),
+    send('mic.get', {}),
+    send('mic.muted', {})
+  ]).then(function (r) {
+    var num = function (x) {
+      var n = Number(x && x.ok ? x.result : NaN);
+      return isFinite(n) ? Math.max(0, Math.min(100, Math.round(n))) : null;
+    };
+    var bool = function (x) {
+      if (!x || !x.ok) { return null; }
+      return x.result === true || x.result === 'True' || x.result === 'true';
+    };
+    return {
+      'audio.master':   num(r[0]),
+      'audio.desktop':  num(r[0]),
+      'audio.mic.gain': num(r[2]),
+      'audio.mic.mute': bool(r[3]),
+      masterMuted:      bool(r[1])
+    };
+  }).catch(function () { return null; });
+}
+
 function stop() {
   if (host) { try { host.stdin.end(); } catch (e) { /* already gone */ } }
 }
 
 module.exports = { start: start, send: send, apply: apply,
-                   handles: handles, stop: stop,
+                   handles: handles, stop: stop, readState: readState,
                    isReady: function () { return ready; } };
