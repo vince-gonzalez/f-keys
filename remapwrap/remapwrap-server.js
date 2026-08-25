@@ -744,6 +744,17 @@ wss.on('connection', function(ws, req) {
         return;
       }
 
+      // ── A phone asking for another page ────────────────────
+      // pushPage has always sent the page number and the count; nothing
+      // could ask for a different one, so a profile with four pages showed
+      // its first one forever.
+      if (msg.type === 'page') {
+        var want = parseInt(msg.index, 10);
+        if (!activeProfile || isNaN(want)) { return; }
+        pushPage(want);
+        return;
+      }
+
       // ── Ping/pong ───────────────────────────────────────────
       if (msg.type === 'ping') {
         ws.send(JSON.stringify({ type: 'pong', ts: Date.now() }));

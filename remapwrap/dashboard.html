@@ -542,6 +542,26 @@
     color: var(--text-dim);
     margin-top: 6px;
   }
+
+  /* ---- Pages ---- */
+  .page-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .page-chip {
+    min-height: 34px;
+    padding: 6px 14px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--panel);
+    border: 2px outset var(--border);
+    cursor: pointer;
+  }
+  .page-chip[aria-current="true"] {
+    color: var(--text-invert);
+    background: var(--accent);
+    border-style: inset;
+  }
+  .page-actions { display: flex; gap: 8px; }
+  .page-actions .btn { flex: 1; }
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -613,6 +633,17 @@
           <input class="field-input" id="profile-match" type="text"
                  placeholder="photoshop, Adobe Photoshop" />
           <div id="match-note" style="font-size:13px; color:var(--text-dim); margin-top:6px;"></div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">PAGES</div>
+          <!-- A page is a whole surface, not a filter on one. Muscle memory
+               belongs to the page, so switching keeps each page's keys
+               exactly where they were put. -->
+          <div class="page-row" id="page-row"></div>
+          <div class="page-actions">
+            <button class="btn" data-act="addPage">+ PAGE</button>
+            <button class="btn" data-act="deletePage">− PAGE</button>
+          </div>
         </div>
         <button class="btn accent btn-block first" data-act="saveProfile">SAVE PROFILE</button>
         <button class="btn btn-block" data-act="newProfile">NEW, EMPTY</button>
@@ -989,6 +1020,8 @@ function activateProfile(file) {
 
 function loadProfileIntoBoard(doc) {
   if (!doc || !doc.pages || !doc.pages.length) { return; }
+  pages = doc.pages.slice();
+  currentPage = 0;
   var page = doc.pages[0];
   GRID.cols = page.cols; GRID.rows = page.rows;
   document.getElementById('cfg-cols').value = page.cols;
@@ -998,6 +1031,7 @@ function loadProfileIntoBoard(doc) {
   layout.length = 0;
   (page.keys || []).forEach(function (k) { layout.push(k); });
   renderGrid();
+  renderPageRow();
   updateMatchNote();
 }
 
@@ -1013,8 +1047,7 @@ function saveProfile() {
     .split(',').map(function (t) { return t.trim(); }).filter(Boolean);
 
   api('POST', '/profile', {
-    schema: 1, name: name, match: match,
-    pages: [{ name: 'Page 1', cols: GRID.cols, rows: GRID.rows, keys: layout }]
+    schema: 1, name: name, match: match, pages: pagesSnapshot()
   }).then(function (d) {
     if (d && d.ok) {
       setFeed('Saved ' + d.file);
@@ -1025,11 +1058,14 @@ function saveProfile() {
 }
 
 function newProfile() {
+  pages = [];
+  currentPage = 0;
   layout.length = 0;
   document.getElementById('profile-name').value = '';
   document.getElementById('profile-match').value = '';
   currentProfileFile = null;
   renderGrid();
+  renderPageRow();
   updateMatchNote();
   setFeed('Empty board. Name it and save when you are ready.');
 }
@@ -1219,6 +1255,91 @@ function runAction(el, e) {
   });
 });
 
+// ---- Pages -----------------------------------------------------
+// The dashboard only ever wrote one page, so the format supported four,
+// the server broadcast which one you were on, and there was no way to make
+// a second. `layout` stays the keys of the page being edited; the others
+// live here until they are saved.
+var pages = [];          // every page except the one open, by index
+var currentPage = 0;
+
+function pagesSnapshot() {
+  // The open page is authoritative for its own slot.
+  var out = pages.slice();
+  out[currentPage] = { name: 'Page ' + (currentPage + 1),
+                       cols: GRID.cols, rows: GRID.rows,
+                       keys: layout.slice() };
+  for (var i = 0; i < out.length; i++) {
+    if (!out[i]) { out[i] = { name: 'Page ' + (i + 1), cols: GRID.cols,
+                              rows: GRID.rows, keys: [] }; }
+  }
+  return out;
+}
+
+function renderPageRow() {
+  var row = document.getElementById('page-row');
+  if (!row) { return; }
+  var total = Math.max(1, pagesSnapshot().length);
+  row.innerHTML = '';
+  for (var i = 0; i < total; i++) {
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'page-chip';
+    chip.textContent = String(i + 1);
+    chip.setAttribute('data-page', String(i));
+    chip.setAttribute('aria-current', i === currentPage ? 'true' : 'false');
+    chip.setAttribute('aria-label', 'Edit page ' + (i + 1) + ' of ' + total);
+    row.appendChild(chip);
+  }
+}
+
+function switchPage(index) {
+  var all = pagesSnapshot();
+  if (index < 0 || index >= all.length || index === currentPage) { return; }
+  pages = all;                       // bank the page being left
+  currentPage = index;
+  var page = pages[index];
+  GRID.cols = page.cols || GRID.cols;
+  GRID.rows = page.rows || GRID.rows;
+  document.getElementById('cfg-cols').value = GRID.cols;
+  document.getElementById('cfg-rows').value = GRID.rows;
+  layout.length = 0;
+  (page.keys || []).forEach(function (k) { layout.push(k); });
+  renderGrid();
+  renderPageRow();
+  pushLayoutToControllers();
+  setFeed('Editing page ' + (index + 1));
+}
+
+function addPage() {
+  pages = pagesSnapshot();
+  pages.push({ name: 'Page ' + (pages.length + 1), cols: GRID.cols,
+               rows: GRID.rows, keys: [] });
+  switchPage(pages.length - 1);
+}
+
+function deletePage() {
+  var all = pagesSnapshot();
+  if (all.length < 2) {
+    setFeed('A profile needs at least one page.');
+    return;
+  }
+  if (!window.confirm('Delete page ' + (currentPage + 1) + ' and its keys?')) { return; }
+  all.splice(currentPage, 1);
+  pages = all;
+  currentPage = Math.min(currentPage, pages.length - 1);
+  // Re-enter the page that is now current, which reloads its keys.
+  var landing = currentPage;
+  currentPage = -1;
+  switchPage(landing);
+}
+
+document.addEventListener('click', function (e) {
+  var chip = e.target && e.target.closest ? e.target.closest('.page-chip') : null;
+  if (!chip) { return; }
+  switchPage(parseInt(chip.getAttribute('data-page'), 10));
+});
+
 function showPin() {
   // /pin is refused to anything that is not this machine, so the dashboard
   // can simply ask for it. It is never injected into this page - only
@@ -1240,6 +1361,7 @@ function loadQR(ip) {
     var frBtn = document.getElementById('fr-dismiss');
     if (frBtn) { frBtn.addEventListener('click', dismissFirstRun); }
     updateFirstRun();
+    renderPageRow();
 }
 
 // ── WebSocket ──────────────────────────────────────────────────

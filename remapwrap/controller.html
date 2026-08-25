@@ -389,6 +389,43 @@
 @media (prefers-reduced-motion: reduce) {
   .dial-arc, .dial-pointer, .slider-fill { transition: none; }
 }
+
+/* ── Pages ─────────────────────────────────────────────────────
+   Tabs are 44px tall because that is the smallest target a thumb
+   hits reliably, and this is the control somebody uses while doing
+   something else with their other hand. */
+.page-strip {
+  display: flex;
+  gap: 6px;
+  padding: 8px 10px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.page-strip::-webkit-scrollbar { display: none; }
+.page-tab {
+  flex: 0 0 auto;
+  min-height: 44px;
+  min-width: 56px;
+  padding: 10px 16px;
+  font-family: var(--font-display), var(--font);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text);
+  background: var(--panel);
+  border: 2px outset var(--border);
+  cursor: pointer;
+}
+.page-tab[aria-selected="true"] {
+  color: var(--text-bright);
+  background: var(--bg2);
+  border-style: inset;
+}
+.page-tab:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -417,6 +454,11 @@
     <div class="logo">RemapWrap</div>
     <div class="conn-badge" id="conn-badge">CONNECTING…</div>
   </div>
+
+  <!-- Pages. Hidden entirely when a profile has one, because a strip of
+       one tab is furniture rather than navigation. -->
+  <nav class="page-strip" id="page-strip" role="tablist"
+       aria-label="Pages in this profile" hidden></nav>
 
   <div class="grid-wrap">
     <div class="key-grid" id="key-grid"></div>
@@ -649,11 +691,83 @@ function handleMessage(msg) {
   }
   if (msg.type === 'layout') {
     layout = msg.layout;
+    // Sent with every push and ignored until now.
+    if (typeof msg.pages === 'number') { pageCount = Math.max(1, msg.pages); }
+    if (typeof msg.page === 'number') { pageIndex = msg.page; }
+    renderPages();
     renderKeys();
-    log('Layout received from dashboard');
+    log('Layout received' +
+        (pageCount > 1 ? ' (page ' + (pageIndex + 1) + ' of ' + pageCount + ')' : ''));
     return;
   }
 }
+
+// ── Pages ────────────────────────────────────────────────────────
+// The server has always sent the page number and the count with every
+// layout, and this file ignored both, so a profile with four pages showed
+// its first one and nothing else. A page is a whole surface: the keys
+// change, the board size can change, and muscle memory belongs to the page
+// rather than the profile.
+var pageIndex = 0;
+var pageCount = 1;
+
+function renderPages() {
+  var strip = document.getElementById('page-strip');
+  if (!strip) { return; }
+
+  if (pageCount < 2) {
+    strip.hidden = true;
+    strip.innerHTML = '';
+    return;
+  }
+  strip.hidden = false;
+  strip.innerHTML = '';
+
+  for (var i = 0; i < pageCount; i++) {
+    var tab = document.createElement('button');
+    tab.type = 'button';
+    tab.className = 'page-tab';
+    tab.textContent = String(i + 1);
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-selected', i === pageIndex ? 'true' : 'false');
+    tab.setAttribute('aria-label', 'Page ' + (i + 1) + ' of ' + pageCount);
+    // The index rides on the element rather than a closure, so the strip
+    // can be rebuilt without leaving handlers behind pointing at old ones.
+    tab.setAttribute('data-page', String(i));
+    strip.appendChild(tab);
+  }
+}
+
+function goToPage(index) {
+  if (index < 0 || index >= pageCount || index === pageIndex) { return; }
+  send({ type: 'page', index: index });
+  // The tab responds now rather than when the PC replies. A control that
+  // waits for a round trip before acknowledging feels broken on a slow
+  // network even when it is working.
+  pageIndex = index;
+  renderPages();
+}
+
+document.addEventListener('click', function (e) {
+  var tab = e.target && e.target.closest ? e.target.closest('.page-tab') : null;
+  if (!tab) { return; }
+  goToPage(parseInt(tab.getAttribute('data-page'), 10));
+});
+
+// Arrow keys along the strip, which is what a tablist is expected to do
+// and what anybody using a keyboard or a switch will try.
+document.addEventListener('keydown', function (e) {
+  var tab = e.target && e.target.closest ? e.target.closest('.page-tab') : null;
+  if (!tab) { return; }
+  var step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+  if (!step) { return; }
+  e.preventDefault();
+  var next = pageIndex + step;
+  if (next < 0 || next >= pageCount) { return; }
+  goToPage(next);
+  var el = document.querySelector('.page-tab[data-page="' + next + '"]');
+  if (el) { el.focus(); }
+});
 
 // ── Ping ───────────────────────────────────────────────────────
 function startPing() {
