@@ -38,6 +38,7 @@ var CONFIG = {
 /* ===== END CONFIG BLOCK ===== */
 
 var http    = require('http');
+var crypto  = require('crypto');
 var fs      = require('fs');
 var path    = require('path');
 var os      = require('os');
@@ -83,18 +84,117 @@ function getLocalIP() {
   return candidates[0] || '127.0.0.1';
 }
 
+// ── Pairing ───────────────────────────────────────────────────
+// Until now anything that could reach the WebSocket port had a keyboard on
+// this machine. On a home network that is a housemate; on hotel, campus or
+// venue WiFi it is everyone in range. A phone now has to prove it was
+// invited, in one of two ways:
+//
+//   scan the QR   the URL carries the secret, nothing to type
+//   type the PIN  six digits shown on this screen, for a phone that
+//                 reached the page some other way
+//
+// The dashboard is exempt only when it is this machine talking to itself.
+var store = require('./store');
+var settings = store.readSettings();
+var PAIR_SECRET = settings.pairing.secret;
+var PAIR_PIN = settings.pairing.pin;
+
+var pinAttempts = {};        // ip -> { n, until }
+var PIN_MAX = 5;
+var PIN_LOCK_MS = 5 * 60 * 1000;
+
+function sameSecret(given) {
+  // Comparing with === leaks length and position through timing. The
+  // amounts are tiny here, but this is the one comparison that matters.
+  var a = Buffer.from(String(given || ''), 'utf8');
+  var b = Buffer.from(PAIR_SECRET, 'utf8');
+  if (a.length !== b.length) { return false; }
+  return crypto.timingSafeEqual(a, b);
+}
+
+function isLocal(ip) {
+  var v = String(ip || '');
+  return v === '::1' || v === '127.0.0.1' || v === '::ffff:127.0.0.1';
+}
+
+function pinLocked(ip) {
+  var rec = pinAttempts[ip];
+  return !!(rec && rec.until && Date.now() < rec.until);
+}
+
+function pinFailed(ip) {
+  var rec = pinAttempts[ip] || { n: 0, until: 0 };
+  rec.n += 1;
+  if (rec.n >= PIN_MAX) {
+    rec.until = Date.now() + PIN_LOCK_MS;
+    rec.n = 0;
+    log('Pairing locked for ' + ip + ' after ' + PIN_MAX + ' wrong PINs');
+  }
+  pinAttempts[ip] = rec;
+}
+
 // ── HTTP Server (dashboard, controller, assets, QR) ───────────
 var httpServer = http.createServer(function(req, res) {
   // READS: CONFIG.HTTP_PORT, local filesystem
   // WRITES: HTTP response
 
   if (req.url === '/qr' || req.url === '/qr.png') {
-    var controllerURL = 'http://' + getLocalIP() + ':' + CONFIG.HTTP_PORT + '/controller';
+    // The QR is the invitation, so it carries the secret. A phone that
+    // scans it is paired without typing anything.
+    var controllerURL = 'http://' + getLocalIP() + ':' + CONFIG.HTTP_PORT +
+                        '/controller?k=' + PAIR_SECRET;
     QRCode.toBuffer(controllerURL, { width: 300, margin: 2 }, function(err, buf) {
       if (err) { res.writeHead(500); res.end('QR error'); return; }
       res.writeHead(200, { 'Content-Type': 'image/png' });
       res.end(buf);
     });
+    return;
+  }
+
+  // A phone that reached this page without scanning types the six digits
+  // shown on the PC. Five wrong tries locks that address out for five
+  // minutes, so the six digit space cannot simply be walked.
+  if (req.url === '/pair' && req.method === 'POST') {
+    var ip = req.socket.remoteAddress;
+    var body = '';
+    req.on('data', function (chunk) {
+      body += chunk;
+      if (body.length > 512) { req.destroy(); }   // nothing legitimate is bigger
+    });
+    req.on('end', function () {
+      res.setHeader('Content-Type', 'application/json');
+      if (pinLocked(ip)) {
+        res.writeHead(429);
+        res.end(JSON.stringify({ ok: false, error: 'Too many tries. Wait five minutes.' }));
+        return;
+      }
+      var given = '';
+      try { given = String((JSON.parse(body) || {}).pin || ''); } catch (e) { given = ''; }
+      if (given.length === 6 && given === PAIR_PIN) {
+        pinAttempts[ip] = { n: 0, until: 0 };
+        log('Paired ' + ip + ' by PIN');
+        res.writeHead(200);
+        res.end(JSON.stringify({ ok: true, token: PAIR_SECRET }));
+      } else {
+        pinFailed(ip);
+        res.writeHead(401);
+        res.end(JSON.stringify({ ok: false, error: 'That PIN is not right.' }));
+      }
+    });
+    return;
+  }
+
+  // The PIN is only ever readable by this machine. Handing it out over the
+  // network would make it exactly as useful as no PIN at all.
+  if (req.url === '/pin') {
+    if (!isLocal(req.socket.remoteAddress)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false }));
+      return;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ ok: true, pin: PAIR_PIN }));
     return;
   }
 
@@ -132,6 +232,15 @@ var httpServer = http.createServer(function(req, res) {
 
   if (!page) { res.writeHead(404); res.end('not found'); return; }
 
+  // The dashboard builds boards and hands out the pairing PIN, so it is
+  // only ever this machine. Asking for it from another device gets the
+  // controller instead, which is what that device actually wanted.
+  if (page === 'dashboard.html' && !isLocal(req.socket.remoteAddress)) {
+    res.writeHead(302, { Location: '/controller' });
+    res.end();
+    return;
+  }
+
   fs.readFile(path.join(__dirname, page), function(err, data) {
     if (err) {
       res.writeHead(404);
@@ -141,7 +250,10 @@ var httpServer = http.createServer(function(req, res) {
     // The controller carries a marker for this; the dashboard asks /ip.
     var injected = data.toString().replace(
       '/* __SERVER_IP_INJECT__ */',
-      'var SERVER_IP = "' + getLocalIP() + '"; var WS_PORT = ' + CONFIG.WS_PORT + ';'
+      'var SERVER_IP = "' + getLocalIP() + '"; var WS_PORT = ' + CONFIG.WS_PORT + ';' +
+      (page === 'dashboard.html'
+        ? ' var PAIR_TOKEN = "' + PAIR_SECRET + '"; var PAIR_PIN = "' + PAIR_PIN + '";'
+        : '')
     );
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(injected);
@@ -203,9 +315,23 @@ wss.on('connection', function(ws, req) {
       if (msg.type === 'register') {
         clientType = msg.role; // 'dashboard' or 'controller'
         if (clientType === 'dashboard') {
+          if (!isLocal(clientIP) && !sameSecret(msg.token)) {
+            log('Refused a remote dashboard from ' + clientIP);
+            ws.send(JSON.stringify({ type: 'unpaired' }));
+            ws.close();
+            return;
+          }
           dashboardClients.push(ws);
           log('Dashboard registered (' + dashboardClients.length + ' active)');
         } else if (clientType === 'controller') {
+          // The gate. Without this, reaching the port was the whole
+          // qualification for having a keyboard on this machine.
+          if (!sameSecret(msg.token)) {
+            log('Refused an unpaired controller from ' + clientIP);
+            ws.send(JSON.stringify({ type: 'unpaired' }));
+            ws.close();
+            return;
+          }
           controllerClients.push(ws);
           log('Controller registered (' + controllerClients.length + ' active)');
           // Send controller the current layout if dashboard is connected

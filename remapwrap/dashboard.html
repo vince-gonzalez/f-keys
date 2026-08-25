@@ -475,6 +475,22 @@
   }
   footer a { color: var(--text-dim); text-decoration: none; }
   footer a:hover { color: var(--accent2); }
+
+  /* ── Pairing PIN ── */
+  .pin-row {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-dark);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+  }
+  .pin-cap {
+    font-size: 13px; letter-spacing: 1.5px; color: var(--text-invert);
+  }
+  .pin-digits {
+    font-family: var(--font-mono), monospace;
+    font-size: 22px; font-weight: 700; letter-spacing: 4px;
+    color: var(--lcd);
+  }
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -511,6 +527,13 @@
         <img id="qr-img" src="" alt="QR loading..." />
         <div class="qr-label">SCAN WITH PHONE</div>
         <div class="qr-url" id="qr-url">connecting…</div>
+        <!-- For a phone that typed the address instead of scanning. The
+             digits are the only thing standing between this keyboard and
+             everyone else on the network, so they are shown, not hidden. -->
+        <div class="pin-row">
+          <span class="pin-cap">OR ENTER PIN</span>
+          <span class="pin-digits" id="pair-pin">------</span>
+        </div>
       </div>
 
       <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
@@ -803,11 +826,22 @@ function detectServerIP(cb) {
     .catch(function() { cb(host); });
 }
 
+function showPin() {
+  // /pin is refused to anything that is not this machine, so the dashboard
+  // can simply ask for it. It is never injected into this page - only
+  // controller.html carries the injection marker.
+  fetch('/pin').then(function (r) { return r.json(); }).then(function (d) {
+    var el = document.getElementById('pair-pin');
+    if (el && d && d.ok && d.pin) { el.textContent = d.pin; }
+  }).catch(function () { /* the row already reads ------ */ });
+}
+
 function loadQR(ip) {
   var qrSrc = 'http://' + ip + ':' + CFG.HTTP_PORT + '/qr';
   var controllerURL = 'http://' + ip + ':' + CFG.HTTP_PORT + '/controller';
   document.getElementById('qr-img').src = qrSrc;
   document.getElementById('qr-url').textContent = controllerURL;
+  showPin();
 }
 
 // ── WebSocket ──────────────────────────────────────────────────

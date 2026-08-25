@@ -295,11 +295,79 @@
     display: flex;
     flex-direction: column;
   }
+
+/* ── Pairing gate ──────────────────────────────────────────────
+   Nothing here goes below 15px. This is the first screen anyone
+   sees and it is read across a room. */
+#pinScreen {
+  display: none;
+  position: fixed; inset: 0; z-index: 9000;
+  background: var(--bg);
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.pin-box {
+  width: 100%; max-width: 380px;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-top-color: var(--border-light);
+  border-left-color: var(--border-light);
+  border-right-color: var(--border-dark);
+  border-bottom-color: var(--border-dark);
+  padding: 22px 20px 20px;
+}
+.pin-title {
+  font-family: var(--font-display), var(--font);
+  font-size: 20px; font-weight: 700; letter-spacing: 1px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+.pin-note { font-size: 15px; line-height: 1.45; color: var(--text); margin-bottom: 18px; }
+.pin-input {
+  display: block; width: 100%; box-sizing: border-box;
+  font-family: var(--font-mono), monospace;
+  font-size: 34px; letter-spacing: 10px; text-align: center;
+  padding: 14px 10px;
+  color: var(--text-bright);
+  background: var(--field);
+  border: 2px inset var(--border);
+  margin-bottom: 16px;
+}
+.pin-input::placeholder { color: var(--text); opacity: .45; letter-spacing: 10px; }
+.pin-go {
+  display: block; width: 100%;
+  font-family: var(--font-display), var(--font);
+  font-size: 18px; font-weight: 700; letter-spacing: 1px;
+  padding: 14px;
+  color: var(--text-bright);
+  background: var(--bg2);
+  border: 2px outset var(--border);
+  cursor: pointer;
+}
+.pin-go:active { border-style: inset; }
+.pin-hint { font-size: 13px; line-height: 1.4; color: var(--text); margin-top: 14px; }
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
 </head>
 <body>
+
+<!-- ── Pairing gate ────────────────────────────────────────────────
+     Shown only when this phone has no secret the PC accepts. The
+     digits are large because they are read off one screen and typed
+     on another, often at arm's length.                            -->
+<div id="pinScreen">
+  <div class="pin-box">
+    <div class="pin-title">PAIR THIS PHONE</div>
+    <div class="pin-note" id="pinNote">Enter the six digits shown on your PC.</div>
+    <input id="pinInput" class="pin-input" type="text" inputmode="numeric"
+           autocomplete="one-time-code" maxlength="6" placeholder="000000"
+           aria-label="Six digit pairing code">
+    <button id="pinGo" class="pin-go" type="button">CONNECT</button>
+    <div class="pin-hint">Scanning the QR code on the PC skips this step.</div>
+  </div>
+</div>
+
 <div class="app">
 
   <div class="header">
@@ -363,6 +431,91 @@ window.onload = function() {
 };
 
 // ── WebSocket ──────────────────────────────────────────────────
+// ── Pairing ──────────────────────────────────────────────────────
+// Three ways a phone gets here, and only the first two are allowed in:
+//   scanned the QR   the secret arrives in the URL
+//   paired earlier   the secret is in this browser's storage
+//   typed the address the server refuses, and the PIN screen opens
+var TOKEN_KEY = 'remapwrap.token';
+var unpaired = false;
+
+function readToken() {
+  var m = /[?&]k=([0-9a-f]{64})/.exec(window.location.search);
+  if (m) {
+    try { localStorage.setItem(TOKEN_KEY, m[1]); } catch (e) { /* private mode */ }
+    // Take the secret out of the address bar so it is not left in history,
+    // shoulder-surfed, or handed on when somebody shares the link.
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+    return m[1];
+  }
+  try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; }
+}
+
+var PAIR_TOKEN = readToken();
+
+document.addEventListener('DOMContentLoaded', function () {
+  var go = document.getElementById('pinGo');
+  var box = document.getElementById('pinInput');
+  if (go) { go.addEventListener('click', submitPin); }
+  if (box) {
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { submitPin(); }
+    });
+    // Six digits typed means the person is finished; asking them to reach
+    // for a button afterwards is a step for nothing.
+    box.addEventListener('input', function () {
+      box.value = box.value.replace(/[^0-9]/g, '').slice(0, 6);
+      if (box.value.length === 6) { submitPin(); }
+    });
+  }
+});
+
+function showPinScreen(message) {
+  stopPing();
+  var el = document.getElementById('pinScreen');
+  if (!el) { return; }
+  el.style.display = 'flex';
+  var note = document.getElementById('pinNote');
+  if (note) { note.textContent = message || 'Enter the six digits shown on your PC.'; }
+  var box = document.getElementById('pinInput');
+  if (box) { box.value = ''; box.focus(); }
+}
+
+function hidePinScreen() {
+  var el = document.getElementById('pinScreen');
+  if (el) { el.style.display = 'none'; }
+}
+
+function submitPin() {
+  var box = document.getElementById('pinInput');
+  var note = document.getElementById('pinNote');
+  var pin = (box && box.value || '').replace(/[^0-9]/g, '');
+  if (pin.length !== 6) {
+    if (note) { note.textContent = 'Six digits.'; }
+    return;
+  }
+  if (note) { note.textContent = 'Checking…'; }
+  fetch('/pair', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pin: pin })
+  }).then(function (r) { return r.json(); }).then(function (d) {
+    if (d && d.ok && d.token) {
+      PAIR_TOKEN = d.token;
+      try { localStorage.setItem(TOKEN_KEY, d.token); } catch (e) { /* private mode */ }
+      hidePinScreen();
+      connectWS();
+    } else {
+      if (note) { note.textContent = (d && d.error) || 'That PIN is not right.'; }
+      if (box) { box.value = ''; box.focus(); }
+    }
+  }).catch(function () {
+    if (note) { note.textContent = 'Could not reach the PC.'; }
+  });
+}
+
 function connectWS() {
   // READS: CFG
   // WRITES: ws, pingTimer
@@ -373,7 +526,8 @@ function connectWS() {
 
   ws.onopen = function() {
     setBadge('LIVE', 'on');
-    ws.send(JSON.stringify({ type: 'register', role: 'controller' }));
+    ws.send(JSON.stringify({ type: 'register', role: 'controller',
+                             token: PAIR_TOKEN }));
     startPing();
     log('Connected to ' + url);
   };
@@ -386,8 +540,9 @@ function connectWS() {
   };
 
   ws.onclose = function() {
-    setBadge('OFFLINE', 'err');
     stopPing();
+    if (unpaired) { return; }          // waiting on a PIN, not on the network
+    setBadge('OFFLINE', 'err');
     setTimeout(connectWS, 3000);
   };
 
@@ -395,6 +550,14 @@ function connectWS() {
 }
 
 function handleMessage(msg) {
+  if (msg.type === 'unpaired') {
+    // Retrying every three seconds with a secret the PC has refused is
+    // just a slow brute force. Ask the person instead.
+    unpaired = true;
+    setBadge('NOT PAIRED', 'err');
+    showPinScreen('This PC does not know that phone yet.');
+    return;
+  }
   if (msg.type === 'registered') { log('Registered as controller'); return; }
   if (msg.type === 'pong') {
     var lat = Date.now() - pingStart;
