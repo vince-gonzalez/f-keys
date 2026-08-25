@@ -48,6 +48,40 @@ ok('every key on the default board does something',
    deadDefaults.length ? '-> ' + deadDefaults.join(', ')
                        : '(' + defaults.length + ' keys)');
 
+// ── the board it ships with has to fit the board it ships with ─
+// The slider added to this default was 3x8 placed at y=11 on a 16 row
+// board, so it hung off the bottom - and because applyGridConfig refuses
+// any size that would strand a control, that one key jammed the board
+// size boxes permanently. Nothing said so.
+var geom = [];
+var reKey = /\{[^{}]*?id:\s*'([^']+)'[^{}]*?x:\s*(\d+),\s*y:\s*(\d+),\s*w:\s*(\d+),\s*h:\s*(\d+)[^{}]*?\}/g;
+while ((m = reKey.exec(block)) !== null) {
+  geom.push({ id: m[1], x: +m[2], y: +m[3], w: +m[4], h: +m[5] });
+}
+var COLS = 24, ROWS = 16;
+var offBoard = geom.filter(function (k) {
+  return k.x + k.w > COLS || k.y + k.h > ROWS || k.x < 0 || k.y < 0;
+});
+ok('every default key fits a ' + COLS + 'x' + ROWS + ' board',
+   offBoard.length === 0,
+   offBoard.length
+     ? '-> ' + offBoard.map(function (k) {
+         return k.id + ' reaches ' + (k.x + k.w) + ',' + (k.y + k.h); }).join('; ')
+     : '(' + geom.length + ' keys)');
+
+var overlapping = [];
+for (var a = 0; a < geom.length; a++) {
+  for (var bIdx = a + 1; bIdx < geom.length; bIdx++) {
+    var p = geom[a], q = geom[bIdx];
+    if (p.x < q.x + q.w && p.x + p.w > q.x &&
+        p.y < q.y + q.h && p.y + p.h > q.y) {
+      overlapping.push(p.id + '/' + q.id);
+    }
+  }
+}
+ok('no two default keys overlap', overlapping.length === 0,
+   overlapping.length ? '-> ' + overlapping.join(', ') : '');
+
 // ── what the editor offers ────────────────────────────────────
 var offered = [];
 var re2 = /\['([a-z]+\.[a-z.]+)',\s*'/g;

@@ -22,21 +22,39 @@ function ok(name, cond, detail) {
 ['dashboard.html', 'controller.html'].forEach(function (file) {
   var html = fs.readFileSync(path.join(__dirname, file), 'utf8');
 
-  // Every inline handler names a function. It must exist.
+  // Every action names a function, however it is declared. Both forms are
+  // checked: inline handlers are gone from the dashboard, and a check that
+  // only ever looks at the empty one proves nothing at all.
   var called = [];
-  var re = /on(?:click|change|input|submit)="([A-Za-z_$][\w$]*)\s*\(/g;
   var m;
-  while ((m = re.exec(html)) !== null) {
-    if (called.indexOf(m[1]) === -1) { called.push(m[1]); }
-  }
+  [/on(?:click|change|input|submit)="([A-Za-z_$][\w$]*)\s*\(/g,
+   /data-act="([A-Za-z_$][\w$]*)"/g].forEach(function (re) {
+    while ((m = re.exec(html)) !== null) {
+      if (called.indexOf(m[1]) === -1) { called.push(m[1]); }
+    }
+  });
   var undefinedHandlers = called.filter(function (n) {
     return html.indexOf('function ' + n + '(') === -1 &&
            html.indexOf(n + ' = function') === -1;
   });
-  ok(file + ': every inline handler is defined',
+  ok(file + ': every action is defined',
      undefinedHandlers.length === 0,
      undefinedHandlers.length ? '-> ' + undefinedHandlers.join(', ')
                               : '(' + called.length + ' checked)');
+
+  // data-field means "hand this to updateKey". On anything else it is a
+  // binding that will quietly do the wrong thing.
+  var stray = [];
+  // Scoped to one tag. The first version used [^>]* which crosses
+  // newlines, so it matched the comment block in dashboard.html that
+  // documents this very convention and reported the documentation as a
+  // defect.
+  var reField = /data-act="([A-Za-z_$][\w$]*)"[^>\n]*data-field="/g;
+  while ((m = reField.exec(html)) !== null) {
+    if (m[1] !== 'updateKey') { stray.push(m[1]); }
+  }
+  ok(file + ': data-field is only used with updateKey',
+     stray.length === 0, stray.length ? '-> ' + stray.join(', ') : '');
 
   // Every element id the script reaches for must be in the markup.
   var wanted = [];

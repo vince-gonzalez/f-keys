@@ -520,6 +520,28 @@
     cursor: pointer;
   }
   .fr-dismiss:active { border-style: inset; }
+
+  /* The same declarations were repeated inline on nearly every button in
+     the left column, which is how a column stops looking like one hand
+     made it. Named once. */
+  .btn-block { width: 100%; margin-top: 8px; }
+  .btn-block.first { margin-top: 4px; }
+  .panel-sub {
+    padding: 0 0 10px;
+    border: none;
+    font-size: 13px;
+  }
+  .panel-section {
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    margin-top: 4px;
+  }
+  .note-line {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-dim);
+    margin-top: 6px;
+  }
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -558,7 +580,7 @@
 
       <div class="connect-row">
         <input class="field-input" id="server-ip" placeholder="Server IP (auto)" />
-        <button class="btn accent" onclick="connectWebSocket()">CONNECT</button>
+        <button class="btn accent" data-act="connectWebSocket">CONNECT</button>
       </div>
 
       <div class="qr-card">
@@ -574,13 +596,13 @@
         </div>
       </div>
 
-      <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
-        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">PROFILES</div>
+      <div class="panel-section">
+        <div class="panel-title panel-sub">PROFILES</div>
         <!-- A profile is a file on disk. Everything here is also doable by
              dropping a .json into the profiles folder, which is how a board
              written by the Python package arrives. -->
         <select class="field-input" id="profile-list" style="width:100%;"
-                onchange="activateProfile(this.value)"></select>
+                data-act="activateProfile" data-pass="value"></select>
         <div class="field-group" style="margin-top:8px;">
           <div class="field-label">PROFILE NAME</div>
           <input class="field-input" id="profile-name" type="text"
@@ -592,36 +614,36 @@
                  placeholder="photoshop, Adobe Photoshop" />
           <div id="match-note" style="font-size:13px; color:var(--text-dim); margin-top:6px;"></div>
         </div>
-        <button class="btn accent" style="width:100%; margin-top:4px;" onclick="saveProfile()">SAVE PROFILE</button>
-        <button class="btn" style="width:100%; margin-top:8px;" onclick="newProfile()">NEW, EMPTY</button>
-        <button class="btn" style="width:100%; margin-top:8px;" onclick="deleteProfile()">DELETE THIS PROFILE</button>
-        <button class="btn" style="width:100%; margin-top:8px;" onclick="openProfilesFolder()">WHERE ARE THE FILES?</button>
+        <button class="btn accent btn-block first" data-act="saveProfile">SAVE PROFILE</button>
+        <button class="btn btn-block" data-act="newProfile">NEW, EMPTY</button>
+        <button class="btn btn-block" data-act="deleteProfile">DELETE THIS PROFILE</button>
+        <button class="btn btn-block" data-act="openProfilesFolder">WHERE ARE THE FILES?</button>
       </div>
 
-      <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
-        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">THIS COPY</div>
+      <div class="panel-section">
+        <div class="panel-title panel-sub">THIS COPY</div>
         <div id="tier-line" style="font-size:15px; color:var(--text-bright); margin-bottom:6px;">…</div>
         <div id="tier-note" style="font-size:13px; color:var(--text-dim); line-height:1.45; margin-bottom:10px;"></div>
         <input class="field-input" id="licence-key" type="text"
                placeholder="paste a licence key" style="width:100%;" />
-        <button class="btn" style="width:100%; margin-top:8px;" onclick="applyLicence()">UNLOCK</button>
-        <button class="btn" style="width:100%; margin-top:8px;" onclick="removeLicence()" id="licence-remove">REMOVE LICENCE FROM THIS PC</button>
+        <button class="btn btn-block" data-act="applyLicence">UNLOCK</button>
+        <button class="btn btn-block" data-act="removeLicence" id="licence-remove">REMOVE LICENCE FROM THIS PC</button>
       </div>
 
-      <div style="border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
-        <div class="panel-title" style="padding:0 0 10px; border:none; font-size:13px;">BOARD SIZE</div>
+      <div class="panel-section">
+        <div class="panel-title panel-sub">BOARD SIZE</div>
         <div class="field-group">
           <div class="field-label">COLUMNS</div>
-          <input class="field-input" id="cfg-cols" type="number" min="6" max="48" value="24" oninput="applyGridConfig()" />
+          <input class="field-input" id="cfg-cols" type="number" min="6" max="48" value="24" data-act="applyGridConfig" />
         </div>
         <div class="field-group">
           <div class="field-label">ROWS</div>
-          <input class="field-input" id="cfg-rows" type="number" min="4" max="32" value="16" oninput="applyGridConfig()" />
+          <input class="field-input" id="cfg-rows" type="number" min="4" max="32" value="16" data-act="applyGridConfig" />
         </div>
-        <button class="btn accent" style="width:100%; margin-top:4px;" onclick="pushLayoutToControllers()">▶ PUSH TO PHONE</button>
-        <button class="btn" style="width:100%; margin-top:8px;" onclick="exportLayout()">EXPORT LAYOUT JSON</button>
-        <button class="btn" style="width:100%; margin-top:8px;" onclick="importLayoutClick()">IMPORT LAYOUT JSON</button>
-        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importLayout(event)" />
+        <button class="btn accent btn-block first" data-act="pushLayoutToControllers">▶ PUSH TO PHONE</button>
+        <button class="btn btn-block" data-act="exportLayout">EXPORT LAYOUT JSON</button>
+        <button class="btn btn-block" data-act="importLayoutClick">IMPORT LAYOUT JSON</button>
+        <input type="file" id="import-file" accept=".json" style="display:none" data-act="importLayout" data-pass="event" />
       </div>
     </div>
   </div>
@@ -629,9 +651,9 @@
   <!-- Center: Key canvas -->
   <div class="canvas-area">
     <div class="canvas-toolbar">
-      <select class="field-input" id="add-type" style="width:auto; display:inline-block; margin-right:6px;"><option value="key">Key</option><option value="toggle">Toggle</option><option value="pad">Pad</option><option value="dial">Dial</option><option value="slider">Slider</option></select><button class="btn accent" onclick="addKey(document.getElementById('add-type').value)">+ ADD</button>
-      <button class="btn" onclick="removeSelected()">− REMOVE</button>
-      <button class="btn" onclick="clearAll()">CLEAR ALL</button>
+      <select class="field-input" id="add-type" style="width:auto; display:inline-block; margin-right:6px;"><option value="key">Key</option><option value="toggle">Toggle</option><option value="pad">Pad</option><option value="dial">Dial</option><option value="slider">Slider</option></select><button class="btn accent" data-act="addKey" data-from="add-type">+ ADD</button>
+      <button class="btn" data-act="removeSelected">− REMOVE</button>
+      <button class="btn" data-act="clearAll">CLEAR ALL</button>
       <span style="font-size:13px; color:var(--text-dim); margin-left:8px;">CLICK KEY TO EDIT</span>
     </div>
     <div class="canvas-body">
@@ -880,8 +902,13 @@ function firstFree(w, h) {
       arg: 'applause.wav',label: 'APPLAUSE',  sub: 'soundboard',  color: '#1a1426', shape: 'rect', x: 6, y: 11, w: 4, h: 4 },
     { id: 'k11', type: 'key',    behaviour: 'hold',     command: 'audio.mic.ptt',
       label: 'PUSH TALK', sub: 'hold',        color: '#101a1e', shape: 'rounded', x: 11, y: 11, w: 4, h: 4 },
+    // A 3x8 slider does not fit in the bottom band of a 16 row board:
+    // y 11 plus h 8 is 19. It hung off the bottom, and because
+    // applyGridConfig refuses any size that would strand a control, the
+    // board size boxes were jammed permanently as a side effect.
+    // Column 21 is the free one.
     { id: 'k12', type: 'slider', behaviour: 'absolute', command: 'audio.app',
-      arg: 'Spotify',     label: 'SPOTIFY',   sub: 'app volume',  color: '#12211a', shape: 'pill', x: 16, y: 11, w: 3, h: 8 }
+      arg: 'Spotify',     label: 'SPOTIFY',   sub: 'app volume',  color: '#12211a', shape: 'pill', x: 21, y: 1, w: 3, h: 8 }
   ];
 
 var serverIP = '127.0.0.1';
@@ -1139,6 +1166,58 @@ function dismissFirstRun() {
   var bar = document.getElementById('first-run');
   if (bar) { bar.classList.remove('showing'); }
 }
+
+// ---- Actions ---------------------------------------------------
+// controller.html has always used addEventListener while this file used
+// twenty seven inline onclick attributes. Two idioms in one product is a
+// seam, and a seam is the thing a person feels without being able to name.
+//
+// One listener, three events, and the markup declares what it wants:
+//
+//   data-act="saveProfile"                       saveProfile()
+//   data-act="changeType"  data-pass="value"     changeType(el.value)
+//   data-act="importLayout" data-pass="event"    importLayout(event)
+//   data-act="updateKey"   data-field="label"    updateKey('label', value)
+//   data-act="addKey"      data-from="add-type"  addKey(that select's value)
+function runAction(el, e) {
+  var act = el.getAttribute('data-act');
+  if (!act) { return; }
+  var field = el.getAttribute('data-field');
+  var pass = el.getAttribute('data-pass');
+  var from = el.getAttribute('data-from');
+  var value = el.type === 'checkbox' ? el.checked : el.value;
+
+  if (field) { updateKey(field, value); return; }
+  if (from) {
+    var src = document.getElementById(from);
+    if (typeof window[act] === 'function') { window[act](src ? src.value : ''); }
+    return;
+  }
+  var fn = window[act];
+  if (typeof fn !== 'function') {
+    // Silence here is how a button quietly stops working. Say it.
+    console.error('[RemapWrap] no function behind data-act="' + act + '"');
+    return;
+  }
+  if (pass === 'event') { fn(e); }
+  else if (pass === 'value') { fn(value); }
+  else { fn(); }
+}
+
+['click', 'change', 'input'].forEach(function (kind) {
+  document.addEventListener(kind, function (e) {
+    var el = e.target && e.target.closest ? e.target.closest('[data-act]') : null;
+    if (!el) { return; }
+    // A button should not also fire on input, nor a text field on click.
+    var isControl = el.tagName === 'INPUT' || el.tagName === 'SELECT' ||
+                    el.tagName === 'TEXTAREA';
+    if (kind === 'click' && isControl && el.type !== 'button') { return; }
+    if (kind !== 'click' && !isControl) { return; }
+    if (kind === 'input' && el.tagName === 'SELECT') { return; }
+    if (kind === 'change' && el.type === 'text') { return; }
+    runAction(el, e);
+  });
+});
 
 function showPin() {
   // /pin is refused to anything that is not this machine, so the dashboard
@@ -1661,17 +1740,17 @@ function renderEditor(id) {
   var html = '';
 
   html += row('TYPE', typeHint,
-    '<select class="field-input" id="ed-type" onchange="changeType(this.value)">' +
+    '<select class="field-input" id="ed-type" data-act="changeType" data-pass="value">' +
       opts(TYPES.map(function(t) { return [t.id, t.name]; }), key.type) +
     '</select>');
 
   html += row('ACTION', 'how it fires',
-    '<select class="field-input" id="ed-behaviour" onchange="updateKey(\'behaviour\', this.value)">' +
+    '<select class="field-input" id="ed-behaviour" data-act="updateKey" data-field="behaviour">' +
       opts(BEHAVIOURS[key.type] || [], key.behaviour) +
     '</select>');
 
   html += row('COMMAND', continuous ? 'values only' : '',
-    '<select class="field-input" id="ed-command" onchange="changeCommand(this.value)">' +
+    '<select class="field-input" id="ed-command" data-act="changeCommand" data-pass="value">' +
       commandOptions(key.type, key.command) +
     '</select>');
 
@@ -1688,7 +1767,7 @@ function renderEditor(id) {
     var argHtml =
       '<input class="field-input" id="ed-arg" value="' + escAttr(key.arg || '') +
       '" placeholder="' + escAttr(placeholders[meta.arg] || '') +
-      '" oninput="updateKey(\'arg\', this.value)" />';
+      '" data-act="updateKey" data-field="arg" />';
 
     // Typing a shortcut into a box accepts "ctrl+shft+m" without a word of
     // complaint and the key silently does nothing on the phone. Pressing
@@ -1706,14 +1785,14 @@ function renderEditor(id) {
 
   html += '<div class="field-split">' +
     row('LABEL', '', '<input class="field-input" value="' + escAttr(key.label || '') +
-        '" oninput="updateKey(\'label\', this.value)" />') +
+        '" data-act="updateKey" data-field="label" />') +
     row('COLOUR', '', '<input type="color" class="field-input field-colour" value="' +
         escAttr(key.color || '#111820') +
-        '" oninput="updateKey(\'color\', this.value)" />') +
+        '" data-act="updateKey" data-field="color" />') +
     '</div>';
 
   html += '<div class="field-split">' +
-    row('SHAPE', '', '<select class="field-input" onchange="changeShape(this.value)">' +
+    row('SHAPE', '', '<select class="field-input" data-act="changeShape" data-pass="value">' +
         opts(SHAPES, key.shape || 'rounded') + '</select>') +
     row('SIZE', '', '<span class="size-read">' + key.w + ' x ' + key.h +
         '</span>') +
@@ -1721,7 +1800,7 @@ function renderEditor(id) {
 
   html += row('SUBTITLE', 'small line under the label',
     '<input class="field-input" value="' + escAttr(key.sub || '') +
-    '" oninput="updateKey(\'sub\', this.value)" />');
+    '" data-act="updateKey" data-field="sub" />');
 
   // An image replaces the label and the colour rather than sitting beside
   // them, so the editor says so instead of leaving three fields fighting
@@ -1737,12 +1816,12 @@ function renderEditor(id) {
     html += row('WHEN ACTIVE', '',
       '<label class="check"><input type="checkbox" ' +
       (key.lit ? 'checked ' : '') +
-      'onchange="updateKey(\'lit\', this.checked)" /> ' +
+      'data-act="updateKey" data-field="lit" /> ' +
       '<span>Light the key while it is on</span></label>');
   }
 
   html += '<button class="btn danger" style="width:100%; margin-top:12px;" ' +
-          'onclick="removeSelected()">REMOVE CONTROL</button>';
+          'data-act="removeSelected">REMOVE CONTROL</button>';
 
   panel.innerHTML = html;
 
