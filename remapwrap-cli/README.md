@@ -57,7 +57,8 @@ either way.
 ]}
 ```
 
-Five control types — `key`, `toggle`, `pad`, `dial`, `slider` — four shapes,
+Seven control types — `key`, `toggle`, `pad`, `dial`, `slider`, `timer`,
+`input` — four shapes,
 and a command from a fixed catalogue of twenty-nine. Read or write it with
 anything; it is JSON, and this package imports nothing that is not in the
 standard library.
@@ -103,6 +104,19 @@ A generator that cannot produce a valid layout raises instead of writing a
 broken one.
 
 ## As a library
+
+A `timer` counts down from its `arg` in seconds, or up when it is blank. An
+`input` opens the phone's own keyboard and what is written lands on the PC
+through the clipboard, so an accent or an emoji arrives as it was written.
+Neither carries a command, and `check` says so if one is given.
+
+A `toggle` can carry a second face for when it is on, so a key says what is
+true rather than only what it does:
+
+```json
+{"type": "toggle", "command": "audio.mic.mute", "label": "MIC LIVE",
+ "whenOn": {"label": "MUTED", "color": "#2a1216"}}
+```
 
 ```python
 from remapwrap import generate, layout
