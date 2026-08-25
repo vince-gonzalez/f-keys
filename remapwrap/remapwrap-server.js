@@ -97,7 +97,12 @@ function getLocalIP() {
 //
 // The dashboard is exempt only when it is this machine talking to itself.
 var store = require('./store');
+var licence = require('./licence');
 var settings = store.readSettings();
+
+// What this copy may do. Read once at start and again whenever a key is
+// entered, so nothing has to restart to become paid.
+var FEATURES = licence.features(settings.licence);
 var PAIR_SECRET = settings.pairing.secret;
 var PAIR_PIN = settings.pairing.pin;
 
@@ -229,6 +234,70 @@ var httpServer = http.createServer(function(req, res) {
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, pin: PAIR_PIN }));
+    return;
+  }
+
+  // ── Licence ─────────────────────────────────────────────────
+  // Local only. The paid half of the product is unlocked by a signed key
+  // and never by a call to us, so a paid copy works with no internet.
+  if (req.url === '/licence' && req.method === 'GET') {
+    if (!isLocal(req.socket.remoteAddress)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false })); return;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      ok: true, tier: FEATURES.tier, name: FEATURES.name,
+      licensed: FEATURES.licensed, reason: FEATURES.reason,
+      features: {
+        autoSwitch: FEATURES.autoSwitch, imageKeys: FEATURES.imageKeys,
+        meters: FEATURES.meters,
+        devices: FEATURES.devices === Infinity ? null : FEATURES.devices
+      }
+    }));
+    return;
+  }
+
+  if (req.url === '/licence' && req.method === 'POST') {
+    if (!isLocal(req.socket.remoteAddress)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false })); return;
+    }
+    var lbody = '';
+    req.on('data', function (c) { lbody += c; if (lbody.length > 8192) { req.destroy(); } });
+    req.on('end', function () {
+      var given = '';
+      try { given = String((JSON.parse(lbody) || {}).key || '').trim(); } catch (e) { given = ''; }
+      var seen = licence.features(given);
+      res.setHeader('Content-Type', 'application/json');
+      if (!seen.licensed) {
+        res.writeHead(400);
+        res.end(JSON.stringify({ ok: false, error: seen.reason }));
+        return;
+      }
+      settings.licence = given;
+      store.writeSettings(settings);
+      FEATURES = seen;
+      log('Licensed to ' + (seen.name || 'unnamed') + ' (' + seen.tier + ')');
+      res.writeHead(200);
+      res.end(JSON.stringify({ ok: true, tier: seen.tier, name: seen.name }));
+    });
+    return;
+  }
+
+  // Taking a licence off a machine is the other half of putting one on:
+  // somebody replacing a PC needs the key back, not stranded here.
+  if (req.url === '/licence/remove' && req.method === 'POST') {
+    if (!isLocal(req.socket.remoteAddress)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false })); return;
+    }
+    delete settings.licence;
+    store.writeSettings(settings);
+    FEATURES = licence.features(null);
+    log('Licence removed; this copy is free again');
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ ok: true, tier: FEATURES.tier }));
     return;
   }
 
@@ -442,6 +511,17 @@ wss.on('connection', function(ws, req) {
           if (!sameSecret(msg.token)) {
             log('Refused an unpaired controller from ' + clientIP);
             ws.send(JSON.stringify({ type: 'unpaired' }));
+            ws.close();
+            return;
+          }
+          // The only ceiling the free tier has. Everything that makes
+          // this a control surface - keys, profiles, pages, placement -
+          // is unlimited and stays unlimited.
+          if (controllerClients.length >= FEATURES.devices) {
+            log('Refused a phone: ' + FEATURES.devices +
+                ' already connected on the ' + FEATURES.tier + ' tier');
+            ws.send(JSON.stringify({ type: 'too_many_devices',
+                                     limit: FEATURES.devices }));
             ws.close();
             return;
           }
