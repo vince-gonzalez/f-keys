@@ -16,6 +16,28 @@ function call(m,p,b){ return new Promise(function(res){
   r.on('error',function(){res({status:0,body:null});}); if(d){r.write(d);} r.end();});}
 var wait = function(ms){ return new Promise(function(r){ setTimeout(r,ms); }); };
 
+// Sleeping a fixed 2500ms and then asserting is how this test earned its
+// reputation. The PowerShell host compiles its C# on first start, which
+// takes seconds, and until it answers there is no foreground reading at
+// all - so the assertion was racing a compiler. Wait for the condition,
+// with a ceiling, and report the ceiling as the failure.
+async function until(what, check, ms) {
+  var deadline = Date.now() + (ms || 12000);
+  while (Date.now() < deadline) {
+    if (await check()) { return true; }
+    await wait(250);
+  }
+  return false;
+}
+
+// Nothing can be asserted about switching until the host is answering.
+async function hostReady() {
+  return until('the audio host to answer', async function () {
+    var r = await call('GET', '/profiles');
+    return r.status === 200;
+  }, 20000);
+}
+
 var KEY_PATH = process.env.REMAPWRAP_SIGNING_KEY ||
                'C:/tmp/remapwrap-signing/PRIVATE-KEY.txt';
 if (!fs.existsSync(KEY_PATH)) {
@@ -37,7 +59,11 @@ if (!fs.existsSync(KEY_PATH)) {
   var before = (await call('GET','/profiles')).body.active;
   ok('starting on the other profile', before === 'Autoswitch Other.json');
 
-  await wait(2500);
+  await hostReady();
+
+  // Give the watcher several ticks. If it were going to move on the free
+  // tier it would have by now.
+  await wait(3000);
   var stillFree = (await call('GET','/profiles')).body.active;
   ok('free does not follow the window', stillFree === 'Autoswitch Other.json');
 
@@ -46,9 +72,11 @@ if (!fs.existsSync(KEY_PATH)) {
   await call('POST','/licence',{key:key});
   ok('now licensed', (await call('GET','/licence')).body.tier === 'pro');
 
-  await wait(2500);
-  var after = (await call('GET','/profiles')).body.active;
-  ok('pro switched to the matching profile', after === 'Autoswitch Probe.json');
+  var switched = await until('the surface to follow the window', async function () {
+    var r = await call('GET','/profiles');
+    return r.body && r.body.active === 'Autoswitch Probe.json';
+  }, 12000);
+  ok('pro switched to the matching profile', switched);
 
   // tidy up so the machine is left as it was
   await call('POST','/licence/remove');

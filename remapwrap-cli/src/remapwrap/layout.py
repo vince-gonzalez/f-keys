@@ -68,14 +68,22 @@ CONTINUOUS = (
 #: typo as far as the surface is concerned, and a typo that reaches the
 #: phone is a control that does nothing when pressed.
 COMMANDS = {
-    "obs.stream", "obs.record", "obs.replay", "obs.scene", "obs.transition",
-    "obs.studio", "stream.marker", "stream.ad",
     "audio.mic.mute", "audio.mic.ptt", "audio.mic.gain", "audio.master",
     "audio.desktop", "audio.app", "audio.duck",
     "sound.play", "sound.stop",
     "capture.clip", "capture.shot", "capture.window",
     "win.keystroke", "win.text", "win.launch", "win.desktop", "win.media",
     "macro.sequence",
+}
+
+#: Named so nobody proposes them twice, and deliberately not in COMMANDS.
+#: obs.* needs an obs-websocket connection and stream.* needs a Twitch
+#: token; both are integrations rather than commands. Listing them as real
+#: meant a third of the catalogue existed only to announce its own absence,
+#: which is a worse catalogue than a shorter true one.
+PLANNED = {
+    "obs.stream", "obs.record", "obs.replay", "obs.scene", "obs.transition",
+    "obs.studio", "stream.marker", "stream.ad",
 }
 
 #: What the surface can actually carry out today. A command outside this set
@@ -227,15 +235,14 @@ def check(lay):
                                                 ktype))
 
         cmd = k.get("command", "")
-        if cmd and cmd not in COMMANDS:
+        if cmd and cmd in PLANNED:
+            problems.append("{} is bound to {!r}, which is planned but not "
+                            "built. It would be a key that does nothing."
+                            .format(where, cmd))
+        elif cmd and cmd not in COMMANDS:
             problems.append("{} is bound to {!r}, which is not a command."
                             .format(where, cmd))
-        elif cmd and cmd not in IMPLEMENTED:
-            # Not a typo and not malformed - simply not connected to
-            # anything yet. Said plainly so nobody ships a dead button.
-            problems.append("{} is bound to {!r}, which the surface does not "
-                            "do yet. It will be a key that does nothing."
-                            .format(where, cmd))
+
 
         # The rule the browser enforces by hiding the options: a dial
         # reports a value and can only drive something that takes one.

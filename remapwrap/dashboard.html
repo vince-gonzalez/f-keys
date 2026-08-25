@@ -737,14 +737,11 @@ function firstFree(w, h) {
   // toggle bound to one can be lit while it is on.
   var COMMANDS = [
     { group: 'Stream', items: [
-      ['obs.stream',      'Start / stop stream',   { latching: true }],
-      ['obs.record',      'Start / stop recording',{ latching: true }],
-      ['obs.replay',      'Save replay buffer'],
-      ['obs.scene',       'Switch scene…',         { arg: 'scene' }],
-      ['obs.transition',  'Trigger transition'],
-      ['obs.studio',      'Toggle studio mode',    { latching: true }],
-      ['stream.marker',   'Place stream marker'],
-      ['stream.ad',       'Run commercial break',  { arg: 'seconds' }]
+      // obs.* and stream.* are not offered. They need an obs-websocket
+      // connection and a Twitch token respectively, and an option somebody
+      // can pick that does nothing is worse than an option that is absent.
+      // They are named in the Python package as PLANNED so nobody proposes
+      // them twice.
     ]},
     { group: 'Audio', items: [
       ['audio.mic.mute',  'Mute microphone',       { latching: true }],
@@ -809,33 +806,44 @@ function firstFree(w, h) {
   // is under their hands; a streamer reaches for it to go to a break, mute a
   // microphone or fire a sound without alt-tabbing out of a game. The two
   // middle positions are the volume controls, which are always continuous.
+  // Five of the twelve keys this shipped with were bound to obs.* and
+  // stream.*, which nothing runs - so the board a person met on first
+  // launch was half dead buttons, and there was no way for them to know
+  // which half. Every key here does something on a bare Windows machine
+  // with nothing else installed.
+  //
+  // The three that used to be scene switches are keystrokes instead,
+  // because that is how a streamer actually binds a scene: the hotkey is
+  // set once inside their streaming software and this presses it. It works
+  // with OBS, Streamlabs, XSplit and anything else that takes a hotkey,
+  // which is more than an OBS integration would have done.
   var layout = [
     { id: 'k1',  type: 'toggle', behaviour: 'latch',    command: 'audio.mic.mute',
       label: 'MUTE MIC',  sub: 'microphone',  color: '#2a1216', lit: true, shape: 'rounded', x: 1, y: 1, w: 4, h: 4 },
-    { id: 'k2',  type: 'key',    behaviour: 'press',    command: 'obs.scene',
-      arg: 'Be Right Back', label: 'BRB',  sub: 'scene',  color: '#161a2a', shape: 'rounded', x: 6, y: 1, w: 4, h: 4 },
-    { id: 'k3',  type: 'key',    behaviour: 'press',    command: 'obs.scene',
-      arg: 'Live',        label: 'LIVE',      sub: 'scene',       color: '#12211a', shape: 'rounded', x: 11, y: 1, w: 4, h: 4 },
+    { id: 'k2',  type: 'key',    behaviour: 'press',    command: 'win.keystroke',
+      arg: 'ctrl+shift+f1', label: 'BRB',     sub: 'ctrl+shift+f1', color: '#161a2a', shape: 'rounded', x: 6, y: 1, w: 4, h: 4 },
+    { id: 'k3',  type: 'key',    behaviour: 'press',    command: 'win.keystroke',
+      arg: 'ctrl+shift+f2', label: 'LIVE',    sub: 'ctrl+shift+f2', color: '#12211a', shape: 'rounded', x: 11, y: 1, w: 4, h: 4 },
     { id: 'k4',  type: 'key',    behaviour: 'press',    command: 'capture.clip',
       label: 'CLIP THAT', sub: 'last 30s',    color: '#1c1626', shape: 'rounded', x: 16, y: 1, w: 4, h: 4 },
-  
-    { id: 'k5',  type: 'key',    behaviour: 'press',    command: 'stream.ad',
-      arg: '180',         label: 'AD BREAK',  sub: '3 minutes',   color: '#241a10', shape: 'rounded', x: 1, y: 6, w: 4, h: 4 },
+
+    { id: 'k5',  type: 'key',    behaviour: 'press',    command: 'win.keystroke',
+      arg: 'ctrl+shift+f3', label: 'AD BREAK', sub: 'ctrl+shift+f3', color: '#241a10', shape: 'rounded', x: 1, y: 6, w: 4, h: 4 },
     { id: 'k6',  type: 'dial',   behaviour: 'relative', command: 'audio.mic.gain',
       label: 'MIC GAIN',  sub: 'dial',        color: '#111820', shape: 'circle', x: 6, y: 6, w: 4, h: 4 },
     { id: 'k7',  type: 'dial',   behaviour: 'relative', command: 'audio.master',
       label: 'MASTER',    sub: 'dial',        color: '#111820', shape: 'circle', x: 11, y: 6, w: 4, h: 4 },
-    { id: 'k8',  type: 'toggle', behaviour: 'latch',    command: 'obs.record',
-      label: 'RECORD',    sub: 'local file',  color: '#2a1216', lit: true, shape: 'rounded', x: 16, y: 6, w: 4, h: 4 },
-  
+    { id: 'k8',  type: 'key',    behaviour: 'press',    command: 'capture.shot',
+      label: 'SCREENSHOT', sub: 'game bar',   color: '#2a1216', shape: 'rounded', x: 16, y: 6, w: 4, h: 4 },
+
     { id: 'k9',  type: 'pad',    behaviour: 'trigger',  command: 'sound.play',
       arg: 'airhorn.wav', label: 'AIRHORN',   sub: 'soundboard',  color: '#1a1426', shape: 'rect', x: 1, y: 11, w: 4, h: 4 },
     { id: 'k10', type: 'pad',    behaviour: 'trigger',  command: 'sound.play',
       arg: 'applause.wav',label: 'APPLAUSE',  sub: 'soundboard',  color: '#1a1426', shape: 'rect', x: 6, y: 11, w: 4, h: 4 },
     { id: 'k11', type: 'key',    behaviour: 'hold',     command: 'audio.mic.ptt',
       label: 'PUSH TALK', sub: 'hold',        color: '#101a1e', shape: 'rounded', x: 11, y: 11, w: 4, h: 4 },
-    { id: 'k12', type: 'toggle', behaviour: 'latch',    command: 'obs.stream',
-      label: 'STREAM',    sub: 'go live',     color: '#12211a', lit: true, shape: 'rounded', x: 16, y: 11, w: 4, h: 4 }
+    { id: 'k12', type: 'slider', behaviour: 'absolute', command: 'audio.app',
+      arg: 'Spotify',     label: 'SPOTIFY',   sub: 'app volume',  color: '#12211a', shape: 'pill', x: 16, y: 11, w: 3, h: 8 }
   ];
 
 var serverIP = '127.0.0.1';

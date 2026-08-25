@@ -231,27 +231,42 @@ function startStatePolling() {
 var lastForeground = null;
 var switchTimer = null;
 
-function profileMatching(exe, title) {
-  var hay = (exe + ' ' + title).toLowerCase();
-  var found = null;
+// Built once and kept, because the old version opened, read and parsed
+// every profile on disk on each foreground change - inside a timer running
+// twice a second. At a dozen profiles nobody notices; at two hundred it is
+// a stutter, and it was doing the work whether or not anything matched.
+var matchTable = null;
+
+function buildMatchTable() {
+  matchTable = [];
   store.listProfiles().forEach(function (entry) {
-    if (found || entry.unreadable) { return; }
+    if (entry.unreadable) { return; }
     var doc = store.loadProfile(entry.file);
-    if (!doc || !Array.isArray(doc.match)) { return; }
-    var hit = doc.match.some(function (m) {
-      return m && hay.indexOf(String(m).toLowerCase()) !== -1;
+    if (!doc || !Array.isArray(doc.match) || !doc.match.length) { return; }
+    matchTable.push({
+      file: entry.file,
+      needles: doc.match.filter(Boolean).map(function (m) {
+        return String(m).toLowerCase();
+      })
     });
-    if (hit) { found = { file: entry.file, doc: doc }; }
   });
-  return found;
+  return matchTable;
 }
 
-// Set whenever the answer could have changed for a reason that is not the
-// window moving: a licence arriving, or a profile being saved or deleted.
-// Without this, buying the feature while already sitting in Photoshop did
-// nothing until you alt-tabbed away and back, and so did writing a profile
-// for the app you are looking at. Both read as the feature not working.
-var matchDirty = true;
+function profileMatching(exe, title) {
+  var hay = (exe + ' ' + title).toLowerCase();
+  var table = matchTable || buildMatchTable();
+  for (var i = 0; i < table.length; i++) {
+    for (var j = 0; j < table[i].needles.length; j++) {
+      if (hay.indexOf(table[i].needles[j]) !== -1) {
+        // The document itself is only loaded once something matched.
+        var doc = store.loadProfile(table[i].file);
+        if (doc) { return { file: table[i].file, doc: doc }; }
+      }
+    }
+  }
+  return null;
+}
 
 function considerForeground(reading) {
   if (!FEATURES.autoSwitch || typeof reading !== 'string') { return; }
@@ -378,7 +393,7 @@ var httpServer = http.createServer(function(req, res) {
       settings.licence = given;
       store.writeSettings(settings);
       FEATURES = seen;
-      matchDirty = true;
+      matchDirty = true; matchTable = null;
       log('Licensed to ' + (seen.name || 'unnamed') + ' (' + seen.tier + ')');
       res.writeHead(200);
       res.end(JSON.stringify({ ok: true, tier: seen.tier, name: seen.name }));
@@ -396,7 +411,7 @@ var httpServer = http.createServer(function(req, res) {
     delete settings.licence;
     store.writeSettings(settings);
     FEATURES = licence.features(null);
-    matchDirty = true;
+    matchDirty = true; matchTable = null;
     log('Licence removed; this copy is free again');
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, tier: FEATURES.tier }));
@@ -433,7 +448,7 @@ var httpServer = http.createServer(function(req, res) {
     }
 
     if (req.method === 'POST' && req.url.indexOf('/profile/delete') === 0) {
-      matchDirty = true;
+      matchDirty = true; matchTable = null;
       var gone = store.deleteProfile(q.file || '');
       if (gone && settings.activeProfile === q.file) {
         settings.activeProfile = null;
@@ -466,7 +481,7 @@ var httpServer = http.createServer(function(req, res) {
         var doc = null;
         try { doc = JSON.parse(body); } catch (e) { doc = null; }
         if (!doc) { res.writeHead(400); res.end(JSON.stringify({ ok: false, error: 'Not a profile.' })); return; }
-        matchDirty = true;
+        matchDirty = true; matchTable = null;
         var file = store.saveProfile(doc);
         settings.activeProfile = file;
         store.writeSettings(settings);
@@ -664,11 +679,16 @@ wss.on('connection', function(ws, req) {
 
         // Audio owns some of the catalogue now. Anything it claims goes
         // there; the rest is still a key combination.
-        if (fireCommand(msg)) { return; }
+        if (fireCommand(msg)) { ackTo(ws, msg.id, true); return; }
 
         // Fire keystroke if nut-js is loaded and action is mapped
         if (keyboard && msg.action && msg.action !== 'none') {
           fireKeystroke(msg.action);
+          ackTo(ws, msg.id, true);
+        } else {
+          // Nothing ran. Saying so is the difference between a button that
+          // feels broken and a button that tells you it is not wired up.
+          ackTo(ws, msg.id, false);
         }
         return;
       }
@@ -758,6 +778,16 @@ wss.on('error', function(err) {
 });
 
 // ── Broadcast helpers ─────────────────────────────────────────
+// A phone gets no feedback of its own worth having: navigator.vibrate does
+// not exist on iOS at all, so a press on an iPhone was silent in every
+// sense. The PC now answers every press, and the key confirms on screen -
+// which works on every phone, and says whether anything actually ran.
+function ackTo(ws, id, ok) {
+  if (!id || ws.readyState !== WebSocket.OPEN) { return; }
+  try { ws.send(JSON.stringify({ type: 'ack', id: id, ok: !!ok })); }
+  catch (e) { /* the phone left mid-press */ }
+}
+
 function broadcastToDashboards(obj) {
   // READS: dashboardClients
   var str = JSON.stringify(obj);

@@ -347,6 +347,48 @@
 }
 .pin-go:active { border-style: inset; }
 .pin-hint { font-size: 13px; line-height: 1.4; color: var(--text); margin-top: 14px; }
+
+/* A press has to be visible, not only felt: iOS has no vibrate API, so
+   the ring is the only confirmation an iPhone user ever gets. */
+.key-btn.confirmed {
+  animation: rw-confirm 320ms ease-out;
+}
+@keyframes rw-confirm {
+  0%   { box-shadow: 0 0 0 0 var(--accent); }
+  100% { box-shadow: 0 0 0 14px rgba(0,0,0,0); }
+}
+/* A command the PC does not run yet must not look the same as one it does. */
+.key-btn.unwired {
+  animation: rw-unwired 900ms ease-out;
+}
+@keyframes rw-unwired {
+  0%, 100% { outline: 0 solid transparent; }
+  20%, 60% { outline: 3px solid var(--accent3); outline-offset: -3px; }
+}
+/* Nothing moves for somebody who asked the system not to move things. */
+@media (prefers-reduced-motion: reduce) {
+  .key-btn.confirmed, .key-btn.unwired { animation: none; }
+  .key-btn.confirmed { box-shadow: 0 0 0 3px var(--accent); }
+  .key-btn.unwired { outline: 3px solid var(--accent3); outline-offset: -3px; }
+}
+
+/* A volume change made on the keyboard used to make the dial on the phone
+   jump between two positions with nothing in between, which reads as a
+   glitch rather than as a reading. It travels now - but only when the PC
+   is moving it. Under a thumb there must be no lag at all, so the drag
+   turns the transition off for as long as it lasts. */
+.dial-arc, .dial-pointer, .slider-fill {
+  transition: transform 180ms ease-out, background 180ms ease-out,
+              height 180ms ease-out;
+}
+.value-ctl[data-holding="1"] .dial-arc,
+.value-ctl[data-holding="1"] .dial-pointer,
+.value-ctl[data-holding="1"] .slider-fill {
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dial-arc, .dial-pointer, .slider-fill { transition: none; }
+}
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -597,6 +639,10 @@ function handleMessage(msg) {
     document.getElementById('ping-disp').textContent = lat + ' ms';
     return;
   }
+  if (msg.type === 'ack') {
+    confirmPress(msg.id, msg.ok);
+    return;
+  }
   if (msg.type === 'state') {
     applyState(msg.state);
     return;
@@ -684,6 +730,17 @@ function renderKeys() {
 function buildButton(key, type) {
   var btn = document.createElement('div');
   btn.className = 'key-btn type-' + type + (key.state ? ' on' : '');
+
+  // A div that acts like a button has to say so, be reachable by keyboard,
+  // and carry its name - the label inside is styled text, not an accessible
+  // name, and a toggle has to announce whether it is on.
+  btn.setAttribute('role', type === 'toggle' ? 'switch' : 'button');
+  btn.setAttribute('tabindex', '0');
+  btn.setAttribute('aria-label', key.label + (key.sub ? ', ' + key.sub : ''));
+  if (type === 'toggle') {
+    btn.setAttribute('aria-checked', key.state ? 'true' : 'false');
+  }
+
   btn.dataset.label = key.label;
   btn.dataset.command = key.command || key.action || '';
   btn.dataset.behaviour = key.behaviour || 'press';
@@ -763,8 +820,21 @@ function buildValueControl(key, type) {
   }
   if (typeof key.value !== 'number') { key.value = 50; }
 
+  // A screen reader met a bare div here and had nothing to say about it.
+  // A dial and a slider are both the same thing to assistive technology -
+  // a value inside a range - so both get the slider role, a name, and a
+  // reading that stays in step with the face.
+  wrap.setAttribute('role', 'slider');
+  wrap.setAttribute('tabindex', '0');
+  wrap.setAttribute('aria-label', key.label + (key.sub ? ', ' + key.sub : ''));
+  wrap.setAttribute('aria-valuemin', '0');
+  wrap.setAttribute('aria-valuemax', '100');
+  wrap.setAttribute('aria-valuenow', String(Math.round(key.value)));
+  wrap.setAttribute('aria-orientation', type === 'slider' ? 'vertical' : 'horizontal');
+
   wrap.innerHTML =
-    '<div class="' + (type === 'dial' ? 'dial-face' : 'slider-face') + '">' +
+    '<div aria-hidden="true" class="' +
+      (type === 'dial' ? 'dial-face' : 'slider-face') + '">' +
       (type === 'dial'
         ? '<div class="dial-arc"></div><div class="dial-pointer"></div>'
         : '<div class="slider-fill"></div>') +
@@ -775,7 +845,48 @@ function buildValueControl(key, type) {
 
   paintValue(wrap, key);
   attachValueDrag(wrap, key, type);
+  attachValueKeys(wrap, key, type);
   return wrap;
+}
+
+// A dial that can only be turned by dragging cannot be used by anybody
+// working with a keyboard, a switch, or a screen reader. Arrow keys move
+// it by one, page keys by ten, home and end to the ends - the behaviour
+// every native range control already has and that people expect.
+function attachValueKeys(wrap, key, type) {
+  wrap.addEventListener('keydown', function (e) {
+    var step = 0;
+    if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { step = 1; }
+    else if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { step = -1; }
+    else if (e.key === 'PageUp') { step = 10; }
+    else if (e.key === 'PageDown') { step = -10; }
+    else if (e.key === 'Home') { step = -101; }
+    else if (e.key === 'End') { step = 101; }
+    else { return; }
+
+    e.preventDefault();
+    var next = Math.max(0, Math.min(100, Math.round(key.value) + step));
+    key.value = next;
+    paintValue(wrap, key);
+    sendValue(key);
+  });
+}
+
+// The PC heard it. A press used to rely on navigator.vibrate, which iOS
+// does not implement, so on an iPhone nothing happened at all until the
+// thing being controlled changed - and for a keystroke sent to another
+// window, that is invisible. The key now confirms on its own face.
+function confirmPress(id, ok) {
+  var el = document.querySelector('[data-id="' + id + '"]');
+  if (!el) { return; }
+  var cls = ok ? 'confirmed' : 'unwired';
+  el.classList.remove('confirmed', 'unwired');
+  // Reading offsetWidth restarts the animation when the same key is
+  // pressed twice quickly; without it the second press shows nothing.
+  void el.offsetWidth;
+  el.classList.add(cls);
+  setTimeout(function () { el.classList.remove(cls); }, ok ? 320 : 900);
+  if (ok) { triggerHaptic(CFG.HAPTIC_MS); }
 }
 
 // ── What the machine says is true ────────────────────────────────
@@ -810,6 +921,13 @@ function paintValue(wrap, key) {
   var v = Math.max(0, Math.min(100, key.value));
   var read = wrap.querySelector('.value-read');
   if (read) { read.textContent = Math.round(v); }
+
+  // The reading a screen reader announces has to be the reading on the
+  // face. Setting one and not the other is worse than setting neither.
+  if (wrap.getAttribute('role') === 'slider') {
+    wrap.setAttribute('aria-valuenow', String(Math.round(v)));
+    wrap.setAttribute('aria-valuetext', Math.round(v) + ' percent');
+  }
 
   var arc = wrap.querySelector('.dial-arc');
   if (arc) {
