@@ -491,6 +491,29 @@ input[type=range].sheet-input { padding: 0; }
   color: var(--text-bright); background: var(--bg2);
   border: 2px outset var(--border); cursor: pointer;
 }
+
+/* ── Compose, timers and the two faces of a key ────────────────── */
+.compose-area { min-height: 120px; resize: vertical; line-height: 1.4; }
+.sheet-done.compose-alt { margin-top: 10px; background: var(--panel); }
+.key-btn .timer-face {
+  font-family: var(--font-mono), monospace;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+/* A finished countdown must be obvious without relying on colour, since
+   the person it is telling may not be looking straight at it. */
+.key-btn.timer-done { animation: rw-done 1s ease-in-out infinite; }
+@keyframes rw-done {
+  0%, 100% { outline: 4px solid transparent; outline-offset: -4px; }
+  50%      { outline: 4px solid var(--accent); outline-offset: -4px; }
+}
+.key-btn.timer-running .timer-face { color: var(--lcd); }
+@media (prefers-reduced-motion: reduce) {
+  .key-btn.timer-done { animation: none; outline: 4px solid var(--accent);
+                        outline-offset: -4px; }
+}
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -585,6 +608,24 @@ input[type=range].sheet-input { padding: 0; }
     </div>
   </div>
 
+  <!-- Compose. The phone already has the keyboard somebody can use -
+       theirs, with their prediction, their dictation, their language -
+       and the PC has none of that for them. Typing here and sending it
+       is the shortest route between a person and a text box on a
+       computer they cannot easily type into. -->
+  <div id="compose-sheet" class="sheet" role="dialog" aria-modal="true"
+       aria-label="Type something" hidden>
+    <div class="sheet-inner">
+      <div class="sheet-title" id="compose-title">TYPE SOMETHING</div>
+      <textarea id="compose-text" class="sheet-input compose-area"
+                rows="4" aria-label="What to send"></textarea>
+      <div class="sheet-note" id="compose-note">It goes into whatever is in front on the PC.</div>
+      <button id="compose-send" class="sheet-done" type="button">SEND TO THE PC</button>
+      <button id="compose-say" class="sheet-done compose-alt" type="button">SAY IT OUT LOUD</button>
+      <button id="compose-close" class="sheet-done compose-alt" type="button">CANCEL</button>
+    </div>
+  </div>
+
   <div class="grid-wrap">
     <div class="key-grid" id="key-grid"></div>
   </div>
@@ -665,6 +706,7 @@ document.addEventListener('visibilitychange', function () {
 document.addEventListener('DOMContentLoaded', function () {
   loadAccess();
   wireSettings();
+  wireCompose();
   holdScreenAwake();
   var once = function () {
     holdScreenAwake();
@@ -812,6 +854,11 @@ function handleMessage(msg) {
     confirmPress(msg.id, msg.ok);
     return;
   }
+  if (msg.type === 'timers') {
+    timerData = msg.timers || {};
+    paintTimers();
+    return;
+  }
   if (msg.type === 'state') {
     applyState(msg.state);
     return;
@@ -823,6 +870,7 @@ function handleMessage(msg) {
     if (typeof msg.page === 'number') { pageIndex = msg.page; }
     renderPages();
     renderKeys();
+    paintTimers();
     scanStart();          // the surface changed; the sweep follows it
     log('Layout received' +
         (pageCount > 1 ? ' (page ' + (pageIndex + 1) + ' of ' + pageCount + ')' : ''));
@@ -1325,7 +1373,9 @@ function renderKeys() {
     var type = key.type || 'key';
     var el = (type === 'dial' || type === 'slider')
       ? buildValueControl(key, type)
-      : buildButton(key, type);
+      : (type === 'timer' ? buildTimer(key)
+      : (type === 'input' ? buildComposeKey(key)
+      : buildButton(key, type)));
     el.dataset.id = key.id;
     el.dataset.type = type;
 
@@ -1345,6 +1395,41 @@ function renderKeys() {
     }
     grid.appendChild(el);
   });
+}
+
+// ── The two faces of a key ───────────────────────────────────────
+// A toggle that reads MUTE MIC whether or not the microphone is muted is
+// telling you what the key does rather than what is true. whenOn lets a
+// layout say both:
+//
+//   { "label": "MIC LIVE", "color": "#12211a",
+//     "whenOn": { "label": "MUTED", "color": "#2a1216" } }
+//
+// Everything in whenOn is optional; anything left out keeps the ordinary
+// face, so a layout can change only the colour, or only the words.
+// Update what a key says without rebuilding it, so a state arriving from
+// the PC changes the words and the colour in place.
+function repaintFace(el, key) {
+  var face = faceFor(key);
+  var label = el.querySelector('.key-label');
+  if (label) { label.textContent = face.label; }
+  var sub = el.querySelector('.key-sub');
+  if (sub) { sub.textContent = face.sub; }
+  if (face.color) {
+    el.style.background = face.color;
+    el.style.color = inkFor(face.color);
+  }
+  el.setAttribute('aria-label', face.label + (face.sub ? ', ' + face.sub : ''));
+}
+
+function faceFor(key) {
+  var on = key.state === true;
+  var alt = (on && key.whenOn) ? key.whenOn : null;
+  return {
+    label: (alt && alt.label !== undefined) ? alt.label : (key.label || ''),
+    sub:   (alt && alt.sub !== undefined) ? alt.sub : (key.sub || ''),
+    color: (alt && alt.color) ? alt.color : (key.color || '')
+  };
 }
 
 function buildButton(key, type) {
@@ -1369,10 +1454,21 @@ function buildButton(key, type) {
     btn.style.color = inkFor(key.color);
   }
 
+  // A key can carry a second face for when it is on. A mute button that
+  // still says MUTE MIC while the microphone is already muted is a button
+  // that has to be read twice, and on a surface somebody is using without
+  // looking directly at it, twice is too many.
+  var face = faceFor(key);
+  if (face.color) {
+    btn.style.background = face.color;
+    btn.style.color = inkFor(face.color);
+  }
+  btn.setAttribute('aria-label', face.label + (face.sub ? ', ' + face.sub : ''));
+
   btn.innerHTML =
     (key.lit ? '<span class="lamp"></span>' : '') +
-    '<span class="key-label">' + escHtml(key.label) + '</span>' +
-    (key.sub ? '<span class="key-sub">' + escHtml(key.sub) + '</span>' : '');
+    '<span class="key-label">' + escHtml(face.label) + '</span>' +
+    (face.sub ? '<span class="key-sub">' + escHtml(face.sub) + '</span>' : '');
 
   // A pad fires the moment it is struck. Waiting for release is right for
   // a key and wrong for a soundboard, where the delay is audible.
@@ -1430,6 +1526,164 @@ function fireControl(key, el) {
 }
 
 // ── dials and sliders ────────────────────────────────────────────
+
+// ── Compose ──────────────────────────────────────────────────────
+// The phone already has a keyboard this person can use - theirs, with
+// their prediction, their dictation, their language - and the PC has none
+// of that for them. This is the shortest route between somebody and a text
+// box on a computer they cannot easily type into.
+//
+// SAY IT OUT LOUD is the same text through the PC's voice, which is what
+// turns this from a keyboard into a way of speaking.
+var composeKey = null;
+
+function openCompose(key) {
+  composeKey = key || null;
+  var sheet = document.getElementById('compose-sheet');
+  var box = document.getElementById('compose-text');
+  var title = document.getElementById('compose-title');
+  if (!sheet) { return; }
+  if (title) { title.textContent = (key && key.label) ? key.label.toUpperCase()
+                                                      : 'TYPE SOMETHING'; }
+  if (box) { box.value = (key && key.arg) ? key.arg : ''; }
+  sheet.hidden = false;
+  scanStop();                       // do not sweep the keyboard away
+  if (box) { box.focus(); }
+}
+
+function closeCompose() {
+  var sheet = document.getElementById('compose-sheet');
+  if (sheet) { sheet.hidden = true; }
+  composeKey = null;
+  scanStart();
+}
+
+function sendCompose(mode) {
+  var box = document.getElementById('compose-text');
+  var note = document.getElementById('compose-note');
+  var text = box ? box.value : '';
+  if (!text) { if (box) { box.focus(); } return; }
+  send({ type: 'compose', mode: mode, text: text });
+  if (note) {
+    note.textContent = mode === 'say' ? 'Said.' : 'Sent to the PC.';
+  }
+  triggerHaptic(CFG.HAPTIC_MS);
+  // The sheet stays open on purpose: somebody saying several things in a
+  // row should not have to reopen it between sentences.
+  if (mode !== 'say' && box) { box.select && box.select(); }
+}
+
+function buildComposeKey(key) {
+  var el = document.createElement('div');
+  el.className = 'key-btn type-input';
+  if (key.color) {
+    el.style.background = key.color;
+    el.style.color = inkFor(key.color);
+  }
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('aria-label', (key.label || 'Type something') +
+                  (key.sub ? ', ' + key.sub : ''));
+  el.innerHTML =
+    '<span class="key-label">' + escHtml(key.label || 'TYPE') + '</span>' +
+    (key.sub ? '<span class="key-sub">' + escHtml(key.sub) + '</span>' : '');
+  var open = function (e) { if (e) { e.preventDefault(); } openCompose(key); };
+  el.addEventListener('click', open);
+  el.addEventListener('keydown', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') { open(e); }
+  });
+  return el;
+}
+
+function wireCompose() {
+  var send_ = document.getElementById('compose-send');
+  var say = document.getElementById('compose-say');
+  var close = document.getElementById('compose-close');
+  if (send_) { send_.addEventListener('click', function () { sendCompose('type'); }); }
+  if (say) { say.addEventListener('click', function () { sendCompose('say'); }); }
+  if (close) { close.addEventListener('click', closeCompose); }
+}
+
+// ── Timers ───────────────────────────────────────────────────────
+// The PC owns the count and only tells us when something changed. What is
+// on the face is worked out here from the local clock, so a running timer
+// costs nothing on the network and keeps ticking if the connection drops.
+var timerData = {};
+var timerPaint = null;
+
+function timerText(t) {
+  if (!t) { return '--:--'; }
+  var ms = t.accumulated + (t.running ? (Date.now() - t.startedAt) : 0);
+  if (t.duration) { ms = Math.max(0, t.duration * 1000 - ms); }
+  var total = Math.floor(ms / 1000);
+  var mm = Math.floor(total / 60);
+  var ss = total % 60;
+  // Past an hour, minutes stop being readable at a glance.
+  if (mm >= 60) {
+    return Math.floor(mm / 60) + ':' + String(mm % 60).padStart(2, '0') +
+           ':' + String(ss).padStart(2, '0');
+  }
+  return String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0');
+}
+
+function paintTimers() {
+  var any = false;
+  (layout.keys || []).forEach(function (key) {
+    if (key.type !== 'timer') { return; }
+    var el = document.querySelector('[data-id="' + key.id + '"]');
+    if (!el) { return; }
+    var t = timerData[key.id];
+    var face = el.querySelector('.timer-face');
+    if (face) { face.textContent = timerText(t); }
+    el.classList.toggle('timer-running', !!(t && t.running));
+    el.classList.toggle('timer-done', !!(t && t.done));
+    // What a screen reader hears has to be the same fact as the face.
+    el.setAttribute('aria-label',
+      (key.label || 'Timer') + ', ' + timerText(t) +
+      (t && t.done ? ', finished' : t && t.running ? ', running' : ', stopped'));
+    if (t && t.running) { any = true; }
+  });
+  // Only run a repaint while something is actually counting.
+  if (any && !timerPaint) { timerPaint = setInterval(paintTimers, 250); }
+  if (!any && timerPaint) { clearInterval(timerPaint); timerPaint = null; }
+}
+
+function buildTimer(key) {
+  var el = document.createElement('div');
+  el.className = 'key-btn type-timer';
+  if (key.color) {
+    el.style.background = key.color;
+    el.style.color = inkFor(key.color);
+  }
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('aria-label', (key.label || 'Timer') + ', stopped');
+  el.innerHTML =
+    '<span class="timer-face" aria-hidden="true">--:--</span>' +
+    '<span class="key-label">' + escHtml(key.label || 'TIMER') + '</span>';
+
+  var fire = function (action) {
+    send({ type: 'timer', id: key.id, action: action,
+           duration: parseInt(key.arg, 10) || 0, label: key.label || '' });
+  };
+  // Press to start or pause, hold to put it back to the beginning. One key
+  // doing both is one key rather than three on a surface where every key
+  // costs presses to reach.
+  var held = null;
+  var down = function () { held = setTimeout(function () {
+    held = null; fire('reset'); triggerHaptic(CFG.HAPTIC_MS); }, 700); };
+  var up = function () {
+    if (held) { clearTimeout(held); held = null; fire('toggle'); } };
+  el.addEventListener('touchstart', down, { passive: true });
+  el.addEventListener('touchend', up);
+  el.addEventListener('mousedown', down);
+  el.addEventListener('mouseup', up);
+  el.addEventListener('keydown', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); fire('toggle'); }
+    if (e.key === 'Backspace' || e.key === 'Delete') { e.preventDefault(); fire('reset'); }
+  });
+  return el;
+}
 
 function buildValueControl(key, type) {
   var wrap = document.createElement('div');
@@ -1527,6 +1781,10 @@ function applyState(state) {
     if (typeof incoming === 'boolean') {
       key.state = incoming;
       el.classList.toggle('on', incoming);
+      // The second face has to change here too. Toggling the lamp and
+      // leaving the words alone is the exact failure whenOn exists to
+      // prevent: a key that lights up while still reading MIC LIVE.
+      repaintFace(el, key);
       return;
     }
 

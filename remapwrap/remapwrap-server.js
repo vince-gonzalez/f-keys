@@ -199,6 +199,7 @@ function pollState() {
     // The same reading carries the foreground, so the watcher costs
     // nothing extra and can never queue behind the audio polling.
     considerForeground(state.foreground);
+    checkTimers();
     if (!controllerClients.length) { return; }
     // Only speak when something changed. A phone does not need the same
     // sentence twice a second for an hour.
@@ -292,6 +293,83 @@ function considerForeground(reading) {
   log('Foreground is ' + (split[0] || '?') + ' - switched to "' + hit.doc.name + '"');
   broadcastToDashboards({ type: 'profile_switched', file: hit.file,
                           name: hit.doc.name, reason: split[0] });
+}
+
+// ── Timers ────────────────────────────────────────────────────
+// The count lives here rather than on the phone for two reasons: two
+// phones looking at the same board must agree, and a phone whose screen
+// slept and came back must not have lost the count.
+//
+// Only changes are broadcast, never ticks. Each phone is told when a timer
+// started and how much it had already accumulated, and works out what to
+// display from its own clock - so a running timer costs no traffic at all.
+var timers = {};        // id -> { running, startedAt, accumulated, duration, label }
+
+function timerElapsed(t) {
+  return t.accumulated + (t.running ? (Date.now() - t.startedAt) : 0);
+}
+
+function timerState() {
+  var out = {};
+  Object.keys(timers).forEach(function (id) {
+    var t = timers[id];
+    out[id] = { running: t.running, startedAt: t.startedAt,
+                accumulated: t.accumulated, duration: t.duration,
+                done: !!t.done };
+  });
+  return out;
+}
+
+function pushTimers() {
+  broadcastToControllers({ type: 'timers', timers: timerState() });
+  broadcastToDashboards({ type: 'timers', timers: timerState() });
+}
+
+function timerAction(id, action, duration, label) {
+  if (!id) { return; }
+  var t = timers[id];
+  if (!t) {
+    t = timers[id] = { running: false, startedAt: 0, accumulated: 0,
+                       duration: duration || 0, label: label || '', done: false };
+  }
+  if (duration !== undefined) { t.duration = duration || 0; }
+  if (label) { t.label = label; }
+
+  if (action === 'reset') {
+    t.running = false; t.accumulated = 0; t.startedAt = 0; t.done = false;
+  } else {
+    // One key, both jobs. A separate start and stop is two keys where a
+    // person wanted one, and on a scanning surface every key costs presses.
+    if (t.running) {
+      t.accumulated = timerElapsed(t);
+      t.running = false;
+    } else {
+      if (t.done) { t.accumulated = 0; t.done = false; }
+      t.startedAt = Date.now();
+      t.running = true;
+    }
+  }
+  pushTimers();
+}
+
+function checkTimers() {
+  // A countdown that reaches zero has to say so. Somebody watching the
+  // phone will see it; somebody who is not looking - which is the point of
+  // a timer - needs to be told, so the PC speaks the name of the timer.
+  var changed = false;
+  Object.keys(timers).forEach(function (id) {
+    var t = timers[id];
+    if (!t.running || !t.duration || t.done) { return; }
+    if (timerElapsed(t) >= t.duration * 1000) {
+      t.running = false;
+      t.accumulated = t.duration * 1000;
+      t.done = true;
+      changed = true;
+      log('Timer finished: ' + (t.label || id));
+      audio.speak((t.label || 'Timer') + ' finished').catch(function () {});
+    }
+  });
+  if (changed) { pushTimers(); }
 }
 
 // ── HTTP Server (dashboard, controller, assets, QR) ───────────
@@ -710,6 +788,10 @@ wss.on('connection', function(ws, req) {
           // A phone that just arrived has no idea where anything is.
           lastState = null;
           setTimeout(pollState, 120);
+          // and whatever is already counting
+          setTimeout(function () {
+            if (Object.keys(timers).length) { pushTimers(); }
+          }, 140);
         }
         ws.send(JSON.stringify({ type: 'registered', role: clientType, serverTime: Date.now() }));
         return;
@@ -773,6 +855,37 @@ wss.on('connection', function(ws, req) {
                                 action: msg.command + ' ' +
                                         (msg.state ? 'on' : 'off'),
                                 id: msg.id, ts: Date.now() });
+        return;
+      }
+
+      // ── Text composed on the phone ─────────────────────────
+      // Inserted through the clipboard rather than typed key by key: what
+      // somebody wrote on their own keyboard, in their own language, with
+      // their own prediction, has to arrive as they wrote it. Typing it
+      // out would mangle anything a US layout cannot spell and could not
+      // produce an emoji at all.
+      if (msg.type === 'compose') {
+        var text = String(msg.text || '');
+        if (!text) { return; }
+        if (msg.mode === 'say') {
+          audio.speak(text).catch(function () {});
+          log('Said ' + text.length + ' characters from a phone');
+        } else {
+          audio.clipSet(text).then(function () {
+            return fireKeystroke('ctrl+v');
+          }).catch(function (e) { log('Compose: ' + e.message); });
+          log('Inserted ' + text.length + ' characters from a phone');
+        }
+        broadcastToDashboards({ type: 'feed', label: 'compose',
+                                action: (msg.mode === 'say' ? 'said ' : 'typed ') +
+                                        text.length + ' characters',
+                                id: 'compose', ts: Date.now() });
+        return;
+      }
+
+      // ── A timer key ────────────────────────────────────────
+      if (msg.type === 'timer') {
+        timerAction(msg.id, msg.action, msg.duration, msg.label);
         return;
       }
 

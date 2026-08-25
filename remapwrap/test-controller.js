@@ -103,7 +103,17 @@ function makeDom() {
   });
   Object.defineProperty(El.prototype, 'innerHTML', {
     get: function () { return this._html; },
-    set: function (v) { this._html = String(v); this.children.length = 0; }
+    set: function (v) {
+      this._html = String(v);
+      // Clearing a container detaches what was inside it. Without this the
+      // old elements stayed findable, and a lookup by id returned the one
+      // from before a re-render rather than the one on screen - which read
+      // as the code failing to update when it had updated fine.
+      (function detach(node) {
+        node.children.forEach(function (c) { c._detached = true; detach(c); });
+      })(this);
+      this.children.length = 0;
+    }
   });
   Object.defineProperty(El.prototype, 'offsetWidth', { get: function () { return 100; } });
 
@@ -116,7 +126,8 @@ function makeDom() {
     querySelector: function (sel) {
       var m = /\[data-id="([^"]+)"\]/.exec(sel);
       if (m) {
-        return all.filter(function (e) { return e.dataset.id === m[1]; })[0] || null;
+        return all.filter(function (e) {
+          return e.dataset.id === m[1] && !e._detached; })[0] || null;
       }
       var p = /\.([\w-]+)\[data-page="(\d+)"\]/.exec(sel);
       if (p) {
@@ -406,6 +417,115 @@ sandbox.handleMessage({
 var flowed = sandbox.scanRows();
 ok('a layout with no coordinates still has rows', flowed.length === 2,
    flowed.map(function (r) { return r.length; }).join('+') + ' from a 4 wide board');
+
+// ── The second face ───────────────────────────────────────────
+// A mute key that reads MUTE MIC whether or not the microphone is muted
+// tells you what the key does rather than what is true.
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 8, rows: 4, keys: [
+    { id: 'mic', type: 'toggle', command: 'audio.mic.mute',
+      label: 'MIC LIVE', color: '#12211a',
+      whenOn: { label: 'MUTED', color: '#2a1216' },
+      x: 0, y: 0, w: 4, h: 4 }
+  ]}
+});
+var micEl = dom.document.querySelector('[data-id="mic"]');
+ok('a toggle shows its ordinary face when off',
+   /MIC LIVE/.test(micEl.getAttribute('aria-label') || ''));
+
+// Deliberately NOT re-rendering. A state arriving from the PC has to
+// change the face where it stands - calling renderKeys() here was the
+// test doing the work the code was supposed to do, and it hid the fact
+// that applyState only ever toggled a class and left the words alone.
+sandbox.handleMessage({ type: 'state', state: { 'audio.mic.mute': true } });
+micEl = dom.document.querySelector('[data-id="mic"]');
+ok('and its second face when on, without a re-render',
+   /MUTED/.test(micEl.getAttribute('aria-label') || ''),
+   micEl.getAttribute('aria-label'));
+
+sandbox.handleMessage({ type: 'state', state: { 'audio.mic.mute': false } });
+micEl = dom.document.querySelector('[data-id="mic"]');
+ok('and back again when it is unmuted',
+   /MIC LIVE/.test(micEl.getAttribute('aria-label') || ''),
+   micEl.getAttribute('aria-label'));
+
+var partial = sandbox.faceFor({ label: 'A', sub: 'b', color: '#111111',
+                                state: true, whenOn: { color: '#222222' } });
+ok('anything left out of whenOn keeps the ordinary face',
+   partial.label === 'A' && partial.sub === 'b' && partial.color === '#222222');
+
+// ── Timers ────────────────────────────────────────────────────
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 8, rows: 4, keys: [
+    { id: 'ad', type: 'timer', label: 'AD BREAK', arg: '180',
+      x: 0, y: 0, w: 6, h: 4 }
+  ]}
+});
+var adEl = dom.document.querySelector('[data-id="ad"]');
+ok('a timer is a button with a name', adEl &&
+   adEl.getAttribute('role') === 'button' &&
+   /AD BREAK/.test(adEl.getAttribute('aria-label') || ''));
+
+var nowMs = Date.now();
+sandbox.handleMessage({ type: 'timers', timers: {
+  ad: { running: true, startedAt: nowMs - 20000, accumulated: 0,
+        duration: 180, done: false } } });
+adEl = dom.document.querySelector('[data-id="ad"]');
+ok('a countdown shows what is left, not what has passed',
+   /02:40/.test(adEl.getAttribute('aria-label') || ''),
+   adEl.getAttribute('aria-label'));
+ok('and says it is running',
+   /running/.test(adEl.getAttribute('aria-label') || ''));
+
+sandbox.handleMessage({ type: 'timers', timers: {
+  ad: { running: false, startedAt: 0, accumulated: 180000,
+        duration: 180, done: true } } });
+adEl = dom.document.querySelector('[data-id="ad"]');
+ok('a finished countdown reads zero and says so',
+   /00:00/.test(adEl.getAttribute('aria-label') || '') &&
+   /finished/.test(adEl.getAttribute('aria-label') || ''),
+   adEl.getAttribute('aria-label'));
+
+sandbox.handleMessage({ type: 'timers', timers: {
+  ad: { running: false, startedAt: 0, accumulated: 3725000, duration: 0,
+        done: false } } });
+adEl = dom.document.querySelector('[data-id="ad"]');
+ok('past an hour it grows an hours column',
+   /1:02:05/.test(adEl.getAttribute('aria-label') || ''),
+   adEl.getAttribute('aria-label'));
+
+// ── Compose ───────────────────────────────────────────────────
+// The phone already has a keyboard this person can use. Typing there and
+// sending it is the shortest route to a text box on a computer they
+// cannot easily type into - and the same text through the PC's voice is
+// what turns a keyboard into a way of speaking.
+dom.document._register('compose-text', (function () {
+  var el = dom.document.createElement('textarea');
+  el.setAttribute('id', 'compose-text');
+  return el;
+})());
+dom.document._register('compose-note', dom.document.createElement('div'));
+dom.document._register('compose-sheet', dom.document.createElement('div'));
+dom.document._register('compose-title', dom.document.createElement('div'));
+
+var beforeCompose = sent.length;
+dom.document.getElementById('compose-text').value = 'Could you pass the water please.';
+sandbox.sendCompose('type');
+var typed = sent.slice(beforeCompose).filter(function (m) { return m.type === 'compose'; });
+ok('what was typed on the phone is sent to the PC',
+   typed.length === 1 && typed[0].mode === 'type' &&
+   typed[0].text === 'Could you pass the water please.');
+
+sandbox.sendCompose('say');
+var said = sent.filter(function (m) { return m.type === 'compose' && m.mode === 'say'; });
+ok('and the same words can be spoken instead', said.length === 1);
+
+dom.document.getElementById('compose-text').value = '';
+var beforeEmpty = sent.length;
+sandbox.sendCompose('type');
+ok('an empty box sends nothing', sent.length === beforeEmpty);
 
 console.log('  ---');
 console.log('  ' + (fail.length ? fail.length + ' FAILED' : 'all pass'));

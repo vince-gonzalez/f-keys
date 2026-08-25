@@ -47,7 +47,15 @@ from __future__ import annotations
 import json
 import re
 
-TYPES = ("key", "toggle", "pad", "dial", "slider")
+#: `timer` and `input` carry no command: a timer counts and an input opens
+#: the phone's own keyboard. Both are checked for that below, because a
+#: generated board with a command on a timer would be a control bound to
+#: something it cannot fire.
+TYPES = ("key", "toggle", "pad", "dial", "slider", "timer", "input")
+
+#: Types that do their own job rather than firing something from the
+#: catalogue.
+SELF_CONTAINED = ("timer", "input")
 SHAPES = ("rect", "rounded", "pill", "circle")
 
 BEHAVIOURS = {
@@ -56,6 +64,8 @@ BEHAVIOURS = {
     "pad":    ("trigger", "retrigger", "choke"),
     "dial":   ("relative", "absolute", "detent"),
     "slider": ("absolute", "relative"),
+    "timer":  ("countdown",),
+    "input":  ("compose",),
 }
 
 #: Commands that report a value. Only a dial or a slider may carry one, and
@@ -127,6 +137,9 @@ DEFAULT_SIZE = {
     "pad":    (4, 4, "rect"),
     "dial":   (4, 4, "circle"),
     "slider": (3, 8, "pill"),
+    # A timer shows mm:ss at 30px and needs the room for it.
+    "timer":  (6, 4, "rounded"),
+    "input":  (6, 4, "rounded"),
 }
 
 
@@ -254,7 +267,10 @@ def check(lay):
                                                 ktype))
 
         cmd = k.get("command", "")
-        if cmd and cmd in PLANNED:
+        if ktype in SELF_CONTAINED and cmd:
+            problems.append("{} is a {} and does not fire a command, but it "
+                            "is bound to {!r}.".format(where, ktype, cmd))
+        elif cmd and cmd in PLANNED:
             problems.append("{} is bound to {!r}, which is planned but not "
                             "built. It would be a key that does nothing."
                             .format(where, cmd))
@@ -291,6 +307,20 @@ def check(lay):
                     "{} sits at {},{} and is {}x{}, which runs off a {}x{} "
                     "board.".format(where, k["x"], k["y"], k["w"], k["h"],
                                     cols, rows))
+
+        on = k.get("whenOn")
+        if on is not None:
+            if not isinstance(on, dict):
+                problems.append("{} has a whenOn that is not an object."
+                                .format(where))
+            elif ktype not in ("toggle",):
+                # Only something that latches has an "on" to have a face for.
+                problems.append("{} is a {}, which is never on, so whenOn "
+                                "would never show.".format(where, ktype))
+            elif on.get("color") and not re.match(r"^#[0-9a-fA-F]{6}$",
+                                                  on["color"]):
+                problems.append("{} has a whenOn colour {!r}; expected #rrggbb."
+                                .format(where, on["color"]))
 
         if k.get("color") and not re.match(r"^#[0-9a-fA-F]{6}$", k["color"]):
             problems.append("{} has colour {!r}; expected #rrggbb."

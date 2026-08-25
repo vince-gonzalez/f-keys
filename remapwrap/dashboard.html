@@ -683,7 +683,7 @@
   <!-- Center: Key canvas -->
   <div class="canvas-area">
     <div class="canvas-toolbar">
-      <select class="field-input" id="add-type" style="width:auto; display:inline-block; margin-right:6px;"><option value="key">Key</option><option value="toggle">Toggle</option><option value="pad">Pad</option><option value="dial">Dial</option><option value="slider">Slider</option></select><button class="btn accent" data-act="addKey" data-from="add-type">+ ADD</button>
+      <select class="field-input" id="add-type" style="width:auto; display:inline-block; margin-right:6px;"><option value="key">Key</option><option value="toggle">Toggle</option><option value="pad">Pad</option><option value="dial">Dial</option><option value="slider">Slider</option><option value="timer">Timer</option><option value="input">Type</option></select><button class="btn accent" data-act="addKey" data-from="add-type">+ ADD</button>
       <button class="btn" data-act="removeSelected">− REMOVE</button>
       <button class="btn" data-act="clearAll">CLEAR ALL</button>
       <span style="font-size:13px; color:var(--text-dim); margin-left:8px;">CLICK KEY TO EDIT</span>
@@ -803,7 +803,12 @@ function firstFree(w, h) {
     { id: 'toggle', name: 'Toggle', hint: 'latches on and off, and can light' },
     { id: 'pad',    name: 'Pad',    hint: 'soundboard trigger' },
     { id: 'dial',   name: 'Dial',   hint: 'rotary, reports a value' },
-    { id: 'slider', name: 'Slider', hint: 'linear, reports a value' }
+    { id: 'slider', name: 'Slider', hint: 'linear, reports a value' },
+    // Neither fires a command. A timer counts and a compose key opens the
+    // phone's own keyboard, so both are left off the ACTION row entirely
+    // rather than offering a dropdown that would do nothing.
+    { id: 'timer',  name: 'Timer',  hint: 'counts up, or down from a number of seconds' },
+    { id: 'input',  name: 'Type',   hint: 'opens the phone keyboard; what you write lands on the PC' }
   ];
   
   // How the control behaves when it is used. A double-press and a hold are
@@ -1881,6 +1886,19 @@ function wireKeyCapture() {
   }
 }
 
+function updateWhenOn(value) {
+  // A toggle can carry a second label for when it is on, so a mute key
+  // reads MIC LIVE and then MUTED - saying what is true rather than only
+  // what the key does.
+  var key = layout.find(function (k) { return k.id === selectedKeyId; });
+  if (!key) { return; }
+  var text = (value || '').trim();
+  if (!text) { delete key.whenOn; }
+  else { key.whenOn = Object.assign({}, key.whenOn || {}, { label: text }); }
+  renderGrid();
+  pushLayoutToControllers();
+}
+
 function renderEditor(id) {
   // READS: layout
   // WRITES: #editor-panel DOM
@@ -1909,14 +1927,32 @@ function renderEditor(id) {
       opts(BEHAVIOURS[key.type] || [], key.behaviour) +
     '</select>');
 
-  html += row('COMMAND', continuous ? 'values only' : '',
+  // A timer counts and a compose key opens the phone's keyboard.
+  // Neither fires anything from the catalogue, so neither is offered a
+  // catalogue to pick from: a dropdown that cannot affect the control
+  // is worse than no dropdown at all.
+  var selfContained = (key.type === 'timer' || key.type === 'input');
+
+  if (!selfContained) {
+    html += row('COMMAND', continuous ? 'values only' : '',
     '<select class="field-input" id="ed-command" data-act="changeCommand" data-pass="value">' +
-      commandOptions(key.type, key.command) +
+    commandOptions(key.type, key.command) +
     '</select>');
+  } else if (key.type === 'timer') {
+    html += row('COUNTS DOWN FROM', 'blank counts up instead',
+      '<input class="field-input" id="ed-arg" type="number" min="0" ' +
+      'max="86400" value="' + escAttr(key.arg || '') + '" placeholder="180" ' +
+      'data-act="updateKey" data-field="arg" />');
+  } else {
+    html += row('STARTS WITH', 'already in the box when it opens',
+      '<input class="field-input" id="ed-arg" value="' +
+      escAttr(key.arg || '') + '" placeholder="(empty)" ' +
+      'data-act="updateKey" data-field="arg" />');
+  }
 
   // Only the commands that need one ask for one, and the placeholder says
   // what kind of thing it wants rather than "value".
-  if (meta.arg) {
+  if (meta.arg && !selfContained) {
     var placeholders = {
       scene: 'Scene name in OBS', seconds: 'Length in seconds',
       file: 'sound file', keys: 'ctrl+shift+s', text: 'text to type',
@@ -1925,6 +1961,8 @@ function renderEditor(id) {
       button: 'left, right, middle or double',
       nudge: 'sideways,down  e.g.  0,-40',
       scroll: 'up, down, left or right',
+      seconds: 'seconds to count down, or blank to count up',
+      draft: 'text already in the box when it opens',
       application: 'process name, e.g. Discord',
       transport: 'play, next, previous', steps: 'one step per line'
     };
@@ -1945,6 +1983,15 @@ function renderEditor(id) {
         'line-height:1.4; color:var(--text-dim);"></div>';
     }
     html += row(meta.arg.toUpperCase(), '', argHtml);
+  }
+
+  // The second face. Only a control with an on state can use one.
+  if (key.type === 'toggle') {
+    var onFace = key.whenOn || {};
+    html += row('WHEN IT IS ON', 'blank keeps the same face',
+      '<input class="field-input" placeholder="MUTED" value="' +
+      escAttr(onFace.label || '') +
+      '" data-act="updateWhenOn" data-pass="value" />');
   }
 
   html += '<div class="field-split">' +
