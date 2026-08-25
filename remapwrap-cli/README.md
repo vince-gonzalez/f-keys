@@ -58,12 +58,14 @@ either way.
 ```
 
 Five control types — `key`, `toggle`, `pad`, `dial`, `slider` — four shapes,
-and a command from a fixed catalogue of eighteen. Read or write it with
+and a command from a fixed catalogue of twenty. Read or write it with
 anything; it is JSON, and this package imports nothing that is not in the
 standard library.
 
-Every command in `COMMANDS` is one the surface actually carries out. Eight
-more are named in `PLANNED` and deliberately kept out of the catalogue:
+Every command in `COMMANDS` is one the surface actually carries out —
+including `speak.text`, which is what makes a board of keys a way of
+talking rather than only a way of pressing things. Eight more are named in
+`PLANNED` and deliberately kept out of the catalogue:
 `obs.*` needs an obs-websocket connection and `stream.*` needs a Twitch
 token, and a list where a third of the entries exist only to announce their
 own absence is a worse list than a shorter true one. Binding one is
