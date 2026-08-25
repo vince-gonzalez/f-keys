@@ -542,7 +542,13 @@ function fireControl(key, el) {
     return;
   }
   send({ type: 'keypress', id: key.id, label: key.label,
-         command: key.command, action: key.action || key.command,
+         // A keystroke key carries its combination in arg - that is what
+         // the layout format calls it and what the generators write.
+         // Falling back to key.command sent the literal string
+         // "win.keystroke" to the key resolver, so every generated
+         // shortcut resolved to nothing and did nothing.
+         command: key.command,
+         action: key.action || key.arg || key.command,
          behaviour: key.behaviour || 'press' });
 }
 
