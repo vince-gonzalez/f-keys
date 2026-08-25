@@ -78,6 +78,22 @@ COMMANDS = {
     "macro.sequence",
 }
 
+#: What the surface can actually carry out today. A command outside this set
+#: is real - it is in the catalogue, the dashboard offers it, and a layout
+#: carrying it is not malformed - but pressing it does nothing yet, and a
+#: generator that quietly produced a board of those would be lying.
+#:
+#: obs.* needs an obs-websocket connection and stream.* needs a Twitch
+#: token. Both are integrations rather than commands.
+IMPLEMENTED = {
+    "audio.master", "audio.desktop", "audio.app", "audio.mic.gain",
+    "audio.mic.mute", "audio.mic.ptt", "audio.duck",
+    "sound.play", "sound.stop",
+    "win.keystroke", "win.text", "win.launch", "win.desktop", "win.media",
+    "capture.clip", "capture.shot", "capture.window",
+    "macro.sequence",
+}
+
 DEFAULT_SIZE = {
     "key":    (4, 4, "rounded"),
     "toggle": (4, 4, "rounded"),
@@ -213,6 +229,12 @@ def check(lay):
         cmd = k.get("command", "")
         if cmd and cmd not in COMMANDS:
             problems.append("{} is bound to {!r}, which is not a command."
+                            .format(where, cmd))
+        elif cmd and cmd not in IMPLEMENTED:
+            # Not a typo and not malformed - simply not connected to
+            # anything yet. Said plainly so nobody ships a dead button.
+            problems.append("{} is bound to {!r}, which the surface does not "
+                            "do yet. It will be a key that does nothing."
                             .format(where, cmd))
 
         # The rule the browser enforces by hiding the options: a dial

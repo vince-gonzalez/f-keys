@@ -1,0 +1,25 @@
+{
+ "name": "RemapWrap",
+ "short_name": "RemapWrap",
+ "description": "Your phone is the control surface.",
+ "start_url": "/controller",
+ "scope": "/",
+ "display": "fullscreen",
+ "orientation": "any",
+ "background_color": "#0b0d0e",
+ "theme_color": "#0b0d0e",
+ "icons": [
+  {
+   "src": "/assets/logo-256.png",
+   "sizes": "256x256",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "/assets/logo.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}

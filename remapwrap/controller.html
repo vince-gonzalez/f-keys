@@ -33,7 +33,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>RemapWrap - Controller</title>
 <style>
@@ -431,6 +432,38 @@ window.onload = function() {
 };
 
 // ── WebSocket ──────────────────────────────────────────────────
+// ── Keeping the screen on ────────────────────────────────────────
+// A control surface that goes black after thirty seconds is not a control
+// surface. The lock is dropped when the page is hidden, which is required
+// - the browser revokes it anyway - and is re-taken on return, otherwise
+// switching apps once turns the deck off for good.
+var wakeLock = null;
+
+function holdScreenAwake() {
+  if (!('wakeLock' in navigator)) { return; }      // iOS before 16.4, older Android
+  navigator.wakeLock.request('screen').then(function (lock) {
+    wakeLock = lock;
+    lock.addEventListener('release', function () { wakeLock = null; });
+  }).catch(function () { /* refused: battery saver, or not user-activated yet */ });
+}
+
+document.addEventListener('visibilitychange', function () {
+  if (document.visibilityState === 'visible' && !wakeLock) { holdScreenAwake(); }
+});
+
+// Some browsers only grant the lock after a gesture, so ask again on the
+// first touch as well as at load.
+document.addEventListener('DOMContentLoaded', function () {
+  holdScreenAwake();
+  var once = function () {
+    holdScreenAwake();
+    document.removeEventListener('touchstart', once);
+    document.removeEventListener('click', once);
+  };
+  document.addEventListener('touchstart', once, { passive: true });
+  document.addEventListener('click', once);
+});
+
 // ── Pairing ──────────────────────────────────────────────────────
 // Three ways a phone gets here, and only the first two are allowed in:
 //   scanned the QR   the secret arrives in the URL

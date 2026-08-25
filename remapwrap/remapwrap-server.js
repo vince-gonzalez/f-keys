@@ -98,6 +98,7 @@ function getLocalIP() {
 // The dashboard is exempt only when it is this machine talking to itself.
 var store = require('./store');
 var licence = require('./licence');
+var system  = require('./system');
 var settings = store.readSettings();
 
 // What this copy may do. Read once at start and again whenever a key is
@@ -411,6 +412,16 @@ var httpServer = http.createServer(function(req, res) {
     return;
   }
 
+  if (req.url === '/manifest.webmanifest') {
+    fs.readFile(path.join(__dirname, 'manifest.webmanifest'), function (err, buf) {
+      if (err) { res.writeHead(404); res.end('no manifest'); return; }
+      // Android will not offer to install without this content type.
+      res.writeHead(200, { 'Content-Type': 'application/manifest+json' });
+      res.end(buf);
+    });
+    return;
+  }
+
   if (req.url === '/ip') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ip: getLocalIP(), wsPort: CONFIG.WS_PORT, httpPort: CONFIG.HTTP_PORT }));
@@ -693,13 +704,28 @@ function broadcastToControllers(obj) {
 }
 
 // ── Keystroke injection ───────────────────────────────────────
+// What a command may use to make something happen. Passed in rather than
+// imported so system.js never has to know what a keyboard is.
+var FIRE = {
+  combo: function (action) { return fireKeystroke(action); },
+  type: function (text) {
+    if (!keyboard) { return Promise.reject(new Error('no keyboard')); }
+    return keyboard.type(text);
+  }
+};
+
 function fireCommand(msg) {
-  // The catalogue has grown past keystrokes. Anything audio owns goes to
-  // the audio host; everything else is still a key combination, which is
-  // what this started as and what most commands still are.
+  // Three layers now: sound, the things Windows can do on its own, and
+  // plain key combinations, which is what this started as.
   if (audio.handles(msg.command)) {
     audio.apply(msg).then(function (r) {
       if (!r.ok) { log('Audio: ' + msg.command + ' - ' + r.result); }
+    });
+    return true;
+  }
+  if (system.handles(msg.command)) {
+    system.apply(msg, FIRE, log).then(function (r) {
+      if (!r.ok) { log('System: ' + msg.command + ' - ' + r.result); }
     });
     return true;
   }
@@ -716,9 +742,14 @@ function fireKeystroke(action) {
                  .map(resolveKey)
                  .filter(function (k) { return k !== null; });
 
-    if (keys.length === 0) { log('No valid keys resolved for action: ' + action); return; }
+    if (keys.length === 0) {
+      log('No valid keys resolved for action: ' + action);
+      return Promise.resolve();
+    }
 
-    keyboard.pressKey.apply(keyboard, keys).then(function() {
+    // Returned rather than fired and forgotten, so a macro can wait for
+    // one step to finish before starting the next.
+    return keyboard.pressKey.apply(keyboard, keys).then(function() {
       return keyboard.releaseKey.apply(keyboard, keys);
     }).catch(function(e) {
       console.error('[RemapWrap] fireKeystroke error:', e.message);
