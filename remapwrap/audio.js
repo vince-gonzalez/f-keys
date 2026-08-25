@@ -205,9 +205,11 @@ function stop() {
 function speak(text) { return send('speak', { text: text }); }
 function speakStop() { return send('speak.stop', {}); }
 function voices() { return send('voices', {}); }
+function clipSet(text) { return send('clip.set', { text: text }); }
 
 module.exports = { start: start, send: send, apply: apply,
                    speak: speak, speakStop: speakStop, voices: voices,
+                   clipSet: clipSet,
                    // Exported so a test can ask what this module claims
                    // rather than being told in a second list.
                    CONTINUOUS: CONTINUOUS, SWITCHED: SWITCHED,

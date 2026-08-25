@@ -858,6 +858,19 @@ function firstFree(w, h) {
     { group: 'Windows', items: [
       // Speech is the command that makes a board of keys a way of
       // talking rather than only a way of pressing things.
+      // The pointer. Four keys that step it around are how somebody who
+      // cannot hold a mouse still uses one.
+      ['mouse.click',     'Click…',                { arg: 'button' }],
+      ['mouse.move',      'Move the pointer…',     { arg: 'nudge' }],
+      ['mouse.scroll',    'Scroll…',               { arg: 'scroll' }],
+      ['mouse.hold',      'Grip / let go',         { latching: true }],
+      // The clipboard. Naming what somebody wants beats making them know
+      // that ctrl+c is copy.
+      ['clip.copy',       'Copy'],
+      ['clip.cut',        'Cut'],
+      ['clip.paste',      'Paste'],
+      ['clip.set',        'Put on the clipboard…', { arg: 'say' }],
+      ['clip.phrase',     'Insert a phrase…',      { arg: 'say' }],
       ['speak.text',      'Say something…',        { arg: 'say' }],
       ['speak.stop',      'Stop talking'],
       ['win.keystroke',   'Send keystroke…',       { arg: 'keys' }],
@@ -1909,6 +1922,9 @@ function renderEditor(id) {
       file: 'sound file', keys: 'ctrl+shift+s', text: 'text to type',
       target: 'app path or https://', direction: 'left or right',
       say: 'what the computer should say',
+      button: 'left, right, middle or double',
+      nudge: 'sideways,down  e.g.  0,-40',
+      scroll: 'up, down, left or right',
       application: 'process name, e.g. Discord',
       transport: 'play, next, previous', steps: 'one step per line'
     };

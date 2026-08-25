@@ -307,6 +307,22 @@ while ($true) {
         Reply $id $true $null
       }
       'speak.stop'   { $script:voice.SpeakAsyncCancelAll(); Reply $id $true $null }
+      'clip.set' {
+        # Set-Clipboard rather than the .NET Clipboard class, which needs an
+        # STA thread this host does not have.
+        #
+        # An empty string throws "Value cannot be null" - so a key documented
+        # as clearing the clipboard raised an error instead. Only a real run
+        # found that; the stub in the unit test could not know. $null clears
+        # it properly, which is the one case that has to be handled apart.
+        $text = [string]$m.text
+        if ([string]::IsNullOrEmpty($text)) {
+          Set-Clipboard -Value $null
+        } else {
+          Set-Clipboard -Value $text
+        }
+        Reply $id $true $null
+      }
       'voices'       {
         Reply $id $true (@($script:voice.GetInstalledVoices() |
           ForEach-Object { $_.VoiceInfo.Name }))

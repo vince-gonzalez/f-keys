@@ -292,6 +292,121 @@ sandbox.confirmPress('z', false);
 ok('a press that ran nothing looks different',
    zEl && zEl.classList.contains('unwired') && !zEl.classList.contains('confirmed'));
 
+// ── Scanning ──────────────────────────────────────────────────
+// A board of forty keys swept one at a time costs twenty presses on
+// average. Row and column costs about six. For somebody whose every press
+// is effortful that is the difference between using this and giving up, so
+// the saving is asserted rather than asserted about.
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 12, rows: 12, keys: [
+    { id: 'r1a', type: 'key', command: 'clip.copy',  label: 'A', x: 0, y: 0, w: 3, h: 3 },
+    { id: 'r1b', type: 'key', command: 'clip.cut',   label: 'B', x: 3, y: 0, w: 3, h: 3 },
+    { id: 'r1c', type: 'key', command: 'clip.paste', label: 'C', x: 6, y: 0, w: 3, h: 3 },
+    { id: 'r2a', type: 'key', command: 'clip.copy',  label: 'D', x: 0, y: 3, w: 3, h: 3 },
+    { id: 'r2b', type: 'key', command: 'clip.cut',   label: 'E', x: 3, y: 3, w: 3, h: 3 },
+    { id: 'r2c', type: 'key', command: 'clip.paste', label: 'F', x: 6, y: 3, w: 3, h: 3 },
+    { id: 'r3a', type: 'key', command: 'clip.copy',  label: 'G', x: 0, y: 6, w: 3, h: 3 },
+    { id: 'r3b', type: 'key', command: 'clip.cut',   label: 'H', x: 3, y: 6, w: 3, h: 3 },
+    { id: 'r3c', type: 'key', command: 'clip.paste', label: 'I', x: 6, y: 6, w: 3, h: 3 }
+  ]}
+});
+
+var rows = sandbox.scanRows();
+ok('nine keys in three bands make three rows', rows.length === 3,
+   rows.map(function (r) { return r.length; }).join('+'));
+ok('each row holds its three keys',
+   rows.every(function (r) { return r.length === 3; }));
+
+// A tall control must join the row it starts in, not invent one of its own.
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 12, rows: 12, keys: [
+    { id: 'k', type: 'key', command: 'clip.copy', label: 'K', x: 0, y: 0, w: 3, h: 3 },
+    { id: 's', type: 'slider', command: 'audio.master', label: 'S', x: 3, y: 0, w: 3, h: 9 },
+    { id: 'm', type: 'key', command: 'clip.cut', label: 'M', x: 6, y: 3, w: 3, h: 3 }
+  ]}
+});
+var tall = sandbox.scanRows();
+ok('a tall control joins one row and stretches it', tall.length === 1,
+   tall.length + ' row(s)');
+
+// ── the saving, counted ───────────────────────────────────────
+function pressesToReach(pattern, wantedLabel, cap) {
+  sandbox.access.mode = 'step';
+  sandbox.access.pattern = pattern;
+  sandbox.access.guard = 0;
+  sandbox.scanStart();
+  for (var n = 1; n <= cap; n++) {
+    var groups = sandbox.scanGroups();
+    var lit = groups[sandbox.scanAt] || [];
+    var isTarget = lit.length === 1 &&
+      (lit[0].getAttribute('aria-label') || '').indexOf(wantedLabel) === 0;
+    if (isTarget) { return n; }
+    // In row and column, taking a row that contains the target is progress.
+    if (pattern === 'rowcol' && sandbox.scanPhase === 'rows' &&
+        lit.some(function (e) {
+          return (e.getAttribute('aria-label') || '').indexOf(wantedLabel) === 0; })) {
+      sandbox.scanChoose();
+      continue;
+    }
+    sandbox.scanStep();
+  }
+  return cap + 1;
+}
+
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 12, rows: 12, keys: (function () {
+    var out = [], n = 0;
+    for (var r = 0; r < 5; r++) {
+      for (var c = 0; c < 8; c++) {
+        out.push({ id: 'g' + (n), type: 'key', command: 'clip.copy',
+                   label: 'KEY' + n, x: c, y: r, w: 1, h: 1 });
+        n++;
+      }
+    }
+    return out;
+  })() }
+});
+ok('a forty key board makes five rows', sandbox.scanRows().length === 5);
+
+var linear = pressesToReach('linear', 'KEY39', 200);
+var rowcol = pressesToReach('rowcol', 'KEY39', 200);
+ok('row and column reaches the far key in fewer presses', rowcol < linear,
+   rowcol + ' presses instead of ' + linear);
+
+// ── you cannot get stuck in a row you did not want ────────────
+sandbox.access.pattern = 'rowcol';
+sandbox.scanStart();
+sandbox.scanChoose();                       // take row one
+ok('taking a row enters it', sandbox.scanPhase === 'keys');
+for (var i = 0; i < 40; i++) { sandbox.scanStep(); }
+ok('sweeping a row twice without choosing backs out of it',
+   sandbox.scanPhase === 'rows');
+
+sandbox.access.mode = 'off';
+sandbox.access.pattern = 'linear';
+sandbox.scanStop();
+
+// A layout that flows rather than placing its keys still has rows. This
+// was found by looking at the real phone rather than by a test: the built
+// in starter board has no coordinates at all, every key read as y=0, and
+// twelve keys became one row of twelve - which made row and column
+// scanning cost a press more than sweeping one at a time.
+sandbox.handleMessage({
+  type: 'layout', pages: 1, page: 0,
+  layout: { cols: 4, rows: 3, keys: [
+    { id: 'f1', label: 'A', action: 'ctrl+a' }, { id: 'f2', label: 'B', action: 'ctrl+b' },
+    { id: 'f3', label: 'C', action: 'ctrl+c' }, { id: 'f4', label: 'D', action: 'ctrl+d' },
+    { id: 'f5', label: 'E', action: 'ctrl+e' }, { id: 'f6', label: 'F', action: 'ctrl+f' },
+    { id: 'f7', label: 'G', action: 'ctrl+g' }, { id: 'f8', label: 'H', action: 'ctrl+h' }
+  ]}
+});
+var flowed = sandbox.scanRows();
+ok('a layout with no coordinates still has rows', flowed.length === 2,
+   flowed.map(function (r) { return r.length; }).join('+') + ' from a 4 wide board');
+
 console.log('  ---');
 console.log('  ' + (fail.length ? fail.length + ' FAILED' : 'all pass'));
 process.exit(fail.length ? 1 : 0);

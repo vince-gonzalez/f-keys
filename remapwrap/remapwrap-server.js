@@ -57,10 +57,16 @@ var MIME = {
 // ── Keystroke injection (optional — gracefully degrades) ──────
 var keyboard = null;
 var Key = null;
+var mouse = null;
+var Button = null;
 try {
   var nut = require('@nut-tree-fork/nut-js');
   keyboard = nut.keyboard;
   Key = nut.Key;
+  // Imported since the first build and never used. Moving a pointer in
+  // steps is how somebody who cannot hold a mouse still uses one.
+  mouse = nut.mouse;
+  Button = nut.Button;
   log('Keystroke injection: ACTIVE (nut-js loaded)');
 } catch (e) {
   log('Keystroke injection: INACTIVE (nut-js not found — install @nut-tree-fork/nut-js)');
@@ -864,7 +870,35 @@ var FIRE = {
     return keyboard.type(text);
   },
   speak: function (text) { return audio.speak(text); },
-  speakStop: function () { return audio.speakStop(); }
+  speakStop: function () { return audio.speakStop(); },
+  clipSet: function (text) { return audio.clipSet(text); },
+
+  mouseClick: function (which) {
+    if (!mouse) { return Promise.reject(new Error('no pointer')); }
+    if (which === 'double') { return mouse.doubleClick(Button.LEFT); }
+    if (which === 'right') { return mouse.click(Button.RIGHT); }
+    if (which === 'middle') { return mouse.click(Button.MIDDLE); }
+    return mouse.click(Button.LEFT);
+  },
+  mouseMove: function (dx, dy) {
+    if (!mouse) { return Promise.reject(new Error('no pointer')); }
+    // Relative to wherever it is, which is what a step key means.
+    return mouse.getPosition().then(function (at) {
+      return mouse.setPosition({ x: at.x + dx, y: at.y + dy });
+    });
+  },
+  mouseScroll: function (dir, amount) {
+    if (!mouse) { return Promise.reject(new Error('no pointer')); }
+    if (dir === 'up') { return mouse.scrollUp(amount); }
+    if (dir === 'left') { return mouse.scrollLeft(amount); }
+    if (dir === 'right') { return mouse.scrollRight(amount); }
+    return mouse.scrollDown(amount);
+  },
+  mouseHold: function (down) {
+    if (!mouse) { return Promise.reject(new Error('no pointer')); }
+    return down ? mouse.pressButton(Button.LEFT)
+                : mouse.releaseButton(Button.LEFT);
+  }
 };
 
 function fireCommand(msg) {

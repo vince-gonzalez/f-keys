@@ -40,7 +40,10 @@ var AS_KEYSTROKE = {
 
 var HANDLED = ['win.text', 'win.launch', 'win.desktop', 'win.media',
                'capture.clip', 'capture.shot', 'capture.window',
-               'macro.sequence', 'speak.text', 'speak.stop'];
+               'macro.sequence', 'speak.text', 'speak.stop',
+               'mouse.click', 'mouse.move', 'mouse.scroll', 'mouse.hold',
+               'clip.copy', 'clip.cut', 'clip.paste', 'clip.set',
+               'clip.phrase'];
 
 function handles(command) { return HANDLED.indexOf(command) !== -1; }
 
@@ -66,6 +69,85 @@ function apply(msg, fire, log) {
   }
   if (command === 'speak.stop') {
     return fire.speakStop().then(function () { return done(true, 'stopped'); })
+      .catch(function (e) { return done(false, e.message); });
+  }
+
+  // ── The pointer ────────────────────────────────────────────
+  // nut-js has had a mouse since the first build and nothing ever asked it
+  // for anything. Four keys that move the pointer in steps are how somebody
+  // who cannot hold a mouse still uses one, and they are useful to anybody
+  // whose hands are busy.
+  if (command === 'mouse.click') {
+    var which = arg.toLowerCase() || 'left';
+    return fire.mouseClick(which)
+      .then(function () { return done(true, which + ' click'); })
+      .catch(function (e) { return done(false, e.message); });
+  }
+
+  if (command === 'mouse.move') {
+    // "0,-40" - relative, because absolute coordinates mean nothing on a
+    // machine whose screen is not the one the layout was written on.
+    var parts = arg.split(',').map(function (n) { return parseInt(n.trim(), 10); });
+    var dx = isFinite(parts[0]) ? parts[0] : 0;
+    var dy = isFinite(parts[1]) ? parts[1] : 0;
+    if (!dx && !dy) { return done(false, 'nowhere to move'); }
+    return fire.mouseMove(dx, dy)
+      .then(function () { return done(true, 'moved ' + dx + ',' + dy); })
+      .catch(function (e) { return done(false, e.message); });
+  }
+
+  if (command === 'mouse.scroll') {
+    var bits = arg.toLowerCase().split(/\s+/);
+    var dir = bits[0] || 'down';
+    var amount = parseInt(bits[1], 10);
+    if (!isFinite(amount) || amount < 1) { amount = 3; }
+    return fire.mouseScroll(dir, amount)
+      .then(function () { return done(true, dir + ' ' + amount); })
+      .catch(function (e) { return done(false, e.message); });
+  }
+
+  if (command === 'mouse.hold') {
+    // A toggle rather than a press. Holding a physical button down while
+    // moving is exactly the movement somebody using this cannot make, so
+    // dragging becomes: press to grip, move, press to let go.
+    var down = (msg.state === true || msg.down === true);
+    return fire.mouseHold(down)
+      .then(function () { return done(true, down ? 'gripped' : 'released'); })
+      .catch(function (e) { return done(false, e.message); });
+  }
+
+  // ── The clipboard ──────────────────────────────────────────
+  // copy, cut and paste are keystrokes and could be bound as such, but
+  // somebody building a board should not have to know that ctrl+c is copy.
+  // Naming the thing they want is the whole point of a catalogue.
+  if (command === 'clip.copy') {
+    return Promise.resolve(fire.combo('ctrl+c')).then(function () {
+      return done(true, 'copied'); });
+  }
+  if (command === 'clip.cut') {
+    return Promise.resolve(fire.combo('ctrl+x')).then(function () {
+      return done(true, 'cut'); });
+  }
+  if (command === 'clip.paste') {
+    return Promise.resolve(fire.combo('ctrl+v')).then(function () {
+      return done(true, 'pasted'); });
+  }
+  if (command === 'clip.set') {
+    return fire.clipSet(arg)
+      .then(function () {
+        return done(true, arg ? 'copied ' + arg.length + ' characters'
+                              : 'clipboard cleared'); })
+      .catch(function (e) { return done(false, e.message); });
+  }
+  if (command === 'clip.phrase') {
+    // The reliable way to put a sentence into another program. win.text
+    // types it key by key, which mangles anything outside a US layout and
+    // cannot produce an emoji at all. This puts it on the clipboard and
+    // pastes, so what arrives is what was written.
+    if (!arg) { return done(false, 'nothing to insert'); }
+    return fire.clipSet(arg)
+      .then(function () { return fire.combo('ctrl+v'); })
+      .then(function () { return done(true, 'inserted ' + arg.length + ' characters'); })
       .catch(function (e) { return done(false, e.message); });
   }
 

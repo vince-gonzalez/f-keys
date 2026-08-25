@@ -551,6 +551,15 @@ input[type=range].sheet-input { padding: 0; }
         <div class="sheet-note" id="scan-mode-note"></div>
       </div>
 
+      <div class="sheet-field" id="scan-pattern-field">
+        <label class="sheet-label" for="scan-pattern">HOW IT SWEEPS</label>
+        <select id="scan-pattern" class="sheet-input">
+          <option value="linear">One key at a time</option>
+          <option value="rowcol">A row first, then the keys in it</option>
+        </select>
+        <div class="sheet-note" id="scan-pattern-note"></div>
+      </div>
+
       <div class="sheet-field" id="scan-rate-field">
         <label class="sheet-label" for="scan-rate">HOW LONG ON EACH KEY</label>
         <input id="scan-rate" class="sheet-input" type="range"
@@ -834,14 +843,18 @@ function handleMessage(msg) {
 // wrong way round.
 var SCAN_KEY = 'remapwrap.access';
 var access = {
-  mode: 'off',          // off | auto | step
-  rate: 1200,           // ms on each key when scanning on its own
+  mode: 'off',          // off | auto | step   - what advances the sweep
+  pattern: 'linear',    // linear | rowcol     - what the sweep travels over
+  rate: 1200,           // ms on each stop when scanning on its own
   dwell: 600,           // ms to hold before a hold counts as a choice
   guard: 0              // ms during which a second press is ignored
 };
 var scanAt = -1;
 var scanTimer = null;
 var lastFire = 0;
+var scanPhase = 'rows';   // rowcol only: which half of the sweep we are in
+var scanRow = null;       // the row taken, while choosing inside it
+var sweeps = 0;           // passes over the current group with nothing chosen
 
 function loadAccess() {
   try {
@@ -868,33 +881,124 @@ function scannable() {
   return out;
 }
 
+// ── Rows ─────────────────────────────────────────────────────────
+// Sweeping forty keys one at a time costs twenty presses on average.
+// Sweeping five rows and then eight keys costs about six. For somebody
+// whose every press is effortful that is not a refinement, it is the
+// difference between using the surface and giving up on it.
+//
+// Rows come from where the keys actually are, not from the grid: a control
+// belongs to the first row its vertical span overlaps, so a tall slider
+// beside short keys joins the row it starts in rather than inventing one.
+function scanRows() {
+  var rows = [];
+  var strip = document.getElementById('page-strip');
+  if (strip && !strip.hidden && strip.children.length) {
+    rows.push([].slice.call(strip.children));
+  }
+
+  var grid = document.getElementById('key-grid');
+  if (!grid) { return rows; }
+
+  // A layout can place its keys explicitly or let them flow across the
+  // grid. Both have rows; only one says so. Reading y off a flowing layout
+  // gave every key y=0, so twelve keys became one row of twelve and row
+  // and column scanning was worse than useless - it added a press and
+  // saved nothing. Where there are no coordinates the row is worked out
+  // from the position in the list and the width of the board.
+  var cols = Math.max(1, layout.cols || 1);
+  var placed = [].slice.call(grid.children).map(function (el, i) {
+    var key = (layout.keys || []).filter(function (k) {
+      return k.id === el.dataset.id; })[0] || {};
+    var flowing = typeof key.y !== 'number';
+    return { el: el,
+             y: flowing ? Math.floor(i / cols) : key.y,
+             h: flowing ? 1 : (typeof key.h === 'number' ? key.h : 1),
+             x: flowing ? (i % cols) : (typeof key.x === 'number' ? key.x : 0) };
+  }).sort(function (a, b) { return (a.y - b.y) || (a.x - b.x); });
+
+  var current = null;
+  placed.forEach(function (item) {
+    if (!current || item.y >= current.bottom) {
+      current = { bottom: item.y + item.h, items: [] };
+      rows.push(current.items);
+    } else {
+      // A control reaching further down stretches the row it joined, so a
+      // neighbour starting inside it lands here too rather than alone.
+      current.bottom = Math.max(current.bottom, item.y + item.h);
+    }
+    current.items.push(item.el);
+  });
+  return rows;
+}
+
+// One stop on the sweep. Linear stops are single controls; row and column
+// stops are a whole row, then the controls inside the row that was taken.
+function scanGroups() {
+  if (access.pattern !== 'rowcol') {
+    return scannable().map(function (el) { return [el]; });
+  }
+  if (scanPhase === 'rows') { return scanRows(); }
+  return (scanRow || []).map(function (el) { return [el]; });
+}
+
 function announce(text) {
   var el = document.getElementById('scan-say');
   if (el) { el.textContent = text; }
 }
 
 function paintScan() {
-  var items = scannable();
-  items.forEach(function (el, i) {
-    el.classList.toggle('scanning', i === scanAt);
-  });
-  var live = items[scanAt];
-  if (live) {
-    announce((live.getAttribute('aria-label') || live.textContent || 'key') +
-             ', ' + (scanAt + 1) + ' of ' + items.length);
+  var groups = scanGroups();
+  var lit = groups[scanAt] || [];
+  scannable().forEach(function (el) { el.classList.remove('scanning'); });
+  lit.forEach(function (el) { el.classList.add('scanning'); });
+
+  if (!lit.length) { return; }
+  if (access.pattern === 'rowcol' && scanPhase === 'rows') {
+    // A row is announced by how many things are in it and what the first
+    // one is, which is enough to recognise it without reading all of them.
+    announce('Row ' + (scanAt + 1) + ' of ' + groups.length + ', ' +
+             lit.length + ' key' + (lit.length === 1 ? '' : 's') +
+             ', starting ' + (lit[0].getAttribute('aria-label') || ''));
+  } else {
+    announce((lit[0].getAttribute('aria-label') || lit[0].textContent || 'key') +
+             ', ' + (scanAt + 1) + ' of ' + groups.length);
   }
 }
 
 function scanStep() {
-  var items = scannable();
-  if (!items.length) { return; }
-  scanAt = (scanAt + 1) % items.length;
+  var groups = scanGroups();
+  if (!groups.length) { return; }
+  scanAt = scanAt + 1;
+
+  if (scanAt >= groups.length) {
+    scanAt = 0;
+    sweeps += 1;
+    // Entering a row you did not want must not trap you in it. After two
+    // passes with nothing chosen, the sweep backs out to the rows again.
+    if (access.pattern === 'rowcol' && scanPhase === 'keys' && sweeps >= 2) {
+      leaveRow();
+      return;
+    }
+  }
   paintScan();
+}
+
+function leaveRow() {
+  scanPhase = 'rows';
+  scanRow = null;
+  scanAt = -1;
+  sweeps = 0;
+  announce('Back to the rows.');
+  scanStep();
 }
 
 function scanStop() {
   if (scanTimer) { clearInterval(scanTimer); scanTimer = null; }
   scanAt = -1;
+  scanPhase = 'rows';
+  scanRow = null;
+  sweeps = 0;
   scannable().forEach(function (el) { el.classList.remove('scanning'); });
 }
 
@@ -909,9 +1013,9 @@ function scanStart() {
 }
 
 function scanChoose() {
-  var items = scannable();
-  var el = items[scanAt];
-  if (!el) { return; }
+  var groups = scanGroups();
+  var lit = groups[scanAt];
+  if (!lit || !lit.length) { return; }
 
   // Tremor produces two presses where one was meant. The guard is off by
   // default because it costs speed, and available because for some people
@@ -920,14 +1024,34 @@ function scanChoose() {
   if (access.guard && (now - lastFire) < access.guard) { return; }
   lastFire = now;
 
+  if (access.pattern === 'rowcol' && scanPhase === 'rows') {
+    if (lit.length === 1) {
+      // A row of one has nothing to choose between. Taking it directly
+      // saves a press that would only ever have one answer.
+      chooseElement(lit[0]);
+      return;
+    }
+    scanPhase = 'keys';
+    scanRow = lit.slice();
+    scanAt = -1;
+    sweeps = 0;
+    announce('Row taken, ' + scanRow.length + ' keys.');
+    scanStep();
+    return;
+  }
+
+  chooseElement(lit[0]);
+}
+
+function chooseElement(el) {
+  if (!el) { return; }
   if (el.classList.contains('page-tab')) {
     goToPage(parseInt(el.getAttribute('data-page'), 10));
-    // The strip is rebuilt, so start the sweep again rather than point at
-    // an element that no longer exists.
-    scanStart();
+    scanStart();          // the strip is rebuilt; start the sweep again
     return;
   }
   activateElement(el);
+  if (access.pattern === 'rowcol') { leaveRow(); }
 }
 
 // One place that "press this" goes through, whatever asked for it: a
@@ -937,10 +1061,10 @@ function activateElement(el) {
   var type = el.dataset.type;
   if (type === 'dial' || type === 'slider') {
     // A value control has no single action to fire. Scanning selects it and
-    // the next two presses move it, which is how switch users expect a
-    // continuous control to behave.
-    el.classList.add('scan-holding');
-    announce('selected, press to increase');
+    // the arrow keys move it, which is how switch users expect a continuous
+    // control to behave.
+    el.focus && el.focus();
+    announce('selected, use up and down to change it');
     return;
   }
   pressKey(el);
@@ -1017,13 +1141,33 @@ function describeMode() {
   }[access.mode] || '';
 }
 
+function describePattern() {
+  if (access.pattern !== 'rowcol') {
+    return 'Simple, and slow on a big board: it stops at every key.';
+  }
+  // The number is worth showing rather than describing, because it is the
+  // whole argument for the setting.
+  var rows = scanRows();
+  var keys = scannable().length;
+  if (!rows.length || !keys) { return 'A row at a time, then the keys in it.'; }
+  var widest = Math.max.apply(null, rows.map(function (r) { return r.length; }));
+  return 'About ' + Math.ceil(rows.length / 2 + widest / 2) +
+         ' presses to reach a key instead of about ' + Math.ceil(keys / 2) + '.';
+}
+
 function syncSettings() {
   var mode = document.getElementById('scan-mode');
+  var pattern = document.getElementById('scan-pattern');
   var rate = document.getElementById('scan-rate');
   var dwell = document.getElementById('dwell-ms');
   var guard = document.getElementById('repeat-guard');
   if (!mode) { return; }
   mode.value = access.mode;
+  if (pattern) {
+    pattern.value = access.pattern;
+    document.getElementById('scan-pattern-note').textContent = describePattern();
+    document.getElementById('scan-pattern-field').hidden = access.mode === 'off';
+  }
   rate.value = access.rate;
   dwell.value = access.dwell;
   guard.value = access.guard;
@@ -1050,6 +1194,11 @@ function wireSettings() {
   done.addEventListener('click', closeSettings);
   mode.addEventListener('change', function () {
     access.mode = mode.value; saveAccess(); syncSettings(); scanStart(); });
+  var pattern = document.getElementById('scan-pattern');
+  if (pattern) {
+    pattern.addEventListener('change', function () {
+      access.pattern = pattern.value; saveAccess(); syncSettings(); scanStart(); });
+  }
   rate.addEventListener('input', function () {
     access.rate = parseInt(rate.value, 10); syncSettings(); scanStart(); });
   dwell.addEventListener('input', function () {

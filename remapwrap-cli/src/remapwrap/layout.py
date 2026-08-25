@@ -78,6 +78,13 @@ COMMANDS = {
     # board of keys a way of talking rather than only a way of pressing
     # things, and it is why the free tier looks the way it does.
     "speak.text", "speak.stop",
+    # The pointer and the clipboard. Both matter more for somebody using a
+    # switch than for a streamer: stepping a pointer is how you use a mouse
+    # without holding one, and clip.phrase is the reliable way to put a whole
+    # sentence into another program - win.text types it key by key, which
+    # mangles anything outside a US layout and cannot make an emoji at all.
+    "mouse.click", "mouse.move", "mouse.scroll", "mouse.hold",
+    "clip.copy", "clip.cut", "clip.paste", "clip.set", "clip.phrase",
 }
 
 #: Named so nobody proposes them twice, and deliberately not in COMMANDS.
@@ -105,6 +112,13 @@ IMPLEMENTED = {
     "capture.clip", "capture.shot", "capture.window",
     "macro.sequence",
     "speak.text", "speak.stop",
+    # The pointer and the clipboard. Both matter more for somebody using a
+    # switch than for a streamer: stepping a pointer is how you use a mouse
+    # without holding one, and clip.phrase is the reliable way to put a whole
+    # sentence into another program - win.text types it key by key, which
+    # mangles anything outside a US layout and cannot make an emoji at all.
+    "mouse.click", "mouse.move", "mouse.scroll", "mouse.hold",
+    "clip.copy", "clip.cut", "clip.paste", "clip.set", "clip.phrase",
 }
 
 DEFAULT_SIZE = {
