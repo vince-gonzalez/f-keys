@@ -174,26 +174,26 @@ function apply(msg) {
 // button. This is the difference between a remote control and a control
 // surface.
 function readState() {
-  return Promise.all([
-    send('master.get', {}),
-    send('master.muted', {}),
-    send('mic.get', {}),
-    send('mic.muted', {})
-  ]).then(function (r) {
+  // One round trip, not four. The host answers serially, so four requests
+  // twice a second was twenty four a second in the queue, and the
+  // foreground check waited behind every one of them.
+  return send('state', {}).then(function (r) {
+    if (!r || !r.ok || !r.result) { return null; }
+    var v = r.result;
     var num = function (x) {
-      var n = Number(x && x.ok ? x.result : NaN);
+      var n = Number(x);
       return isFinite(n) ? Math.max(0, Math.min(100, Math.round(n))) : null;
     };
     var bool = function (x) {
-      if (!x || !x.ok) { return null; }
-      return x.result === true || x.result === 'True' || x.result === 'true';
+      return x === true || x === 'True' || x === 'true';
     };
     return {
-      'audio.master':   num(r[0]),
-      'audio.desktop':  num(r[0]),
-      'audio.mic.gain': num(r[2]),
-      'audio.mic.mute': bool(r[3]),
-      masterMuted:      bool(r[1])
+      'audio.master':   num(v.master),
+      'audio.desktop':  num(v.master),
+      'audio.mic.gain': num(v.mic),
+      'audio.mic.mute': bool(v.micmuted),
+      masterMuted:      bool(v.mmuted),
+      foreground:       typeof v.fore === 'string' ? v.fore : null
     };
   }).catch(function () { return null; });
 }

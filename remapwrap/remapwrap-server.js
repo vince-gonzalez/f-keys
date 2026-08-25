@@ -188,20 +188,33 @@ function statesDiffer(a, b) {
 }
 
 function pollState() {
-  if (!controllerClients.length) { return; }
   audio.readState().then(function (state) {
     if (!state) { return; }
+    // The same reading carries the foreground, so the watcher costs
+    // nothing extra and can never queue behind the audio polling.
+    considerForeground(state.foreground);
+    if (!controllerClients.length) { return; }
     // Only speak when something changed. A phone does not need the same
     // sentence twice a second for an hour.
     if (statesDiffer(lastState, state)) {
       lastState = state;
-      broadcastToControllers({ type: 'state', state: state });
+      // The foreground reading rides along for the profile watcher and is
+      // this machine's business. A window title carries document names,
+      // email subjects and client names, and a phone has no use for any of
+      // it, so it does not leave the PC.
+      var forPhone = {};
+      Object.keys(state).forEach(function (k) {
+        if (k !== 'foreground') { forPhone[k] = state[k]; }
+      });
+      broadcastToControllers({ type: 'state', state: forPhone });
     }
   });
 }
 
 function startStatePolling() {
   if (stateTimer) { return; }
+  // Twice a second: the reading is one round trip now, and the
+  // foreground watcher rides on it.
   stateTimer = setInterval(pollState, 500);
   if (stateTimer.unref) { stateTimer.unref(); }
 }
@@ -233,34 +246,31 @@ function profileMatching(exe, title) {
   return found;
 }
 
-function checkForeground() {
-  if (!FEATURES.autoSwitch) { return; }
-  audio.send('foreground', {}).then(function (r) {
-    if (!r || !r.ok || typeof r.result !== 'string') { return; }
-    if (r.result === lastForeground) { return; }     // nothing moved
-    lastForeground = r.result;
+// Set whenever the answer could have changed for a reason that is not the
+// window moving: a licence arriving, or a profile being saved or deleted.
+// Without this, buying the feature while already sitting in Photoshop did
+// nothing until you alt-tabbed away and back, and so did writing a profile
+// for the app you are looking at. Both read as the feature not working.
+var matchDirty = true;
 
-    var split = r.result.split('|');
-    var hit = profileMatching(split[0] || '', split.slice(1).join('|') || '');
-    if (!hit || hit.file === settings.activeProfile) { return; }
+function considerForeground(reading) {
+  if (!FEATURES.autoSwitch || typeof reading !== 'string') { return; }
+  if (reading === lastForeground && !matchDirty) { return; }   // nothing moved
+  lastForeground = reading;
+  matchDirty = false;
 
-    settings.activeProfile = hit.file;
-    store.writeSettings(settings);
-    activeProfile = hit.doc;
-    activePage = 0;
-    pushPage(0);
-    log('Foreground is ' + (split[0] || '?') + ' - switched to "' + hit.doc.name + '"');
-    broadcastToDashboards({ type: 'profile_switched', file: hit.file,
-                            name: hit.doc.name, reason: split[0] });
-  }).catch(function () { /* the host is restarting; try again next tick */ });
-}
+  var split = reading.split('|');
+  var hit = profileMatching(split[0] || '', split.slice(1).join('|') || '');
+  if (!hit || hit.file === settings.activeProfile) { return; }
 
-function startForegroundWatch() {
-  if (switchTimer) { return; }
-  // One second: fast enough that the surface has changed before a hand
-  // reaches the phone, slow enough to cost nothing.
-  switchTimer = setInterval(checkForeground, 1000);
-  if (switchTimer.unref) { switchTimer.unref(); }
+  settings.activeProfile = hit.file;
+  store.writeSettings(settings);
+  activeProfile = hit.doc;
+  activePage = 0;
+  pushPage(0);
+  log('Foreground is ' + (split[0] || '?') + ' - switched to "' + hit.doc.name + '"');
+  broadcastToDashboards({ type: 'profile_switched', file: hit.file,
+                          name: hit.doc.name, reason: split[0] });
 }
 
 // ── HTTP Server (dashboard, controller, assets, QR) ───────────
@@ -368,6 +378,7 @@ var httpServer = http.createServer(function(req, res) {
       settings.licence = given;
       store.writeSettings(settings);
       FEATURES = seen;
+      matchDirty = true;
       log('Licensed to ' + (seen.name || 'unnamed') + ' (' + seen.tier + ')');
       res.writeHead(200);
       res.end(JSON.stringify({ ok: true, tier: seen.tier, name: seen.name }));
@@ -385,6 +396,7 @@ var httpServer = http.createServer(function(req, res) {
     delete settings.licence;
     store.writeSettings(settings);
     FEATURES = licence.features(null);
+    matchDirty = true;
     log('Licence removed; this copy is free again');
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, tier: FEATURES.tier }));
@@ -421,6 +433,7 @@ var httpServer = http.createServer(function(req, res) {
     }
 
     if (req.method === 'POST' && req.url.indexOf('/profile/delete') === 0) {
+      matchDirty = true;
       var gone = store.deleteProfile(q.file || '');
       if (gone && settings.activeProfile === q.file) {
         settings.activeProfile = null;
@@ -453,6 +466,7 @@ var httpServer = http.createServer(function(req, res) {
         var doc = null;
         try { doc = JSON.parse(body); } catch (e) { doc = null; }
         if (!doc) { res.writeHead(400); res.end(JSON.stringify({ ok: false, error: 'Not a profile.' })); return; }
+        matchDirty = true;
         var file = store.saveProfile(doc);
         settings.activeProfile = file;
         store.writeSettings(settings);
@@ -572,7 +586,6 @@ httpServer.listen(CONFIG.HTTP_PORT, function() {
   audio.start(log);
   loadActiveOnStart();
   startStatePolling();
-  startForegroundWatch();
 });
 
 // ── WebSocket Server ──────────────────────────────────────────

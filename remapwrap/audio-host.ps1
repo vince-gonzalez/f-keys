@@ -288,6 +288,19 @@ while ($true) {
         Reply $id $true $null
       }
       'foreground'   { Reply $id $true ([RwWindow]::Foreground()) }
+      'state' {
+        # Everything the phone needs, in one reply. Asking four times
+        # twice a second put twenty four round trips a second through a
+        # host that answers them one at a time, and anything else -
+        # such as the foreground check - queued behind all of it.
+        Reply $id $true @{
+          master  = [math]::Round([RwAudio]::Get(0))
+          mmuted  = [RwAudio]::GetMute(0)
+          mic     = [math]::Round([RwAudio]::Get(1))
+          micmuted= [RwAudio]::GetMute(1)
+          fore    = [RwWindow]::Foreground()
+        }
+      }
       'ping'         { Reply $id $true "pong" }
       default        { Reply $id $false "unknown command: $($m.cmd)" }
     }

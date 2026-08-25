@@ -30,6 +30,10 @@ function finish(){
      typeof s['audio.mic.gain'] === 'number');
   ok('it carries the mute state', typeof s['audio.mic.mute'] === 'boolean');
   ok('desktop mirrors master', s['audio.desktop'] === s['audio.master']);
+  // The window title never leaves this machine. It is read for the profile
+  // watcher and carries document names, email subjects and client names.
+  ok('the phone is not told what window is in front',
+     s.foreground === undefined);
   // Unchanged state must not be repeated twice a second for six seconds.
   ok('an unchanging machine is not spammed', states.length <= 3);
   console.log('  received ' + states.length + ' update(s) in 6s: ' +
