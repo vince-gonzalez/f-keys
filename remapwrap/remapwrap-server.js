@@ -206,6 +206,63 @@ function startStatePolling() {
   if (stateTimer.unref) { stateTimer.unref(); }
 }
 
+// ── Following the foreground window ───────────────────────────
+// Open Photoshop, the surface becomes Photoshop. This is the paid half's
+// reason to exist: it needs the service running and cannot be had by
+// exporting a file, which is what makes it a fair thing to charge for.
+//
+// A profile opts in by naming programs:
+//   { "name": "Photoshop", "match": ["photoshop", "Adobe Photoshop"], ... }
+// matched against the executable name and the window title, so both ways
+// of thinking about "which app is this" work.
+var lastForeground = null;
+var switchTimer = null;
+
+function profileMatching(exe, title) {
+  var hay = (exe + ' ' + title).toLowerCase();
+  var found = null;
+  store.listProfiles().forEach(function (entry) {
+    if (found || entry.unreadable) { return; }
+    var doc = store.loadProfile(entry.file);
+    if (!doc || !Array.isArray(doc.match)) { return; }
+    var hit = doc.match.some(function (m) {
+      return m && hay.indexOf(String(m).toLowerCase()) !== -1;
+    });
+    if (hit) { found = { file: entry.file, doc: doc }; }
+  });
+  return found;
+}
+
+function checkForeground() {
+  if (!FEATURES.autoSwitch) { return; }
+  audio.send('foreground', {}).then(function (r) {
+    if (!r || !r.ok || typeof r.result !== 'string') { return; }
+    if (r.result === lastForeground) { return; }     // nothing moved
+    lastForeground = r.result;
+
+    var split = r.result.split('|');
+    var hit = profileMatching(split[0] || '', split.slice(1).join('|') || '');
+    if (!hit || hit.file === settings.activeProfile) { return; }
+
+    settings.activeProfile = hit.file;
+    store.writeSettings(settings);
+    activeProfile = hit.doc;
+    activePage = 0;
+    pushPage(0);
+    log('Foreground is ' + (split[0] || '?') + ' - switched to "' + hit.doc.name + '"');
+    broadcastToDashboards({ type: 'profile_switched', file: hit.file,
+                            name: hit.doc.name, reason: split[0] });
+  }).catch(function () { /* the host is restarting; try again next tick */ });
+}
+
+function startForegroundWatch() {
+  if (switchTimer) { return; }
+  // One second: fast enough that the surface has changed before a hand
+  // reaches the phone, slow enough to cost nothing.
+  switchTimer = setInterval(checkForeground, 1000);
+  if (switchTimer.unref) { switchTimer.unref(); }
+}
+
 // ── HTTP Server (dashboard, controller, assets, QR) ───────────
 var httpServer = http.createServer(function(req, res) {
   // READS: CONFIG.HTTP_PORT, local filesystem
@@ -515,6 +572,7 @@ httpServer.listen(CONFIG.HTTP_PORT, function() {
   audio.start(log);
   loadActiveOnStart();
   startStatePolling();
+  startForegroundWatch();
 });
 
 // ── WebSocket Server ──────────────────────────────────────────

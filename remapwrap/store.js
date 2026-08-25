@@ -138,6 +138,9 @@ function upgrade(doc, fallbackName) {
   if (Array.isArray(doc.pages)) {
     doc.schema = doc.schema || SCHEMA;
     doc.name = doc.name || fallbackName || 'Untitled';
+    // Optional: the programs this profile belongs to. Kept as written so
+    // somebody editing the file by hand is not second-guessed.
+    if (doc.match && !Array.isArray(doc.match)) { doc.match = [String(doc.match)]; }
     return doc;
   }
   if (Array.isArray(doc.keys)) {

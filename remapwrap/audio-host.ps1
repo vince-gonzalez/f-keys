@@ -113,6 +113,30 @@ interface IMMDeviceEnumerator {
 [ComImport, Guid("BCDE0395-E52F-467C-8E3D-C4579291692E")]
 class MMDeviceEnumeratorComObject { }
 
+public class RwWindow {
+  [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
+  [DllImport("user32.dll")] static extern int GetWindowThreadProcessId(IntPtr h, out int pid);
+  [DllImport("user32.dll", CharSet=CharSet.Unicode)]
+  static extern int GetWindowTextW(IntPtr h, System.Text.StringBuilder s, int n);
+
+  // Which program the person is actually looking at. Returned as a pair so
+  // a profile can match on either the executable or what the title bar
+  // says, because "chrome.exe" and "Photoshop" are both how people think
+  // about the same question.
+  public static string Foreground() {
+    IntPtr h = GetForegroundWindow();
+    if (h == IntPtr.Zero) return "|";
+    int pid = 0;
+    GetWindowThreadProcessId(h, out pid);
+    string exe = "";
+    try { exe = System.Diagnostics.Process.GetProcessById(pid).ProcessName; }
+    catch { exe = ""; }
+    var sb = new System.Text.StringBuilder(512);
+    GetWindowTextW(h, sb, sb.Capacity);
+    return exe + "|" + sb.ToString();
+  }
+}
+
 public class RwAudio {
   static Guid ctx = Guid.Empty;
 
@@ -263,6 +287,7 @@ while ($true) {
         foreach ($p in $script:players.Values) { $p.Stop() }
         Reply $id $true $null
       }
+      'foreground'   { Reply $id $true ([RwWindow]::Foreground()) }
       'ping'         { Reply $id $true "pong" }
       default        { Reply $id $false "unknown command: $($m.cmd)" }
     }
