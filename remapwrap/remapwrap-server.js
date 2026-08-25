@@ -39,6 +39,7 @@ var CONFIG = {
 
 var http    = require('http');
 var crypto  = require('crypto');
+var url     = require('url');
 var fs      = require('fs');
 var path    = require('path');
 var os      = require('os');
@@ -134,6 +135,39 @@ function pinFailed(ip) {
   pinAttempts[ip] = rec;
 }
 
+
+// ── The board that is live right now ──────────────────────────
+// Held in memory so a phone that connects gets something immediately,
+// rather than an empty grid until somebody touches the dashboard.
+var activeProfile = null;
+var activePage = 0;
+
+function pushPage(index) {
+  if (!activeProfile || !activeProfile.pages.length) { return; }
+  activePage = Math.max(0, Math.min(index || 0, activeProfile.pages.length - 1));
+  var page = activeProfile.pages[activePage];
+  broadcastToControllers({
+    type: 'layout',
+    layout: { cols: page.cols, rows: page.rows, keys: page.keys },
+    profile: activeProfile.name,
+    page: activePage,
+    pages: activeProfile.pages.length
+  });
+}
+
+function loadActiveOnStart() {
+  if (settings.autoLoad === false || !settings.activeProfile) { return; }
+  activeProfile = store.loadProfile(settings.activeProfile);
+  if (activeProfile) {
+    log('Loaded profile "' + activeProfile.name + '" (' +
+        activeProfile.pages.length + ' page(s))');
+  } else {
+    log('Last profile ' + settings.activeProfile + ' is gone; starting empty');
+    settings.activeProfile = null;
+    store.writeSettings(settings);
+  }
+}
+
 // ── HTTP Server (dashboard, controller, assets, QR) ───────────
 var httpServer = http.createServer(function(req, res) {
   // READS: CONFIG.HTTP_PORT, local filesystem
@@ -195,6 +229,84 @@ var httpServer = http.createServer(function(req, res) {
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, pin: PAIR_PIN }));
+    return;
+  }
+
+  // ── Profiles ────────────────────────────────────────────────
+  // Everything here is this machine's own business: the dashboard runs on
+  // localhost and phones never touch profiles, they are sent a board.
+  if (req.url.indexOf('/profiles') === 0 || req.url.indexOf('/profile') === 0) {
+    if (!isLocal(req.socket.remoteAddress)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false }));
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+
+    if (req.url === '/profiles') {
+      res.writeHead(200);
+      res.end(JSON.stringify({ ok: true, active: settings.activeProfile,
+                               autoLoad: settings.autoLoad !== false,
+                               profiles: store.listProfiles() }));
+      return;
+    }
+
+    var q = url.parse(req.url, true).query;
+
+    if (req.method === 'GET' && q.file) {
+      var doc = store.loadProfile(q.file);
+      res.writeHead(doc ? 200 : 404);
+      res.end(JSON.stringify(doc ? { ok: true, profile: doc }
+                                 : { ok: false, error: 'No such profile.' }));
+      return;
+    }
+
+    if (req.method === 'POST' && req.url.indexOf('/profile/delete') === 0) {
+      var gone = store.deleteProfile(q.file || '');
+      if (gone && settings.activeProfile === q.file) {
+        settings.activeProfile = null;
+        store.writeSettings(settings);
+      }
+      res.writeHead(gone ? 200 : 404);
+      res.end(JSON.stringify({ ok: gone }));
+      return;
+    }
+
+    if (req.method === 'POST' && req.url.indexOf('/profile/activate') === 0) {
+      var chosen = store.loadProfile(q.file || '');
+      if (!chosen) { res.writeHead(404); res.end(JSON.stringify({ ok: false })); return; }
+      settings.activeProfile = q.file;
+      store.writeSettings(settings);
+      activeProfile = chosen;
+      pushPage(0);
+      res.writeHead(200);
+      res.end(JSON.stringify({ ok: true, profile: chosen }));
+      return;
+    }
+
+    if (req.method === 'POST') {
+      var body = '';
+      req.on('data', function (c) {
+        body += c;
+        if (body.length > 4 * 1024 * 1024) { req.destroy(); }
+      });
+      req.on('end', function () {
+        var doc = null;
+        try { doc = JSON.parse(body); } catch (e) { doc = null; }
+        if (!doc) { res.writeHead(400); res.end(JSON.stringify({ ok: false, error: 'Not a profile.' })); return; }
+        var file = store.saveProfile(doc);
+        settings.activeProfile = file;
+        store.writeSettings(settings);
+        activeProfile = store.loadProfile(file);
+        log('Saved profile ' + file);
+        res.writeHead(200);
+        res.end(JSON.stringify({ ok: true, file: file }));
+      });
+      return;
+    }
+
+    res.writeHead(405);
+    res.end(JSON.stringify({ ok: false }));
     return;
   }
 
@@ -289,6 +401,7 @@ httpServer.listen(CONFIG.HTTP_PORT, function() {
   // while the QR code is still being scanned instead of on the first
   // turn of a dial.
   audio.start(log);
+  loadActiveOnStart();
 });
 
 // ── WebSocket Server ──────────────────────────────────────────
@@ -336,6 +449,9 @@ wss.on('connection', function(ws, req) {
           log('Controller registered (' + controllerClients.length + ' active)');
           // Send controller the current layout if dashboard is connected
           broadcastToDashboards({ type: 'controller_connected', ip: clientIP });
+          // Hand it the live board straight away instead of an empty
+          // grid it keeps until somebody touches the dashboard.
+          if (activeProfile) { setTimeout(function () { pushPage(activePage); }, 60); }
         }
         ws.send(JSON.stringify({ type: 'registered', role: clientType, serverTime: Date.now() }));
         return;
