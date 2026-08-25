@@ -22,7 +22,7 @@ No dependencies. Standard library only.
 #: Kept in step with pyproject.toml. The wheel filename and its metadata
 #: both come from pyproject and agree with each other regardless, so a
 #: drift here is invisible from outside the wheel.
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 from .layout import (LayoutError, board, check, control, describe, load,
                      overlaps, place, save)
