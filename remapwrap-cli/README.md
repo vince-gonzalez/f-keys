@@ -25,6 +25,7 @@ pip install remapwrap
 remapwrap soundboard ./samples -o board.json     a pad per sound file
 remapwrap mixer Discord Spotify chrome -o mix.json   a slider per application
 remapwrap deck "Copy:ctrl+c" "Paste:ctrl+v" -o keys.json
+remapwrap elgato Mine.streamDeckProfile -o mine.json  bring a Stream Deck across
 remapwrap check board.json                       would this work
 remapwrap describe board.json                    what is in it
 ```
@@ -79,6 +80,33 @@ reported as its own kind of problem, not as a typo:
 REC is bound to 'obs.record', which is planned but not built.
 It would be a key that does nothing.
 ```
+
+## Coming from a Stream Deck
+
+```
+remapwrap elgato "My Profile.streamDeckProfile" -o mine.json
+```
+
+Elgato does not publish this format — their documentation covers how to
+bundle a profile and says nothing about what is inside one — so it is read
+from the files rather than from a specification, and it is best effort by
+construction.
+
+It never invents a binding. An action it cannot map keeps its name, its
+picture and its place on the board and gets **no command**, so it is visibly
+inert rather than quietly wrong, and everything it could not carry comes
+back as sentences:
+
+```
+3 of 6 keys came across with a working binding.
+"BRB" at 0,1 came across with its name and picture but no binding:
+  needs OBS, which RemapWrap does not connect to yet.
+"BROKEN" at 2,1 ... a hotkey whose keys could not be read.
+```
+
+Hotkeys are decoded from Windows virtual key codes. Text actions become
+`clip.phrase`, which is how an accent or an emoji survives the trip.
+Pictures come across embedded, so the profile stays one file.
 
 ## The rules are written twice on purpose
 

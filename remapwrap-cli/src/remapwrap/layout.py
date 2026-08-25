@@ -308,6 +308,23 @@ def check(lay):
                     "board.".format(where, k["x"], k["y"], k["w"], k["h"],
                                     cols, rows))
 
+        # A picture on a key supersedes the label and the colour, and a
+        # key with a picture and no label is silent to a screen reader -
+        # which is the one person a symbol board most needs to speak to.
+        img = k.get("image")
+        if img is not None:
+            if not isinstance(img, str) or not img.strip():
+                problems.append("{} has an image that is not a string."
+                                .format(where))
+            elif not img.startswith("data:image/"):
+                problems.append("{} has an image that is not a data URI. "
+                                "Embed it so the profile stays one file."
+                                .format(where))
+            elif not (k.get("label") or "").strip():
+                problems.append("{} has a picture and no label. A screen "
+                                "reader would have nothing to say about it."
+                                .format(where))
+
         on = k.get("whenOn")
         if on is not None:
             if not isinstance(on, dict):
