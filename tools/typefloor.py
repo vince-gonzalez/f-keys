@@ -1,190 +1,36 @@
 #!/usr/bin/env python3
-"""Fail when text is set below the minimum readable size.
-
-    python tools/typefloor.py            # report; exit 1 if anything undeclared is too small
-    python tools/typefloor.py --list     # every hit, declared or not, grouped by selector
-    python tools/typefloor.py --fix      # raise undeclared violations to the floor
-
-Small type is the single defect that has come back on this project more often than any other,
-and it keeps coming back because it is invisible in a diff and nobody re-measures a page they
-did not touch. So the rule is not "don't set small type" - it is "you cannot set small type by
-accident." A size below the floor has to be written down in typefloor.json with a reason, and
-anything not written down fails.
-
-Three places it hides, all of them checked here, because grepping for `font-size: 10px` finds
-only the first:
-
-  1. plain declarations          font-size: 10px
-  2. clamp() minimums            font-size: clamp(9px, 2vw, 18px)   <- renders at 9px on a phone
-  3. canvas text                 cx.font = "10px monospace"          <- no CSS rule to grep
-
-Not checked: computed sizes from em/rem/% chains. Those need a browser; tools/a11y-sweep.js
-covers the rendered side.
 """
-import json, re, sys
-from pathlib import Path
+============================================================
+typefloor - this repository's entry point
+F-Keys | www.f-keys.com
+------------------------------------------------------------
+WHY THIS IS A SHIM
+The implementation moved to gatekit/, which is published so
+other people can run the same gate. Copying it back here would
+make two copies of one thing, which is how Key-J shipped three
+defects and is the reason this repository has a parity test at
+all.
 
-def _root():
-    """
-    The tree to check. Defaults to the repository this file sits in, but takes
-    --root so one copy can gate every property rather than one copy per
-    property drifting apart - which is the fault this repository already
-    learned the hard way with two copies of one renderer.
-    """
-    argv = sys.argv
-    if "--root" in argv:
-        i = argv.index("--root")
-        if i + 1 < len(argv):
-            return Path(argv[i + 1]).resolve()
-    return Path(__file__).resolve().parent.parent
+So there is one implementation. CI runs the code that ships,
+and the exception list stays local: TYPEFLOOR_CONFIG
+points at tools/typefloor.json rather than the packaged
+default.
 
+Run:  python tools/typefloor.py [path] [--list]
+============================================================
+"""
 
-ROOT = _root()
-CONFIG = Path(__file__).parent / "typefloor.json"
-SKIP_DIRS = {"node_modules", ".git", "dist", "__pycache__"}
+import os
+import sys
 
-# .js and .css are scanned, not only .html, because the widget and the feedback control build
-# their own stylesheets in JavaScript. Those rules are invisible to an HTML scan and they ship
-# to OTHER people's sites, which makes them the worst possible place to hide small type.
-EXTS = ("*.html", "*.js", "*.css")
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
 
-# Patterns return (declared_px, whole_match). Each corresponds to a hiding place above.
-PATTERNS = [
-    ("css",    re.compile(r"font-size\s*:\s*(\d+(?:\.\d+)?)px")),
-    ("clamp",  re.compile(r"font-size\s*:\s*clamp\(\s*(\d+(?:\.\d+)?)px")),
-    ("canvas", re.compile(r"""\.font\s*=\s*['"][^'"]*?(\d+(?:\.\d+)?)px""")),
-    # `font: 600 11px/1.3 system-ui` sets a size without the string "font-size" appearing at
-    # all, so it survives every grep anyone reaches for first.
-    ("short",  re.compile(r"(?<!-)\bfont\s*:\s*(?:(?:normal|italic|oblique|small-caps|bold|bolder|lighter|\d{3})\s+)*(\d+(?:\.\d+)?)px")),
-]
+os.environ.setdefault("TYPEFLOOR_CONFIG", os.path.join(HERE, "typefloor.json"))
+os.environ.setdefault("TYPEFLOOR_ROOT", ROOT)
+sys.path.insert(0, os.path.join(ROOT, "gatekit", "src"))
 
-
-def load_config():
-    if not CONFIG.exists():
-        return {"floor_px": 13, "exceptions": []}
-    return json.loads(CONFIG.read_text(encoding="utf-8"))
-
-
-# A hit inside JavaScript has no CSS selector, but selector_for() will happily
-# invent one, because the nearest preceding "{" is a JS block. A 12px textarea
-# built in a string was reported as the selector `if (!w)`, which reads as a
-# stylesheet rule, sends the reader looking for one that does not exist, and
-# cost a wrong diagnosis. When the guess does not look like a selector, say so.
-_JS_LIKE = re.compile(
-    r"(?:^|[\s;{}])(?:if|for|while|function|return|var|let|const|else|switch|try|catch)\b"
-    r"|[!<>=&|]=|=[=>]|\(\s*!")
-
-
-def _looks_like_selector(sel):
-    return bool(sel) and sel != "?" and not _JS_LIKE.search(sel)
-
-
-def _inline_label(text, pos):
-    """Name a hit that lives in a string rather than a stylesheet."""
-    start = text.rfind("style=", max(0, pos - 300), pos)
-    if start != -1:
-        frag = text[start + 6:pos + 30].strip("\"' ")
-        return "inline style: " + re.sub(r"\s+", " ", frag)[:56]
-    line_start = text.rfind("\n", 0, pos) + 1
-    frag = text[line_start:pos + 30].strip()
-    return "in script: " + re.sub(r"\s+", " ", frag)[:56]
-
-
-def selector_for(text, pos):
-    """Best-effort CSS selector for a hit, so an exception can name something stable."""
-    head = text[:pos]
-    brace = head.rfind("{")
-    if brace == -1:
-        return _inline_label(text, pos)
-    # Start after whichever delimiter ends the PREVIOUS rule. Each candidate contributes the
-    # index just past itself, so a two-character delimiter like */ does not leave its slash
-    # glued to the front of the selector.
-    ends = [0]
-    for delim in ("}", "*/", ">", ";"):
-        i = head.rfind(delim, 0, brace)
-        if i != -1:
-            ends.append(i + len(delim))
-    sel = head[max(ends):brace].strip().replace("\n", " ")
-    sel = re.sub(r"\s+", " ", sel)[-90:]
-    return sel if _looks_like_selector(sel) else _inline_label(text, pos)
-
-
-def scan(floor, exceptions):
-    exact = {e["selector"] for e in exceptions}
-    hits = []
-    paths = sorted({p for ext in EXTS for p in ROOT.rglob(ext)})
-    for path in paths:
-        if SKIP_DIRS & set(path.parts):
-            continue
-        if path.name in ("typefloor.py", "a11y-sweep.js"):   # the tools' own thresholds
-            continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        for kind, pat in PATTERNS:
-            for m in pat.finditer(text):
-                px = float(m.group(1))
-                if px >= floor:
-                    continue
-                sel = selector_for(text, m.start()) if kind != "canvas" else "canvas:" + m.group(0)[:40]
-                hits.append({
-                    "file": str(path.relative_to(ROOT)).replace("\\", "/"),
-                    "line": text.count("\n", 0, m.start()) + 1,
-                    "px": px, "kind": kind, "selector": sel,
-                    "match": m.group(0),
-                    "declared": sel in exact,
-                })
-    return hits
-
-
-def main():
-    cfg = load_config()
-    floor = cfg.get("floor_px", 13)
-    hits = scan(floor, cfg.get("exceptions", []))
-    undeclared = [h for h in hits if not h["declared"]]
-
-    if "--list" in sys.argv:
-        by_sel = {}
-        for h in hits:
-            by_sel.setdefault((h["selector"], h["px"], h["declared"]), []).append(h["file"])
-        for (sel, px, dec), files in sorted(by_sel.items(), key=lambda kv: (kv[0][2], kv[0][1])):
-            flag = "declared" if dec else "TOO SMALL"
-            print("%-9s %5.1fpx  %-52s  %d file(s)" % (flag, px, sel[:52], len(set(files))))
-        print("\nfloor %dpx | %d hit(s), %d undeclared" % (floor, len(hits), len(undeclared)))
-        return 0
-
-    if "--fix" in sys.argv and undeclared:
-        edits = {}
-        for h in undeclared:
-            if h["kind"] == "canvas":       # never rewrite canvas strings blind
-                continue
-            edits.setdefault(h["file"], []).append(h)
-        for f, hs in edits.items():
-            p = ROOT / f
-            t = p.read_text(encoding="utf-8")
-            for h in hs:
-                fixed = h["match"].replace("%gpx" % h["px"] if h["px"] % 1 else "%dpx" % h["px"],
-                                           "%dpx" % floor, 1)
-                if fixed != h["match"]:
-                    t = t.replace(h["match"], fixed)
-            p.write_text(t, encoding="utf-8")
-        print("raised %d declaration(s) in %d file(s) to %dpx" % (
-            sum(len(v) for v in edits.values()), len(edits), floor))
-        print("canvas hits are never auto-fixed - fix those by hand")
-        hits = scan(floor, cfg.get("exceptions", []))
-        undeclared = [h for h in hits if not h["declared"]]
-
-    if not undeclared:
-        print("typefloor: OK - %d declaration(s) below %dpx, all declared in typefloor.json"
-              % (len(hits), floor))
-        return 0
-
-    print("typefloor: %d declaration(s) below the %dpx floor and not declared\n" % (len(undeclared), floor))
-    for h in sorted(undeclared, key=lambda h: (h["px"], h["file"]))[:60]:
-        print("  %s:%d  %.0fpx  %s  [%s]" % (h["file"], h["line"], h["px"], h["selector"][:46], h["kind"]))
-    if len(undeclared) > 60:
-        print("  ... and %d more (use --list)" % (len(undeclared) - 60))
-    print("\nEither raise them (--fix) or add the selector to tools/typefloor.json with a reason.")
-    return 1
-
+from gatekit.typefloor import main   # noqa: E402
 
 if __name__ == "__main__":
     sys.exit(main())

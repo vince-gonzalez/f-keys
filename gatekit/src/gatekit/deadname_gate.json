@@ -1,0 +1,13 @@
+{
+  "_comment": [
+    "Names that must not reach anything a human reads.",
+    "'forbidden' is a list of case-insensitive words.",
+    "'allowed' exempts machine identifiers - repo paths, package names,",
+    "live URLs - because renaming those breaks working links or",
+    "contradicts a published record. Each needs a reason.",
+    "Nothing is forbidden by default: say what yours is."
+  ],
+  "forbidden": [],
+  "allowed": [],
+  "skip_paths": []
+}

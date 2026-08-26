@@ -81,6 +81,13 @@ jobs:
         if: failure()
         run: python tools/typefloor.py --list
 
+      # These three gates are published as `gatekit`, and tools/ is a shim
+      # over the same code so CI runs what ships. Every one of them once
+      # reported OK on a directory it had never opened; the fixtures below
+      # are known-bad and a gate that misses them fails here.
+      - name: The gates find what they exist to find
+        run: python gatekit/tests/test_gates.py
+
 
   # The README standard is a tool, so it is checked rather than trusted:
   # the glyphs against the published gonzalgo banner, and every product

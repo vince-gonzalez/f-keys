@@ -1,0 +1,45 @@
+name: "Type floor"
+description: "Fail the build when type is declared below a readable floor."
+author: "F-Keys"
+
+branding:
+  icon: "alert-triangle"
+  color: "purple"
+
+inputs:
+  path:
+    description: "Directory to check."
+    required: false
+    default: "."
+  config:
+    description: "JSON file of recorded exceptions."
+    required: false
+    default: ""
+  floor:
+    description: "Minimum font size in px"
+    required: false
+    default: "13"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install gatekit
+      shell: bash
+      run: pip install --quiet gatekit
+
+    - name: Type floor
+      shell: bash
+      run: |
+        ARGS="${{ inputs.path }}"
+        if [ -n "${{ inputs.config }}" ]; then
+          ARGS="$ARGS --config ${{ inputs.config }}"
+        fi
+        if [ -n "${{ inputs.floor }}" ]; then
+          ARGS="$ARGS --floor ${{ inputs.floor }}"
+        fi
+        typefloor $ARGS
+
+    - name: What it found
+      if: failure()
+      shell: bash
+      run: typefloor "${{ inputs.path }}" --list || true
