@@ -165,5 +165,29 @@ jobs:
           fi
           echo "an empty check failed under --require-pairs, as it should"
 
+      # ── the published repos, not the local copies ────────────
+      # A local action.yml that works proves nothing about what a stranger
+      # gets from the Marketplace. These pull the real thing at the tag
+      # anyone else would pin.
+      - name: The published typefloor@v1
+        uses: vince-gonzalez/typefloor@v1
+        with:
+          path: fixtures/clean
+
+      - name: The published cvd-palette@v1 on red and green
+        id: pub_cvd
+        continue-on-error: true
+        uses: vince-gonzalez/cvd-palette@v1
+        with:
+          colors: "#d62728,#2ca02c"
+
+      - name: The published action must gate too
+        run: |
+          if [ "${{ steps.pub_cvd.outcome }}" != "failure" ]; then
+            echo "::error::cvd-palette@v1 passed red/green from its own repo."
+            exit 1
+          fi
+          echo "the published action gates, not just the local copy"
+
       - name: All four gate, and all four pass what is fine
         run: echo "typefloor, deadname-gate, contrast-gate and the palette check are live"
