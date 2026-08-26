@@ -1,4 +1,8 @@
 {
+  "changewatch": {
+    "sha256": "9bddf99dd2f32fbb",
+    "source": "changewatch.jpg"
+  },
   "daisupop": {
     "sha256": "29d9e52439e0340f",
     "source": "daisupop.png"

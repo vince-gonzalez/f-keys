@@ -1816,13 +1816,27 @@ def main():
                     "capture, and what to check when something is not working.",
         canonical="https://f-keys.com/keyj/manual/")))
 
+    # A README per generated directory, and never over a real one.
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import readme as house
+    readmes = 0
+    for slug, page in PAGES.items():
+        target = os.path.join(ROOT, slug, "README.md")
+        if not house.is_generated(target):
+            continue                  # somebody wrote a real one. Leave it.
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        with open(target, "w", encoding="utf-8", newline="\n") as f:
+            f.write(house.product_readme(
+                slug, page["title"], page["tagline"], page["facts"]))
+        readmes += 1
+
     for name, content in written:
         target = os.path.join(ROOT, name)
         os.makedirs(os.path.dirname(target), exist_ok=True)
         with open(target, "w", encoding="utf-8") as f:
             f.write(content)
 
-    print(f"buildsite: {len(written)} pages")
+    print(f"buildsite: {len(written)} pages, {readmes} READMEs")
     for n, _ in written:
         print("  ", n)
     return 0
