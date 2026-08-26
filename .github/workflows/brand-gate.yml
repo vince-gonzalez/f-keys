@@ -207,3 +207,12 @@ jobs:
       - name: The live player, and the claim it makes
         working-directory: keyj-cli
         run: python tests/test_play.py
+
+      # The npm package is lifted from app.html at build time rather than
+      # written twice. This fails if app.html moved and the package did
+      # not - a third copy would be a third chance to drift.
+      - name: The npm package matches app.html
+        run: node keyj-js/build.js --check
+
+      - name: And every export still answers
+        run: node keyj-js/test.js

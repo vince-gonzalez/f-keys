@@ -1,0 +1,27 @@
+{
+  "name": "keyj",
+  "version": "0.1.0",
+  "description": "Read guitar tablature and convert notes: eight tunings, capo offsets, MIDI and frequency. The same reader the Key-J browser app runs, lifted from it so the two cannot disagree.",
+  "main": "index.js",
+  "files": ["index.js", "README.md"],
+  "scripts": {
+    "build": "node build.js",
+    "test": "node test.js",
+    "prepublishOnly": "node build.js --check && node test.js"
+  },
+  "keywords": [
+    "guitar", "tablature", "tab", "music", "midi", "notes",
+    "frequency", "tuning", "capo", "music-theory"
+  ],
+  "author": "Vincent Gonzalez <hello@f-keys.com>",
+  "license": "MIT",
+  "homepage": "https://f-keys.com/keyj/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vince-gonzalez/f-keys.git",
+    "directory": "keyj-js"
+  },
+  "bugs": { "url": "https://github.com/vince-gonzalez/f-keys/issues" },
+  "engines": { "node": ">=14" },
+  "sideEffects": false
+}
