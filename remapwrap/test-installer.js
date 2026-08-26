@@ -74,6 +74,28 @@ ok('uninstall tells the person their boards are kept',
    /boards and your licence key are kept/i.test(src) ||
    /Your boards are still/i.test(src));
 
+// ── Signing ───────────────────────────────────────────────────
+// The build must never claim to have signed something it did not, and must
+// never quietly skip it either. An unsigned build is normal while
+// developing; an unsigned build that says nothing is how an unsigned
+// installer reaches a stranger.
+var build = fs.readFileSync(path.join(__dirname, 'build.js'), 'utf8');
+ok('the build says out loud when it did not sign',
+   /not signed - /.test(build));
+ok('signed is not reported without verifying it',
+   build.indexOf("'verify', '/pa'") !== -1 &&
+   /SIGNED BUT DOES NOT VERIFY/.test(build));
+ok('the launcher is signed before the payload is packed',
+   build.indexOf("sign([path.join(OUT, 'RemapWrap.exe')])") <
+   build.indexOf('function buildInstaller'));
+ok('nothing about signing is configured from inside this repository',
+   /process\.env\.APPDATA/.test(build) &&
+   build.indexOf('signing.json') !== -1);
+
+var ignore = fs.readFileSync(path.join(__dirname, '.gitignore'), 'utf8');
+ok('signing material cannot be committed',
+   /signing\.json/.test(ignore) && /signing\//.test(ignore));
+
 console.log('  ---');
 console.log('  ' + (fail.length ? fail.length + ' FAILED' : 'all pass'));
 process.exit(fail.length ? 1 : 0);

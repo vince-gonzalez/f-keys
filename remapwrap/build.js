@@ -158,6 +158,9 @@ if (built.status !== 0) {
   throw new Error('the launcher did not compile');
 }
 say('RemapWrap.exe compiled');
+// Before the payload is packed, or the copy inside the installer is the
+// unsigned one and only the installer itself would carry a signature.
+sign([path.join(OUT, 'RemapWrap.exe')]);
 
 // ── does what came out actually work ──────────────────────────
 // Pruning dependencies is only safe if the result still loads, and the
@@ -181,6 +184,119 @@ if (check.status !== 0) {
   throw new Error('the built app does not load on its own - do not ship this');
 }
 say('built app loads: ' + String(check.stdout).trim() + ' key constants');
+
+// ── Signing ───────────────────────────────────────────────────
+// Windows 11's Smart App Control blocks unsigned executables outright, and
+// a keystroke injector is the exact shape of thing SmartScreen exists to
+// warn about, so this is not optional for anything a stranger downloads.
+//
+// What signing does NOT do, and it is worth being straight about: it does
+// not remove the first-run warning. Microsoft's own guidance says an EV
+// certificate stopped bypassing SmartScreen years ago and paying the
+// premium for that reason is no longer justified. What it buys is the
+// publisher name in the dialog instead of "Unknown publisher", and
+// reputation that accumulates on the certificate and carries to the next
+// version rather than starting from nothing every release.
+//
+// Configured by a file that is NOT in this repository:
+//
+//   %APPDATA%\RemapWrap\signing.json
+//   { "endpoint": "https://wus2.codesigning.azure.net",
+//     "account":  "fkeys",
+//     "profile":  "remapwrap" }
+//
+// Until that file exists this is a no-op that says so. It never fails the
+// build - an unsigned local build is the normal case while developing -
+// but it never pretends either.
+function signingConfig() {
+  var where = path.join(process.env.APPDATA || os.tmpdir(),
+                        'RemapWrap', 'signing.json');
+  if (!fs.existsSync(where)) { return null; }
+  try {
+    var cfg = JSON.parse(fs.readFileSync(where, 'utf8'));
+    if (!cfg.endpoint || !cfg.account || !cfg.profile) {
+      say('signing.json is missing endpoint, account or profile - not signing');
+      return null;
+    }
+    cfg._from = where;
+    return cfg;
+  } catch (e) {
+    say('signing.json could not be read (' + e.message + ') - not signing');
+    return null;
+  }
+}
+
+function findSigntool() {
+  // The newest one wins. Older signtool builds predate the /v2 dlib flag
+  // this needs.
+  var base = path.join(process.env['ProgramFiles(x86)'] ||
+                       'C:' + path.sep + 'Program Files (x86)',
+                       'Windows Kits', '10', 'bin');
+  if (!fs.existsSync(base)) { return null; }
+  var found = [];
+  fs.readdirSync(base).forEach(function (v) {
+    var candidate = path.join(base, v, 'x64', 'signtool.exe');
+    if (fs.existsSync(candidate)) { found.push({ v: v, p: candidate }); }
+  });
+  if (!found.length) { return null; }
+  found.sort(function (a, b) { return a.v < b.v ? 1 : -1; });
+  return found[0].p;
+}
+
+function sign(files) {
+  var cfg = signingConfig();
+  if (!cfg) {
+    say('not signed - no signing.json, see SIGNING.md');
+    return false;
+  }
+  var signtool = findSigntool();
+  if (!signtool) {
+    say('not signed - no signtool.exe; install the Windows SDK signing tools');
+    return false;
+  }
+  var dlib = path.join(ROOT, 'signing', 'Azure.CodeSigning.Dlib.dll');
+  if (!fs.existsSync(dlib)) {
+    say('not signed - the Azure signing library is not in signing/, see SIGNING.md');
+    return false;
+  }
+
+  // The metadata signtool hands to the library.
+  var meta = path.join(ROOT, 'dist', 'signing-metadata.json');
+  fs.writeFileSync(meta, JSON.stringify({
+    Endpoint: cfg.endpoint,
+    CodeSigningAccountName: cfg.account,
+    CertificateProfileName: cfg.profile
+  }, null, 1));
+
+  var allOk = true;
+  files.forEach(function (file) {
+    var run = child.spawnSync(signtool, [
+      'sign', '/v', '/debug', '/fd', 'SHA256',
+      '/tr', 'http://timestamp.acs.microsoft.com',
+      '/td', 'SHA256',
+      '/dlib', dlib, '/dmdf', meta,
+      file
+    ], { encoding: 'utf8' });
+    if (run.status !== 0) {
+      console.log(run.stdout || ''); console.log(run.stderr || '');
+      say('SIGNING FAILED for ' + path.basename(file));
+      allOk = false;
+      return;
+    }
+    // Signed is not the same as verifiable. Checking is the whole point.
+    var check = child.spawnSync(signtool, ['verify', '/pa', '/v', file],
+                                { encoding: 'utf8' });
+    if (check.status !== 0) {
+      console.log(check.stdout || '');
+      say('SIGNED BUT DOES NOT VERIFY: ' + path.basename(file));
+      allOk = false;
+      return;
+    }
+    say('signed and verified: ' + path.basename(file));
+  });
+  try { fs.rmSync(meta); } catch (e) { /* nothing depends on it */ }
+  return allOk;
+}
 
 // ── The installer ─────────────────────────────────────────────
 // One file a stranger downloads and double-clicks. The application is
@@ -229,6 +345,7 @@ function buildInstaller() {
     throw new Error('the installer did not compile');
   }
   fs.rmSync(zip);            // it lives inside the exe now
+  sign([setupExe]);
   say('RemapWrap-Setup.exe  ' +
       (fs.statSync(setupExe).size / 1048576).toFixed(1) + ' MB, one file');
 }

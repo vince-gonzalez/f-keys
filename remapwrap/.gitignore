@@ -3,3 +3,6 @@ dist/
 *.log
 PRIVATE-KEY*
 *.pem
+signing/
+signing.json
+signing-metadata.json
