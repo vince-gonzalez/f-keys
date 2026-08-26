@@ -134,6 +134,12 @@ jobs:
       - name: The specification matches the data
         run: python tools/buildapi.py --check
 
+      # The sitemap was hand-kept and listed one of 24 product pages.
+      # The old check only asked whether the URLs it listed existed,
+      # which is the direction that cannot catch an absence.
+      - name: The sitemap lists every page
+        run: python tools/buildsitemap.py --check
+
       # The Contact page publishes hello@f-keys.com. That only works while
       # the domain accepts mail, and a contact address that bounces fails
       # silently - nobody tells you the email they sent went nowhere.

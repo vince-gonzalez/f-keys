@@ -489,6 +489,54 @@ def published_zones():
                                   "traffic table".format(cell.strip()))
 
 
+def internal_links():
+    """Every root-relative link on this site has to resolve to a file.
+
+    Added after a product page shipped with a link to /cvd-palette-action,
+    a path invented while writing prose and never created. A visitor gets a
+    404 from a page that looks finished, and nothing else here would have
+    noticed: the sitemap check only reads the sitemap, and the markdown and
+    schema checks only read what they generate.
+    """
+    for path in html_files():
+        source = read(path)
+        for href in re.findall(r'href="(/[^"#?]*)"', source):
+            target = href.lstrip("/")
+            if not target:
+                continue
+            if not exists_exactly(target):
+                fail("links", "{} links to {}, which is not a file"
+                     .format(rel(path), href))
+
+
+def exists_exactly(target):
+    """Does this path exist with EXACTLY this spelling?
+
+    os.path.isfile would answer yes to /docs.html when the file is
+    Docs.html, because this repository is developed on Windows and
+    Windows does not care about case. GitHub Pages serves it from
+    Linux, which does. A gate that runs on the forgiving filesystem
+    and passes a link the strict one would 404 is worse than no gate,
+    so every segment is matched against the real directory listing.
+    """
+    here = ROOT
+    parts = [p for p in target.split("/") if p]
+    for i, part in enumerate(parts):
+        try:
+            listing = os.listdir(here)
+        except OSError:
+            return False
+        if part not in listing:
+            return False
+        here = os.path.join(here, part)
+        last = i == len(parts) - 1
+        if os.path.isfile(here):
+            return last
+    # a directory: it serves if it has an index, and a bare directory
+    # link is how /status/ and /papers/ are written
+    return os.path.isdir(here)
+
+
 def agent_instructions():
     path = os.path.join(ROOT, "llms.txt")
     s = read(path)
@@ -561,6 +609,7 @@ def main():
     structured()
     anchors()
     contact_is_reachable()
+    internal_links()
     published_zones()
     openapi()
     recovery()

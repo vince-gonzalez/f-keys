@@ -259,6 +259,216 @@ one.</p>
   <a class="btn" href="/keyj/">Key-J</a>
 </div>"""),
 
+"opticquiz": dict(
+  title="OpticQuiz", tagline="See colour. Check colour. Correct colour.",
+  facts=[("Where","opticquiz.com"),("Cost","Free, no account"),
+         ("Runs","Entirely in the browser"),
+         ("Packages","opticquiz-cvd, opticquiz-eye, opticquiz-cvd-mcp"),
+         ("Research","Deposited, with DOIs")],
+  body="""
+<h2>What it is</h2>
+<p>Sixteen vision tests that run in the browser &mdash; acuity charts, colour
+vision, contrast &mdash; and a colour-accessibility toolkit for people building
+things other people have to look at.</p>
+<p>Nothing is uploaded. The tests run on your machine, which is the only
+arrangement under which anyone should be typing what they can and cannot see
+into a web page.</p>
+<h2>Two audiences, one engine</h2>
+<p>If you want to check your own eyes, open the site. If you are shipping a
+design, the same simulation is installable: <code>npm i opticquiz-cvd</code> or
+the PyPI package of the same name, so the check that runs in the browser also
+runs in your build.</p>
+<p>There is a <a href="https://github.com/vince-gonzalez/cvd-palette" rel="noopener">GitHub Action</a> too &mdash; it
+fails a build when two colours in a palette become the same colour under
+protanopia, deuteranopia or tritanopia. The default matplotlib red and green
+are seventy-one apart to normal vision and five apart under deuteranopia.</p>
+<h2>What it is not</h2>
+<p>Screening, not diagnosis. These are the same plates and charts an optician
+would recognise, rendered honestly, with their calibration limits published
+rather than glossed. A screen is not a lightbox and the tests say so.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://opticquiz.com" rel="noopener">Take a test</a>
+  <a class="btn" href="https://www.npmjs.com/package/opticquiz-cvd" rel="noopener">npm</a>
+  <a class="btn" href="/papers/">The research</a>
+</div>"""),
+
+ "trailer-load": dict(
+  title="Trailer Load", tagline="Warehouse load training that plays like a game.",
+  facts=[("Where","trailer-load.com"),("Cost","Free to play"),
+         ("Licensing","Separately, for institutional training use"),
+         ("Runs","In the browser")],
+  body="""
+<h2>What it is</h2>
+<p>A loading simulator where weight distribution, axle limits and stack
+integrity are the lesson rather than the scenery. You load a trailer, and the
+trailer behaves like a trailer.</p>
+<h2>Who it is for</h2>
+<p>Anyone who has to teach loading and would rather the first mistake happened
+on a screen. The cheapest way to learn what a badly distributed load does is to
+crush one nobody paid for.</p>
+<h2>Cost</h2>
+<p>Free to play. Licensed separately to institutions that want it for training,
+because a training department wants an invoice, a contact and something that
+will still be there next year &mdash; and that is a different arrangement from
+a free browser game.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://trailer-load.com" rel="noopener">Play it</a>
+  <a class="btn" href="/contact.html">Licensing</a>
+</div>"""),
+
+ "prompt": dict(
+  title="PROMPT", tagline="A multiplayer word game, inside Discord.",
+  facts=[("Where","prompt.f-keys.com"),("Runs","As a Discord Activity"),
+         ("Install","None. No bot invite."),("Cost","Free")],
+  body="""
+<h2>What it is</h2>
+<p>A word game that runs inside a Discord voice channel, in a 90s CRT shell.
+Everyone in the room is looking at the same green screen at the same moment.</p>
+<h2>Why it is an Activity</h2>
+<p>No install, no bot to invite, no permissions to grant, nothing for a server
+admin to approve. You start it from the voice channel and the people already
+there are already playing. The friction of getting a group into a game is
+usually larger than the game.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://prompt.f-keys.com" rel="noopener">Open it</a>
+</div>"""),
+
+ "daisupop": dict(
+  title="DaisuPop", tagline="Everyone sees the same roll at the same moment.",
+  facts=[("Where","dp.f-keys.com"),("Runs","As a Discord Activity"),
+         ("Install","None"),("Cost","Free")],
+  body="""
+<h2>What it is</h2>
+<p>A dice popper for Discord. One roll, rendered to everyone in the voice
+channel simultaneously.</p>
+<h2>Why that matters</h2>
+<p>Every remote dice game has the same argument in it: somebody rolled
+somewhere nobody else could see. A shared roll removes the one excuse, and it
+turns out that is most of what a dice tool needs to do.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://dp.f-keys.com" rel="noopener">Open it</a>
+</div>"""),
+
+ "fytecraft": dict(
+  title="FyteCraft", tagline="An RTS built around the fight, not the build order.",
+  facts=[("Where","github.com/zengineco/fytecraft.com"),
+         ("Status","Alpha, and openly so"),("Cost","Free")],
+  body="""
+<h2>What it is</h2>
+<p>A real-time strategy game where combat is the game rather than the reward
+for twenty minutes of economy. Most RTS makes you spend the opening building
+something before anything happens; this starts at the part people stayed for.</p>
+<h2>It is early</h2>
+<p>Alpha, and said so on the front page rather than discovered on launch.
+Things are missing, things will change, and the source is public while that is
+true. If you want a finished game this is not one yet.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://github.com/zengineco/fytecraft.com" rel="noopener">Source</a>
+</div>"""),
+
+ "modulign": dict(
+  title="Modulign", tagline="A dimensional address grammar for observable reality.",
+  facts=[("Where","modulign.org"),("Standard","DAG-OR v3"),
+         ("Papers","Deposited, with DOIs"),("Cost","Free to read and use")],
+  body="""
+<h2>What it is</h2>
+<p>A grammar for saying <em>where</em> a claim sits before arguing about whether
+it is true. DAG-OR gives an observation an address across explicit dimensions,
+so two people disagreeing can find out whether they are disagreeing about the
+same thing.</p>
+<h2>Why an address</h2>
+<p>Most classification arguments are really arguments about which axis somebody
+is standing on. Once the axes are named and an observation has coordinates on
+each, the disagreement either resolves or becomes a specific one &mdash; and a
+specific disagreement is worth having.</p>
+<h2>Where the work is</h2>
+<p>The standard, the classification decision protocol and the papers are all
+deposited with DOIs, so a citation points at a version rather than a website
+that may have changed.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://modulign.org" rel="noopener">The standard</a>
+  <a class="btn" href="/papers/">Papers</a>
+</div>"""),
+
+ "5best2buy": dict(
+  title="5Best2Buy", tagline="A sourcing map for independent American food.",
+  facts=[("Where","5best2buy.com"),("Cost","Free"),
+         ("What it lists","Independent makers who ship")],
+  body="""
+<h2>What it is</h2>
+<p>A map of small American food makers who will send you what they make.
+Bakeries, smokehouses, dairies, single-product outfits that have been doing one
+thing for forty years.</p>
+<h2>Why it exists</h2>
+<p>Most of the good stuff is made by people who never learned search engine
+optimisation. They are findable if you already know their name, and invisible
+if you do not, which is a bad arrangement for everyone involved. This is the
+list you would want if you knew the list existed.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://www.5best2buy.com" rel="noopener">Browse it</a>
+</div>"""),
+
+ "poticas": dict(
+  title="Poticas", tagline="The home of potica.",
+  facts=[("Where","poticas.com"),("Cost","Free"),
+         ("Covers","History, method, and who still ships one")],
+  body="""
+<h2>What it is</h2>
+<p>Potica is a Slovenian rolled nut bread, and this is the reference for it:
+where it comes from, how it is actually made, and the short list of people who
+still ship one.</p>
+<h2>The list is short for a reason</h2>
+<p>It is a slow bread with a thin dough and a filling heavy enough to tear it,
+so the people who make it well are mostly the people who learned it from
+somebody. That is a smaller group every year, and writing down what they do is
+most of the point of the site.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://poticas.com" rel="noopener">Read it</a>
+</div>"""),
+
+ "tipstreams": dict(
+  title="TipStreams", tagline="Get tipped directly.",
+  facts=[("Where","tipstreams.com"),("Cost","Free"),
+         ("Package","@f-keys/tip-widget"),
+         ("Money","Goes to your wallet, never through ours")],
+  body="""
+<h2>What it is</h2>
+<p>Branded tip pages and OBS overlays for streamers. A multi-payment QR router,
+crypto and the usual platforms, pointed at your accounts.</p>
+<h2>The only sentence that matters in this category</h2>
+<p><b>The widget never touches the money.</b> It routes a viewer to your payment
+method and gets out of the way. Nothing is held, nothing is forwarded, there is
+no balance, and there is no point at which a decision of ours affects whether
+you get paid.</p>
+<p>Every other tipping product in this space is a custodian, and a custodian can
+freeze you. This one cannot, because it never has anything to freeze.</p>
+<h2>In your own page</h2>
+<p><code>npm i &#64;f-keys/tip-widget</code> if you would rather embed it than
+use the hosted page.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://tipstreams.com" rel="noopener">Set one up</a>
+  <a class="btn" href="https://www.npmjs.com/package/@f-keys/tip-widget" rel="noopener">npm</a>
+</div>"""),
+
+ "fundoge": dict(
+  title="FunDoge", tagline="The mini-golf game you build yourself.",
+  facts=[("Where","dogefundme.com"),("Cost","Free"),
+         ("Install","None. It runs in the browser."),
+         ("Also","Design holes and share them")],
+  body="""
+<h2>What it is</h2>
+<p>Free isometric mini-golf in the browser. No install, no account, no launcher.
+You can design your own holes, share them, and play the ones other people
+built.</p>
+<h2>The domain</h2>
+<p>It is on dogefundme.com, which was bought in a different mood for a different
+idea. The game is better than the address and the address is staying, because
+moving a live thing to a tidier name is a cost with no benefit to anyone
+currently playing it.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://dogefundme.com" rel="noopener">Play it</a>
+</div>"""),
+
  "keyj": dict(
   title="Key-J", tagline="Every keystroke plays a note, in any application.",
   facts=[("Version","1.6.0"),("Licence","Proprietary"),("Platforms","Browser, Windows, Linux"),
