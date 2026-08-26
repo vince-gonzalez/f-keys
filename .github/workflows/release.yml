@@ -7,6 +7,7 @@ name: release
 #   keyj      -> Electron installers, built per platform, attached to a Release
 #   moonbeam  -> Python wheel + sdist, published to PyPI and attached too
 #   plumhud   -> the same
+#   keyjockey -> keyjockey on npm, lifted from keyj/app.html
 #   gatekit   -> legible on PyPI (typefloor, contrast-gate,
 #                deadname-gate). The directory is gatekit/; the
 #                distribution is legible, because gatekit was
@@ -23,7 +24,7 @@ on:
       product:
         description: 'Product to build'
         type: choice
-        options: [keyj, moonbeam, plumhud, gatekit]
+        options: [keyj, moonbeam, plumhud, gatekit, keyjockey]
         default: keyj
       version:
         description: 'Version, without the v (e.g. 1.0.0)'
@@ -178,8 +179,79 @@ jobs:
           if-no-files-found: warn
 
   # ── One release, whatever was produced ──────────────────────
+  # ── npm products ────────────────────────────────────────────
+  # Same discipline as the Python job: the tag and the manifest have to
+  # agree, the artifact is built and exercised before anyone can install
+  # it, and a missing token skips the upload rather than failing the run.
+  npm-package:
+    needs: identify
+    if: needs.identify.outputs.product == 'keyjockey'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Refuse to ship a version the manifest does not claim
+        working-directory: keyj-js
+        run: |
+          # Tagging v0.2.0 while package.json still says 0.1.0 would publish
+          # the wrong version under the right name, and npm is append-only.
+          DECLARED=$(node -p "require('./package.json').version")
+          TAGGED="${{ needs.identify.outputs.version }}"
+          echo "package.json: $DECLARED   tag: $TAGGED"
+          if [ "$DECLARED" != "$TAGGED" ]; then
+            echo "::error::package.json says $DECLARED but the tag says $TAGGED."
+            exit 1
+          fi
+
+      - name: The package still matches the app it was lifted from
+        working-directory: keyj-js
+        run: node build.js --check
+
+      - name: Every export answers
+        working-directory: keyj-js
+        run: node test.js
+
+      - name: Pack it, and install the tarball somewhere clean
+        working-directory: keyj-js
+        run: |
+          # Proving the artifact works beats proving the source works: this
+          # installs what a stranger would install, from the tarball, and
+          # calls into it.
+          npm pack
+          TARBALL=$(ls *.tgz)
+          mkdir -p /tmp/verify && cd /tmp/verify
+          npm init -y > /dev/null
+          npm install --silent "$GITHUB_WORKSPACE/keyj-js/$TARBALL"
+          node -e "
+            var k = require('keyjockey');
+            if (k.midiToName(60) !== 'C4') { throw new Error('midiToName wrong'); }
+            if (k.midiToFreq(69) !== 440) { throw new Error('midiToFreq wrong'); }
+            if (Object.keys(k.TUNINGS).length !== 8) { throw new Error('tunings wrong'); }
+            console.log('the published tarball works');
+          "
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: keyj-js
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "NPM_TOKEN not set - skipping the upload."
+            exit 0
+          fi
+          npm publish --access public
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: keyjockey-tarball
+          path: keyj-js/*.tgz
+
   publish:
-    needs: [identify, desktop, python-package]
+    needs: [identify, desktop, python-package, npm-package]
     if: always() && needs.identify.result == 'success'
     runs-on: ubuntu-latest
     steps:
