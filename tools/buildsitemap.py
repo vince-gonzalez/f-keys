@@ -18,16 +18,30 @@ every time - it only ever asked the question in the direction
 that could not fail.
 
 So the sitemap is no longer remembered. The pages buildsite
-generates are read from buildsite, the dates come from git
-rather than from a guess, and the entries this tool does not
-own - papers, gonzalgo, and anything else added by hand - are
-carried through untouched with the lastmod they already had.
+generates are read from buildsite, and the entries this tool
+does not own - papers, gonzalgo, and anything added by hand -
+are carried through untouched with the lastmod they already
+had.
+
+lastmod does NOT come from git. It did, and git could not
+answer the question: the sitemap is generated BEFORE the commit
+that changes these pages, so `git log -1` returned each page's
+PREVIOUS commit date, and the moment the result was committed
+the same command in CI returned today. The check failed with
+159 URLs on both sides and no way to reconcile them, because
+committing the tool's output changed its input.
+
+Each page's content is hashed instead, and the hash and the
+date are stored together in sitemap-dates.json. An unchanged
+page keeps its date; a changed one gets today. It is also the
+better answer - lastmod now means the day the content changed,
+not the day somebody committed a reformat that touched it.
 
 WORKFLOW STACK
   1. owned     - the URLs buildsite is responsible for
   2. carried   - every other URL already in the file, kept
                  verbatim so no hand-set date is lost
-  3. lastmod   - git's date for the file, not today's
+  3. lastmod   - the day the CONTENT changed, by hash
   4. write     - or --check, which fails when the two differ
 
 Run:  python tools/buildsitemap.py
@@ -35,10 +49,11 @@ Run:  python tools/buildsitemap.py
 ============================================================
 """
 
+import hashlib
 import io
+import json
 import os
 import re
-import subprocess
 import sys
 
 try:
@@ -62,46 +77,59 @@ SECTIONS = ["apps.html", "games.html", "tools.html", "hardware.html",
 STANDING = ["about.html", "contact.html", "privacy.html", "developers.html"]
 
 
-def is_shallow():
-    """A shallow clone answers every date question with the same day.
+DATES = os.path.join(ROOT, "sitemap-dates.json")
 
-    This is not a theory. The first CI run of this check failed with
-    159 URLs on both sides, because actions/checkout clones to depth 1
-    and git log then reports the checkout commit for every file. A
-    tool whose output depends on how the repository was cloned has to
-    say so, rather than writing a different file and looking fine.
+
+def load_dates():
+    if not os.path.exists(DATES):
+        return {}
+    try:
+        with io.open(DATES, encoding="utf-8") as f:
+            return json.load(f)
+    except ValueError:
+        return {}
+
+
+def content_sha(path):
+    full = os.path.join(ROOT, path)
+    h = hashlib.sha256()
+    with open(full, "rb") as f:
+        h.update(f.read())
+    return h.hexdigest()[:16]
+
+
+def today():
+    import datetime
+    return datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+
+
+def lastmod_for(url, path, state, changed):
+    """The day this page's content last changed, remembered alongside it.
+
+    The first version asked git, and git could not answer the question
+    being asked. The sitemap is generated BEFORE the commit that changes
+    these pages, so `git log -1` returned each page's PREVIOUS commit
+    date; the moment the result was committed, the same command in CI
+    returned today, and the check failed with 159 URLs on both sides and
+    no way to reconcile them. The tool could not agree with itself,
+    because committing its output changed its input.
+
+    So the date is not derived from the repository at all. Each page's
+    content is hashed and the pair is stored. An unchanged page keeps
+    the date it had, a changed one gets today, and CI recomputes the
+    same hashes and therefore the same file. It is also a better answer:
+    lastmod now means the day the content changed, not the day somebody
+    committed a reformat that touched it.
     """
-    try:
-        out = subprocess.check_output(
-            ["git", "rev-parse", "--is-shallow-repository"],
-            cwd=ROOT, stderr=subprocess.DEVNULL).decode().strip()
-        return out == "true"
-    except (subprocess.CalledProcessError, OSError):
-        return False
-
-
-def git_date(path):
-    """The day this file actually last changed.
-
-    An invented lastmod is worse than none: it tells a crawler to come
-    back for a page that did not move. Untracked files fall back to the
-    working tree's date, which is the day they are about to be
-    committed.
-    """
-    try:
-        out = subprocess.check_output(
-            ["git", "log", "-1", "--format=%ad", "--date=short", "--", path],
-            cwd=ROOT, stderr=subprocess.DEVNULL).decode().strip()
-        if out:
-            return out
-    except (subprocess.CalledProcessError, OSError):
-        pass
-    try:
-        stamp = os.path.getmtime(os.path.join(ROOT, path))
-        import datetime
-        return datetime.date.fromtimestamp(stamp).isoformat()
-    except OSError:
-        return None
+    entry = state.get(url) or {}
+    sha = content_sha(path)
+    if entry.get("sha") == sha and entry.get("lastmod"):
+        return entry["lastmod"]
+    stamp = entry.get("lastmod") or today()
+    if entry.get("sha") != sha:
+        stamp = today()
+    changed[url] = {"sha": sha, "lastmod": stamp}
+    return stamp
 
 
 def owned():
@@ -134,12 +162,15 @@ def build():
     row = ('  <url><loc>{}{}</loc><lastmod>{}</lastmod>'
            '<priority>{}</priority></url>')
 
+    state = load_dates()
+    changed = {}
     skipped = []
     for url, path, priority in mine:
         if not os.path.exists(os.path.join(ROOT, path)):
             skipped.append(url)
             continue
-        lines.append(row.format(BASE, url, git_date(path), priority))
+        lines.append(row.format(
+            BASE, url, lastmod_for(url, path, state, changed), priority))
 
     # Everything this tool does not own is carried through exactly as
     # it was. These are the deposited papers and the gonzalgo index,
@@ -149,19 +180,12 @@ def build():
             lines.append(row.format(BASE, url, lastmod, priority))
 
     lines.append("</urlset>")
-    return "\n".join(lines) + "\n", skipped
+    return "\n".join(lines) + "\n", skipped, changed
 
 
 def main():
     check = "--check" in sys.argv
-    if is_shallow():
-        print("buildsitemap: this is a shallow clone, so git reports one "
-              "date for every file.")
-        print("  every lastmod would be wrong. fetch the history first:")
-        print("  git fetch --unshallow      "
-              "(in CI: actions/checkout with fetch-depth: 0)")
-        return 2
-    fresh, skipped = build()
+    fresh, skipped, changed = build()
     for url in skipped:
         print("  skipped (no file yet): /" + url)
 
@@ -170,6 +194,13 @@ def main():
         current = io.open(SITEMAP, encoding="utf-8").read()
 
     if check:
+        if changed:
+            print("buildsitemap: {} page(s) changed since sitemap-dates.json "
+                  "was written:".format(len(changed)))
+            for url in sorted(changed)[:8]:
+                print("    /" + url)
+            print("  run: python tools/buildsitemap.py")
+            return 1
         if current != fresh:
             was = len(re.findall(r"<loc>", current))
             now = len(re.findall(r"<loc>", fresh))
@@ -180,6 +211,15 @@ def main():
         print("buildsitemap: sitemap.xml current "
               "({} URLs)".format(len(re.findall(r"<loc>", fresh))))
         return 0
+
+    state = load_dates()
+    state.update(changed)
+    # Drop URLs that are no longer served, so the file does not grow a
+    # tail of dates for pages that stopped existing.
+    live = set(u for u, _, _ in owned())
+    state = dict((k, v) for k, v in state.items() if k in live)
+    with io.open(DATES, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(state, f, indent=1, sort_keys=True)
 
     io.open(SITEMAP, "w", encoding="utf-8", newline="\n").write(fresh)
     print("buildsitemap: wrote {} URLs ({} generated, {} carried)".format(

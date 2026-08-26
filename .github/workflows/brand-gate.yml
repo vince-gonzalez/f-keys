@@ -111,13 +111,11 @@ jobs:
   site-claims:
     runs-on: ubuntu-latest
     steps:
+      # A full clone is no longer needed here. buildsitemap used to take
+      # each lastmod from git, which a shallow checkout answered with one
+      # date for every file; it now hashes each page's content instead
+      # and depends on the repository not at all.
       - uses: actions/checkout@v4
-        with:
-          # buildsitemap takes each lastmod from git. A shallow
-          # clone gives every file the same date, so the check
-          # disagrees with a full clone and fails for a reason
-          # that has nothing to do with the sitemap.
-          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
