@@ -115,7 +115,7 @@ PAGES = {
  "keyj": dict(
   title="Key-J", tagline="Every keystroke plays a note, in any application.",
   facts=[("Version","1.6.0"),("Licence","Proprietary"),("Platforms","Browser, Windows, Linux"),
-         ("Source","zengineco/f-keys")],
+         ("Source","vince-gonzalez/f-keys")],
   body="""
 <h2>What it does</h2>
 <p>Your keyboard becomes an instrument. Every keystroke plays a note, the notes land
@@ -154,10 +154,10 @@ stops when you stop it &mdash; nothing is added to startup.</p>
 asks whether a key went down and discards everything else. There is no keystroke buffer in
 it, which is the difference between an instrument and a keylogger.</p>
 <p>The CLI is MIT. The desktop and browser apps are not &mdash; see
-<a href="https://github.com/zengineco/f-keys/blob/main/keyj/LICENSE">the licence</a>.</p>
+<a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE">the licence</a>.</p>
 <div class="btnrow">
   <a class="btn default" href="/keyj/app.html">Open in browser</a>
-  <a class="btn" href="https://github.com/zengineco/f-keys/releases/latest">Download</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/f-keys/releases/latest">Download</a>
   <a class="btn" href="/keyj/manual/">Manual</a>
   <a class="btn" href="https://pypi.org/project/keyj/">PyPI</a>
   <a class="btn" href="/keyj/privacy/">Privacy</a>
@@ -333,7 +333,7 @@ plumhud check    poll once, print, exit
 plumhud where    where config and history live</pre>
 <div class="btnrow">
   <a class="btn default" href="https://pypi.org/project/plumhud/">View on PyPI</a>
-  <a class="btn" href="https://github.com/zengineco/f-keys/tree/main/plumhud">Source</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/f-keys/tree/main/plumhud">Source</a>
 </div>"""),
 
  "streamsniper": dict(
@@ -351,7 +351,7 @@ nearer the top gets the screen. A stream already playing runs to the end, so nob
 in the list can cut in halfway through. Edits apply at the next check, with no restart.</p>
 <pre>bash install.sh
 <b>sudo systemctl start streamsniper@USER</b></pre>
-<div class="btnrow"><a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/streamsniper">Get the source</a></div>"""),
+<div class="btnrow"><a class="btn default" href="https://github.com/vince-gonzalez/f-keys/tree/main/streamsniper">Get the source</a></div>"""),
 
  "moonbeam": dict(
   title="Moonbeam", tagline="Find the NerdMiners on your network.",
@@ -374,14 +374,14 @@ averaging them in.</p>
 <p>Standard library only, so the install cannot fail on someone else's package.</p>
 <div class="btnrow">
   <a class="btn default" href="https://pypi.org/project/moonbeam-miner/">View on PyPI</a>
-  <a class="btn" href="https://github.com/zengineco/f-keys/tree/main/moonbeam">Source</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/f-keys/tree/main/moonbeam">Source</a>
 </div>"""),
 
  "remapwrap": dict(
   title="RemapWrap", tagline="Your phone is already the extra row of keys.",
   facts=[("Version","0.1.0 alpha"),("Runtime","Node.js 16+"),
          ("Phone needs","A browser"),("Install","None on the phone"),
-         ("Source","zengineco/f-keys")],
+         ("Source","vince-gonzalez/f-keys")],
   body="""
 <p><img src="/remapwrap/assets/logo-256.png" alt="RemapWrap"
    style="width:132px;height:132px;float:right;margin:0 0 14px 20px"></p>
@@ -426,7 +426,7 @@ scan the QR with your phone</pre>
 <p>Both devices on the same network. Ports 7331 and 7332 open locally. Keystroke injection
 via <code>@nut-tree-fork/nut-js</code>.</p>
 <div class="btnrow">
-  <a class="btn default" href="https://github.com/zengineco/f-keys/tree/main/remapwrap">Get the source</a>
+  <a class="btn default" href="https://github.com/vince-gonzalez/f-keys/tree/main/remapwrap">Get the source</a>
 </div>"""),
 
 }
@@ -1125,7 +1125,7 @@ where you put it.</p>
 
 <h2>Verifying this rather than believing it</h2>
 <p>The Key-J source is published. It is not free to copy &mdash; see
-<a href="https://github.com/zengineco/f-keys/blob/main/keyj/LICENSE">the
+<a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE">the
 licence</a> &mdash; but it is readable precisely so that a program which installs
 a keyboard hook can be audited by the people running it. The global hook lives in
 <code>keyj/desktop/src/main.js</code>; the handler is a few lines long and you can

@@ -27,7 +27,7 @@ logo = ["Pillow>=10.0.0"]
 
 [project.urls]
 Homepage = "https://f-keys.com/plumhud/"
-Source = "https://github.com/zengineco/f-keys/tree/main/plumhud"
+Source = "https://github.com/vince-gonzalez/f-keys/tree/main/plumhud"
 
 [project.scripts]
 plumhud = "plumhud.cli:main"

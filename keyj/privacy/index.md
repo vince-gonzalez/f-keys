@@ -64,7 +64,7 @@ where you put it.
 
 The Key-J source is published. It is not free to copy — see
 [the
-licence](https://github.com/zengineco/f-keys/blob/main/keyj/LICENSE) — but it is readable precisely so that a program which installs
+licence](https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE) — but it is readable precisely so that a program which installs
 a keyboard hook can be audited by the people running it. The global hook lives in
 keyj/desktop/src/main.js; the handler is a few lines long and you can
 read every one of them.

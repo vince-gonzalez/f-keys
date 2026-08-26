@@ -11,7 +11,7 @@ Every keystroke plays a note, in any application.
 | Version | 1.6.0 |
 | Licence | Proprietary |
 | Platforms | Browser, Windows, Linux |
-| Source | zengineco/f-keys |
+| Source | vince-gonzalez/f-keys |
 
 ## What it does
 
@@ -64,7 +64,7 @@ asks whether a key went down and discards everything else. There is no keystroke
 it, which is the difference between an instrument and a keylogger.
 
 The CLI is MIT. The desktop and browser apps are not — see
-[the licence](https://github.com/zengineco/f-keys/blob/main/keyj/LICENSE).
+[the licence](https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE).
 
 ---
 

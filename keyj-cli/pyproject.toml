@@ -30,7 +30,7 @@ play = ["pynput>=1.7", "sounddevice>=0.4"]
 [project.urls]
 Homepage = "https://f-keys.com/keyj/"
 Manual = "https://f-keys.com/keyj/manual/"
-Source = "https://github.com/zengineco/f-keys/tree/main/keyj-cli"
+Source = "https://github.com/vince-gonzalez/f-keys/tree/main/keyj-cli"
 
 [project.scripts]
 keyj = "keyj.cli:main"

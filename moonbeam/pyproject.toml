@@ -23,7 +23,7 @@ dependencies = []
 
 [project.urls]
 Homepage = "https://f-keys.com/moonbeam/"
-Source = "https://github.com/zengineco/f-keys/tree/main/moonbeam"
+Source = "https://github.com/vince-gonzalez/f-keys/tree/main/moonbeam"
 
 [project.scripts]
 moonbeam = "moonbeam.cli:main"

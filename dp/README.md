@@ -17,7 +17,7 @@ Cloudflare dashboard:
 
 1. Workers & Pages.
 2. Create app.
-3. Connect GitHub repo `zengineco/f-keys`.
+3. Connect GitHub repo `vince-gonzalez/f-keys`.
 4. Root directory: `dp`
 5. Build command: `npm run build`
 6. Deploy command: `npx wrangler deploy`

@@ -34,7 +34,7 @@ import os
 import sys
 import urllib.request
 
-REPO = "zengineco/f-keys"
+REPO = "vince-gonzalez/f-keys"
 PACKAGE = "FKeysCreative.KeyJ"
 PUBLISHER = "F-Keys Creative LLC"
 SCHEMA = "1.12.0"

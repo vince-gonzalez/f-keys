@@ -12,7 +12,7 @@ Your phone is already the extra row of keys.
 | Runtime | Node.js 16+ |
 | Phone needs | A browser |
 | Install | None on the phone |
-| Source | zengineco/f-keys |
+| Source | vince-gonzalez/f-keys |
 
 ## Zero to a deck in fifteen seconds
 

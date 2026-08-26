@@ -70,7 +70,7 @@ schema (already done).
 
 - [ ] **Every PyPI package points into a monorepo subdirectory.** `keyj`,
       `plumhud`, `moonbeam-miner` all resolve to
-      `github.com/zengineco/f-keys/tree/main/<dir>`. No stars, no issues, no
+      `github.com/vince-gonzalez/f-keys/tree/main/<dir>`. No stars, no issues, no
       releases, no watchers land anywhere.
 - [ ] **4 of 21 tracked repositories have no licence** — nobody who finds them
       can legally reuse them. Now surfaced on `/status/`.

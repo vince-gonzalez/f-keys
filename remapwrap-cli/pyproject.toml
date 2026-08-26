@@ -28,8 +28,8 @@ dependencies = []
 
 [project.urls]
 Homepage = "https://f-keys.com/remapwrap/"
-Source = "https://github.com/zengineco/f-keys/tree/main/remapwrap-cli"
-Issues = "https://github.com/zengineco/f-keys/issues"
+Source = "https://github.com/vince-gonzalez/f-keys/tree/main/remapwrap-cli"
+Issues = "https://github.com/vince-gonzalez/f-keys/issues"
 
 [project.scripts]
 remapwrap = "remapwrap.cli:main"

@@ -132,7 +132,7 @@ function createTray() {
 // So checking for an update opens the releases page in the system browser.
 // No request is made unless the user asks for one, and the request is made
 // by their browser rather than by this app.
-const RELEASES_URL = 'https://github.com/zengineco/f-keys/releases/latest';
+const RELEASES_URL = 'https://github.com/vince-gonzalez/f-keys/releases/latest';
 
 function updateTrayMenu() {
   const menu = Menu.buildFromTemplate([
