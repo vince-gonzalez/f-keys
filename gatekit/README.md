@@ -66,6 +66,19 @@ Written for a company rename. It is the same shape as the problem of a person
 changing their name and finding it in three hundred places, which is the
 harder version and the one worth getting right.
 
+## Exit codes
+
+| Code | Means |
+|---|---|
+| `0` | Clean |
+| `1` | It found something. The file and line are printed. |
+| `2` | Misconfigured — it could not check, and will not report clean |
+
+The third one matters. `deadname-gate` forbids nothing out of the box, so a
+fresh install exits **2** with an explanation rather than **0**. A gate that
+reports a pass while checking nothing is worse than no gate, and every one of
+these three shipped a version that did exactly that before it was caught.
+
 ## Configuration
 
 Each gate reads a JSON file of exceptions, so a deliberate choice is

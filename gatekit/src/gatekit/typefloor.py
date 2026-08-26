@@ -159,7 +159,27 @@ def scan(floor, exceptions):
     return hits
 
 
+def _help():
+    print("""typefloor - Fail a build when type is declared below a readable floor.
+
+usage:
+  typefloor [PATH] [--floor N] [--config FILE] [--list] [--fix]
+
+  PATH        directory to check (default: the working directory)
+  --floor N   minimum size in px (default: 13, or floor_px in the config)
+  --config    JSON file of recorded exceptions
+  --list      every offender rather than the summary
+  --fix       raise undeclared sizes to the floor
+  --root DIR  same as PATH, kept for existing callers
+
+Exits 0 when clean, 1 on a finding. Part of readable-gates.
+https://f-keys.com/gatekit/""")
+    return 0
+
+
 def main():
+    if "--help" in sys.argv or "-h" in sys.argv:
+        return _help()
     cfg = load_config()
     # --floor overrides the config, so the Action can advertise it as an
     # input without that input being decoration.

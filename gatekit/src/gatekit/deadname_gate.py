@@ -139,7 +139,27 @@ def scan(root, cfg):
     return hits
 
 
+def _help():
+    print("""deadname-gate - Fail a build when a retired name reaches anything a human reads.
+
+usage:
+  deadname-gate [PATH] [--config FILE] [--list]
+
+  PATH        directory to check (default: the working directory)
+  --config    JSON file: forbidden words, and allowed machine identifiers
+  --list      every occurrence rather than the summary
+  --root DIR  same as PATH, kept for existing callers
+
+Nothing is forbidden by default. Say what yours is in the config.
+
+Exits 0 when clean, 1 on a finding. Part of readable-gates.
+https://f-keys.com/gatekit/""")
+    return 0
+
+
 def main():
+    if "--help" in sys.argv or "-h" in sys.argv:
+        return _help()
     # Packaged, the directory above this file is site-packages,
     # not the project being checked. The working directory is
     # what someone running this in their repo means.

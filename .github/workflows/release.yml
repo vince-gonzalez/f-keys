@@ -7,6 +7,10 @@ name: release
 #   keyj      -> Electron installers, built per platform, attached to a Release
 #   moonbeam  -> Python wheel + sdist, published to PyPI and attached too
 #   plumhud   -> the same
+#   gatekit   -> readable-gates on PyPI (typefloor, contrast-gate,
+#                deadname-gate). The directory is gatekit/; the
+#                distribution is readable-gates, because gatekit was
+#                already taken on PyPI by an unrelated project.
 #
 # Adding a product means adding a job condition, not another workflow.
 
@@ -19,7 +23,7 @@ on:
       product:
         description: 'Product to build'
         type: choice
-        options: [keyj, moonbeam, plumhud]
+        options: [keyj, moonbeam, plumhud, gatekit]
         default: keyj
       version:
         description: 'Version, without the v (e.g. 1.0.0)'
@@ -111,7 +115,7 @@ jobs:
   # ── Python products ─────────────────────────────────────────
   python-package:
     needs: identify
-    if: needs.identify.outputs.product == 'moonbeam' || needs.identify.outputs.product == 'plumhud' || needs.identify.outputs.product == 'keyj-cli'
+    if: needs.identify.outputs.product == 'moonbeam' || needs.identify.outputs.product == 'plumhud' || needs.identify.outputs.product == 'keyj-cli' || needs.identify.outputs.product == 'gatekit'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

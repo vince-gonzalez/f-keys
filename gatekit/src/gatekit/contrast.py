@@ -181,7 +181,30 @@ def check(root, cfg):
     return rows
 
 
+def _help():
+    print("""contrast-gate - Fail a build when a declared colour cannot be read on any surface the file declares.
+
+usage:
+  contrast-gate [PATH] [--config FILE] [--list] [--require-pairs]
+
+  PATH             directory to check (default: the working directory)
+  --config         JSON file of recorded exceptions
+  --list           every pair rather than the summary
+  --require-pairs  fail if no colour pair was found at all, instead of
+                   passing vacuously on a stylesheet with no variables
+  --root DIR       same as PATH, kept for existing callers
+
+This reads CSS custom properties (--name: #hex), not literal
+color/background declarations.
+
+Exits 0 when clean, 1 on a finding. Part of readable-gates.
+https://f-keys.com/gatekit/""")
+    return 0
+
+
 def main():
+    if "--help" in sys.argv or "-h" in sys.argv:
+        return _help()
     args = sys.argv[1:]
     # Packaged, the directory above this file is site-packages,
     # not the project being checked. The working directory is
