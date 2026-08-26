@@ -112,6 +112,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # buildsitemap takes each lastmod from git. A shallow
+          # clone gives every file the same date, so the check
+          # disagrees with a full clone and fails for a reason
+          # that has nothing to do with the sitemap.
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

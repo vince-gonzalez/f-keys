@@ -62,6 +62,24 @@ SECTIONS = ["apps.html", "games.html", "tools.html", "hardware.html",
 STANDING = ["about.html", "contact.html", "privacy.html", "developers.html"]
 
 
+def is_shallow():
+    """A shallow clone answers every date question with the same day.
+
+    This is not a theory. The first CI run of this check failed with
+    159 URLs on both sides, because actions/checkout clones to depth 1
+    and git log then reports the checkout commit for every file. A
+    tool whose output depends on how the repository was cloned has to
+    say so, rather than writing a different file and looking fine.
+    """
+    try:
+        out = subprocess.check_output(
+            ["git", "rev-parse", "--is-shallow-repository"],
+            cwd=ROOT, stderr=subprocess.DEVNULL).decode().strip()
+        return out == "true"
+    except (subprocess.CalledProcessError, OSError):
+        return False
+
+
 def git_date(path):
     """The day this file actually last changed.
 
@@ -136,6 +154,13 @@ def build():
 
 def main():
     check = "--check" in sys.argv
+    if is_shallow():
+        print("buildsitemap: this is a shallow clone, so git reports one "
+              "date for every file.")
+        print("  every lastmod would be wrong. fetch the history first:")
+        print("  git fetch --unshallow      "
+              "(in CI: actions/checkout with fetch-depth: 0)")
+        return 2
     fresh, skipped = build()
     for url in skipped:
         print("  skipped (no file yet): /" + url)
