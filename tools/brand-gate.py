@@ -151,5 +151,74 @@ def main():
     return 1
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and "--commits" not in sys.argv:
     sys.exit(main())
+
+
+# ── commit messages ──────────────────────────────────────────
+# Added 2026-08-26. The rule "no Claude attribution in this repository"
+# was stated, recorded, and then broken fifteen times in one sitting,
+# because the trailer is a default that has to be actively suppressed on
+# every single commit. A rule that depends on remembering is not a rule.
+#
+# This reads the messages rather than the files, so it catches the one
+# place the rest of this script cannot see.
+ATTRIBUTION = (
+    r"co-authored-by:\s*claude",
+    r"co-authored-by:.*@anthropic\.com",
+    r"generated with .{0,20}claude code",
+    r"\U0001F916 generated with",
+)
+
+
+def check_commits(rev_range=None):
+    """Fail if any commit message in the range carries AI attribution."""
+    import subprocess
+    rng = rev_range or "origin/main..HEAD"
+    try:
+        out = subprocess.run(["git", "log", "--format=%H%x00%B%x00%x00", rng],
+                             capture_output=True, text=True,
+                             cwd=os.path.dirname(os.path.dirname(
+                                 os.path.abspath(__file__))),
+                             encoding="utf-8", errors="replace")
+    except Exception as e:
+        # A gate that cannot read what it guards has not found it clean.
+        # The first version of this returned 0 here and reported success
+        # while raising NameError internally, which is the whole failure
+        # mode this file exists to prevent.
+        print("brand-gate: FAILED - could not read commit messages:", e)
+        return 1
+    if out.returncode != 0:
+        print("brand-gate: FAILED - git log {!r} did not run: {}"
+              .format(rng, (out.stderr or "").strip()[:160]))
+        return 1
+
+    bad = []
+    for entry in (out.stdout or "").split("\x00\x00"):
+        if "\x00" not in entry:
+            continue
+        sha, message = entry.split("\x00", 1)
+        for pattern in ATTRIBUTION:
+            hit = re.search(pattern, message, re.I)
+            if hit:
+                bad.append((sha.strip()[:8], hit.group(0).strip()))
+                break
+
+    if not bad:
+        print("brand-gate: commit messages clean - no AI attribution")
+        return 0
+
+    print("brand-gate: FAILED - {} commit(s) carry AI attribution\n"
+          .format(len(bad)))
+    for sha, hit in bad:
+        print("  {}  {!r}".format(sha, hit))
+    print("\n  This repository does not credit a model for the work. Strip the"
+          "\n  trailer and amend, or rewrite the range:"
+          "\n    git filter-branch -f --msg-filter"
+          " 'sed \"/^Co-Authored-By: Claude/d\"' <range>")
+    return 1
+
+
+if __name__ == "__main__" and "--commits" in sys.argv:
+    _i = sys.argv.index("--commits")
+    sys.exit(check_commits(sys.argv[_i + 1] if _i + 1 < len(sys.argv) else None))

@@ -28,6 +28,17 @@ jobs:
         if: failure()
         run: python tools/brand-gate.py --list-allowed
 
+      # This repository does not credit a model for the work. The rule was
+      # stated, recorded, and then broken fifteen times in one sitting,
+      # because the trailer is a harness default that has to be actively
+      # suppressed on every commit. A rule that depends on remembering is
+      # not a rule, so it is checked here instead.
+      - name: No AI attribution in commit messages
+        run: |
+          git fetch --no-tags --depth=50 origin main || true
+          python tools/brand-gate.py --commits "HEAD~30..HEAD" ||           python tools/brand-gate.py --commits "HEAD"
+
+
   # Key-J shipped three defects that existed only because app.html and
   # desktop/src/index.html were maintained as two copies. index.html is a
   # generated file now, and this fails if someone edits it directly or
