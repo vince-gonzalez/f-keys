@@ -23,13 +23,13 @@ as `keyj`, and a parity test diffs the two on every build.
 ## Install
 
 ```
-npm install capotasto
+npm install keyjockey
 ```
 
 ## Use
 
 ```js
-var keyj = require("capotasto");
+var keyj = require("keyjockey");
 
 keyj.parseTab(tab, "Standard (EADGBe)", 0).notes;   // [{ name: "E4", ... }]
 keyj.parseTab(tab, "Drop D", 2).notes;              // capo 2, raised a tone

@@ -1,5 +1,5 @@
 {
-  "name": "capotasto",
+  "name": "keyjockey",
   "version": "0.1.0",
   "description": "Read guitar tablature and convert notes: eight tunings, capo offsets, MIDI and frequency. The same reader the Key-J browser app runs, lifted from it so the two cannot disagree.",
   "main": "index.js",
