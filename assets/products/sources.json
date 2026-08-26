@@ -7,6 +7,10 @@
     "sha256": "29d9e52439e0340f",
     "source": "daisupop.png"
   },
+  "fundoge": {
+    "sha256": "56c5349576a5c694",
+    "source": "fundoge.png"
+  },
   "keyj": {
     "sha256": "8a699060b332ccd5",
     "source": "keyj.png"
@@ -19,6 +23,10 @@
     "sha256": "f6873fcd067e45db",
     "source": "micdrop.png"
   },
+  "modulign": {
+    "sha256": "c311093c9743b44b",
+    "source": "modulign.png"
+  },
   "moonbeam": {
     "sha256": "949a09519d98b7f9",
     "source": "moonbeam.png"
@@ -27,9 +35,21 @@
     "sha256": "c1659e08f2b442ac",
     "source": "opticquiz.png"
   },
+  "pixelstaff": {
+    "sha256": "bfa60560651d7e97",
+    "source": "pixelstaff.png"
+  },
   "plumhud": {
     "sha256": "22788273386a5906",
     "source": "plumhud.png"
+  },
+  "poticas": {
+    "sha256": "e8c16a08af1c00d6",
+    "source": "poticas.png"
+  },
+  "prompt": {
+    "sha256": "f65abb0bbe8ebfc4",
+    "source": "prompt.png"
   },
   "remapwrap": {
     "sha256": "f4bc99ea802b0474",
@@ -38,5 +58,13 @@
   "streamsniper": {
     "sha256": "ab577d20a4738b4e",
     "source": "streamsniper.png"
+  },
+  "tipstreams": {
+    "sha256": "cab4010ec93d5d70",
+    "source": "tipstreams.png"
+  },
+  "trailer-load": {
+    "sha256": "6c0bc9934cb1c854",
+    "source": "trailer-load.png"
   }
 }

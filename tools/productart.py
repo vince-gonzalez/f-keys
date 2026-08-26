@@ -70,12 +70,26 @@ def catalogue():
     return [(slug, name) for slug, name, *_rest in buildsite.CATALOGUE]
 
 
+# One mark, several products. epistemend.png is the authorecon family's
+# mark, so anything in that family draws on it rather than waiting for a
+# drawing of its own that would only have to match. Recorded here rather
+# than by copying the file, because two copies of one mark is two things
+# to update and one of them gets missed.
+ALIASES = {
+    "authorecon": "epistemend",
+    "epistemend": "epistemend",
+}
+
+
 def source_for(slug):
     """Whatever was dropped in, in whichever of the sane formats."""
-    for ext in (".png", ".webp", ".jpg", ".jpeg"):
-        path = os.path.join(ART, slug + ext)
-        if os.path.exists(path):
-            return path
+    for candidate in (slug, ALIASES.get(slug)):
+        if not candidate:
+            continue
+        for ext in (".png", ".webp", ".jpg", ".jpeg"):
+            path = os.path.join(ART, candidate + ext)
+            if os.path.exists(path):
+                return path
     return None
 
 
@@ -133,6 +147,45 @@ def why_unusable(path):
     return None
 
 
+def slug_of(filename):
+    """The product a dropped file is for, allowing for how files arrive.
+
+    Windows renames a file that collides on copy, so a fixed mark comes
+    back as 'pixelstaff (2).png'. That slug is in no catalogue, so the
+    file would be treated as somebody else's stray and ignored forever
+    - the one failure mode worse than a loud refusal.
+    """
+    import re
+    stem = os.path.splitext(filename)[0]
+    return re.sub(r"\s*\(\d+\)$", "", stem).strip()
+
+
+def promote_fixed(slugs):
+    """Take anything in todo/ that is now usable back upstairs.
+
+    The README told people to fix a file and move it up. They fix it
+    where it is, which is the reasonable thing to do, and then nothing
+    happens and the tool looks broken. Meeting that halfway costs
+    nothing and removes the only step that was ever manual.
+    """
+    if not os.path.isdir(TODO):
+        return []
+    moved = []
+    for f in sorted(os.listdir(TODO)):
+        if not f.lower().endswith((".png", ".webp", ".jpg", ".jpeg")):
+            continue
+        here = os.path.join(TODO, f)
+        slug = slug_of(f)
+        if slug not in slugs or why_unusable(here):
+            continue
+        dest = os.path.join(ART, slug + os.path.splitext(f)[1].lower())
+        if os.path.exists(dest):
+            os.remove(dest)
+        os.rename(here, dest)
+        moved.append((f, os.path.basename(dest)))
+    return moved
+
+
 def park(slug, source):
     """Move a source that cannot be used out of the way.
 
@@ -188,8 +241,11 @@ def write_todo(names):
         for f, why, name in rows:
             lines.append("| `%s` | %s | %s |"
                          % (f, why, name or "**not in the catalogue**"))
-        lines += ["", "Fix one, move it up to `assets/products/`, and run:",
-                  "", "    python tools/productart.py", ""]
+        lines += ["", "Fix one **in place** and run the tool. It takes anything",
+                  "here that has become usable back upstairs by itself, so",
+                  "there is nothing to move and nothing to rename - a file",
+                  "that came back as `name (2).png` is matched too.", "",
+                  "    python tools/productart.py", ""]
     else:
         lines += ["Nothing is parked. Every dropped-in source is usable.", ""]
     io.open(os.path.join(TODO, "README.md"), "w",
@@ -245,6 +301,14 @@ def main():
     have, missing, problems = [], [], []
     manifest = {}
     old = load_manifest()
+
+    # Anything parked that has since been fixed comes back up first, so
+    # the loop below sees it as an ordinary source. --verify never moves
+    # anything: a check that edits the tree is not a check.
+    if not verify:
+        for was, now in promote_fixed(set(s for s, _ in catalogue())):
+            print("  {:<14} fixed - {} -> {}".format(
+                slug_of(was), was, now))
 
     for slug, name in catalogue():
         source = source_for(slug)

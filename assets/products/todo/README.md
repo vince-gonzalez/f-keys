@@ -12,16 +12,11 @@ with a different job.
 
 | file | problem | product |
 |---|---|---|
-| `5best2buy.png` | 220x229 - needs a square crop AND a bigger source; cropping this gives 220px, under the 256px floor | 5Best2Buy |
-| `fundoge.png` | 1408x768 - needs a square crop | FunDoge |
-| `modulign.png` | 468x410 - needs a square crop | Modulign |
-| `pixelstaff.png` | 1408x768 - needs a square crop | Pixel Staff |
-| `poticas.png` | 1900x828 - needs a square crop | Poticas |
-| `prompt.png` | 1024x1536 - needs a square crop | PROMPT |
-| `tipstreams.png` | 864x1229 - needs a square crop | TipStreams |
-| `trailer-load.png` | 1026x289 - needs a square crop | Trailer Load |
-| `wikipolish.png` | 1408x768 - needs a square crop | WikiPolish |
+| `5best2buy.png` | 550x572 - needs a square crop | 5Best2Buy |
 
-Fix one, move it up to `assets/products/`, and run:
+Fix one **in place** and run the tool. It takes anything
+here that has become usable back upstairs by itself, so
+there is nothing to move and nothing to rename - a file
+that came back as `name (2).png` is matched too.
 
     python tools/productart.py
