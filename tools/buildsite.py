@@ -309,7 +309,8 @@ answers a real question is worth keeping.</p>
 
  "plumhud": dict(
   title="PlumHUD", tagline="Watch the fleet, not the screen.",
-  facts=[("Version","4.1.0"),("Licence","MIT"),("Install","pip install plumhud"),
+  facts=[("Name","Personal Ledger Utility Monitor, Heads-Up Display"),
+         ("Version","4.1.0"),("Licence","MIT"),("Install","pip install plumhud"),
          ("Requires","Python 3.8+, Tk"),("Depends on","moonbeam-miner")],
   body="""
 <h2>What it does</h2>

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "plumhud"
 version = "4.1.2"
-description = "Miner fleet monitor - a borderless overlay HUD, alerts, and history."
+description = "Personal Ledger Utility Monitor, Heads-Up Display: a borderless overlay for a miner fleet, with alerts and local history."
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }

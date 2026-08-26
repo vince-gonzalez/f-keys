@@ -25,7 +25,7 @@ something and could not.
 ## Install
 
 ```
-pip install gatekit
+pip install legible
 ```
 
 ## Use
@@ -95,7 +95,7 @@ deadname-gate ./src --config deadname_gate.json
 ## In CI
 
 ```yaml
-- run: pip install gatekit
+- run: pip install legible
 - run: typefloor ./src
 - run: contrast-gate ./src --require-pairs
 - run: deadname-gate ./src

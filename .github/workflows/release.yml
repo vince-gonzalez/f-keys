@@ -7,9 +7,9 @@ name: release
 #   keyj      -> Electron installers, built per platform, attached to a Release
 #   moonbeam  -> Python wheel + sdist, published to PyPI and attached too
 #   plumhud   -> the same
-#   gatekit   -> readable-gates on PyPI (typefloor, contrast-gate,
+#   gatekit   -> legible on PyPI (typefloor, contrast-gate,
 #                deadname-gate). The directory is gatekit/; the
-#                distribution is readable-gates, because gatekit was
+#                distribution is legible, because gatekit was
 #                already taken on PyPI by an unrelated project.
 #
 # Adding a product means adding a job condition, not another workflow.

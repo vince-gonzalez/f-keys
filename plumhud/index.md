@@ -8,6 +8,7 @@ Watch the fleet, not the screen.
 
 | Field | Value |
 | --- | --- |
+| Name | Personal Ledger Utility Monitor, Heads-Up Display |
 | Version | 4.1.0 |
 | Licence | MIT |
 | Install | pip install plumhud |

@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "readable-gates"
+name = "legible"
 version = "0.1.0"
 description = "Three build gates for things a linter will not catch: type below a readable floor, colour that cannot be read on the surface it sits on, and a retired name reaching anything a human reads."
 readme = "README.md"
@@ -26,7 +26,7 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://f-keys.com/gatekit/"
+Homepage = "https://f-keys.com/legible/"
 Source = "https://github.com/vince-gonzalez/f-keys/tree/main/gatekit"
 Issues = "https://github.com/vince-gonzalez/f-keys/issues"
 
