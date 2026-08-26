@@ -91,11 +91,24 @@ def load_dates():
 
 
 def content_sha(path):
+    """A hash of what the page SAYS, not of how it is stored.
+
+    Raw bytes were the obvious thing and were wrong. This repository is
+    developed on Windows, where git checks these files out with CRLF
+    line endings, and built in CI on Linux, where they are LF. Hashing
+    the bytes therefore asked a question about the checkout rather than
+    the content, and CI reported all 35 pages as changed on every run
+    while the working copy reported none.
+
+    That is the same failure as taking lastmod from git: an answer that
+    depends on where it is asked. Newlines are normalised first, so both
+    machines hash the same page.
+    """
     full = os.path.join(ROOT, path)
-    h = hashlib.sha256()
     with open(full, "rb") as f:
-        h.update(f.read())
-    return h.hexdigest()[:16]
+        raw = f.read()
+    raw = raw.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(raw).hexdigest()[:16]
 
 
 def today():
