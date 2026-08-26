@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "remapwrap"
-version = "0.5.0"
+version = "0.6.0"
 description = "Build RemapWrap control surfaces from what you already have: a folder of samples, a list of applications, a set of shortcuts."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -31,8 +31,18 @@ Homepage = "https://f-keys.com/remapwrap/"
 Source = "https://github.com/vince-gonzalez/f-keys/tree/main/remapwrap-cli"
 Issues = "https://github.com/vince-gonzalez/f-keys/issues"
 
+[project.optional-dependencies]
+# The MCP server is optional so the layout tools stay entirely
+# dependency-free for anyone who only wants the command line.
+mcp = ["mcp>=2.0"]
+
 [project.scripts]
+remapwrap-mcp = "remapwrap.mcp_server:main"
 remapwrap = "remapwrap.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

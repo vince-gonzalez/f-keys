@@ -1,0 +1,42 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.vince-gonzalez/remapwrap",
+  "title": "remapwrap",
+  "description": "Builds RemapWrap control surfaces from a description: communication boards, adapted keyboards, soundboards and stream decks. Every layout is checked before it is returned, and a broken one is never written.",
+  "version": "0.6.0",
+  "websiteUrl": "https://f-keys.com/remapwrap/",
+  "repository": {
+    "url": "https://github.com/vince-gonzalez/f-keys",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "remapwrap",
+      "version": "0.6.0",
+      "runtimeHint": "uvx",
+      "runtimeArguments": [
+        {
+          "type": "named",
+          "name": "--from",
+          "value": "remapwrap[mcp]",
+          "isRequired": true,
+          "description": "The MCP server lives behind an optional dependency so the layout tools stay dependency-free."
+        }
+      ],
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "remapwrap-mcp",
+          "isRequired": true,
+          "description": "Starts the stdio server."
+        }
+      ],
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": []
+    }
+  ]
+}
