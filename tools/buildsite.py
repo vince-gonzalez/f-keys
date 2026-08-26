@@ -68,7 +68,7 @@ CATALOGUE = [
     ("micdrop", "MICDROP", "games", "Fortnite island", FORTNITE,
      "A live open-mic arena. 120 seconds to win the crowd. Code 1534-0440-5810.", "/micdrop/"),
     ("fytecraft", "FyteCraft", "games", "Game", ALPHA,
-     "An RTS built around combat rather than base-building. Early, and openly so.", "https://github.com/zengineco/fytecraft.com"),
+     "An RTS built around combat rather than base-building. Early, and openly so.", "https://github.com/vince-gonzalez/fytecraft.com"),
 
     ("wikipolish", "WikiPolish", "tools", "Web tool", READY,
      "Grammar scout for Wikipedia. Finds a first edit nobody will revert.", "/wikipolish/"),
@@ -351,7 +351,7 @@ turns out that is most of what a dice tool needs to do.</p>
 
  "fytecraft": dict(
   title="FyteCraft", tagline="An RTS built around the fight, not the build order.",
-  facts=[("Where","github.com/zengineco/fytecraft.com"),
+  facts=[("Where","github.com/vince-gonzalez/fytecraft.com"),
          ("Status","Alpha, and openly so"),("Cost","Free")],
   body="""
 <h2>What it is</h2>
@@ -363,7 +363,7 @@ something before anything happens; this starts at the part people stayed for.</p
 Things are missing, things will change, and the source is public while that is
 true. If you want a finished game this is not one yet.</p>
 <div class="btnrow">
-  <a class="btn default" href="https://github.com/zengineco/fytecraft.com" rel="noopener">Source</a>
+  <a class="btn default" href="https://github.com/vince-gonzalez/fytecraft.com" rel="noopener">Source</a>
 </div>"""),
 
  "modulign": dict(
@@ -537,7 +537,7 @@ board and clear it. Square, saw, triangle and sine per channel.</p>
   title="QV", tagline="One tap, one vote, live needle. The ballot comes to you.",
   facts=[("Version","0.5.0 \u2014 Ballot Box"),("Platform","Browser, PWA"),
          ("Accounts","None"),("Embeds","One script tag"),
-         ("Source","zengineco/qv")],
+         ("Source","vince-gonzalez/qv")],
   body="""
 <h2>What it is</h2>
 <p>A QV ballot is one question &mdash; yes or no, this or that &mdash; that anybody can
@@ -567,7 +567,7 @@ creator key. Bulk seeding fills a channel from a question set, so a new channel 
 launch empty.</p>
 <div class="btnrow">
   <a class="btn default" href="https://qv.f-keys.com/">Open QV</a>
-  <a class="btn" href="https://github.com/zengineco/qv">Source</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/qv">Source</a>
 </div>"""),
 
  "micdrop": dict(
@@ -627,15 +627,15 @@ trying to remember and becomes a number you can see. <b>Next Article</b> keeps t
 moving when one turns out to be already clean.</p>
 
 <div class="btnrow">
-  <a class="btn default" href="https://zengineco.github.io/wikiscout/">Open WikiPolish</a>
-  <a class="btn" href="https://github.com/zengineco/wikiscout">Source</a>
+  <a class="btn default" href="https://vince-gonzalez.github.io/wikiscout/">Open WikiPolish</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/wikiscout">Source</a>
 </div>"""),
 
  "leadseer": dict(
   title="LeadSeer", tagline="Which businesses near you have no website at all?",
   facts=[("Status","Archived, working"),("Runtime","Node 18+, Electron"),
          ("Needs","A Google Places API key"),("Install","Run from source"),
-         ("Source","zengineco/LeadSeer")],
+         ("Source","vince-gonzalez/LeadSeer")],
   body="""
 <h2>What it does</h2>
 <p>Search a place and a trade &mdash; plumbers in Toledo, salons in Sarasota &mdash; and
@@ -661,7 +661,7 @@ anyone else. That is also the catch: without a key it cannot search at all.</p>
 it runs from source with Node and Electron. The code stays readable because a tool that
 answers a real question is worth keeping.</p>
 <div class="btnrow">
-  <a class="btn default" href="https://github.com/zengineco/LeadSeer">Get the source</a>
+  <a class="btn default" href="https://github.com/vince-gonzalez/LeadSeer">Get the source</a>
 </div>"""),
 
  "plumhud": dict(

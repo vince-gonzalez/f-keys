@@ -35,7 +35,7 @@ quietly lost.
 | Platform | Browser, PWA |
 | Accounts | None |
 | Embeds | One script tag |
-| Source | zengineco/qv |
+| Source | vince-gonzalez/qv |
 
 [The page itself](https://f-keys.com/qv/)
 

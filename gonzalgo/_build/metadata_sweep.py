@@ -40,7 +40,7 @@ OVERCLAIMING = {"Journal article", "Book", "Data paper", "Book section",
 
 # Repositories that exist and hold the code behind a deposit.
 REPO = {
-    "gonzalgo": "https://github.com/zengineco/gonzalgo",
+    "gonzalgo": "https://github.com/vince-gonzalez/gonzalgo",
     "opticquiz": "https://github.com/zengineco/opticquiz.com",
 }
 CATALOGUE = "https://f-keys.com/gonzalgo/data/"

@@ -12,7 +12,7 @@ Which businesses near you have no website at all?
 | Runtime | Node 18+, Electron |
 | Needs | A Google Places API key |
 | Install | Run from source |
-| Source | zengineco/LeadSeer |
+| Source | vince-gonzalez/LeadSeer |
 
 ## What it does
 

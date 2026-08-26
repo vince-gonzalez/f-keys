@@ -187,7 +187,7 @@ h3 { font-family:'VT323',monospace; font-weight:400; font-size:1.35rem; color:va
   <div style="display:flex;gap:1.5rem;font-size:.9rem;">
     <a href="/gonzalgo/">gonzalgo</a>
     <a href="/gonzalgo/data/">indexes</a>
-    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
 </nav>
 <main>

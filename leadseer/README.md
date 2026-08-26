@@ -35,7 +35,7 @@ quietly lost.
 | Runtime | Node 18+, Electron |
 | Needs | A Google Places API key |
 | Install | Run from source |
-| Source | zengineco/LeadSeer |
+| Source | vince-gonzalez/LeadSeer |
 
 [The page itself](https://f-keys.com/leadseer/)
 

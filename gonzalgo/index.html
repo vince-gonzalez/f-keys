@@ -38,7 +38,7 @@
       "operatingSystem": "macOS, Windows, Linux",
       "url": "https://f-keys.com/gonzalgo/",
       "downloadUrl": "https://pypi.org/project/gonzalgo/",
-      "codeRepository": "https://github.com/zengineco/gonzalgo",
+      "codeRepository": "https://github.com/vince-gonzalez/gonzalgo",
       "programmingLanguage": ["Python", "Lean 4"],
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "description": "Axiom provenance for Lean 4 and Metamath. Separates a theorem's statement dependencies from its proof dependencies, so an axiom the theorem genuinely requires stops looking identical to one a tactic reached for unnecessarily. Gives the shortest path from any declaration to any axiom with each step labelled statement or proof, computes the band of theorems whose statements are choice-free while their proofs are not, and reports what breaks downstream if a definition changes.",
@@ -168,7 +168,7 @@ footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; co
   <div style="display:flex;gap:1.6rem;font-size:.9rem;">
     <a href="/">Home</a>
     <a href="/portfolio.html">Portfolio</a>
-    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
 </nav>
 
@@ -194,7 +194,7 @@ required it, or whether a constructive route exists.
 
 <p>
   <a href="https://pypi.org/project/gonzalgo/">PyPI</a> ·
-  <a href="https://github.com/zengineco/gonzalgo">Source</a> ·
+  <a href="https://github.com/vince-gonzalez/gonzalgo">Source</a> ·
   <a href="/gonzalgo/faq/">FAQ</a> ·
   <a href="/gonzalgo/data/">Indexes</a> ·
   <a href="/gonzalgo/kernel-index/">Kernel Index</a> ·
@@ -304,7 +304,7 @@ it, and whether it can be rerouted.
 <h3>Can I fail a build when a proof rests on something unfinished?</h3>
 <p>Yes. Three lines:</p>
 
-<pre>- uses: zengineco/gonzalgo@v1
+<pre>- uses: vince-gonzalez/gonzalgo@v1
   with:
     module: MyProject</pre>
 

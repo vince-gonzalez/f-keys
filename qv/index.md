@@ -12,7 +12,7 @@ One tap, one vote, live needle. The ballot comes to you.
 | Platform | Browser, PWA |
 | Accounts | None |
 | Embeds | One script tag |
-| Source | zengineco/qv |
+| Source | vince-gonzalez/qv |
 
 ## What it is
 

@@ -406,7 +406,7 @@ def build(idx: Index) -> dict:
   <div style="display:flex;gap:1.5rem;font-size:.9rem;">
     <a href="/gonzalgo/">gonzalgo</a>
     <a href="/gonzalgo/data/">indexes</a>
-    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
 </nav>
 <main>

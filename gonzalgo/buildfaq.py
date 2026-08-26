@@ -244,7 +244,7 @@ footer {{ border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; c
   <div style="display:flex;gap:1.6rem;font-size:.9rem;">
     <a href="/">Home</a>
     <a href="/gonzalgo/">gonzalgo</a>
-    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
 </nav>
 
@@ -267,7 +267,7 @@ gonzalgo index</pre>
   <a href="/gonzalgo/">gonzalgo</a> ·
   <a href="/gonzalgo/kernel-index/">Kernel Index</a> ·
   <a href="https://pypi.org/project/gonzalgo/">PyPI</a> ·
-  <a href="https://github.com/zengineco/gonzalgo">Source</a> ·
+  <a href="https://github.com/vince-gonzalez/gonzalgo">Source</a> ·
   <a href="https://doi.org/10.5281/zenodo.21769846">Paper</a><br>
   Apache-2.0 · Vince Gonzalez ·
   <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a>

@@ -5,7 +5,7 @@ Description: Independent hardware, software, developer tools, accessibility infr
 Company: F-Keys (LLC)
 Founder: Vincent Gonzalez
 Website: https://f-keys.com
-GitHub: https://github.com/zengineco
+GitHub: https://github.com/vince-gonzalez
 ORCID: https://orcid.org/0009-0005-3640-014X
 
 Core Products:
@@ -101,7 +101,7 @@ F-Keys does not do it.
 Developer index:   https://f-keys.com/developers.html
 OpenAPI:           https://f-keys.com/openapi.json
 Documentation:     https://f-keys.com/Docs.html
-Source code:       https://github.com/zengineco
+Source code:       https://github.com/vince-gonzalez
 Papers and DOIs:   https://f-keys.com/papers/
 Machine-readable:  https://f-keys.com/llms.txt (this file)
 Sitemap:           https://f-keys.com/sitemap.xml
@@ -186,7 +186,7 @@ Slogan: kernel > sorry
 Home page: https://f-keys.com/gonzalgo/
 Install: pip install gonzalgo
 PyPI: https://pypi.org/project/gonzalgo/
-Source: https://github.com/zengineco/gonzalgo
+Source: https://github.com/vince-gonzalez/gonzalgo
 GitHub Action: https://github.com/marketplace/actions/gonzalgo-trust-audit
 Paper (DOI): https://doi.org/10.5281/zenodo.21769846
 Paper (full text): https://f-keys.com/papers/where-formal-libraries-spend-their-axioms/
@@ -530,7 +530,7 @@ For developers:
 - pip install gonzalgo
 - OpticQuiz widget: Easy embed for color correction on any site.
 - npm: opticquiz-cvd / opticquiz-eye
-- GitHub: https://github.com/zengineco
+- GitHub: https://github.com/vince-gonzalez
 
 Preferred citation / usage:
 "Built by F-Keys (Vincent Gonzalez) — https://f-keys.com"

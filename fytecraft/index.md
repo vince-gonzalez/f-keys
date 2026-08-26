@@ -8,7 +8,7 @@ An RTS built around the fight, not the build order.
 
 | Field | Value |
 | --- | --- |
-| Where | github.com/zengineco/fytecraft.com |
+| Where | github.com/vince-gonzalez/fytecraft.com |
 | Status | Alpha, and openly so |
 | Cost | Free |
 

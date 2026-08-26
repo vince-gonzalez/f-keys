@@ -42,7 +42,7 @@ RELATED = [
     ("isSupplementTo", "10.5281/zenodo.21853489", "doi"),
     ("isSupplementTo", "10.5281/zenodo.21883963", "doi"),
     ("isSupplementTo", "10.5281/zenodo.21884471", "doi"),
-    ("isCompiledBy", "https://github.com/zengineco/gonzalgo", "url"),
+    ("isCompiledBy", "https://github.com/vince-gonzalez/gonzalgo", "url"),
     ("isDocumentedBy", "https://f-keys.com/gonzalgo/data/", "url"),
 ]
 KEYWORDS = ["formal verification", "Lean 4", "Mathlib", "Metamath",

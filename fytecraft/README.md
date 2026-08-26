@@ -31,7 +31,7 @@ quietly lost.
 
 | | |
 |---|---|
-| Where | github.com/zengineco/fytecraft.com |
+| Where | github.com/vince-gonzalez/fytecraft.com |
 | Status | Alpha, and openly so |
 | Cost | Free |
 

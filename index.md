@@ -58,7 +58,7 @@ to match the last one. [Contact](https://f-keys.com/contact.html) for licensing,
 | [PROMPT](https://prompt.f-keys.com) | Discord activity | In Discord | A multiplayer word game inside Discord, in a 90s CRT shell. |
 | [DaisuPop](https://dp.f-keys.com) | Discord activity | In Discord | A dice popper. Everyone in the room sees the same roll at the same moment. |
 | [MICDROP](https://f-keys.com/micdrop/) | Fortnite island | In Fortnite | A live open-mic arena. 120 seconds to win the crowd. Code 1534-0440-5810. |
-| [FyteCraft](https://github.com/zengineco/fytecraft.com) | Game | Alpha | An RTS built around combat rather than base-building. Early, and openly so. |
+| [FyteCraft](https://github.com/vince-gonzalez/fytecraft.com) | Game | Alpha | An RTS built around combat rather than base-building. Early, and openly so. |
 | [WikiPolish](https://f-keys.com/wikipolish/) | Web tool | Ready | Grammar scout for Wikipedia. Finds a first edit nobody will revert. |
 | [LeadSeer](https://f-keys.com/leadseer/) | Desktop tool | Needs setup | Finds the local businesses that still have no website. |
 | [PlumHUD](https://f-keys.com/plumhud/) | Python package | pip install | Miner fleet monitor. Overlay HUD, alerts, and local history. |

@@ -153,7 +153,7 @@ def build_hub(metas: list[dict]) -> None:
   <div style="display:flex;gap:1.5rem;font-size:.9rem;">
     <a href="/gonzalgo/">gonzalgo</a>
     <a href="/gonzalgo/faq/">FAQ</a>
-    <a href="https://github.com/zengineco/gonzalgo">GitHub</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
 </nav>
 <main>
@@ -180,7 +180,7 @@ moves only when the numbers do.
 <p>
 CC-BY-4.0: use them, quote them, redistribute them, cite the DOI on the index
 you used. If a number here disagrees with one you measured, that is worth an
-<a href="https://github.com/zengineco/gonzalgo/issues">issue</a> &mdash; the
+<a href="https://github.com/vince-gonzalez/gonzalgo/issues">issue</a> &mdash; the
 point of publishing the data is that someone can check it.
 </p>
 

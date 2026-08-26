@@ -25,7 +25,7 @@ NAME = "VINCE GONZALEZ"
 LOC = "Punta Gorda, FL"
 PHONE = "614.216.4709"
 EMAIL = "vg188705@gmail.com"
-LINKS = "f-keys.com · github.com/zengineco · orcid.org/0009-0005-3640-014X"
+LINKS = "f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X"
 
 # ---------------------------------------------------------------- facts
 FEDEX = [
@@ -304,7 +304,7 @@ def inline(s: str) -> str:
     # into tags by this point, and a greedy match swallowed the closing
     # </strong> into the href on every product line.
     s = re.sub(r"\b((?:f-keys\.com|opticquiz\.com|trailer-load\.com|poticas\.com|"
-               r"5best2buy\.com|github\.com/zengineco|orcid\.org/[\w-]+)[^\s·,)<]*)",
+               r"5best2buy\.com|github\.com/vince-gonzalez|orcid\.org/[\w-]+)[^\s·,)<]*)",
                r'<a href="https://\1">\1</a>', s)
     return s
 

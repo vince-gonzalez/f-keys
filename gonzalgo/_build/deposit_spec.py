@@ -158,7 +158,7 @@ def main() -> None:
             {"relation": "isDocumentedBy",
              "identifier": "https://f-keys.com/gonzalgo/kernel-trust/"},
             {"relation": "isSupplementedBy",
-             "identifier": "https://github.com/zengineco/gonzalgo"},
+             "identifier": "https://github.com/vince-gonzalez/gonzalgo"},
         ],
         "notes": ("The specification is CC-BY-4.0 and implementations are "
                   "unencumbered. Worked profiles were emitted by gonzalgo 0.5.2; "
