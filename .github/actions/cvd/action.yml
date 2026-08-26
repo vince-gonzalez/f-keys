@@ -1,0 +1,46 @@
+name: "Colour-blind safe palette"
+description: "Fail the build when two colours in a palette become the same colour under protanopia, deuteranopia or tritanopia."
+author: "F-Keys"
+
+branding:
+  icon: "eye"
+  color: "purple"
+
+inputs:
+  colors:
+    description: "Comma-separated hex colours, e.g. #1f77b4,#ff7f0e"
+    required: false
+    default: ""
+  file:
+    description: "A .json palette (array or name->hex), or any file to scan for #rrggbb."
+    required: false
+    default: ""
+  types:
+    description: "Which deficiencies to check."
+    required: false
+    default: "protan,deutan,tritan"
+  severity:
+    description: "0..1, how complete the simulated deficiency is."
+    required: false
+    default: "1.0"
+  distinct:
+    description: "Minimum perceptual distance between two colours."
+    required: false
+    default: "13"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install opticquiz-cvd
+      shell: bash
+      run: pip install --quiet opticquiz-cvd
+
+    - name: Check the palette
+      shell: bash
+      run: |
+        python "${{ github.action_path }}/check_palette.py" \
+          --colors "${{ inputs.colors }}" \
+          --file "${{ inputs.file }}" \
+          --types "${{ inputs.types }}" \
+          --severity "${{ inputs.severity }}" \
+          --distinct "${{ inputs.distinct }}"

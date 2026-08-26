@@ -1,0 +1,169 @@
+name: actions self-test
+
+# The four Actions are thin wrappers, and a thin wrapper fails in ways the
+# package's own tests cannot see: a renamed input, a shell quoting mistake,
+# a `pip install` of a package that no longer exists under that name. All
+# three of those happened here - the first three Actions installed
+# `gatekit` for a week after the distribution became `legible`.
+#
+# So each one runs twice: against a fixture it must pass, and one it must
+# fail. An Action that cannot fail is not a gate, and one that cannot pass
+# is not usable.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/actions/**'
+      - '.github/workflows/actions-selftest.yml'
+  pull_request:
+    paths:
+      - '.github/actions/**'
+  workflow_dispatch:
+
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # ── fixtures ─────────────────────────────────────────────
+      - name: Build a clean tree and a broken one
+        run: |
+          mkdir -p fixtures/clean fixtures/broken
+
+          cat > fixtures/clean/page.html <<'EOF'
+          <style>
+            .body { font-size: 16px; }
+          </style>
+          <div class="body">large enough to read</div>
+          EOF
+
+          cat > fixtures/broken/page.html <<'EOF'
+          <style>
+            .tiny { font-size: 7px; }
+          </style>
+          <div class="tiny">six point type</div>
+          <p>Built by OldCorp</p>
+          EOF
+
+          echo '{"forbidden": ["oldcorp"], "allowed": [], "skip_paths": []}' \
+            > fixtures/deadname.json
+
+      # ── typefloor ────────────────────────────────────────────
+      - name: typefloor passes a readable tree
+        uses: ./.github/actions/typefloor
+        with:
+          path: fixtures/clean
+
+      - name: typefloor on 7px type
+        id: floor_bad
+        continue-on-error: true
+        uses: ./.github/actions/typefloor
+        with:
+          path: fixtures/broken
+
+      - name: typefloor must have failed
+        run: |
+          if [ "${{ steps.floor_bad.outcome }}" != "failure" ]; then
+            echo "::error::typefloor passed a 7px declaration. It is not gating."
+            exit 1
+          fi
+          echo "typefloor failed the broken tree, as it should"
+
+      # ── deadname ─────────────────────────────────────────────
+      - name: deadname passes a clean tree
+        uses: ./.github/actions/deadname
+        with:
+          path: fixtures/clean
+          config: fixtures/deadname.json
+
+      - name: deadname on a retired name
+        id: dead_bad
+        continue-on-error: true
+        uses: ./.github/actions/deadname
+        with:
+          path: fixtures/broken
+          config: fixtures/deadname.json
+
+      - name: deadname must have failed
+        run: |
+          if [ "${{ steps.dead_bad.outcome }}" != "failure" ]; then
+            echo "::error::deadname-gate passed a retired name. It is not gating."
+            exit 1
+          fi
+          echo "deadname-gate failed the broken tree, as it should"
+
+      # ── colour blindness ─────────────────────────────────────
+      - name: a palette that survives
+        uses: ./.github/actions/cvd
+        with:
+          colors: "#000000,#ffffff,#0000ff"
+
+      - name: the classic red/green pair
+        id: cvd_bad
+        continue-on-error: true
+        uses: ./.github/actions/cvd
+        with:
+          colors: "#d62728,#2ca02c"
+
+      - name: the palette check must have failed
+        run: |
+          if [ "${{ steps.cvd_bad.outcome }}" != "failure" ]; then
+            echo "::error::red and green passed. Roughly one man in twelve"
+            echo "::error::cannot tell those apart, and this did not notice."
+            exit 1
+          fi
+          echo "the palette check failed red/green, as it should"
+
+      # ── contrast ─────────────────────────────────────────────
+      # This one reads CSS custom properties, so its fixture declares them.
+      - name: A stylesheet with a readable pair and an unreadable one
+        run: |
+          mkdir -p fixtures/css-good fixtures/css-bad
+          printf ':root{--bg:#ffffff;--ink:#111111;}' > fixtures/css-good/t.css
+          printf ':root{--bg:#ffffff;--ink-faint:#bbbbbb;}' > fixtures/css-bad/t.css
+
+      - name: contrast passes a readable pair
+        uses: ./.github/actions/contrast
+        with:
+          path: fixtures/css-good
+
+      - name: contrast on #bbbbbb over white
+        id: contrast_bad
+        continue-on-error: true
+        uses: ./.github/actions/contrast
+        with:
+          path: fixtures/css-bad
+
+      - name: contrast must have failed
+        run: |
+          if [ "${{ steps.contrast_bad.outcome }}" != "failure" ]; then
+            echo "::error::contrast passed 1.9:1. It is not gating."
+            exit 1
+          fi
+          echo "contrast failed the unreadable pair, as it should"
+
+      # ── the vacuous pass ─────────────────────────────────────
+      - name: contrast with nothing to check, and told to require some
+        id: contrast_empty
+        continue-on-error: true
+        uses: ./.github/actions/contrast
+        with:
+          path: fixtures/clean
+          require-pairs: "true"
+
+      - name: an empty check must not read as a pass
+        run: |
+          if [ "${{ steps.contrast_empty.outcome }}" != "failure" ]; then
+            echo "::error::--require-pairs did not fail on a tree with no"
+            echo "::error::declared colours. A pass on nothing is not a pass."
+            exit 1
+          fi
+          echo "an empty check failed under --require-pairs, as it should"
+
+      - name: All four gate, and all four pass what is fine
+        run: echo "typefloor, deadname-gate, contrast-gate and the palette check are live"

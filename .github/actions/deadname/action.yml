@@ -19,9 +19,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install gatekit
+    - name: Install legible
       shell: bash
-      run: pip install --quiet gatekit
+      run: pip install --quiet legible
 
     - name: Deadname gate
       shell: bash
