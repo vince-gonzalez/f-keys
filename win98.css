@@ -138,6 +138,10 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 /* ── document pane (product pages) ───────────────────────── */
 .doc{padding:16px 20px 26px;max-width:760px}
 .doc h1{font-size:17px;margin-bottom:2px;letter-spacing:.2px}
+/* The product mark. Floated so the heading keeps its place when a
+   product has no mark and nothing is emitted at all. */
+.doc .mark{float:right;margin:0 0 8px 12px;image-rendering:auto}
+@media (max-width:520px){.doc .mark{width:48px;height:48px}}
 .doc .sub{color:var(--dim);margin-bottom:14px}
 .doc h2{font-size:13px;margin:18px 0 6px;padding-bottom:3px;
   border-bottom:1px solid #d8d8d8;letter-spacing:.3px;text-transform:uppercase;

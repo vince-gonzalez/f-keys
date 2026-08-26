@@ -1224,6 +1224,26 @@ EXTRA_NODES = [("/about.html", "About"), ("/Docs.html", "Docs"), ("/developers.h
 SITE = "https://f-keys.com"
 OG_IMAGE = SITE + "/assets/og.png"
 
+# The mark a product actually has, or the house card. productart writes
+# <slug>-og.png from a mark; until a product has one, every link to it
+# unfurls as the F-Keys card, which is correct but tells a reader
+# nothing about which of twenty-six things they are looking at.
+def product_og(slug):
+    if slug:
+        name = slug + "-og.png"
+        if os.path.isfile(os.path.join(ROOT, "assets", "products", name)):
+            return SITE + "/assets/products/" + name
+    return OG_IMAGE
+
+
+def product_mark(slug):
+    """The 256px mark, for the page itself. None when there is none."""
+    if slug:
+        name = slug + "-256.png"
+        if os.path.isfile(os.path.join(ROOT, "assets", "products", name)):
+            return "/assets/products/" + name
+    return None
+
 LEGAL_NAME = "F-Keys Creative LLC"
 FOUNDER = "Vincent Gonzalez"
 EMAIL = "hello@f-keys.com"
@@ -1530,6 +1550,11 @@ def shell(title, path_label, body, count_label, active_cat=None,
     ld_block = jsonld(ld) if ld else ""
     robots = "noindex, follow" if noindex else "index, follow"
     og_url = canonical or SITE
+    og_image = product_og(active_slug)
+    og_alt = ("The {} mark.".format(title.split(" — ")[0])
+              if og_image != OG_IMAGE else
+              "The F-Keys mark: a script f with KEYS set in seven-segment "
+              "digits across it.")
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1548,14 +1573,14 @@ def shell(title, path_label, body, count_label, active_cat=None,
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{esc(og_url)}">
-<meta property="og:image" content="{esc(OG_IMAGE)}">
+<meta property="og:image" content="{esc(og_image)}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta property="og:image:alt" content="{esc(og_alt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(description)}">
-<meta name="twitter:image" content="{esc(OG_IMAGE)}">
+<meta name="twitter:image" content="{esc(og_image)}">
 <link rel="stylesheet" href="/win98.css">
 {ld_block}
 </head>
@@ -1657,7 +1682,7 @@ def software(slug, page, row):
         "url": "{}/{}/".format(SITE, slug),
         "description": page["tagline"],
         "applicationCategory": APP_CATEGORY.get(slug, "UtilitiesApplication"),
-        "image": OG_IMAGE,
+        "image": product_og(slug),
         "author": {"@type": "Person", "name": FOUNDER, "sameAs": [ORCID]},
         "publisher": {"@id": SITE + "/#organization"},
         "offers": {
@@ -1744,9 +1769,16 @@ def main():
         facts = "".join(
             "<tr><th>{}</th><td>{}</td></tr>".format(esc(k), esc(v))
             for k, v in page["facts"])
-        doc = ('<div class="doc"><h1>{}</h1><p class="sub">{}</p>'
+        # The mark, when the product has one. Nothing is emitted when it
+        # does not: a broken image or a placeholder box is worse than a
+        # heading on its own, and twenty-one of these have no mark yet.
+        mark = product_mark(slug)
+        head = ('<img class="mark" src="{}" width="72" height="72" alt="" '
+                'loading="lazy" decoding="async">').format(mark) if mark else ""
+        doc = ('<div class="doc">{}<h1>{}</h1><p class="sub">{}</p>'
                '<table class="facts">{}</table>{}</div>').format(
-                   esc(page["title"]), esc(page["tagline"]), facts, page["body"])
+                   head, esc(page["title"]), esc(page["tagline"]),
+                   facts, page["body"])
         label = dict((c[0], c[1]) for c in CATEGORIES) if False else None
         catname = next((c[1] for c in CATEGORIES if c[0] == cat), "")
         written.append((os.path.join(slug, "index.html"), shell(
