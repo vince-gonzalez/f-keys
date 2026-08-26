@@ -1,8 +1,4 @@
 {
-  "5best2buy": {
-    "sha256": "06380277f2dd02b1",
-    "source": "5best2buy.png"
-  },
   "daisupop": {
     "sha256": "29d9e52439e0340f",
     "source": "daisupop.png"
@@ -11,44 +7,32 @@
     "sha256": "8a699060b332ccd5",
     "source": "keyj.png"
   },
+  "leadseer": {
+    "sha256": "962e87c3684a5280",
+    "source": "leadseer.png"
+  },
   "micdrop": {
-    "sha256": "d122736d6cf50ed0",
+    "sha256": "f6873fcd067e45db",
     "source": "micdrop.png"
   },
-  "modulign": {
-    "sha256": "de0244b983e93f1e",
-    "source": "modulign.png"
+  "moonbeam": {
+    "sha256": "949a09519d98b7f9",
+    "source": "moonbeam.png"
   },
   "opticquiz": {
     "sha256": "c1659e08f2b442ac",
     "source": "opticquiz.png"
   },
-  "pixelstaff": {
-    "sha256": "e40ca1ffd6f8994f",
-    "source": "pixelstaff.png"
-  },
   "plumhud": {
     "sha256": "22788273386a5906",
     "source": "plumhud.png"
-  },
-  "poticas": {
-    "sha256": "f7a548334884931f",
-    "source": "poticas.png"
-  },
-  "prompt": {
-    "sha256": "81da0c9aff83a094",
-    "source": "prompt.png"
   },
   "remapwrap": {
     "sha256": "f4bc99ea802b0474",
     "source": "remapwrap.png"
   },
-  "tipstreams": {
-    "sha256": "f17b12cf79a75f39",
-    "source": "tipstreams.png"
-  },
-  "wikipolish": {
-    "sha256": "1314b1d3dabb0cc9",
-    "source": "wikipolish.png"
+  "streamsniper": {
+    "sha256": "ab577d20a4738b4e",
+    "source": "streamsniper.png"
   }
 }
