@@ -489,6 +489,48 @@ def published_zones():
                                   "traffic table".format(cell.strip()))
 
 
+def security_txt():
+    """security.txt has to be present, reachable, and NOT expired.
+
+    RFC 9116 makes Expires mandatory and caps it at a year, which means
+    every security.txt is a claim with a fuse on it. An expired one is
+    worse than none: a researcher reads it, sees a dead date, and
+    assumes nobody is home. Nothing about the file changes on the day
+    it lapses, so nothing would tell us.
+
+    The 30-day warning is the point. Failing on the day it expires
+    would fail the build on a day nobody chose.
+    """
+    import datetime
+    path = os.path.join(ROOT, ".well-known", "security.txt")
+    if not os.path.isfile(path):
+        fail("security", ".well-known/security.txt is missing")
+        return
+    s = read(path)
+    for field in ("Contact:", "Expires:"):
+        if not re.search(r"^" + field, s, re.M):
+            fail("security", "security.txt has no " + field.rstrip(":"))
+    if "hello@f-keys.com" not in s:
+        fail("security", "security.txt does not publish the role address")
+    m = re.search(r"^Expires:\s*(\S+)", s, re.M)
+    if not m:
+        return
+    try:
+        when = datetime.datetime.strptime(m.group(1),
+                                          "%Y-%m-%dT%H:%M:%S.%fZ")
+    except ValueError:
+        fail("security", "Expires is not an RFC 3339 timestamp: " + m.group(1))
+        return
+    now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+    left = (when - now).days
+    if left < 0:
+        fail("security", "security.txt EXPIRED {} days ago ({})".format(
+            -left, m.group(1)))
+    elif left < 30:
+        fail("security", "security.txt expires in {} days ({}) - "
+                         "push the date out".format(left, m.group(1)))
+
+
 def internal_links():
     """Every root-relative link on this site has to resolve to a file.
 
@@ -610,6 +652,7 @@ def main():
     anchors()
     contact_is_reachable()
     internal_links()
+    security_txt()
     published_zones()
     openapi()
     recovery()

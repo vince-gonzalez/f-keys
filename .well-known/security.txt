@@ -1,0 +1,16 @@
+# https://f-keys.com/.well-known/security.txt
+# RFC 9116. If you found something, this is where to send it.
+
+Contact: mailto:hello@f-keys.com
+Expires: 2027-08-26T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://f-keys.com/.well-known/security.txt
+Policy: https://f-keys.com/contact.html
+
+# There is no bug bounty and no money. What there is: a human who reads
+# that address, a reply, and credit in the fix if you want it.
+#
+# Everything here is static and served from a CDN, so the interesting
+# surface is small: the Cloudflare Worker doing content negotiation, and
+# the two Discord Activities. Say what you did, not just what you found -
+# a report that cannot be reproduced cannot be fixed.
