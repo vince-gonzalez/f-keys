@@ -251,7 +251,75 @@ META_SCHEMA = {
 }
 
 
+# The status snapshot is a REPORT, not a dataset, and inferring its shape
+# broke the build every time a source had a different day. Cloudflare's
+# 24-hour bot sample returns whichever categories it saw, so "Security"
+# became a schema property one day and "Accessibility" the next. A failed
+# pypistats call replaced `daily`/`weekly`/`monthly` with `error`. GitHub
+# traffic succeeding removed `traffic_error`. None of that is a change to
+# the format; it is the weather.
+#
+# So this one is described rather than measured. Optional things are
+# optional, and the maps whose KEYS are data are declared as maps.
+STATUS_SCHEMA = {
+    "type": "object",
+    "title": "Status snapshot",
+    "required": ["date", "generated_at", "summary"],
+    "properties": {
+        "date": {"type": "string", "format": "date"},
+        "generated_at": {"type": "string"},
+        "mode": {"type": "string", "enum": ["daily", "weekly"]},
+        "redacted": {"type": "string",
+                     "description": "What this published copy leaves out."},
+        "summary": {
+            "type": "object",
+            "description": "The headline figures. A key is absent when the "
+                           "source behind it did not report.",
+            "additionalProperties": {"type": ["integer", "null"]},
+        },
+        "uptime": {"type": "array", "items": {
+            "type": "object",
+            "required": ["name", "up"],
+            "properties": {"name": {"type": "string"},
+                           "url": {"type": "string", "format": "uri"},
+                           "up": {"type": "boolean"},
+                           "ms": {"type": "integer"},
+                           "error": {"type": ["string", "null"]}}}},
+        "npm": {"type": "array", "items": {"$comment": "package row",
+                                           "type": "object"}},
+        "pypi": {"type": "array", "items": {"$comment": "package row",
+                                            "type": "object"}},
+        "github": {"type": "array", "items": {"type": "object"}},
+        "zenodo": {"type": "object", "properties": {
+            "error": {"type": ["string", "null"]},
+            "records": {"type": "array", "items": {"type": "object"}}}},
+        "cloudflare": {"type": "object", "properties": {
+            "days": {"type": "integer"},
+            "error": {"type": ["string", "null"]},
+            "sites_omitted": {"type": "integer"},
+            "sites": {"type": "array", "items": {"type": "object"}},
+            "totals": {"type": "object"},
+            "window": {"type": "object"},
+            # the keys here are Cloudflare's bot categories, which are
+            # data and differ day to day - a map, never named properties
+            "bots_24h": {"type": "object",
+                         "additionalProperties": {"type": "integer"},
+                         "description": "Requests per bot category in the "
+                                        "last 24 hours. Keys are "
+                                        "Cloudflare's categories and vary."},
+            "bots_error": {"type": ["string", "null"]}}},
+        "history": {"type": "array", "items": {"type": "object"}},
+    },
+}
+
+
 def dataset_schema(doc, title, blurb):
+    if "summary" in doc and "uptime" in doc:
+        out = dict(STATUS_SCHEMA)
+        out["title"] = title
+        if blurb:
+            out["description"] = blurb.strip()
+        return out
     if "$schema" in doc:
         out = dict(META_SCHEMA)
         out["title"] = title

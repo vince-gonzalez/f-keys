@@ -379,6 +379,33 @@ def openapi():
             fail("openapi", "names a server that is not this site: " +
                  str(server.get("url")))
 
+    # The spec must not depend on what the weather was when the snapshot
+    # ran. It did: Cloudflare's bot categories became schema properties,
+    # so a day that saw "Security" and a day that saw "Accessibility"
+    # produced different specs, and the build went red on the next push
+    # for a reason nobody had caused. Rendering it against every day on
+    # record has to give one answer.
+    import glob
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import buildapi
+    live = os.path.join(ROOT, "status", "latest.json")
+    days = sorted(glob.glob(os.path.join(ROOT, "status", "data", "*.json")))
+    if days and os.path.exists(live):
+        kept = read(live)
+        shapes = {}
+        try:
+            for day in days:
+                with io.open(live, "w", encoding="utf-8", newline="\n") as f:
+                    f.write(read(day))
+                shapes.setdefault(buildapi.render(), []).append(
+                    os.path.basename(day))
+        finally:
+            with io.open(live, "w", encoding="utf-8", newline="\n") as f:
+                f.write(kept)
+        if len(shapes) > 1:
+            fail("openapi", "the specification changes with the day's data: "
+                 + " vs ".join(", ".join(v) for v in shapes.values()))
+
     # The developer page is the human-readable half. An audit called it
     # thin, which it was: it named the packages but never said what
     # authentication is required, what the rate limit is, or what happens

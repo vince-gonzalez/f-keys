@@ -51,11 +51,19 @@ jobs:
             python tools/snapshot.py
           fi
 
+      # openapi.json describes status/latest.json, which this job just
+      # rewrote. The spec is meant to be stable across a day's numbers and
+      # is now written so that it is, but regenerating here means any
+      # drift that does appear is corrected by the job that caused it,
+      # rather than turning up as a red build on the next unrelated push.
+      - name: Keep the specification in step with the snapshot
+        run: python tools/buildapi.py
+
       - name: Commit the public snapshot
         run: |
           git config user.name  "kpi-snapshot"
           git config user.email "noreply@f-keys.com"
-          git add status/
+          git add status/ openapi.json
           if git diff --staged --quiet; then
             echo "No change in the numbers today - nothing to commit."
             exit 0

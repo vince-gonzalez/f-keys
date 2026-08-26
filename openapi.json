@@ -6538,577 +6538,158 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "title": "Status snapshot",
+                  "required": [
+                    "date",
+                    "generated_at",
+                    "summary"
+                  ],
                   "properties": {
-                    "cloudflare": {
-                      "type": "object",
-                      "properties": {
-                        "bots_24h": {
-                          "type": "object",
-                          "properties": {
-                            "AI Assistant": {
-                              "type": "integer"
-                            },
-                            "AI Crawler": {
-                              "type": "integer"
-                            },
-                            "AI Search": {
-                              "type": "integer"
-                            },
-                            "Advertising & Marketing": {
-                              "type": "integer"
-                            },
-                            "Archiver": {
-                              "type": "integer"
-                            },
-                            "Monitoring & Analytics": {
-                              "type": "integer"
-                            },
-                            "Page Preview": {
-                              "type": "integer"
-                            },
-                            "Search Engine Crawler": {
-                              "type": "integer"
-                            },
-                            "Search Engine Optimization": {
-                              "type": "integer"
-                            },
-                            "Security": {
-                              "type": "integer"
-                            },
-                            "Unverified": {
-                              "type": "integer"
-                            }
-                          },
-                          "required": [
-                            "AI Assistant",
-                            "AI Crawler",
-                            "AI Search",
-                            "Advertising & Marketing",
-                            "Archiver",
-                            "Monitoring & Analytics",
-                            "Page Preview",
-                            "Search Engine Crawler",
-                            "Search Engine Optimization",
-                            "Security",
-                            "Unverified"
-                          ]
-                        },
-                        "days": {
-                          "type": "integer"
-                        },
-                        "sites": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "days_returned": {
-                                "type": "integer"
-                              },
-                              "page_views": {
-                                "type": "integer"
-                              },
-                              "requests": {
-                                "type": "integer"
-                              },
-                              "site": {
-                                "type": "string"
-                              },
-                              "threats": {
-                                "type": "integer"
-                              },
-                              "top_countries": {
-                                "type": "array"
-                              },
-                              "uniques": {
-                                "type": "integer"
-                              }
-                            },
-                            "required": [
-                              "days_returned",
-                              "page_views",
-                              "requests",
-                              "site",
-                              "threats",
-                              "top_countries",
-                              "uniques"
-                            ]
-                          }
-                        },
-                        "sites_omitted": {
-                          "type": "integer"
-                        },
-                        "totals": {
-                          "type": "object",
-                          "properties": {
-                            "page_views": {
-                              "type": "integer"
-                            },
-                            "threats": {
-                              "type": "integer"
-                            },
-                            "uniques": {
-                              "type": "integer"
-                            }
-                          },
-                          "required": [
-                            "page_views",
-                            "threats",
-                            "uniques"
-                          ]
-                        },
-                        "window": {
-                          "type": "object",
-                          "properties": {
-                            "since": {
-                              "type": "string"
-                            },
-                            "until": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "since",
-                            "until"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "bots_24h",
-                        "days",
-                        "sites",
-                        "sites_omitted",
-                        "totals",
-                        "window"
-                      ]
-                    },
                     "date": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "date"
                     },
                     "generated_at": {
                       "type": "string"
                     },
-                    "github": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "archived": {
-                            "type": "boolean"
-                          },
-                          "created_at": {
-                            "type": "string"
-                          },
-                          "description": {
-                            "type": "string"
-                          },
-                          "forks": {
-                            "type": "integer"
-                          },
-                          "full_name": {
-                            "type": "string"
-                          },
-                          "language": {
-                            "type": "string"
-                          },
-                          "open_issues": {
-                            "type": "integer"
-                          },
-                          "owner": {
-                            "type": "string"
-                          },
-                          "pushed_at": {
-                            "type": "string"
-                          },
-                          "repo": {
-                            "type": "string"
-                          },
-                          "size_kb": {
-                            "type": "integer"
-                          },
-                          "stars": {
-                            "type": "integer"
-                          },
-                          "topics": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "traffic_error": {
-                            "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "watchers": {
-                            "type": "integer"
-                          },
-                          "license": {
-                            "type": "string"
-                          },
-                          "homepage": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "archived",
-                          "created_at",
-                          "description",
-                          "forks",
-                          "full_name",
-                          "open_issues",
-                          "owner",
-                          "pushed_at",
-                          "repo",
-                          "size_kb",
-                          "stars",
-                          "topics",
-                          "traffic_error",
-                          "url",
-                          "watchers"
-                        ]
-                      }
-                    },
-                    "history": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "date": {
-                            "type": "string"
-                          },
-                          "github_stars": {
-                            "type": "integer"
-                          },
-                          "package_weekly": {
-                            "type": "integer"
-                          },
-                          "properties_total": {
-                            "type": "integer"
-                          },
-                          "properties_up": {
-                            "type": "integer"
-                          },
-                          "zenodo_downloads": {
-                            "type": "integer"
-                          },
-                          "zenodo_views": {
-                            "type": "integer"
-                          },
-                          "page_views_7d": {
-                            "type": "integer"
-                          },
-                          "visitors_7d": {
-                            "type": "integer"
-                          }
-                        },
-                        "required": [
-                          "date",
-                          "github_stars",
-                          "package_weekly",
-                          "properties_total",
-                          "properties_up",
-                          "zenodo_downloads",
-                          "zenodo_views"
-                        ]
-                      }
-                    },
                     "mode": {
-                      "type": "string"
-                    },
-                    "npm": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "all_time": {
-                            "type": "integer"
-                          },
-                          "license": {
-                            "type": "string"
-                          },
-                          "package": {
-                            "type": "string"
-                          },
-                          "registry": {
-                            "type": "string"
-                          },
-                          "released": {
-                            "type": "string"
-                          },
-                          "summary": {
-                            "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "version": {
-                            "type": "string"
-                          },
-                          "weekly": {
-                            "type": "integer"
-                          }
-                        },
-                        "required": [
-                          "all_time",
-                          "license",
-                          "package",
-                          "registry",
-                          "released",
-                          "summary",
-                          "url",
-                          "version",
-                          "weekly"
-                        ]
-                      }
-                    },
-                    "pypi": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "all_time": {
-                            "type": "integer"
-                          },
-                          "daily": {
-                            "type": "integer"
-                          },
-                          "monthly": {
-                            "type": "integer"
-                          },
-                          "package": {
-                            "type": "string"
-                          },
-                          "registry": {
-                            "type": "string"
-                          },
-                          "released": {
-                            "type": "string"
-                          },
-                          "requires_python": {
-                            "type": "string"
-                          },
-                          "summary": {
-                            "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "version": {
-                            "type": "string"
-                          },
-                          "weekly": {
-                            "type": "integer"
-                          },
-                          "license": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "all_time",
-                          "daily",
-                          "monthly",
-                          "package",
-                          "registry",
-                          "released",
-                          "requires_python",
-                          "summary",
-                          "url",
-                          "version",
-                          "weekly"
-                        ]
-                      }
+                      "type": "string",
+                      "enum": [
+                        "daily",
+                        "weekly"
+                      ]
                     },
                     "redacted": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "What this published copy leaves out."
                     },
                     "summary": {
                       "type": "object",
-                      "properties": {
-                        "bot_requests_24h": {
-                          "type": "integer"
-                        },
-                        "github_forks": {
-                          "type": "integer"
-                        },
-                        "github_repos": {
-                          "type": "integer"
-                        },
-                        "github_stars": {
-                          "type": "integer"
-                        },
-                        "median_response_ms": {
-                          "type": "integer"
-                        },
-                        "npm_all_time": {
-                          "type": "integer"
-                        },
-                        "npm_weekly": {
-                          "type": "integer"
-                        },
-                        "open_issues": {
-                          "type": "integer"
-                        },
-                        "package_all_time": {
-                          "type": "integer"
-                        },
-                        "package_weekly": {
-                          "type": "integer"
-                        },
-                        "packages_total": {
-                          "type": "integer"
-                        },
-                        "page_views_7d": {
-                          "type": "integer"
-                        },
-                        "properties_total": {
-                          "type": "integer"
-                        },
-                        "properties_up": {
-                          "type": "integer"
-                        },
-                        "pypi_all_time": {
-                          "type": "integer"
-                        },
-                        "pypi_monthly": {
-                          "type": "integer"
-                        },
-                        "pypi_weekly": {
-                          "type": "integer"
-                        },
-                        "repos_archived": {
-                          "type": "integer"
-                        },
-                        "repos_unlicensed": {
-                          "type": "integer"
-                        },
-                        "threats_7d": {
-                          "type": "integer"
-                        },
-                        "visitors_7d": {
-                          "type": "integer"
-                        },
-                        "zenodo_downloads": {
-                          "type": "integer"
-                        },
-                        "zenodo_records": {
-                          "type": "integer"
-                        },
-                        "zenodo_views": {
-                          "type": "integer"
-                        }
-                      },
-                      "required": [
-                        "bot_requests_24h",
-                        "github_forks",
-                        "github_repos",
-                        "github_stars",
-                        "median_response_ms",
-                        "npm_all_time",
-                        "npm_weekly",
-                        "open_issues",
-                        "package_all_time",
-                        "package_weekly",
-                        "packages_total",
-                        "page_views_7d",
-                        "properties_total",
-                        "properties_up",
-                        "pypi_all_time",
-                        "pypi_monthly",
-                        "pypi_weekly",
-                        "repos_archived",
-                        "repos_unlicensed",
-                        "threats_7d",
-                        "visitors_7d",
-                        "zenodo_downloads",
-                        "zenodo_records",
-                        "zenodo_views"
-                      ]
+                      "description": "The headline figures. A key is absent when the source behind it did not report.",
+                      "additionalProperties": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      }
                     },
                     "uptime": {
                       "type": "array",
                       "items": {
                         "type": "object",
+                        "required": [
+                          "name",
+                          "up"
+                        ],
                         "properties": {
-                          "ms": {
-                            "type": "integer"
-                          },
                           "name": {
                             "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
                           },
                           "up": {
                             "type": "boolean"
                           },
-                          "url": {
-                            "type": "string"
+                          "ms": {
+                            "type": "integer"
+                          },
+                          "error": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
-                        },
-                        "required": [
-                          "ms",
-                          "name",
-                          "up",
-                          "url"
-                        ]
+                        }
+                      }
+                    },
+                    "npm": {
+                      "type": "array",
+                      "items": {
+                        "$comment": "package row",
+                        "type": "object"
+                      }
+                    },
+                    "pypi": {
+                      "type": "array",
+                      "items": {
+                        "$comment": "package row",
+                        "type": "object"
+                      }
+                    },
+                    "github": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
                       }
                     },
                     "zenodo": {
                       "type": "object",
                       "properties": {
+                        "error": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
                         "records": {
                           "type": "array",
                           "items": {
-                            "type": "object",
-                            "properties": {
-                              "downloads": {
-                                "type": "integer"
-                              },
-                              "id": {
-                                "type": "string"
-                              },
-                              "title": {
-                                "type": "string"
-                              },
-                              "unique_downloads": {
-                                "type": "integer"
-                              },
-                              "unique_views": {
-                                "type": "integer"
-                              },
-                              "views": {
-                                "type": "integer"
-                              }
-                            },
-                            "required": [
-                              "downloads",
-                              "id",
-                              "title",
-                              "unique_downloads",
-                              "unique_views",
-                              "views"
-                            ]
+                            "type": "object"
                           }
                         }
-                      },
-                      "required": [
-                        "records"
-                      ]
+                      }
+                    },
+                    "cloudflare": {
+                      "type": "object",
+                      "properties": {
+                        "days": {
+                          "type": "integer"
+                        },
+                        "error": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "sites_omitted": {
+                          "type": "integer"
+                        },
+                        "sites": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "totals": {
+                          "type": "object"
+                        },
+                        "window": {
+                          "type": "object"
+                        },
+                        "bots_24h": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "integer"
+                          },
+                          "description": "Requests per bot category in the last 24 hours. Keys are Cloudflare's categories and vary."
+                        },
+                        "bots_error": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    },
+                    "history": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
                     }
                   },
-                  "required": [
-                    "cloudflare",
-                    "date",
-                    "generated_at",
-                    "github",
-                    "history",
-                    "mode",
-                    "npm",
-                    "pypi",
-                    "redacted",
-                    "summary",
-                    "uptime",
-                    "zenodo"
-                  ],
-                  "title": "Status snapshot",
                   "description": "Uptime, package installs, publication views and aggregate traffic. Repository traffic is owner-only and is not here. Prior days are archived at /status/data/YYYY-MM-DD.json using the same shape; this file is a copy of the most recent one."
                 }
               }
