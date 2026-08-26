@@ -1,4 +1,8 @@
 {
+  "5best2buy": {
+    "sha256": "4e595ec76e6ea6a8",
+    "source": "5best2buy.png"
+  },
   "changewatch": {
     "sha256": "9bddf99dd2f32fbb",
     "source": "changewatch.jpg"
@@ -10,6 +14,10 @@
   "fundoge": {
     "sha256": "56c5349576a5c694",
     "source": "fundoge.png"
+  },
+  "fytecraft": {
+    "sha256": "9bd25da4bf71ce20",
+    "source": "fytecraft.png"
   },
   "keyj": {
     "sha256": "8a699060b332ccd5",
@@ -51,6 +59,10 @@
     "sha256": "f65abb0bbe8ebfc4",
     "source": "prompt.png"
   },
+  "qv": {
+    "sha256": "0192a3e77d854600",
+    "source": "qv.png"
+  },
   "remapwrap": {
     "sha256": "f4bc99ea802b0474",
     "source": "remapwrap.png"
@@ -66,5 +78,9 @@
   "trailer-load": {
     "sha256": "6c0bc9934cb1c854",
     "source": "trailer-load.png"
+  },
+  "wikipolish": {
+    "sha256": "45316f679620ca6c",
+    "source": "wikipolish.png"
   }
 }

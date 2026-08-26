@@ -10,13 +10,4 @@ fussiness: the smallest derivative is a 32px favicon, and a
 banner and screenshot crops, which is a different picture
 with a different job.
 
-| file | problem | product |
-|---|---|---|
-| `5best2buy.png` | 550x572 - needs a square crop | 5Best2Buy |
-
-Fix one **in place** and run the tool. It takes anything
-here that has become usable back upstairs by itself, so
-there is nothing to move and nothing to rename - a file
-that came back as `name (2).png` is matched too.
-
-    python tools/productart.py
+Nothing is parked. Every dropped-in source is usable.
