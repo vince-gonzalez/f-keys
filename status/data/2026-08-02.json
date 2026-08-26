@@ -1,0 +1,23 @@
+{
+  "backfill_note": "Reconstructed from the registries, which recorded this before the daily snapshot existed. Traffic and uptime are absent rather than estimated: nothing measured them on this date.",
+  "backfill_sources": [
+    "npm"
+  ],
+  "backfilled": true,
+  "date": "2026-08-02",
+  "generated_at": "backfilled",
+  "mode": "backfill",
+  "npm": [
+    {
+      "daily": 1,
+      "package": "opticquiz-cvd-mcp",
+      "registry": "npm"
+    }
+  ],
+  "pypi": [],
+  "releases": [],
+  "summary": {
+    "npm_daily": 1,
+    "package_daily": 1
+  }
+}

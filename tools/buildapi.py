@@ -127,7 +127,9 @@ def describe(doc, path):
         return ("Kernel Trust Profile: " + (name or os.path.basename(path)),
                 "A Kernel Trust Profile conforming to kernel-trust-0.1, "
                 "reporting what one library's proofs depend on.")
-    if "summary" in doc and "uptime" in doc:
+    # Same recognition as dataset_schema(): a reconstructed day has a
+    # summary and no uptime, because nothing was checking on that date.
+    if "summary" in doc and ("uptime" in doc or doc.get("backfilled")):
         return ("Status snapshot",
                 "Uptime, package installs, publication views and aggregate "
                 "traffic. Repository traffic is owner-only and is not here."
@@ -314,7 +316,11 @@ STATUS_SCHEMA = {
 
 
 def dataset_schema(doc, title, blurb):
-    if "summary" in doc and "uptime" in doc:
+    # A backfilled day carries a summary and no uptime - nothing was
+    # checking on that date. It is still a status snapshot, and if it
+    # is not recognised as one the generator falls back to inferring
+    # it, which is the churn this schema exists to stop.
+    if "summary" in doc and ("uptime" in doc or doc.get("backfilled")):
         out = dict(STATUS_SCHEMA)
         out["title"] = title
         if blurb:

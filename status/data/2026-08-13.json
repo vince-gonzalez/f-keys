@@ -1,0 +1,65 @@
+{
+  "backfill_note": "Reconstructed from the registries, which recorded this before the daily snapshot existed. Traffic and uptime are absent rather than estimated: nothing measured them on this date.",
+  "backfill_sources": [
+    "npm",
+    "pypi",
+    "releases"
+  ],
+  "backfilled": true,
+  "date": "2026-08-13",
+  "generated_at": "backfilled",
+  "mode": "backfill",
+  "npm": [
+    {
+      "daily": 280,
+      "package": "@f-keys/tip-widget",
+      "registry": "npm"
+    },
+    {
+      "daily": 2,
+      "package": "opticquiz-cvd",
+      "registry": "npm"
+    },
+    {
+      "daily": 2,
+      "package": "opticquiz-cvd-mcp",
+      "registry": "npm"
+    },
+    {
+      "daily": 5,
+      "package": "opticquiz-eye",
+      "registry": "npm"
+    }
+  ],
+  "pypi": [
+    {
+      "daily": 36,
+      "package": "gonzalgo",
+      "registry": "PyPI"
+    },
+    {
+      "daily": 1,
+      "package": "opticquiz-cvd",
+      "registry": "PyPI"
+    }
+  ],
+  "releases": [
+    {
+      "package": "@f-keys/tip-widget",
+      "registry": "npm",
+      "version": "0.1.2"
+    },
+    {
+      "package": "@f-keys/tip-widget",
+      "registry": "npm",
+      "version": "0.1.3"
+    }
+  ],
+  "summary": {
+    "github_stars": 7,
+    "npm_daily": 289,
+    "package_daily": 326,
+    "pypi_daily": 37,
+    "releases_published": 2
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "backfill_note": "Reconstructed from the registries, which recorded this before the daily snapshot existed. Traffic and uptime are absent rather than estimated: nothing measured them on this date.",
+  "backfill_sources": [
+    "pypi",
+    "releases"
+  ],
+  "backfilled": true,
+  "date": "2026-07-12",
+  "generated_at": "backfilled",
+  "mode": "backfill",
+  "npm": [],
+  "pypi": [
+    {
+      "daily": 98,
+      "package": "opticquiz-cvd",
+      "registry": "PyPI"
+    }
+  ],
+  "releases": [
+    {
+      "package": "opticquiz-cvd",
+      "registry": "PyPI",
+      "version": "1.0.0"
+    },
+    {
+      "package": "opticquiz-cvd",
+      "registry": "npm",
+      "version": "1.0.0"
+    }
+  ],
+  "summary": {
+    "package_daily": 98,
+    "pypi_daily": 98,
+    "releases_published": 2
+  }
+}

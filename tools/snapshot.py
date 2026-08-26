@@ -538,6 +538,11 @@ def collect_history(today):
             "github_stars": s.get("github_stars"),
             "properties_up": s.get("properties_up"),
             "properties_total": s.get("properties_total"),
+            # what a reconstructed day has instead: a daily install count
+            # rather than a rolling week, and the releases that shipped
+            "package_daily": s.get("package_daily"),
+            "releases_published": s.get("releases_published"),
+            "backfilled": bool(d.get("backfilled")),
         })
     return series
 

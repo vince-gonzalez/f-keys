@@ -173,6 +173,7 @@ TRENDS = [
     ("Visitors · 7d", "visitors_7d"),
     ("Installs · week", "package_weekly"),
     ("Paper downloads", "zenodo_downloads"),
+    ("Installs · day", "package_daily"),
 ]
 
 
@@ -284,6 +285,26 @@ def render_trends(snap):
         out.append('<tr><th>{}</th><td class="num">{} {}</td>'
                    '<td class="num" data-spark="{}">{}</td></tr>'
                    .format(esc(label), esc(f_num(last)), delta, key, spark(vals)))
+    # A reader has to be able to tell a measured day from a reconstructed
+    # one. The daily snapshot began on 18 August; everything before that
+    # was pulled back out of the registries, which had been recording all
+    # along. Traffic and uptime are absent on those days rather than
+    # estimated - nothing was measuring them, and a smooth line across a
+    # gap would be an invention.
+    back = [h for h in hist if h.get("backfilled")]
+    measured = [h for h in hist if not h.get("backfilled")]
+    note = "Over the last {} day(s) on record.".format(len(hist))
+    if back:
+        # Not a clean before-and-after: a day the scheduled run missed is
+        # reconstructed too, so backfilled days sit among measured ones.
+        note += (" {} of them are reconstructed from the package registries "
+                 "and release history rather than measured here, including "
+                 "any day the scheduled run missed. Each is flagged in "
+                 "<a href=\"/status/latest.json\">latest.json</a>. Traffic "
+                 "and uptime are absent on those days rather than estimated "
+                 "&mdash; nothing was measuring them.").format(len(back))
+        if measured:
+            note += (" Daily measurement has run since {}."
+                     .format(esc(measured[0]["date"])))
     return ('<table class="facts">' + "".join(out) + "</table>"
-            '<p class="dim">Over the last {} day(s) on record.</p>'
-            .format(len(hist)))
+            '<p class="dim">' + note + "</p>")
