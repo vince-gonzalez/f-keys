@@ -62,7 +62,7 @@ P = [
      "Ballot boxes that live inside a notification. Create a vote, share a link, "
      "embed it anywhere.",
      ["voting", "embeds"],
-     "https://zengineco.github.io/qv/"),
+     "https://qv.f-keys.com/"),
     ("C-01", "5Best2Buy", "LIVE", "commerce",
      "Worth The Hunt — curated shelves of independent makers, plus a tool for "
      "finding out who actually owns a brand.",
@@ -155,9 +155,10 @@ footer a{color:var(--dim)}
 footer a:hover{color:var(--green)}
 @media (max-width:640px){.hero h1{letter-spacing:2px}.boot pre{font-size:.7rem}}"""
 
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
-         '<link href="https://fonts.googleapis.com/css2?family=VT323&'
-         'family=Share+Tech+Mono&display=swap" rel="stylesheet">')
+# Both faces are OFL and served from this domain — the privacy page
+# promises no page loads anything from another company's server, and
+# tools/test_site.py fails the build when one does.
+FONTS = '<link href="/assets/fonts.css" rel="stylesheet">'
 
 NAV = """<nav>
   <a href="/" class="logo">F-KEYS</a>

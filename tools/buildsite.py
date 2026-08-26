@@ -566,7 +566,7 @@ rather than a choice.</p>
 creator key. Bulk seeding fills a channel from a question set, so a new channel does not
 launch empty.</p>
 <div class="btnrow">
-  <a class="btn default" href="https://zengineco.github.io/qv/">Open QV</a>
+  <a class="btn default" href="https://qv.f-keys.com/">Open QV</a>
   <a class="btn" href="https://github.com/zengineco/qv">Source</a>
 </div>"""),
 
@@ -890,7 +890,7 @@ on file with the
 <a href="https://search.sunbiz.org/Inquiry/CorporationSearch/ByName" rel="noopener">Florida
 Division of Corporations</a> under the document number above.</td></tr>
 <tr><th>ORCID</th><td><a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">0009-0005-3640-014X</a></td></tr>
-<tr><th>Source code</th><td><a href="https://github.com/zengineco" rel="noopener">github.com/zengineco</a></td></tr>
+<tr><th>Source code</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
 </table>
 
 <h2>What to write about</h2>
@@ -1055,7 +1055,7 @@ catalogue as plain text, including when to reach for each thing</td></tr>
 <tr><th>Site map</th><td><a href="/sitemap.xml">/sitemap.xml</a></td></tr>
 <tr><th>Product docs</th><td><a href="/Docs.html">/Docs.html</a> &mdash; setup,
 configuration and troubleshooting</td></tr>
-<tr><th>Source</th><td><a href="https://github.com/zengineco" rel="noopener">github.com/zengineco</a></td></tr>
+<tr><th>Source</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
 <tr><th>Questions</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
 </table>
 
@@ -1248,7 +1248,10 @@ LEGAL_NAME = "F-Keys Creative LLC"
 FOUNDER = "Vincent Gonzalez"
 EMAIL = "hello@f-keys.com"
 ORCID = "https://orcid.org/0009-0005-3640-014X"
-GH_ORG = "https://github.com/zengineco"
+# The account that hosts this site's own source. Older products still
+# live under github.com/zengineco until their repos migrate; their pages
+# link them directly.
+GH_ORG = "https://github.com/vince-gonzalez"
 
 # Filed with the Florida Division of Corporations 2026-08-18,
 # document L26000436157. Kept here so the schema and the Contact page

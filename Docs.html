@@ -7,9 +7,10 @@
 // File:        docs.html
 // Brand:       F-Keys
 // Author:      Vincent Gonzalez | © 2026 F-Keys | www.f-keys.com
-// Version:     v1.0.0
-// Description: F-Keys documentation page. Quick-start guide,
-//              config reference, action strings, troubleshooting.
+// Version:     v2.0.0
+// Description: RemapWrap documentation. Quick-start, config
+//              reference, action strings, pairing, troubleshooting.
+//              Every claim verified against remapwrap/ source.
 // Boot Order:
 //   1. Fonts load
 //   2. DOM ready → initScroll(), initDocNav()
@@ -23,8 +24,8 @@
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="F-Keys Documentation — Quick-start guide, config reference, action strings, troubleshooting.">
-<title>Docs — F-Keys</title>
+<meta name="description" content="RemapWrap documentation — quick-start, config reference, action strings, pairing, troubleshooting.">
+<title>Docs — RemapWrap</title>
 
 <!-- Fonts -->
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -330,12 +331,12 @@ code {
     <a href="#files"        class="sidebar-link">File Reference</a>
     <a href="#config"       class="sidebar-link">Config Block</a>
     <a href="#actions"      class="sidebar-link">Action Strings</a>
-    <a href="#layout-json"  class="sidebar-link">Layout JSON</a>
+    <a href="#layout-json"  class="sidebar-link">Profile JSON</a>
 
     <div class="sidebar-section-title">USAGE</div>
-    <a href="#dashboard"    class="sidebar-link">Dashboard Guide</a>
+    <a href="#dashboard"    class="sidebar-link">Dashboard</a>
     <a href="#controller"   class="sidebar-link">Phone Controller</a>
-    <a href="#pairing"      class="sidebar-link">QR Pairing</a>
+    <a href="#pairing"      class="sidebar-link">Pairing</a>
 
     <div class="sidebar-section-title">TROUBLESHOOTING</div>
     <a href="#nutjs"        class="sidebar-link">nut-js Install</a>
@@ -344,7 +345,7 @@ code {
     <a href="#errors"       class="sidebar-link">Common Errors</a>
 
     <div class="sidebar-section-title">PROJECT</div>
-    <a href="#roadmap"      class="sidebar-link">Roadmap</a>
+    <a href="#roadmap"      class="sidebar-link">State of the Build</a>
     <a href="#changelog"    class="sidebar-link">Changelog</a>
   </aside>
 
@@ -353,16 +354,17 @@ code {
 
     <!-- ─── Overview ─── -->
     <div class="doc-section" id="overview">
-      <div class="doc-h1">F-KEYS <span>DOCS</span></div>
+      <div class="doc-h1">REMAPWRAP <span>DOCS</span></div>
       <p class="doc-p" style="font-size:13px; letter-spacing:3px; color:var(--text-dim);">v0.1.0 ALPHA — © 2026 F-KEYS</p>
 
       <div class="doc-h2">Overview</div>
-      <p class="doc-p">F-Keys turns your smartphone browser into a live macro keypad for your PC. It works entirely on your local network — no cloud, no accounts, no installed apps on the phone.</p>
-      <p class="doc-p">The system has three parts: a <strong>Node.js server</strong> that bridges communication, a <strong>PC dashboard</strong> where you build and manage button layouts, and a <strong>phone controller page</strong> that becomes your physical keypad.</p>
+      <p class="doc-p">RemapWrap serves a phone's browser a grid of keys that fire OS-level keystrokes on a PC. All traffic stays on the local network: no cloud, no account, no app installed on the phone.</p>
+      <p class="doc-p">Four parts: <strong>remapwrap-server.js</strong>, a Node.js process that serves the pages, relays WebSocket messages and injects keystrokes; <strong>dashboard.html</strong>, the PC side, where layouts are built; <strong>controller.html</strong>, the phone side, the keypad itself; and <strong>store.js</strong>, which keeps settings and profiles on disk.</p>
+      <p class="doc-p">RemapWrap began under the name F-Keys. The name moved to the company; the product kept the code.</p>
 
       <div class="callout">
-        <strong>ALPHA STATUS</strong>
-        This is a v0.1.0 alpha build. Core functionality is complete and working. Some advanced features (cloud relay, long-press actions, multi-page layouts) are on the roadmap. Report issues via GitHub.
+        <strong>ALPHA — v0.1.0</strong>
+        Runs from source. A packaged Windows build exists in the repository but is unsigned and not yet distributed.
       </div>
     </div>
 
@@ -389,7 +391,7 @@ code {
       </table>
 
       <div class="doc-h3">Native Build Tools (for keystroke injection)</div>
-      <p class="doc-p">The <code>@nut-tree-fork/nut-js</code> package compiles native bindings. Without it, F-Keys runs in relay-only mode. See the <a href="#nutjs">nut-js troubleshooting section</a>.</p>
+      <p class="doc-p">The <code>@nut-tree-fork/nut-js</code> package compiles native bindings. Without it, RemapWrap runs in relay-only mode: presses reach the dashboard's live feed but no OS keystrokes fire. See <a href="#nutjs">nut-js install</a>.</p>
       <table class="doc-table">
         <tr><th>OS</th><th>Required Tools</th></tr>
         <tr><td>Windows</td><td>Visual Studio Build Tools 2019+ with "Desktop development with C++" workload + Python 3</td></tr>
@@ -402,49 +404,49 @@ code {
     <div class="doc-section" id="quickstart">
       <div class="doc-h2">Quick-Start</div>
 
-      <div class="doc-h3">Step 1 — Get the files</div>
-      <p class="doc-p">Download the three alpha files from the <a href="https://github.com/vince-gonzalez/f-keys/releases/latest">download section</a> and place them in the same folder:</p>
+      <div class="doc-h3">Step 1 — Get the source</div>
+      <p class="doc-p">RemapWrap runs from source, from the <code>remapwrap/</code> directory of the <a href="https://github.com/vince-gonzalez/f-keys">f-keys repository</a>:</p>
       <div class="doc-code">
-        <span class="cmd">fkeys-server.js</span><br>
-        <span class="cmd">fkeys-dashboard.html</span><br>
-        <span class="cmd">fkeys-controller.html</span>
+        <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+        <span class="ln">1</span><span class="cmd">git clone https://github.com/vince-gonzalez/f-keys</span><br>
+        <span class="ln">2</span><span class="cmd">cd f-keys/remapwrap</span>
       </div>
 
       <div class="doc-h3">Step 2 — Install dependencies</div>
-      <p class="doc-p">Open a terminal in that folder and run:</p>
       <div class="doc-code">
         <button class="copy-btn" onclick="copyCode(this)">COPY</button>
-        <span class="ln">1</span><span class="cmd">npm install ws qrcode @nut-tree-fork/nut-js</span>
+        <span class="ln">1</span><span class="cmd">npm install</span>
       </div>
       <div class="callout warn">
-        <strong>IF NUT-JS FAILS</strong>
-        If the install errors on @nut-tree-fork/nut-js, run <code>npm install ws qrcode</code> first to get the server running, then fix nut-js separately. See <a href="#nutjs">nut-js troubleshooting</a>.
+        <strong>IF NUT-JS FAILS TO COMPILE</strong>
+        The server still runs without it, in relay-only mode. Fix the native build separately — see <a href="#nutjs">nut-js install</a>.
       </div>
 
       <div class="doc-h3">Step 3 — Start the server</div>
       <div class="doc-code">
         <button class="copy-btn" onclick="copyCode(this)">COPY</button>
-        <span class="ln">1</span><span class="cmd">node fkeys-server.js</span>
+        <span class="ln">1</span><span class="cmd">npm start</span>
       </div>
-      <p class="doc-p">You'll see a banner with your server URLs:</p>
+      <p class="doc-p">The server prints its URLs on startup:</p>
       <div class="doc-code">
         <span class="kw">╔══════════════════════════════════════════════╗</span><br>
-        <span class="kw">║         F-KEYS SERVER v0.1.0 RUNNING         ║</span><br>
+        <span class="kw">║        RemapWrap  SERVER  v0.1.0  RUNNING    ║</span><br>
         <span class="kw">╠══════════════════════════════════════════════╣</span><br>
         <span class="cmd">║  Dashboard:  http://192.168.1.42:7331/</span><br>
         <span class="cmd">║  Controller: http://192.168.1.42:7331/controller</span><br>
         <span class="cmd">║  QR Code:    http://192.168.1.42:7331/qr</span><br>
+        <span class="cmd">║  WebSocket:  ws://192.168.1.42:7332</span><br>
         <span class="kw">╚══════════════════════════════════════════════╝</span>
       </div>
 
       <div class="doc-h3">Step 4 — Open the dashboard</div>
-      <p class="doc-p">Open the Dashboard URL in Chrome or Edge on your PC. The status bar should show <strong>SERVER: LIVE</strong> within a second.</p>
+      <p class="doc-p">Open the Dashboard URL on the PC running the server. The dashboard is served to that machine only; a request for <code>/</code> from any other device is redirected to the controller.</p>
 
-      <div class="doc-h3">Step 5 — Pair your phone</div>
-      <p class="doc-p">On your phone: open the camera app (or a QR scanner), scan the QR code shown on the dashboard. Your phone's browser opens the controller page and connects automatically. The dashboard status bar shows <strong>CONTROLLER: LIVE</strong>.</p>
+      <div class="doc-h3">Step 5 — Pair the phone</div>
+      <p class="doc-p">Scan the QR code shown on the dashboard. The encoded URL carries the pairing secret, so a scanned phone is paired with nothing to type. A phone whose camera cannot scan opens the Controller URL directly and enters the six-digit PIN displayed on the dashboard. Five wrong PINs lock that address out for five minutes.</p>
 
-      <div class="doc-h3">Step 6 — Press a button</div>
-      <p class="doc-p">Tap any button on your phone. The dashboard live feed lights up showing the keypress, and the action fires as a real OS-level keystroke on your PC.</p>
+      <div class="doc-h3">Step 6 — Press a key</div>
+      <p class="doc-p">A tap on the phone fires the bound action as an OS-level keystroke on the PC. The dashboard's live feed records the key, the action fired, and the timestamp.</p>
     </div>
 
     <!-- ─── Files ─── -->
@@ -452,19 +454,23 @@ code {
       <div class="doc-h2">File Reference</div>
       <table class="doc-table">
         <tr><th>File</th><th>Role</th><th>Runs On</th></tr>
-        <tr><td>fkeys-server.js</td><td>HTTP server + WebSocket bridge + keystroke injector</td><td>PC (Node.js)</td></tr>
-        <tr><td>fkeys-dashboard.html</td><td>Layout builder, pairing QR display, live feed</td><td>PC browser</td></tr>
-        <tr><td>fkeys-controller.html</td><td>Touch keypad UI served to phone browser</td><td>Phone browser (via server)</td></tr>
+        <tr><td>remapwrap-server.js</td><td>HTTP server + WebSocket bridge + keystroke injector</td><td>PC (Node.js)</td></tr>
+        <tr><td>dashboard.html</td><td>Layout builder, pairing QR + PIN, live feed</td><td>PC browser, localhost only</td></tr>
+        <tr><td>controller.html</td><td>The keypad, served at <code>/controller</code></td><td>Phone browser</td></tr>
+        <tr><td>store.js</td><td>Settings and profiles on disk</td><td>Inside the server</td></tr>
+        <tr><td>system.js</td><td>Command catalogue</td><td>Inside the server</td></tr>
+        <tr><td>licence.js</td><td>Tier check for the paid features</td><td>Inside the server</td></tr>
       </table>
-      <p class="doc-p">All three files must live in the same directory. The server serves <code>fkeys-controller.html</code> at the <code>/controller</code> route, injecting your local IP at serve time so the phone auto-connects.</p>
+      <p class="doc-p">The server injects the local IP and WebSocket port into <code>controller.html</code> at serve time; the dashboard reads them from <code>/ip</code>. Neither page carries a hand-edited address.</p>
+      <p class="doc-p">On disk: <code>%APPDATA%\RemapWrap\settings.json</code> holds pairing and the active profile; <code>%APPDATA%\RemapWrap\profiles\*.json</code> holds one file per profile. The folder is the import path — a profile file placed there appears in the dashboard.</p>
     </div>
 
     <!-- ─── Config ─── -->
     <div class="doc-section" id="config">
       <div class="doc-h2">Config Block</div>
-      <p class="doc-p">Each file has a <code>CONFIG</code> / <code>CFG</code> block at the top. Modify these values to adjust behavior without digging into the logic.</p>
+      <p class="doc-p">The server carries one <code>CONFIG</code> block at the top of <code>remapwrap-server.js</code>. It is the only place a value needs changing: the dashboard and controller take their ports from the running server.</p>
 
-      <div class="doc-h3">fkeys-server.js</div>
+      <div class="doc-h3">remapwrap-server.js</div>
       <table class="doc-table">
         <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
         <tr><td>HTTP_PORT</td><td>7331</td><td>Port for the HTTP server. Change if 7331 is in use.</td></tr>
@@ -474,28 +480,14 @@ code {
         <tr><td>MAX_CLIENTS</td><td>8</td><td>Max simultaneous WebSocket connections. Covers multiple phones + dashboards.</td></tr>
       </table>
 
-      <div class="doc-h3">fkeys-dashboard.html</div>
-      <table class="doc-table">
-        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
-        <tr><td>WS_PORT</td><td>7332</td><td>Must match server WS_PORT.</td></tr>
-        <tr><td>HTTP_PORT</td><td>7331</td><td>Must match server HTTP_PORT. Used to fetch QR and /ip endpoint.</td></tr>
-        <tr><td>PING_INTERVAL</td><td>4000</td><td>How often (ms) the dashboard pings the server for latency measurement.</td></tr>
-        <tr><td>MAX_FEED</td><td>40</td><td>Maximum entries in the live keypress feed before oldest are removed.</td></tr>
-      </table>
-
-      <div class="doc-h3">fkeys-controller.html</div>
-      <table class="doc-table">
-        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
-        <tr><td>WS_PORT</td><td>7332</td><td>Auto-injected by server. Override manually if needed.</td></tr>
-        <tr><td>PING_INTERVAL</td><td>5000</td><td>How often (ms) the controller pings for latency display.</td></tr>
-        <tr><td>HAPTIC_MS</td><td>40</td><td>Vibration duration in ms on each key press. Set 0 to disable.</td></tr>
-      </table>
+      <div class="doc-h3">dashboard.html and controller.html</div>
+      <p class="doc-p">No configuration. The controller is served with the server's IP and WebSocket port injected; the dashboard asks the server's <code>/ip</code> endpoint. Changing <code>HTTP_PORT</code> or <code>WS_PORT</code> in the server config is sufficient for all three parts.</p>
     </div>
 
     <!-- ─── Action Strings ─── -->
     <div class="doc-section" id="actions">
       <div class="doc-h2">Action Strings</div>
-      <p class="doc-p">The <strong>Action</strong> field in the key editor accepts a <code>+</code>-separated keystroke string. F-Keys resolves each token to an OS key via nut-js.</p>
+      <p class="doc-p">The <strong>Action</strong> field in the key editor accepts a <code>+</code>-separated keystroke string. Each token resolves to an OS key via nut-js. The key table is generated from the nut-js enum at startup — all 137 keys the library can press are available — with aliases layered on top for the names people actually type.</p>
 
       <div class="doc-h3">Format</div>
       <div class="doc-code">
@@ -509,102 +501,78 @@ code {
         <span class="cmd">mute</span>
       </div>
 
-      <div class="doc-h3">Supported Tokens</div>
+      <div class="doc-h3">Token Aliases</div>
       <table class="doc-table">
-        <tr><th>Token</th><th>Key</th></tr>
-        <tr><td>ctrl, control</td><td>Left Control</td></tr>
-        <tr><td>shift</td><td>Left Shift</td></tr>
-        <tr><td>alt</td><td>Left Alt</td></tr>
-        <tr><td>win, cmd, super</td><td>Windows / Command key</td></tr>
-        <tr><td>enter, return</td><td>Enter / Return</td></tr>
-        <tr><td>esc, escape</td><td>Escape</td></tr>
-        <tr><td>space</td><td>Space bar</td></tr>
-        <tr><td>tab</td><td>Tab</td></tr>
-        <tr><td>backspace</td><td>Backspace</td></tr>
-        <tr><td>delete</td><td>Delete</td></tr>
-        <tr><td>up, down, left, right</td><td>Arrow keys</td></tr>
-        <tr><td>f1 … f12</td><td>Function keys F1–F12</td></tr>
-        <tr><td>volumeup</td><td>Volume Up</td></tr>
-        <tr><td>volumedown</td><td>Volume Down</td></tr>
-        <tr><td>mute</td><td>Audio Mute</td></tr>
-        <tr><td>playpause</td><td>Media Play/Pause</td></tr>
-        <tr><td>home, end</td><td>Home / End</td></tr>
-        <tr><td>pageup, pagedown</td><td>Page Up / Down</td></tr>
-        <tr><td>a–z, 0–9</td><td>Letter and number keys</td></tr>
+        <tr><th>Family</th><th>Tokens</th></tr>
+        <tr><td>Modifiers</td><td>ctrl / control / lctrl / rctrl · shift / lshift / rshift · alt / lalt / ralt / altgr · win / cmd / super / meta</td></tr>
+        <tr><td>Navigation</td><td>esc, enter, tab, backspace, ins, del, home, end, pgup, pgdn, up, down, left, right, caps, prtsc, break</td></tr>
+        <tr><td>Function keys</td><td>f1 … f12</td></tr>
+        <tr><td>Media</td><td>volumeup / volup, volumedown / voldown, mute, playpause / play, next, prev, stop</td></tr>
+        <tr><td>Punctuation</td><td>= plus - _ , . / ; ' [ ] \ ` ~ space</td></tr>
+        <tr><td>Numpad</td><td>numpadplus, numpadminus, numpadtimes, numpaddivide, numpaddot, numpadenter</td></tr>
+        <tr><td>Letters, digits</td><td>a–z, 0–9</td></tr>
       </table>
 
       <div class="callout">
-        <strong>UNRECOGNIZED TOKEN?</strong>
-        If you use a token not in the table, the server logs a warning: <code>WARN: unresolved key token "[x]"</code>. That token is skipped but other keys in the combo still fire.
+        <strong>UNRESOLVED TOKENS</strong>
+        A token the map cannot resolve is logged and dropped; the remaining keys in the combo still fire. A combo with no resolvable keys fires nothing.
       </div>
     </div>
 
     <!-- ─── Layout JSON ─── -->
     <div class="doc-section" id="layout-json">
-      <div class="doc-h2">Layout JSON</div>
-      <p class="doc-p">Layouts are plain JSON files. Export from the dashboard, share freely, import on any F-Keys install.</p>
+      <div class="doc-h2">Profile JSON</div>
+      <p class="doc-p">Profiles are plain JSON files, one per file, in <code>%APPDATA%\RemapWrap\profiles\</code>. Exporting, sharing and importing a profile is moving that file. The format is versioned from the first byte: every profile carries <code>"schema": 1</code> and holds <code>pages</code>, even when there is only one page.</p>
 
-      <div class="doc-h3">Schema</div>
+      <div class="doc-h3">Structure</div>
       <div class="doc-code">
 <span class="kw">{</span><br>
-<span class="str">  "cols"</span><span class="kw">: 4,</span>         <span class="cmt">// grid columns (1–8)</span><br>
-<span class="str">  "rows"</span><span class="kw">: 3,</span>         <span class="cmt">// grid rows (1–8)</span><br>
-<span class="str">  "keys"</span><span class="kw">: [</span><br>
-<span class="kw">    {</span><br>
-<span class="str">      "id"</span><span class="kw">:     </span><span class="str">"k1"</span><span class="kw">,</span>       <span class="cmt">// unique string ID</span><br>
-<span class="str">      "label"</span><span class="kw">: </span><span class="str">"COPY"</span><span class="kw">,</span>     <span class="cmt">// button display text</span><br>
-<span class="str">      "sub"</span><span class="kw">:   </span><span class="str">"ctrl+c"</span><span class="kw">,</span>   <span class="cmt">// subtitle / hint text</span><br>
-<span class="str">      "action"</span><span class="kw">:</span><span class="str">"ctrl+c"</span><span class="kw">,</span>   <span class="cmt">// keystroke action string</span><br>
-<span class="str">      "color"</span><span class="kw">: </span><span class="str">"#111820"</span>   <span class="cmt">// optional hex background</span><br>
-<span class="kw">    }</span><br>
+<span class="str">  "schema"</span><span class="kw">: 1,</span><br>
+<span class="str">  "name"</span><span class="kw">: </span><span class="str">"Streaming"</span><span class="kw">,</span><br>
+<span class="str">  "pages"</span><span class="kw">: [</span><br>
+<span class="kw">    {</span> <span class="str">"name"</span><span class="kw">: </span><span class="str">"Main"</span><span class="kw">,</span> <span class="str">"cols"</span><span class="kw">: 12,</span> <span class="str">"rows"</span><span class="kw">: 21,</span><br>
+<span class="kw">      </span><span class="str">"keys"</span><span class="kw">: [</span> <span class="cmt">// id, label, sub, action, color per key</span> <span class="kw">]</span> <span class="kw">}</span><br>
 <span class="kw">  ]</span><br>
 <span class="kw">}</span>
       </div>
-
-      <p class="doc-p">All fields except <code>id</code>, <code>label</code>, and <code>action</code> are optional. Omitting <code>color</code> uses the default dark background.</p>
+      <p class="doc-p">The dashboard's key editor writes every field a key can carry; a saved profile is its own reference for the full key shape.</p>
     </div>
 
     <!-- ─── Dashboard Guide ─── -->
     <div class="doc-section" id="dashboard">
-      <div class="doc-h2">Dashboard Guide</div>
+      <div class="doc-h2">Dashboard</div>
+      <p class="doc-p">Served at <code>/</code> to the machine running the server, and to that machine only — any other device requesting it is redirected to the controller. Pairing, licence and profile routes refuse non-local requests outright.</p>
 
-      <div class="doc-h3">Left Panel — Pairing</div>
-      <p class="doc-p">The server IP is auto-detected on load. If it shows the wrong IP, type the correct one and click <strong>CONNECT</strong>. The QR code updates automatically. Below the QR code, the Grid Config inputs control how many columns and rows your layout has.</p>
+      <div class="doc-h3">Pairing Panel</div>
+      <p class="doc-p">Shows the QR code and the six-digit PIN. The server detects its own LAN address; the QR re-renders when the address changes.</p>
 
-      <div class="doc-h3">Center Canvas — Layout Builder</div>
-      <p class="doc-p">Click any key to select it (highlighted green border). Use the Key Editor in the right panel to change its label, subtitle, action, and background color. Changes update the button in real time. Click <strong>+ ADD KEY</strong> to append a new key. Click <strong>− REMOVE</strong> to delete the selected key.</p>
+      <div class="doc-h3">Layout Builder</div>
+      <p class="doc-p">Clicking a key selects it; the key editor edits its label, subtitle, action string and background colour, and the canvas re-renders per edit. <strong>+ ADD KEY</strong> appends, <strong>− REMOVE</strong> deletes the selection. Grid dimensions are per page.</p>
 
-      <div class="doc-h3">Right Panel — Key Editor</div>
-      <p class="doc-p"><strong>Label:</strong> What's displayed on the button (large text).<br>
-      <strong>Subtitle:</strong> Small hint text below the label — usually the action string or a description.<br>
-      <strong>Action:</strong> The keystroke string fired when the button is pressed. See <a href="#actions">Action Strings</a>.<br>
-      <strong>Background Color:</strong> Per-key color picker. Use it to group related keys visually.</p>
-
-      <div class="doc-h3">Right Panel — Live Feed</div>
-      <p class="doc-p">Every keypress from the phone appears here in real time with the key label, action fired, and timestamp. Useful for confirming the loop is working.</p>
+      <div class="doc-h3">Live Feed</div>
+      <p class="doc-p">Each press from the phone is appended with the key label, the action fired, and a timestamp. The feed is the loop's confirmation surface: a press that reaches the feed but moves nothing on screen is a nut-js problem, not a network one.</p>
 
       <div class="doc-h3">▶ PUSH TO PHONE</div>
-      <p class="doc-p">Sends your current layout to the phone over WebSocket. The phone re-renders its grid immediately. Push any time you make layout changes — they don't apply to the phone automatically.</p>
+      <p class="doc-p">Sends the current layout to connected controllers over WebSocket. Edits do not reach the phone until pushed.</p>
     </div>
 
     <!-- ─── Phone Controller ─── -->
     <div class="doc-section" id="controller">
       <div class="doc-h2">Phone Controller</div>
-      <p class="doc-p">The controller page is a touch-optimized version of your layout. It auto-scales to fit your screen. The status badge at the top right shows connection state: <strong>LIVE</strong> (green), <strong>OFFLINE</strong> (red), <strong>CONNECTING…</strong>.</p>
-      <p class="doc-p">Tap a button — the visual press animation fires, the phone vibrates (Android), and the keystroke is sent over WebSocket to your PC within milliseconds.</p>
-      <p class="doc-p">The controller auto-reconnects if it loses the WebSocket connection. No manual reload needed.</p>
+      <p class="doc-p">Served at <code>/controller</code>. Renders the pushed layout scaled to the phone's screen. The status badge reports connection state: <strong>LIVE</strong>, <strong>OFFLINE</strong>, <strong>CONNECTING…</strong>.</p>
+      <p class="doc-p">A press animates, vibrates on Android, and sends the action over WebSocket. On a dropped connection the controller reconnects on its own; a reload is never required.</p>
     </div>
 
-    <!-- ─── QR Pairing ─── -->
+    <!-- ─── Pairing ─── -->
     <div class="doc-section" id="pairing">
-      <div class="doc-h2">QR Pairing</div>
-      <p class="doc-p">The QR code encodes your controller URL: <code>http://[your-local-ip]:7331/controller</code>. Scan it with your phone's camera or a QR app. The browser opens automatically.</p>
-      <p class="doc-p">If the QR scan opens to an error, check that your firewall allows port 7331 (see <a href="#firewall">Firewall / Ports</a>). You can also navigate manually by typing the controller URL into your phone's browser.</p>
-
-      <div class="callout">
-        <strong>BOOKMARK THE URL</strong>
-        Once connected once, bookmark the controller URL on your phone. Future sessions just need the server running — no QR scan needed.
-      </div>
+      <div class="doc-h2">Pairing</div>
+      <p class="doc-p">Two paths, one secret:</p>
+      <table class="doc-table">
+        <tr><th>Path</th><th>Mechanism</th></tr>
+        <tr><td>Scan the QR</td><td>The encoded URL carries the pairing secret. Nothing to type. The comparison is constant-time.</td></tr>
+        <tr><td>Type the PIN</td><td>For a phone that cannot scan: open <code>http://[server-ip]:7331/controller</code> and enter the six digits shown on the dashboard.</td></tr>
+      </table>
+      <p class="doc-p">Five wrong PINs lock the requesting address out for five minutes. A QR scan that reaches an error page is a firewall or network problem — see <a href="#firewall">Firewall / Ports</a>.</p>
     </div>
 
     <!-- ─── nut-js ─── -->
@@ -645,7 +613,7 @@ code {
     <!-- ─── Firewall ─── -->
     <div class="doc-section" id="firewall">
       <div class="doc-h2">Firewall / Ports</div>
-      <p class="doc-p">F-Keys uses two ports. Both must be reachable from your phone:</p>
+      <p class="doc-p">RemapWrap uses two ports. Both must be reachable from the phone:</p>
       <table class="doc-table">
         <tr><th>Port</th><th>Protocol</th><th>Purpose</th></tr>
         <tr><td>7331</td><td>TCP (HTTP)</td><td>Serves dashboard + controller pages, QR endpoint</td></tr>
@@ -656,7 +624,7 @@ code {
       <p class="doc-p">On first run, Windows may prompt you to allow Node.js through the firewall. Click <strong>Allow</strong> for private networks. If you missed the prompt, open Windows Defender Firewall → Allow an app → add <code>node.exe</code> with Private checked.</p>
 
       <div class="doc-h3">Router AP Isolation</div>
-      <p class="doc-p">Some routers block device-to-device traffic on the same Wi-Fi (AP isolation / client isolation). If your phone can't reach the PC, check your router settings. Alternatively, hotspot your phone directly to the PC — this bypasses the router entirely.</p>
+      <p class="doc-p">Some routers block device-to-device traffic on the same Wi-Fi (AP isolation / client isolation). A phone that cannot reach the PC on an otherwise working network is usually this. The router setting is the fix; a phone hotspot with the PC joined to it bypasses the router entirely.</p>
 
       <div class="doc-h3">Changing Ports</div>
       <p class="doc-p">Edit <code>HTTP_PORT</code> and <code>WS_PORT</code> in the CONFIG BLOCK at the top of <code>fkeys-server.js</code>. Update the matching <code>WS_PORT</code> and <code>HTTP_PORT</code> values in <code>fkeys-dashboard.html</code>'s CFG block.</p>
@@ -673,7 +641,7 @@ code {
         <tr><td>Add to Home Screen</td><td>✓ Works</td><td>✓ Works</td></tr>
         <tr><td>Background WebSocket</td><td>Drops after ~60s</td><td>Drops after ~60s</td></tr>
       </table>
-      <p class="doc-p">The auto-reconnect logic handles iOS background drops. When you return to the browser, the controller reconnects within 3 seconds automatically.</p>
+      <p class="doc-p">iOS suspends a backgrounded WebSocket after roughly a minute. The controller reconnects on its own when the page returns to the foreground.</p>
     </div>
 
     <!-- ─── Common Errors ─── -->
@@ -681,61 +649,64 @@ code {
       <div class="doc-h2">Common Errors</div>
 
       <div class="doc-h3">Dashboard shows "DISCONNECTED" immediately</div>
-      <p class="doc-p">The server is not running, or the IP in the dashboard connect field is wrong. Check the terminal where you ran <code>node fkeys-server.js</code>. If the server crashed, check for port-in-use errors and change <code>HTTP_PORT</code> or <code>WS_PORT</code> if needed.</p>
+      <p class="doc-p">The server is not running, or it crashed on a port error. The terminal running <code>npm start</code> names the cause.</p>
 
       <div class="doc-h3">Phone QR scan fails / "Site can't be reached"</div>
-      <p class="doc-p">Firewall is blocking port 7331, or the phone is on a different network. See <a href="#firewall">Firewall / Ports</a>.</p>
+      <p class="doc-p">Firewall blocking port 7331, or the phone is on a different network. See <a href="#firewall">Firewall / Ports</a>.</p>
+
+      <div class="doc-h3">Pairing locked</div>
+      <p class="doc-p">Five wrong PINs lock that address for five minutes. Scanning the QR pairs without a PIN and is not subject to the lockout.</p>
 
       <div class="doc-h3">Keystrokes fire on the wrong window</div>
-      <p class="doc-p">nut-js injects keystrokes into whichever window has OS focus. Click the window you want to control on your PC before pressing phone buttons.</p>
+      <p class="doc-p">nut-js injects into whichever window has OS focus. The window to be controlled must be focused on the PC before keys are pressed on the phone.</p>
 
-      <div class="doc-h3">fkeys-controller.html not found</div>
-      <p class="doc-p">The server returns this message if <code>fkeys-controller.html</code> is not in the same directory as <code>fkeys-server.js</code>. Move both files to the same folder.</p>
+      <div class="doc-h3">Presses reach the live feed but nothing happens on screen</div>
+      <p class="doc-p">Relay-only mode: <code>@nut-tree-fork/nut-js</code> did not load. The startup log prints <code>Keystroke injection: INACTIVE</code>. See <a href="#nutjs">nut-js install</a>.</p>
 
-      <div class="doc-code">
-        <span class="err">fkeys-controller.html not found — make sure it is in the same folder as fkeys-server.js</span>
-      </div>
-
-      <div class="doc-h3">Error: listen EADDRINUSE :::7331</div>
-      <p class="doc-p">Another process is already using port 7331. Either stop that process or change <code>HTTP_PORT</code> in the server CONFIG BLOCK to a free port like 7333.</p>
+      <div class="doc-h3">Port already in use</div>
+      <p class="doc-p">On <code>EADDRINUSE</code> the server prints the address of the instance that is probably already running, and exits. One server per machine; a genuinely occupied port means changing <code>HTTP_PORT</code> or <code>WS_PORT</code> in the CONFIG block.</p>
     </div>
 
     <!-- ─── Roadmap ─── -->
     <div class="doc-section" id="roadmap">
-      <div class="doc-h2">Roadmap</div>
+      <div class="doc-h2">State of the Build</div>
       <table class="doc-table">
-        <tr><th>Feature</th><th>Target</th><th>Status</th></tr>
-        <tr><td>Layout persistence to disk</td><td>v0.2.0</td><td>Planned</td></tr>
-        <tr><td>Long-press alternate action</td><td>v0.2.0</td><td>Planned</td></tr>
-        <tr><td>Swipe gesture per key (4 actions)</td><td>v0.2.0</td><td>Planned</td></tr>
-        <tr><td>Drag-to-reorder keys on dashboard</td><td>v0.3.0</td><td>Planned</td></tr>
-        <tr><td>Multi-page layouts (page tabs)</td><td>v0.3.0</td><td>Planned</td></tr>
-        <tr><td>Cloud relay (cross-network pairing)</td><td>v1.0.0</td><td>Planned</td></tr>
-        <tr><td>F-Hub community layout repository</td><td>v1.0.0</td><td>Planned</td></tr>
-        <tr><td>Rotary dial widget</td><td>v1.0.0</td><td>Planned</td></tr>
-        <tr><td>X/Y touchpad widget</td><td>v1.0.0</td><td>Planned</td></tr>
-        <tr><td>Sovereign tier (paid features)</td><td>v1.0.0</td><td>Planned</td></tr>
-        <tr><td>USB HID fallback mode</td><td>v1.1.0</td><td>Future</td></tr>
-        <tr><td>MIDI / OSC output mode</td><td>v1.1.0</td><td>Future</td></tr>
+        <tr><th>Area</th><th>State</th></tr>
+        <tr><td>Profiles on disk, multi-page layouts</td><td>Built. <code>schema: 1</code>, one JSON file per profile.</td></tr>
+        <tr><td>Pairing: QR secret + PIN with lockout</td><td>Built.</td></tr>
+        <tr><td>Command catalogue</td><td>Built. Everything offered runs; a test enforces both directions.</td></tr>
+        <tr><td>Packaged Windows build</td><td>Builds from source; unsigned, not yet distributed.</td></tr>
+        <tr><td>OBS / Twitch integrations (obs.*, stream.*)</td><td>Planned. Named in the catalogue, outside it until the integrations exist.</td></tr>
+        <tr><td>VU meters</td><td>Not built.</td></tr>
+        <tr><td>Row-column scanning</td><td>Not built; scanning is linear.</td></tr>
       </table>
+      <p class="doc-p">Nothing in this table is aspirational. A feature listed as built has a test; a feature listed as planned is absent from the running product.</p>
     </div>
 
     <!-- ─── Changelog ─── -->
     <div class="doc-section" id="changelog">
       <div class="doc-h2">Changelog</div>
 
-      <div class="doc-h3">v0.1.0 — 2026-03-19</div>
-      <p class="doc-p">Initial alpha release.</p>
+      <div class="doc-h3">2026-08 — RemapWrap</div>
+      <p class="doc-p">The product F-Keys was renamed RemapWrap; the F-Keys name became the company. Same alpha, carried forward:</p>
       <div class="doc-code">
-        <span class="cmd">+ fkeys-server.js: HTTP + WebSocket bridge, nut-js keystroke injection</span><br>
-        <span class="cmd">+ fkeys-dashboard.html: layout builder, QR pairing, live feed</span><br>
-        <span class="cmd">+ fkeys-controller.html: touch-optimized phone keypad</span><br>
-        <span class="cmd">+ QR pairing via /qr endpoint</span><br>
+        <span class="cmd">+ Files renamed: remapwrap-server.js, dashboard.html, controller.html</span><br>
+        <span class="cmd">+ Pairing secret in the QR URL; six-digit PIN fallback with lockout</span><br>
+        <span class="cmd">+ Profiles on disk: %APPDATA%\RemapWrap, schema 1, pages</span><br>
+        <span class="cmd">+ Dashboard restricted to localhost</span><br>
+        <span class="cmd">+ Command catalogue with a two-way test</span>
+      </div>
+
+      <div class="doc-h3">v0.1.0 — 2026-03-19</div>
+      <p class="doc-p">Initial alpha, under the working name F-Keys.</p>
+      <div class="doc-code">
+        <span class="cmd">+ HTTP + WebSocket bridge, nut-js keystroke injection</span><br>
+        <span class="cmd">+ Layout builder, QR pairing, live feed</span><br>
+        <span class="cmd">+ Touch keypad served to the phone</span><br>
         <span class="cmd">+ Auto-reconnect on both dashboard and controller</span><br>
         <span class="cmd">+ Layout export / import as JSON</span><br>
         <span class="cmd">+ Push layout from dashboard to phone over WebSocket</span><br>
-        <span class="cmd">+ Haptic feedback on Android</span><br>
-        <span class="cmd">+ 12 default keys with common actions pre-mapped</span>
+        <span class="cmd">+ Haptic feedback on Android</span>
       </div>
     </div>
 
@@ -781,21 +752,35 @@ function copyCode(btn) {
 }
 
 /*
+CHANGE LOG v2.0.0
+- Every content section rewritten against remapwrap/ source.
+  The page documented the retired fkeys-* three-file alpha in a
+  walkthrough register; it now documents RemapWrap as shipped,
+  in declarative reference register.
+- Quick-start: releases download (which held no RemapWrap
+  assets) replaced with clone + npm install + npm start; real
+  startup banner.
+- Facts corrected: file names, pairing (QR secret + PIN with
+  5-try/5-min lockout), localhost-only dashboard, profiles at
+  %APPDATA%\RemapWrap with schema 1 + pages, enum-generated
+  key table, per-server-only config.
+- Stale dashboard/controller CFG tables removed (values are
+  injected by the server).
+- Roadmap of invented version targets replaced with a
+  State-of-the-Build table matching the code.
+- DECISION: page titled RemapWrap Docs — it documents one
+  product, and "F-Keys Docs" collided with the company name.
+
 CHANGE LOG v1.0.0
-- Initial docs page. All sections: overview, requirements,
-  quick-start, file reference, config, action strings,
-  layout JSON schema, dashboard guide, controller guide,
-  QR pairing, nut-js install, firewall, iOS notes,
-  common errors, roadmap, changelog.
-- Sticky sidebar with scroll spy active-link highlight.
-- Copy button on code blocks.
-- AdSense mid-page ad placement.
+- Initial docs page: overview, requirements, quick-start,
+  reference, usage, troubleshooting, roadmap, changelog.
+- Sticky sidebar with scroll spy; copy button on code blocks.
 - Responsive: sidebar hidden on mobile (<768px).
 
 NEXT STEPS
-- Add v0.2.0 docs when long-press + swipe features ship
-- Add search/filter within docs page
-- Add OG meta for docs page social sharing
+- Document the command catalogue (system.js) when obs.*/stream.*
+  integrations land
+- OG meta for the docs page
 */
 </script>
 </body>
