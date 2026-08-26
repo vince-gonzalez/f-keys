@@ -1519,10 +1519,10 @@
   "pypi": [
     {
       "all_time": 1206,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 4,
+      "error": null,
       "license": null,
-      "monthly": null,
+      "monthly": 1206,
       "package": "gonzalgo",
       "registry": "PyPI",
       "released": "2026-08-24T04:49:25.070559Z",
@@ -1530,14 +1530,14 @@
       "summary": "Measure where a formal library spends its axioms: Lean 4 and Metamath.",
       "url": "https://pypi.org/project/gonzalgo/",
       "version": "0.5.5",
-      "weekly": null
+      "weekly": 319
     },
     {
       "all_time": 590,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 1,
+      "error": null,
       "license": null,
-      "monthly": null,
+      "monthly": 342,
       "package": "opticquiz-cvd",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:23.834985Z",
@@ -1545,14 +1545,14 @@
       "summary": "Color accessibility engine: colorblind-safety (protan/deutan/tritan, Machado 2009 + CIEDE2000), palette fixing, and WCAG contrast. Zero dependencies; drops into any matplotlib/plotly workflow.",
       "url": "https://pypi.org/project/opticquiz-cvd/",
       "version": "1.1.3",
-      "weekly": null
+      "weekly": 206
     },
     {
       "all_time": 399,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 2,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 399,
       "package": "moonbeam-miner",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:34.832631Z",
@@ -1560,14 +1560,14 @@
       "summary": "Find the NerdMiners on your network and read their vitals, from the terminal.",
       "url": "https://pypi.org/project/moonbeam-miner/",
       "version": "1.0.2",
-      "weekly": null
+      "weekly": 399
     },
     {
       "all_time": 398,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 1,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 398,
       "package": "plumhud",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:30.713017Z",
@@ -1575,14 +1575,14 @@
       "summary": "Miner fleet monitor - a borderless overlay HUD, alerts, and history.",
       "url": "https://pypi.org/project/plumhud/",
       "version": "4.1.2",
-      "weekly": null
+      "weekly": 398
     },
     {
       "all_time": 321,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 3,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 321,
       "package": "keyj",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:26.782174Z",
@@ -1590,14 +1590,14 @@
       "summary": "Turn guitar tablature into notes, render it, and play it back with any keystroke.",
       "url": "https://pypi.org/project/keyj/",
       "version": "0.1.2",
-      "weekly": null
+      "weekly": 321
     },
     {
       "all_time": 251,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 2,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 251,
       "package": "mmforge",
       "registry": "PyPI",
       "released": "2026-08-23T18:49:25.564371Z",
@@ -1605,14 +1605,14 @@
       "summary": "Find avoidable axiom dependencies in Metamath databases, and build the proofs that remove them.",
       "url": "https://pypi.org/project/mmforge/",
       "version": "0.1.2",
-      "weekly": null
+      "weekly": 251
     },
     {
       "all_time": 312,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 0,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 312,
       "package": "certivl",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:17.864146Z",
@@ -1620,14 +1620,14 @@
       "summary": "Exact rational and certified interval arithmetic: enclosures that turn a computed inequality into a proof.",
       "url": "https://pypi.org/project/certivl/",
       "version": "0.1.2",
-      "weekly": null
+      "weekly": 312
     },
     {
       "all_time": 289,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 2,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 289,
       "package": "ishihara",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:20.752265Z",
@@ -1635,7 +1635,22 @@
       "summary": "Generate pseudoisochromatic (Ishihara-style) colour vision plates. Reproducible from a seed, no dependencies.",
       "url": "https://pypi.org/project/ishihara/",
       "version": "0.1.2",
-      "weekly": null
+      "weekly": 289
+    },
+    {
+      "all_time": 703,
+      "daily": 703,
+      "error": null,
+      "license": "MIT",
+      "monthly": 703,
+      "package": "remapwrap",
+      "registry": "PyPI",
+      "released": "2026-08-25T16:23:59.675344Z",
+      "requires_python": ">=3.8",
+      "summary": "Build RemapWrap control surfaces from what you already have: a folder of samples, a list of applications, a set of shortcuts.",
+      "url": "https://pypi.org/project/remapwrap/",
+      "version": "0.5.0",
+      "weekly": 703
     }
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
@@ -1648,15 +1663,15 @@
     "npm_all_time": 1723,
     "npm_weekly": 70,
     "open_issues": 1,
-    "package_all_time": 5489,
-    "package_weekly": 70,
-    "packages_total": 12,
+    "package_all_time": 6192,
+    "package_weekly": 3268,
+    "packages_total": 13,
     "page_views_7d": 42629,
     "properties_total": 11,
     "properties_up": 11,
-    "pypi_all_time": 3766,
-    "pypi_monthly": 0,
-    "pypi_weekly": 0,
+    "pypi_all_time": 4469,
+    "pypi_monthly": 4221,
+    "pypi_weekly": 3198,
     "repos_archived": 0,
     "repos_unlicensed": 4,
     "threats_7d": 365,

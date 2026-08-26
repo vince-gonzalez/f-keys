@@ -109,7 +109,7 @@ NPM_PACKAGES  = ["@f-keys/tip-widget", "opticquiz-eye", "opticquiz-cvd", "opticq
 # all live on PyPI and absent here, which is the same failure the note
 # below already recorded once.
 PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
-                 "keyj", "mmforge", "certivl", "ishihara"]
+                 "keyj", "mmforge", "certivl", "ishihara", "remapwrap"]
 
 # Repositories are owner-qualified now. gonzalgo moved to the personal
 # account and only kept reporting because GitHub redirects transferred
