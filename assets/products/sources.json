@@ -1,0 +1,18 @@
+{
+  "keyj": {
+    "sha256": "8a699060b332ccd5",
+    "source": "keyj.png"
+  },
+  "opticquiz": {
+    "sha256": "c1659e08f2b442ac",
+    "source": "opticquiz.png"
+  },
+  "plumhud": {
+    "sha256": "22788273386a5906",
+    "source": "plumhud.png"
+  },
+  "remapwrap": {
+    "sha256": "f4bc99ea802b0474",
+    "source": "remapwrap.png"
+  }
+}

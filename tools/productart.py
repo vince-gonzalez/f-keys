@@ -1,0 +1,218 @@
+#!/usr/bin/env python3
+"""
+============================================================
+productart - one mark per product, everything else derived
+F-Keys | www.f-keys.com
+------------------------------------------------------------
+WHY THIS EXISTS
+Three products had a mark and they were in three places for
+three reasons: an Electron build icon, a folder of web assets,
+and data packaged inside a Python wheel. All correct, none of
+them the mark for a product PAGE, and nineteen products had
+nothing at all.
+
+So there is one place a mark is DROPPED and one place each
+derivative is WRITTEN, and nobody has to remember a size.
+
+  assets/products/<slug>.png     <- you put this here
+  assets/products/<slug>-512.png <- generated
+  assets/products/<slug>-256.png <- generated
+  assets/products/<slug>-64.png  <- generated
+  assets/products/<slug>.ico     <- generated
+  assets/products/<slug>-og.png  <- generated, 1200x630
+
+The source is never edited by this tool and never overwritten.
+Drop a better one in and rerun; the derivatives are rebuilt.
+
+The og card is the point. Twenty-two products currently share
+one share image, so twenty-two links unfurl identically.
+
+WORKFLOW STACK
+  1. slugs()    - the catalogue is the list, not a hard-coded one
+  2. derive()   - the five sizes, from the one source
+  3. --report   - what is still missing, by name
+  4. --verify   - every derivative matches its source (CI)
+
+Run:  python tools/productart.py            (build what exists)
+      python tools/productart.py --report   (what is missing)
+      python tools/productart.py --verify   (CI)
+============================================================
+"""
+
+import hashlib
+import io
+import json
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except (AttributeError, ValueError):
+    pass
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ART = os.path.join(ROOT, "assets", "products")
+MANIFEST = os.path.join(ART, "sources.json")
+
+SIZES = (512, 256, 64)
+ICO_SIZES = [(16, 16), (32, 32), (48, 48), (256, 256)]
+OG = (1200, 630)
+MIN_SOURCE = 256          # smaller than this and 512 is an upscale
+
+BG = (0, 0, 0)
+INK = (255, 255, 255)
+
+
+def catalogue():
+    import buildsite
+    return [(slug, name) for slug, name, *_rest in buildsite.CATALOGUE]
+
+
+def source_for(slug):
+    """Whatever was dropped in, in whichever of the sane formats."""
+    for ext in (".png", ".webp", ".jpg", ".jpeg"):
+        path = os.path.join(ART, slug + ext)
+        if os.path.exists(path):
+            return path
+    return None
+
+
+def digest(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        h.update(f.read())
+    return h.hexdigest()[:16]
+
+
+def derive(slug, source, name):
+    from PIL import Image
+    im = Image.open(source).convert("RGBA")
+    if min(im.size) < MIN_SOURCE:
+        return None, "source is {}x{}; needs at least {}px square".format(
+            im.size[0], im.size[1], MIN_SOURCE)
+    if im.size[0] != im.size[1]:
+        return None, "source is {}x{}; a mark has to be square".format(*im.size)
+
+    written = []
+    for px in SIZES:
+        out = os.path.join(ART, "{}-{}.png".format(slug, px))
+        im.resize((px, px), Image.LANCZOS).save(out, "PNG", optimize=True)
+        written.append(out)
+
+    ico = os.path.join(ART, slug + ".ico")
+    im.resize((256, 256), Image.LANCZOS).save(ico, "ICO", sizes=ICO_SIZES)
+    written.append(ico)
+
+    written.append(og_card(slug, im, name))
+    return written, None
+
+
+def og_card(slug, mark, name):
+    """The share card. Same construction as the company card so a product
+    link and an F-Keys link look like they came from the same place."""
+    from PIL import Image, ImageDraw, ImageFont
+    card = Image.new("RGB", OG, BG)
+    side = 470
+    art = mark.resize((side, side), Image.LANCZOS)
+    card.paste(art, (72, (OG[1] - side) // 2), art)
+
+    d = ImageDraw.Draw(card)
+    x = 72 + side + 56
+    d.text((x, 250), name, font=_font(84, True), fill=INK)
+    d.text((x, 372), "f-keys.com", font=_font(26), fill=(150, 150, 150))
+    d.line([(x, 430), (OG[0] - 72, 430)], fill=(60, 60, 60), width=2)
+
+    out = os.path.join(ART, slug + "-og.png")
+    card.save(out, "PNG", optimize=True)
+    return out
+
+
+def _font(size, bold=False):
+    from PIL import ImageFont
+    names = ("tahomabd.ttf", "segoeuib.ttf", "arialbd.ttf") if bold else \
+            ("tahoma.ttf", "segoeui.ttf", "arial.ttf")
+    for n in names:
+        p = os.path.join("C:\\", "Windows", "Fonts", n)
+        if os.path.exists(p):
+            return ImageFont.truetype(p, size)
+    return ImageFont.load_default()
+
+
+def load_manifest():
+    if os.path.exists(MANIFEST):
+        try:
+            with io.open(MANIFEST, encoding="utf-8") as f:
+                return json.load(f)
+        except ValueError:
+            pass
+    return {}
+
+
+def main():
+    os.makedirs(ART, exist_ok=True)
+    report = "--report" in sys.argv
+    verify = "--verify" in sys.argv
+
+    have, missing, problems = [], [], []
+    manifest = {}
+    old = load_manifest()
+
+    for slug, name in catalogue():
+        source = source_for(slug)
+        if not source:
+            missing.append((slug, name))
+            continue
+
+        stamp = digest(source)
+        manifest[slug] = {"source": os.path.basename(source), "sha256": stamp}
+
+        if report:
+            have.append((slug, name))
+            continue
+
+        if verify:
+            if old.get(slug, {}).get("sha256") != stamp:
+                problems.append("{}: derivatives are stale for {}".format(
+                    slug, os.path.basename(source)))
+            for suffix in ["-512.png", "-256.png", "-64.png", ".ico", "-og.png"]:
+                if not os.path.exists(os.path.join(ART, slug + suffix)):
+                    problems.append("{}: missing {}{}".format(slug, slug, suffix))
+            have.append((slug, name))
+            continue
+
+        written, err = derive(slug, source, name)
+        if err:
+            problems.append("{}: {}".format(slug, err))
+            continue
+        have.append((slug, name))
+        print("  {:<14} {} -> {} files".format(
+            slug, os.path.basename(source), len(written)))
+
+    if not report and not verify:
+        with io.open(MANIFEST, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(manifest, f, indent=2, sort_keys=True)
+
+    total = len(have) + len(missing)
+    print()
+    print("  {} of {} products have a mark".format(len(have), total))
+
+    if missing and (report or not verify):
+        print()
+        print("  STILL NEEDED - drop each one at assets/products/<name>:")
+        for slug, name in missing:
+            print("     assets/products/{}.png      ({})".format(slug, name))
+
+    for p in problems:
+        print("  productart:", p)
+
+    if verify:
+        print("productart: ok" if not problems else
+              "productart: {} FAILED".format(len(problems)))
+        return 1 if problems else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

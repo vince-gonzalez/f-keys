@@ -139,6 +139,11 @@ jobs:
       - name: The server and the browser render the same status page
         run: python tools/test_statuspage.py
 
+      # A mark dropped in without its derivatives rebuilt means the
+      # product page and the share card disagree with the source file.
+      - name: Product marks match their sources
+        run: python tools/productart.py --verify
+
       - name: Share card and favicons
         run: |
           pip install --quiet pillow
