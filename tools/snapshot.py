@@ -102,14 +102,19 @@ def publishable(sites):
     return [x for x in (sites or []) if x.get("site") in PUBLISHABLE_SITES]
 
 
-NPM_PACKAGES  = ["@f-keys/tip-widget", "opticquiz-eye", "opticquiz-cvd", "opticquiz-cvd-mcp"]
+NPM_PACKAGES  = ["@f-keys/tip-widget", "opticquiz-eye", "opticquiz-cvd",
+                 "opticquiz-cvd-mcp", "keyjockey"]
 
 # A package that is published and untracked reads, on this page, exactly
 # like a package that does not exist. mmforge, certivl and ishihara were
 # all live on PyPI and absent here, which is the same failure the note
 # below already recorded once.
 PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
-                 "keyj", "mmforge", "certivl", "ishihara", "remapwrap"]
+                 "keyj", "mmforge", "certivl", "ishihara", "remapwrap",
+                 # published 2026-08-26, added the same day, because the
+                 # three times this list went stale it was always the same
+                 # mistake: shipping and not writing it down
+                 "legible", "openapi-drift", "changewatch"]
 
 # Repositories are owner-qualified now. gonzalgo moved to the personal
 # account and only kept reporting because GitHub redirects transferred
@@ -126,6 +131,9 @@ GITHUB_REPOS = [
     "vince-gonzalez/ishihara", "vince-gonzalez/mmforge",
     "vince-gonzalez/apriori", "vince-gonzalez/loadbearing",
     "vince-gonzalez/certified-covers", "vince-gonzalez/epistemend.org",
+    "vince-gonzalez/openapi-drift", "vince-gonzalez/changewatch",
+    "vince-gonzalez/typefloor", "vince-gonzalez/contrast-gate",
+    "vince-gonzalez/deadname-gate", "vince-gonzalez/cvd-palette",
 ]
 
 # How many days of history the page draws its trends from. The dated

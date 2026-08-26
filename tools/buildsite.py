@@ -77,6 +77,18 @@ CATALOGUE = [
     ("plumhud", "PlumHUD", "tools", "Python package", PIP,
      "Miner fleet monitor. Overlay HUD, alerts, and local history.", "/plumhud/"),
 
+    # Shipped 2026-08-26. Listed the same day, because the failure this
+    # site keeps repeating is not building things - it is building them
+    # and leaving them where nobody can find them.
+    ("legible", "legible", "tools", "Python package", PIP,
+     "Three build gates: unreadable type, unreadable colour, a retired name.", "/legible/"),
+    ("openapi-drift", "openapi-drift", "tools", "Python package", PIP,
+     "Has your API drifted from its spec, and can a machine still read it?", "/openapi-drift/"),
+    ("changewatch", "changewatch", "tools", "Python package", PIP,
+     "A doorbell for your published work. Silent until somebody else acts.", "/changewatch/"),
+    ("keyjockey", "keyjockey", "tools", "npm package", PIP,
+     "Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency.", "/keyjockey/"),
+
     ("streamsniper", "Stream Sniper", "hardware", "Appliance", SETUP,
      "A spare mini PC shows a channel fullscreen the moment it goes live.", "/streamsniper/"),
     ("moonbeam", "Moonbeam", "hardware", "Python package", PIP,
@@ -112,6 +124,141 @@ CATEGORIES = [
 
 # ── long-form detail, one entry per product ──────────────────
 PAGES = {
+"legible": dict(
+  title="legible", tagline="Three gates a linter will not give you.",
+  facts=[("Install","pip install legible"),("Licence","MIT"),
+         ("Commands","typefloor, contrast-gate, deadname-gate"),
+         ("Actions","typefloor, contrast-gate, deadname-gate, cvd-palette"),
+         ("Source","vince-gonzalez/f-keys")],
+  body="""
+<h2>What it does</h2>
+<p>Three build gates for defects a linter has no opinion about, because none of
+them is a syntax error. Each one exists because a person read something and
+could not.</p>
+<pre><b>pip install legible</b>
+typefloor ./src                  type below a readable floor
+contrast-gate ./src              colour that cannot be read on its surface
+deadname-gate ./src              a name that should be gone</pre>
+<h2>The rename gate is the unusual one</h2>
+<p>It fails a build when a retired name reaches a title, a footer, a byline,
+alt text or a comment &mdash; while leaving machine identifiers alone, because
+renaming a repository path or a published artifact breaks working links or
+contradicts a deposited record. Both halves matter. A gate that cannot tell
+those apart gets switched off within a week.</p>
+<p>Written for a company rename. It is the same shape as the problem of a
+person changing their name and finding it in three hundred places, which is the
+harder version and the one worth getting right.</p>
+<h2>It will not tell you it passed when it did not</h2>
+<p>All three once reported <code>OK</code> on a directory they had never
+opened, because a bare path argument was ignored and each scanned itself
+instead. <code>deadname-gate</code> exits <b>2</b> rather than <b>0</b> when
+nothing is configured, and <code>contrast-gate --require-pairs</code> fails
+rather than passing a stylesheet that declares no colours at all.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/legible/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/typefloor" rel="noopener">typefloor action</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/cvd-palette" rel="noopener">cvd-palette action</a>
+</div>"""),
+
+ "openapi-drift": dict(
+  title="openapi-drift", tagline="Does the service still do what the spec says?",
+  facts=[("Install","pip install openapi-drift"),("Licence","MIT"),
+         ("Action","vince-gonzalez/openapi-drift"),
+         ("Source","vince-gonzalez/openapi-drift")],
+  body="""
+<h2>What it does</h2>
+<p>An OpenAPI document is a promise about a service, and nothing keeps the two
+together. It quietly becomes a description of what the service used to do, and
+every consumer finds out one failed call at a time.</p>
+<pre><b>pip install openapi-drift</b>
+openapi-drift openapi.json
+openapi-drift https://example.com/openapi.json --live</pre>
+<h2>The check nobody else runs</h2>
+<p>A response schema behind a <code>$ref</code> is correct, valid, and useless
+to the tools that turn an operation into a function signature, because they do
+not dereference. A validator sees a schema; a converter sees an argument with
+no type. The document passes everything and cannot be used.</p>
+<p>That is not hypothetical. It cost a week on a specification that passed
+every other check.</p>
+<h2>What it is not</h2>
+<p>Not a fuzzer &mdash; it calls what you documented rather than generating
+traffic hunting for crashes. Not a syntax validator &mdash; a perfectly
+well-formed document can be unreadable by a machine.</p>
+<h2>Only safe calls</h2>
+<p><code>--live</code> calls parameterless GETs only. A path with a placeholder
+or a required parameter is skipped rather than guessed at, because a guessed
+value reports drift that is the checker's fault. Nothing is ever written.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/openapi-drift/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/openapi-drift" rel="noopener">Source</a>
+</div>"""),
+
+ "changewatch": dict(
+  title="changewatch", tagline="A doorbell, not a dashboard.",
+  facts=[("Install","pip install changewatch"),("Licence","MIT"),
+         ("Needs","GITHUB_TOKEN for the GitHub half"),
+         ("Source","vince-gonzalez/changewatch")],
+  body="""
+<h2>What it does</h2>
+<p>You can already see what you did. What you cannot see is whether anyone else
+did anything about it &mdash; the first citation, the first star from a
+stranger, the first time your name appears somewhere you did not put it.</p>
+<pre><b>pip install changewatch</b>
+changewatch init
+changewatch check</pre>
+<p>Almost every run says nothing happened and exits. That is the design.</p>
+<h2>Why it only reports other people</h2>
+<p>The first ORCID this was pointed at reported six citations. All six were the
+author citing himself, doubled because Zenodo mints a DOI per version. Six is a
+number that feels like an audience; the real figure was zero.</p>
+<p>A tool that cannot tell your own activity from a stranger's rings on your own
+deposits, gets muted inside a week, and is then silent on the day something real
+happens. So every source checks your ORCID, your names and your logins.</p>
+<h2>It does not trust the search engine</h2>
+<p>Asked for the exact phrase <code>"openapi-drift"</code>, Hacker News returned
+a five-month-old thread titled &ldquo;How do you catch OpenAPI drift before the
+UI breaks?&rdquo; &mdash; two words, and not about anybody's package. Every hit
+is checked against the text locally, because a search engine's idea of a phrase
+is not yours.</p>
+<h2>The first run is silent</h2>
+<p>It has nothing to compare against, so everything looks new. A doorbell that
+announces months of history the moment it is plugged in gets unplugged. The
+first run learns; the second one rings.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/changewatch/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/changewatch" rel="noopener">Source</a>
+</div>"""),
+
+ "keyjockey": dict(
+  title="keyjockey", tagline="Tablature in, notes out.",
+  facts=[("Install","npm install keyjockey"),("Licence","MIT"),
+         ("Tunings","8, with capo offsets"),
+         ("Source","vince-gonzalez/f-keys")],
+  body="""
+<h2>What it does</h2>
+<p>Reads guitar tablature and converts notes. Eight tunings, capo offsets, MIDI
+and frequency.</p>
+<pre><b>npm install keyjockey</b>
+keyjockey.parseTab(tab, "Standard (EADGBe)", 0).notes;
+keyjockey.parseTab(tab, "Drop D", 2).notes;      // capo 2
+keyjockey.midiToName(60);                        // "C4"
+keyjockey.nameToFreq("A4");                      // 440</pre>
+<h2>Lifted, not rewritten</h2>
+<p>This is the same reader <a href="/keyj/">Key-J</a> runs in the browser, and
+the Python half is on PyPI as <code>keyj</code>. The npm package is generated
+from <code>app.html</code> at build time rather than written a third time, and
+the build fails if the app moves and the package does not.</p>
+<p>Key-J has already shipped three defects that existed only because two copies
+of one thing drifted. A third copy would have been a third chance.</p>
+<h2>Errors come back, they are not thrown</h2>
+<p>A tab in a tuning that does not exist returns <code>.error</code> and no
+notes. Text that is not tablature returns zero notes rather than guessing at
+one.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://www.npmjs.com/package/keyjockey" rel="noopener">npm</a>
+  <a class="btn" href="/keyj/">Key-J</a>
+</div>"""),
+
  "keyj": dict(
   title="Key-J", tagline="Every keystroke plays a note, in any application.",
   facts=[("Version","1.6.0"),("Licence","Proprietary"),("Platforms","Browser, Windows, Linux"),
