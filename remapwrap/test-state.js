@@ -36,6 +36,11 @@ function finish(){
      s.foreground === undefined);
   // Unchanged state must not be repeated twice a second for six seconds.
   ok('an unchanging machine is not spammed', states.length <= 3);
+  // Levels belong to the meters channel. If one appears here the settings
+  // message changes on every poll and the guard above stops meaning
+  // anything - which is exactly how it broke.
+  ok('a level never rides the settings message',
+     s.peakIn === undefined && s.peakOut === undefined);
   console.log('  received ' + states.length + ' update(s) in 6s: ' +
               JSON.stringify(states[0]));
   console.log('  ---'); console.log('  '+(fail.length?fail.length+' FAILED':'all pass'));

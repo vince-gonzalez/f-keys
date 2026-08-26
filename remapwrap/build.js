@@ -20,6 +20,7 @@
 var fs = require('fs');
 var path = require('path');
 var child = require('child_process');
+var os = require('os');
 
 var ROOT = __dirname;
 var OUT = path.join(ROOT, 'dist', 'RemapWrap');
@@ -41,12 +42,16 @@ var FILES = [
 
 var DEPS = ['ws', 'qrcode', '@nut-tree-fork'];
 
-// nut-js can also match images on screen, which drags in jimp and a whole
-// image pipeline. RemapWrap presses keys and never looks at the screen, so
-// twenty four megabytes of it went into every download for nothing.
-// Verified by pruning and reloading: 137 key constants, all present.
-var NEVER_LOADED = ['@types', '@jimp', 'jimp', 'gifwrap', 'pixelmatch',
-                    'image-q', '@tokenizer', 'file-type'];
+// nut-js can also match images on screen, and it requires that machinery at
+// load time whether or not anything asks for it. Pruning jimp looked fine
+// for a whole day because Node walked UP out of dist/ and found the
+// development node_modules - the build's own check passed for the same
+// reason and proved nothing. The moment the installer put the app somewhere
+// with no parent to fall back on, it could not start at all.
+//
+// So only what is genuinely never reached is removed. TypeScript
+// definitions are the whole list.
+var NEVER_LOADED = ['@types'];
 
 function say(m) { console.log('  ' + m); }
 
@@ -157,20 +162,80 @@ say('RemapWrap.exe compiled');
 // ── does what came out actually work ──────────────────────────
 // Pruning dependencies is only safe if the result still loads, and the
 // place to find out is here rather than on a customer's machine.
-var check = child.spawnSync(path.join(OUT, 'node.exe'),
+// Run from a copy OUTSIDE this repository. Checking it in place lets Node
+// resolve anything missing from the development tree above it, which is
+// exactly how a broken build passed this check for a day.
+var proving = path.join(os.tmpdir(), 'rw-prove-' + process.pid);
+fs.rmSync(proving, { recursive: true, force: true });
+copyDir(OUT, proving);
+var check = child.spawnSync(path.join(proving, 'node.exe'),
   ['-e', "var n=require('@nut-tree-fork/nut-js');" +
          "require('./store');require('./licence');require('./system');" +
          "require('ws');require('qrcode');" +
          "if(typeof n.keyboard.pressKey!=='function')process.exit(1);" +
          "console.log(Object.keys(n.Key).filter(function(k){return isNaN(Number(k))}).length)"],
-  { cwd: APP, encoding: 'utf8' });
+  { cwd: path.join(proving, 'app'), encoding: 'utf8' });
+fs.rmSync(proving, { recursive: true, force: true });
 if (check.status !== 0) {
   console.log(check.stdout || ''); console.log(check.stderr || '');
-  throw new Error('the built app does not load - do not ship this');
+  throw new Error('the built app does not load on its own - do not ship this');
 }
 say('built app loads: ' + String(check.stdout).trim() + ' key constants');
 
+// ── The installer ─────────────────────────────────────────────
+// One file a stranger downloads and double-clicks. The application is
+// carried inside it as an embedded resource, so building an installer
+// needs no installer-building tool - the same reason the launcher is
+// compiled with the C# compiler that ships inside Windows.
+//
+// installer.iss is still in this repository for the day Inno Setup is on
+// the build machine. This exists so that day is not a blocker.
+function buildInstaller() {
+  var zip = path.join(ROOT, 'dist', 'payload.zip');
+  if (fs.existsSync(zip)) { fs.rmSync(zip); }
+
+  // .NET's own zip, through PowerShell, because Compress-Archive is slow on
+  // eight hundred files and produces a larger file.
+  var ps = "Add-Type -AssemblyName System.IO.Compression.FileSystem; " +
+    "[System.IO.Compression.ZipFile]::CreateFromDirectory(" +
+    "'" + OUT.replace(/'/g, "''") + "','" + zip.replace(/'/g, "''") + "'," +
+    "[System.IO.Compression.CompressionLevel]::Optimal,$false)";
+  var packed = child.spawnSync('powershell', ['-NoProfile', '-Command', ps],
+                               { encoding: 'utf8' });
+  if (packed.status !== 0 || !fs.existsSync(zip)) {
+    console.log(packed.stderr || '');
+    throw new Error('could not pack the payload');
+  }
+  say('payload.zip  ' + (fs.statSync(zip).size / 1048576).toFixed(1) + ' MB');
+
+  var setupExe = path.join(ROOT, 'dist', 'RemapWrap-Setup.exe');
+  var args = [
+    '/nologo', '/target:winexe', '/optimize+',
+    '/out:' + setupExe,
+    '/reference:System.dll', '/reference:System.Drawing.dll',
+    '/reference:System.Windows.Forms.dll',
+    '/reference:System.IO.Compression.dll',
+    '/reference:System.IO.Compression.FileSystem.dll',
+    // Named, because the code asks for it by name rather than by position.
+    '/resource:' + zip + ',payload.zip'
+  ];
+  var icon = path.join(ROOT, 'assets', 'icon.ico');
+  if (fs.existsSync(icon)) { args.push('/win32icon:' + icon); }
+  args.push(path.join(ROOT, 'installer', 'Setup.cs'));
+
+  var built = child.spawnSync(CSC, args, { encoding: 'utf8' });
+  if (built.status !== 0) {
+    console.log(built.stdout || ''); console.log(built.stderr || '');
+    throw new Error('the installer did not compile');
+  }
+  fs.rmSync(zip);            // it lives inside the exe now
+  say('RemapWrap-Setup.exe  ' +
+      (fs.statSync(setupExe).size / 1048576).toFixed(1) + ' MB, one file');
+}
+
 // ── what came out ─────────────────────────────────────────────
+buildInstaller();
+
 var m = measure(OUT);
 say('---');
 say('dist/RemapWrap/  ' + m.files + ' files, ' +

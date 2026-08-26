@@ -190,7 +190,12 @@ var stateTimer = null;
 
 function statesDiffer(a, b) {
   if (!a || !b) { return true; }
-  return Object.keys(b).some(function (k) { return a[k] !== b[k]; });
+  // A level is not a setting. Comparing them here would make every poll a
+  // change, which is the same defect from the other end.
+  return Object.keys(b).some(function (k) {
+    if (k === 'peakOut' || k === 'peakIn' || k === 'foreground') { return false; }
+    return a[k] !== b[k];
+  });
 }
 
 function pollState() {
@@ -212,8 +217,12 @@ function pollState() {
       var forPhone = {};
       Object.keys(state).forEach(function (k) {
         if (k === 'foreground') { return; }
-        if (k === 'peakOut' && !FEATURES.meters) { return; }
-        if (k === 'peakIn' && !FEATURES.micMeter) { return; }
+        // Levels have their own channel at fifteen times a second. Letting
+        // them ride here as well meant the settings message changed on
+        // every single poll - so "only speak when something changed" became
+        // "speak constantly", and a phone got seven full state messages in
+        // six seconds of an idle machine instead of one.
+        if (k === 'peakOut' || k === 'peakIn') { return; }
         forPhone[k] = state[k];
       });
       broadcastToControllers({ type: 'state', state: forPhone });
@@ -1016,7 +1025,7 @@ var FIRE = {
   clipSet: function (text) { return audio.clipSet(text); },
 
   mouseClick: function (which) {
-    if (!mouse) { return Promise.reject(new Error('no pointer')); }
+    if (!mouse || !Button) { return Promise.reject(new Error('no pointer')); }
     if (which === 'double') { return mouse.doubleClick(Button.LEFT); }
     if (which === 'right') { return mouse.click(Button.RIGHT); }
     if (which === 'middle') { return mouse.click(Button.MIDDLE); }
@@ -1037,7 +1046,7 @@ var FIRE = {
     return mouse.scrollDown(amount);
   },
   mouseHold: function (down) {
-    if (!mouse) { return Promise.reject(new Error('no pointer')); }
+    if (!mouse || !Button) { return Promise.reject(new Error('no pointer')); }
     return down ? mouse.pressButton(Button.LEFT)
                 : mouse.releaseButton(Button.LEFT);
   }
@@ -1096,6 +1105,11 @@ function fireKeystroke(action) {
 // than transcribed from it, and it cannot fall behind the library again.
 var KEYS = (function () {
   var table = {};
+  // Key is null when nut-js could not load. The message above says this
+  // keeps running in relay-only mode, and then this crashed on the very
+  // next line - so the promise was false and the failure looked like a
+  // damaged install rather than a missing dependency.
+  if (!Key) { return table; }
   Object.keys(Key).forEach(function (name) {
     if (!isNaN(Number(name))) { return; }          // reverse numeric entries
     table[name.toLowerCase()] = Key[name];
