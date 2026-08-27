@@ -121,12 +121,12 @@ PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
 # repos - a redirect is not a reason to keep the wrong name written down.
 GITHUB_OWNER = "zengineco"          # kept for anything still unqualified
 GITHUB_REPOS = [
-    "vince-gonzalez/f-keys", "zengineco/opticquiz.com", "zengineco/tip-widget",
-    "zengineco/poticas", "zengineco/5best2buy.com",
-    "zengineco/trailer-load.com", "zengineco/tipstreams.com",
-    "zengineco/prompt-game", "zengineco/daisupop", "vince-gonzalez/qv",
+    "vince-gonzalez/f-keys", "vince-gonzalez/opticquiz.com", "vince-gonzalez/tip-widget",
+    "vince-gonzalez/poticas", "vince-gonzalez/5best2buy.com",
+    "vince-gonzalez/trailer-load.com", "vince-gonzalez/tipstreams.com",
+    "vince-gonzalez/prompt-game", "vince-gonzalez/daisupop", "vince-gonzalez/qv",
     "vince-gonzalez/fytecraft.com", "zengineco/modulign.org",
-    "zengineco/Moonbeam-NerdMiner",
+    "vince-gonzalez/Moonbeam-NerdMiner",
     "vince-gonzalez/gonzalgo", "vince-gonzalez/certivl",
     "vince-gonzalez/ishihara", "vince-gonzalez/mmforge",
     "vince-gonzalez/apriori", "vince-gonzalez/loadbearing",
