@@ -1851,10 +1851,18 @@ def main():
         if shot:
             where = dict(page["facts"]).get("Where", "")
             when = SHOT_DATES.get(slug, "")
+            # The sizing is inline on purpose, not left to win98.css.
+            # HTML and CSS deploy together and cache SEPARATELY: the
+            # stylesheet carries max-age=14400, so for four hours every
+            # returning visitor gets this new markup with the old
+            # stylesheet. Without the inline rule they see an 800px
+            # image clipped inside a 720px column. Anything load-bearing
+            # for the layout of new markup cannot depend on new CSS.
             figure = (
                 '<figure class="shot">'
                 '<img src="{}" alt="{} running in a browser." '
-                'width="800" loading="lazy" decoding="async">'
+                'width="800" style="max-width:100%;height:auto" '
+                'loading="lazy" decoding="async">'
                 '<figcaption>{}{}</figcaption></figure>').format(
                     shot, esc(page["title"]),
                     esc(where) if where else esc(page["title"]),
