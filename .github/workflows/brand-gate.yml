@@ -141,6 +141,11 @@ jobs:
       # The sitemap was hand-kept and listed one of 24 product pages.
       # The old check only asked whether the URLs it listed existed,
       # which is the direction that cannot catch an absence.
+      # papers/index.html used to be hand-maintained HTML, and its
+      # own header was wrong about how many papers it listed.
+      - name: The papers document matches its data
+        run: python tools/buildpapers.py --check
+
       - name: The sitemap lists every page
         run: python tools/buildsitemap.py --check
 

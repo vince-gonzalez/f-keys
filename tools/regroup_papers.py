@@ -14,6 +14,27 @@ Two problems this fixes:
 Idempotent: rebuilds the whole main block from the parsed entries each run.
 """
 from __future__ import print_function
+import sys as _sys
+
+# ── SUPERSEDED 2026-08-28 - do not run this ─────────────────
+# papers/index.html is generated now. The data lives in
+# papers/papers.json and tools/buildpapers.py renders it through the
+# site shell. This script parses the page and REWRITES IT IN PLACE,
+# which was the right shape when the page was the only copy of the data
+# and is now a loaded gun: one run replaces a generated document with a
+# regrouped copy of itself, and the next --check fails with no obvious
+# cause.
+#
+# It is kept, not deleted, because GROUP_OF below is the grouping
+# decision - which paper belongs in which section - and that judgement
+# was made once and should not have to be made again. buildpapers reads
+# the same grouping out of papers.json.
+if __name__ == "__main__":
+    print("regroup_papers: superseded. papers/index.html is generated.")
+    print("  data:     papers/papers.json")
+    print("  renderer: python tools/buildpapers.py")
+    _sys.exit(2)
+
 import io, re, sys, collections
 
 SRC = 'papers/index.html'
