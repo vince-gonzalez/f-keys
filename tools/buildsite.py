@@ -842,7 +842,10 @@ channels, with its JavaScript and Python implementations verified identical to s
 decimal places, and publishes the calibration limits that keep its own results
 honest.</p>
 <p>More than thirty works are deposited with DOIs. The packages are installed
-several hundred times a week.</p>
+several hundred times a week. Six pull requests to
+<a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>
+carry the measurements back upstream &mdash; reviewed and merged by that
+library's own maintainers.</p>
 <h2>Current interests</h2>
 <p>Accessibility &middot; hardware interfaces &middot; creator tools &middot; gaming
 &middot; formal methods &middot; the open web.</p>
@@ -1179,6 +1182,25 @@ colour-vision simulation and daltonisation.</td></tr>
 <tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
 &mdash; the TipStreams widget.</td></tr>
 </table>
+
+<h2>Upstream, merged</h2>
+<p>The measurements feed back into the library they measure. Six pull requests
+to <a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>
+&mdash; the Metamath Proof Explorer's canonical database, reviewed and merged by
+its own maintainers &mdash; each remove an avoidable axiom-of-choice dependency
+that the tooling on this page located:</p>
+<table class="facts">
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5442" rel="noopener">#5442</a></th><td>Remove the ax-ac dependency from <code>difelsiga</code> &mdash; merged 2026-08-19</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5448" rel="noopener">#5448</a></th><td>Drop the ax-ac dependency from <code>omeiunle</code> &mdash; merged 2026-08-21</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5447" rel="noopener">#5447</a></th><td>Avoid ax-ac in <code>sigaclci</code> directly &mdash; merged 2026-08-21</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5445" rel="noopener">#5445</a></th><td>Shorten <code>madefi</code> and drop its ax-ac dependency &mdash; merged 2026-08-21</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5443" rel="noopener">#5443</a></th><td>Add <code>fnrndomnum</code>, and prove <code>fnrndomg</code> from it &mdash; merged 2026-08-24</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5458" rel="noopener">#5458</a></th><td>Drop the ax-ac dependency from <code>fnct</code>, <code>dmct</code> and <code>ffsrn</code> &mdash; merged 2026-08-26</td></tr>
+</table>
+<p>Three more set.mm pull requests are open in review, along with two
+<a href="https://github.com/microsoft/winget-pkgs/pull/421552" rel="noopener">winget-pkgs</a>
+package submissions. Open means open &mdash; nothing here is claimed merged
+until its maintainers say so.</p>
 
 <h2>The published data</h2>
 <p>Every published document is described in

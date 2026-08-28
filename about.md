@@ -29,7 +29,10 @@ decimal places, and publishes the calibration limits that keep its own results
 honest.
 
 More than thirty works are deposited with DOIs. The packages are installed
-several hundred times a week.
+several hundred times a week. Six pull requests to
+[metamath/set.mm](https://github.com/metamath/set.mm)
+carry the measurements back upstream — reviewed and merged by that
+library's own maintainers.
 
 ## Current interests
 

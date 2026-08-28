@@ -113,6 +113,28 @@ something unfinished.
 | opticquiz-cvd | npm i opticquiz-cvd — colour-vision simulation and daltonisation. |
 | @f-keys/tip-widget | npm i @f-keys/tip-widget — the TipStreams widget. |
 
+## Upstream, merged
+
+The measurements feed back into the library they measure. Six pull requests
+to [metamath/set.mm](https://github.com/metamath/set.mm)
+— the Metamath Proof Explorer's canonical database, reviewed and merged by
+its own maintainers — each remove an avoidable axiom-of-choice dependency
+that the tooling on this page located:
+
+| Field | Value |
+| --- | --- |
+| [#5442](https://github.com/metamath/set.mm/pull/5442) | Remove the ax-ac dependency from difelsiga — merged 2026-08-19 |
+| [#5448](https://github.com/metamath/set.mm/pull/5448) | Drop the ax-ac dependency from omeiunle — merged 2026-08-21 |
+| [#5447](https://github.com/metamath/set.mm/pull/5447) | Avoid ax-ac in sigaclci directly — merged 2026-08-21 |
+| [#5445](https://github.com/metamath/set.mm/pull/5445) | Shorten madefi and drop its ax-ac dependency — merged 2026-08-21 |
+| [#5443](https://github.com/metamath/set.mm/pull/5443) | Add fnrndomnum, and prove fnrndomg from it — merged 2026-08-24 |
+| [#5458](https://github.com/metamath/set.mm/pull/5458) | Drop the ax-ac dependency from fnct, dmct and ffsrn — merged 2026-08-26 |
+
+Three more set.mm pull requests are open in review, along with two
+[winget-pkgs](https://github.com/microsoft/winget-pkgs/pull/421552)
+package submissions. Open means open — nothing here is claimed merged
+until its maintainers say so.
+
 ## The published data
 
 Every published document is described in
