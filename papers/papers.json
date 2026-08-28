@@ -110,7 +110,7 @@
      "title": "Certified upper bounds for Fejes Tóth's point-goalie problem at n = 4 and 5",
      "date": "2026-08-01",
      "kind": "Preprint",
-     "abstract": "In 1974 L&aacute;szl&oacute; Fejes T&oacute;th posed the following problem: place n points in the plane so as to minimise the largest distance from a line meeting the unit-radius disc to the nearest point. Writing r_n for the optimum, he proved r_1 = r_2 = 1 a…",
+     "abstract": "In 1974 László Fejes Tóth posed the following problem: place n points in the plane so as to minimise the largest distance from a line meeting the unit-radius disc to the nearest point. Writing r_n for the optimum, he proved r_1 = r_2 = 1 a…",
      "links": [
       {
        "label": "Abstract",
@@ -156,7 +156,7 @@
      "title": "Rigorous areas for the classical Lebesgue universal covering ladder",
      "date": "2026-07-31",
      "kind": "Preprint",
-     "abstract": "Lebesgue's universal covering problem, posed in 1914, asks for the convex set of least area containing an isometric copy of every planar set of diameter 1. The known upper bounds descend through a ladder of constructions &mdash; the regular hexagon, P&aacute;l…",
+     "abstract": "Lebesgue's universal covering problem, posed in 1914, asks for the convex set of least area containing an isometric copy of every planar set of diameter 1. The known upper bounds descend through a ladder of constructions — the regular hexagon, Pál…",
      "links": [
       {
        "label": "Abstract",
@@ -202,7 +202,7 @@
      "title": "A machine-checked proof of opacity for a Faber–Mycielski barrier",
      "date": "2026-07-30",
      "kind": "Preprint",
-     "abstract": "An opaque set for the unit disc is a set meeting every straight line that meets the disc. I report a formal verification, in Lean 4 with mathlib, that the three-piece Faber&ndash;Mycielski barrier is opaque. The main theorem barrier_isOpaque is proved with no …",
+     "abstract": "An opaque set for the unit disc is a set meeting every straight line that meets the disc. I report a formal verification, in Lean 4 with mathlib, that the three-piece Faber–Mycielski barrier is opaque. The main theorem barrier_isOpaque is proved with no …",
      "links": [
       {
        "label": "Abstract",
@@ -297,7 +297,7 @@
      "title": "On The Record: Toward a Formal Epistemology of Journalistic Attestation",
      "date": "2026-04-18",
      "kind": "Journal article",
-     "abstract": "The phrase \"on the record\" is journalism's foundational epistemic claim. It means, at minimum, that a statement or observation is attributable, verifiable, and accountable. Yet no journalism standard specifies what verifiable means formally &mdash; by what pro…",
+     "abstract": "The phrase \"on the record\" is journalism's foundational epistemic claim. It means, at minimum, that a statement or observation is attributable, verifiable, and accountable. Yet no journalism standard specifies what verifiable means formally — by what pro…",
      "links": [
       {
        "label": "Abstract",
@@ -343,7 +343,7 @@
      "title": "The Epistemology of Observation: A Formal Certification Framework for Human and Automated Classifiers in DAG-OR",
      "date": "2026-04-24",
      "kind": "Journal article",
-     "abstract": "Every classification system presupposes an observer. The Modulign Standard (DAG-OR) makes this presupposition explicit through the &sect;OBS and &sect;AUT segments of the dimensional address, which encode not merely who observed but at what level of certified …",
+     "abstract": "Every classification system presupposes an observer. The Modulign Standard (DAG-OR) makes this presupposition explicit through the §OBS and §AUT segments of the dimensional address, which encode not merely who observed but at what level of certified …",
      "links": [
       {
        "label": "Abstract",
@@ -419,7 +419,7 @@
      "title": "Dimensional Address as Rigid Designation: How DAG-OR Grounds Reference Without Metaphysical Posit",
      "date": "2026-04-13",
      "kind": "Preprint",
-     "abstract": "The problem of reference &mdash; what makes a name, description, or term reliably track its object &mdash; has generated three dominant frameworks in the analytic tradition: Frege's sense/reference distinction, Russell's theory of definite descriptions, and Kr…",
+     "abstract": "The problem of reference — what makes a name, description, or term reliably track its object — has generated three dominant frameworks in the analytic tradition: Frege's sense/reference distinction, Russell's theory of definite descriptions, and Kr…",
      "links": [
       {
        "label": "Abstract",
@@ -488,7 +488,7 @@
      "title": "The Formal Logic of Modulign",
      "date": "2026-03-31",
      "kind": "Technical note",
-     "abstract": "This document does not explain Modulign. It proves it. Every claim the Standard makes  about its own properties &mdash; validity, uniqueness, intersubjectivity, non-accidentality,  chain-of-custody integrity, and scale-sensitivity &mdash; is here ren…",
+     "abstract": "This document does not explain Modulign. It proves it. Every claim the Standard makes  about its own properties — validity, uniqueness, intersubjectivity, non-accidentality,  chain-of-custody integrity, and scale-sensitivity — is here ren…",
      "links": [
       {
        "label": "Abstract",
@@ -541,7 +541,7 @@
      "title": "AI-Generated Evidence Admissibility:  A Formal Classification Framework for Synthetic Content",
      "date": "2026-04-18",
      "kind": "Journal article",
-     "abstract": "Courts in the United States and internationally are now regularly confronted with evidence alleged to be AI-generated, AI-enhanced, or of uncertain synthetic origin &mdash; and they lack a formal framework adequate to the problem. Existing evidentiary doctrine…",
+     "abstract": "Courts in the United States and internationally are now regularly confronted with evidence alleged to be AI-generated, AI-enhanced, or of uncertain synthetic origin — and they lack a formal framework adequate to the problem. Existing evidentiary doctrine…",
      "links": [
       {
        "label": "Abstract",
@@ -564,7 +564,7 @@
      "title": "Chain of Custody Formalisation in Digital Forensics: The Modulign ^EVID Architecture as a Registry-Based Evidentiary Framework",
      "date": "2026-04-18",
      "kind": "Journal article",
-     "abstract": "Digital chain of custody remains a frequently litigated and consequential vulnerability in forensic evidence proceedings. Existing frameworks &mdash; NIST SP 800-86, ISO/IEC 27037, the ACPO Good Practice Guide &mdash; establish procedural requirements for evid…",
+     "abstract": "Digital chain of custody remains a frequently litigated and consequential vulnerability in forensic evidence proceedings. Existing frameworks — NIST SP 800-86, ISO/IEC 27037, the ACPO Good Practice Guide — establish procedural requirements for evid…",
      "links": [
       {
        "label": "Abstract",
@@ -587,7 +587,7 @@
      "title": "THE CLASSIFICATION DEFICIT Article 50 of the EU AI Act, the Epistemic Gap It Cannot Close, and the Formal Standard That Does",
      "date": "2026-04-14",
      "kind": "Preprint",
-     "abstract": "The evidentiary problem of AI-generated content is not a disclosure problem. It is an epistemological one. Every major governance framework &mdash; the EU AI Act's Article 50, proposed FRE Rule 707, the Take It Down Act, platform watermarking policies &mdash; …",
+     "abstract": "The evidentiary problem of AI-generated content is not a disclosure problem. It is an epistemological one. Every major governance framework — the EU AI Act's Article 50, proposed FRE Rule 707, the Take It Down Act, platform watermarking policies — …",
      "links": [
       {
        "label": "Abstract",
@@ -610,7 +610,7 @@
      "title": "Modulign As Evidence",
      "date": "2026-03-31",
      "kind": "Report",
-     "abstract": "This treatise applies the Modulign Standard v3.0 &mdash; a Dimensional Address Grammar for Observable Reality (DAG-OR) &mdash; as a formal evidentiary and legal codex framework. It establishes four foundational propositions. First, that Modulign-classified obs…",
+     "abstract": "This treatise applies the Modulign Standard v3.0 — a Dimensional Address Grammar for Observable Reality (DAG-OR) — as a formal evidentiary and legal codex framework. It establishes four foundational propositions. First, that Modulign-classified obs…",
      "links": [
       {
        "label": "Abstract",
@@ -709,7 +709,7 @@
      "title": "Inter-Rater Reliability of Automated Modulign Standard Classifiers",
      "date": "2026-04-18",
      "kind": "Data paper",
-     "abstract": "This paper reports the first empirical inter-rater reliability study conducted on automated classifiers implementing the Modulign Standard v3.0 &mdash; a Dimensional Address Grammar for Observable Reality (DAG-OR). Two independently designed heuristic classifi…",
+     "abstract": "This paper reports the first empirical inter-rater reliability study conducted on automated classifiers implementing the Modulign Standard v3.0 — a Dimensional Address Grammar for Observable Reality (DAG-OR). Two independently designed heuristic classifi…",
      "links": [
       {
        "label": "Abstract",
@@ -822,7 +822,7 @@
      "title": "Version 3.1 Amendment Document",
      "date": "2026-04-18",
      "kind": "Technical note",
-     "abstract": "This document specifies all amendments to the Modulign Standard that constitute version 3.1. It is a formal amendment document &mdash; not a replacement of the v3.0 specification. All v3.0 provisions not explicitly amended remain in force. The v3.1 complete sp…",
+     "abstract": "This document specifies all amendments to the Modulign Standard that constitute version 3.1. It is a formal amendment document — not a replacement of the v3.0 specification. All v3.0 provisions not explicitly amended remain in force. The v3.1 complete sp…",
      "links": [
       {
        "label": "Abstract",

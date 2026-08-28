@@ -110,14 +110,18 @@ def entry_html(e):
             esc(l["href"]), ' rel="noopener"' if l["href"].startswith("http")
             else "", esc(l["label"]))
         for l in e.get("links") or [])
-    meta = " &middot; ".join(x for x in (e.get("date"), e.get("kind")) if x)
+    # Escape each part, THEN join with the entity. Escaping the joined
+    # string turns the & of &middot; into &amp;middot; and the reader
+    # sees the markup instead of the dot.
+    meta = " &middot; ".join(esc(x) for x in (e.get("date"), e.get("kind"))
+                             if x)
     return (
         '<div class="wentry">'
         '<h3><a href="%s">%s</a></h3>'
         '<p class="wmeta">%s</p>'
         '<p class="wabs">%s</p>'
         '<p class="wlinks">%s</p>'
-        '</div>' % (esc(e["url"]), esc(e["title"]), esc(meta),
+        '</div>' % (esc(e["url"]), esc(e["title"]), meta,
                     esc(e.get("abstract") or ""), links))
 
 
