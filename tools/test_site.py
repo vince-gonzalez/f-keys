@@ -54,9 +54,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Directories that are not the website: vendored code, build output and
 # the git database would all produce false positives.
+# cv/ was in here, and it should not have been. The Privacy page's
+# promises are made on behalf of the whole domain, and the CV pages are
+# the ones a client is most likely to open. Skipping them meant the
+# tracker rules were never asserted against the most client-facing thing
+# on the site - which is how four of them kept fetching a typeface from
+# Google long after every other page stopped.
 SKIP_DIRS = {".git", ".github", "node_modules", "dist", "build",
              "__pycache__", ".private-snapshot", ".agents", ".claude",
-             "desktop", "cv"}
+             "desktop"}
 
 # The pages this site generates, which are the ones these rules govern.
 GENERATED = ["index.html", "apps.html", "games.html", "tools.html",
