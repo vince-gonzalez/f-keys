@@ -1826,7 +1826,7 @@
     "packages_total": 17,
     "page_views_7d": 41768,
     "properties_total": 11,
-    "properties_up": 10,
+    "properties_up": 11,
     "pypi_all_time": 5124,
     "pypi_monthly": 4466,
     "pypi_weekly": 3220,
@@ -1840,6 +1840,7 @@
   },
   "uptime": [
     {
+      "code": 200,
       "error": null,
       "ms": 195,
       "name": "f-keys.com",
@@ -1847,6 +1848,7 @@
       "url": "https://f-keys.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 130,
       "name": "opticquiz.com",
@@ -1854,6 +1856,7 @@
       "url": "https://opticquiz.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 182,
       "name": "poticas.com",
@@ -1861,6 +1864,7 @@
       "url": "https://poticas.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 71,
       "name": "5best2buy.com",
@@ -1868,6 +1872,7 @@
       "url": "https://www.5best2buy.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 153,
       "name": "trailer-load.com",
@@ -1875,6 +1880,7 @@
       "url": "https://trailer-load.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 147,
       "name": "tipstreams.com",
@@ -1882,6 +1888,7 @@
       "url": "https://tipstreams.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 164,
       "name": "dogefundme.com",
@@ -1889,13 +1896,15 @@
       "url": "https://dogefundme.com"
     },
     {
+      "code": 403,
       "error": "HTTP 403",
       "ms": 251,
       "name": "modulign.org",
-      "up": false,
+      "up": true,
       "url": "https://modulign.org"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 90,
       "name": "prompt.f-keys.com",
@@ -1903,6 +1912,7 @@
       "url": "https://prompt.f-keys.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 72,
       "name": "dp.f-keys.com",
@@ -1910,6 +1920,7 @@
       "url": "https://dp.f-keys.com"
     },
     {
+      "code": 200,
       "error": null,
       "ms": 115,
       "name": "zengin.es",

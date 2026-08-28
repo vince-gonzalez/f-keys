@@ -156,6 +156,33 @@ def main():
             failures.append("format {!r} is used but not defined in status.js"
                             .format(fmt))
 
+    # ── the trend and the summary have to agree ──────────────
+    # They did not. history was built from the dated files on disk while
+    # today's file had not been written yet, so the series ended one day
+    # short of the snapshot carrying it - and the page showed 41,768 page
+    # views in the summary and 42,629 in the trend, for the same metric,
+    # at the same moment. A status page that contradicts itself is worse
+    # than one that is merely out of date: it tells a reader that none of
+    # the numbers can be trusted, which is the opposite of its job.
+    if os.path.exists(SNAPSHOT):
+        with io.open(SNAPSHOT, encoding="utf-8") as f:
+            snap = json.load(f)
+        hist = snap.get("history") or []
+        summary = snap.get("summary") or {}
+        if hist:
+            last = hist[-1]
+            if last.get("date") != snap.get("date"):
+                failures.append(
+                    "history ends {} but the snapshot is dated {} - the "
+                    "trend renders yesterday as today"
+                    .format(last.get("date"), snap.get("date")))
+            for key in ("page_views_7d", "visitors_7d", "package_weekly"):
+                a, b = last.get(key), summary.get(key)
+                if a is not None and b is not None and a != b:
+                    failures.append(
+                        "{}: the trend says {} and the summary says {}"
+                        .format(key, a, b))
+
     if failures:
         print("test_statuspage: {} FAILED\n".format(len(failures)))
         for f in failures:

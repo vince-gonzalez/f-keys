@@ -66,8 +66,17 @@ INK = (255, 255, 255)
 
 
 def catalogue():
+    """The things that need a mark: the ones with a page to put it on.
+
+    Not every catalogue row is a product. `papers` and `gonzalgo` are
+    destinations - rows that link out to their own sub-sites and have no
+    generated page here. A mark is only ever drawn on a product page, so
+    demanding one for a row that has no page put two entries on the
+    still-needed list that could never be satisfied by anything.
+    """
     import buildsite
-    return [(slug, name) for slug, name, *_rest in buildsite.CATALOGUE]
+    return [(slug, name) for slug, name, *_rest in buildsite.CATALOGUE
+            if slug in buildsite.PAGES]
 
 
 # One mark, several products. epistemend.png is the authorecon family's

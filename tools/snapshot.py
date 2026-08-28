@@ -177,14 +177,46 @@ def fetch_json(url, headers=None, tries=3):
 
 
 # ── COLLECTORS ───────────────────────────────────────────────
+def probe(url, timeout=20):
+    """Is anything answering at this address?
+
+    A response is a response. This used to call any error 'down', so
+    when Cloudflare's bot protection returned 403 to the GitHub runner's
+    datacenter IP, the status page told the public that modulign.org was
+    down while it was serving everyone else normally. Reporting your own
+    working site as down is worse than reporting nothing.
+
+    So: a status under 500 means something is listening and answering,
+    and the site is up even if it refused this particular caller. 5xx is
+    down, because the server is there and broken. No response at all -
+    DNS, TLS, connection, timeout - is down.
+    """
+    req = urllib.request.Request(
+        url, headers={"User-Agent": UA, "Accept": "text/html"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return True, r.getcode(), None
+    except urllib.error.HTTPError as e:
+        # The server answered. Whether we liked the answer is a
+        # different question from whether the site is up.
+        return (e.code < 500), e.code, "HTTP %d" % e.code
+    except Exception as e:
+        return False, None, type(e).__name__
+
+
 def collect_uptime():
     out = []
     for name, url in PROPERTIES:
         t0 = time.time()
-        body, err = fetch(url, headers={"Accept": "text/html"}, tries=2, timeout=20)
+        up, code, err = probe(url)
+        if not up and code is None:
+            # One retry, and only for a genuine non-answer. A 403 is a
+            # settled answer and retrying it just doubles the delay.
+            time.sleep(1.5)
+            up, code, err = probe(url)
         ms = int((time.time() - t0) * 1000)
-        out.append({"name": name, "url": url, "up": err is None,
-                    "ms": ms, "error": err})
+        out.append({"name": name, "url": url, "up": up,
+                    "code": code, "ms": ms, "error": err})
     return out
 
 
@@ -519,6 +551,31 @@ def collect_cloudflare(days=7):
 
 
 # ── TOTALS ───────────────────────────────────────────────────
+def history_row(date, s, backfilled):
+    """One point on the series.
+
+    The shape lives here rather than being written out twice. It was
+    written twice, and the two copies were not the same length - which
+    is how the series could end a day short of the snapshot carrying it.
+    """
+    return {
+        "date": date,
+        "visitors_7d": s.get("visitors_7d"),
+        "page_views_7d": s.get("page_views_7d"),
+        "package_weekly": s.get("package_weekly"),
+        "zenodo_views": s.get("zenodo_views"),
+        "zenodo_downloads": s.get("zenodo_downloads"),
+        "github_stars": s.get("github_stars"),
+        "properties_up": s.get("properties_up"),
+        "properties_total": s.get("properties_total"),
+        # what a reconstructed day has instead: a daily install count
+        # rather than a rolling week, and the releases that shipped
+        "package_daily": s.get("package_daily"),
+        "releases_published": s.get("releases_published"),
+        "backfilled": bool(backfilled),
+    }
+
+
 def collect_history(today):
     """The dated files in status/data already are a time series; nothing
     had ever read them back. A number on its own says what today is. The
@@ -536,22 +593,8 @@ def collect_history(today):
         except (ValueError, OSError):
             continue
         s = d.get("summary") or {}
-        series.append({
-            "date": d.get("date") or day,
-            "visitors_7d": s.get("visitors_7d"),
-            "page_views_7d": s.get("page_views_7d"),
-            "package_weekly": s.get("package_weekly"),
-            "zenodo_views": s.get("zenodo_views"),
-            "zenodo_downloads": s.get("zenodo_downloads"),
-            "github_stars": s.get("github_stars"),
-            "properties_up": s.get("properties_up"),
-            "properties_total": s.get("properties_total"),
-            # what a reconstructed day has instead: a daily install count
-            # rather than a rolling week, and the releases that shipped
-            "package_daily": s.get("package_daily"),
-            "releases_published": s.get("releases_published"),
-            "backfilled": bool(d.get("backfilled")),
-        })
+        series.append(history_row(d.get("date") or day, s,
+                                  d.get("backfilled")))
     return series
 
 
@@ -848,6 +891,31 @@ def main():
     weekly = "--weekly" in sys.argv
     os.makedirs(DATA_DIR, exist_ok=True)
 
+    # Re-render the page from the snapshot already on disk, collecting
+    # nothing. Needed the first time a recorded snapshot had to be
+    # repaired: without it the only way to redraw the page was to run a
+    # fresh collection, which overwrites the day's data file and asks
+    # every live API for numbers nobody was asking about.
+    if "--render-only" in sys.argv:
+        path = os.path.join(STATUS_DIR, "latest.json")
+        if not os.path.exists(path):
+            print("snapshot: no status/latest.json to render")
+            return 2
+        with open(path, encoding="utf-8") as f:
+            snap = json.load(f)
+        pages = render(snap, None)
+        with open(os.path.join(STATUS_DIR, "index.html"), "w",
+                  encoding="utf-8") as f:
+            f.write(pages["public"])
+        detail_dir = os.path.join(STATUS_DIR, "detail")
+        os.makedirs(detail_dir, exist_ok=True)
+        with open(os.path.join(detail_dir, "index.html"), "w",
+                  encoding="utf-8") as f:
+            f.write(pages["detail"])
+        print("snapshot: re-rendered the status pages from %s "
+              "(collected nothing)" % snap.get("date"))
+        return 0
+
     today = datetime.datetime.now(datetime.timezone.utc).date()
     snap = {
         "date": today.isoformat(),
@@ -863,9 +931,16 @@ def main():
     print("collecting zenodo...");     snap["zenodo"]     = collect_zenodo()
     print("collecting cloudflare..."); snap["cloudflare"] = collect_cloudflare()
     snap["summary"] = summarise(snap)
-    # written last, and from the files on disk, so today's own row is
-    # appended by the write below rather than guessed at here
+    # History comes off the dated files on disk, and today's file has not
+    # been written yet at this point - so the series ended one day short
+    # of the snapshot carrying it. The page then showed two different
+    # numbers for the same metric: the summary read today, the trend read
+    # yesterday and called it the latest. Today's row is appended here,
+    # from the summary that was just computed.
     snap["history"] = collect_history(today)
+    todays = history_row(today.isoformat(), snap["summary"], backfilled=False)
+    snap["history"] = ([h for h in snap["history"]
+                        if h.get("date") != todays["date"]] + [todays])
 
     prev = load_prev(today, 7 if weekly else 1)
 
