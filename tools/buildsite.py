@@ -790,6 +790,36 @@ via <code>@nut-tree-fork/nut-js</code>.</p>
 }
 
 
+# ── the counts in the prose are counted ──────────────────────
+# The homepage said "Twenty-two products are live" when there were
+# twenty-six. Nothing was broken and every gate passed, because no gate
+# had any opinion about a number spelled out in a sentence. It is the
+# only thing on the page a client can catch being wrong without knowing
+# anything about the work, which makes it the most expensive kind of
+# stale there is.
+WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven",
+         "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
+         "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
+TENS = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
+        "Eighty", "Ninety"]
+
+
+def count_word(n):
+    """Twenty-six, not 26. The prose is written out and stays written out."""
+    if n < 20:
+        return WORDS[n]
+    if n < 100:
+        tens, ones = divmod(n, 10)
+        return TENS[tens] + ("-" + WORDS[ones].lower() if ones else "")
+    return str(n)
+
+
+def counted(text):
+    """Fill the tokens no gate could previously check."""
+    return (text.replace("%%PRODUCTS%%", count_word(len(CATALOGUE)))
+                .replace("%%SHELVES%%", count_word(len(CATEGORIES)).lower()))
+
+
 ABOUT_DOC = """
 <div class="doc"><h1>About F-Keys</h1>
 <p class="sub">Independent products built by Vincent Gonzalez.</p>
@@ -800,7 +830,7 @@ ABOUT_DOC = """
 <tr><th>Contact</th><td>hello@f-keys.com</td></tr>
 </table>
 <h2>What this is</h2>
-<p>F-Keys is Vince Gonzalez, working alone. Twenty-two products are live, from
+<p>F-Keys is Vince Gonzalez, working alone. %%PRODUCTS%% products are live, from
 browser games to formal proof tooling, and each is built end to end by the same
 person: architecture, both ends, database, deployment, documentation.</p>
 <h2>The recurring interest</h2>
@@ -833,7 +863,7 @@ HOME_DOC = """
 <h1>F-Keys</h1>
 <p class="sub">Hardware. Software. Ideas brought to life.</p>
 <p>F-Keys is the working catalogue of <b>Vincent Gonzalez</b>, an independent
-builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-two
+builder trading as F-Keys Creative LLC in Punta Gorda, Florida. %%PRODUCTS%%
 products are live, and each one was designed, written, deployed and documented
 by the same person &mdash; architecture, both ends, database, release notes. The
 table below is the whole company.</p>
@@ -844,7 +874,7 @@ and survives because it was in a zip file in a folder called &ldquo;zip to
 sort&rdquo;.</p>
 
 <h2>What is on the shelves</h2>
-<p>Six of them, sorted the way a file manager would sort them.
+<p>%%SHELVES%% of them, sorted the way a file manager would sort them.
 <a href="/apps.html">Apps</a> are things you run: a keyboard that plays notes in
 any program, an 8-bit composer, colour-vision tests, live ballots for a room.
 <a href="/games.html">Games</a> holds a warehouse-loading simulator, two Discord
@@ -1708,7 +1738,7 @@ def main():
     written = []
 
     # index: everything, grouped by category heading rows
-    body = [HOME_DOC, details_table(CATALOGUE)]
+    body = [counted(HOME_DOC), details_table(CATALOGUE)]
     written.append(("index.html", shell(
         "F-Keys — Hardware. Software. Ideas Brought to Life.",
         "F-Keys", "\n".join(body), f"{len(CATALOGUE)} object(s)",
@@ -1728,9 +1758,10 @@ def main():
 
 
     written.append(("about.html", shell(
-        "About \u2014 F-Keys", "F-Keys\\About", ABOUT_DOC, "1 item",
-        description="F-Keys is Vince Gonzalez, working alone. Twenty-two live "
-                    "products and more than thirty deposited works.",
+        "About \u2014 F-Keys", "F-Keys\\About", counted(ABOUT_DOC), "1 item",
+        description=counted(
+            "F-Keys is Vince Gonzalez, working alone. %%PRODUCTS%% live "
+            "products and more than thirty deposited works."),
         canonical="https://f-keys.com/about.html", ld=organization())))
 
     written.append(("contact.html", shell(

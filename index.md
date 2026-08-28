@@ -7,7 +7,7 @@ Canonical: https://f-keys.com
 Hardware. Software. Ideas brought to life.
 
 F-Keys is the working catalogue of **Vincent Gonzalez**, an independent
-builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-two
+builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-six
 products are live, and each one was designed, written, deployed and documented
 by the same person — architecture, both ends, database, release notes. The
 table below is the whole company.
@@ -20,7 +20,7 @@ sort”.
 
 ## What is on the shelves
 
-Six of them, sorted the way a file manager would sort them.
+six of them, sorted the way a file manager would sort them.
 [Apps](https://f-keys.com/apps.html) are things you run: a keyboard that plays notes in
 any program, an 8-bit composer, colour-vision tests, live ballots for a room.
 [Games](https://f-keys.com/games.html) holds a warehouse-loading simulator, two Discord

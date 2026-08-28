@@ -489,6 +489,52 @@ def published_zones():
                                   "traffic table".format(cell.strip()))
 
 
+def counts_in_prose():
+    """A number written out in a sentence still has to be the number.
+
+    The homepage said "Twenty-two products are live" while the catalogue
+    held twenty-six, and every gate passed for weeks, because none of
+    them had any opinion about prose. It is the one error a visitor can
+    catch without knowing anything about the work - which makes it the
+    most expensive stale thing on the site and the cheapest to check.
+
+    No token may survive either. An unfilled %%PRODUCTS%% shipping to a
+    reader is worse than a wrong number, because it says the page is
+    generated and the generator is broken.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import buildsite
+    want = buildsite.count_word(len(buildsite.CATALOGUE))
+    shelves = buildsite.count_word(len(buildsite.CATEGORIES)).lower()
+
+    for path in html_files():
+        source = read(path)
+        for token in ("%%PRODUCTS%%", "%%SHELVES%%"):
+            if token in source:
+                fail("counts", "{} still carries an unfilled {}"
+                     .format(rel(path), token))
+
+    for name, phrase in (("index.html", " products are live"),
+                         ("about.html", " products are live")):
+        path = os.path.join(ROOT, name)
+        if not os.path.exists(path):
+            continue
+        for said in re.findall(r"([A-Z][a-z]+(?:-[a-z]+)?)" + phrase,
+                               read(path)):
+            if said != want:
+                fail("counts", "{} says {}{} - the catalogue holds {} ({})"
+                     .format(name, said, phrase, len(buildsite.CATALOGUE),
+                             want))
+
+    home = os.path.join(ROOT, "index.html")
+    if os.path.exists(home):
+        for said in re.findall(r"([a-z]+(?:-[a-z]+)?) of them, sorted",
+                               read(home)):
+            if said != shelves:
+                fail("counts", "index.html says {} shelves, there are {} ({})"
+                     .format(said, len(buildsite.CATEGORIES), shelves))
+
+
 def security_txt():
     """security.txt has to be present, reachable, and NOT expired.
 
@@ -653,6 +699,7 @@ def main():
     contact_is_reachable()
     internal_links()
     security_txt()
+    counts_in_prose()
     published_zones()
     openapi()
     recovery()
