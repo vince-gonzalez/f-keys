@@ -8,7 +8,8 @@ Hardware. Software. Ideas brought to life.
 
 F-Keys is the working catalogue of **Vincent Gonzalez**, an independent
 builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-six
-products are live, and each one was designed, written, deployed and documented
+products are on the shelves, twenty-two of them live today, and each one was
+designed, written, deployed and documented
 by the same person — architecture, both ends, database, release notes. The
 table below is the whole company.
 

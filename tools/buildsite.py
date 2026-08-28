@@ -815,9 +815,16 @@ def count_word(n):
     return str(n)
 
 
+def live_count():
+    """Live means live: an Alpha or Needs-setup badge is not a live
+    product, and the prose must not count it as one."""
+    return sum(1 for c in CATALOGUE if c[4] not in (ALPHA, SETUP))
+
+
 def counted(text):
     """Fill the tokens no gate could previously check."""
     return (text.replace("%%PRODUCTS%%", count_word(len(CATALOGUE)))
+                .replace("%%LIVE%%", count_word(live_count()).lower())
                 .replace("%%SHELVES%%", count_word(len(CATEGORIES)).lower()))
 
 
@@ -831,7 +838,9 @@ ABOUT_DOC = """
 <tr><th>Contact</th><td>hello@f-keys.com</td></tr>
 </table>
 <h2>What this is</h2>
-<p>F-Keys is Vince Gonzalez, working alone. %%PRODUCTS%% products are live, from
+<p>F-Keys is Vince Gonzalez, working alone. %%PRODUCTS%% products are on the
+shelves &mdash; %%LIVE%% of them live today, the rest labeled alpha or
+needs-setup, because a badge is cheaper than a broken promise &mdash; from
 browser games to formal proof tooling, and each is built end to end by the same
 person: architecture, both ends, database, deployment, documentation.</p>
 <h2>The recurring interest</h2>
@@ -868,7 +877,8 @@ HOME_DOC = """
 <p class="sub">Hardware. Software. Ideas brought to life.</p>
 <p>F-Keys is the working catalogue of <b>Vincent Gonzalez</b>, an independent
 builder trading as F-Keys Creative LLC in Punta Gorda, Florida. %%PRODUCTS%%
-products are live, and each one was designed, written, deployed and documented
+products are on the shelves, %%LIVE%% of them live today, and each one was
+designed, written, deployed and documented
 by the same person &mdash; architecture, both ends, database, release notes. The
 table below is the whole company.</p>
 <p>The name came from a product. <a href="/remapwrap/">RemapWrap</a> was called
@@ -1814,7 +1824,7 @@ def main():
     written.append(("about.html", shell(
         "About \u2014 F-Keys", "F-Keys\\About", counted(ABOUT_DOC), "1 item",
         description=counted(
-            "F-Keys is Vince Gonzalez, working alone. %%PRODUCTS%% live "
+            "F-Keys is Vince Gonzalez, working alone, with %%LIVE%% live "
             "products and more than thirty deposited works."),
         canonical="https://f-keys.com/about.html", ld=organization())))
 
