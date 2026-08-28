@@ -141,6 +141,13 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 /* The product mark. Floated so the heading keeps its place when a
    product has no mark and nothing is emitted at all. */
 .doc .mark{float:right;margin:0 0 8px 12px;image-rendering:auto}
+/* A screenshot, framed the way this shell frames everything else:
+   an inset border, because a picture of a window sitting flat on the
+   page reads as a stray image rather than a thing in a frame. */
+.doc .shot{margin:14px 0 18px;padding:0}
+.doc .shot img{display:block;width:100%;height:auto;
+  border:2px inset #dfdfdf;background:#fff}
+.doc .shot figcaption{margin-top:5px;color:var(--dim);font-size:13px}
 @media (max-width:520px){.doc .mark{width:48px;height:48px}}
 .doc .sub{color:var(--dim);margin-bottom:14px}
 .doc h2{font-size:13px;margin:18px 0 6px;padding-bottom:3px;

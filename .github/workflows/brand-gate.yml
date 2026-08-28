@@ -169,6 +169,13 @@ jobs:
 
       # A mark dropped in without its derivatives rebuilt means the
       # product page and the share card disagree with the source file.
+      # Screenshots are captured on a machine with a browser, never
+      # here: the runner has no Chrome and these are live public sites,
+      # so a capture step would fail for somebody else's DNS. This only
+      # asserts that what was recorded is still on disk.
+      - name: Every recorded screenshot is still here
+        run: python tools/shots.py --verify
+
       - name: Product marks match their sources
         run: python tools/productart.py --verify
 

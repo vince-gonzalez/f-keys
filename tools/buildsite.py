@@ -24,6 +24,7 @@ Run:  python tools/buildsite.py
 """
 
 import html
+import io
 import json
 import os
 import sys
@@ -1274,6 +1275,37 @@ def product_mark(slug):
             return "/assets/products/" + name
     return None
 
+
+def _shot_dates():
+    """When each screenshot was taken, from the capture manifest."""
+    path = os.path.join(ROOT, "assets", "products", "shots.json")
+    if not os.path.isfile(path):
+        return {}
+    try:
+        with io.open(path, encoding="utf-8") as f:
+            return dict((k, v.get("captured", ""))
+                        for k, v in json.load(f).items())
+    except (ValueError, AttributeError):
+        return {}
+
+
+SHOT_DATES = _shot_dates()
+
+
+def product_shot(slug):
+    """A picture of the product running, if one has been captured.
+
+    A mark says a product has an identity; a screenshot says somebody
+    can go and use it. Twenty-six pages of prose describing software is
+    the format least able to prove the software exists, and prose is
+    what a client has the least reason to believe.
+    """
+    if slug:
+        name = slug + "-shot-800.png"
+        if os.path.isfile(os.path.join(ROOT, "assets", "products", name)):
+            return "/assets/products/" + name
+    return None
+
 LEGAL_NAME = "F-Keys Creative LLC"
 FOUNDER = "Vincent Gonzalez"
 EMAIL = "hello@f-keys.com"
@@ -1809,10 +1841,29 @@ def main():
         mark = product_mark(slug)
         head = ('<img class="mark" src="{}" width="72" height="72" alt="" '
                 'loading="lazy" decoding="async">').format(mark) if mark else ""
+
+        # The screenshot carries a caption naming what it is a picture
+        # of and when. An undated screenshot of a live site is a claim
+        # with no expiry on it, and the reader cannot tell whether they
+        # are looking at this morning or two years ago.
+        shot = product_shot(slug)
+        figure = ""
+        if shot:
+            where = dict(page["facts"]).get("Where", "")
+            when = SHOT_DATES.get(slug, "")
+            figure = (
+                '<figure class="shot">'
+                '<img src="{}" alt="{} running in a browser." '
+                'width="800" loading="lazy" decoding="async">'
+                '<figcaption>{}{}</figcaption></figure>').format(
+                    shot, esc(page["title"]),
+                    esc(where) if where else esc(page["title"]),
+                    ", " + esc(when) if when else "")
+
         doc = ('<div class="doc">{}<h1>{}</h1><p class="sub">{}</p>'
-               '<table class="facts">{}</table>{}</div>').format(
+               '<table class="facts">{}</table>{}{}</div>').format(
                    head, esc(page["title"]), esc(page["tagline"]),
-                   facts, page["body"])
+                   facts, figure, page["body"])
         label = dict((c[0], c[1]) for c in CATEGORIES) if False else None
         catname = next((c[1] for c in CATEGORIES if c[0] == cat), "")
         written.append((os.path.join(slug, "index.html"), shell(
