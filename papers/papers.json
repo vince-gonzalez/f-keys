@@ -1,0 +1,868 @@
+{
+ "groups": [
+  {
+   "id": "axioms",
+   "title": "Axiom dependence in formal libraries",
+   "note": "What classical assumptions formal libraries actually rest on, and which constant is responsible.",
+   "entries": [
+    {
+     "slug": "eligibility-discriminates-among-theorems-not-among",
+     "url": "/papers/eligibility-discriminates-among-theorems-not-among/",
+     "title": "Eligibility Discriminates Among Theorems and Not Among the Constants They Rest On",
+     "date": "2026-08-11",
+     "kind": "Preprint",
+     "abstract": "Separating a theorem's statement dependencies from its proof dependencies bounds how much classical dependence a formal library could shed. Across Mathlib, 13.1% of theorems have a choice-free statement and a choice-dependent proof; nothing outside that band c…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/eligibility-discriminates-among-theorems-not-among/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/eligibility-discriminates-among-theorems-not-among.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21884471"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21884471"
+    },
+    {
+     "slug": "which-constant-responsible-dominator-analysis-classical",
+     "url": "/papers/which-constant-responsible-dominator-analysis-classical/",
+     "title": "Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib",
+     "date": "2026-08-11",
+     "kind": "Preprint",
+     "abstract": "61.2% of Mathlib's theorems depend on Classical.choice. Asking which constant is responsible for that dependence is a different question from asking which constants a proof touches, and the two answers differ by a factor of 58 on the first case examined: 116,7…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/which-constant-responsible-dominator-analysis-classical/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/which-constant-responsible-dominator-analysis-classical.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21883963"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21883963"
+    },
+    {
+     "slug": "why-tactic-level-rates-cannot-attribute",
+     "url": "/papers/why-tactic-level-rates-cannot-attribute/",
+     "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
+     "date": "2026-08-08",
+     "kind": "Preprint",
+     "abstract": "A proof assistant reports which axioms a theorem depends on. It does not report which step introduced them, and a proof invoking several tactics offers no way to apportion the answer. The obvious approach is statistical: score each tactic by how often its proo…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/why-tactic-level-rates-cannot-attribute/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/why-tactic-level-rates-cannot-attribute.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21853489"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21853489"
+    },
+    {
+     "slug": "where-formal-libraries-spend-their-axioms",
+     "url": "/papers/where-formal-libraries-spend-their-axioms/",
+     "title": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
+     "date": "2026-08-05",
+     "kind": "Preprint",
+     "abstract": "A proof assistant can report which axioms a theorem rests on, but only one theorem at a time, and only whether rather than why. I measure axiom use across six libraries and two proof systems - the Metamath databases set.mm (ZFC, classical first-order), iset.mm…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/where-formal-libraries-spend-their-axioms/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/where-formal-libraries-spend-their-axioms.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21769846"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21769846"
+    }
+   ]
+  },
+  {
+   "id": "geometry",
+   "title": "Certified bounds in discrete geometry",
+   "note": "Machine-checked upper and lower bounds for covering, packing and opacity problems.",
+   "entries": [
+    {
+     "slug": "certified-upper-bounds-fejes-t-th",
+     "url": "/papers/certified-upper-bounds-fejes-t-th/",
+     "title": "Certified upper bounds for Fejes Tóth's point-goalie problem at n = 4 and 5",
+     "date": "2026-08-01",
+     "kind": "Preprint",
+     "abstract": "In 1974 L&aacute;szl&oacute; Fejes T&oacute;th posed the following problem: place n points in the plane so as to minimise the largest distance from a line meeting the unit-radius disc to the nearest point. Writing r_n for the optimum, he proved r_1 = r_2 = 1 a…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/certified-upper-bounds-fejes-t-th/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/certified-upper-bounds-fejes-t-th.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21729548"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21729548"
+    },
+    {
+     "slug": "maximality-added-vector-codes-cohn-li",
+     "url": "/papers/maximality-added-vector-codes-cohn-li/",
+     "title": "Maximality of the added-vector codes in the Cohn-Li kissing constructions",
+     "date": "2026-08-01",
+     "kind": "Preprint",
+     "abstract": "Cohn and Li (arXiv:2411.04916) improved the known lower bounds for the kissing number in dimensions 17 through 21. Each of their configurations fixes a large family of vectors and then adjoins further points indexed by a binary code, here called the added-vect…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/maximality-added-vector-codes-cohn-li/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/maximality-added-vector-codes-cohn-li.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21729367"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21729367"
+    },
+    {
+     "slug": "rigorous-areas-classical-lebesgue-universal-covering",
+     "url": "/papers/rigorous-areas-classical-lebesgue-universal-covering/",
+     "title": "Rigorous areas for the classical Lebesgue universal covering ladder",
+     "date": "2026-07-31",
+     "kind": "Preprint",
+     "abstract": "Lebesgue's universal covering problem, posed in 1914, asks for the convex set of least area containing an isometric copy of every planar set of diameter 1. The known upper bounds descend through a ladder of constructions &mdash; the regular hexagon, P&aacute;l…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/rigorous-areas-classical-lebesgue-universal-covering/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/rigorous-areas-classical-lebesgue-universal-covering.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21701519"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21701519"
+    },
+    {
+     "slug": "certified-opaque-barrier-unit-disc-length",
+     "url": "/papers/certified-opaque-barrier-unit-disc-length/",
+     "title": "A certified opaque barrier for the unit disc of length 4.79984937…",
+     "date": "2026-07-30",
+     "kind": "Preprint",
+     "abstract": "An  opaque set for the unit disc is a set meeting every straight line that meets the disc; the infimum of the lengths of such sets is the beam detection constant, whose value is unknown. The best published upper bound, realised by a three-piece barrier of…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/certified-opaque-barrier-unit-disc-length/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/certified-opaque-barrier-unit-disc-length.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21568684"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21568684"
+    },
+    {
+     "slug": "machine-checked-proof-opacity-faber-mycielski",
+     "url": "/papers/machine-checked-proof-opacity-faber-mycielski/",
+     "title": "A machine-checked proof of opacity for a Faber–Mycielski barrier",
+     "date": "2026-07-30",
+     "kind": "Preprint",
+     "abstract": "An opaque set for the unit disc is a set meeting every straight line that meets the disc. I report a formal verification, in Lean 4 with mathlib, that the three-piece Faber&ndash;Mycielski barrier is opaque. The main theorem barrier_isOpaque is proved with no …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/machine-checked-proof-opacity-faber-mycielski/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/machine-checked-proof-opacity-faber-mycielski.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21701338"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21701338"
+    },
+    {
+     "slug": "added-vector-code-odd-sign-construction",
+     "url": "/papers/added-vector-code-odd-sign-construction/",
+     "title": "The added-vector code of the odd-sign construction is maximal in dimensions 20 and 21",
+     "date": "2026-07-30",
+     "kind": "Preprint",
+     "abstract": "Cohn and Li (arXiv:2411.04916) improved the known lower bounds for the kissing number in dimensions 17 through 21 by an odd-sign construction whose final ingredient is a binary code, here called the added-vector code, chosen inside a punctured extended binary …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/added-vector-code-odd-sign-construction/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/added-vector-code-odd-sign-construction.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21702301"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21702301"
+    },
+    {
+     "slug": "first-return-walks-vertex-transitive-graphs",
+     "url": "/papers/first-return-walks-vertex-transitive-graphs/",
+     "title": "First-Return Walks on Vertex-Transitive Graphs",
+     "date": "2026-07-27",
+     "kind": "Preprint",
+     "abstract": "For a connected vertex-transitive graph on N vertices with adjacency spectrum {(lambda_i, m_i)}, a closed walk based at a vertex is indecomposable (a \"first return\") if it revisits its base only on the final step. This note records that the first-return counts…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/first-return-walks-vertex-transitive-graphs/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/first-return-walks-vertex-transitive-graphs.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21629398"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21629398"
+    }
+   ]
+  },
+  {
+   "id": "epistem",
+   "title": "Epistemology",
+   "note": "Formal accounts of knowledge, attestation and testimony.",
+   "entries": [
+    {
+     "slug": "competitive-context-jailbreak-accelerant-inter-model",
+     "url": "/papers/competitive-context-jailbreak-accelerant-inter-model/",
+     "title": "Competitive Context as a Jailbreak Accelerant: Inter-Model Rivalry as a Novel Adversarial Vector in Large Language Model Safety",
+     "date": "2026-05-03",
+     "kind": "Journal article",
+     "abstract": "This paper identifies and formalizes a novel adversarial vector in large language model (LLM) safety: the use of inter-model competitive framing to accelerate and deepen safety failures across frontier AI systems. We term this the Competitive Context Exploit (…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/competitive-context-jailbreak-accelerant-inter-model/"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.20013336"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.20013336"
+    },
+    {
+     "slug": "record-formal-epistemology-journalistic-attestation",
+     "url": "/papers/record-formal-epistemology-journalistic-attestation/",
+     "title": "On The Record: Toward a Formal Epistemology of Journalistic Attestation",
+     "date": "2026-04-18",
+     "kind": "Journal article",
+     "abstract": "The phrase \"on the record\" is journalism's foundational epistemic claim. It means, at minimum, that a statement or observation is attributable, verifiable, and accountable. Yet no journalism standard specifies what verifiable means formally &mdash; by what pro…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/record-formal-epistemology-journalistic-attestation/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/record-formal-epistemology-journalistic-attestation.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19644070"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19644070"
+    },
+    {
+     "slug": "structural-dissolution-gettier-problem-address-theoretic",
+     "url": "/papers/structural-dissolution-gettier-problem-address-theoretic/",
+     "title": "Structural Dissolution of the Gettier Problem through Address-Theoretic Epistemology",
+     "date": "2026-04-06",
+     "kind": "Preprint",
+     "abstract": "Abstract Edmund Gettier's 1963 paper in Analysis demonstrated that justified true belief is insufficient for knowledge: justification and truth can coincide accidentally. The impasse has a structural source: all parties assume justification is specifiable inde…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/structural-dissolution-gettier-problem-address-theoretic/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/structural-dissolution-gettier-problem-address-theoretic.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19432926"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19432926"
+    },
+    {
+     "slug": "epistemology-observation-formal-certification-framework-human",
+     "url": "/papers/epistemology-observation-formal-certification-framework-human/",
+     "title": "The Epistemology of Observation: A Formal Certification Framework for Human and Automated Classifiers in DAG-OR",
+     "date": "2026-04-24",
+     "kind": "Journal article",
+     "abstract": "Every classification system presupposes an observer. The Modulign Standard (DAG-OR) makes this presupposition explicit through the &sect;OBS and &sect;AUT segments of the dimensional address, which encode not merely who observed but at what level of certified …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/epistemology-observation-formal-certification-framework-human/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/epistemology-observation-formal-certification-framework-human.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19726226"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19726226"
+    }
+   ]
+  },
+  {
+   "id": "standard",
+   "title": "The Modulign standard",
+   "note": "The dimensional address grammar itself: architecture, formal logic and certification.",
+   "entries": [
+    {
+     "slug": "federated-classification-infrastructure-registry-governance-node",
+     "url": "/papers/federated-classification-infrastructure-registry-governance-node/",
+     "title": "Federated Classification Infrastructure: Registry Governance, Node Architecture, and Decentralized Stewardship for DAG-OR",
+     "date": "2026-04-24",
+     "kind": "Journal article",
+     "abstract": "The Modulign Observation Registry currently operates as a single PostgreSQL instance maintained by a sole author. This architecture is adequate for a research-stage system but is incompatible with the system's own commitments: the append-only guarantee, the Pe…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/federated-classification-infrastructure-registry-governance-node/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/federated-classification-infrastructure-registry-governance-node.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19726393"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19726393"
+    },
+    {
+     "slug": "modulign-architecture-implementation-applications-dimensional-address",
+     "url": "/papers/modulign-architecture-implementation-applications-dimensional-address/",
+     "title": "Modulign: Architecture, Implementation, and Applications of a Dimensional Address Grammar for Observable Reality",
+     "date": "2026-04-24",
+     "kind": "Journal article",
+     "abstract": "This paper presents Modulign (DAG-OR) as a unified research program comprising a formal address grammar for observable phenomena, three interoperable registries, a reproducible classification protocol, and a growing empirical corpus now exceeding 3.79 million …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/modulign-architecture-implementation-applications-dimensional-address/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/modulign-architecture-implementation-applications-dimensional-address.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19726994"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19726994"
+    },
+    {
+     "slug": "dimensional-address-rigid-designation-dag-or",
+     "url": "/papers/dimensional-address-rigid-designation-dag-or/",
+     "title": "Dimensional Address as Rigid Designation: How DAG-OR Grounds Reference Without Metaphysical Posit",
+     "date": "2026-04-13",
+     "kind": "Preprint",
+     "abstract": "The problem of reference &mdash; what makes a name, description, or term reliably track its object &mdash; has generated three dominant frameworks in the analytic tradition: Frege's sense/reference distinction, Russell's theory of definite descriptions, and Kr…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/dimensional-address-rigid-designation-dag-or/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/dimensional-address-rigid-designation-dag-or.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19557382"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19557382"
+    },
+    {
+     "slug": "modulign-standard-automated-classifier-certification-framework",
+     "url": "/papers/modulign-standard-automated-classifier-certification-framework/",
+     "title": "Modulign Standard:  Automated Classifier Certification Framework",
+     "date": "2026-04-13",
+     "kind": "Technical note",
+     "abstract": "The Modulign Standard v3.0 permits automated systems (%AUT) to produce classifications, including ^EVID-grade classifications, provided domain competence requirements are met.  Version 3.0 does not specify how an automated system achieves or demonstrates …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/modulign-standard-automated-classifier-certification-framework/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/modulign-standard-automated-classifier-certification-framework.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19559602"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19559602"
+    },
+    {
+     "slug": "modulign-standard-dimensional-address-grammar-observable",
+     "url": "/papers/modulign-standard-dimensional-address-grammar-observable/",
+     "title": "MODULIGN Standard, A Dimensional Address Grammar for Observable Reality",
+     "date": "2026-03-31",
+     "kind": "Book",
+     "abstract": "Modulign was conceived in 2026 by Vincent Gonzalez during the development of a live-stream atlas of Earth built as a single static HTML file. The problem was simple on its surface: how do you organize thousands of live video feeds from across the planet so tha…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/modulign-standard-dimensional-address-grammar-observable/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/modulign-standard-dimensional-address-grammar-observable.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19348704"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19348704"
+    },
+    {
+     "slug": "formal-logic-modulign",
+     "url": "/papers/formal-logic-modulign/",
+     "title": "The Formal Logic of Modulign",
+     "date": "2026-03-31",
+     "kind": "Technical note",
+     "abstract": "This document does not explain Modulign. It proves it. Every claim the Standard makes  about its own properties &mdash; validity, uniqueness, intersubjectivity, non-accidentality,  chain-of-custody integrity, and scale-sensitivity &mdash; is here ren…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/formal-logic-modulign/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/formal-logic-modulign.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19350848"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19350848"
+    }
+   ]
+  },
+  {
+   "id": "evidence",
+   "title": "Modulign in evidence and law",
+   "note": "Applying the standard to admissibility, chain of custody and regulatory classification.",
+   "entries": [
+    {
+     "slug": "human-attestation-protocol-confrontation-clause-compliance",
+     "url": "/papers/human-attestation-protocol-confrontation-clause-compliance/",
+     "title": "The Human Attestation Protocol: Confrontation Clause Compliance for Automated Classifications in DAG-OR",
+     "date": "2026-04-24",
+     "kind": "Journal article",
+     "abstract": "When an automated Modulign classification is offered as evidence in a criminal proceeding, the Confrontation Clause of the Sixth Amendment requires that the defendant be able to confront the witness against them. An algorithm cannot be cross-examined. This pap…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/human-attestation-protocol-confrontation-clause-compliance/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/human-attestation-protocol-confrontation-clause-compliance.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19726407"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19726407"
+    },
+    {
+     "slug": "ai-generated-evidence-admissibility-formal-classification",
+     "url": "/papers/ai-generated-evidence-admissibility-formal-classification/",
+     "title": "AI-Generated Evidence Admissibility:  A Formal Classification Framework for Synthetic Content",
+     "date": "2026-04-18",
+     "kind": "Journal article",
+     "abstract": "Courts in the United States and internationally are now regularly confronted with evidence alleged to be AI-generated, AI-enhanced, or of uncertain synthetic origin &mdash; and they lack a formal framework adequate to the problem. Existing evidentiary doctrine…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/ai-generated-evidence-admissibility-formal-classification/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/ai-generated-evidence-admissibility-formal-classification.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19642437"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19642437"
+    },
+    {
+     "slug": "chain-custody-formalisation-digital-forensics-modulign",
+     "url": "/papers/chain-custody-formalisation-digital-forensics-modulign/",
+     "title": "Chain of Custody Formalisation in Digital Forensics: The Modulign ^EVID Architecture as a Registry-Based Evidentiary Framework",
+     "date": "2026-04-18",
+     "kind": "Journal article",
+     "abstract": "Digital chain of custody remains a frequently litigated and consequential vulnerability in forensic evidence proceedings. Existing frameworks &mdash; NIST SP 800-86, ISO/IEC 27037, the ACPO Good Practice Guide &mdash; establish procedural requirements for evid…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/chain-custody-formalisation-digital-forensics-modulign/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/chain-custody-formalisation-digital-forensics-modulign.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19642385"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19642385"
+    },
+    {
+     "slug": "classification-deficit-article-50-eu-ai",
+     "url": "/papers/classification-deficit-article-50-eu-ai/",
+     "title": "THE CLASSIFICATION DEFICIT Article 50 of the EU AI Act, the Epistemic Gap It Cannot Close, and the Formal Standard That Does",
+     "date": "2026-04-14",
+     "kind": "Preprint",
+     "abstract": "The evidentiary problem of AI-generated content is not a disclosure problem. It is an epistemological one. Every major governance framework &mdash; the EU AI Act's Article 50, proposed FRE Rule 707, the Take It Down Act, platform watermarking policies &mdash; …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/classification-deficit-article-50-eu-ai/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/classification-deficit-article-50-eu-ai.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19578570"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19578570"
+    },
+    {
+     "slug": "modulign-evidence",
+     "url": "/papers/modulign-evidence/",
+     "title": "Modulign As Evidence",
+     "date": "2026-03-31",
+     "kind": "Report",
+     "abstract": "This treatise applies the Modulign Standard v3.0 &mdash; a Dimensional Address Grammar for Observable Reality (DAG-OR) &mdash; as a formal evidentiary and legal codex framework. It establishes four foundational propositions. First, that Modulign-classified obs…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/modulign-evidence/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/modulign-evidence.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19351250"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19351250"
+    },
+    {
+     "slug": "synthetic-content-epistemic-category",
+     "url": "/papers/synthetic-content-epistemic-category/",
+     "title": "Synthetic Content As Epistemic Category",
+     "date": "2026-03-31",
+     "kind": "Working paper",
+     "abstract": "This white paper is a companion document to \"Structural Dissolution of the  Gettier Problem through Address-Theoretic Epistemology\" (Gonzalez, under  review at Analysis). That paper establishes the formal epistemological  foundation. This paper …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/synthetic-content-epistemic-category/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/synthetic-content-epistemic-category.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19351055"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19351055"
+    }
+   ]
+  },
+  {
+   "id": "protocol",
+   "title": "Modulign validation and protocol",
+   "note": "Measuring and correcting the standard in practice.",
+   "entries": [
+    {
+     "slug": "modulign-correction-protocol-formal-specification-append",
+     "url": "/papers/modulign-correction-protocol-formal-specification-append/",
+     "title": "The Modulign Correction Protocol: Formal Specification for Append-Only Error Resolution in DAG-OR",
+     "date": "2026-04-24",
+     "kind": "Journal article",
+     "abstract": "The Modulign Observation Registry is append-only: no entry is ever modified or deleted after commit. This invariant is foundational to the system's chain-of-custody argument, its legal applications, and its epistemic integrity. But classification errors occur.…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/modulign-correction-protocol-formal-specification-append/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/modulign-correction-protocol-formal-specification-append.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19726401"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19726401"
+    },
+    {
+     "slug": "architecture-epistemic-enforcement-empirical-implementation-universal",
+     "url": "/papers/architecture-epistemic-enforcement-empirical-implementation-universal/",
+     "title": "Architecture, Epistemic Enforcement, and Empirical Implementation of a Universal Classification System for Sensor-Heterogeneous Environments",
+     "date": "2026-04-18",
+     "kind": "Journal article",
+     "abstract": "I present the Modulign Standard v3.0, a Dimensional Address Grammar for Observable Reality (DAG-OR): a formal information architecture that assigns a canonical, permanent, cryptographically-anchored address to any observable phenomenon across any physical scal…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/architecture-epistemic-enforcement-empirical-implementation-universal/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/architecture-epistemic-enforcement-empirical-implementation-universal.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19642557"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19642557"
+    },
+    {
+     "slug": "inter-rater-reliability-automated-modulign-standard",
+     "url": "/papers/inter-rater-reliability-automated-modulign-standard/",
+     "title": "Inter-Rater Reliability of Automated Modulign Standard Classifiers",
+     "date": "2026-04-18",
+     "kind": "Data paper",
+     "abstract": "This paper reports the first empirical inter-rater reliability study conducted on automated classifiers implementing the Modulign Standard v3.0 &mdash; a Dimensional Address Grammar for Observable Reality (DAG-OR). Two independently designed heuristic classifi…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/inter-rater-reliability-automated-modulign-standard/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/inter-rater-reliability-automated-modulign-standard.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19643322"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19643322"
+    }
+   ]
+  },
+  {
+   "id": "colour",
+   "title": "Colour vision and accessibility",
+   "note": "Pseudoisochromatic plate design, generation and recovery.",
+   "entries": [
+    {
+     "slug": "pseudoisochromatic-plate-design-type-recoverable-from",
+     "url": "/papers/pseudoisochromatic-plate-design-type-recoverable-from/",
+     "title": "Pseudoisochromatic plate design type is recoverable from delivered colour and dot geometry alone",
+     "date": "2026-08-10",
+     "kind": "Preprint",
+     "abstract": "Pseudoisochromatic plates fall into design types characterised by Hardy, Rand and Rittler: demonstration, transformation, vanishing and hidden digit. The type governs what a plate measures and is ordinarily read from the test's own documentation. This note ask…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/pseudoisochromatic-plate-design-type-recoverable-from/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/pseudoisochromatic-plate-design-type-recoverable-from.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21876790"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21876790"
+    },
+    {
+     "slug": "procedural-method-generating-pseudoisochromatic-plates-browser",
+     "url": "/papers/procedural-method-generating-pseudoisochromatic-plates-browser/",
+     "title": "A Procedural Method for Generating Pseudoisochromatic Plates in the Browser, and the Calibration Limits of Screen-Based Colour-Vision Screening",
+     "date": "2026-07-11",
+     "kind": "Preprint",
+     "abstract": "Background. Pseudoisochromatic plate tests, exemplified by the Ishihara plates, remain the most widely used screen for red-green color vision deficiency. Online reproductions are now abundant, but most reuse a small set of fixed, scanned plate images, and few …",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/procedural-method-generating-pseudoisochromatic-plates-browser/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/procedural-method-generating-pseudoisochromatic-plates-browser.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21310577"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21310577"
+    }
+   ]
+  },
+  {
+   "id": "food",
+   "title": "Food history and diaspora",
+   "note": "Naming and transmission in the printed record.",
+   "entries": [
+    {
+     "slug": "potica-america-naming-transmission-printed-record",
+     "url": "/papers/potica-america-naming-transmission-printed-record/",
+     "title": "Potica in America: Naming, Transmission, and the Printed Record of a Diaspora Pastry",
+     "date": "2026-07-11",
+     "kind": "Preprint",
+     "abstract": "This paper documents the survival of the South Slavic rolled pastry potica/povitica across more than a century in the United States, read through its printed record: community cookbooks, fraternal publications, commercial bakery archives, and mediated recipes.…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/potica-america-naming-transmission-printed-record/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/potica-america-naming-transmission-printed-record.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21302923"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21302923"
+    }
+   ]
+  },
+  {
+   "id": "docs",
+   "title": "Project documents",
+   "note": "Amendments, commitments and continuously updated measurements. Not papers.",
+   "entries": [
+    {
+     "slug": "version-3-1-amendment-document",
+     "url": "/papers/version-3-1-amendment-document/",
+     "title": "Version 3.1 Amendment Document",
+     "date": "2026-04-18",
+     "kind": "Technical note",
+     "abstract": "This document specifies all amendments to the Modulign Standard that constitute version 3.1. It is a formal amendment document &mdash; not a replacement of the v3.0 specification. All v3.0 provisions not explicitly amended remain in force. The v3.1 complete sp…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/version-3-1-amendment-document/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/version-3-1-amendment-document.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19644043"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19644043"
+    },
+    {
+     "slug": "public-commitment-document",
+     "url": "/papers/public-commitment-document/",
+     "title": "Public Commitment Document",
+     "date": "2026-04-13",
+     "kind": "Working paper",
+     "abstract": "Modulign is a classification standard — a grammar for assigning addresses to observable phenomena. It does not operate cameras. It does not collect surveillance footage. It does not monitor individuals. It does not build profiles of people's movements, behavio…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "/papers/public-commitment-document/"
+      },
+      {
+       "label": "PDF",
+       "href": "/papers/pdf/public-commitment-document.pdf"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.19559689"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.19559689"
+    }
+   ]
+  }
+ ]
+}
