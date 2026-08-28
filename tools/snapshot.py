@@ -160,6 +160,22 @@ def fetch(url, headers=None, tries=3, timeout=25):
             last = f"HTTP {e.code}"
             if e.code in (400, 401, 403, 404):
                 break               # not transient, stop retrying
+            if e.code == 429:
+                # Rate limited. On 2026-08-26 all twelve PyPI packages
+                # came back 429 in the same run and the day recorded 70
+                # installs - the four npm packages, and nothing else.
+                # That is not a quiet gap: it looks exactly like a real
+                # collapse in installs, and it sat on the trend as one.
+                # The 1.5s backoff below is far too short for pypistats,
+                # so honour Retry-After when it is sent and wait a great
+                # deal longer when it is not.
+                wait = 0
+                try:
+                    wait = int(e.headers.get("Retry-After") or 0)
+                except (TypeError, ValueError):
+                    wait = 0
+                time.sleep(min(max(wait, 20 * (attempt + 1)), 90))
+                continue
         except Exception as e:
             last = type(e).__name__
         time.sleep(1.5 * (attempt + 1))
@@ -249,7 +265,13 @@ def collect_npm():
 
 def collect_pypi():
     out = []
-    for pkg in PYPI_PACKAGES:
+    for i, pkg in enumerate(PYPI_PACKAGES):
+        # Twelve packages fired back-to-back is what earned the 429 that
+        # cost a whole day of install figures. A courtesy pause between
+        # them costs the run twelve seconds and is the difference between
+        # a number and a hole.
+        if i:
+            time.sleep(1.0)
         d, err = fetch_json(f"https://pypistats.org/api/packages/{pkg}/recent")
         data = (d or {}).get("data", {}) if not err else {}
         entry = {"package": pkg,
