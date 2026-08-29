@@ -60,9 +60,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # tracker rules were never asserted against the most client-facing thing
 # on the site - which is how four of them kept fetching a typeface from
 # Google long after every other page stopped.
-SKIP_DIRS = {".git", ".github", "node_modules", "dist", "build",
-             "__pycache__", ".private-snapshot", ".agents", ".claude",
-             "desktop"}
+# Only things that are NOT SERVED belong in here. cv/ was in this set
+# and four of its pages were fetching a typeface from Google; dist/ and
+# desktop/ were in it too, and /dp/dist/ and /keyj/desktop/src/ both
+# answer 200 on the live domain. The Privacy page makes its promises on
+# behalf of the whole site, so the only safe rule is that anything a
+# visitor can reach gets checked. node_modules stays: it 404s.
+SKIP_DIRS = {".git", ".github", "node_modules",
+             "__pycache__", ".private-snapshot", ".agents", ".claude"}
 
 # The pages this site generates, which are the ones these rules govern.
 GENERATED = ["index.html", "apps.html", "games.html", "tools.html",
@@ -583,8 +588,26 @@ def security_txt():
                          "push the date out".format(left, m.group(1)))
 
 
+# Build output this repository serves but did not author. dp/dist is a
+# Vite build whose real home is dp.f-keys.com, where /assets/... is
+# correct; it is only wrong at the /dp/dist/ path f-keys.com also
+# happens to serve. Its internal paths are that build's business and
+# cannot be fixed from here.
+#
+# The distinction is deliberate and narrow: the LINK rule does not apply
+# to these, because they were built for a different mount point. Every
+# other rule does - above all the tracker rules, which the Privacy page
+# makes on behalf of anything a visitor can reach.
+VENDORED = ("/dist/", "/node_modules/")
+
+
+def authored(path):
+    rel_path = "/" + rel(path)
+    return not any(v in rel_path for v in VENDORED)
+
+
 def internal_links():
-    """Every root-relative link on this site has to resolve to a file.
+    """Every root-relative link this site AUTHORS has to resolve to a file.
 
     Added after a product page shipped with a link to /cvd-palette-action,
     a path invented while writing prose and never created. A visitor gets a
@@ -593,6 +616,8 @@ def internal_links():
     schema checks only read what they generate.
     """
     for path in html_files():
+        if not authored(path):
+            continue
         source = read(path)
         for href in re.findall(r'href="(/[^"#?]*)"', source):
             target = href.lstrip("/")
