@@ -504,46 +504,61 @@ def counts_in_prose():
     """A number written out in a sentence still has to be the number.
 
     The homepage said "Twenty-two products are live" while the catalogue
-    held twenty-six, and every gate passed for weeks, because none of
-    them had any opinion about prose. It is the one error a visitor can
-    catch without knowing anything about the work - which makes it the
-    most expensive stale thing on the site and the cheapest to check.
+    held twenty-six, and every gate passed for weeks because none of
+    them had any opinion about prose.
 
-    No token may survive either. An unfilled %%PRODUCTS%% shipping to a
-    reader is worse than a wrong number, because it says the page is
-    generated and the generator is broken.
+    Then this gate stopped working, silently, and passed anyway. The
+    sentence was rewritten to "products are on the shelves" and wrapped
+    across a line, so the pattern matched nothing at all and a check
+    over zero claims reported success. A gate that cannot find the thing
+    it checks has NOT verified it, so finding nothing is now a failure -
+    the same rule contrast-gate learned as --require-pairs.
+
+    Whitespace is collapsed first, because where a sentence happens to
+    wrap in the source is not a fact about the site.
     """
     sys.path.insert(0, os.path.join(ROOT, "tools"))
     import buildsite
-    want = buildsite.count_word(len(buildsite.CATALOGUE))
+
+    products = buildsite.count_word(len(buildsite.CATALOGUE))
+    live = buildsite.count_word(buildsite.live_count()).lower()
     shelves = buildsite.count_word(len(buildsite.CATEGORIES)).lower()
 
     for path in html_files():
         source = read(path)
-        for token in ("%%PRODUCTS%%", "%%SHELVES%%"):
+        for token in ("%%PRODUCTS%%", "%%SHELVES%%", "%%LIVE%%"):
             if token in source:
                 fail("counts", "{} still carries an unfilled {}"
                      .format(rel(path), token))
 
-    for name, phrase in (("index.html", " products are live"),
-                         ("about.html", " products are live")):
+    # (file, regex, expected, what it is) - every one MUST be found.
+    claims = [
+        ("index.html", r"([A-Z][a-z]+(?:-[a-z]+)?) products are on the shelves",
+         products, "the catalogue size"),
+        ("index.html", r"([a-z]+(?:-[a-z]+)?) of them live today",
+         live, "the live count"),
+        ("about.html", r"([A-Z][a-z]+(?:-[a-z]+)?) products are on the shelves",
+         products, "the catalogue size"),
+        ("about.html", r"([a-z]+(?:-[a-z]+)?) of them live today",
+         live, "the live count"),
+        ("index.html", r"([a-z]+(?:-[a-z]+)?) of them, sorted",
+         shelves, "the number of shelves"),
+    ]
+    for name, pattern, want, what in claims:
         path = os.path.join(ROOT, name)
         if not os.path.exists(path):
+            fail("counts", "missing " + name)
             continue
-        for said in re.findall(r"([A-Z][a-z]+(?:-[a-z]+)?)" + phrase,
-                               read(path)):
+        flat = re.sub(r"\s+", " ", visible_text(read(path)))
+        found = re.findall(pattern, flat)
+        if not found:
+            fail("counts", "{}: no sentence states {} any more - this gate "
+                           "was checking nothing".format(name, what))
+            continue
+        for said in found:
             if said != want:
-                fail("counts", "{} says {}{} - the catalogue holds {} ({})"
-                     .format(name, said, phrase, len(buildsite.CATALOGUE),
-                             want))
-
-    home = os.path.join(ROOT, "index.html")
-    if os.path.exists(home):
-        for said in re.findall(r"([a-z]+(?:-[a-z]+)?) of them, sorted",
-                               read(home)):
-            if said != shelves:
-                fail("counts", "index.html says {} shelves, there are {} ({})"
-                     .format(said, len(buildsite.CATEGORIES), shelves))
+                fail("counts", "{} says {!r} for {}, it is {!r}"
+                     .format(name, said, what, want))
 
 
 def security_txt():
