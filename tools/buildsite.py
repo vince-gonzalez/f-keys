@@ -1765,6 +1765,36 @@ APP_CATEGORY = {
 }
 
 
+# ── what the page can actually support about price ───────────
+# "price": "0" used to be hardcoded into every SoftwareApplication
+# block: twenty-four machine-readable assertions that a thing is free,
+# derived from nothing on the page. Google renders that as "Free" in a
+# rich result, and trailer-load's own page says it is licensed
+# separately to institutions while Key-J is proprietary.
+#
+# An Offer is only emitted when the page states a basis for it. Where
+# there is none the block is left out - schema.org does not require an
+# offer, and saying nothing is not a claim, whereas saying zero is.
+OSS_LICENCES = ("mit", "apache", "bsd", "gpl", "mpl", "isc", "unlicense")
+
+
+def free_basis(facts):
+    """The fact that makes 'free' true, or None."""
+    for key in ("Cost", "Price"):
+        v = (facts.get(key) or "").lower()
+        if "free" in v:
+            return facts[key]
+        if v and ("$" in v or "licen" in v or "paid" in v):
+            return None                 # it states a price. Not free.
+    lic = (facts.get("Licence") or facts.get("License") or "").lower()
+    if any(x in lic for x in OSS_LICENCES):
+        return facts.get("Licence") or facts.get("License")
+    inst = (facts.get("Install") or "").lower()
+    if inst.startswith("pip install") or inst.startswith("npm install"):
+        return facts.get("Install")
+    return None
+
+
 def software(slug, page, row):
     """A product page, as the thing a parser is looking for.
 
@@ -1782,13 +1812,15 @@ def software(slug, page, row):
         "image": product_og(slug),
         "author": {"@type": "Person", "name": FOUNDER, "sameAs": [ORCID]},
         "publisher": {"@id": SITE + "/#organization"},
-        "offers": {
+    }
+    basis = free_basis(facts)
+    if basis:
+        obj["offers"] = {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-        },
-    }
+        }
     if facts.get("Platforms"):
         obj["operatingSystem"] = facts["Platforms"]
     if facts.get("Version"):

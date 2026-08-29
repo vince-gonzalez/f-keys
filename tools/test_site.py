@@ -500,6 +500,73 @@ def published_zones():
                                   "traffic table".format(cell.strip()))
 
 
+def papers_ordering():
+    """The papers page says "most recent first". It has to be.
+
+    It said so while the Epistemology group ran 05-03, 04-18, 04-06,
+    04-24. The order is produced by sorting now rather than by hand, so
+    this is here to catch somebody removing the sort - and, like the
+    count check, it fails when it finds no groups to inspect rather than
+    passing over nothing.
+    """
+    path = os.path.join(ROOT, "papers", "index.html")
+    if not os.path.exists(path):
+        return
+    source = read(path)
+    if "most recent" not in source:
+        return                      # the page no longer claims it
+    groups = re.findall(
+        r'<section class="wgroup" id="([^"]+)">(.*?)</section>',
+        source, flags=re.S)
+    if not groups:
+        fail("papers", "the page claims an order and has no groups to check")
+        return
+    for gid, body in groups:
+        dates = re.findall(r'<p class="wmeta">(\d{4}-\d{2}-\d{2})', body)
+        if dates and dates != sorted(dates, reverse=True):
+            fail("papers", "{}: claims most-recent-first, reads {}"
+                 .format(gid, " ".join(dates)))
+
+
+def price_claims():
+    """No page may assert a price it cannot support.
+
+    "price": "0" was hardcoded into every SoftwareApplication block -
+    twenty-four machine-readable assertions that a thing is free,
+    derived from nothing. Google renders that as "Free" in a rich
+    result. Key-J is proprietary; RemapWrap has an organisation tier;
+    trailer-load is licensed separately to institutions.
+
+    A structured-data claim is worse than a prose one, because the
+    reader is a machine that will repeat it without ever seeing the
+    page that contradicts it.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import buildsite
+
+    for slug, page in buildsite.PAGES.items():
+        path = os.path.join(ROOT, slug, "index.html")
+        if not os.path.exists(path):
+            continue
+        facts = dict(page["facts"])
+        basis = buildsite.free_basis(facts)
+        for raw in re.findall(
+                r'<script type="application/ld\+json">(.*?)</script>',
+                read(path), flags=re.S):
+            try:
+                obj = json.loads(raw)
+            except ValueError:
+                continue
+            if obj.get("@type") != "SoftwareApplication":
+                continue
+            offer = obj.get("offers") or {}
+            if not offer:
+                continue
+            if str(offer.get("price")) == "0" and not basis:
+                fail("price", "{}: claims price 0 and nothing on the page "
+                              "says it is free".format(slug))
+
+
 def counts_in_prose():
     """A number written out in a sentence still has to be the number.
 
@@ -746,6 +813,8 @@ def main():
     internal_links()
     security_txt()
     counts_in_prose()
+    price_claims()
+    papers_ordering()
     published_zones()
     openapi()
     recovery()

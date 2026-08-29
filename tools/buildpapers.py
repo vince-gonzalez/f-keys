@@ -125,8 +125,22 @@ def entry_html(e):
                     esc(e.get("abstract") or ""), links))
 
 
+def sorted_entries(entries):
+    """Most recent first, because the page says so.
+
+    It said so while the Epistemology group ran 05-03, 04-18, 04-06,
+    04-24. Ordering by hand is a promise renewed every time somebody
+    adds a paper and forgets. Sorting here makes the sentence true by
+    construction instead of by attention. An entry with no date sorts
+    last rather than being dropped or guessed at.
+    """
+    return sorted(entries, key=lambda e: (e.get("date") or ""),
+                  reverse=True)
+
+
 def document(data):
-    groups = data["groups"]
+    groups = [dict(g, entries=sorted_entries(g["entries"]))
+              for g in data["groups"]]
     papers = sum(len(g["entries"]) for g in groups if g["id"] != DOCS_GROUP)
     docs = sum(len(g["entries"]) for g in groups if g["id"] == DOCS_GROUP)
     total = papers + docs
