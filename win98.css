@@ -327,3 +327,23 @@ table.details th.num,table.details td.num{text-align:right}
   .wruler,.wtool{display:none}
   .wentry{padding-left:0;text-indent:0}
 }
+
+/* ── the SayDo receipt ────────────────────────────────────────
+   A real receipt from the repository, not a mock-up: thirteen
+   rows, every prev_hash equal to the row_hash above it. It is
+   set as a ledger because that is what it is - and it scrolls
+   inside its own box so a long hash never widens the page. */
+.receipt{border:2px inset #dfdfdf;background:var(--field);
+  margin:12px 0 6px;overflow-x:auto}
+.receipt table{border-collapse:collapse;width:100%;min-width:520px;
+  font-family:"Space Mono",Consolas,"Courier New",monospace;font-size:13px}
+.receipt th{text-align:left;padding:5px 8px;background:var(--face);
+  border-bottom:1px solid var(--sh);color:var(--ink);font-weight:700;
+  white-space:nowrap}
+.receipt td{padding:3px 8px;border-bottom:1px solid #e6e6e6;
+  color:var(--ink);white-space:nowrap}
+.receipt tr:last-child td{border-bottom:none;font-weight:700}
+.receipt .sq{color:var(--dim);text-align:right;width:1%}
+.receipt .ty{width:1%}
+.receipt .ex{color:var(--dim)}
+.receipt .hx{color:#00309c;width:1%}

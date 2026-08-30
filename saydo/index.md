@@ -56,6 +56,32 @@ built to fail. saydo selfcheck runs that one and requires the
 harness to catch every violation — the same discipline the rest of this
 catalogue is built on, pointed at itself.
 
+## A receipt, actually
+
+This is the receipt for saydo verify certivl, from the repository. Thirteen rows: the declaration it was checked against, the captured tool definitions, what the monitor could and could not see, one row per invariant, and a close. Each row carries the hash of the row before it.
+
+| # | row |  | prev_hash | row_hash |
+| --- | --- | --- | --- | --- |
+| 1 | open | pkg:pypi/certivl@0.2.0 | 31b446b87a387b3d… | 2911aee89d746f02… |
+| 2 | capture |  | 2911aee89d746f02… | 8bbcbdebf275fae5… |
+| 3 | monitor |  | 8bbcbdebf275fae5… | 8db9473951715e22… |
+| 4 | verdict | refusal.scope | 8db9473951715e22… | a192845eb5d858e8… |
+| 5 | verdict | network.none | a192845eb5d858e8… | 94ff9d07b07e1140… |
+| 6 | verdict | writes.none | 94ff9d07b07e1140… | 2792b46310d90e1e… |
+| 7 | verdict | reads.none | 2792b46310d90e1e… | 6953d604c4a27794… |
+| 8 | verdict | subprocess.none | 6953d604c4a27794… | fe0193b67cfeab17… |
+| 9 | verdict | answers.deterministic | fe0193b67cfeab17… | e83fd3722b937d43… |
+| 10 | verdict | errors.are-values | e83fd3722b937d43… | 8d7fb1429449889e… |
+| 11 | verdict | undecided.on-overlap | 8d7fb1429449889e… | 27850d284c2f007b… |
+| 12 | verdict | decimal.read-exactly | 27850d284c2f007b… | 6f174eaa56827918… |
+| 13 | close | tally {'pass': 9} | 6f174eaa56827918… | 754a675f79ea0f92… |
+
+Every prev_hash above equals the row_hash on the line before it — checked, not asserted. Change any row and every hash below it stops matching, which is the whole mechanism. Paste it into verifier/index.html and it checks offline, with no account and no request to anybody.
+
+## What the monitor admits it cannot see
+
+Row 3 is not a result. It is the harness recording its own blind spots — that it observes filesystem opens and socket connects at the host process, and does **not** observe activity below the Python runtime, such as a native extension. An invariant it did not exercise is reported not-covered rather than passed.
+
 ## What it is not, yet
 
 This is a working proof of concept and the name is provisional. Every
