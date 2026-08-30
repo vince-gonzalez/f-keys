@@ -27,7 +27,16 @@ The pages are served by GitHub Pages through Cloudflare. Both keep ordinary
 web-server logs, which means your IP address, the page you asked for, your
 browser's user-agent string and the time are recorded by those companies as a
 side effect of the request being delivered at all. F-Keys does not receive those
-logs, cannot query them, and does not know who visited. Their handling is
+logs and does not know who visited.
+
+It does read one thing: Cloudflare's aggregate counts for its own zones
+— page views, unique visitors, and threats blocked, per site, per day.
+That is where the numbers on the [status page](https://f-keys.com/status/) come from.
+It is a daily total and nothing else. It is not tied to a person, it cannot be,
+and no script on this page produces it — the count is made by Cloudflare
+while delivering the request, and read afterwards through their API.
+
+Their handling is
 governed by
 [GitHub's privacy statement](https://docs.github.com/site-policy/privacy-policies/github-privacy-statement)
 and

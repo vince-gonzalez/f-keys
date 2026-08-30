@@ -528,6 +528,47 @@ def papers_ordering():
                  .format(gid, " ".join(dates)))
 
 
+def privacy_matches_tooling():
+    """The Privacy page has to describe what the tooling actually does.
+
+    It said F-Keys "does not receive those logs, cannot query them, and
+    does not know who visited" while snapshot.py queried Cloudflare's
+    GraphQL API every day and published the result on the status page.
+    Two of those three clauses were true. The middle one was false, on
+    the one page whose entire worth is being exactly right.
+
+    No tracker check caught it, because every one of them looks for a
+    script. A privacy claim can be broken by a tool that never touches
+    the page at all.
+
+    So: if snapshot collects Cloudflare analytics, Privacy must say so;
+    and if it stops, the disclosure must not linger claiming a
+    collection that no longer happens.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import snapshot
+
+    path = os.path.join(ROOT, "privacy.html")
+    if not os.path.exists(path):
+        fail("privacy", "privacy.html is missing")
+        return
+    text = visible_text(read(path))
+    collects = hasattr(snapshot, "collect_cloudflare")
+
+    discloses = "Cloudflare's aggregate counts" in text
+    if collects and not discloses:
+        fail("privacy", "snapshot collects Cloudflare analytics and Privacy "
+                        "does not disclose it")
+    if discloses and not collects:
+        fail("privacy", "Privacy discloses a Cloudflare collection that "
+                        "snapshot no longer performs")
+
+    # The old wording is a specific, known falsehood. It must not return.
+    if "cannot query them" in text:
+        fail("privacy", "privacy.html still says F-Keys cannot query the "
+                        "server logs; snapshot.py queries them daily")
+
+
 def colours_are_tokens():
     """Every text colour has to be a token, so the contrast gate sees it.
 
@@ -851,6 +892,7 @@ def main():
     counts_in_prose()
     price_claims()
     colours_are_tokens()
+    privacy_matches_tooling()
     papers_ordering()
     published_zones()
     openapi()
