@@ -1,23 +1,31 @@
 {
  "": {
-  "lastmod": "2026-08-29",
-  "sha": "a0e07d90b991366c"
+  "lastmod": "2026-08-30",
+  "sha": "abaac1eff9ec4425"
  },
  "5best2buy/": {
   "lastmod": "2026-08-28",
   "sha": "d5e61529ebe3a2ed"
  },
  "about.html": {
-  "lastmod": "2026-08-29",
-  "sha": "b277ec2de358ff91"
+  "lastmod": "2026-08-30",
+  "sha": "69f5c79376330fb2"
  },
  "apps.html": {
   "lastmod": "2026-08-26",
   "sha": "3a398b52d25d5811"
  },
+ "authorecon/": {
+  "lastmod": "2026-08-30",
+  "sha": "8b1a5c4a681efd6a"
+ },
+ "axsent/": {
+  "lastmod": "2026-08-30",
+  "sha": "ea725a7100dc9ed5"
+ },
  "changewatch/": {
-  "lastmod": "2026-08-26",
-  "sha": "19a6b8039e1263b5"
+  "lastmod": "2026-08-30",
+  "sha": "8b7682a614a5e94a"
  },
  "contact.html": {
   "lastmod": "2026-08-26",
@@ -52,32 +60,32 @@
   "sha": "d0cf8d1dc34c214d"
  },
  "keyjockey/": {
-  "lastmod": "2026-08-26",
-  "sha": "0145133487f3816f"
+  "lastmod": "2026-08-30",
+  "sha": "1e6f76aea55a3638"
  },
  "leadseer/": {
-  "lastmod": "2026-08-29",
-  "sha": "538b816cb684b673"
+  "lastmod": "2026-08-30",
+  "sha": "61b6beea44776ff7"
  },
  "legible/": {
-  "lastmod": "2026-08-26",
-  "sha": "376e4989a56b0379"
+  "lastmod": "2026-08-30",
+  "sha": "caef67be4c5659c9"
  },
  "micdrop/": {
   "lastmod": "2026-08-29",
   "sha": "1f3ee3137c7dffdb"
  },
  "modulign/": {
-  "lastmod": "2026-08-28",
-  "sha": "b080bfbe500db472"
+  "lastmod": "2026-08-30",
+  "sha": "f7ebc9e1f7dbe782"
  },
  "moonbeam/": {
   "lastmod": "2026-08-26",
   "sha": "de06fd28a94fbf79"
  },
  "openapi-drift/": {
-  "lastmod": "2026-08-26",
-  "sha": "29a2aad2f84b63e2"
+  "lastmod": "2026-08-30",
+  "sha": "17053ef8565e9289"
  },
  "opticquiz/": {
   "lastmod": "2026-08-28",
@@ -88,8 +96,8 @@
   "sha": "00e01c60d8826f36"
  },
  "plumhud/": {
-  "lastmod": "2026-08-26",
-  "sha": "536a0f8da5f81df2"
+  "lastmod": "2026-08-30",
+  "sha": "6d17dc397696857e"
  },
  "poticas/": {
   "lastmod": "2026-08-28",
@@ -116,8 +124,12 @@
   "sha": "ab63a99f44a62d30"
  },
  "research.html": {
-  "lastmod": "2026-08-26",
-  "sha": "945d8844d38556a7"
+  "lastmod": "2026-08-30",
+  "sha": "d1b4eac658d7b916"
+ },
+ "saydo/": {
+  "lastmod": "2026-08-30",
+  "sha": "f6ac61938ead464b"
  },
  "streamsniper/": {
   "lastmod": "2026-08-26",
@@ -128,15 +140,15 @@
   "sha": "900b57cfe9bf31a9"
  },
  "tools.html": {
-  "lastmod": "2026-08-26",
-  "sha": "e90a63314c27e06d"
+  "lastmod": "2026-08-30",
+  "sha": "f99f9b56d37b1391"
  },
  "trailer-load/": {
   "lastmod": "2026-08-28",
   "sha": "fd552038bdc162d7"
  },
  "wikipolish/": {
-  "lastmod": "2026-08-29",
-  "sha": "aa1b3c69b50947ab"
+  "lastmod": "2026-08-30",
+  "sha": "160446e727211115"
  }
 }

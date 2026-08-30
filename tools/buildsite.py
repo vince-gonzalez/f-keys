@@ -81,6 +81,16 @@ CATALOGUE = [
     # Shipped 2026-08-26. Listed the same day, because the failure this
     # site keeps repeating is not building things - it is building them
     # and leaving them where nobody can find them.
+    # 2026-08-29. SayDo is the flagship and it is honestly an alpha: the
+    # declarations are drafts and the receipts are unsigned, which the
+    # page says in the same size type as everything else.
+    ("saydo", "SayDo", "tools", "Standard + harness", ALPHA,
+     "Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check.", "/saydo/"),
+    ("axsent", "axsent", "research", "Python package", PIP,
+     "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.", "/axsent/"),
+    ("authorecon", "authorecon", "research", "Python package", PIP,
+     "Reconcile published work against every place it lives, for any ORCID, from public sources.", "/authorecon/"),
+
     ("legible", "legible", "tools", "Python package", PIP,
      "Three build gates: unreadable type, unreadable colour, a retired name.", "/legible/"),
     ("openapi-drift", "openapi-drift", "tools", "Python package", PIP,
@@ -125,6 +135,143 @@ CATEGORIES = [
 
 # ── long-form detail, one entry per product ──────────────────
 PAGES = {
+"saydo": dict(
+  title="SayDo", tagline="Prove a tool behaves as it says.",
+  facts=[("Status", "Working proof of concept \u2014 name provisional"),
+         ("Declarations", "5 F-Keys servers, 4 third-party \u2014 all draft"),
+         ("Receipts", "Unsigned"),
+         ("Invariant types", "10 in the current draft"),
+         ("Licence", "Apache-2.0 on the open layers"),
+         ("Source", "vince-gonzalez/saydo")],
+  body="""
+<h2>The gap</h2>
+<p>Signing and provenance prove a tool&rsquo;s code is what the publisher
+released. They do not prove the tool behaves as its description promises.
+Tool poisoning, capability rug-pulls and silent behavioral drift are one
+problem wearing three names: the distance between what a tool declares and
+what it does.</p>
+<p>The provenance standards say so themselves. <b>TBOM</b> states it cannot
+verify that tool behavior matches descriptions. <b>CTMS</b> states it verifies
+that a tool&rsquo;s claims have not changed, not that they are true. That
+out-of-scope line is what this is for.</p>
+<p>SayDo does not replace either. It extends them: a declaration binds to the
+same tool-definition digests a Tool Bill of Materials already records, and
+attaches to one without changing its schema.</p>
+
+<h2>Four layers</h2>
+<table class="facts">
+<tr><th>Declaration</th><td>A signed, machine-readable contract per tool: the
+behavior it is permitted to show &mdash; no network, writes only here,
+deterministic, returns errors as values. Ten invariant types in the current
+draft.</td></tr>
+<tr><th>Conformance</th><td>A harness exercises the tool under observation
+&mdash; valid calls, adversarial input, egress and filesystem monitoring
+&mdash; and reports pass, fail or <b>not-covered</b> per invariant. It cannot
+prove an invariant it did not exercise, and it says so rather than passing
+it.</td></tr>
+<tr><th>Receipt</th><td>Every run emits a hash-chained record, one row per
+verdict, chained by <code>row_hash = sha256(prev + row)</code>. Edit one row
+and the chain breaks at it. An auditor re-verifies it in a browser &mdash; no
+account, no request to us.</td></tr>
+<tr><th>Trust mark</th><td>A &ldquo;Warranted&rdquo; badge served from the
+registry, linking to the full findings rather than a bare grade, with expiry
+and revocation. <b>Not built yet.</b></td></tr>
+</table>
+
+<h2>Run it</h2>
+<p>Install one of the covered servers, then put it under SayDo. The command
+captures the tool definitions, exercises the server, and writes a receipt.</p>
+<pre><b>saydo verify certivl</b>
+  certivl   CONFORMANT
+  tally     {'pass': 9}
+  receipt   receipts/certivl.receipt.jsonl
+  head      353e94cd497115aa49e10ab76874ab7bd9645fed&hellip;</pre>
+<p>A harness that only ever passes is worth nothing, so it ships with a server
+built to fail. <code>saydo selfcheck</code> runs that one and requires the
+harness to catch every violation &mdash; the same discipline the rest of this
+catalogue is built on, pointed at itself.</p>
+
+<h2>What it is not, yet</h2>
+<p>This is a working proof of concept and the name is provisional. Every
+declaration currently carries <code>status: "draft"</code>. Every receipt is
+unsigned. Nothing here is a claim of conformance about anybody&rsquo;s
+software, including ours, and the trust mark does not exist.</p>
+<p>Those sentences are on this page in the same size type as the rest, because
+a tool whose entire purpose is the distance between what software claims and
+what it does would be a poor place to start overstating.</p>
+
+<h2>Prior art it builds on</h2>
+<p>TBOM v1.0.2, Jason M. Lovell, 2026 &mdash;
+<a href="https://doi.org/10.5281/zenodo.18459260" rel="noopener">10.5281/zenodo.18459260</a>.
+CTMS 1.0, George Kanellopoulos, 2026 &mdash;
+<a href="https://github.com/gkanellopoulos/ctms" rel="noopener">gkanellopoulos/ctms</a>.
+Both are provenance; both state that verifying behavior against the metadata
+is out of their scope.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://github.com/vince-gonzalez/saydo" rel="noopener">The repository</a>
+  <a class="btn" href="/papers/">Related work</a>
+</div>"""),
+
+ "axsent": dict(
+  title="axsent", tagline="What a formal library assumes, measured from source.",
+  facts=[("Install", "pip install axsent"),
+         ("Reads", "Rocq, Agda, Isabelle"),
+         ("Builds", "Nothing"),
+         ("Source", "vince-gonzalez/axsent")],
+  body="""
+<h2>What it does</h2>
+<p>Measures what a formal library actually assumes &mdash; its axioms, and the
+interface assumptions that get counted alongside them &mdash; across Rocq,
+Agda and Isabelle, read from source with nothing compiled.</p>
+<pre><b>pip install axsent</b>
+axsent &lt;path-to-library&gt;</pre>
+<h2>Why nothing is built</h2>
+<p>A census that requires building the library can only measure libraries that
+still build. That silently excludes the old, the abandoned and the ones
+pinned to a compiler nobody has &mdash; which is a biased sample of exactly the
+wrong kind, because those are the ones whose assumptions nobody has looked at
+lately.</p>
+<h2>The finding behind it</h2>
+<p>Every census of this kind conflates two different things: assumptions that
+are <em>mathematical</em>, and assumptions that are about the
+<em>interface</em> to the outside world. They are counted together and
+reported as one number. Separating them is most of what this tool is for, and
+the measurements are written up in the papers.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/axsent/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/axsent" rel="noopener">Source</a>
+  <a class="btn" href="/papers/">The papers</a>
+</div>"""),
+
+ "authorecon": dict(
+  title="authorecon", tagline="Every place your published work ended up.",
+  facts=[("Install", "pip install authorecon"),
+         ("Takes", "Any ORCID"),
+         ("Sources", "Public ones only"),
+         ("Also", "Gates that run before work leaves your hands"),
+         ("Source", "vince-gonzalez/apriori")],
+  body="""
+<h2>What it does</h2>
+<p>Reconciles a body of published work against every place it lives &mdash; for
+any ORCID, from public sources. A deposit exists in more places than the person
+who made it can hold in their head: the DOI, the index, the profile, the
+repository, the aggregator that copied it, and the one that copied it wrong.</p>
+<pre><b>pip install authorecon</b>
+authorecon 0009-0005-3640-014X</pre>
+<h2>The half people skip</h2>
+<p>It also carries the gates that run <em>before</em> research output leaves
+your hands. Reconciling after publication tells you where the mistake went; a
+gate before it tells you not to make it. Both halves are the same tool because
+they are the same question asked at two different times.</p>
+<h2>What it will not do</h2>
+<p>It reads public sources only, and it does not treat a citation count as a
+signal &mdash; a count reflects how long a corpus has been indexed at least as
+much as it reflects anything about the work.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/authorecon/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/apriori" rel="noopener">Source</a>
+</div>"""),
+
 "legible": dict(
   title="legible", tagline="Three gates a linter will not give you.",
   facts=[("Install","pip install legible"),("Licence","MIT"),

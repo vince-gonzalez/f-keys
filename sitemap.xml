@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://f-keys.com/</loc><lastmod>2026-08-29</lastmod><priority>1.0</priority></url>
+  <url><loc>https://f-keys.com/</loc><lastmod>2026-08-30</lastmod><priority>1.0</priority></url>
   <url><loc>https://f-keys.com/apps.html</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/games.html</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/tools.html</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/tools.html</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/hardware.html</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/research.html</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/research.html</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/properties.html</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/legible/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/openapi-drift/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/changewatch/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/keyjockey/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/saydo/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/axsent/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/authorecon/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/legible/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/openapi-drift/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/changewatch/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/keyjockey/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/opticquiz/</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/trailer-load/</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/prompt/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/daisupop/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/fytecraft/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/modulign/</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/modulign/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/5best2buy/</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/poticas/</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/tipstreams/</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
@@ -25,13 +28,13 @@
   <url><loc>https://f-keys.com/pixelstaff/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/qv/</loc><lastmod>2026-08-29</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/micdrop/</loc><lastmod>2026-08-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/wikipolish/</loc><lastmod>2026-08-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/leadseer/</loc><lastmod>2026-08-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/plumhud/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/wikipolish/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/leadseer/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://f-keys.com/plumhud/</loc><lastmod>2026-08-30</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/streamsniper/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/moonbeam/</loc><lastmod>2026-08-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://f-keys.com/remapwrap/</loc><lastmod>2026-08-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://f-keys.com/about.html</loc><lastmod>2026-08-29</lastmod><priority>0.7</priority></url>
+  <url><loc>https://f-keys.com/about.html</loc><lastmod>2026-08-30</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/contact.html</loc><lastmod>2026-08-26</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/privacy.html</loc><lastmod>2026-08-26</lastmod><priority>0.7</priority></url>
   <url><loc>https://f-keys.com/developers.html</loc><lastmod>2026-08-28</lastmod><priority>0.7</priority></url>

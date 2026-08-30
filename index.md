@@ -7,8 +7,8 @@ Canonical: https://f-keys.com
 Hardware. Software. Ideas brought to life.
 
 F-Keys is the working catalogue of **Vincent Gonzalez**, an independent
-builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-six
-products are on the shelves, twenty-two of them live today, and each one was
+builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-nine
+products are on the shelves, twenty-four of them live today, and each one was
 designed, written, deployed and documented
 by the same person — architecture, both ends, database, release notes. The
 table below is the whole company.
@@ -63,6 +63,9 @@ to match the last one. [Contact](https://f-keys.com/contact.html) for licensing,
 | [WikiPolish](https://f-keys.com/wikipolish/) | Web tool | Ready | Grammar scout for Wikipedia. Finds a first edit nobody will revert. |
 | [LeadSeer](https://f-keys.com/leadseer/) | Desktop tool | Needs setup | Finds the local businesses that still have no website. |
 | [PlumHUD](https://f-keys.com/plumhud/) | Python package | pip install | Miner fleet monitor. Overlay HUD, alerts, and local history. |
+| [SayDo](https://f-keys.com/saydo/) | Standard + harness | Alpha | Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check. |
+| [axsent](https://f-keys.com/axsent/) | Python package | pip install | What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built. |
+| [authorecon](https://f-keys.com/authorecon/) | Python package | pip install | Reconcile published work against every place it lives, for any ORCID, from public sources. |
 | [legible](https://f-keys.com/legible/) | Python package | pip install | Three build gates: unreadable type, unreadable colour, a retired name. |
 | [openapi-drift](https://f-keys.com/openapi-drift/) | Python package | pip install | Has your API drifted from its spec, and can a machine still read it? |
 | [changewatch](https://f-keys.com/changewatch/) | Python package | pip install | A doorbell for your published work. Silent until somebody else acts. |

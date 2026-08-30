@@ -114,7 +114,17 @@ PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
                  # published 2026-08-26, added the same day, because the
                  # three times this list went stale it was always the same
                  # mistake: shipping and not writing it down
-                 "legible", "openapi-drift", "changewatch"]
+                 "legible", "openapi-drift", "changewatch",
+                 # 2026-08-29. authorecon and axsent were both live on
+                 # PyPI and absent from this list, which is the fourth
+                 # time the same thing has happened. A published package
+                 # that is untracked reads, on the status page, exactly
+                 # like a package that does not exist.
+                 #
+                 # NOT "warrant": that name on PyPI belongs to Brian
+                 # Jinwright at capless.io. SayDo was renamed from
+                 # WARRANT and the coincidence is not ownership.
+                 "authorecon", "axsent"]
 
 # Repositories are owner-qualified now. gonzalgo moved to the personal
 # account and only kept reporting because GitHub redirects transferred
@@ -134,6 +144,7 @@ GITHUB_REPOS = [
     "vince-gonzalez/openapi-drift", "vince-gonzalez/changewatch",
     "vince-gonzalez/typefloor", "vince-gonzalez/contrast-gate",
     "vince-gonzalez/deadname-gate", "vince-gonzalez/cvd-palette",
+    "vince-gonzalez/saydo", "vince-gonzalez/axsent",
 ]
 
 # How many days of history the page draws its trends from. The dated
