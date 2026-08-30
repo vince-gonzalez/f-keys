@@ -29,6 +29,19 @@
   --ok:#006000;
   --warn:#8a4b00;
   --plat:#00007b;
+  --alert:#a00000;
+  --doc-abs:#222;
+  --doc-by:#333;
+  --doc-head:#16307a;
+  --doc-ink:#111;
+  --doc-link:#00309c;
+  --doc-meta:#555;
+  --doc-note:#444;
+  --doc-seen:#5c2a86;
+  --face-lo:#c0c0c0;
+  --paper:#fff;
+  --rule-dk:#5a5a5a;
+  --title-lo:#cfe3ff;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -70,7 +83,7 @@ a{color:inherit;text-decoration:none}
 }
 .titlebar{
   background:linear-gradient(90deg,var(--title-a),var(--title-b));
-  color:#fff;font-weight:700;font-size:13px;
+  color:var(--paper);font-weight:700;font-size:13px;
   padding:3px 3px 3px 6px;display:flex;align-items:center;
   justify-content:space-between;gap:8px;
 }
@@ -84,7 +97,7 @@ a{color:inherit;text-decoration:none}
 /* ── menus + toolbar ─────────────────────────────────────── */
 .menubar{display:flex;gap:1px;padding:2px 1px;flex-wrap:wrap}
 .menubar a{padding:3px 7px}
-.menubar a:hover{background:var(--sel);color:#fff}
+.menubar a:hover{background:var(--sel);color:var(--paper)}
 .menubar u{text-decoration:underline}
 
 .toolbar{display:flex;align-items:center;gap:3px;padding:3px 2px;flex-wrap:wrap}
@@ -116,7 +129,7 @@ a{color:inherit;text-decoration:none}
 .tree .kids{margin-left:13px;border-left:1px dotted var(--sh);padding-left:7px}
 .tree .root{font-weight:700}
 .ic{display:inline-block;width:15px;text-align:center;color:var(--title-a)}
-.tree a.on .ic{color:#fff}
+.tree a.on .ic{color:var(--paper)}
 
 /* ── details table ───────────────────────────────────────── */
 table.details{width:100%;border-collapse:collapse;font-size:13px}
@@ -137,7 +150,7 @@ table.details tbody td{padding:4px 7px;border-bottom:1px solid #ececec;
 .col-name{width:210px}
 table.details tbody tr:hover{background:var(--sel);color:var(--sel-txt)}
 table.details tbody tr:hover .st,
-table.details tbody tr:hover .muted{color:#cfe3ff}
+table.details tbody tr:hover .muted{color:var(--title-lo)}
 table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .muted{color:var(--dim)}
 .st{white-space:nowrap;font-size:13px}
@@ -170,9 +183,9 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .doc code{font-family:'Lucida Console',Consolas,monospace;font-size:13px;
   background:#f2f2f2;padding:1px 4px;border:1px solid #ddd}
 .doc pre{font-family:'Lucida Console',Consolas,monospace;font-size:13px;
-  background:#000;color:#c0c0c0;padding:9px 11px;margin-bottom:11px;
+  background:#000;color:var(--face-lo);padding:9px 11px;margin-bottom:11px;
   overflow-x:auto;line-height:1.55}
-.doc pre b{color:#fff;font-weight:400}
+.doc pre b{color:var(--paper);font-weight:400}
 .doc .facts{border-collapse:collapse;margin-bottom:12px;width:100%}
 .doc .facts th{text-align:left;font-weight:400;color:var(--dim);
   padding:3px 12px 3px 0;white-space:nowrap;vertical-align:top;width:130px}
@@ -223,7 +236,7 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .dim{color:var(--dim)}
 .ok{color:var(--ok);font-weight:700}
-.down{color:#a00000;font-weight:700}
+.down{color:var(--alert);font-weight:700}
 .up{color:var(--ok)}
 .scroll{overflow-x:auto;max-width:100%;margin:0 0 4px}
 .scroll table{min-width:100%}
@@ -275,7 +288,7 @@ table.details th.num,table.details td.num{text-align:right}
 .wruler i{flex:1 1 auto;border-left:1px solid #9a9a9a}
 .wruler i.min{height:4px}
 .wruler i.mid{height:7px}
-.wruler i.maj{height:11px;border-left-color:#5a5a5a}
+.wruler i.maj{height:11px;border-left-color:var(--rule-dk)}
 .wr-indent-top,.wr-indent-bot{position:absolute;left:28px;width:0;height:0;
   border-left:5px solid transparent;border-right:5px solid transparent}
 .wr-indent-top{top:1px;border-top:6px solid #4a4a4a}
@@ -286,32 +299,32 @@ table.details th.num,table.details td.num{text-align:right}
   max-width:760px;width:calc(100% - 28px);
   border:1px solid #808080;box-shadow:2px 2px 0 rgba(0,0,0,.22);
   font-family:Georgia,"Times New Roman",Times,serif;
-  font-size:16px;line-height:1.55;color:#111;flex:1 1 auto}
+  font-size:16px;line-height:1.55;color:var(--doc-ink);flex:1 1 auto}
 .wpage h1{font-family:Georgia,"Times New Roman",Times,serif;
-  font-size:29px;font-weight:700;margin:0 0 2px;color:#111;letter-spacing:0}
+  font-size:29px;font-weight:700;margin:0 0 2px;color:var(--doc-ink);letter-spacing:0}
 .wpage p{margin:0 0 11px}
-.wkicker{font-size:15px;color:#444;margin-bottom:14px !important}
-.wby,.wjump{font-size:15px;color:#333}
+.wkicker{font-size:15px;color:var(--doc-note);margin-bottom:14px !important}
+.wby,.wjump{font-size:15px;color:var(--doc-by)}
 .wjump{border-top:1px solid #ccc;border-bottom:1px solid #ccc;
   padding:9px 0;margin:16px 0 22px !important}
-.wpage a{color:#00309c}
-.wpage a:visited{color:#5c2a86}
+.wpage a{color:var(--doc-link)}
+.wpage a:visited{color:var(--doc-seen)}
 
 /* Heading 1, the way Word styled it: a sans face against a serif body. */
 .wgroup{margin:0 0 26px}
 .wgroup h2{font-family:Arial,Helvetica,sans-serif;font-size:19px;
-  font-weight:700;color:#16307a;margin:26px 0 3px;letter-spacing:0}
+  font-weight:700;color:var(--doc-head);margin:26px 0 3px;letter-spacing:0}
 .wcount{font-family:Georgia,serif;font-size:14px;font-weight:400;
-  color:#555;vertical-align:super}
-.wnote{font-size:15px;color:#444;font-style:italic;margin-bottom:14px !important}
+  color:var(--doc-meta);vertical-align:super}
+.wnote{font-size:15px;color:var(--doc-note);font-style:italic;margin-bottom:14px !important}
 
 /* An entry set as a bibliography: hanging indent, title first. */
 .wentry{margin:0 0 17px;padding-left:26px;text-indent:-26px}
 .wentry h3{font-family:Georgia,"Times New Roman",Times,serif;
-  font-size:16px;font-weight:700;margin:0 0 2px;line-height:1.4;color:#111}
-.wentry h3 a{color:#00309c}
-.wmeta{font-size:14px;color:#555;margin:0 0 4px !important;text-indent:0}
-.wabs{font-size:15px;color:#222;margin:0 0 4px !important;text-indent:0}
+  font-size:16px;font-weight:700;margin:0 0 2px;line-height:1.4;color:var(--doc-ink)}
+.wentry h3 a{color:var(--doc-link)}
+.wmeta{font-size:14px;color:var(--doc-meta);margin:0 0 4px !important;text-indent:0}
+.wabs{font-size:15px;color:var(--doc-abs);margin:0 0 4px !important;text-indent:0}
 .wlinks{font-size:14px;margin:0 !important;text-indent:0}
 
 /* Word 97 put its state in the status bar whether or not you used it. */
@@ -320,7 +333,16 @@ table.details th.num,table.details td.num{text-align:right}
 .wstatus span{padding:1px 9px;font-size:13px;color:var(--ink);
   border-right:1px solid var(--sh);white-space:nowrap}
 .wstatus span.grow{flex:1 1 auto;border-right:none;color:var(--dim)}
-.wstatus span:nth-last-child(-n+4){color:#8b8b8b}
+/* Word greyed these out when the mode was off. #8b8b8b on the face
+   colour is 2.22:1 - it shipped, because contrast-gate only checks
+   pairs somebody declared and nobody declared this one. The look is
+   not worth text a person cannot read, so it is --dim at 6.74:1. */
+.wstatus span:nth-last-child(-n+4){color:var(--dim)}
+/* No opacity here. --dim is 6.74:1 on the face colour; at .75 the
+   effective colour is #656462 and the ratio is 3.84:1. Opacity
+   defeats the contrast gate completely - the token it checks is
+   not the colour that reaches the eye - so the same defect nearly
+   shipped twice in the edit that was fixing it. */
 
 @media (max-width:760px){
   .wpage{padding:22px 18px 26px;margin:9px auto;font-size:15px}
@@ -346,4 +368,4 @@ table.details th.num,table.details td.num{text-align:right}
 .receipt .sq{color:var(--dim);text-align:right;width:1%}
 .receipt .ty{width:1%}
 .receipt .ex{color:var(--dim)}
-.receipt .hx{color:#00309c;width:1%}
+.receipt .hx{color:var(--doc-link);width:1%}

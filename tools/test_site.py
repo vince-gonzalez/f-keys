@@ -528,6 +528,42 @@ def papers_ordering():
                  .format(gid, " ".join(dates)))
 
 
+def colours_are_tokens():
+    """Every text colour has to be a token, so the contrast gate sees it.
+
+    contrast-gate reasons about custom properties. A literal hex written
+    straight into a rule is a colour it never evaluates - and win98.css
+    had twenty-two of them, a third of the text colours on the site,
+    none of them checked by a gate that reported OK every time.
+
+    That is how #8b8b8b on #d4d0c8 shipped at 2.22:1. The gate was not
+    wrong; it was answering a narrower question than the one its name
+    implies, and the difference was invisible.
+    """
+    for name in ("win98.css",):
+        path = os.path.join(ROOT, name)
+        if not os.path.exists(path):
+            continue
+        for line_no, line in enumerate(read(path).splitlines(), 1):
+            if line.lstrip().startswith(("/*", "*", "//")):
+                continue
+            m = re.search(r"(?:^|[^-\w])color\s*:\s*(#[0-9a-fA-F]{3,8})",
+                          line)
+            if m:
+                fail("colour", "{}:{} uses the literal {} - make it a token "
+                               "so contrast-gate can check it"
+                     .format(name, line_no, m.group(1)))
+            # Opacity on a rule that also sets a colour is a second way
+            # past the gate: the token it checks is not the colour that
+            # reaches the eye. --dim at .75 is 3.84:1, not 6.74:1.
+            o = re.search(r"opacity\s*:\s*(0?\.\d+)", line)
+            if o and "color:" in line:
+                fail("colour", "{}:{} sets a colour and opacity {} in one "
+                               "rule - the contrast gate checks the token, "
+                               "not what is drawn"
+                     .format(name, line_no, o.group(1)))
+
+
 def price_claims():
     """No page may assert a price it cannot support.
 
@@ -814,6 +850,7 @@ def main():
     security_txt()
     counts_in_prose()
     price_claims()
+    colours_are_tokens()
     papers_ordering()
     published_zones()
     openapi()
