@@ -2140,6 +2140,15 @@ def main():
         with open(target, "w", encoding="utf-8") as f:
             f.write(content)
 
+    # papers/index.html is written by buildpapers, and it goes through
+    # the same shell() as everything here - so adding a product changes
+    # the folder tree on the papers page too, and leaves it stale until
+    # somebody remembers a second command. Nobody remembers a second
+    # command; CI caught it the first time this happened. Deferred
+    # import because buildpapers imports this module.
+    import buildpapers
+    buildpapers.main()
+
     print(f"buildsite: {len(written)} pages, {readmes} READMEs")
     for n, _ in written:
         print("  ", n)
