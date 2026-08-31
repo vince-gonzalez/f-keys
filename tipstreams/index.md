@@ -4,14 +4,9 @@
 
 Canonical: https://f-keys.com/tipstreams/
 
-Get tipped directly.
+Branded tip pages and OBS overlays for streamers, pointed at your own accounts. The widget never touches the money &mdash; it routes a viewer to your payment method and gets out of the way.
 
-| Field | Value |
-| --- | --- |
-| Where | tipstreams.com |
-| Cost | Free |
-| Package | @f-keys/tip-widget |
-| Money | Goes to your wallet, never through ours |
+**Free** · @f-keys/tip-widget on npm · money goes to your wallet, never through ours
 
 ## What it is
 
@@ -32,6 +27,21 @@ freeze you. This one cannot, because it never has anything to freeze.
 
 npm i @f-keys/tip-widget if you would rather embed it than
 use the hosted page.
+
+## How it works
+
+## What you get
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Where | tipstreams.com |
+| Cost | Free |
+| Package | @f-keys/tip-widget |
+| Money | Goes to your wallet, never through ours |
+
+## Questions
 
 ---
 

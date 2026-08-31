@@ -4,14 +4,9 @@
 
 Canonical: https://f-keys.com/streamsniper/
 
-They go live. It is on the TV.
+A streamer you follow goes live, and it is on the television. No phone, no notification, no clicking &mdash; a small Debian box that starts on boot and puts the stream on the screen.
 
-| Field | Value |
-| --- | --- |
-| Licence | MIT |
-| Platform | Debian or Ubuntu |
-| Needs | Streamlink, VLC, pygame |
-| Starts | systemd, on boot |
+**MIT** · Debian or Ubuntu · Streamlink, VLC, pygame · starts on boot via systemd
 
 ## What it does
 
@@ -24,6 +19,21 @@ When the stream ends, the clock comes back.
 One username per line in a text file, and order is priority: if two are live, the one
 nearer the top gets the screen. A stream already playing runs to the end, so nobody higher
 in the list can cut in halfway through. Edits apply at the next check, with no restart.
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Licence | MIT |
+| Platform | Debian or Ubuntu |
+| Needs | Streamlink, VLC, pygame |
+| Starts | systemd, on boot |
+
+## Questions
 
 ---
 

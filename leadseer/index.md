@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/leadseer/
 
-Which businesses near you have no website at all?
+Answers one question: which businesses near you have no website at all. It is archived, it works, and it runs from source with your own Google Places key.
 
-| Field | Value |
-| --- | --- |
-| Status | Archived, working |
-| Runtime | Node 18+, Electron |
-| Needs | A Google Places API key |
-| Install | Run from source |
-| Source | vince-gonzalez/LeadSeer |
+**Archived, working** · Node 18+ and Electron · needs your own Google Places API key · run from source
 
 ## What it does
 
@@ -42,6 +36,22 @@ anyone else. That is also the catch: without a key it cannot search at all.
 It works and it is not being developed. There has never been a packaged installer —
 it runs from source with Node and Electron. The code stays readable because a tool that
 answers a real question is worth keeping.
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Status | Archived, working |
+| Runtime | Node 18+, Electron |
+| Needs | A Google Places API key |
+| Install | Run from source |
+| Source | vince-gonzalez/LeadSeer |
+
+## Questions
 
 ---
 

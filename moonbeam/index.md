@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/moonbeam/
 
-Find the NerdMiners on your network.
+Finds the NerdMiners on your network. One pip install, no dependencies, and it tells you what is actually out there rather than what you think you plugged in.
 
-| Field | Value |
-| --- | --- |
-| Version | 1.0.0 |
-| Licence | MIT |
-| Install | pip install moonbeam-miner |
-| Requires | Python 3.8+ |
-| Dependencies | None |
+**1.0.0** · pip install moonbeam-miner · Python 3.8+ · MIT · zero dependencies
 
 ## What it does
 
@@ -31,6 +25,22 @@ arrived. The summary counts how many devices declined to report rather than quie
 averaging them in.
 
 Standard library only, so the install cannot fail on someone else's package.
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Version | 1.0.0 |
+| Licence | MIT |
+| Install | pip install moonbeam-miner |
+| Requires | Python 3.8+ |
+| Dependencies | None |
+
+## Questions
 
 ---
 

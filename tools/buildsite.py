@@ -1356,6 +1356,45 @@ that may have changed.</p>
 
  "5best2buy": dict(
   title="5Best2Buy", tagline="A sourcing map for independent American food.",
+  lede="A map of small American food makers who will send you what they make "
+       "&mdash; bakeries, smokehouses, dairies, and single-product outfits "
+       "that have been doing one thing for forty years.",
+  cta=[("Browse it", "https://www.5best2buy.com"),
+       ("Why it exists", "#why-it-exists")],
+  herometa="<b>Free</b> &middot; no account &middot; independent makers who "
+           "ship &middot; updated continuously",
+  steps=[("Look for what you want",
+          "By what it is, not by who paid to be listed first."),
+         ("Find who actually makes it",
+          "Small outfits, most of which you have never heard of because they "
+          "never learned search engine optimisation."),
+         ("Order it from them",
+          "Direct. The list is a map, not a middleman.")],
+  features_title="What it lists",
+  features=[("Independent makers only",
+             "Not distributors, not resellers, not whoever bought the top of "
+             "the search page."),
+            ("People who actually ship",
+             "A maker who does not send it to you is not useful, however good "
+             "the product."),
+            ("Findable if you already knew the name",
+             "The good stuff is invisible if you did not. That asymmetry is "
+             "the whole reason for the site."),
+            ("Free to read",
+             "No account, no wall."),
+            ("Recipes as a sourcing map",
+             "A dish, and then who to get the parts from."),
+            ("Continuously worked on",
+             "It is a live catalogue rather than a listicle from 2019.")],
+  faq=[("Do makers pay to be listed?",
+        "The list is compiled to be useful. If you are a maker who ships and "
+        "you are missing, "
+        "<a href=\"/contact.html\">say so</a>."),
+       ("Is it just gift baskets?",
+        "No. It is the people who make one thing well and will mail it."),
+       ("Why does this need to exist?",
+        "Because the best small producers are findable only if you already "
+        "know their name, which is a bad arrangement for everybody.")],
   facts=[("Where","5best2buy.com"),("Cost","Free"),
          ("What it lists","Independent makers who ship")],
   body="""
@@ -1363,7 +1402,7 @@ that may have changed.</p>
 <p>A map of small American food makers who will send you what they make.
 Bakeries, smokehouses, dairies, single-product outfits that have been doing one
 thing for forty years.</p>
-<h2>Why it exists</h2>
+<h2 id="why-it-exists">Why it exists</h2>
 <p>Most of the good stuff is made by people who never learned search engine
 optimisation. They are findable if you already know their name, and invisible
 if you do not, which is a bad arrangement for everyone involved. This is the
@@ -1374,6 +1413,45 @@ list you would want if you knew the list existed.</p>
 
  "poticas": dict(
   title="Poticas", tagline="The home of potica.",
+  lede="Potica is a Slovenian rolled nut bread, and this is the reference for "
+       "it: where it comes from, how it is actually made, and the short list "
+       "of people who still ship one.",
+  cta=[("Read it", "https://poticas.com"),
+       ("Why the list is short", "#the-list-is-short-for-a-reason")],
+  herometa="<b>Free</b> &middot; history, method, and who still ships one "
+           "&middot; no account",
+  steps=[("Learn what it is",
+          "The history, and why it is not a strudel and not a babka."),
+         ("Learn how it is made",
+          "A thin dough and a filling heavy enough to tear it, which is the "
+          "whole difficulty."),
+         ("Find one, or make one",
+          "The short list of people who still ship, or the method to do it "
+          "yourself.")],
+  features_title="What is on it",
+  features=[("The history",
+             "Where it comes from and how it travelled."),
+            ("The method",
+             "How it is actually made, not a simplified version that "
+             "produces something else."),
+            ("Who still ships one",
+             "A short list, and short for a reason."),
+            ("Why the list is short",
+             "It is a slow bread with a thin dough and a heavy filling, so "
+             "the people who make it well mostly learned it from somebody. "
+             "That is a smaller group every year."),
+            ("Written down before it is lost",
+             "Recording what those bakers do is most of the point."),
+            ("Free",
+             "No account and no wall.")],
+  faq=[("Is this a recipe site?",
+        "It has the method, but the point is the reference &mdash; what "
+        "potica is, and who still makes it properly."),
+       ("Can I buy one through the site?",
+        "It tells you who ships. You buy from them."),
+       ("Why does it matter?",
+        "Because the people who know how to do it are a smaller group every "
+        "year, and nobody was writing it down.")],
   facts=[("Where","poticas.com"),("Cost","Free"),
          ("Covers","History, method, and who still ships one")],
   body="""
@@ -1381,7 +1459,7 @@ list you would want if you knew the list existed.</p>
 <p>Potica is a Slovenian rolled nut bread, and this is the reference for it:
 where it comes from, how it is actually made, and the short list of people who
 still ship one.</p>
-<h2>The list is short for a reason</h2>
+<h2 id="the-list-is-short-for-a-reason">The list is short for a reason</h2>
 <p>It is a slow bread with a thin dough and a filling heavy enough to tear it,
 so the people who make it well are mostly the people who learned it from
 somebody. That is a smaller group every year, and writing down what they do is
@@ -1392,6 +1470,48 @@ most of the point of the site.</p>
 
  "tipstreams": dict(
   title="TipStreams", tagline="Get tipped directly.",
+  lede="Branded tip pages and OBS overlays for streamers, pointed at your own "
+       "accounts. The widget never touches the money &mdash; it routes a "
+       "viewer to your payment method and gets out of the way.",
+  cta=[("Set one up", "https://tipstreams.com"),
+       ("Embed the widget", "https://www.npmjs.com/package/@f-keys/tip-widget"),
+       ("The one sentence that matters", "#the-only-sentence-that-matters-in-this-category")],
+  herometa="<b>Free</b> &middot; <code>@f-keys/tip-widget</code> on npm "
+           "&middot; money goes to your wallet, never through ours",
+  steps=[("Point it at your accounts",
+          "Crypto, the usual platforms, whatever you already use to get "
+          "paid."),
+         ("Take the page, or the embed",
+          "A hosted tip page, or <code>@f-keys/tip-widget</code> in your own "
+          "site."),
+         ("Get paid directly",
+          "The viewer pays you. Nothing is held, forwarded, or waiting for a "
+          "payout.")],
+  features_title="What you get",
+  features=[("It never holds the money",
+             "There is no balance, no payout schedule, and no decision of "
+             "ours that can affect whether you get paid."),
+            ("Nobody can freeze you",
+             "Every other product in this category is a custodian, and a "
+             "custodian can freeze you. This one cannot, because it never has "
+             "anything to freeze."),
+            ("Multi-payment QR router",
+             "Crypto and the usual platforms, from one page."),
+            ("OBS overlays",
+             "Made to go on a stream rather than bolted on afterwards."),
+            ("An npm package",
+             "<code>@f-keys/tip-widget</code> if you would rather embed than "
+             "use the hosted page."),
+            ("Free",
+             "No cut, because there is nothing to take a cut of.")],
+  faq=[("Do you take a percentage?",
+        "There is nothing to take it from. The money goes from the viewer to "
+        "your account without passing through anything of ours."),
+       ("What if you shut down?",
+        "Your payment accounts are yours and keep working. The widget is a "
+        "signpost, not a bank."),
+       ("Can I put it on my own site?",
+        "Yes &mdash; <code>@f-keys/tip-widget</code> on npm.")],
   facts=[("Where","tipstreams.com"),("Cost","Free"),
          ("Package","@f-keys/tip-widget"),
          ("Money","Goes to your wallet, never through ours")],
@@ -1399,7 +1519,7 @@ most of the point of the site.</p>
 <h2>What it is</h2>
 <p>Branded tip pages and OBS overlays for streamers. A multi-payment QR router,
 crypto and the usual platforms, pointed at your accounts.</p>
-<h2>The only sentence that matters in this category</h2>
+<h2 id="the-only-sentence-that-matters-in-this-category">The only sentence that matters in this category</h2>
 <p><b>The widget never touches the money.</b> It routes a viewer to your payment
 method and gets out of the way. Nothing is held, nothing is forwarded, there is
 no balance, and there is no point at which a decision of ours affects whether
@@ -1416,6 +1536,41 @@ use the hosted page.</p>
 
  "fundoge": dict(
   title="FunDoge", tagline="The mini-golf game you build yourself.",
+  lede="Free isometric mini-golf in the browser. Play the holes other people "
+       "built, then design your own and share them. No install, no account, "
+       "no launcher.",
+  cta=[("Play it", "https://dogefundme.com"),
+       ("About the address", "#the-domain")],
+  herometa="<b>Free</b> &middot; runs in the browser &middot; nothing to "
+           "install &middot; design and share your own holes",
+  steps=[("Open it",
+          "A browser tab. No install, no account, no launcher."),
+         ("Play the holes",
+          "Isometric mini-golf, including the ones other people built."),
+         ("Build one",
+          "Design a hole, share it, and let somebody else fail at it.")],
+  features_title="What you get",
+  features=[("Isometric mini-golf",
+             "The whole game, in a tab."),
+            ("A hole editor",
+             "Design your own rather than waiting for more content."),
+            ("Share what you build",
+             "A hole other people can actually play."),
+            ("No account",
+             "Nothing to sign up for and nothing to remember."),
+            ("No install",
+             "It is a web page."),
+            ("Free",
+             "There is nothing to buy.")],
+  faq=[("Why is it on dogefundme.com?",
+        "The domain was bought in a different mood for a different idea. The "
+        "game is better than the address, and the address is staying &mdash; "
+        "moving a live thing to a tidier name costs the people already "
+        "playing it and buys nothing."),
+       ("Do I need an account to build a hole?",
+        "No."),
+       ("Does it work on a phone?",
+        "It runs in a browser.")],
   facts=[("Where","dogefundme.com"),("Cost","Free"),
          ("Install","None. It runs in the browser."),
          ("Also","Design holes and share them")],
@@ -1424,7 +1579,7 @@ use the hosted page.</p>
 <p>Free isometric mini-golf in the browser. No install, no account, no launcher.
 You can design your own holes, share them, and play the ones other people
 built.</p>
-<h2>The domain</h2>
+<h2 id="the-domain">The domain</h2>
 <p>It is on dogefundme.com, which was bought in a different mood for a different
 idea. The game is better than the address and the address is staying, because
 moving a live thing to a tidier name is a cost with no benefit to anyone
@@ -1800,6 +1955,45 @@ moving when one turns out to be already clean.</p>
 
  "leadseer": dict(
   title="LeadSeer", tagline="Which businesses near you have no website at all?",
+  lede="Answers one question: which businesses near you have no website at "
+       "all. It is archived, it works, and it runs from source with your own "
+       "Google Places key.",
+  cta=[("Get the source", "https://github.com/vince-gonzalez/LeadSeer"),
+       ("What archived means", "#archived")],
+  herometa="<b>Archived, working</b> &middot; Node 18+ and Electron &middot; "
+           "needs your own Google Places API key &middot; run from source",
+  steps=[("Clone it and install",
+          "Node 18 or newer, plus Electron."),
+         ("Add a Google Places API key",
+          "Your own. There is no shared key and no service in the middle."),
+         ("Search an area",
+          "It comes back with the businesses that have no website &mdash; "
+          "which is the list, because everyone else already has one.")],
+  features_title="What it does",
+  features=[("One question, answered",
+             "Not a CRM, not a pipeline, not a dashboard. Which businesses "
+             "have no site."),
+            ("Your key, your quota",
+             "Nothing is proxied through anybody. You bring the Places key "
+             "and you own the usage."),
+            ("Desktop, via Electron",
+             "It runs on your machine."),
+            ("Archived and honest about it",
+             "The repository is archived. It works; it is not being "
+             "developed."),
+            ("Source-only",
+             "There is no installer, and the page does not pretend there is."),
+            ("Useful as-is",
+             "Archived is not broken. It answers the question it was built "
+             "for.")],
+  faq=[("Is this maintained?",
+        "No. It is archived and the page says so rather than letting you find "
+        "out after installing it."),
+       ("Do I need to pay Google?",
+        "You need a Places API key, and its usage is billed to you by Google "
+        "under their terms."),
+       ("Is there a packaged download?",
+        "No. Run it from source.")],
   facts=[("Status","Archived, working"),("Runtime","Node 18+, Electron"),
          ("Needs","A Google Places API key"),("Install","Run from source"),
          ("Source","vince-gonzalez/LeadSeer")],
@@ -1906,6 +2100,41 @@ plumhud where    where config and history live</pre>
 
  "streamsniper": dict(
   title="Stream Sniper", tagline="They go live. It is on the TV.",
+  lede="A streamer you follow goes live, and it is on the television. No "
+       "phone, no notification, no clicking &mdash; a small Debian box that "
+       "starts on boot and puts the stream on the screen.",
+  cta=[("Get the source", "https://github.com/vince-gonzalez/f-keys/tree/main/streamsniper"),
+       ("What it needs", "#specifications")],
+  herometa="<b>MIT</b> &middot; Debian or Ubuntu &middot; Streamlink, VLC, "
+           "pygame &middot; starts on boot via systemd",
+  steps=[("Put it on a small Linux box",
+          "Debian or Ubuntu. The kind of machine that lives behind the TV."),
+         ("Tell it who you follow",
+          "The channels that are worth interrupting the room for."),
+         ("Forget about it",
+          "systemd starts it on boot. When they go live, it is on the TV.")],
+  features_title="What it does",
+  features=[("Live means on-screen",
+             "Not a notification you have to act on."),
+            ("Starts on boot",
+             "A systemd unit, so a power cut does not end the arrangement."),
+            ("Streamlink and VLC",
+             "Standard parts doing the standard job, rather than a bespoke "
+             "player to maintain."),
+            ("Debian or Ubuntu",
+             "Runs on the cheap box you already have spare."),
+            ("MIT",
+             "It is yours to change."),
+            ("No account with us",
+             "It is software on your machine watching public streams.")],
+  faq=[("Does it work on Windows?",
+        "It is built for Debian or Ubuntu with systemd."),
+       ("Do I need a subscription?",
+        "To the streaming platform, whatever you already have. Nothing to "
+        "us."),
+       ("What hardware?",
+        "Anything that runs Debian and can decode video &mdash; it is meant "
+        "for a small box behind the television.")],
   facts=[("Licence","MIT"),("Platform","Debian or Ubuntu"),
          ("Needs","Streamlink, VLC, pygame"),("Starts","systemd, on boot")],
   body="""
@@ -1923,6 +2152,44 @@ in the list can cut in halfway through. Edits apply at the next check, with no r
 
  "moonbeam": dict(
   title="Moonbeam", tagline="Find the NerdMiners on your network.",
+  lede="Finds the NerdMiners on your network. One pip install, no "
+       "dependencies, and it tells you what is actually out there rather than "
+       "what you think you plugged in.",
+  cta=[("Install it", "https://pypi.org/project/moonbeam-miner/"),
+       ("Source", "https://github.com/vince-gonzalez/f-keys/tree/main/moonbeam")],
+  herometa="<b>1.0.0</b> &middot; <code>pip install moonbeam-miner</code> "
+           "&middot; Python 3.8+ &middot; MIT &middot; zero dependencies",
+  steps=[("Install it",
+          "<code>pip install moonbeam-miner</code>. Nothing else comes with "
+          "it."),
+         ("Scan the network",
+          "It looks for miners on the local network rather than asking you "
+          "to keep a list."),
+         ("Use it, or build on it",
+          "PlumHUD takes the same discovery and puts it on a heads-up "
+          "display.")],
+  features_title="What it does",
+  features=[("Finds them",
+             "The machines that are actually there, not the ones you "
+             "remember setting up."),
+            ("Zero dependencies",
+             "Nothing else installs with it. On a box that mines, that "
+             "matters."),
+            ("Python 3.8+",
+             "Old enough to run on whatever the miner host happens to be."),
+            ("MIT",
+             "Read it, change it, ship it."),
+            ("The base for PlumHUD",
+             "Discovery here, display there, one implementation."),
+            ("1.0.0",
+             "It does the one thing and it is finished.")],
+  faq=[("Does it work with other miners?",
+        "It is built for NerdMiners on a local network."),
+       ("Does it need root?",
+        "It is a network scan from your own machine."),
+       ("Is there a UI?",
+        "This is the library. <a href=\"/plumhud/\">PlumHUD</a> is the "
+        "display.")],
   facts=[("Version","1.0.0"),("Licence","MIT"),("Install","pip install moonbeam-miner"),
          ("Requires","Python 3.8+"),("Dependencies","None")],
   body="""
