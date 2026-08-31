@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/qv/
 
-One tap, one vote, live needle. The ballot comes to you.
+Ask a room a question and watch the answer move. One tap, one vote, a live needle, and no account for anybody &mdash; the ballot comes to the voter rather than the other way round.
 
-| Field | Value |
-| --- | --- |
-| Version | 0.5.0 — Ballot Box |
-| Platform | Browser, PWA |
-| Accounts | None |
-| Embeds | One script tag |
-| Source | vince-gonzalez/qv |
+**0.5.0 — Ballot Box** · browser and PWA · no accounts · one script tag to embed
 
 ## What it is
 
@@ -45,6 +39,22 @@ rather than a choice.
 The creator terminal publishes and closes ballots and watches tallies live, behind a
 creator key. Bulk seeding fills a channel from a question set, so a new channel does not
 launch empty.
+
+## How it works
+
+## What you get
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Version | 0.5.0 — Ballot Box |
+| Platform | Browser, PWA |
+| Accounts | None |
+| Embeds | One script tag |
+| Source | vince-gonzalez/qv |
+
+## Questions
 
 ---
 

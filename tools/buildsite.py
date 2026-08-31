@@ -147,6 +147,69 @@ CATEGORIES = [
 PAGES = {
 "saydo": dict(
   title="SayDo", tagline="Prove a tool behaves as it says.",
+  lede="Signing proves a tool's code is what the publisher released. It does "
+       "not prove the tool behaves as its description promises. SayDo tests "
+       "that second claim: a contract per tool, a harness that checks the tool "
+       "against it, and a hash-chained receipt anyone can verify without "
+       "trusting us.",
+  cta=[("The repository", "https://github.com/vince-gonzalez/saydo"),
+       ("See a real receipt", "#a-receipt-actually"),
+       ("Read the declaration spec", "https://github.com/vince-gonzalez/saydo/tree/main/spec")],
+  herometa="<b>Working proof of concept</b> &middot; name provisional &middot; "
+           "declarations are drafts &middot; receipts are unsigned &middot; "
+           "no trust mark yet",
+  steps=[("Declare what the tool may do",
+          "A machine-readable contract per tool: no network, writes only "
+          "here, deterministic, errors returned as values. Ten invariant "
+          "types in the current draft."),
+         ("Put the tool under the harness",
+          "<code>saydo verify certivl</code> captures the live tool "
+          "definitions, exercises the server with valid and adversarial "
+          "input while watching egress and the filesystem, and reports pass, "
+          "fail or <b>not-covered</b> per invariant."),
+         ("Hand somebody the receipt",
+          "Every run emits a hash-chained record, one row per verdict. They "
+          "check it in a browser with no account and no request to us.")],
+  features_title="What is actually built",
+  features=[("Ten invariant types",
+             "no-network, network-allowlist, no-write, write-scope, "
+             "read-scope, no-subprocess, deterministic, error-as-value, "
+             "refusal-tool, property."),
+            ("Nine declarations",
+             "Five F-Keys MCP servers and four third-party ones. All draft, "
+             "and the page says so because they are."),
+            ("A chain that breaks visibly",
+             "<code>row_hash = sha256(prev + row)</code>. Edit one row and "
+             "every hash below it stops matching."),
+            ("It reports what it did not test",
+             "An invariant the harness could not exercise comes back "
+             "not-covered rather than passed. A harness that only ever "
+             "passes is worth nothing."),
+            ("It admits its blind spots",
+             "The receipt records that the monitor does not see below the "
+             "Python runtime &mdash; a native extension is outside what it "
+             "can observe, and it says so in the artifact."),
+            ("Offline verification",
+             "A self-contained browser verifier. No account, no network, no "
+             "request to anybody, including us.")],
+  faq=[("Does this replace TBOM or CTMS?",
+        "No. It extends them. Both are provenance and both state that "
+        "verifying behavior against the metadata is out of their scope &mdash; "
+        "that line is the reason this exists. A declaration binds to the same "
+        "tool-definition digests a Tool Bill of Materials records."),
+       ("Is anything here certified?",
+        "No. Every declaration carries <code>status: \"draft\"</code> and "
+        "every receipt is unsigned. Nothing here is a claim of conformance "
+        "about anybody's software, including ours."),
+       ("What about the trust mark?",
+        "Not built. A registry-served badge with expiry and revocation is the "
+        "fourth layer and it does not exist yet."),
+       ("Why should I believe the harness?",
+        "Do not. Run <code>saydo selfcheck</code> &mdash; it ships a server "
+        "built to fail and requires the harness to catch every violation."),
+       ("Is the name final?",
+        "No. It was WARRANT, it is SayDo, and it is marked provisional "
+        "because it is.")],
   facts=[("Status", "Working proof of concept \u2014 name provisional"),
          ("Declarations", "5 F-Keys servers, 4 third-party \u2014 all draft"),
          ("Receipts", "Unsigned"),
@@ -201,7 +264,7 @@ built to fail. <code>saydo selfcheck</code> runs that one and requires the
 harness to catch every violation &mdash; the same discipline the rest of this
 catalogue is built on, pointed at itself.</p>
 
-<h2>A receipt, actually</h2><p>This is the receipt for <code>saydo verify certivl</code>, from the repository. Thirteen rows: the declaration it was checked against, the captured tool definitions, what the monitor could and could not see, one row per invariant, and a close. Each row carries the hash of the row before it.</p><div class="receipt"><table><thead><tr><th>#</th><th>row</th><th></th><th>prev_hash</th><th>row_hash</th></tr></thead><tbody><tr><td class="sq">1</td><td class="ty">open</td><td class="ex">pkg:pypi/certivl@0.2.0</td><td class="hx">31b446b87a387b3d…</td><td class="hx">2911aee89d746f02…</td></tr><tr><td class="sq">2</td><td class="ty">capture</td><td class="ex"></td><td class="hx">2911aee89d746f02…</td><td class="hx">8bbcbdebf275fae5…</td></tr><tr><td class="sq">3</td><td class="ty">monitor</td><td class="ex"></td><td class="hx">8bbcbdebf275fae5…</td><td class="hx">8db9473951715e22…</td></tr><tr><td class="sq">4</td><td class="ty">verdict</td><td class="ex">refusal.scope</td><td class="hx">8db9473951715e22…</td><td class="hx">a192845eb5d858e8…</td></tr><tr><td class="sq">5</td><td class="ty">verdict</td><td class="ex">network.none</td><td class="hx">a192845eb5d858e8…</td><td class="hx">94ff9d07b07e1140…</td></tr><tr><td class="sq">6</td><td class="ty">verdict</td><td class="ex">writes.none</td><td class="hx">94ff9d07b07e1140…</td><td class="hx">2792b46310d90e1e…</td></tr><tr><td class="sq">7</td><td class="ty">verdict</td><td class="ex">reads.none</td><td class="hx">2792b46310d90e1e…</td><td class="hx">6953d604c4a27794…</td></tr><tr><td class="sq">8</td><td class="ty">verdict</td><td class="ex">subprocess.none</td><td class="hx">6953d604c4a27794…</td><td class="hx">fe0193b67cfeab17…</td></tr><tr><td class="sq">9</td><td class="ty">verdict</td><td class="ex">answers.deterministic</td><td class="hx">fe0193b67cfeab17…</td><td class="hx">e83fd3722b937d43…</td></tr><tr><td class="sq">10</td><td class="ty">verdict</td><td class="ex">errors.are-values</td><td class="hx">e83fd3722b937d43…</td><td class="hx">8d7fb1429449889e…</td></tr><tr><td class="sq">11</td><td class="ty">verdict</td><td class="ex">undecided.on-overlap</td><td class="hx">8d7fb1429449889e…</td><td class="hx">27850d284c2f007b…</td></tr><tr><td class="sq">12</td><td class="ty">verdict</td><td class="ex">decimal.read-exactly</td><td class="hx">27850d284c2f007b…</td><td class="hx">6f174eaa56827918…</td></tr><tr><td class="sq">13</td><td class="ty">close</td><td class="ex">tally {'pass': 9}</td><td class="hx">6f174eaa56827918…</td><td class="hx">754a675f79ea0f92…</td></tr></tbody></table></div><p class="sub">Every <code>prev_hash</code> above equals the <code>row_hash</code> on the line before it &mdash; checked, not asserted. Change any row and every hash below it stops matching, which is the whole mechanism. Paste it into <code>verifier/index.html</code> and it checks offline, with no account and no request to anybody.</p><h2>What the monitor admits it cannot see</h2><p>Row 3 is not a result. It is the harness recording its own blind spots &mdash; that it observes filesystem opens and socket connects at the host process, and does <b>not</b> observe activity below the Python runtime, such as a native extension. An invariant it did not exercise is reported <code>not-covered</code> rather than passed.</p><h2>What it is not, yet</h2>
+<h2 id="a-receipt-actually">A receipt, actually</h2><p>This is the receipt for <code>saydo verify certivl</code>, from the repository. Thirteen rows: the declaration it was checked against, the captured tool definitions, what the monitor could and could not see, one row per invariant, and a close. Each row carries the hash of the row before it.</p><div class="receipt"><table><thead><tr><th>#</th><th>row</th><th></th><th>prev_hash</th><th>row_hash</th></tr></thead><tbody><tr><td class="sq">1</td><td class="ty">open</td><td class="ex">pkg:pypi/certivl@0.2.0</td><td class="hx">31b446b87a387b3d…</td><td class="hx">2911aee89d746f02…</td></tr><tr><td class="sq">2</td><td class="ty">capture</td><td class="ex"></td><td class="hx">2911aee89d746f02…</td><td class="hx">8bbcbdebf275fae5…</td></tr><tr><td class="sq">3</td><td class="ty">monitor</td><td class="ex"></td><td class="hx">8bbcbdebf275fae5…</td><td class="hx">8db9473951715e22…</td></tr><tr><td class="sq">4</td><td class="ty">verdict</td><td class="ex">refusal.scope</td><td class="hx">8db9473951715e22…</td><td class="hx">a192845eb5d858e8…</td></tr><tr><td class="sq">5</td><td class="ty">verdict</td><td class="ex">network.none</td><td class="hx">a192845eb5d858e8…</td><td class="hx">94ff9d07b07e1140…</td></tr><tr><td class="sq">6</td><td class="ty">verdict</td><td class="ex">writes.none</td><td class="hx">94ff9d07b07e1140…</td><td class="hx">2792b46310d90e1e…</td></tr><tr><td class="sq">7</td><td class="ty">verdict</td><td class="ex">reads.none</td><td class="hx">2792b46310d90e1e…</td><td class="hx">6953d604c4a27794…</td></tr><tr><td class="sq">8</td><td class="ty">verdict</td><td class="ex">subprocess.none</td><td class="hx">6953d604c4a27794…</td><td class="hx">fe0193b67cfeab17…</td></tr><tr><td class="sq">9</td><td class="ty">verdict</td><td class="ex">answers.deterministic</td><td class="hx">fe0193b67cfeab17…</td><td class="hx">e83fd3722b937d43…</td></tr><tr><td class="sq">10</td><td class="ty">verdict</td><td class="ex">errors.are-values</td><td class="hx">e83fd3722b937d43…</td><td class="hx">8d7fb1429449889e…</td></tr><tr><td class="sq">11</td><td class="ty">verdict</td><td class="ex">undecided.on-overlap</td><td class="hx">8d7fb1429449889e…</td><td class="hx">27850d284c2f007b…</td></tr><tr><td class="sq">12</td><td class="ty">verdict</td><td class="ex">decimal.read-exactly</td><td class="hx">27850d284c2f007b…</td><td class="hx">6f174eaa56827918…</td></tr><tr><td class="sq">13</td><td class="ty">close</td><td class="ex">tally {'pass': 9}</td><td class="hx">6f174eaa56827918…</td><td class="hx">754a675f79ea0f92…</td></tr></tbody></table></div><p class="sub">Every <code>prev_hash</code> above equals the <code>row_hash</code> on the line before it &mdash; checked, not asserted. Change any row and every hash below it stops matching, which is the whole mechanism. Paste it into <code>verifier/index.html</code> and it checks offline, with no account and no request to anybody.</p><h2>What the monitor admits it cannot see</h2><p>Row 3 is not a result. It is the harness recording its own blind spots &mdash; that it observes filesystem opens and socket connects at the host process, and does <b>not</b> observe activity below the Python runtime, such as a native extension. An invariant it did not exercise is reported <code>not-covered</code> rather than passed.</p><h2>What it is not, yet</h2>
 <p>This is a working proof of concept and the name is provisional. Every
 declaration currently carries <code>status: "draft"</code>. Every receipt is
 unsigned. Nothing here is a claim of conformance about anybody&rsquo;s
@@ -538,6 +601,56 @@ one.</p>
 
 "opticquiz": dict(
   title="OpticQuiz", tagline="See colour. Check colour. Correct colour.",
+  lede="Sixteen vision tests that run entirely in your browser, and a "
+       "colour-accessibility toolkit for people who ship things other people "
+       "have to look at. Nothing is uploaded.",
+  cta=[("Take a test", "https://opticquiz.com"),
+       ("Check a palette", "https://www.npmjs.com/package/opticquiz-cvd"),
+       ("The research", "/papers/")],
+  herometa="<b>Free, no account</b> &middot; runs entirely in the browser "
+           "&middot; three packages &middot; method deposited with a DOI",
+  steps=[("Open it and pick a test",
+          "Acuity charts, colour vision, contrast. Sixteen of them, and none "
+          "asks who you are."),
+         ("Take it on your own screen",
+          "Everything runs locally. The results never leave the machine, "
+          "which is the only sane arrangement for typing what you can and "
+          "cannot see into a web page."),
+         ("Or put the same engine in your build",
+          "<code>npm i opticquiz-cvd</code> &mdash; the simulation that runs "
+          "the tests also runs in CI, so a palette is checked before it "
+          "ships rather than after somebody complains.")],
+  features_title="Two audiences, one engine",
+  features=[("Sixteen tests",
+             "Acuity, colour vision and contrast, rendered honestly with "
+             "their calibration limits published rather than glossed."),
+            ("Nothing is uploaded",
+             "The tests run on your machine. No account, no result stored, "
+             "nothing to leak."),
+            ("Installable simulation",
+             "<code>opticquiz-cvd</code> on npm and PyPI, plus an MCP server, "
+             "so the same maths runs in your pipeline."),
+            ("A build gate",
+             "The cvd-palette Action fails a build when two colours collapse "
+             "into one under protanopia, deuteranopia or tritanopia."),
+            ("The default palette is not safe",
+             "Matplotlib red and green are 71 apart to normal vision and "
+             "<b>five apart</b> under deuteranopia. That is the whole case."),
+            ("Published method",
+             "The plate-generation method is deposited with a DOI, so the "
+             "test can be cited and reproduced rather than trusted.")],
+  faq=[("Is this a medical test?",
+        "No. It is screening, not diagnosis. A screen is not a lightbox, and "
+        "the pages say so where the limits matter."),
+       ("Do you keep my results?",
+        "There is nothing to keep. The tests run in your browser and no "
+        "result is transmitted."),
+       ("Can I check my product's colours automatically?",
+        "Yes &mdash; that is what the packages and the GitHub Action are for. "
+        "The check that runs on the site runs in your build."),
+       ("Why should I trust the plates?",
+        "Because the method is published with a DOI and the calibration "
+        "limits are stated, rather than the plates being asserted as correct.")],
   facts=[("Where","opticquiz.com"),("Cost","Free, no account"),
          ("Runs","Entirely in the browser"),
          ("Packages","opticquiz-cvd, opticquiz-eye, opticquiz-cvd-mcp"),
@@ -748,6 +861,55 @@ currently playing it.</p>
 
  "keyj": dict(
   title="Key-J", tagline="Every keystroke plays a note, in any application.",
+  lede="Every key you press plays a note, in whatever program is already in "
+       "front of you. Type an email and hear a melody; import guitar tablature "
+       "and watch it play itself on a live staff.",
+  cta=[("Open it in the browser", "/keyj/app.html"),
+       ("Download for Windows or Linux", "https://github.com/vince-gonzalez/f-keys/releases/latest"),
+       ("Manual", "/keyj/manual/")],
+  herometa="<b>1.6.0</b> &middot; Browser, Windows, Linux &middot; "
+           "no account &middot; <code>pip install keyj</code> for the reader",
+  steps=[("Open it, or install it",
+          "The browser version needs nothing at all. The desktop build adds "
+          "global capture, so the notes follow you into any other program."),
+         ("Choose a scale and a sound",
+          "Every key maps to a note. The mapping is a keycode table, not a "
+          "guess about your keyboard layout, so it lands the same on every "
+          "machine."),
+         ("Type, or import a tab",
+          "Play by typing, or paste guitar tablature and watch it resolve onto "
+          "a live staff. Export the result as WAV.")],
+  features_title="What it does",
+  features=[("Any program, not just this one",
+             "The desktop build captures globally, so the music plays while "
+             "you work in something else entirely."),
+            ("Tablature in, notation out",
+             "Eight tunings with capo offsets. The same reader ships as "
+             "<code>keyj</code> on PyPI and <code>keyjockey</code> on npm."),
+            ("A live staff",
+             "Notes appear on a real five-line staff as they sound, rather "
+             "than a piano roll that only a DAW user can read."),
+            ("WAV export",
+             "What you played comes out as a file, at the tempo you played "
+             "it, without a recording step."),
+            ("No account, no upload",
+             "It runs on your machine. Nothing you type is sent anywhere."),
+            ("One reader, three places",
+             "Browser, desktop and package are generated from one source, and "
+             "the build fails if they drift.")],
+  faq=[("Do I need to know music?",
+        "No. Every key is already a note in a scale you pick, so nothing you "
+        "type is wrong."),
+       ("Does it work while I use other programs?",
+        "The desktop build does &mdash; that is the reason it exists. The "
+        "browser version only hears keys while its tab has focus."),
+       ("What is the difference between keyj and keyjockey?",
+        "Same reader, two registries: <code>keyj</code> on PyPI, "
+        "<code>keyjockey</code> on npm. Both are generated from the code the "
+        "app runs, so none of the three can drift apart."),
+       ("Is it free?",
+        "The browser version is. The desktop build is proprietary and "
+        "downloadable from the releases page.")],
   facts=[("Version","1.6.0"),("Licence","Proprietary"),("Platforms","Browser, Windows, Linux"),
          ("Source","vince-gonzalez/f-keys")],
   body="""
@@ -812,6 +974,53 @@ board and clear it. Square, saw, triangle and sine per channel.</p>
 
  "qv": dict(
   title="QV", tagline="One tap, one vote, live needle. The ballot comes to you.",
+  lede="Ask a room a question and watch the answer move. One tap, one vote, "
+       "a live needle, and no account for anybody &mdash; the ballot comes to "
+       "the voter rather than the other way round.",
+  cta=[("Open QV", "https://qv.f-keys.com/"),
+       ("Put one on your site", "#embeds"),
+       ("Source", "https://github.com/vince-gonzalez/qv")],
+  herometa="<b>0.5.0 &mdash; Ballot Box</b> &middot; browser and PWA &middot; "
+           "no accounts &middot; one script tag to embed",
+  steps=[("Ask a question",
+          "Yes or no, this or that. A ballot is one question, which is why it "
+          "takes a second to answer."),
+         ("Send it, or subscribe to a channel",
+          "Subscribers get new ballots as notifications. On Chrome, Edge, "
+          "Firefox and Android you vote from the notification's own buttons "
+          "without opening anything."),
+         ("Watch the needle",
+          "The result moves the moment anyone votes, anywhere. There is no "
+          "closing time unless you want one.")],
+  features_title="What you get",
+  features=[("No accounts, for anyone",
+             "Not for the asker and not for the voter. Anonymity is the "
+             "product, not a setting."),
+            ("Vote without opening anything",
+             "On Chrome, Edge, Firefox and Android the notification carries "
+             "the buttons. That is the difference between a poll and a "
+             "question somebody actually answers."),
+            ("A live needle",
+             "The result is a needle that moves, not a page you refresh."),
+            ("One script tag",
+             "A live ballot on somebody else's page with a single embed."),
+            ("Browser and PWA",
+             "On iPhone it works through Add to Home Screen, which is "
+             "Apple's requirement for web push rather than a choice."),
+            ("Channels",
+             "Ballots grouped by topic, so people opt into the questions "
+             "they care about.")],
+  faq=[("Do voters need an account?",
+        "No. Nobody does. That is the entire point and it is why results are "
+        "anonymous by construction rather than by promise."),
+       ("How is it different from a poll?",
+        "Answering costs one tap from wherever you already are, instead of "
+        "opening a page. That difference is most of the response rate."),
+       ("Can I put one on my own site?",
+        "Yes, with one script tag."),
+       ("Does it work on iPhone?",
+        "Through Add to Home Screen. That is Apple's requirement for web "
+        "push, not a limitation we chose.")],
   facts=[("Version","0.5.0 \u2014 Ballot Box"),("Platform","Browser, PWA"),
          ("Accounts","None"),("Embeds","One script tag"),
          ("Source","vince-gonzalez/qv")],
@@ -943,6 +1152,49 @@ answers a real question is worth keeping.</p>
 
  "plumhud": dict(
   title="PlumHUD", tagline="Watch the fleet, not the screen.",
+  lede="A heads-up display for a fleet of miners. It sits on your desktop, "
+       "goes quiet while everything is fine, and tells you the moment a "
+       "machine stops earning.",
+  cta=[("Install it", "https://pypi.org/project/plumhud/"),
+       ("Source", "https://github.com/vince-gonzalez/f-keys/tree/main/plumhud")],
+  herometa="<b>4.1.0</b> &middot; <code>pip install plumhud</code> &middot; "
+           "Python 3.8+ with Tk &middot; MIT",
+  steps=[("Install it",
+          "<code>pip install plumhud</code>. It needs Python 3.8 or newer and "
+          "Tk, which ships with most Python builds."),
+         ("Point it at the fleet",
+          "It finds the miners through <code>moonbeam-miner</code>, so the "
+          "discovery you already have is the discovery it uses."),
+         ("Leave it alone",
+          "That is the design. It is a heads-up display, so the correct "
+          "amount of attention to give it while things work is none.")],
+  features_title="What it does",
+  features=[("A glance, not a dashboard",
+             "The whole fleet reduced to a strip you can read without "
+             "stopping what you are doing."),
+            ("Alerts when it matters",
+             "Silence while the machines are working. A machine that stops "
+             "earning is the event, not the ordinary variation around it."),
+            ("Built on moonbeam-miner",
+             "Discovery is shared with the tool that already finds the "
+             "NerdMiners on your network."),
+            ("Desktop, not a web app",
+             "It runs on your machine with Tk. Nothing is hosted and nothing "
+             "phones home."),
+            ("MIT licensed",
+             "Read it, change it, ship it."),
+            ("Version 4",
+             "Four major revisions of one small idea, which is what happens "
+             "when a tool is used daily by the person who wrote it.")],
+  faq=[("What does the name mean?",
+        "Personal Ledger Utility Monitor, Heads-Up Display. It was a joke "
+        "that stuck."),
+       ("Do I need Moonbeam too?",
+        "It depends on <code>moonbeam-miner</code> for discovery, which pip "
+        "installs for you."),
+       ("Will it run on a headless box?",
+        "No. It draws a window with Tk, so it wants a desktop. The machine "
+        "being watched can be headless; the machine watching cannot.")],
   facts=[("Name","Personal Ledger Utility Monitor, Heads-Up Display"),
          ("Version","4.1.0"),("Licence","MIT"),("Install","pip install plumhud"),
          ("Requires","Python 3.8+, Tk"),("Depends on","moonbeam-miner")],

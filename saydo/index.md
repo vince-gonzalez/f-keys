@@ -4,16 +4,9 @@
 
 Canonical: https://f-keys.com/saydo/
 
-Prove a tool behaves as it says.
+Signing proves a tool's code is what the publisher released. It does not prove the tool behaves as its description promises. SayDo tests that second claim: a contract per tool, a harness that checks the tool against it, and a hash-chained receipt anyone can verify without trusting us.
 
-| Field | Value |
-| --- | --- |
-| Status | Working proof of concept — name provisional |
-| Declarations | 5 F-Keys servers, 4 third-party — all draft |
-| Receipts | Unsigned |
-| Invariant types | 10 in the current draft |
-| Licence | Apache-2.0 on the open layers |
-| Source | vince-gonzalez/saydo |
+**Working proof of concept** · name provisional · declarations are drafts · receipts are unsigned · no trust mark yet
 
 ## The gap
 
@@ -101,6 +94,23 @@ CTMS 1.0, George Kanellopoulos, 2026 —
 [gkanellopoulos/ctms](https://github.com/gkanellopoulos/ctms).
 Both are provenance; both state that verifying behavior against the metadata
 is out of their scope.
+
+## How it works
+
+## What is actually built
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Status | Working proof of concept — name provisional |
+| Declarations | 5 F-Keys servers, 4 third-party — all draft |
+| Receipts | Unsigned |
+| Invariant types | 10 in the current draft |
+| Licence | Apache-2.0 on the open layers |
+| Source | vince-gonzalez/saydo |
+
+## Questions
 
 ---
 

@@ -4,14 +4,9 @@
 
 Canonical: https://f-keys.com/keyj/
 
-Every keystroke plays a note, in any application.
+Every key you press plays a note, in whatever program is already in front of you. Type an email and hear a melody; import guitar tablature and watch it play itself on a live staff.
 
-| Field | Value |
-| --- | --- |
-| Version | 1.6.0 |
-| Licence | Proprietary |
-| Platforms | Browser, Windows, Linux |
-| Source | vince-gonzalez/f-keys |
+**1.6.0** · Browser, Windows, Linux · no account · pip install keyj for the reader
 
 ## What it does
 
@@ -65,6 +60,21 @@ it, which is the difference between an instrument and a keylogger.
 
 The CLI is MIT. The desktop and browser apps are not — see
 [the licence](https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE).
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Version | 1.6.0 |
+| Licence | Proprietary |
+| Platforms | Browser, Windows, Linux |
+| Source | vince-gonzalez/f-keys |
+
+## Questions
 
 ---
 

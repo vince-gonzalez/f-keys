@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/opticquiz/
 
-See colour. Check colour. Correct colour.
+Sixteen vision tests that run entirely in your browser, and a colour-accessibility toolkit for people who ship things other people have to look at. Nothing is uploaded.
 
-| Field | Value |
-| --- | --- |
-| Where | opticquiz.com |
-| Cost | Free, no account |
-| Runs | Entirely in the browser |
-| Packages | opticquiz-cvd, opticquiz-eye, opticquiz-cvd-mcp |
-| Research | Deposited, with DOIs |
+**Free, no account** · runs entirely in the browser · three packages · method deposited with a DOI
 
 ## What it is
 
@@ -41,6 +35,22 @@ are seventy-one apart to normal vision and five apart under deuteranopia.
 Screening, not diagnosis. These are the same plates and charts an optician
 would recognise, rendered honestly, with their calibration limits published
 rather than glossed. A screen is not a lightbox and the tests say so.
+
+## How it works
+
+## Two audiences, one engine
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Where | opticquiz.com |
+| Cost | Free, no account |
+| Runs | Entirely in the browser |
+| Packages | opticquiz-cvd, opticquiz-eye, opticquiz-cvd-mcp |
+| Research | Deposited, with DOIs |
+
+## Questions
 
 ---
 

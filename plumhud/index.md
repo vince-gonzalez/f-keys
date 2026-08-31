@@ -4,16 +4,9 @@
 
 Canonical: https://f-keys.com/plumhud/
 
-Watch the fleet, not the screen.
+A heads-up display for a fleet of miners. It sits on your desktop, goes quiet while everything is fine, and tells you the moment a machine stops earning.
 
-| Field | Value |
-| --- | --- |
-| Name | Personal Ledger Utility Monitor, Heads-Up Display |
-| Version | 4.1.0 |
-| Licence | MIT |
-| Install | pip install plumhud |
-| Requires | Python 3.8+, Tk |
-| Depends on | moonbeam-miner |
+**4.1.0** · pip install plumhud · Python 3.8+ with Tk · MIT
 
 ## What it does
 
@@ -36,6 +29,23 @@ null, and alert rules stay quiet rather than reporting an absent measurement as 
 
 The config also stopped moving. It lives in one per-user directory, created owner-only,
 because it holds a Discord webhook and a Telegram token.
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Name | Personal Ledger Utility Monitor, Heads-Up Display |
+| Version | 4.1.0 |
+| Licence | MIT |
+| Install | pip install plumhud |
+| Requires | Python 3.8+, Tk |
+| Depends on | moonbeam-miner |
+
+## Questions
 
 ---
 
