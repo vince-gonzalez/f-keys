@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/ishihara/
 
-Colour-vision plates, reproducible from a seed.
+Generates pseudoisochromatic plates &mdash; the dotted circles with a numeral hidden in the colour separation &mdash; from a seed, so the same seed gives the same plate on any machine, forever.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install ishihara |
-| Version | 0.1.2 |
-| Licence | MIT |
-| Output | Plate images from a seed |
-| Source | vince-gonzalez/ishihara |
+**0.1.2** · pip install ishihara · MIT · reproducible from a seed
 
 ## What it does
 
@@ -34,6 +28,22 @@ Not a diagnosis, and not a calibrated instrument. A screen is not a
 lightbox: the plate you generate is only as honest as the display it lands on,
 and the calibration limits are published rather than glossed over. The
 underlying method is deposited with a DOI.
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install ishihara |
+| Version | 0.1.2 |
+| Licence | MIT |
+| Output | Plate images from a seed |
+| Source | vince-gonzalez/ishihara |
+
+## Questions
 
 ---
 

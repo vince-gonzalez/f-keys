@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/authorecon/
 
-Every place your published work ended up.
+Reconciles a body of published work against every place it lives &mdash; for any ORCID, from public sources. A deposit exists in more places than the person who made it can hold in their head.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install authorecon |
-| Takes | Any ORCID |
-| Sources | Public ones only |
-| Also | Gates that run before work leaves your hands |
-| Source | vince-gonzalez/apriori |
+pip install authorecon · any ORCID · public sources only
 
 ## What it does
 
@@ -34,6 +28,22 @@ they are the same question asked at two different times.
 It reads public sources only, and it does not treat a citation count as a
 signal — a count reflects how long a corpus has been indexed at least as
 much as it reflects anything about the work.
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install authorecon |
+| Takes | Any ORCID |
+| Sources | Public ones only |
+| Also | Gates that run before work leaves your hands |
+| Source | vince-gonzalez/apriori |
+
+## Questions
 
 ---
 

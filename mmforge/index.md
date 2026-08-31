@@ -4,16 +4,9 @@
 
 Canonical: https://f-keys.com/mmforge/
 
-Find the axiom a theorem did not need.
+Finds a theorem that pays for an axiom it does not need, then builds the proof that removes the dependence and checks it.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install mmforge |
-| Version | 0.2.0 |
-| Licence | MIT |
-| Reads | Metamath databases |
-| Upstream | 6 pull requests merged into set.mm |
-| Source | vince-gonzalez/mmforge |
+**0.2.0** · pip install mmforge · MIT · six pull requests merged into set.mm
 
 ## What it does
 
@@ -42,6 +35,23 @@ Fixing one statement frees a count that is not the count you get when you
 fix it alongside the others. fimact alone frees one theorem; in the
 stack it frees fourteen. Every per-repair figure this reports is a lower bound,
 and it says so rather than adding them for you.
+
+## How it works
+
+## What it finds
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install mmforge |
+| Version | 0.2.0 |
+| Licence | MIT |
+| Reads | Metamath databases |
+| Upstream | 6 pull requests merged into set.mm |
+| Source | vince-gonzalez/mmforge |
+
+## Questions
 
 ---
 

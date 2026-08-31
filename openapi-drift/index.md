@@ -4,14 +4,9 @@
 
 Canonical: https://f-keys.com/openapi-drift/
 
-Does the service still do what the spec says?
+An OpenAPI document is a promise about a service, and nothing keeps the two together. This checks whether the service still does what the document says &mdash; and whether a machine can still read the document at all.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install openapi-drift |
-| Licence | MIT |
-| Action | vince-gonzalez/openapi-drift |
-| Source | vince-gonzalez/openapi-drift |
+pip install openapi-drift · MIT · safe calls only, never writes
 
 ## What it does
 
@@ -42,6 +37,21 @@ well-formed document can be unreadable by a machine.
 --live calls parameterless GETs only. A path with a placeholder
 or a required parameter is skipped rather than guessed at, because a guessed
 value reports drift that is the checker's fault. Nothing is ever written.
+
+## How it works
+
+## What it checks
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install openapi-drift |
+| Licence | MIT |
+| Action | vince-gonzalez/openapi-drift |
+| Source | vince-gonzalez/openapi-drift |
+
+## Questions
 
 ---
 

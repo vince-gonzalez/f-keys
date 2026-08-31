@@ -123,7 +123,7 @@
 </ul></li></ul>
     </aside>
     <section class="content sunken">
-<div class="doc"><h1>certivl</h1><p class="sub">An enclosure that turns a computed inequality into a proof.</p><table class="facts"><tr><th>Install</th><td>pip install certivl</td></tr><tr><th>Version</th><td>0.2.0</td></tr><tr><th>Licence</th><td>MIT</td></tr><tr><th>Arithmetic</th><td>Exact rational, certified interval</td></tr><tr><th>Source</th><td>vince-gonzalez/certivl</td></tr></table>
+<div class="doc"><div class="hero"><h1>certivl</h1><p class="lede">Exact rational and certified interval arithmetic. A float comparison tells you what the hardware thought; an enclosure tells you what is true, because the answer is bracketed and the bracket is carried through every operation.</p><div class="herocta"><a class="btn default" href="https://pypi.org/project/certivl/" rel="noopener">Install it</a><a class="btn" href="https://github.com/vince-gonzalez/certivl" rel="noopener">Source</a><a class="btn" href="/papers/">The papers</a></div><p class="meta"><b>0.2.0</b> &middot; <code>pip install certivl</code> &middot; MIT &middot; exact rational and interval</p></div>
 <h2>What it does</h2>
 <p>Exact rational and certified interval arithmetic. A float comparison tells
 you what the hardware thought; an enclosure tells you what is true, because the
@@ -143,7 +143,7 @@ someone re-running it on different hardware.</p>
   <a class="btn default" href="https://pypi.org/project/certivl/" rel="noopener">PyPI</a>
   <a class="btn" href="https://github.com/vince-gonzalez/certivl" rel="noopener">Source</a>
   <a class="btn" href="/papers/">The papers</a>
-</div></div>
+</div><h2>How it works</h2><ol class="steps"><li><b>Install it</b><span><code>pip install certivl</code>.</span></li><li><b>Compute inside an enclosure</b><span>Every operation carries the bracket forward rather than collapsing to a number that has lost its error.</span></li><li><b>Read the verdict, including &#x27;undecided&#x27;</b><span>An enclosure strictly on one side of zero settles the inequality. One that straddles zero says the computation did not decide it &mdash; which is the answer floating point never gives you.</span></li></ol><h2>What it gives you</h2><div class="featgrid"><div class="feat"><b>Exact rational arithmetic</b><span>No rounding at all where the numbers allow it.</span></div><div class="feat"><b>Certified intervals</b><span>Where they do not, an enclosure whose width is the honest uncertainty.</span></div><div class="feat"><b>An honest &#x27;I do not know&#x27;</b><span>The most useful result and the one a float cannot produce.</span></div><div class="feat"><b>Machine-checkable bounds</b><span>A result that survives somebody re-running it on different hardware.</span></div><div class="feat"><b>Behind the geometry papers</b><span>Covering, packing and opacity bounds in the deposited work.</span></div><div class="feat"><b>MIT</b><span>Read it, use it, ship it.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>pip install certivl</td></tr><tr><th>Version</th><td>0.2.0</td></tr><tr><th>Licence</th><td>MIT</td></tr><tr><th>Arithmetic</th><td>Exact rational, certified interval</td></tr><tr><th>Source</th><td>vince-gonzalez/certivl</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Why not just use floats carefully?</dt><dd>Carefully is not a property you can check. An enclosure is.</dd><dt>Is it slow?</dt><dd>Slower than a float and faster than being wrong in a published bound.</dd></dl></div>
     </section>
   </div>
 

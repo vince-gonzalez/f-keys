@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/loadbearing/
 
-What a claim asserts, and what its proof consumed.
+Separates two things every axiom census runs together: what a statement asserts, and what the derivation behind it consumed. They are different questions with different answers.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install loadbearing |
-| Version | 0.2.0 |
-| Extras | [formal] for Lean and Metamath, [mcp] for the server |
-| Reads | Lean 4, Metamath |
-| Source | vince-gonzalez/loadbearing |
+**0.2.0** · pip install loadbearing · Lean 4 and Metamath · MCP server included
 
 ## What it does
 
@@ -34,6 +28,22 @@ A graph carries the population it excluded, and a ledger that excluded
 nothing says so explicitly. The digest is taken over installed file contents,
 so a measurement can be quoted with the version of the thing that produced it
 — a reach without a digest is not a citation, it is a memory.
+
+## How it works
+
+## What it measures
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install loadbearing |
+| Version | 0.2.0 |
+| Extras | [formal] for Lean and Metamath, [mcp] for the server |
+| Reads | Lean 4, Metamath |
+| Source | vince-gonzalez/loadbearing |
+
+## Questions
 
 ---
 

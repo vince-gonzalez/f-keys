@@ -121,7 +121,7 @@
 </ul></li></ul>
     </aside>
     <section class="content sunken">
-<div class="doc"><h1>axsent</h1><p class="sub">What a formal library assumes, measured from source.</p><table class="facts"><tr><th>Install</th><td>pip install axsent</td></tr><tr><th>Reads</th><td>Rocq, Agda, Isabelle</td></tr><tr><th>Builds</th><td>Nothing</td></tr><tr><th>Source</th><td>vince-gonzalez/axsent</td></tr></table>
+<div class="doc"><div class="hero"><h1>axsent</h1><p class="lede">Measures what a formal library actually assumes &amp;mdash; across Rocq, Agda and Isabelle, read from source, with nothing compiled.</p><div class="herocta"><a class="btn default" href="https://pypi.org/project/axsent/" rel="noopener">Install it</a><a class="btn" href="https://github.com/vince-gonzalez/axsent" rel="noopener">Source</a><a class="btn" href="/papers/">The papers</a></div><p class="meta"><code>pip install axsent</code> &middot; Rocq, Agda, Isabelle &middot; builds nothing</p></div>
 <h2>What it does</h2>
 <p>Measures what a formal library actually assumes &mdash; its axioms, and the
 interface assumptions that get counted alongside them &mdash; across Rocq,
@@ -144,7 +144,7 @@ the measurements are written up in the papers.</p>
   <a class="btn default" href="https://pypi.org/project/axsent/" rel="noopener">PyPI</a>
   <a class="btn" href="https://github.com/vince-gonzalez/axsent" rel="noopener">Source</a>
   <a class="btn" href="/papers/">The papers</a>
-</div></div>
+</div><h2>How it works</h2><ol class="steps"><li><b>Install it</b><span><code>pip install axsent</code>.</span></li><li><b>Point it at a library</b><span>It reads the source. There is no build step, no toolchain to match, and no compiler version to satisfy.</span></li><li><b>Read the split</b><span>Assumptions that are mathematical, reported separately from assumptions about the interface to the outside world.</span></li></ol><h2>What it measures</h2><div class="featgrid"><div class="feat"><b>Three systems</b><span>Rocq, Agda and Isabelle, from one tool.</span></div><div class="feat"><b>Nothing is built</b><span>A census that requires building can only measure libraries that still build &mdash; which silently excludes the old, the abandoned, and anything pinned to a compiler nobody has.</span></div><div class="feat"><b>The finding behind it</b><span>Every census of this kind conflates mathematical assumptions with interface assumptions and reports one number. Separating them is most of what this is for.</span></div><div class="feat"><b>Four populations</b><span>Including assumptions that assert nothing at all, which no previous census counted separately.</span></div><div class="feat"><b>Agda&#x27;s --safe</b><span>The only self-validating harness among the three, and the measurements say why.</span></div><div class="feat"><b>Deposited</b><span>The measurements are written up and deposited with DOIs.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>pip install axsent</td></tr><tr><th>Reads</th><td>Rocq, Agda, Isabelle</td></tr><tr><th>Builds</th><td>Nothing</td></tr><tr><th>Source</th><td>vince-gonzalez/axsent</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Why not just build the library and ask it?</dt><dd>Because then you can only measure libraries that still build, and the ones that do not are exactly the ones nobody has checked lately.</dd><dt>Is this the same as gonzalgo?</dt><dd>No. gonzalgo does Lean 4 and Metamath. axsent does Rocq, Agda and Isabelle, and does it without building.</dd></dl></div>
     </section>
   </div>
 

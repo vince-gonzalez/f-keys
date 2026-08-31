@@ -4,14 +4,9 @@
 
 Canonical: https://f-keys.com/axsent/
 
-What a formal library assumes, measured from source.
+Measures what a formal library actually assumes &mdash; across Rocq, Agda and Isabelle, read from source, with nothing compiled.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install axsent |
-| Reads | Rocq, Agda, Isabelle |
-| Builds | Nothing |
-| Source | vince-gonzalez/axsent |
+pip install axsent · Rocq, Agda, Isabelle · builds nothing
 
 ## What it does
 
@@ -35,6 +30,21 @@ are *mathematical*, and assumptions that are about the
 *interface* to the outside world. They are counted together and
 reported as one number. Separating them is most of what this tool is for, and
 the measurements are written up in the papers.
+
+## How it works
+
+## What it measures
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install axsent |
+| Reads | Rocq, Agda, Isabelle |
+| Builds | Nothing |
+| Source | vince-gonzalez/axsent |
+
+## Questions
 
 ---
 

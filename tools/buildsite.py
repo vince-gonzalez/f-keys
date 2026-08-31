@@ -287,6 +287,47 @@ is out of their scope.</p>
 
  "axsent": dict(
   title="axsent", tagline="What a formal library assumes, measured from source.",
+  lede="Measures what a formal library actually assumes &mdash; across Rocq, "
+       "Agda and Isabelle, read from source, with nothing compiled.",
+  cta=[("Install it", "https://pypi.org/project/axsent/"),
+       ("Source", "https://github.com/vince-gonzalez/axsent"),
+       ("The papers", "/papers/")],
+  herometa="<code>pip install axsent</code> &middot; Rocq, Agda, Isabelle "
+           "&middot; builds nothing",
+  steps=[("Install it",
+          "<code>pip install axsent</code>."),
+         ("Point it at a library",
+          "It reads the source. There is no build step, no toolchain to "
+          "match, and no compiler version to satisfy."),
+         ("Read the split",
+          "Assumptions that are mathematical, reported separately from "
+          "assumptions about the interface to the outside world.")],
+  features_title="What it measures",
+  features=[("Three systems",
+             "Rocq, Agda and Isabelle, from one tool."),
+            ("Nothing is built",
+             "A census that requires building can only measure libraries that "
+             "still build &mdash; which silently excludes the old, the "
+             "abandoned, and anything pinned to a compiler nobody has."),
+            ("The finding behind it",
+             "Every census of this kind conflates mathematical assumptions "
+             "with interface assumptions and reports one number. Separating "
+             "them is most of what this is for."),
+            ("Four populations",
+             "Including assumptions that assert nothing at all, which no "
+             "previous census counted separately."),
+            ("Agda's --safe",
+             "The only self-validating harness among the three, and the "
+             "measurements say why."),
+            ("Deposited",
+             "The measurements are written up and deposited with DOIs.")],
+  faq=[("Why not just build the library and ask it?",
+        "Because then you can only measure libraries that still build, and "
+        "the ones that do not are exactly the ones nobody has checked "
+        "lately."),
+       ("Is this the same as gonzalgo?",
+        "No. gonzalgo does Lean 4 and Metamath. axsent does Rocq, Agda and "
+        "Isabelle, and does it without building.")],
   facts=[("Install", "pip install axsent"),
          ("Reads", "Rocq, Agda, Isabelle"),
          ("Builds", "Nothing"),
@@ -318,6 +359,44 @@ the measurements are written up in the papers.</p>
 
  "authorecon": dict(
   title="authorecon", tagline="Every place your published work ended up.",
+  lede="Reconciles a body of published work against every place it lives "
+       "&mdash; for any ORCID, from public sources. A deposit exists in more "
+       "places than the person who made it can hold in their head.",
+  cta=[("Install it", "https://pypi.org/project/authorecon/"),
+       ("Source", "https://github.com/vince-gonzalez/apriori")],
+  herometa="<code>pip install authorecon</code> &middot; any ORCID &middot; "
+           "public sources only",
+  steps=[("Install it",
+          "<code>pip install authorecon</code>."),
+         ("Give it an ORCID",
+          "<code>authorecon 0009-0005-3640-014X</code>. Any ORCID, not just "
+          "your own."),
+         ("Read what disagrees",
+          "The DOI, the index, the profile, the repository, the aggregator "
+          "that copied it, and the one that copied it wrong.")],
+  features_title="What it does",
+  features=[("Every place, not just the good ones",
+             "The record that is missing and the record that is wrong are "
+             "both findings."),
+            ("Gates before publication",
+             "It also carries the checks that run before research output "
+             "leaves your hands. Reconciling afterwards tells you where the "
+             "mistake went; a gate tells you not to make it."),
+            ("Public sources only",
+             "Nothing here needs an account or a key."),
+            ("It ignores citation counts",
+             "A count reflects how long a corpus has been indexed at least as "
+             "much as anything about the work."),
+            ("An MCP server",
+             "Usable from a tool that speaks MCP as well as from a shell."),
+            ("Any ORCID",
+             "It is not tied to one identity, so it works as a check on "
+             "somebody else's record too.")],
+  faq=[("Do I need an account anywhere?",
+        "No. It reads public sources."),
+       ("Will it tell me how well my work is doing?",
+        "No, deliberately. It tells you where your work IS. Impact is a "
+        "different question and citation counts are a bad proxy for it.")],
   facts=[("Install", "pip install authorecon"),
          ("Takes", "Any ORCID"),
          ("Sources", "Public ones only"),
@@ -347,6 +426,49 @@ much as it reflects anything about the work.</p>
 
 "mmforge": dict(
   title="mmforge", tagline="Find the axiom a theorem did not need.",
+  lede="Finds a theorem that pays for an axiom it does not need, then builds "
+       "the proof that removes the dependence and checks it.",
+  cta=[("Install it", "https://pypi.org/project/mmforge/"),
+       ("Source", "https://github.com/vince-gonzalez/mmforge"),
+       ("The papers", "/papers/")],
+  herometa="<b>0.2.0</b> &middot; <code>pip install mmforge</code> &middot; "
+           "MIT &middot; six pull requests merged into set.mm",
+  steps=[("Install it",
+          "<code>pip install mmforge</code>. One entry point, seven "
+          "subcommands."),
+         ("Measure",
+          "<code>mmforge reach set.mm --axiom ax-ac</code> shows what reaches "
+          "an axiom and how each one gets there. <code>impact</code> ranks "
+          "theorems by how many others a repair would free."),
+         ("Build the repair",
+          "The construction half writes the replacement proof and verifies "
+          "it. Six of the repairs that came out of this loop are merged "
+          "upstream.")],
+  features_title="What it finds",
+  features=[("Three invocations, 583 dependents",
+             "Choice enters set.mm at <code>ac2</code>, <code>axac3</code> and "
+             "<code>zfac</code>. Everything else inherits."),
+            ("The measure-theory tail",
+             "<code>difelsiga</code> says a sigma-algebra is closed under set "
+             "difference. Below it sit 64 results including <b>Bayes' "
+             "theorem</b>, none of which needs choice."),
+            ("Repairs do not add up",
+             "<code>fimact</code> alone frees one theorem; in the stack it "
+             "frees fourteen. Every per-repair figure is a lower bound and "
+             "the tool says so rather than summing them."),
+            ("Conformance",
+             "Round-trips every proof through the compressed format and "
+             "verifies the result."),
+            ("The guard census",
+             "Reads the database's own <code>$j 'avoids'</code> directives "
+             "and checks the declarations are still true."),
+            ("Merged upstream",
+             "Six pull requests into metamath/set.mm.")],
+  faq=[("Do I need a Metamath install?",
+        "For verification, yes. The analysis reads the database directly."),
+       ("Is this only about the axiom of choice?",
+        "No &mdash; that is the worked example. <code>--axiom</code> takes "
+        "whichever constant you want to trace.")],
   facts=[("Install", "pip install mmforge"), ("Version", "0.2.0"),
          ("Licence", "MIT"), ("Reads", "Metamath databases"),
          ("Upstream", "6 pull requests merged into set.mm"),
@@ -382,6 +504,47 @@ and it says so rather than adding them for you.</p>
 
 "loadbearing": dict(
   title="loadbearing", tagline="What a claim asserts, and what its proof consumed.",
+  lede="Separates two things every axiom census runs together: what a "
+       "statement asserts, and what the derivation behind it consumed. They "
+       "are different questions with different answers.",
+  cta=[("Install it", "https://pypi.org/project/loadbearing/"),
+       ("Source", "https://github.com/vince-gonzalez/loadbearing"),
+       ("The papers", "/papers/")],
+  herometa="<b>0.2.0</b> &middot; <code>pip install loadbearing</code> "
+           "&middot; Lean 4 and Metamath &middot; MCP server included",
+  steps=[("Install it with the extras you need",
+          "<code>pip install \"loadbearing[formal]\"</code> for the Lean and "
+          "Metamath adapters, <code>[mcp]</code> for the server."),
+         ("Point it at a library",
+          "It reads Lean 4 or Metamath and separates asserted dependencies "
+          "from consumed ones."),
+         ("Sever, and see what breaks",
+          "The counterfactual is the measurement: not what sits downstream of "
+          "an assumption, but what actually fails without it.")],
+  features_title="What it measures",
+  features=[("Half of every cone holds up nothing",
+             "Measured across four libraries and two foundations."),
+            ("Reach overstates by up to 58&times;",
+             "Counting what is downstream of an assumption is not the same as "
+             "counting what depends on it, and the gap is enormous."),
+            ("It carries what it excluded",
+             "A graph reports the population it left out; a ledger that "
+             "excluded nothing says so explicitly."),
+            ("A digest with every measurement",
+             "Taken over installed file contents, so a number can be quoted "
+             "with the version that produced it. A reach without a digest is "
+             "a memory, not a citation."),
+            ("Lean 4 and Metamath",
+             "Two foundations, one measurement."),
+            ("An MCP server",
+             "So the measurement is available to a tool, not just a shell.")],
+  faq=[("What is the difference from gonzalgo?",
+        "gonzalgo reports which axioms a proof step introduced. loadbearing "
+        "asks the harder question of what the claim would lose if the "
+        "assumption were removed."),
+       ("Why does the digest matter?",
+        "Because a measurement quoted without the version that produced it "
+        "cannot be checked by anybody, including you.")],
   facts=[("Install", "pip install loadbearing"), ("Version", "0.2.0"),
          ("Extras", "[formal] for Lean and Metamath, [mcp] for the server"),
          ("Reads", "Lean 4, Metamath"),
@@ -411,6 +574,44 @@ so a measurement can be quoted with the version of the thing that produced it
 
 "certivl": dict(
   title="certivl", tagline="An enclosure that turns a computed inequality into a proof.",
+  lede="Exact rational and certified interval arithmetic. A float comparison "
+       "tells you what the hardware thought; an enclosure tells you what is "
+       "true, because the answer is bracketed and the bracket is carried "
+       "through every operation.",
+  cta=[("Install it", "https://pypi.org/project/certivl/"),
+       ("Source", "https://github.com/vince-gonzalez/certivl"),
+       ("The papers", "/papers/")],
+  herometa="<b>0.2.0</b> &middot; <code>pip install certivl</code> &middot; "
+           "MIT &middot; exact rational and interval",
+  steps=[("Install it",
+          "<code>pip install certivl</code>."),
+         ("Compute inside an enclosure",
+          "Every operation carries the bracket forward rather than "
+          "collapsing to a number that has lost its error."),
+         ("Read the verdict, including 'undecided'",
+          "An enclosure strictly on one side of zero settles the inequality. "
+          "One that straddles zero says the computation did not decide it "
+          "&mdash; which is the answer floating point never gives you.")],
+  features_title="What it gives you",
+  features=[("Exact rational arithmetic",
+             "No rounding at all where the numbers allow it."),
+            ("Certified intervals",
+             "Where they do not, an enclosure whose width is the honest "
+             "uncertainty."),
+            ("An honest 'I do not know'",
+             "The most useful result and the one a float cannot produce."),
+            ("Machine-checkable bounds",
+             "A result that survives somebody re-running it on different "
+             "hardware."),
+            ("Behind the geometry papers",
+             "Covering, packing and opacity bounds in the deposited work."),
+            ("MIT",
+             "Read it, use it, ship it.")],
+  faq=[("Why not just use floats carefully?",
+        "Carefully is not a property you can check. An enclosure is."),
+       ("Is it slow?",
+        "Slower than a float and faster than being wrong in a published "
+        "bound.")],
   facts=[("Install", "pip install certivl"), ("Version", "0.2.0"),
          ("Licence", "MIT"), ("Arithmetic", "Exact rational, certified interval"),
          ("Source", "vince-gonzalez/certivl")],
@@ -438,6 +639,42 @@ someone re-running it on different hardware.</p>
 
 "ishihara": dict(
   title="ishihara", tagline="Colour-vision plates, reproducible from a seed.",
+  lede="Generates pseudoisochromatic plates &mdash; the dotted circles with a "
+       "numeral hidden in the colour separation &mdash; from a seed, so the "
+       "same seed gives the same plate on any machine, forever.",
+  cta=[("Install it", "https://pypi.org/project/ishihara/"),
+       ("Source", "https://github.com/vince-gonzalez/ishihara"),
+       ("Take a test", "/opticquiz/")],
+  herometa="<b>0.1.2</b> &middot; <code>pip install ishihara</code> &middot; "
+           "MIT &middot; reproducible from a seed",
+  steps=[("Install it",
+          "<code>pip install ishihara</code>."),
+         ("Pick a seed and a figure",
+          "<code>ishihara --seed 4211 --figure 74</code>."),
+         ("Get the same plate anywhere",
+          "The seed is the plate. Run it on another machine next year and it "
+          "is identical.")],
+  features_title="What it does",
+  features=[("Reproducible from a seed",
+             "The entire point. Plates in the wild are generated with an "
+             "unseeded RNG, so no two runs produce the same test."),
+            ("Comparable results",
+             "A screening tool whose stimulus changes between subjects is "
+             "measuring the stimulus as much as the subject."),
+            ("Published method",
+             "The generation method is deposited with a DOI."),
+            ("Deficiency types",
+             "Plates targeted at protan, deutan and tritan separation."),
+            ("Honest about the screen",
+             "A display is not a lightbox, and the calibration limits are "
+             "published rather than glossed."),
+            ("Not a diagnosis",
+             "Screening. The pages that matter say so.")],
+  faq=[("Can I use these to diagnose someone?",
+        "No. It is screening, and a screen is not a calibrated instrument."),
+       ("Why does the seed matter so much?",
+        "Because without it, two people take two different tests and the "
+        "results cannot be compared with each other or with themselves.")],
   facts=[("Install", "pip install ishihara"), ("Version", "0.1.2"),
          ("Licence", "MIT"), ("Output", "Plate images from a seed"),
          ("Source", "vince-gonzalez/ishihara")],
@@ -466,6 +703,57 @@ underlying method is deposited with a DOI.</p>
 
 "legible": dict(
   title="legible", tagline="Three gates a linter will not give you.",
+  lede="Three build gates for defects a linter has no opinion about, because "
+       "none of them is a syntax error. Type too small to read, colour that "
+       "cannot be read on its own background, and a name that should be gone.",
+  cta=[("Install it", "https://pypi.org/project/legible/"),
+       ("Use as a GitHub Action", "https://github.com/vince-gonzalez/typefloor"),
+       ("The palette gate", "https://github.com/vince-gonzalez/cvd-palette")],
+  herometa="<code>pip install legible</code> &middot; MIT &middot; three "
+           "commands, four GitHub Actions",
+  steps=[("Install it, or add the Action",
+          "<code>pip install legible</code> locally, or drop one of the four "
+          "Actions into a workflow."),
+         ("Point it at a directory",
+          "<code>typefloor ./src</code>, <code>contrast-gate ./src</code>, "
+          "<code>deadname-gate ./src</code>. Exceptions live in a JSON file "
+          "rather than suppressed inline, so what you allowed is one list you "
+          "can read."),
+         ("Let it fail the build",
+          "That is the point. A warning nobody reads is the same as no check "
+          "at all.")],
+  features_title="The three gates",
+  features=[("typefloor",
+             "Fails when type is declared below a readable floor. A linter "
+             "has no view on 9px body text; a person does."),
+            ("contrast-gate",
+             "Fails when a declared colour cannot be read on a surface the "
+             "same file declares. <code>--require-pairs</code> also fails a "
+             "file that declares no pairs at all, because a vacuous pass "
+             "looks exactly like a real one."),
+            ("deadname-gate",
+             "Fails when a retired name reaches a title, a footer, a byline, "
+             "alt text or a comment &mdash; and leaves machine identifiers "
+             "alone, because renaming a published artifact breaks links or "
+             "contradicts a deposited record."),
+            ("It exits 2, not 0, unconfigured",
+             "An unconfigured gate must not be mistakable for a passing one."),
+            ("Four GitHub Actions",
+             "typefloor, contrast-gate, deadname-gate and cvd-palette, each "
+             "usable on its own."),
+            ("Written for a real rename",
+             "The rename gate came out of a company rename. It is the same "
+             "shape as a person changing their name and finding it in three "
+             "hundred places, which is the version worth getting right.")],
+  faq=[("Why not just use a linter?",
+        "A linter checks syntax. None of these three are syntax errors &mdash; "
+        "they are things a person could not read, which no parser has an "
+        "opinion about."),
+       ("Will it fight my existing style rules?",
+        "No. It only asserts the three things above, and every exception is "
+        "recorded in a file rather than scattered through the source."),
+       ("Do I have to use all three?",
+        "No. They are separate commands and separate Actions.")],
   facts=[("Install","pip install legible"),("Licence","MIT"),
          ("Commands","typefloor, contrast-gate, deadname-gate"),
          ("Actions","typefloor, contrast-gate, deadname-gate, cvd-palette"),
@@ -502,6 +790,50 @@ rather than passing a stylesheet that declares no colours at all.</p>
 
  "openapi-drift": dict(
   title="openapi-drift", tagline="Does the service still do what the spec says?",
+  lede="An OpenAPI document is a promise about a service, and nothing keeps "
+       "the two together. This checks whether the service still does what the "
+       "document says &mdash; and whether a machine can still read the "
+       "document at all.",
+  cta=[("Install it", "https://pypi.org/project/openapi-drift/"),
+       ("Use as a GitHub Action", "https://github.com/vince-gonzalez/openapi-drift")],
+  herometa="<code>pip install openapi-drift</code> &middot; MIT &middot; "
+           "safe calls only, never writes",
+  steps=[("Point it at your document",
+          "<code>openapi-drift openapi.json</code>, or a URL."),
+         ("Add <code>--live</code> to call the service",
+          "It calls every parameterless GET and compares what comes back to "
+          "what the document promised."),
+         ("Put it in CI",
+          "The document and the service drift apart quietly. Every consumer "
+          "finds out one failed call at a time; this finds out on the commit "
+          "that caused it.")],
+  features_title="What it checks",
+  features=[("The check nobody else runs",
+             "A response schema behind a <code>$ref</code> is valid and "
+             "useless to the tools that turn an operation into a function "
+             "signature, because they do not dereference. A validator sees a "
+             "schema; a converter sees an argument with no type."),
+            ("Live comparison",
+             "Not just the document. What the service actually returns."),
+            ("Only safe calls",
+             "Parameterless GETs. A path with a placeholder or a required "
+             "parameter is skipped rather than guessed at &mdash; a guessed "
+             "value reports drift that is the checker's fault."),
+            ("It never writes",
+             "No POST, no PUT, no DELETE. Ever."),
+            ("Not a fuzzer",
+             "It calls what you documented rather than generating traffic "
+             "hunting for crashes."),
+            ("A GitHub Action",
+             "One step in a workflow, pointed at a path or a live URL.")],
+  faq=[("Is this a schema validator?",
+        "No, and that is the point. A perfectly well-formed document can be "
+        "unreadable by the tooling that has to consume it."),
+       ("Will it hit my production API?",
+        "Only if you pass <code>--live</code>, and only with parameterless "
+        "GETs. It never writes anything."),
+       ("Why does the $ref thing matter?",
+        "It cost a week on a specification that passed every other check.")],
   facts=[("Install","pip install openapi-drift"),("Licence","MIT"),
          ("Action","vince-gonzalez/openapi-drift"),
          ("Source","vince-gonzalez/openapi-drift")],
@@ -535,6 +867,54 @@ value reports drift that is the checker's fault. Nothing is ever written.</p>
 
  "changewatch": dict(
   title="changewatch", tagline="A doorbell, not a dashboard.",
+  lede="You can already see what you did. What you cannot see is whether "
+       "anyone else did anything about it &mdash; the first citation, the "
+       "first star from a stranger, the first time your name appears "
+       "somewhere you did not put it.",
+  cta=[("Install it", "https://pypi.org/project/changewatch/"),
+       ("Run it as an Action", "https://github.com/vince-gonzalez/changewatch")],
+  herometa="<code>pip install changewatch</code> &middot; MIT &middot; "
+           "silent unless somebody else acts",
+  steps=[("Tell it who you are",
+          "<code>changewatch init</code> writes a config. Your ORCID, your "
+          "names, your logins &mdash; so your own activity is never reported "
+          "as somebody noticing you."),
+         ("Run it once to learn",
+          "The first run records what is already there and says nothing. A "
+          "doorbell that announces months of history the moment it is plugged "
+          "in gets unplugged."),
+         ("Put it on a schedule",
+          "The Action runs it weekly and opens an issue when it rings. "
+          "Almost every run does nothing and says so.")],
+  features_title="What it watches, and what it refuses to do",
+  features=[("Citations, stars, mentions",
+             "ORCID and OpenAlex, GitHub, and exact-phrase mentions."),
+            ("It silences you",
+             "The first ORCID this was pointed at reported six citations. All "
+             "six were the author citing himself, doubled because Zenodo mints "
+             "a DOI per version. Six feels like an audience; the real figure "
+             "was zero."),
+            ("It does not trust the search engine",
+             "Asked for the exact phrase <code>\"openapi-drift\"</code>, "
+             "Hacker News returned a five-month-old thread about neither. "
+             "Every hit is re-checked against the text locally."),
+            ("A threshold, not a diff",
+             "A number that wanders is not news. Small absolute moves stay "
+             "quiet; nothing-to-something always rings."),
+            ("The first run is silent",
+             "By design. It learns, then it rings."),
+            ("It needs somewhere to ring",
+             "The Action opens an issue. A scheduled job that succeeds "
+             "silently is indistinguishable from one that never ran.")],
+  faq=[("Will it spam me?",
+        "Almost every run reports nothing and exits. That is the design and "
+        "the reason it is a doorbell rather than a dashboard."),
+       ("Does it count my own activity?",
+        "No, explicitly. Every source checks your ORCID, your names and your "
+        "logins first."),
+       ("What does it need?",
+        "A <code>GITHUB_TOKEN</code> for the GitHub half. Everything else is "
+        "public.")],
   facts=[("Install","pip install changewatch"),("Licence","MIT"),
          ("Needs","GITHUB_TOKEN for the GitHub half"),
          ("Source","vince-gonzalez/changewatch")],
@@ -571,6 +951,48 @@ first run learns; the second one rings.</p>
 
  "keyjockey": dict(
   title="keyjockey", tagline="Tablature in, notes out.",
+  lede="Reads guitar tablature and gives you notes: eight tunings, capo "
+       "offsets, MIDI numbers and frequencies. The same reader Key-J runs in "
+       "the browser, as a package.",
+  cta=[("Install from npm", "https://www.npmjs.com/package/keyjockey"),
+       ("See it running in Key-J", "/keyj/")],
+  herometa="<code>npm install keyjockey</code> &middot; MIT &middot; "
+           "8 tunings &middot; also on PyPI as <code>keyj</code>",
+  steps=[("Install it",
+          "<code>npm install keyjockey</code>."),
+         ("Give it a tab and a tuning",
+          "<code>parseTab(tab, \"Drop D\", 2)</code> &mdash; tuning by name, "
+          "capo as an offset."),
+         ("Take the notes",
+          "Note names, MIDI numbers or frequencies, whichever your program "
+          "needs.")],
+  features_title="What it does",
+  features=[("Eight tunings",
+             "With capo offsets applied as a shift rather than a separate "
+             "table to maintain."),
+            ("MIDI and frequency",
+             "<code>midiToName(60)</code> and <code>nameToFreq(\"A4\")</code> "
+             "for the conversions everything else needs."),
+            ("Lifted, not rewritten",
+             "Generated from the code Key-J actually runs, and the build "
+             "fails if the app moves and the package does not."),
+            ("Errors come back, not thrown",
+             "An unknown tuning returns <code>.error</code> and no notes. "
+             "Text that is not tablature returns zero notes rather than "
+             "guessing at one."),
+            ("Two registries, one source",
+             "<code>keyjockey</code> on npm, <code>keyj</code> on PyPI."),
+            ("Why it exists",
+             "Key-J shipped three defects that existed only because two "
+             "copies of one thing drifted. A third copy would have been a "
+             "third chance.")],
+  faq=[("Is this the same as the keyj package?",
+        "Same reader, different registry. npm gets keyjockey, PyPI gets "
+        "keyj."),
+       ("Does it play audio?",
+        "No. It converts tablature to notes; what you do with them is yours."),
+       ("What happens with a malformed tab?",
+        "Zero notes rather than invented ones.")],
   facts=[("Install","npm install keyjockey"),("Licence","MIT"),
          ("Tunings","8, with capo offsets"),
          ("Source","vince-gonzalez/f-keys")],

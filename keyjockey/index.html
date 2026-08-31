@@ -121,7 +121,7 @@
 </ul></li></ul>
     </aside>
     <section class="content sunken">
-<div class="doc"><h1>keyjockey</h1><p class="sub">Tablature in, notes out.</p><table class="facts"><tr><th>Install</th><td>npm install keyjockey</td></tr><tr><th>Licence</th><td>MIT</td></tr><tr><th>Tunings</th><td>8, with capo offsets</td></tr><tr><th>Source</th><td>vince-gonzalez/f-keys</td></tr></table>
+<div class="doc"><div class="hero"><h1>keyjockey</h1><p class="lede">Reads guitar tablature and gives you notes: eight tunings, capo offsets, MIDI numbers and frequencies. The same reader Key-J runs in the browser, as a package.</p><div class="herocta"><a class="btn default" href="https://www.npmjs.com/package/keyjockey" rel="noopener">Install from npm</a><a class="btn" href="/keyj/">See it running in Key-J</a></div><p class="meta"><code>npm install keyjockey</code> &middot; MIT &middot; 8 tunings &middot; also on PyPI as <code>keyj</code></p></div>
 <h2>What it does</h2>
 <p>Reads guitar tablature and converts notes. Eight tunings, capo offsets, MIDI
 and frequency.</p>
@@ -144,7 +144,7 @@ one.</p>
 <div class="btnrow">
   <a class="btn default" href="https://www.npmjs.com/package/keyjockey" rel="noopener">npm</a>
   <a class="btn" href="/keyj/">Key-J</a>
-</div></div>
+</div><h2>How it works</h2><ol class="steps"><li><b>Install it</b><span><code>npm install keyjockey</code>.</span></li><li><b>Give it a tab and a tuning</b><span><code>parseTab(tab, "Drop D", 2)</code> &mdash; tuning by name, capo as an offset.</span></li><li><b>Take the notes</b><span>Note names, MIDI numbers or frequencies, whichever your program needs.</span></li></ol><h2>What it does</h2><div class="featgrid"><div class="feat"><b>Eight tunings</b><span>With capo offsets applied as a shift rather than a separate table to maintain.</span></div><div class="feat"><b>MIDI and frequency</b><span><code>midiToName(60)</code> and <code>nameToFreq("A4")</code> for the conversions everything else needs.</span></div><div class="feat"><b>Lifted, not rewritten</b><span>Generated from the code Key-J actually runs, and the build fails if the app moves and the package does not.</span></div><div class="feat"><b>Errors come back, not thrown</b><span>An unknown tuning returns <code>.error</code> and no notes. Text that is not tablature returns zero notes rather than guessing at one.</span></div><div class="feat"><b>Two registries, one source</b><span><code>keyjockey</code> on npm, <code>keyj</code> on PyPI.</span></div><div class="feat"><b>Why it exists</b><span>Key-J shipped three defects that existed only because two copies of one thing drifted. A third copy would have been a third chance.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>npm install keyjockey</td></tr><tr><th>Licence</th><td>MIT</td></tr><tr><th>Tunings</th><td>8, with capo offsets</td></tr><tr><th>Source</th><td>vince-gonzalez/f-keys</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Is this the same as the keyj package?</dt><dd>Same reader, different registry. npm gets keyjockey, PyPI gets keyj.</dd><dt>Does it play audio?</dt><dd>No. It converts tablature to notes; what you do with them is yours.</dd><dt>What happens with a malformed tab?</dt><dd>Zero notes rather than invented ones.</dd></dl></div>
     </section>
   </div>
 

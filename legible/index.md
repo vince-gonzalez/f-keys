@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/legible/
 
-Three gates a linter will not give you.
+Three build gates for defects a linter has no opinion about, because none of them is a syntax error. Type too small to read, colour that cannot be read on its own background, and a name that should be gone.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install legible |
-| Licence | MIT |
-| Commands | typefloor, contrast-gate, deadname-gate |
-| Actions | typefloor, contrast-gate, deadname-gate, cvd-palette |
-| Source | vince-gonzalez/f-keys |
+pip install legible · MIT · three commands, four GitHub Actions
 
 ## What it does
 
@@ -42,6 +36,22 @@ opened, because a bare path argument was ignored and each scanned itself
 instead. deadname-gate exits **2** rather than **0** when
 nothing is configured, and contrast-gate --require-pairs fails
 rather than passing a stylesheet that declares no colours at all.
+
+## How it works
+
+## The three gates
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install legible |
+| Licence | MIT |
+| Commands | typefloor, contrast-gate, deadname-gate |
+| Actions | typefloor, contrast-gate, deadname-gate, cvd-palette |
+| Source | vince-gonzalez/f-keys |
+
+## Questions
 
 ---
 

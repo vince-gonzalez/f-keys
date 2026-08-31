@@ -4,14 +4,9 @@
 
 Canonical: https://f-keys.com/changewatch/
 
-A doorbell, not a dashboard.
+You can already see what you did. What you cannot see is whether anyone else did anything about it &mdash; the first citation, the first star from a stranger, the first time your name appears somewhere you did not put it.
 
-| Field | Value |
-| --- | --- |
-| Install | pip install changewatch |
-| Licence | MIT |
-| Needs | GITHUB_TOKEN for the GitHub half |
-| Source | vince-gonzalez/changewatch |
+pip install changewatch · MIT · silent unless somebody else acts
 
 ## What it does
 
@@ -47,6 +42,21 @@ is not yours.
 It has nothing to compare against, so everything looks new. A doorbell that
 announces months of history the moment it is plugged in gets unplugged. The
 first run learns; the second one rings.
+
+## How it works
+
+## What it watches, and what it refuses to do
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Install | pip install changewatch |
+| Licence | MIT |
+| Needs | GITHUB_TOKEN for the GitHub half |
+| Source | vince-gonzalez/changewatch |
+
+## Questions
 
 ---
 
