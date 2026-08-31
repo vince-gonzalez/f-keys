@@ -1,15 +1,15 @@
 {
   "cloudflare": {
     "bots_24h": {
-      "AI Assistant": 102,
-      "AI Crawler": 467,
-      "AI Search": 261,
+      "AI Assistant": 99,
+      "AI Crawler": 495,
+      "AI Search": 359,
       "Accessibility": 1,
-      "Advertising & Marketing": 180,
+      "Advertising & Marketing": 2,
       "Page Preview": 19,
-      "Search Engine Crawler": 1161,
-      "Search Engine Optimization": 1520,
-      "Unverified": 43596
+      "Search Engine Crawler": 1046,
+      "Search Engine Optimization": 1864,
+      "Unverified": 38246
     },
     "bots_error": null,
     "days": 7,
@@ -343,7 +343,7 @@
     }
   },
   "date": "2026-08-31",
-  "generated_at": "2026-08-31 00:10 UTC",
+  "generated_at": "2026-08-31 05:20 UTC",
   "github": [
     {
       "archived": false,
@@ -356,9 +356,9 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-08-30T10:00:27Z",
+      "pushed_at": "2026-08-31T00:33:13Z",
       "repo": "f-keys",
-      "size_kb": 75543,
+      "size_kb": 75559,
       "stars": 1,
       "topics": [
         "formal-verification",
@@ -947,7 +947,7 @@
     {
       "archived": false,
       "created_at": "2026-08-29T22:59:00Z",
-      "description": "A behavioral warranty layer for AI tools: a signed contract per tool, a harness that tests conformance against it, and a hash-chained receipt anyone can verify.",
+      "description": "Conformance harness for MCP servers. A publisher declares what a tool does; SayDo runs it in a sandbox and checks. Signed, verifiable receipts.",
       "forks": 0,
       "full_name": "vince-gonzalez/saydo",
       "homepage": null,
@@ -955,9 +955,9 @@
       "license": "Apache-2.0",
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-08-30T18:40:05Z",
+      "pushed_at": "2026-08-31T04:18:22Z",
       "repo": "saydo",
-      "size_kb": 1036,
+      "size_kb": 655,
       "stars": 0,
       "topics": [
         "agent-security",
@@ -1702,17 +1702,17 @@
       "date": "2026-08-31",
       "github_stars": 17,
       "package_daily": null,
-      "package_weekly": 611,
+      "package_weekly": 2803,
       "page_views_7d": 40750,
       "properties_total": 11,
       "properties_up": 11,
       "releases_published": null,
       "visitors_7d": 27945,
-      "zenodo_downloads": 490,
-      "zenodo_views": 1210
+      "zenodo_downloads": 493,
+      "zenodo_views": 1211
     }
   ],
-  "mode": "daily",
+  "mode": "weekly",
   "npm": [
     {
       "all_time": 435,
@@ -1777,11 +1777,11 @@
   ],
   "pypi": [
     {
-      "all_time": 1299,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 1319,
+      "daily": 20,
+      "error": null,
       "license": null,
-      "monthly": null,
+      "monthly": 1319,
       "package": "gonzalgo",
       "registry": "PyPI",
       "released": "2026-08-24T04:49:25.070559Z",
@@ -1789,14 +1789,14 @@
       "summary": "Measure where a formal library spends its axioms: Lean 4 and Metamath.",
       "url": "https://pypi.org/project/gonzalgo/",
       "version": "0.5.5",
-      "weekly": null
+      "weekly": 219
     },
     {
-      "all_time": 623,
-      "daily": 18,
+      "all_time": 629,
+      "daily": 6,
       "error": null,
       "license": null,
-      "monthly": 372,
+      "monthly": 378,
       "package": "opticquiz-cvd",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:23.834985Z",
@@ -1804,14 +1804,14 @@
       "summary": "Color accessibility engine: colorblind-safety (protan/deutan/tritan, Machado 2009 + CIEDE2000), palette fixing, and WCAG contrast. Zero dependencies; drops into any matplotlib/plotly workflow.",
       "url": "https://pypi.org/project/opticquiz-cvd/",
       "version": "1.1.3",
-      "weekly": 65
+      "weekly": 46
     },
     {
-      "all_time": 436,
-      "daily": 19,
+      "all_time": 439,
+      "daily": 3,
       "error": null,
       "license": "MIT",
-      "monthly": 436,
+      "monthly": 439,
       "package": "moonbeam-miner",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:34.832631Z",
@@ -1819,14 +1819,14 @@
       "summary": "Find the NerdMiners on your network and read their vitals, from the terminal.",
       "url": "https://pypi.org/project/moonbeam-miner/",
       "version": "1.0.2",
-      "weekly": 61
+      "weekly": 54
     },
     {
-      "all_time": 460,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 461,
+      "daily": 1,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 461,
       "package": "plumhud",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:30.713017Z",
@@ -1834,14 +1834,14 @@
       "summary": "Miner fleet monitor - a borderless overlay HUD, alerts, and history.",
       "url": "https://pypi.org/project/plumhud/",
       "version": "4.1.2",
-      "weekly": null
+      "weekly": 72
     },
     {
-      "all_time": 359,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": null,
+      "daily": 6,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 365,
       "package": "keyj",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:26.782174Z",
@@ -1849,14 +1849,14 @@
       "summary": "Turn guitar tablature into notes, render it, and play it back with any keystroke.",
       "url": "https://pypi.org/project/keyj/",
       "version": "0.1.2",
-      "weekly": null
+      "weekly": 52
     },
     {
-      "all_time": 497,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 503,
+      "daily": 6,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 503,
       "package": "mmforge",
       "registry": "PyPI",
       "released": "2026-08-26T17:10:29.162922Z",
@@ -1864,14 +1864,14 @@
       "summary": "Find avoidable axiom dependencies in Metamath databases, and build the proofs that remove them.",
       "url": "https://pypi.org/project/mmforge/",
       "version": "0.2.0",
-      "weekly": null
+      "weekly": 262
     },
     {
-      "all_time": 466,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 474,
+      "daily": 8,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 474,
       "package": "certivl",
       "registry": "PyPI",
       "released": "2026-08-26T16:19:04.673435Z",
@@ -1879,14 +1879,14 @@
       "summary": "Exact rational and certified interval arithmetic: enclosures that turn a computed inequality into a proof.",
       "url": "https://pypi.org/project/certivl/",
       "version": "0.2.0",
-      "weekly": null
+      "weekly": 178
     },
     {
-      "all_time": 323,
-      "daily": 26,
+      "all_time": 336,
+      "daily": 13,
       "error": null,
       "license": "MIT",
-      "monthly": 323,
+      "monthly": 336,
       "package": "ishihara",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:20.752265Z",
@@ -1894,14 +1894,14 @@
       "summary": "Generate pseudoisochromatic (Ishihara-style) colour vision plates. Reproducible from a seed, no dependencies.",
       "url": "https://pypi.org/project/ishihara/",
       "version": "0.1.2",
-      "weekly": 62
+      "weekly": 61
     },
     {
-      "all_time": 954,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 987,
+      "daily": 33,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 987,
       "package": "remapwrap",
       "registry": "PyPI",
       "released": "2026-08-26T17:24:55.199171Z",
@@ -1909,14 +1909,14 @@
       "summary": "Build RemapWrap control surfaces from what you already have: a folder of samples, a list of applications, a set of shortcuts.",
       "url": "https://pypi.org/project/remapwrap/",
       "version": "0.6.0",
-      "weekly": null
+      "weekly": 987
     },
     {
-      "all_time": 110,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 111,
+      "daily": 1,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 111,
       "package": "legible",
       "registry": "PyPI",
       "released": "2026-08-26T06:48:27.808008Z",
@@ -1924,14 +1924,14 @@
       "summary": "Three build gates for things a linter will not catch: type below a readable floor, colour that cannot be read on the surface it sits on, and a retired name reaching anything a human reads.",
       "url": "https://pypi.org/project/legible/",
       "version": "0.1.0",
-      "weekly": null
+      "weekly": 111
     },
     {
-      "all_time": 114,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 118,
+      "daily": 4,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 118,
       "package": "openapi-drift",
       "registry": "PyPI",
       "released": "2026-08-26T08:19:49.294827Z",
@@ -1939,14 +1939,14 @@
       "summary": "Does the deployed service still do what your OpenAPI document says, and can a machine read it? A drift check, not a fuzzer and not a syntax validator.",
       "url": "https://pypi.org/project/openapi-drift/",
       "version": "0.1.0",
-      "weekly": null
+      "weekly": 118
     },
     {
       "all_time": 114,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 0,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 114,
       "package": "changewatch",
       "registry": "PyPI",
       "released": "2026-08-26T08:43:40.909027Z",
@@ -1954,14 +1954,14 @@
       "summary": "A doorbell for your published work. Tells you when somebody else cites, stars, files or mentions it - and stays silent the rest of the time.",
       "url": "https://pypi.org/project/changewatch/",
       "version": "0.1.0",
-      "weekly": null
+      "weekly": 114
     },
     {
-      "all_time": 462,
-      "daily": 17,
+      "all_time": null,
+      "daily": 8,
       "error": null,
       "license": "MIT",
-      "monthly": 462,
+      "monthly": 470,
       "package": "authorecon",
       "registry": "PyPI",
       "released": "2026-08-26T16:00:02.735099Z",
@@ -1969,14 +1969,14 @@
       "summary": "Reconcile a body of published work against every place it lives - for any ORCID, from public sources - plus the gates that run before research output leaves your hands.",
       "url": "https://pypi.org/project/authorecon/",
       "version": "1.1.0",
-      "weekly": 244
+      "weekly": 241
     },
     {
-      "all_time": 99,
-      "daily": null,
-      "error": "HTTP 429",
+      "all_time": 109,
+      "daily": 10,
+      "error": null,
       "license": null,
-      "monthly": null,
+      "monthly": 109,
       "package": "axsent",
       "registry": "PyPI",
       "released": "2026-08-29T06:16:40.122562Z",
@@ -1984,41 +1984,41 @@
       "summary": "Measure what a formal library assumes: Rocq, Agda and Isabelle, from source, with nothing built",
       "url": "https://pypi.org/project/axsent/",
       "version": "0.1.0",
-      "weekly": null
+      "weekly": 109
     }
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 47307,
+    "bot_requests_24h": 42131,
     "github_forks": 0,
     "github_repos": 29,
     "github_stars": 17,
-    "median_response_ms": 292,
+    "median_response_ms": 240,
     "npm_all_time": 1895,
     "npm_weekly": 179,
     "open_issues": 1,
-    "package_all_time": 8211,
-    "package_weekly": 611,
+    "package_all_time": 7495,
+    "package_weekly": 2803,
     "packages_total": 19,
     "page_views_7d": 40750,
     "properties_total": 11,
     "properties_up": 11,
-    "pypi_all_time": 6316,
-    "pypi_monthly": 1593,
-    "pypi_weekly": 432,
+    "pypi_all_time": 5600,
+    "pypi_monthly": 6184,
+    "pypi_weekly": 2624,
     "repos_archived": 0,
     "repos_unlicensed": 6,
     "threats_7d": 2295,
     "visitors_7d": 27945,
-    "zenodo_downloads": 490,
+    "zenodo_downloads": 493,
     "zenodo_records": 35,
-    "zenodo_views": 1210
+    "zenodo_views": 1211
   },
   "uptime": [
     {
       "code": 200,
       "error": null,
-      "ms": 292,
+      "ms": 256,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2026,7 +2026,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 204,
+      "ms": 222,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2034,7 +2034,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 383,
+      "ms": 358,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2042,7 +2042,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 200,
+      "ms": 149,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2050,7 +2050,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 437,
+      "ms": 366,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2058,7 +2058,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 266,
+      "ms": 273,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2066,7 +2066,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 249,
+      "ms": 217,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2074,7 +2074,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 627,
+      "ms": 608,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2082,7 +2082,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 384,
+      "ms": 240,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2090,7 +2090,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 236,
+      "ms": 108,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2098,7 +2098,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 399,
+      "ms": 209,
       "name": "zengin.es",
       "up": true,
       "url": "https://zengin.es"
@@ -2356,12 +2356,12 @@
         "views": 94
       },
       {
-        "downloads": 21,
+        "downloads": 24,
         "id": "21853489",
         "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
-        "unique_downloads": 19,
-        "unique_views": 41,
-        "views": 42
+        "unique_downloads": 22,
+        "unique_views": 42,
+        "views": 43
       },
       {
         "downloads": 7,
