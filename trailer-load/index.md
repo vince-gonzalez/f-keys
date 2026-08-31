@@ -4,14 +4,9 @@
 
 Canonical: https://f-keys.com/trailer-load/
 
-Warehouse load training that plays like a game.
+Warehouse load training that plays like a game. Weight distribution, axle limits and stack integrity are the lesson rather than the scenery &mdash; you load a trailer, and the trailer behaves like a trailer.
 
-| Field | Value |
-| --- | --- |
-| Where | trailer-load.com |
-| Cost | Free to play |
-| Licensing | Separately, for institutional training use |
-| Runs | In the browser |
+**Free to play** · runs in the browser · no download · licensed separately for institutional training
 
 ## What it is
 
@@ -31,6 +26,21 @@ Free to play. Licensed separately to institutions that want it for training,
 because a training department wants an invoice, a contact and something that
 will still be there next year — and that is a different arrangement from
 a free browser game.
+
+## How it works
+
+## What it teaches
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Where | trailer-load.com |
+| Cost | Free to play |
+| Licensing | Separately, for institutional training use |
+| Runs | In the browser |
+
+## Questions
 
 ---
 

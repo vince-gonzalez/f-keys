@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/wikipolish/
 
-Ten good edits is the hard part. This finds them.
+Finding ten good edits is the hard part of contributing to Wikipedia. This finds them &mdash; it reads the API, surfaces specific fixable things, and you make the edit under your own account.
 
-| Field | Value |
-| --- | --- |
-| Status | Live |
-| Platform | Browser |
-| Install | None |
-| Reads | Wikipedia API |
-| Account | Your own Wikipedia login |
+**Live** · browser · nothing to install · your own Wikipedia login · reads the public API
 
 ## The problem it solves
 
@@ -37,6 +31,22 @@ edited for you.
 **Log Edit** records the ones you actually made, so ten stops being a number you are
 trying to remember and becomes a number you can see. **Next Article** keeps the queue
 moving when one turns out to be already clean.
+
+## How it works
+
+## What it does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Status | Live |
+| Platform | Browser |
+| Install | None |
+| Reads | Wikipedia API |
+| Account | Your own Wikipedia login |
+
+## Questions
 
 ---
 

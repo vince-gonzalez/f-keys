@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/micdrop/
 
-Grab the mic. Survive the room.
+Grab the mic and survive the room. A Fortnite island built in UEFN, open lobby, jump straight in from the code.
 
-| Field | Value |
-| --- | --- |
-| Island code | 1534-0440-5810 |
-| Creator | d00b |
-| Platform | Fortnite, built in UEFN |
-| Players | Open lobby |
-| Support | hello@f-keys.com |
+**Island 1534-0440-5810** · by d00b · built in UEFN · open lobby · free with Fortnite
 
 ## What it is
 
@@ -37,6 +31,22 @@ the only mute that exists, and that is Epic's layer rather than something a crea
 build. Play it with people you would already be in a call with.
 
 ## Playing it
+
+## How it works
+
+## What it is
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Island code | 1534-0440-5810 |
+| Creator | d00b |
+| Platform | Fortnite, built in UEFN |
+| Players | Open lobby |
+| Support | hello@f-keys.com |
+
+## Questions
 
 ---
 

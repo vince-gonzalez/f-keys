@@ -1106,6 +1106,48 @@ rather than glossed. A screen is not a lightbox and the tests say so.</p>
 
  "trailer-load": dict(
   title="Trailer Load", tagline="Warehouse load training that plays like a game.",
+  lede="Warehouse load training that plays like a game. Weight distribution, "
+       "axle limits and stack integrity are the lesson rather than the "
+       "scenery &mdash; you load a trailer, and the trailer behaves like a "
+       "trailer.",
+  cta=[("Play it free", "https://trailer-load.com"),
+       ("Licensing for institutions", "/contact.html")],
+  herometa="<b>Free to play</b> &middot; runs in the browser &middot; no "
+           "download &middot; licensed separately for institutional training",
+  steps=[("Open it and load a trailer",
+          "In the browser. No download and no account to play."),
+         ("Get the distribution wrong",
+          "That is the lesson. The cheapest way to learn what a badly "
+          "distributed load does is to crush one nobody paid for."),
+         ("Do it again until it is boring",
+          "Which is exactly what you want from the person loading a real "
+          "one.")],
+  features_title="What it teaches",
+  features=[("Weight distribution",
+             "Where the mass sits, and what that does to the vehicle."),
+            ("Axle limits",
+             "The number that turns a full trailer into an illegal one."),
+            ("Stack integrity",
+             "What holds and what shifts, and the difference between them."),
+            ("Real load theory",
+             "Support, balance, hazmat, and the veteran tricks the docks "
+             "never put in a manual."),
+            ("Free forever for a person",
+             "No login to play. The training is not behind a gate."),
+            ("Institutional licensing",
+             "A training department wants an invoice, a contact and something "
+             "that will still be there next year &mdash; a different "
+             "arrangement from a free browser game. "
+             "<a href=\"/contact.html\">Ask</a>.")],
+  faq=[("Is it really free?",
+        "To play, yes, with no login. Use as training inside a school, a "
+        "district or a company is licensed separately &mdash; "
+        "<a href=\"/contact.html\">ask</a>."),
+       ("Does it run on a school network?",
+        "It is a browser game with no download and no install."),
+       ("Is there advertising?",
+        "None, anywhere on the domain, and that is permanent rather than a "
+        "setting. A reviewer can confirm it in dev tools.")],
   facts=[("Where","trailer-load.com"),("Cost","Free to play"),
          ("Licensing","Separately, for institutional training use"),
          ("Runs","In the browser")],
@@ -1130,13 +1172,53 @@ a free browser game.</p>
 
  "prompt": dict(
   title="PROMPT", tagline="A multiplayer word game, inside Discord.",
+  lede="A word game that runs inside a Discord voice channel, in a 90s CRT "
+       "shell. Everyone in the room looks at the same green screen at the "
+       "same moment &mdash; no install, no bot to invite, nothing for an "
+       "admin to approve.",
+  cta=[("Open it in Discord", "https://prompt.f-keys.com"),
+       ("Why an Activity", "#why-it-is-an-activity")],
+  herometa="<b>Free</b> &middot; a Discord Activity &middot; no install "
+           "&middot; no bot invite &middot; no permissions to grant",
+  steps=[("Join a voice channel",
+          "With the people you already wanted to play with."),
+         ("Start the Activity",
+          "From the channel itself. Nothing is installed and no bot is "
+          "invited."),
+         ("Play",
+          "Everyone already in the room is already playing.")],
+  features_title="What you get",
+  features=[("No bot invite",
+             "Nothing to add to the server, no permissions to grant, no "
+             "admin to ask."),
+            ("Everyone on one screen",
+             "The same green CRT, at the same moment, for the whole "
+             "channel."),
+            ("Zero friction",
+             "The effort of getting a group into a game is usually larger "
+             "than the game. This removes it."),
+            ("A 90s CRT shell",
+             "Phosphor green, because the game is about words and the screen "
+             "should get out of the way."),
+            ("Multiplayer by default",
+             "The voice channel is the lobby."),
+            ("Free",
+             "No purchase and no account beyond the Discord you already "
+             "have.")],
+  faq=[("Do I need to add a bot to my server?",
+        "No. It is an Activity, so it runs from the voice channel with "
+        "nothing to invite and no permissions to grant."),
+       ("How many can play?",
+        "Whoever is in the channel."),
+       ("Does it work on mobile Discord?",
+        "Activities run on mobile Discord, yes.")],
   facts=[("Where","prompt.f-keys.com"),("Runs","As a Discord Activity"),
          ("Install","None. No bot invite."),("Cost","Free")],
   body="""
 <h2>What it is</h2>
 <p>A word game that runs inside a Discord voice channel, in a 90s CRT shell.
 Everyone in the room is looking at the same green screen at the same moment.</p>
-<h2>Why it is an Activity</h2>
+<h2 id="why-it-is-an-activity">Why it is an Activity</h2>
 <p>No install, no bot to invite, no permissions to grant, nothing for a server
 admin to approve. You start it from the voice channel and the people already
 there are already playing. The friction of getting a group into a game is
@@ -1147,13 +1229,48 @@ usually larger than the game.</p>
 
  "daisupop": dict(
   title="DaisuPop", tagline="Everyone sees the same roll at the same moment.",
+  lede="A dice popper for Discord. One roll, rendered to everyone in the "
+       "voice channel at the same moment &mdash; which removes the only "
+       "argument every remote dice game has in it.",
+  cta=[("Open it in Discord", "https://dp.f-keys.com"),
+       ("Why it matters", "#why-that-matters")],
+  herometa="<b>Free</b> &middot; a Discord Activity &middot; no install "
+           "&middot; one roll, everyone sees it",
+  steps=[("Join the voice channel",
+          "The channel is the table."),
+         ("Start the Activity",
+          "Nothing to install and no bot to invite."),
+         ("Pop",
+          "One roll, drawn to every screen in the room simultaneously.")],
+  features_title="What you get",
+  features=[("One roll, everyone",
+             "Not a roll each with a shared result. The same event, rendered "
+             "to every screen."),
+            ("No 'I rolled a 20'",
+             "Every remote dice game has the same argument in it: somebody "
+             "rolled somewhere nobody else could see. This removes the "
+             "excuse, and that turns out to be most of the job."),
+            ("No install",
+             "It is an Activity. There is nothing to add."),
+            ("Instant",
+             "Start it from the channel and it is running."),
+            ("Works with any game",
+             "It is dice. It does not care what you are playing."),
+            ("Free",
+             "No purchase, no account beyond Discord.")],
+  faq=[("Does everyone really see the same roll?",
+        "Yes &mdash; that is the entire product."),
+       ("Do I need to invite a bot?",
+        "No."),
+       ("What dice does it do?",
+        "The ones a tabletop game needs.")],
   facts=[("Where","dp.f-keys.com"),("Runs","As a Discord Activity"),
          ("Install","None"),("Cost","Free")],
   body="""
 <h2>What it is</h2>
 <p>A dice popper for Discord. One roll, rendered to everyone in the voice
 channel simultaneously.</p>
-<h2>Why that matters</h2>
+<h2 id="why-that-matters">Why that matters</h2>
 <p>Every remote dice game has the same argument in it: somebody rolled
 somewhere nobody else could see. A shared roll removes the one excuse, and it
 turns out that is most of what a dice tool needs to do.</p>
@@ -1163,6 +1280,41 @@ turns out that is most of what a dice tool needs to do.</p>
 
  "fytecraft": dict(
   title="FyteCraft", tagline="An RTS built around the fight, not the build order.",
+  lede="A real-time strategy game where combat is the game rather than the "
+       "reward for twenty minutes of economy. It is alpha, it says so on the "
+       "front page, and the source is public while that is true.",
+  cta=[("Read the source", "https://github.com/vince-gonzalez/fytecraft.com"),
+       ("What alpha means here", "#it-is-early")],
+  herometa="<b>Alpha</b> &middot; free &middot; source public &middot; "
+           "things are missing and will change",
+  steps=[("Look at it as source",
+          "It is public, and that is currently the honest way in."),
+         ("Understand the inversion",
+          "Most RTS makes you spend the opening building something before "
+          "anything happens. This starts at the part people stayed for."),
+         ("Expect it to change",
+          "Alpha is not a marketing word here.")],
+  features_title="The idea",
+  features=[("The fight is the game",
+             "Not the reward for surviving an economy phase."),
+            ("No build order to memorise",
+             "The opening is not a script you either know or lose to."),
+            ("Real-time",
+             "It is an RTS, with the part people actually replay."),
+            ("Alpha, said out loud",
+             "On the front page, rather than discovered on launch."),
+            ("Public source",
+             "Readable while it is being built, not after."),
+            ("Free",
+             "There is nothing to buy and nothing to pre-order.")],
+  faq=[("Can I play it right now?",
+        "It is alpha. If you want a finished game, this is not one yet, and "
+        "the page says so rather than letting you find out."),
+       ("Why is the source public?",
+        "Because it is unfinished, and that is the honest state to be "
+        "readable in."),
+       ("Will it cost money later?",
+        "Nothing is being sold and nothing is being promised.")],
   facts=[("Where","github.com/vince-gonzalez/fytecraft.com"),
          ("Status","Alpha, and openly so"),("Cost","Free")],
   body="""
@@ -1170,7 +1322,7 @@ turns out that is most of what a dice tool needs to do.</p>
 <p>A real-time strategy game where combat is the game rather than the reward
 for twenty minutes of economy. Most RTS makes you spend the opening building
 something before anything happens; this starts at the part people stayed for.</p>
-<h2>It is early</h2>
+<h2 id="it-is-early">It is early</h2>
 <p>Alpha, and said so on the front page rather than discovered on launch.
 Things are missing, things will change, and the source is public while that is
 true. If you want a finished game this is not one yet.</p>
@@ -1383,6 +1535,44 @@ it, which is the difference between an instrument and a keylogger.</p>
 
  "pixelstaff": dict(
   title="Pixel Staff", tagline="An 8-bit composer with no DAW anywhere in it.",
+  lede="An 8-bit composer with no DAW anywhere in it. Place notes on a staff, "
+       "hear a chiptune, export a WAV or a ringtone. It opens in a browser tab "
+       "and there is nothing to install.",
+  cta=[("Open Pixel Staff", "/pixelstaff/app.html"),
+       ("How it works", "#what-it-does")],
+  herometa="<b>Free</b> &middot; browser &middot; nothing to install &middot; "
+           "MIT &middot; exports WAV and ringtone",
+  steps=[("Open the tab",
+          "No download, no account, no project file to create first."),
+         ("Place notes on a staff",
+          "Real notation, not a piano roll. If you can read a line of music "
+          "you already know the interface."),
+         ("Export it",
+          "WAV for anywhere, or a ringtone straight out.")],
+  features_title="What you get",
+  features=[("No DAW, anywhere in it",
+             "A digital audio workstation is the correct tool for making an "
+             "album and the wrong one for writing eight bars of chiptune."),
+            ("Real notation",
+             "A staff, not a grid of coloured blocks. The knowledge transfers "
+             "in both directions."),
+            ("8-bit voices",
+             "Square, triangle, noise &mdash; the palette that made the sound "
+             "worth wanting."),
+            ("WAV export",
+             "The thing you made comes out as a file."),
+            ("Ringtone export",
+             "Because that is what a short loop is actually for."),
+            ("MIT, in the browser",
+             "Read the source, take it apart, run it yourself.")],
+  faq=[("Do I need to read music?",
+        "It helps and it is not required &mdash; you can place notes by ear "
+        "and the staff shows you what you did, which is how people learn to "
+        "read it."),
+       ("Is anything uploaded?",
+        "No. It runs in your browser and the export is a local file."),
+       ("Can I use what I make?",
+        "Yes. It is yours.")],
   facts=[("Licence","MIT"),("Platform","Browser"),("Install","None"),("Exports","WAV, ringtone")],
   body="""
 <h2>What it does</h2>
@@ -1480,6 +1670,38 @@ launch empty.</p>
 
  "micdrop": dict(
   title="MICDROP", tagline="Grab the mic. Survive the room.",
+  lede="Grab the mic and survive the room. A Fortnite island built in UEFN, "
+       "open lobby, jump straight in from the code.",
+  cta=[("Play it in Fortnite", "https://www.fortnite.com/@d00b/1534-0440-5810"),
+       ("Support", "/contact.html")],
+  herometa="<b>Island 1534-0440-5810</b> &middot; by d00b &middot; built in "
+           "UEFN &middot; open lobby &middot; free with Fortnite",
+  steps=[("Open Fortnite",
+          "Any platform Fortnite runs on."),
+         ("Enter the island code",
+          "<b>1534-0440-5810</b>, or use the link."),
+         ("Take the mic",
+          "And survive the room.")],
+  features_title="What it is",
+  features=[("Open lobby",
+             "No party required. Drop in with whoever is there."),
+            ("Built in UEFN",
+             "Unreal Editor for Fortnite, not a creative-mode map."),
+            ("Island 1534-0440-5810",
+             "The code is the address. It does not change."),
+            ("By d00b",
+             "The creator handle the island is published under."),
+            ("Free with Fortnite",
+             "Nothing to buy beyond the game you already have."),
+            ("Supported",
+             "Problems go to <a href=\"/contact.html\">hello@f-keys.com</a> "
+             "and reach a person.")],
+  faq=[("Do I need to buy anything?",
+        "No, beyond Fortnite itself, which is free."),
+       ("Can I play solo?",
+        "It is an open lobby, so you can join whoever is in it."),
+       ("Where do I report a problem?",
+        "<a href=\"/contact.html\">hello@f-keys.com</a>.")],
   facts=[("Island code","1534-0440-5810"),("Creator","d00b"),
          ("Platform","Fortnite, built in UEFN"),("Players","Open lobby"),
          ("Support","hello@f-keys.com")],
@@ -1511,6 +1733,43 @@ build. Play it with people you would already be in a call with.</p>
 
  "wikipolish": dict(
   title="WikiPolish", tagline="Ten good edits is the hard part. This finds them.",
+  lede="Finding ten good edits is the hard part of contributing to Wikipedia. "
+       "This finds them &mdash; it reads the API, surfaces specific fixable "
+       "things, and you make the edit under your own account.",
+  cta=[("Open WikiPolish", "https://vince-gonzalez.github.io/wikiscout/"),
+       ("Source", "https://github.com/vince-gonzalez/wikiscout")],
+  herometa="<b>Live</b> &middot; browser &middot; nothing to install &middot; "
+           "your own Wikipedia login &middot; reads the public API",
+  steps=[("Open it",
+          "In a browser. There is nothing to install."),
+         ("Get a list of specific fixes",
+          "Not 'go improve an article' &mdash; particular things, in "
+          "particular places, that are wrong or missing."),
+         ("Edit under your own account",
+          "It never edits for you. Your login, your edit, your history.")],
+  features_title="What it does",
+  features=[("It finds the work",
+             "Wanting to contribute is easy. Knowing which ten edits are "
+             "worth making is the part that stops people."),
+            ("Specific, not vague",
+             "A named fix in a named place, rather than a category to "
+             "browse."),
+            ("Reads the public API",
+             "Nothing scraped and nothing cached that should not be."),
+            ("Your account, always",
+             "It does not edit on your behalf. Attribution and "
+             "responsibility stay with you."),
+            ("Nothing to install",
+             "A browser and a Wikipedia login."),
+            ("Public source",
+             "Read what it looks for before you trust what it finds.")],
+  faq=[("Does it edit Wikipedia for me?",
+        "No, and deliberately. Automated editing is somebody else's problem "
+        "to have. It finds the work; you do it under your own account."),
+       ("Do I need a Wikipedia account?",
+        "To make the edits, yes. To look at what it finds, no."),
+       ("Is this a bot?",
+        "No. It reads the public API and shows you a list.")],
   facts=[("Status","Live"),("Platform","Browser"),("Install","None"),
          ("Reads","Wikipedia API"),("Account","Your own Wikipedia login")],
   body="""
