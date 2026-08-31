@@ -369,3 +369,49 @@ table.details th.num,table.details td.num{text-align:right}
 .receipt .ty{width:1%}
 .receipt .ex{color:var(--dim)}
 .receipt .hx{color:var(--doc-link);width:1%}
+
+/* ── an actual product page ───────────────────────────────────
+   A facts table and four paragraphs is a catalogue entry. A
+   product page has a hero, a picture of the thing at full width,
+   what it does in steps, what you get, what it needs, and how to
+   get it. These blocks render only when a product supplies them,
+   so a page grows into one rather than being rebuilt. */
+.hero{background:var(--field);border:2px inset #dfdfdf;padding:22px 24px 20px;
+  margin:0 0 16px}
+.hero h1{font-size:31px;margin:0 0 4px;letter-spacing:.2px}
+.hero .lede{font-size:17px;color:var(--doc-by);margin:0 0 14px;max-width:56ch}
+.hero .meta{color:var(--dim);font-size:13px;margin:12px 0 0}
+.hero .meta b{color:var(--ink)}
+.herocta{display:flex;gap:8px;flex-wrap:wrap;margin:0}
+.herocta .btn{padding:7px 18px;font-size:15px}
+
+.shotwide{margin:0 0 18px}
+.shotwide img{display:block;width:100%;height:auto;
+  border:2px inset #dfdfdf;background:var(--field)}
+.shotwide figcaption{margin-top:5px;color:var(--dim);font-size:13px}
+
+.steps{counter-reset:step;margin:6px 0 18px;padding:0;list-style:none}
+.steps li{counter-increment:step;position:relative;padding:0 0 12px 42px;
+  min-height:30px}
+.steps li::before{content:counter(step);position:absolute;left:0;top:0;
+  width:27px;height:27px;background:var(--sel);color:var(--hi);
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+  font-size:15px}
+.steps b{display:block;margin-bottom:1px}
+.steps span{color:var(--doc-by)}
+
+.featgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:6px 0 18px}
+.feat{background:var(--field);border:1px solid;
+  border-color:var(--sh) var(--hi) var(--hi) var(--sh);padding:11px 13px}
+.feat b{display:block;margin-bottom:3px}
+.feat span{color:var(--doc-by);font-size:14px}
+
+.faq dt{font-weight:700;margin:13px 0 3px}
+.faq dd{margin:0;color:var(--doc-by)}
+
+@media (max-width:760px){
+  .featgrid{grid-template-columns:1fr}
+  .hero{padding:16px 15px 15px}
+  .hero h1{font-size:25px}
+  .hero .lede{font-size:16px}
+}

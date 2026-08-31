@@ -4,15 +4,9 @@
 
 Canonical: https://f-keys.com/remapwrap/
 
-Your phone is already the extra row of keys.
+Turn the phone in your hand into a drag-and-drop control surface that fires real OS-level keystrokes. No app to install, no hardware to buy, and the software you are driving never knows it is not a keyboard.
 
-| Field | Value |
-| --- | --- |
-| Version | 0.1.0 alpha |
-| Runtime | Node.js 16+ |
-| Phone needs | A browser |
-| Install | None on the phone |
-| Source | vince-gonzalez/f-keys |
+**0.1.0 alpha** · Windows, macOS, Linux · Node.js 16+ · free, no account, unlimited keys
 
 ## Zero to a deck in fifteen seconds
 
@@ -63,6 +57,22 @@ npm install
 scan the QR with your phone
 Both devices on the same network. Ports 7331 and 7332 open locally. Keystroke injection
 via @nut-tree-fork/nut-js.
+
+## How it works
+
+## What the free version does
+
+## Specifications
+
+| Field | Value |
+| --- | --- |
+| Version | 0.1.0 alpha |
+| Runtime | Node.js 16+ |
+| Phone needs | A browser |
+| Install | None on the phone |
+| Source | vince-gonzalez/f-keys |
+
+## Questions
 
 ---
 

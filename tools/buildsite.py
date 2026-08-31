@@ -1014,6 +1014,64 @@ averaging them in.</p>
 
  "remapwrap": dict(
   title="RemapWrap", tagline="Your phone is already the extra row of keys.",
+  lede="Turn the phone in your hand into a drag-and-drop control surface that "
+       "fires real OS-level keystrokes. No app to install, no hardware to buy, "
+       "and the software you are driving never knows it is not a keyboard.",
+  cta=[("Get it on GitHub", "https://github.com/vince-gonzalez/f-keys/tree/main/remapwrap"),
+       ("How it works", "#how-it-works"),
+       ("Licensing", "/contact.html")],
+  herometa="<b>0.1.0 alpha</b> &middot; Windows, macOS, Linux &middot; "
+           "Node.js 16+ &middot; free, no account, unlimited keys",
+  steps=[("Run the server on your PC",
+          "<code>npm install</code> then <code>npm start</code>. It prints a "
+          "dashboard address and shows a pairing QR code."),
+         ("Scan the code with your phone",
+          "The phone opens the controller in its browser. Both devices need to "
+          "be on the same network. Nothing is installed and no account is "
+          "created."),
+         ("Press a key",
+          "The phone sends the press, the server fires a real OS-level "
+          "keystroke, and the application in front receives it exactly as if "
+          "it came from your keyboard.")],
+  features_title="What the free version does",
+  features=[("Unlimited keys, profiles and pages",
+             "Not a trial limit that appears at ten. There is no count."),
+            ("Any shape, any size, anywhere",
+             "Free placement on a grid you draw on. Drop a control, size it, "
+             "colour it, decide what it sends."),
+            ("Every command it can carry out",
+             "No command is held back for a paid tier. If RemapWrap can do it, "
+             "the free version does it."),
+            ("Two phones at once",
+             "A second device connects to the same surface without paying for "
+             "the privilege."),
+            ("It works with everything",
+             "Because it is indistinguishable from a keyboard. The software "
+             "you are driving needs no plugin and no integration."),
+            ("Nothing leaves your network",
+             "The server is on your PC and the phone talks to it directly. "
+             "There is no cloud in the path and no account to create.")],
+  faq=[("Do I need to install anything on the phone?",
+        "No. It is a web page served by your own PC. That is the whole design "
+        "&mdash; an app would be one more thing to update and one more thing "
+        "to trust."),
+       ("How is this different from a Stream Deck?",
+        "A Stream Deck is a hundred and fifty dollars of hardware that lives "
+        "in a drawer. This is the glass already in your hand. The trade is "
+        "real: dedicated hardware has physical keys you can find without "
+        "looking, and this does not."),
+       ("Does it work over the internet?",
+        "No, and deliberately. Both devices must be on the same local network. "
+        "Something that fires OS-level keystrokes on your machine is not "
+        "something to expose to the internet."),
+       ("What does it cost?",
+        "The free version is free forever, with no account, on as many of your "
+        "own computers as you like, and everything listed above stays free. "
+        "Use inside a business, a school or another organisation needs a "
+        "licence &mdash; <a href=\"/contact.html\">ask</a>."),
+       ("How finished is it?",
+        "It is 0.1.0 and labelled alpha because it is one. It works, it is in "
+        "daily use, and it will have rough edges you find before I do.")],
   facts=[("Version","0.1.0 alpha"),("Runtime","Node.js 16+"),
          ("Phone needs","A browser"),("Install","None on the phone"),
          ("Source","vince-gonzalez/f-keys")],
@@ -1041,7 +1099,7 @@ on: drop a control anywhere, size it, colour it, and decide what it sends.</p>
 <p>Every input a mouse has, on a surface with no fixed shape. A deck for editing does not
 have to look anything like a deck for streaming, and neither has to look like a keyboard.</p>
 
-<h2>Where it actually is</h2>
+<h2 id="how-it-works">Where it actually is</h2>
 <p><b>The alpha is buttons.</b> The recovered v0.1.0 pairs over a QR code, serves a grid of
 keys, fires them through the OS, and buzzes the phone on press. Layouts are JSON, edited
 live in the dashboard. That much works today.</p>
@@ -1580,6 +1638,57 @@ def product_og(slug):
         if os.path.isfile(os.path.join(ROOT, "assets", "products", name)):
             return SITE + "/assets/products/" + name
     return OG_IMAGE
+
+
+# ── the parts of an actual product page ──────────────────────
+# A heading, a facts table and four paragraphs is a catalogue entry.
+# It says what a thing is; it does not help anybody get it, and it was
+# what every product here had. These render only for products that
+# supply them, so a page becomes a product page rather than being
+# rebuilt from scratch.
+def product_hero(page, slug):
+    lede = page.get("lede") or page["tagline"]
+    ctas = page.get("cta") or []
+    buttons = "".join(
+        '<a class="btn{}" href="{}"{}>{}</a>'.format(
+            " default" if i == 0 else "", esc(u),
+            ' rel="noopener"' if u.startswith("http") else "", esc(t))
+        for i, (t, u) in enumerate(ctas))
+    meta = page.get("herometa") or ""
+    return (
+        '<div class="hero">'
+        '<h1>{}</h1><p class="lede">{}</p>'
+        '<div class="herocta">{}</div>'
+        '{}</div>').format(
+            esc(page["title"]), esc(lede), buttons,
+            '<p class="meta">%s</p>' % meta if meta else "")
+
+
+def product_steps(page):
+    steps = page.get("steps") or []
+    if not steps:
+        return ""
+    items = "".join('<li><b>{}</b><span>{}</span></li>'.format(esc(t), body)
+                    for t, body in steps)
+    return ('<h2>How it works</h2><ol class="steps">%s</ol>' % items)
+
+
+def product_features(page):
+    feats = page.get("features") or []
+    if not feats:
+        return ""
+    cards = "".join('<div class="feat"><b>{}</b><span>{}</span></div>'
+                    .format(esc(t), body) for t, body in feats)
+    return ('<h2>%s</h2><div class="featgrid">%s</div>'
+            % (esc(page.get("features_title") or "What you get"), cards))
+
+
+def product_faq(page):
+    faq = page.get("faq") or []
+    if not faq:
+        return ""
+    rows = "".join('<dt>{}</dt><dd>{}</dd>'.format(esc(q), a) for q, a in faq)
+    return '<h2>Questions</h2><dl class="faq">%s</dl>' % rows
 
 
 def product_mark(slug):
@@ -2215,10 +2324,30 @@ def main():
                     esc(where) if where else esc(page["title"]),
                     ", " + esc(when) if when else "")
 
-        doc = ('<div class="doc">{}<h1>{}</h1><p class="sub">{}</p>'
-               '<table class="facts">{}</table>{}{}</div>').format(
-                   head, esc(page["title"]), esc(page["tagline"]),
-                   facts, figure, page["body"])
+        if page.get("cta"):
+            # A product page: hero, the picture at full width, then the
+            # prose, then how it works, what you get, and the questions.
+            wide = ""
+            if shot:
+                when = SHOT_DATES.get(slug, "")
+                wide = ('<figure class="shotwide">'
+                        '<img src="{}" alt="{} running." width="800" '
+                        'style="max-width:100%;height:auto" loading="lazy" '
+                        'decoding="async"><figcaption>{}{}</figcaption>'
+                        '</figure>').format(
+                            shot, esc(page["title"]), esc(page["title"]),
+                            ", " + esc(when) if when else "")
+            doc = ('<div class="doc">{}{}{}{}{}{}'
+                   '<h2>Specifications</h2><table class="facts">{}</table>'
+                   '{}</div>').format(
+                       head, product_hero(page, slug), wide, page["body"],
+                       product_steps(page), product_features(page),
+                       facts, product_faq(page))
+        else:
+            doc = ('<div class="doc">{}<h1>{}</h1><p class="sub">{}</p>'
+                   '<table class="facts">{}</table>{}{}</div>').format(
+                       head, esc(page["title"]), esc(page["tagline"]),
+                       facts, figure, page["body"])
         label = dict((c[0], c[1]) for c in CATEGORIES) if False else None
         catname = next((c[1] for c in CATEGORIES if c[0] == cat), "")
         written.append((os.path.join(slug, "index.html"), shell(
