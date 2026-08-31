@@ -78,6 +78,17 @@ SHOTS = {
     "keyj":         "https://f-keys.com/keyj/app.html",
 }
 
+# Products with no public URL because they run on your own machine. The
+# app is real HTML, so it is captured from the file it ships as. A local
+# app with no picture looked, on the product page, exactly like a
+# product that has no interface - which is the opposite of true for the
+# one that IS an interface.
+LOCAL_SHOTS = {
+    "remapwrap":  "remapwrap/dashboard.html",
+    "keyj":       "keyj/app.html",
+    "pixelstaff": "pixelstaff/app.html",
+}
+
 CHROMES = [
     r"C:\Program Files\Google\Chrome\Application\chrome.exe",
     r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
@@ -166,6 +177,12 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     report = "--report" in sys.argv
     verify = "--verify" in sys.argv
+    for slug, rel_path in sorted(LOCAL_SHOTS.items()):
+        if slug not in SHOTS:
+            full = os.path.join(ROOT, rel_path).replace("\\", "/")
+            if os.path.exists(full):
+                SHOTS[slug] = "file:///" + full
+
     state = load()
 
     if verify:
@@ -193,6 +210,13 @@ def main():
                 slug, SHOTS[slug],
                 state.get(slug, {}).get("captured", "NOT CAPTURED")))
         return 0
+
+    # Local app UIs, captured from the file they ship as.
+    for slug, rel_path in sorted(LOCAL_SHOTS.items()):
+        if slug not in SHOTS:
+            full = os.path.join(ROOT, rel_path).replace("\\", "/")
+            if os.path.exists(full):
+                SHOTS[slug] = "file:///" + full
 
     chrome = find_chrome()
     if not chrome:

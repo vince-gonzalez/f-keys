@@ -91,6 +91,16 @@ CATALOGUE = [
     ("authorecon", "authorecon", "research", "Python package", PIP,
      "Reconcile published work against every place it lives, for any ORCID, from public sources.", "/authorecon/"),
 
+    # 2026-08-31. Four packages that were live on PyPI with no page here.
+    ("mmforge", "mmforge", "research", "Python package", PIP,
+     "Find avoidable axiom dependencies in Metamath, and build the proofs that remove them.", "/mmforge/"),
+    ("loadbearing", "loadbearing", "research", "Python package", PIP,
+     "What a claim asserts, separated from what its derivation consumed.", "/loadbearing/"),
+    ("certivl", "certivl", "research", "Python package", PIP,
+     "Certified interval arithmetic: an enclosure that turns a computed inequality into a proof.", "/certivl/"),
+    ("ishihara", "ishihara", "research", "Python package", PIP,
+     "Generate pseudoisochromatic colour-vision plates, reproducible from a seed.", "/ishihara/"),
+
     ("legible", "legible", "tools", "Python package", PIP,
      "Three build gates: unreadable type, unreadable colour, a retired name.", "/legible/"),
     ("openapi-drift", "openapi-drift", "tools", "Python package", PIP,
@@ -270,6 +280,125 @@ much as it reflects anything about the work.</p>
 <div class="btnrow">
   <a class="btn default" href="https://pypi.org/project/authorecon/" rel="noopener">PyPI</a>
   <a class="btn" href="https://github.com/vince-gonzalez/apriori" rel="noopener">Source</a>
+</div>"""),
+
+"mmforge": dict(
+  title="mmforge", tagline="Find the axiom a theorem did not need.",
+  facts=[("Install", "pip install mmforge"), ("Version", "0.2.0"),
+         ("Licence", "MIT"), ("Reads", "Metamath databases"),
+         ("Upstream", "6 pull requests merged into set.mm"),
+         ("Source", "vince-gonzalez/mmforge")],
+  body="""
+<h2>What it does</h2>
+<p>Two halves of one loop. The analysis finds a theorem that pays for an
+axiom it does not need; the construction writes the replacement proof and
+checks it.</p>
+<pre><b>pip install mmforge</b>
+mmforge reach      set.mm --axiom ax-ac
+mmforge impact     set.mm --axiom ax-ac --top 40
+mmforge domination set.mm
+mmforge conformance set.mm</pre>
+<h2>The finding it came from</h2>
+<p>set.mm is 47,621 theorems deep. 583 of them reach the axiom of choice and
+<b>three</b> actually invoke it &mdash; everything else inherits. 418 of the 583
+inherit through exactly one step, which means each has a single place where the
+dependence could be removed.</p>
+<p>The lower half of that table is measure theory, which has no business being
+there. <code>difelsiga</code> says a sigma-algebra is closed under set
+difference; below it sit 64 results including <b>Bayes' theorem</b>.</p>
+<h2>Repairs do not add up</h2>
+<p>Fixing one statement frees a count that is not the count you get when you
+fix it alongside the others. <code>fimact</code> alone frees one theorem; in the
+stack it frees fourteen. Every per-repair figure this reports is a lower bound,
+and it says so rather than adding them for you.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/mmforge/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/mmforge" rel="noopener">Source</a>
+  <a class="btn" href="/papers/">The papers</a>
+</div>"""),
+
+"loadbearing": dict(
+  title="loadbearing", tagline="What a claim asserts, and what its proof consumed.",
+  facts=[("Install", "pip install loadbearing"), ("Version", "0.2.0"),
+         ("Extras", "[formal] for Lean and Metamath, [mcp] for the server"),
+         ("Reads", "Lean 4, Metamath"),
+         ("Source", "vince-gonzalez/loadbearing")],
+  body="""
+<h2>What it does</h2>
+<p>Separates two things every axiom census runs together: what a statement
+<em>asserts</em>, and what the derivation behind it <em>consumed</em>. They are
+different questions and they have different answers.</p>
+<pre><b>pip install "loadbearing[formal]"</b></pre>
+<h2>Why the distinction pays</h2>
+<p>Measured across four libraries and two foundations: <b>more than half of
+every axiom cone holds up nothing at all</b>. Reach &mdash; the count of what
+sits downstream of an assumption &mdash; overstates responsibility by up to
+<b>58&times;</b> against the severing counterfactual, which asks the harder
+question of what actually breaks if you take the assumption away.</p>
+<h2>It reports what it did not check</h2>
+<p>A graph carries the population it excluded, and a ledger that excluded
+nothing says so explicitly. The digest is taken over installed file contents,
+so a measurement can be quoted with the version of the thing that produced it
+&mdash; a reach without a digest is not a citation, it is a memory.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/loadbearing/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/loadbearing" rel="noopener">Source</a>
+  <a class="btn" href="/papers/">The papers</a>
+</div>"""),
+
+"certivl": dict(
+  title="certivl", tagline="An enclosure that turns a computed inequality into a proof.",
+  facts=[("Install", "pip install certivl"), ("Version", "0.2.0"),
+         ("Licence", "MIT"), ("Arithmetic", "Exact rational, certified interval"),
+         ("Source", "vince-gonzalez/certivl")],
+  body="""
+<h2>What it does</h2>
+<p>Exact rational and certified interval arithmetic. A float comparison tells
+you what the hardware thought; an enclosure tells you what is true, because the
+answer is bracketed and the bracket is carried through every operation.</p>
+<pre><b>pip install certivl</b></pre>
+<h2>Why an interval rather than a number</h2>
+<p>A computed inequality is only evidence until the rounding is accounted for.
+An enclosure that stays strictly on one side of zero settles the question; one
+that straddles zero says the computation did not decide it. The second answer
+is the useful one, and floating point never gives it to you &mdash; it gives
+you a number and no idea how much of it is real.</p>
+<h2>Where it is used</h2>
+<p>Behind the certified bounds in the discrete-geometry papers: covering,
+packing and opacity results where a machine-checked upper bound has to survive
+someone re-running it on different hardware.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/certivl/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/certivl" rel="noopener">Source</a>
+  <a class="btn" href="/papers/">The papers</a>
+</div>"""),
+
+"ishihara": dict(
+  title="ishihara", tagline="Colour-vision plates, reproducible from a seed.",
+  facts=[("Install", "pip install ishihara"), ("Version", "0.1.2"),
+         ("Licence", "MIT"), ("Output", "Plate images from a seed"),
+         ("Source", "vince-gonzalez/ishihara")],
+  body="""
+<h2>What it does</h2>
+<p>Generates pseudoisochromatic plates &mdash; the dotted circles with a
+numeral hidden in the colour separation &mdash; from a seed, so the same seed
+gives the same plate on any machine, forever.</p>
+<pre><b>pip install ishihara</b>
+ishihara --seed 4211 --figure 74</pre>
+<h2>Why the seed matters</h2>
+<p>Plates in the wild are generated with an unseeded random number generator,
+which means no two runs produce the same test and no result can be compared
+with another. A screening tool whose stimulus changes between subjects is
+measuring the stimulus as much as the subject.</p>
+<h2>What it is not</h2>
+<p>Not a diagnosis, and not a calibrated instrument. A screen is not a
+lightbox: the plate you generate is only as honest as the display it lands on,
+and the calibration limits are published rather than glossed over. The
+underlying method is deposited with a DOI.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://pypi.org/project/ishihara/" rel="noopener">PyPI</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/ishihara" rel="noopener">Source</a>
+  <a class="btn" href="/opticquiz/">OpticQuiz</a>
 </div>"""),
 
 "legible": dict(

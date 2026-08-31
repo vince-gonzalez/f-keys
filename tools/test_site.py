@@ -528,6 +528,51 @@ def papers_ordering():
                  .format(gid, " ".join(dates)))
 
 
+# A published package maps to a page. Where the package name is not the
+# product name, say so here rather than letting the check guess.
+PACKAGE_PAGE = {
+    "opticquiz-cvd": "opticquiz", "opticquiz-eye": "opticquiz",
+    "opticquiz-cvd-mcp": "opticquiz", "@f-keys/tip-widget": "tipstreams",
+    "moonbeam-miner": "moonbeam", "plumhud": "plumhud",
+    # Destinations rather than product pages: these link out to their own
+    # sub-site and are listed in the catalogue that way.
+    "gonzalgo": None,
+}
+
+
+def every_package_has_a_page():
+    """Anything published gets a page here. That is the rule.
+
+    mmforge, certivl, ishihara and loadbearing were all live on PyPI
+    with nothing on this site - so the only way to find them was to
+    already know they existed, which is the opposite of what a
+    catalogue is for. authorecon and axsent were the same the week
+    before, and the three before that.
+
+    It stops being something to remember. A package in the tracked
+    lists must have a page, or an explicit entry in PACKAGE_PAGE saying
+    where it lives instead.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import buildsite
+    import snapshot
+
+    for pkg in list(snapshot.PYPI_PACKAGES) + list(snapshot.NPM_PACKAGES):
+        if pkg in PACKAGE_PAGE:
+            slug = PACKAGE_PAGE[pkg]
+            if slug is None:
+                continue            # deliberately a destination
+        else:
+            slug = pkg
+        if slug in buildsite.PAGES:
+            continue
+        if any(c[0] == slug for c in buildsite.CATALOGUE):
+            continue
+        fail("catalogue", "{} is published and has no page. Add one, or "
+                          "record where it lives in PACKAGE_PAGE."
+             .format(pkg))
+
+
 def privacy_matches_tooling():
     """The Privacy page has to describe what the tooling actually does.
 
@@ -893,6 +938,7 @@ def main():
     price_claims()
     colours_are_tokens()
     privacy_matches_tooling()
+    every_package_has_a_page()
     papers_ordering()
     published_zones()
     openapi()

@@ -124,7 +124,9 @@ PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
                  # NOT "warrant": that name on PyPI belongs to Brian
                  # Jinwright at capless.io. SayDo was renamed from
                  # WARRANT and the coincidence is not ownership.
-                 "authorecon", "axsent"]
+                 "authorecon", "axsent",
+                 # loadbearing 0.2.0 was live and untracked too.
+                 "loadbearing"]
 
 # Repositories are owner-qualified now. gonzalgo moved to the personal
 # account and only kept reporting because GitHub redirects transferred

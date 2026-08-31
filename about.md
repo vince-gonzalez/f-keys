@@ -1,6 +1,6 @@
 # About F-Keys
 
-> F-Keys is Vince Gonzalez, working alone, with twenty-four live products and more than thirty deposited works.
+> F-Keys is Vince Gonzalez, working alone, with twenty-eight live products and more than thirty deposited works.
 
 Canonical: https://f-keys.com/about.html
 
@@ -15,8 +15,8 @@ Independent products built by Vincent Gonzalez.
 
 ## What this is
 
-F-Keys is Vince Gonzalez, working alone. Twenty-nine products are on the
-shelves — twenty-four of them live today, the rest labeled alpha or
+F-Keys is Vince Gonzalez, working alone. Thirty-three products are on the
+shelves — twenty-eight of them live today, the rest labeled alpha or
 needs-setup, because a badge is cheaper than a broken promise — from
 browser games to formal proof tooling, and each is built end to end by the same
 person: architecture, both ends, database, deployment, documentation.

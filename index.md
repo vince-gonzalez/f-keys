@@ -7,8 +7,8 @@ Canonical: https://f-keys.com
 Hardware. Software. Ideas brought to life.
 
 F-Keys is the working catalogue of **Vincent Gonzalez**, an independent
-builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Twenty-nine
-products are on the shelves, twenty-four of them live today, and each one was
+builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Thirty-three
+products are on the shelves, twenty-eight of them live today, and each one was
 designed, written, deployed and documented
 by the same person — architecture, both ends, database, release notes. The
 table below is the whole company.
@@ -66,6 +66,10 @@ to match the last one. [Contact](https://f-keys.com/contact.html) for licensing,
 | [SayDo](https://f-keys.com/saydo/) | Standard + harness | Alpha | Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check. |
 | [axsent](https://f-keys.com/axsent/) | Python package | pip install | What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built. |
 | [authorecon](https://f-keys.com/authorecon/) | Python package | pip install | Reconcile published work against every place it lives, for any ORCID, from public sources. |
+| [mmforge](https://f-keys.com/mmforge/) | Python package | pip install | Find avoidable axiom dependencies in Metamath, and build the proofs that remove them. |
+| [loadbearing](https://f-keys.com/loadbearing/) | Python package | pip install | What a claim asserts, separated from what its derivation consumed. |
+| [certivl](https://f-keys.com/certivl/) | Python package | pip install | Certified interval arithmetic: an enclosure that turns a computed inequality into a proof. |
+| [ishihara](https://f-keys.com/ishihara/) | Python package | pip install | Generate pseudoisochromatic colour-vision plates, reproducible from a seed. |
 | [legible](https://f-keys.com/legible/) | Python package | pip install | Three build gates: unreadable type, unreadable colour, a retired name. |
 | [openapi-drift](https://f-keys.com/openapi-drift/) | Python package | pip install | Has your API drifted from its spec, and can a machine still read it? |
 | [changewatch](https://f-keys.com/changewatch/) | Python package | pip install | A doorbell for your published work. Silent until somebody else acts. |
