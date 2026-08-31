@@ -808,11 +808,14 @@ rather than passing a stylesheet that declares no colours at all.</p>
           "finds out one failed call at a time; this finds out on the commit "
           "that caused it.")],
   features_title="What it checks",
-  features=[("The check nobody else runs",
+  features=[("The $ref trap, reported not silently fixed",
              "A response schema behind a <code>$ref</code> is valid and "
-             "useless to the tools that turn an operation into a function "
-             "signature, because they do not dereference. A validator sees a "
-             "schema; a converter sees an argument with no type."),
+             "useless to a consumer that does not dereference. This is a "
+             "known problem with libraries built to solve it &mdash; "
+             "<a href=\"https://github.com/devflowinc/openapi-schema-ref-parser\" "
+             "rel=\"noopener\">openapi-schema-ref-parser</a> is one. Those "
+             "dereference it for you; this reports it, so the document gets "
+             "fixed rather than every consumer working around it."),
             ("Live comparison",
              "Not just the document. What the service actually returns."),
             ("Only safe calls",
@@ -845,7 +848,7 @@ every consumer finds out one failed call at a time.</p>
 <pre><b>pip install openapi-drift</b>
 openapi-drift openapi.json
 openapi-drift https://example.com/openapi.json --live</pre>
-<h2>The check nobody else runs</h2>
+<h2>The check that is easy to skip</h2>
 <p>A response schema behind a <code>$ref</code> is correct, valid, and useless
 to the tools that turn an operation into a function signature, because they do
 not dereference. A validator sees a schema; a converter sees an argument with
@@ -1491,10 +1494,10 @@ most of the point of the site.</p>
   features=[("It never holds the money",
              "There is no balance, no payout schedule, and no decision of "
              "ours that can affect whether you get paid."),
-            ("Nobody can freeze you",
-             "Every other product in this category is a custodian, and a "
-             "custodian can freeze you. This one cannot, because it never has "
-             "anything to freeze."),
+            ("Nothing to freeze",
+             "A custodial product holds your money on the way through, and "
+             "anything that holds it can freeze it. Nothing ever arrives "
+             "here, so there is nothing to hold and nothing to stop."),
             ("Multi-payment QR router",
              "Crypto and the usual platforms, from one page."),
             ("OBS overlays",
@@ -1524,8 +1527,9 @@ crypto and the usual platforms, pointed at your accounts.</p>
 method and gets out of the way. Nothing is held, nothing is forwarded, there is
 no balance, and there is no point at which a decision of ours affects whether
 you get paid.</p>
-<p>Every other tipping product in this space is a custodian, and a custodian can
-freeze you. This one cannot, because it never has anything to freeze.</p>
+<p>Custodial tipping products hold your money on the way through, and anything
+that holds it can freeze it. This one has nothing to freeze, because nothing
+ever arrives.</p>
 <h2>In your own page</h2>
 <p><code>npm i &#64;f-keys/tip-widget</code> if you would rather embed it than
 use the hosted page.</p>

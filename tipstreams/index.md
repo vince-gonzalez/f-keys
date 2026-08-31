@@ -20,8 +20,9 @@ method and gets out of the way. Nothing is held, nothing is forwarded, there is
 no balance, and there is no point at which a decision of ours affects whether
 you get paid.
 
-Every other tipping product in this space is a custodian, and a custodian can
-freeze you. This one cannot, because it never has anything to freeze.
+Custodial tipping products hold your money on the way through, and anything
+that holds it can freeze it. This one has nothing to freeze, because nothing
+ever arrives.
 
 ## In your own page
 

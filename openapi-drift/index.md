@@ -17,7 +17,7 @@ every consumer finds out one failed call at a time.
 **pip install openapi-drift**
 openapi-drift openapi.json
 openapi-drift https://example.com/openapi.json --live
-The check nobody else runs
+The check that is easy to skip
 A response schema behind a $ref is correct, valid, and useless
 to the tools that turn an operation into a function signature, because they do
 not dereference. A validator sees a schema; a converter sees an argument with

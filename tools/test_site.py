@@ -540,6 +540,52 @@ PACKAGE_PAGE = {
 }
 
 
+# Claims about the outside world - what nobody else does, what every
+# competitor is - are the ones that get published without being checked,
+# because checking them means searching and the sentence already sounds
+# true. "The check nobody else runs" shipped on the openapi-drift page.
+# It is false: openapi-schema-ref-parser exists to solve exactly that
+# problem, and finding it took one search that was never run.
+#
+# A claim about OUR OWN software is checkable here. A claim about
+# everyone else's is not, so it does not go on a page.
+COMPETITIVE = [
+    (r"nobody else (runs|does|has built|offers)", "what nobody else does"),
+    (r"no one else (runs|does|has built|offers)", "what no one else does"),
+    (r"every other (product|tool|service|library)", "what every competitor is"),
+    (r"no other (tool|product|service|library)", "what no other tool does"),
+    (r"the only (tool|product|service|library) that", "being the only one"),
+    (r"first of its kind", "being first"),
+    (r"world'?s first", "being first in the world"),
+    (r"industry[- ]first", "being an industry first"),
+    (r"never been done", "nobody having done it"),
+    (r"unprecedented", "being unprecedented"),
+]
+
+
+def unsupported_claims():
+    """No page may claim something about everybody else's software.
+
+    A claim about this software can be checked by running it. A claim
+    about the rest of the world cannot be checked here at all, which is
+    exactly why it gets written and exactly why it should not ship.
+    """
+    for path in html_files():
+        rel_path = rel(path)
+        # Deposited work and the research sub-site have their own review.
+        if rel_path.startswith(("papers/", "gonzalgo/")):
+            continue
+        if not authored(path):
+            continue
+        text = visible_text(read(path))
+        for pattern, what in COMPETITIVE:
+            m = re.search(pattern, text, flags=re.I)
+            if m:
+                fail("claims", "{}: claims {} ({!r}). That cannot be checked "
+                               "from here, so it does not go on a page."
+                     .format(rel_path, what, m.group(0)))
+
+
 def every_package_has_a_page():
     """Anything published gets a page here. That is the rule.
 
@@ -939,6 +985,7 @@ def main():
     colours_are_tokens()
     privacy_matches_tooling()
     every_package_has_a_page()
+    unsupported_claims()
     papers_ordering()
     published_zones()
     openapi()
