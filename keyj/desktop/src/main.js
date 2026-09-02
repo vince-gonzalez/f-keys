@@ -10,9 +10,20 @@ const path = require('path');
 // ── State ──────────────────────────────────────────────────────
 let mainWindow = null;
 let tray = null;
-let uiohook = null;
+let uiohook = null;              // the uiohook-napi singleton, once required
+let hookAvailable = null;        // null = not tried yet, false = module missing
+let hookListenersBound = false;  // listeners are bound once, not per start
+let hookRunning = false;         // is the OS hook actually installed
 let globalCaptureEnabled = false;
 let isQuitting = false;
+
+// The window is destroyed on quit and hidden on close, and the hook can
+// still be delivering events either side of that.
+function sendToRenderer(channel, payload) {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.webContents.send(channel, payload);
+  }
+}
 
 // ── Create Window ──────────────────────────────────────────────
 function createWindow() {
@@ -172,48 +183,105 @@ function updateTrayMenu() {
 }
 
 // ── Global Key Hook (uiohook-napi) ─────────────────────────────
-function startHook() {
+//
+// The OS hook is installed only while Global Capture is on.
+//
+// It used to be installed at start-up and left in place for the whole
+// session. Global Capture defaults to OFF and toggling it only flipped a
+// boolean, so the handlers below returned immediately and the hook sat in
+// the path of every keystroke on the machine doing nothing at all. A
+// WH_KEYBOARD_LL hook is called before the shell sees a key, so the cost of
+// leaving one installed is not zero: it lands between Windows and its own
+// shortcuts, and Win+P during a display switch was bringing up the Game Bar
+// on a machine where Key-J was running with capture off.
+//
+// Loading the module and binding the listeners are separate from starting,
+// because neither of those touches the OS. Only start() installs the hook.
+
+function loadHook() {
+  if (uiohook) return true;
+  if (hookAvailable === false) return false;
   try {
     const { UiohookKey, uIOhook } = require('uiohook-napi');
     uiohook = uIOhook;
     CODE_TO_CHAR = buildKeycodeMap(UiohookKey);
+    hookAvailable = true;
     console.log('[Key-J] keycode map built from UiohookKey:',
                 Object.keys(CODE_TO_CHAR).length, 'keys');
-
-    uiohook.on('keydown', (e) => {
-      if (!globalCaptureEnabled) return;
-      // Send raw keycode to renderer
-      mainWindow && mainWindow.webContents.send('global-keydown', {
-        keycode: e.keycode,
-        key: keycodeToChar(e.keycode)
-      });
-    });
-
-    uiohook.on('keyup', (e) => {
-      if (!globalCaptureEnabled) return;
-      mainWindow && mainWindow.webContents.send('global-keyup', {
-        keycode: e.keycode,
-        key: keycodeToChar(e.keycode)
-      });
-    });
-
-    uiohook.start();
-    console.log('[Key-J] Global key hook started.');
+    return true;
   } catch (err) {
     console.warn('[Key-J] uiohook-napi not available — falling back to window-focused mode only.', err.message);
+    hookAvailable = false;
     // Graceful fallback: renderer still works when window is focused
-    mainWindow && mainWindow.webContents.send('hook-status', { available: false });
+    sendToRenderer('hook-status', { available: false });
+    return false;
+  }
+}
+
+function bindHookListeners() {
+  if (hookListenersBound) return;
+
+  uiohook.on('keydown', (e) => {
+    if (!globalCaptureEnabled) return;
+    // Send raw keycode to renderer
+    sendToRenderer('global-keydown', {
+      keycode: e.keycode,
+      key: keycodeToChar(e.keycode)
+    });
+  });
+
+  uiohook.on('keyup', (e) => {
+    if (!globalCaptureEnabled) return;
+    sendToRenderer('global-keyup', {
+      keycode: e.keycode,
+      key: keycodeToChar(e.keycode)
+    });
+  });
+
+  hookListenersBound = true;
+}
+
+function startHook() {
+  if (hookRunning) return true;
+  if (!loadHook()) return false;
+  bindHookListeners();
+  try {
+    uiohook.start();
+    hookRunning = true;
+    console.log('[Key-J] Global key hook installed.');
+    return true;
+  } catch (err) {
+    console.error('[Key-J] could not install the global key hook:', err.message);
+    sendToRenderer('hook-status', { available: false });
+    return false;
   }
 }
 
 function stopHook() {
-  try { uiohook && uiohook.stop(); } catch(e) {}
+  if (!hookRunning || !uiohook) return;
+  try {
+    uiohook.stop();
+    console.log('[Key-J] Global key hook removed.');
+  } catch (err) {
+    console.error('[Key-J] could not remove the global key hook:', err.message);
+  }
+  hookRunning = false;
 }
 
+// Turning capture on is the thing that may fail, since it is the thing that
+// asks the OS for something. Report what actually happened rather than what
+// was requested, so the tray and the renderer cannot claim capture is on
+// while no hook is installed.
 function toggleGlobalCapture(enable) {
-  globalCaptureEnabled = enable;
+  if (enable) {
+    globalCaptureEnabled = startHook();
+  } else {
+    globalCaptureEnabled = false;
+    stopHook();
+  }
   updateTrayMenu();
-  mainWindow && mainWindow.webContents.send('global-capture-status', { enabled: globalCaptureEnabled });
+  sendToRenderer('global-capture-status', { enabled: globalCaptureEnabled });
+  return globalCaptureEnabled;
 }
 
 
@@ -259,12 +327,13 @@ function keycodeToChar(keycode) {
 
 // ── IPC Handlers ───────────────────────────────────────────────
 ipcMain.handle('toggle-global-capture', (_, enabled) => {
-  toggleGlobalCapture(enabled);
-  return { enabled: globalCaptureEnabled };
+  // Returns what happened, not what was asked for: requesting capture can
+  // fail if the hook will not install.
+  return { enabled: toggleGlobalCapture(enabled), available: hookAvailable !== false };
 });
 
 ipcMain.handle('get-global-capture-status', () => {
-  return { enabled: globalCaptureEnabled };
+  return { enabled: globalCaptureEnabled, available: hookAvailable !== false };
 });
 
 ipcMain.on('window-minimize', () => mainWindow.minimize());
@@ -278,7 +347,10 @@ ipcMain.on('window-quit', () => { isQuitting = true; stopHook(); app.quit(); });
 app.whenReady().then(() => {
   createWindow();
   createTray();
-  startHook();
+  // Load the module so the renderer can be told whether global capture is
+  // even available on this machine. This does not install the OS hook --
+  // only turning Global Capture on does that.
+  loadHook();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
