@@ -27,7 +27,7 @@
  "pixelstaff": {
   "captured": "2026-08-31",
   "size": "1280x800",
-  "url": "file:///C:/tmp/f-keys/pixelstaff/app.html"
+  "url": "repo:pixelstaff/app.html"
  },
  "poticas": {
   "captured": "2026-08-28",
@@ -42,7 +42,7 @@
  "remapwrap": {
   "captured": "2026-08-31",
   "size": "1280x800",
-  "url": "file:///C:/tmp/f-keys/remapwrap/dashboard.html"
+  "url": "repo:remapwrap/dashboard.html"
  },
  "tipstreams": {
   "captured": "2026-08-28",
