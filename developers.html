@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F-Keys Developer Resources — API, CLI, and published data</title>
-<meta name="description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
+<meta name="description" content="F-Keys developer resources: the OpenAPI description of 31 published documents, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
 <link rel="canonical" href="https://f-keys.com/developers.html">
 <meta name="robots" content="index, follow">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:site_name" content="F-Keys">
 <meta property="og:title" content="F-Keys Developer Resources — API, CLI, and published data">
-<meta property="og:description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
+<meta property="og:description" content="F-Keys developer resources: the OpenAPI description of 31 published documents, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/developers.html">
 <meta property="og:image" content="https://f-keys.com/assets/og.png">
@@ -22,7 +22,7 @@
 <meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="F-Keys Developer Resources — API, CLI, and published data">
-<meta name="twitter:description" content="F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
+<meta name="twitter:description" content="F-Keys developer resources: the OpenAPI description of 31 published documents, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
 <link rel="stylesheet" href="/win98.css">
 <script type="application/ld+json">
@@ -132,7 +132,7 @@
     <section class="content sunken">
 
 <div class="doc"><h1>F-Keys developer resources</h1>
-<p class="sub">Four command-line tools, six packages, and a shelf of published
+<p class="sub">Four command-line tools, sixteen PyPI packages, nineteen on npm, and a shelf of published
 JSON. Everything here is a thing you install or a file you fetch, and there is
 nothing to sign up for.</p>
 
@@ -201,9 +201,9 @@ the <code>Deprecation</code> and <code>Sunset</code> headers of RFC 8594 and RFC
 </table>
 
 <h2>The command line</h2>
-<p>Four of these are real CLIs, not libraries with a script attached. Each does
-its whole job from a terminal, which is the point: an agent can drive them
-without an integration.</p>
+<p>Four of them, below. Each is a real CLI rather than a library with a script
+attached, and does its whole job from a terminal, which is the point: an agent
+can drive them without an integration.</p>
 <pre><b>pip install gonzalgo</b>
 gonzalgo trust <i>path</i>              every theorem reaching a sorry
 gonzalgo why <i>decl</i> <i>axiom</i>          shortest labelled path to an axiom
@@ -224,23 +224,66 @@ Action is three lines of workflow and fails the build when a proof rests on
 something unfinished.</p>
 
 <h2>Packages</h2>
+<p>Sixteen on PyPI. Every one installs from the public index, with no account
+and no registration step.</p>
 <table class="facts">
 <tr><th>gonzalgo</th><td><code>pip install gonzalgo</code> &mdash; axiom
 provenance for Lean 4 and Metamath. Apache-2.0.</td></tr>
+<tr><th>mmforge</th><td><code>pip install mmforge</code> &mdash; find avoidable
+axiom dependencies in Metamath, and build the proofs that remove
+them.</td></tr>
+<tr><th>loadbearing</th><td><code>pip install loadbearing</code> &mdash; what a
+claim asserts, separated from what its derivation consumed.</td></tr>
+<tr><th>axsent</th><td><code>pip install axsent</code> &mdash; what a formal
+library assumes, read from Rocq, Agda and Isabelle source, with nothing
+built.</td></tr>
+<tr><th>certivl</th><td><code>pip install certivl</code> &mdash; certified
+interval arithmetic: an enclosure that turns a computed inequality into a
+proof.</td></tr>
+<tr><th>authorecon</th><td><code>pip install authorecon</code> &mdash;
+reconcile published work against every place it lives, for any ORCID, from
+public sources.</td></tr>
+<tr><th>saydo</th><td><code>pip install saydo</code> &mdash; run a tool against
+the behavioural contract its author signed, and emit a receipt anyone can
+verify.</td></tr>
+<tr><th>ishihara</th><td><code>pip install ishihara</code> &mdash;
+pseudoisochromatic colour-vision plates, reproducible from a seed.</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>pip install opticquiz-cvd</code> &mdash;
+the colour-accessibility engine, the same maths as the npm package.</td></tr>
+<tr><th>legible</th><td><code>pip install legible</code> &mdash; three build
+gates: unreadable type, unreadable colour, a retired name.</td></tr>
+<tr><th>openapi-drift</th><td><code>pip install openapi-drift</code> &mdash;
+has your API drifted from its spec, and can a machine still read it?</td></tr>
+<tr><th>changewatch</th><td><code>pip install changewatch</code> &mdash; a
+doorbell for your published work. Silent until somebody else acts.</td></tr>
 <tr><th>keyj</th><td><code>pip install keyj</code> &mdash; tablature to notes,
 render, and play.</td></tr>
+<tr><th>remapwrap</th><td><code>pip install remapwrap</code> &mdash; build a
+RemapWrap control surface from a folder of samples or a list of
+shortcuts.</td></tr>
 <tr><th>plumhud</th><td><code>pip install plumhud</code> &mdash; miner fleet
 monitor.</td></tr>
 <tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
 NerdMiner discovery and vitals.</td></tr>
+</table>
+<p>Nineteen on npm. Most of them are the OpticQuiz colour engine published one
+name per deficiency, so somebody searching for <code>protanopia</code> finds
+it; these are the entry points.</p>
+<table class="facts">
 <tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code> &mdash;
 colour-vision simulation and daltonisation.</td></tr>
+<tr><th>opticquiz-cvd-mcp</th><td><code>npm i opticquiz-cvd-mcp</code> &mdash;
+the same engine as callable tools for an LLM.</td></tr>
+<tr><th>opticquiz-eye</th><td><code>npm i opticquiz-eye</code> &mdash; a
+one-line widget that lets a visitor re-colour your site.</td></tr>
+<tr><th>keyjockey</th><td><code>npm i keyjockey</code> &mdash; tablature to
+notes: eight tunings, capo offsets, MIDI and frequency. npm only.</td></tr>
 <tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
 &mdash; the TipStreams widget.</td></tr>
 </table>
 
 <h2>Upstream, merged</h2>
-<p>The measurements feed back into the library they measure. Six pull requests
+<p>The measurements feed back into the library they measure. Eight pull requests
 to <a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>
 &mdash; the Metamath Proof Explorer's canonical database, reviewed and merged by
 its own maintainers &mdash; each remove an avoidable axiom-of-choice dependency
@@ -252,9 +295,14 @@ that the tooling on this page located:</p>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5445" rel="noopener">#5445</a></th><td>Shorten <code>madefi</code> and drop its ax-ac dependency &mdash; merged 2026-08-21</td></tr>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5443" rel="noopener">#5443</a></th><td>Add <code>fnrndomnum</code>, and prove <code>fnrndomg</code> from it &mdash; merged 2026-08-24</td></tr>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5458" rel="noopener">#5458</a></th><td>Drop the ax-ac dependency from <code>fnct</code>, <code>dmct</code> and <code>ffsrn</code> &mdash; merged 2026-08-26</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5446" rel="noopener">#5446</a></th><td>Drop the ax-ac dependency from <code>disjinfi</code> &mdash; merged 2026-08-30</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5466" rel="noopener">#5466</a></th><td>Add <code>imadomnum</code>, and drop the ax-ac dependency from <code>fimact</code> &mdash; merged 2026-09-01</td></tr>
 </table>
-<p>Three more set.mm pull requests are open in review, along with two
-<a href="https://github.com/microsoft/winget-pkgs/pull/421552" rel="noopener">winget-pkgs</a>
+<p>Two more set.mm pull requests are open in review, along with
+<a href="https://github.com/metamath/metamath-exe/pull/203" rel="noopener">#203</a>
+against metamath/metamath-exe &mdash; the C source of the Metamath program
+itself, rather than the database &mdash; and two
+<a href="https://github.com/microsoft/winget-pkgs/pulls?q=is%3Apr+author%3Avince-gonzalez" rel="noopener">winget-pkgs</a>
 package submissions. Open means open &mdash; nothing here is claimed merged
 until its maintainers say so.</p>
 
@@ -265,7 +313,7 @@ columns &mdash; so a function-calling agent knows a table has a
 <code>library</code> string and a <code>theorems</code> integer before it
 fetches half a megabyte to find out.</p>
 <table class="facts">
-<tr><th>Measurement tables</th><td>Thirteen tables behind the papers &mdash; the
+<tr><th>Measurement tables</th><td>Fifteen tables behind the papers &mdash; the
 <a href="/gonzalgo/kernel-index/">Kernel Index</a>, the
 <a href="/gonzalgo/dominator-table/">Dominator Table</a> and the rest. One
 object each, carrying its <code>version</code>, <code>sha256</code>,

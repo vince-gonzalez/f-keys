@@ -9,7 +9,7 @@
      "slug": "eligibility-discriminates-among-theorems-not-among",
      "url": "/papers/eligibility-discriminates-among-theorems-not-among/",
      "title": "Eligibility Discriminates Among Theorems and Not Among the Constants They Rest On",
-     "date": "2026-08-11",
+     "date": "2026-08-15",
      "kind": "Preprint",
      "abstract": "Separating a theorem's statement dependencies from its proof dependencies bounds how much classical dependence a formal library could shed. Across Mathlib, 13.1% of theorems have a choice-free statement and a choice-dependent proof; nothing outside that band c…",
      "links": [
@@ -55,7 +55,7 @@
      "slug": "why-tactic-level-rates-cannot-attribute",
      "url": "/papers/why-tactic-level-rates-cannot-attribute/",
      "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
-     "date": "2026-08-08",
+     "date": "2026-08-10",
      "kind": "Preprint",
      "abstract": "A proof assistant reports which axioms a theorem depends on. It does not report which step introduced them, and a proof invoking several tactics offers no way to apportion the answer. The obvious approach is statistical: score each tactic by how often its proo…",
      "links": [
@@ -78,7 +78,7 @@
      "slug": "where-formal-libraries-spend-their-axioms",
      "url": "/papers/where-formal-libraries-spend-their-axioms/",
      "title": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
-     "date": "2026-08-05",
+     "date": "2026-08-10",
      "kind": "Preprint",
      "abstract": "A proof assistant can report which axioms a theorem rests on, but only one theorem at a time, and only whether rather than why. I measure axiom use across six libraries and two proof systems - the Metamath databases set.mm (ZFC, classical first-order), iset.mm…",
      "links": [
@@ -96,6 +96,101 @@
       }
      ],
      "doi": "https://doi.org/10.5281/zenodo.21769846"
+    },
+    {
+     "slug": "verified-software-assumes-what-its-arithmetic",
+     "url": "https://zenodo.org/records/22162430",
+     "title": "Verified Software Assumes What Its Arithmetic Requires: An Axiom Census of Four Rocq Developments",
+     "date": "2026-08-29",
+     "kind": "Preprint",
+     "abstract": "A machine-checked proof of a program's correctness is conditional on whatever the development assumes, and for deployed software that condition is the whole point. Four Rocq developments are censused with one source-level instrument: the CompCert verified C co…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22162430"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22162429"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22162429"
+    },
+    {
+     "slug": "interface-assumptions-are-not-mathematical-assumptions",
+     "url": "https://zenodo.org/records/22149628",
+     "title": "Interface Assumptions Are Not Mathematical Assumptions: An Axiom Census of Five Libraries Across Four Proof Systems",
+     "date": "2026-08-28",
+     "kind": "Preprint",
+     "abstract": "A formal library's axiom count is routinely reported as a single number. This paper argues that the number conflates two populations which behave differently and answer different questions, and that the conflation is only visible from outside a single library.…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22149628"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22148932"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22148932"
+    },
+    {
+     "slug": "which-axiom-seams-yield",
+     "url": "https://zenodo.org/records/22030575",
+     "title": "Which Axiom Seams Yield",
+     "date": "2026-08-20",
+     "kind": "Preprint",
+     "abstract": "A formal library records which axioms each theorem depends on. Some of those dependencies are removable and some are load-bearing, and the difference is not visible from the dependency graph. Deciding whether an axiom is worth attacking by attacking it costs d…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22030575"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22030574"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22030574"
+    },
+    {
+     "slug": "specialisation-loss-avoidable-classical-dependence-from",
+     "url": "https://zenodo.org/records/22030569",
+     "title": "Specialisation Loss: Avoidable Classical Dependence from Correctly-Stated Lemmas",
+     "date": "2026-08-20",
+     "kind": "Preprint",
+     "abstract": "norm_num closes (2 : ℤ) ≤ 4 through Classical.choice. decide and simp close the same goal without it, and norm_num closes (2 : ℤ) + 2 = 4 without it. The dependence enters through lt_or_eq_of_le : a ≤ b → a < b ∨ a = b, which is stated for a general PartialOrd…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22030569"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22030568"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22030568"
+    },
+    {
+     "slug": "kernel-trust-profile-0-1-machine",
+     "url": "https://zenodo.org/records/21913737",
+     "title": "Kernel Trust Profile 0.1: a machine-readable declaration of what a body of machine-checked mathematics rests on",
+     "date": "2026-08-13",
+     "kind": "Technical note",
+     "abstract": "A specification for declaring what a body of machine-checked mathematics rests on. CITATION.cff standardises how to cite a project and SPDX standardises its licence. Nothing standardises what it rests on — whether a theorem is standing on an unfinished proof s…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/21913737"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21913736"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21913736"
     }
    ]
   },
@@ -268,6 +363,32 @@
    ]
   },
   {
+   "id": "number",
+   "title": "Odd perfect numbers",
+   "note": "Congruence obstructions on the Euler prime of a hypothetical odd perfect number.",
+   "entries": [
+    {
+     "slug": "congruence-obstruction-euler-prime-odd-perfect",
+     "url": "https://zenodo.org/records/21777108",
+     "title": "A congruence obstruction on the Euler prime of an odd perfect number",
+     "date": "2026-08-03",
+     "kind": "Preprint",
+     "abstract": "Let N=qkm2 be an odd perfect number in Euler form, so that q≡k≡1(mod4) and gcd(q,m)=1. Write d=(q+1)/2. We observe that d divides m2 for every admissible k, and deduce that q cannot be the Euler prime of an odd perfect number whenever the abundancy index force…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/21777108"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21777107"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21777107"
+    }
+   ]
+  },
+  {
    "id": "epistem",
    "title": "Epistemology",
    "note": "Formal accounts of knowledge, attestation and testimony.",
@@ -359,6 +480,25 @@
       }
      ],
      "doi": "https://doi.org/10.5281/zenodo.19726226"
+    },
+    {
+     "slug": "filtering-generating-two-roles-method-specification",
+     "url": "https://zenodo.org/records/22083875",
+     "title": "Filtering and Generating: Two Roles for Method-Specification in Epistemic-Possibility Anti-Luck Conditions",
+     "date": "2026-08-24",
+     "kind": "Preprint",
+     "abstract": "Method-relative modal conditions on knowledge are standardly assessed against a similarity ordering over possible worlds fixed independently of the method: the specification restricts which worlds are quantified over, while the metric is given by the world-spa…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22083875"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22072131"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22072131"
     }
    ]
   },
@@ -814,7 +954,7 @@
   {
    "id": "docs",
    "title": "Project documents",
-   "note": "Amendments, commitments and continuously updated measurements. Not papers.",
+   "note": "Amendments, commitments, datasets and released source. Not papers.",
    "entries": [
     {
      "slug": "version-3-1-amendment-document",
@@ -861,6 +1001,120 @@
       }
      ],
      "doi": "https://doi.org/10.5281/zenodo.19559689"
+    },
+    {
+     "slug": "record-hash-chained-modulign-address-ledger",
+     "url": "https://zenodo.org/records/22131388",
+     "title": "THE RECORD: a hash-chained Modulign address ledger of 1,000,000 legal documents",
+     "date": "2026-08-27",
+     "kind": "Dataset",
+     "abstract": "THE RECORD is an append-only, hash-chained ledger assigning Modulign (DAG-OR) addresses to legal documents from the Harvard Caselaw Access Project's openly published static archive. This deposit contains the complete implementation (addresser, pipelines, verif…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22131388"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22131387"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22131387"
+    },
+    {
+     "slug": "independent-us-food-makers-direct-consumer",
+     "url": "https://zenodo.org/records/22037150",
+     "title": "Independent US Food Makers: direct-to-consumer producers, with named halal and kosher certifying authorities",
+     "date": "2026-08-21",
+     "kind": "Dataset",
+     "abstract": "Three open datasets covering independent, non-conglomerate American food producers that ship direct to consumers. 1,558 records across 47 states. Every record was researched and verified individually rather than scraped from a directory. What is unusual here i…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22037150"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22037149"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22037149"
+    },
+    {
+     "slug": "gonzalgo-indexes-standing-measurements-what-formal",
+     "url": "https://zenodo.org/records/21922825",
+     "title": "The gonzalgo Indexes: standing measurements of what formal mathematical libraries rest on",
+     "date": "2026-08-13",
+     "kind": "Dataset",
+     "abstract": "14 tables measuring what formal mathematical libraries depend on, produced by one program (gonzalgo) reading proofs that Lean 4 and Metamath have already checked. 10,859 rows, each table as JSON and CSV. module-spend (3,261 rows) — Modules containing at least…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/21922825"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21900625"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21900625"
+    },
+    {
+     "slug": "exact-calculator-norton-abundancy-bound-j",
+     "url": "https://zenodo.org/records/21716006",
+     "title": "Exact calculator for Norton's abundancy bound a(j) on odd perfect numbers",
+     "date": "2026-07-31",
+     "kind": "Software",
+     "abstract": "Exact-rational calculator for Norton's function a(j): the least k such that the product of p/(p−1) over the k smallest primes ≥ q strictly exceeds 2. This is the classical abundancy-product obstruction for odd perfect numbers (Servais 1888; Norton 1961, who pr…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/21716006"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21716005"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21716005"
+    },
+    {
+     "slug": "independent-exact-verification-11948-point-kissing",
+     "url": "https://zenodo.org/records/21618222",
+     "title": "An independent exact verification of an 11948-point kissing configuration in 19 dimensions",
+     "date": "2026-07-27",
+     "kind": "Software",
+     "abstract": "In 2026, B. S. Ho published a claimed new lower bound for the kissing number in 19 dimensions: at least 11948 unit balls can simultaneously touch a central unit ball without overlapping (arXiv:2603.10425), improving the previous bound of Cohn and Li by 256. Th…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/21618222"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21618221"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21618221"
+    },
+    {
+     "slug": "opticquiz-pppg-procedural-pseudoisochromatic-plate-generator",
+     "url": "https://zenodo.org/records/21311369",
+     "title": "OpticQuiz PPPG — Procedural Pseudoisochromatic Plate Generator (source code)",
+     "date": "2026-07-11",
+     "kind": "Software",
+     "abstract": "Client-side JavaScript source for the browser-based procedural pseudoisochromatic (Ishihara-style) colour-vision plate generator (PPPG). Generates plates at runtime — no server, no stored images. Companion code to the preprint of the same name.",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/21311369"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.21311368"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.21311368"
     }
    ]
   }

@@ -34,7 +34,8 @@ quietly lost.
 | Where | opticquiz.com |
 | Cost | Free, no account |
 | Runs | Entirely in the browser |
-| Packages | opticquiz-cvd, opticquiz-eye, opticquiz-cvd-mcp |
+| Packages | 15 on npm — opticquiz-cvd, opticquiz-eye, cvdsim, cvdsafe, safepalette, cvdplate, and the rest |
+| MCP servers | opticquiz-cvd-mcp, cvdsafe-mcp, colorblind-mcp |
 | Research | Deposited, with DOIs |
 
 [The page itself](https://f-keys.com/opticquiz/)

@@ -10,7 +10,7 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 ## Profile
 
-Founder of F-Keys LLC, shipping a solo-built portfolio of live web products — an accessibility platform distributed across eight channels, an axiom-provenance tool for two proof assistants, a logistics training simulator with institutional licensing — alongside 40 deposited works with DOIs. Full lifecycle on all of it: architecture, front and back end, database, deployment, documentation, technical SEO.
+Founder of F-Keys LLC, shipping a solo-built portfolio of live web products — an accessibility platform distributed across eight channels, an axiom-provenance tool for two proof assistants, a logistics training simulator with institutional licensing — alongside 56 deposited works with DOIs. Full lifecycle on all of it: architecture, front and back end, database, deployment, documentation, technical SEO.
 
 ## Independent Products — F-Keys LLC
 
@@ -32,7 +32,7 @@ poticas.com · 5best2buy.com · RemapWrap · TipStreams · DogeFundMe · PROMPT 
 
 ## Published Research
 
-40 deposited works · ORCID 0009-0005-3640-014X
+56 deposited works · ORCID 0009-0005-3640-014X
 
 - Where Formal Libraries Spend Their Axioms
 - Which Constant Is Responsible?

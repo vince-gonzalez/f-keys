@@ -43,6 +43,7 @@ FORTNITE = ("In Fortnite", "st-plat")
 SETUP = ("Needs setup", "st-setup")
 ALPHA = ("Alpha", "st-setup")
 PIP = ("pip install", "st-ready")
+NPM = ("npm install", "st-ready")
 PUBLISHED = ("Published", "st-ready")
 LIVE = ("Live", "st-ready")
 
@@ -82,9 +83,10 @@ CATALOGUE = [
     # site keeps repeating is not building things - it is building them
     # and leaving them where nobody can find them.
     # 2026-08-29. SayDo is the flagship and it is honestly an alpha: the
-    # declarations are drafts and the receipts are unsigned, which the
-    # page says in the same size type as everything else.
-    ("saydo", "SayDo", "tools", "Standard + harness", ALPHA,
+    # declarations are drafts and unsigned, and the receipts are signed only
+    # with a proof-of-concept key, which the page says in the same size type
+    # as everything else.
+    ("saydo", "SayDo", "tools", "Standard + harness", READY,
      "Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check.", "/saydo/"),
     ("axsent", "axsent", "research", "Python package", PIP,
      "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.", "/axsent/"),
@@ -107,7 +109,7 @@ CATALOGUE = [
      "Has your API drifted from its spec, and can a machine still read it?", "/openapi-drift/"),
     ("changewatch", "changewatch", "tools", "Python package", PIP,
      "A doorbell for your published work. Silent until somebody else acts.", "/changewatch/"),
-    ("keyjockey", "keyjockey", "tools", "npm package", PIP,
+    ("keyjockey", "keyjockey", "tools", "npm package", NPM,
      "Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency.", "/keyjockey/"),
 
     ("streamsniper", "Stream Sniper", "hardware", "Appliance", SETUP,
@@ -130,6 +132,11 @@ CATALOGUE = [
      "Branded tip pages and OBS overlays. The widget never touches money.", "https://tipstreams.com"),
     ("fundoge", "FunDoge", "properties", "Website", LIVE,
      "Free isometric mini-golf in the browser.", "https://dogefundme.com"),
+    # 2026-09-04. Live, taking checkout, and listed nowhere on this site
+    # until now - the same failure the note above the SayDo row describes.
+    ("epistemend", "Epistemend", "properties", "Website", LIVE,
+     "One ORCID in, one document out. Checks a published record against where the work lives.",
+     "https://www.epistemend.org"),
 ]
 
 CATEGORIES = [
@@ -155,12 +162,13 @@ PAGES = {
   cta=[("The repository", "https://github.com/vince-gonzalez/saydo"),
        ("See a real receipt", "#a-receipt-actually"),
        ("Read the declaration spec", "https://github.com/vince-gonzalez/saydo/tree/main/spec")],
-  herometa="<b>Working proof of concept</b> &middot; name provisional &middot; "
-           "declarations are drafts &middot; receipts are unsigned &middot; "
-           "no trust mark yet",
+  herometa="<b>Working proof of concept</b> &middot; "
+           "<code>pip install saydo</code> &middot; name provisional &middot; "
+           "declarations are drafts &middot; receipts are Ed25519-signed with "
+           "a proof-of-concept key &middot; no trust mark issued",
   steps=[("Declare what the tool may do",
           "A machine-readable contract per tool: no network, writes only "
-          "here, deterministic, errors returned as values. Ten invariant "
+          "here, deterministic, errors returned as values. Thirteen invariant "
           "types in the current draft."),
          ("Put the tool under the harness",
           "<code>saydo verify certivl</code> captures the live tool "
@@ -171,13 +179,29 @@ PAGES = {
           "Every run emits a hash-chained record, one row per verdict. They "
           "check it in a browser with no account and no request to us.")],
   features_title="What is actually built",
-  features=[("Ten invariant types",
+  features=[("Thirteen invariant types",
              "no-network, network-allowlist, no-write, write-scope, "
-             "read-scope, no-subprocess, deterministic, error-as-value, "
-             "refusal-tool, property."),
-            ("Nine declarations",
-             "Five F-Keys MCP servers and four third-party ones. All draft, "
-             "and the page says so because they are."),
+             "read-scope, no-subprocess, subprocess-scope, deterministic, "
+             "error-as-value, refusal-tool, no-data-egress, output-hygiene, "
+             "property."),
+            ("Eleven declarations",
+             "Six F-Keys MCP servers, one seeded fixture and four "
+             "third-party ones. All draft and all unsigned, and the page "
+             "says so because they are."),
+            ("A GitHub Action",
+             "<code>action.yml</code>, published as <i>SayDo conformance</i>. "
+             "The build fails if the tool breaks its declaration, and also if "
+             "the run established nothing."),
+            ("A sandbox",
+             "<code>--sandbox</code> runs the server in a container whose "
+             "only route out is a recording proxy. Linux and Docker. Without "
+             "it the run is observed rather than enforced, and the receipt "
+             "records which it was."),
+            ("A data-egress counterfactual",
+             "The tool is run twice with different inputs, and each "
+             "destination is classified by whether what it received changed "
+             "with the input. <i>It sent your input to example.com</i> is a "
+             "different statement from <i>it made a request</i>."),
             ("A chain that breaks visibly",
              "<code>row_hash = sha256(prev + row)</code>. Edit one row and "
              "every hash below it stops matching."),
@@ -199,11 +223,18 @@ PAGES = {
         "tool-definition digests a Tool Bill of Materials records."),
        ("Is anything here certified?",
         "No. Every declaration carries <code>status: \"draft\"</code> and "
-        "every receipt is unsigned. Nothing here is a claim of conformance "
-        "about anybody's software, including ours."),
+        "carries no supplier signature. Receipts are signed, but with a "
+        "proof-of-concept key; production signing is not settled. Nothing "
+        "here is a claim of conformance about anybody's software, including "
+        "ours."),
        ("What about the trust mark?",
-        "Not built. A registry-served badge with expiry and revocation is the "
-        "fourth layer and it does not exist yet."),
+        "The mechanism is built and nothing is issued. "
+        "<code>tools/registry.py</code> publishes, revokes and looks up an "
+        "entry, writes an <code>expiresAt</code> so a claim goes stale "
+        "rather than staying green, keeps a revocation sticky against a "
+        "later passing receipt, and returns one badge line that never reads "
+        "as a bare grade. What does not exist: anywhere to serve it from, a "
+        "mark on anybody's page, and a key anyone should rely on."),
        ("Why should I believe the harness?",
         "Do not. Run <code>saydo selfcheck</code> &mdash; it ships a server "
         "built to fail and requires the harness to catch every violation."),
@@ -211,9 +242,14 @@ PAGES = {
         "No. It was WARRANT, it is SayDo, and it is marked provisional "
         "because it is.")],
   facts=[("Status", "Working proof of concept \u2014 name provisional"),
-         ("Declarations", "5 F-Keys servers, 4 third-party \u2014 all draft"),
-         ("Receipts", "Unsigned"),
-         ("Invariant types", "10 in the current draft"),
+         ("Install", "pip install saydo"),
+         ("Declarations",
+          "11 \u2014 6 F-Keys servers, 1 seeded fixture, 4 third-party; "
+          "all draft, all unsigned"),
+         ("Receipts",
+          "Ed25519-signed with a proof-of-concept key; production signing "
+          "not settled"),
+         ("Invariant types", "13 in the current draft"),
          ("Licence", "Apache-2.0 on the open layers"),
          ("Source", "vince-gonzalez/saydo")],
   body="""
@@ -235,8 +271,8 @@ attaches to one without changing its schema.</p>
 <table class="facts">
 <tr><th>Declaration</th><td>A signed, machine-readable contract per tool: the
 behavior it is permitted to show &mdash; no network, writes only here,
-deterministic, returns errors as values. Ten invariant types in the current
-draft.</td></tr>
+deterministic, returns errors as values. Thirteen invariant types in the
+current draft.</td></tr>
 <tr><th>Conformance</th><td>A harness exercises the tool under observation
 &mdash; valid calls, adversarial input, egress and filesystem monitoring
 &mdash; and reports pass, fail or <b>not-covered</b> per invariant. It cannot
@@ -246,9 +282,13 @@ it.</td></tr>
 verdict, chained by <code>row_hash = sha256(prev + row)</code>. Edit one row
 and the chain breaks at it. An auditor re-verifies it in a browser &mdash; no
 account, no request to us.</td></tr>
-<tr><th>Trust mark</th><td>A &ldquo;Warranted&rdquo; badge served from the
-registry, linking to the full findings rather than a bare grade, with expiry
-and revocation. <b>Not built yet.</b></td></tr>
+<tr><th>Trust mark</th><td>The registry, and what it is still willing to say.
+<code>tools/registry.py</code> publishes an entry from a receipt, stamps it
+with an <code>expiresAt</code> so the claim goes stale on its own, keeps a
+revocation sticky against a later passing receipt, and returns a badge line
+that carries its evidence rather than a bare grade. <b>Nothing is served and
+no mark has been issued to anybody</b> &mdash; the mechanism exists, the
+hosted registry does not.</td></tr>
 </table>
 
 <h2>Run it</h2>
@@ -266,9 +306,12 @@ catalogue is built on, pointed at itself.</p>
 
 <h2 id="a-receipt-actually">A receipt, actually</h2><p>This is the receipt for <code>saydo verify certivl</code>, from the repository. Thirteen rows: the declaration it was checked against, the captured tool definitions, what the monitor could and could not see, one row per invariant, and a close. Each row carries the hash of the row before it.</p><div class="receipt"><table><thead><tr><th>#</th><th>row</th><th></th><th>prev_hash</th><th>row_hash</th></tr></thead><tbody><tr><td class="sq">1</td><td class="ty">open</td><td class="ex">pkg:pypi/certivl@0.2.0</td><td class="hx">31b446b87a387b3d…</td><td class="hx">2911aee89d746f02…</td></tr><tr><td class="sq">2</td><td class="ty">capture</td><td class="ex"></td><td class="hx">2911aee89d746f02…</td><td class="hx">8bbcbdebf275fae5…</td></tr><tr><td class="sq">3</td><td class="ty">monitor</td><td class="ex"></td><td class="hx">8bbcbdebf275fae5…</td><td class="hx">8db9473951715e22…</td></tr><tr><td class="sq">4</td><td class="ty">verdict</td><td class="ex">refusal.scope</td><td class="hx">8db9473951715e22…</td><td class="hx">a192845eb5d858e8…</td></tr><tr><td class="sq">5</td><td class="ty">verdict</td><td class="ex">network.none</td><td class="hx">a192845eb5d858e8…</td><td class="hx">94ff9d07b07e1140…</td></tr><tr><td class="sq">6</td><td class="ty">verdict</td><td class="ex">writes.none</td><td class="hx">94ff9d07b07e1140…</td><td class="hx">2792b46310d90e1e…</td></tr><tr><td class="sq">7</td><td class="ty">verdict</td><td class="ex">reads.none</td><td class="hx">2792b46310d90e1e…</td><td class="hx">6953d604c4a27794…</td></tr><tr><td class="sq">8</td><td class="ty">verdict</td><td class="ex">subprocess.none</td><td class="hx">6953d604c4a27794…</td><td class="hx">fe0193b67cfeab17…</td></tr><tr><td class="sq">9</td><td class="ty">verdict</td><td class="ex">answers.deterministic</td><td class="hx">fe0193b67cfeab17…</td><td class="hx">e83fd3722b937d43…</td></tr><tr><td class="sq">10</td><td class="ty">verdict</td><td class="ex">errors.are-values</td><td class="hx">e83fd3722b937d43…</td><td class="hx">8d7fb1429449889e…</td></tr><tr><td class="sq">11</td><td class="ty">verdict</td><td class="ex">undecided.on-overlap</td><td class="hx">8d7fb1429449889e…</td><td class="hx">27850d284c2f007b…</td></tr><tr><td class="sq">12</td><td class="ty">verdict</td><td class="ex">decimal.read-exactly</td><td class="hx">27850d284c2f007b…</td><td class="hx">6f174eaa56827918…</td></tr><tr><td class="sq">13</td><td class="ty">close</td><td class="ex">tally {'pass': 9}</td><td class="hx">6f174eaa56827918…</td><td class="hx">754a675f79ea0f92…</td></tr></tbody></table></div><p class="sub">Every <code>prev_hash</code> above equals the <code>row_hash</code> on the line before it &mdash; checked, not asserted. Change any row and every hash below it stops matching, which is the whole mechanism. Paste it into <code>verifier/index.html</code> and it checks offline, with no account and no request to anybody.</p><h2>What the monitor admits it cannot see</h2><p>Row 3 is not a result. It is the harness recording its own blind spots &mdash; that it observes filesystem opens and socket connects at the host process, and does <b>not</b> observe activity below the Python runtime, such as a native extension. An invariant it did not exercise is reported <code>not-covered</code> rather than passed.</p><h2>What it is not, yet</h2>
 <p>This is a working proof of concept and the name is provisional. Every
-declaration currently carries <code>status: "draft"</code>. Every receipt is
-unsigned. Nothing here is a claim of conformance about anybody&rsquo;s
-software, including ours, and the trust mark does not exist.</p>
+declaration currently carries <code>status: "draft"</code> and none of them
+carries a supplier signature. Receipts are signed, but with a
+proof-of-concept key held by F-Keys Creative LLC, and production signing is
+not settled. The registry runs, and nothing is served from it. Nothing here
+is a claim of conformance about anybody&rsquo;s software, including
+ours.</p>
 <p>Those sentences are on this page in the same size type as the rest, because
 a tool whose entire purpose is the distance between what software claims and
 what it does would be a poor place to start overstating.</p>
@@ -432,7 +475,7 @@ much as it reflects anything about the work.</p>
        ("Source", "https://github.com/vince-gonzalez/mmforge"),
        ("The papers", "/papers/")],
   herometa="<b>0.2.0</b> &middot; <code>pip install mmforge</code> &middot; "
-           "MIT &middot; six pull requests merged into set.mm",
+           "MIT &middot; eight pull requests merged into set.mm",
   steps=[("Install it",
           "<code>pip install mmforge</code>. One entry point, seven "
           "subcommands."),
@@ -442,7 +485,7 @@ much as it reflects anything about the work.</p>
           "theorems by how many others a repair would free."),
          ("Build the repair",
           "The construction half writes the replacement proof and verifies "
-          "it. Six of the repairs that came out of this loop are merged "
+          "it. Eight of the repairs that came out of this loop are merged "
           "upstream.")],
   features_title="What it finds",
   features=[("Three invocations, 583 dependents",
@@ -463,7 +506,7 @@ much as it reflects anything about the work.</p>
              "Reads the database's own <code>$j 'avoids'</code> directives "
              "and checks the declarations are still true."),
             ("Merged upstream",
-             "Six pull requests into metamath/set.mm.")],
+             "Eight pull requests into metamath/set.mm.")],
   faq=[("Do I need a Metamath install?",
         "For verification, yes. The analysis reads the database directly."),
        ("Is this only about the axiom of choice?",
@@ -471,7 +514,7 @@ much as it reflects anything about the work.</p>
         "whichever constant you want to trace.")],
   facts=[("Install", "pip install mmforge"), ("Version", "0.2.0"),
          ("Licence", "MIT"), ("Reads", "Metamath databases"),
-         ("Upstream", "6 pull requests merged into set.mm"),
+         ("Upstream", "8 pull requests merged into set.mm"),
          ("Source", "vince-gonzalez/mmforge")],
   body="""
 <h2>What it does</h2>
@@ -1033,7 +1076,7 @@ one.</p>
        ("Check a palette", "https://www.npmjs.com/package/opticquiz-cvd"),
        ("The research", "/papers/")],
   herometa="<b>Free, no account</b> &middot; runs entirely in the browser "
-           "&middot; three packages &middot; method deposited with a DOI",
+           "&middot; fifteen npm packages &middot; method deposited with a DOI",
   steps=[("Open it and pick a test",
           "Acuity charts, colour vision, contrast. Sixteen of them, and none "
           "asks who you are."),
@@ -1053,8 +1096,13 @@ one.</p>
              "The tests run on your machine. No account, no result stored, "
              "nothing to leak."),
             ("Installable simulation",
-             "<code>opticquiz-cvd</code> on npm and PyPI, plus an MCP server, "
-             "so the same maths runs in your pipeline."),
+             "<code>opticquiz-cvd</code> on npm and PyPI, and fourteen more "
+             "npm packages carrying the same engine &mdash; "
+             "<code>cvdsim</code>, <code>cvdsafe</code>, "
+             "<code>safepalette</code>, <code>cvdplate</code>, "
+             "<code>opticquiz-eye</code>, one named for each deficiency, and "
+             "three MCP servers &mdash; so the same maths runs in your "
+             "pipeline."),
             ("A build gate",
              "The cvd-palette Action fails a build when two colours collapse "
              "into one under protanopia, deuteranopia or tritanopia."),
@@ -1078,7 +1126,11 @@ one.</p>
         "limits are stated, rather than the plates being asserted as correct.")],
   facts=[("Where","opticquiz.com"),("Cost","Free, no account"),
          ("Runs","Entirely in the browser"),
-         ("Packages","opticquiz-cvd, opticquiz-eye, opticquiz-cvd-mcp"),
+         ("Packages",
+          "15 on npm — opticquiz-cvd, opticquiz-eye, cvdsim, cvdsafe, "
+          "safepalette, cvdplate, and the rest"),
+         ("MCP servers",
+          "opticquiz-cvd-mcp, cvdsafe-mcp, colorblind-mcp"),
          ("Research","Deposited, with DOIs")],
   body="""
 <h2>What it is</h2>
@@ -2036,7 +2088,7 @@ answers a real question is worth keeping.</p>
        "machine stops earning.",
   cta=[("Install it", "https://pypi.org/project/plumhud/"),
        ("Source", "https://github.com/vince-gonzalez/f-keys/tree/main/plumhud")],
-  herometa="<b>4.1.0</b> &middot; <code>pip install plumhud</code> &middot; "
+  herometa="<b>4.1.2</b> &middot; <code>pip install plumhud</code> &middot; "
            "Python 3.8+ with Tk &middot; MIT",
   steps=[("Install it",
           "<code>pip install plumhud</code>. It needs Python 3.8 or newer and "
@@ -2075,7 +2127,7 @@ answers a real question is worth keeping.</p>
         "No. It draws a window with Tk, so it wants a desktop. The machine "
         "being watched can be headless; the machine watching cannot.")],
   facts=[("Name","Personal Ledger Utility Monitor, Heads-Up Display"),
-         ("Version","4.1.0"),("Licence","MIT"),("Install","pip install plumhud"),
+         ("Version","4.1.2"),("Licence","MIT"),("Install","pip install plumhud"),
          ("Requires","Python 3.8+, Tk"),("Depends on","moonbeam-miner")],
   body="""
 <h2>What it does</h2>
@@ -2161,7 +2213,7 @@ in the list can cut in halfway through. Edits apply at the next check, with no r
        "what you think you plugged in.",
   cta=[("Install it", "https://pypi.org/project/moonbeam-miner/"),
        ("Source", "https://github.com/vince-gonzalez/f-keys/tree/main/moonbeam")],
-  herometa="<b>1.0.0</b> &middot; <code>pip install moonbeam-miner</code> "
+  herometa="<b>1.0.2</b> &middot; <code>pip install moonbeam-miner</code> "
            "&middot; Python 3.8+ &middot; MIT &middot; zero dependencies",
   steps=[("Install it",
           "<code>pip install moonbeam-miner</code>. Nothing else comes with "
@@ -2185,7 +2237,7 @@ in the list can cut in halfway through. Edits apply at the next check, with no r
              "Read it, change it, ship it."),
             ("The base for PlumHUD",
              "Discovery here, display there, one implementation."),
-            ("1.0.0",
+            ("1.0.2",
              "It does the one thing and it is finished.")],
   faq=[("Does it work with other miners?",
         "It is built for NerdMiners on a local network."),
@@ -2194,7 +2246,7 @@ in the list can cut in halfway through. Edits apply at the next check, with no r
        ("Is there a UI?",
         "This is the library. <a href=\"/plumhud/\">PlumHUD</a> is the "
         "display.")],
-  facts=[("Version","1.0.0"),("Licence","MIT"),("Install","pip install moonbeam-miner"),
+  facts=[("Version","1.0.2"),("Licence","MIT"),("Install","pip install moonbeam-miner"),
          ("Requires","Python 3.8+"),("Dependencies","None")],
   body="""
 <h2>What it does</h2>
@@ -2225,7 +2277,8 @@ averaging them in.</p>
        ("How it works", "#how-it-works"),
        ("Licensing", "/contact.html")],
   herometa="<b>0.1.0 alpha</b> &middot; Windows, macOS, Linux &middot; "
-           "Node.js 16+ &middot; free, no account, unlimited keys",
+           "Node.js 16+ &middot; <code>pip install remapwrap</code> for the "
+           "layout builder &middot; free, no account, unlimited keys",
   steps=[("Run the server on your PC",
           "<code>npm install</code> then <code>npm start</code>. It prints a "
           "dashboard address and shows a pairing QR code."),
@@ -2278,6 +2331,7 @@ averaging them in.</p>
         "daily use, and it will have rough edges you find before I do.")],
   facts=[("Version","0.1.0 alpha"),("Runtime","Node.js 16+"),
          ("Phone needs","A browser"),("Install","None on the phone"),
+         ("Layout builder","pip install remapwrap — 0.6.0, MIT"),
          ("Source","vince-gonzalez/f-keys")],
   body="""
 <p><img src="/remapwrap/assets/logo-256.png" alt="RemapWrap"
@@ -2359,11 +2413,36 @@ def live_count():
     return sum(1 for c in CATALOGUE if c[4] not in (ALPHA, SETUP))
 
 
+def api_counts():
+    """(measurement tables, every document openapi.json declares).
+
+    The prose used to hand-count these and was wrong both times: thirteen
+    measurement tables when the file declared fifteen, thirty-five published
+    documents when it declared thirty-one. buildapi.py writes openapi.json
+    from the files that exist, so counting it here is the only version that
+    cannot go stale. Absent, the build stops rather than printing a number
+    nothing measured.
+    """
+    path = os.path.join(ROOT, "openapi.json")
+    if not os.path.exists(path):
+        raise SystemExit("buildsite: openapi.json is missing - run "
+                         "tools/buildapi.py first; the published-data counts "
+                         "are read from it, not typed in")
+    with io.open(path, encoding="utf-8") as fh:
+        paths = sorted(json.load(fh).get("paths", {}))
+    tables = [p for p in paths
+              if p.startswith("/gonzalgo/") and "/kernel-trust/" not in p]
+    return len(tables), len(paths)
+
+
 def counted(text):
     """Fill the tokens no gate could previously check."""
+    tables, docs = api_counts()
     return (text.replace("%%PRODUCTS%%", count_word(len(CATALOGUE)))
                 .replace("%%LIVE%%", count_word(live_count()).lower())
-                .replace("%%SHELVES%%", count_word(len(CATEGORIES)).lower()))
+                .replace("%%SHELVES%%", count_word(len(CATEGORIES)).lower())
+                .replace("%%TABLES%%", count_word(tables))
+                .replace("%%DOCS_N%%", str(docs)))
 
 
 ABOUT_DOC = """
@@ -2388,8 +2467,8 @@ inherits. OpticQuiz runs one colour-vision engine across eight distribution
 channels, with its JavaScript and Python implementations verified identical to six
 decimal places, and publishes the calibration limits that keep its own results
 honest.</p>
-<p>More than thirty works are deposited with DOIs. The packages are installed
-several hundred times a week. Six pull requests to
+<p>Fifty-six works are deposited with DOIs. The packages are installed
+more than two thousand times a week. Eight pull requests to
 <a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>
 carry the measurements back upstream &mdash; reviewed and merged by that
 library's own maintainers.</p>
@@ -2631,7 +2710,7 @@ link that sent you here was ours.</li>
 # search for.
 DEVELOPERS_DOC = """
 <div class="doc"><h1>F-Keys developer resources</h1>
-<p class="sub">Four command-line tools, six packages, and a shelf of published
+<p class="sub">Four command-line tools, sixteen PyPI packages, nineteen on npm, and a shelf of published
 JSON. Everything here is a thing you install or a file you fetch, and there is
 nothing to sign up for.</p>
 
@@ -2700,9 +2779,9 @@ the <code>Deprecation</code> and <code>Sunset</code> headers of RFC 8594 and RFC
 </table>
 
 <h2>The command line</h2>
-<p>Four of these are real CLIs, not libraries with a script attached. Each does
-its whole job from a terminal, which is the point: an agent can drive them
-without an integration.</p>
+<p>Four of them, below. Each is a real CLI rather than a library with a script
+attached, and does its whole job from a terminal, which is the point: an agent
+can drive them without an integration.</p>
 <pre><b>pip install gonzalgo</b>
 gonzalgo trust <i>path</i>              every theorem reaching a sorry
 gonzalgo why <i>decl</i> <i>axiom</i>          shortest labelled path to an axiom
@@ -2723,23 +2802,66 @@ Action is three lines of workflow and fails the build when a proof rests on
 something unfinished.</p>
 
 <h2>Packages</h2>
+<p>Sixteen on PyPI. Every one installs from the public index, with no account
+and no registration step.</p>
 <table class="facts">
 <tr><th>gonzalgo</th><td><code>pip install gonzalgo</code> &mdash; axiom
 provenance for Lean 4 and Metamath. Apache-2.0.</td></tr>
+<tr><th>mmforge</th><td><code>pip install mmforge</code> &mdash; find avoidable
+axiom dependencies in Metamath, and build the proofs that remove
+them.</td></tr>
+<tr><th>loadbearing</th><td><code>pip install loadbearing</code> &mdash; what a
+claim asserts, separated from what its derivation consumed.</td></tr>
+<tr><th>axsent</th><td><code>pip install axsent</code> &mdash; what a formal
+library assumes, read from Rocq, Agda and Isabelle source, with nothing
+built.</td></tr>
+<tr><th>certivl</th><td><code>pip install certivl</code> &mdash; certified
+interval arithmetic: an enclosure that turns a computed inequality into a
+proof.</td></tr>
+<tr><th>authorecon</th><td><code>pip install authorecon</code> &mdash;
+reconcile published work against every place it lives, for any ORCID, from
+public sources.</td></tr>
+<tr><th>saydo</th><td><code>pip install saydo</code> &mdash; run a tool against
+the behavioural contract its author signed, and emit a receipt anyone can
+verify.</td></tr>
+<tr><th>ishihara</th><td><code>pip install ishihara</code> &mdash;
+pseudoisochromatic colour-vision plates, reproducible from a seed.</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>pip install opticquiz-cvd</code> &mdash;
+the colour-accessibility engine, the same maths as the npm package.</td></tr>
+<tr><th>legible</th><td><code>pip install legible</code> &mdash; three build
+gates: unreadable type, unreadable colour, a retired name.</td></tr>
+<tr><th>openapi-drift</th><td><code>pip install openapi-drift</code> &mdash;
+has your API drifted from its spec, and can a machine still read it?</td></tr>
+<tr><th>changewatch</th><td><code>pip install changewatch</code> &mdash; a
+doorbell for your published work. Silent until somebody else acts.</td></tr>
 <tr><th>keyj</th><td><code>pip install keyj</code> &mdash; tablature to notes,
 render, and play.</td></tr>
+<tr><th>remapwrap</th><td><code>pip install remapwrap</code> &mdash; build a
+RemapWrap control surface from a folder of samples or a list of
+shortcuts.</td></tr>
 <tr><th>plumhud</th><td><code>pip install plumhud</code> &mdash; miner fleet
 monitor.</td></tr>
 <tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
 NerdMiner discovery and vitals.</td></tr>
+</table>
+<p>Nineteen on npm. Most of them are the OpticQuiz colour engine published one
+name per deficiency, so somebody searching for <code>protanopia</code> finds
+it; these are the entry points.</p>
+<table class="facts">
 <tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code> &mdash;
 colour-vision simulation and daltonisation.</td></tr>
+<tr><th>opticquiz-cvd-mcp</th><td><code>npm i opticquiz-cvd-mcp</code> &mdash;
+the same engine as callable tools for an LLM.</td></tr>
+<tr><th>opticquiz-eye</th><td><code>npm i opticquiz-eye</code> &mdash; a
+one-line widget that lets a visitor re-colour your site.</td></tr>
+<tr><th>keyjockey</th><td><code>npm i keyjockey</code> &mdash; tablature to
+notes: eight tunings, capo offsets, MIDI and frequency. npm only.</td></tr>
 <tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
 &mdash; the TipStreams widget.</td></tr>
 </table>
 
 <h2>Upstream, merged</h2>
-<p>The measurements feed back into the library they measure. Six pull requests
+<p>The measurements feed back into the library they measure. Eight pull requests
 to <a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>
 &mdash; the Metamath Proof Explorer's canonical database, reviewed and merged by
 its own maintainers &mdash; each remove an avoidable axiom-of-choice dependency
@@ -2751,9 +2873,14 @@ that the tooling on this page located:</p>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5445" rel="noopener">#5445</a></th><td>Shorten <code>madefi</code> and drop its ax-ac dependency &mdash; merged 2026-08-21</td></tr>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5443" rel="noopener">#5443</a></th><td>Add <code>fnrndomnum</code>, and prove <code>fnrndomg</code> from it &mdash; merged 2026-08-24</td></tr>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5458" rel="noopener">#5458</a></th><td>Drop the ax-ac dependency from <code>fnct</code>, <code>dmct</code> and <code>ffsrn</code> &mdash; merged 2026-08-26</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5446" rel="noopener">#5446</a></th><td>Drop the ax-ac dependency from <code>disjinfi</code> &mdash; merged 2026-08-30</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5466" rel="noopener">#5466</a></th><td>Add <code>imadomnum</code>, and drop the ax-ac dependency from <code>fimact</code> &mdash; merged 2026-09-01</td></tr>
 </table>
-<p>Three more set.mm pull requests are open in review, along with two
-<a href="https://github.com/microsoft/winget-pkgs/pull/421552" rel="noopener">winget-pkgs</a>
+<p>Two more set.mm pull requests are open in review, along with
+<a href="https://github.com/metamath/metamath-exe/pull/203" rel="noopener">#203</a>
+against metamath/metamath-exe &mdash; the C source of the Metamath program
+itself, rather than the database &mdash; and two
+<a href="https://github.com/microsoft/winget-pkgs/pulls?q=is%3Apr+author%3Avince-gonzalez" rel="noopener">winget-pkgs</a>
 package submissions. Open means open &mdash; nothing here is claimed merged
 until its maintainers say so.</p>
 
@@ -2764,7 +2891,7 @@ columns &mdash; so a function-calling agent knows a table has a
 <code>library</code> string and a <code>theorems</code> integer before it
 fetches half a megabyte to find out.</p>
 <table class="facts">
-<tr><th>Measurement tables</th><td>Thirteen tables behind the papers &mdash; the
+<tr><th>Measurement tables</th><td>%%TABLES%% tables behind the papers &mdash; the
 <a href="/gonzalgo/kernel-index/">Kernel Index</a>, the
 <a href="/gonzalgo/dominator-table/">Dominator Table</a> and the rest. One
 object each, carrying its <code>version</code>, <code>sha256</code>,
@@ -2938,9 +3065,9 @@ LEGAL_NAME = "F-Keys Creative LLC"
 FOUNDER = "Vincent Gonzalez"
 EMAIL = "hello@f-keys.com"
 ORCID = "https://orcid.org/0009-0005-3640-014X"
-# The account that hosts this site's own source. Older products still
-# live under github.com/zengineco until their repos migrate; their pages
-# link them directly.
+# The account that hosts this site's own source, and now every product's:
+# the migration finished, so there is one owner and no second name to
+# reconcile a link against.
 GH_ORG = "https://github.com/vince-gonzalez"
 
 # Filed with the Florida Division of Corporations 2026-08-18,
@@ -3453,7 +3580,7 @@ def main():
         "About \u2014 F-Keys", "F-Keys\\About", counted(ABOUT_DOC), "1 item",
         description=counted(
             "F-Keys is Vince Gonzalez, working alone, with %%LIVE%% live "
-            "products and more than thirty deposited works."),
+            "products and fifty-six deposited works."),
         canonical="https://f-keys.com/about.html", ld=organization())))
 
     written.append(("contact.html", shell(
@@ -3465,12 +3592,13 @@ def main():
     written.append(("developers.html", shell(
         "F-Keys Developer Resources \u2014 API, CLI, and published data",
         "F-Keys\\Developers",
-        DEVELOPERS_DOC, "1 item",
-        description="F-Keys developer resources: the OpenAPI description of "
-                    "35 published datasets, the PyPI and npm packages, the "
-                    "gonzalgo GitHub Action, llms.txt, and Markdown and JSON "
+        counted(DEVELOPERS_DOC), "1 item",
+        description=counted(
+                    "F-Keys developer resources: the OpenAPI description of "
+                    "%%DOCS_N%% published documents, the PyPI and npm packages, "
+                    "the gonzalgo GitHub Action, llms.txt, and Markdown and JSON "
                     "content negotiation. No API keys, because there is no "
-                    "hosted API.",
+                    "hosted API."),
         canonical="https://f-keys.com/developers.html", ld=organization())))
 
     written.append(("privacy.html", shell(

@@ -9,12 +9,35 @@ was written.
 from __future__ import annotations
 
 import html
+import json
 import re
 import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 SITE = Path(__file__).resolve().parent
+
+
+def deposits() -> int:
+    """Deposited works, read rather than typed.
+
+    The boot banner and the Papers card each carried their own copy of this
+    figure and the two disagreed. tools/snapshot.py counts the deposits
+    against the Zenodo API; both mentions below read that one count.
+    """
+    snap = SITE / "status" / "latest.json"
+    try:
+        summary = json.loads(snap.read_text(encoding="utf-8"))["summary"]
+        n = summary["zenodo_records"]
+    except (OSError, ValueError, KeyError) as e:
+        raise SystemExit(f"buildportfolio: no deposit count in {snap} ({e}); "
+                         "run tools/snapshot.py first")
+    if not isinstance(n, int) or n < 1:
+        raise SystemExit(f"buildportfolio: deposit count in {snap} is {n!r}")
+    return n
+
+
+DEPOSITS = deposits()
 
 # status: LIVE (verified 200 on 2026-08-12), DEV, ARCHIVE
 P = [
@@ -32,9 +55,9 @@ P = [
      ["measurement", "open data"],
      "/gonzalgo/kernel-index/"),
     ("R-03", "Papers", "LIVE", "research",
-     "35 deposited works with DOIs — axiom provenance, dominator analysis of "
-     "classical dependence, colour-vision methodology, formal epistemology. "
-     "Full text, no paywall.",
+     f"{DEPOSITS} deposited works with DOIs — axiom provenance, dominator "
+     "analysis of classical dependence, colour-vision methodology, formal "
+     "epistemology. Full text, no paywall.",
      ["preprints", "open access"],
      "/papers/"),
     ("A-01", "OpticQuiz", "LIVE", "access",
@@ -166,7 +189,7 @@ NAV = """<nav>
     <a href="/papers/">papers</a>
     <a href="/gonzalgo/">gonzalgo</a>
     <a href="/portfolio.html">work</a>
-    <a href="https://github.com/zengineco">github</a>
+    <a href="https://github.com/vince-gonzalez">github</a>
   </div>
 </nav>"""
 
@@ -175,7 +198,7 @@ live = sum(1 for p in P if p[2] == "LIVE")
 BOOT = f"""<div class="boot"><pre>F-KEYS // PRODUCT MANIFEST
 loading index ................ <b>ok</b>   {len(P)} entries
 verifying endpoints .......... <b>ok</b>   {live} responding
-checking deposits ............ <b>ok</b>   40 works, all with DOIs
+checking deposits ............ <b>ok</b>   {DEPOSITS} works, all with DOIs
 operator ..................... <b>vincent gonzalez</b> · orcid 0009-0005-3640-014X
 </pre></div>"""
 
@@ -237,7 +260,7 @@ page = f"""<!DOCTYPE html>
 <div class="strip">
   <div class="cell"><span class="n">{len(P)}</span><span class="l">listed</span></div>
   <div class="cell"><span class="n">{live}</span><span class="l">live now</span></div>
-  <div class="cell"><span class="n">40</span><span class="l">deposited works</span></div>
+  <div class="cell"><span class="n">{DEPOSITS}</span><span class="l">deposited works</span></div>
   <div class="cell"><span class="n">8</span><span class="l">distribution channels</span></div>
   <div class="cell"><span class="n">0</span><span class="l">proofs resting on a sorry</span></div>
 </div>
@@ -249,7 +272,7 @@ page = f"""<!DOCTYPE html>
 <footer>
   <p>F-Keys LLC · Vincent Gonzalez ·
   <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a> ·
-  <a href="https://github.com/zengineco">github</a></p>
+  <a href="https://github.com/vince-gonzalez">github</a></p>
   <p style="margin-top:.5rem;">Every endpoint on this page was checked before it
   was listed. <a href="/">back to f-keys.com</a></p>
 </footer>

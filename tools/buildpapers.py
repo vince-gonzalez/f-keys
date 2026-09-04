@@ -199,7 +199,7 @@ def build():
         document(data),
         "%d item(s)" % total,
         active_cat="research",
-        description=("Thirty-five deposited works by Vincent Gonzalez: axiom "
+        description=("Fifty-six deposited works by Vincent Gonzalez: axiom "
                      "dependence in formal libraries, certified bounds in "
                      "discrete geometry, the Modulign standard, colour "
                      "vision. Open access, every one with a DOI."),

@@ -65,6 +65,12 @@ PRIVATE_FIELDS = ("views_14d", "unique_views_14d", "traffic_error",
 UA         = "fkeys-snapshot/1.0 (+https://f-keys.com)"
 
 # ── WHAT WE TRACK ────────────────────────────────────────────
+# This list is headed "every public property" on the page, so it has to
+# be exactly that. It was wrong in both directions: zengin.es serves the
+# retired brand out of the retired account and is not an F-Keys
+# property at all, while epistemend.org and qv.f-keys.com are live, are
+# linked from the site, and were monitored by nothing. A property that is
+# not probed cannot be reported down.
 PROPERTIES = [
     ("f-keys.com",        "https://f-keys.com"),
     ("opticquiz.com",     "https://opticquiz.com"),
@@ -74,9 +80,10 @@ PROPERTIES = [
     ("tipstreams.com",    "https://tipstreams.com"),
     ("dogefundme.com",    "https://dogefundme.com"),
     ("modulign.org",      "https://modulign.org"),
+    ("epistemend.org",    "https://epistemend.org"),
     ("prompt.f-keys.com", "https://prompt.f-keys.com"),
     ("dp.f-keys.com",     "https://dp.f-keys.com"),
-    ("zengin.es",         "https://zengin.es"),
+    ("qv.f-keys.com",     "https://qv.f-keys.com"),
 ]
 
 # ── WHAT MAY BE PUBLISHED ────────────────────────────────────
@@ -90,11 +97,11 @@ PROPERTIES = [
 # PROPERTIES above is that list. Anything Cloudflare reports that is not
 # on it is dropped before it is written to disk, so it never reaches
 # status/latest.json, the dated history, or the page.
-PUBLISHABLE_SITES = set(name for name, _url in PROPERTIES) | {
-    # measured properties that are public and intentionally listed but
-    # are not uptime targets
-    "epistemend.org",
-}
+#
+# epistemend.org used to be carried here as an exception, because it was
+# published without being probed. It is an uptime target in its own right
+# now, so the allowlist is exactly PROPERTIES and nothing beside it.
+PUBLISHABLE_SITES = set(name for name, _url in PROPERTIES)
 
 
 def publishable(sites):
@@ -102,8 +109,20 @@ def publishable(sites):
     return [x for x in (sites or []) if x.get("site") in PUBLISHABLE_SITES]
 
 
-NPM_PACKAGES  = ["@f-keys/tip-widget", "opticquiz-eye", "opticquiz-cvd",
-                 "opticquiz-cvd-mcp", "keyjockey"]
+# The npm account, and the fallback list.
+#
+# The list below used to be the whole of it, and it named five packages
+# against nineteen actually published under the account. A hand-kept list
+# only ever measures what somebody remembered to write down, so the run
+# asks the registry which packages exist (npm_packages) and falls back to
+# this when the search endpoint does not answer. Keep it in step with the
+# account: backfill.py and the catalogue gate both read it directly.
+NPM_MAINTAINER = "vincegonz"
+NPM_PACKAGES  = ["@f-keys/tip-widget", "achromatopsia", "colorblind-mcp",
+                 "cvdplate", "cvdsafe", "cvdsafe-mcp", "cvdsim", "deutan",
+                 "dichromacy", "dogefundme", "keyjockey", "logmar",
+                 "opticquiz-cvd", "opticquiz-cvd-mcp", "opticquiz-eye",
+                 "protanopia", "safepalette", "trichromacy", "tritanopia"]
 
 # A package that is published and untracked reads, on this page, exactly
 # like a package that does not exist. mmforge, certivl and ishihara were
@@ -126,18 +145,24 @@ PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
                  # WARRANT and the coincidence is not ownership.
                  "authorecon", "axsent",
                  # loadbearing 0.2.0 was live and untracked too.
-                 "loadbearing"]
+                 "loadbearing",
+                 # 2026-09-04. saydo 0.1.1, the fifth time. Two names that
+                 # look like his and are not, so that neither gets added
+                 # here by pattern-matching later: "apriori" on PyPI is
+                 # Lorenzo Piu's, and "moonbeam" is somebody else's - his
+                 # is "moonbeam-miner", which is already above.
+                 "saydo"]
 
 # Repositories are owner-qualified now. gonzalgo moved to the personal
 # account and only kept reporting because GitHub redirects transferred
 # repos - a redirect is not a reason to keep the wrong name written down.
-GITHUB_OWNER = "zengineco"          # kept for anything still unqualified
+GITHUB_OWNER = "vince-gonzalez"     # kept for anything still unqualified
 GITHUB_REPOS = [
     "vince-gonzalez/f-keys", "vince-gonzalez/opticquiz.com", "vince-gonzalez/tip-widget",
     "vince-gonzalez/poticas", "vince-gonzalez/5best2buy.com",
     "vince-gonzalez/trailer-load.com", "vince-gonzalez/tipstreams.com",
     "vince-gonzalez/prompt-game", "vince-gonzalez/daisupop", "vince-gonzalez/qv",
-    "vince-gonzalez/fytecraft.com", "zengineco/modulign.org",
+    "vince-gonzalez/fytecraft.com", "vince-gonzalez/modulign.org",
     "vince-gonzalez/Moonbeam-NerdMiner",
     "vince-gonzalez/gonzalgo", "vince-gonzalez/certivl",
     "vince-gonzalez/ishihara", "vince-gonzalez/mmforge",
@@ -147,6 +172,14 @@ GITHUB_REPOS = [
     "vince-gonzalez/typefloor", "vince-gonzalez/contrast-gate",
     "vince-gonzalez/deadname-gate", "vince-gonzalez/cvd-palette",
     "vince-gonzalez/saydo", "vince-gonzalez/axsent",
+    # Six public non-fork repositories were absent from this list, so the
+    # repository count on the page was 29 against 35 on the account. The
+    # last of them is the profile README, which is a public repository
+    # like any other and is counted as one.
+    "vince-gonzalez/LeadSeer", "vince-gonzalez/dogefundme.com",
+    "vince-gonzalez/wikiscout", "vince-gonzalez/the-record",
+    "vince-gonzalez/independent-us-food-makers",
+    "vince-gonzalez/vince-gonzalez",
 ]
 
 # How many days of history the page draws its trends from. The dated
@@ -154,7 +187,11 @@ GITHUB_REPOS = [
 # published summary reaches into them.
 HISTORY_DAYS = 60
 
-PAPERS_URL = "https://f-keys.com/papers/"
+# The deposits are enumerated from the ORCID, not from this site. See
+# collect_zenodo for why. Zenodo rejects a page size above 25 with HTTP
+# 400, so the search is paged rather than asked for everything at once.
+ZENODO_ORCID = "0009-0005-3640-014X"
+ZENODO_PAGE  = 25
 
 
 # ── HTTP ─────────────────────────────────────────────────────
@@ -249,18 +286,51 @@ def collect_uptime():
     return out
 
 
+def npm_packages():
+    """Ask the registry which packages the account publishes.
+
+    The same reason the Cloudflare zones are enumerated rather than
+    written down: a package published today should appear here without
+    anyone editing this file, because the four times the PyPI list went
+    stale it was always the same mistake. Returns (names, error); on any
+    failure the recorded list stands in, because a short run of the real
+    list is better than no npm figures at all.
+    """
+    d, err = fetch_json(
+        "https://registry.npmjs.org/-/v1/search"
+        f"?text=maintainer:{NPM_MAINTAINER}&size=250", tries=2)
+    if err or not d:
+        return list(NPM_PACKAGES), err or "no result"
+    names = sorted({(o.get("package") or {}).get("name")
+                    for o in (d.get("objects") or [])
+                    if (o.get("package") or {}).get("name")})
+    return (names or list(NPM_PACKAGES)), None
+
+
 def collect_npm():
     today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+    packages, list_err = npm_packages()
+    if list_err:
+        print(f"npm: registry search unavailable ({list_err}); "
+              "measuring the recorded list")
     out = []
-    for pkg in NPM_PACKAGES:
+    for pkg in packages:
+        # Ownership is confirmed against the package document rather than
+        # the search index, because a search index is allowed to be out
+        # of date about who maintains a name. A name we can positively
+        # see is somebody else's is not measured as ours; a name we could
+        # not check is kept, since a transient 500 is not evidence.
+        meta, merr = fetch_json(
+            "https://registry.npmjs.org/" + pkg.replace("/", "%2f"), tries=2)
+        maintainers = [m.get("name") for m in ((meta or {}).get("maintainers") or [])]
+        if maintainers and NPM_MAINTAINER not in maintainers:
+            continue
         d, err = fetch_json(f"https://api.npmjs.org/downloads/point/last-week/{pkg}")
         entry = {"package": pkg,
                  "registry": "npm",
                  "url": f"https://www.npmjs.com/package/{pkg}",
                  "weekly": (d or {}).get("downloads") if not err else None,
                  "error": err}
-        meta, merr = fetch_json(
-            "https://registry.npmjs.org/" + pkg.replace("/", "%2f"), tries=2)
         if not merr and meta:
             latest = ((meta.get("dist-tags") or {}).get("latest"))
             entry["version"] = latest
@@ -351,8 +421,12 @@ def collect_github():
                       "url": d.get("html_url")})
         if token:
             # Traffic needs push access; absent that it 403s, which is fine.
+            # These two used to interpolate GITHUB_OWNER in front of a name
+            # that already carried its owner, so every URL was
+            # /repos/owner/owner/repo/traffic and every repository recorded
+            # a 404 as its traffic error. `full` is the qualified name.
             t, terr = fetch_json(
-                f"https://api.github.com/repos/{GITHUB_OWNER}/{repo}/traffic/views",
+                f"https://api.github.com/repos/{full}/traffic/views",
                 headers=auth, tries=1)
             if terr:
                 entry["traffic_error"] = terr
@@ -363,7 +437,7 @@ def collect_github():
             # rather than read about it. gonzalgo ran 828 clones against 35
             # page views the first time this was measured.
             c, cerr = fetch_json(
-                f"https://api.github.com/repos/{GITHUB_OWNER}/{repo}/traffic/clones",
+                f"https://api.github.com/repos/{full}/traffic/clones",
                 headers=auth, tries=1)
             if not cerr:
                 entry["clones_14d"] = c.get("count")
@@ -375,27 +449,67 @@ def collect_github():
 
 
 def collect_zenodo():
-    """Harvest DOIs from the live papers page, then pull stats per record."""
-    page, err = fetch(PAPERS_URL, headers={"Accept": "text/html"})
-    if err:
-        return {"error": f"papers page: {err}", "records": []}
-    dois = sorted(set(re.findall(r"10\.5281/zenodo\.(\d+)", page)))
+    """Every deposit under the ORCID, and what each one has been read.
+
+    This used to fetch the live /papers/ page, regex the DOIs out of the
+    rendered HTML, and ask Zenodo about those. That measures the site
+    rather than the corpus: a deposit absent from papers.json could not
+    appear here, so "deposited records" counted the papers page and could
+    never notice a new deposit. Circular, and it read as a flat line.
+
+    Zenodo is asked directly now - which records carry the ORCID - and
+    the answer drives the count, the views and the downloads. The search
+    document already carries stats and title, so this is three requests
+    rather than one per record, which also keeps the run under the
+    anonymous rate limit instead of turning it into a hole.
+    """
+    hits, err, seen, page = [], None, set(), 1
+    while True:
+        d, perr = fetch_json(
+            "https://zenodo.org/api/records"
+            f"?q=creators.orcid:{ZENODO_ORCID}&size={ZENODO_PAGE}&page={page}",
+            tries=2)
+        if perr:
+            err = f"orcid search page {page}: {perr}"
+            break
+        batch = ((d.get("hits") or {}).get("hits")) or []
+        for h in batch:
+            # A versioned deposit is one work under one parent concept.
+            # Dedupe on the concept so a new version is not a new record.
+            key = str(h.get("conceptrecid") or h.get("id") or "")
+            if key in seen:
+                continue
+            seen.add(key)
+            hits.append(h)
+        if len(batch) < ZENODO_PAGE:
+            break
+        page += 1
+        time.sleep(1.0)
+
+    if err and not hits:
+        return {"error": err, "records": []}
+
     records = []
-    for rid in dois:
-        d, derr = fetch_json(f"https://zenodo.org/api/records/{rid}", tries=2)
-        if derr:
-            records.append({"id": rid, "error": derr})
-            continue
-        s = d.get("stats") or {}
+    for h in hits:
+        rid = str(h.get("id") or "")
+        s = h.get("stats") or {}
+        if not s:
+            # The search document normally carries stats. When it does
+            # not, ask for the record rather than recording a zero.
+            d, derr = fetch_json(f"https://zenodo.org/api/records/{rid}", tries=2)
+            if derr:
+                records.append({"id": rid, "error": derr})
+                continue
+            s = d.get("stats") or {}
         records.append({
             "id": rid,
-            "title": (d.get("metadata", {}) or {}).get("title") or d.get("title") or "",
+            "title": (h.get("metadata", {}) or {}).get("title") or h.get("title") or "",
             "views": s.get("views"),
             "unique_views": s.get("unique_views"),
             "downloads": s.get("downloads"),
             "unique_downloads": s.get("unique_downloads"),
         })
-    return {"error": None, "records": records}
+    return {"error": err, "records": records}
 
 
 def cf_graphql(token, query, variables, tries=3):

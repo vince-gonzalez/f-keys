@@ -10,11 +10,11 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 ## Profile
 
-Independent researcher with 40 deposited works and an ORCID record spanning formal verification, colour science and epistemology. Built the tooling the measurements run on. Work is characterised by reporting what the data does not support as prominently as what it does — a published limitation on an off-axis palette, a 58× gap between two plausible measures, and negative results published as negative results.
+Independent researcher with 56 deposited works and an ORCID record spanning formal verification, colour science and epistemology. Built the tooling the measurements run on. Work is characterised by reporting what the data does not support as prominently as what it does — a published limitation on an off-axis palette, a 58× gap between two plausible measures, and negative results published as negative results.
 
 ## Published Research
 
-40 deposited works · ORCID 0009-0005-3640-014X · all open access
+56 deposited works · ORCID 0009-0005-3640-014X · all open access
 
 - Where Formal Libraries Spend Their Axioms — axiom use measured across six libraries and two proof systems by one program. Located an avoidable classical dependency in Lean's `omega` and computed a 13.1% ceiling on removable classical dependence in Mathlib.
 - Which Constant Is Responsible? — dominator analysis over 766,564 constants showing that reachability overstates responsibility by 58×, and that 60.1% of classically dependent theorems have no responsible constant at all.

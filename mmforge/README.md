@@ -35,7 +35,7 @@ quietly lost.
 | Version | 0.2.0 |
 | Licence | MIT |
 | Reads | Metamath databases |
-| Upstream | 6 pull requests merged into set.mm |
+| Upstream | 8 pull requests merged into set.mm |
 | Source | vince-gonzalez/mmforge |
 
 [The page itself](https://f-keys.com/mmforge/)

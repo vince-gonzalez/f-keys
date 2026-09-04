@@ -13,6 +13,7 @@ is set, because an unlisted page is not a private one.
 from __future__ import annotations
 
 import html
+import json
 import re
 import sys
 from pathlib import Path
@@ -20,6 +21,29 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 SITE = Path(__file__).resolve().parent
 SHOW_CONTACT = False
+
+
+def deposits() -> int:
+    """Deposited works, read rather than typed.
+
+    The figure was written out in four places in this file and all four had
+    fallen behind the record. tools/snapshot.py counts the deposits against
+    the Zenodo API; this reads that count, so the number is measured once and
+    every page below quotes the same one.
+    """
+    snap = SITE / "status" / "latest.json"
+    try:
+        summary = json.loads(snap.read_text(encoding="utf-8"))["summary"]
+        n = summary["zenodo_records"]
+    except (OSError, ValueError, KeyError) as e:
+        raise SystemExit(f"buildcv: no deposit count in {snap} ({e}); "
+                         "run tools/snapshot.py first")
+    if not isinstance(n, int) or n < 1:
+        raise SystemExit(f"buildcv: deposit count in {snap} is {n!r}")
+    return n
+
+
+DEPOSITS = deposits()
 
 NAME = "VINCE GONZALEZ"
 LOC = "Punta Gorda, FL"
@@ -173,15 +197,15 @@ V = {
                 "web products — an accessibility platform distributed across "
                 "eight channels, an axiom-provenance tool for two proof "
                 "assistants, a logistics training simulator with institutional "
-                "licensing — alongside 40 deposited works with DOIs. Full "
-                "lifecycle on all of it: architecture, front and back end, "
+                f"licensing — alongside {DEPOSITS} deposited works with DOIs. "
+                "Full lifecycle on all of it: architecture, front and back end, "
                 "database, deployment, documentation, technical SEO.",
         order=["products", "research_brief", "tech", "fedex_brief", "edu"]),
     "research": dict(
         slug="research",
         tag="Formal Methods · Measurement · Open Research",
-        profile="Independent researcher with 40 deposited works and an ORCID "
-                "record spanning formal verification, colour science and "
+        profile=f"Independent researcher with {DEPOSITS} deposited works and "
+                "an ORCID record spanning formal verification, colour science and "
                 "epistemology. Built the tooling the measurements run on. Work "
                 "is characterised by reporting what the data does not support "
                 "as prominently as what it does — a published limitation on an "
@@ -266,11 +290,11 @@ def md_section(key: str) -> list[str]:
             o += [f"- **{head}** — {body.split('.')[0]}."]
         o += ["- **Also live** — " + PRODUCTS[3][1].split(".")[0] + ".", ""]
     elif key == "research":
-        o += ["40 deposited works · ORCID 0009-0005-3640-014X · all open access",
-              ""]
+        o += [f"{DEPOSITS} deposited works · ORCID 0009-0005-3640-014X · "
+              "all open access", ""]
         o += [f"- {r}" for r in RESEARCH] + [""]
     elif key == "research_brief":
-        o += ["40 deposited works · ORCID 0009-0005-3640-014X", ""]
+        o += [f"{DEPOSITS} deposited works · ORCID 0009-0005-3640-014X", ""]
         o += [f"- {r.split(' — ')[0]}" for r in RESEARCH[:5]] + [""]
     elif key == "writing":
         o += [f"- {w}" for w in WRITING] + [""]
@@ -387,8 +411,7 @@ for key, cfg in V.items():
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="googlebot" content="noindex, nofollow">
 <title>V. Gonzalez — {key} CV</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fonts.css">
 <style>
 {CSS}
 </style>

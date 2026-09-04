@@ -30,7 +30,7 @@ Writes the documentation that carries consequences: compliance records in a safe
 
 ## Published Research
 
-40 deposited works · ORCID 0009-0005-3640-014X
+56 deposited works · ORCID 0009-0005-3640-014X
 
 - Where Formal Libraries Spend Their Axioms
 - Which Constant Is Responsible?

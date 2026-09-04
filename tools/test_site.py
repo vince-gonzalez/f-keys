@@ -534,6 +534,20 @@ PACKAGE_PAGE = {
     "opticquiz-cvd": "opticquiz", "opticquiz-eye": "opticquiz",
     "opticquiz-cvd-mcp": "opticquiz", "@f-keys/tip-widget": "tipstreams",
     "moonbeam-miner": "moonbeam", "plumhud": "plumhud",
+    # The colour-vision family. Each of these declares opticquiz.com as its
+    # own homepage in its registry document, so the OpticQuiz page is where
+    # it lives; they are one engine published under the names people search
+    # for rather than fourteen separate products.
+    "achromatopsia": "opticquiz", "colorblind-mcp": "opticquiz",
+    "cvdplate": "opticquiz", "cvdsafe": "opticquiz",
+    "cvdsafe-mcp": "opticquiz", "cvdsim": "opticquiz",
+    "deutan": "opticquiz", "dichromacy": "opticquiz",
+    "logmar": "opticquiz", "protanopia": "opticquiz",
+    "safepalette": "opticquiz", "trichromacy": "opticquiz",
+    "tritanopia": "opticquiz",
+    # dogefundme's registry document names dogefundme.com, which the
+    # catalogue carries under the slug "fundoge".
+    "dogefundme": "fundoge",
     # Destinations rather than product pages: these link out to their own
     # sub-site and are listed in the catalogue that way.
     "gonzalgo": None,
