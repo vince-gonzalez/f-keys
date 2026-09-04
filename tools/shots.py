@@ -106,6 +106,38 @@ def find_chrome():
     return None
 
 
+def recorded_source(slug):
+    """The machine-independent identity stored for a shot and checked by
+    --verify.
+
+    A live product is its URL. A local app is its path inside the repo. That
+    path is C:\\tmp\\f-keys on the machine that captures and
+    /home/runner/work/f-keys/f-keys in CI, so recording an absolute file://
+    URL made --verify fail everywhere except the one machine that wrote it.
+    The path relative to the repo is the same on every machine."""
+    if slug in SHOTS:
+        return SHOTS[slug]
+    if slug in LOCAL_SHOTS:
+        return "repo:" + LOCAL_SHOTS[slug].replace("\\", "/")
+    return None
+
+
+def chrome_target(slug):
+    """What Chrome actually loads: a live URL, or an absolute file:// URL for
+    a local app. The absolute path is fine here because it is handed to Chrome
+    and never stored - recorded_source() is what goes in the manifest."""
+    if slug in SHOTS:
+        return SHOTS[slug]
+    if slug in LOCAL_SHOTS:
+        full = os.path.join(ROOT, LOCAL_SHOTS[slug]).replace("\\", "/")
+        return "file:///" + full
+    return None
+
+
+def all_slugs():
+    return sorted(set(SHOTS) | set(LOCAL_SHOTS))
+
+
 def load():
     if not os.path.exists(MANIFEST):
         return {}
@@ -177,11 +209,6 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     report = "--report" in sys.argv
     verify = "--verify" in sys.argv
-    for slug, rel_path in sorted(LOCAL_SHOTS.items()):
-        if slug not in SHOTS:
-            full = os.path.join(ROOT, rel_path).replace("\\", "/")
-            if os.path.exists(full):
-                SHOTS[slug] = "file:///" + full
 
     state = load()
 
@@ -192,9 +219,9 @@ def main():
                 if not os.path.exists(os.path.join(ART, slug + suffix)):
                     problems.append("%s: %s%s was recorded and is not here"
                                     % (slug, slug, suffix))
-            if rec.get("url") != SHOTS.get(slug):
+            if rec.get("url") != recorded_source(slug):
                 problems.append("%s: captured %s, the map now says %s"
-                                % (slug, rec.get("url"), SHOTS.get(slug)))
+                                % (slug, rec.get("url"), recorded_source(slug)))
         for p in problems:
             print("  shots: " + p)
         print("shots: %s" % ("%d FAILED" % len(problems) if problems
@@ -203,20 +230,13 @@ def main():
 
     if report:
         print()
-        print("  %d of %d products with a live URL have a screenshot"
-              % (len(state), len(SHOTS)))
-        for slug in sorted(SHOTS):
+        print("  %d of %d products have a screenshot"
+              % (len(state), len(all_slugs())))
+        for slug in all_slugs():
             print("   %-14s %-34s %s" % (
-                slug, SHOTS[slug],
+                slug, recorded_source(slug),
                 state.get(slug, {}).get("captured", "NOT CAPTURED")))
         return 0
-
-    # Local app UIs, captured from the file they ship as.
-    for slug, rel_path in sorted(LOCAL_SHOTS.items()):
-        if slug not in SHOTS:
-            full = os.path.join(ROOT, rel_path).replace("\\", "/")
-            if os.path.exists(full):
-                SHOTS[slug] = "file:///" + full
 
     chrome = find_chrome()
     if not chrome:
@@ -226,23 +246,24 @@ def main():
         return 2
 
     import datetime
-    todo = args or sorted(SHOTS)
+    todo = args or all_slugs()
     ok = 0
     for slug in todo:
-        if slug not in SHOTS:
-            print("  %-14s no URL in SHOTS - skipped" % slug)
+        target = chrome_target(slug)
+        if not target:
+            print("  %-14s no URL or local file - skipped" % slug)
             continue
-        written, err = capture(slug, SHOTS[slug], chrome)
+        written, err = capture(slug, target, chrome)
         if err:
             print("  %-14s REFUSED: %s" % (slug, err))
             continue
         state[slug] = {
-            "url": SHOTS[slug],
+            "url": recorded_source(slug),
             "captured": datetime.date.today().isoformat(),
             "size": "%dx%d" % (WIDTH, HEIGHT),
         }
         ok += 1
-        print("  %-14s %s -> %d files" % (slug, SHOTS[slug], len(written)))
+        print("  %-14s %s -> %d files" % (slug, recorded_source(slug), len(written)))
 
     with io.open(MANIFEST, "w", encoding="utf-8", newline="\n") as f:
         json.dump(state, f, indent=1, sort_keys=True)
