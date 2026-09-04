@@ -1,0 +1,45 @@
+# ============================================================
+# f-keys-vanity — a product name that is also an address
+# F-Keys | www.f-keys.com
+# ------------------------------------------------------------
+# Each route below is one product that answers to its own name
+# and redirects, permanently, to its page on the canonical site.
+# Adding a product here is two steps and no more:
+#   1. an AAAA record for the host, 100::, proxied
+#   2. a route in this list
+#
+# Deploy:  cd vanity && npx wrangler deploy
+# Check:   curl -sSI https://saydo.f-keys.com/
+# ============================================================
+
+name = "f-keys-vanity"
+main = "index.js"
+compatibility_date = "2026-08-21"
+
+routes = [
+  { pattern = "saydo.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "keyj.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "keyjockey.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "remapwrap.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "pixelstaff.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "plumhud.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "micdrop.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "wikipolish.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "leadseer.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "streamsniper.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "moonbeam.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "gonzalgo.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "mmforge.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "loadbearing.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "certivl.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "ishihara.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "axsent.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "authorecon.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "legible.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "openapi-drift.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "changewatch.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "papers.f-keys.com/*", zone_name = "f-keys.com" },
+]
+
+# There is one site and one set of names; nothing here is per-environment.
+workers_dev = false
