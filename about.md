@@ -1,6 +1,6 @@
 # About F-Keys
 
-> F-Keys is Vince Gonzalez, working alone, with twenty-eight live products and more than thirty deposited works.
+> F-Keys is Vince Gonzalez, working alone, with thirty live products and fifty-six deposited works.
 
 Canonical: https://f-keys.com/about.html
 
@@ -15,8 +15,8 @@ Independent products built by Vincent Gonzalez.
 
 ## What this is
 
-F-Keys is Vince Gonzalez, working alone. Thirty-three products are on the
-shelves — twenty-eight of them live today, the rest labeled alpha or
+F-Keys is Vince Gonzalez, working alone. Thirty-four products are on the
+shelves — thirty of them live today, the rest labeled alpha or
 needs-setup, because a badge is cheaper than a broken promise — from
 browser games to formal proof tooling, and each is built end to end by the same
 person: architecture, both ends, database, deployment, documentation.
@@ -30,8 +30,8 @@ channels, with its JavaScript and Python implementations verified identical to s
 decimal places, and publishes the calibration limits that keep its own results
 honest.
 
-More than thirty works are deposited with DOIs. The packages are installed
-several hundred times a week. Six pull requests to
+Fifty-six works are deposited with DOIs. The packages are installed
+more than two thousand times a week. Eight pull requests to
 [metamath/set.mm](https://github.com/metamath/set.mm)
 carry the measurements back upstream — reviewed and merged by that
 library's own maintainers.

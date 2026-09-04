@@ -6,7 +6,7 @@ Canonical: https://f-keys.com/opticquiz/
 
 Sixteen vision tests that run entirely in your browser, and a colour-accessibility toolkit for people who ship things other people have to look at. Nothing is uploaded.
 
-**Free, no account** · runs entirely in the browser · three packages · method deposited with a DOI
+**Free, no account** · runs entirely in the browser · fifteen npm packages · method deposited with a DOI
 
 ## What it is
 
@@ -47,7 +47,8 @@ rather than glossed. A screen is not a lightbox and the tests say so.
 | Where | opticquiz.com |
 | Cost | Free, no account |
 | Runs | Entirely in the browser |
-| Packages | opticquiz-cvd, opticquiz-eye, opticquiz-cvd-mcp |
+| Packages | 15 on npm — opticquiz-cvd, opticquiz-eye, cvdsim, cvdsafe, safepalette, cvdplate, and the rest |
+| MCP servers | opticquiz-cvd-mcp, cvdsafe-mcp, colorblind-mcp |
 | Research | Deposited, with DOIs |
 
 ## Questions

@@ -1,10 +1,10 @@
 # F-Keys developer resources
 
-> F-Keys developer resources: the OpenAPI description of 35 published datasets, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.
+> F-Keys developer resources: the OpenAPI description of 31 published documents, the PyPI and npm packages, the gonzalgo GitHub Action, llms.txt, and Markdown and JSON content negotiation. No API keys, because there is no hosted API.
 
 Canonical: https://f-keys.com/developers.html
 
-Four command-line tools, six packages, and a shelf of published
+Four command-line tools, sixteen PyPI packages, nineteen on npm, and a shelf of published
 JSON. Everything here is a thing you install or a file you fetch, and there is
 nothing to sign up for.
 
@@ -79,9 +79,9 @@ the Deprecation and Sunset headers of RFC 8594 and RFC
 
 
 The command line
-Four of these are real CLIs, not libraries with a script attached. Each does
-its whole job from a terminal, which is the point: an agent can drive them
-without an integration.
+Four of them, below. Each is a real CLI rather than a library with a script
+attached, and does its whole job from a terminal, which is the point: an agent
+can drive them without an integration.
 
 **pip install gonzalgo**
 gonzalgo trust *path* every theorem reaching a sorry
@@ -104,18 +104,43 @@ something unfinished.
 
 ## Packages
 
+Sixteen on PyPI. Every one installs from the public index, with no account
+and no registration step.
+
 | Field | Value |
 | --- | --- |
 | gonzalgo | pip install gonzalgo — axiom provenance for Lean 4 and Metamath. Apache-2.0. |
+| mmforge | pip install mmforge — find avoidable axiom dependencies in Metamath, and build the proofs that remove them. |
+| loadbearing | pip install loadbearing — what a claim asserts, separated from what its derivation consumed. |
+| axsent | pip install axsent — what a formal library assumes, read from Rocq, Agda and Isabelle source, with nothing built. |
+| certivl | pip install certivl — certified interval arithmetic: an enclosure that turns a computed inequality into a proof. |
+| authorecon | pip install authorecon — reconcile published work against every place it lives, for any ORCID, from public sources. |
+| saydo | pip install saydo — run a tool against the behavioural contract its author signed, and emit a receipt anyone can verify. |
+| ishihara | pip install ishihara — pseudoisochromatic colour-vision plates, reproducible from a seed. |
+| opticquiz-cvd | pip install opticquiz-cvd — the colour-accessibility engine, the same maths as the npm package. |
+| legible | pip install legible — three build gates: unreadable type, unreadable colour, a retired name. |
+| openapi-drift | pip install openapi-drift — has your API drifted from its spec, and can a machine still read it? |
+| changewatch | pip install changewatch — a doorbell for your published work. Silent until somebody else acts. |
 | keyj | pip install keyj — tablature to notes, render, and play. |
+| remapwrap | pip install remapwrap — build a RemapWrap control surface from a folder of samples or a list of shortcuts. |
 | plumhud | pip install plumhud — miner fleet monitor. |
 | moonbeam-miner | pip install moonbeam-miner — NerdMiner discovery and vitals. |
+
+Nineteen on npm. Most of them are the OpticQuiz colour engine published one
+name per deficiency, so somebody searching for protanopia finds
+it; these are the entry points.
+
+| Field | Value |
+| --- | --- |
 | opticquiz-cvd | npm i opticquiz-cvd — colour-vision simulation and daltonisation. |
+| opticquiz-cvd-mcp | npm i opticquiz-cvd-mcp — the same engine as callable tools for an LLM. |
+| opticquiz-eye | npm i opticquiz-eye — a one-line widget that lets a visitor re-colour your site. |
+| keyjockey | npm i keyjockey — tablature to notes: eight tunings, capo offsets, MIDI and frequency. npm only. |
 | @f-keys/tip-widget | npm i @f-keys/tip-widget — the TipStreams widget. |
 
 ## Upstream, merged
 
-The measurements feed back into the library they measure. Six pull requests
+The measurements feed back into the library they measure. Eight pull requests
 to [metamath/set.mm](https://github.com/metamath/set.mm)
 — the Metamath Proof Explorer's canonical database, reviewed and merged by
 its own maintainers — each remove an avoidable axiom-of-choice dependency
@@ -129,9 +154,14 @@ that the tooling on this page located:
 | [#5445](https://github.com/metamath/set.mm/pull/5445) | Shorten madefi and drop its ax-ac dependency — merged 2026-08-21 |
 | [#5443](https://github.com/metamath/set.mm/pull/5443) | Add fnrndomnum, and prove fnrndomg from it — merged 2026-08-24 |
 | [#5458](https://github.com/metamath/set.mm/pull/5458) | Drop the ax-ac dependency from fnct, dmct and ffsrn — merged 2026-08-26 |
+| [#5446](https://github.com/metamath/set.mm/pull/5446) | Drop the ax-ac dependency from disjinfi — merged 2026-08-30 |
+| [#5466](https://github.com/metamath/set.mm/pull/5466) | Add imadomnum, and drop the ax-ac dependency from fimact — merged 2026-09-01 |
 
-Three more set.mm pull requests are open in review, along with two
-[winget-pkgs](https://github.com/microsoft/winget-pkgs/pull/421552)
+Two more set.mm pull requests are open in review, along with
+[#203](https://github.com/metamath/metamath-exe/pull/203)
+against metamath/metamath-exe — the C source of the Metamath program
+itself, rather than the database — and two
+[winget-pkgs](https://github.com/microsoft/winget-pkgs/pulls?q=is%3Apr+author%3Avince-gonzalez)
 package submissions. Open means open — nothing here is claimed merged
 until its maintainers say so.
 
@@ -145,7 +175,7 @@ fetches half a megabyte to find out.
 
 | Field | Value |
 | --- | --- |
-| Measurement tables | Thirteen tables behind the papers — the [Kernel Index](https://f-keys.com/gonzalgo/kernel-index/), the [Dominator Table](https://f-keys.com/gonzalgo/dominator-table/) and the rest. One object each, carrying its version, sha256, license and seriesDoi beside its rows. CC BY 4.0. |
+| Measurement tables | Fifteen tables behind the papers — the [Kernel Index](https://f-keys.com/gonzalgo/kernel-index/), the [Dominator Table](https://f-keys.com/gonzalgo/dominator-table/) and the rest. One object each, carrying its version, sha256, license and seriesDoi beside its rows. CC BY 4.0. |
 | Kernel Trust Profile | The [0.1 schema](https://f-keys.com/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json) and fourteen profiles conforming to it, one per library measured. |
 | Status | [/status/latest.json](https://f-keys.com/status/latest.json) — the daily snapshot behind the [status page](https://f-keys.com/status/). Repository traffic is owner-only and is not in it. |
 

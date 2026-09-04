@@ -6,7 +6,7 @@ Canonical: https://f-keys.com/plumhud/
 
 A heads-up display for a fleet of miners. It sits on your desktop, goes quiet while everything is fine, and tells you the moment a machine stops earning.
 
-**4.1.0** · pip install plumhud · Python 3.8+ with Tk · MIT
+**4.1.2** · pip install plumhud · Python 3.8+ with Tk · MIT
 
 ## What it does
 
@@ -39,7 +39,7 @@ because it holds a Discord webhook and a Telegram token.
 | Field | Value |
 | --- | --- |
 | Name | Personal Ledger Utility Monitor, Heads-Up Display |
-| Version | 4.1.0 |
+| Version | 4.1.2 |
 | Licence | MIT |
 | Install | pip install plumhud |
 | Requires | Python 3.8+, Tk |
