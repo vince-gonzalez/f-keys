@@ -44,7 +44,7 @@ let readyResolve;
 const electronMock = {
   app: {
     whenReady: () => new Promise((r) => { readyResolve = r; }),
-    on: () => {}, quit: () => {}, getVersion: () => '1.6.0',
+    on: () => {}, quit: () => {}, getVersion: () => '1.6.1',
     requestSingleInstanceLock: () => true
   },
   BrowserWindow: Object.assign(function () { return win; },

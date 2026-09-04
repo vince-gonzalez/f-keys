@@ -1,6 +1,6 @@
 {
   "name": "key-j",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Key-J \u2014 Musical Keystroke Studio",
   "main": "src/main.js",
   "license": "SEE LICENSE IN ../LICENSE",
