@@ -12,6 +12,7 @@ Sites that stand on their own.
 | [Poticas](https://poticas.com) | Website | Live | The home of potica. History, method, and who still ships one. |
 | [TipStreams](https://tipstreams.com) | Website | Live | Branded tip pages and OBS overlays. The widget never touches money. |
 | [FunDoge](https://dogefundme.com) | Website | Live | Free isometric mini-golf in the browser. |
+| [Epistemend](https://www.epistemend.org) | Website | Live | One ORCID in, one document out. Checks a published record against where the work lives. |
 
 ---
 

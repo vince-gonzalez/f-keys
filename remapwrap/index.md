@@ -6,7 +6,7 @@ Canonical: https://f-keys.com/remapwrap/
 
 Turn the phone in your hand into a drag-and-drop control surface that fires real OS-level keystrokes. No app to install, no hardware to buy, and the software you are driving never knows it is not a keyboard.
 
-**0.1.0 alpha** · Windows, macOS, Linux · Node.js 16+ · free, no account, unlimited keys
+**0.1.0 alpha** · Windows, macOS, Linux · Node.js 16+ · pip install remapwrap for the layout builder · free, no account, unlimited keys
 
 ## Zero to a deck in fifteen seconds
 
@@ -70,6 +70,7 @@ via @nut-tree-fork/nut-js.
 | Runtime | Node.js 16+ |
 | Phone needs | A browser |
 | Install | None on the phone |
+| Layout builder | pip install remapwrap — 0.6.0, MIT |
 | Source | vince-gonzalez/f-keys |
 
 ## Questions

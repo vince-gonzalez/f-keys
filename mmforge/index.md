@@ -6,7 +6,7 @@ Canonical: https://f-keys.com/mmforge/
 
 Finds a theorem that pays for an axiom it does not need, then builds the proof that removes the dependence and checks it.
 
-**0.2.0** · pip install mmforge · MIT · six pull requests merged into set.mm
+**0.2.0** · pip install mmforge · MIT · eight pull requests merged into set.mm
 
 ## What it does
 
@@ -48,7 +48,7 @@ and it says so rather than adding them for you.
 | Version | 0.2.0 |
 | Licence | MIT |
 | Reads | Metamath databases |
-| Upstream | 6 pull requests merged into set.mm |
+| Upstream | 8 pull requests merged into set.mm |
 | Source | vince-gonzalez/mmforge |
 
 ## Questions

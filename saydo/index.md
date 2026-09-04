@@ -6,7 +6,7 @@ Canonical: https://f-keys.com/saydo/
 
 Signing proves a tool's code is what the publisher released. It does not prove the tool behaves as its description promises. SayDo tests that second claim: a contract per tool, a harness that checks the tool against it, and a hash-chained receipt anyone can verify without trusting us.
 
-**Working proof of concept** · name provisional · declarations are drafts · receipts are unsigned · no trust mark yet
+**Working proof of concept** · pip install saydo · name provisional · declarations are drafts · receipts are Ed25519-signed with a proof-of-concept key · no trust mark issued
 
 ## The gap
 
@@ -29,10 +29,10 @@ attaches to one without changing its schema.
 
 | Field | Value |
 | --- | --- |
-| Declaration | A signed, machine-readable contract per tool: the behavior it is permitted to show — no network, writes only here, deterministic, returns errors as values. Ten invariant types in the current draft. |
+| Declaration | A signed, machine-readable contract per tool: the behavior it is permitted to show — no network, writes only here, deterministic, returns errors as values. Thirteen invariant types in the current draft. |
 | Conformance | A harness exercises the tool under observation — valid calls, adversarial input, egress and filesystem monitoring — and reports pass, fail or **not-covered** per invariant. It cannot prove an invariant it did not exercise, and it says so rather than passing it. |
 | Receipt | Every run emits a hash-chained record, one row per verdict, chained by row_hash = sha256(prev + row). Edit one row and the chain breaks at it. An auditor re-verifies it in a browser — no account, no request to us. |
-| Trust mark | A “Warranted” badge served from the registry, linking to the full findings rather than a bare grade, with expiry and revocation. **Not built yet.** |
+| Trust mark | The registry, and what it is still willing to say. tools/registry.py publishes an entry from a receipt, stamps it with an expiresAt so the claim goes stale on its own, keeps a revocation sticky against a later passing receipt, and returns a badge line that carries its evidence rather than a bare grade. **Nothing is served and no mark has been issued to anybody** — the mechanism exists, the hosted registry does not. |
 
 ## Run it
 
@@ -78,9 +78,12 @@ Row 3 is not a result. It is the harness recording its own blind spots — that 
 ## What it is not, yet
 
 This is a working proof of concept and the name is provisional. Every
-declaration currently carries status: "draft". Every receipt is
-unsigned. Nothing here is a claim of conformance about anybody’s
-software, including ours, and the trust mark does not exist.
+declaration currently carries status: "draft" and none of them
+carries a supplier signature. Receipts are signed, but with a
+proof-of-concept key held by F-Keys Creative LLC, and production signing is
+not settled. The registry runs, and nothing is served from it. Nothing here
+is a claim of conformance about anybody’s software, including
+ours.
 
 Those sentences are on this page in the same size type as the rest, because
 a tool whose entire purpose is the distance between what software claims and
@@ -104,9 +107,10 @@ is out of their scope.
 | Field | Value |
 | --- | --- |
 | Status | Working proof of concept — name provisional |
-| Declarations | 5 F-Keys servers, 4 third-party — all draft |
-| Receipts | Unsigned |
-| Invariant types | 10 in the current draft |
+| Install | pip install saydo |
+| Declarations | 11 — 6 F-Keys servers, 1 seeded fixture, 4 third-party; all draft, all unsigned |
+| Receipts | Ed25519-signed with a proof-of-concept key; production signing not settled |
+| Invariant types | 13 in the current draft |
 | Licence | Apache-2.0 on the open layers |
 | Source | vince-gonzalez/saydo |
 

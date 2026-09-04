@@ -7,8 +7,8 @@ Canonical: https://f-keys.com
 Hardware. Software. Ideas brought to life.
 
 F-Keys is the working catalogue of **Vincent Gonzalez**, an independent
-builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Thirty-three
-products are on the shelves, twenty-eight of them live today, and each one was
+builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Thirty-four
+products are on the shelves, thirty of them live today, and each one was
 designed, written, deployed and documented
 by the same person — architecture, both ends, database, release notes. The
 table below is the whole company.
@@ -63,7 +63,7 @@ to match the last one. [Contact](https://f-keys.com/contact.html) for licensing,
 | [WikiPolish](https://f-keys.com/wikipolish/) | Web tool | Ready | Grammar scout for Wikipedia. Finds a first edit nobody will revert. |
 | [LeadSeer](https://f-keys.com/leadseer/) | Desktop tool | Needs setup | Finds the local businesses that still have no website. |
 | [PlumHUD](https://f-keys.com/plumhud/) | Python package | pip install | Miner fleet monitor. Overlay HUD, alerts, and local history. |
-| [SayDo](https://f-keys.com/saydo/) | Standard + harness | Alpha | Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check. |
+| [SayDo](https://f-keys.com/saydo/) | Standard + harness | Ready | Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check. |
 | [axsent](https://f-keys.com/axsent/) | Python package | pip install | What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built. |
 | [authorecon](https://f-keys.com/authorecon/) | Python package | pip install | Reconcile published work against every place it lives, for any ORCID, from public sources. |
 | [mmforge](https://f-keys.com/mmforge/) | Python package | pip install | Find avoidable axiom dependencies in Metamath, and build the proofs that remove them. |
@@ -73,7 +73,7 @@ to match the last one. [Contact](https://f-keys.com/contact.html) for licensing,
 | [legible](https://f-keys.com/legible/) | Python package | pip install | Three build gates: unreadable type, unreadable colour, a retired name. |
 | [openapi-drift](https://f-keys.com/openapi-drift/) | Python package | pip install | Has your API drifted from its spec, and can a machine still read it? |
 | [changewatch](https://f-keys.com/changewatch/) | Python package | pip install | A doorbell for your published work. Silent until somebody else acts. |
-| [keyjockey](https://f-keys.com/keyjockey/) | npm package | pip install | Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency. |
+| [keyjockey](https://f-keys.com/keyjockey/) | npm package | npm install | Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency. |
 | [Stream Sniper](https://f-keys.com/streamsniper/) | Appliance | Needs setup | A spare mini PC shows a channel fullscreen the moment it goes live. |
 | [Moonbeam](https://f-keys.com/moonbeam/) | Python package | pip install | Finds the NerdMiners on your network and reads their vitals. |
 | [gonzalgo](https://f-keys.com/gonzalgo/) | Research tool | Published | Which axioms a Lean 4 or Metamath theorem spends rather than inherits. |
@@ -83,6 +83,7 @@ to match the last one. [Contact](https://f-keys.com/contact.html) for licensing,
 | [Poticas](https://poticas.com) | Website | Live | The home of potica. History, method, and who still ships one. |
 | [TipStreams](https://tipstreams.com) | Website | Live | Branded tip pages and OBS overlays. The widget never touches money. |
 | [FunDoge](https://dogefundme.com) | Website | Live | Free isometric mini-golf in the browser. |
+| [Epistemend](https://www.epistemend.org) | Website | Live | One ORCID in, one document out. Checks a published record against where the work lives. |
 
 ---
 
