@@ -69,6 +69,10 @@ CATALOGUE = [
      "A dice popper. Everyone in the room sees the same roll at the same moment.", "https://dp.f-keys.com"),
     ("micdrop", "MICDROP", "games", "Fortnite island", FORTNITE,
      "A live open-mic arena. 120 seconds to win the crowd. Code 1534-0440-5810.", "/micdrop/"),
+    ("tag", "TAG", "games", "Fortnite island", FORTNITE,
+     "One player is IT and everyone else runs. Ninety seconds to pass it on. Code 8134-9047-4850.", "/tag/"),
+    ("tagpro", "TAG PRO", "games", "Fortnite island", FORTNITE,
+     "The blink version: lunge, dash, counter-tag on an open arena. Code 1986-9320-8940.", "/tagpro/"),
     ("fytecraft", "FyteCraft", "games", "Game", ALPHA,
      "An RTS built around combat rather than base-building. Early, and openly so.", "https://github.com/vince-gonzalez/fytecraft.com"),
 
@@ -1940,6 +1944,143 @@ build. Play it with people you would already be in a call with.</p>
 <b>1534-0440-5810</b></pre>
 <div class="btnrow">
   <a class="btn default" href="https://www.fortnite.com/@d00b/1534-0440-5810">Play now</a>
+</div>"""),
+
+ "tag": dict(
+  title="TAG", tagline="Close quarters. Nowhere to hide.",
+  lede="One player is IT &mdash; get in someone's face and tag them to pass it "
+       "on. Duck to slip a tag and keep moving, because whoever is holding IT "
+       "when the 90-second clock hits zero loses the round.",
+  cta=[("Play it in Fortnite", "https://www.fortnite.com/@d00b/8134-9047-4850"),
+       ("Support", "/contact.html")],
+  herometa="<b>Island 8134-9047-4850</b> &middot; by d00b &middot; built in "
+           "UEFN &middot; open lobby &middot; free with Fortnite",
+  steps=[("Open Fortnite",
+          "Any platform Fortnite runs on."),
+         ("Enter the island code",
+          "<b>8134-9047-4850</b>, or use the link."),
+         ("Run",
+          "And do not be the one holding IT at zero.")],
+  features_title="What it is",
+  features=[("Ninety seconds",
+             "Whoever is holding IT when the clock hits zero loses the round."),
+            ("Duck to slip a tag",
+             "Get in someone's face to pass it on. Duck to slip one and keep "
+             "moving."),
+            ("Tight rooms, blind corners",
+             "Close-quarters chaos, and a group of people all convinced "
+             "everyone else is the one who is IT."),
+            ("No weapons, no building",
+             "Just you, your feet, and nowhere to hide."),
+            ("Titles that follow you",
+             "Survive, tag, and get caught enough and you earn permanent "
+             "titles that follow you across sessions &mdash; Fresh Legs, "
+             "Slippery, all the way to The Phantom."),
+            ("Best with a full squad",
+             "Fast 90-second rounds. Drop in and run.")],
+  faq=[("Do I need to buy anything?",
+        "No, beyond Fortnite itself, which is free."),
+       ("Can I play it solo?",
+        "It is an open lobby, so you can join whoever is in it, but it is a "
+        "chase game and it wants a group."),
+       ("How is this different from TAG PRO?",
+        "TAG is close quarters and ducking. <a href=\"/tagpro/\">TAG PRO</a> is "
+        "an open arena, a lunge and a dash, and reads rather than corners."),
+       ("Where do I report a problem?",
+        "<a href=\"/contact.html\">hello@f-keys.com</a>.")],
+  facts=[("Island code","8134-9047-4850"),("Creator","d00b"),
+         ("Platform","Fortnite, built in UEFN"),("Round","90 seconds"),
+         ("Players","Open lobby, best with a squad"),
+         ("Support","hello@f-keys.com")],
+  body="""
+<h2>What it is</h2>
+<p>One player is IT and everyone else runs. Get in someone's face and tag them to pass it
+on; duck to slip a tag and keep moving. Whoever is holding IT when the 90-second clock hits
+zero loses the round.</p>
+
+<h2>Close quarters</h2>
+<p>Tight rooms, blind corners, and a group of people all convinced everyone else is the one
+who is IT. No weapons and no building &mdash; just you, your feet, and nowhere to hide. The
+only two verbs are run and duck, which is what makes a corner worth something.</p>
+
+<h2>Titles that follow you</h2>
+<p>Survive, tag, and get caught enough and you earn permanent titles that carry across
+sessions: Fresh Legs at the bottom, The Phantom at the top, Slippery somewhere in between.
+The ladder remembers how you played rather than how long you were in the lobby.</p>
+
+<h2>Playing it</h2>
+<pre>Fortnite &rarr; Search by island code
+<b>8134-9047-4850</b></pre>
+<div class="btnrow">
+  <a class="btn default" href="https://www.fortnite.com/@d00b/8134-9047-4850">Play now</a>
+</div>"""),
+
+ "tagpro": dict(
+  title="TAG PRO", tagline="The blink version of TAG.",
+  lede="One player is IT &mdash; lunge to tag, dash to dodge, on an open arena "
+       "where spacing and timing decide it. Bait a lunge, slip it with a dash, "
+       "then counter-tag.",
+  cta=[("Play it in Fortnite", "https://www.fortnite.com/@d00b/1986-9320-8940"),
+       ("Support", "/contact.html")],
+  herometa="<b>Island 1986-9320-8940</b> &middot; by d00b &middot; built in "
+           "UEFN &middot; open lobby &middot; free with Fortnite",
+  steps=[("Open Fortnite",
+          "Any platform Fortnite runs on."),
+         ("Enter the island code",
+          "<b>1986-9320-8940</b>, or use the link."),
+         ("Read the room",
+          "Bait the lunge, slip it, counter-tag.")],
+  features_title="What it is",
+  features=[("Lunge and dash",
+             "Lunge to tag, dash to dodge. Bait a lunge, slip it with a dash, "
+             "then counter-tag."),
+            ("Watch the edge",
+             "Dash out of bounds and you tag yourself."),
+            ("Reads, not proximity",
+             "It is not click-when-you-are-close. Whoever is holding IT when "
+             "the 90-second clock hits zero loses the round."),
+            ("The room calls it out",
+             "Every round the room names what just happened: SLAP JACK, "
+             "MATADOR, HUMAN SHIELD, FLAT EARTHER."),
+            ("A ladder that remembers",
+             "Survive, tag and dodge enough and you climb a title ladder that "
+             "remembers how you play."),
+            ("Best with a full squad",
+             "Fast 90-second rounds. Grab three or more and run it.")],
+  faq=[("Do I need to buy anything?",
+        "No, beyond Fortnite itself, which is free."),
+       ("How many people does it want?",
+        "Three or more. Spacing is the game, and spacing needs a room."),
+       ("How is this different from TAG?",
+        "<a href=\"/tag/\">TAG</a> is close quarters and ducking. TAG PRO is an "
+        "open arena, a lunge and a dash, and reads rather than corners."),
+       ("Where do I report a problem?",
+        "<a href=\"/contact.html\">hello@f-keys.com</a>.")],
+  facts=[("Island code","1986-9320-8940"),("Creator","d00b"),
+         ("Platform","Fortnite, built in UEFN"),("Round","90 seconds"),
+         ("Players","Open lobby, three or more"),
+         ("Support","hello@f-keys.com")],
+  body="""
+<h2>What it is</h2>
+<p>The blink version of TAG. One player is IT &mdash; lunge to tag, dash to dodge, on an
+open arena where spacing and timing decide it. Bait a lunge, slip it with a dash, then
+counter-tag. And watch the edge: dash out of bounds and you tag yourself.</p>
+
+<h2>Reads, not proximity</h2>
+<p>It is not click-when-you-are-close. Both players have a commit &mdash; the lunge and the
+dash &mdash; and each of them costs something, so the round turns on which one you spend
+first. Whoever is holding IT when the 90-second clock hits zero loses it.</p>
+
+<h2>The room calls it out</h2>
+<p>Every round the room names what just happened out loud: SLAP JACK, MATADOR, HUMAN SHIELD,
+FLAT EARTHER. Survive, tag and dodge enough and you climb a title ladder that remembers how
+you play.</p>
+
+<h2>Playing it</h2>
+<pre>Fortnite &rarr; Search by island code
+<b>1986-9320-8940</b></pre>
+<div class="btnrow">
+  <a class="btn default" href="https://www.fortnite.com/@d00b/1986-9320-8940">Play now</a>
 </div>"""),
 
  "wikipolish": dict(
