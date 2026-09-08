@@ -72,7 +72,7 @@ CATALOGUE = [
     ("tag", "TAG", "games", "Fortnite island", FORTNITE,
      "One player is IT and everyone else runs. Ninety seconds to pass it on. Code 8134-9047-4850.", "/tag/"),
     ("tagpro", "TAG PRO", "games", "Fortnite island", FORTNITE,
-     "The blink version: lunge, dash, counter-tag on an open arena. Code 1986-9320-8940.", "/tagpro/"),
+     "The blink version: lunge, dash, counter-tag on an open arena. Code 5571-1708-8987.", "/tagpro/"),
     ("fytecraft", "FyteCraft", "games", "Game", ALPHA,
      "An RTS built around combat rather than base-building. Early, and openly so.", "https://github.com/vince-gonzalez/fytecraft.com"),
 
@@ -2020,14 +2020,14 @@ The ladder remembers how you played rather than how long you were in the lobby.<
   lede="One player is IT &mdash; lunge to tag, dash to dodge, on an open arena "
        "where spacing and timing decide it. Bait a lunge, slip it with a dash, "
        "then counter-tag.",
-  cta=[("Play it in Fortnite", "https://www.fortnite.com/@d00b/1986-9320-8940"),
+  cta=[("Play it in Fortnite", "https://www.fortnite.com/@d00b/5571-1708-8987"),
        ("Support", "/contact.html")],
-  herometa="<b>Island 1986-9320-8940</b> &middot; by d00b &middot; built in "
+  herometa="<b>Island 5571-1708-8987</b> &middot; by d00b &middot; built in "
            "UEFN &middot; open lobby &middot; free with Fortnite",
   steps=[("Open Fortnite",
           "Any platform Fortnite runs on."),
          ("Enter the island code",
-          "<b>1986-9320-8940</b>, or use the link."),
+          "<b>5571-1708-8987</b>, or use the link."),
          ("Read the room",
           "Bait the lunge, slip it, counter-tag.")],
   features_title="What it is",
@@ -2056,7 +2056,7 @@ The ladder remembers how you played rather than how long you were in the lobby.<
         "open arena, a lunge and a dash, and reads rather than corners."),
        ("Where do I report a problem?",
         "<a href=\"/contact.html\">hello@f-keys.com</a>.")],
-  facts=[("Island code","1986-9320-8940"),("Creator","d00b"),
+  facts=[("Island code","5571-1708-8987"),("Creator","d00b"),
          ("Platform","Fortnite, built in UEFN"),("Round","90 seconds"),
          ("Players","Open lobby, three or more"),
          ("Support","hello@f-keys.com")],
@@ -2078,9 +2078,9 @@ you play.</p>
 
 <h2>Playing it</h2>
 <pre>Fortnite &rarr; Search by island code
-<b>1986-9320-8940</b></pre>
+<b>5571-1708-8987</b></pre>
 <div class="btnrow">
-  <a class="btn default" href="https://www.fortnite.com/@d00b/1986-9320-8940">Play now</a>
+  <a class="btn default" href="https://www.fortnite.com/@d00b/5571-1708-8987">Play now</a>
 </div>"""),
 
  "wikipolish": dict(

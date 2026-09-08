@@ -31,7 +31,7 @@ quietly lost.
 
 | | |
 |---|---|
-| Island code | 1986-9320-8940 |
+| Island code | 5571-1708-8987 |
 | Creator | d00b |
 | Platform | Fortnite, built in UEFN |
 | Round | 90 seconds |
