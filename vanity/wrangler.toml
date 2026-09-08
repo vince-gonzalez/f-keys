@@ -18,6 +18,8 @@ compatibility_date = "2026-08-21"
 
 routes = [
   { pattern = "saydo.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "tag.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "tagpro.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "keyj.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "keyjockey.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "remapwrap.f-keys.com/*", zone_name = "f-keys.com" },
