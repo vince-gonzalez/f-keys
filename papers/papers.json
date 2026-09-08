@@ -191,6 +191,44 @@
       }
      ],
      "doi": "https://doi.org/10.5281/zenodo.21913736"
+    },
+    {
+     "slug": "discretionary-axiom-reach-comparable-proof-systems-cross-foundation",
+     "url": "https://zenodo.org/records/22541788",
+     "title": "Discretionary-Axiom Reach Is Not Comparable Across Proof Systems: A Cross-Foundation Kernel Census",
+     "date": "2026-09-06",
+     "kind": "Preprint",
+     "abstract": "The fraction of a formal library's theorems that transitively depend on a discretionary axiom — most often the axiom of choice — is increasingly reported as though it characterised a foundation. This paper measures that quantity across six libraries in four pr…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22541788"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22541787"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22541787"
+    },
+    {
+     "slug": "half-mathlib-s-choice-classical-logic",
+     "url": "https://zenodo.org/records/22647226",
+     "title": "Half of Mathlib's Choice Is Classical Logic: Unbundling the Axiom-of-Choice Reach of a Formal Library",
+     "date": "2026-09-07",
+     "kind": "Preprint",
+     "abstract": "About 70% of Mathlib's theorems transitively depend on Classical.choice , and that figure is read as the library's reliance on the axiom of choice. It is not. In Lean, Classical.choice is the single axiom from which excluded middle and decidability are also de…",
+     "links": [
+      {
+       "label": "Abstract",
+       "href": "https://zenodo.org/records/22647226"
+      },
+      {
+       "label": "DOI",
+       "href": "https://doi.org/10.5281/zenodo.22647225"
+      }
+     ],
+     "doi": "https://doi.org/10.5281/zenodo.22647225"
     }
    ]
   },
