@@ -2630,7 +2630,7 @@ library's own maintainers.</p>
 HOME_DOC = """
 <div class="doc" style="padding-bottom:6px">
 <h1>F-Keys</h1>
-<p class="sub">Hardware. Software. Ideas brought to life.</p>
+<p class="sub">Ideas. Delivered.</p>
 <p>I'm Vince Gonzalez. I build in Punta Gorda, Florida, under F-Keys
 Creative LLC. Right now %%LIVE%% products are live. I designed, wrote,
 deployed and documented every one of them. The table below is the whole
@@ -3696,7 +3696,7 @@ def main():
     # index: everything, grouped by category heading rows
     body = [counted(HOME_DOC), details_table(CATALOGUE)]
     written.append(("index.html", shell(
-        "F-Keys — Hardware. Software. Ideas Brought to Life.",
+        "F-Keys — Ideas. Delivered.",
         "F-Keys", "\n".join(body), f"{len(CATALOGUE)} object(s)",
         description="Hardware, software and internet products I build and keep "
                     "running. Apps, games, tools, hardware and research.",
