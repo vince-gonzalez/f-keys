@@ -235,7 +235,7 @@ page = f"""<!DOCTYPE html>
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://f-keys.com/portfolio.html">
 <title>Work — F-Keys</title>
-<meta name="description" content="Independent research tools, accessibility infrastructure, games and commerce properties built by Vincent Gonzalez under F-Keys. {live} live.">
+<meta name="description" content="Research tools, accessibility infrastructure, games and commerce properties I build under F-Keys. {live} live.">
 <meta name="author" content="Vincent Gonzalez">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">

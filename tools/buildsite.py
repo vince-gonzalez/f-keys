@@ -2588,7 +2588,7 @@ def counted(text):
 
 ABOUT_DOC = """
 <div class="doc"><h1>About F-Keys</h1>
-<p class="sub">Independent products built by Vincent Gonzalez.</p>
+<p class="sub">What I build, and what it rests on.</p>
 <table class="facts">
 <tr><th>Entity</th><td>F-Keys Creative LLC (Florida)</td></tr>
 <tr><th>Trading as</th><td>F-Keys</td></tr>
@@ -2596,11 +2596,9 @@ ABOUT_DOC = """
 <tr><th>Contact</th><td>hello@f-keys.com</td></tr>
 </table>
 <h2>What this is</h2>
-<p>F-Keys is Vince Gonzalez, working alone. %%PRODUCTS%% products are on the
-shelves &mdash; %%LIVE%% of them live today, the rest labeled alpha or
-needs-setup, because a badge is cheaper than a broken promise &mdash; from
-browser games to formal proof tooling, and each is built end to end by the same
-person: architecture, both ends, database, deployment, documentation.</p>
+<p>I'm Vince. F-Keys is what I ship. Right now %%LIVE%% products are
+live, from browser games to formal proof tooling. I build them end to end:
+architecture, both ends, database, deployment, documentation.</p>
 <h2>The recurring interest</h2>
 <p>Provenance - what a result actually rests on. gonzalgo reads a compiled Lean 4
 or Metamath library and reports which axioms a theorem spends rather than quietly
@@ -2633,12 +2631,10 @@ HOME_DOC = """
 <div class="doc" style="padding-bottom:6px">
 <h1>F-Keys</h1>
 <p class="sub">Hardware. Software. Ideas brought to life.</p>
-<p>F-Keys is the working catalogue of <b>Vincent Gonzalez</b>, an independent
-builder trading as F-Keys Creative LLC in Punta Gorda, Florida. %%PRODUCTS%%
-products are on the shelves, %%LIVE%% of them live today, and each one was
-designed, written, deployed and documented
-by the same person &mdash; architecture, both ends, database, release notes. The
-table below is the whole company.</p>
+<p>I'm Vince Gonzalez. I build in Punta Gorda, Florida, under F-Keys
+Creative LLC. Right now %%LIVE%% products are live. I designed, wrote,
+deployed and documented every one of them. The table below is the whole
+company.</p>
 <p>The name came from a product. <a href="/remapwrap/">RemapWrap</a> was called
 F-Keys first &mdash; an extra row of function keys, on glass you already own
 &mdash; and the name outgrew it. The product then went missing for five months
@@ -2712,7 +2708,7 @@ is the fastest way to get it fixed. Corrections go in the
 
 <h2>What not to expect</h2>
 <p>There is no phone line, because there is no one to answer it. Replies come
-from one person between builds, so a few days is normal and a week is not
+between builds, so a few days is normal and a week is not
 unusual. Nothing here is sold through a reseller, so an email offering to
 represent F-Keys will not get a reply.</p>
 <div class="btnrow">
@@ -3248,8 +3244,8 @@ def organization():
         "url": SITE,
         "logo": SITE + "/assets/fkeys-logo.png",
         "image": OG_IMAGE,
-        "description": "Independent hardware, software and internet products "
-                       "built by Vincent Gonzalez. Apps, games, tools, "
+        "description": "Hardware, software and internet products I build and "
+                       "keep running. Apps, games, tools, "
                        "hardware and research.",
         "email": EMAIL,
         "founder": {
@@ -3702,8 +3698,8 @@ def main():
     written.append(("index.html", shell(
         "F-Keys — Hardware. Software. Ideas Brought to Life.",
         "F-Keys", "\n".join(body), f"{len(CATALOGUE)} object(s)",
-        description="Independent hardware, software and internet products built by "
-                    "Vincent Gonzalez. Apps, games, tools, hardware and research.",
+        description="Hardware, software and internet products I build and keep "
+                    "running. Apps, games, tools, hardware and research.",
         canonical="https://f-keys.com", ld=organization())))
 
     # one page per category
@@ -3720,7 +3716,7 @@ def main():
     written.append(("about.html", shell(
         "About \u2014 F-Keys", "F-Keys\\About", counted(ABOUT_DOC), "1 item",
         description=counted(
-            "F-Keys is Vince Gonzalez, working alone, with %%LIVE%% live "
+            "I'm Vince Gonzalez. %%LIVE%% live "
             "products and fifty-six deposited works."),
         canonical="https://f-keys.com/about.html", ld=organization())))
 

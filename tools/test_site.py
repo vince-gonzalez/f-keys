@@ -782,13 +782,13 @@ def counts_in_prose():
 
     # (file, regex, expected, what it is) - every one MUST be found.
     claims = [
-        ("index.html", r"([A-Z][a-z]+(?:-[a-z]+)?) products are on the shelves",
-         products, "the catalogue size"),
-        ("index.html", r"([a-z]+(?:-[a-z]+)?) of them live today",
+        # The catalogue-size sentence was removed on purpose: stating the
+        # total next to the live number published a subtraction, and the
+        # four not-live products were the loudest thing on the page. The
+        # live count is the claim now, so it is the claim this checks.
+        ("index.html", r"([a-z]+(?:-[a-z]+)?) products are live",
          live, "the live count"),
-        ("about.html", r"([A-Z][a-z]+(?:-[a-z]+)?) products are on the shelves",
-         products, "the catalogue size"),
-        ("about.html", r"([a-z]+(?:-[a-z]+)?) of them live today",
+        ("about.html", r"([a-z]+(?:-[a-z]+)?) products are\s+live",
          live, "the live count"),
         ("index.html", r"([a-z]+(?:-[a-z]+)?) of them, sorted",
          shelves, "the number of shelves"),
