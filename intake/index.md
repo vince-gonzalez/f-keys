@@ -31,11 +31,13 @@ There are 47 extras on the intake form — a store, online booking, a blog, anot
 
 **Do I own the site?** Yes, once the build is paid for. The files are yours. If you leave, you take them with you.
 
-**What happens if I cancel?** Hosting stops, so the site goes down. You keep the files and the domain. Tell me in writing and that's it.
+**What happens if I cancel?** Email me and it stops at the end of the month you have already paid for. No notice period, no cancellation fee. The site goes offline because hosting stops, but you keep the files and the domain — ask within 30 days and I hand both over for free.
 
 **Why is the build only $100?** The monthly is the business, and $100 is a price you can say yes to without a meeting.
 
 **Can you take payments on my site?** Usually — it's one of the add-ons. Some businesses can't, because the payment processors won't handle certain products. If that's you I'll say so and build you a site that sends people to you instead.
+
+**Will you put my business on your website?** Not without asking first. I can link to your site as an example of my work, but your logo and name stay out of my advertising unless you say otherwise. That is in the agreement, not just here.
 
 **Is there a contract?** Yes, on the last page of the intake form, where you can read it before agreeing to anything. It's month-to-month. Submitting the form does not start work and does not charge you — work begins only once you accept a written quote.
 
