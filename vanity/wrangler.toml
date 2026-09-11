@@ -41,6 +41,7 @@ routes = [
   { pattern = "openapi-drift.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "changewatch.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "papers.f-keys.com/*", zone_name = "f-keys.com" },
+  { pattern = "intake.f-keys.com/*", zone_name = "f-keys.com" },
 ]
 
 # There is one site and one set of names; nothing here is per-environment.

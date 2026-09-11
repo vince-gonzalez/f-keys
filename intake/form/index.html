@@ -1,0 +1,2988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Launch Authorization — F-Keys</title>
+<meta name="description" content="Client intake for an F-Keys website build.">
+<link rel="canonical" href="https://f-keys.com/intake/form/">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   PALETTE — Midnight Gradient · Sky · Coral
+   Syne display · DM Sans body
+══════════════════════════════════════════════ */
+:root {
+  --bg:           #060f1a;
+  --bg-2:         #081525;
+  --bg-card:      rgba(255,255,255,.045);
+  --txt:          #eef4ff;
+  --muted:        #7a9dbf;
+  --muted2:       #4a6a85;
+  --sky:          #87ceeb;
+  --sky-dim:      rgba(135,206,235,.15);
+  --coral:        #ff7f6e;
+  --coral-dim:    rgba(255,127,110,.12);
+  --peach:        #ffb38a;
+  --orange:       #ff8c42;
+  --mint:         #6de8c8;
+  --gold:         #f5c842;
+  --violet:       #a78bfa;
+  --glass:        rgba(255,255,255,.042);
+  --glass-border: rgba(255,255,255,.085);
+  --glass-hover:  rgba(255,255,255,.075);
+  --radius:       20px;
+  --radius-sm:    13px;
+  --radius-xs:    8px;
+  --shadow:       0 8px 32px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05);
+  --shadow-lift:  0 20px 60px rgba(0,0,0,.6), 0 4px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.07);
+  --glow-sky:     0 0 30px rgba(135,206,235,.2);
+  --glow-coral:   0 0 30px rgba(255,127,110,.2);
+  --font-display: 'Syne', 'Georgia', serif;
+  --font-body:    'DM Sans', 'Georgia', ui-serif, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 15% -10%, rgba(135,206,235,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 110%, rgba(255,127,110,.06) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(167,139,250,.04) 0%, transparent 70%);
+  color: var(--txt);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* subtle noise grain */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: rgba(6,15,26,.88);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.header-brand {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+.header-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 300px;
+}
+.progress-track {
+  flex: 1;
+  height: 2px;
+  background: var(--glass-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sky), var(--mint));
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  width: 11.1%;
+}
+.progress-text {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 46px;
+  text-align: right;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--bg-2);
+  text-align: center;
+  padding: 80px 24px 68px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--glass-border);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(135,206,235,.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(135,206,235,.4) 40%, rgba(255,179,138,.4) 60%, transparent 100%);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sky);
+  background: var(--sky-dim);
+  border: 1px solid rgba(135,206,235,.25);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6vw, 66px);
+  font-weight: 800;
+  line-height: 1.02;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+  position: relative;
+  color: var(--txt);
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--sky) 0%, var(--coral) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.75;
+  position: relative;
+  font-weight: 300;
+}
+
+/* ── STEP PIPS ── */
+.steps-bar {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 12px 0 14px;
+}
+.steps-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.steps-inner::-webkit-scrollbar { display: none; }
+.step-pip {
+  flex: 1;
+  height: 3px;
+  background: var(--glass-border);
+  border-radius: 3px;
+  transition: background 0.35s, opacity 0.35s;
+  min-width: 20px;
+}
+.step-pip.active {
+  background: linear-gradient(90deg, var(--sky), var(--mint));
+}
+.step-pip.done {
+  background: rgba(135,206,235,.3);
+}
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 52px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── SECTIONS ── */
+.form-section { display: none; }
+.form-section.active {
+  display: block;
+  animation: slideIn 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sky);
+  display: block;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+  color: var(--txt);
+}
+.section-sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 36px;
+  max-width: 520px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px 36px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.1) 50%, transparent 100%);
+}
+
+/* ── FIELD ── */
+.field { margin-bottom: 28px; }
+.field:last-child { margin-bottom: 0; }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.field-label {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 9px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt);
+  letter-spacing: 0.01em;
+}
+.req { color: var(--coral); font-size: 11px; }
+.opt {
+  color: var(--muted2);
+  font-size: 11px;
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+.field-hint {
+  font-size: 12px;
+  color: var(--muted2);
+  margin-top: 7px;
+  line-height: 1.55;
+  font-weight: 300;
+}
+.field-error {
+  font-size: 12px;
+  color: var(--coral);
+  margin-top: 7px;
+  display: none;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+.field-error.visible { display: flex; }
+.field-error::before { content: '↑'; font-family: var(--font-display); }
+
+/* ── INPUTS ── */
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=url],
+input[type=date],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--txt);
+  background: rgba(255,255,255,.04);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(135,206,235,.5);
+  background: rgba(135,206,235,.05);
+  box-shadow: 0 0 0 3px rgba(135,206,235,.1);
+}
+input.has-error, select.has-error, textarea.has-error {
+  border-color: rgba(255,127,110,.5);
+  box-shadow: 0 0 0 3px rgba(255,127,110,.1);
+}
+textarea { resize: vertical; min-height: 96px; }
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a6a85'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+select option { background: #0d1f33; color: var(--txt); }
+::placeholder { color: var(--muted2); font-weight: 300; }
+
+/* ── CHOICE BUTTONS ── */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.choices.stack { flex-direction: column; }
+.choices.grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
+.choices.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+
+.choice-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  background: rgba(255,255,255,.03);
+  color: var(--muted);
+  line-height: 1.4;
+  text-align: left;
+}
+.choice-btn:hover {
+  border-color: rgba(135,206,235,.35);
+  background: var(--sky-dim);
+  color: var(--txt);
+}
+.choice-btn.selected {
+  border-color: rgba(135,206,235,.5);
+  background: var(--sky-dim);
+  color: var(--sky);
+  font-weight: 500;
+  box-shadow: 0 0 0 1px rgba(135,206,235,.2) inset;
+}
+
+/* radio indicator */
+.radio-dot {
+  width: 15px; height: 15px;
+  border: 2px solid var(--muted2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: border-color 0.18s, background 0.18s;
+  display: flex; align-items: center; justify-content: center;
+}
+.choice-btn.selected .radio-dot {
+  border-color: var(--sky);
+  background: var(--sky);
+}
+.radio-dot::after {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--bg);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.choice-btn.selected .radio-dot::after { opacity: 1; }
+
+/* checkbox indicator */
+.check-box {
+  width: 15px; height: 15px;
+  border: 2px solid var(--muted2);
+  border-radius: 3px;
+  flex-shrink: 0;
+  transition: border-color 0.18s, background 0.18s;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--bg);
+}
+.choice-btn.selected .check-box {
+  border-color: var(--sky);
+  background: var(--sky);
+}
+.choice-btn.selected .check-box::after { content: '✓'; }
+
+.choice-btn input[type=radio],
+.choice-btn input[type=checkbox] { display: none; }
+
+/* ── CONDITIONAL ── */
+.conditional { display: none; margin-top: 20px; }
+.conditional.visible { display: block; animation: slideIn 0.25s ease; }
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  margin: 28px 0;
+}
+
+/* ── LEGAL SECTION ── */
+.legal-banner {
+  background: rgba(245,200,66,.04);
+  border: 1px solid rgba(245,200,66,.18);
+  border-radius: var(--radius);
+  padding: 32px 36px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.legal-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,200,66,.3), transparent);
+}
+.legal-banner-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.legal-icon {
+  width: 38px; height: 38px;
+  background: rgba(245,200,66,.15);
+  border: 1px solid rgba(245,200,66,.3);
+  color: var(--gold);
+  border-radius: var(--radius-xs);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.legal-banner-head h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--txt);
+  letter-spacing: -0.01em;
+}
+.legal-text {
+  font-size: 13px;
+  color: rgba(238,244,255,.7);
+  line-height: 1.85;
+  font-weight: 300;
+}
+.legal-text strong { color: var(--txt); font-weight: 600; }
+.legal-clause {
+  display: flex;
+  gap: 12px;
+  margin: 10px 0;
+  align-items: flex-start;
+}
+.clause-num {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 3px;
+  min-width: 24px;
+  letter-spacing: 0.05em;
+}
+
+/* ── CONSENT ── */
+.consent-list { display: flex; flex-direction: column; }
+.consent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 4px;
+}
+.consent-row:first-child { padding-top: 0; }
+.consent-row:last-child { border-bottom: none; padding-bottom: 0; }
+.consent-row:hover { background: rgba(255,255,255,.02); }
+.consent-tick {
+  width: 20px; height: 20px;
+  border: 1.5px solid var(--muted2);
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--bg);
+  transition: all 0.18s;
+  cursor: pointer;
+}
+.consent-tick.on {
+  background: var(--mint);
+  border-color: var(--mint);
+}
+.consent-tick.on::after { content: '✓'; }
+.consent-copy {
+  font-size: 13px;
+  color: rgba(238,244,255,.7);
+  line-height: 1.65;
+  font-weight: 300;
+}
+.consent-copy strong { color: var(--txt); font-weight: 600; }
+
+/* ── ALERT ── */
+.alert {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.alert.warn {
+  background: rgba(245,200,66,.07);
+  border: 1px solid rgba(245,200,66,.22);
+  color: rgba(245,200,66,.9);
+}
+.alert.info {
+  background: var(--sky-dim);
+  border: 1px solid rgba(135,206,235,.22);
+  color: rgba(135,206,235,.9);
+}
+.alert.error {
+  background: var(--coral-dim);
+  border: 1px solid rgba(255,127,110,.25);
+  color: rgba(255,127,110,.9);
+}
+.alert-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── UPLOAD ── */
+.upload-zone {
+  border: 1.5px dashed var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  background: rgba(255,255,255,.02);
+}
+.upload-zone:hover, .upload-zone.dragging {
+  border-color: rgba(135,206,235,.4);
+  background: var(--sky-dim);
+}
+.upload-zone input[type=file] {
+  position: absolute; inset: 0;
+  opacity: 0; cursor: pointer;
+  width: 100%; height: 100%;
+}
+.upload-emoji { font-size: 30px; margin-bottom: 12px; }
+.upload-zone h4 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--txt);
+}
+.upload-zone p { font-size: 12px; color: var(--muted2); font-weight: 300; }
+.upload-status {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mint);
+  display: none;
+  font-family: var(--font-display);
+}
+.upload-status.show { display: block; }
+
+.media-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+.media-thumb {
+  width: 80px; height: 80px;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  position: relative;
+}
+.media-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.media-thumb .rm {
+  position: absolute; top: 3px; right: 3px;
+  background: rgba(0,0,0,.7);
+  color: white; border: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── SUMMARY TABLE ── */
+.summary-table { width: 100%; border-collapse: collapse; }
+.summary-table tr { border-bottom: 1px solid var(--glass-border); }
+.summary-table tr:last-child { border-bottom: none; }
+.summary-table td {
+  padding: 10px 0;
+  vertical-align: top;
+  font-size: 13px;
+  color: var(--txt);
+}
+.summary-table td:first-child {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted2);
+  text-transform: uppercase;
+  width: 36%;
+  padding-right: 16px;
+  padding-top: 13px;
+}
+
+/* ── NAV ── */
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--glass-border);
+}
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--muted);
+  border-radius: var(--radius-xs);
+  padding: 11px 22px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.nav-back:hover {
+  border-color: rgba(255,255,255,.16);
+  color: var(--txt);
+  background: var(--glass-hover);
+}
+.nav-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(135,206,235,.18) 0%, rgba(109,232,200,.14) 100%);
+  border: 1px solid rgba(135,206,235,.35);
+  color: var(--sky);
+  border-radius: var(--radius-xs);
+  padding: 12px 30px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  flex: 1;
+  max-width: 260px;
+  justify-content: center;
+  letter-spacing: 0.02em;
+}
+.nav-next:hover {
+  background: linear-gradient(135deg, rgba(135,206,235,.28) 0%, rgba(109,232,200,.22) 100%);
+  border-color: rgba(135,206,235,.55);
+  box-shadow: var(--glow-sky);
+  transform: translateY(-1px);
+  color: #c8eeff;
+}
+.nav-next:active { transform: translateY(0); }
+.nav-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+.btn-submit {
+  background: linear-gradient(135deg, rgba(255,127,110,.2) 0%, rgba(255,179,138,.15) 100%);
+  border: 1px solid rgba(255,127,110,.4);
+  color: var(--coral);
+  font-size: 14px;
+  padding: 13px 34px;
+  max-width: 320px;
+}
+.btn-submit:hover {
+  background: linear-gradient(135deg, rgba(255,127,110,.32) 0%, rgba(255,179,138,.24) 100%);
+  border-color: rgba(255,127,110,.6);
+  box-shadow: var(--glow-coral);
+  color: #ffb3a9;
+}
+
+/* ── SUCCESS ── */
+#success-screen {
+  display: none;
+  text-align: center;
+  padding: 80px 24px;
+  animation: slideIn 0.4s ease;
+}
+.success-mark {
+  width: 68px; height: 68px;
+  background: linear-gradient(135deg, rgba(109,232,200,.25), rgba(135,206,235,.2));
+  border: 1px solid rgba(109,232,200,.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  font-size: 28px;
+  color: var(--mint);
+  box-shadow: 0 0 30px rgba(109,232,200,.2);
+}
+#success-screen h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--sky), var(--mint));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+#success-screen .sub {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 460px;
+  margin: 0 auto 52px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.next-steps {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  max-width: 520px;
+  margin: 0 auto 24px;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+.next-steps h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--txt);
+}
+.next-step-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.next-step-item:last-child { margin-bottom: 0; }
+.step-num {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, rgba(135,206,235,.2), rgba(109,232,200,.15));
+  border: 1px solid rgba(135,206,235,.3);
+  color: var(--sky);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(238,244,255,.65);
+  font-weight: 300;
+}
+.step-desc strong { color: var(--txt); font-weight: 600; }
+
+/* ── UPLOAD POST-SUCCESS ── */
+.upload-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+.upload-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--txt);
+}
+.upload-card .sub2 {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 22px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+.btn-send-media {
+  display: none;
+  width: 100%;
+  margin-top: 16px;
+  background: linear-gradient(135deg, rgba(255,140,66,.18), rgba(255,179,138,.12));
+  border: 1px solid rgba(255,140,66,.35);
+  color: var(--peach);
+  border-radius: var(--radius-xs);
+  padding: 13px 24px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.02em;
+}
+.btn-send-media:hover {
+  background: linear-gradient(135deg, rgba(255,140,66,.28), rgba(255,179,138,.2));
+  border-color: rgba(255,140,66,.55);
+  box-shadow: 0 0 24px rgba(255,140,66,.18);
+}
+.btn-send-media.show { display: block; }
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--glass-border);
+  text-align: center;
+  padding: 24px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── INLINE OVERRIDES for legacy var refs ── */
+[style*="var(--muted)"] { color: var(--muted) !important; }
+[style*="var(--orange)"] { color: var(--coral) !important; }
+
+/* ── COST BADGES ($ tiers on CTA buttons) ── */
+.cost-badge {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+.cost-badge.tier1 { color: var(--mint); background: rgba(109,232,200,.12); border: 1px solid rgba(109,232,200,.2); }
+.cost-badge.tier2 { color: var(--peach); background: rgba(255,179,138,.12); border: 1px solid rgba(255,179,138,.2); }
+.cost-badge.tier3 { color: var(--coral); background: rgba(255,127,110,.12); border: 1px solid rgba(255,127,110,.2); }
+
+/* ── UPSELL SECTION ── */
+.upsell-total-bar {
+  background: linear-gradient(135deg, rgba(109,232,200,.08), rgba(135,206,235,.06));
+  border: 1px solid rgba(109,232,200,.2);
+  border-radius: var(--radius-sm);
+  padding: 18px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: sticky;
+  top: 60px;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+}
+.upsell-total-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mint);
+}
+.upsell-total-amount {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--mint);
+}
+
+.upsell-category {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--txt);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.upsell-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.upsell-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all 0.18s;
+  background: rgba(255,255,255,.02);
+}
+.upsell-item:hover {
+  border-color: rgba(135,206,235,.3);
+  background: rgba(135,206,235,.04);
+}
+.upsell-item input[type=checkbox] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: var(--sky);
+  cursor: pointer;
+}
+.upsell-item:has(input:checked) {
+  border-color: rgba(135,206,235,.45);
+  background: rgba(135,206,235,.07);
+}
+.upsell-info { flex: 1; min-width: 0; }
+.upsell-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 3px;
+}
+.upsell-desc {
+  font-size: 11px;
+  color: var(--muted2);
+  font-weight: 300;
+  line-height: 1.4;
+}
+.upsell-tier {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.upsell-tier.tier1 { color: var(--mint); }
+.upsell-tier.tier2 { color: var(--peach); }
+.upsell-tier.tier3 { color: var(--coral); }
+
+@media (max-width: 600px) {
+  .upsell-grid { grid-template-columns: 1fr; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .card, .legal-banner, .next-steps, .upload-card { padding: 22px 20px; }
+  .choices.grid-2, .choices.grid-3 { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .nav-next { max-width: none; }
+  .btn-submit { max-width: none; }
+  .header-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .header-progress { max-width: 100%; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="header-brand" style="color:inherit;text-decoration:none;">F-Keys</a>
+    <div class="header-progress">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-text" id="progressText">1 / 10</span>
+    </div>
+  </div>
+</header>
+
+<!-- STEP PIPS -->
+<div class="steps-bar">
+  <div class="steps-inner" id="stepPips"></div>
+</div>
+
+<!-- HERO (only shown on first section) -->
+<div class="hero" id="heroBlock">
+  <div class="hero-tag">Website Launch Authorization</div>
+  <h1>Build <em>Your</em><br>Website.</h1>
+  <p>Fill this out and I'll send you a written quote. Submitting it does not start the work and does not charge you anything — the terms are in Section 8, and they say so.</p>
+</div>
+
+<!-- MAIN FORM -->
+<div class="container">
+
+  <!-- ══════ SECTION 1: CLIENT INFO ══════ -->
+  <div class="form-section active" id="sec-1">
+    <span class="section-label">Section 01 of 10</span>
+    <h2 class="section-title">Client Information</h2>
+    <p class="section-sub">Basic contact and business details — how we identify and reach you throughout the project.</p>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">Business Name (Public-Facing) <span class="req">*</span></div>
+        <input type="text" id="f-biz-name" placeholder="e.g. Cape Coral Cleaning Co.">
+        <div class="field-error" id="e-biz-name">Required — please enter your business name.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Legal Business Name <span class="opt">optional</span></div>
+        <input type="text" id="f-legal-name" placeholder="If different from above">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Primary Contact Name <span class="req">*</span></div>
+          <input type="text" id="f-contact-name" placeholder="Your full name">
+          <div class="field-error" id="e-contact-name">Required.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Phone <span class="opt">optional</span></div>
+          <input type="tel" id="f-phone" placeholder="(239) 000-0000">
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Email Address <span class="req">*</span></div>
+        <input type="email" id="f-email" placeholder="you@yourbusiness.com">
+        <div class="field-error" id="e-email">Please enter a valid email address.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Country <span class="req">*</span></div>
+        <select id="f-country">
+          <option value="">Select country...</option>
+          <option>United States</option>
+          <option>Canada</option>
+          <option>United Kingdom</option>
+          <option>European Union</option>
+          <option>Other</option>
+        </select>
+        <div class="field-error" id="e-country">Please select your country.</div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <div></div>
+      <button class="nav-next" onclick="advance(1)">Continue <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 2: BRAND & IDENTITY ══════ -->
+  <div class="form-section" id="sec-2">
+    <span class="section-label">Section 02 of 10</span>
+    <h2 class="section-title">Brand & Identity</h2>
+    <p class="section-sub">Your visual identity guides every design decision. Be as specific as possible.</p>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">Do you have a logo? <span class="req">*</span></div>
+        <div class="choices grid-2" id="logo-choice">
+          <button type="button" class="choice-btn" data-group="has-logo" data-value="yes" onclick="pickRadio(this,'has-logo'); showConditional('logo-upload-wrap', true)">
+            <span class="radio-dot"></span> Yes, I have one
+          </button>
+          <button type="button" class="choice-btn" data-group="has-logo" data-value="no" onclick="pickRadio(this,'has-logo'); showConditional('logo-upload-wrap', false)">
+            <span class="radio-dot"></span> No — text branding is fine
+          </button>
+        </div>
+        <div class="field-error" id="e-has-logo">Please select one.</div>
+
+        <div class="conditional" id="logo-upload-wrap">
+          <div class="field-label" style="margin-top:20px;">Upload Your Logo <span class="req">*</span></div>
+          <p class="field-hint" style="margin-bottom:10px;">PNG, JPG, or SVG preferred. Will be attached to your email submission.</p>
+          <div class="upload-zone" id="logo-zone">
+            <input type="file" id="f-logo" accept=".png,.jpg,.jpeg,.svg,.gif" onchange="handleLogo(this)">
+            <div class="upload-emoji">🖼</div>
+            <h4>Click to upload or drag & drop</h4>
+            <p>PNG · JPG · SVG · GIF</p>
+          </div>
+          <div class="upload-status" id="logo-status"></div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="field">
+        <div class="field-label">Brand Colors <span class="opt">optional</span></div>
+        <input type="text" id="f-colors" placeholder="e.g. #2a5fc8, deep navy + warm orange">
+        <div class="field-hint">Hex codes, names, or descriptions all work.</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Brand Tone — select all that apply <span class="req">*</span></div>
+        <div class="choices" id="brand-tone-group">
+          <button type="button" class="choice-btn" data-group="brand-tone" data-value="Professional" onclick="toggleCheck(this,'brand-tone')">
+            <span class="check-box"></span> Professional
+          </button>
+          <button type="button" class="choice-btn" data-group="brand-tone" data-value="Casual" onclick="toggleCheck(this,'brand-tone')">
+            <span class="check-box"></span> Casual
+          </button>
+          <button type="button" class="choice-btn" data-group="brand-tone" data-value="Warm" onclick="toggleCheck(this,'brand-tone')">
+            <span class="check-box"></span> Warm
+          </button>
+          <button type="button" class="choice-btn" data-group="brand-tone" data-value="Bold" onclick="toggleCheck(this,'brand-tone')">
+            <span class="check-box"></span> Bold
+          </button>
+          <button type="button" class="choice-btn" data-group="brand-tone" data-value="Minimal" onclick="toggleCheck(this,'brand-tone')">
+            <span class="check-box"></span> Minimal
+          </button>
+          <button type="button" class="choice-btn" data-group="brand-tone" data-value="Edgy" onclick="toggleCheck(this,'brand-tone')">
+            <span class="check-box"></span> Edgy
+          </button>
+        </div>
+        <div class="field-error" id="e-brand-tone">Please select at least one.</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Words or Phrases to AVOID <span class="opt">optional</span></div>
+        <textarea id="f-avoid" placeholder="e.g. cheap, budget, discount, aggressive..."></textarea>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(2)">← Back</button>
+      <button class="nav-next" onclick="advance(2)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 3: BUSINESS DETAILS ══════ -->
+  <div class="form-section" id="sec-3">
+    <span class="section-label">Section 03 of 10</span>
+    <h2 class="section-title">Business Details</h2>
+    <p class="section-sub">Operational info that shapes your website structure — hours, location presence, and credentials.</p>
+
+    <div class="card">
+
+      <!-- ADDRESS DISPLAY PREFERENCE -->
+      <div class="field">
+        <div class="field-label">How should your location appear on your website? <span class="req">*</span></div>
+        <div class="field-hint" style="margin-bottom:12px;">This affects your footer, contact page, and local SEO setup.</div>
+        <div class="choices stack" id="location-mode-group">
+          <button type="button" class="choice-btn" data-group="location-mode" data-value="Full Address"
+            onclick="pickRadio(this,'location-mode'); showConditional('loc-address-wrap',true); showConditional('loc-area-wrap',false);">
+            <span class="radio-dot"></span>
+            <span><strong>Display my full business address</strong> — I have a physical location or office clients visit</span>
+          </button>
+          <button type="button" class="choice-btn" data-group="location-mode" data-value="Service Area Only"
+            onclick="pickRadio(this,'location-mode'); showConditional('loc-address-wrap',false); showConditional('loc-area-wrap',true);">
+            <span class="radio-dot"></span>
+            <span><strong>Emphasize my service area</strong> — I travel to clients or work remotely</span>
+          </button>
+          <button type="button" class="choice-btn" data-group="location-mode" data-value="Both"
+            onclick="pickRadio(this,'location-mode'); showConditional('loc-address-wrap',true); showConditional('loc-area-wrap',true);">
+            <span class="radio-dot"></span>
+            <span><strong>Show both</strong> — I have a location AND serve a wider area</span>
+          </button>
+          <button type="button" class="choice-btn" data-group="location-mode" data-value="No Location"
+            onclick="pickRadio(this,'location-mode'); showConditional('loc-address-wrap',false); showConditional('loc-area-wrap',false);">
+            <span class="radio-dot"></span>
+            <span><strong>No location needed</strong> — fully online / location not relevant</span>
+          </button>
+        </div>
+        <div class="field-error" id="e-location-mode">Please select one.</div>
+
+        <div class="conditional" id="loc-address-wrap">
+          <div class="field-label" style="margin-top:20px;">Business Address <span class="opt">optional</span></div>
+          <input type="text" id="f-address" placeholder="e.g. 1234 Cape Coral Pkwy, Cape Coral, FL 33904">
+          <div class="field-hint">Will appear on your contact page, footer, and Google Maps embed.</div>
+        </div>
+
+        <div class="conditional" id="loc-area-wrap">
+          <div class="field-label" style="margin-top:20px;">Area(s) Served <span class="opt">optional</span></div>
+          <input type="text" id="f-area-served" placeholder="e.g. Cape Coral, Fort Myers, Lee County, SW Florida">
+          <div class="field-hint">Used for local SEO and your contact / about pages.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="field">
+        <div class="field-label">Business Hours <span class="req">*</span></div>
+        <textarea id="f-hours" placeholder="e.g. Mon–Fri 8am–6pm, Sat by appointment, Sun closed"></textarea>
+        <div class="field-error" id="e-hours">Please enter your business hours.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Age Restrictions <span class="opt">optional</span></div>
+        <input type="text" id="f-age" placeholder="e.g. 18+ only, 21+ for alcohol-related services">
+      </div>
+      <div class="field">
+        <div class="field-label">Licensed and/or Insured? <span class="opt">optional</span></div>
+        <div class="choices grid-3" id="licensed-group">
+          <button type="button" class="choice-btn" data-group="licensed" data-value="Yes" onclick="pickRadio(this,'licensed')">
+            <span class="radio-dot"></span> Yes
+          </button>
+          <button type="button" class="choice-btn" data-group="licensed" data-value="No" onclick="pickRadio(this,'licensed')">
+            <span class="radio-dot"></span> No
+          </button>
+          <button type="button" class="choice-btn" data-group="licensed" data-value="N/A" onclick="pickRadio(this,'licensed')">
+            <span class="radio-dot"></span> Not Applicable
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(3)">← Back</button>
+      <button class="nav-next" onclick="advance(3)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 4: SERVICES & POLICIES ══════ -->
+  <div class="form-section" id="sec-4">
+    <span class="section-label">Section 04 of 10</span>
+    <h2 class="section-title">Services & Policies</h2>
+    <p class="section-sub">What you offer, how you price it, and how you handle payments — this drives your site's core content.</p>
+
+    <!-- SERVICES LIST -->
+    <div class="card">
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sky);margin-bottom:18px;">Your Services</div>
+      <div class="field">
+        <div class="field-label">List Your Services <span class="req">*</span></div>
+        <textarea id="f-services" style="min-height:120px;" placeholder="e.g.&#10;— Residential cleaning&#10;— Deep cleans&#10;— Move-in / move-out&#10;— Commercial spaces"></textarea>
+        <div class="field-hint">Type them out, paste from a doc, or upload a menu/service list below.</div>
+        <div class="field-error" id="e-services">Please describe your services — or upload a file below.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Upload a Menu or Service List <span class="opt">optional</span></div>
+        <div class="field-hint" style="margin-bottom:10px;">PDF, image, Word doc, or spreadsheet — anything that lists what you offer.</div>
+        <div class="upload-zone" id="services-zone">
+          <input type="file" id="f-services-file" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.csv" onchange="handleServicesFile(this)">
+          <div class="upload-emoji">📋</div>
+          <h4>Click to upload or drag & drop</h4>
+          <p>PDF · DOC · XLS · PNG · JPG</p>
+        </div>
+        <div class="upload-status" id="services-file-status"></div>
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <div class="card">
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sky);margin-bottom:18px;">Pricing on Your Website</div>
+      <div class="field">
+        <div class="field-label">Would you like to display pricing on your site? <span class="req">*</span></div>
+        <div class="choices grid-2" id="show-pricing-group">
+          <button type="button" class="choice-btn" data-group="show-pricing" data-value="Yes"
+            onclick="pickRadio(this,'show-pricing'); showConditional('pricing-detail-wrap',true);">
+            <span class="radio-dot"></span> Yes — show pricing
+          </button>
+          <button type="button" class="choice-btn" data-group="show-pricing" data-value="No"
+            onclick="pickRadio(this,'show-pricing'); showConditional('pricing-detail-wrap',false);">
+            <span class="radio-dot"></span> No — keep it off the site
+          </button>
+        </div>
+        <div class="field-error" id="e-show-pricing">Please select one.</div>
+
+        <div class="conditional" id="pricing-detail-wrap">
+          <div class="field-label" style="margin-top:22px;">Pricing Format <span class="req">*</span></div>
+          <div class="choices grid-2" id="pricing-group" style="margin-bottom:16px;">
+            <button type="button" class="choice-btn" data-group="pricing" data-value="Fixed" onclick="pickRadio(this,'pricing'); showConditional('pricing-input-wrap',true); showConditional('pricing-upload-wrap',false);">
+              <span class="radio-dot"></span> Fixed / Set Prices
+            </button>
+            <button type="button" class="choice-btn" data-group="pricing" data-value="Starting At" onclick="pickRadio(this,'pricing'); showConditional('pricing-input-wrap',true); showConditional('pricing-upload-wrap',false);">
+              <span class="radio-dot"></span> Starting At…
+            </button>
+            <button type="button" class="choice-btn" data-group="pricing" data-value="Quote Only" onclick="pickRadio(this,'pricing'); showConditional('pricing-input-wrap',false); showConditional('pricing-upload-wrap',false);">
+              <span class="radio-dot"></span> Quote / Estimate Only
+            </button>
+            <button type="button" class="choice-btn" data-group="pricing" data-value="Upload Menu" onclick="pickRadio(this,'pricing'); showConditional('pricing-input-wrap',false); showConditional('pricing-upload-wrap',true);">
+              <span class="radio-dot"></span> Upload Price Menu / PDF
+            </button>
+          </div>
+
+          <div class="conditional" id="pricing-input-wrap">
+            <div class="field-label">Enter Your Pricing Details <span class="opt">optional</span></div>
+            <textarea id="f-pricing-custom" style="min-height:100px;" placeholder="e.g.&#10;Basic Clean — starting at $80&#10;Deep Clean — starting at $150&#10;Move-Out — from $200"></textarea>
+          </div>
+          <div class="conditional" id="pricing-upload-wrap">
+            <div class="field-label" style="margin-bottom:10px;">Upload Price Menu / PDF <span class="opt">optional</span></div>
+            <div class="upload-zone" id="pricing-zone">
+              <input type="file" id="f-pricing-file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onchange="handlePricingFile(this)">
+              <div class="upload-emoji">💲</div>
+              <h4>Upload your pricing document</h4>
+              <p>PDF · DOC · PNG · JPG</p>
+            </div>
+            <div class="upload-status" id="pricing-file-status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT POLICIES -->
+    <div class="card">
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sky);margin-bottom:18px;">Payment Policies</div>
+      <div class="field">
+        <div class="field-label">Payment Policy Highlights — select all that apply <span class="opt">optional</span></div>
+        <div class="field-hint" style="margin-bottom:12px;">These will be highlighted on your site to build trust with new clients.</div>
+        <div class="choices" id="payment-policy-group">
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Deposit Required" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Deposit Required
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Free Quote" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Free Quote
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Coupons Accepted" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Coupons Accepted
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Pay After Service" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Pay After Service
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Financing Available" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Financing Available
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Payment Plans" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Payment Plans
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Cash Only" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Cash Only
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Card/Online" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Card / Online Accepted
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Venmo/Zelle" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Venmo / Zelle
+          </button>
+          <button type="button" class="choice-btn" data-group="payment-policy" data-value="Refund Policy" onclick="toggleCheck(this,'payment-policy')">
+            <span class="check-box"></span> Refund Policy
+          </button>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Additional Payment Details <span class="opt">optional</span></div>
+        <textarea id="f-payment-notes" placeholder="e.g. 50% deposit required at booking. Balance due upon completion. No refunds within 48 hours of appointment..."></textarea>
+      </div>
+      <div class="field">
+        <div class="field-label">Cancellation / Reschedule Policy <span class="opt">optional</span></div>
+        <textarea id="f-cancel" placeholder="e.g. 24-hour notice required. Late cancellations may be charged a convenience fee..."></textarea>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(4)">← Back</button>
+      <button class="nav-next" onclick="advance(4)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 5: BOOKING & CONTACT ══════ -->
+  <div class="form-section" id="sec-5">
+    <span class="section-label">Section 05 of 10</span>
+    <h2 class="section-title">Booking & Contact Flow</h2>
+    <p class="section-sub">How should visitors reach you? This shapes your site's primary calls-to-action. <span style="color:var(--muted);font-size:12px;">$ icons indicate relative technical complexity of each feature.</span></p>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">Primary Call-to-Action — select all that apply <span class="req">*</span></div>
+        <div class="field-hint" style="margin-bottom:12px;">These become the main action buttons on your website. You may pick multiple.</div>
+        <div class="choices stack" id="cta-group">
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Book a Consultation"
+            onclick="toggleCheck(this,'cta'); toggleConditionalCheck('booking-wrap', 'cta', 'Book a Consultation')">
+            <span class="check-box"></span>
+            <span style="flex:1">Book a Consultation / Appointment</span>
+            <span class="cost-badge tier2" title="Requires booking platform integration">$$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Contact Form"
+            onclick="toggleCheck(this,'cta')">
+            <span class="check-box"></span>
+            <span style="flex:1">Contact Form</span>
+            <span class="cost-badge tier1" title="Standard — included">$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Walk-Ins Welcome"
+            onclick="toggleCheck(this,'cta')">
+            <span class="check-box"></span>
+            <span style="flex:1">Walk-Ins Welcome</span>
+            <span class="cost-badge tier1" title="Standard — included">$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Phone Call"
+            onclick="toggleCheck(this,'cta')">
+            <span class="check-box"></span>
+            <span style="flex:1">Phone / Call Now Button</span>
+            <span class="cost-badge tier1" title="Standard — included">$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Instagram DM"
+            onclick="toggleCheck(this,'cta')">
+            <span class="check-box"></span>
+            <span style="flex:1">Instagram DM</span>
+            <span class="cost-badge tier1" title="Standard — included">$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Email Direct"
+            onclick="toggleCheck(this,'cta')">
+            <span class="check-box"></span>
+            <span style="flex:1">Email Button (direct mailto link)</span>
+            <span class="cost-badge tier1" title="Standard — included">$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Subscribe to Newsletter"
+            onclick="toggleCheck(this,'cta')">
+            <span class="check-box"></span>
+            <span style="flex:1">Subscribe to Newsletter / Email List</span>
+            <span class="cost-badge tier2" title="Requires email platform integration (Mailchimp, etc.)">$$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="None"
+            onclick="toggleCheck(this,'cta')">
+            <span class="check-box"></span>
+            <span style="flex:1">None of the above — informational only</span>
+            <span class="cost-badge tier1">$</span>
+          </button>
+
+          <button type="button" class="choice-btn" data-group="cta" data-value="Other"
+            onclick="toggleCheck(this,'cta'); showConditional('cta-other-wrap', this.classList.contains('selected'))">
+            <span class="check-box"></span>
+            <span style="flex:1">Other — I'll describe it</span>
+            <span class="cost-badge tier3" title="Custom integrations quoted individually">$$$</span>
+          </button>
+        </div>
+        <div class="field-error" id="e-cta">Please select at least one option.</div>
+
+        <div class="conditional" id="booking-wrap">
+          <div class="field-label" style="margin-top:20px;">Booking Platform <span class="opt">optional</span></div>
+          <input type="text" id="f-booking" placeholder="e.g. Calendly, Square, Acuity, Mindbody, Jane...">
+        </div>
+
+        <div class="conditional" id="cta-other-wrap">
+          <div class="field-label" style="margin-top:20px;">Describe Your Custom CTA <span class="opt">optional</span></div>
+          <textarea id="f-cta-other" style="min-height:72px;" placeholder="e.g. WhatsApp chat button, Shopify store link, custom intake form..."></textarea>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="field">
+        <div class="field-label">Expected Response Time <span class="req">*</span></div>
+        <div class="choices grid-3" id="response-group">
+          <button type="button" class="choice-btn" data-group="response" data-value="Same Day" onclick="pickRadio(this,'response')">
+            <span class="radio-dot"></span> Same Day
+          </button>
+          <button type="button" class="choice-btn" data-group="response" data-value="24 Hours" onclick="pickRadio(this,'response')">
+            <span class="radio-dot"></span> 24 Hours
+          </button>
+          <button type="button" class="choice-btn" data-group="response" data-value="48 Hours" onclick="pickRadio(this,'response')">
+            <span class="radio-dot"></span> 48 Hours
+          </button>
+        </div>
+        <div class="field-error" id="e-response">Please select one.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Auto-Reply Message <span class="opt">optional</span></div>
+        <textarea id="f-autoreply" placeholder="e.g. Thanks for reaching out! I'll get back to you within 24 hours. For urgent matters call (239) 000-0000."></textarea>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(5)">← Back</button>
+      <button class="nav-next" onclick="advance(5)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 6: SEO & ONLINE ══════ -->
+  <div class="form-section" id="sec-6">
+    <span class="section-label">Section 06 of 10</span>
+    <h2 class="section-title">SEO & Online Presence</h2>
+    <p class="section-sub">Where you want to be found and how we connect your existing digital footprint.</p>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">Primary Service Area(s) <span class="req">*</span></div>
+        <textarea id="f-service-area" placeholder="e.g. Cape Coral, Fort Myers, Lee County FL — or nationwide"></textarea>
+        <div class="field-error" id="e-service-area">Please enter your service area.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Keywords to Rank For <span class="opt">optional</span></div>
+        <textarea id="f-keywords" placeholder="e.g. house cleaning Cape Coral, maid service Fort Myers, residential cleaner Lee County"></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Instagram Username <span class="opt">optional</span></div>
+          <input type="text" id="f-instagram" placeholder="@yourbusiness">
+        </div>
+        <div class="field">
+          <div class="field-label">Google Business Profile <span class="opt">optional</span></div>
+          <input type="url" id="f-gbp" placeholder="https://g.page/...">
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Review Platforms — check all that apply <span class="opt">optional</span></div>
+        <div class="choices" id="review-group">
+          <button type="button" class="choice-btn" data-group="reviews" data-value="Google" onclick="toggleCheck(this,'reviews')">
+            <span class="check-box"></span> Google
+          </button>
+          <button type="button" class="choice-btn" data-group="reviews" data-value="Yelp" onclick="toggleCheck(this,'reviews')">
+            <span class="check-box"></span> Yelp
+          </button>
+          <button type="button" class="choice-btn" data-group="reviews" data-value="Facebook" onclick="toggleCheck(this,'reviews')">
+            <span class="check-box"></span> Facebook
+          </button>
+          <button type="button" class="choice-btn" data-group="reviews" data-value="Other" onclick="toggleCheck(this,'reviews')">
+            <span class="check-box"></span> Other
+          </button>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Can we quote your reviews on the website? <span class="req">*</span></div>
+        <div class="choices grid-2" id="quote-reviews-group">
+          <button type="button" class="choice-btn" data-group="quote-reviews" data-value="Yes" onclick="pickRadio(this,'quote-reviews')">
+            <span class="radio-dot"></span> Yes
+          </button>
+          <button type="button" class="choice-btn" data-group="quote-reviews" data-value="No" onclick="pickRadio(this,'quote-reviews')">
+            <span class="radio-dot"></span> No
+          </button>
+        </div>
+        <div class="field-error" id="e-quote-reviews">Please select one.</div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(6)">← Back</button>
+      <button class="nav-next" onclick="advance(6)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 7: ANALYTICS & DOMAIN ══════ -->
+  <div class="form-section" id="sec-7">
+    <span class="section-label">Section 07 of 10</span>
+    <h2 class="section-title">Analytics & Domain</h2>
+    <p class="section-sub">Technical setup so we configure your site correctly from day one.</p>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">Install Google Analytics? <span class="req">*</span></div>
+        <div class="choices grid-2" id="analytics-group">
+          <button type="button" class="choice-btn" data-group="analytics" data-value="Yes" onclick="pickRadio(this,'analytics')">
+            <span class="radio-dot"></span> Yes
+          </button>
+          <button type="button" class="choice-btn" data-group="analytics" data-value="No" onclick="pickRadio(this,'analytics')">
+            <span class="radio-dot"></span> No
+          </button>
+        </div>
+        <div class="field-error" id="e-analytics">Please select one.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Require a Privacy Policy page? <span class="req">*</span></div>
+        <div class="choices grid-2" id="privacy-group">
+          <button type="button" class="choice-btn" data-group="privacy" data-value="Yes" onclick="pickRadio(this,'privacy')">
+            <span class="radio-dot"></span> Yes
+          </button>
+          <button type="button" class="choice-btn" data-group="privacy" data-value="No" onclick="pickRadio(this,'privacy')">
+            <span class="radio-dot"></span> No
+          </button>
+        </div>
+        <div class="field-error" id="e-privacy">Please select one.</div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="field">
+        <div class="field-label">Domain Name <span class="opt">optional</span></div>
+        <input type="text" id="f-domain" placeholder="e.g. mycoolbusiness.com">
+      </div>
+      <div class="field">
+        <div class="field-label">Domain Ownership <span class="req">*</span></div>
+        <div class="choices stack" id="domain-owner-group">
+          <button type="button" class="choice-btn" data-group="domain-owner" data-value="Client Owns It" onclick="pickRadio(this,'domain-owner')">
+            <span class="radio-dot"></span> I own it — I'll provide access
+          </button>
+          <button type="button" class="choice-btn" data-group="domain-owner" data-value="Developer Manages" onclick="pickRadio(this,'domain-owner')">
+            <span class="radio-dot"></span> I want it registered and managed for me ($75/mo includes renewal)
+          </button>
+          <button type="button" class="choice-btn" data-group="domain-owner" data-value="Not Purchased Yet" onclick="pickRadio(this,'domain-owner')">
+            <span class="radio-dot"></span> Not purchased yet — we'll figure it out together
+          </button>
+        </div>
+        <div class="field-error" id="e-domain-owner">Please select one.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Target Launch Date <span class="opt">optional</span></div>
+        <input type="date" id="f-launch-date">
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(7)">← Back</button>
+      <button class="nav-next" onclick="advance(7)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 8: LEGAL AGREEMENT ══════ -->
+  <div class="form-section" id="sec-8">
+    <span class="section-label">Section 08 of 10</span>
+    <h2 class="section-title">Service Agreement</h2>
+    <p class="section-sub">Read carefully. Submitting this form constitutes your electronic signature.</p>
+
+    <div class="alert warn">
+      <span class="alert-icon">⚠</span>
+      <div>This section is legally binding under <strong>U.S. E-SIGN law</strong>. All boxes must be checked to proceed. Submission of this form serves as your electronic acceptance of the full service agreement.</div>
+    </div>
+
+    <div class="legal-banner">
+      <div class="legal-banner-head">
+        <div class="legal-icon">§</div>
+        <h3>Website Development, Delivery & Monthly Hosting Agreement</h3>
+      </div>
+      <div class="legal-text">
+        <p>By submitting this form, you (the <strong>Client</strong>) enter into a binding electronic agreement with the Provider. The following terms govern how your website is created, delivered, paid for, and supported.</p>
+
+        <div style="margin-top:20px;"><strong>1. Quote, Authorization & Payment</strong></div>
+        <div class="legal-clause"><span class="clause-num">1.1</span><span>Submission of this form is a <strong>request for a written quote</strong>. By itself it does <strong>not</strong> authorize Provider to begin work, and it does <strong>not</strong> obligate Client to pay anything.</span></div>
+        <div class="legal-clause"><span class="clause-num">1.2</span><span>Provider will send Client a <strong>written quote</strong> stating the one-time build fee, the monthly fee, any selected add-ons, and the date the site will be delivered. Those figures will be the figures stated in Section 2 of this agreement plus the add-ons Client selected in this form.</span></div>
+        <div class="legal-clause"><span class="clause-num">1.3</span><span><strong>Work begins only after Client accepts that quote in writing.</strong> Until Client accepts, Client owes nothing and may walk away for any reason. Deposits, milestone payments and due dates, if any, will be stated in the quote.</span></div>
+        <div class="legal-clause"><span class="clause-num">1.4</span><span>If payment is not made per the <strong>accepted quote</strong>, Provider may pause or retain work until outstanding balances are resolved.</span></div>
+
+        <div style="margin-top:20px;"><strong>2. Monthly Hosting & Support</strong></div>
+        <div class="legal-clause"><span class="clause-num">2.1</span><span>The website build is a <strong>one-time fee of $100.00</strong>. Monthly hosting and support is <strong>$75.00 per month</strong> and begins only after the site is delivered and live.</span></div>
+        <div class="legal-clause"><span class="clause-num">2.2</span><span>Services continue month-to-month until terminated by either party with written notice.</span></div>
+        <div class="legal-clause"><span class="clause-num">2.3</span><span>The $75.00/month includes: hosting, domain renewal management, <strong>two (2) edit requests per month</strong>, <strong>one (1) hour of Zoom or phone time per month</strong>, and basic security monitoring. An <strong>edit request</strong> is one batch of changes sent in a single message. Unused edits and unused call time do not carry over to the next month. Anything beyond this is quoted in writing before it is done.</span></div>
+
+        <div style="margin-top:20px;"><strong>3. Ownership & Brand Asset Authorization</strong></div>
+        <div class="legal-clause"><span class="clause-num">3.1</span><span>Client grants Provider a <strong>limited, non-exclusive license</strong> to use Client's name, logo, images, and business identity solely to build and demonstrate this website.</span></div>
+        <div class="legal-clause"><span class="clause-num">3.2</span><span><strong>Full ownership of website files transfers to Client only upon final payment</strong> of the development fee.</span></div>
+        <div class="legal-clause"><span class="clause-num">3.3</span><span>Client certifies they <strong>own or have legal rights</strong> to all submitted content.</span></div>
+
+        <div style="margin-top:20px;"><strong>4. Liability & Governing Law</strong></div>
+        <div class="legal-clause"><span class="clause-num">4.1</span><span>Provider's total liability shall not exceed amounts paid by Client in the 12 months preceding any claim.</span></div>
+        <div class="legal-clause"><span class="clause-num">4.2</span><span>This agreement is governed by the <strong>laws of the State of Florida</strong>. Disputes shall be resolved in Charlotte County, FL.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:16px;font-family:'Syne',sans-serif;">I confirm all of the following: <span style="color:var(--coral)">*</span></div>
+      <div class="consent-list" id="consent-list">
+        <div class="consent-row" onclick="toggleConsent('con1')">
+          <div class="consent-tick" id="con1"></div>
+          <div class="consent-copy">I understand that <strong>submitting this form does not start work and does not charge me anything</strong> — it is a request for a written quote, and work begins only after I accept that quote in writing.</div>
+        </div>
+        <div class="consent-row" onclick="toggleConsent('con2')">
+          <div class="consent-tick" id="con2"></div>
+          <div class="consent-copy">I understand the build is <strong>$100 one-time</strong>, that <strong>$75/month begins after my website is delivered</strong>, and that it continues month-to-month until I cancel.</div>
+        </div>
+        <div class="consent-row" onclick="toggleConsent('con3')">
+          <div class="consent-tick" id="con3"></div>
+          <div class="consent-copy">I authorize Provider to <strong>use my submitted logo, images, and business identity</strong> to design and build my website.</div>
+        </div>
+        <div class="consent-row" onclick="toggleConsent('con4')">
+          <div class="consent-tick" id="con4"></div>
+          <div class="consent-copy">I confirm I <strong>own or have legal rights to all content</strong> I am submitting, including logos and images.</div>
+        </div>
+        <div class="consent-row" onclick="toggleConsent('con5')">
+          <div class="consent-tick" id="con5"></div>
+          <div class="consent-copy">I have read and <strong>agree to the full Website Development, Delivery & Monthly Hosting Agreement</strong> as stated above.</div>
+        </div>
+        <div class="consent-row" onclick="toggleConsent('con6')">
+          <div class="consent-tick" id="con6"></div>
+          <div class="consent-copy">I understand that <strong>submitting this form is my electronic signature</strong> and constitutes a binding agreement under U.S. E-SIGN law.</div>
+        </div>
+      </div>
+      <div class="alert error" id="e-consents" style="display:none;margin-top:16px;margin-bottom:0;">
+        <span class="alert-icon">!</span>
+        <div>All six boxes must be checked to proceed.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <div class="field-label">Anything else we should know? <span class="opt">optional</span></div>
+        <textarea id="f-notes" placeholder="Special requirements, tight deadlines, references you love, existing brand guidelines..."></textarea>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(8)">← Back</button>
+      <button class="nav-next" onclick="advance(8)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 9: PREMIUM UPSELLS ══════ -->
+  <div class="form-section" id="sec-9">
+    <span class="section-label">Section 09 of 10</span>
+    <h2 class="section-title">Enhance Your Website</h2>
+    <p class="section-sub">All of this is optional. Pick what you want and it goes on your quote. <span style="color:var(--mint);font-weight:600;">included</span> = already in your $75/mo, no extra charge · <span style="color:var(--peach);font-weight:600;">$15</span> and <span style="color:var(--coral);font-weight:600;">$50</span> = one-time, added to your build · <span style="color:var(--coral);font-weight:600;">$50/mo</span> = ongoing monthly work.</p>
+
+    <div class="alert info" style="margin-bottom:20px;">
+      <span class="alert-icon">✨</span>
+      <div>None of this is required. Twenty of these are already included in your monthly — they cost you nothing. The rest add up live as you tick them.</div>
+    </div>
+
+    <!-- LIVE TOTAL BANNER -->
+    <div class="upsell-total-bar">
+      <div class="upsell-total-label">Your Add-Ons So Far</div>
+      <div class="upsell-total-amount">+ $<span id="upsell-once">0</span> <span style="font-size:12px;font-weight:400;color:var(--muted);">one-time</span> &nbsp;&nbsp;+ $<span id="upsell-mo">0</span> <span style="font-size:12px;font-weight:400;color:var(--muted);">/mo</span></div>
+    </div>
+
+    <!-- DESIGN & VISUAL -->
+    <div class="card">
+      <div class="upsell-category">🎨 Design & Visual</div>
+      <div class="upsell-grid">
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Custom Animated Hero Section</div>
+            <div class="upsell-desc">Full-screen motion intro with your brand</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Before & After Photo Gallery</div>
+            <div class="upsell-desc">Swipeable comparison slider for results</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Video Background / Embed</div>
+            <div class="upsell-desc">Autoplay or YouTube embed in hero</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Custom Icon Set</div>
+            <div class="upsell-desc">Branded icons matching your visual style</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Dark Mode Toggle</div>
+            <div class="upsell-desc">Let visitors switch between light/dark</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Scroll Animations</div>
+            <div class="upsell-desc">Elements animate as user scrolls down</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Custom Cursor / Micro-interactions</div>
+            <div class="upsell-desc">Polished hover effects and cursor styling</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Photo Editing / Optimization</div>
+            <div class="upsell-desc">We resize, compress, and enhance your images</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- CONTENT & COPY -->
+    <div class="card">
+      <div class="upsell-category">✍️ Content & Copy</div>
+      <div class="upsell-grid">
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Professional Copywriting</div>
+            <div class="upsell-desc">We write your About, Services, and Home page text</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Blog / News Section</div>
+            <div class="upsell-desc">Ongoing content hub, great for SEO</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="mo">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="mo" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Monthly Blog Post (1x/mo)</div>
+            <div class="upsell-desc">Researched, written, and published for you</div>
+          </div>
+          <div class="upsell-tier tier3">$50/mo</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">FAQ Page</div>
+            <div class="upsell-desc">Reduces support inquiries, boosts SEO</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Testimonials / Reviews Page</div>
+            <div class="upsell-desc">Curated reviews with star ratings and photos</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Team / Staff Page</div>
+            <div class="upsell-desc">Profiles, bios, and photos of your team</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- E-COMMERCE & PAYMENTS -->
+    <div class="card">
+      <div class="upsell-category">🛒 E-Commerce & Payments</div>
+      <div class="upsell-grid">
+        <label class="upsell-item" data-cost="50" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Online Store (up to 20 products)</div>
+            <div class="upsell-desc">Full e-commerce with cart and checkout</div>
+          </div>
+          <div class="upsell-tier tier3">$50</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Online Payment / Invoicing</div>
+            <div class="upsell-desc">Stripe or Square embedded checkout</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Digital Downloads / Products</div>
+            <div class="upsell-desc">Sell PDFs, guides, or digital files</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Gift Card / Voucher System</div>
+            <div class="upsell-desc">Sell and redeem gift cards online</div>
+          </div>
+          <div class="upsell-tier tier3">$50</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Membership / Subscription Gating</div>
+            <div class="upsell-desc">Members-only content or recurring billing</div>
+          </div>
+          <div class="upsell-tier tier3">$50</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Tip / Gratuity Button</div>
+            <div class="upsell-desc">One-click tip link (Venmo, Square, etc.)</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- BOOKING & AUTOMATION -->
+    <div class="card">
+      <div class="upsell-category">📅 Booking & Automation</div>
+      <div class="upsell-grid">
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Booking System Integration</div>
+            <div class="upsell-desc">Calendly, Acuity, Square Appointments, etc.</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Custom Intake / Quote Request Form</div>
+            <div class="upsell-desc">Multi-step form tailored to your service</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Automated Email Confirmations</div>
+            <div class="upsell-desc">Auto-replies, reminders, and follow-ups</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Live Chat Widget</div>
+            <div class="upsell-desc">Real-time chat or chatbot (Tidio, etc.)</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">CRM Integration</div>
+            <div class="upsell-desc">Connect to HubSpot, Zoho, or similar</div>
+          </div>
+          <div class="upsell-tier tier3">$50</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Newsletter Signup + Email List</div>
+            <div class="upsell-desc">Mailchimp / Klaviyo integration</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- SEO & MARKETING -->
+    <div class="card">
+      <div class="upsell-category">📈 SEO & Marketing</div>
+      <div class="upsell-grid">
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Advanced Local SEO Setup</div>
+            <div class="upsell-desc">Schema markup, citations, Google profile link</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Google Business Profile Optimization</div>
+            <div class="upsell-desc">Posts, photos, categories, Q&amp;A setup</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Open Graph / Social Share Cards</div>
+            <div class="upsell-desc">Branded previews when shared on social</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="mo">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="mo" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Monthly SEO Report</div>
+            <div class="upsell-desc">Keyword rankings, traffic, and recommendations</div>
+          </div>
+          <div class="upsell-tier tier3">$50/mo</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Pop-Up / Promo Banner</div>
+            <div class="upsell-desc">Announce sales, events, or offers</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Google / Meta Ad Landing Page</div>
+            <div class="upsell-desc">Conversion-optimized page for paid ads</div>
+          </div>
+          <div class="upsell-tier tier3">$50</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Social Media Feed Embed</div>
+            <div class="upsell-desc">Live Instagram or Facebook feed on site</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- TRUST & CONVERSION -->
+    <div class="card">
+      <div class="upsell-category">🏆 Trust & Conversion</div>
+      <div class="upsell-grid">
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Live Google Review Feed</div>
+            <div class="upsell-desc">Auto-updating reviews pulled from Google</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Trust Badges / Credentials Section</div>
+            <div class="upsell-desc">License numbers, insurance, certifications</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Case Study / Portfolio Page</div>
+            <div class="upsell-desc">Featured project breakdowns with results</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Video Testimonials Section</div>
+            <div class="upsell-desc">Embedded or uploaded client video reviews</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Countdown Timer / Urgency Banner</div>
+            <div class="upsell-desc">Limited-time offers and promotions</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Press / Media Mentions Section</div>
+            <div class="upsell-desc">"As seen in" logos and news links</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- TECHNICAL & ADVANCED -->
+    <div class="card">
+      <div class="upsell-category">⚙️ Technical & Advanced</div>
+      <div class="upsell-grid">
+        <label class="upsell-item" data-cost="50" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Multilingual Site (2 languages)</div>
+            <div class="upsell-desc">English + Spanish or other language</div>
+          </div>
+          <div class="upsell-tier tier3">$50</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Password-Protected Client Portal</div>
+            <div class="upsell-desc">Private area for documents or updates</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Cookie Consent Banner</div>
+            <div class="upsell-desc">GDPR/CCPA compliant popup</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="15" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="15" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Speed & Core Web Vitals Optimization</div>
+            <div class="upsell-desc">Faster load time = better Google rankings</div>
+          </div>
+          <div class="upsell-tier tier2">$15</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Custom 404 / Error Page</div>
+            <div class="upsell-desc">Branded, helpful page for broken links</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="once">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="once" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">API / Third-Party Integration</div>
+            <div class="upsell-desc">Connect custom tools, databases, or apps</div>
+          </div>
+          <div class="upsell-tier tier3">$50</div>
+        </label>
+        <label class="upsell-item" data-cost="0" data-bill="inc">
+          <input type="checkbox" class="upsell-check" data-cost="0" data-bill="inc" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Google Maps Embed</div>
+            <div class="upsell-desc">Interactive map on your contact page</div>
+          </div>
+          <div class="upsell-tier tier1">included</div>
+        </label>
+        <label class="upsell-item" data-cost="50" data-bill="mo">
+          <input type="checkbox" class="upsell-check" data-cost="50" data-bill="mo" onchange="updateUpsellTotal()">
+          <div class="upsell-info">
+            <div class="upsell-name">Monthly Maintenance Plan (expanded)</div>
+            <div class="upsell-desc">3 hrs/mo updates, priority support, backups</div>
+          </div>
+          <div class="upsell-tier tier3">$50/mo</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- TOTAL SUMMARY -->
+    <div class="card" style="background:rgba(109,232,200,.06);border-color:rgba(109,232,200,.2);">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+        <div>
+          <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--mint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">What This Comes To</div>
+          <div style="font-size:13px;color:var(--muted);font-weight:300;">$100 build + one-time add-ons, then $75/mo + monthly add-ons</div>
+        </div>
+        <div style="font-family:var(--font-display);font-weight:800;color:var(--mint);text-align:right;">
+          <div style="font-size:32px;">$<span id="grand-once">100</span></div>
+          <div style="font-size:12px;font-weight:400;color:var(--muted);margin:-4px 0 8px;">to build it</div>
+          <div style="font-size:32px;">$<span id="grand-mo">75</span><span style="font-size:14px;font-weight:400;color:var(--muted)">/mo</span></div>
+          <div style="font-size:12px;font-weight:400;color:var(--muted);margin-top:-4px;">after it's live</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;font-size:12px;color:var(--muted2);">* These are the real prices, not a teaser. I'll send you a written quote with the same numbers before anything is charged. If something you picked turns out to be bigger than it looked, I'll tell you before I build it — not after.</div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(9)">← Back</button>
+      <button class="nav-next" onclick="advance(9)">Review & Submit →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SECTION 10: FINAL CONFIRMATION ══════ -->
+  <div class="form-section" id="sec-10">
+    <span class="section-label">Section 10 of 10</span>
+    <h2 class="section-title">Final Confirmation</h2>
+    <p class="section-sub">Have a look before you send it. Nothing is charged and nothing is built until you and I agree on a written quote.</p>
+
+    <div class="card">
+      <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;color:var(--muted2);text-transform:uppercase;margin-bottom:16px;">Submission Summary</div>
+      <table class="summary-table" id="summary-table"></table>
+    </div>
+
+    <div class="card">
+      <div class="consent-row" onclick="toggleConsent('con-final')" style="border-bottom:none;padding:0;">
+        <div class="consent-tick" id="con-final"></div>
+        <div class="consent-copy"><strong>I confirm all information is accurate</strong> and I understand this submission is my electronic agreement to the terms in Section 8 — including that work starts only once I accept a written quote.</div>
+      </div>
+      <div class="alert error" id="e-final" style="display:none;margin-top:16px;margin-bottom:0;">
+        <span class="alert-icon">!</span>
+        <div>Please check the box to confirm before submitting.</div>
+      </div>
+    </div>
+
+    <div class="alert info" style="margin-top:0;">
+      <span class="alert-icon">ℹ</span>
+      <div>Your logo and any files you attached go with this. If your mail app opens instead, that's the backup route — just hit send.</div>
+    </div>
+
+    <div id="submit-status" style="display:none;font-size:13px;color:var(--muted);text-align:center;margin-bottom:14px;"></div>
+
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack(10)">← Back</button>
+      <button class="nav-next btn-submit" id="btn-submit" onclick="submitForm()">Send My Intake →</button>
+    </div>
+  </div>
+
+  <!-- ══════ SUCCESS ══════ -->
+  <div id="success-screen">
+    <div class="success-mark">✓</div>
+    <h2>Submission Sent.</h2>
+    <p class="sub">Your intake has been submitted. You'll hear back within 24–48 business hours with your custom quote. Review it carefully before any payment is made.</p>
+
+    <div class="next-steps">
+      <h3>What Happens Next</h3>
+      <div class="next-step-item">
+        <div class="step-num">1</div>
+        <div class="step-desc"><strong>You'll receive a custom quote</strong> within 1–2 business days based on your intake details and selected upgrades.</div>
+      </div>
+      <div class="next-step-item">
+        <div class="step-num">2</div>
+        <div class="step-desc"><strong>Read it and decide.</strong> Nothing is charged and nothing is built until you accept that quote in writing.</div>
+      </div>
+      <div class="next-step-item">
+        <div class="step-num">3</div>
+        <div class="step-desc"><strong>Build begins</strong> once you accept. You'll get progress updates as it goes.</div>
+      </div>
+      <div class="next-step-item">
+        <div class="step-num">4</div>
+        <div class="step-desc"><strong>Site goes live</strong> once you approve it. The $75/mo starts after launch, not before.</div>
+      </div>
+    </div>
+
+    <!-- POST-SUCCESS MEDIA UPLOAD -->
+    <div class="upload-card">
+      <h3>Upload Brand Assets</h3>
+      <p class="sub2">Optional — upload photos, reference images, existing design files, or anything that helps communicate your vision. These get sent as a separate email.</p>
+
+      <div class="upload-zone" id="media-zone">
+        <input type="file" id="f-media" accept="image/*,.pdf" multiple onchange="handleMedia(this)">
+        <div class="upload-emoji">📎</div>
+        <h4>Click to select or drag files here</h4>
+        <p>Images · PDFs · Logos · References — multiple files ok</p>
+      </div>
+
+      <div class="media-grid" id="media-grid"></div>
+
+      <div class="alert info" id="media-rights-note" style="display:none;margin-top:14px;margin-bottom:0;">
+        <span class="alert-icon">ℹ</span>
+        <div>By uploading files you confirm you own or have rights to use them, and authorize Provider to use them in your website build.</div>
+      </div>
+
+      <div id="media-status" style="display:none;font-size:13px;color:var(--muted);text-align:center;margin:12px 0 0;"></div>
+      <button class="btn-send-media" id="btn-send-media" onclick="sendMediaEmail()">📎 Send My Files →</button>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  F-Keys Creative LLC · Punta Gorda, Florida · <a href="https://f-keys.com" style="color:var(--sky);text-decoration:none;">f-keys.com</a> · <a href="mailto:vincegonzalez@me.com" style="color:var(--sky);text-decoration:none;">vincegonzalez@me.com</a><br><span style="opacity:.6;">This form is an agreement, not legal advice. If you want a lawyer to read it first, read it first.</span>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// F-KEYS — CLIENT INTAKE
+// F-Keys Creative LLC · Punta Gorda, FL · f-keys.com
+// ------------------------------------------------------------
+// Submits to a Google Apps Script web app: fields land in a
+// Google Sheet, uploaded files land in a Drive folder, and a
+// notification goes to NOTIFY.
+//
+// Until ENDPOINT is filled in, the form falls back to opening
+// the client's mail app with everything typed out. It is never
+// dead. Setup steps are in APPS-SCRIPT-SETUP.md next to this file.
+// ════════════════════════════════════════════════════════════
+const FKEYS = {
+  ENDPOINT: '',                        // <— paste the Apps Script /exec URL here
+  NOTIFY:   'vincegonzalez@me.com',    // where the mailto fallback goes
+  BUILD:    100,                       // one-time build fee
+  MONTHLY:  75                         // monthly, starts after launch
+};
+
+// ════════════════════════════════
+// STATE
+// ════════════════════════════════
+const TOTAL = 10;
+let current = 1;
+const consentState = {};
+let mediaFiles = [];
+
+const radioState  = {}; // group -> value
+const checkState  = {}; // group -> Set of values
+
+// ════════════════════════════════
+// INIT
+// ════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildPips();
+  updateUI();
+});
+
+function buildPips() {
+  const wrap = document.getElementById('stepPips');
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'step-pip';
+    d.id = 'pip-' + i;
+    wrap.appendChild(d);
+  }
+}
+
+function updateUI() {
+  // progress bar
+  const pct = ((current - 1) / (TOTAL - 1)) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = current + ' / ' + TOTAL;
+
+  // pips
+  for (let i = 1; i <= TOTAL; i++) {
+    const pip = document.getElementById('pip-' + i);
+    pip.className = 'step-pip' + (i === current ? ' active' : i < current ? ' done' : '');
+  }
+
+  // hero only on section 1
+  document.getElementById('heroBlock').style.display = current === 1 ? 'block' : 'none';
+}
+
+// ════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════
+function advance(from) {
+  if (!validate(from)) return;
+  if (from === 9) buildSummary();
+
+  document.getElementById('sec-' + from).classList.remove('active');
+  current = from + 1;
+
+  const nextId = current <= TOTAL ? 'sec-' + current : null;
+  if (nextId && document.getElementById(nextId)) {
+    document.getElementById(nextId).classList.add('active');
+  }
+
+  updateUI();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goBack(from) {
+  document.getElementById('sec-' + from).classList.remove('active');
+  current = from - 1;
+  document.getElementById('sec-' + current).classList.add('active');
+  updateUI();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ════════════════════════════════
+// CHOICE BUTTONS
+// ════════════════════════════════
+function pickRadio(btn, group) {
+  // deselect all in group
+  document.querySelectorAll(`.choice-btn[data-group="${group}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  radioState[group] = btn.dataset.value;
+}
+
+function toggleCheck(btn, group) {
+  btn.classList.toggle('selected');
+  if (!checkState[group]) checkState[group] = new Set();
+  if (btn.classList.contains('selected')) {
+    checkState[group].add(btn.dataset.value);
+  } else {
+    checkState[group].delete(btn.dataset.value);
+  }
+}
+
+function getRadio(group) { return radioState[group] || null; }
+function getChecks(group) { return checkState[group] ? [...checkState[group]] : []; }
+
+// ════════════════════════════════
+// CONDITIONAL FIELDS
+// ════════════════════════════════
+function showConditional(id, show) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('visible', show);
+}
+
+// ════════════════════════════════
+// FILE UPLOADS
+// ════════════════════════════════
+function handleLogo(input) {
+  const status = document.getElementById('logo-status');
+  if (input.files && input.files[0]) {
+    status.textContent = '✓ Selected: ' + input.files[0].name;
+    status.classList.add('show');
+  }
+}
+
+function handleMedia(input) {
+  const grid = document.getElementById('media-grid');
+  const btn  = document.getElementById('btn-send-media');
+  const note = document.getElementById('media-rights-note');
+
+  Array.from(input.files).forEach(file => {
+    mediaFiles.push(file);
+    const div = document.createElement('div');
+    div.className = 'media-thumb';
+    if (file.type.startsWith('image/')) {
+      const img = document.createElement('img');
+      const reader = new FileReader();
+      reader.onload = e => { img.src = e.target.result; };
+      reader.readAsDataURL(file);
+      div.appendChild(img);
+    } else {
+      div.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);padding:6px;text-align:center;">${file.name}</div>`;
+    }
+    grid.appendChild(div);
+  });
+
+  if (mediaFiles.length > 0) {
+    btn.classList.add('show');
+    note.style.display = 'flex';
+  }
+}
+
+// ════════════════════════════════
+// CONSENT TICKS
+// ════════════════════════════════
+function toggleConsent(id) {
+  consentState[id] = !consentState[id];
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('on', consentState[id]);
+}
+
+// ════════════════════════════════
+// VALIDATION
+// ════════════════════════════════
+function setErr(id, show, inputId) {
+  const err = document.getElementById(id);
+  if (err) { err.style.display = show ? 'flex' : 'none'; }
+  if (inputId) {
+    const inp = document.getElementById(inputId);
+    if (inp) inp.classList.toggle('has-error', show);
+  }
+}
+
+function validate(sec) {
+  let ok = true;
+
+  const req = (fieldId, errId) => {
+    const el = document.getElementById(fieldId);
+    const empty = !el || !el.value.trim();
+    setErr(errId, empty, fieldId);
+    if (empty) ok = false;
+  };
+  const reqEmail = (fieldId, errId) => {
+    const el = document.getElementById(fieldId);
+    const bad = !el || !el.value.trim() || !el.value.includes('@');
+    setErr(errId, bad, fieldId);
+    if (bad) ok = false;
+  };
+  const reqRadio = (group, errId) => {
+    const v = getRadio(group);
+    const err = document.getElementById(errId);
+    if (err) err.style.display = v ? 'none' : 'flex';
+    if (!v) ok = false;
+  };
+  const reqCheck = (group, errId) => {
+    const v = getChecks(group);
+    const err = document.getElementById(errId);
+    if (err) err.style.display = v.length > 0 ? 'none' : 'flex';
+    if (v.length === 0) ok = false;
+  };
+
+  if (sec === 1) {
+    req('f-biz-name','e-biz-name');
+    req('f-contact-name','e-contact-name');
+    reqEmail('f-email','e-email');
+    const country = document.getElementById('f-country');
+    const cBad = !country || !country.value;
+    setErr('e-country', cBad, 'f-country');
+    if (cBad) ok = false;
+  }
+
+  if (sec === 2) {
+    reqRadio('has-logo','e-has-logo');
+    reqCheck('brand-tone','e-brand-tone');
+  }
+
+  if (sec === 3) {
+    reqRadio('location-mode','e-location-mode');
+    req('f-hours','e-hours');
+  }
+
+  if (sec === 4) {
+    // services: text OR file is acceptable
+    const svcText = document.getElementById('f-services');
+    const svcFile = document.getElementById('f-services-file');
+    const hasSvc = (svcText && svcText.value.trim()) || (svcFile && svcFile.files && svcFile.files.length > 0);
+    setErr('e-services', !hasSvc, 'f-services');
+    if (!hasSvc) ok = false;
+    reqRadio('show-pricing','e-show-pricing');
+  }
+
+  if (sec === 5) {
+    reqCheck('cta','e-cta');
+    reqRadio('response','e-response');
+  }
+
+  if (sec === 6) {
+    req('f-service-area','e-service-area');
+    reqRadio('quote-reviews','e-quote-reviews');
+  }
+
+  if (sec === 7) {
+    reqRadio('analytics','e-analytics');
+    reqRadio('privacy','e-privacy');
+    reqRadio('domain-owner','e-domain-owner');
+  }
+
+  if (sec === 8) {
+    const needed = ['con1','con2','con3','con4','con5','con6'];
+    const allDone = needed.every(id => consentState[id]);
+    const errEl = document.getElementById('e-consents');
+    if (errEl) errEl.style.display = allDone ? 'none' : 'flex';
+    if (!allDone) ok = false;
+  }
+
+  // sec 9 (upsells) has no required fields
+  // sec 10 handled by submitForm()
+
+  return ok;
+}
+
+// ════════════════════════════════
+// UPSELL TOTAL
+// ════════════════════════════════
+function upsellTotals() {
+  const checks = document.querySelectorAll('.upsell-check:checked');
+  let once = 0, mo = 0;
+  checks.forEach(c => {
+    const cost = parseInt(c.dataset.cost || 0);
+    if (c.dataset.bill === 'mo') mo += cost;
+    else once += cost;                 // 'inc' items are 0, so they add nothing
+  });
+  return { once: once, mo: mo, dueToday: FKEYS.BUILD + once, perMonth: FKEYS.MONTHLY + mo };
+}
+
+function updateUpsellTotal() {
+  const t = upsellTotals();
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('upsell-once', t.once);
+  set('upsell-mo',   t.mo);
+  set('grand-once',  t.dueToday);
+  set('grand-mo',    t.perMonth);
+}
+
+// ════════════════════════════════
+// UPSELL SELECTED LIST
+// ════════════════════════════════
+function getUpsellList() {
+  const checks = document.querySelectorAll('.upsell-check:checked');
+  const list = [];
+  checks.forEach(c => {
+    const item = c.closest('.upsell-item');
+    if (!item) return;
+    const name = item.querySelector('.upsell-name');
+    if (!name) return;
+    const bill = c.dataset.bill;
+    const cost = parseInt(c.dataset.cost || 0);
+    const tag  = bill === 'inc' ? 'included' : bill === 'mo' ? '+$' + cost + '/mo' : '+$' + cost + ' one-time';
+    list.push(name.textContent.trim() + ' (' + tag + ')');
+  });
+  return list;
+}
+
+// ════════════════════════════════
+// FILE UPLOAD HANDLERS (new)
+// ════════════════════════════════
+function handleServicesFile(input) {
+  const status = document.getElementById('services-file-status');
+  if (input.files && input.files[0]) {
+    status.textContent = '✓ Attached: ' + input.files[0].name;
+    status.classList.add('show');
+  }
+}
+function handlePricingFile(input) {
+  const status = document.getElementById('pricing-file-status');
+  if (input.files && input.files[0]) {
+    status.textContent = '✓ Attached: ' + input.files[0].name;
+    status.classList.add('show');
+  }
+}
+
+// toggleConditionalCheck: show conditional only if a specific checkbox value is checked
+function toggleConditionalCheck(conditionalId, group, value) {
+  const checks = getChecks(group);
+  showConditional(conditionalId, checks.includes(value));
+}
+
+// ════════════════════════════════
+// SUMMARY
+// ════════════════════════════════
+function buildSummary() {
+  const v = id => { const el = document.getElementById(id); return el && el.value.trim() ? el.value.trim() : '—'; };
+  const r = group => getRadio(group) || '—';
+  const c = group => getChecks(group).join(', ') || '—';
+
+  const upsells = getUpsellList();
+  const t = upsellTotals();
+
+  const rows = [
+    ['Business', v('f-biz-name')],
+    ['Legal Name', v('f-legal-name')],
+    ['Contact', v('f-contact-name')],
+    ['Email', v('f-email')],
+    ['Phone', v('f-phone')],
+    ['Country', v('f-country')],
+    ['Location Mode', r('location-mode')],
+    ['Address', v('f-address')],
+    ['Area Served', v('f-area-served')],
+    ['Has Logo', r('has-logo')],
+    ['Brand Colors', v('f-colors')],
+    ['Tone', c('brand-tone')],
+    ['Hours', v('f-hours')],
+    ['Services', v('f-services').length > 80 ? v('f-services').substring(0,80)+'…' : v('f-services')],
+    ['Show Pricing', r('show-pricing')],
+    ['Pricing Format', r('pricing')],
+    ['Payment Policies', c('payment-policy')],
+    ['CTAs Selected', c('cta')],
+    ['Response Time', r('response')],
+    ['Service Area (SEO)', v('f-service-area')],
+    ['Instagram', v('f-instagram')],
+    ['Reviews', c('reviews')],
+    ['Quote Reviews', r('quote-reviews')],
+    ['Analytics', r('analytics')],
+    ['Privacy Page', r('privacy')],
+    ['Domain', v('f-domain')],
+    ['Domain Owner', r('domain-owner')],
+    ['Launch Date', v('f-launch-date')],
+    ['Add-Ons Selected', upsells.length > 0 ? upsells.join(' | ') : '—'],
+    ['Due To Build', '$' + t.dueToday + ' one-time'],
+    ['Monthly After Launch', '$' + t.perMonth + '/mo'],
+  ];
+
+  const table = document.getElementById('summary-table');
+  table.innerHTML = rows.map(([k, val]) =>
+    `<tr><td>${k}</td><td>${val}</td></tr>`
+  ).join('');
+}
+
+// ════════════════════════════════
+// SUBMIT
+// ════════════════════════════════
+function submitForm() {
+  if (!consentState['con-final']) {
+    document.getElementById('e-final').style.display = 'flex';
+    return;
+  }
+
+  const v = id => { const el = document.getElementById(id); return el && el.value.trim() ? el.value.trim() : 'Not provided'; };
+  const r = group => getRadio(group) || 'Not selected';
+  const c = group => getChecks(group).join(', ') || 'None selected';
+
+  const ts      = new Date().toLocaleString('en-US', { dateStyle:'full', timeStyle:'short' });
+  const upsells = getUpsellList();
+  const t       = upsellTotals();
+
+  // ── structured record: one column per field in the Google Sheet ──
+  const fields = {
+    'Submitted':            ts,
+    'Business Name':        v('f-biz-name'),
+    'Legal Name':           v('f-legal-name'),
+    'Contact':              v('f-contact-name'),
+    'Email':                v('f-email'),
+    'Phone':                v('f-phone'),
+    'Country':              v('f-country'),
+    'Has Logo':             r('has-logo'),
+    'Brand Colors':         v('f-colors'),
+    'Brand Tone':           c('brand-tone'),
+    'Avoid Words':          v('f-avoid'),
+    'Location Mode':        r('location-mode'),
+    'Address':              v('f-address'),
+    'Area Served':          v('f-area-served'),
+    'Hours':                v('f-hours'),
+    'Age Restrictions':     v('f-age'),
+    'Licensed/Insured':     r('licensed'),
+    'Services':             v('f-services'),
+    'Show Pricing':         r('show-pricing'),
+    'Pricing Format':       r('pricing'),
+    'Pricing Details':      v('f-pricing-custom'),
+    'Payment Policies':     c('payment-policy'),
+    'Payment Notes':        v('f-payment-notes'),
+    'Cancel Policy':        v('f-cancel'),
+    'CTAs':                 c('cta'),
+    'Booking Platform':     v('f-booking'),
+    'Custom CTA':           v('f-cta-other'),
+    'Response Time':        r('response'),
+    'Auto-Reply':           v('f-autoreply'),
+    'Service Area (SEO)':   v('f-service-area'),
+    'Keywords':             v('f-keywords'),
+    'Instagram':            v('f-instagram'),
+    'Google Business':      v('f-gbp'),
+    'Review Platforms':     c('reviews'),
+    'Quote Reviews':        r('quote-reviews'),
+    'Analytics':            r('analytics'),
+    'Privacy Page':         r('privacy'),
+    'Domain':               v('f-domain'),
+    'Domain Owner':         r('domain-owner'),
+    'Target Launch':        v('f-launch-date'),
+    'Add-Ons':              upsells.length ? upsells.join(' | ') : 'None',
+    'One-Time Add-Ons':     '$' + t.once,
+    'Monthly Add-Ons':      '$' + t.mo,
+    'Due To Build':         '$' + t.dueToday,
+    'Monthly After Launch': '$' + t.perMonth,
+    'Notes':                v('f-notes'),
+    'Agreement Accepted':   'Yes — all 6 clauses + final confirmation, ' + ts
+  };
+
+  // ── readable version, for the notification email and the mailto fallback ──
+  const body =
+`WEBSITE LAUNCH AUTHORIZATION — CLIENT INTAKE
+Submitted: ${ts}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLIENT INFORMATION
+  Business Name:     ${fields['Business Name']}
+  Legal Name:        ${fields['Legal Name']}
+  Contact:           ${fields['Contact']}
+  Email:             ${fields['Email']}
+  Phone:             ${fields['Phone']}
+  Country:           ${fields['Country']}
+
+BRAND & IDENTITY
+  Has Logo:          ${fields['Has Logo']}
+  Brand Colors:      ${fields['Brand Colors']}
+  Brand Tone:        ${fields['Brand Tone']}
+  Avoid Words:       ${fields['Avoid Words']}
+
+BUSINESS DETAILS
+  Location Mode:     ${fields['Location Mode']}
+  Address:           ${fields['Address']}
+  Area Served:       ${fields['Area Served']}
+  Hours:             ${fields['Hours']}
+  Age Restrictions:  ${fields['Age Restrictions']}
+  Licensed/Insured:  ${fields['Licensed/Insured']}
+
+SERVICES & POLICIES
+  Services:
+${fields['Services'].split('\n').map(l => '    ' + l).join('\n')}
+
+  Show Pricing:      ${fields['Show Pricing']}
+  Pricing Format:    ${fields['Pricing Format']}
+  Pricing Details:   ${fields['Pricing Details']}
+  Payment Policies:  ${fields['Payment Policies']}
+  Payment Notes:     ${fields['Payment Notes']}
+  Cancel Policy:     ${fields['Cancel Policy']}
+
+BOOKING & CONTACT
+  CTAs Selected:     ${fields['CTAs']}
+  Booking Platform:  ${fields['Booking Platform']}
+  Custom CTA:        ${fields['Custom CTA']}
+  Response Time:     ${fields['Response Time']}
+  Auto-Reply:        ${fields['Auto-Reply']}
+
+SEO & ONLINE PRESENCE
+  Service Area:      ${fields['Service Area (SEO)']}
+  Keywords:          ${fields['Keywords']}
+  Instagram:         ${fields['Instagram']}
+  Google Business:   ${fields['Google Business']}
+  Review Platforms:  ${fields['Review Platforms']}
+  Quote Reviews:     ${fields['Quote Reviews']}
+
+ANALYTICS & DOMAIN
+  Google Analytics:  ${fields['Analytics']}
+  Privacy Policy:    ${fields['Privacy Page']}
+  Domain:            ${fields['Domain']}
+  Domain Owner:      ${fields['Domain Owner']}
+  Target Launch:     ${fields['Target Launch']}
+
+SELECTED ADD-ONS
+${upsells.length ? upsells.map(u => '  • ' + u).join('\n') : '  None selected'}
+
+  One-time add-ons:      $${t.once}
+  Monthly add-ons:       $${t.mo}/mo
+  ────────────────────────────────
+  DUE TO BUILD:          $${t.dueToday}   ($${FKEYS.BUILD} build + $${t.once} add-ons)
+  MONTHLY AFTER LAUNCH:  $${t.perMonth}/mo ($${FKEYS.MONTHLY} base + $${t.mo} add-ons)
+
+ADDITIONAL NOTES
+${fields['Notes']}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LEGAL AGREEMENT & ELECTRONIC SIGNATURE
+Timestamp: ${ts}
+
+The following was individually confirmed by the Client:
+
+  [✓] Submission is a quote request — does not start work, does not charge the client
+  [✓] $100 one-time build; $75/month begins after website delivery
+  [✓] Provider authorized to use submitted logo, images, and business identity
+  [✓] Client confirms ownership of all submitted content
+  [✓] Client agrees to full Website Development, Delivery & Hosting Agreement
+  [✓] Submission constitutes electronic signature under U.S. E-SIGN law
+  [✓] Final confirmation: all information is accurate
+
+This submission constitutes a binding electronic agreement.
+Governing law: State of Florida. Venue: Charlotte County, FL.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+  const subject = `Website Intake — ${fields['Business Name']} — ${fields['Contact']}`;
+
+  send({
+    formType: 'Client Intake',
+    fields:   fields,
+    subject:  subject,
+    body:     body,
+    fileIds:  ['f-logo', 'f-services-file', 'f-pricing-file']
+  }, 'btn-submit', 'submit-status', showSuccess);
+}
+
+// ════════════════════════════════
+// SEND — endpoint if configured, mail app if not
+// ════════════════════════════════
+async function readFiles(ids) {
+  const out = [];
+  for (const id of ids) {
+    const input = document.getElementById(id);
+    if (!input || !input.files) continue;
+    for (const file of input.files) {
+      try {
+        const b64 = await new Promise((res, rej) => {
+          const fr = new FileReader();
+          fr.onload  = () => res(fr.result.split(',')[1]);
+          fr.onerror = rej;
+          fr.readAsDataURL(file);
+        });
+        out.push({ name: file.name, type: file.type || 'application/octet-stream', data: b64 });
+      } catch (e) { console.warn('skipped file', file.name); }
+    }
+  }
+  return out;
+}
+
+async function send(payload, btnId, statusId, onDone) {
+  const btn    = document.getElementById(btnId);
+  const status = document.getElementById(statusId);
+  const say    = msg => { if (status) { status.style.display = 'block'; status.textContent = msg; } };
+
+  // No endpoint configured yet — open the client's mail app instead.
+  // The form is never dead, whatever state the backend is in.
+  if (!FKEYS.ENDPOINT) {
+    say('Opening your mail app…');
+    window.location.href = 'mailto:' + FKEYS.NOTIFY +
+      '?subject=' + encodeURIComponent(payload.subject) +
+      '&body='    + encodeURIComponent(payload.body);
+    setTimeout(onDone, 600);
+    return;
+  }
+
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+  say('Getting your files ready…');
+
+  let files = [];
+  try { files = await readFiles(payload.fileIds || []); } catch (e) { files = []; }
+  say(files.length ? 'Sending ' + files.length + ' file(s)…' : 'Sending…');
+
+  try {
+    await fetch(FKEYS.ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        formType: payload.formType,
+        fields:   payload.fields,
+        subject:  payload.subject,
+        body:     payload.body,
+        files:    files
+      })
+    });
+    say('Sent.');
+    setTimeout(onDone, 400);
+  } catch (err) {
+    // Endpoint unreachable — fall back to the mail app rather than lose the intake.
+    say('Connection problem — opening your mail app instead.');
+    if (btn) { btn.disabled = false; btn.textContent = 'Send My Intake →'; }
+    window.location.href = 'mailto:' + FKEYS.NOTIFY +
+      '?subject=' + encodeURIComponent(payload.subject) +
+      '&body='    + encodeURIComponent(payload.body);
+    setTimeout(onDone, 900);
+  }
+}
+
+function showSuccess() {
+  document.getElementById('sec-10').classList.remove('active');
+  document.getElementById('success-screen').style.display = 'block';
+  document.getElementById('heroBlock').style.display = 'none';
+  current = TOTAL;
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = '✓';
+  for (let i = 1; i <= TOTAL; i++) {
+    const pip = document.getElementById('pip-' + i);
+    if (pip) pip.className = 'step-pip done';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ════════════════════════════════
+// POST-SUCCESS BRAND ASSET UPLOAD
+// ════════════════════════════════
+function sendMediaEmail() {
+  const bizName = document.getElementById('f-biz-name').value.trim() || 'Client';
+  const names   = mediaFiles.map(f => '  • ' + f.name).join('\n');
+  const manual  = FKEYS.ENDPOINT ? '' :
+    '\n\nNOTE: please attach the files to this email before you send it — your browser cannot attach them on its own.';
+  const body =
+`Brand assets for ${bizName}.
+
+Files: ${mediaFiles.length}
+${names}
+
+I own or have the rights to use these files, and I authorize their use on my website.${manual}`;
+
+  send({
+    formType: 'Brand Assets',
+    fields:   { 'Submitted': new Date().toLocaleString('en-US'), 'Business Name': bizName, 'File Count': mediaFiles.length },
+    subject:  `Website Assets — ${bizName}`,
+    body:     body,
+    fileIds:  ['f-media']
+  }, 'btn-send-media', 'media-status', () => {
+    const btn = document.getElementById('btn-send-media');
+    if (btn) { btn.disabled = true; btn.textContent = '✓ Assets sent'; }
+  });
+}
+</script>
+</body>
+</html>

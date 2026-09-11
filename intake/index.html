@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Websites for local businesses — F-Keys</title>
+<meta name="description" content="$100 to build your website. $75/month to keep it running. Punta Gorda, Florida.">
+<link rel="canonical" href="https://f-keys.com/intake/">
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<meta property="og:site_name" content="F-Keys">
+<meta property="og:title" content="Websites for local businesses — F-Keys">
+<meta property="og:description" content="$100 to build your website. $75/month to keep it running. Punta Gorda, Florida.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/intake/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Websites for local businesses — F-Keys">
+<meta name="twitter:description" content="$100 to build your website. $75/month to keep it running.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   F-KEYS — THE OFFER
+   Same palette as the intake form, so the two
+   pages read as one thing.
+══════════════════════════════════════════════ */
+:root {
+  --bg:#060f1a; --bg-2:#081525; --txt:#eef4ff; --muted:#7a9dbf; --muted2:#4a6a85;
+  --sky:#87ceeb; --coral:#ff7f6e; --mint:#6de8c8; --gold:#f5c842;
+  --glass:rgba(255,255,255,.042); --glass-border:rgba(255,255,255,.085);
+  --radius:20px;
+  --font-display:'Syne','Georgia',serif;
+  --font-body:'DM Sans','Georgia',ui-serif,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 15% -10%, rgba(135,206,235,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 110%, rgba(255,127,110,.06) 0%, transparent 55%);
+  color:var(--txt);font-family:var(--font-body);font-size:16px;line-height:1.7;min-height:100vh;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+header{padding:80px 0 56px;}
+.eyebrow{
+  font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--sky);margin-bottom:20px;
+}
+h1{font-family:var(--font-display);font-size:clamp(38px,7vw,62px);font-weight:800;line-height:1.05;letter-spacing:-.02em;}
+h1 em{font-style:normal;color:var(--coral);}
+.lede{font-size:19px;color:var(--muted);margin-top:22px;max-width:56ch;font-weight:300;}
+
+h2{
+  font-family:var(--font-display);font-size:26px;font-weight:700;
+  margin:0 0 18px;letter-spacing:-.01em;
+}
+section{padding:44px 0;border-top:1px solid var(--glass-border);}
+
+/* price cards */
+.prices{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:8px 0 0;}
+.price{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:var(--radius);padding:30px 28px;
+}
+.price.mo{border-color:rgba(109,232,200,.28);background:rgba(109,232,200,.05);}
+.price .num{font-family:var(--font-display);font-size:48px;font-weight:800;line-height:1;}
+.price.build .num{color:var(--sky);}
+.price.mo .num{color:var(--mint);}
+.price .num span{font-size:15px;font-weight:400;color:var(--muted);}
+.price .cap{
+  font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted2);margin:14px 0 12px;
+}
+.price ul{list-style:none;font-size:15px;}
+.price li{padding:6px 0 6px 24px;position:relative;color:var(--muted);}
+.price li::before{content:'✓';position:absolute;left:0;color:var(--mint);font-weight:700;}
+.price li strong{color:var(--txt);font-weight:500;}
+
+/* steps */
+.steps{counter-reset:s;}
+.step{display:flex;gap:20px;padding:16px 0;}
+.step .n{
+  flex-shrink:0;width:34px;height:34px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--sky);
+}
+.step p{color:var(--muted);font-size:15px;}
+.step p strong{color:var(--txt);font-weight:500;}
+
+/* q&a */
+.qa{padding:20px 0;border-bottom:1px solid var(--glass-border);}
+.qa:last-child{border-bottom:none;}
+.qa h3{font-family:var(--font-display);font-size:17px;font-weight:600;margin-bottom:7px;}
+.qa p{color:var(--muted);font-size:15px;}
+
+.note{
+  background:rgba(245,200,66,.06);border:1px solid rgba(245,200,66,.2);
+  border-radius:14px;padding:18px 22px;font-size:15px;color:var(--muted);margin-top:24px;
+}
+.note strong{color:var(--gold);font-weight:600;}
+
+.cta{text-align:center;padding:64px 0 40px;}
+.cta a{
+  display:inline-block;background:var(--coral);color:#0b0f14;
+  font-family:var(--font-display);font-weight:700;font-size:17px;
+  padding:17px 42px;border-radius:14px;text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.cta a:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,127,110,.3);}
+.cta .sub{font-size:14px;color:var(--muted2);margin-top:16px;}
+
+footer{
+  padding:36px 0 60px;border-top:1px solid var(--glass-border);
+  font-size:13px;color:var(--muted2);text-align:center;
+}
+footer a{color:var(--sky);text-decoration:none;}
+
+@media (max-width:620px){
+  .prices{grid-template-columns:1fr;}
+  header{padding:56px 0 40px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">F-Keys Creative LLC · Punta Gorda, Florida</div>
+    <h1>A real website<br>for <em>$100</em>.</h1>
+    <p class="lede">I'm Vince. I build websites in Punta Gorda. If your business doesn't have one, or has one you're embarrassed by, this is the whole offer — no packages to compare, no sales call, no quote that takes a week.</p>
+  </header>
+
+  <section>
+    <h2>The price</h2>
+    <div class="prices">
+      <div class="price build">
+        <div class="num">$100<span> once</span></div>
+        <div class="cap">To build it</div>
+        <ul>
+          <li>A <strong>real site</strong>, written and built for your business</li>
+          <li>Works on <strong>phones</strong>, where your customers actually are</li>
+          <li><strong>Your photos, your words</strong>, your hours, your prices</li>
+          <li><strong>Contact and booking</strong> that reach you</li>
+          <li>Set up so <strong>Google can find you</strong></li>
+          <li>You see it and approve it <strong>before it goes live</strong></li>
+        </ul>
+      </div>
+      <div class="price mo">
+        <div class="num">$75<span>/month</span></div>
+        <div class="cap">To keep it running</div>
+        <ul>
+          <li><strong>Hosting</strong> — the site stays up</li>
+          <li><strong>Your domain</strong>, renewed and managed</li>
+          <li><strong>Two edits a month</strong> — new prices, new hours, new photos</li>
+          <li><strong>One hour</strong> of Zoom or phone, whenever you want it</li>
+          <li><strong>Security monitoring</strong>, so it doesn't get hijacked</li>
+          <li><strong>Cancel any time.</strong> No year contract</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">
+      <strong>An edit is one batch of changes</strong> — send me a list, I do the whole list. Two of those a month. Not two individual words. If you need more than that in a month, I'll tell you what it costs before I do it, never after.
+    </div>
+  </section>
+
+  <section>
+    <h2>What isn't included</h2>
+    <p style="color:var(--muted);font-size:15px;">There's a menu of extras on the intake form — a store, online booking, a blog, another language, and about forty more. Twenty of them are already in your $75 and cost you nothing. The rest are $15 or $50 one-time, and the three that are ongoing work are $50/month. Every price is on the menu. Nothing is "call for pricing."</p>
+  </section>
+
+  <section>
+    <h2>How it goes</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><p><strong>You fill out the form.</strong> It takes about fifteen minutes and it asks everything I need, so I'm not calling you six times.</p></div>
+      <div class="step"><div class="n">2</div><p><strong>I send you a written quote</strong> with the same numbers you saw on the form, plus the date I'll have it done. Nothing is charged yet.</p></div>
+      <div class="step"><div class="n">3</div><p><strong>You say yes and I build it.</strong> You see it before anyone else does.</p></div>
+      <div class="step"><div class="n">4</div><p><strong>It goes live when you approve it.</strong> The $75/month starts then — not while I'm still building.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Straight answers</h2>
+
+    <div class="qa">
+      <h3>Do I own the site?</h3>
+      <p>Yes, once the build is paid for. The files are yours. If you leave, you take them with you.</p>
+    </div>
+    <div class="qa">
+      <h3>What happens if I cancel?</h3>
+      <p>Hosting stops, so the site goes down. You keep the files and the domain. Tell me in writing and that's it — there's nothing to argue about.</p>
+    </div>
+    <div class="qa">
+      <h3>Why is the build only $100?</h3>
+      <p>Because the monthly is the business, and because $100 is a price you can say yes to without a meeting. I'd rather build ten sites this month than argue about one $3,000 proposal.</p>
+    </div>
+    <div class="qa">
+      <h3>I already have a website and it's bad.</h3>
+      <p>Same price. Replacing a bad site is usually easier than starting cold, because the words already exist somewhere.</p>
+    </div>
+    <div class="qa">
+      <h3>Can you take payments on my site?</h3>
+      <p>Usually yes — that's one of the add-ons. Some businesses can't, because the payment companies won't process certain products. If that's you, I'll tell you straight and build you a site that sends people to you instead.</p>
+    </div>
+    <div class="qa">
+      <h3>Is there a contract?</h3>
+      <p>Yes, and it's on the last page of the intake form where you can read it before you agree to anything. It's month-to-month. Read it. If something in it bothers you, say so and we'll talk about it before you sign.</p>
+    </div>
+  </section>
+
+  <div class="cta">
+    <a href="form/">Start the intake form →</a>
+    <div class="sub">Fifteen minutes. Nothing is charged and nothing is built until you see a written quote.</div>
+  </div>
+
+  <footer>
+    F-Keys Creative LLC · Punta Gorda, Florida<br>
+    <a href="https://f-keys.com">f-keys.com</a> · <a href="mailto:vincegonzalez@me.com">vincegonzalez@me.com</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
