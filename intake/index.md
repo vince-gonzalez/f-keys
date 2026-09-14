@@ -55,7 +55,7 @@ There are 47 extras on the intake form — a store, online booking, a blog, anot
 
 ## Start
 
-[Start the intake form](https://f-keys.com/intake/form/) — or email <vincegonzalez@me.com>.
+Email <vincegonzalez@me.com> with your business name and what it does. I'll reply with a written quote.
 
 ---
 

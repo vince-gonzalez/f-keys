@@ -20,7 +20,7 @@
   --bg-card:      rgba(255,255,255,.045);
   --txt:          #eef4ff;
   --muted:        #7a9dbf;
-  --muted2:       #4a6a85;
+  --muted2:       #6f92af;   /* 4.83:1 on the deepest card - measured, not eyeballed */
   --sky:          #87ceeb;
   --sky-dim:      rgba(135,206,235,.15);
   --coral:        #ff7f6e;
@@ -373,7 +373,7 @@ input.has-error, select.has-error, textarea.has-error {
 }
 textarea { resize: vertical; min-height: 96px; }
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a6a85'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236f92af'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 36px;
@@ -1077,6 +1077,11 @@ select option { background: #0d1f33; color: var(--txt); }
 <!-- MAIN FORM -->
 <div class="container">
 
+<!-- A real form element: the browser will offer autofill for the
+     contact fields, and Enter behaves the way people expect.
+     Submission is driven by submitForm(), not by the browser. -->
+<form id="intakeForm" novalidate onsubmit="event.preventDefault();return false;">
+
   <!-- ══════ SECTION 1: CLIENT INFO ══════ -->
   <div class="form-section active" id="sec-1">
     <span class="section-label">Section 01 of 10</span>
@@ -1086,32 +1091,32 @@ select option { background: #0d1f33; color: var(--txt); }
     <div class="card">
       <div class="field">
         <div class="field-label">Business Name (Public-Facing) <span class="req">*</span></div>
-        <input type="text" id="f-biz-name" placeholder="e.g. Cape Coral Cleaning Co.">
+        <input type="text" id="f-biz-name" name="f-biz-name" autocomplete="organization" placeholder="e.g. Cape Coral Cleaning Co.">
         <div class="field-error" id="e-biz-name">Required — please enter your business name.</div>
       </div>
       <div class="field">
         <div class="field-label">Legal Business Name <span class="opt">optional</span></div>
-        <input type="text" id="f-legal-name" placeholder="If different from above">
+        <input type="text" id="f-legal-name" name="f-legal-name" autocomplete="organization" placeholder="If different from above">
       </div>
       <div class="field-row">
         <div class="field">
           <div class="field-label">Primary Contact Name <span class="req">*</span></div>
-          <input type="text" id="f-contact-name" placeholder="Your full name">
+          <input type="text" id="f-contact-name" name="f-contact-name" autocomplete="name" placeholder="Your full name">
           <div class="field-error" id="e-contact-name">Required.</div>
         </div>
         <div class="field">
           <div class="field-label">Phone <span class="opt">optional</span></div>
-          <input type="tel" id="f-phone" placeholder="(239) 000-0000">
+          <input type="tel" id="f-phone" name="f-phone" autocomplete="tel" placeholder="(239) 000-0000">
         </div>
       </div>
       <div class="field">
         <div class="field-label">Email Address <span class="req">*</span></div>
-        <input type="email" id="f-email" placeholder="you@yourbusiness.com">
+        <input type="email" id="f-email" name="f-email" autocomplete="email" placeholder="you@yourbusiness.com">
         <div class="field-error" id="e-email">Please enter a valid email address.</div>
       </div>
       <div class="field">
         <div class="field-label">Country <span class="req">*</span></div>
-        <select id="f-country">
+        <select id="f-country" name="f-country" autocomplete="country-name">
           <option value="">Select country...</option>
           <option>United States</option>
           <option>Canada</option>
@@ -1152,7 +1157,7 @@ select option { background: #0d1f33; color: var(--txt); }
           <div class="field-label" style="margin-top:20px;">Upload Your Logo <span class="req">*</span></div>
           <p class="field-hint" style="margin-bottom:10px;">PNG, JPG, or SVG preferred. Will be attached to your email submission.</p>
           <div class="upload-zone" id="logo-zone">
-            <input type="file" id="f-logo" accept=".png,.jpg,.jpeg,.svg,.gif" onchange="handleLogo(this)">
+            <input type="file" id="f-logo" name="f-logo" accept=".png,.jpg,.jpeg,.svg,.gif" onchange="handleLogo(this)">
             <div class="upload-emoji">🖼</div>
             <h4>Click to upload or drag & drop</h4>
             <p>PNG · JPG · SVG · GIF</p>
@@ -1165,7 +1170,7 @@ select option { background: #0d1f33; color: var(--txt); }
 
       <div class="field">
         <div class="field-label">Brand Colors <span class="opt">optional</span></div>
-        <input type="text" id="f-colors" placeholder="e.g. #2a5fc8, deep navy + warm orange">
+        <input type="text" id="f-colors" name="f-colors" placeholder="e.g. #2a5fc8, deep navy + warm orange">
         <div class="field-hint">Hex codes, names, or descriptions all work.</div>
       </div>
 
@@ -1196,7 +1201,7 @@ select option { background: #0d1f33; color: var(--txt); }
 
       <div class="field">
         <div class="field-label">Words or Phrases to AVOID <span class="opt">optional</span></div>
-        <textarea id="f-avoid" placeholder="e.g. cheap, budget, discount, aggressive..."></textarea>
+        <textarea id="f-avoid" name="f-avoid" placeholder="e.g. cheap, budget, discount, aggressive..."></textarea>
       </div>
     </div>
 
@@ -1244,13 +1249,13 @@ select option { background: #0d1f33; color: var(--txt); }
 
         <div class="conditional" id="loc-address-wrap">
           <div class="field-label" style="margin-top:20px;">Business Address <span class="opt">optional</span></div>
-          <input type="text" id="f-address" placeholder="e.g. 1234 Cape Coral Pkwy, Cape Coral, FL 33904">
+          <input type="text" id="f-address" name="f-address" autocomplete="street-address" placeholder="e.g. 1234 Cape Coral Pkwy, Cape Coral, FL 33904">
           <div class="field-hint">Will appear on your contact page, footer, and Google Maps embed.</div>
         </div>
 
         <div class="conditional" id="loc-area-wrap">
           <div class="field-label" style="margin-top:20px;">Area(s) Served <span class="opt">optional</span></div>
-          <input type="text" id="f-area-served" placeholder="e.g. Cape Coral, Fort Myers, Lee County, SW Florida">
+          <input type="text" id="f-area-served" name="f-area-served" placeholder="e.g. Cape Coral, Fort Myers, Lee County, SW Florida">
           <div class="field-hint">Used for local SEO and your contact / about pages.</div>
         </div>
       </div>
@@ -1259,12 +1264,12 @@ select option { background: #0d1f33; color: var(--txt); }
 
       <div class="field">
         <div class="field-label">Business Hours <span class="req">*</span></div>
-        <textarea id="f-hours" placeholder="e.g. Mon–Fri 8am–6pm, Sat by appointment, Sun closed"></textarea>
+        <textarea id="f-hours" name="f-hours" placeholder="e.g. Mon–Fri 8am–6pm, Sat by appointment, Sun closed"></textarea>
         <div class="field-error" id="e-hours">Please enter your business hours.</div>
       </div>
       <div class="field">
         <div class="field-label">Age Restrictions <span class="opt">optional</span></div>
-        <input type="text" id="f-age" placeholder="e.g. 18+ only, 21+ for alcohol-related services">
+        <input type="text" id="f-age" name="f-age" placeholder="e.g. 18+ only, 21+ for alcohol-related services">
       </div>
       <div class="field">
         <div class="field-label">Licensed and/or Insured? <span class="opt">optional</span></div>
@@ -1299,7 +1304,7 @@ select option { background: #0d1f33; color: var(--txt); }
       <div style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sky);margin-bottom:18px;">Your Services</div>
       <div class="field">
         <div class="field-label">List Your Services <span class="req">*</span></div>
-        <textarea id="f-services" style="min-height:120px;" placeholder="e.g.&#10;— Residential cleaning&#10;— Deep cleans&#10;— Move-in / move-out&#10;— Commercial spaces"></textarea>
+        <textarea id="f-services" name="f-services" style="min-height:120px;" placeholder="e.g.&#10;— Residential cleaning&#10;— Deep cleans&#10;— Move-in / move-out&#10;— Commercial spaces"></textarea>
         <div class="field-hint">Type them out, paste from a doc, or upload a menu/service list below.</div>
         <div class="field-error" id="e-services">Please describe your services — or upload a file below.</div>
       </div>
@@ -1307,7 +1312,7 @@ select option { background: #0d1f33; color: var(--txt); }
         <div class="field-label">Upload a Menu or Service List <span class="opt">optional</span></div>
         <div class="field-hint" style="margin-bottom:10px;">PDF, image, Word doc, or spreadsheet — anything that lists what you offer.</div>
         <div class="upload-zone" id="services-zone">
-          <input type="file" id="f-services-file" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.csv" onchange="handleServicesFile(this)">
+          <input type="file" id="f-services-file" name="f-services-file" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.csv" onchange="handleServicesFile(this)">
           <div class="upload-emoji">📋</div>
           <h4>Click to upload or drag & drop</h4>
           <p>PDF · DOC · XLS · PNG · JPG</p>
@@ -1352,12 +1357,12 @@ select option { background: #0d1f33; color: var(--txt); }
 
           <div class="conditional" id="pricing-input-wrap">
             <div class="field-label">Enter Your Pricing Details <span class="opt">optional</span></div>
-            <textarea id="f-pricing-custom" style="min-height:100px;" placeholder="e.g.&#10;Basic Clean — starting at $80&#10;Deep Clean — starting at $150&#10;Move-Out — from $200"></textarea>
+            <textarea id="f-pricing-custom" name="f-pricing-custom" style="min-height:100px;" placeholder="e.g.&#10;Basic Clean — starting at $80&#10;Deep Clean — starting at $150&#10;Move-Out — from $200"></textarea>
           </div>
           <div class="conditional" id="pricing-upload-wrap">
             <div class="field-label" style="margin-bottom:10px;">Upload Price Menu / PDF <span class="opt">optional</span></div>
             <div class="upload-zone" id="pricing-zone">
-              <input type="file" id="f-pricing-file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onchange="handlePricingFile(this)">
+              <input type="file" id="f-pricing-file" name="f-pricing-file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onchange="handlePricingFile(this)">
               <div class="upload-emoji">💲</div>
               <h4>Upload your pricing document</h4>
               <p>PDF · DOC · PNG · JPG</p>
@@ -1409,11 +1414,11 @@ select option { background: #0d1f33; color: var(--txt); }
       </div>
       <div class="field">
         <div class="field-label">Additional Payment Details <span class="opt">optional</span></div>
-        <textarea id="f-payment-notes" placeholder="e.g. 50% deposit required at booking. Balance due upon completion. No refunds within 48 hours of appointment..."></textarea>
+        <textarea id="f-payment-notes" name="f-payment-notes" placeholder="e.g. 50% deposit required at booking. Balance due upon completion. No refunds within 48 hours of appointment..."></textarea>
       </div>
       <div class="field">
         <div class="field-label">Cancellation / Reschedule Policy <span class="opt">optional</span></div>
-        <textarea id="f-cancel" placeholder="e.g. 24-hour notice required. Late cancellations may be charged a convenience fee..."></textarea>
+        <textarea id="f-cancel" name="f-cancel" placeholder="e.g. 24-hour notice required. Late cancellations may be charged a convenience fee..."></textarea>
       </div>
     </div>
 
@@ -1502,12 +1507,12 @@ select option { background: #0d1f33; color: var(--txt); }
 
         <div class="conditional" id="booking-wrap">
           <div class="field-label" style="margin-top:20px;">Booking Platform <span class="opt">optional</span></div>
-          <input type="text" id="f-booking" placeholder="e.g. Calendly, Square, Acuity, Mindbody, Jane...">
+          <input type="text" id="f-booking" name="f-booking" placeholder="e.g. Calendly, Square, Acuity, Mindbody, Jane...">
         </div>
 
         <div class="conditional" id="cta-other-wrap">
           <div class="field-label" style="margin-top:20px;">Describe Your Custom CTA <span class="opt">optional</span></div>
-          <textarea id="f-cta-other" style="min-height:72px;" placeholder="e.g. WhatsApp chat button, Shopify store link, custom intake form..."></textarea>
+          <textarea id="f-cta-other" name="f-cta-other" style="min-height:72px;" placeholder="e.g. WhatsApp chat button, Shopify store link, custom intake form..."></textarea>
         </div>
       </div>
 
@@ -1530,7 +1535,7 @@ select option { background: #0d1f33; color: var(--txt); }
       </div>
       <div class="field">
         <div class="field-label">Auto-Reply Message <span class="opt">optional</span></div>
-        <textarea id="f-autoreply" placeholder="e.g. Thanks for reaching out! I'll get back to you within 24 hours. For urgent matters call (239) 000-0000."></textarea>
+        <textarea id="f-autoreply" name="f-autoreply" placeholder="e.g. Thanks for reaching out! I'll get back to you within 24 hours. For urgent matters call (239) 000-0000."></textarea>
       </div>
     </div>
 
@@ -1549,21 +1554,21 @@ select option { background: #0d1f33; color: var(--txt); }
     <div class="card">
       <div class="field">
         <div class="field-label">Primary Service Area(s) <span class="req">*</span></div>
-        <textarea id="f-service-area" placeholder="e.g. Cape Coral, Fort Myers, Lee County FL — or nationwide"></textarea>
+        <textarea id="f-service-area" name="f-service-area" placeholder="e.g. Cape Coral, Fort Myers, Lee County FL — or nationwide"></textarea>
         <div class="field-error" id="e-service-area">Please enter your service area.</div>
       </div>
       <div class="field">
         <div class="field-label">Keywords to Rank For <span class="opt">optional</span></div>
-        <textarea id="f-keywords" placeholder="e.g. house cleaning Cape Coral, maid service Fort Myers, residential cleaner Lee County"></textarea>
+        <textarea id="f-keywords" name="f-keywords" placeholder="e.g. house cleaning Cape Coral, maid service Fort Myers, residential cleaner Lee County"></textarea>
       </div>
       <div class="field-row">
         <div class="field">
           <div class="field-label">Instagram Username <span class="opt">optional</span></div>
-          <input type="text" id="f-instagram" placeholder="@yourbusiness">
+          <input type="text" id="f-instagram" name="f-instagram" placeholder="@yourbusiness">
         </div>
         <div class="field">
           <div class="field-label">Google Business Profile <span class="opt">optional</span></div>
-          <input type="url" id="f-gbp" placeholder="https://g.page/...">
+          <input type="url" id="f-gbp" name="f-gbp" placeholder="https://g.page/...">
         </div>
       </div>
       <div class="field">
@@ -1639,7 +1644,7 @@ select option { background: #0d1f33; color: var(--txt); }
 
       <div class="field">
         <div class="field-label">Domain Name <span class="opt">optional</span></div>
-        <input type="text" id="f-domain" placeholder="e.g. mycoolbusiness.com">
+        <input type="text" id="f-domain" name="f-domain" autocomplete="url" placeholder="e.g. mycoolbusiness.com">
       </div>
       <div class="field">
         <div class="field-label">Domain Ownership <span class="req">*</span></div>
@@ -1658,7 +1663,7 @@ select option { background: #0d1f33; color: var(--txt); }
       </div>
       <div class="field">
         <div class="field-label">Target Launch Date <span class="opt">optional</span></div>
-        <input type="date" id="f-launch-date">
+        <input type="date" id="f-launch-date" name="f-launch-date">
       </div>
     </div>
 
@@ -1748,7 +1753,7 @@ select option { background: #0d1f33; color: var(--txt); }
     <div class="card">
       <div class="field">
         <div class="field-label">Anything else we should know? <span class="opt">optional</span></div>
-        <textarea id="f-notes" placeholder="Special requirements, tight deadlines, references you love, existing brand guidelines..."></textarea>
+        <textarea id="f-notes" name="f-notes" placeholder="Special requirements, tight deadlines, references you love, existing brand guidelines..."></textarea>
       </div>
     </div>
 
@@ -2290,7 +2295,7 @@ select option { background: #0d1f33; color: var(--txt); }
       <p class="sub2">Optional — upload photos, reference images, existing design files, or anything that helps communicate your vision. These get sent as a separate email.</p>
 
       <div class="upload-zone" id="media-zone">
-        <input type="file" id="f-media" accept="image/*,.pdf" multiple onchange="handleMedia(this)">
+        <input type="file" id="f-media" name="f-media" accept="image/*,.pdf" multiple onchange="handleMedia(this)">
         <div class="upload-emoji">📎</div>
         <h4>Click to select or drag files here</h4>
         <p>Images · PDFs · Logos · References — multiple files ok</p>
@@ -2307,6 +2312,8 @@ select option { background: #0d1f33; color: var(--txt); }
       <button class="btn-send-media" id="btn-send-media" onclick="sendMediaEmail()">📎 Send My Files →</button>
     </div>
   </div>
+
+</form>
 
 </div>
 
@@ -2898,16 +2905,23 @@ async function readFiles(ids) {
 async function send(payload, btnId, statusId, onDone) {
   const btn    = document.getElementById(btnId);
   const status = document.getElementById(statusId);
-  const say    = msg => { if (status) { status.style.display = 'block'; status.textContent = msg; } };
+  const say    = (msg, bad) => {
+    if (!status) return;
+    status.style.display = 'block';
+    status.textContent   = msg;
+    status.style.color   = bad ? 'var(--warn, #ff7f6e)' : 'var(--muted)';
+  };
+  const reset  = () => { if (btn) { btn.disabled = false; btn.textContent = payload.btnLabel || 'Send My Intake →'; } };
 
-  // No endpoint configured yet — open the client's mail app instead.
-  // The form is never dead, whatever state the backend is in.
+  /* No endpoint configured. The mail app is the fallback, but a mailto
+     carrying this whole intake is several thousand characters and Windows
+     hands the mail client about two thousand, so it arrives cut in half or
+     not at all. Showing the success screen here told the client they were
+     done when nothing had left the browser. It no longer does that: the
+     text is put on screen to copy, and the success screen waits for a
+     delivery that actually happened. */
   if (!FKEYS.ENDPOINT) {
-    say('Opening your mail app…');
-    window.location.href = 'mailto:' + FKEYS.NOTIFY +
-      '?subject=' + encodeURIComponent(payload.subject) +
-      '&body='    + encodeURIComponent(payload.body);
-    setTimeout(onDone, 600);
+    showHandoff(payload);
     return;
   }
 
@@ -2918,11 +2932,12 @@ async function send(payload, btnId, statusId, onDone) {
   try { files = await readFiles(payload.fileIds || []); } catch (e) { files = []; }
   say(files.length ? 'Sending ' + files.length + ' file(s)…' : 'Sending…');
 
+  /* A real cross-origin POST, not mode:'no-cors'. An opaque response cannot
+     be told apart from a failure, which is the whole defect being fixed. */
   try {
-    await fetch(FKEYS.ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    const r = await fetch(FKEYS.ENDPOINT, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         formType: payload.formType,
         fields:   payload.fields,
@@ -2931,17 +2946,58 @@ async function send(payload, btnId, statusId, onDone) {
         files:    files
       })
     });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
     say('Sent.');
     setTimeout(onDone, 400);
   } catch (err) {
-    // Endpoint unreachable — fall back to the mail app rather than lose the intake.
-    say('Connection problem — opening your mail app instead.');
-    if (btn) { btn.disabled = false; btn.textContent = 'Send My Intake →'; }
-    window.location.href = 'mailto:' + FKEYS.NOTIFY +
-      '?subject=' + encodeURIComponent(payload.subject) +
-      '&body='    + encodeURIComponent(payload.body);
-    setTimeout(onDone, 900);
+    say('That did not go through — nothing was lost, use the box below.', true);
+    reset();
+    showHandoff(payload);
   }
+}
+
+/* The intake, on screen, copyable, with a short mailto that does fit.
+   Used whenever the browser could not deliver it. */
+function showHandoff(payload) {
+  let box = document.getElementById('handoff');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'handoff';
+    box.className = 'card';
+    box.style.cssText = 'margin-top:20px;text-align:left;';
+    box.innerHTML =
+      '<h3 style="margin:0 0 8px;">Send this to me</h3>' +
+      '<p class="field-hint" style="margin:0 0 12px;">Your answers are below and nothing is lost. ' +
+      'Copy them, then email them to <a href="mailto:' + FKEYS.NOTIFY + '" style="color:var(--sky);">' +
+      FKEYS.NOTIFY + '</a>. I will reply with your written quote.</p>' +
+      '<textarea id="handoff-text" rows="12" readonly ' +
+      'style="width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.5;"></textarea>' +
+      '<div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">' +
+      '<button type="button" class="nav-next" id="handoff-copy">Copy my answers</button>' +
+      '<a class="nav-next" style="text-decoration:none;display:inline-block;" id="handoff-mail">Open my mail app</a>' +
+      '</div>';
+    const anchor = document.getElementById('sec-10') || document.querySelector('.container');
+    anchor.appendChild(box);
+
+    box.querySelector('#handoff-copy').addEventListener('click', async function () {
+      const ta = document.getElementById('handoff-text');
+      try {
+        await navigator.clipboard.writeText(ta.value);
+      } catch (e) {
+        ta.select();                       /* clipboard API is blocked in some
+                                              browsers unless the page is focused */
+        document.execCommand('copy');
+      }
+      this.textContent = '✓ Copied — now paste it into an email';
+    });
+  }
+
+  document.getElementById('handoff-text').value = payload.body;
+  document.getElementById('handoff-mail').href =
+    'mailto:' + FKEYS.NOTIFY +
+    '?subject=' + encodeURIComponent(payload.subject) +
+    '&body=My%20website%20intake%20is%20pasted%20below.%0A%0A';
+  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function showSuccess() {
