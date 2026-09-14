@@ -1,15 +1,15 @@
 {
   "cloudflare": {
     "bots_24h": {
-      "AI Assistant": 69,
-      "AI Crawler": 1429,
-      "AI Search": 188,
-      "Accessibility": 2,
+      "AI Assistant": 70,
+      "AI Crawler": 1428,
+      "AI Search": 182,
+      "Accessibility": 1,
       "Monitoring & Analytics": 4,
       "Page Preview": 58,
-      "Search Engine Crawler": 1316,
-      "Search Engine Optimization": 555,
-      "Unverified": 56188
+      "Search Engine Crawler": 1311,
+      "Search Engine Optimization": 561,
+      "Unverified": 55866
     },
     "bots_error": null,
     "days": 7,
@@ -343,7 +343,7 @@
     }
   },
   "date": "2026-09-14",
-  "generated_at": "2026-09-14 04:21 UTC",
+  "generated_at": "2026-09-14 04:42 UTC",
   "github": [
     {
       "archived": false,
@@ -356,7 +356,7 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-09-13T04:18:35Z",
+      "pushed_at": "2026-09-14T04:40:28Z",
       "repo": "f-keys",
       "size_kb": 76438,
       "stars": 2,
@@ -1985,7 +1985,7 @@
       "date": "2026-09-14",
       "github_stars": 18,
       "package_daily": null,
-      "package_weekly": 1351,
+      "package_weekly": 1306,
       "page_views_7d": 47334,
       "properties_total": 12,
       "properties_up": 12,
@@ -1995,7 +1995,7 @@
       "zenodo_views": 1600
     }
   ],
-  "mode": "daily",
+  "mode": "weekly",
   "npm": [
     {
       "all_time": 465,
@@ -2244,10 +2244,10 @@
     },
     {
       "all_time": 842,
-      "daily": 0,
-      "error": null,
+      "daily": null,
+      "error": "HTTP 429",
       "license": null,
-      "monthly": 464,
+      "monthly": null,
       "package": "opticquiz-cvd",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:23.834985Z",
@@ -2255,14 +2255,14 @@
       "summary": "Color accessibility engine: colorblind-safety (protan/deutan/tritan, Machado 2009 + CIEDE2000), palette fixing, and WCAG contrast. Zero dependencies; drops into any matplotlib/plotly workflow.",
       "url": "https://pypi.org/project/opticquiz-cvd/",
       "version": "1.1.3",
-      "weekly": 52
+      "weekly": null
     },
     {
       "all_time": 461,
-      "daily": 0,
-      "error": null,
+      "daily": null,
+      "error": "HTTP 429",
       "license": "MIT",
-      "monthly": 461,
+      "monthly": null,
       "package": "moonbeam-miner",
       "registry": "PyPI",
       "released": "2026-08-22T00:35:34.832631Z",
@@ -2270,7 +2270,7 @@
       "summary": "Find the NerdMiners on your network and read their vitals, from the terminal.",
       "url": "https://pypi.org/project/moonbeam-miner/",
       "version": "1.0.2",
-      "weekly": 6
+      "weekly": null
     },
     {
       "all_time": 498,
@@ -2303,11 +2303,11 @@
       "weekly": 4
     },
     {
-      "all_time": null,
-      "daily": 0,
-      "error": null,
+      "all_time": 569,
+      "daily": null,
+      "error": "HTTP 429",
       "license": "MIT",
-      "monthly": 569,
+      "monthly": null,
       "package": "mmforge",
       "registry": "PyPI",
       "released": "2026-08-26T17:10:29.162922Z",
@@ -2315,14 +2315,14 @@
       "summary": "Find avoidable axiom dependencies in Metamath databases, and build the proofs that remove them.",
       "url": "https://pypi.org/project/mmforge/",
       "version": "0.2.0",
-      "weekly": 7
+      "weekly": null
     },
     {
       "all_time": 507,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 0,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 507,
       "package": "certivl",
       "registry": "PyPI",
       "released": "2026-08-26T16:19:04.673435Z",
@@ -2330,7 +2330,7 @@
       "summary": "Exact rational and certified interval arithmetic: enclosures that turn a computed inequality into a proof.",
       "url": "https://pypi.org/project/certivl/",
       "version": "0.2.0",
-      "weekly": null
+      "weekly": 7
     },
     {
       "all_time": 358,
@@ -2364,10 +2364,10 @@
     },
     {
       "all_time": 126,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 0,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 126,
       "package": "legible",
       "registry": "PyPI",
       "released": "2026-08-26T06:48:27.808008Z",
@@ -2375,7 +2375,7 @@
       "summary": "Three build gates for things a linter will not catch: type below a readable floor, colour that cannot be read on the surface it sits on, and a retired name reaching anything a human reads.",
       "url": "https://pypi.org/project/legible/",
       "version": "0.1.0",
-      "weekly": null
+      "weekly": 5
     },
     {
       "all_time": 133,
@@ -2409,10 +2409,10 @@
     },
     {
       "all_time": 504,
-      "daily": null,
-      "error": "HTTP 429",
+      "daily": 1,
+      "error": null,
       "license": "MIT",
-      "monthly": null,
+      "monthly": 504,
       "package": "authorecon",
       "registry": "PyPI",
       "released": "2026-08-26T16:00:02.735099Z",
@@ -2420,7 +2420,7 @@
       "summary": "Reconcile a body of published work against every place it lives - for any ORCID, from public sources - plus the gates that run before research output leaves your hands.",
       "url": "https://pypi.org/project/authorecon/",
       "version": "1.1.0",
-      "weekly": null
+      "weekly": 8
     },
     {
       "all_time": 136,
@@ -2470,23 +2470,23 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 59809,
+    "bot_requests_24h": 59481,
     "github_forks": 0,
     "github_repos": 35,
     "github_stars": 18,
-    "median_response_ms": 196,
+    "median_response_ms": 215,
     "npm_all_time": 5264,
     "npm_weekly": 1029,
     "open_issues": 1,
-    "package_all_time": 12712,
-    "package_weekly": 1351,
+    "package_all_time": 13281,
+    "package_weekly": 1306,
     "packages_total": 35,
     "page_views_7d": 47334,
     "properties_total": 12,
     "properties_up": 12,
-    "pypi_all_time": 7448,
-    "pypi_monthly": 5039,
-    "pypi_weekly": 322,
+    "pypi_all_time": 8017,
+    "pypi_monthly": 4682,
+    "pypi_weekly": 277,
     "repos_archived": 2,
     "repos_unlicensed": 12,
     "threats_7d": 6100,
@@ -2499,7 +2499,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 167,
+      "ms": 213,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2507,7 +2507,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 227,
+      "ms": 143,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2515,7 +2515,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 211,
+      "ms": 217,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2523,7 +2523,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 119,
+      "ms": 61,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2531,7 +2531,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 284,
+      "ms": 273,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2539,7 +2539,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 182,
+      "ms": 537,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2547,7 +2547,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 148,
+      "ms": 206,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2555,7 +2555,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 394,
+      "ms": 269,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2563,7 +2563,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 478,
+      "ms": 302,
       "name": "epistemend.org",
       "up": true,
       "url": "https://epistemend.org"
@@ -2571,7 +2571,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 212,
+      "ms": 239,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2579,7 +2579,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 118,
+      "ms": 194,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2587,7 +2587,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 109,
+      "ms": 164,
       "name": "qv.f-keys.com",
       "up": true,
       "url": "https://qv.f-keys.com"
