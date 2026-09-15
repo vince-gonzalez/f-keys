@@ -219,16 +219,24 @@ def scan(path):
         return None
 
     lines = visible_text(path, raw)
-    joined = unescape(" ".join(t for _, t in lines))
+    # Unescape ONCE per line, not once per line per pattern. Doing it
+    # inside the pattern loop meant ten string replaces x 90 patterns x
+    # every line, which took minutes on a 2,550-file corpus.
+    lines = [(n, unescape(t)) for n, t in lines]
+    joined = " ".join(t for _, t in lines)
     words = len(re.findall(r"[A-Za-z']+", joined))
     if words < 40:
         return None                      # too short to have a voice
 
     hits = []
     for kind, rx, pat, weight, floor in COMPILED:
+        # Cheap whole-file test first. Most patterns miss most files, and
+        # a miss here skips the per-line pass entirely.
+        if not rx.search(joined):
+            continue
         found = []
         for lineno, text in lines:
-            for m in rx.finditer(unescape(text)):
+            for m in rx.finditer(text):
                 found.append((lineno, m.group(0).strip(), text.strip()[:110]))
         if len(found) >= floor:
             for lineno, phrase, context in found:
