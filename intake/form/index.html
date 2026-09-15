@@ -2326,16 +2326,17 @@ select option { background: #0d1f33; color: var(--txt); }
 // F-KEYS — CLIENT INTAKE
 // F-Keys Creative LLC · Punta Gorda, FL · f-keys.com
 // ------------------------------------------------------------
-// Submits to a Google Apps Script web app: fields land in a
-// Google Sheet, uploaded files land in a Drive folder, and a
-// notification goes to NOTIFY.
+// Submits to the f-keys-intake Worker at orders.f-keys.com.
+// The row is written to D1 before any email is attempted, so a
+// submission is never lost to a mail problem, and the response
+// says both things separately: recorded, and notified.
 //
-// Until ENDPOINT is filled in, the form falls back to opening
-// the client's mail app with everything typed out. It is never
-// dead. Setup steps are in APPS-SCRIPT-SETUP.md next to this file.
+// If that POST fails for any reason, the intake goes on screen
+// in a box the client can copy. The success screen is shown for
+// a delivery that happened and for nothing else.
 // ════════════════════════════════════════════════════════════
 const FKEYS = {
-  ENDPOINT: '',                        // <— paste the Apps Script /exec URL here
+  ENDPOINT: 'https://orders.f-keys.com/submit',   // f-keys-intake worker -> D1
   NOTIFY:   'vincegonzalez@me.com',    // where the mailto fallback goes
   BUILD:    100,                       // one-time build fee
   MONTHLY:  75                         // monthly, starts after launch

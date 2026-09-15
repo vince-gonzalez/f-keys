@@ -1,0 +1,40 @@
+# ============================================================
+# f-keys-intake - where a website enquiry actually lands
+# F-Keys | www.f-keys.com
+# ------------------------------------------------------------
+# The form at f-keys.com/intake/form/ POSTs here. The row is
+# written to D1 first and the notification is attempted second,
+# so a missing mail key costs a notification and never the
+# intake itself.
+#
+# Deploy:  cd intake-worker && npx wrangler deploy
+# Read:    npx wrangler d1 execute f-keys-intake --remote \
+#            --command "SELECT created_at, business, email FROM submissions ORDER BY created_at DESC LIMIT 20"
+# ============================================================
+
+name = "f-keys-intake"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[[routes]]
+pattern = "orders.f-keys.com"
+custom_domain = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "f-keys-intake"
+database_id = "273da242-9752-44fc-8bde-f2dd3433bf44"
+
+[vars]
+# Where a submission is announced. Not a secret.
+NOTIFY_EMAIL = "vincegonzalez@me.com"
+# The site allowed to POST here. An origin the browser sends, checked
+# against this list - not a security boundary, a CORS one.
+ALLOWED_ORIGINS = "https://f-keys.com,https://www.f-keys.com"
+
+# Set with `wrangler secret put <NAME>`, never in this file:
+#
+#   RESEND_API_KEY   re_...  optional; without it rows still land,
+#                            notified stays 0 and notify_error says why
+#   ADMIN_KEY        any long random string; required to read /submissions
+#   IP_SALT          any long random string; salts the stored IP hash
