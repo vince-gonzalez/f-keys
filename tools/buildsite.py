@@ -3268,7 +3268,17 @@ def organization():
 
 
 def esc(s):
-    return html.escape(str(s), quote=True)
+    """Escape once, no matter how many entities the data already carries.
+
+    The catalogue is prose, and prose written by hand has &mdash; in it.
+    Escaping that produced &amp;mdash;, which a browser renders as the
+    literal text "&mdash;" - so TAG's first line read "One player is IT
+    &mdash; get in someone's face" on the live page, and 27 other pages
+    had the same. Unescaping first makes this idempotent: an entity
+    becomes its character, then the character is escaped correctly, and
+    running it twice changes nothing.
+    """
+    return html.escape(html.unescape(str(s)), quote=True)
 
 
 # ── the shell ────────────────────────────────────────────────
@@ -3716,7 +3726,7 @@ def main():
     written.append(("about.html", shell(
         "About \u2014 F-Keys", "F-Keys\\About", counted(ABOUT_DOC), "1 item",
         description=counted(
-            "I'm Vince Gonzalez. %%LIVE%% live "
+            "I'm Vince Gonzalez. I have %%LIVE%% live "
             "products and fifty-six deposited works."),
         canonical="https://f-keys.com/about.html", ld=organization())))
 

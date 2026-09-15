@@ -1,17 +1,15 @@
 # F-Keys
 
-> Independent hardware, software and internet products built by Vincent Gonzalez. Apps, games, tools, hardware and research.
+> Hardware, software and internet products I build and keep running. Apps, games, tools, hardware and research.
 
 Canonical: https://f-keys.com
 
-Hardware. Software. Ideas brought to life.
+Ideas. Delivered.
 
-F-Keys is the working catalogue of **Vincent Gonzalez**, an independent
-builder trading as F-Keys Creative LLC in Punta Gorda, Florida. Thirty-four
-products are on the shelves, thirty of them live today, and each one was
-designed, written, deployed and documented
-by the same person — architecture, both ends, database, release notes. The
-table below is the whole company.
+I'm Vince Gonzalez. I build in Punta Gorda, Florida, under F-Keys
+Creative LLC. Right now thirty-two products are live. I designed, wrote,
+deployed and documented every one of them. The table below is the whole
+company.
 
 The name came from a product. [RemapWrap](https://f-keys.com/remapwrap/) was called
 F-Keys first — an extra row of function keys, on glass you already own
@@ -59,6 +57,8 @@ to match the last one. [Contact](https://f-keys.com/contact.html) for licensing,
 | [PROMPT](https://prompt.f-keys.com) | Discord activity | In Discord | A multiplayer word game inside Discord, in a 90s CRT shell. |
 | [DaisuPop](https://dp.f-keys.com) | Discord activity | In Discord | A dice popper. Everyone in the room sees the same roll at the same moment. |
 | [MICDROP](https://f-keys.com/micdrop/) | Fortnite island | In Fortnite | A live open-mic arena. 120 seconds to win the crowd. Code 1534-0440-5810. |
+| [TAG](https://f-keys.com/tag/) | Fortnite island | In Fortnite | One player is IT and everyone else runs. Ninety seconds to pass it on. Code 8134-9047-4850. |
+| [TAG PRO](https://f-keys.com/tagpro/) | Fortnite island | In Fortnite | The blink version: lunge, dash, counter-tag on an open arena. Code 5571-1708-8987. |
 | [FyteCraft](https://github.com/vince-gonzalez/fytecraft.com) | Game | Alpha | An RTS built around combat rather than base-building. Early, and openly so. |
 | [WikiPolish](https://f-keys.com/wikipolish/) | Web tool | Ready | Grammar scout for Wikipedia. Finds a first edit nobody will revert. |
 | [LeadSeer](https://f-keys.com/leadseer/) | Desktop tool | Needs setup | Finds the local businesses that still have no website. |

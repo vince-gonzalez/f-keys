@@ -59,6 +59,12 @@ FAMILIES = [
     "Press+Start+2P",
     "Space+Mono:ital,wght@0,400;0,700;1,400",
     "Playfair+Display:ital@1",
+    # The intake pages were written after this tool and linked straight to
+    # Google, so the one page that takes a name, an email and a signature
+    # was also the one page reporting its readers to a third party - while
+    # the privacy page promised it did not. Both faces are OFL.
+    "Syne:wght@400;500;600;700;800",
+    "DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300",
 ]
 
 # The Latin subsets. The pages are in English; pulling Cyrillic and Greek

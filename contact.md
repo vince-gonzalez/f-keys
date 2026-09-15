@@ -39,7 +39,7 @@ is the fastest way to get it fixed. Corrections go in the
 ## What not to expect
 
 There is no phone line, because there is no one to answer it. Replies come
-from one person between builds, so a few days is normal and a week is not
+between builds, so a few days is normal and a week is not
 unusual. Nothing here is sold through a reseller, so an email offering to
 represent F-Keys will not get a reply.
 
