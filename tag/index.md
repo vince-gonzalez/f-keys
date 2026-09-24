@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/tag/
 
-One player is IT &mdash; get in someone's face and tag them to pass it on. Duck to slip a tag and keep moving, because whoever is holding IT when the 90-second clock hits zero loses the round.
+One player is IT — get in someone's face and tag them to pass it on. Duck to slip a tag and keep moving, because whoever is holding IT when the 90-second clock hits zero loses the round.
 
 **Island 8134-9047-4850** · by d00b · built in UEFN · open lobby · free with Fortnite
 

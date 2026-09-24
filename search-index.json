@@ -1,0 +1,394 @@
+[
+ {
+  "name": "Key-J",
+  "kind": "Application",
+  "status": "Ready",
+  "text": "Every keystroke plays a note, in any application. Live staff, WAV export.",
+  "href": "/keyj/",
+  "group": "apps"
+ },
+ {
+  "name": "Pixel Staff",
+  "kind": "Application",
+  "status": "Ready",
+  "text": "An 8-bit composer. Piano roll, waveform per channel, WAV or ringtone out.",
+  "href": "/pixelstaff/",
+  "group": "apps"
+ },
+ {
+  "name": "OpticQuiz",
+  "kind": "Web app",
+  "status": "Ready",
+  "text": "Colour-vision and acuity tests that run entirely in the browser.",
+  "href": "https://opticquiz.com",
+  "group": "apps"
+ },
+ {
+  "name": "QV",
+  "kind": "Web app",
+  "status": "Ready",
+  "text": "Live ballots. Put a question to a room and watch the count move.",
+  "href": "/qv/",
+  "group": "apps"
+ },
+ {
+  "name": "RemapWrap",
+  "kind": "Application",
+  "status": "Alpha",
+  "text": "Any smartphone becomes a programmable macro pad. No app, no dongle.",
+  "href": "/remapwrap/",
+  "group": "apps"
+ },
+ {
+  "name": "Trailer Load",
+  "kind": "Simulator",
+  "status": "Ready",
+  "text": "Warehouse load training that plays like a game. Institutional licensing.",
+  "href": "https://trailer-load.com",
+  "group": "games"
+ },
+ {
+  "name": "PROMPT",
+  "kind": "Discord activity",
+  "status": "In Discord",
+  "text": "A multiplayer word game inside Discord, in a 90s CRT shell.",
+  "href": "https://prompt.f-keys.com",
+  "group": "games"
+ },
+ {
+  "name": "DaisuPop",
+  "kind": "Discord activity",
+  "status": "In Discord",
+  "text": "A dice popper. Everyone in the room sees the same roll at the same moment.",
+  "href": "https://dp.f-keys.com",
+  "group": "games"
+ },
+ {
+  "name": "MICDROP",
+  "kind": "Fortnite island",
+  "status": "In Fortnite",
+  "text": "A live open-mic arena. 120 seconds to win the crowd. Code 1534-0440-5810.",
+  "href": "/micdrop/",
+  "group": "games"
+ },
+ {
+  "name": "TAG",
+  "kind": "Fortnite island",
+  "status": "In Fortnite",
+  "text": "One player is IT and everyone else runs. Ninety seconds to pass it on. Code 8134-9047-4850.",
+  "href": "/tag/",
+  "group": "games"
+ },
+ {
+  "name": "TAG PRO",
+  "kind": "Fortnite island",
+  "status": "In Fortnite",
+  "text": "The blink version: lunge, dash, counter-tag on an open arena. Code 5571-1708-8987.",
+  "href": "/tagpro/",
+  "group": "games"
+ },
+ {
+  "name": "FyteCraft",
+  "kind": "Game",
+  "status": "Alpha",
+  "text": "An RTS built around combat rather than base-building. Early, and openly so.",
+  "href": "https://github.com/vince-gonzalez/fytecraft.com",
+  "group": "games"
+ },
+ {
+  "name": "WikiPolish",
+  "kind": "Web tool",
+  "status": "Ready",
+  "text": "Grammar scout for Wikipedia. Finds a first edit nobody will revert.",
+  "href": "/wikipolish/",
+  "group": "tools"
+ },
+ {
+  "name": "LeadSeer",
+  "kind": "Desktop tool",
+  "status": "Needs setup",
+  "text": "Finds the local businesses that still have no website.",
+  "href": "/leadseer/",
+  "group": "tools"
+ },
+ {
+  "name": "PlumHUD",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Miner fleet monitor. Overlay HUD, alerts, and local history.",
+  "href": "/plumhud/",
+  "group": "tools"
+ },
+ {
+  "name": "SayDo",
+  "kind": "Standard + harness",
+  "status": "Ready",
+  "text": "Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check.",
+  "href": "/saydo/",
+  "group": "tools"
+ },
+ {
+  "name": "axsent",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.",
+  "href": "/axsent/",
+  "group": "research"
+ },
+ {
+  "name": "authorecon",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Reconcile published work against every place it lives, for any ORCID, from public sources.",
+  "href": "/authorecon/",
+  "group": "research"
+ },
+ {
+  "name": "mmforge",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Find avoidable axiom dependencies in Metamath, and build the proofs that remove them.",
+  "href": "/mmforge/",
+  "group": "research"
+ },
+ {
+  "name": "loadbearing",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "What a claim asserts, separated from what its derivation consumed.",
+  "href": "/loadbearing/",
+  "group": "research"
+ },
+ {
+  "name": "certivl",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Certified interval arithmetic: an enclosure that turns a computed inequality into a proof.",
+  "href": "/certivl/",
+  "group": "research"
+ },
+ {
+  "name": "ishihara",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Generate pseudoisochromatic colour-vision plates, reproducible from a seed.",
+  "href": "/ishihara/",
+  "group": "research"
+ },
+ {
+  "name": "legible",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Three build gates: unreadable type, unreadable colour, a retired name.",
+  "href": "/legible/",
+  "group": "tools"
+ },
+ {
+  "name": "openapi-drift",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Has your API drifted from its spec, and can a machine still read it?",
+  "href": "/openapi-drift/",
+  "group": "tools"
+ },
+ {
+  "name": "changewatch",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "A doorbell for your published work. Silent until somebody else acts.",
+  "href": "/changewatch/",
+  "group": "tools"
+ },
+ {
+  "name": "keyjockey",
+  "kind": "npm package",
+  "status": "npm install",
+  "text": "Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency.",
+  "href": "/keyjockey/",
+  "group": "tools"
+ },
+ {
+  "name": "Stream Sniper",
+  "kind": "Appliance",
+  "status": "Needs setup",
+  "text": "A spare mini PC shows a channel fullscreen the moment it goes live.",
+  "href": "/streamsniper/",
+  "group": "hardware"
+ },
+ {
+  "name": "Moonbeam",
+  "kind": "Python package",
+  "status": "pip install",
+  "text": "Finds the NerdMiners on your network and reads their vitals.",
+  "href": "/moonbeam/",
+  "group": "hardware"
+ },
+ {
+  "name": "gonzalgo",
+  "kind": "Research tool",
+  "status": "Published",
+  "text": "Which axioms a Lean 4 or Metamath theorem spends rather than inherits.",
+  "href": "/gonzalgo/",
+  "group": "research"
+ },
+ {
+  "name": "Papers",
+  "kind": "Publications",
+  "status": "Published",
+  "text": "Where formal libraries spend their axioms. Full text, DOIs, archives.",
+  "href": "/papers/",
+  "group": "research"
+ },
+ {
+  "name": "Modulign",
+  "kind": "Standard",
+  "status": "Published",
+  "text": "A dimensional address grammar for observable reality. DAG-OR v3.",
+  "href": "https://modulign.org",
+  "group": "research"
+ },
+ {
+  "name": "5Best2Buy",
+  "kind": "Website",
+  "status": "Live",
+  "text": "A sourcing map for independent American food.",
+  "href": "https://www.5best2buy.com",
+  "group": "properties"
+ },
+ {
+  "name": "Poticas",
+  "kind": "Website",
+  "status": "Live",
+  "text": "The home of potica. History, method, and who still ships one.",
+  "href": "https://poticas.com",
+  "group": "properties"
+ },
+ {
+  "name": "TipStreams",
+  "kind": "Website",
+  "status": "Live",
+  "text": "Branded tip pages and OBS overlays. The widget never touches money.",
+  "href": "https://tipstreams.com",
+  "group": "properties"
+ },
+ {
+  "name": "FunDoge",
+  "kind": "Website",
+  "status": "Live",
+  "text": "Free isometric mini-golf in the browser.",
+  "href": "https://dogefundme.com",
+  "group": "properties"
+ },
+ {
+  "name": "Epistemend",
+  "kind": "Website",
+  "status": "Live",
+  "text": "One ORCID in, one document out. Checks a published record against where the work lives.",
+  "href": "https://www.epistemend.org",
+  "group": "properties"
+ },
+ {
+  "name": "CV - founder",
+  "kind": "Document",
+  "status": "",
+  "text": "Company, products shipped, what was built and run end to end.",
+  "href": "/cv/founder/",
+  "group": "site"
+ },
+ {
+  "name": "CV - operations",
+  "kind": "Document",
+  "status": "",
+  "text": "Logistics and operations record.",
+  "href": "/cv/operations/",
+  "group": "site"
+ },
+ {
+  "name": "CV - research",
+  "kind": "Document",
+  "status": "",
+  "text": "Formal methods, deposits, upstream contributions.",
+  "href": "/cv/research/",
+  "group": "site"
+ },
+ {
+  "name": "CV - writing",
+  "kind": "Document",
+  "status": "",
+  "text": "Published writing and documentation.",
+  "href": "/cv/writing/",
+  "group": "site"
+ },
+ {
+  "name": "Papers",
+  "kind": "Index",
+  "status": "",
+  "text": "Deposited work, each entry with a DOI.",
+  "href": "/papers/",
+  "group": "site"
+ },
+ {
+  "name": "Log",
+  "kind": "Record",
+  "status": "",
+  "text": "What got built, what broke, what turned out to be true.",
+  "href": "/log/",
+  "group": "site"
+ },
+ {
+  "name": "Status",
+  "kind": "Record",
+  "status": "",
+  "text": "Measured uptime, installs and reach. Regenerated daily.",
+  "href": "/status/",
+  "group": "site"
+ },
+ {
+  "name": "About",
+  "kind": "Document",
+  "status": "",
+  "text": "Entity, scope, subjects.",
+  "href": "/about.html",
+  "group": "site"
+ },
+ {
+  "name": "Contact",
+  "kind": "Document",
+  "status": "",
+  "text": "Email, filing details, what to write about.",
+  "href": "/contact.html",
+  "group": "site"
+ },
+ {
+  "name": "Developers",
+  "kind": "Index",
+  "status": "",
+  "text": "Packages, command-line tools and published JSON.",
+  "href": "/developers.html",
+  "group": "site"
+ },
+ {
+  "name": "Docs",
+  "kind": "Document",
+  "status": "",
+  "text": "RemapWrap documentation.",
+  "href": "/Docs.html",
+  "group": "site"
+ },
+ {
+  "name": "Website builds",
+  "kind": "Service",
+  "status": "",
+  "text": "Local business websites. Fixed build fee, monthly hosting.",
+  "href": "/intake/",
+  "group": "site"
+ },
+ {
+  "name": "Privacy",
+  "kind": "Document",
+  "status": "",
+  "text": "Every byte this site receives.",
+  "href": "/privacy.html",
+  "group": "site"
+ }
+]

@@ -782,15 +782,16 @@ def counts_in_prose():
 
     # (file, regex, expected, what it is) - every one MUST be found.
     claims = [
-        # The catalogue-size sentence was removed on purpose: stating the
-        # total next to the live number published a subtraction, and the
-        # four not-live products were the loudest thing on the page. The
-        # live count is the claim now, so it is the claim this checks.
-        ("index.html", r"([a-z]+(?:-[a-z]+)?) products are live",
+        # The counts moved out of prose and into the About facts table.
+        # A datasheet states a number; a sentence that states it at the
+        # reader is a boast, and he ruled the boasting out. The number
+        # still has to be the number, so it is still checked - just
+        # where it now lives.
+        # Matched against VISIBLE text, not markup - this gate checks what
+        # a reader sees, so the table row reads "Live products thirty-two".
+        ("about.html", r"Live products ([a-z]+(?:-[a-z]+)?)",
          live, "the live count"),
-        ("about.html", r"([a-z]+(?:-[a-z]+)?) products are\s+live",
-         live, "the live count"),
-        ("index.html", r"([a-z]+(?:-[a-z]+)?) of them, sorted",
+        ("index.html", r"([a-z]+(?:-[a-z]+)?) sections, sorted",
          shelves, "the number of shelves"),
     ]
     for name, pattern, want, what in claims:

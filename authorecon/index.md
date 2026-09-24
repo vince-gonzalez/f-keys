@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/authorecon/
 
-Reconciles a body of published work against every place it lives &mdash; for any ORCID, from public sources. A deposit exists in more places than the person who made it can hold in their head.
+Reconciles a body of published work against every place it lives — for any ORCID, from public sources. A deposit exists in more places than the person who made it can hold in their head.
 
 pip install authorecon · any ORCID · public sources only
 

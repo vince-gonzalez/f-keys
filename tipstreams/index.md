@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/tipstreams/
 
-Branded tip pages and OBS overlays for streamers, pointed at your own accounts. The widget never touches the money &mdash; it routes a viewer to your payment method and gets out of the way.
+Branded tip pages and OBS overlays for streamers, pointed at your own accounts. The widget never touches the money — it routes a viewer to your payment method and gets out of the way.
 
 **Free** · @f-keys/tip-widget on npm · money goes to your wallet, never through ours
 

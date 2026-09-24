@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/wikipolish/
 
-Finding ten good edits is the hard part of contributing to Wikipedia. This finds them &mdash; it reads the API, surfaces specific fixable things, and you make the edit under your own account.
+Finding ten good edits is the hard part of contributing to Wikipedia. This finds them — it reads the API, surfaces specific fixable things, and you make the edit under your own account.
 
 **Live** · browser · nothing to install · your own Wikipedia login · reads the public API
 

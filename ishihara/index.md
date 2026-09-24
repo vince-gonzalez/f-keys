@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/ishihara/
 
-Generates pseudoisochromatic plates &mdash; the dotted circles with a numeral hidden in the colour separation &mdash; from a seed, so the same seed gives the same plate on any machine, forever.
+Generates pseudoisochromatic plates — the dotted circles with a numeral hidden in the colour separation — from a seed, so the same seed gives the same plate on any machine, forever.
 
 **0.1.2** · pip install ishihara · MIT · reproducible from a seed
 

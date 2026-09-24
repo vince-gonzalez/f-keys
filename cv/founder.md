@@ -1,6 +1,6 @@
 # VINCE GONZALEZ
 
-Founder, F-Keys LLC · Systems Architect · Published Researcher
+Founder, F-Keys Creative LLC · systems and research
 
 Punta Gorda, FL · contact on request
 
@@ -10,7 +10,7 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 ## Profile
 
-Founder of F-Keys LLC, shipping a solo-built portfolio of live web products — an accessibility platform distributed across eight channels, an axiom-provenance tool for two proof assistants, a logistics training simulator with institutional licensing — alongside 58 deposited works with DOIs. Full lifecycle on all of it: architecture, front and back end, database, deployment, documentation, technical SEO.
+Founder, F-Keys Creative LLC. Live products include an accessibility platform distributed across eight channels, an axiom-provenance tool for two proof assistants, and a logistics training simulator licensed to institutions. Architecture, both ends, database, deployment, documentation and technical SEO.
 
 ## Independent Products — F-Keys LLC
 

@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/trailer-load/
 
-Warehouse load training that plays like a game. Weight distribution, axle limits and stack integrity are the lesson rather than the scenery &mdash; you load a trailer, and the trailer behaves like a trailer.
+Warehouse load training that plays like a game. Weight distribution, axle limits and stack integrity are the lesson rather than the scenery — you load a trailer, and the trailer behaves like a trailer.
 
 **Free to play** · runs in the browser · no download · licensed separately for institutional training
 

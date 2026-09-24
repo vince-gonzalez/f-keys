@@ -1,6 +1,6 @@
 # VINCE GONZALEZ
 
-Technical Writing · Documentation · Information Design
+Technical writing · documentation
 
 Punta Gorda, FL · contact on request
 
@@ -10,7 +10,7 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 ## Profile
 
-Writes the documentation that carries consequences: compliance records in a safety-intensive operation, a procedure adopted statewide, SOPs, user manuals, and peer-facing academic work published with DOIs. Also builds the systems being documented, which is why the documentation matches them.
+Documentation that carries consequences: compliance records in a safety-intensive operation, a procedure adopted statewide, SOPs, user manuals, and academic work published with DOIs. Also builds the systems being documented.
 
 ## Writing & Documentation
 

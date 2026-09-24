@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/qv/
 
-Ask a room a question and watch the answer move. One tap, one vote, a live needle, and no account for anybody &mdash; the ballot comes to the voter rather than the other way round.
+Ask a room a question and watch the answer move. One tap, one vote, a live needle, and no account for anybody — the ballot comes to the voter rather than the other way round.
 
 **0.5.0 — Ballot Box** · browser and PWA · no accounts · one script tag to embed
 

@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/5best2buy/
 
-A map of small American food makers who will send you what they make &mdash; bakeries, smokehouses, dairies, and single-product outfits that have been doing one thing for forty years.
+A map of small American food makers who will send you what they make — bakeries, smokehouses, dairies, and single-product outfits that have been doing one thing for forty years.
 
 **Free** · no account · independent makers who ship · updated continuously
 

@@ -180,47 +180,42 @@ EDU = ("Ohio University — BA Pre-Law Philosophy, Minor in History, 2012. "
 V = {
     "operations": dict(
         slug="operations",
-        tag="Operations Leadership · Quality & Process",
-        profile="Six years at Federal Express, four of them supervising "
-                "entry-level teams and trainers, with a consistent record of "
-                "thoroughgoing and integrity-oriented operational leadership. "
-                "Designed a request-documentation procedure that Ohio "
-                "standardised statewide. Took a hub to a certification it had "
-                "never achieved in its history. Builds the documentation "
-                "systems that make process stick.",
+        tag="Operations · quality and process",
+        profile="Operations Supervisor at FedEx Ground since May 2023; "
+                "Outbound, Sorter and Mentor from October 2020. Coaches "
+                "entry-level teams and trainers. Wrote a "
+                "request-documentation procedure adopted statewide in Ohio. "
+                "Took a hub to a certification it had not previously held.",
         order=["fedex", "process", "earlier", "certs", "products_brief",
                "edu", "tech"]),
     "founder": dict(
         slug="founder",
-        tag="Founder, F-Keys LLC · Systems Architect · Published Researcher",
-        profile="Founder of F-Keys LLC, shipping a solo-built portfolio of live "
-                "web products — an accessibility platform distributed across "
-                "eight channels, an axiom-provenance tool for two proof "
-                "assistants, a logistics training simulator with institutional "
-                f"licensing — alongside {DEPOSITS} deposited works with DOIs. "
-                "Full lifecycle on all of it: architecture, front and back end, "
-                "database, deployment, documentation, technical SEO.",
+        tag="Founder, F-Keys Creative LLC · systems and research",
+        profile="Founder, F-Keys Creative LLC. Live products include an "
+                "accessibility platform distributed across eight channels, an "
+                "axiom-provenance tool for two proof assistants, and a "
+                "logistics training simulator licensed to institutions. "
+                "Architecture, both ends, database, deployment, documentation "
+                "and technical SEO.",
         order=["products", "research_brief", "tech", "fedex_brief", "edu"]),
     "research": dict(
         slug="research",
-        tag="Formal Methods · Measurement · Open Research",
-        profile=f"Independent researcher with {DEPOSITS} deposited works and "
-                "an ORCID record spanning formal verification, colour science and "
-                "epistemology. Built the tooling the measurements run on. Work "
-                "is characterised by reporting what the data does not support "
-                "as prominently as what it does — a published limitation on an "
-                "off-axis palette, a 58× gap between two plausible measures, "
-                "and negative results published as negative results.",
+        tag="Formal methods · measurement",
+        profile="Formal verification, colour science and epistemology. Built "
+                "the tooling the measurements run on. Reports what the data "
+                "does not support alongside what it does: a published "
+                "limitation on an off-axis palette, a 58× gap between two "
+                "plausible measures, and negative results published as "
+                "negative results.",
         order=["research", "products_brief", "tech", "writing_brief", "edu",
                "fedex_brief"]),
     "writing": dict(
         slug="writing",
-        tag="Technical Writing · Documentation · Information Design",
-        profile="Writes the documentation that carries consequences: compliance "
-                "records in a safety-intensive operation, a procedure adopted "
-                "statewide, SOPs, user manuals, and peer-facing academic work "
-                "published with DOIs. Also builds the systems being documented, "
-                "which is why the documentation matches them.",
+        tag="Technical writing · documentation",
+        profile="Documentation that carries consequences: compliance records "
+                "in a safety-intensive operation, a procedure adopted "
+                "statewide, SOPs, user manuals, and academic work published "
+                "with DOIs. Also builds the systems being documented.",
         order=["writing", "process", "research_brief", "tech", "fedex_brief",
                "certs", "edu"]),
 }
@@ -437,6 +432,56 @@ Share the URL directly.</div>
     (SITE / "cv" / f"{key}.md").write_text(md, encoding="utf-8", newline="\n")
     made.append((key, len(md.split()), len(page)))
 
-print(f"{len(made)} variants, contact {'SHOWN' if SHOW_CONTACT else 'redacted'}")
+# ── the front door ───────────────────────────────────────────
+# All four were live with zero inbound links, absent from the sitemap,
+# and /cv/ itself returned 404 - so nobody could reach a resume from the
+# site and no crawler knew they existed. This is the index that fixes it.
+_rows = "\n".join(
+    f'<li><a href="/cv/{k}/"><b>{k}</b></a> &mdash; {V[k]["tag"]}</li>'
+    for k in ("founder", "operations", "research", "writing"))
+
+_index = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV — V. Gonzalez</title>
+<meta name="description" content="Four records, one per lane: founder,
+operations, research, writing.">
+<link rel="canonical" href="https://f-keys.com/cv/">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+ body{{background:#0e1218;color:#e8eef7;font:16px/1.55 ui-sans-serif,system-ui,
+      -apple-system,"Segoe UI",Roboto,Arial,sans-serif;margin:0;padding:40px 22px;}}
+ main{{max-width:44em;margin:0 auto;}}
+ h1{{font-size:26px;margin:0 0 4px;letter-spacing:.2px;}}
+ p.sub{{color:#9db2cc;margin:0 0 26px;font-size:15px;}}
+ ul{{list-style:none;padding:0;margin:0 0 28px;}}
+ li{{padding:11px 0;border-bottom:1px solid #223047;font-size:15px;}}
+ li b{{font-weight:600;text-transform:capitalize;}}
+ a{{color:#8fc7ff;text-decoration:none;}}
+ a:hover{{text-decoration:underline;}}
+ footer{{color:#9db2cc;font-size:14px;border-top:1px solid #223047;padding-top:14px;}}
+</style>
+</head>
+<body>
+<main>
+<h1>CV</h1>
+<p class="sub">Four records, one per lane. Same facts, different emphasis.</p>
+<ul>
+{_rows}
+</ul>
+<footer>
+  <a href="/">f-keys.com</a> &middot; <a href="/papers/">papers</a> &middot;
+  <a href="/search/">find</a> &middot;
+  <a href="https://orcid.org/0009-0005-3640-014X">ORCID</a>
+</footer>
+</main>
+</body>
+</html>
+"""
+(SITE / "cv" / "index.html").write_text(_index, encoding="utf-8", newline="\n")
+
+print(f"{len(made)} variants + /cv/ index, contact {'SHOWN' if SHOW_CONTACT else 'redacted'}")
 for k, w, b in made:
     print(f"  /cv/{k:<11} {w:>4} words   {b:>6,} bytes   {V[k]['tag']}")

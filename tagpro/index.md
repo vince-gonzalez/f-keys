@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/tagpro/
 
-One player is IT &mdash; lunge to tag, dash to dodge, on an open arena where spacing and timing decide it. Bait a lunge, slip it with a dash, then counter-tag.
+One player is IT — lunge to tag, dash to dodge, on an open arena where spacing and timing decide it. Bait a lunge, slip it with a dash, then counter-tag.
 
 **Island 5571-1708-8987** · by d00b · built in UEFN · open lobby · free with Fortnite
 

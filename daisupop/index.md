@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/daisupop/
 
-A dice popper for Discord. One roll, rendered to everyone in the voice channel at the same moment &mdash; which removes the only argument every remote dice game has in it.
+A dice popper for Discord. One roll, rendered to everyone in the voice channel at the same moment — which removes the only argument every remote dice game has in it.
 
 **Free** · a Discord Activity · no install · one roll, everyone sees it
 

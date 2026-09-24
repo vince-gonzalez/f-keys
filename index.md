@@ -1,50 +1,15 @@
 # F-Keys
 
-> Hardware, software and internet products I build and keep running. Apps, games, tools, hardware and research.
+> Catalogue of hardware, software and research. F-Keys Creative LLC, Punta Gorda, Florida.
 
 Canonical: https://f-keys.com
 
-Ideas. Delivered.
+Hardware, software and research.
 
-I'm Vince Gonzalez. I build in Punta Gorda, Florida, under F-Keys
-Creative LLC. Right now thirty-two products are live. I designed, wrote,
-deployed and documented every one of them. The table below is the whole
-company.
-
-The name came from a product. [RemapWrap](https://f-keys.com/remapwrap/) was called
-F-Keys first — an extra row of function keys, on glass you already own
-— and the name outgrew it. The product then went missing for five months
-and survives because it was in a zip file in a folder called “zip to
-sort”.
-
-## What is on the shelves
-
-six of them, sorted the way a file manager would sort them.
-[Apps](https://f-keys.com/apps.html) are things you run: a keyboard that plays notes in
-any program, an 8-bit composer, colour-vision tests, live ballots for a room.
-[Games](https://f-keys.com/games.html) holds a warehouse-loading simulator, two Discord
-activities and a Fortnite island. [Tools](https://f-keys.com/tools.html) are small
-single-purpose programs for people who already know what they want.
-[Hardware](https://f-keys.com/hardware.html) turns a spare machine into an appliance.
-[Research](https://f-keys.com/research.html) is the formal-methods work — papers
-with DOIs and the tooling the measurements run on.
-[Properties](https://f-keys.com/properties.html) lists the standalone sites.
-
-## Who it is for
-
-There is no single customer, because these are not one product line. A Lean 4
-axiom auditor, a colour-vision test and a Discord word game share no market at
-all. In practice the people who end up here are **developers and proof
-engineers** who need to know what a theorem actually rests on, **designers and
-accessibility teams** checking colour against a real engine rather than a
-guess, **musicians and typists** who want a keyboard to make sound,
-**streamers and Discord communities** looking for something to run in a room
-full of people, and **trainers** who want load planning to behave like the
-physical thing.
-
-Each product page carries its own terms, licence and price. Nothing is assumed
-to match the last one. [Contact](https://f-keys.com/contact.html) for licensing, or
-[Privacy](https://f-keys.com/privacy.html) for what this site does and does not collect.
+F-Keys Creative LLC, Punta Gorda, Florida. The catalogue below holds
+six sections, sorted the way a file manager sorts them. Each product
+page carries its own licence, terms and price; nothing is assumed to match the
+last one.
 
 | Name | Type | Status | Description |
 | --- | --- | --- | --- |

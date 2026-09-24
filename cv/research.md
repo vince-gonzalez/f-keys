@@ -1,6 +1,6 @@
 # VINCE GONZALEZ
 
-Formal Methods · Measurement · Open Research
+Formal methods · measurement
 
 Punta Gorda, FL · contact on request
 
@@ -10,7 +10,7 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 ## Profile
 
-Independent researcher with 58 deposited works and an ORCID record spanning formal verification, colour science and epistemology. Built the tooling the measurements run on. Work is characterised by reporting what the data does not support as prominently as what it does — a published limitation on an off-axis palette, a 58× gap between two plausible measures, and negative results published as negative results.
+Formal verification, colour science and epistemology. Built the tooling the measurements run on. Reports what the data does not support alongside what it does: a published limitation on an off-axis palette, a 58× gap between two plausible measures, and negative results published as negative results.
 
 ## Published Research
 

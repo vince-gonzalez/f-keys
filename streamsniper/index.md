@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/streamsniper/
 
-A streamer you follow goes live, and it is on the television. No phone, no notification, no clicking &mdash; a small Debian box that starts on boot and puts the stream on the screen.
+A streamer you follow goes live, and it is on the television. No phone, no notification, no clicking — a small Debian box that starts on boot and puts the stream on the screen.
 
 **MIT** · Debian or Ubuntu · Streamlink, VLC, pygame · starts on boot via systemd
 

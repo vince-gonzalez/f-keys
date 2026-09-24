@@ -2587,36 +2587,33 @@ def counted(text):
 
 
 ABOUT_DOC = """
-<div class="doc"><h1>About F-Keys</h1>
-<p class="sub">What I build, and what it rests on.</p>
+<div class="doc"><h1>About</h1>
+<p class="sub">F-Keys Creative LLC.</p>
 <table class="facts">
 <tr><th>Entity</th><td>F-Keys Creative LLC (Florida)</td></tr>
 <tr><th>Trading as</th><td>F-Keys</td></tr>
-<tr><th>ORCID</th><td>0009-0005-3640-014X</td></tr>
-<tr><th>Contact</th><td>hello@f-keys.com</td></tr>
+<tr><th>Based in</th><td>Punta Gorda, Florida</td></tr>
+<tr><th>Live products</th><td>%%LIVE%%</td></tr>
+<tr><th>ORCID</th><td><a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">0009-0005-3640-014X</a></td></tr>
+<tr><th>Source</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
+<tr><th>Contact</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
 </table>
-<h2>What this is</h2>
-<p>I'm Vince. F-Keys is what I ship. Right now %%LIVE%% products are
-live, from browser games to formal proof tooling. I build them end to end:
-architecture, both ends, database, deployment, documentation.</p>
-<h2>The recurring interest</h2>
-<p>Provenance - what a result actually rests on. gonzalgo reads a compiled Lean 4
-or Metamath library and reports which axioms a theorem spends rather than quietly
-inherits. OpticQuiz runs one colour-vision engine across eight distribution
-channels, with its JavaScript and Python implementations verified identical to six
-decimal places, and publishes the calibration limits that keep its own results
-honest.</p>
-<p>Fifty-six works are deposited with DOIs. The packages are installed
-more than two thousand times a week. Eight pull requests to
-<a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>
-carry the measurements back upstream &mdash; reviewed and merged by that
-library's own maintainers.</p>
-<h2>Current interests</h2>
-<p>Accessibility &middot; hardware interfaces &middot; creator tools &middot; gaming
-&middot; formal methods &middot; the open web.</p>
+<h2>Scope</h2>
+<p>Built and maintained end to end: architecture, both ends, database,
+deployment, documentation.</p>
+<h2>Recurring subject</h2>
+<p>Provenance &mdash; what a result rests on. gonzalgo reads a compiled Lean 4 or
+Metamath library and reports which axioms a theorem spends rather than inherits.
+OpticQuiz runs one colour-vision engine across every channel it ships to, with
+the JavaScript and Python implementations verified identical to six decimal
+places, and publishes the calibration limits that bound its own results.</p>
+<h2>Subjects</h2>
+<p>Accessibility &middot; hardware interfaces &middot; creator tools &middot;
+gaming &middot; formal methods &middot; the open web.</p>
 <div class="btnrow">
-  <a class="btn default" href="/papers/">Read the papers</a>
-  <a class="btn" href="/log/">Working log</a>
+  <a class="btn default" href="/papers/">Papers</a>
+  <a class="btn" href="/cv/">CV</a>
+  <a class="btn" href="/log/">Log</a>
   <a class="btn" href="/status/">Status</a>
 </div>
 </div>
@@ -2630,43 +2627,11 @@ library's own maintainers.</p>
 HOME_DOC = """
 <div class="doc" style="padding-bottom:6px">
 <h1>F-Keys</h1>
-<p class="sub">Ideas. Delivered.</p>
-<p>I'm Vince Gonzalez. I build in Punta Gorda, Florida, under F-Keys
-Creative LLC. Right now %%LIVE%% products are live. I designed, wrote,
-deployed and documented every one of them. The table below is the whole
-company.</p>
-<p>The name came from a product. <a href="/remapwrap/">RemapWrap</a> was called
-F-Keys first &mdash; an extra row of function keys, on glass you already own
-&mdash; and the name outgrew it. The product then went missing for five months
-and survives because it was in a zip file in a folder called &ldquo;zip to
-sort&rdquo;.</p>
-
-<h2>What is on the shelves</h2>
-<p>%%SHELVES%% of them, sorted the way a file manager would sort them.
-<a href="/apps.html">Apps</a> are things you run: a keyboard that plays notes in
-any program, an 8-bit composer, colour-vision tests, live ballots for a room.
-<a href="/games.html">Games</a> holds a warehouse-loading simulator, two Discord
-activities and a Fortnite island. <a href="/tools.html">Tools</a> are small
-single-purpose programs for people who already know what they want.
-<a href="/hardware.html">Hardware</a> turns a spare machine into an appliance.
-<a href="/research.html">Research</a> is the formal-methods work &mdash; papers
-with DOIs and the tooling the measurements run on.
-<a href="/properties.html">Properties</a> lists the standalone sites.</p>
-
-<h2>Who it is for</h2>
-<p>There is no single customer, because these are not one product line. A Lean 4
-axiom auditor, a colour-vision test and a Discord word game share no market at
-all. In practice the people who end up here are <b>developers and proof
-engineers</b> who need to know what a theorem actually rests on, <b>designers and
-accessibility teams</b> checking colour against a real engine rather than a
-guess, <b>musicians and typists</b> who want a keyboard to make sound,
-<b>streamers and Discord communities</b> looking for something to run in a room
-full of people, and <b>trainers</b> who want load planning to behave like the
-physical thing.</p>
-
-<p>Each product page carries its own terms, licence and price. Nothing is assumed
-to match the last one. <a href="/contact.html">Contact</a> for licensing, or
-<a href="/privacy.html">Privacy</a> for what this site does and does not collect.</p>
+<p class="sub">Hardware, software and research.</p>
+<p>F-Keys Creative LLC, Punta Gorda, Florida. The catalogue below holds
+%%SHELVES%% sections, sorted the way a file manager sorts them. Each product
+page carries its own licence, terms and price; nothing is assumed to match the
+last one.</p>
 </div>
 """
 
@@ -2676,43 +2641,37 @@ to match the last one. <a href="/contact.html">Contact</a> for licensing, or
 # that a reader and a parser get the identical facts.
 CONTACT_DOC = """
 <div class="doc"><h1>Contact</h1>
-<p class="sub">One person reads this. There is no support queue and no ticket
-number.</p>
+<p class="sub">One reader. No queue, no ticket number.</p>
 <table class="facts">
 <tr><th>Email</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
 <tr><th>Entity</th><td>F-Keys Creative LLC, a Florida limited liability company</td></tr>
 <tr><th>Document number</th><td>L26000436157, filed 18 August 2026, status active</td></tr>
 <tr><th>Based in</th><td>Punta Gorda, Florida, United States</td></tr>
-<tr><th>Registered agent</th><td>Vincent Gonzalez. The registered address is
-on file with the
+<tr><th>Registered agent</th><td>Vincent Gonzalez. Address on file with the
 <a href="https://search.sunbiz.org/Inquiry/CorporationSearch/ByName" rel="noopener">Florida
 Division of Corporations</a> under the document number above.</td></tr>
 <tr><th>ORCID</th><td><a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">0009-0005-3640-014X</a></td></tr>
 <tr><th>Source code</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
+<tr><th>Reply time</th><td>Days, sometimes a week. No phone line.</td></tr>
 </table>
 
-<h2>What to write about</h2>
-<p><b>A bug, or something that will not run.</b> Say which product, which
-operating system, and what you saw instead. Every product page lists what it
-needs; if the answer is on that page the reply will just point at it, which is
-faster for both of us.</p>
-<p><b>Licensing.</b> Trailer Load is licensed to institutions for training use.
-Anything else you want to use commercially, ask &mdash; the published source is
-MIT and the answer is usually yes and costs nothing.</p>
-<p><b>The research.</b> Questions about the axiom-provenance work, the papers, or
-a measurement you want reproduced are welcome and get a real answer. The tooling
-is public, so you can check the numbers without asking.</p>
-<p><b>Press, or a correction.</b> If something on this site is wrong, saying so
-is the fastest way to get it fixed. Corrections go in the
-<a href="/log/">working log</a> with a date.</p>
+<h2>Bug reports</h2>
+<p>Product, operating system, and what happened instead. Requirements are on
+each product page.</p>
 
-<h2>What not to expect</h2>
-<p>There is no phone line, because there is no one to answer it. Replies come
-between builds, so a few days is normal and a week is not
-unusual. Nothing here is sold through a reseller, so an email offering to
-represent F-Keys will not get a reply.</p>
+<h2>Licensing</h2>
+<p>Trailer Load is licensed to institutions for training use. Published source
+is MIT; commercial use of anything else, ask.</p>
+
+<h2>Research</h2>
+<p>The tooling is public, so a measurement can be reproduced without asking.
+Questions about the axiom-provenance work get an answer.</p>
+
+<h2>Corrections</h2>
+<p>Errors on this site are logged with a date in the
+<a href="/log/">working log</a>.</p>
 <div class="btnrow">
-  <a class="btn default" href="mailto:hello@f-keys.com">Send an email</a>
+  <a class="btn default" href="mailto:hello@f-keys.com">Email</a>
   <a class="btn" href="/about.html">About</a>
   <a class="btn" href="/privacy.html">Privacy</a>
 </div>
@@ -2847,9 +2806,7 @@ link that sent you here was ours.</li>
 # search for.
 DEVELOPERS_DOC = """
 <div class="doc"><h1>F-Keys developer resources</h1>
-<p class="sub">Four command-line tools, sixteen PyPI packages, nineteen on npm, and a shelf of published
-JSON. Everything here is a thing you install or a file you fetch, and there is
-nothing to sign up for.</p>
+<p class="sub">Install or fetch. Nothing to sign up for.</p>
 
 <h2>Start here</h2>
 <table class="facts">
@@ -3084,7 +3041,8 @@ specification.</p>
 </div>
 """
 
-EXTRA_NODES = [("/about.html", "About"), ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
+EXTRA_NODES = [("/search/", "Find"), ("/about.html", "About"), ("/cv/", "CV"),
+               ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
                ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
                ("/contact.html", "Contact"), ("/privacy.html", "Privacy")]
 
@@ -3571,6 +3529,7 @@ def shell(title, path_label, body, count_label, active_cat=None,
     <a class="tool" href="{esc(up)}">&#8593; Up</a>
     <span class="sep"></span>
     <a class="tool" href="/">Home</a>
+    <a class="tool" href="/search/">Find</a>
     <a class="tool hide-xs" href="/status/">Status</a>
     <a class="tool hide-xs" href="/log/">Log</a>
   </div>
@@ -3706,10 +3665,10 @@ def main():
     # index: everything, grouped by category heading rows
     body = [counted(HOME_DOC), details_table(CATALOGUE)]
     written.append(("index.html", shell(
-        "F-Keys — Ideas. Delivered.",
+        "F-Keys — hardware, software and research",
         "F-Keys", "\n".join(body), f"{len(CATALOGUE)} object(s)",
-        description="Hardware, software and internet products I build and keep "
-                    "running. Apps, games, tools, hardware and research.",
+        description="Catalogue of hardware, software and research. F-Keys "
+                    "Creative LLC, Punta Gorda, Florida.",
         canonical="https://f-keys.com", ld=organization())))
 
     # one page per category

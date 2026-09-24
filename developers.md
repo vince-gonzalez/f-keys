@@ -4,9 +4,7 @@
 
 Canonical: https://f-keys.com/developers.html
 
-Four command-line tools, sixteen PyPI packages, nineteen on npm, and a shelf of published
-JSON. Everything here is a thing you install or a file you fetch, and there is
-nothing to sign up for.
+Install or fetch. Nothing to sign up for.
 
 ## Start here
 

@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/axsent/
 
-Measures what a formal library actually assumes &mdash; across Rocq, Agda and Isabelle, read from source, with nothing compiled.
+Measures what a formal library actually assumes — across Rocq, Agda and Isabelle, read from source, with nothing compiled.
 
 pip install axsent · Rocq, Agda, Isabelle · builds nothing
 

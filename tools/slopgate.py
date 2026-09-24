@@ -19,6 +19,10 @@ Three kinds of finding:
              "delve", "tapestry", "a testament to". Weight 3.
   TIC        a sentence shape models fall into. "It's not just
              X, it's Y." "Whether you're X or Y." Weight 2.
+  COUNT      a total recited as an achievement. Skipped on the log
+             and the status page, where a number is the content.
+  BOAST      self-praise, or marketing scaffolding on what is a
+             catalogue. Applies everywhere. Weight 3.
   DRIFT      a house rule about this specific site's voice:
              third person about him, subtractive counts,
              hedging. Weight 3.
@@ -130,6 +134,63 @@ TICS = [
 # ── house voice, specific to this site ──────────────────────
 # These are his rulings, not general style advice.
 
+# ── register: cold and technical, his ruling 2026-09-24 ──────
+# "Minimize word count and boastfulness. All wording. Technical field
+#  register... coldly mechanical. But super important you don't repeat
+#  '47 packages 9 npm' like anyone reading will care."
+#
+# A datasheet states a number in a table. Prose that states it AT the
+# reader is a boast. So these catch the sentence, not the figure - the
+# About facts table carries the live count and is meant to.
+
+# Pages whose function is to report a measurement. A number in the log or
+# on the status page is the content, not a brag: "the first run reported
+# 457 installs a week" is a record, and "checking deposits ... ok 58 works"
+# is a check printing its own output. The voice rules still apply there.
+REPORTING = ("log/", "status/", "portfolio.html", "snapshot", "latest.json")
+
+BOAST_COUNTS = [
+    # counts recited as achievement
+    # A bare number plus a noun is not a boast on its own: the intake
+    # form offers "Online Store (up to 20 products)", which is a
+    # customer's store, and ROADMAP.md says "8 of 22 products are not
+    # shipped", which is self-critical. Only a possessive frame counts.
+    (r"(?i)\b(?:my|our|his) \d{2,}\+? (?:packages|products|repos|deposits|works)\b", 3, 1),
+    (r"(?i)\b\d{2,}\+? (?:packages|products) (?:across|shipped|published|live on)\b", 3, 1),
+    (r"(?i)\b(?:forty-seven|fifty-six|thirty-five|twenty-eight|nineteen|nine) (?:packages|works|deposits|servers|merges|pull requests)\b", 3, 1),
+    (r"(?i)\bpackages are installed\b", 3, 1),
+    # The shape he named: an inventory recited as a lede - "Four
+    # command-line tools, sixteen PyPI packages, nineteen on npm". Two or
+    # more counted nouns in one breath is a brag, and it goes stale: that
+    # line said sixteen PyPI when the true figure was twenty-eight.
+    (r"(?i)\b(?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|[0-9]{1,3})[a-z-]* (?:PyPI |npm |MCP |command-line )?(?:packages|tools|servers|repos|repositories|projects|products)\b[^.!?]{0,40}?, (?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|[0-9]{1,3})[a-z-]* ", 3, 1),
+    (r"(?i)\b(?:installed|downloaded) (?:more than |over )?[\w-]+ (?:thousand|hundred) times\b", 3, 1),
+    (r"(?i)\b(?:are|were) deposited with DOIs\b", 3, 1),
+    (r"(?i)\b\w+ pull requests to\b", 3, 1),
+]
+
+BOAST_VOICE = [
+    # self-praise and effort claims
+    # NOT here: "every one of them". Key-J's privacy page uses it to say
+    # what the app does NOT read, which is the opposite of a boast, and
+    # the sentence it came from is caught by the "I designed, wrote" rule.
+    (r"(?i)\bI (?:designed|wrote|built|shipped),? (?:wrote|deployed|documented)", 3, 1),
+    (r"(?i)\bfrom the ground up\b", 3, 1),
+    (r"(?i)\bsingle[- ]handedly\b", 3, 1),
+    (r"(?i)\bthe whole company\b", 2, 1),
+    (r"(?i)\bwhat I (?:ship|build and keep running)\b", 2, 1),
+    # marketing scaffolding on a catalogue
+    # NOT a bare "who it is for": Trailer Load uses it as a facts-table
+    # row with a one-line answer, which is a spec. What he killed was
+    # the heading over a paragraph of customer personas, and the two
+    # rules below catch that without catching the table.
+    (r"(?i)\bthere is no single customer\b", 3, 1),
+    (r"(?i)\bthe people who end up here\b", 3, 1),
+    (r"(?i)\bwhat is on the shelves\b", 2, 1),
+    (r"(?i)\bwhat to expect\b", 2, 1),
+    (r"(?i)\bwhat not to expect\b", 2, 1),
+]
+
 DRIFT = [
     # third person about himself - his ruling after outside feedback
     (r"\bVince(?:nt)? Gonzalez is\b",                                3, 1),
@@ -167,6 +228,8 @@ DRIFT = [
 
 ALL = ([("TELL", p, w, f) for p, w, f in TELLS]
        + [("TIC", p, w, f) for p, w, f in TICS]
+       + [("COUNT", p, w, f) for p, w, f in BOAST_COUNTS]
+       + [("BOAST", p, w, f) for p, w, f in BOAST_VOICE]
        + [("DRIFT", p, w, f) for p, w, f in DRIFT])
 
 COMPILED = [(kind, re.compile(pat), pat, weight, floor)
@@ -228,8 +291,15 @@ def scan(path):
     if words < 40:
         return None                      # too short to have a voice
 
+    # A page whose job is reporting may state a number; it may not adopt a
+    # sales voice. So COUNT is skipped there and BOAST is not.
+    relp = path.replace("\\", "/")
+    reporting = any(m in relp for m in REPORTING)
+
     hits = []
     for kind, rx, pat, weight, floor in COMPILED:
+        if kind == "COUNT" and reporting:
+            continue
         # Cheap whole-file test first. Most patterns miss most files, and
         # a miss here skips the per-line pass entirely.
         if not rx.search(joined):

@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/openapi-drift/
 
-An OpenAPI document is a promise about a service, and nothing keeps the two together. This checks whether the service still does what the document says &mdash; and whether a machine can still read the document at all.
+An OpenAPI document is a promise about a service, and nothing keeps the two together. This checks whether the service still does what the document says — and whether a machine can still read the document at all.
 
 pip install openapi-drift · MIT · safe calls only, never writes
 

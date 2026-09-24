@@ -1,6 +1,6 @@
 # VINCE GONZALEZ
 
-Operations Leadership · Quality & Process
+Operations · quality and process
 
 Punta Gorda, FL · contact on request
 
@@ -10,7 +10,7 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 ## Profile
 
-Six years at Federal Express, four of them supervising entry-level teams and trainers, with a consistent record of thoroughgoing and integrity-oriented operational leadership. Designed a request-documentation procedure that Ohio standardised statewide. Took a hub to a certification it had never achieved in its history. Builds the documentation systems that make process stick.
+Operations Supervisor at FedEx Ground since May 2023; Outbound, Sorter and Mentor from October 2020. Coaches entry-level teams and trainers. Wrote a request-documentation procedure adopted statewide in Ohio. Took a hub to a certification it had not previously held.
 
 ## Professional Experience
 

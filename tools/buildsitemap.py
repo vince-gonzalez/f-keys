@@ -76,6 +76,15 @@ SECTIONS = ["apps.html", "games.html", "tools.html", "hardware.html",
             "research.html", "properties.html"]
 STANDING = ["about.html", "contact.html", "privacy.html", "developers.html"]
 
+# Pages written by a generator other than buildsite, which is why the
+# sitemap could not see them. Four CVs were live with no inbound link and
+# no sitemap entry, /cv/ was a 404, and TAG and TAG PRO - the two newest
+# products - had never been submitted to any crawler. A second generator
+# whose output nothing downstream knows about is the recurring shape here;
+# the markdown mirrors went stale the same way.
+OTHER = ["search/", "cv/", "cv/founder/", "cv/operations/", "cv/research/",
+         "cv/writing/", "log/", "status/", "intake/"]
+
 
 DATES = os.path.join(ROOT, "sitemap-dates.json")
 
@@ -154,6 +163,8 @@ def owned():
         out.append((slug + "/", os.path.join(slug, "index.html"), "0.8"))
     for name in STANDING:
         out.append((name, name, "0.7"))
+    for url in OTHER:
+        out.append((url, os.path.join(url.rstrip("/"), "index.html"), "0.7"))
     return out
 
 

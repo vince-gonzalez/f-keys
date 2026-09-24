@@ -1,170 +1,214 @@
 {
  "": {
-  "lastmod": "2026-09-04",
-  "sha": "e03e4f62dee72968"
+  "lastmod": "2026-09-24",
+  "sha": "f6c75ad475efb2ce"
  },
  "5best2buy/": {
-  "lastmod": "2026-09-04",
-  "sha": "0134b974369b876d"
+  "lastmod": "2026-09-24",
+  "sha": "b68a6954f1fa10ba"
  },
  "about.html": {
-  "lastmod": "2026-09-04",
-  "sha": "67af14341004ca1d"
+  "lastmod": "2026-09-24",
+  "sha": "7edf52b471263478"
  },
  "apps.html": {
-  "lastmod": "2026-08-26",
-  "sha": "3a398b52d25d5811"
+  "lastmod": "2026-09-24",
+  "sha": "81b1957c1afc0b4a"
  },
  "authorecon/": {
-  "lastmod": "2026-08-31",
-  "sha": "92a0103c6012c31f"
+  "lastmod": "2026-09-24",
+  "sha": "b563ef6f0d5498b1"
  },
  "axsent/": {
-  "lastmod": "2026-08-31",
-  "sha": "b2aa7a2aeac42fb4"
+  "lastmod": "2026-09-24",
+  "sha": "6af8fe3805088fbb"
  },
  "certivl/": {
-  "lastmod": "2026-08-31",
-  "sha": "a618128520fd91ef"
+  "lastmod": "2026-09-24",
+  "sha": "d024623b2a44d42e"
  },
  "changewatch/": {
-  "lastmod": "2026-08-31",
-  "sha": "5da7dce9d042829f"
+  "lastmod": "2026-09-24",
+  "sha": "454bc4577b57fbb5"
  },
  "contact.html": {
-  "lastmod": "2026-08-26",
-  "sha": "4d347081544df3c5"
+  "lastmod": "2026-09-24",
+  "sha": "257e2492a2e8a995"
+ },
+ "cv/": {
+  "lastmod": "2026-09-24",
+  "sha": "17da7c32e019f6e8"
+ },
+ "cv/founder/": {
+  "lastmod": "2026-09-24",
+  "sha": "cf9017d2f3b499dd"
+ },
+ "cv/operations/": {
+  "lastmod": "2026-09-24",
+  "sha": "5cf862d69f8f2251"
+ },
+ "cv/research/": {
+  "lastmod": "2026-09-24",
+  "sha": "c223798af4d4cbfd"
+ },
+ "cv/writing/": {
+  "lastmod": "2026-09-24",
+  "sha": "2f20212ec7c3eb2e"
  },
  "daisupop/": {
-  "lastmod": "2026-08-31",
-  "sha": "dc52503799055434"
+  "lastmod": "2026-09-24",
+  "sha": "4cb4456ad2b6ed84"
  },
  "developers.html": {
-  "lastmod": "2026-09-04",
-  "sha": "a4852a83a0ff90f9"
+  "lastmod": "2026-09-24",
+  "sha": "635b116e8bbfa2c4"
  },
  "fundoge/": {
-  "lastmod": "2026-09-04",
-  "sha": "a9f8c52625b3559c"
+  "lastmod": "2026-09-24",
+  "sha": "7e527e092ea591af"
  },
  "fytecraft/": {
-  "lastmod": "2026-08-31",
-  "sha": "fe0f1d5b95378370"
+  "lastmod": "2026-09-24",
+  "sha": "9234985b2a107dc0"
  },
  "games.html": {
-  "lastmod": "2026-08-26",
-  "sha": "a3b7dcdad64f10bc"
+  "lastmod": "2026-09-24",
+  "sha": "6f00fc07a8ce3209"
  },
  "hardware.html": {
-  "lastmod": "2026-08-26",
-  "sha": "3f440d48bdd67168"
+  "lastmod": "2026-09-24",
+  "sha": "fac730a2348e13af"
+ },
+ "intake/": {
+  "lastmod": "2026-09-24",
+  "sha": "f65c9c5123ba0b37"
  },
  "ishihara/": {
-  "lastmod": "2026-08-31",
-  "sha": "4e73b3d286cabd37"
+  "lastmod": "2026-09-24",
+  "sha": "04cf78e506d9465a"
  },
  "keyj/": {
-  "lastmod": "2026-08-31",
-  "sha": "5bdb56f981b5197f"
+  "lastmod": "2026-09-24",
+  "sha": "4435315f97e41101"
  },
  "keyjockey/": {
-  "lastmod": "2026-08-31",
-  "sha": "c630b726c4cce620"
+  "lastmod": "2026-09-24",
+  "sha": "d8ec7326eb55edd5"
  },
  "leadseer/": {
-  "lastmod": "2026-08-31",
-  "sha": "19d898ef8c09ef69"
+  "lastmod": "2026-09-24",
+  "sha": "7af61af60eb94f37"
  },
  "legible/": {
-  "lastmod": "2026-08-31",
-  "sha": "bea7ba799f556b31"
+  "lastmod": "2026-09-24",
+  "sha": "e9e96c7963e316e1"
  },
  "loadbearing/": {
-  "lastmod": "2026-08-31",
-  "sha": "5c60a2187ac0dd4b"
+  "lastmod": "2026-09-24",
+  "sha": "4db0174fd23bf877"
+ },
+ "log/": {
+  "lastmod": "2026-09-24",
+  "sha": "82ab799f1b646c8b"
  },
  "micdrop/": {
-  "lastmod": "2026-08-31",
-  "sha": "332e59a852756093"
+  "lastmod": "2026-09-24",
+  "sha": "e50131dc776dfb78"
  },
  "mmforge/": {
-  "lastmod": "2026-09-04",
-  "sha": "2b8bd9ce439218de"
+  "lastmod": "2026-09-24",
+  "sha": "65c36ddb3d6ac6ef"
  },
  "modulign/": {
-  "lastmod": "2026-08-31",
-  "sha": "58d885b350a170f5"
+  "lastmod": "2026-09-24",
+  "sha": "e57cb06e79328fe2"
  },
  "moonbeam/": {
-  "lastmod": "2026-09-04",
-  "sha": "275b2f0abe06a412"
+  "lastmod": "2026-09-24",
+  "sha": "f5f90596af88ccda"
  },
  "openapi-drift/": {
-  "lastmod": "2026-08-31",
-  "sha": "fb0e24bf0702a1de"
+  "lastmod": "2026-09-24",
+  "sha": "e586b443f716e6cd"
  },
  "opticquiz/": {
-  "lastmod": "2026-09-04",
-  "sha": "a87906ee64702539"
+  "lastmod": "2026-09-24",
+  "sha": "49df6a738fb3dcce"
  },
  "pixelstaff/": {
-  "lastmod": "2026-08-31",
-  "sha": "53b787b0ec2c78ae"
+  "lastmod": "2026-09-24",
+  "sha": "10fd550ace937822"
  },
  "plumhud/": {
-  "lastmod": "2026-09-04",
-  "sha": "128c1dd57d12493e"
+  "lastmod": "2026-09-24",
+  "sha": "a77dffc70d35f2f9"
  },
  "poticas/": {
-  "lastmod": "2026-09-04",
-  "sha": "5fbbc98c11292e48"
+  "lastmod": "2026-09-24",
+  "sha": "61e008d65e2d4d5c"
  },
  "privacy.html": {
-  "lastmod": "2026-08-30",
-  "sha": "d9d846919338bf45"
+  "lastmod": "2026-09-24",
+  "sha": "fdee7f09c7c79e04"
  },
  "prompt/": {
-  "lastmod": "2026-08-31",
-  "sha": "751c78ffb8c3f62f"
+  "lastmod": "2026-09-24",
+  "sha": "a5771fd0ae8b80a3"
  },
  "properties.html": {
-  "lastmod": "2026-09-04",
-  "sha": "0a2bafd8031b4596"
+  "lastmod": "2026-09-24",
+  "sha": "7d0ffd113e89d3d7"
  },
  "qv/": {
-  "lastmod": "2026-08-31",
-  "sha": "98ad8481bb7455fe"
+  "lastmod": "2026-09-24",
+  "sha": "5dab3f0f3e9ad207"
  },
  "remapwrap/": {
-  "lastmod": "2026-09-04",
-  "sha": "add4360ccb9ce925"
+  "lastmod": "2026-09-24",
+  "sha": "cc473f875d009e4f"
  },
  "research.html": {
-  "lastmod": "2026-08-31",
-  "sha": "ea68960d8291b365"
+  "lastmod": "2026-09-24",
+  "sha": "4c435e706b4a19f2"
  },
  "saydo/": {
-  "lastmod": "2026-09-04",
-  "sha": "dee49c3d5ffa3ad5"
+  "lastmod": "2026-09-24",
+  "sha": "2f34571c307d02c2"
+ },
+ "search/": {
+  "lastmod": "2026-09-24",
+  "sha": "f2f93a470ab84f08"
+ },
+ "status/": {
+  "lastmod": "2026-09-24",
+  "sha": "2d48f5b4a31a178a"
  },
  "streamsniper/": {
-  "lastmod": "2026-08-31",
-  "sha": "8a443cb1617308b6"
+  "lastmod": "2026-09-24",
+  "sha": "1f3806883020acd7"
+ },
+ "tag/": {
+  "lastmod": "2026-09-24",
+  "sha": "8ff574a286578b2c"
+ },
+ "tagpro/": {
+  "lastmod": "2026-09-24",
+  "sha": "48e9f16372c77211"
  },
  "tipstreams/": {
-  "lastmod": "2026-09-04",
-  "sha": "6bd6537d7678e6b8"
+  "lastmod": "2026-09-24",
+  "sha": "069b2d9d7d8c05db"
  },
  "tools.html": {
-  "lastmod": "2026-09-04",
-  "sha": "bbd3c261298055e0"
+  "lastmod": "2026-09-24",
+  "sha": "4970b06e9d68c7db"
  },
  "trailer-load/": {
-  "lastmod": "2026-08-31",
-  "sha": "ec49e118d80b8a11"
+  "lastmod": "2026-09-24",
+  "sha": "8f8a49a068481488"
  },
  "wikipolish/": {
-  "lastmod": "2026-08-31",
-  "sha": "fb44891bea8c7f3d"
+  "lastmod": "2026-09-24",
+  "sha": "00cc3cbf1131c05a"
  }
 }

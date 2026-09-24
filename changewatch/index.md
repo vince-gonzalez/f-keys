@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/changewatch/
 
-You can already see what you did. What you cannot see is whether anyone else did anything about it &mdash; the first citation, the first star from a stranger, the first time your name appears somewhere you did not put it.
+You can already see what you did. What you cannot see is whether anyone else did anything about it — the first citation, the first star from a stranger, the first time your name appears somewhere you did not put it.
 
 pip install changewatch · MIT · silent unless somebody else acts
 

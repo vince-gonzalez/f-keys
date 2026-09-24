@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/prompt/
 
-A word game that runs inside a Discord voice channel, in a 90s CRT shell. Everyone in the room looks at the same green screen at the same moment &mdash; no install, no bot to invite, nothing for an admin to approve.
+A word game that runs inside a Discord voice channel, in a 90s CRT shell. Everyone in the room looks at the same green screen at the same moment — no install, no bot to invite, nothing for an admin to approve.
 
 **Free** · a Discord Activity · no install · no bot invite · no permissions to grant
 
