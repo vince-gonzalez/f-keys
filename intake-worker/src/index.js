@@ -18,6 +18,16 @@ to make impossible.
 ============================================================
 */
 
+/* A Workers request body caps at 100 MB and base64 inflates by a third,
+   so a per-file ceiling keeps one oversized photo from failing the whole
+   enquiry. Anything larger is still recorded by name and asked for later. */
+const MAX_FILE_BYTES = 12 * 1024 * 1024;
+
+/* How long a download link in the notification stays good. Long enough
+   to act on a lead over a weekend, short enough that a forwarded email
+   is not a permanent key to someone's brand assets. */
+const LINK_TTL_SECONDS = 14 * 24 * 60 * 60;
+
 const now = () => new Date().toISOString();
 
 const id = (prefix) => {
@@ -251,6 +261,36 @@ async function handleList(request, env, origin) {
   return json({ count: rows.results.length, submissions: rows.results }, 200, origin);
 }
 
+/* Serves one uploaded file to whoever holds an unexpired signature.
+   No public bucket and no admin key in an email link. */
+async function handleFile(request, env, origin, fileId) {
+  if (!env.FILES) return json({ error: 'no file storage' }, 404, origin);
+  const url = new URL(request.url);
+  const exp = parseInt(url.searchParams.get('exp') || '0', 10);
+  const sig = url.searchParams.get('sig') || '';
+  if (!exp || Math.floor(Date.now() / 1000) > exp) {
+    return json({ error: 'link expired' }, 410, origin);
+  }
+  if (!sameSig(sig, await signFile(env, fileId, exp))) {
+    return json({ error: 'not authorised' }, 401, origin);
+  }
+  const row = await env.DB.prepare(
+    'SELECT name, mime, r2_key FROM submission_files WHERE id = ?'
+  ).bind(fileId).first();
+  if (!row || !row.r2_key) return json({ error: 'no such file' }, 404, origin);
+
+  const obj = await env.FILES.get(row.r2_key);
+  if (!obj) return json({ error: 'file missing from storage' }, 404, origin);
+
+  return new Response(obj.body, {
+    headers: {
+      'Content-Type': row.mime || 'application/octet-stream',
+      'Content-Disposition': 'inline; filename="' + String(row.name).replace(/"/g, '') + '"',
+      'Cache-Control': 'private, no-store'
+    }
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -279,6 +319,15 @@ export default {
         /* The browser must not be told "sent" because a write threw.
            It falls back to the copy box, which is why that box exists. */
         return json({ error: 'not recorded', detail: String(e).slice(0, 200) }, 500, origin);
+      }
+    }
+
+    const fileMatch = url.pathname.match(/^\/file\/(\d+)$/);
+    if (fileMatch && request.method === 'GET') {
+      try {
+        return await handleFile(request, env, origin, fileMatch[1]);
+      } catch (e) {
+        return json({ error: String(e).slice(0, 200) }, 500, origin);
       }
     }
 

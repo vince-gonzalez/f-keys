@@ -25,9 +25,23 @@ binding = "DB"
 database_name = "f-keys-intake"
 database_id = "273da242-9752-44fc-8bde-f2dd3433bf44"
 
+# UNCOMMENT once R2 is enabled on the account and the bucket exists.
+# Deploying with this block before then fails: wrangler cannot bind a
+# bucket that is not there. Without it env.FILES is undefined and the
+# code records file names only, which is the old behaviour and safe.
+# [[r2_buckets]]
+# binding = "FILES"
+# bucket_name = "f-keys-intake-files"
+
 [vars]
-# Where a submission is announced. Not a secret.
-NOTIFY_EMAIL = "vincegonzalez@me.com"
+# Where a submission is announced. Comma separated - two inboxes so that
+# one of them going quiet is something he notices rather than discovers.
+# Not a secret.
+NOTIFY_EMAIL = "vincegonzalez@me.com,admin@f-keys.com"
+# The sender. A SUBDOMAIN on purpose: f-keys.com's MX is Apple's and its
+# SPF already carries icloud.com, so sender records go on send.f-keys.com
+# where they cannot fight the mail that already works.
+MAIL_FROM = "F-Keys Intake <intake@send.f-keys.com>"
 # The site allowed to POST here. An origin the browser sends, checked
 # against this list - not a security boundary, a CORS one.
 ALLOWED_ORIGINS = "https://f-keys.com,https://www.f-keys.com"
@@ -38,3 +52,5 @@ ALLOWED_ORIGINS = "https://f-keys.com,https://www.f-keys.com"
 #                            notified stays 0 and notify_error says why
 #   ADMIN_KEY        any long random string; required to read /submissions
 #   IP_SALT          any long random string; salts the stored IP hash
+#   FILE_SIGNING_KEY any long random string; signs the expiring download
+#                    links in the notification. Falls back to IP_SALT.
