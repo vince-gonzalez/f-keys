@@ -75,8 +75,8 @@ regardless because it fired on a timer instead of on a delivery.
 ## 2026-09-11
 
 Published the website offer at `/intake/`. A hundred dollars to build a site,
-seventy-five a month to run it, and `intake.f-keys.com` routed to it like
-every other product name.
+seventy-five a month to run it, and `intake.f-keys.com` routed to it the
+way the product names are.
 
 The form behind it is ten sections: the business, its brand, its hours and
 service area, what it sells, how it takes bookings, what it wants found for,
