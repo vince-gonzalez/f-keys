@@ -36,29 +36,6 @@ async function hashIp(ip, salt) {
     (x) => x.toString(16).padStart(2, '0')).join('');
 }
 
-/* A link in an email cannot carry the admin key, and the bucket must
-   not be public - a client's logo is their property, not the internet's.
-   So the link carries its own expiry and a signature over it. */
-async function signFile(env, fileId, exp) {
-  const key = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(String(env.FILE_SIGNING_KEY || env.IP_SALT || '')),
-    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
-  );
-  const mac = await crypto.subtle.sign('HMAC', key,
-    new TextEncoder().encode(fileId + '.' + exp));
-  return Array.from(new Uint8Array(mac).slice(0, 16),
-    (x) => x.toString(16).padStart(2, '0')).join('');
-}
-
-/* Compared with a constant-time walk rather than ===, so a wrong
-   signature cannot be guessed one character at a time from timing. */
-function sameSig(a, b) {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return diff === 0;
-}
-
 function allowed(origin, env) {
   const list = (env.ALLOWED_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean);
   return list.includes(origin) ? origin : list[0] || '';
@@ -74,23 +51,11 @@ const json = (body, status, origin) =>
     }
   });
 
-/* Every address in NOTIFY_EMAIL, comma separated. Two inboxes is not
-   redundancy for its own sake: if one of them silently stops
-   delivering, the other one is how that gets noticed. */
-const recipients = (env) => String(env.NOTIFY_EMAIL || '')
-  .split(',').map((s) => s.trim()).filter(Boolean);
-
 /* Resend if a key is set. Returns why it refused rather than a bare
    false: "the customer never got the email" has to be answerable, and
-   an unverified domain and a rate limit are not the same problem.
-
-   MAIL_FROM is a var, not a literal, because the sending domain is a
-   SUBDOMAIN - f-keys.com itself is Apple's, and writing sender records
-   at the apex would fight the MX that already works. */
+   an unverified domain and a rate limit are not the same problem. */
 async function notify(env, subject, text) {
   if (!env.RESEND_API_KEY) return { ok: false, why: 'no RESEND_API_KEY set' };
-  const to = recipients(env);
-  if (!to.length) return { ok: false, why: 'no NOTIFY_EMAIL set' };
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -99,8 +64,8 @@ async function notify(env, subject, text) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: env.MAIL_FROM || 'F-Keys Intake <intake@send.f-keys.com>',
-        to: to,
+        from: 'F-Keys Intake <intake@f-keys.com>',
+        to: [env.NOTIFY_EMAIL],
         subject: subject,
         text: text
       })
@@ -163,57 +128,26 @@ async function handleSubmit(request, env, origin) {
     ts
   ).run();
 
-  /* The bytes go to R2 and never into D1 - a 4 MB logo base64s past the
-     1 MB row cap, and a failed write here would take the intake down
-     with it. If FILES is not bound the name is still recorded, so the
-     intake keeps working before the bucket exists rather than after. */
+  /* Files are recorded by name, not stored: a 4 MB logo base64s past
+     the 1 MB D1 row cap, and a failed write here would take the intake
+     down with it. The names are enough to ask for them in the reply. */
   const files = Array.isArray(payload.files) ? payload.files.slice(0, 20) : [];
-  const stored = [];
   for (const file of files) {
     const name = String((file && file.name) || '').slice(0, 300);
     if (!name) continue;
     const bytes = typeof file.data === 'string'
       ? Math.round(file.data.length * 3 / 4) : null;
-
-    let r2Key = null;
-    if (env.FILES && typeof file.data === 'string' && bytes && bytes <= MAX_FILE_BYTES) {
-      try {
-        const raw = Uint8Array.from(atob(file.data), (c) => c.charCodeAt(0));
-        r2Key = subId + '/' + name.replace(/[^\w.\- ]+/g, '_');
-        await env.FILES.put(r2Key, raw, {
-          httpMetadata: { contentType: String(file.type || 'application/octet-stream') }
-        });
-      } catch (e) {
-        r2Key = null;   // the enquiry survives a failed upload
-      }
-    }
-
-    const row = await env.DB.prepare(
-      'INSERT INTO submission_files (submission_id, name, mime, bytes, r2_key)' +
-      ' VALUES (?,?,?,?,?) RETURNING id'
-    ).bind(subId, name, String(file.type || '').slice(0, 120) || null, bytes, r2Key).first();
-    stored.push({ id: row && row.id, name: name, bytes: bytes, r2Key: r2Key });
+    await env.DB.prepare(
+      'INSERT INTO submission_files (submission_id, name, mime, bytes) VALUES (?,?,?,?)'
+    ).bind(subId, name, String(file.type || '').slice(0, 120) || null, bytes).run();
   }
 
   const subject = String(payload.subject
     || ('Website Intake - ' + (f['Business Name'] || 'no name')));
-  let lines = body;
-  if (stored.length) {
-    const exp = Math.floor(Date.now() / 1000) + LINK_TTL_SECONDS;
-    const base = new URL(request.url).origin;
-    const parts = [];
-    for (const s of stored) {
-      if (s.r2Key && s.id) {
-        const sig = await signFile(env, String(s.id), exp);
-        parts.push('  ' + s.name + '\n    ' + base + '/file/' + s.id
-          + '?exp=' + exp + '&sig=' + sig);
-      } else {
-        parts.push('  ' + s.name + '  (not stored - ask for it in the reply)');
-      }
-    }
-    lines += '\n\nFILES\n' + parts.join('\n')
-      + '\n\n  Links expire in 14 days. Save anything you want to keep.';
-  }
+  const lines = body + (files.length
+    ? '\n\nFILES NAMED (not attached, ask for them in the reply):\n'
+      + files.map((x) => '  - ' + x.name).join('\n')
+    : '');
 
   const sent = await notify(env, subject, lines);
   await env.DB.prepare(
