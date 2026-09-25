@@ -258,6 +258,30 @@ async function handleList(request, env, origin) {
   const rows = await env.DB.prepare(
     'SELECT ' + cols + ' FROM submissions ORDER BY created_at DESC LIMIT ?'
   ).bind(limit).all();
+
+  /* A raw r2_key is not something anyone can open. Every listed
+     submission carries freshly signed links instead, minted at read
+     time - so a link is only ever as old as the request that asked
+     for it, and an old listing does not keep working forever. */
+  const exp = Math.floor(Date.now() / 1000) + LINK_TTL_SECONDS;
+  const base = new URL(request.url).origin;
+  for (const row of rows.results) {
+    const files = await env.DB.prepare(
+      'SELECT id, name, mime, bytes, r2_key FROM submission_files WHERE submission_id = ?'
+    ).bind(row.id).all();
+    row.files = [];
+    for (const f of files.results) {
+      row.files.push({
+        name: f.name,
+        bytes: f.bytes,
+        url: f.r2_key
+          ? base + '/file/' + f.id + '?exp=' + exp
+            + '&sig=' + await signFile(env, String(f.id), exp)
+          : null
+      });
+    }
+  }
+
   return json({ count: rows.results.length, submissions: rows.results }, 200, origin);
 }
 
