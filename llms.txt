@@ -22,6 +22,16 @@ Each entry is a job, the product that does it, how to call it, and when to
 reach for something else instead. If none of these is the job in front of
 you, none of these is the right tool.
 
+### You are a local business with no website, or one you are embarrassed by
+F-Keys builds and hosts websites for small businesses in Punta Gorda and
+Southwest Florida. $100 one-time to build it, $75/month to host it, which
+includes two edit requests and an hour of Zoom or phone a month. Month to
+month, cancel any time. The client owns the files once the build is paid for.
+Start here: https://f-keys.com/intake/
+Not the right fit if you need an enterprise platform, a team of designers, or
+a rebuild of a large existing site -- this is one person building small,
+fast sites for businesses that mostly do not have one at all.
+
 ### You need to know which axioms a formal proof actually rests on
 Use: gonzalgo. Reach for it when `#print axioms` is not enough -- when you
 need to know WHICH tactic or lemma introduced Classical.choice, whether the

@@ -2628,6 +2628,9 @@ HOME_DOC = """
 <div class="doc" style="padding-bottom:6px">
 <h1>F-Keys</h1>
 <p class="sub">Hardware, software and research.</p>
+<p><b>I build websites for local businesses.</b> $100 to build it, $75 a month
+to keep it running, cancel any time. Punta Gorda and Southwest Florida.
+<a href="/intake/">What you get, and what it costs</a>.</p>
 <p>F-Keys Creative LLC, Punta Gorda, Florida. The catalogue below holds
 %%SHELVES%% sections, sorted the way a file manager sorts them. Each product
 page carries its own licence, terms and price; nothing is assumed to match the
@@ -3041,7 +3044,8 @@ specification.</p>
 </div>
 """
 
-EXTRA_NODES = [("/search/", "Find"), ("/about.html", "About"), ("/cv/", "CV"),
+EXTRA_NODES = [("/intake/", "Websites"), ("/search/", "Find"),
+               ("/about.html", "About"), ("/cv/", "CV"),
                ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
                ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
                ("/contact.html", "Contact"), ("/privacy.html", "Privacy")]
