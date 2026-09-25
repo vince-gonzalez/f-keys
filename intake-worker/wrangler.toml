@@ -25,13 +25,12 @@ binding = "DB"
 database_name = "f-keys-intake"
 database_id = "273da242-9752-44fc-8bde-f2dd3433bf44"
 
-# UNCOMMENT once R2 is enabled on the account and the bucket exists.
-# Deploying with this block before then fails: wrangler cannot bind a
-# bucket that is not there. Without it env.FILES is undefined and the
-# code records file names only, which is the old behaviour and safe.
-# [[r2_buckets]]
-# binding = "FILES"
-# bucket_name = "f-keys-intake-files"
+# Client logos and reference photos. Private - nothing in this bucket is
+# publicly readable. The notification email carries a signed link per
+# file instead, which expires; see LINK_TTL_SECONDS in src/index.js.
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "f-keys-intake-files"
 
 [vars]
 # Where a submission is announced. Comma separated - two inboxes so that
