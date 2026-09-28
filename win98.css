@@ -200,6 +200,32 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .doc .note{background:#ffffe1;border:1px solid #c0c000;padding:8px 11px;
   margin-bottom:12px;line-height:1.6}
 
+/* ── The offer, as a message box ─────────────────────────────
+   A prose sentence in the intro was doing the selling and nobody
+   was reading it. This is the one thing on the homepage that is
+   shaped like a dialog, which on a page dressed as Explorer is
+   the shape a reader's eye goes to first. No popup: a portfolio
+   that interrupts you is a portfolio you close. */
+.offerbox{background:var(--face);margin:0 0 16px;
+  border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);
+  display:flex;gap:14px;padding:16px 18px;flex-wrap:wrap;align-items:flex-start}
+.offerbox .ico{flex:0 0 auto;width:32px;height:32px;border-radius:50%;
+  background:var(--sel);color:var(--sel-txt);display:flex;align-items:center;
+  justify-content:center;font-family:Georgia,serif;font-size:21px;
+  font-weight:700;line-height:1}
+.offerbox .said{flex:1 1 300px;min-width:0}
+.offerbox h2{font-size:17px;margin:0 0 4px}
+.offerbox p{margin:0 0 10px}
+.offerbox .tags{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.offerbox .tag{background:var(--field);padding:5px 10px;
+  border:1px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh);
+  font-family:var(--mono,ui-monospace),Consolas,monospace;font-size:13px}
+.offerbox .tag b{font-size:15px}
+@media (max-width:520px){
+  .offerbox{padding:14px}
+  .offerbox .ico{display:none}
+}
+
 /* ── Setup wizard ────────────────────────────────────────────
    The intake page is a ten-step form with Back and Next, which is
    a Setup wizard and has been since 1995. So it looks like one:
