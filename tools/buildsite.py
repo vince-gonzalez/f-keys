@@ -2632,6 +2632,9 @@ gaming &middot; formal methods &middot; the open web.</p>
 # PAY_AUDIT is the Stripe Payment Link. Until it is set the page
 # asks for an email instead, so the page is never a dead end.
 PAY_AUDIT = "https://buy.stripe.com/bJecN54tY6oD8vJd3N4Ni06"
+# The build link. The monthly deliberately has none yet: clause 2.4 now
+# authorises an automatic monthly charge, and he reads it before it runs.
+PAY_BUILD = "https://buy.stripe.com/3cIaEXd0u00fh2fe7R4Ni07"
 
 AUDIT_DOC = """
 <div class="setup">
@@ -2734,6 +2737,10 @@ INTAKE_DOC = """
     <span class="grow">Step 1 of 4 &mdash; read this, then fill in the form</span>
     <a class="btn" href="/">Cancel</a>
     <a class="btn default" href="/intake/form/">Next &gt;</a>
+  </div>
+  <div class="setup-foot" style="border-top:none;padding-top:0;">
+    <span class="grow">Already know you want it? The build is payable here.</span>
+    <a class="btn" href="%%PAY_BUILD%%">Pay the $100 build</a>
   </div>
 </div>
 
@@ -3945,7 +3952,7 @@ def main():
 
     written.append((os.path.join("intake", "index.html"), shell(
         "Websites for local business \u2014 F-Keys", "F-Keys\\Websites",
-        INTAKE_DOC, "1 item",
+        INTAKE_DOC.replace("%%PAY_BUILD%%", PAY_BUILD), "1 item",
         description="$100 to build your website. $75/month to keep it "
                     "running. Punta Gorda and Southwest Florida.",
         canonical="https://f-keys.com/intake/", ld=organization())))
