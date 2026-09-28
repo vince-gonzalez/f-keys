@@ -97,10 +97,10 @@ const recipients = (env) => String(env.NOTIFY_EMAIL || '')
    MAIL_FROM is a var, not a literal, because the sending domain is a
    SUBDOMAIN - f-keys.com itself is Apple's, and writing sender records
    at the apex would fight the MX that already works. */
-async function notify(env, subject, text) {
+async function notify(env, subject, text, toOverride) {
   if (!env.RESEND_API_KEY) return { ok: false, why: 'no RESEND_API_KEY set' };
-  const to = recipients(env);
-  if (!to.length) return { ok: false, why: 'no NOTIFY_EMAIL set' };
+  const to = toOverride && toOverride.length ? toOverride : recipients(env);
+  if (!to.length) return { ok: false, why: 'no recipient' };
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -173,6 +173,10 @@ async function handleSubmit(request, env, origin) {
     ts
   ).run();
 
+  /* Shown to the client in their own copy only. Never stored in the clear -
+     the column holds the salted hash and always has. */
+  const ipShown = request.headers.get('CF-Connecting-IP') || '';
+
   /* The bytes go to R2 and never into D1 - a 4 MB logo base64s past the
      1 MB row cap, and a failed write here would take the intake down
      with it. If FILES is not bound the name is still recorded, so the
@@ -226,9 +230,26 @@ async function handleSubmit(request, env, origin) {
   }
 
   const sent = await notify(env, subject, lines);
+
+  /* His notification first, the client's copy second, and neither can take
+     the row down. A client copy that fails is a clause breached and an
+     enquiry kept; a row that fails is an enquiry lost. */
+  let copy = { ok: false, why: 'not attempted' };
+  try {
+    copy = await sendClientCopy(env, payload, request, ts, ipShown);
+  } catch (e) {
+    copy = { ok: false, why: String(e).slice(0, 200) };
+  }
+
   await env.DB.prepare(
-    'UPDATE submissions SET notified = ?, notify_error = ? WHERE id = ?'
-  ).bind(sent.ok ? 1 : 0, sent.ok ? null : sent.why.slice(0, 300), subId).run();
+    'UPDATE submissions SET notified = ?, notify_error = ?, client_copied = ?,' +
+    ' client_copy_error = ?, agreement_version = ? WHERE id = ?'
+  ).bind(
+    sent.ok ? 1 : 0, sent.ok ? null : sent.why.slice(0, 300),
+    copy.ok ? 1 : 0, copy.ok ? null : String(copy.why).slice(0, 300),
+    String(payload.agreementVersion || '').slice(0, 40) || null,
+    subId
+  ).run();
 
   /* The browser is told the truth about the part that matters. The row
      is safe; whether the email went is a separate fact and is reported
@@ -238,6 +259,7 @@ async function handleSubmit(request, env, origin) {
     id: subId,
     recorded: true,
     notified: sent.ok,
+    copySent: copy.ok,
     received_at: ts
   }, 200, origin);
 }
@@ -283,6 +305,53 @@ async function handleList(request, env, origin) {
   }
 
   return json({ count: rows.results.length, submissions: rows.results }, 200, origin);
+}
+
+/* Clause 1.5: the person who signs gets a copy, automatically, at the time
+   they sign it. Before this the worker mailed him twice and the signer zero
+   times -- a binding agreement nobody but the drafter could produce.
+
+   The clause promises specific contents, so this builds exactly those: the
+   agreement text as it read, its version, every answer, the totals, the
+   timestamp, the IP, and the wording of each box ticked. It goes in the BODY,
+   not an attachment, because the clause says a client can read it with any
+   ordinary email program. */
+async function sendClientCopy(env, payload, request, ts, ipShown) {
+  const f = payload.fields || {};
+  const email = String(f['Email'] || '').trim();
+  if (!email) return { ok: false, why: 'no client email' };
+
+  const agreement = typeof payload.agreementText === 'string' ? payload.agreementText : '';
+  const version = String(payload.agreementVersion || 'not stated');
+  const consents = Array.isArray(payload.consents) ? payload.consents : [];
+
+  const text =
+    'This is your copy of what you sent to F-Keys Creative LLC.\n\n' +
+    'It is a record of your request. It is NOT a quote and it does not set a\n' +
+    'price. You owe nothing and have authorised nothing until you accept a\n' +
+    'written quote in writing.\n\n' +
+    'Submitted: ' + ts + '\n' +
+    'From IP: ' + (ipShown || 'not recorded') + '\n' +
+    'Agreement version: ' + version + '\n' +
+    '\n' + '='.repeat(60) + '\nWHAT YOU SENT\n' + '='.repeat(60) + '\n\n' +
+    (payload.body || '') +
+    (consents.length
+      ? '\n\n' + '='.repeat(60) + '\nWHAT YOU AGREED TO, WORD FOR WORD\n' +
+        '='.repeat(60) + '\n\n' + consents.map(function (c, i) {
+          return '[' + (i + 1) + '] ' + c;
+        }).join('\n\n')
+      : '') +
+    (agreement
+      ? '\n\n' + '='.repeat(60) + '\nTHE FULL AGREEMENT, VERSION ' + version + '\n' +
+        '='.repeat(60) + '\n\n' + agreement
+      : '') +
+    '\n\nKeep this email. Ask for it again any time at vincegonzalez@me.com and\n' +
+    'it will be sent again at no charge, for five years from the date above.\n\n' +
+    'Vince Gonzalez\nF-Keys Creative LLC, Punta Gorda, Florida\n';
+
+  return notify(env,
+    'Your copy - ' + (f['Business Name'] || 'website enquiry') + ' - F-Keys',
+    text, [email]);
 }
 
 /* Serves one uploaded file to whoever holds an unexpired signature.

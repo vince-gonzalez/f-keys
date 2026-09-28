@@ -2631,7 +2631,7 @@ gaming &middot; formal methods &middot; the open web.</p>
 # actually is, field by field, whether or not you like the answer.
 # PAY_AUDIT is the Stripe Payment Link. Until it is set the page
 # asks for an email instead, so the page is never a dead end.
-PAY_AUDIT = ""
+PAY_AUDIT = "https://buy.stripe.com/bJecN54tY6oD8vJd3N4Ni06"
 
 AUDIT_DOC = """
 <div class="setup">
