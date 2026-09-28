@@ -2624,6 +2624,85 @@ gaming &middot; formal methods &middot; the open web.</p>
 # assemble an answer, because the homepage was a bare table with no
 # heading and no prose. This is the answer in one place: what the
 # catalogue is, who each shelf is for, and what any of it costs.
+# -- the audit, as a Properties dialog --------------------------
+# The build page is a Setup wizard because a ten-step form with
+# Back and Next is one. This one is a Properties sheet, because
+# that is what an audit is: you select a thing and read what it
+# actually is, field by field, whether or not you like the answer.
+# PAY_AUDIT is the Stripe Payment Link. Until it is set the page
+# asks for an email instead, so the page is never a dead end.
+PAY_AUDIT = ""
+
+AUDIT_DOC = """
+<div class="setup">
+  <div class="setup-banner">
+    <div class="mark">Site<span>.</span>chk</div>
+    <div class="tag">Website audit<br>for one address</div>
+    <div class="foot">$50 &middot; three business days</div>
+  </div>
+  <div class="setup-body">
+    <h1>What your website is actually doing</h1>
+    <p>Send me your address and I send back a written report: what is
+    broken, what it is costing you, and what I would fix. Fifty dollars,
+    by email, inside three business days.</p>
+    <p>I do not need your password, your hosting login, or access to
+    anything. Everything in the report is measured from the page a
+    customer already sees.</p>
+  </div>
+  <div class="setup-foot">
+    <span class="grow">Ends with a priced list. You are under no obligation to take any of it.</span>
+    %%AUDIT_CTA%%
+  </div>
+</div>
+
+<div class="doc">
+<h2>What gets measured</h2>
+<table class="facts">
+<tr><th>On a phone</th><td>Whether the site works on the screen most of your
+customers are holding. Tap targets, text size, anything running off the
+edge.</td></tr>
+<tr><th>Speed</th><td>How long it takes to show something useful, and what is
+holding it up.</td></tr>
+<tr><th>Being found</th><td>Whether search engines can read the page, what it
+claims to be about, and whether your town appears anywhere on it.</td></tr>
+<tr><th>Reaching you</th><td>Whether a customer can find a phone number, an
+address and today's hours without hunting. For a chain, whether every location
+has them.</td></tr>
+<tr><th>Legibility</th><td>Every text colour measured against its background
+for contrast, to the WCAG 4.5:1 floor. Computed, not eyeballed.</td></tr>
+<tr><th>Broken things</th><td>Dead links, missing images, pages that error, and
+anything the browser complains about.</td></tr>
+<tr><th>Trust</th><td>Certificate, mixed content, and whether the site says who
+runs it.</td></tr>
+</table>
+
+<h2>What you get</h2>
+<p>One document. Each finding says what it is, where it is, why it matters in
+money or customers, and what fixing it costs. Findings are ordered by what I
+would do first.</p>
+<p>The fixes are priced individually and quoted separately. Take all of them,
+take one, or take the report to another builder &mdash; it is yours and it
+names no names but yours.</p>
+
+<h2>Straight answers</h2>
+<table class="facts">
+<tr><th>Do you need my login?</th><td>No. Nothing in the report requires access
+to your site.</td></tr>
+<tr><th>What if nothing is wrong?</th><td>Then the report says so and you have
+paid $50 to find out, which is cheaper than guessing. It has not happened
+yet.</td></tr>
+<tr><th>Is this a sales pitch?</th><td>It ends in prices, so partly. The
+measurements are the measurements either way, and you can hand them to
+anyone.</td></tr>
+<tr><th>More than one site?</th><td>Each address is its own audit. Ask me about
+several and I will quote the set.</td></tr>
+<tr><th>What if I want it fixed?</th><td>Every fix is priced in the report. A
+full rebuild is $100 and $75 a month, which is the
+<a href="/intake/">website setup</a>.</td></tr>
+</table>
+</div>
+"""
+
 # -- the intake offer, as a Setup wizard -----------------------
 # The page used to be a hand-written file with its own dark palette,
 # which made the one page a paying customer sees the only page that
@@ -2723,7 +2802,9 @@ HOME_DOC = """
 <p class="sub">Hardware, software and research.</p>
 <p><b>I build websites for local businesses.</b> $100 to build it, $75 a month
 to keep it running, cancel any time. Punta Gorda and Southwest Florida.
-<a href="/intake/">What you get, and what it costs</a>.</p>
+<a href="/intake/">What you get, and what it costs</a>.
+Already have one? A <a href="/audit/">written audit</a> of what it is doing
+wrong is $50.</p>
 <p>F-Keys Creative LLC, Punta Gorda, Florida. The catalogue below holds
 %%SHELVES%% sections, sorted the way a file manager sorts them. Each product
 page carries its own licence, terms and price; nothing is assumed to match the
@@ -3178,7 +3259,8 @@ specification.</p>
 </div>
 """
 
-EXTRA_NODES = [("/intake/", "Websites"), ("/search/", "Find"),
+EXTRA_NODES = [("/intake/", "Websites"), ("/audit/", "Site audit"),
+               ("/search/", "Find"),
                ("/about.html", "About"), ("/cv/", "CV"),
                ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
                ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
@@ -3844,6 +3926,22 @@ def main():
                     "content negotiation. No API keys, because there is no "
                     "hosted API."),
         canonical="https://f-keys.com/developers.html", ld=organization())))
+
+    audit_cta = (
+        '<a class="btn" href="mailto:vincegonzalez@me.com'
+        '?subject=Website%20audit">Ask a question</a>'
+        '<a class="btn default" href="{}">Buy the audit &mdash; $50</a>'.format(PAY_AUDIT)
+        if PAY_AUDIT else
+        '<a class="btn default" href="mailto:vincegonzalez@me.com'
+        '?subject=Website%20audit%20%E2%80%94%20%2450'
+        '&body=My%20website%20address%20is%3A%0A%0A">'
+        'Email me the address &mdash; $50</a>')
+    written.append((os.path.join("audit", "index.html"), shell(
+        "Website audit \u2014 F-Keys", "F-Keys\\Websites\\Audit",
+        AUDIT_DOC.replace("%%AUDIT_CTA%%", audit_cta), "1 item",
+        description="A written report on what your website is doing wrong, "
+                    "what it costs you, and what fixing it costs. $50.",
+        canonical="https://f-keys.com/audit/", ld=organization())))
 
     written.append((os.path.join("intake", "index.html"), shell(
         "Websites for local business \u2014 F-Keys", "F-Keys\\Websites",

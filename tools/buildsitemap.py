@@ -83,7 +83,7 @@ STANDING = ["about.html", "contact.html", "privacy.html", "developers.html"]
 # whose output nothing downstream knows about is the recurring shape here;
 # the markdown mirrors went stale the same way.
 OTHER = ["search/", "cv/", "cv/founder/", "cv/operations/", "cv/research/",
-         "cv/writing/", "log/", "status/", "intake/"]
+         "cv/writing/", "log/", "status/", "intake/", "audit/"]
 
 
 DATES = os.path.join(ROOT, "sitemap-dates.json")
