@@ -36,6 +36,25 @@ except (AttributeError, ValueError):
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
+def css_version():
+    """Short content hash of the stylesheet, for the <link> query string.
+
+    win98.css is served with max-age=14400. Without this, a CSS change
+    took up to four hours to reach a returning visitor, which is how a
+    homepage panel shipped looking unstyled to the only person checking
+    it. A changed file is now a changed URL.
+    """
+    import hashlib
+    try:
+        raw = open(os.path.join(ROOT, "win98.css"), "rb").read()
+    except OSError:
+        return "0"
+    return hashlib.sha256(raw).hexdigest()[:8]
+
+
+CSS_V = None
+
 # ── status vocabulary ────────────────────────────────────────
 READY = ("Ready", "st-ready")
 DISCORD = ("In Discord", "st-plat")
@@ -3751,7 +3770,7 @@ def shell(title, path_label, body, count_label, active_cat=None,
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(description)}">
 <meta name="twitter:image" content="{esc(og_image)}">
-<link rel="stylesheet" href="/win98.css">
+<link rel="stylesheet" href="/win98.css?v={CSS_V}">
 {ld_block}
 </head>
 <body>
@@ -3905,6 +3924,8 @@ def software(slug, page, row):
 
 
 def main():
+    global CSS_V
+    CSS_V = css_version()
     written = []
 
     # index: everything, grouped by category heading rows
