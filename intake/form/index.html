@@ -1036,6 +1036,74 @@ select option { background: #0d1f33; color: var(--txt); }
   .upsell-grid { grid-template-columns: 1fr; }
 }
 
+/* ── BRAND COLOR SWATCHES ──
+   A text box asking a plumber for a hex code is a worse question than
+   three squares he can tap. The text field stays the field of record;
+   these only ever write into it, so nothing downstream changes. */
+.swatch-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.swatch input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: none;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease;
+}
+.swatch input[type="color"]::-webkit-color-swatch-wrapper { padding: 3px; }
+.swatch input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 9px;
+}
+.swatch input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 9px;
+}
+.swatch input[type="color"]:hover { transform: translateY(-2px); border-color: var(--sky); }
+.swatch input[type="color"]:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.swatch-cap {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.swatch-clear {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xs);
+  padding: 9px 14px;
+  cursor: pointer;
+  margin-bottom: 21px;
+  transition: color .12s ease, border-color .12s ease;
+}
+.swatch-clear:hover { color: var(--txt); border-color: var(--sky); }
+
+@media (max-width: 400px) {
+  .swatch input[type="color"] { width: 46px; height: 46px; }
+  .swatch-clear { margin-bottom: 19px; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   .card, .legal-banner, .next-steps, .upload-card { padding: 22px 20px; }
@@ -1170,8 +1238,24 @@ select option { background: #0d1f33; color: var(--txt); }
 
       <div class="field">
         <div class="field-label">Brand Colors <span class="opt">optional</span></div>
+        <div class="swatch-row" id="swatch-row">
+          <label class="swatch">
+            <input type="color" id="f-swatch-1" value="#2a5fc8" oninput="syncSwatches()">
+            <span class="swatch-cap">Main</span>
+          </label>
+          <label class="swatch">
+            <input type="color" id="f-swatch-2" value="#ff8c42" oninput="syncSwatches()">
+            <span class="swatch-cap">Accent</span>
+          </label>
+          <label class="swatch">
+            <input type="color" id="f-swatch-3" value="#1c2733" oninput="syncSwatches()">
+            <span class="swatch-cap">Text</span>
+          </label>
+          <button type="button" class="swatch-clear" id="swatch-clear" onclick="clearSwatches()">Clear</button>
+        </div>
         <input type="text" id="f-colors" name="f-colors" placeholder="e.g. #2a5fc8, deep navy + warm orange">
-        <div class="field-hint">Hex codes, names, or descriptions all work.</div>
+        <div class="field-hint">Tap a square to pick a color, or just type it. Hex codes, names
+          and plain descriptions all work &mdash; &ldquo;the green on my truck&rdquo; is a fine answer.</div>
       </div>
 
       <div class="field">
@@ -2449,6 +2533,37 @@ function showConditional(id, show) {
 // ════════════════════════════════
 // FILE UPLOADS
 // ════════════════════════════════
+/* The three pickers write a comma-separated list into f-colors, which is
+   the field that is collected, stored and emailed. Typing straight into
+   that box still works and is never overwritten while it holds something
+   the pickers did not put there - a client who wrote "the green on my
+   truck" does not lose it by brushing a swatch. */
+var SWATCH_IDS = ['f-swatch-1', 'f-swatch-2', 'f-swatch-3'];
+
+function swatchValues() {
+  return SWATCH_IDS
+    .map(function (id) { var el = document.getElementById(id); return el ? el.value.toUpperCase() : ''; })
+    .filter(Boolean);
+}
+
+function syncSwatches() {
+  var box = document.getElementById('f-colors');
+  if (!box) return;
+  var current = box.value.trim();
+  var generated = box.dataset.fromSwatches || '';
+  if (current && current !== generated) return;   /* their words win */
+  box.value = swatchValues().join(', ');
+  box.dataset.fromSwatches = box.value;
+}
+
+function clearSwatches() {
+  var box = document.getElementById('f-colors');
+  if (box && box.value.trim() === (box.dataset.fromSwatches || '')) {
+    box.value = '';
+    box.dataset.fromSwatches = '';
+  }
+}
+
 function handleLogo(input) {
   const status = document.getElementById('logo-status');
   if (input.files && input.files[0]) {
