@@ -2624,6 +2624,99 @@ gaming &middot; formal methods &middot; the open web.</p>
 # assemble an answer, because the homepage was a bare table with no
 # heading and no prose. This is the answer in one place: what the
 # catalogue is, who each shelf is for, and what any of it costs.
+# -- the intake offer, as a Setup wizard -----------------------
+# The page used to be a hand-written file with its own dark palette,
+# which made the one page a paying customer sees the only page that
+# did not look like this site. It is generated now, so it cannot
+# drift again, and the form it leads to is a ten-step wizard with
+# Back and Next -- so the page says so.
+INTAKE_DOC = """
+<div class="setup">
+  <div class="setup-banner">
+    <div class="mark">F<span>-</span>Keys</div>
+    <div class="tag">Website Setup<br>for local business</div>
+    <div class="foot">Punta Gorda, Florida</div>
+  </div>
+  <div class="setup-body">
+    <h1>Welcome to the website setup</h1>
+    <p>I'm Vince. I build websites in Punta Gorda. If your business
+    hasn't got one, or has one you would rather nobody saw, this is
+    the whole offer. No packages to compare and no sales call.</p>
+    <div class="setup-price">
+      <div><b>$100</b><s>once, to build it</s></div>
+      <div><b>$75</b><s>a month, to run it</s></div>
+    </div>
+    <p>The form takes about fifteen minutes and asks everything I need,
+    so I am not calling you six times. Then I send you a written quote
+    with the same numbers on it. Nothing is charged and nothing is built
+    until you say yes to that quote.</p>
+  </div>
+  <div class="setup-foot">
+    <span class="grow">Step 1 of 4 &mdash; read this, then fill in the form</span>
+    <a class="btn" href="/">Cancel</a>
+    <a class="btn default" href="/intake/form/">Next &gt;</a>
+  </div>
+</div>
+
+<div class="doc">
+<h2>What the $100 builds</h2>
+<table class="facts">
+<tr><th>Pages</th><td>Up to seven. Home, Services, About, Gallery and Contact
+are five typical ones.</td></tr>
+<tr><th>Photos</th><td>Up to forty of yours, resized, compressed and placed.</td></tr>
+<tr><th>Changes</th><td>Two rounds on the draft, then you approve it before it
+goes live.</td></tr>
+<tr><th>Phones</th><td>Works on one, which is where your customers are.</td></tr>
+<tr><th>Search</th><td>Built so search engines can read it.</td></tr>
+</table>
+
+<h2>What the $75 a month covers</h2>
+<table class="facts">
+<tr><th>Hosting</th><td>The site stays up, and outages get fixed as fast as
+I can.</td></tr>
+<tr><th>Domain</th><td>Renewed and managed. I pay the renewal up to $25 a year.</td></tr>
+<tr><th>Edits</th><td>Up to three small ones a month &mdash; a color, a
+background, a logo you send me, or new photos into a gallery you already have.</td></tr>
+<tr><th>A call</th><td>One, up to twenty-five minutes, by Zoom or phone.</td></tr>
+<tr><th>Security</th><td>I watch for downtime and keep the site's software
+current.</td></tr>
+<tr><th>Term</th><td>Month to month. Cancel by email any time, no fee.</td></tr>
+</table>
+<p>Need a fourth edit, another call, or something bigger? I send you the price
+first and you decide.</p>
+
+<h2>Add-ons</h2>
+<p>There are forty-seven extras on the form &mdash; a store, online booking, a
+blog, another language. Twenty are already in the $100 and cost nothing, though
+the ones that are their own page count toward your seven. The rest are $15 or
+$50 one-time, and three that are ongoing work are $50 a month. Every price is
+printed on the menu. Nothing is &ldquo;call for pricing&rdquo;.</p>
+
+<h2>Straight answers</h2>
+<table class="facts">
+<tr><th>Do I own it?</th><td>Yes, once the build is paid for. The files are
+yours and you take them with you.</td></tr>
+<tr><th>What if I don't like it?</th><td>Before it goes live, your money comes
+back. All of it, for any reason, including changing your mind.</td></tr>
+<tr><th>If I cancel?</th><td>Email me. It stops at the end of the month you have
+paid for. No notice period, no fee. You keep the files and the domain.</td></tr>
+<tr><th>Why only $100?</th><td>The monthly is the business, and $100 is a price
+you can say yes to without a meeting.</td></tr>
+<tr><th>Payments on my site?</th><td>Usually &mdash; it is one of the add-ons.
+Some trades the processors will not handle, and I will say so rather than find
+out later.</td></tr>
+<tr><th>Is there a contract?</th><td>Yes, on the last page of the form where you
+can read it first. Submitting the form does not order anything and does not
+charge you.</td></tr>
+</table>
+
+<div class="btnrow">
+  <a class="btn default" href="/intake/form/">Start the form</a>
+  <a class="btn" href="mailto:vincegonzalez@me.com">Email me instead</a>
+</div>
+</div>
+"""
+
 HOME_DOC = """
 <div class="doc" style="padding-bottom:6px">
 <h1>F-Keys</h1>
@@ -3751,6 +3844,13 @@ def main():
                     "content negotiation. No API keys, because there is no "
                     "hosted API."),
         canonical="https://f-keys.com/developers.html", ld=organization())))
+
+    written.append((os.path.join("intake", "index.html"), shell(
+        "Websites for local business \u2014 F-Keys", "F-Keys\\Websites",
+        INTAKE_DOC, "1 item",
+        description="$100 to build your website. $75/month to keep it "
+                    "running. Punta Gorda and Southwest Florida.",
+        canonical="https://f-keys.com/intake/", ld=organization())))
 
     written.append(("privacy.html", shell(
         "Privacy \u2014 F-Keys", "F-Keys\\Privacy", PRIVACY_DOC, "1 item",

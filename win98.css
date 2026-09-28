@@ -14,6 +14,13 @@
 
 :root{
   --desktop:#008080;
+  --wiz-a:#000b3d;         /* setup banner, dark end            */
+  --wiz-b:#0a246a;         /* setup banner, middle              */
+  --wiz-c:#1a3f66;         /* setup banner, LIGHT end = worst   */
+  --wiz-ink:#ffffff;       /* 10.79:1 on --wiz-c                */
+  --wiz-accent:#ffd45e;    /*  7.62:1 on --wiz-c                */
+  --wiz-tag:#c9d8ef;       /*  7.48:1 on --wiz-c                */
+  --wiz-foot:#9fb6d6;      /*  5.21:1 on --wiz-c                */
   --face:#d4d0c8;          /* Win98 face, warmer than 3.1 silver */
   --hi:#ffffff;
   --sh:#808080;
@@ -192,6 +199,47 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .doc .facts td{padding:3px 0;vertical-align:top}
 .doc .note{background:#ffffe1;border:1px solid #c0c000;padding:8px 11px;
   margin-bottom:12px;line-height:1.6}
+
+/* ── Setup wizard ────────────────────────────────────────────
+   The intake page is a ten-step form with Back and Next, which is
+   a Setup wizard and has been since 1995. So it looks like one:
+   banner down the left, panel on the right, buttons bottom right.
+   The metaphor is not decoration here - it tells a stranger what
+   kind of thing this is before they read a word of it. */
+.setup{background:var(--face);border:2px solid;
+  border-color:var(--hi) var(--dk) var(--dk) var(--hi);
+  display:flex;flex-wrap:wrap;max-width:660px;margin:0 0 18px}
+.setup-banner{width:172px;flex:0 0 172px;
+  background:linear-gradient(160deg,var(--wiz-a) 0%,var(--wiz-b) 45%,var(--wiz-c) 100%);
+  color:var(--wiz-ink);padding:20px 16px;display:flex;flex-direction:column}
+.setup-banner .mark{font-family:Georgia,"Times New Roman",serif;
+  font-size:34px;line-height:1;font-weight:700;letter-spacing:-.02em}
+.setup-banner .mark span{color:var(--wiz-accent)}
+.setup-banner .tag{margin-top:10px;font-size:12px;line-height:1.5;
+  color:var(--wiz-tag)}
+.setup-banner .foot{margin-top:auto;font-size:11px;color:var(--wiz-foot);
+  padding-top:18px}
+.setup-body{flex:1 1 300px;padding:20px 22px 16px;min-width:0}
+.setup-body h1{font-size:19px;margin:0 0 10px}
+.setup-body p{margin:0 0 11px}
+.setup-price{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.setup-price div{flex:1 1 120px;background:var(--field);padding:10px 12px;
+  border:1px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh)}
+.setup-price b{display:block;font-size:22px;line-height:1.1}
+.setup-price s{display:block;font-size:11px;color:var(--dim);
+  text-decoration:none;text-transform:uppercase;letter-spacing:.08em;
+  margin-top:3px}
+.setup-foot{flex:1 1 100%;border-top:1px solid var(--sh);
+  box-shadow:0 -1px 0 var(--hi) inset;padding:12px 16px;
+  display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap}
+.setup-foot .grow{margin-right:auto;font-size:12px;color:var(--dim);
+  align-self:center}
+@media (max-width:560px){
+  .setup-banner{width:100%;flex:0 0 auto;flex-direction:row;
+    align-items:baseline;gap:12px;padding:14px 16px}
+  .setup-banner .mark{font-size:26px}
+  .setup-banner .tag,.setup-banner .foot{display:none}
+}
 
 .btnrow{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 4px}
 .btn{background:var(--face);padding:5px 16px;color:var(--ink);
