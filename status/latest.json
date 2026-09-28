@@ -1,16 +1,16 @@
 {
   "cloudflare": {
     "bots_24h": {
-      "AI Assistant": 58,
-      "AI Crawler": 932,
+      "AI Assistant": 62,
+      "AI Crawler": 949,
       "AI Search": 27,
       "Archiver": 1,
       "Monitoring & Analytics": 5,
-      "Page Preview": 125,
-      "Search Engine Crawler": 1681,
-      "Search Engine Optimization": 913,
+      "Page Preview": 126,
+      "Search Engine Crawler": 1674,
+      "Search Engine Optimization": 911,
       "Security": 4,
-      "Unverified": 63493
+      "Unverified": 63634
     },
     "bots_error": null,
     "days": 7,
@@ -344,7 +344,7 @@
     }
   },
   "date": "2026-09-28",
-  "generated_at": "2026-09-28 04:47 UTC",
+  "generated_at": "2026-09-28 05:11 UTC",
   "github": [
     {
       "archived": false,
@@ -357,7 +357,7 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-09-27T04:46:48Z",
+      "pushed_at": "2026-09-28T04:48:55Z",
       "repo": "f-keys",
       "size_kb": 77243,
       "stars": 2,
@@ -1996,7 +1996,7 @@
       "zenodo_views": 1700
     }
   ],
-  "mode": "daily",
+  "mode": "weekly",
   "npm": [
     {
       "all_time": 480,
@@ -2471,11 +2471,11 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 67239,
+    "bot_requests_24h": 67393,
     "github_forks": 0,
     "github_repos": 35,
     "github_stars": 18,
-    "median_response_ms": 333,
+    "median_response_ms": 297,
     "npm_all_time": 5757,
     "npm_weekly": 273,
     "open_issues": 1,
@@ -2500,7 +2500,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 320,
+      "ms": 405,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2508,7 +2508,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 213,
+      "ms": 196,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2516,7 +2516,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 373,
+      "ms": 613,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2524,7 +2524,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 270,
+      "ms": 86,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2532,7 +2532,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 538,
+      "ms": 298,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2540,7 +2540,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 209,
+      "ms": 311,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2548,7 +2548,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 275,
+      "ms": 147,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2556,7 +2556,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 748,
+      "ms": 683,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2564,7 +2564,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 518,
+      "ms": 601,
       "name": "epistemend.org",
       "up": true,
       "url": "https://epistemend.org"
@@ -2572,7 +2572,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 222,
+      "ms": 258,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2580,7 +2580,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 347,
+      "ms": 296,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2588,7 +2588,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 439,
+      "ms": 148,
       "name": "qv.f-keys.com",
       "up": true,
       "url": "https://qv.f-keys.com"
