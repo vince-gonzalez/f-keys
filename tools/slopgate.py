@@ -129,6 +129,19 @@ TICS = [
     (r"(?i)\bthink of it (?:as|like)\b",                                 1, 2),
     (r"(?i)\bbuilt (?:from the ground up|with love|to last)\b",          2, 1),
     (r"(?i)\byour (?:one[- ]stop|go[- ]to) (?:shop|solution|destination)\b", 3, 1),
+
+    # -- the corrective tail -----------------------------------
+    # Appending the negation of the opposite, for weight it has not
+    # earned. "before I do it, never after" - "before" already said it.
+    # Four of these shipped inside binding contract text and none of
+    # the 95 patterns above could see them, because every one of those
+    # hunts a WORD and this is a rhythm. He caught them, this file did
+    # not, which is the reason these five exist.
+    (r"(?i),\s+never\s+(?:after|before|afterwards?|the other way|in reverse)\b", 3, 1),
+    (r"(?i),\s+not\s+(?:after|before|afterwards?|the other way|the reverse|vice versa)\b", 3, 1),
+    (r"(?i)\bit is not [^.!?]{3,50}?\. it is\b", 2, 2),
+    (r"(?i)\b(?:is|was) not [^.!?]{3,40}?\s*[—-]\s*it'?s\b", 2, 1),
+    (r"(?i)[.!?]\s+Not\s+\w+\.", 2, 2),
 ]
 
 # ── house voice, specific to this site ──────────────────────

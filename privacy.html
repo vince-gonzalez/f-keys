@@ -90,8 +90,8 @@
     <section class="content sunken">
 
 <div class="doc"><h1>Privacy</h1>
-<p class="sub">This site does not want your data, and the shortest way to say so
-is to describe every byte it does receive.</p>
+<p class="sub">Every page here takes nothing, except one that has to. This
+describes both.</p>
 
 <h2>The short version</h2>
 <table class="facts">
@@ -103,6 +103,10 @@ banner to dismiss.</td></tr>
 <tr><th>Accounts</th><td>None. Nothing on f-keys.com asks you to sign up or sign in.</td></tr>
 <tr><th>Third-party code</th><td>None. No page on this site loads anything from
 another company's server &mdash; not a script, not a stylesheet, not a font.</td></tr>
+<tr><th>Forms</th><td>One. The <a href="/intake/form/">website intake form</a>
+collects what you type into it, because it cannot do its job otherwise. Every
+other page on this site collects nothing. <a href="#intake">What that one does
+with it</a>.</td></tr>
 </table>
 <p>These are checkable rather than promised. The site is a folder of static files
 in a public repository, and a test in that repository fails the build if an ad
@@ -145,13 +149,50 @@ retain a key. Products hosted elsewhere, and the separate
 <a href="/properties.html">properties</a>, are governed by their own policies
 rather than this one.</p>
 
+<h2 id="intake">The one form that does collect</h2>
+<p><a href="/intake/form/">f-keys.com/intake/form/</a> is a quote request for
+website work. Filling it in is the only way to hand this site personal
+information, and it is optional in the ordinary sense: nobody reaches it by
+accident, and leaving the page loses everything typed.</p>
+
+<p><strong>What it takes.</strong> Your business name, your name, your email
+address, your phone number, your business address and hours, what you sell and
+what you charge for it, your domain, and whatever else you choose to type into
+the notes. If you attach a logo or photographs, it takes those too. It also
+records the date and time, the country the request came from, and a
+<strong>salted hash</strong> of the IP address &mdash; a fingerprint of the
+address rather than the address, kept because a form that is also a signature
+has to be able to say where it was signed.</p>
+
+<p><strong>Where it goes.</strong> Straight to a Cloudflare Worker on
+orders.f-keys.com, into a Cloudflare D1 database, with any files into a private
+Cloudflare R2 bucket. The bucket is not public and nothing in it is readable by
+a URL anyone could guess. A notification email is then sent through
+<a href="https://resend.com/legal/privacy-policy">Resend</a>, which carries your
+answers so that the enquiry lands in an inbox. Resend and Cloudflare are the
+only two companies that see it. It is not sold, it is not shared with anyone
+else, and it is not used to advertise anything to you.</p>
+
+<p><strong>How long it stays.</strong> Until you ask for it to go. There is no
+automatic deletion, because a quote request is the record of what was agreed and
+throwing it away on a timer would serve nobody. Ask and it is deleted, both the
+row and any files, and that is the whole procedure.</p>
+
+<p><strong>What it does not do.</strong> It sets no cookie. It writes nothing to
+your browser's storage. It creates no account, builds no profile, and adds you to
+no mailing list &mdash; there is no mailing list. Submitting it does not sign you
+up for anything.</p>
+
 <h2>Your rights, and how little there is to exercise them on</h2>
 <p>Rights of access, correction, deletion and portability under the GDPR, the
-CCPA and similar laws attach to personal data held by the operator. F-Keys holds
-none from this site: there is no database, no mailing list gathered here, and no
-profile of you. If you send an email it exists in a mailbox until you ask for it
-to be deleted, and asking is enough. This site is not directed at children and
-collects nothing from anyone, of any age.</p>
+CCPA and similar laws attach to personal data held by the operator. Browsing
+these pages hands over nothing for those rights to attach to: no mailing list is
+gathered here and no profile of you is built. If you have sent the intake form,
+the answers you sent are yours &mdash; ask and you get a copy, a correction, or
+deletion, and asking is enough. There is no form to fill in and no identity to
+prove beyond replying from the address you used. If you send an email it exists
+in a mailbox until you ask for it to be deleted. This site is not directed at
+children, and the intake form is a business-to-business document.</p>
 <p>Questions, or a challenge to any claim above, go to
 <a href="mailto:hello@f-keys.com">hello@f-keys.com</a>. If a claim here
 ever stops being true, the page changes first and the change is dated in the

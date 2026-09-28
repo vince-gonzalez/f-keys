@@ -12,9 +12,9 @@ I'm Vince. I build websites in Punta Gorda, Florida. If your business doesn't ha
 
 **$100 to build it.** A real site written and built for your business. Works on phones. Your photos, your words, your hours, your prices. Contact and booking that reach you. Set up so Google can find you. You see it and approve it before it goes live.
 
-**$75/month to keep it running.** Hosting, your domain renewed and managed, two edit requests a month, one hour of Zoom or phone, and security monitoring. Month-to-month — cancel whenever.
+**$75/month to keep it running.** Hosting, your domain renewed and managed, up to three small edits a month, a 25-minute call, and security monitoring. Month-to-month — cancel whenever.
 
-An **edit request** is one batch of changes: send a list, I do the whole list. Two of those a month, not two individual words. Anything beyond that gets quoted before I do it, never after.
+A **small edit** is one change: a color, a background, installing a logo you send me, or new photos into a gallery you already have. Up to three a month, plus one 25-minute call. Need more? I send you the price first and you decide.
 
 ## Add-ons
 
@@ -47,7 +47,7 @@ There are 47 extras on the intake form — a store, online booking, a blog, anot
 | --- | --- |
 | Build | $100 one-time |
 | Monthly | $75/month |
-| Included monthly | 2 edit requests, 1 hour of Zoom or phone |
+| Included monthly | Up to 3 small edits, one 25-minute call |
 | Term | Month-to-month, cancel any time |
 | Add-ons | 47 listed, priced on the form |
 | Area | Punta Gorda and Southwest Florida |
