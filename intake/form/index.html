@@ -1099,6 +1099,11 @@ select option { background: #0d1f33; color: var(--txt); }
 }
 .swatch-clear:hover { color: var(--txt); border-color: var(--sky); }
 
+/* 44px is the floor a thumb needs. The default padding put Clear at
+   37px on a phone, which is a miss waiting to happen next to three
+   things that are easy to hit. */
+.swatch-clear { min-height: 44px; }
+
 @media (max-width: 400px) {
   .swatch input[type="color"] { width: 46px; height: 46px; }
   .swatch-clear { margin-bottom: 19px; }
