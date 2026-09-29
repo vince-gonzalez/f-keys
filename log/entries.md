@@ -6,6 +6,89 @@ underneath it. Blank line between paragraphs. `**bold**`, `` `code` `` and
 
 CI renders this into `log/index.html` on push. Do not edit that file by hand.
 
+## 2026-09-29
+
+Checked whether this site is current. Most of it was; the stylesheet was
+not, in a way that only showed up if you went looking.
+
+The fingerprint added on the twenty-eighth was computed inside the
+homepage builder. Five generators use the same page shell without ever
+running that builder, so the papers page, the log, the search index, the
+CVs and the status pages all linked the stylesheet as `?v=None`. A query
+string the server ignores still renders, so nothing looked wrong. What it
+did was point those pages at a different URL from the other fifty-two,
+which kept them on their own cached copy — the exact thing the fingerprint
+was added to prevent.
+
+It is computed once at import now, so every generator gets the real hash.
+The gate that enforces it found two more while it was being written: the
+status pages, which are rendered by the snapshot rather than the site
+builder, and which I had not thought to re-run.
+
+The gate exempts packaged builds, and that exemption records a defect
+rather than hiding it. The downloadable RemapWrap app links `/win98.css`
+and `/assets/fonts.css` as absolute site paths, so it renders unstyled when
+run offline — the only way anyone runs a desktop app. It also ships a
+stylesheet of its own that nothing references.
+
+## 2026-09-28
+
+The website business can take money.
+
+Three Stripe payment links, each verified on its real checkout before it
+was wired in: the audit at fifty dollars, the build at a hundred, hosting
+at seventy-five a month with a Subscribe button. Every one asks for the
+website address, because a payment that does not say which site it is for
+is a payment you chase an email about. No API key, no payment code in the
+repository, no card ever reaching this side.
+
+The agreement went from fifteen clauses to twenty-seven and was renumbered
+clean. The new ones are refunds before launch, the client's own copy of
+what they signed, the materials stall, no-guarantees, third-party services,
+the lost-profits exclusion, and three payment clauses.
+
+Two clauses contradicted each other and had to be resolved rather than
+shipped side by side: the refund clause and the stall clause gave opposite
+answers to the same day-ninety close — one refunded everything, the other
+forfeited the build fee, both stated absolutely. The refund wins, and the
+stall clause now ends by pointing at it.
+
+An audit of the billing section against Stripe's own documentation found
+three defaults that made it untrue on a new account. It said Stripe retries
+over the following week; the documented default is eight attempts across
+two weeks. It said Stripe emails the client after each failed attempt; that
+email is off until someone turns it on. Corrected to what Stripe actually
+does, and the settings that make the rest true are written down beside it.
+
+The offer page is generated now instead of hand-edited, and it reads as a
+Setup wizard. The included tier had been describing itself as part of the
+monthly fee, which it is not. The Clear button was a thirty-seven pixel tap
+target. The brand question has colour swatches.
+
+## 2026-09-25
+
+Uploads, and somewhere for the mail to come from.
+
+Logos and photos land in an R2 bucket keyed by submission. The bucket is
+private, so the notification carries a signed link per file that expires in
+fourteen days, and the admin listing mints fresh ones every time it is
+read. The signature is checked before the database is touched, so a wrong
+signature and a file that does not exist answer identically and the ids
+cannot be walked.
+
+Notifications go to two inboxes. That is not redundancy for its own sake —
+if one of them quietly stops delivering, the other is how that gets noticed
+rather than discovered a month later.
+
+The sender is a subdomain, not the apex, and that is the whole design. This
+domain's mail is Apple's and its SPF already carries iCloud, so sender
+records at the apex would fight the mail that already works. Three records
+on `send.f-keys.com`, none of them touching anything that was already
+delivering.
+
+The website business also got a front door: it is in the tree on every
+page, priced on the homepage, and described in the file the crawlers read.
+
 ## 2026-09-24
 
 Rewrote the site's wording and gave it a way in.

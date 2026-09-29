@@ -89,7 +89,25 @@
 </ul></li></ul>
     </aside>
     <section class="content sunken">
-<div class="doc"><h1>Log</h1><p class="sub">A working record. What got built, what broke, and what turned out to be true.</p><article class="entry"><time datetime="2026-09-24">24 September 2026</time>
+<div class="doc"><h1>Log</h1><p class="sub">A working record. What got built, what broke, and what turned out to be true.</p><article class="entry"><time datetime="2026-09-29">29 September 2026</time>
+      <p>Checked whether this site is current. Most of it was; the stylesheet was not, in a way that only showed up if you went looking.</p>
+      <p>The fingerprint added on the twenty-eighth was computed inside the homepage builder. Five generators use the same page shell without ever running that builder, so the papers page, the log, the search index, the CVs and the status pages all linked the stylesheet as <code>?v=None</code>. A query string the server ignores still renders, so nothing looked wrong. What it did was point those pages at a different URL from the other fifty-two, which kept them on their own cached copy — the exact thing the fingerprint was added to prevent.</p>
+      <p>It is computed once at import now, so every generator gets the real hash. The gate that enforces it found two more while it was being written: the status pages, which are rendered by the snapshot rather than the site builder, and which I had not thought to re-run.</p>
+      <p>The gate exempts packaged builds, and that exemption records a defect rather than hiding it. The downloadable RemapWrap app links <code>/win98.css</code> and <code>/assets/fonts.css</code> as absolute site paths, so it renders unstyled when run offline — the only way anyone runs a desktop app. It also ships a stylesheet of its own that nothing references.</p></article>
+<article class="entry"><time datetime="2026-09-28">28 September 2026</time>
+      <p>The website business can take money.</p>
+      <p>Three Stripe payment links, each verified on its real checkout before it was wired in: the audit at fifty dollars, the build at a hundred, hosting at seventy-five a month with a Subscribe button. Every one asks for the website address, because a payment that does not say which site it is for is a payment you chase an email about. No API key, no payment code in the repository, no card ever reaching this side.</p>
+      <p>The agreement went from fifteen clauses to twenty-seven and was renumbered clean. The new ones are refunds before launch, the client&#x27;s own copy of what they signed, the materials stall, no-guarantees, third-party services, the lost-profits exclusion, and three payment clauses.</p>
+      <p>Two clauses contradicted each other and had to be resolved rather than shipped side by side: the refund clause and the stall clause gave opposite answers to the same day-ninety close — one refunded everything, the other forfeited the build fee, both stated absolutely. The refund wins, and the stall clause now ends by pointing at it.</p>
+      <p>An audit of the billing section against Stripe&#x27;s own documentation found three defaults that made it untrue on a new account. It said Stripe retries over the following week; the documented default is eight attempts across two weeks. It said Stripe emails the client after each failed attempt; that email is off until someone turns it on. Corrected to what Stripe actually does, and the settings that make the rest true are written down beside it.</p>
+      <p>The offer page is generated now instead of hand-edited, and it reads as a Setup wizard. The included tier had been describing itself as part of the monthly fee, which it is not. The Clear button was a thirty-seven pixel tap target. The brand question has colour swatches.</p></article>
+<article class="entry"><time datetime="2026-09-25">25 September 2026</time>
+      <p>Uploads, and somewhere for the mail to come from.</p>
+      <p>Logos and photos land in an R2 bucket keyed by submission. The bucket is private, so the notification carries a signed link per file that expires in fourteen days, and the admin listing mints fresh ones every time it is read. The signature is checked before the database is touched, so a wrong signature and a file that does not exist answer identically and the ids cannot be walked.</p>
+      <p>Notifications go to two inboxes. That is not redundancy for its own sake — if one of them quietly stops delivering, the other is how that gets noticed rather than discovered a month later.</p>
+      <p>The sender is a subdomain, not the apex, and that is the whole design. This domain&#x27;s mail is Apple&#x27;s and its SPF already carries iCloud, so sender records at the apex would fight the mail that already works. Three records on <code>send.f-keys.com</code>, none of them touching anything that was already delivering.</p>
+      <p>The website business also got a front door: it is in the tree on every page, priced on the homepage, and described in the file the crawlers read.</p></article>
+<article class="entry"><time datetime="2026-09-24">24 September 2026</time>
       <p>Rewrote the site&#x27;s wording and gave it a way in.</p>
       <p><code>/search/</code> is the whole catalogue in one table, filtered in the browser as you type — products, papers, records, the CVs. It is rendered at build time, so with scripting switched off it is still the complete index. Find sits in the toolbar and the tree, and the sitemap picked up the eleven pages it had never been told about: the four CVs, the intake pages, the log, the status page, and TAG and TAG PRO.</p>
       <p>The wording is a field register now. The homepage is forty-one words and a table. Counts live in the About facts table, where a number is a number; the build fails if one of them stops matching the catalogue. Contact is the filing details and four short headings.</p>
@@ -142,7 +160,7 @@
   </div>
 
   <div class="statusbar">
-    <span class="cell groove">10 entries</span>
+    <span class="cell groove">13 entries</span>
     <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
     <span class="cell groove">F-Keys</span>
   </div>

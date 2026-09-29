@@ -1010,7 +1010,12 @@ def stylesheet_fingerprint(pages):
         # which is the only way a desktop app is ever run.
         if "/dist/" in rel(path).replace("\\", "/"):
             continue
-        for ver in re.findall(r"win98\.css(\?v=[^\"']*)?", read(path)):
+        # Only a <link href>, not the string anywhere in the document. The
+        # log entry describing this very defect quotes "win98.css" inside a
+        # <code> tag, and the first version of this gate failed on it.
+        for ver in re.findall(
+                r"""<link[^>]+href=["']/win98\.css(\?v=[^"']*)?["']""",
+                read(path)):
             seen.setdefault(ver or "<none>", []).append(rel(path))
 
     for ver, where in sorted(seen.items()):
