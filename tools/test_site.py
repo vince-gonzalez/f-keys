@@ -983,6 +983,44 @@ def sitemap():
         fail("sitemap", "lists a path with no file behind it: /" + u)
 
 
+def stylesheet_fingerprint(pages):
+    """Every page links the stylesheet at the SAME fingerprinted URL.
+
+    The fingerprint exists so a CSS change reaches a returning visitor
+    before the four-hour cache expires. It only works if every page
+    agrees on the URL.
+
+    CSS_V was assigned inside buildsite.main(), so the four generators
+    that import shell() without running main() - papers, log, search, cv
+    - emitted "?v=None". /papers/ served that live. Those pages were
+    pointing at a different URL from the rest of the site, which is the
+    precise failure the fingerprint was added to prevent, and nothing
+    noticed because a query string a server ignores still renders fine.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import buildsite
+
+    want = buildsite.css_version()
+    seen = {}
+    for path in pages:
+        # A packaged build is a downloadable artifact, not a page this
+        # site serves chrome to. RemapWrap ships its own copy and has a
+        # separate defect - it links /win98.css and /assets/fonts.css as
+        # absolute site paths, so it renders unstyled when run offline,
+        # which is the only way a desktop app is ever run.
+        if "/dist/" in rel(path).replace("\\", "/"):
+            continue
+        for ver in re.findall(r"win98\.css(\?v=[^\"']*)?", read(path)):
+            seen.setdefault(ver or "<none>", []).append(rel(path))
+
+    for ver, where in sorted(seen.items()):
+        if ver == "?v=" + want:
+            continue
+        fail("stylesheet",
+             "{} page(s) link win98.css as '{}', expected '?v={}' - first: {}"
+             .format(len(where), ver, want, ", ".join(sorted(where)[:3])))
+
+
 def main():
     pages = html_files()
     print("test_site: {} html files".format(len(pages)))
@@ -998,6 +1036,7 @@ def main():
     counts_in_prose()
     price_claims()
     colours_are_tokens()
+    stylesheet_fingerprint(pages)
     privacy_matches_tooling()
     every_package_has_a_page()
     unsupported_claims()

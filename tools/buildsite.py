@@ -53,7 +53,12 @@ def css_version():
     return hashlib.sha256(raw).hexdigest()[:8]
 
 
-CSS_V = None
+# Computed at import, NOT inside main(). buildpapers, buildlog, buildsearch
+# and buildcv import shell() without ever running main(), so a value set
+# there left them emitting "?v=None" - which /papers/ served live, and
+# which is a different URL from the real fingerprint, so those pages kept
+# their own stale cached stylesheet. The whole point of the fingerprint.
+CSS_V = css_version()
 
 # ── status vocabulary ────────────────────────────────────────
 READY = ("Ready", "st-ready")

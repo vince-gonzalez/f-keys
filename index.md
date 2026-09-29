@@ -6,6 +6,11 @@ Canonical: https://f-keys.com
 
 Hardware, software and research.
 
+## I build websites for local businesses.
+
+Punta Gorda and Southwest Florida. One price, no sales call, and
+ nothing is charged until you say yes to a written quote.
+
 F-Keys Creative LLC, Punta Gorda, Florida. The catalogue below holds
 six sections, sorted the way a file manager sorts them. Each product
 page carries its own licence, terms and price; nothing is assumed to match the
