@@ -50,7 +50,14 @@ def css_version():
         raw = open(os.path.join(ROOT, "win98.css"), "rb").read()
     except OSError:
         return "0"
-    return hashlib.sha256(raw).hexdigest()[:8]
+    # Hash the bytes that SHIP, not the bytes on this disk. Git stores LF
+    # and checks out CRLF on Windows, so the working copy hashed to
+    # 20894fc8 while the file GitHub Pages serves hashed to 5e982420.
+    # Every page built here carried a fingerprint that did not describe
+    # the stylesheet any visitor received, and a build on another machine
+    # produced a different fingerprint for byte-identical CSS - which is
+    # a whole-site diff and a cache flush for no change at all.
+    return hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()[:8]
 
 
 # Computed at import, NOT inside main(). buildpapers, buildlog, buildsearch
