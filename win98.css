@@ -241,9 +241,9 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .setup-banner .mark{font-family:Georgia,"Times New Roman",serif;
   font-size:34px;line-height:1;font-weight:700;letter-spacing:-.02em}
 .setup-banner .mark span{color:var(--wiz-accent)}
-.setup-banner .tag{margin-top:10px;font-size:12px;line-height:1.5;
+.setup-banner .tag{margin-top:10px;font-size:13px;line-height:1.5;
   color:var(--wiz-tag)}
-.setup-banner .foot{margin-top:auto;font-size:11px;color:var(--wiz-foot);
+.setup-banner .foot{margin-top:auto;font-size:13px;color:var(--wiz-foot);
   padding-top:18px}
 .setup-body{flex:1 1 300px;padding:20px 22px 16px;min-width:0}
 .setup-body h1{font-size:19px;margin:0 0 10px}
@@ -252,13 +252,13 @@ table.details a.row-name{display:flex;align-items:center;gap:6px;font-weight:400
 .setup-price div{flex:1 1 120px;background:var(--field);padding:10px 12px;
   border:1px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh)}
 .setup-price b{display:block;font-size:22px;line-height:1.1}
-.setup-price s{display:block;font-size:11px;color:var(--dim);
+.setup-price s{display:block;font-size:13px;color:var(--dim);
   text-decoration:none;text-transform:uppercase;letter-spacing:.08em;
   margin-top:3px}
 .setup-foot{flex:1 1 100%;border-top:1px solid var(--sh);
   box-shadow:0 -1px 0 var(--hi) inset;padding:12px 16px;
   display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap}
-.setup-foot .grow{margin-right:auto;font-size:12px;color:var(--dim);
+.setup-foot .grow{margin-right:auto;font-size:13px;color:var(--dim);
   align-self:center}
 @media (max-width:560px){
   .setup-banner{width:100%;flex:0 0 auto;flex-direction:row;

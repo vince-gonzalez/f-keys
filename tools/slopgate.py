@@ -23,6 +23,10 @@ Three kinds of finding:
              and the status page, where a number is the content.
   BOAST      self-praise, or marketing scaffolding on what is a
              catalogue. Applies everywhere. Weight 3.
+  SHAPE      a rhetorical tell a word list cannot see: em dashes
+             far past what human technical writing uses, and the
+             "it cannot X, this does" turn. Thresholds measured
+             against eight well-known human READMEs. Weight 3.
   DRIFT      a house rule about this specific site's voice:
              third person about him, subtractive counts,
              hedging. Weight 3.
@@ -327,6 +331,10 @@ def scan(path):
                              "weight": weight, "pattern": pat,
                              "context": context})
 
+    for label, detail in rhetoric(joined, words):
+        hits.append({"kind": "SHAPE", "line": 0, "phrase": label,
+                     "weight": 3, "pattern": label, "context": detail})
+
     score = sum(h["weight"] for h in hits)
     per_k = round(score * 1000.0 / words, 2)
     return {"path": path, "words": words, "hits": hits,
@@ -356,6 +364,46 @@ def escape_check(root):
         if n:
             bad.append((n, os.path.relpath(path, root).replace("\\", "/")))
     return sorted(bad, reverse=True)
+
+
+# ── rhetoric: the tells a vocabulary list cannot see ────────
+# Two outside readers called the prose machine-written while this gate
+# reported clean, because it only knew words. What they actually named
+# was shape: em dashes everywhere, and the antithesis construction
+# ("It cannot tell you X. This does.").
+#
+# The em-dash threshold is measured, not guessed. Eight well-known
+# human-written READMEs - requests, flask, ruff, sqlite, curl, jq, tqdm,
+# pytest - run a MEDIAN of 3.4 em dashes per 1000 words and a MAXIMUM of
+# 9.0. certivl was at 22.9 and developers.html at 28.4.
+#
+# 12.0 sits above every human in that sample, so this fires on an
+# outlier and not on a writer who simply likes the punctuation.
+EM_PER_1K_MAX = 12.0
+EM_MIN_WORDS = 120          # a short page swings wildly on one dash
+
+ANTITHESIS = re.compile(
+    r"(?i)(?:it )?(?:cannot|does not|doesn't|will not|won't|is not|isn't)"
+    r"[^.!?]{0,70}[.!?]\s+(?:This|That|It|These|Here)[^.!?]{0,40}"
+    r"(?:does|is|are|will|can)")
+NOT_A_NOT_B = re.compile(r"(?i)Not [a-z]+[^.!?]{0,40}, not [a-z]+")
+
+
+def rhetoric(text, words):
+    """Returns a list of (label, detail) for shape-level tells."""
+    out = []
+    if words >= EM_MIN_WORDS:
+        em = text.count("—")
+        rate = em * 1000.0 / words
+        if rate >= EM_PER_1K_MAX:
+            out.append(("em-dash", "%.1f per 1000 words (%d of them); "
+                        "human technical READMEs median 3.4, max 9.0"
+                        % (rate, em)))
+    n = len(ANTITHESIS.findall(text)) + len(NOT_A_NOT_B.findall(text))
+    if n >= 2:
+        out.append(("antithesis",
+                    "%d 'it cannot X, this does' / 'not a, not b' turns" % n))
+    return out
 
 
 def walk(root):
@@ -395,8 +443,17 @@ def main():
     results.sort(key=lambda r: (-r["per_1000"], -r["score"]))
     # Both conditions: a rate high enough to be a habit, AND enough raw
     # points that it is not one unlucky word on a short page.
+    # A SHAPE finding fails on its own. Em-dash density is a property of
+    # the whole document, so dividing it by length is meaningless - a long
+    # essay full of them scored lower than a short page with two tells,
+    # and all three outlier READMEs sat "under threshold" while being the
+    # exact files two outside readers called machine-written.
+    def shaped(r):
+        return any(h["kind"] == "SHAPE" for h in r["hits"])
+
     failing = [r for r in results
-               if r["per_1000"] >= THRESHOLD and r["score"] >= MIN_SCORE]
+               if shaped(r)
+               or (r["per_1000"] >= THRESHOLD and r["score"] >= MIN_SCORE)]
 
     if as_json:
         print(json.dumps({"threshold": THRESHOLD,
@@ -423,8 +480,9 @@ def main():
           % (len(results), len(failing), THRESHOLD))
 
     for r in results[:top]:
-        flag = ("FAIL" if (r["per_1000"] >= THRESHOLD
-                           and r["score"] >= MIN_SCORE) else "    ")
+        flag = ("FAIL" if (any(h["kind"] == "SHAPE" for h in r["hits"])
+                           or (r["per_1000"] >= THRESHOLD
+                               and r["score"] >= MIN_SCORE)) else "    ")
         print("  %s %6.2f/1k  %3d pts  %5d words  %s"
               % (flag, r["per_1000"], r["score"], r["words"], r["rel"]))
         seen = set()

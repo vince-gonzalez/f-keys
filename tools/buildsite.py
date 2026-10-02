@@ -3084,12 +3084,12 @@ DEVELOPERS_DOC = """
 
 <h2>Start here</h2>
 <table class="facts">
-<tr><th>OpenAPI</th><td><a href="/openapi.json">/openapi.json</a> &mdash; every
+<tr><th>OpenAPI</th><td><a href="/openapi.json">/openapi.json</a>. Every
 published document, each with a typed schema naming its columns</td></tr>
-<tr><th>For agents</th><td><a href="/llms.txt">/llms.txt</a> &mdash; the whole
+<tr><th>For agents</th><td><a href="/llms.txt">/llms.txt</a>. The whole
 catalogue as plain text, including when to reach for each thing</td></tr>
 <tr><th>Site map</th><td><a href="/sitemap.xml">/sitemap.xml</a></td></tr>
-<tr><th>Product docs</th><td><a href="/Docs.html">/Docs.html</a> &mdash; setup,
+<tr><th>Product docs</th><td><a href="/Docs.html">/Docs.html</a>. Setup,
 configuration and troubleshooting</td></tr>
 <tr><th>Source</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
 <tr><th>Questions</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
@@ -3173,41 +3173,37 @@ something unfinished.</p>
 <p>Sixteen on PyPI. Every one installs from the public index, with no account
 and no registration step.</p>
 <table class="facts">
-<tr><th>gonzalgo</th><td><code>pip install gonzalgo</code> &mdash; axiom
+<tr><th>gonzalgo</th><td><code>pip install gonzalgo</code>. Axiom
 provenance for Lean 4 and Metamath. Apache-2.0.</td></tr>
-<tr><th>mmforge</th><td><code>pip install mmforge</code> &mdash; find avoidable
+<tr><th>mmforge</th><td><code>pip install mmforge</code>. Find avoidable
 axiom dependencies in Metamath, and build the proofs that remove
 them.</td></tr>
-<tr><th>loadbearing</th><td><code>pip install loadbearing</code> &mdash; what a
+<tr><th>loadbearing</th><td><code>pip install loadbearing</code>. What a
 claim asserts, separated from what its derivation consumed.</td></tr>
-<tr><th>axsent</th><td><code>pip install axsent</code> &mdash; what a formal
+<tr><th>axsent</th><td><code>pip install axsent</code>. What a formal
 library assumes, read from Rocq, Agda and Isabelle source, with nothing
 built.</td></tr>
-<tr><th>certivl</th><td><code>pip install certivl</code> &mdash; certified
+<tr><th>certivl</th><td><code>pip install certivl</code>. Certified
 interval arithmetic: an enclosure that turns a computed inequality into a
 proof.</td></tr>
-<tr><th>authorecon</th><td><code>pip install authorecon</code> &mdash;
-reconcile published work against every place it lives, for any ORCID, from
+<tr><th>authorecon</th><td><code>pip install authorecon</code>. Reconcile published work against every place it lives, for any ORCID, from
 public sources.</td></tr>
-<tr><th>saydo</th><td><code>pip install saydo</code> &mdash; run a tool against
+<tr><th>saydo</th><td><code>pip install saydo</code>. Run a tool against
 the behavioural contract its author signed, and emit a receipt anyone can
 verify.</td></tr>
-<tr><th>ishihara</th><td><code>pip install ishihara</code> &mdash;
-pseudoisochromatic colour-vision plates, reproducible from a seed.</td></tr>
-<tr><th>opticquiz-cvd</th><td><code>pip install opticquiz-cvd</code> &mdash;
-the colour-accessibility engine, the same maths as the npm package.</td></tr>
-<tr><th>legible</th><td><code>pip install legible</code> &mdash; three build
+<tr><th>ishihara</th><td><code>pip install ishihara</code>. Pseudoisochromatic colour-vision plates, reproducible from a seed.</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>pip install opticquiz-cvd</code>. The colour-accessibility engine, the same maths as the npm package.</td></tr>
+<tr><th>legible</th><td><code>pip install legible</code>. Three build
 gates: unreadable type, unreadable colour, a retired name.</td></tr>
-<tr><th>openapi-drift</th><td><code>pip install openapi-drift</code> &mdash;
-has your API drifted from its spec, and can a machine still read it?</td></tr>
-<tr><th>changewatch</th><td><code>pip install changewatch</code> &mdash; a
+<tr><th>openapi-drift</th><td><code>pip install openapi-drift</code>. Has your API drifted from its spec, and can a machine still read it?</td></tr>
+<tr><th>changewatch</th><td><code>pip install changewatch</code>. A
 doorbell for your published work. Silent until somebody else acts.</td></tr>
-<tr><th>keyj</th><td><code>pip install keyj</code> &mdash; tablature to notes,
+<tr><th>keyj</th><td><code>pip install keyj</code>. Tablature to notes,
 render, and play.</td></tr>
-<tr><th>remapwrap</th><td><code>pip install remapwrap</code> &mdash; build a
+<tr><th>remapwrap</th><td><code>pip install remapwrap</code>. Build a
 RemapWrap control surface from a folder of samples or a list of
 shortcuts.</td></tr>
-<tr><th>plumhud</th><td><code>pip install plumhud</code> &mdash; miner fleet
+<tr><th>plumhud</th><td><code>pip install plumhud</code>. Miner fleet
 monitor.</td></tr>
 <tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
 NerdMiner discovery and vitals.</td></tr>
@@ -3216,33 +3212,29 @@ NerdMiner discovery and vitals.</td></tr>
 name per deficiency, so somebody searching for <code>protanopia</code> finds
 it; these are the entry points.</p>
 <table class="facts">
-<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code> &mdash;
-colour-vision simulation and daltonisation.</td></tr>
-<tr><th>opticquiz-cvd-mcp</th><td><code>npm i opticquiz-cvd-mcp</code> &mdash;
-the same engine as callable tools for an LLM.</td></tr>
-<tr><th>opticquiz-eye</th><td><code>npm i opticquiz-eye</code> &mdash; a
+<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code>. Colour-vision simulation and daltonisation.</td></tr>
+<tr><th>opticquiz-cvd-mcp</th><td><code>npm i opticquiz-cvd-mcp</code>. The same engine as callable tools for an LLM.</td></tr>
+<tr><th>opticquiz-eye</th><td><code>npm i opticquiz-eye</code>. A
 one-line widget that lets a visitor re-colour your site.</td></tr>
-<tr><th>keyjockey</th><td><code>npm i keyjockey</code> &mdash; tablature to
+<tr><th>keyjockey</th><td><code>npm i keyjockey</code>. Tablature to
 notes: eight tunings, capo offsets, MIDI and frequency. npm only.</td></tr>
-<tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>
-&mdash; the TipStreams widget.</td></tr>
+<tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>. The TipStreams widget.</td></tr>
 </table>
 
 <h2>Upstream, merged</h2>
 <p>The measurements feed back into the library they measure. Eight pull requests
-to <a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>
-&mdash; the Metamath Proof Explorer's canonical database, reviewed and merged by
+to <a href="https://github.com/metamath/set.mm" rel="noopener">metamath/set.mm</a>. The Metamath Proof Explorer's canonical database, reviewed and merged by
 its own maintainers &mdash; each remove an avoidable axiom-of-choice dependency
 that the tooling on this page located:</p>
 <table class="facts">
-<tr><th><a href="https://github.com/metamath/set.mm/pull/5442" rel="noopener">#5442</a></th><td>Remove the ax-ac dependency from <code>difelsiga</code> &mdash; merged 2026-08-19</td></tr>
-<tr><th><a href="https://github.com/metamath/set.mm/pull/5448" rel="noopener">#5448</a></th><td>Drop the ax-ac dependency from <code>omeiunle</code> &mdash; merged 2026-08-21</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5442" rel="noopener">#5442</a></th><td>Remove the ax-ac dependency from <code>difelsiga</code>. Merged 2026-08-19</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5448" rel="noopener">#5448</a></th><td>Drop the ax-ac dependency from <code>omeiunle</code>. Merged 2026-08-21</td></tr>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5447" rel="noopener">#5447</a></th><td>Avoid ax-ac in <code>sigaclci</code> directly &mdash; merged 2026-08-21</td></tr>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5445" rel="noopener">#5445</a></th><td>Shorten <code>madefi</code> and drop its ax-ac dependency &mdash; merged 2026-08-21</td></tr>
 <tr><th><a href="https://github.com/metamath/set.mm/pull/5443" rel="noopener">#5443</a></th><td>Add <code>fnrndomnum</code>, and prove <code>fnrndomg</code> from it &mdash; merged 2026-08-24</td></tr>
-<tr><th><a href="https://github.com/metamath/set.mm/pull/5458" rel="noopener">#5458</a></th><td>Drop the ax-ac dependency from <code>fnct</code>, <code>dmct</code> and <code>ffsrn</code> &mdash; merged 2026-08-26</td></tr>
-<tr><th><a href="https://github.com/metamath/set.mm/pull/5446" rel="noopener">#5446</a></th><td>Drop the ax-ac dependency from <code>disjinfi</code> &mdash; merged 2026-08-30</td></tr>
-<tr><th><a href="https://github.com/metamath/set.mm/pull/5466" rel="noopener">#5466</a></th><td>Add <code>imadomnum</code>, and drop the ax-ac dependency from <code>fimact</code> &mdash; merged 2026-09-01</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5458" rel="noopener">#5458</a></th><td>Drop the ax-ac dependency from <code>fnct</code>, <code>dmct</code> and <code>ffsrn</code>. Merged 2026-08-26</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5446" rel="noopener">#5446</a></th><td>Drop the ax-ac dependency from <code>disjinfi</code>. Merged 2026-08-30</td></tr>
+<tr><th><a href="https://github.com/metamath/set.mm/pull/5466" rel="noopener">#5466</a></th><td>Add <code>imadomnum</code>, and drop the ax-ac dependency from <code>fimact</code>. Merged 2026-09-01</td></tr>
 </table>
 <p>Two more set.mm pull requests are open in review, along with
 <a href="https://github.com/metamath/metamath-exe/pull/203" rel="noopener">#203</a>
@@ -3268,8 +3260,7 @@ CC BY 4.0.</td></tr>
 <tr><th>Kernel Trust Profile</th><td>The
 <a href="/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json">0.1 schema</a> and
 fourteen profiles conforming to it, one per library measured.</td></tr>
-<tr><th>Status</th><td><a href="/status/latest.json">/status/latest.json</a>
-&mdash; the daily snapshot behind the <a href="/status/">status page</a>.
+<tr><th>Status</th><td><a href="/status/latest.json">/status/latest.json</a>. The daily snapshot behind the <a href="/status/">status page</a>.
 Repository traffic is owner-only and is not in it.</td></tr>
 </table>
 <pre># the whole surface, as an agent would discover it
@@ -3289,7 +3280,7 @@ with <code>Vary: Accept</code> set so a cache cannot hand you the wrong one.</p>
 <pre>curl -H "Accept: text/markdown" https://f-keys.com/keyj/</pre>
 <p>A path that does not exist returns a real <b>404</b> in the format you asked
 for. Anything under a data path &mdash; a <code>.json</code> URL,
-<code>/api</code>, <code>/v1</code> &mdash; errors as JSON even when the client
+<code>/api</code>, <code>/v1</code>. Errors as JSON even when the client
 sends no <code>Accept</code> at all, because most of them do not:</p>
 <pre>curl https://f-keys.com/gonzalgo/no-such-table.json
 

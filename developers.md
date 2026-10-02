@@ -10,10 +10,10 @@ Install or fetch. Nothing to sign up for.
 
 | Field | Value |
 | --- | --- |
-| OpenAPI | [/openapi.json](https://f-keys.com/openapi.json) — every published document, each with a typed schema naming its columns |
-| For agents | [/llms.txt](https://f-keys.com/llms.txt) — the whole catalogue as plain text, including when to reach for each thing |
+| OpenAPI | [/openapi.json](https://f-keys.com/openapi.json). Every published document, each with a typed schema naming its columns |
+| For agents | [/llms.txt](https://f-keys.com/llms.txt). The whole catalogue as plain text, including when to reach for each thing |
 | Site map | [/sitemap.xml](https://f-keys.com/sitemap.xml) |
-| Product docs | [/Docs.html](https://f-keys.com/Docs.html) — setup, configuration and troubleshooting |
+| Product docs | [/Docs.html](https://f-keys.com/Docs.html). Setup, configuration and troubleshooting |
 | Source | [github.com/vince-gonzalez](https://github.com/vince-gonzalez) |
 | Questions | [hello@f-keys.com](mailto:hello@f-keys.com) |
 
@@ -107,21 +107,21 @@ and no registration step.
 
 | Field | Value |
 | --- | --- |
-| gonzalgo | pip install gonzalgo — axiom provenance for Lean 4 and Metamath. Apache-2.0. |
-| mmforge | pip install mmforge — find avoidable axiom dependencies in Metamath, and build the proofs that remove them. |
-| loadbearing | pip install loadbearing — what a claim asserts, separated from what its derivation consumed. |
-| axsent | pip install axsent — what a formal library assumes, read from Rocq, Agda and Isabelle source, with nothing built. |
-| certivl | pip install certivl — certified interval arithmetic: an enclosure that turns a computed inequality into a proof. |
-| authorecon | pip install authorecon — reconcile published work against every place it lives, for any ORCID, from public sources. |
-| saydo | pip install saydo — run a tool against the behavioural contract its author signed, and emit a receipt anyone can verify. |
-| ishihara | pip install ishihara — pseudoisochromatic colour-vision plates, reproducible from a seed. |
-| opticquiz-cvd | pip install opticquiz-cvd — the colour-accessibility engine, the same maths as the npm package. |
-| legible | pip install legible — three build gates: unreadable type, unreadable colour, a retired name. |
-| openapi-drift | pip install openapi-drift — has your API drifted from its spec, and can a machine still read it? |
-| changewatch | pip install changewatch — a doorbell for your published work. Silent until somebody else acts. |
-| keyj | pip install keyj — tablature to notes, render, and play. |
-| remapwrap | pip install remapwrap — build a RemapWrap control surface from a folder of samples or a list of shortcuts. |
-| plumhud | pip install plumhud — miner fleet monitor. |
+| gonzalgo | pip install gonzalgo. Axiom provenance for Lean 4 and Metamath. Apache-2.0. |
+| mmforge | pip install mmforge. Find avoidable axiom dependencies in Metamath, and build the proofs that remove them. |
+| loadbearing | pip install loadbearing. What a claim asserts, separated from what its derivation consumed. |
+| axsent | pip install axsent. What a formal library assumes, read from Rocq, Agda and Isabelle source, with nothing built. |
+| certivl | pip install certivl. Certified interval arithmetic: an enclosure that turns a computed inequality into a proof. |
+| authorecon | pip install authorecon. Reconcile published work against every place it lives, for any ORCID, from public sources. |
+| saydo | pip install saydo. Run a tool against the behavioural contract its author signed, and emit a receipt anyone can verify. |
+| ishihara | pip install ishihara. Pseudoisochromatic colour-vision plates, reproducible from a seed. |
+| opticquiz-cvd | pip install opticquiz-cvd. The colour-accessibility engine, the same maths as the npm package. |
+| legible | pip install legible. Three build gates: unreadable type, unreadable colour, a retired name. |
+| openapi-drift | pip install openapi-drift. Has your API drifted from its spec, and can a machine still read it? |
+| changewatch | pip install changewatch. A doorbell for your published work. Silent until somebody else acts. |
+| keyj | pip install keyj. Tablature to notes, render, and play. |
+| remapwrap | pip install remapwrap. Build a RemapWrap control surface from a folder of samples or a list of shortcuts. |
+| plumhud | pip install plumhud. Miner fleet monitor. |
 | moonbeam-miner | pip install moonbeam-miner — NerdMiner discovery and vitals. |
 
 Nineteen on npm. Most of them are the OpticQuiz colour engine published one
@@ -130,30 +130,29 @@ it; these are the entry points.
 
 | Field | Value |
 | --- | --- |
-| opticquiz-cvd | npm i opticquiz-cvd — colour-vision simulation and daltonisation. |
-| opticquiz-cvd-mcp | npm i opticquiz-cvd-mcp — the same engine as callable tools for an LLM. |
-| opticquiz-eye | npm i opticquiz-eye — a one-line widget that lets a visitor re-colour your site. |
-| keyjockey | npm i keyjockey — tablature to notes: eight tunings, capo offsets, MIDI and frequency. npm only. |
-| @f-keys/tip-widget | npm i @f-keys/tip-widget — the TipStreams widget. |
+| opticquiz-cvd | npm i opticquiz-cvd. Colour-vision simulation and daltonisation. |
+| opticquiz-cvd-mcp | npm i opticquiz-cvd-mcp. The same engine as callable tools for an LLM. |
+| opticquiz-eye | npm i opticquiz-eye. A one-line widget that lets a visitor re-colour your site. |
+| keyjockey | npm i keyjockey. Tablature to notes: eight tunings, capo offsets, MIDI and frequency. npm only. |
+| @f-keys/tip-widget | npm i @f-keys/tip-widget. The TipStreams widget. |
 
 ## Upstream, merged
 
 The measurements feed back into the library they measure. Eight pull requests
-to [metamath/set.mm](https://github.com/metamath/set.mm)
-— the Metamath Proof Explorer's canonical database, reviewed and merged by
+to [metamath/set.mm](https://github.com/metamath/set.mm). The Metamath Proof Explorer's canonical database, reviewed and merged by
 its own maintainers — each remove an avoidable axiom-of-choice dependency
 that the tooling on this page located:
 
 | Field | Value |
 | --- | --- |
-| [#5442](https://github.com/metamath/set.mm/pull/5442) | Remove the ax-ac dependency from difelsiga — merged 2026-08-19 |
-| [#5448](https://github.com/metamath/set.mm/pull/5448) | Drop the ax-ac dependency from omeiunle — merged 2026-08-21 |
+| [#5442](https://github.com/metamath/set.mm/pull/5442) | Remove the ax-ac dependency from difelsiga. Merged 2026-08-19 |
+| [#5448](https://github.com/metamath/set.mm/pull/5448) | Drop the ax-ac dependency from omeiunle. Merged 2026-08-21 |
 | [#5447](https://github.com/metamath/set.mm/pull/5447) | Avoid ax-ac in sigaclci directly — merged 2026-08-21 |
 | [#5445](https://github.com/metamath/set.mm/pull/5445) | Shorten madefi and drop its ax-ac dependency — merged 2026-08-21 |
 | [#5443](https://github.com/metamath/set.mm/pull/5443) | Add fnrndomnum, and prove fnrndomg from it — merged 2026-08-24 |
-| [#5458](https://github.com/metamath/set.mm/pull/5458) | Drop the ax-ac dependency from fnct, dmct and ffsrn — merged 2026-08-26 |
-| [#5446](https://github.com/metamath/set.mm/pull/5446) | Drop the ax-ac dependency from disjinfi — merged 2026-08-30 |
-| [#5466](https://github.com/metamath/set.mm/pull/5466) | Add imadomnum, and drop the ax-ac dependency from fimact — merged 2026-09-01 |
+| [#5458](https://github.com/metamath/set.mm/pull/5458) | Drop the ax-ac dependency from fnct, dmct and ffsrn. Merged 2026-08-26 |
+| [#5446](https://github.com/metamath/set.mm/pull/5446) | Drop the ax-ac dependency from disjinfi. Merged 2026-08-30 |
+| [#5466](https://github.com/metamath/set.mm/pull/5466) | Add imadomnum, and drop the ax-ac dependency from fimact. Merged 2026-09-01 |
 
 Two more set.mm pull requests are open in review, along with
 [#203](https://github.com/metamath/metamath-exe/pull/203)
@@ -175,7 +174,7 @@ fetches half a megabyte to find out.
 | --- | --- |
 | Measurement tables | Fifteen tables behind the papers — the [Kernel Index](https://f-keys.com/gonzalgo/kernel-index/), the [Dominator Table](https://f-keys.com/gonzalgo/dominator-table/) and the rest. One object each, carrying its version, sha256, license and seriesDoi beside its rows. CC BY 4.0. |
 | Kernel Trust Profile | The [0.1 schema](https://f-keys.com/gonzalgo/kernel-trust/kernel-trust-0.1.schema.json) and fourteen profiles conforming to it, one per library measured. |
-| Status | [/status/latest.json](https://f-keys.com/status/latest.json) — the daily snapshot behind the [status page](https://f-keys.com/status/). Repository traffic is owner-only and is not in it. |
+| Status | [/status/latest.json](https://f-keys.com/status/latest.json). The daily snapshot behind the [status page](https://f-keys.com/status/). Repository traffic is owner-only and is not in it. |
 
 # the whole surface, as an agent would discover it
 curl https://f-keys.com/openapi.json | jq '.paths | keys'
@@ -195,7 +194,7 @@ with Vary: Accept set so a cache cannot hand you the wrong one.
 curl -H "Accept: text/markdown" https://f-keys.com/keyj/
 A path that does not exist returns a real **404** in the format you asked
 for. Anything under a data path — a .json URL,
-/api, /v1 — errors as JSON even when the client
+/api, /v1. Errors as JSON even when the client
 sends no Accept at all, because most of them do not:
 
 curl https://f-keys.com/gonzalgo/no-such-table.json
