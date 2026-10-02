@@ -272,6 +272,14 @@ def visible_text(path, raw):
             return re.sub(r"[^\n]", " ", m.group(0))
         text = re.sub(r"(?is)<script\b.*?</script>", blank, text)
         text = re.sub(r"(?is)<style\b.*?</style>", blank, text)
+        # Table cells, code and preformatted blocks are data, not writing.
+        # gonzalgo's results tables repeat "(none - inherits)" down a
+        # column, which pushed three measurement pages past the em-dash
+        # threshold - and would have had me editing published measurements
+        # to satisfy a prose metric. The metric was wrong, not the data.
+        text = re.sub(r"(?is)<t[dh]\b.*?</t[dh]>", blank, text)
+        text = re.sub(r"(?is)<pre\b.*?</pre>", blank, text)
+        text = re.sub(r"(?is)<code\b.*?</code>", blank, text)
         text = re.sub(r"(?s)<!--.*?-->", blank, text)
         text = re.sub(r"<[^>]+>", lambda m: " " * len(m.group(0)), text)
     elif ext in (".md", ".markdown"):
@@ -312,6 +320,14 @@ def scan(path):
     # sales voice. So COUNT is skipped there and BOAST is not.
     relp = path.replace("\\", "/")
     reporting = any(m in relp for m in REPORTING)
+
+    # A paper page is a quotation of a deposited work. Its abstract has a
+    # DOI and the deposit is immutable, so editing the page to satisfy a
+    # prose metric would make the page disagree with the citable record -
+    # which is a worse problem than an em dash. Measure the writing this
+    # site is free to change; the published text is not that.
+    if re.search(r"/papers/[^/]+/index\.html$", relp):
+        return None
 
     hits = []
     for kind, rx, pat, weight, floor in COMPILED:
@@ -380,7 +396,14 @@ def escape_check(root):
 # 12.0 sits above every human in that sample, so this fires on an
 # outlier and not on a writer who simply likes the punctuation.
 EM_PER_1K_MAX = 12.0
-EM_MIN_WORDS = 120          # a short page swings wildly on one dash
+# A rate needs enough text to mean anything, and enough instances to be a
+# habit. At the old floor of 120 words, two dashes on the 151-word homepage
+# scored 13.2 and "failed" - which is noise, not a voice. Both floors must
+# be cleared: 200 words of prose AND at least 5 dashes. certivl (480 words,
+# 11 dashes) and gonzalgo (1711, 29) clear both comfortably; the eight
+# human baseline READMEs clear neither.
+EM_MIN_WORDS = 200
+EM_MIN_COUNT = 5
 
 ANTITHESIS = re.compile(
     r"(?i)(?:it )?(?:cannot|does not|doesn't|will not|won't|is not|isn't)"
@@ -395,7 +418,7 @@ def rhetoric(text, words):
     if words >= EM_MIN_WORDS:
         em = text.count("—")
         rate = em * 1000.0 / words
-        if rate >= EM_PER_1K_MAX:
+        if rate >= EM_PER_1K_MAX and em >= EM_MIN_COUNT:
             out.append(("em-dash", "%.1f per 1000 words (%d of them); "
                         "human technical READMEs median 3.4, max 9.0"
                         % (rate, em)))

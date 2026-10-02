@@ -68,34 +68,116 @@
 </script>
 
 <style>
-:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+/* A paper should look like a paper. These pages carried the catalogue's
+   terminal styling: neon green on near-black, monospace body text, and a
+   CRT scanline overlay across the abstract of a legal-evidence treatise.
+   A reader arriving from a DOI expects a document.
+
+   Every colour below was computed against its own background before it
+   was used here; the lowest pair is 6.83:1. */
+:root {
+  --paper:#fdfdfb; --desk:#e7e7e2; --band-bg:#2a2d33;
+  --ink:#1b1b1d; --muted:#55585e; --rule:#dcdcd6;
+  --link:#17457f; --label:#45484e;
+  --band-ink:#e9eaec; --band-dim:#b9bcc2; --desk-ink:#4a4d53;
+}
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; line-height:1.65; overflow-x:hidden; }
-body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
-nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,0.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
-.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
-nav a { color:var(--dim); text-decoration:none; }
-nav a:hover { color:var(--green); }
-main { max-width:820px; margin:0 auto; padding:7rem 1.5rem 4rem; }
-h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(30px,5vw,46px); color:var(--green); letter-spacing:1px; line-height:1.15; }
-.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(18px,3vw,24px); color:var(--cyan); letter-spacing:1px; margin:.6rem 0 1.4rem; }
-h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.6rem; color:var(--green); margin:2.6rem 0 .7rem; letter-spacing:1px; }
-p { margin-bottom:1rem; }
-a { color:var(--green); }
-code { color:var(--cyan); }
-pre { background:#0d120d; border:1px solid var(--border); padding:1.1rem; overflow-x:auto; font-size:.85rem; margin:1.4rem 0; color:var(--text); }
-.byline { color:var(--dim); margin-bottom:1.8rem; font-size:.95rem; }
-.getit { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.6rem 0 2.2rem; }
-.getit a { display:inline-block; border:1px solid var(--green); color:var(--green); padding:.55rem 1.1rem; text-decoration:none; font-size:.9rem; }
-.getit a:hover { background:var(--green); color:var(--bg); }
-.getit a.alt { border-color:var(--border); color:var(--dim); }
-.getit a.alt:hover { background:var(--border); color:var(--text); }
-.entry { border-top:1px solid var(--border); padding:1.6rem 0; }
-.entry h2 { margin:0 0 .3rem; font-size:1.5rem; }
-.entry h2 a { text-decoration:none; }
-.entry .meta { color:var(--dim); font-size:.85rem; margin-bottom:.6rem; }
-.entry p { margin-bottom:.6rem; }
-footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+
+body {
+  background:var(--desk); color:var(--ink);
+  font-family:Georgia,"Times New Roman","Liberation Serif",serif;
+  font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+nav {
+  background:var(--band-bg); color:var(--band-ink);
+  padding:10px 22px; display:flex; align-items:center;
+  justify-content:space-between; gap:1.5rem;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:14px;
+}
+.logo { color:var(--band-ink); font-weight:700; letter-spacing:.12em;
+        text-decoration:none; }
+nav a { color:var(--band-dim); text-decoration:none; }
+nav a:hover { color:var(--band-ink); text-decoration:underline; }
+
+/* the sheet */
+main {
+  background:var(--paper); max-width:46em; margin:30px auto 46px;
+  padding:52px 58px 60px;
+  border:1px solid var(--rule);
+  box-shadow:0 1px 3px rgba(0,0,0,.09), 0 10px 26px rgba(0,0,0,.07);
+}
+
+h1 { font-size:27px; line-height:1.28; font-weight:700;
+     letter-spacing:-.005em; margin:0 0 14px; }
+.kicker { font-family:system-ui,sans-serif; font-size:13px;
+          letter-spacing:.14em; text-transform:uppercase;
+          color:var(--label); margin:0 0 10px; }
+h2 { font-size:15px; font-weight:700; letter-spacing:.07em;
+     text-transform:uppercase; color:var(--label);
+     font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+     margin:30px 0 9px; padding-bottom:5px;
+     border-bottom:1px solid var(--rule); }
+p { margin:0 0 15px; text-align:left; hyphens:auto; }
+
+a { color:var(--link); text-decoration:underline;
+    text-underline-offset:2px; }
+
+.byline { font-family:system-ui,sans-serif; font-size:13.5px;
+          color:var(--muted); margin:0 0 22px; line-height:1.55; }
+
+code { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:14px;
+       background:#f1f1ec; border:1px solid var(--rule);
+       border-radius:3px; padding:1px 5px; }
+pre { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px;
+      line-height:1.55; background:#f6f6f1; border:1px solid var(--rule);
+      border-left:3px solid #b9b9b0; padding:13px 15px; margin:16px 0;
+      overflow-x:auto; white-space:pre-wrap; word-break:break-word; }
+
+/* where to get it: a document's front matter, not a button bar */
+.getit { display:flex; flex-wrap:wrap; gap:9px; margin:0 0 26px;
+         padding:13px 0; border-top:1px solid var(--rule);
+         border-bottom:1px solid var(--rule);
+         font-family:system-ui,sans-serif; font-size:13.5px; }
+.getit a { color:var(--link); text-decoration:none; font-weight:600;
+           border:1px solid var(--rule); border-radius:3px;
+           padding:6px 12px; background:#f6f6f1; }
+.getit a:hover { background:#eeeee7; text-decoration:underline; }
+.getit a.alt { font-weight:400; background:transparent; }
+.getit a.alt:hover { background:#f6f6f1; }
+
+/* the index listing */
+.entry { padding:17px 0; border-bottom:1px solid var(--rule); }
+.entry h2 { border:0; padding:0; margin:0 0 5px; font-size:17px;
+            text-transform:none; letter-spacing:0; color:var(--ink);
+            font-family:Georgia,"Times New Roman",serif; }
+.entry h2 a { color:var(--ink); text-decoration:none; }
+.entry h2 a:hover { text-decoration:underline; color:var(--link); }
+.entry .meta { font-family:system-ui,sans-serif; font-size:13px;
+               color:var(--muted); margin:0 0 6px; }
+.entry p { margin:0; color:var(--ink); }
+
+footer { max-width:46em; margin:0 auto 42px; padding:0 58px;
+         font-family:system-ui,sans-serif; font-size:13px;
+         color:var(--desk-ink); }
+footer a { color:var(--link); }
+
+@media (max-width:640px) {
+  body { font-size:16px; }
+  main { margin:0; padding:30px 20px 40px; border-left:0; border-right:0;
+         box-shadow:none; }
+  footer { padding:0 20px; }
+  h1 { font-size:23px; }
+}
+
+@media print {
+  body { background:#fff; font-size:11pt; }
+  nav, .getit { display:none; }
+  main { box-shadow:none; border:0; margin:0; padding:0; max-width:none; }
+  a { color:#000; text-decoration:none; }
+}
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -120,20 +202,20 @@ footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; co
 2026-07-27 · Preprint · CC-BY-4.0</p>
 
 <div class="getit">
-  <a href="/papers/pdf/first-return-walks-vertex-transitive-graphs.pdf">Read the PDF</a>
-  <a class="alt" href="https://doi.org/10.5281/zenodo.21629398">DOI: 10.5281/zenodo.21629398</a>
-  <a class="alt" href="/papers/">All papers</a>
+ <a href="/papers/pdf/first-return-walks-vertex-transitive-graphs.pdf">Read the PDF</a>
+ <a class="alt" href="https://doi.org/10.5281/zenodo.21629398">DOI: 10.5281/zenodo.21629398</a>
+ <a class="alt" href="/papers/">All papers</a>
 </div>
 
 <h2>Abstract</h2>
-<p>For a connected vertex-transitive graph on N vertices with adjacency spectrum {(lambda_i, m_i)},<br>a closed walk based at a vertex is indecomposable (a "first return") if it revisits its base only<br>on the final step. This note records that the first-return counts follow from the spectrum alone<br>by a single rational operation: their generating function is 2 - 1/f(x), where<br>f(x) = (1/N) sum_i m_i/(1 - lambda_i x) is the closed-walk generating function. Each graph thus<br>yields an integer sequence obeying a linear recurrence whose order is the number of distinct<br>nonzero eigenvalues.</p>
-<p>Specialising to the Hamming graphs H(k,q) - the Cayley graphs of (Z/q)^k with weight-one<br>generators - gives a two-parameter array with an explicit closed form covering hypercubes, rook's<br>graphs, and their q-ary generalisations. The q=2 case is the hypercube, and its row for fixed k<br>counts, under a dictionary made precise here, the irreducible theorems of the pure equivalential<br>calculus in k variables.</p>
-<p>Three sequences produced by the construction were absent from the OEIS and have been submitted:<br>the 4-cube (A398262), the Petersen graph (A398309), and the icosahedron (A398310). All values were<br>verified three independent ways (spectral formula, adjacency-matrix powers, and brute-force word<br>enumeration); the verification code and b-files accompany the note.</p>
-<p>The underlying tools - closed-walk counts as spectral moments, and the first-return/INVERT<br>decomposition - are classical; the contribution is the uniform statement, the Hamming closed form,<br>the recorded sequences, and the equivalential-calculus dictionary.</p>
+<p>For a connected vertex-transitive graph on N vertices with adjacency spectrum {(lambda_i, m_i)}, a closed walk based at a vertex is indecomposable (a "first return") if it revisits its base only on the final step. This note records that the first-return counts follow from the spectrum alone by a single rational operation: their generating function is 2 - 1/f(x), where f(x) = (1/N) sum_i m_i/(1 - lambda_i x) is the closed-walk generating function. Each graph thus yields an integer sequence obeying a linear recurrence whose order is the number of distinct nonzero eigenvalues.</p>
+<p>Specialising to the Hamming graphs H(k,q) - the Cayley graphs of (Z/q)^k with weight-one generators - gives a two-parameter array with an explicit closed form covering hypercubes, rook's graphs, and their q-ary generalisations. The q=2 case is the hypercube, and its row for fixed k counts, under a dictionary made precise here, the irreducible theorems of the pure equivalential calculus in k variables.</p>
+<p>Three sequences produced by the construction were absent from the OEIS and have been submitted: the 4-cube (A398262), the Petersen graph (A398309), and the icosahedron (A398310). All values were verified three independent ways (spectral formula, adjacency-matrix powers, and brute-force word enumeration); the verification code and b-files accompany the note.</p>
+<p>The underlying tools - closed-walk counts as spectral moments, and the first-return/INVERT decomposition - are classical; the contribution is the uniform statement, the Hamming closed form, the recorded sequences, and the equivalential-calculus dictionary.</p>
 
 <h2>Cite it</h2>
 <pre>Gonzalez, V. (2026). First-Return Walks on Vertex-Transitive Graphs.
-  Zenodo. https://doi.org/10.5281/zenodo.21629398</pre>
+ Zenodo. https://doi.org/10.5281/zenodo.21629398</pre>
 
 </main>
 
