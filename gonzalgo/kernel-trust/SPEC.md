@@ -1,6 +1,6 @@
 # Kernel Trust Profile
 
-**Version 0.1 (draft) — 2026-08-05**
+**Version 0.1 (draft), 2026-08-05**
 
 A machine-readable declaration of what a body of machine-checked mathematics
 rests on.
@@ -50,8 +50,8 @@ through its *proof*. Collapsing the two discards the distinction that makes the
 measurement actionable: a statement dependency changes what was proved, a proof
 dependency changes only how.
 
-**R4. Reach, not amplification.** Reach — the fraction of a library depending on
-an assumption — is invariant under inlining and factoring. Amplification is not:
+**R4. Reach, not amplification.** Reach, the fraction of a library depending on
+an assumption, is invariant under inlining and factoring. Amplification is not:
 factoring a shared step into a lemma changes it without changing anything the
 library proves. A profile MAY report amplification, MUST report reach, and MUST
 NOT rank libraries by amplification.
@@ -116,23 +116,23 @@ A profile is a JSON document, conventionally at the repository root as
 
 ### Fields
 
-`ktp_version` (required) — the version of this specification.
+`ktp_version` (required), the version of this specification.
 
-`generated_at` (required) — ISO 8601 date the measurement was taken.
+`generated_at` (required): ISO 8601 date the measurement was taken.
 
-`generated_by` (required) — `tool` and `version`. Identifies what to re-run.
+`generated_by` (required): `tool` and `version`. Identifies what to re-run.
 
-`subject` (required) — what was measured. `revision` SHOULD be a commit hash or
+`subject` (required): what was measured. `revision` SHOULD be a commit hash or
 released version, so R1 is satisfiable.
 
-`counts` (required) — `theorems` is the denominator for every `fraction`.
+`counts` (required): `theorems` is the denominator for every `fraction`.
 
-`unfinished` (required) — theorems reaching an unfinished proof from anywhere
+`unfinished` (required): theorems reaching an unfinished proof from anywhere
 upstream, and the axiom names that signal it. `theorems_reaching: 0` is the
 claim most worth making and, under R2, the one that must be measured to be
 stated.
 
-`compiler_trusted` (required) — theorems reaching a result obtained by trusting
+`compiler_trusted` (required): theorems reaching a result obtained by trusting
 the compiler and runtime rather than the kernel.
 
 `assumptions` (required, may be empty) — one entry per axiom or assumption

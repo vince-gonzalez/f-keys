@@ -567,7 +567,7 @@
 
   <!-- LEFT: KEY MAP -->
   <div class="panel-left">
-    <div class="panel-title">Key Map — Click to Re-Bind</div>
+    <div class="panel-title">Key Map: click to re-bind</div>
     <div class="keymap-scroll" id="keyMapList"></div>
     <div class="scale-bar">
       <div class="scale-label">Scale</div>
@@ -668,7 +668,7 @@
   <!-- BOTTOM BAR -->
   <div class="bottom-bar">
     <div class="status-dot" id="statusDot"></div>
-    <div class="status-text" id="statusText">Key-J ready — press any key to play</div>
+    <div class="status-text" id="statusText">Key-J ready. Press any key to play</div>
     <div class="note-count">Notes: <span id="noteCountBot">0</span></div>
   </div>
 </div>
@@ -682,8 +682,8 @@
     <input type="text" id="exportName" value="Key-J_Session">
     <label>Normalize</label>
     <select id="exportNorm">
-      <option value="1">Yes — normalize peak to 0dB</option>
-      <option value="0">No — keep as recorded</option>
+      <option value="1">Yes, normalize peak to 0dB</option>
+      <option value="0">No, keep as recorded</option>
     </select>
     <div class="modal-row">
       <button class="modal-close" onclick="closeModal('exportModal')">Cancel</button>
@@ -700,7 +700,7 @@
     the scale and octave in the left rail. Click any row there to rebind that key.</p>
     <p><b style="color:var(--accent)">Load a sequence and every key plays the next note
     of it.</b> This is the part people miss. You stop playing pitches and start playing
-    rhythm, and the melody is already handled &mdash; paste a tab into
+    rhythm, and the melody is already handled. Paste a tab into
     <b>Tab &amp; Sequence</b> and type anything.</p>
     <p><b style="color:var(--accent)">Where it plays.</b> In a browser, only while this
     tab has focus; a page cannot read keys outside itself. The desktop app has a
@@ -921,7 +921,7 @@ function playNote(key) {
   activeNotes[key] = { note, freq, startAC: now };
   flashNote(note);
   markKeyActive(key, true);
-  setStatus(`Playing: ${note} (${freq.toFixed(1)} Hz) — ${state.playStyle}`);
+  setStatus(`Playing: ${note} (${freq.toFixed(1)} Hz), ${state.playStyle}`);
 }
 
 function releaseNote(key, fromStaccato = false) {
@@ -1434,7 +1434,7 @@ let rebindTarget = null;
 function startRebind(key) {
   rebindTarget = key;
   const bind = keyBindings[key];
-  document.getElementById('rebindMsg').textContent = `Re-assigning key: [${key.toUpperCase()}] — currently ${bind.note}`;
+  document.getElementById('rebindMsg').textContent = `Re-assigning key: [${key.toUpperCase()}], currently ${bind.note}`;
 
   const sel = document.getElementById('rebindNote');
   sel.innerHTML = '';
@@ -1540,7 +1540,7 @@ window.addEventListener('load', async () => {
   buildKeyBindings();
   resizeCanvases();
   startViz();
-  setStatus('Key-J ready — press any key to play  |  Click a key in the panel to re-bind it');
+  setStatus('Key-J ready. Press any key to play  |  Click a key in the panel to re-bind it');
 });
 
 window.addEventListener('resize', () => {
@@ -1899,7 +1899,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
             'slides and bends are read as the notes they land on.</p>' +
         '</div>' +
         '<div class="col">' +
-          '<label>Sequence &mdash; any key plays the next note</label>' +
+          '<label>Sequence: any key plays the next note</label>' +
           '<div class="status" id="kj-status">No sequence loaded.</div>' +
           '<div class="preview" id="kj-preview"></div>' +
           '<div class="row">' +
@@ -1969,7 +1969,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     el('kj-midi').onchange = function (e) {
       var f = e.target.files && e.target.files[0]; if (!f) return;
       if (f.size > 1024 * 1024) {
-        el('kj-status').innerHTML = '<span class="warn">Over 1 MB — that is not a melody.</span>';
+        el('kj-status').innerHTML = '<span class="warn">Over 1 MB. That is not a melody.</span>';
         return;
       }
       var fr = new FileReader();
@@ -3183,7 +3183,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     } else {
       // The browser cannot do this, so it offers the build that can.
       mode.innerHTML =
-        '<span class="kj-why">Notes play while this tab is focused &mdash; a browser ' +
+        '<span class="kj-why">Notes play while this tab is focused; a browser ' +
           'cannot read keys outside its own page. The desktop app plays over ' +
           'every application.</span>' +
         '<span class="kj-badge off"><a href="' + DOWNLOAD + '" target="_blank" ' +
@@ -3593,7 +3593,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
       var perKey = scroller.scrollWidth / white;
       var hiddenKeys = Math.round(max / perKey);
       label.textContent = hiddenKeys > 0
-        ? 'Scroll sideways — about ' + hiddenKeys + ' more keys off the side.'
+        ? 'Scroll sideways: about ' + hiddenKeys + ' more keys off the side.'
         : '';
     }
   }

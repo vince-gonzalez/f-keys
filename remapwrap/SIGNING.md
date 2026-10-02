@@ -1,6 +1,6 @@
 # Signing RemapWrap
 
-**DRAFT — the account does not exist yet. This is the checklist for creating
+**DRAFT, the account does not exist yet. This is the checklist for creating
 it, written from Microsoft's current documentation rather than from memory,
 because the rules changed twice in three years.**
 
@@ -43,7 +43,7 @@ download page:
 - **Reputation accumulates on the certificate** and carries to the next
   release. Unsigned files start from zero every single version, forever.
 - **Windows 11 Smart App Control blocks unsigned executables outright.** Not
-  a warning — a block. This is the part that makes signing non-optional.
+  a warning, a block. This is the part that makes signing non-optional.
 
 Reputation takes *weeks and hundreds of clean installs*. Plan the launch
 around that rather than expecting a clean first day.
@@ -57,7 +57,7 @@ distribution, not a feature.
 
 Organization validation needs an Azure subscription and a Microsoft Entra
 tenant. There is **no minimum organization age** in the current
-prerequisites — a claim that organizations need three years of tax history
+prerequisites, a claim that organizations need three years of tax history
 circulates widely and traces back to an AI-generated forum answer citing a
 different product's guidance. A Microsoft engineer answered the same
 question with *"no minimum org age restrictions."*
@@ -66,7 +66,7 @@ Public Trust certificates are available to organizations in the US.
 
 ## The checklist
 
-**1. Email — this is the blocker, do it first.**
+**1. Email. This is the blocker, do it first.**
 Organization validation needs a **primary** and a **secondary** monitored
 mailbox, both on a domain owned by the legal entity. That means two
 addresses at **@f-keys.com**. They must accept mail from external senders
@@ -91,7 +91,7 @@ requires starting over.
 
 - [ ] Organization Name — F-KEYS CREATIVE LLC
 - [ ] Website — https://f-keys.com
-- [ ] Business Identifier — the EIN
+- [ ] Business Identifier, the EIN
 - [ ] Business address
 - [ ] First and last name **exactly as printed on the government ID** that
       will be presented. Not a preferred name.
@@ -110,7 +110,7 @@ There is a fallback if organization validation stalls: an **Individual
 Developer** path, US and Canada only, which sources details from the Azure
 billing account and needs no business mailboxes. The certificate then
 carries a personal name rather than the company's, which is worse for
-something being sold under an LLC — so it is a fallback, not the plan.
+something being sold under an LLC, so it is a fallback, not the plan.
 
 ## Then it signs itself
 

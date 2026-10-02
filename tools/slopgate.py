@@ -277,6 +277,11 @@ def visible_text(path, raw):
         # column, which pushed three measurement pages past the em-dash
         # threshold - and would have had me editing published measurements
         # to satisfy a prose metric. The metric was wrong, not the data.
+        # A <title> is "Page - Site", which is how every site on the web
+        # writes one, and <meta> content repeats it. Counting those as
+        # prose had the portfolio and Key-J failing on their own titles.
+        text = re.sub(r"(?is)<title\b.*?</title>", blank, text)
+        text = re.sub(r"(?is)<meta\b[^>]*>", blank, text)
         text = re.sub(r"(?is)<t[dh]\b.*?</t[dh]>", blank, text)
         text = re.sub(r"(?is)<pre\b.*?</pre>", blank, text)
         text = re.sub(r"(?is)<code\b.*?</code>", blank, text)
@@ -288,6 +293,11 @@ def visible_text(path, raw):
         text = re.sub(r"(?s)```.*?```", blank, text)
         text = re.sub(r"`[^`\n]+`", lambda m: " " * len(m.group(0)), text)
         text = re.sub(r"(?s)<!--.*?-->", blank, text)
+        # A markdown table row is the same data an HTML <td> is, and
+        # was read as prose only because it is spelled differently.
+        # QV's spec table failed on its own Version row.
+        text = re.sub(r"(?m)^[ \t]*\|.*$",
+                      lambda m: " " * len(m.group(0)), text)
 
     return list(enumerate(text.split("\n"), start=1))
 
@@ -347,7 +357,8 @@ def scan(path):
                              "weight": weight, "pattern": pat,
                              "context": context})
 
-    for label, detail in rhetoric(joined, words):
+    for label, detail in rhetoric(joined, words,
+                                 em_connectors(lines)):
         hits.append({"kind": "SHAPE", "line": 0, "phrase": label,
                      "weight": 3, "pattern": label, "context": detail})
 
@@ -412,11 +423,26 @@ ANTITHESIS = re.compile(
 NOT_A_NOT_B = re.compile(r"(?i)Not [a-z]+[^.!?]{0,40}, not [a-z]+")
 
 
-def rhetoric(text, words):
+# Counted per line, because joining lines invents adjacency: a "Last:
+# —" at the end of one line would otherwise pair with the first word
+# of the next and read as a connector. A dash with no word on one side
+# is a placeholder for an empty value, which Key-J prints until you
+# play a note, and that is a glyph rather than a sentence being built
+# out of dashes. This can only lower a count against a plain
+# .count(), so the 12.0 ceiling still sits above the human sample.
+EM_CONNECTOR = re.compile(r"\w[ \t]*—[ \t]*\w")
+
+
+def em_connectors(lines):
+    return sum(len(EM_CONNECTOR.findall(t)) for _, t in lines)
+
+
+def rhetoric(text, words, em=None):
     """Returns a list of (label, detail) for shape-level tells."""
     out = []
     if words >= EM_MIN_WORDS:
-        em = text.count("—")
+        if em is None:
+            em = text.count("—")
         rate = em * 1000.0 / words
         if rate >= EM_PER_1K_MAX and em >= EM_MIN_COUNT:
             out.append(("em-dash", "%.1f per 1000 words (%d of them); "

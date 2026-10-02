@@ -68,36 +68,156 @@
 }
 </script>
 <style>
-:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+/* These pages are published measurements with DOIs, and they were
+   dressed as a hacker terminal: neon green on near-black, VT323 at 68px,
+   and a CRT scanline fixed over 9,202 table cells of Mathlib data. The
+   reader arriving from a citation is an engineer or a mathematician
+   checking a number, and the styling was asking them to read a results
+   table through a simulated bad monitor.
+
+   The palette is the one the paper pages use, so the whole body of
+   evidence reads as one publication rather than two websites. Every
+   colour was computed against its own background first; the lowest pair
+   is 6.64:1 against a 4.5:1 requirement.
+
+   Prose is held to a 44em measure while tables take the full width,
+   because a 66em line is unreadable and a six-column table at 44em is
+   unusable, and these pages contain both. */
+:root {
+  --paper:#fdfdfb; --desk-bg:#e7e7e2; --band-bg:#2a2d33;
+  --ink:#1b1b1d; --muted:#55585e; --rule:#dcdcd6; --hair:#ebebe5;
+  --link:#17457f; --label:#45484e;
+  --zebra-bg:#f7f7f3; --hover-bg:#eef1f5;
+  --found:#1d5c2e; --found-bg:#eef5ef; --warn:#8a3030;
+  --band-ink:#e9eaec; --band-dim:#b9bcc2; --desk-ink:#4a4d53;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:Georgia,"Times New Roman","Liberation Serif",serif;
+}
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
-body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
-nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
-.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
-nav a { color:var(--dim); text-decoration:none; }
-nav a:hover { color:var(--green); }
-main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
-h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
-.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
-h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
-p { margin-bottom:1rem; }
-a { color:var(--green); }
-.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
-table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
-th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
-td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
-td.num { text-align:right; font-variant-numeric:tabular-nums; }
-td.found { color:var(--dim); }
-tr:hover td { background:#0d120d; }
-strong { color:#ff8080; }
-.note { color:var(--dim); font-size:.9rem; }
-.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
-pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
-code { color:var(--cyan); }
-footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+
+body {
+  background:var(--desk-bg); color:var(--ink);
+  font-family:var(--serif); font-size:16.5px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* the running head */
+nav {
+  background:var(--band-bg); color:var(--band-ink);
+  padding:10px 22px; display:flex; align-items:center;
+  justify-content:space-between; gap:1.5rem;
+  font-family:var(--sans); font-size:14px;
+}
+.logo { color:var(--band-ink); font-weight:700; letter-spacing:.12em;
+        text-decoration:none; font-family:var(--sans); font-size:14px; }
+nav a { color:var(--band-dim); text-decoration:none; }
+nav a:hover { color:var(--band-ink); text-decoration:underline; }
+
+/* the sheet */
+main {
+  background:var(--paper); max-width:64em; margin:30px auto 46px;
+  padding:48px 54px 56px; border:1px solid var(--rule);
+  box-shadow:0 1px 3px rgba(0,0,0,.09), 0 10px 26px rgba(0,0,0,.07);
+}
+
+h1 { font-size:30px; line-height:1.24; font-weight:700;
+     letter-spacing:-.005em; max-width:34em; }
+.kicker { font-family:var(--sans); font-size:13px; letter-spacing:.14em;
+          text-transform:uppercase; color:var(--label);
+          margin:9px 0 22px; max-width:50em; }
+h2 { font-family:var(--sans); font-size:15px; font-weight:700;
+     letter-spacing:.07em; text-transform:uppercase; color:var(--label);
+     margin:34px 0 10px; padding-bottom:5px;
+     border-bottom:1px solid var(--rule); }
+h3 { font-family:var(--serif); font-size:18px; font-weight:700;
+     margin:24px 0 7px; }
+p { margin:0 0 15px; max-width:44em; }
+hr { border:0; border-top:1px solid var(--rule); margin:28px 0; }
+
+a { color:var(--link); text-decoration:underline; text-underline-offset:2px; }
+strong { font-weight:700; color:var(--ink); }
+em { font-style:italic; }
+
+/* the data */
+.wrap { overflow-x:auto; border:1px solid var(--rule); margin:20px 0;
+        background:var(--paper); }
+table { width:100%; border-collapse:collapse; font-family:var(--sans);
+        font-size:14px; min-width:720px; }
+th { font-size:13px; font-weight:700; letter-spacing:.05em;
+     text-transform:uppercase; color:var(--label); text-align:left;
+     padding:9px 11px; white-space:nowrap; background:var(--zebra-bg);
+     border-bottom:1px solid var(--rule); position:sticky; top:0; }
+td { padding:7px 11px; border-bottom:1px solid var(--hair);
+     vertical-align:top; }
+td, th { line-height:1.45; }
+tr:nth-child(even) td { background:var(--zebra-bg); }
+tr:hover td { background:var(--hover-bg); }
+td.num, td.n { text-align:right; font-family:var(--mono); font-size:13px;
+               font-variant-numeric:tabular-nums; white-space:nowrap; }
+td.found { color:var(--found); background:var(--found-bg); }
+tr:hover td.found { background:#e4efe6; }
+
+/* asides */
+.note { font-family:var(--sans); font-size:14px; color:var(--muted);
+        max-width:44em; }
+.series { font-family:var(--sans); font-size:14px; color:var(--muted);
+          background:var(--zebra-bg); border-left:3px solid var(--rule);
+          padding:11px 14px; margin:18px 0; max-width:48em; }
+.lede { font-size:18px; line-height:1.55; color:var(--ink);
+        max-width:40em; margin:0 0 20px; }
+.panel { border:1px solid var(--rule); background:var(--zebra-bg);
+         padding:16px 18px; margin:18px 0; }
+.meta { font-family:var(--sans); font-size:13px; color:var(--muted);
+        margin:0 0 6px; }
+.pill { font-family:var(--sans); font-size:13px; color:var(--label);
+        border:1px solid var(--rule); border-radius:3px;
+        padding:2px 8px; background:var(--zebra-bg);
+        display:inline-block; }
+
+/* the index listing */
+.card { border-bottom:1px solid var(--rule); padding:16px 0; }
+.card h2 { font-family:var(--serif); font-size:18px; text-transform:none;
+           letter-spacing:0; color:var(--ink); border:0; padding:0;
+           margin:0 0 5px; }
+.card h2 a { color:var(--ink); text-decoration:none; }
+.card h2 a:hover { color:var(--link); text-decoration:underline; }
+.card p { margin:0; }
+
+code { font-family:var(--mono); font-size:14px; background:#f1f1ec;
+       border:1px solid var(--rule); border-radius:3px; padding:1px 5px;
+       color:var(--ink); }
+pre { font-family:var(--mono); font-size:13px; line-height:1.55;
+      background:#f6f6f1; border:1px solid var(--rule);
+      border-left:3px solid #b9b9b0; padding:13px 15px; margin:16px 0;
+      overflow-x:auto; }
+pre code { background:none; border:0; padding:0; font-size:13px; }
+
+footer { max-width:64em; margin:0 auto 42px; padding:0 54px;
+         font-family:var(--sans); font-size:13px; color:var(--desk-ink); }
+footer a { color:var(--link); }
+
+@media (max-width:760px) {
+  body { font-size:16px; }
+  main { margin:0; padding:28px 18px 36px; border-left:0; border-right:0;
+         box-shadow:none; max-width:none; }
+  footer { padding:0 18px; }
+  h1 { font-size:24px; }
+  .wrap { margin-left:-18px; margin-right:-18px; border-left:0;
+          border-right:0; }
+}
+
+@media print {
+  body { background:#fff; font-size:10.5pt; }
+  nav { display:none; }
+  main { box-shadow:none; border:0; margin:0; padding:0; max-width:none; }
+  th { position:static; }
+  tr:nth-child(even) td { background:transparent; }
+  a { color:#000; text-decoration:none; }
+  .wrap { border:1px solid #999; overflow:visible; }
+}
 </style>
 
-<link href="/assets/fonts.css" rel="stylesheet">
 </head>
 <body>
 <nav>
@@ -110,7 +230,7 @@ footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; 
 </nav>
 <main>
 
-<h1>THE SPEND-POINT TABLE</h1>
+<h1>The Spend-Point Table</h1>
 <p class="kicker">where choice is spent, and where it is only inherited</p>
 
 <p>Dominance says which site a theorem's classical dependence is responsible to. It does not say where the axiom is actually spent, and the two come apart hard.</p>
@@ -154,7 +274,7 @@ footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; 
 version 2026-08-12
 </p>
 <p class="series">
-One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a>. Standing
 measurements of what formal libraries rest on, remeasured as the libraries move.
 Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
 resolves to the current deposit.
@@ -166,7 +286,7 @@ python analysis/spendpoints.py</pre>
 <p class="note">Code and derived data: <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a>.</p>
 
 <h2>The two that carry almost everything</h2>
-<p><code>Classical.propDecidable</code> has 6,775 spenders in its subtree and <code>Classical.byContradiction</code> 1,854. Between them they account for nearly all direct spending in the library, and propDecidable's own subtree spends byContradiction 5,338 times against its own 1,540 — the decidability fallback reaches the axiom mostly through excluded middle rather than directly.</p>
+<p><code>Classical.propDecidable</code> has 6,775 spenders in its subtree and <code>Classical.byContradiction</code> 1,854. Between them they account for nearly all direct spending in the library, and propDecidable's own subtree spends byContradiction 5,338 times against its own 1,540, the decidability fallback reaches the axiom mostly through excluded middle rather than directly.</p>
 <p>Everything below them in this table is structural. A functor category instance dominates 5,271 theorems and spends nothing. Hash-map well-formedness dominates 4,899 and spends nothing. These are places classical dependence passes through, not places it originates.</p>
 
 <h2>Why the distinction changes what you would do</h2>
@@ -176,8 +296,7 @@ python analysis/spendpoints.py</pre>
 <footer>
   <p>Cite: Gonzalez, V. (2026). <em>Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21883963">10.5281/zenodo.21883963</a></p>
   <p style="margin-top:.8rem;">
-    Maintained at <a href="https://f-keys.com/gonzalgo/spend-points/">f-keys.com/gonzalgo/spend-points/</a>
-    &mdash; the home of <code>kernel &gt; sorry</code>.
+    Maintained at <a href="https://f-keys.com/gonzalgo/spend-points/">f-keys.com/gonzalgo/spend-points/</a>. The home of <code>kernel &gt; sorry</code>.
   </p>
   <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
 </footer>

@@ -15,7 +15,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/plumhud)](https://pypi.org/project/plumhud/) [![Python](https://img.shields.io/pypi/pyversions/plumhud)](https://pypi.org/project/plumhud/) [![License](https://img.shields.io/pypi/l/plumhud)](LICENSE)
 
-Miner fleet monitor — a borderless overlay HUD that sits on top of whatever
+Miner fleet monitor, a borderless overlay HUD that sits on top of whatever
 you're doing, with alerts and history.
 
 ```
@@ -38,12 +38,12 @@ not send is now `None`, renders as a dash, and is stored as NULL. "We did not
 measure it" and "it is zero" are different facts and the display says which.
 
 **Alert rules require a real measurement.** Removing the fabrication exposed
-that the rules had never been written to survive a missing value — they would
+that the rules had never been written to survive a missing value. They would
 have raised on the first `None`. A rule now stays quiet when the number never
 arrived, and still fires on genuine problems.
 
 **Your config stopped moving.** v3 wrote `plumhud_config.json` relative to the
-working directory, so launching from two folders gave you two fleets — and
+working directory, so launching from two folders gave you two fleets, and
 dropped a file containing your Discord webhook and Telegram token wherever you
 happened to be, including repositories. Everything now lives in one per-user
 directory (`plumhud where`), created owner-only. A v3 config found in the
@@ -52,7 +52,7 @@ current directory is adopted automatically.
 **One poller, two faces.** Polling moved to
 [`moonbeam-miner`](https://pypi.org/project/moonbeam-miner/), which the
 terminal tool already used. That removed the private asyncio event loop, the
-aiohttp session and its fallback path with no loss of speed — and means the
+aiohttp session and its fallback path with no loss of speed, and means the
 CLI and the HUD can never disagree about what a miner said.
 
 **Zero required dependencies** beyond the shared core. `aiohttp` and

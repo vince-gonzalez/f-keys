@@ -6,7 +6,7 @@
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://f-keys.com/gonzalgo/">
 
-<title>Axiom provenance for Lean 4 — which tactic introduced Classical.choice, and could it not have | gonzalgo</title>
+<title>Axiom provenance for Lean 4, which tactic introduced Classical.choice, and could it not have | gonzalgo</title>
 <meta name="description" content="Separates a theorem's statement dependencies from its proof dependencies, so an axiom the theorem requires stops looking like one a tactic reached for. Shortest path from any declaration to any axiom, in Lean 4 and Metamath. gonzalgo.">
 <meta name="keywords" content="axiom provenance, Lean 4, Mathlib, Classical.choice, which tactic introduced axiom, statement versus proof dependency, constructive mathematics, sorry, native_decide, Metamath, formal verification, gonzalgo">
 <meta name="author" content="Vincent Gonzalez">
@@ -17,11 +17,11 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/">
-<meta property="og:title" content="Axiom provenance for Lean 4 — which step introduced it, and could it not have">
+<meta property="og:title" content="Axiom provenance for Lean 4, which step introduced it, and could it not have">
 <meta property="og:description" content="#print axioms says a theorem depends on Classical.choice. It does not say which tactic put it there, or whether the statement required it. gonzalgo does.">
 <meta property="og:site_name" content="F-Keys">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Axiom provenance for Lean 4 — which step introduced it, and could it not have">
+<meta name="twitter:title" content="Axiom provenance for Lean 4, which step introduced it, and could it not have">
 <meta name="twitter:description" content="#print axioms says a theorem depends on Classical.choice. It does not say which tactic put it there. gonzalgo does.">
 
 <script type="application/ld+json">
@@ -133,33 +133,156 @@
 </script>
 
 <style>
-:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+/* These pages are published measurements with DOIs, and they were
+   dressed as a hacker terminal: neon green on near-black, VT323 at 68px,
+   and a CRT scanline fixed over 9,202 table cells of Mathlib data. The
+   reader arriving from a citation is an engineer or a mathematician
+   checking a number, and the styling was asking them to read a results
+   table through a simulated bad monitor.
+
+   The palette is the one the paper pages use, so the whole body of
+   evidence reads as one publication rather than two websites. Every
+   colour was computed against its own background first; the lowest pair
+   is 6.64:1 against a 4.5:1 requirement.
+
+   Prose is held to a 44em measure while tables take the full width,
+   because a 66em line is unreadable and a six-column table at 44em is
+   unusable, and these pages contain both. */
+:root {
+  --paper:#fdfdfb; --desk-bg:#e7e7e2; --band-bg:#2a2d33;
+  --ink:#1b1b1d; --muted:#55585e; --rule:#dcdcd6; --hair:#ebebe5;
+  --link:#17457f; --label:#45484e;
+  --zebra-bg:#f7f7f3; --hover-bg:#eef1f5;
+  --found:#1d5c2e; --found-bg:#eef5ef; --warn:#8a3030;
+  --band-ink:#e9eaec; --band-dim:#b9bcc2; --desk-ink:#4a4d53;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:Georgia,"Times New Roman","Liberation Serif",serif;
+}
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; line-height:1.65; overflow-x:hidden; }
-body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
-nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,0.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
-.logo { font-family:'VT323',monospace; font-weight: 400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
-nav a { color:var(--dim); text-decoration:none; }
-nav a:hover { color:var(--green); }
-main { max-width:900px; margin:0 auto; padding:7rem 1.5rem 4rem; }
-h1 { font-family:'VT323',monospace; font-weight: 400; font-size:clamp(44px,9vw,86px); color:var(--green); letter-spacing:5px; line-height:1; }
-.kicker { font-family:'VT323',monospace; font-weight: 400; font-size:clamp(22px,4vw,34px); color:var(--cyan); letter-spacing:3px; margin:.6rem 0 1.4rem; }
-h2 { font-family:'VT323',monospace; font-weight: 400; font-size:1.9rem; color:var(--green); margin:3rem 0 1rem; letter-spacing:2px; }
-h3 { font-family:'VT323',monospace; font-weight: 400; font-size:1.35rem; color:var(--cyan); margin:1.8rem 0 .4rem; }
-p { margin-bottom:1rem; }
-a { color:var(--green); }
-pre { background:#0d120d; border:1px solid var(--border); padding:1.1rem; overflow-x:auto; font-size:.85rem; margin:1rem 0; color:var(--text); }
-code { color:var(--cyan); }
-.lede { font-size:1.15rem; color:var(--text); }
-.pill { display:inline-block; border:1px solid var(--border); padding:.3rem .8rem; margin:.2rem .3rem .2rem 0; font-size:.85rem; color:var(--dim); }
-.panel { background:var(--panel); border:1px solid var(--border); padding:1.5rem; margin:1.5rem 0; }
-table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem; }
-td,th { border-bottom:1px solid var(--border); padding:.5rem .4rem; text-align:left; }
-th { color:var(--green); }
-footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+
+body {
+  background:var(--desk-bg); color:var(--ink);
+  font-family:var(--serif); font-size:16.5px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* the running head */
+nav {
+  background:var(--band-bg); color:var(--band-ink);
+  padding:10px 22px; display:flex; align-items:center;
+  justify-content:space-between; gap:1.5rem;
+  font-family:var(--sans); font-size:14px;
+}
+.logo { color:var(--band-ink); font-weight:700; letter-spacing:.12em;
+        text-decoration:none; font-family:var(--sans); font-size:14px; }
+nav a { color:var(--band-dim); text-decoration:none; }
+nav a:hover { color:var(--band-ink); text-decoration:underline; }
+
+/* the sheet */
+main {
+  background:var(--paper); max-width:64em; margin:30px auto 46px;
+  padding:48px 54px 56px; border:1px solid var(--rule);
+  box-shadow:0 1px 3px rgba(0,0,0,.09), 0 10px 26px rgba(0,0,0,.07);
+}
+
+h1 { font-size:30px; line-height:1.24; font-weight:700;
+     letter-spacing:-.005em; max-width:34em; }
+.kicker { font-family:var(--sans); font-size:13px; letter-spacing:.14em;
+          text-transform:uppercase; color:var(--label);
+          margin:9px 0 22px; max-width:50em; }
+h2 { font-family:var(--sans); font-size:15px; font-weight:700;
+     letter-spacing:.07em; text-transform:uppercase; color:var(--label);
+     margin:34px 0 10px; padding-bottom:5px;
+     border-bottom:1px solid var(--rule); }
+h3 { font-family:var(--serif); font-size:18px; font-weight:700;
+     margin:24px 0 7px; }
+p { margin:0 0 15px; max-width:44em; }
+hr { border:0; border-top:1px solid var(--rule); margin:28px 0; }
+
+a { color:var(--link); text-decoration:underline; text-underline-offset:2px; }
+strong { font-weight:700; color:var(--ink); }
+em { font-style:italic; }
+
+/* the data */
+.wrap { overflow-x:auto; border:1px solid var(--rule); margin:20px 0;
+        background:var(--paper); }
+table { width:100%; border-collapse:collapse; font-family:var(--sans);
+        font-size:14px; min-width:720px; }
+th { font-size:13px; font-weight:700; letter-spacing:.05em;
+     text-transform:uppercase; color:var(--label); text-align:left;
+     padding:9px 11px; white-space:nowrap; background:var(--zebra-bg);
+     border-bottom:1px solid var(--rule); position:sticky; top:0; }
+td { padding:7px 11px; border-bottom:1px solid var(--hair);
+     vertical-align:top; }
+td, th { line-height:1.45; }
+tr:nth-child(even) td { background:var(--zebra-bg); }
+tr:hover td { background:var(--hover-bg); }
+td.num, td.n { text-align:right; font-family:var(--mono); font-size:13px;
+               font-variant-numeric:tabular-nums; white-space:nowrap; }
+td.found { color:var(--found); background:var(--found-bg); }
+tr:hover td.found { background:#e4efe6; }
+
+/* asides */
+.note { font-family:var(--sans); font-size:14px; color:var(--muted);
+        max-width:44em; }
+.series { font-family:var(--sans); font-size:14px; color:var(--muted);
+          background:var(--zebra-bg); border-left:3px solid var(--rule);
+          padding:11px 14px; margin:18px 0; max-width:48em; }
+.lede { font-size:18px; line-height:1.55; color:var(--ink);
+        max-width:40em; margin:0 0 20px; }
+.panel { border:1px solid var(--rule); background:var(--zebra-bg);
+         padding:16px 18px; margin:18px 0; }
+.meta { font-family:var(--sans); font-size:13px; color:var(--muted);
+        margin:0 0 6px; }
+.pill { font-family:var(--sans); font-size:13px; color:var(--label);
+        border:1px solid var(--rule); border-radius:3px;
+        padding:2px 8px; background:var(--zebra-bg);
+        display:inline-block; }
+
+/* the index listing */
+.card { border-bottom:1px solid var(--rule); padding:16px 0; }
+.card h2 { font-family:var(--serif); font-size:18px; text-transform:none;
+           letter-spacing:0; color:var(--ink); border:0; padding:0;
+           margin:0 0 5px; }
+.card h2 a { color:var(--ink); text-decoration:none; }
+.card h2 a:hover { color:var(--link); text-decoration:underline; }
+.card p { margin:0; }
+
+code { font-family:var(--mono); font-size:14px; background:#f1f1ec;
+       border:1px solid var(--rule); border-radius:3px; padding:1px 5px;
+       color:var(--ink); }
+pre { font-family:var(--mono); font-size:13px; line-height:1.55;
+      background:#f6f6f1; border:1px solid var(--rule);
+      border-left:3px solid #b9b9b0; padding:13px 15px; margin:16px 0;
+      overflow-x:auto; }
+pre code { background:none; border:0; padding:0; font-size:13px; }
+
+footer { max-width:64em; margin:0 auto 42px; padding:0 54px;
+         font-family:var(--sans); font-size:13px; color:var(--desk-ink); }
+footer a { color:var(--link); }
+
+@media (max-width:760px) {
+  body { font-size:16px; }
+  main { margin:0; padding:28px 18px 36px; border-left:0; border-right:0;
+         box-shadow:none; max-width:none; }
+  footer { padding:0 18px; }
+  h1 { font-size:24px; }
+  .wrap { margin-left:-18px; margin-right:-18px; border-left:0;
+          border-right:0; }
+}
+
+@media print {
+  body { background:#fff; font-size:10.5pt; }
+  nav { display:none; }
+  main { box-shadow:none; border:0; margin:0; padding:0; max-width:none; }
+  th { position:static; }
+  tr:nth-child(even) td { background:transparent; }
+  a { color:#000; text-decoration:none; }
+  .wrap { border:1px solid #999; overflow:visible; }
+}
 </style>
 
-<link href="/assets/fonts.css" rel="stylesheet">
 </head>
 <body>
 
@@ -174,7 +297,7 @@ footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; co
 
 <main>
 
-<h1>AXIOM PROVENANCE<br>FOR LEAN 4</h1>
+<h1>Axiom provenance<br>for Lean 4</h1>
 <p class="kicker">gonzalgo &nbsp;·&nbsp; which step introduced it, and could it not have</p>
 
 <p class="lede">
@@ -232,7 +355,7 @@ a fixable one.
 <p>
 gonzalgo separates a theorem's <strong>statement</strong> dependencies from its
 <strong>proof</strong> dependencies, so those two cases stop looking identical.
-Across 9,169 machine-generated Lean proofs, 92.7% depend on choice — but 86.1%
+Across 9,169 machine-generated Lean proofs, 92.7% depend on choice, but 86.1%
 of them are fixed by what the theorems say, and only 6.5% are avoidable. Without
 the split you would report the first number and mean nothing by it.
 </p>
@@ -243,7 +366,7 @@ the split you would report the first number and mean nothing by it.
 <p>
 <code>gonzalgo why</code> gives the shortest path from a declaration to an
 axiom, labelling every step a <em>statement</em> dependency or a <em>proof</em>
-dependency — so you can see where it entered and whether it can be rerouted.
+dependency, so you can see where it entered and whether it can be rerouted.
 This is how the <code>omega</code> and <code>norm_num</code> defects in the
 papers were found.
 </p>
@@ -251,7 +374,7 @@ papers were found.
 <h3>Could this theorem be stated without the axiom of choice?</h3>
 <p>
 <code>gonzalgo eligible</code> computes the band whose statements are
-choice-free while their proofs are not — an upper bound on what could be
+choice-free while their proofs are not, an upper bound on what could be
 removed. For Mathlib that is <strong>13.1%</strong> of theorems, against a
 figure of 55% that circulates without a measurement behind it.
 </p>
@@ -273,7 +396,7 @@ anywhere upstream, however far, and
 when one does.
 </p>
 <p>
-For that job alone — an allowlist gate in CI, nothing else — the Lean community
+For that job alone, an allowlist gate in CI, nothing else, the Lean community
 maintains
 <a href="https://github.com/leanprover-community/axiom-audit">axiom-audit</a>,
 which is Lean-native and needs no Python. Use it if a pass/fail gate is all you
@@ -283,7 +406,7 @@ want. gonzalgo is for the questions above it.
 <h3>Does my project use <code>native_decide</code> anywhere?</h3>
 <p>
 A <code>native_decide</code> result is obtained by compiling and running code and
-believing the answer — the compiler and runtime are trusted, not the kernel, and
+believing the answer, the compiler and runtime are trusted, not the kernel, and
 soundness bugs have been found there. gonzalgo reports the axioms it emits and
 how many theorems inherit them.
 </p>
@@ -292,7 +415,7 @@ how many theorems inherit them.
 <p>
 <code>#print axioms</code> answers <em>whether</em>. <code>gonzalgo why</code>
 gives the shortest path from a declaration to an axiom and labels every step as a
-statement dependency or a proof dependency — so you can see which step introduced
+statement dependency or a proof dependency, so you can see which step introduced
 it, and whether it can be rerouted.
 </p>
 
@@ -364,7 +487,7 @@ compared under identical definitions rather than by analogy.
   <p>
     gonzalgo is built and maintained by <strong>Vincent Gonzalez</strong>
     (<a href="https://orcid.org/0009-0005-3640-014X">ORCID</a>) and lives at
-    <a href="https://f-keys.com/gonzalgo/">f-keys.com/gonzalgo</a> — the home of
+    <a href="https://f-keys.com/gonzalgo/">f-keys.com/gonzalgo</a>. The home of
     <code>kernel &gt; sorry</code>.
   </p>
   <p style="margin-top:1rem;">

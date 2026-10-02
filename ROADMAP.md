@@ -17,7 +17,7 @@ By that test, 8 of 22 products are not shipped.
 
 ---
 
-## 1. Portfolio entries — 10 products have no page at all
+## 1. Portfolio entries: 10 products have no page at all
 
 f-keys.com lists 22 products. Twelve have a real page. **Ten are a table row
 whose link goes straight off-site**, so the site never makes a case for them.
@@ -55,13 +55,13 @@ schema (already done).
 
 ---
 
-## 2. Repositories — 8 products have none of their own
+## 2. Repositories: 8 products have none of their own
 
 | Product | State now | Action |
 |---|---|---|
 | **Key-J** | no repo; ships installers, winget, PyPI | new public repo, move `keyj/` + `keyj-cli/` |
 | **PlumHUD** | archived repo; live on PyPI | unarchive or recreate, repoint `project.urls` |
-| **Moonbeam** | **two live sources** — `Moonbeam-NerdMiner` unarchived *and* `f-keys/moonbeam` at 1.0.2 | pick one, redirect the other |
+| **Moonbeam** | **two live sources**: `Moonbeam-NerdMiner` unarchived *and* `f-keys/moonbeam` at 1.0.2 | pick one, redirect the other |
 | **FunDoge** | **live site served from an archived repo** | unarchive; cannot ship a fix as-is |
 | Pixel Staff | archived repo, code in monorepo | decide: own repo or stay |
 | LeadSeer | archived repo, code in monorepo | decide |
@@ -83,7 +83,7 @@ schema (already done).
 
 ---
 
-## 3. Icons — 1 of 22 products has one
+## 3. Icons: 1 of 22 products has one
 
 Only RemapWrap has a mark (`icon.ico`, `logo.png`, `logo-256.png`).
 
@@ -94,7 +94,7 @@ Only RemapWrap has a mark (`icon.ico`, `logo.png`, `logo-256.png`).
 
 ---
 
-## 4. The properties — measured 2026-08-22
+## 4. The properties: measured 2026-08-22
 
 | Property | Missing |
 |---|---|
@@ -109,14 +109,14 @@ Only RemapWrap has a mark (`icon.ico`, `logo.png`, `logo-256.png`).
       Staff are installable-web-app shaped and none of them can be installed.
 - [ ] **modulign.org is the academic-legitimacy play and has no robots.txt,
       no sitemap and no llms.txt at all.**
-- [ ] The two Discord Activities have no landing layer — a browser visitor
+- [ ] The two Discord Activities have no landing layer, a browser visitor
       gets the game shell and search engines get nothing.
 
 ---
 
 ## 5. Documentation and house standards
 
-- [ ] **6 product directories have no README** — `keyj`, `pixelstaff`, `qv`,
+- [ ] **6 product directories have no README**: `keyj`, `pixelstaff`, `qv`,
       `micdrop`, `wikipolish`, `leadseer`, against the house standard that
       every repo opens with the banner.
 - [ ] `Docs.html` is capital-D at the site root. Predictable URLs matter to
@@ -125,7 +125,7 @@ Only RemapWrap has a mark (`icon.ico`, `logo.png`, `logo-256.png`).
 
 ---
 
-## 6. Agent readiness — done, and what remains
+## 6. Agent readiness: done, and what remains
 
 Done and live: SSR homepage, contact/privacy/404, JSON-LD, self-hosted fonts,
 `llms.txt` with when-to-use, `openapi.json` with 31 inline typed schemas,
@@ -168,12 +168,12 @@ walled off from cross-promotion.
 
 ## Suggested order
 
-1. **Key-J end to end** — repo, icon, screenshot, og card, full entry. It is
+1. **Key-J end to end**: repo, icon, screenshot, og card, full entry. It is
    the most distributed and least supported thing here, and it becomes the
    template.
-2. **The cheap sitewide sweep** — favicons, manifests, `security.txt`,
+2. **The cheap sitewide sweep**: favicons, manifests, `security.txt`,
    modulign.org's robots/sitemap/llms. Hours, not days, and it closes a whole
    column of the table above.
-3. **Repos and licences** — the four unlicensed, the two Moonbeams, the
+3. **Repos and licences**, the four unlicensed, the two Moonbeams, the
    archived repo serving a live site.
 4. **The other 21 product entries**, template first.

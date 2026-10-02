@@ -1,4 +1,4 @@
-# Key-J — Musical Keystroke Studio
+# Key-J: Musical Keystroke Studio
 ### Every key you press plays a musical note. Works in any app on your PC.
 
 ---
@@ -16,7 +16,7 @@ Chrome, a game, or anything else on your PC.
 
 ## Requirements
 - **Windows 10 or 11** (Mac/Linux also work with minor tweaks — see bottom)
-- **Node.js** (v18 or higher) — download from https://nodejs.org
+- **Node.js** (v18 or higher): download from https://nodejs.org
   - Just install it with default settings, that's all
 - **Git** (optional, only if you cloned this from a repo)
 
@@ -58,34 +58,34 @@ Chrome, a game, or anything else on your PC.
   then run `npm start` again.
 - Toggle it OFF any time to go back to window-only mode
 
-### Left Panel — Key Map
+### Left Panel: Key Map
 - Shows every key on your keyboard and what note it's bound to
 - **Click any key row** to re-assign it to any note you want
 - Use the **Scale** buttons to change the musical scale (Major, Minor, Blues, etc.)
 - Use **Octave +/−** to shift all notes up or down by an octave
 
-### Right Panel — Sound Controls
+### Right Panel: Sound Controls
 
 **Play Styles:**
-- **Normal** — clean attack and release
-- **Staccato** — sharp, punchy, cut short automatically
-- **Vibrato** — pitch wobbles up and down (LFO)
-- **Tremolo** — volume flutters rhythmically
-- **Arpeggio** — plays a chord spread (root, 3rd, 5th, octave) on each key
-- **Legato** — extra-smooth crossfade between notes
+- **Normal**: clean attack and release
+- **Staccato**: sharp, punchy, cut short automatically
+- **Vibrato**: pitch wobbles up and down (LFO)
+- **Tremolo**: volume flutters rhythmically
+- **Arpeggio**: plays a chord spread (root, 3rd, 5th, octave) on each key
+- **Legato**: extra-smooth crossfade between notes
 
 **Waveform:**
-- **Sine** — smooth, pure tone (default)
-- **Saw** — bright, buzzy
-- **Square** — hollow, retro
-- **Triangle** — soft, flute-like
+- **Sine**: smooth, pure tone (default)
+- **Saw**: bright, buzzy
+- **Square**: hollow, retro
+- **Triangle**: soft, flute-like
 
 **Sliders:**
-- **Attack** — how fast the note fades in (ms)
-- **Release** — how long the note rings after you let go (ms)
-- **Volume** — overall output level
-- **Reverb** — add room/hall echo
-- **Detune** — shift pitch up or down in semitones
+- **Attack**: how fast the note fades in (ms)
+- **Release**: how long the note rings after you let go (ms)
+- **Volume**: overall output level
+- **Reverb**: add room/hall echo
+- **Detune**: shift pitch up or down in semitones
 
 ### Staff (Center Top)
 - Shows a treble clef staff that draws your notes in real time as you type
@@ -93,15 +93,15 @@ Chrome, a game, or anything else on your PC.
 - Scrolls automatically as your session grows
 
 ### Visualizer (Center Main)
-- **Wave** — real-time waveform of what you're playing
-- **Roll** — piano-roll style scrolling view of notes over time
-- **FFT** — frequency spectrum analyzer
+- **Wave**: real-time waveform of what you're playing
+- **Roll**: piano-roll style scrolling view of notes over time
+- **FFT**: frequency spectrum analyzer
 
 ### Bottom Bar
-- **⏺ Rec** — starts precise timing for your session (important for export timing)
-- **▶ Play** — plays back everything you've typed so far
-- **Export WAV** — renders and downloads your full session as a WAV file
-- **✕ Clear** — wipes the session and starts fresh
+- **⏺ Rec**: starts precise timing for your session (important for export timing)
+- **▶ Play**: plays back everything you've typed so far
+- **Export WAV**: renders and downloads your full session as a WAV file
+- **✕ Clear**: wipes the session and starts fresh
 
 ---
 
@@ -110,7 +110,7 @@ Chrome, a game, or anything else on your PC.
 1. Click **Export WAV** at any time
 2. Give it a filename
 3. Choose whether to normalize the audio (recommended: Yes)
-4. Click **Download** — a `.wav` file saves to your Downloads folder
+4. Click **Download**, a `.wav` file saves to your Downloads folder
 
 **To convert to MP3:**
 - Free option: Download Audacity (audacityteam.org), open the WAV, File → Export → MP3
@@ -128,7 +128,7 @@ When you're ready to release or share Key-J:
    ```
    npm run build
    ```
-3. Find the installer in the `dist/` folder — it's a standard Windows NSIS installer
+3. Find the installer in the `dist/` folder. It's a standard Windows NSIS installer
 
 ---
 
