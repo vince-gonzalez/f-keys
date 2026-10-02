@@ -12,11 +12,11 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 Founder, F-Keys Creative LLC. Live products include an accessibility platform distributed across eight channels, an axiom-provenance tool for two proof assistants, and a logistics training simulator licensed to institutions. Architecture, both ends, database, deployment, documentation and technical SEO.
 
-## Independent Products — F-Keys LLC
+## Independent Products. F-Keys LLC
 
 ### OpticQuiz · opticquiz.com
 
-Colour-vision accessibility platform. One engine — Machado 2009 simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection — shipped across eight distribution channels with no duplicated logic: npm, PyPI, REST API, VS Code extension, Open VSX, Chrome MV3 extension, GitHub Action, MCP server. JavaScript and Python implementations verified byte-identical to six decimal places.
+Colour-vision accessibility platform. One engine. Machado 2009 simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection, shipped across eight distribution channels with no duplicated logic: npm, PyPI, REST API, VS Code extension, Open VSX, Chrome MV3 extension, GitHub Action, MCP server. JavaScript and Python implementations verified byte-identical to six decimal places.
 
 ### gonzalgo · f-keys.com/gonzalgo
 
@@ -42,12 +42,12 @@ poticas.com · 5best2buy.com · RemapWrap · TipStreams · DogeFundMe · PROMPT 
 
 ## Technical
 
-- **Languages** — JavaScript (ES5–ES2022), Python, C#/.NET, SQL, GLSL, HTML, CSS
-- **Backend** — Node.js, Supabase (PostgreSQL, RLS, auth, edge functions), REST APIs, JSON and CSV pipelines
-- **Infrastructure** — Git/GitHub, GitHub Actions, GitHub Pages, Cloudflare (DNS, CDN, Pages, Workers, D1), Linux, Raspberry Pi, SSH
-- **AI & formal** — Local LLM deployment (Ollama, Open WebUI), prompt and context engineering, evaluation pipelines, Lean 4 proof auditing, Model Context Protocol
-- **Frontend** — WCAG 2.1 AA, responsive design, progressive enhancement, WebGL, Canvas 2D, Manifest V3 extensions, VS Code extension API
-- **Docs & search** — Technical SEO, Schema.org, SOP development, compliance documentation, DOI publication
+- **Languages**: JavaScript (ES5–ES2022), Python, C#/.NET, SQL, GLSL, HTML, CSS
+- **Backend**: Node.js, Supabase (PostgreSQL, RLS, auth, edge functions), REST APIs, JSON and CSV pipelines
+- **Infrastructure**: Git/GitHub, GitHub Actions, GitHub Pages, Cloudflare (DNS, CDN, Pages, Workers, D1), Linux, Raspberry Pi, SSH
+- **AI & formal**: Local LLM deployment (Ollama, Open WebUI), prompt and context engineering, evaluation pipelines, Lean 4 proof auditing, Model Context Protocol
+- **Frontend**: WCAG 2.1 AA, responsive design, progressive enhancement, WebGL, Canvas 2D, Manifest V3 extensions, VS Code extension API
+- **Docs & search**: Technical SEO, Schema.org, SOP development, compliance documentation, DOI publication
 
 ## Professional Experience
 
@@ -59,4 +59,4 @@ poticas.com · 5best2buy.com · RemapWrap · TipStreams · DogeFundMe · PROMPT 
 
 ## Education
 
-Ohio University — BA Pre-Law Philosophy, Minor in History, 2012. Gateway Scholarship Award.
+Ohio University. BA Pre-Law Philosophy, Minor in History, 2012. Gateway Scholarship Award.

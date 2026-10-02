@@ -10,7 +10,7 @@ Answers one question: which businesses near you have no website at all. It is ar
 
 ## What it does
 
-Search a place and a trade — plumbers in Toledo, salons in Sarasota — and
+Search a place and a trade — plumbers in Toledo, salons in Sarasota, and
 LeadSeer asks the Google Places API for every match, then keeps only the ones whose record
 has no website on it.
 

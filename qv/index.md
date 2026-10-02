@@ -17,7 +17,7 @@ the moment anyone anywhere votes.
 ## The ballot comes to you
 
 Subscribe to channels — #food, #politics,
-#ohio, whatever exists — and new ballots arrive as notifications. On
+#ohio, whatever exists, and new ballots arrive as notifications. On
 Chrome, Edge, Firefox and Android **you vote from the notification's own buttons without
 opening anything**. That is the part that makes it different from a poll: answering costs
 one tap from wherever you already were.

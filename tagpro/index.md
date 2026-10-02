@@ -17,7 +17,7 @@ counter-tag. And watch the edge: dash out of bounds and you tag yourself.
 ## Reads, not proximity
 
 It is not click-when-you-are-close. Both players have a commit — the lunge and the
-dash — and each of them costs something, so the round turns on which one you spend
+dash, and each of them costs something, so the round turns on which one you spend
 first. Whoever is holding IT when the 90-second clock hits zero loses it.
 
 ## The room calls it out

@@ -46,7 +46,7 @@ nobody downloads the alpha expecting them.
 
 ## The company is named after this
 
-RemapWrap began as **F-Keys** — an extra row of keys, on glass you already own.
+RemapWrap began as **F-Keys**. An extra row of keys, on glass you already own.
 The name outgrew the product and became the company. The product then went missing for five
 months, surviving in a single zip file in a folder called "zip to sort".
 

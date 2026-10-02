@@ -26,17 +26,17 @@ Operations Supervisor at FedEx Ground since May 2023; Outbound, Sorter and Mento
 ### Operations Manager · Columbus, OH · 2022–2025
 
 - Title reclassified company-wide; lateral transfer to Punta Gorda in 2025.
-- Hub Certification — first achieved in the history of COLO/432, FY25, a standard the hub had never previously met.
+- Hub Certification. First achieved in the history of COLO/432, FY25, a standard the hub had never previously met.
 - Bravo Zulu Award 2025 · Purple Promise of the Month 2024.
 
 ### Package Handler · Columbus, OH · 2020–2022
 
-- Package Handler of the Month 2022 (×2). Promoted 2022 — the loading knowledge behind LOCK IN comes from this floor.
+- Package Handler of the Month 2022 (×2). Promoted 2022. The loading knowledge behind LOCK IN comes from this floor.
 
 ## Selected Process & Quality Work
 
 - **State-adopted procedure.** Designed a formal request-documentation procedure at Giant Eagle's State Liquor Agency that Ohio later standardised statewide as its lottery system.
-- **Hub Certification.** First achieved in the history of COLO/432, FY25 — a standard the hub had never previously met.
+- **Hub Certification.** First achieved in the history of COLO/432, FY25. A standard the hub had never previously met.
 - **LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally live as undocumented dock knowledge into a scored training simulator with logins, an institutional dashboard and a defined pilot programme.
 - **Technical and professional content.** User manuals, SOPs, academic writing in mathematics, philosophy and history, and full websites and applications.
 
@@ -53,27 +53,27 @@ Operations Supervisor at FedEx Ground since May 2023; Outbound, Sorter and Mento
 
 ## Certifications & Recognition
 
-- First Aid / CPR — American Heart Association, current through 2028.
-- Responsive Web Design and JavaScript — freeCodeCamp, 2022.
+- First Aid / CPR. American Heart Association, current through 2028.
+- Responsive Web Design and JavaScript. FreeCodeCamp, 2022.
 - Google verified publisher · Microsoft verified publisher.
 - Several hundred documented corporate training hours across leadership development, orientation facilitation and dangerous goods handling.
 
 ## Independent Products
 
-- **OpticQuiz · opticquiz.com** — Colour-vision accessibility platform.
-- **gonzalgo · f-keys.com/gonzalgo** — Axiom provenance for Lean 4 and Metamath.
-- **Trailer Load / LOCK IN · trailer-load.com** — Freight-loading training simulator built from dock experience.
-- **Also live** — poticas.
+- **OpticQuiz · opticquiz.com**: Colour-vision accessibility platform.
+- **gonzalgo · f-keys.com/gonzalgo**: Axiom provenance for Lean 4 and Metamath.
+- **Trailer Load / LOCK IN · trailer-load.com**: Freight-loading training simulator built from dock experience.
+- **Also live**: poticas.
 
 ## Education
 
-Ohio University — BA Pre-Law Philosophy, Minor in History, 2012. Gateway Scholarship Award.
+Ohio University. BA Pre-Law Philosophy, Minor in History, 2012. Gateway Scholarship Award.
 
 ## Technical
 
-- **Languages** — JavaScript (ES5–ES2022), Python, C#/.NET, SQL, GLSL, HTML, CSS
-- **Backend** — Node.js, Supabase (PostgreSQL, RLS, auth, edge functions), REST APIs, JSON and CSV pipelines
-- **Infrastructure** — Git/GitHub, GitHub Actions, GitHub Pages, Cloudflare (DNS, CDN, Pages, Workers, D1), Linux, Raspberry Pi, SSH
-- **AI & formal** — Local LLM deployment (Ollama, Open WebUI), prompt and context engineering, evaluation pipelines, Lean 4 proof auditing, Model Context Protocol
-- **Frontend** — WCAG 2.1 AA, responsive design, progressive enhancement, WebGL, Canvas 2D, Manifest V3 extensions, VS Code extension API
-- **Docs & search** — Technical SEO, Schema.org, SOP development, compliance documentation, DOI publication
+- **Languages**: JavaScript (ES5–ES2022), Python, C#/.NET, SQL, GLSL, HTML, CSS
+- **Backend**: Node.js, Supabase (PostgreSQL, RLS, auth, edge functions), REST APIs, JSON and CSV pipelines
+- **Infrastructure**: Git/GitHub, GitHub Actions, GitHub Pages, Cloudflare (DNS, CDN, Pages, Workers, D1), Linux, Raspberry Pi, SSH
+- **AI & formal**: Local LLM deployment (Ollama, Open WebUI), prompt and context engineering, evaluation pipelines, Lean 4 proof auditing, Model Context Protocol
+- **Frontend**: WCAG 2.1 AA, responsive design, progressive enhancement, WebGL, Canvas 2D, Manifest V3 extensions, VS Code extension API
+- **Docs & search**: Technical SEO, Schema.org, SOP development, compliance documentation, DOI publication

@@ -24,7 +24,7 @@ same thing.
 
 Most classification arguments are really arguments about which axis somebody
 is standing on. Once the axes are named and an observation has coordinates on
-each, the disagreement either resolves or becomes a specific one — and a
+each, the disagreement either resolves or becomes a specific one, and a
 specific disagreement is worth having.
 
 ## Where the work is

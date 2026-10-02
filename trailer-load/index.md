@@ -24,7 +24,7 @@ crush one nobody paid for.
 
 Free to play. Licensed separately to institutions that want it for training,
 because a training department wants an invoice, a contact and something that
-will still be there next year — and that is a different arrangement from
+will still be there next year, and that is a different arrangement from
 a free browser game.
 
 ## How it works

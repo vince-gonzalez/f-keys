@@ -11,7 +11,7 @@ Sixteen vision tests that run entirely in your browser, and a colour-accessibili
 ## What it is
 
 Sixteen vision tests that run in the browser — acuity charts, colour
-vision, contrast — and a colour-accessibility toolkit for people building
+vision, contrast, and a colour-accessibility toolkit for people building
 things other people have to look at.
 
 Nothing is uploaded. The tests run on your machine, which is the only

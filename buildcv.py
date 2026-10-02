@@ -65,12 +65,12 @@ FEDEX = [
     ]),
     ("Operations Manager · Columbus, OH · 2022–2025", [
         "Title reclassified company-wide; lateral transfer to Punta Gorda in 2025.",
-        "Hub Certification — first achieved in the history of COLO/432, FY25, a "
+        "Hub Certification. First achieved in the history of COLO/432, FY25, a "
         "standard the hub had never previously met.",
         "Bravo Zulu Award 2025 · Purple Promise of the Month 2024.",
     ]),
     ("Package Handler · Columbus, OH · 2020–2022", [
-        "Package Handler of the Month 2022 (×2). Promoted 2022 — the loading "
+        "Package Handler of the Month 2022 (×2). Promoted 2022. The loading "
         "knowledge behind LOCK IN comes from this floor.",
     ]),
 ]
@@ -93,8 +93,8 @@ EARLIER = [
 
 PRODUCTS = [
     ("OpticQuiz · opticquiz.com",
-     "Colour-vision accessibility platform. One engine — Machado 2009 "
-     "simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection — "
+     "Colour-vision accessibility platform. One engine. Machado 2009 "
+     "simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection, "
      "shipped across eight distribution channels with no duplicated logic: npm, "
      "PyPI, REST API, VS Code extension, Open VSX, Chrome MV3 extension, GitHub "
      "Action, MCP server. JavaScript and Python implementations verified "
@@ -116,23 +116,23 @@ PRODUCTS = [
 ]
 
 RESEARCH = [
-    "Where Formal Libraries Spend Their Axioms — axiom use measured across six "
+    "Where Formal Libraries Spend Their Axioms. Axiom use measured across six "
     "libraries and two proof systems by one program. Located an avoidable "
     "classical dependency in Lean's `omega` and computed a 13.1% ceiling on "
     "removable classical dependence in Mathlib.",
-    "Which Constant Is Responsible? — dominator analysis over 766,564 constants "
+    "Which Constant Is Responsible?. Dominator analysis over 766,564 constants "
     "showing that reachability overstates responsibility by 58×, and that 60.1% "
     "of classically dependent theorems have no responsible constant at all.",
-    "Why Tactic-Level Rates Cannot Attribute Classical Dependencies — a negative "
+    "Why Tactic-Level Rates Cannot Attribute Classical Dependencies. A negative "
     "methodological result with known-negative calibration across four libraries.",
     "Eligibility Discriminates Among Theorems and Not Among the Constants They "
-    "Rest On — where the statement/proof measure stops working, and why.",
-    "A Procedural Method for Generating Pseudoisochromatic Plates — DOI "
+    "Rest On. Where the statement/proof measure stops working, and why.",
+    "A Procedural Method for Generating Pseudoisochromatic Plates. DOI "
     "10.5281/zenodo.21310578. Reported the tritan palette's ~53° off-axis "
     "deviation as a limitation rather than correcting it silently.",
-    "Potica in America — argues from community cookbooks, fraternal "
+    "Potica in America. Argues from community cookbooks, fraternal "
     "publications and bakery archives.",
-    "Modulign / DAG-OR series — a dimensional address grammar for observable "
+    "Modulign / DAG-OR series. A dimensional address grammar for observable "
     "reality, including The Classification Deficit on Article 50 of the EU AI Act.",
 ]
 
@@ -166,14 +166,14 @@ TECH = [
 ]
 
 CERTS = [
-    "First Aid / CPR — American Heart Association, current through 2028.",
-    "Responsive Web Design and JavaScript — freeCodeCamp, 2022.",
+    "First Aid / CPR. American Heart Association, current through 2028.",
+    "Responsive Web Design and JavaScript. FreeCodeCamp, 2022.",
     "Google verified publisher · Microsoft verified publisher.",
     "Several hundred documented corporate training hours across leadership "
     "development, orientation facilitation and dangerous goods handling.",
 ]
 
-EDU = ("Ohio University — BA Pre-Law Philosophy, Minor in History, 2012. "
+EDU = ("Ohio University. BA Pre-Law Philosophy, Minor in History, 2012. "
        "Gateway Scholarship Award.")
 
 # ---------------------------------------------------------------- variants
@@ -226,7 +226,7 @@ SECTION_TITLES = {
     "process": "Selected Process & Quality Work",
     "earlier": "Earlier Experience",
     "certs": "Certifications & Recognition",
-    "products": "Independent Products — F-Keys LLC",
+    "products": "Independent Products. F-Keys LLC",
     "products_brief": "Independent Products",
     "research": "Published Research",
     "research_brief": "Published Research",
@@ -240,7 +240,7 @@ PROCESS = [
     "**State-adopted procedure.** Designed a formal request-documentation "
     "procedure at Giant Eagle's State Liquor Agency that Ohio later "
     "standardised statewide as its lottery system.",
-    "**Hub Certification.** First achieved in the history of COLO/432, FY25 — a "
+    "**Hub Certification.** First achieved in the history of COLO/432, FY25. A "
     "standard the hub had never previously met.",
     "**LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally "
     "live as undocumented dock knowledge into a scored training simulator with "
@@ -282,22 +282,22 @@ def md_section(key: str) -> list[str]:
             o += [f"### {head}", "", body, ""]
     elif key == "products_brief":
         for head, body in PRODUCTS[:3]:
-            o += [f"- **{head}** — {body.split('.')[0]}."]
-        o += ["- **Also live** — " + PRODUCTS[3][1].split(".")[0] + ".", ""]
+            o += [f"- **{head}**: {body.split('.')[0]}."]
+        o += ["- **Also live**: " + PRODUCTS[3][1].split(".")[0] + ".", ""]
     elif key == "research":
         o += [f"{DEPOSITS} deposited works · ORCID 0009-0005-3640-014X · "
               "all open access", ""]
         o += [f"- {r}" for r in RESEARCH] + [""]
     elif key == "research_brief":
         o += [f"{DEPOSITS} deposited works · ORCID 0009-0005-3640-014X", ""]
-        o += [f"- {r.split(' — ')[0]}" for r in RESEARCH[:5]] + [""]
+        o += [f"- {r.split('. ')[0]}" for r in RESEARCH[:5]] + [""]
     elif key == "writing":
         o += [f"- {w}" for w in WRITING] + [""]
     elif key == "writing_brief":
         o += [f"- {w}" for w in WRITING[:3]] + [""]
     elif key == "tech":
         for label, body in TECH:
-            o.append(f"- **{label}** — {body}")
+            o.append(f"- **{label}**: {body}")
         o.append("")
     elif key == "edu":
         o += [EDU, ""]
@@ -405,7 +405,7 @@ for key, cfg in V.items():
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="googlebot" content="noindex, nofollow">
-<title>V. Gonzalez — {key} CV</title>
+<title>V. Gonzalez, {key} CV</title>
 <link rel="stylesheet" href="/assets/fonts.css">
 <style>
 {CSS}
@@ -413,7 +413,7 @@ for key, cfg in V.items():
 </head>
 <body>
 <main>
-<div class="note">Unlisted — not indexed, not in the sitemap, linked from nowhere.
+<div class="note">Unlisted. Not indexed, not in the sitemap, linked from nowhere.
 Share the URL directly.</div>
 {body}
 <p class="switch">other versions: {others(key)}</p>
@@ -437,7 +437,7 @@ Share the URL directly.</div>
 # and /cv/ itself returned 404 - so nobody could reach a resume from the
 # site and no crawler knew they existed. This is the index that fixes it.
 _rows = "\n".join(
-    f'<li><a href="/cv/{k}/"><b>{k}</b></a> &mdash; {V[k]["tag"]}</li>'
+    f'<li><a href="/cv/{k}/"><b>{k}</b></a>: {V[k]["tag"]}</li>'
     for k in ("founder", "operations", "research", "writing"))
 
 _index = f"""<!DOCTYPE html>
@@ -445,7 +445,7 @@ _index = f"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CV — V. Gonzalez</title>
+<title>CV. V. Gonzalez</title>
 <meta name="description" content="Four records, one per lane: founder,
 operations, research, writing.">
 <link rel="canonical" href="https://f-keys.com/cv/">

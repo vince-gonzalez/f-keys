@@ -30,9 +30,9 @@ attaches to one without changing its schema.
 | Field | Value |
 | --- | --- |
 | Declaration | A signed, machine-readable contract per tool: the behavior it is permitted to show — no network, writes only here, deterministic, returns errors as values. Thirteen invariant types in the current draft. |
-| Conformance | A harness exercises the tool under observation — valid calls, adversarial input, egress and filesystem monitoring — and reports pass, fail or **not-covered** per invariant. It cannot prove an invariant it did not exercise, and it says so rather than passing it. |
+| Conformance | A harness exercises the tool under observation — valid calls, adversarial input, egress and filesystem monitoring, and reports pass, fail or **not-covered** per invariant. It cannot prove an invariant it did not exercise, and it says so rather than passing it. |
 | Receipt | Every run emits a hash-chained record, one row per verdict, chained by row_hash = sha256(prev + row). Edit one row and the chain breaks at it. An auditor re-verifies it in a browser — no account, no request to us. |
-| Trust mark | The registry, and what it is still willing to say. tools/registry.py publishes an entry from a receipt, stamps it with an expiresAt so the claim goes stale on its own, keeps a revocation sticky against a later passing receipt, and returns a badge line that carries its evidence rather than a bare grade. **Nothing is served and no mark has been issued to anybody** — the mechanism exists, the hosted registry does not. |
+| Trust mark | The registry, and what it is still willing to say. tools/registry.py publishes an entry from a receipt, stamps it with an expiresAt so the claim goes stale on its own, keeps a revocation sticky against a later passing receipt, and returns a badge line that carries its evidence rather than a bare grade. **Nothing is served and no mark has been issued to anybody**. The mechanism exists, the hosted registry does not. |
 
 ## Run it
 
@@ -91,10 +91,8 @@ what it does would be a poor place to start overstating.
 
 ## Prior art it builds on
 
-TBOM v1.0.2, Jason M. Lovell, 2026 —
-[10.5281/zenodo.18459260](https://doi.org/10.5281/zenodo.18459260).
-CTMS 1.0, George Kanellopoulos, 2026 —
-[gkanellopoulos/ctms](https://github.com/gkanellopoulos/ctms).
+TBOM v1.0.2, Jason M. Lovell, 2026. [10.5281/zenodo.18459260](https://doi.org/10.5281/zenodo.18459260).
+CTMS 1.0, George Kanellopoulos, 2026. [gkanellopoulos/ctms](https://github.com/gkanellopoulos/ctms).
 Both are provenance; both state that verifying behavior against the metadata
 is out of their scope.
 

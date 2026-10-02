@@ -157,7 +157,7 @@ that the tooling on this page located:
 Two more set.mm pull requests are open in review, along with
 [#203](https://github.com/metamath/metamath-exe/pull/203)
 against metamath/metamath-exe — the C source of the Metamath program
-itself, rather than the database — and two
+itself, rather than the database, and two
 [winget-pkgs](https://github.com/microsoft/winget-pkgs/pulls?q=is%3Apr+author%3Avince-gonzalez)
 package submissions. Open means open — nothing here is claimed merged
 until its maintainers say so.
@@ -166,7 +166,7 @@ until its maintainers say so.
 
 Every published document is described in
 [openapi.json](https://f-keys.com/openapi.json) with a typed schema that names its
-columns — so a function-calling agent knows a table has a
+columns, so a function-calling agent knows a table has a
 library string and a theorems integer before it
 fetches half a megabyte to find out.
 

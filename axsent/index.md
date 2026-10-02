@@ -19,7 +19,7 @@ axsent <path-to-library>
 Why nothing is built
 A census that requires building the library can only measure libraries that
 still build. That silently excludes the old, the abandoned and the ones
-pinned to a compiler nobody has — which is a biased sample of exactly the
+pinned to a compiler nobody has, which is a biased sample of exactly the
 wrong kind, because those are the ones whose assumptions nobody has looked at
 lately.
 

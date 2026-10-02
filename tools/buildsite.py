@@ -271,7 +271,7 @@ PAGES = {
         "as a bare grade. What does not exist: anywhere to serve it from, a "
         "mark on anybody's page, and a key anyone should rely on."),
        ("Why should I believe the harness?",
-        "Do not. Run <code>saydo selfcheck</code> &mdash; it ships a server "
+        "Do not. Run <code>saydo selfcheck</code>. It ships a server "
         "built to fail and requires the harness to catch every violation."),
        ("Is the name final?",
         "No. It was WARRANT, it is SayDo, and it is marked provisional "
@@ -309,8 +309,7 @@ behavior it is permitted to show &mdash; no network, writes only here,
 deterministic, returns errors as values. Thirteen invariant types in the
 current draft.</td></tr>
 <tr><th>Conformance</th><td>A harness exercises the tool under observation
-&mdash; valid calls, adversarial input, egress and filesystem monitoring
-&mdash; and reports pass, fail or <b>not-covered</b> per invariant. It cannot
+&mdash; valid calls, adversarial input, egress and filesystem monitoring, and reports pass, fail or <b>not-covered</b> per invariant. It cannot
 prove an invariant it did not exercise, and it says so rather than passing
 it.</td></tr>
 <tr><th>Receipt</th><td>Every run emits a hash-chained record, one row per
@@ -322,7 +321,7 @@ account, no request to us.</td></tr>
 with an <code>expiresAt</code> so the claim goes stale on its own, keeps a
 revocation sticky against a later passing receipt, and returns a badge line
 that carries its evidence rather than a bare grade. <b>Nothing is served and
-no mark has been issued to anybody</b> &mdash; the mechanism exists, the
+no mark has been issued to anybody</b>. The mechanism exists, the
 hosted registry does not.</td></tr>
 </table>
 
@@ -352,10 +351,8 @@ a tool whose entire purpose is the distance between what software claims and
 what it does would be a poor place to start overstating.</p>
 
 <h2>Prior art it builds on</h2>
-<p>TBOM v1.0.2, Jason M. Lovell, 2026 &mdash;
-<a href="https://doi.org/10.5281/zenodo.18459260" rel="noopener">10.5281/zenodo.18459260</a>.
-CTMS 1.0, George Kanellopoulos, 2026 &mdash;
-<a href="https://github.com/gkanellopoulos/ctms" rel="noopener">gkanellopoulos/ctms</a>.
+<p>TBOM v1.0.2, Jason M. Lovell, 2026. <a href="https://doi.org/10.5281/zenodo.18459260" rel="noopener">10.5281/zenodo.18459260</a>.
+CTMS 1.0, George Kanellopoulos, 2026. <a href="https://github.com/gkanellopoulos/ctms" rel="noopener">gkanellopoulos/ctms</a>.
 Both are provenance; both state that verifying behavior against the metadata
 is out of their scope.</p>
 <div class="btnrow">
@@ -385,7 +382,7 @@ is out of their scope.</p>
              "Rocq, Agda and Isabelle, from one tool."),
             ("Nothing is built",
              "A census that requires building can only measure libraries that "
-             "still build &mdash; which silently excludes the old, the "
+             "still build, which silently excludes the old, the "
              "abandoned, and anything pinned to a compiler nobody has."),
             ("The finding behind it",
              "Every census of this kind conflates mathematical assumptions "
@@ -420,7 +417,7 @@ axsent &lt;path-to-library&gt;</pre>
 <h2>Why nothing is built</h2>
 <p>A census that requires building the library can only measure libraries that
 still build. That silently excludes the old, the abandoned and the ones
-pinned to a compiler nobody has &mdash; which is a biased sample of exactly the
+pinned to a compiler nobody has, which is a biased sample of exactly the
 wrong kind, because those are the ones whose assumptions nobody has looked at
 lately.</p>
 <h2>The finding behind it</h2>
@@ -669,7 +666,7 @@ so a measurement can be quoted with the version of the thing that produced it
          ("Read the verdict, including 'undecided'",
           "An enclosure strictly on one side of zero settles the inequality. "
           "One that straddles zero says the computation did not decide it "
-          "&mdash; which is the answer floating point never gives you.")],
+          ", which is the answer floating point never gives you.")],
   features_title="What it gives you",
   features=[("Exact rational arithmetic",
              "No rounding at all where the numbers allow it."),
@@ -811,7 +808,7 @@ underlying method is deposited with a DOI.</p>
              "looks exactly like a real one."),
             ("deadname-gate",
              "Fails when a retired name reaches a title, a footer, a byline, "
-             "alt text or a comment &mdash; and leaves machine identifiers "
+             "alt text or a comment, and leaves machine identifiers "
              "alone, because renaming a published artifact breaks links or "
              "contradicts a deposited record."),
             ("It exits 2, not 0, unconfigured",
@@ -870,7 +867,7 @@ rather than passing a stylesheet that declares no colours at all.</p>
   title="openapi-drift", tagline="Does the service still do what the spec says?",
   lede="An OpenAPI document is a promise about a service, and nothing keeps "
        "the two together. This checks whether the service still does what the "
-       "document says &mdash; and whether a machine can still read the "
+       "document says, and whether a machine can still read the "
        "document at all.",
   cta=[("Install it", "https://pypi.org/project/openapi-drift/"),
        ("Use as a GitHub Action", "https://github.com/vince-gonzalez/openapi-drift")],
@@ -958,7 +955,7 @@ value reports drift that is the checker's fault. Nothing is ever written.</p>
            "silent unless somebody else acts",
   steps=[("Tell it who you are",
           "<code>changewatch init</code> writes a config. Your ORCID, your "
-          "names, your logins &mdash; so your own activity is never reported "
+          "names, your logins, so your own activity is never reported "
           "as somebody noticing you."),
          ("Run it once to learn",
           "The first run records what is already there and says nothing. A "
@@ -1042,7 +1039,7 @@ first run learns; the second one rings.</p>
   steps=[("Install it",
           "<code>npm install keyjockey</code>."),
          ("Give it a tab and a tuning",
-          "<code>parseTab(tab, \"Drop D\", 2)</code> &mdash; tuning by name, "
+          "<code>parseTab(tab, \"Drop D\", 2)</code>. Tuning by name, "
           "capo as an offset."),
          ("Take the notes",
           "Note names, MIDI numbers or frequencies, whichever your program "
@@ -1120,7 +1117,7 @@ one.</p>
           "which is the only sane arrangement for typing what you can and "
           "cannot see into a web page."),
          ("Or put the same engine in your build",
-          "<code>npm i opticquiz-cvd</code> &mdash; the simulation that runs "
+          "<code>npm i opticquiz-cvd</code>. The simulation that runs "
           "the tests also runs in CI, so a palette is checked before it "
           "ships rather than after somebody complains.")],
   features_title="Two audiences, one engine",
@@ -1136,7 +1133,7 @@ one.</p>
              "<code>cvdsim</code>, <code>cvdsafe</code>, "
              "<code>safepalette</code>, <code>cvdplate</code>, "
              "<code>opticquiz-eye</code>, one named for each deficiency, and "
-             "three MCP servers &mdash; so the same maths runs in your "
+             "three MCP servers, so the same maths runs in your "
              "pipeline."),
             ("A build gate",
              "The cvd-palette Action fails a build when two colours collapse "
@@ -1170,7 +1167,7 @@ one.</p>
   body="""
 <h2>What it is</h2>
 <p>Sixteen vision tests that run in the browser &mdash; acuity charts, colour
-vision, contrast &mdash; and a colour-accessibility toolkit for people building
+vision, contrast, and a colour-accessibility toolkit for people building
 things other people have to look at.</p>
 <p>Nothing is uploaded. The tests run on your machine, which is the only
 arrangement under which anyone should be typing what they can and cannot see
@@ -1253,7 +1250,7 @@ crush one nobody paid for.</p>
 <h2>Cost</h2>
 <p>Free to play. Licensed separately to institutions that want it for training,
 because a training department wants an invoice, a contact and something that
-will still be there next year &mdash; and that is a different arrangement from
+will still be there next year, and that is a different arrangement from
 a free browser game.</p>
 <div class="btnrow">
   <a class="btn default" href="https://trailer-load.com" rel="noopener">Play it</a>
@@ -1320,7 +1317,7 @@ usually larger than the game.</p>
  "daisupop": dict(
   title="DaisuPop", tagline="Everyone sees the same roll at the same moment.",
   lede="A dice popper for Discord. One roll, rendered to everyone in the "
-       "voice channel at the same moment &mdash; which removes the only "
+       "voice channel at the same moment, which removes the only "
        "argument every remote dice game has in it.",
   cta=[("Open it in Discord", "https://dp.f-keys.com"),
        ("Why it matters", "#why-that-matters")],
@@ -1433,7 +1430,7 @@ same thing.</p>
 <h2>Why an address</h2>
 <p>Most classification arguments are really arguments about which axis somebody
 is standing on. Once the axes are named and an observation has coordinates on
-each, the disagreement either resolves or becomes a specific one &mdash; and a
+each, the disagreement either resolves or becomes a specific one, and a
 specific disagreement is worth having.</p>
 <h2>Where the work is</h2>
 <p>The standard, the classification decision protocol and the papers are all
@@ -1890,7 +1887,7 @@ the moment anyone anywhere votes.</p>
 
 <h2>The ballot comes to you</h2>
 <p>Subscribe to channels &mdash; <code>#food</code>, <code>#politics</code>,
-<code>#ohio</code>, whatever exists &mdash; and new ballots arrive as notifications. On
+<code>#ohio</code>, whatever exists, and new ballots arrive as notifications. On
 Chrome, Edge, Firefox and Android <b>you vote from the notification's own buttons without
 opening anything</b>. That is the part that makes it different from a poll: answering costs
 one tap from wherever you already were.</p>
@@ -2099,7 +2096,7 @@ counter-tag. And watch the edge: dash out of bounds and you tag yourself.</p>
 
 <h2>Reads, not proximity</h2>
 <p>It is not click-when-you-are-close. Both players have a commit &mdash; the lunge and the
-dash &mdash; and each of them costs something, so the round turns on which one you spend
+dash, and each of them costs something, so the round turns on which one you spend
 first. Whoever is holding IT when the 90-second clock hits zero loses it.</p>
 
 <h2>The room calls it out</h2>
@@ -2227,7 +2224,7 @@ moving when one turns out to be already clean.</p>
          ("Source","vince-gonzalez/LeadSeer")],
   body="""
 <h2>What it does</h2>
-<p>Search a place and a trade &mdash; plumbers in Toledo, salons in Sarasota &mdash; and
+<p>Search a place and a trade &mdash; plumbers in Toledo, salons in Sarasota, and
 LeadSeer asks the Google Places API for every match, then keeps only the ones whose record
 has no website on it.</p>
 <p>That absence is the whole qualification. A business with no website cannot already have
@@ -2538,7 +2535,7 @@ They are on this page because they are what the product is for, and marked plain
 nobody downloads the alpha expecting them.</p>
 
 <h2>The company is named after this</h2>
-<p>RemapWrap began as <b>F-Keys</b> &mdash; an extra row of keys, on glass you already own.
+<p>RemapWrap began as <b>F-Keys</b>. An extra row of keys, on glass you already own.
 The name outgrew the product and became the company. The product then went missing for five
 months, surviving in a single zip file in a folder called "zip to sort".</p>
 
@@ -3043,24 +3040,24 @@ NOT_FOUND_DOC = """
 at where it used to be.</p>
 <h2>Where to look next</h2>
 <ul>
-<li><b><a href="/">f-keys.com</a></b> &mdash; every product in one table.</li>
-<li><b><a href="/sitemap.xml">/sitemap.xml</a></b> &mdash; every URL on this
+<li><b><a href="/">f-keys.com</a></b>. Every product in one table.</li>
+<li><b><a href="/sitemap.xml">/sitemap.xml</a></b>. Every URL on this
 site, for crawlers and agents.</li>
-<li><b><a href="/llms.txt">/llms.txt</a></b> &mdash; the whole catalogue as plain
+<li><b><a href="/llms.txt">/llms.txt</a></b>. The whole catalogue as plain
 text, including what each product is for and when to reach for it.</li>
-<li><b><a href="/Docs.html">/Docs.html</a></b> &mdash; setup, configuration and
+<li><b><a href="/Docs.html">/Docs.html</a></b>. Setup, configuration and
 troubleshooting.</li>
-<li><b><a href="/contact.html">/contact.html</a></b> &mdash; a person, if the
+<li><b><a href="/contact.html">/contact.html</a></b>. A person, if the
 link that sent you here was ours.</li>
 </ul>
 <h2>By shelf</h2>
 <ul>
-<li><a href="/apps.html">/apps.html</a> &mdash; things you run</li>
-<li><a href="/games.html">/games.html</a> &mdash; games and simulators</li>
-<li><a href="/tools.html">/tools.html</a> &mdash; single-purpose programs</li>
-<li><a href="/hardware.html">/hardware.html</a> &mdash; appliances</li>
-<li><a href="/research.html">/research.html</a> &mdash; papers and proof tooling</li>
-<li><a href="/properties.html">/properties.html</a> &mdash; the standalone sites</li>
+<li><a href="/apps.html">/apps.html</a>. Things you run</li>
+<li><a href="/games.html">/games.html</a>. Games and simulators</li>
+<li><a href="/tools.html">/tools.html</a>. Single-purpose programs</li>
+<li><a href="/hardware.html">/hardware.html</a>. Appliances</li>
+<li><a href="/research.html">/research.html</a>. Papers and proof tooling</li>
+<li><a href="/properties.html">/properties.html</a>. The standalone sites</li>
 </ul>
 <div class="btnrow">
   <a class="btn default" href="/">Back to the catalogue</a>
@@ -3239,7 +3236,7 @@ that the tooling on this page located:</p>
 <p>Two more set.mm pull requests are open in review, along with
 <a href="https://github.com/metamath/metamath-exe/pull/203" rel="noopener">#203</a>
 against metamath/metamath-exe &mdash; the C source of the Metamath program
-itself, rather than the database &mdash; and two
+itself, rather than the database, and two
 <a href="https://github.com/microsoft/winget-pkgs/pulls?q=is%3Apr+author%3Avince-gonzalez" rel="noopener">winget-pkgs</a>
 package submissions. Open means open &mdash; nothing here is claimed merged
 until its maintainers say so.</p>
@@ -3247,7 +3244,7 @@ until its maintainers say so.</p>
 <h2>The published data</h2>
 <p>Every published document is described in
 <a href="/openapi.json">openapi.json</a> with a typed schema that names its
-columns &mdash; so a function-calling agent knows a table has a
+columns, so a function-calling agent knows a table has a
 <code>library</code> string and a <code>theorems</code> integer before it
 fetches half a megabyte to find out.</p>
 <table class="facts">
@@ -3621,7 +3618,7 @@ to recognise an upgrade, so anything newer installs beside it rather than over
 it. Uninstall both, then install the current version once. Nothing installed
 from 1.4.1 onward does this.</td></tr>
 <tr><th>The installer says it cannot continue</th><td>Key-J is running. Close it
-&mdash; including from the tray &mdash; and install again. It stops rather than
+&mdash; including from the tray, and install again. It stops rather than
 replacing the files it can reach and leaving the ones Windows has open, which
 would give you half of each version.</td></tr>
 </table>
@@ -3696,7 +3693,7 @@ where you put it.</p>
 <h2>Verifying this rather than believing it</h2>
 <p>The Key-J source is published. It is not free to copy &mdash; see
 <a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE">the
-licence</a> &mdash; but it is readable precisely so that a program which installs
+licence</a>. But it is readable precisely so that a program which installs
 a keyboard hook can be audited by the people running it. The global hook lives in
 <code>keyj/desktop/src/main.js</code>; the handler is a few lines long and you can
 read every one of them.</p>

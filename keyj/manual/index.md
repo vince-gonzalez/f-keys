@@ -122,7 +122,7 @@ way it went and its name beside it. A note that will not fit is reported, not dr
 | Notes cut off sharply | Release is low. Raise the Release slider, or pick a tone with a longer tail such as Bell or Pad. |
 | The tab imported nothing | The status line names what it skipped. Most often the block has a different number of string lines than the tuning expects. |
 | Two Key-J entries in Add/Remove Programs | Only if you installed 1.4.0. That build carried a different application identifier, which Windows uses to recognise an upgrade, so anything newer installs beside it rather than over it. Uninstall both, then install the current version once. Nothing installed from 1.4.1 onward does this. |
-| The installer says it cannot continue | Key-J is running. Close it — including from the tray — and install again. It stops rather than replacing the files it can reach and leaving the ones Windows has open, which would give you half of each version. |
+| The installer says it cannot continue | Key-J is running. Close it — including from the tray, and install again. It stops rather than replacing the files it can reach and leaving the ones Windows has open, which would give you half of each version. |
 
 ## What it can see
 
