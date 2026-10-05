@@ -220,6 +220,18 @@ V = {
                "certs", "edu"]),
 }
 
+# The PDF beside each page is the one he actually sends, built from the
+# same .txt source by resume-kit/build_web_resumes.py, with the phone
+# number and personal address swapped for f-keys.com/contact. These pages
+# have always redacted contact details and publishing the originals here
+# would have undone that quietly.
+PDFS = {
+    "founder":    ("VG-Resume-Master.pdf", "general"),
+    "operations": ("VG-Resume-Sales.pdf", "sales and operations"),
+    "research":   ("VG-Resume-Formal-Methods.pdf", "formal methods"),
+    "writing":    ("VG-Resume-Writing.pdf", "writing"),
+}
+
 SECTION_TITLES = {
     "fedex": "Professional Experience",
     "fedex_brief": "Professional Experience",
@@ -306,8 +318,11 @@ def md_section(key: str) -> list[str]:
 def build_md(cfg: dict) -> str:
     contact = (f"{LOC} · {PHONE} · {EMAIL}" if SHOW_CONTACT
                else f"{LOC} · contact on request")
-    out = [f"# {NAME}", "", cfg["tag"], "", contact, "", LINKS, "", "---", "",
-           "## Profile", "", cfg["profile"], ""]
+    pdf, lane = PDFS[cfg["slug"]]
+    out = [f"# {NAME}", "", cfg["tag"], "", contact, "", LINKS, "",
+           f"[Download this as a PDF](/cv/{pdf}) · "
+           f"[all four](/cv/) · [writing samples](/writing/)",
+           "", "---", "", "## Profile", "", cfg["profile"], ""]
     for key in cfg["order"]:
         out += md_section(key)
     return "\n".join(out)
@@ -436,7 +451,8 @@ Share the URL directly.</div>
 # and /cv/ itself returned 404 - so nobody could reach a resume from the
 # site and no crawler knew they existed. This is the index that fixes it.
 _rows = "\n".join(
-    f'<li><a href="/cv/{k}/"><b>{k}</b></a>: {V[k]["tag"]}</li>'
+    f'<li><a href="/cv/{k}/"><b>{k}</b></a>: {V[k]["tag"]}'
+    f' &middot; <a href="/cv/{PDFS[k][0]}">PDF, {PDFS[k][1]}</a></li>'
     for k in ("founder", "operations", "research", "writing"))
 
 _index = f"""<!DOCTYPE html>

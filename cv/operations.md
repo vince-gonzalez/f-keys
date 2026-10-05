@@ -6,6 +6,8 @@ Punta Gorda, FL · contact on request
 
 f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
+[Download this as a PDF](/cv/VG-Resume-Sales.pdf) · [all four](/cv/) · [writing samples](/writing/)
+
 ---
 
 ## Profile
