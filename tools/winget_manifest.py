@@ -85,6 +85,14 @@ ManifestType: version
 ManifestVersion: {schema}
 """
 
+# InstallerSwitches is declared rather than left to a default. `Scope: user`
+# tells winget what the package is; it does not tell the installer anything.
+# The switches say the same thing to the binary itself. This generator
+# emitted none at all until 2026-10-05, so the manifest on PR 427477 carried
+# them only because someone typed them in, and the next regeneration would
+# have dropped them without saying so. Keep this note here, not in the YAML:
+# the manifest is published on microsoft/winget-pkgs and our build history is
+# not a reviewer's problem.
 INSTALLER_YAML = """# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.{schema}.schema.json
 
 PackageIdentifier: {pkg}
@@ -94,11 +102,6 @@ Platform:
 MinimumOSVersion: 10.0.17763.0
 InstallerType: {itype}
 Scope: user
-# Declared, not left to a default. `Scope: user` tells winget what the
-# package is; it does not tell the installer. These say the same thing to
-# the binary. The generator emitted no switches at all until 2026-10-05,
-# so the manifest on PR 427477 carried them only because they were typed
-# in by hand, and the next regeneration would have dropped them.
 InstallerSwitches:
   Silent: /S /currentuser
   SilentWithProgress: /S /currentuser
