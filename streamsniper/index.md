@@ -28,7 +28,7 @@ in the list can cut in halfway through. Edits apply at the next check, with no r
 
 | Field | Value |
 | --- | --- |
-| Licence | MIT |
+| License | MIT |
 | Platform | Debian or Ubuntu |
 | Needs | Streamlink, VLC, pygame |
 | Starts | systemd, on boot |

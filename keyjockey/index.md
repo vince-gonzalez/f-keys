@@ -42,7 +42,7 @@ one.
 | Field | Value |
 | --- | --- |
 | Install | npm install keyjockey |
-| Licence | MIT |
+| License | MIT |
 | Tunings | 8, with capo offsets |
 | Source | vince-gonzalez/f-keys |
 

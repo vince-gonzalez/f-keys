@@ -628,7 +628,7 @@ def every_package_has_a_page():
             continue
         if any(c[0] == slug for c in buildsite.CATALOGUE):
             continue
-        fail("catalogue", "{} is published and has no page. Add one, or "
+        fail("catalog", "{} is published and has no page. Add one, or "
                           "record where it lives in PACKAGE_PAGE."
              .format(pkg))
 
@@ -696,7 +696,7 @@ def colours_are_tokens():
             m = re.search(r"(?:^|[^-\w])color\s*:\s*(#[0-9a-fA-F]{3,8})",
                           line)
             if m:
-                fail("colour", "{}:{} uses the literal {} - make it a token "
+                fail("color", "{}:{} uses the literal {} - make it a token "
                                "so contrast-gate can check it"
                      .format(name, line_no, m.group(1)))
             # Opacity on a rule that also sets a colour is a second way
@@ -704,7 +704,7 @@ def colours_are_tokens():
             # reaches the eye. --dim at .75 is 3.84:1, not 6.74:1.
             o = re.search(r"opacity\s*:\s*(0?\.\d+)", line)
             if o and "color:" in line:
-                fail("colour", "{}:{} sets a colour and opacity {} in one "
+                fail("color", "{}:{} sets a color and opacity {} in one "
                                "rule - the contrast gate checks the token, "
                                "not what is drawn"
                      .format(name, line_no, o.group(1)))

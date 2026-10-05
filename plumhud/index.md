@@ -40,7 +40,7 @@ because it holds a Discord webhook and a Telegram token.
 | --- | --- |
 | Name | Personal Ledger Utility Monitor, Heads-Up Display |
 | Version | 4.1.2 |
-| Licence | MIT |
+| License | MIT |
 | Install | pip install plumhud |
 | Requires | Python 3.8+, Tk |
 | Depends on | moonbeam-miner |

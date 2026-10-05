@@ -421,7 +421,7 @@ resolves to the current deposit.
 
 <h2>Where it lives</h2>
 <p>The distribution is the useful part: Init 223, Std 41, Mathlib 9, Batteries 3, Lean 3, Plausible 1. Four fifths of the removable classical dependence in this measurement is in Lean core, and only nine declarations are in Mathlib.</p>
-<p>That matters for what anyone can do about it. Lean core's position on the tactic behaviour behind most of these is on record: avoiding choice is a deliberate non-goal there, stated in response to the <code>omega</code> report and without disputing any figure. So the largest share of what is removable sits where removal is not wanted, and the share sitting where it might be welcomed is small.</p>
+<p>That matters for what anyone can do about it. Lean core's position on the tactic behavior behind most of these is on record: avoiding choice is a deliberate non-goal there, stated in response to the <code>omega</code> report and without disputing any figure. So the largest share of what is removable sits where removal is not wanted, and the share sitting where it might be welcomed is small.</p>
 
 <h2>The four the kernel refused</h2>
 <p>Every refusal is a type mismatch rather than a timeout or a missing instance: the substituted term elaborated and then failed to check. Those are the interesting ones, because they are cases where a <code>Decidable</code> instance exists and is still not interchangeable with the classical one at the point it is used. The kernel's message is carried verbatim in the data for each.</p>

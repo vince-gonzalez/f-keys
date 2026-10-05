@@ -977,7 +977,7 @@ def render(snap, prev):
             head = (
                 '<div class="doc"><h1>Status &mdash; full</h1>'
                 '<p class="sub">The maintenance view: every repository, every '
-                'licence gap, and every source that failed to report. The '
+                'license gap, and every source that failed to report. The '
                 'public page is at <a href="/status/">/status/</a>. '
                 'Built {gen_open}{gen}{gen_close}. {strip}</p>'
                 '<p id="live-note" class="dim">Re-reading the snapshot&hellip;</p>')

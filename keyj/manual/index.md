@@ -36,7 +36,7 @@ your keys keep playing. Quit from the tray menu.
 
 ## The three tools
 
-The centre of the window is tabbed, and one tool shows at a time. That is
+The center of the window is tabbed, and one tool shows at a time. That is
 deliberate: stacked, the three of them made the page four thousand pixels tall.
 
 | Field | Value |
@@ -121,7 +121,7 @@ way it went and its name beside it. A note that will not fit is reported, not dr
 | Every key plays the same run | Sequence mode is on, and that is what it does. Press **Sequence OFF** for fixed pitches. |
 | Notes cut off sharply | Release is low. Raise the Release slider, or pick a tone with a longer tail such as Bell or Pad. |
 | The tab imported nothing | The status line names what it skipped. Most often the block has a different number of string lines than the tuning expects. |
-| Two Key-J entries in Add/Remove Programs | Only if you installed 1.4.0. That build carried a different application identifier, which Windows uses to recognise an upgrade, so anything newer installs beside it rather than over it. Uninstall both, then install the current version once. Nothing installed from 1.4.1 onward does this. |
+| Two Key-J entries in Add/Remove Programs | Only if you installed 1.4.0. That build carried a different application identifier, which Windows uses to recognize an upgrade, so anything newer installs beside it rather than over it. Uninstall both, then install the current version once. Nothing installed from 1.4.1 onward does this. |
 | The installer says it cannot continue | Key-J is running. Close it — including from the tray, and install again. It stops rather than replacing the files it can reach and leaving the ones Windows has open, which would give you half of each version. |
 
 ## What it can see

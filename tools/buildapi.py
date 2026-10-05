@@ -387,7 +387,7 @@ _ERROR_RESPONSE = {
                 "hints": [
                     "Every published path is listed in " + SITE + "/openapi.json",
                     "The full site map is at " + SITE + "/sitemap.xml",
-                    "A plain-text catalogue is at " + SITE + "/llms.txt",
+                    "A plain-text catalog is at " + SITE + "/llms.txt",
                 ],
             }
         }}},
@@ -448,7 +448,7 @@ repository. If a dataset is removed, it leaves this document on the next
 build rather than remaining as a promise.
 
 Each measurement table is a single JSON object carrying its own name,
-description, version, sha256, licence and series DOI alongside its rows, so a
+description, version, sha256, license and series DOI alongside its rows, so a
 consumer can cite it and verify it did not change underneath them.
 
 Pages on this site also serve `text/markdown` when the request asks for it

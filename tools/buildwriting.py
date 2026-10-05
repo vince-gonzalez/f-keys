@@ -115,7 +115,7 @@ SECTIONS = [
    "falls to 38 to 63% on the vanishing plates, with no confidence signal "
    "distinguishing successes from failures.",
    "Pseudoisochromatic plate design type is recoverable from delivered "
-   "colour and dot geometry alone",
+   "color and dot geometry alone",
    "/papers/pseudoisochromatic-plate-design-type-recoverable-from/",
    "10.5281/zenodo.21876790",
    "papers/pseudoisochromatic-plate-design-type-recoverable-from/index.html"),

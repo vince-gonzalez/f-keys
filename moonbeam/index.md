@@ -35,7 +35,7 @@ Standard library only, so the install cannot fail on someone else's package.
 | Field | Value |
 | --- | --- |
 | Version | 1.0.2 |
-| Licence | MIT |
+| License | MIT |
 | Install | pip install moonbeam-miner |
 | Requires | Python 3.8+ |
 | Dependencies | None |

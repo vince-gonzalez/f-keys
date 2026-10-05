@@ -65,6 +65,6 @@ Hammer-ons, slides and bends are read as the notes they land on. A block
 with the wrong number of strings produces no notes and says how many it
 found, rather than silently guessing a tuning.
 
-## Licence
+## License
 
 MIT.

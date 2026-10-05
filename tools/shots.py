@@ -163,7 +163,7 @@ def looks_like_a_failure(path):
         return None
     top = max(colours)[0]
     if top / float(64 * 64) > 0.97:
-        return "97% one colour - an error page or a load that never finished"
+        return "97% one color - an error page or a load that never finished"
     return None
 
 

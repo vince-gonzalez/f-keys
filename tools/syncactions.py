@@ -50,11 +50,11 @@ ACTIONS = [
     ("typefloor", "typefloor", "TYPEFLOOR",
      "type below a readable floor fails the build"),
     ("contrast", "contrast-gate", "CONTRAST",
-     "colour nobody can read fails the build"),
+     "color nobody can read fails the build"),
     ("deadname", "deadname-gate", "DEADNAME",
      "a name that should be gone fails the build"),
     ("cvd", "cvd-palette", "CVD PALETTE",
-     "a palette that collapses under colour blindness fails the build"),
+     "a palette that collapses under color blindness fails the build"),
 ]
 
 MIT = """MIT License
@@ -139,7 +139,7 @@ harder version and the one worth getting right.""",
     file: palette.json
 ```
 
-Fails when two colours become the same colour under protanopia, deuteranopia
+Fails when two colors become the same color under protanopia, deuteranopia
 or tritanopia.
 
 The matplotlib defaults `#d62728` and `#2ca02c` are **71.8 apart to normal
@@ -150,7 +150,7 @@ it.
 `file:` takes a JSON array, a JSON object of name to hex, or any file at all -
 a stylesheet, a config - which is scanned for `#rrggbb`.
 
-Exits **2** rather than 0 when handed fewer than two colours, because a pass
+Exits **2** rather than 0 when handed fewer than two colors, because a pass
 on an empty list is not a pass.""",
 }
 
@@ -179,7 +179,7 @@ pip install legible
 Source, and the self-test that runs this Action against a fixture it must
 pass and one it must fail, live in [f-keys](%s).
 
-## Licence
+## License
 
 MIT.
 """ % SOURCE

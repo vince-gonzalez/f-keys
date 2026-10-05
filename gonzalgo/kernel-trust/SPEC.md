@@ -15,7 +15,7 @@ result was obtained by trusting a compiler rather than a kernel. Both look
 exactly like success, and neither is visible to anyone downstream.
 
 There is a standard way to say how to cite a project (`CITATION.cff`), and a
-standard way to say what licence it carries (SPDX). There is no standard way to
+standard way to say what license it carries (SPDX). There is no standard way to
 say what it *rests on*. Every project states it in prose, or not at all.
 
 A Kernel Trust Profile is that statement, in a fixed shape, computed from the
@@ -165,8 +165,8 @@ existing field increments the major version. A consumer encountering an unknown
 
 ## 6. Prior art
 
-`CITATION.cff` standardises citation metadata; SPDX standardises licence
-identifiers; `codemeta.json` standardises software description. Each took a
+`CITATION.cff` standardizes citation metadata; SPDX standardizes license
+identifiers; `codemeta.json` standardizes software description. Each took a
 thing every project stated in prose and gave it a shape. This does the same for
 the trust assumptions under a machine-checked result.
 
@@ -174,6 +174,6 @@ The measurements are defined in *Where Formal Libraries Spend Their Axioms*,
 https://doi.org/10.5281/zenodo.21769846, which also gives the refactoring
 argument behind R4 and the statement/proof separation behind R3.
 
-## 7. Licence
+## 7. License
 
 This specification is CC-BY-4.0. Implementations are unencumbered.

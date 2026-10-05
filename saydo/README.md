@@ -36,7 +36,7 @@ quietly lost.
 | Declarations | 11 — 6 F-Keys servers, 1 seeded fixture, 4 third-party; all draft, all unsigned |
 | Receipts | Ed25519-signed with a proof-of-concept key; production signing not settled |
 | Invariant types | 13 in the current draft |
-| Licence | Apache-2.0 on the open layers |
+| License | Apache-2.0 on the open layers |
 | Source | vince-gonzalez/saydo |
 
 [The page itself](https://f-keys.com/saydo/)

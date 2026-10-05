@@ -38,7 +38,7 @@ someone re-running it on different hardware.
 | --- | --- |
 | Install | pip install certivl |
 | Version | 0.2.0 |
-| Licence | MIT |
+| License | MIT |
 | Arithmetic | Exact rational, certified interval |
 | Source | vince-gonzalez/certivl |
 

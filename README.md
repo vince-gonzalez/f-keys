@@ -29,7 +29,7 @@ the site, the products it lists, and the tools that keep the two honest.
 
 ## The site is generated, not edited
 
-`tools/buildsite.py` holds the catalogue and emits all eighteen pages through
+`tools/buildsite.py` holds the catalog and emits all eighteen pages through
 one shell, so a product exists in exactly one place. Editing a generated
 `.html` file directly means the next build overwrites it.
 

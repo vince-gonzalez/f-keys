@@ -46,7 +46,7 @@ And the twelve that do have pages are prose only:
 ### What an entry contains
 
 Screenshot or short demo · its own og card · what it is, who it is for, what
-it costs · version, licence, platform, requirements · install or run in one
+it costs · version, license, platform, requirements · install or run in one
 command · source and issues link · **a named limitation** · SoftwareApplication
 schema (already done).
 
@@ -72,11 +72,11 @@ schema (already done).
       `plumhud`, `moonbeam-miner` all resolve to
       `github.com/vince-gonzalez/f-keys/tree/main/<dir>`. No stars, no issues, no
       releases, no watchers land anywhere.
-- [ ] **4 of 21 tracked repositories have no licence** — nobody who finds them
+- [ ] **4 of 21 tracked repositories have no license** — nobody who finds them
       can legally reuse them. Now surfaced on `/status/`.
       Unlicensed: `trailer-load.com`, `Moonbeam-NerdMiner`, `fkeys`, and the
       retired `.site` repo (plus `icd`, `ionics`, `awesome-twitch` outside the
-      tracked set). The live list is the "Repos without a licence" figure on
+      tracked set). The live list is the "Repos without a license" figure on
       [/status/](https://f-keys.com/status/).
 - [ ] `zengineco/fkeys` (no hyphen) is a stale duplicate of the site repo.
       Archive it.
@@ -174,6 +174,6 @@ walled off from cross-promotion.
 2. **The cheap sitewide sweep**: favicons, manifests, `security.txt`,
    modulign.org's robots/sitemap/llms. Hours, not days, and it closes a whole
    column of the table above.
-3. **Repos and licences**, the four unlicensed, the two Moonbeams, the
+3. **Repos and licenses**, the four unlicensed, the two Moonbeams, the
    archived repo serving a live site.
 4. **The other 21 product entries**, template first.

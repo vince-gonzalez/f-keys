@@ -47,7 +47,7 @@ value reports drift that is the checker's fault. Nothing is ever written.
 | Field | Value |
 | --- | --- |
 | Install | pip install openapi-drift |
-| Licence | MIT |
+| License | MIT |
 | Action | vince-gonzalez/openapi-drift |
 | Source | vince-gonzalez/openapi-drift |
 

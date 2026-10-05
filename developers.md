@@ -11,7 +11,7 @@ Install or fetch. Nothing to sign up for.
 | Field | Value |
 | --- | --- |
 | OpenAPI | [/openapi.json](https://f-keys.com/openapi.json). Every published document, each with a typed schema naming its columns |
-| For agents | [/llms.txt](https://f-keys.com/llms.txt). The whole catalogue as plain text, including when to reach for each thing |
+| For agents | [/llms.txt](https://f-keys.com/llms.txt). The whole catalog as plain text, including when to reach for each thing |
 | Site map | [/sitemap.xml](https://f-keys.com/sitemap.xml) |
 | Product docs | [/Docs.html](https://f-keys.com/Docs.html). Setup, configuration and troubleshooting |
 | Source | [github.com/vince-gonzalez](https://github.com/vince-gonzalez) |
@@ -114,9 +114,9 @@ and no registration step.
 | certivl | pip install certivl. Certified interval arithmetic: an enclosure that turns a computed inequality into a proof. |
 | authorecon | pip install authorecon. Reconcile published work against every place it lives, for any ORCID, from public sources. |
 | saydo | pip install saydo. Run a tool against the behavioural contract its author signed, and emit a receipt anyone can verify. |
-| ishihara | pip install ishihara. Pseudoisochromatic colour-vision plates, reproducible from a seed. |
-| opticquiz-cvd | pip install opticquiz-cvd. The colour-accessibility engine, the same maths as the npm package. |
-| legible | pip install legible. Three build gates: unreadable type, unreadable colour, a retired name. |
+| ishihara | pip install ishihara. Pseudoisochromatic color-vision plates, reproducible from a seed. |
+| opticquiz-cvd | pip install opticquiz-cvd. The color-accessibility engine, the same math as the npm package. |
+| legible | pip install legible. Three build gates: unreadable type, unreadable color, a retired name. |
 | openapi-drift | pip install openapi-drift. Has your API drifted from its spec, and can a machine still read it? |
 | changewatch | pip install changewatch. A doorbell for your published work. Silent until somebody else acts. |
 | keyj | pip install keyj. Tablature to notes, render, and play. |
@@ -124,15 +124,15 @@ and no registration step.
 | plumhud | pip install plumhud. Miner fleet monitor. |
 | moonbeam-miner | pip install moonbeam-miner — NerdMiner discovery and vitals. |
 
-Nineteen on npm. Most of them are the OpticQuiz colour engine published one
+Nineteen on npm. Most of them are the OpticQuiz color engine published one
 name per deficiency, so somebody searching for protanopia finds
 it; these are the entry points.
 
 | Field | Value |
 | --- | --- |
-| opticquiz-cvd | npm i opticquiz-cvd. Colour-vision simulation and daltonisation. |
+| opticquiz-cvd | npm i opticquiz-cvd. Color-vision simulation and daltonization. |
 | opticquiz-cvd-mcp | npm i opticquiz-cvd-mcp. The same engine as callable tools for an LLM. |
-| opticquiz-eye | npm i opticquiz-eye. A one-line widget that lets a visitor re-colour your site. |
+| opticquiz-eye | npm i opticquiz-eye. A one-line widget that lets a visitor re-color your site. |
 | keyjockey | npm i keyjockey. Tablature to notes: eight tunings, capo offsets, MIDI and frequency. npm only. |
 | @f-keys/tip-widget | npm i @f-keys/tip-widget. The TipStreams widget. |
 

@@ -32,7 +32,7 @@ quietly lost.
 | | |
 |---|---|
 | Install | pip install legible |
-| Licence | MIT |
+| License | MIT |
 | Commands | typefloor, contrast-gate, deadname-gate |
 | Actions | typefloor, contrast-gate, deadname-gate, cvd-palette |
 | Source | vince-gonzalez/f-keys |

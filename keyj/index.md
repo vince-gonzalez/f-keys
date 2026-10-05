@@ -59,7 +59,7 @@ asks whether a key went down and discards everything else. There is no keystroke
 it, which is the difference between an instrument and a keylogger.
 
 The CLI is MIT. The desktop and browser apps are not — see
-[the licence](https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE).
+[the license](https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE).
 
 ## How it works
 
@@ -70,7 +70,7 @@ The CLI is MIT. The desktop and browser apps are not — see
 | Field | Value |
 | --- | --- |
 | Version | 1.6.0 |
-| Licence | Proprietary |
+| License | Proprietary |
 | Platforms | Browser, Windows, Linux |
 | Source | vince-gonzalez/f-keys |
 

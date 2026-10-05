@@ -416,7 +416,7 @@ resolves to the current deposit.
 <h2>What the boundary means</h2>
 <p><code>norm_num</code>'s dependence is not a property of the arithmetic. The same numbers, stated as an equality, come out choice-free from the same tactic. It is the order goals specifically, and on <code>Nat</code> and <code>Int</code> the constructive decidability instance exists and is axiom-free, so the classical route was taken where a free one was available.</p>
 <p><code>grind</code> is classical on every goal it closes and that is not a defect: it is architecturally classical. Reporting it beside <code>norm_num</code> without that distinction is exactly the error the attribution paper is about, a rate cannot separate a tactic that is designed classical from one that reached for choice unnecessarily.</p>
-<p><code>aesop</code> and <code>simp</code> agree on all 27 goals, cell for cell. aesop's classical cells are simp's classical cells. A search procedure built over a simp set inherits that set's axiom behaviour rather than adding to it.</p>
+<p><code>aesop</code> and <code>simp</code> agree on all 27 goals, cell for cell. aesop's classical cells are simp's classical cells. A search procedure built over a simp set inherits that set's axiom behavior rather than adding to it.</p>
 
 <h2>Why this is worth more than the census</h2>
 <p>Per-tactic rates measured across a library vary as much within a library as between them &mdash; 5.8&ndash;28.2% in Mathlib, 45&ndash;100% in Lean core &mdash; because eligibility is a property of the theorem while the defect is a property of the proof term. Fixing the goal removes that confound entirely. Every difference in this table is attributable, because nothing else was allowed to vary.</p>

@@ -249,7 +249,7 @@ def write_todo(names):
         lines += ["| file | problem | product |", "|---|---|---|"]
         for f, why, name in rows:
             lines.append("| `%s` | %s | %s |"
-                         % (f, why, name or "**not in the catalogue**"))
+                         % (f, why, name or "**not in the catalog**"))
         lines += ["", "Fix one **in place** and run the tool. It takes anything",
                   "here that has become usable back upstairs by itself, so",
                   "there is nothing to move and nothing to rename - a file",

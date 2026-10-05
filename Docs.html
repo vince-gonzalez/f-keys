@@ -160,7 +160,7 @@
         <tr><td>dashboard.html</td><td>Layout builder, pairing QR + PIN, live feed</td><td>PC browser, localhost only</td></tr>
         <tr><td>controller.html</td><td>The keypad, served at <code>/controller</code></td><td>Phone browser</td></tr>
         <tr><td>store.js</td><td>Settings and profiles on disk</td><td>Inside the server</td></tr>
-        <tr><td>system.js</td><td>Command catalogue</td><td>Inside the server</td></tr>
+        <tr><td>system.js</td><td>Command catalog</td><td>Inside the server</td></tr>
         <tr><td>licence.js</td><td>Tier check for the paid features</td><td>Inside the server</td></tr>
       </table>
       <p class="doc-p">The server injects the local IP and WebSocket port into <code>controller.html</code> at serve time; the dashboard reads them from <code>/ip</code>. Neither page carries a hand-edited address.</p>
@@ -243,13 +243,13 @@
     <!-- ─── Dashboard Guide ─── -->
     <div class="doc-section" id="dashboard">
       <div class="doc-h2">Dashboard</div>
-      <p class="doc-p">Served at <code>/</code> to the machine running the server, and to that machine only — any other device requesting it is redirected to the controller. Pairing, licence and profile routes refuse non-local requests outright.</p>
+      <p class="doc-p">Served at <code>/</code> to the machine running the server, and to that machine only — any other device requesting it is redirected to the controller. Pairing, license and profile routes refuse non-local requests outright.</p>
 
       <div class="doc-h3">Pairing Panel</div>
       <p class="doc-p">Shows the QR code and the six-digit PIN. The server detects its own LAN address; the QR re-renders when the address changes.</p>
 
       <div class="doc-h3">Layout Builder</div>
-      <p class="doc-p">Clicking a key selects it; the key editor edits its label, subtitle, action string and background colour, and the canvas re-renders per edit. <strong>+ ADD KEY</strong> appends, <strong>− REMOVE</strong> deletes the selection. Grid dimensions are per page.</p>
+      <p class="doc-p">Clicking a key selects it; the key editor edits its label, subtitle, action string and background color, and the canvas re-renders per edit. <strong>+ ADD KEY</strong> appends, <strong>− REMOVE</strong> deletes the selection. Grid dimensions are per page.</p>
 
       <div class="doc-h3">Live Feed</div>
       <p class="doc-p">Each press from the phone is appended with the key label, the action fired, and a timestamp. The feed is the loop's confirmation surface: a press that reaches the feed but moves nothing on screen is a nut-js problem, not a network one.</p>
@@ -376,9 +376,9 @@
         <tr><th>Area</th><th>State</th></tr>
         <tr><td>Profiles on disk, multi-page layouts</td><td>Built. <code>schema: 1</code>, one JSON file per profile.</td></tr>
         <tr><td>Pairing: QR secret + PIN with lockout</td><td>Built.</td></tr>
-        <tr><td>Command catalogue</td><td>Built. Everything offered runs; a test enforces both directions.</td></tr>
+        <tr><td>Command catalog</td><td>Built. Everything offered runs; a test enforces both directions.</td></tr>
         <tr><td>Packaged Windows build</td><td>Builds from source; unsigned, not yet distributed.</td></tr>
-        <tr><td>OBS / Twitch integrations (obs.*, stream.*)</td><td>Planned. Named in the catalogue, outside it until the integrations exist.</td></tr>
+        <tr><td>OBS / Twitch integrations (obs.*, stream.*)</td><td>Planned. Named in the catalog, outside it until the integrations exist.</td></tr>
         <tr><td>VU meters</td><td>Not built.</td></tr>
         <tr><td>Row-column scanning</td><td>Not built; scanning is linear.</td></tr>
       </table>
@@ -396,7 +396,7 @@
         <span class="cmd">+ Pairing secret in the QR URL; six-digit PIN fallback with lockout</span><br>
         <span class="cmd">+ Profiles on disk: %APPDATA%\RemapWrap, schema 1, pages</span><br>
         <span class="cmd">+ Dashboard restricted to localhost</span><br>
-        <span class="cmd">+ Command catalogue with a two-way test</span>
+        <span class="cmd">+ Command catalog with a two-way test</span>
       </div>
 
       <div class="doc-h3">v0.1.0 — 2026-03-19</div>

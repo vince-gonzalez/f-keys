@@ -201,7 +201,7 @@ def build():
         active_cat="research",
         description=("Fifty-six deposited works — axiom "
                      "dependence in formal libraries, certified bounds in "
-                     "discrete geometry, the Modulign standard, colour "
+                     "discrete geometry, the Modulign standard, color "
                      "vision. Open access, every one with a DOI."),
         canonical="https://f-keys.com/papers/")
 

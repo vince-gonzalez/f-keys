@@ -123,7 +123,7 @@ axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 
 <p>A tactic, mostly. <code>omega</code> supplies the <code>Decidable</code> argument of six helper lemmas as a literal <code>Classical.propDecidable</code> and never attempts instance synthesis. On <code>Nat</code> and <code>Int</code> the constructive instance exists and is axiom-free, so an otherwise constructive proof comes out classical. It reproduces in one line with no imports.</p>
 
-<p>This was reported upstream and closed as completed, with the reply that avoiding choice is a deliberate non-goal of Lean core. The behaviour is within Lean&#x27;s stated design. It still propagates into every proof a model generates with that tactic.</p>
+<p>This was reported upstream and closed as completed, with the reply that avoiding choice is a deliberate non-goal of Lean core. The behavior is within Lean&#x27;s stated design. It still propagates into every proof a model generates with that tactic.</p>
 
 <h2>Why the whole corpus, and not a sample</h2>
 

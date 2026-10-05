@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kernel Trust Profile, a standard way to say what a proof rests on</title>
-<meta name="description" content="A machine-readable declaration of what a body of machine-checked mathematics rests on. CITATION.cff standardises citation, SPDX standardises licence; there is no standard way to say what a library rests on. This is that, with a JSON Schema and fourteen worked profiles.">
+<meta name="description" content="A machine-readable declaration of what a body of machine-checked mathematics rests on. CITATION.cff standardizes citation, SPDX standardizes license; there is no standard way to say what a library rests on. This is that, with a JSON Schema and fourteen worked profiles.">
 <link rel="canonical" href="https://f-keys.com/gonzalgo/kernel-trust/">
 <meta name="robots" content="index, follow">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:site_name" content="F-Keys">
 <meta property="og:title" content="Kernel Trust Profile, a standard way to say what a proof rests on">
-<meta property="og:description" content="A machine-readable declaration of what a body of machine-checked mathematics rests on. CITATION.cff standardises citation, SPDX standardises licence; there is no standard way to say what a library rests on. This is that, with a JSON Schema and fourteen worked profiles.">
+<meta property="og:description" content="A machine-readable declaration of what a body of machine-checked mathematics rests on. CITATION.cff standardizes citation, SPDX standardizes license; there is no standard way to say what a library rests on. This is that, with a JSON Schema and fourteen worked profiles.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/kernel-trust/">
 <meta property="og:image" content="https://f-keys.com/assets/og.png">
@@ -22,7 +22,7 @@
 <meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kernel Trust Profile, a standard way to say what a proof rests on">
-<meta name="twitter:description" content="A machine-readable declaration of what a body of machine-checked mathematics rests on. CITATION.cff standardises citation, SPDX standardises licence; there is no standard way to say what a library rests on. This is that, with a JSON Schema and fourteen worked profiles.">
+<meta name="twitter:description" content="A machine-readable declaration of what a body of machine-checked mathematics rests on. CITATION.cff standardizes citation, SPDX standardizes license; there is no standard way to say what a library rests on. This is that, with a JSON Schema and fourteen worked profiles.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
 <link rel="stylesheet" href="/win98.css?v=29fdd917">
 <script type="application/ld+json">
@@ -31,7 +31,7 @@
   "@type": "TechArticle",
   "name": "Kernel Trust Profile",
   "headline": "Kernel Trust Profile 0.1 — a machine-readable declaration of what a body of machine-checked mathematics rests on",
-  "description": "A specification for declaring what a formal library's theorems actually rest on: unfinished proofs, compiler-trusted results, and each axiom reached, with statement and proof dependencies kept apart. CITATION.cff standardises citation and SPDX standardises licence; this does the same for trust assumptions.",
+  "description": "A specification for declaring what a formal library's theorems actually rest on: unfinished proofs, compiler-trusted results, and each axiom reached, with statement and proof dependencies kept apart. CITATION.cff standardizes citation and SPDX standardizes license; this does the same for trust assumptions.",
   "url": "https://f-keys.com/gonzalgo/kernel-trust/",
   "version": "0.1",
   "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -97,7 +97,7 @@ cite as <a href="https://doi.org/10.5281/zenodo.21913736">10.5281/zenodo.2191373
 <hr>
 <h2>0. The gap this fills</h2>
 <p>A proof assistant reports that a proof checks. It does not report that the theorem is standing on an unfinished proof several files upstream, or that the result was obtained by trusting a compiler rather than a kernel. Both look exactly like success, and neither is visible to anyone downstream.</p>
-<p>There is a standard way to say how to cite a project (<code>CITATION.cff</code>), and a standard way to say what licence it carries (SPDX). There is no standard way to say what it <em>rests on</em>. Every project states it in prose, or not at all.</p>
+<p>There is a standard way to say how to cite a project (<code>CITATION.cff</code>), and a standard way to say what license it carries (SPDX). There is no standard way to say what it <em>rests on</em>. Every project states it in prose, or not at all.</p>
 <p>A Kernel Trust Profile is that statement, in a fixed shape, computed from the artifact rather than asserted by its author.</p>
 <h2>1. Scope</h2>
 <p>A profile describes one library, at one revision, as measured by one tool at one time. It carries no claim about correctness, quality, or importance, and it is not a certificate. It reports provenance: which trust assumptions the library&#x27;s theorems actually reach.</p>
@@ -172,9 +172,9 @@ cite as <a href="https://doi.org/10.5281/zenodo.21913736">10.5281/zenodo.2191373
 <h2>5. Versioning</h2>
 <p>Additive changes increment the minor version. Any change to the meaning of an existing field increments the major version. A consumer encountering an unknown <code>ktp_version</code> major MUST NOT interpret the document.</p>
 <h2>6. Prior art</h2>
-<p><code>CITATION.cff</code> standardises citation metadata; SPDX standardises licence identifiers; <code>codemeta.json</code> standardises software description. Each took a thing every project stated in prose and gave it a shape. This does the same for the trust assumptions under a machine-checked result.</p>
+<p><code>CITATION.cff</code> standardizes citation metadata; SPDX standardizes license identifiers; <code>codemeta.json</code> standardizes software description. Each took a thing every project stated in prose and gave it a shape. This does the same for the trust assumptions under a machine-checked result.</p>
 <p>The measurements are defined in <em>Where Formal Libraries Spend Their Axioms</em>, <a href="https://doi.org/10.5281/zenodo.21769846">https://doi.org/10.5281/zenodo.21769846</a>, which also gives the refactoring argument behind R4 and the statement/proof separation behind R3.</p>
-<h2>7. Licence</h2>
+<h2>7. License</h2>
 <p>This specification is CC-BY-4.0. Implementations are unencumbered.</p>
 
 <h2>Profiles</h2>

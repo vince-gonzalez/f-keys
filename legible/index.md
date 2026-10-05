@@ -4,7 +4,7 @@
 
 Canonical: https://f-keys.com/legible/
 
-Three build gates for defects a linter has no opinion about, because none of them is a syntax error. Type too small to read, colour that cannot be read on its own background, and a name that should be gone.
+Three build gates for defects a linter has no opinion about, because none of them is a syntax error. Type too small to read, color that cannot be read on its own background, and a name that should be gone.
 
 pip install legible · MIT · three commands, four GitHub Actions
 
@@ -16,7 +16,7 @@ could not.
 
 **pip install legible**
 typefloor ./src type below a readable floor
-contrast-gate ./src colour that cannot be read on its surface
+contrast-gate ./src color that cannot be read on its surface
 deadname-gate ./src a name that should be gone
 The rename gate is the unusual one
 It fails a build when a retired name reaches a title, a footer, a byline,
@@ -35,7 +35,7 @@ All three once reported OK on a directory they had never
 opened, because a bare path argument was ignored and each scanned itself
 instead. deadname-gate exits **2** rather than **0** when
 nothing is configured, and contrast-gate --require-pairs fails
-rather than passing a stylesheet that declares no colours at all.
+rather than passing a stylesheet that declares no colors at all.
 
 ## How it works
 
@@ -46,7 +46,7 @@ rather than passing a stylesheet that declares no colours at all.
 | Field | Value |
 | --- | --- |
 | Install | pip install legible |
-| Licence | MIT |
+| License | MIT |
 | Commands | typefloor, contrast-gate, deadname-gate |
 | Actions | typefloor, contrast-gate, deadname-gate, cvd-palette |
 | Source | vince-gonzalez/f-keys |

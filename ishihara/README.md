@@ -8,7 +8,7 @@
 ║                   ██║███████║██║  ██║██║██║  ██║██║  ██║██║  ██║██║  ██║                   ║
 ║                   ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝                   ║
 ║                                                                                            ║
-║                      Colour-vision plates, reproducible from a seed.                       ║
+║                       Color-vision plates, reproducible from a seed.                       ║
 ║                                                                                            ║
 ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -33,7 +33,7 @@ quietly lost.
 |---|---|
 | Install | pip install ishihara |
 | Version | 0.1.2 |
-| Licence | MIT |
+| License | MIT |
 | Output | Plate images from a seed |
 | Source | vince-gonzalez/ishihara |
 

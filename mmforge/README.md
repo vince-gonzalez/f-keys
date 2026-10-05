@@ -33,7 +33,7 @@ quietly lost.
 |---|---|
 | Install | pip install mmforge |
 | Version | 0.2.0 |
-| Licence | MIT |
+| License | MIT |
 | Reads | Metamath databases |
 | Upstream | 8 pull requests merged into set.mm |
 | Source | vince-gonzalez/mmforge |

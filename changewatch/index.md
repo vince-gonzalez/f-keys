@@ -52,7 +52,7 @@ first run learns; the second one rings.
 | Field | Value |
 | --- | --- |
 | Install | pip install changewatch |
-| Licence | MIT |
+| License | MIT |
 | Needs | GITHUB_TOKEN for the GitHub half |
 | Source | vince-gonzalez/changewatch |
 

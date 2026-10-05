@@ -86,7 +86,7 @@ CATALOGUE = [
     ("pixelstaff", "Pixel Staff", "apps", "Application", READY,
      "An 8-bit composer. Piano roll, waveform per channel, WAV or ringtone out.", "/pixelstaff/"),
     ("opticquiz", "OpticQuiz", "apps", "Web app", READY,
-     "Colour-vision and acuity tests that run entirely in the browser.", "https://opticquiz.com"),
+     "Color-vision and acuity tests that run entirely in the browser.", "https://opticquiz.com"),
     ("qv", "QV", "apps", "Web app", READY,
      "Live ballots. Put a question to a room and watch the count move.", "/qv/"),
     ("remapwrap", "RemapWrap", "apps", "Application", ALPHA,
@@ -136,10 +136,10 @@ CATALOGUE = [
     ("certivl", "certivl", "research", "Python package", PIP,
      "Certified interval arithmetic: an enclosure that turns a computed inequality into a proof.", "/certivl/"),
     ("ishihara", "ishihara", "research", "Python package", PIP,
-     "Generate pseudoisochromatic colour-vision plates, reproducible from a seed.", "/ishihara/"),
+     "Generate pseudoisochromatic color-vision plates, reproducible from a seed.", "/ishihara/"),
 
     ("legible", "legible", "tools", "Python package", PIP,
-     "Three build gates: unreadable type, unreadable colour, a retired name.", "/legible/"),
+     "Three build gates: unreadable type, unreadable color, a retired name.", "/legible/"),
     ("openapi-drift", "openapi-drift", "tools", "Python package", PIP,
      "Has your API drifted from its spec, and can a machine still read it?", "/openapi-drift/"),
     ("changewatch", "changewatch", "tools", "Python package", PIP,
@@ -285,7 +285,7 @@ PAGES = {
           "Ed25519-signed with a proof-of-concept key; production signing "
           "not settled"),
          ("Invariant types", "13 in the current draft"),
-         ("Licence", "Apache-2.0 on the open layers"),
+         ("License", "Apache-2.0 on the open layers"),
          ("Source", "vince-gonzalez/saydo")],
   body="""
 <h2>The gap</h2>
@@ -336,7 +336,7 @@ captures the tool definitions, exercises the server, and writes a receipt.</p>
 <p>A harness that only ever passes is worth nothing, so it ships with a server
 built to fail. <code>saydo selfcheck</code> runs that one and requires the
 harness to catch every violation &mdash; the same discipline the rest of this
-catalogue is built on, pointed at itself.</p>
+catalog is built on, pointed at itself.</p>
 
 <h2 id="a-receipt-actually">A receipt, actually</h2><p>This is the receipt for <code>saydo verify certivl</code>, from the repository. Thirteen rows: the declaration it was checked against, the captured tool definitions, what the monitor could and could not see, one row per invariant, and a close. Each row carries the hash of the row before it.</p><div class="receipt"><table><thead><tr><th>#</th><th>row</th><th></th><th>prev_hash</th><th>row_hash</th></tr></thead><tbody><tr><td class="sq">1</td><td class="ty">open</td><td class="ex">pkg:pypi/certivl@0.2.0</td><td class="hx">31b446b87a387b3d…</td><td class="hx">2911aee89d746f02…</td></tr><tr><td class="sq">2</td><td class="ty">capture</td><td class="ex"></td><td class="hx">2911aee89d746f02…</td><td class="hx">8bbcbdebf275fae5…</td></tr><tr><td class="sq">3</td><td class="ty">monitor</td><td class="ex"></td><td class="hx">8bbcbdebf275fae5…</td><td class="hx">8db9473951715e22…</td></tr><tr><td class="sq">4</td><td class="ty">verdict</td><td class="ex">refusal.scope</td><td class="hx">8db9473951715e22…</td><td class="hx">a192845eb5d858e8…</td></tr><tr><td class="sq">5</td><td class="ty">verdict</td><td class="ex">network.none</td><td class="hx">a192845eb5d858e8…</td><td class="hx">94ff9d07b07e1140…</td></tr><tr><td class="sq">6</td><td class="ty">verdict</td><td class="ex">writes.none</td><td class="hx">94ff9d07b07e1140…</td><td class="hx">2792b46310d90e1e…</td></tr><tr><td class="sq">7</td><td class="ty">verdict</td><td class="ex">reads.none</td><td class="hx">2792b46310d90e1e…</td><td class="hx">6953d604c4a27794…</td></tr><tr><td class="sq">8</td><td class="ty">verdict</td><td class="ex">subprocess.none</td><td class="hx">6953d604c4a27794…</td><td class="hx">fe0193b67cfeab17…</td></tr><tr><td class="sq">9</td><td class="ty">verdict</td><td class="ex">answers.deterministic</td><td class="hx">fe0193b67cfeab17…</td><td class="hx">e83fd3722b937d43…</td></tr><tr><td class="sq">10</td><td class="ty">verdict</td><td class="ex">errors.are-values</td><td class="hx">e83fd3722b937d43…</td><td class="hx">8d7fb1429449889e…</td></tr><tr><td class="sq">11</td><td class="ty">verdict</td><td class="ex">undecided.on-overlap</td><td class="hx">8d7fb1429449889e…</td><td class="hx">27850d284c2f007b…</td></tr><tr><td class="sq">12</td><td class="ty">verdict</td><td class="ex">decimal.read-exactly</td><td class="hx">27850d284c2f007b…</td><td class="hx">6f174eaa56827918…</td></tr><tr><td class="sq">13</td><td class="ty">close</td><td class="ex">tally {'pass': 9}</td><td class="hx">6f174eaa56827918…</td><td class="hx">754a675f79ea0f92…</td></tr></tbody></table></div><p class="sub">Every <code>prev_hash</code> above equals the <code>row_hash</code> on the line before it &mdash; checked, not asserted. Change any row and every hash below it stops matching, which is the whole mechanism. Paste it into <code>verifier/index.html</code> and it checks offline, with no account and no request to anybody.</p><h2>What the monitor admits it cannot see</h2><p>Row 3 is not a result. It is the harness recording its own blind spots &mdash; that it observes filesystem opens and socket connects at the host process, and does <b>not</b> observe activity below the Python runtime, such as a native extension. An invariant it did not exercise is reported <code>not-covered</code> rather than passed.</p><h2>What it is not, yet</h2>
 <p>This is a working proof of concept and the name is provisional. Every
@@ -545,7 +545,7 @@ much as it reflects anything about the work.</p>
         "No &mdash; that is the worked example. <code>--axiom</code> takes "
         "whichever constant you want to trace.")],
   facts=[("Install", "pip install mmforge"), ("Version", "0.2.0"),
-         ("Licence", "MIT"), ("Reads", "Metamath databases"),
+         ("License", "MIT"), ("Reads", "Metamath databases"),
          ("Upstream", "8 pull requests merged into set.mm"),
          ("Source", "vince-gonzalez/mmforge")],
   body="""
@@ -688,7 +688,7 @@ so a measurement can be quoted with the version of the thing that produced it
         "Slower than a float and faster than being wrong in a published "
         "bound.")],
   facts=[("Install", "pip install certivl"), ("Version", "0.2.0"),
-         ("Licence", "MIT"), ("Arithmetic", "Exact rational, certified interval"),
+         ("License", "MIT"), ("Arithmetic", "Exact rational, certified interval"),
          ("Source", "vince-gonzalez/certivl")],
   body="""
 <h2>What it does</h2>
@@ -713,9 +713,9 @@ someone re-running it on different hardware.</p>
 </div>"""),
 
 "ishihara": dict(
-  title="ishihara", tagline="Colour-vision plates, reproducible from a seed.",
+  title="ishihara", tagline="Color-vision plates, reproducible from a seed.",
   lede="Generates pseudoisochromatic plates &mdash; the dotted circles with a "
-       "numeral hidden in the colour separation &mdash; from a seed, so the "
+       "numeral hidden in the color separation &mdash; from a seed, so the "
        "same seed gives the same plate on any machine, forever.",
   cta=[("Install it", "https://pypi.org/project/ishihara/"),
        ("Source", "https://github.com/vince-gonzalez/ishihara"),
@@ -751,12 +751,12 @@ someone re-running it on different hardware.</p>
         "Because without it, two people take two different tests and the "
         "results cannot be compared with each other or with themselves.")],
   facts=[("Install", "pip install ishihara"), ("Version", "0.1.2"),
-         ("Licence", "MIT"), ("Output", "Plate images from a seed"),
+         ("License", "MIT"), ("Output", "Plate images from a seed"),
          ("Source", "vince-gonzalez/ishihara")],
   body="""
 <h2>What it does</h2>
 <p>Generates pseudoisochromatic plates &mdash; the dotted circles with a
-numeral hidden in the colour separation &mdash; from a seed, so the same seed
+numeral hidden in the color separation &mdash; from a seed, so the same seed
 gives the same plate on any machine, forever.</p>
 <pre><b>pip install ishihara</b>
 ishihara --seed 4211 --figure 74</pre>
@@ -779,7 +779,7 @@ underlying method is deposited with a DOI.</p>
 "legible": dict(
   title="legible", tagline="Three gates a linter will not give you.",
   lede="Three build gates for defects a linter has no opinion about, because "
-       "none of them is a syntax error. Type too small to read, colour that "
+       "none of them is a syntax error. Type too small to read, color that "
        "cannot be read on its own background, and a name that should be gone.",
   cta=[("Install it", "https://pypi.org/project/legible/"),
        ("Use as a GitHub Action", "https://github.com/vince-gonzalez/typefloor"),
@@ -802,7 +802,7 @@ underlying method is deposited with a DOI.</p>
              "Fails when type is declared below a readable floor. A linter "
              "has no view on 9px body text; a person does."),
             ("contrast-gate",
-             "Fails when a declared colour cannot be read on a surface the "
+             "Fails when a declared color cannot be read on a surface the "
              "same file declares. <code>--require-pairs</code> also fails a "
              "file that declares no pairs at all, because a vacuous pass "
              "looks exactly like a real one."),
@@ -829,7 +829,7 @@ underlying method is deposited with a DOI.</p>
         "recorded in a file rather than scattered through the source."),
        ("Do I have to use all three?",
         "No. They are separate commands and separate Actions.")],
-  facts=[("Install","pip install legible"),("Licence","MIT"),
+  facts=[("Install","pip install legible"),("License","MIT"),
          ("Commands","typefloor, contrast-gate, deadname-gate"),
          ("Actions","typefloor, contrast-gate, deadname-gate, cvd-palette"),
          ("Source","vince-gonzalez/f-keys")],
@@ -840,7 +840,7 @@ them is a syntax error. Each one exists because a person read something and
 could not.</p>
 <pre><b>pip install legible</b>
 typefloor ./src                  type below a readable floor
-contrast-gate ./src              colour that cannot be read on its surface
+contrast-gate ./src              color that cannot be read on its surface
 deadname-gate ./src              a name that should be gone</pre>
 <h2>The rename gate is the unusual one</h2>
 <p>It fails a build when a retired name reaches a title, a footer, a byline,
@@ -856,7 +856,7 @@ harder version and the one worth getting right.</p>
 opened, because a bare path argument was ignored and each scanned itself
 instead. <code>deadname-gate</code> exits <b>2</b> rather than <b>0</b> when
 nothing is configured, and <code>contrast-gate --require-pairs</code> fails
-rather than passing a stylesheet that declares no colours at all.</p>
+rather than passing a stylesheet that declares no colors at all.</p>
 <div class="btnrow">
   <a class="btn default" href="https://pypi.org/project/legible/" rel="noopener">PyPI</a>
   <a class="btn" href="https://github.com/vince-gonzalez/typefloor" rel="noopener">typefloor action</a>
@@ -912,7 +912,7 @@ rather than passing a stylesheet that declares no colours at all.</p>
         "GETs. It never writes anything."),
        ("Why does the $ref thing matter?",
         "It cost a week on a specification that passed every other check.")],
-  facts=[("Install","pip install openapi-drift"),("Licence","MIT"),
+  facts=[("Install","pip install openapi-drift"),("License","MIT"),
          ("Action","vince-gonzalez/openapi-drift"),
          ("Source","vince-gonzalez/openapi-drift")],
   body="""
@@ -993,7 +993,7 @@ value reports drift that is the checker's fault. Nothing is ever written.</p>
        ("What does it need?",
         "A <code>GITHUB_TOKEN</code> for the GitHub half. Everything else is "
         "public.")],
-  facts=[("Install","pip install changewatch"),("Licence","MIT"),
+  facts=[("Install","pip install changewatch"),("License","MIT"),
          ("Needs","GITHUB_TOKEN for the GitHub half"),
          ("Source","vince-gonzalez/changewatch")],
   body="""
@@ -1071,7 +1071,7 @@ first run learns; the second one rings.</p>
         "No. It converts tablature to notes; what you do with them is yours."),
        ("What happens with a malformed tab?",
         "Zero notes rather than invented ones.")],
-  facts=[("Install","npm install keyjockey"),("Licence","MIT"),
+  facts=[("Install","npm install keyjockey"),("License","MIT"),
          ("Tunings","8, with capo offsets"),
          ("Source","vince-gonzalez/f-keys")],
   body="""
@@ -1100,9 +1100,9 @@ one.</p>
 </div>"""),
 
 "opticquiz": dict(
-  title="OpticQuiz", tagline="See colour. Check colour. Correct colour.",
+  title="OpticQuiz", tagline="See color. Check color. Correct color.",
   lede="Sixteen vision tests that run entirely in your browser, and a "
-       "colour-accessibility toolkit for people who ship things other people "
+       "color-accessibility toolkit for people who ship things other people "
        "have to look at. Nothing is uploaded.",
   cta=[("Take a test", "https://opticquiz.com"),
        ("Check a palette", "https://www.npmjs.com/package/opticquiz-cvd"),
@@ -1110,7 +1110,7 @@ one.</p>
   herometa="<b>Free, no account</b> &middot; runs entirely in the browser "
            "&middot; fifteen npm packages &middot; method deposited with a DOI",
   steps=[("Open it and pick a test",
-          "Acuity charts, colour vision, contrast. Sixteen of them, and none "
+          "Acuity charts, color vision, contrast. Sixteen of them, and none "
           "asks who you are."),
          ("Take it on your own screen",
           "Everything runs locally. The results never leave the machine, "
@@ -1122,7 +1122,7 @@ one.</p>
           "ships rather than after somebody complains.")],
   features_title="Two audiences, one engine",
   features=[("Sixteen tests",
-             "Acuity, colour vision and contrast, rendered honestly with "
+             "Acuity, color vision and contrast, rendered honestly with "
              "their calibration limits published rather than glossed."),
             ("Nothing is uploaded",
              "The tests run on your machine. No account, no result stored, "
@@ -1133,10 +1133,10 @@ one.</p>
              "<code>cvdsim</code>, <code>cvdsafe</code>, "
              "<code>safepalette</code>, <code>cvdplate</code>, "
              "<code>opticquiz-eye</code>, one named for each deficiency, and "
-             "three MCP servers, so the same maths runs in your "
+             "three MCP servers, so the same math runs in your "
              "pipeline."),
             ("A build gate",
-             "The cvd-palette Action fails a build when two colours collapse "
+             "The cvd-palette Action fails a build when two colors collapse "
              "into one under protanopia, deuteranopia or tritanopia."),
             ("The default palette is not safe",
              "Matplotlib red and green are 71 apart to normal vision and "
@@ -1150,7 +1150,7 @@ one.</p>
        ("Do you keep my results?",
         "There is nothing to keep. The tests run in your browser and no "
         "result is transmitted."),
-       ("Can I check my product's colours automatically?",
+       ("Can I check my product's colors automatically?",
         "Yes &mdash; that is what the packages and the GitHub Action are for. "
         "The check that runs on the site runs in your build."),
        ("Why should I trust the plates?",
@@ -1166,8 +1166,8 @@ one.</p>
          ("Research","Deposited, with DOIs")],
   body="""
 <h2>What it is</h2>
-<p>Sixteen vision tests that run in the browser &mdash; acuity charts, colour
-vision, contrast, and a colour-accessibility toolkit for people building
+<p>Sixteen vision tests that run in the browser &mdash; acuity charts, color
+vision, contrast, and a color-accessibility toolkit for people building
 things other people have to look at.</p>
 <p>Nothing is uploaded. The tests run on your machine, which is the only
 arrangement under which anyone should be typing what they can and cannot see
@@ -1178,12 +1178,12 @@ design, the same simulation is installable: <code>npm i opticquiz-cvd</code> or
 the PyPI package of the same name, so the check that runs in the browser also
 runs in your build.</p>
 <p>There is a <a href="https://github.com/vince-gonzalez/cvd-palette" rel="noopener">GitHub Action</a> too &mdash; it
-fails a build when two colours in a palette become the same colour under
+fails a build when two colors in a palette become the same color under
 protanopia, deuteranopia or tritanopia. The default matplotlib red and green
 are seventy-one apart to normal vision and five apart under deuteranopia.</p>
 <h2>What it is not</h2>
 <p>Screening, not diagnosis. These are the same plates and charts an optician
-would recognise, rendered honestly, with their calibration limits published
+would recognize, rendered honestly, with their calibration limits published
 rather than glossed. A screen is not a lightbox and the tests say so.</p>
 <div class="btnrow">
   <a class="btn default" href="https://opticquiz.com" rel="noopener">Take a test</a>
@@ -1472,7 +1472,7 @@ that may have changed.</p>
             ("Recipes as a sourcing map",
              "A dish, and then who to get the parts from."),
             ("Continuously worked on",
-             "It is a live catalogue rather than a listicle from 2019.")],
+             "It is a live catalog rather than a listicle from 2019.")],
   faq=[("Do makers pay to be listed?",
         "The list is compiled to be useful. If you are a maker who ships and "
         "you are missing, "
@@ -1517,7 +1517,7 @@ list you would want if you knew the list existed.</p>
           "yourself.")],
   features_title="What is on it",
   features=[("The history",
-             "Where it comes from and how it travelled."),
+             "Where it comes from and how it traveled."),
             ("The method",
              "How it is actually made, not a simplified version that "
              "produces something else."),
@@ -1727,7 +1727,7 @@ currently playing it.</p>
        ("Is it free?",
         "The browser version is. The desktop build is proprietary and "
         "downloadable from the releases page.")],
-  facts=[("Version","1.6.0"),("Licence","Proprietary"),("Platforms","Browser, Windows, Linux"),
+  facts=[("Version","1.6.0"),("License","Proprietary"),("Platforms","Browser, Windows, Linux"),
          ("Source","vince-gonzalez/f-keys")],
   body="""
 <h2>What it does</h2>
@@ -1767,7 +1767,7 @@ stops when you stop it &mdash; nothing is added to startup.</p>
 asks whether a key went down and discards everything else. There is no keystroke buffer in
 it, which is the difference between an instrument and a keylogger.</p>
 <p>The CLI is MIT. The desktop and browser apps are not &mdash; see
-<a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE">the licence</a>.</p>
+<a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE">the license</a>.</p>
 <div class="btnrow">
   <a class="btn default" href="/keyj/app.html">Open in browser</a>
   <a class="btn" href="https://github.com/vince-gonzalez/f-keys/releases/latest">Download</a>
@@ -1797,7 +1797,7 @@ it, which is the difference between an instrument and a keylogger.</p>
              "A digital audio workstation is the correct tool for making an "
              "album and the wrong one for writing eight bars of chiptune."),
             ("Real notation",
-             "A staff, not a grid of coloured blocks. The knowledge transfers "
+             "A staff, not a grid of colored blocks. The knowledge transfers "
              "in both directions."),
             ("8-bit voices",
              "Square, triangle, noise &mdash; the palette that made the sound "
@@ -1816,7 +1816,7 @@ it, which is the difference between an instrument and a keylogger.</p>
         "No. It runs in your browser and the export is a local file."),
        ("Can I use what I make?",
         "Yes. It is yours.")],
-  facts=[("Licence","MIT"),("Platform","Browser"),("Install","None"),("Exports","WAV, ringtone")],
+  facts=[("License","MIT"),("Platform","Browser"),("Install","None"),("Exports","WAV, ringtone")],
   body="""
 <h2>What it does</h2>
 <p>Draw notes onto a 96-row piano roll, pick a waveform per channel, set the tempo and
@@ -2296,7 +2296,7 @@ answers a real question is worth keeping.</p>
         "No. It draws a window with Tk, so it wants a desktop. The machine "
         "being watched can be headless; the machine watching cannot.")],
   facts=[("Name","Personal Ledger Utility Monitor, Heads-Up Display"),
-         ("Version","4.1.2"),("Licence","MIT"),("Install","pip install plumhud"),
+         ("Version","4.1.2"),("License","MIT"),("Install","pip install plumhud"),
          ("Requires","Python 3.8+, Tk"),("Depends on","moonbeam-miner")],
   body="""
 <h2>What it does</h2>
@@ -2360,7 +2360,7 @@ plumhud where    where config and history live</pre>
        ("What hardware?",
         "Anything that runs Debian and can decode video &mdash; it is meant "
         "for a small box behind the television.")],
-  facts=[("Licence","MIT"),("Platform","Debian or Ubuntu"),
+  facts=[("License","MIT"),("Platform","Debian or Ubuntu"),
          ("Needs","Streamlink, VLC, pygame"),("Starts","systemd, on boot")],
   body="""
 <h2>What it does</h2>
@@ -2415,7 +2415,7 @@ in the list can cut in halfway through. Edits apply at the next check, with no r
        ("Is there a UI?",
         "This is the library. <a href=\"/plumhud/\">PlumHUD</a> is the "
         "display.")],
-  facts=[("Version","1.0.2"),("Licence","MIT"),("Install","pip install moonbeam-miner"),
+  facts=[("Version","1.0.2"),("License","MIT"),("Install","pip install moonbeam-miner"),
          ("Requires","Python 3.8+"),("Dependencies","None")],
   body="""
 <h2>What it does</h2>
@@ -2464,7 +2464,7 @@ averaging them in.</p>
              "Not a trial limit that appears at ten. There is no count."),
             ("Any shape, any size, anywhere",
              "Free placement on a grid you draw on. Drop a control, size it, "
-             "colour it, decide what it sends."),
+             "color it, decide what it sends."),
             ("Every command it can carry out",
              "No command is held back for a paid tier. If RemapWrap can do it, "
              "the free version does it."),
@@ -2493,8 +2493,8 @@ averaging them in.</p>
        ("What does it cost?",
         "The free version is free forever, with no account, on as many of your "
         "own computers as you like, and everything listed above stays free. "
-        "Use inside a business, a school or another organisation needs a "
-        "licence &mdash; <a href=\"/contact.html\">ask</a>."),
+        "Use inside a business, a school or another organization needs a "
+        "license &mdash; <a href=\"/contact.html\">ask</a>."),
        ("How finished is it?",
         "It is 0.1.0 and labelled alpha because it is one. It works, it is in "
         "daily use, and it will have rough edges you find before I do.")],
@@ -2515,7 +2515,7 @@ is the glass you are already holding.</p>
 
 <h2>Then sixty seconds to make it yours</h2>
 <p>The default layout is the fifteen-second answer. The real one is a mock screen you draw
-on: drop a control anywhere, size it, colour it, and decide what it sends.</p>
+on: drop a control anywhere, size it, color it, and decide what it sends.</p>
 <table class="facts">
 <tr><th>Buttons</th><td>Any shape and size, from a single key to a full-width bar</td></tr>
 <tr><th>Sliders</th><td>Continuous values &mdash; a volume, a zoom, an exposure</td></tr>
@@ -2632,7 +2632,7 @@ deployment, documentation.</p>
 <h2>Recurring subject</h2>
 <p>Provenance &mdash; what a result rests on. gonzalgo reads a compiled Lean 4 or
 Metamath library and reports which axioms a theorem spends rather than inherits.
-OpticQuiz runs one colour-vision engine across every channel it ships to, with
+OpticQuiz runs one color-vision engine across every channel it ships to, with
 the JavaScript and Python implementations verified identical to six decimal
 places, and publishes the calibration limits that bound its own results.</p>
 <h2>Subjects</h2>
@@ -2700,7 +2700,7 @@ claims to be about, and whether your town appears anywhere on it.</td></tr>
 <tr><th>Reaching you</th><td>Whether a customer can find a phone number, an
 address and today's hours without hunting. For a chain, whether every location
 has them.</td></tr>
-<tr><th>Legibility</th><td>Every text colour measured against its background
+<tr><th>Legibility</th><td>Every text color measured against its background
 for contrast, to the WCAG 4.5:1 floor. Computed, not eyeballed.</td></tr>
 <tr><th>Broken things</th><td>Dead links, missing images, pages that error, and
 anything the browser complains about.</td></tr>
@@ -2858,9 +2858,9 @@ HOME_DOC = """
 </div>
 
 <div class="doc" style="padding-bottom:6px">
-<p>F-Keys Creative LLC, Punta Gorda, Florida. The catalogue below holds
+<p>F-Keys Creative LLC, Punta Gorda, Florida. The catalog below holds
 %%SHELVES%% sections, sorted the way a file manager sorts them. Each product
-page carries its own licence, terms and price; nothing is assumed to match the
+page carries its own license, terms and price; nothing is assumed to match the
 last one.</p>
 </div>
 """
@@ -3043,7 +3043,7 @@ at where it used to be.</p>
 <li><b><a href="/">f-keys.com</a></b>. Every product in one table.</li>
 <li><b><a href="/sitemap.xml">/sitemap.xml</a></b>. Every URL on this
 site, for crawlers and agents.</li>
-<li><b><a href="/llms.txt">/llms.txt</a></b>. The whole catalogue as plain
+<li><b><a href="/llms.txt">/llms.txt</a></b>. The whole catalog as plain
 text, including what each product is for and when to reach for it.</li>
 <li><b><a href="/Docs.html">/Docs.html</a></b>. Setup, configuration and
 troubleshooting.</li>
@@ -3060,7 +3060,7 @@ link that sent you here was ours.</li>
 <li><a href="/properties.html">/properties.html</a>. The standalone sites</li>
 </ul>
 <div class="btnrow">
-  <a class="btn default" href="/">Back to the catalogue</a>
+  <a class="btn default" href="/">Back to the catalog</a>
   <a class="btn" href="/llms.txt">llms.txt</a>
   <a class="btn" href="/sitemap.xml">sitemap.xml</a>
 </div>
@@ -3084,7 +3084,7 @@ DEVELOPERS_DOC = """
 <tr><th>OpenAPI</th><td><a href="/openapi.json">/openapi.json</a>. Every
 published document, each with a typed schema naming its columns</td></tr>
 <tr><th>For agents</th><td><a href="/llms.txt">/llms.txt</a>. The whole
-catalogue as plain text, including when to reach for each thing</td></tr>
+catalog as plain text, including when to reach for each thing</td></tr>
 <tr><th>Site map</th><td><a href="/sitemap.xml">/sitemap.xml</a></td></tr>
 <tr><th>Product docs</th><td><a href="/Docs.html">/Docs.html</a>. Setup,
 configuration and troubleshooting</td></tr>
@@ -3188,10 +3188,10 @@ public sources.</td></tr>
 <tr><th>saydo</th><td><code>pip install saydo</code>. Run a tool against
 the behavioural contract its author signed, and emit a receipt anyone can
 verify.</td></tr>
-<tr><th>ishihara</th><td><code>pip install ishihara</code>. Pseudoisochromatic colour-vision plates, reproducible from a seed.</td></tr>
-<tr><th>opticquiz-cvd</th><td><code>pip install opticquiz-cvd</code>. The colour-accessibility engine, the same maths as the npm package.</td></tr>
+<tr><th>ishihara</th><td><code>pip install ishihara</code>. Pseudoisochromatic color-vision plates, reproducible from a seed.</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>pip install opticquiz-cvd</code>. The color-accessibility engine, the same math as the npm package.</td></tr>
 <tr><th>legible</th><td><code>pip install legible</code>. Three build
-gates: unreadable type, unreadable colour, a retired name.</td></tr>
+gates: unreadable type, unreadable color, a retired name.</td></tr>
 <tr><th>openapi-drift</th><td><code>pip install openapi-drift</code>. Has your API drifted from its spec, and can a machine still read it?</td></tr>
 <tr><th>changewatch</th><td><code>pip install changewatch</code>. A
 doorbell for your published work. Silent until somebody else acts.</td></tr>
@@ -3205,14 +3205,14 @@ monitor.</td></tr>
 <tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
 NerdMiner discovery and vitals.</td></tr>
 </table>
-<p>Nineteen on npm. Most of them are the OpticQuiz colour engine published one
+<p>Nineteen on npm. Most of them are the OpticQuiz color engine published one
 name per deficiency, so somebody searching for <code>protanopia</code> finds
 it; these are the entry points.</p>
 <table class="facts">
-<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code>. Colour-vision simulation and daltonisation.</td></tr>
+<tr><th>opticquiz-cvd</th><td><code>npm i opticquiz-cvd</code>. Color-vision simulation and daltonization.</td></tr>
 <tr><th>opticquiz-cvd-mcp</th><td><code>npm i opticquiz-cvd-mcp</code>. The same engine as callable tools for an LLM.</td></tr>
 <tr><th>opticquiz-eye</th><td><code>npm i opticquiz-eye</code>. A
-one-line widget that lets a visitor re-colour your site.</td></tr>
+one-line widget that lets a visitor re-color your site.</td></tr>
 <tr><th>keyjockey</th><td><code>npm i keyjockey</code>. Tablature to
 notes: eight tunings, capo offsets, MIDI and frequency. npm only.</td></tr>
 <tr><th>&#64;f-keys/tip-widget</th><td><code>npm i &#64;f-keys/tip-widget</code>. The TipStreams widget.</td></tr>
@@ -3534,7 +3534,7 @@ permission to read input devices, on Windows that a security tool blocked it.</p
 your keys keep playing. Quit from the tray menu.</p>
 
 <h2>The three tools</h2>
-<p>The centre of the window is tabbed, and one tool shows at a time. That is
+<p>The center of the window is tabbed, and one tool shows at a time. That is
 deliberate: stacked, the three of them made the page four thousand pixels tall.</p>
 <table class="facts">
 <tr><th>Keyboard</th><td>Sixty-one keys, C2 to C7. Click them to hear them, or turn on
@@ -3615,7 +3615,7 @@ a tone with a longer tail such as Bell or Pad.</td></tr>
 often the block has a different number of string lines than the tuning expects.</td></tr>
 <tr><th>Two Key-J entries in Add/Remove Programs</th><td>Only if you installed
 1.4.0. That build carried a different application identifier, which Windows uses
-to recognise an upgrade, so anything newer installs beside it rather than over
+to recognize an upgrade, so anything newer installs beside it rather than over
 it. Uninstall both, then install the current version once. Nothing installed
 from 1.4.1 onward does this.</td></tr>
 <tr><th>The installer says it cannot continue</th><td>Key-J is running. Close it
@@ -3694,7 +3694,7 @@ where you put it.</p>
 <h2>Verifying this rather than believing it</h2>
 <p>The Key-J source is published. It is not free to copy &mdash; see
 <a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj/LICENSE">the
-licence</a>. But it is readable precisely so that a program which installs
+license</a>. But it is readable precisely so that a program which installs
 a keyboard hook can be audited by the people running it. The global hook lives in
 <code>keyj/desktop/src/main.js</code>; the handler is a few lines long and you can
 read every one of them.</p>
@@ -3706,7 +3706,7 @@ watch it make no requests.</p>
 anyone, of any age.</p>
 
 <h2>Changes and contact</h2>
-<p>If this ever stops being true, this page changes before the behaviour does.
+<p>If this ever stops being true, this page changes before the behavior does.
 Questions: <a href="mailto:hello@f-keys.com">hello@f-keys.com</a>.</p>
 <p class="sub">F-Keys Creative LLC &middot; last reviewed 20 August 2026</p>
 """
@@ -3943,9 +3943,9 @@ def free_basis(facts):
             return facts[key]
         if v and ("$" in v or "licen" in v or "paid" in v):
             return None                 # it states a price. Not free.
-    lic = (facts.get("Licence") or facts.get("License") or "").lower()
+    lic = (facts.get("License") or facts.get("License") or "").lower()
     if any(x in lic for x in OSS_LICENCES):
-        return facts.get("Licence") or facts.get("License")
+        return facts.get("License") or facts.get("License")
     inst = (facts.get("Install") or "").lower()
     if inst.startswith("pip install") or inst.startswith("npm install"):
         return facts.get("Install")
@@ -3982,8 +3982,8 @@ def software(slug, page, row):
         obj["operatingSystem"] = facts["Platforms"]
     if facts.get("Version"):
         obj["softwareVersion"] = facts["Version"]
-    if facts.get("Licence"):
-        obj["license"] = facts["Licence"]
+    if facts.get("License"):
+        obj["license"] = facts["License"]
     return obj
 
 
@@ -3997,7 +3997,7 @@ def main():
     written.append(("index.html", shell(
         "F-Keys — hardware, software and research",
         "F-Keys", "\n".join(body), f"{len(CATALOGUE)} object(s)",
-        description="Catalogue of hardware, software and research. F-Keys "
+        description="Catalog of hardware, software and research. F-Keys "
                     "Creative LLC, Punta Gorda, Florida.",
         canonical="https://f-keys.com", ld=organization())))
 

@@ -32,7 +32,7 @@ quietly lost.
 | | |
 |---|---|
 | Install | pip install openapi-drift |
-| Licence | MIT |
+| License | MIT |
 | Action | vince-gonzalez/openapi-drift |
 | Source | vince-gonzalez/openapi-drift |
 

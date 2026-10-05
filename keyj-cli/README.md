@@ -15,7 +15,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/keyj)](https://pypi.org/project/keyj/)
 [![Python](https://img.shields.io/pypi/pyversions/keyj)](https://pypi.org/project/keyj/)
-[![Licence](https://img.shields.io/pypi/l/keyj)](../LICENSE)
+[![License](https://img.shields.io/pypi/l/keyj)](../LICENSE)
 
 Key-J on the command line. Guitar tablature goes in, notes come out, and any
 keystroke plays the next one.

@@ -28,7 +28,7 @@ One page, no dependencies. It opens and it works.
 
 | Field | Value |
 | --- | --- |
-| Licence | MIT |
+| License | MIT |
 | Platform | Browser |
 | Install | None |
 | Exports | WAV, ringtone |

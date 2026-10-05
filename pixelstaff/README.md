@@ -31,7 +31,7 @@ quietly lost.
 
 | | |
 |---|---|
-| Licence | MIT |
+| License | MIT |
 | Platform | Browser |
 | Install | None |
 | Exports | WAV, ringtone |

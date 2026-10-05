@@ -1,6 +1,6 @@
 # F-Keys
 
-> Catalogue of hardware, software and research. F-Keys Creative LLC, Punta Gorda, Florida.
+> Catalog of hardware, software and research. F-Keys Creative LLC, Punta Gorda, Florida.
 
 Canonical: https://f-keys.com
 
@@ -11,16 +11,16 @@ Hardware, software and research.
 Punta Gorda and Southwest Florida. One price, no sales call, and
  nothing is charged until you say yes to a written quote.
 
-F-Keys Creative LLC, Punta Gorda, Florida. The catalogue below holds
+F-Keys Creative LLC, Punta Gorda, Florida. The catalog below holds
 six sections, sorted the way a file manager sorts them. Each product
-page carries its own licence, terms and price; nothing is assumed to match the
+page carries its own license, terms and price; nothing is assumed to match the
 last one.
 
 | Name | Type | Status | Description |
 | --- | --- | --- | --- |
 | [Key-J](https://f-keys.com/keyj/) | Application | Ready | Every keystroke plays a note, in any application. Live staff, WAV export. |
 | [Pixel Staff](https://f-keys.com/pixelstaff/) | Application | Ready | An 8-bit composer. Piano roll, waveform per channel, WAV or ringtone out. |
-| [OpticQuiz](https://opticquiz.com) | Web app | Ready | Colour-vision and acuity tests that run entirely in the browser. |
+| [OpticQuiz](https://opticquiz.com) | Web app | Ready | Color-vision and acuity tests that run entirely in the browser. |
 | [QV](https://f-keys.com/qv/) | Web app | Ready | Live ballots. Put a question to a room and watch the count move. |
 | [RemapWrap](https://f-keys.com/remapwrap/) | Application | Alpha | Any smartphone becomes a programmable macro pad. No app, no dongle. |
 | [Trailer Load](https://trailer-load.com) | Simulator | Ready | Warehouse load training that plays like a game. Institutional licensing. |
@@ -39,8 +39,8 @@ last one.
 | [mmforge](https://f-keys.com/mmforge/) | Python package | pip install | Find avoidable axiom dependencies in Metamath, and build the proofs that remove them. |
 | [loadbearing](https://f-keys.com/loadbearing/) | Python package | pip install | What a claim asserts, separated from what its derivation consumed. |
 | [certivl](https://f-keys.com/certivl/) | Python package | pip install | Certified interval arithmetic: an enclosure that turns a computed inequality into a proof. |
-| [ishihara](https://f-keys.com/ishihara/) | Python package | pip install | Generate pseudoisochromatic colour-vision plates, reproducible from a seed. |
-| [legible](https://f-keys.com/legible/) | Python package | pip install | Three build gates: unreadable type, unreadable colour, a retired name. |
+| [ishihara](https://f-keys.com/ishihara/) | Python package | pip install | Generate pseudoisochromatic color-vision plates, reproducible from a seed. |
+| [legible](https://f-keys.com/legible/) | Python package | pip install | Three build gates: unreadable type, unreadable color, a retired name. |
 | [openapi-drift](https://f-keys.com/openapi-drift/) | Python package | pip install | Has your API drifted from its spec, and can a machine still read it? |
 | [changewatch](https://f-keys.com/changewatch/) | Python package | pip install | A doorbell for your published work. Silent until somebody else acts. |
 | [keyjockey](https://f-keys.com/keyjockey/) | npm package | npm install | Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency. |

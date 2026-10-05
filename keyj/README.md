@@ -32,7 +32,7 @@ quietly lost.
 | | |
 |---|---|
 | Version | 1.6.0 |
-| Licence | Proprietary |
+| License | Proprietary |
 | Platforms | Browser, Windows, Linux |
 | Source | vince-gonzalez/f-keys |
 

@@ -32,7 +32,7 @@ quietly lost.
 | | |
 |---|---|
 | Install | pip install changewatch |
-| Licence | MIT |
+| License | MIT |
 | Needs | GITHUB_TOKEN for the GitHub half |
 | Source | vince-gonzalez/changewatch |
 

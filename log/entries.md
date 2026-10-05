@@ -63,7 +63,7 @@ does, and the settings that make the rest true are written down beside it.
 The offer page is generated now instead of hand-edited, and it reads as a
 Setup wizard. The included tier had been describing itself as part of the
 monthly fee, which it is not. The Clear button was a thirty-seven pixel tap
-target. The brand question has colour swatches.
+target. The brand question has color swatches.
 
 ## 2026-09-25
 
@@ -93,7 +93,7 @@ page, priced on the homepage, and described in the file the crawlers read.
 
 Rewrote the site's wording and gave it a way in.
 
-`/search/` is the whole catalogue in one table, filtered in the browser as
+`/search/` is the whole catalog in one table, filtered in the browser as
 you type — products, papers, records, the CVs. It is rendered at build time,
 so with scripting switched off it is still the complete index. Find sits in
 the toolbar and the tree, and the sitemap picked up the eleven pages it had
@@ -102,7 +102,7 @@ page, and TAG and TAG PRO.
 
 The wording is a field register now. The homepage is forty-one words and a
 table. Counts live in the About facts table, where a number is a number; the
-build fails if one of them stops matching the catalogue. Contact is the
+build fails if one of them stops matching the catalog. Contact is the
 filing details and four short headings.
 
 Wrote the rules into the gate afterwards, so the register holds without
@@ -185,7 +185,7 @@ carrying twenty internal links in four groups, stamped across all seventy-one
 pages along with a 404 and thirty-three redirect stubs for addresses that had
 moved.
 
-The colour audit went into that footer. It had been reachable from one page
+The color audit went into that footer. It had been reachable from one page
 out of sixty-eight, which meant the path from a test result to the thing that
 costs money was invisible from everywhere else — including the page that
 receives the most traffic. Never a demand problem. Nobody had been asked.
@@ -257,7 +257,7 @@ Key-J is proprietary from 1.6.0. MIT was never a decision I made; it was
 inherited from the top of the repository and then copied outward. The source
 stays readable, because a program that installs a global keyboard hook should
 be auditable by whoever runs it. Readable and free to resell are different
-things, and now the licence says which one this is.
+things, and now the license says which one this is.
 
 ## 2026-08-19
 

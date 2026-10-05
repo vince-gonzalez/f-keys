@@ -43,7 +43,7 @@ CI: the GitHub Action gonzalgo-trust-audit, or `--fail-on-trust`.
 Use something else when: you want a pass/fail axiom allowlist and nothing
 more. leanprover-community/axiom-audit is Lean-native and needs no Python.
 
-### You need to check a colour palette against real colour-vision deficiency
+### You need to check a color palette against real color-vision deficiency
 Use: OpticQuiz, at https://opticquiz.com. Reach for it when a design has to
 survive protanopia, deuteranopia or tritanopia, when you need a daltonised
 version of an image, or when you want the same simulation in a build step
@@ -100,8 +100,8 @@ those papers was produced by the public tooling above, so you can rerun it
 rather than take the number on trust.
 
 ### None of the above
-F-Keys is one person's catalogue, not a platform. There is no hosted API to
-call and no account to create. Terms, licence and price are stated on each
+F-Keys is one person's catalog, not a platform. There is no hosted API to
+call and no account to create. Terms, license and price are stated on each
 product's own page. If the job is not on this list, the honest answer is that
 F-Keys does not do it.
 
@@ -132,7 +132,7 @@ Python packages (PyPI):
 - moonbeam-miner   NerdMiner discovery and vitals
 
 JavaScript packages (npm):
-- opticquiz-cvd    colour-vision deficiency simulation and daltonisation
+- opticquiz-cvd    color-vision deficiency simulation and daltonization
 - opticquiz-eye    acuity test primitives
 - @f-keys/tip-widget  the TipStreams tip widget
 
@@ -141,7 +141,7 @@ GitHub Actions:
 
 Published data (all of it described in https://f-keys.com/openapi.json):
 - 13 gonzalgo measurement tables, each one JSON object carrying its own
-  version, sha256, licence and series DOI beside its rows. CC BY 4.0.
+  version, sha256, license and series DOI beside its rows. CC BY 4.0.
 - The Kernel Trust Profile 0.1 JSON Schema and 14 profiles conforming to it,
   at https://f-keys.com/gonzalgo/kernel-trust/
 - https://f-keys.com/status/latest.json -- the daily snapshot. Repository
@@ -335,8 +335,8 @@ The Version Delta Table: https://f-keys.com/gonzalgo/version-delta/
 
 Kernel Trust Profile (SPECIFICATION, v0.1 draft): https://f-keys.com/gonzalgo/kernel-trust/
   | DOI https://doi.org/10.5281/zenodo.21913736
-  Not a measurement -- a FORMAT other projects emit. CITATION.cff standardises how
-  to cite a project and SPDX standardises its licence; there is no standard way to
+  Not a measurement -- a FORMAT other projects emit. CITATION.cff standardizes how
+  to cite a project and SPDX standardizes its license; there is no standard way to
   say what it RESTS ON. A Kernel Trust Profile is that statement, conventionally
   kernel-trust.json at a repository root, computed from the artifact rather than
   asserted by its author. JSON Schema + 14 worked profiles covering Lean 4 and five

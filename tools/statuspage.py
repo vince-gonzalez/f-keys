@@ -89,13 +89,13 @@ SECTIONS = [
       ("All time", "all_time", "num", "num")]),
 
     ("repos", "Repositories",
-     "Public source. A repository with no licence cannot legally be reused "
+     "Public source. A repository with no license cannot legally be reused "
      "by anyone who finds it, so that column is reported rather than left "
      "for a reader to discover.",
      "github",
      [("Repository", "full_name", "text", ""),
       ("Language", "language", "text", "dim"),
-      ("Licence", "license", "text", "dim"),
+      ("License", "license", "text", "dim"),
       ("Stars", "stars", "num", "num"),
       ("Forks", "forks", "num", "num"),
       ("Issues", "open_issues", "num", "num"),
@@ -161,7 +161,7 @@ HEADLINE = [
     ("Repositories", "github_repos", "num"),
     ("Stars", "github_stars", "num"),
     ("Open issues", "open_issues", "num"),
-    ("Repos without a licence", "repos_unlicensed", "num"),
+    ("Repos without a license", "repos_unlicensed", "num"),
     ("Deposited records", "zenodo_records", "num"),
     ("Paper views", "zenodo_views", "num"),
     ("Paper downloads", "zenodo_downloads", "num"),
