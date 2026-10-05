@@ -515,3 +515,161 @@ table.details th.num,table.details td.num{text-align:right}
   line-height:1.45; border-top:1px solid #e3e3e3;
 }
 .ex figcaption a{ color:var(--doc-link); }
+
+/* ------------------------------------------------------------------
+   THE DESKTOP RUNS MORE THAN ONE APPLICATION
+
+   Every page here is a window on the same desktop. What changes is
+   which program the window belongs to, because a grid of 437,429
+   measured theorems and a treatise with a DOI are not the same kind of
+   document, and a file manager is the wrong frame for either.
+
+     .app-wordpad   prose: papers, CVs, selected writing
+     .app-excel     grids: the gonzalgo measurement tables
+
+   Both keep the same titlebar, menu bar and status bar as the
+   catalogue, so it reads as one place rather than three websites. This
+   replaces two separate identities that had grown on the site: a green
+   terminal and a serif document page, neither of which was this.
+
+   Every colour is one already declared above and already measured:
+   ink 18.88:1 and meta 7.46:1 on the white field, head 7.86:1 on the
+   face. Nothing new was introduced that needed checking.
+   ------------------------------------------------------------------ */
+
+.panes.solo{display:block;overflow:auto}
+.panes.solo .content{width:100%}
+
+/* ── WordPad: a page with a fixed measure ───────────────────────── */
+/* The ruler is not ornament. It is the window telling you the measure
+   is fixed, which is the only promise a document frame makes. */
+.ruler{
+  height:16px;margin:0 3px 3px;background:var(--field);
+  background-image:
+    repeating-linear-gradient(90deg,var(--sh) 0 1px,transparent 1px 16px);
+  background-position:8px 10px;background-size:auto 6px;
+  background-repeat:repeat-x;
+}
+
+/* ── Excel: a grid, and it should look like one ─────────────────── */
+.app-excel .wrap{border:0;margin:0}
+.app-excel table{
+  width:100%;border-collapse:collapse;font-size:13px;
+  background:var(--field);
+}
+.app-excel th{
+  position:sticky;top:0;z-index:2;
+  background:var(--face);color:var(--ink);font-weight:400;
+  text-align:center;white-space:nowrap;padding:3px 7px;
+  border:1px solid var(--sh);
+  box-shadow:inset 1px 1px 0 var(--hi);
+}
+.app-excel td{
+  padding:2px 7px;border:1px solid #d8d8d8;
+  color:var(--doc-ink);vertical-align:top;line-height:1.45;
+}
+.app-excel td.num,.app-excel td.n{
+  text-align:right;font-family:'Lucida Console',Consolas,monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.app-excel td.found{color:var(--doc-link)}
+.app-excel tr:hover td{background:#eef1f5}
+.app-excel strong{font-weight:700}
+.app-excel .doc{max-width:none;padding:10px 12px 14px}
+.app-excel .note,.app-excel .series{font-size:13px;color:var(--doc-meta)}
+.app-excel .series{
+  background:var(--face);border:1px solid var(--sh);
+  padding:7px 9px;margin:10px 0;
+}
+.app-excel .kicker{color:var(--doc-meta);font-size:13px;margin:0 0 10px}
+
+/* ── the sheet tabs along the bottom ────────────────────────────── */
+.sheettabs{display:flex;gap:2px;padding:3px 4px 0;align-items:flex-end}
+.sheettabs .tab{
+  font-size:13px;padding:2px 11px;background:var(--face);
+  border:1px solid var(--sh);border-bottom:0;color:var(--dim);
+  border-radius:3px 3px 0 0;
+}
+.sheettabs .tab.on{background:var(--field);color:var(--ink);font-weight:700}
+
+@media (max-width:640px){
+  .ruler{display:none}
+  .app-excel table{font-size:13px}
+  .sheettabs .tab{padding:2px 7px}
+}
+
+/* ------------------------------------------------------------------
+   The classes the converted pages brought with them.
+
+   /papers/, /gonzalgo/, Docs and portfolio each arrived carrying their
+   own markup from the stylesheets they used to have. Moving them into
+   the window left those class names with nothing styling them, so a
+   paper's download row rendered as three bare links in a sentence and
+   the portfolio's cards had no edges. These give each one a Windows
+   equivalent of the job it used to do.
+
+   Colours are tokens that were already measured. Nothing here
+   introduces a value the contrast gate has not seen.
+   ------------------------------------------------------------------ */
+
+/* ── a paper's front matter ─────────────────────────────────────── */
+.doc .byline{color:var(--dim);font-size:13px;margin:0 0 11px;line-height:1.5}
+.doc .getit{
+  display:flex;flex-wrap:wrap;gap:5px;align-items:center;
+  margin:0 0 15px;padding:7px 0;
+  border-top:1px solid var(--sh);border-bottom:1px solid var(--sh);
+}
+.doc .getit a{
+  font-size:13px;padding:3px 11px;background:var(--face);color:var(--ink);
+  text-decoration:none;border:2px solid;
+  border-color:var(--hi) var(--sh) var(--sh) var(--hi);
+}
+.doc .getit a:hover{text-decoration:underline}
+.doc .getit a:active{border-color:var(--sh) var(--hi) var(--hi) var(--sh)}
+.doc .getit a.alt{
+  background:transparent;border-color:transparent;
+  color:var(--doc-link);text-decoration:underline;padding:3px 6px;
+}
+
+/* ── Docs: sections, commands, server output ────────────────────── */
+.doc-section{margin:0 0 20px}
+.doc-h2{
+  font-size:13px;font-weight:700;margin:18px 0 6px;padding-bottom:3px;
+  border-bottom:1px solid var(--sh);color:var(--doc-head);
+  text-transform:uppercase;letter-spacing:.4px;
+}
+.doc-h3{font-size:13px;font-weight:700;margin:14px 0 4px;color:var(--ink)}
+.doc-p{line-height:1.65;margin:0 0 9px}
+.doc-code,.cmd,.kw{
+  font-family:'Lucida Console',Consolas,monospace;font-size:13px;
+}
+.doc-code{
+  display:block;background:var(--field);border:1px solid var(--sh);
+  padding:8px 10px;margin:8px 0;overflow-x:auto;white-space:pre-wrap;
+  word-break:break-word;
+}
+/* A command you type and the box a server draws are different things:
+   one wraps, the other must not, because box-drawing that wraps is
+   no longer a box. */
+.cmd{display:block;color:var(--ink);white-space:pre-wrap;
+     word-break:break-all}
+.kw{display:block;color:var(--ink);white-space:pre;overflow-x:auto}
+
+/* ── portfolio: one card per thing that exists ──────────────────── */
+.card{
+  border:2px solid;border-color:var(--hi) var(--sh) var(--sh) var(--hi);
+  background:var(--field);padding:9px 11px;margin:0 0 7px;
+}
+.card .top{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+.card .id{
+  font-family:'Lucida Console',Consolas,monospace;font-size:13px;
+  color:var(--dim);
+}
+.card .go{margin-left:auto;font-size:13px;white-space:nowrap}
+.card .tags{color:var(--dim);font-size:13px}
+.st.LIVE{color:var(--ok);font-weight:700}
+
+@media (max-width:640px){
+  .doc .getit{gap:4px}
+  .card .go{margin-left:0}
+}

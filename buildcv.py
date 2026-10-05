@@ -18,6 +18,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent / "tools"))
+import buildsite as B   # noqa: E402  the one window every page uses
+
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 SITE = Path(__file__).resolve().parent
 SHOW_CONTACT = False
@@ -412,34 +415,35 @@ for key, cfg in V.items():
     body = body.replace("<p>" + html.escape(cfg["tag"], quote=False) + "</p>",
                         f'<p class="tag">{html.escape(cfg["tag"])}</p>', 1)
     body = re.sub(r"<p>(Punta Gorda[^<]*)</p>", r'<p class="meta">\1</p>', body, 1)
-    page = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="googlebot" content="noindex, nofollow">
-<title>V. Gonzalez, {key} CV</title>
-<link rel="stylesheet" href="/assets/fonts.css">
-<style>
-{CSS}
-</style>
-</head>
-<body>
-<main>
-<div class="note">Unlisted. Not indexed, not in the sitemap, linked from nowhere.
-Share the URL directly.</div>
+    # A CV is a document, so it opens in the word processor like the
+    # papers do, in the same window as everything else on the site.
+    # The old template was a fourth visual identity of its own.
+    #
+    # The banner used to read "Not indexed, not in the sitemap, linked
+    # from nowhere." Two thirds of that stopped being true when /cv/
+    # got an index and the four pages were added to sitemap.xml, so it
+    # now says only what is still the case.
+    inner = f"""<div class="doc">
+<div class="note">Unlisted: these are not indexed, and search engines are
+asked not to follow them. Share the URL directly.</div>
 {body}
 <p class="switch">other versions: {others(key)}</p>
 <footer>
-  <a href="/">f-keys.com</a> · <a href="/papers/">papers</a> ·
-  <a href="/portfolio.html">work</a> ·
+  <a href="/">f-keys.com</a> &middot; <a href="/papers/">papers</a> &middot;
+  <a href="/writing/">writing samples</a> &middot;
+  <a href="/portfolio.html">work</a> &middot;
   <a href="https://orcid.org/0009-0005-3640-014X">ORCID</a>
 </footer>
-</main>
-</body>
-</html>
-"""
+</div>"""
+    page = B.shell(
+        f"V. Gonzalez, {key} CV",
+        f"CV\\{key}",
+        inner,
+        f"{len(md.split())} words",
+        description=cfg["tag"],
+        canonical=f"https://f-keys.com/cv/{key}/",
+        noindex=True,
+        app="wordpad")
     d = SITE / "cv" / key
     d.mkdir(parents=True, exist_ok=True)
     (d / "index.html").write_text(page, encoding="utf-8", newline="\n")
@@ -455,47 +459,28 @@ _rows = "\n".join(
     f' &middot; <a href="/cv/{PDFS[k][0]}">PDF, {PDFS[k][1]}</a></li>'
     for k in ("founder", "operations", "research", "writing"))
 
-_index = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CV. V. Gonzalez</title>
-<meta name="description" content="Four records, one per lane: founder,
-operations, research, writing.">
-<link rel="canonical" href="https://f-keys.com/cv/">
-<link rel="stylesheet" href="/assets/fonts.css">
-<style>
- body{{background:#0e1218;color:#e8eef7;font:16px/1.55 ui-sans-serif,system-ui,
-      -apple-system,"Segoe UI",Roboto,Arial,sans-serif;margin:0;padding:40px 22px;}}
- main{{max-width:44em;margin:0 auto;}}
- h1{{font-size:26px;margin:0 0 4px;letter-spacing:.2px;}}
- p.sub{{color:#9db2cc;margin:0 0 26px;font-size:15px;}}
- ul{{list-style:none;padding:0;margin:0 0 28px;}}
- li{{padding:11px 0;border-bottom:1px solid #223047;font-size:15px;}}
- li b{{font-weight:600;text-transform:capitalize;}}
- a{{color:#8fc7ff;text-decoration:none;}}
- a:hover{{text-decoration:underline;}}
- footer{{color:#9db2cc;font-size:14px;border-top:1px solid #223047;padding-top:14px;}}
-</style>
-</head>
-<body>
-<main>
+# The index opens in the file manager, because that is what it is: a
+# list of four documents. The documents themselves open in the word
+# processor. Same desktop either way.
+_index = B.shell(
+    "CV. V. Gonzalez",
+    "F-Keys\\CV",
+    """<div class="doc">
 <h1>CV</h1>
-<p class="sub">Four records, one per lane. Same facts, different emphasis.</p>
-<ul>
-{_rows}
+<p class="sub">Four records, one per lane. Same facts, different emphasis.
+Each has a PDF beside it with the contact line pointing at
+<a href="/contact.html">f-keys.com/contact</a>.</p>
+<ul class="cvlist">
+""" + _rows + """
 </ul>
-<footer>
-  <a href="/">f-keys.com</a> &middot; <a href="/writing/">writing samples</a>
-  &middot; <a href="/papers/">papers</a> &middot;
-  <a href="/search/">find</a> &middot;
-  <a href="https://orcid.org/0009-0005-3640-014X">ORCID</a>
-</footer>
-</main>
-</body>
-</html>
-"""
+<p>Writing samples, each linked to its source, are at
+<a href="/writing/">/writing/</a>.</p>
+</div>""",
+    "4 records",
+    description=("Four CVs, one per lane: founder, operations, research, "
+                 "writing. PDF beside each."),
+    canonical="https://f-keys.com/cv/")
+
 (SITE / "cv" / "index.html").write_text(_index, encoding="utf-8", newline="\n")
 
 print(f"{len(made)} variants + /cv/ index, contact {'SHOWN' if SHOW_CONTACT else 'redacted'}")

@@ -3733,9 +3733,45 @@ def tree(active_cat=None, active_slug=None):
     return "\n".join(out)
 
 
+# ── one desktop, several applications ────────────────────────
+# Every page on this site is a window on the same desktop. What differs
+# is WHICH application the window belongs to, because a results table and
+# a treatise are not the same kind of document and a file manager is the
+# wrong frame for either.
+#
+#   explorer  the catalogue and every index: a tree and a file list
+#   wordpad   prose with a beginning and an end: papers, CVs, the log
+#   excel     a grid of measurements: the gonzalgo tables
+#
+# The menus are real links, not decoration. A menu bar that does nothing
+# is a costume; this one is the navigation.
+APPS = {
+# Each menu is (label, index of the accelerator letter, href). The index
+# rather than a split, because Favorites underlines its SECOND letter and
+# splitting on the first produced "Favorites" with the F underlined.
+    "explorer": dict(
+        menus=[("File", 0, "/"), ("View", 0, "/status/"),
+               ("Go", 0, "/log/"), ("Favorites", 1, "/papers/"),
+               ("Help", 0, "/about.html")],
+        address=True, tree=True, ruler=False, tabs=None),
+    "wordpad": dict(
+        menus=[("File", 0, "/"), ("Edit", 0, "/log/"),
+               ("View", 0, "/status/"), ("Insert", 0, "/papers/"),
+               ("Format", 1, "/writing/"), ("Help", 0, "/about.html")],
+        address=False, tree=False, ruler=True, tabs=None),
+    "excel": dict(
+        menus=[("File", 0, "/"), ("Edit", 0, "/log/"),
+               ("View", 0, "/status/"), ("Insert", 0, "/papers/"),
+               ("Data", 0, "/gonzalgo/data/"), ("Help", 0, "/about.html")],
+        address=False, tree=False, ruler=False,
+        tabs=[("Measurements", True), ("Method", False), ("Sources", False)]),
+}
+
+
 def shell(title, path_label, body, count_label, active_cat=None,
           active_slug=None, description="", canonical="", ld=None,
-          noindex=False):
+          noindex=False, app="explorer"):
+    cfg = APPS.get(app) or APPS["explorer"]
     up = "/" if active_cat is None else f"/{active_cat}.html"
     ld_block = jsonld(ld) if ld else ""
     robots = "noindex, follow" if noindex else "index, follow"
@@ -3745,6 +3781,48 @@ def shell(title, path_label, body, count_label, active_cat=None,
               if og_image != OG_IMAGE else
               "The F-Keys mark: a script f with KEYS set in seven-segment "
               "digits across it.")
+
+    menubar = "".join(
+        '<a href="{}">{}<u>{}</u>{}</a>'.format(
+            esc(href), esc(label[:i]), esc(label[i]), esc(label[i + 1:]))
+        for label, i, href in cfg["menus"])
+
+    addressbar = ("""
+  <div class="addressbar">
+    <span class="lbl">Address</span>
+    <span class="path sunken"><span>&#128193; %s</span></span>
+  </div>
+""" % esc(path_label)) if cfg["address"] else ""
+
+    # A WordPad ruler is not ornament: it tells the reader the measure is
+    # fixed, which is the whole claim a document window makes.
+    ruler = ("""
+  <div class="ruler sunken" aria-hidden="true"></div>
+""" if cfg["ruler"] else "")
+
+    tabs = ""
+    if cfg["tabs"]:
+        cells = "".join(
+            f'<span class="tab{" on" if on else ""}">{esc(n)}</span>'
+            for n, on in cfg["tabs"])
+        tabs = f'\n  <div class="sheettabs">{cells}</div>\n'
+
+    if cfg["tree"]:
+        panes = f"""  <div class="panes">
+    <aside class="tree sunken">
+{tree(active_cat, active_slug)}
+    </aside>
+    <section class="content sunken">
+{body}
+    </section>
+  </div>"""
+    else:
+        panes = f"""  <div class="panes solo">
+    <section class="content sunken app-{esc(app)}">
+{body}
+    </section>
+  </div>"""
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -3782,11 +3860,7 @@ def shell(title, path_label, body, count_label, active_cat=None,
     <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
   </div>
 
-  <nav class="menubar">
-    <a href="/"><u>F</u>ile</a><a href="/status/"><u>V</u>iew</a>
-    <a href="/log/"><u>G</u>o</a><a href="/papers/">F<u>a</u>vorites</a>
-    <a href="/about.html"><u>H</u>elp</a>
-  </nav>
+  <nav class="menubar">{menubar}</nav>
 
   <div class="toolbar groove">
     <a class="tool" href="{esc(up)}">&#8592; Back</a>
@@ -3799,19 +3873,8 @@ def shell(title, path_label, body, count_label, active_cat=None,
     <a class="tool hide-xs" href="/log/">Log</a>
   </div>
 
-  <div class="addressbar">
-    <span class="lbl">Address</span>
-    <span class="path sunken"><span>&#128193; {esc(path_label)}</span></span>
-  </div>
-
-  <div class="panes">
-    <aside class="tree sunken">
-{tree(active_cat, active_slug)}
-    </aside>
-    <section class="content sunken">
-{body}
-    </section>
-  </div>
+{addressbar}{ruler}
+{panes}{tabs}
 
   <div class="statusbar">
     <span class="cell groove">{esc(count_label)}</span>

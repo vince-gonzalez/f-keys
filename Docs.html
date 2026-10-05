@@ -1,358 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--
-// ============================================================
-// WORKFLOW STACK
-// File:        docs.html
-// Brand:       F-Keys
-// Author:      Vincent Gonzalez | © 2026 F-Keys | www.f-keys.com
-// Version:     v2.0.0
-// Description: RemapWrap documentation. Quick-start, config
-//              reference, action strings, pairing, troubleshooting.
-//              Every claim verified against remapwrap/ source.
-// Boot Order:
-//   1. Fonts load
-//   2. DOM ready → initScroll(), initDocNav()
-//   3. Scroll spy → highlight active doc section in sidebar
-// External Deps: none. VT323 and Share Tech Mono were loaded from
-//   fonts.googleapis.com, which reported every reader's IP to Google.
-//   Both are OFL 1.1 and are now served from /assets/fonts.css.
-// Layout Target: sidebar + content, 768px+. Single col mobile.
-// Browser Target: Chrome / Firefox / Safari / Edge (latest)
-// ============================================================
--->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="RemapWrap documentation — quick-start, config reference, action strings, pairing, troubleshooting.">
 <title>Docs — RemapWrap</title>
+<meta name="description" content="RemapWrap documentation — quick-start, config reference, action strings, pairing, troubleshooting.">
 
-<!-- Fonts -->
-<link href="/assets/fonts.css" rel="stylesheet">
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="F-Keys">
+<meta property="og:title" content="Docs — RemapWrap">
+<meta property="og:description" content="RemapWrap documentation — quick-start, config reference, action strings, pairing, troubleshooting.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com">
+<meta property="og:image" content="https://f-keys.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Docs — RemapWrap">
+<meta name="twitter:description" content="RemapWrap documentation — quick-start, config reference, action strings, pairing, troubleshooting.">
+<meta name="twitter:image" content="https://f-keys.com/assets/og.png">
+<link rel="stylesheet" href="/win98.css?v=29fdd917">
 
-<style>
-:root {
-  --bg:         #0a0e0a;
-  --bg2:        #0d120d;
-  --bg3:        #101610;
-  --panel:      #111911;
-  --border:     #1f351f;
-  --border2:    #243824;
-  --green:      #39ff14;
-  --green-dim:  #2a9c12;
-  --cyan:       #00ffcc;
-  --amber:      #ffb700;
-  --red:        #ff3131;
-  --text:       #c3dcc3;
-  --text-dim:   #8fae8f;
-  --text-bright:#e0ffe0;
-  --font-head:  'VT323', 'Courier New', monospace;
-  --font-body:  'Share Tech Mono', 'Courier New', monospace;
-  --glow:       0 0 20px rgba(57,255,20,0.45);
-  --glow-sm:    0 0 8px  rgba(57,255,20,0.3);
-  --radius:     3px;
-  --sidebar-w:  240px;
-}
-
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.8;
-  cursor: crosshair;
-}
-a { color: var(--green); text-decoration: none; }
-a:hover { text-shadow: var(--glow-sm); }
-
-/* Scanlines */
-body::before {
-  content: '';
-  position: fixed; inset:0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px,
-    rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
-  );
-  pointer-events: none;
-  z-index: 9000;
-}
-
-/* ── Nav ── */
-nav {
-  position: fixed; top:0; left:0; right:0;
-  z-index: 8000;
-  height: 52px;
-  background: rgba(10,14,10,0.95);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-}
-.nav-logo {
-  font-family: var(--font-head);
-  font-size: 26px;
-  letter-spacing: 5px;
-  color: var(--green);
-  text-shadow: var(--glow-sm);
-}
-.nav-logo span { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; }
-.nav-right { display: flex; align-items: center; gap: 24px; font-size: 13px; letter-spacing: 2px; }
-.nav-right a { color: var(--text-dim); }
-.nav-right a:hover { color: var(--green); }
-.nav-back {
-  font-family: var(--font-head);
-  font-size: 16px;
-  letter-spacing: 3px;
-  padding: 5px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text-dim);
-  transition: border-color 0.2s, color 0.2s;
-}
-.nav-back:hover { border-color: var(--green); color: var(--green); }
-
-/* ── Doc layout ── */
-.doc-wrap {
-  display: flex;
-  padding-top: 52px;
-  min-height: 100vh;
-}
-
-/* ── Sidebar ── */
-.sidebar {
-  width: var(--sidebar-w);
-  flex-shrink: 0;
-  position: sticky;
-  top: 52px;
-  height: calc(100vh - 52px);
-  overflow-y: auto;
-  background: var(--bg2);
-  border-right: 1px solid var(--border);
-  padding: 28px 0;
-}
-.sidebar::-webkit-scrollbar { width: 3px; }
-.sidebar::-webkit-scrollbar-thumb { background: var(--border); }
-
-.sidebar-section-title {
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: var(--text-dim);
-  padding: 14px 20px 6px;
-  text-transform: uppercase;
-}
-.sidebar-link {
-  display: block;
-  padding: 7px 20px;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-  border-left: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-}
-.sidebar-link:hover { color: var(--text); border-left-color: var(--border2); }
-.sidebar-link.active { color: var(--green); border-left-color: var(--green); text-shadow: var(--glow-sm); }
-
-/* ── Doc content ── */
-.doc-content {
-  flex: 1;
-  max-width: 820px;
-  padding: 48px 48px 80px;
-  min-width: 0;
-}
-
-/* ── Doc sections ── */
-.doc-section {
-  margin-bottom: 72px;
-  scroll-margin-top: 72px;
-}
-
-.doc-h1 {
-  font-family: var(--font-head);
-  font-size: 52px;
-  letter-spacing: 5px;
-  color: var(--text-bright);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.doc-h1 span { color: var(--green); text-shadow: var(--glow-sm); }
-
-.doc-h2 {
-  font-family: var(--font-head);
-  font-size: 28px;
-  letter-spacing: 4px;
-  color: var(--text-bright);
-  margin-bottom: 16px;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.doc-h2::before {
-  content: '//';
-  color: var(--green-dim);
-  font-size: 18px;
-}
-
-.doc-h3 {
-  font-family: var(--font-head);
-  font-size: 18px;
-  letter-spacing: 3px;
-  color: var(--cyan);
-  margin-bottom: 10px;
-  margin-top: 28px;
-}
-
-.doc-p {
-  color: var(--text-dim);
-  font-size: 13px;
-  line-height: 1.9;
-  margin-bottom: 14px;
-  max-width: 680px;
-}
-.doc-p strong { color: var(--text); }
-.doc-p a { color: var(--green); }
-
-/* ── Code block ── */
-.doc-code {
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  font-size: 13px;
-  line-height: 2;
-  overflow-x: auto;
-  margin: 16px 0;
-  position: relative;
-}
-.doc-code .ln  { color: var(--text-dim); user-select: none; margin-right: 16px; }
-.doc-code .cmd { color: var(--green); }
-.doc-code .cmt { color: var(--text-dim); }
-.doc-code .kw  { color: var(--cyan); }
-.doc-code .str { color: var(--amber); }
-.doc-code .err { color: var(--red); }
-.copy-btn {
-  position: absolute; top: 10px; right: 12px;
-  font-family: var(--font-head);
-  font-size: 13px;
-  letter-spacing: 2px;
-  padding: 3px 12px;
-  background: transparent;
-  border: 1px solid var(--border2);
-  color: var(--text-dim);
-  border-radius: var(--radius);
-  cursor: crosshair;
-  transition: color 0.2s, border-color 0.2s;
-}
-.copy-btn:hover { color: var(--green); border-color: var(--green); }
-
-/* ── Inline code ── */
-code {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  padding: 1px 7px;
-  border-radius: 2px;
-  font-size: 13px;
-  color: var(--cyan);
-  font-family: var(--font-body);
-}
-
-/* ── Table ── */
-.doc-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  margin: 16px 0;
-}
-.doc-table th {
-  font-family: var(--font-head);
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: var(--text);
-  text-align: left;
-  border-bottom: 1px solid var(--border2);
-  padding: 8px 12px;
-  background: var(--bg2);
-}
-.doc-table td {
-  padding: 9px 12px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-dim);
-  vertical-align: top;
-}
-.doc-table td:first-child { color: var(--cyan); }
-.doc-table tr:hover td { background: rgba(57,255,20,0.03); }
-
-/* ── Callout boxes ── */
-.callout {
-  border-left: 3px solid var(--green-dim);
-  background: var(--bg2);
-  padding: 14px 18px;
-  margin: 16px 0;
-  font-size: 13px;
-  color: var(--text-dim);
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-.callout.warn { border-left-color: var(--amber); }
-.callout.err  { border-left-color: var(--red); }
-.callout strong { color: var(--text); display: block; margin-bottom: 4px; letter-spacing: 1px; }
-
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .sidebar { display: none; }
-  .doc-content { padding: 28px 20px 60px; }
-  .doc-h1 { font-size: 36px; }
-}
-</style>
 </head>
 <body>
+<div class="window raised">
 
-<!-- Nav -->
-<nav>
-  <div class="nav-logo">F-KEYS <span>DOCS</span></div>
-  <div class="nav-right">
-    <a href="index.html" class="nav-back">← BACK TO SITE</a>
+  <div class="titlebar">
+    <span class="t"><span>Docs — RemapWrap</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
   </div>
-</nav>
 
-<div class="doc-wrap">
+  <nav class="menubar"><a href="/"><u>F</u>ile</a><a href="/log/"><u>E</u>dit</a><a href="/status/"><u>V</u>iew</a><a href="/papers/"><u>I</u>nsert</a><a href="/writing/">F<u>o</u>rmat</a><a href="/about.html"><u>H</u>elp</a></nav>
 
-  <!-- ── Sidebar ── -->
-  <aside class="sidebar">
-    <div class="sidebar-section-title">GETTING STARTED</div>
-    <a href="#overview"     class="sidebar-link active">Overview</a>
-    <a href="#requirements" class="sidebar-link">Requirements</a>
-    <a href="#quickstart"   class="sidebar-link">Quick-Start</a>
+  <div class="toolbar groove">
+    <a class="tool" href="/">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool" href="/search/">Find</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
+  </div>
 
-    <div class="sidebar-section-title">REFERENCE</div>
-    <a href="#files"        class="sidebar-link">File Reference</a>
-    <a href="#config"       class="sidebar-link">Config Block</a>
-    <a href="#actions"      class="sidebar-link">Action Strings</a>
-    <a href="#layout-json"  class="sidebar-link">Profile JSON</a>
 
-    <div class="sidebar-section-title">USAGE</div>
-    <a href="#dashboard"    class="sidebar-link">Dashboard</a>
-    <a href="#controller"   class="sidebar-link">Phone Controller</a>
-    <a href="#pairing"      class="sidebar-link">Pairing</a>
+  <div class="ruler sunken" aria-hidden="true"></div>
 
-    <div class="sidebar-section-title">TROUBLESHOOTING</div>
-    <a href="#nutjs"        class="sidebar-link">nut-js Install</a>
-    <a href="#firewall"     class="sidebar-link">Firewall / Ports</a>
-    <a href="#ios"          class="sidebar-link">iOS Notes</a>
-    <a href="#errors"       class="sidebar-link">Common Errors</a>
-
-    <div class="sidebar-section-title">PROJECT</div>
-    <a href="#roadmap"      class="sidebar-link">State of the Build</a>
-    <a href="#changelog"    class="sidebar-link">Changelog</a>
-  </aside>
-
-  <!-- ── Content ── -->
-  <main class="doc-content">
-
-    <!-- ─── Overview ─── -->
+  <div class="panes solo">
+    <section class="content sunken app-wordpad">
+<div class="doc">
+<!-- ─── Overview ─── -->
     <div class="doc-section" id="overview">
       <div class="doc-h1">REMAPWRAP <span>DOCS</span></div>
       <p class="doc-p" style="font-size:13px; letter-spacing:3px; color:var(--text-dim);">v0.1.0 ALPHA — © 2026 F-KEYS</p>
@@ -709,79 +411,16 @@ code {
         <span class="cmd">+ Haptic feedback on Android</span>
       </div>
     </div>
-
-  </main>
 </div>
+    </section>
+  </div>
 
-<script>
-/* ===== CONFIG BLOCK ===== */
-var CFG = { DEV_MODE: true };
-/* ===== END CONFIG BLOCK ===== */
+  <div class="statusbar">
+    <span class="cell groove">document</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
 
-// ── Scroll spy ───────────────────────────────────────────
-var docSections = document.querySelectorAll('.doc-section');
-var sidebarLinks = document.querySelectorAll('.sidebar-link');
-
-window.addEventListener('scroll', function() {
-  var scrollY = window.scrollY + 80;
-  var active = null;
-  docSections.forEach(function(sec) {
-    if (sec.offsetTop <= scrollY) active = sec.id;
-  });
-  sidebarLinks.forEach(function(link) {
-    link.classList.remove('active');
-    if (active && link.getAttribute('href') === '#' + active) {
-      link.classList.add('active');
-    }
-  });
-}, { passive: true });
-
-// ── Copy code button ─────────────────────────────────────
-function copyCode(btn) {
-  var block = btn.parentElement;
-  var text = block.innerText
-    .replace(/^COPY\n/, '')
-    .replace(/\n$/, '');
-  navigator.clipboard.writeText(text).then(function() {
-    btn.textContent = 'COPIED';
-    setTimeout(function() { btn.textContent = 'COPY'; }, 1500);
-  }).catch(function() {
-    btn.textContent = 'ERROR';
-    setTimeout(function() { btn.textContent = 'COPY'; }, 1500);
-  });
-}
-
-/*
-CHANGE LOG v2.0.0
-- Every content section rewritten against remapwrap/ source.
-  The page documented the retired fkeys-* three-file alpha in a
-  walkthrough register; it now documents RemapWrap as shipped,
-  in declarative reference register.
-- Quick-start: releases download (which held no RemapWrap
-  assets) replaced with clone + npm install + npm start; real
-  startup banner.
-- Facts corrected: file names, pairing (QR secret + PIN with
-  5-try/5-min lockout), localhost-only dashboard, profiles at
-  %APPDATA%\RemapWrap with schema 1 + pages, enum-generated
-  key table, per-server-only config.
-- Stale dashboard/controller CFG tables removed (values are
-  injected by the server).
-- Roadmap of invented version targets replaced with a
-  State-of-the-Build table matching the code.
-- DECISION: page titled RemapWrap Docs — it documents one
-  product, and "F-Keys Docs" collided with the company name.
-
-CHANGE LOG v1.0.0
-- Initial docs page: overview, requirements, quick-start,
-  reference, usage, troubleshooting, roadmap, changelog.
-- Sticky sidebar with scroll spy; copy button on code blocks.
-- Responsive: sidebar hidden on mobile (<768px).
-
-NEXT STEPS
-- Document the command catalogue (system.js) when obs.*/stream.*
-  integrations land
-- OG meta for the docs page
-*/
-</script>
+</div>
 </body>
 </html>

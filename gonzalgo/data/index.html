@@ -3,17 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="index, follow, max-snippet:-1">
-<link rel="canonical" href="https://f-keys.com/gonzalgo/data/">
-<title>gonzalgo indexes &mdash; standing measurements of what formal libraries rest on</title>
+<title>gonzalgo indexes — standing measurements of what formal libraries rest on</title>
 <meta name="description" content="Downloadable measurements of what formal mathematical libraries rest on: unfinished proofs, compiler-trusted reductions, axiom dependence, and which constants that dependence is responsible to. JSON and CSV, CC-BY-4.0.">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/data/">
+<meta name="robots" content="index, follow">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="F-Keys">
+<meta property="og:title" content="gonzalgo indexes — standing measurements of what formal libraries rest on">
+<meta property="og:description" content="Downloadable measurements of what formal mathematical libraries rest on: unfinished proofs, compiler-trusted reductions, axiom dependence, and which constants that dependence is responsible to. JSON and CSV, CC-BY-4.0.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/data/">
-<meta property="og:title" content="gonzalgo indexes">
-<meta property="og:description" content="Standing measurements of what formal libraries rest on. JSON and CSV, CC-BY-4.0.">
+<meta property="og:image" content="https://f-keys.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="gonzalgo indexes — standing measurements of what formal libraries rest on">
+<meta name="twitter:description" content="Downloadable measurements of what formal mathematical libraries rest on: unfinished proofs, compiler-trusted reductions, axiom dependence, and which constants that dependence is responsible to. JSON and CSV, CC-BY-4.0.">
+<meta name="twitter:image" content="https://f-keys.com/assets/og.png">
+<link rel="stylesheet" href="/win98.css?v=29fdd917">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -337,169 +348,32 @@
   ]
 }
 </script>
-<style>
-/* These pages are published measurements with DOIs, and they were
-   dressed as a hacker terminal: neon green on near-black, VT323 at 68px,
-   and a CRT scanline fixed over 9,202 table cells of Mathlib data. The
-   reader arriving from a citation is an engineer or a mathematician
-   checking a number, and the styling was asking them to read a results
-   table through a simulated bad monitor.
-
-   The palette is the one the paper pages use, so the whole body of
-   evidence reads as one publication rather than two websites. Every
-   colour was computed against its own background first; the lowest pair
-   is 6.64:1 against a 4.5:1 requirement.
-
-   Prose is held to a 44em measure while tables take the full width,
-   because a 66em line is unreadable and a six-column table at 44em is
-   unusable, and these pages contain both. */
-:root {
-  --paper:#fdfdfb; --desk-bg:#e7e7e2; --band-bg:#2a2d33;
-  --ink:#1b1b1d; --muted:#55585e; --rule:#dcdcd6; --hair:#ebebe5;
-  --link:#17457f; --label:#45484e;
-  --zebra-bg:#f7f7f3; --hover-bg:#eef1f5;
-  --found:#1d5c2e; --found-bg:#eef5ef; --warn:#8a3030;
-  --band-ink:#e9eaec; --band-dim:#b9bcc2; --desk-ink:#4a4d53;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  --serif:Georgia,"Times New Roman","Liberation Serif",serif;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  background:var(--desk-bg); color:var(--ink);
-  font-family:var(--serif); font-size:16.5px; line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* the running head */
-nav {
-  background:var(--band-bg); color:var(--band-ink);
-  padding:10px 22px; display:flex; align-items:center;
-  justify-content:space-between; gap:1.5rem;
-  font-family:var(--sans); font-size:14px;
-}
-.logo { color:var(--band-ink); font-weight:700; letter-spacing:.12em;
-        text-decoration:none; font-family:var(--sans); font-size:14px; }
-nav a { color:var(--band-dim); text-decoration:none; }
-nav a:hover { color:var(--band-ink); text-decoration:underline; }
-
-/* the sheet */
-main {
-  background:var(--paper); max-width:64em; margin:30px auto 46px;
-  padding:48px 54px 56px; border:1px solid var(--rule);
-  box-shadow:0 1px 3px rgba(0,0,0,.09), 0 10px 26px rgba(0,0,0,.07);
-}
-
-h1 { font-size:30px; line-height:1.24; font-weight:700;
-     letter-spacing:-.005em; max-width:34em; }
-.kicker { font-family:var(--sans); font-size:13px; letter-spacing:.14em;
-          text-transform:uppercase; color:var(--label);
-          margin:9px 0 22px; max-width:50em; }
-h2 { font-family:var(--sans); font-size:15px; font-weight:700;
-     letter-spacing:.07em; text-transform:uppercase; color:var(--label);
-     margin:34px 0 10px; padding-bottom:5px;
-     border-bottom:1px solid var(--rule); }
-h3 { font-family:var(--serif); font-size:18px; font-weight:700;
-     margin:24px 0 7px; }
-p { margin:0 0 15px; max-width:44em; }
-hr { border:0; border-top:1px solid var(--rule); margin:28px 0; }
-
-a { color:var(--link); text-decoration:underline; text-underline-offset:2px; }
-strong { font-weight:700; color:var(--ink); }
-em { font-style:italic; }
-
-/* the data */
-.wrap { overflow-x:auto; border:1px solid var(--rule); margin:20px 0;
-        background:var(--paper); }
-table { width:100%; border-collapse:collapse; font-family:var(--sans);
-        font-size:14px; min-width:720px; }
-th { font-size:13px; font-weight:700; letter-spacing:.05em;
-     text-transform:uppercase; color:var(--label); text-align:left;
-     padding:9px 11px; white-space:nowrap; background:var(--zebra-bg);
-     border-bottom:1px solid var(--rule); position:sticky; top:0; }
-td { padding:7px 11px; border-bottom:1px solid var(--hair);
-     vertical-align:top; }
-td, th { line-height:1.45; }
-tr:nth-child(even) td { background:var(--zebra-bg); }
-tr:hover td { background:var(--hover-bg); }
-td.num, td.n { text-align:right; font-family:var(--mono); font-size:13px;
-               font-variant-numeric:tabular-nums; white-space:nowrap; }
-td.found { color:var(--found); background:var(--found-bg); }
-tr:hover td.found { background:#e4efe6; }
-
-/* asides */
-.note { font-family:var(--sans); font-size:14px; color:var(--muted);
-        max-width:44em; }
-.series { font-family:var(--sans); font-size:14px; color:var(--muted);
-          background:var(--zebra-bg); border-left:3px solid var(--rule);
-          padding:11px 14px; margin:18px 0; max-width:48em; }
-.lede { font-size:18px; line-height:1.55; color:var(--ink);
-        max-width:40em; margin:0 0 20px; }
-.panel { border:1px solid var(--rule); background:var(--zebra-bg);
-         padding:16px 18px; margin:18px 0; }
-.meta { font-family:var(--sans); font-size:13px; color:var(--muted);
-        margin:0 0 6px; }
-.pill { font-family:var(--sans); font-size:13px; color:var(--label);
-        border:1px solid var(--rule); border-radius:3px;
-        padding:2px 8px; background:var(--zebra-bg);
-        display:inline-block; }
-
-/* the index listing */
-.card { border-bottom:1px solid var(--rule); padding:16px 0; }
-.card h2 { font-family:var(--serif); font-size:18px; text-transform:none;
-           letter-spacing:0; color:var(--ink); border:0; padding:0;
-           margin:0 0 5px; }
-.card h2 a { color:var(--ink); text-decoration:none; }
-.card h2 a:hover { color:var(--link); text-decoration:underline; }
-.card p { margin:0; }
-
-code { font-family:var(--mono); font-size:14px; background:#f1f1ec;
-       border:1px solid var(--rule); border-radius:3px; padding:1px 5px;
-       color:var(--ink); }
-pre { font-family:var(--mono); font-size:13px; line-height:1.55;
-      background:#f6f6f1; border:1px solid var(--rule);
-      border-left:3px solid #b9b9b0; padding:13px 15px; margin:16px 0;
-      overflow-x:auto; }
-pre code { background:none; border:0; padding:0; font-size:13px; }
-
-footer { max-width:64em; margin:0 auto 42px; padding:0 54px;
-         font-family:var(--sans); font-size:13px; color:var(--desk-ink); }
-footer a { color:var(--link); }
-
-@media (max-width:760px) {
-  body { font-size:16px; }
-  main { margin:0; padding:28px 18px 36px; border-left:0; border-right:0;
-         box-shadow:none; max-width:none; }
-  footer { padding:0 18px; }
-  h1 { font-size:24px; }
-  .wrap { margin-left:-18px; margin-right:-18px; border-left:0;
-          border-right:0; }
-}
-
-@media print {
-  body { background:#fff; font-size:10.5pt; }
-  nav { display:none; }
-  main { box-shadow:none; border:0; margin:0; padding:0; max-width:none; }
-  th { position:static; }
-  tr:nth-child(even) td { background:transparent; }
-  a { color:#000; text-decoration:none; }
-  .wrap { border:1px solid #999; overflow:visible; }
-}
-</style>
-
 </head>
 <body>
-<nav>
-  <a href="/" class="logo">F-KEYS</a>
-  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
-    <a href="/gonzalgo/">gonzalgo</a>
-    <a href="/gonzalgo/faq/">FAQ</a>
-    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
-  </div>
-</nav>
-<main>
+<div class="window raised">
 
+  <div class="titlebar">
+    <span class="t"><span>gonzalgo indexes</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+  </div>
+
+  <nav class="menubar"><a href="/"><u>F</u>ile</a><a href="/log/"><u>E</u>dit</a><a href="/status/"><u>V</u>iew</a><a href="/papers/"><u>I</u>nsert</a><a href="/gonzalgo/data/"><u>D</u>ata</a><a href="/about.html"><u>H</u>elp</a></nav>
+
+  <div class="toolbar groove">
+    <a class="tool" href="/research.html">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/research.html">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool" href="/search/">Find</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
+  </div>
+
+
+  <div class="panes solo">
+    <section class="content sunken app-excel">
+<div class="doc">
 <h1>gonzalgo indexes</h1>
 <p class="kicker">measurements, kept current, in a form you can download</p>
 
@@ -678,6 +552,18 @@ point of publishing the data is that someone can check it.
   </p>
   <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
 </footer>
-</main>
+</div>
+    </section>
+  </div>
+  <div class="sheettabs"><span class="tab on">Measurements</span><span class="tab">Method</span><span class="tab">Sources</span></div>
+
+
+  <div class="statusbar">
+    <span class="cell groove">measurements</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
+
+</div>
 </body>
 </html>
