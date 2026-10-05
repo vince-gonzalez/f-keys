@@ -3020,8 +3020,26 @@ Governing law: State of Florida. Venue: Charlotte County, FL.
      are read off this page at submission rather than stored on the server, so
      the copy is of what was actually on screen. */
   const legalEl = document.querySelector('.legal-text');
-  const agreementText = legalEl
-    ? legalEl.innerText.replace(/\n{3,}/g, '\n\n').trim() : '';
+  /* Read the MARKUP, not the rendering. innerText degrades to
+     textContent when an element is not displayed, and the agreement
+     lives in #sec-8 while the submit button is in #sec-9 - so by the
+     time anybody submits, #sec-8 is display:none and every <br> is
+     silently dropped. Measured on the live page before this fix: 64
+     <br> elements, 39 newlines in the captured string. Clause 1.5
+     promises Client the text 'as it read', and a wall of text is not
+     what it read. */
+  const agreementText = legalEl ? (function (el) {
+    var html = el.innerHTML
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<\/(p|div|li|h[1-6])>/gi, '\n\n')
+      .replace(/<[^>]+>/g, '');
+    var box = document.createElement('textarea');
+    box.innerHTML = html;
+    return box.value
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  })(legalEl) : '';
   const versionMatch = agreementText.match(/Version\s+(\d{4}-\d{2}-\d{2})/);
   const consentText = [...document.querySelectorAll('.consent-copy')]
     .map(function (el) { return el.innerText.replace(/\s+/g, ' ').trim(); })
