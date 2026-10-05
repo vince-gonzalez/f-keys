@@ -2735,6 +2735,104 @@ full rebuild is $100 and $75 a month, which is the
 </div>
 """
 
+# -- the shop: every paid thing, in one place ------------------
+# Everything F-Keys sells, on one page, so no product site has to
+# carry a price. OpticQuiz stays free and points here. Each row is
+# what you get, what it costs, how long it takes, and the button.
+# Epistemend is left off until its checkout takes live payments.
+PAY_PALETTE = "https://buy.stripe.com/7sY5kD7GafZdaDRe7R4Ni04"
+PAY_PRODUCT = "https://buy.stripe.com/fZucN50dI5kz13h1l54Ni05"
+CONSULT_MAIL = "hello@f-keys.com"
+
+SHOP_DOC = """
+<div class="setup">
+  <div class="setup-banner">
+    <div class="mark">F<span>-</span>Keys</div>
+    <div class="tag">Shop<br>everything for sale</div>
+    <div class="foot">F-Keys Creative LLC &middot; Punta Gorda, Florida</div>
+  </div>
+  <div class="setup-body">
+    <h1>Everything F-Keys sells</h1>
+    <p>One studio, one person. Websites for local business, color
+    accessibility audits, warehouse training, and help with software
+    and games. Every price is here. Card checkout is by Stripe and
+    every purchase comes with a receipt and an invoice.</p>
+  </div>
+</div>
+
+<div class="doc">
+<h2>Websites</h2>
+<table class="facts">
+<tr><th>Website audit<br>$50</th><td>Send me your address. Inside three
+business days you get a written report: the small changes that would make
+the site work harder, what each one costs you now, and what fixing it costs.
+No login needed.
+<div class="btnrow"><a class="btn default" href="%%PAY_AUDIT%%">Buy the audit &mdash; $50</a>
+<a class="btn" href="/audit/">What gets measured</a></div></td></tr>
+<tr><th>Website, built and run<br>$100 + $75/month</th><td>I build it, host it,
+renew the domain (up to $25 a year) and keep it running. The monthly includes
+three small edits and one call of up to twenty-five minutes. Starts with a
+fifteen-minute form.
+<div class="btnrow"><a class="btn default" href="/intake/">Start the setup</a></div></td></tr>
+</table>
+
+<h2>Color accessibility audits</h2>
+<p>From <a href="https://opticquiz.com">OpticQuiz</a>, the free color-vision
+toolkit F-Keys makes. The tools stay free. The audit is for when you need the
+answer complete, in context, and in writing. It checks the colors in your
+product; it does not test anyone's eyes.</p>
+<table class="facts">
+<tr><th>Palette audit<br>$99</th><td>Up to 20 colors: a brand palette, a chart
+set or design tokens. Every color simulated under protanopia, deuteranopia and
+tritanopia, the full CIEDE2000 pair-conflict table, WCAG contrast for your text
+pairs, and a corrected palette where colors collide. PDF in three business days.
+<div class="btnrow"><a class="btn default" href="%%PAY_PALETTE%%">Buy the palette audit &mdash; $99</a></div></td></tr>
+<tr><th>Product audit<br>$299</th><td>Up to eight screens or pages of one product
+or site. Everything in the palette audit, plus your colors in their roles:
+charts, states, alerts. Names the exact components that fail and ends in a
+punch list your team can work through. PDF in five business days.
+<div class="btnrow"><a class="btn default" href="%%PAY_PRODUCT%%">Buy the product audit &mdash; $299</a></div></td></tr>
+</table>
+
+<h2>Warehouse training</h2>
+<table class="facts">
+<tr><th>LOCK IN<br>from $29</th><td>A trailer-loading simulator for career and
+technical programs and for employers, with an instructor dashboard. Founding site
+license $1,450 a year (first ten institutions), site license $1,950, employer
+bay $490, or $29 a student per semester. Twelve months, no auto-renewal.
+<div class="btnrow"><a class="btn default" href="https://www.trailer-load.com/programs/">See the plans</a></div></td></tr>
+</table>
+
+<h2>Studio work, by email</h2>
+<p>Not priced here, because every job is different. Email me what you have and
+where it stands. I reply with whether I am the right fit, and if I am, a price
+before any work starts.</p>
+<table class="facts">
+<tr><th>Help finishing<br>your product</th><td>A site, an app or a tool that
+stalled short of done. Websites, browser apps, Cloudflare Workers, Python and
+npm packages, browser extensions.
+<div class="btnrow"><a class="btn" href="mailto:%%MAIL%%?subject=Help%20finishing%20a%20product">Email me about it</a></div></td></tr>
+<tr><th>Game development<br>consultation</th><td>Fortnite islands in UEFN,
+Discord activities and browser games. I have shipped all three.
+<div class="btnrow"><a class="btn" href="mailto:%%MAIL%%?subject=Game%20development">Email me about it</a></div></td></tr>
+<tr><th>Something else</th><td>If it is software, a website, or a game and you
+are not sure it fits, ask.
+<div class="btnrow"><a class="btn" href="mailto:%%MAIL%%?subject=Question%20for%20F-Keys">Email me</a></div></td></tr>
+</table>
+
+<h2>Straight answers</h2>
+<table class="facts">
+<tr><th>Who am I paying?</th><td>F-Keys Creative LLC, a Florida company. Stripe
+handles the card; F-Keys never sees the number.</td></tr>
+<tr><th>Refunds?</th><td>Color audits: a full refund if the report is not delivered.
+LOCK IN: a 30-day refund on unused licenses. Websites: the terms in the
+<a href="/intake/form/">service agreement</a> you sign before anything starts.</td></tr>
+<tr><th>Is OpticQuiz free?</th><td>Yes, and it stays free. Nothing on it is
+paywalled.</td></tr>
+</table>
+</div>
+"""
+
 # -- the intake offer, as a Setup wizard -----------------------
 # The page used to be a hand-written file with its own dark palette,
 # which made the one page a paying customer sees the only page that
@@ -3303,7 +3401,7 @@ specification.</p>
 </div>
 """
 
-EXTRA_NODES = [("/intake/", "Websites"), ("/audit/", "Site audit"),
+EXTRA_NODES = [("/shop/", "Shop"), ("/intake/", "Websites"), ("/audit/", "Site audit"),
                ("/search/", "Find"),
                ("/about.html", "About"), ("/cv/", "CV"),
                ("/writing/", "Writing"),
@@ -4052,6 +4150,17 @@ def main():
         description="A written report on what your website is doing wrong, "
                     "what it costs you, and what fixing it costs. $50.",
         canonical="https://f-keys.com/audit/", ld=organization())))
+
+    written.append((os.path.join("shop", "index.html"), shell(
+        "Shop — F-Keys", "F-Keys\\Shop",
+        SHOP_DOC.replace("%%PAY_AUDIT%%", PAY_AUDIT)
+                .replace("%%PAY_PALETTE%%", PAY_PALETTE)
+                .replace("%%PAY_PRODUCT%%", PAY_PRODUCT)
+                .replace("%%MAIL%%", CONSULT_MAIL), "1 item",
+        description="Everything F-Keys sells: a $50 website audit, websites "
+                    "at $100 + $75/month, color accessibility audits at $99 "
+                    "and $299, LOCK IN licenses, and studio work by email.",
+        canonical="https://f-keys.com/shop/", ld=organization())))
 
     written.append((os.path.join("intake", "index.html"), shell(
         "Websites for local business \u2014 F-Keys", "F-Keys\\Websites",
