@@ -94,6 +94,14 @@ Platform:
 MinimumOSVersion: 10.0.17763.0
 InstallerType: {itype}
 Scope: user
+# Declared, not left to a default. `Scope: user` tells winget what the
+# package is; it does not tell the installer. These say the same thing to
+# the binary. The generator emitted no switches at all until 2026-10-05,
+# so the manifest on PR 427477 carried them only because they were typed
+# in by hand, and the next regeneration would have dropped them.
+InstallerSwitches:
+  Silent: /S /currentuser
+  SilentWithProgress: /S /currentuser
 UpgradeBehavior: install
 ReleaseDate: {date}
 Installers:

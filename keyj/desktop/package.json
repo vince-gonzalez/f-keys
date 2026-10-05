@@ -1,6 +1,6 @@
 {
   "name": "key-j",
-  "version": "1.6.1",
+  "version": "2.0.0",
   "description": "Key-J \u2014 Musical Keystroke Studio",
   "main": "src/main.js",
   "license": "SEE LICENSE IN ../LICENSE",
@@ -35,8 +35,9 @@
       "include": "build/installer.nsh",
       "installerIcon": "build/icon.ico",
       "uninstallerIcon": "build/icon.ico",
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
+      "oneClick": true,
+      "perMachine": false,
+      "runAfterFinish": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
     },
