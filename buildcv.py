@@ -53,38 +53,35 @@ LINKS = "f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014
 
 # ---------------------------------------------------------------- facts
 FEDEX = [
-    ("Operations Supervisor · Punta Gorda, FL · 2025–present", [
-        "Direct a 15–20 person staff in a time-critical, safety-intensive "
-        "environment; own the written compliance record.",
+    ("Operations Supervisor · Columbus, OH, then Punta Gorda, FL · "
+     "2020–present", [
+        "Supervise a sort operation of up to 30 people against a fixed "
+        "dispatch time; own the written compliance record.",
+        "Promoted to Operations Supervisor in May 2023. Lateral transfer to "
+        "Punta Gorda in 2025.",
+        "New hire facilitator for the outbound sort. Coach new hires into "
+        "leadership pipelines and develop trainers.",
         "Manage linehaul, dispatch Express and Ground, and cover VSA duties as "
         "needed.",
         "Field package handler injuries by following protocol and providing "
         "post-injury guidance.",
-        "Coach with respect and dignity, centred on the shared responsibility of "
-        "safety. Develop trainers.",
-    ]),
-    ("Operations Manager · Columbus, OH · 2022–2025", [
-        "Title reclassified company-wide; lateral transfer to Punta Gorda in 2025.",
-        "Hub Certification. First achieved in the history of COLO/432, FY25, a "
-        "standard the hub had never previously met.",
-        "Bravo Zulu Award 2025 · Purple Promise of the Month 2024.",
-    ]),
-    ("Package Handler · Columbus, OH · 2020–2022", [
-        "Package Handler of the Month 2022 (×2). Promoted 2022. The loading "
-        "knowledge behind LOCK IN comes from this floor.",
+        "Hub Certification FY25, the first in the history of COLO/432. Bravo "
+        "Zulu 2025 · Purple Promise of the Month 2024.",
     ]),
 ]
 
 EARLIER = [
     ("Spirits & Wine Sales · Ohio · 2014–2020", [
-        "Three consecutive years ranked national top-15 among 400+ "
-        "representatives across 17 control-state markets.",
+        "Ranked 15th of more than 400 representatives across 17 control "
+        "states, carrying the Diageo and Moët Hennessy portfolios.",
         "Golden Bar 2016 and 2017 · Three-Year Consistency 2018, Ohio market.",
-        "Scouted and executed Ohio's #2 Belvedere flagship programme, 2017–2018.",
-        "Managed 100+ accounts, including 50+ wholesale B2B and daily state "
-        "audit records.",
+        "Scouted and executed Ohio's #2 Belvedere flagship program, 2017–2018.",
+        "Managed 100+ on- and off-premise accounts, including 50+ wholesale "
+        "B2B, and wrote the B2B communications and activation reports.",
+        "Allocated a promotional budget on a company card; verified monthly "
+        "and quarterly expense reports across multiple portfolios.",
         "Designed a formal request-documentation procedure at Giant Eagle's "
-        "State Liquor Agency that Ohio later standardised statewide as its "
+        "State Liquor Agency that Ohio later standardized statewide as its "
         "lottery system.",
         "Hosted consumer sampling events; produced event documentation and "
         "demographic reporting.",
@@ -93,21 +90,21 @@ EARLIER = [
 
 PRODUCTS = [
     ("OpticQuiz · opticquiz.com",
-     "Colour-vision accessibility platform. One engine. Machado 2009 "
+     "Color-vision accessibility platform. One engine. Machado 2009 "
      "simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection, "
      "shipped across eight distribution channels with no duplicated logic: npm, "
-     "PyPI, REST API, VS Code extension, Open VSX, Chrome MV3 extension, GitHub "
-     "Action, MCP server. JavaScript and Python implementations verified "
+     "PyPI, REST API, VS Code extension, Open VSX, Chrome MV3 extension and a "
+     "GitHub Action. JavaScript and Python implementations verified "
      "byte-identical to six decimal places."),
     ("gonzalgo · f-keys.com/gonzalgo",
      "Axiom provenance for Lean 4 and Metamath. Separates a theorem's statement "
      "dependencies from its proof dependencies across a whole library and "
-     "reports where an axiom is spent rather than inherited. On PyPI, the MCP "
-     "registry and Reservoir. Apache-2.0."),
+     "reports where an axiom is spent rather than inherited. On PyPI and "
+     "Reservoir. Apache-2.0."),
     ("Trailer Load / LOCK IN · trailer-load.com",
-     "Freight-loading training simulator built from dock experience. Free for "
-     "workers; tiered institutional licensing for schools and employers, with a "
-     "pilot programme and an instructor dashboard."),
+     "A trailer-loading simulator built because he had loaded the trailers. "
+     "Free for workers. Institutional licensing for schools and employers is "
+     "priced and offered, with a pilot program and an instructor dashboard."),
     ("Also live",
      "poticas.com · 5best2buy.com · RemapWrap · TipStreams · DogeFundMe · "
      "PROMPT · QV. Full lifecycle solo across all properties: architecture, "
@@ -137,6 +134,8 @@ RESEARCH = [
 ]
 
 WRITING = [
+    "Writing samples, with the source of each one linked: "
+    "f-keys.com/writing.",
     "Shift reports, compliance documentation, incident logs and contractor "
     "correspondence carrying legal and regulatory weight.",
     "SOP development and a state-adopted request-documentation procedure.",
@@ -145,7 +144,7 @@ WRITING = [
     "facilitation and dangerous goods handling.",
     "Academic writing in mathematics, philosophy and history, published with DOIs.",
     "Taxonomy and metadata design, Schema.org structured data, technical SEO and "
-    "generative-engine optimisation.",
+    "generative-engine optimization.",
     "Documentation for every property listed above, written as part of delivery "
     "rather than after it.",
 ]
@@ -158,7 +157,7 @@ TECH = [
                        "(DNS, CDN, Pages, Workers, D1), Linux, Raspberry Pi, SSH"),
     ("AI & formal", "Local LLM deployment (Ollama, Open WebUI), prompt and "
                     "context engineering, evaluation pipelines, Lean 4 proof "
-                    "auditing, Model Context Protocol"),
+                    "auditing"),
     ("Frontend", "WCAG 2.1 AA, responsive design, progressive enhancement, "
                  "WebGL, Canvas 2D, Manifest V3 extensions, VS Code extension API"),
     ("Docs & search", "Technical SEO, Schema.org, SOP development, compliance "
@@ -194,14 +193,15 @@ V = {
         profile="Founder, F-Keys Creative LLC. Live products include an "
                 "accessibility platform distributed across eight channels, an "
                 "axiom-provenance tool for two proof assistants, and a "
-                "logistics training simulator licensed to institutions. "
+                "trailer-loading simulator built from the floor he loaded "
+                "trailers on. "
                 "Architecture, both ends, database, deployment, documentation "
                 "and technical SEO.",
         order=["products", "research_brief", "tech", "fedex_brief", "edu"]),
     "research": dict(
         slug="research",
         tag="Formal methods · measurement",
-        profile="Formal verification, colour science and epistemology. Built "
+        profile="Formal verification, color science and epistemology. Built "
                 "the tooling the measurements run on. Reports what the data "
                 "does not support alongside what it does: a published "
                 "limitation on an off-axis palette, a 58× gap between two "
@@ -239,12 +239,12 @@ SECTION_TITLES = {
 PROCESS = [
     "**State-adopted procedure.** Designed a formal request-documentation "
     "procedure at Giant Eagle's State Liquor Agency that Ohio later "
-    "standardised statewide as its lottery system.",
+    "standardized statewide as its lottery system.",
     "**Hub Certification.** First achieved in the history of COLO/432, FY25. A "
     "standard the hub had never previously met.",
     "**LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally "
     "live as undocumented dock knowledge into a scored training simulator with "
-    "logins, an institutional dashboard and a defined pilot programme.",
+    "logins, an institutional dashboard and a defined pilot program.",
     "**Technical and professional content.** User manuals, SOPs, academic "
     "writing in mathematics, philosophy and history, and full websites and "
     "applications.",
@@ -262,14 +262,13 @@ def md_section(key: str) -> list[str]:
     elif key == "fedex_brief":
         o.append("**Federal Express Corporation** · 2020–present")
         o.append("")
-        o += ["- Operations Supervisor, Punta Gorda FL, 2025–present. Direct a "
-              "15–20 person staff in a time-critical, safety-intensive "
-              "environment; own the written compliance record.",
-              "- Operations Manager, Columbus OH, 2022–2025. Hub Certification "
-              "first in the history of COLO/432, FY25. Bravo Zulu 2025, Purple "
-              "Promise of the Month 2024.",
-              "- Package Handler 2020–2022, promoted 2022. Package Handler of "
-              "the Month 2022 (×2).", ""]
+        o += ["- Operations Supervisor, Columbus OH then Punta Gorda FL. "
+              "Supervise a sort operation of up to 30 people against a fixed "
+              "dispatch time; own the written compliance record.",
+              "- Promoted to Operations Supervisor in May 2023. New hire "
+              "facilitator for the outbound sort.",
+              "- Hub Certification first in the history of COLO/432, FY25. "
+              "Bravo Zulu 2025, Purple Promise of the Month 2024.", ""]
     elif key == "process":
         o += [f"- {p}" for p in PROCESS] + [""]
     elif key == "earlier":
@@ -472,7 +471,8 @@ operations, research, writing.">
 {_rows}
 </ul>
 <footer>
-  <a href="/">f-keys.com</a> &middot; <a href="/papers/">papers</a> &middot;
+  <a href="/">f-keys.com</a> &middot; <a href="/writing/">writing samples</a>
+  &middot; <a href="/papers/">papers</a> &middot;
   <a href="/search/">find</a> &middot;
   <a href="https://orcid.org/0009-0005-3640-014X">ORCID</a>
 </footer>

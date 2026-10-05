@@ -2890,8 +2890,8 @@ Division of Corporations</a> under the document number above.</td></tr>
 each product page.</p>
 
 <h2>Licensing</h2>
-<p>Trailer Load is licensed to institutions for training use. Published source
-is MIT; commercial use of anything else, ask.</p>
+<p>Trailer Load is offered to institutions for training use under a priced
+license. Published source is MIT; commercial use of anything else, ask.</p>
 
 <h2>Research</h2>
 <p>The tooling is public, so a measurement can be reproduced without asking.
@@ -3306,6 +3306,7 @@ specification.</p>
 EXTRA_NODES = [("/intake/", "Websites"), ("/audit/", "Site audit"),
                ("/search/", "Find"),
                ("/about.html", "About"), ("/cv/", "CV"),
+               ("/writing/", "Writing"),
                ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
                ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
                ("/contact.html", "Contact"), ("/privacy.html", "Privacy")]

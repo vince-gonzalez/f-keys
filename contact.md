@@ -24,8 +24,8 @@ each product page.
 
 ## Licensing
 
-Trailer Load is licensed to institutions for training use. Published source
-is MIT; commercial use of anything else, ask.
+Trailer Load is offered to institutions for training use under a priced
+license. Published source is MIT; commercial use of anything else, ask.
 
 ## Research
 

@@ -14,18 +14,19 @@ Documentation that carries consequences: compliance records in a safety-intensiv
 
 ## Writing & Documentation
 
+- Writing samples, with the source of each one linked: f-keys.com/writing.
 - Shift reports, compliance documentation, incident logs and contractor correspondence carrying legal and regulatory weight.
 - SOP development and a state-adopted request-documentation procedure.
 - User manuals and technical manuals; several hundred documented corporate training hours delivered across leadership development, orientation facilitation and dangerous goods handling.
 - Academic writing in mathematics, philosophy and history, published with DOIs.
-- Taxonomy and metadata design, Schema.org structured data, technical SEO and generative-engine optimisation.
+- Taxonomy and metadata design, Schema.org structured data, technical SEO and generative-engine optimization.
 - Documentation for every property listed above, written as part of delivery rather than after it.
 
 ## Selected Process & Quality Work
 
-- **State-adopted procedure.** Designed a formal request-documentation procedure at Giant Eagle's State Liquor Agency that Ohio later standardised statewide as its lottery system.
+- **State-adopted procedure.** Designed a formal request-documentation procedure at Giant Eagle's State Liquor Agency that Ohio later standardized statewide as its lottery system.
 - **Hub Certification.** First achieved in the history of COLO/432, FY25. A standard the hub had never previously met.
-- **LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally live as undocumented dock knowledge into a scored training simulator with logins, an institutional dashboard and a defined pilot programme.
+- **LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally live as undocumented dock knowledge into a scored training simulator with logins, an institutional dashboard and a defined pilot program.
 - **Technical and professional content.** User manuals, SOPs, academic writing in mathematics, philosophy and history, and full websites and applications.
 
 ## Published Research
@@ -43,7 +44,7 @@ Documentation that carries consequences: compliance records in a safety-intensiv
 - **Languages**: JavaScript (ES5–ES2022), Python, C#/.NET, SQL, GLSL, HTML, CSS
 - **Backend**: Node.js, Supabase (PostgreSQL, RLS, auth, edge functions), REST APIs, JSON and CSV pipelines
 - **Infrastructure**: Git/GitHub, GitHub Actions, GitHub Pages, Cloudflare (DNS, CDN, Pages, Workers, D1), Linux, Raspberry Pi, SSH
-- **AI & formal**: Local LLM deployment (Ollama, Open WebUI), prompt and context engineering, evaluation pipelines, Lean 4 proof auditing, Model Context Protocol
+- **AI & formal**: Local LLM deployment (Ollama, Open WebUI), prompt and context engineering, evaluation pipelines, Lean 4 proof auditing
 - **Frontend**: WCAG 2.1 AA, responsive design, progressive enhancement, WebGL, Canvas 2D, Manifest V3 extensions, VS Code extension API
 - **Docs & search**: Technical SEO, Schema.org, SOP development, compliance documentation, DOI publication
 
@@ -51,9 +52,9 @@ Documentation that carries consequences: compliance records in a safety-intensiv
 
 **Federal Express Corporation** · 2020–present
 
-- Operations Supervisor, Punta Gorda FL, 2025–present. Direct a 15–20 person staff in a time-critical, safety-intensive environment; own the written compliance record.
-- Operations Manager, Columbus OH, 2022–2025. Hub Certification first in the history of COLO/432, FY25. Bravo Zulu 2025, Purple Promise of the Month 2024.
-- Package Handler 2020–2022, promoted 2022. Package Handler of the Month 2022 (×2).
+- Operations Supervisor, Columbus OH then Punta Gorda FL. Supervise a sort operation of up to 30 people against a fixed dispatch time; own the written compliance record.
+- Promoted to Operations Supervisor in May 2023. New hire facilitator for the outbound sort.
+- Hub Certification first in the history of COLO/432, FY25. Bravo Zulu 2025, Purple Promise of the Month 2024.
 
 ## Certifications & Recognition
 
