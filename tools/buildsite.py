@@ -2730,7 +2730,8 @@ anyone.</td></tr>
 several and I will quote the set.</td></tr>
 <tr><th>What if I want it fixed?</th><td>Every fix is priced in the report. A
 full rebuild is $100 and $75 a month, which is the
-<a href="/intake/">website setup</a>.</td></tr>
+<a href="/intake/">website setup</a>. Order the build within 30 days of your
+report and the $50 you paid for the audit comes off it.</td></tr>
 </table>
 </div>
 """
@@ -2766,7 +2767,7 @@ SHOP_DOC = """
 <tr><th>Website audit<br>$50</th><td>Send me your address. Inside three
 business days you get a written report: the small changes that would make
 the site work harder, what each one costs you now, and what fixing it costs.
-No login needed.
+No login needed. Order a build within 30 days and the $50 comes off it.
 <div class="btnrow"><a class="btn default" href="%%PAY_AUDIT%%">Buy the audit &mdash; $50</a>
 <a class="btn" href="/audit/">What gets measured</a></div></td></tr>
 <tr><th>Website, built and run<br>$100 + $75/month</th><td>I build it, host it,
