@@ -4,7 +4,7 @@
     "title": "F-Keys published data",
     "version": "1.0.0",
     "summary": "Read-only static datasets. Not a hosted API.",
-    "description": "F-Keys does not run a hosted API. Nothing here takes a parameter, no request\nis authenticated, there are no write operations, and there is no rate limit\nbecause there is no server of ours in the path - every file below is static\nand served from a CDN.\n\nWhat this document describes is the read-only data surface that already\nexists: the published gonzalgo measurement tables, the Kernel Trust Profile\nschema and the profiles conforming to it, and the daily status snapshot. It\nis here so an agent can find those files and know their shape without\nscraping HTML.\n\nEvery path in this specification is generated from a file that exists in the\nrepository. If a dataset is removed, it leaves this document on the next\nbuild rather than remaining as a promise.\n\nEach measurement table is a single JSON object carrying its own name,\ndescription, version, sha256, licence and series DOI alongside its rows, so a\nconsumer can cite it and verify it did not change underneath them.\n\nPages on this site also serve `text/markdown` when the request asks for it\nvia `Accept`, per acceptmarkdown.com.\n",
+    "description": "F-Keys does not run a hosted API. Nothing here takes a parameter, no request\nis authenticated, there are no write operations, and there is no rate limit\nbecause there is no server of ours in the path - every file below is static\nand served from a CDN.\n\nWhat this document describes is the read-only data surface that already\nexists: the published gonzalgo measurement tables, the Kernel Trust Profile\nschema and the profiles conforming to it, and the daily status snapshot. It\nis here so an agent can find those files and know their shape without\nscraping HTML.\n\nEvery path in this specification is generated from a file that exists in the\nrepository. If a dataset is removed, it leaves this document on the next\nbuild rather than remaining as a promise.\n\nEach measurement table is a single JSON object carrying its own name,\ndescription, version, sha256, license and series DOI alongside its rows, so a\nconsumer can cite it and verify it did not change underneath them.\n\nPages on this site also serve `text/markdown` when the request asks for it\nvia `Accept`, per acceptmarkdown.com.\n",
     "contact": {
       "name": "F-Keys",
       "email": "hello@f-keys.com",
@@ -248,7 +248,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -468,7 +468,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -693,7 +693,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -929,7 +929,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -1147,7 +1147,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -1352,7 +1352,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -1591,7 +1591,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -1713,7 +1713,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -1936,7 +1936,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -2159,7 +2159,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -2340,7 +2340,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -2521,7 +2521,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -2744,7 +2744,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -2967,7 +2967,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -3190,7 +3190,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -3371,7 +3371,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -3594,7 +3594,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -3817,7 +3817,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -3998,7 +3998,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -4221,7 +4221,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -4437,7 +4437,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -4660,7 +4660,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -4895,7 +4895,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -5146,7 +5146,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -5364,7 +5364,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -5584,7 +5584,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -5809,7 +5809,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -6032,7 +6032,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -6288,7 +6288,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -6513,7 +6513,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
@@ -6746,7 +6746,7 @@
                     "hints": [
                       "Every published path is listed in https://f-keys.com/openapi.json",
                       "The full site map is at https://f-keys.com/sitemap.xml",
-                      "A plain-text catalogue is at https://f-keys.com/llms.txt"
+                      "A plain-text catalog is at https://f-keys.com/llms.txt"
                     ]
                   }
                 }
