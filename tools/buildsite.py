@@ -2740,9 +2740,10 @@ report and the $50 you paid for the audit comes off it.</td></tr>
 # Everything F-Keys sells, on one page, so no product site has to
 # carry a price. OpticQuiz stays free and points here. Each row is
 # what you get, what it costs, how long it takes, and the button.
-# Epistemend is left off until its checkout takes live payments.
-PAY_PALETTE = "https://buy.stripe.com/7sY5kD7GafZdaDRe7R4Ni04"
-PAY_PRODUCT = "https://buy.stripe.com/fZucN50dI5kz13h1l54Ni05"
+# The $99 and $299 color audits were retired 2026-10-06: the check is now
+# $25 and sized to what one person can deliver in three days, and the
+# product audit is quoted by email, never sold blind.
+PAY_CHECK = "https://buy.stripe.com/00w6oH2lQ3cr9zN4xh4Ni0b"
 CONSULT_MAIL = "hello@f-keys.com"
 
 SHOP_DOC = """
@@ -2755,8 +2756,8 @@ SHOP_DOC = """
   <div class="setup-body">
     <h1>Everything F-Keys sells</h1>
     <p>One studio, one person. Websites for local business, color
-    accessibility audits, warehouse training, and help with software
-    and games. Every price is here. Card checkout is by Stripe and
+    accessibility checks, a reference checker, warehouse training, and
+    help with software and games. Every price is here. Card checkout is by Stripe and
     every purchase comes with a receipt and an invoice.</p>
   </div>
 </div>
@@ -2775,24 +2776,40 @@ renew the domain (up to $25 a year) and keep it running. The monthly includes
 three small edits and one call of up to twenty-five minutes. Starts with a
 fifteen-minute form.
 <div class="btnrow"><a class="btn default" href="/intake/">Start the setup</a></div></td></tr>
+<tr><th>One page, built and run<br>$40 + $20/month</th><td>Your business on the
+web: name, what you do, where, hours, phone, email and a contact button, with up
+to five photos. Hosting and the domain included; no edits included. A small edit
+is $15 and a call is $40, only when you ask. Move up to the full website any time
+and the $40 counts toward it. Same fifteen-minute form; pick "One page" at the top.
+<div class="btnrow"><a class="btn default" href="/intake/">Start the setup</a></div></td></tr>
 </table>
 
-<h2>Color accessibility audits</h2>
+<h2>Color accessibility</h2>
 <p>From <a href="https://opticquiz.com">OpticQuiz</a>, the free color-vision
-toolkit F-Keys makes. The tools stay free. The audit is for when you need the
-answer complete, in context, and in writing. It checks the colors in your
-product; it does not test anyone's eyes.</p>
+toolkit F-Keys makes. The tools stay free: the
+<a href="https://opticquiz.com/checker/">palette checker</a> runs the same math
+in your browser right now. The paid check is the written version, read by a
+person. It checks the colors in your product; it does not test anyone's eyes.</p>
 <table class="facts">
-<tr><th>Palette audit<br>$99</th><td>Up to 20 colors: a brand palette, a chart
-set or design tokens. Every color simulated under protanopia, deuteranopia and
-tritanopia, the full CIEDE2000 pair-conflict table, WCAG contrast for your text
-pairs, and a corrected palette where colors collide. PDF in three business days.
-<div class="btnrow"><a class="btn default" href="%%PAY_PALETTE%%">Buy the palette audit &mdash; $99</a></div></td></tr>
-<tr><th>Product audit<br>$299</th><td>Up to eight screens or pages of one product
-or site. Everything in the palette audit, plus your colors in their roles:
-charts, states, alerts. Names the exact components that fail and ends in a
-punch list your team can work through. PDF in five business days.
-<div class="btnrow"><a class="btn default" href="%%PAY_PRODUCT%%">Buy the product audit &mdash; $299</a></div></td></tr>
+<tr><th>Palette check<br>$25</th><td>Up to eight colors. Each one shown as
+people with protanopia, deuteranopia and tritanopia see it, the pairs that
+become hard to tell apart, and WCAG contrast for up to four text and background
+pairs. A PDF by email within three business days.
+<div class="btnrow"><a class="btn default" href="%%PAY_CHECK%%">Buy the palette check &mdash; $25</a></div></td></tr>
+<tr><th>Product audit<br>by quote</th><td>A whole product or site, screen by
+screen. Scope depends on what you have, so it starts with an email: send the
+address or the screens and I reply with what I would check and a price, before
+anything is paid.
+<div class="btnrow"><a class="btn" href="mailto:%%MAIL%%?subject=OpticQuiz%20product%20audit">Email me about it</a></div></td></tr>
+</table>
+
+<h2>Reference checking</h2>
+<table class="facts">
+<tr><th>Epistemend<br>$5 / $25</th><td>Paste a bibliography and find out which
+references are real, which cannot be found, and which were retracted, with a
+corrected bibliography back. $5. A full report on one researcher's publication
+record, by ORCID, is $25.
+<div class="btnrow"><a class="btn default" href="https://www.epistemend.org/order/">Order on Epistemend</a></div></td></tr>
 </table>
 
 <h2>Warehouse training</h2>
@@ -2825,7 +2842,8 @@ are not sure it fits, ask.
 <table class="facts">
 <tr><th>Who am I paying?</th><td>F-Keys Creative LLC, a Florida company. Stripe
 handles the card; F-Keys never sees the number.</td></tr>
-<tr><th>Refunds?</th><td>Color audits: a full refund if the report is not delivered.
+<tr><th>Refunds?</th><td>The palette check: a full refund if the report is not delivered.
+Epistemend: the terms on its order page.
 LOCK IN: a 30-day refund on unused licenses. Websites: the terms in the
 <a href="/intake/form/">service agreement</a> you sign before anything starts.</td></tr>
 <tr><th>Is OpticQuiz free?</th><td>Yes, and it stays free. Nothing on it is
@@ -2856,6 +2874,8 @@ INTAKE_DOC = """
       <div><b>$100</b><s>once, to build it</s></div>
       <div><b>$75</b><s>a month, to run it</s></div>
     </div>
+    <p>Only need one page? <b>$40</b> to build it and <b>$20</b> a month,
+    with edits at $15 when you want them. Pick it at the top of the form.</p>
     <p>The form takes about fifteen minutes and asks everything I need,
     so I am not calling you six times. Then I send you a written quote
     with the same numbers on it. Nothing is charged and nothing is built
@@ -4155,12 +4175,12 @@ def main():
     written.append((os.path.join("shop", "index.html"), shell(
         "Shop — F-Keys", "F-Keys\\Shop",
         SHOP_DOC.replace("%%PAY_AUDIT%%", PAY_AUDIT)
-                .replace("%%PAY_PALETTE%%", PAY_PALETTE)
-                .replace("%%PAY_PRODUCT%%", PAY_PRODUCT)
+                .replace("%%PAY_CHECK%%", PAY_CHECK)
                 .replace("%%MAIL%%", CONSULT_MAIL), "1 item",
         description="Everything F-Keys sells: a $50 website audit, websites "
-                    "at $100 + $75/month, color accessibility audits at $99 "
-                    "and $299, LOCK IN licenses, and studio work by email.",
+                    "at $100 + $75/month or one page at $40 + $20/month, a $25 "
+                    "color palette check, Epistemend reference checks from $5, "
+                    "LOCK IN licenses, and studio work by email.",
         canonical="https://f-keys.com/shop/", ld=organization())))
 
     written.append((os.path.join("intake", "index.html"), shell(
