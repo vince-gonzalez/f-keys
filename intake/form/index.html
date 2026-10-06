@@ -1161,6 +1161,21 @@ select option { background: #0d1f33; color: var(--txt); }
     <h2 class="section-title">Client Information</h2>
     <p class="section-sub">Basic contact and business details — how we identify and reach you throughout the project.</p>
 
+    <div class="card" id="plan-card">
+      <div class="field">
+        <div class="field-label">Which plan? <span class="req">*</span></div>
+        <div class="choices grid-2" id="plan-group">
+          <button type="button" class="choice-btn selected" data-plan="standard" onclick="pickPlan('standard')">
+            <span class="radio-dot"></span> <span style="display:block;text-align:left;"><strong>Standard: $100 + $75/month</strong><br><span style="font-size:13px;opacity:.8;">Up to 7 pages. 3 small edits and a 25-minute call every month.</span></span>
+          </button>
+          <button type="button" class="choice-btn" data-plan="onepage" onclick="pickPlan('onepage')">
+            <span class="radio-dot"></span> <span style="display:block;text-align:left;"><strong>One page: $40 + $20/month</strong><br><span style="font-size:13px;opacity:.8;">One page with your contact details. Edits $15 and calls $40, only when you ask.</span></span>
+          </button>
+        </div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;">You can move from one page to standard any time; the $40 counts toward the $100 (clause 2.9).</div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="field">
         <div class="field-label">Business Name (Public-Facing) <span class="req">*</span></div>
@@ -1770,7 +1785,7 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="alert warn">
       <span class="alert-icon">⚠</span>
-      <div>These terms are binding under <strong>U.S. E-SIGN law</strong> when you submit this form, and every box must be checked. Submitting does not order a website and does not charge you. <strong>The $75/month is charged to your card automatically once your site is live</strong>, and you can cancel it by email any time.</div>
+      <div>These terms are binding under <strong>U.S. E-SIGN law</strong> when you submit this form, and every box must be checked. Submitting does not order a website and does not charge you. <strong>The $<span class="plan-mo">75</span>/month is charged to your card automatically once your site is live</strong>, and you can cancel it by email any time.</div>
     </div>
 
     <div class="legal-banner">
@@ -1779,13 +1794,13 @@ select option { background: #0d1f33; color: var(--txt); }
         <h3>Website Development, Delivery & Monthly Hosting Agreement</h3>
       </div>
       <div class="legal-text">
-        <p><strong>Version 2026-10-05.</strong> This is the version you are agreeing to.</p>
+        <p><strong>Version 2026-10-06.</strong> This is the version you are agreeing to.</p>
         <p>These terms are binding when you submit this form. Submitting it does <strong>not</strong> order a website and does <strong>not</strong> charge you &mdash; that happens only when you accept a written quote.</p>
 
         <div style="margin-top:20px;"><strong>1. Quote, Authorization &amp; Payment</strong></div>
         <div class="legal-clause"><span class="clause-num">1.0</span><span><strong>Who this is between, and what these words mean.</strong> Provider is <strong>F-KEYS CREATIVE LLC</strong>, a Florida limited liability company, document number L26000436157, of Punta Gorda, Florida. Client is the business named in this form. The person submitting this form confirms they are authorized to agree to these terms for that business. No member, officer or employee of either party is personally liable under this agreement.<br><br>&ldquo;In writing&rdquo; and &ldquo;written&rdquo; mean an email to or from the addresses in clause 4.7, or a document attached to one. A record kept or sent electronically satisfies any requirement here that something be written, signed, sent or kept, and this agreement is enforceable as a signed writing under the Florida Uniform Electronic Transaction Act and the federal E-SIGN Act. A business day is Monday to Friday excluding United States federal holidays, and every period in this agreement is measured in Eastern Time.</span></div>
         <div class="legal-clause"><span class="clause-num">1.1</span><span>Submission of this form is a request for a written quote. By itself it does not authorize Provider to begin work, and it does not obligate Client to pay anything.</span></div>
-        <div class="legal-clause"><span class="clause-num">1.2</span><span>Provider will send Client a written quote stating the one-time build fee, the monthly fee, any selected add-ons, a plain-language list of the pages the site will have and what each selected feature will do, and the date the site will be delivered. The standard prices are the ones in clause 2.1, plus the add-ons Client selected in this form. If the quote differs from those, it says so and says why. Client owes nothing until Client accepts the quote in writing under clause 1.3.<br><br>The quote is governed by this agreement, version 2026-10-05, in the form emailed to Client under clause 1.5. Accepting the quote accepts these terms. Where the quote and this agreement differ, this agreement controls, except that the quote sets the price, the add-ons, the scope and the delivery date.</span></div>
+        <div class="legal-clause"><span class="clause-num">1.2</span><span>Provider will send Client a written quote stating the one-time build fee, the monthly fee, any selected add-ons, a plain-language list of the pages the site will have and what each selected feature will do, and the date the site will be delivered. The standard prices are the ones in clause 2.1, plus the add-ons Client selected in this form. If the quote differs from those, it says so and says why. Client owes nothing until Client accepts the quote in writing under clause 1.3.<br><br>The quote is governed by this agreement, version 2026-10-06, in the form emailed to Client under clause 1.5. Accepting the quote accepts these terms. Where the quote and this agreement differ, this agreement controls, except that the quote sets the price, the add-ons, the scope and the delivery date.</span></div>
         <div class="legal-clause"><span class="clause-num">1.3</span><span>Work begins only after Client accepts that quote in writing. Until Client accepts, Client owes nothing and may walk away for any reason. Clause 2.4 says how payment is taken.</span></div>
         <div class="legal-clause"><span class="clause-num">1.4</span><span>If payment is not made per the accepted quote, Provider may pause or retain work until outstanding balances are resolved.</span></div>
         <div class="legal-clause"><span class="clause-num">1.5</span><span><strong>Your copy of this submission.</strong> When Client submits this form, Provider emails Client a copy of it, automatically, at the time of submission, to the address Client gave. Replies reach Provider at vincegonzalez@me.com.<br><br>That email contains, as plain text in the body: the full text of this agreement as it read when Client submitted it, and the version date of that text; every answer Client gave; every add-on Client selected with the price shown for it, including add-ons shown at no charge; the one-time total and the monthly total the form displayed; the date, time and time zone of submission; the IP address it was submitted from; and the exact wording of each box Client checked. Client can read, save, print and forward it with any ordinary email program.<br><br>That email is a record of what Client sent. It is not the quote and it does not set a price. Clause 1.2 sets the price, and Client owes nothing until Client accepts it under 1.3.<br><br>Sending is automatic. Delivery is not something Provider controls — an email can be blocked or filtered by Client's provider. If it has not arrived within two business days, Client can ask at vincegonzalez@me.com and Provider sends it again at no charge. Provider keeps the same record for five (5) years from submission and will send it again on request during those five years. This applies after a build is canceled and after monthly service ends.</span></div>
@@ -1801,6 +1816,7 @@ select option { background: #0d1f33; color: var(--txt); }
         <div class="legal-clause"><span class="clause-num">2.6</span><span><strong>Changing the price.</strong> The prices in clause 2.1 are fixed for Client's first twelve (12) months of monthly service.<br><br>After that, Provider may change the monthly fee by emailing Client at least thirty (30) days before the change takes effect. The email will state the old price, the new price and the date. Client may cancel before that date at no cost under clause 2.7 and pays nothing further.<br><br>Provider will not change the price of a month Client has already paid for.</span></div>
         <div class="legal-clause"><span class="clause-num">2.7</span><span><strong>Cancelling.</strong> Either party may cancel at any time <strong>by email</strong> — Client to <strong>vincegonzalez@me.com</strong>, Provider to the email address Client gave in this form. Cancellation takes effect at the <strong>end of the month already paid for</strong>. There is <strong>no notice period and no cancellation fee</strong>. The month in progress is not refunded, except as clause 4.4 provides, and no further payments are taken. Cancellation is effective on the date Client sent the email, whether or not Provider receives it, and Provider will acknowledge it within one business day. Refunds before the website goes live are covered by clause 1.7.</span></div>
         <div class="legal-clause"><span class="clause-num">2.8</span><span><strong>When monthly service ends.</strong> Hosting stops and the website goes offline. Client keeps the website files, once the one-time build fee is paid, and the domain. If Client asks within <strong>30 days</strong>, Provider will send Client a copy of the site files and transfer the domain to an account Client names, at no charge.</span></div>
+        <div class="legal-clause"><span class="clause-num">2.9</span><span><strong>The One-Page Plan.</strong> Instead of the build and monthly service in clauses 2.1 to 2.3, Client may choose the One-Page Plan in Section 1 of this form. It is a one-time build fee of <strong>$40.00</strong> and <strong>$20.00 per month</strong>.<br><br>(a) <strong>What the $40.00 build includes.</strong> One (1) page showing Client's business name, what Client does, Client's service area or address, hours, phone number, email address and a contact button, with up to <strong>five (5) photos</strong> Client supplies. Client gets <strong>one (1) round of changes</strong> on the draft before the site goes live. The approval rule in clause 2.2 applies: if Client neither approves nor sends a list of changes within fourteen (14) days of Provider's request for approval, the draft is approved and the site goes live.<br><br>(b) <strong>What the $20.00/month includes.</strong> Hosting, domain renewal management up to $25.00 a year, and basic security monitoring, each as defined in clause 2.3. It includes <strong>no edits and no calls</strong>.<br><br>(c) <strong>Changes after the site is live.</strong> Each small edit, as defined in clause 2.3, is <strong>$15.00</strong>. A call of up to twenty-five (25) minutes, by Zoom or phone, is <strong>$40.00</strong>. Provider states the price in writing and Client agrees before the work is done. Anything bigger than a small edit is quoted in writing under clause 2.3. The add-ons in Section 9 of this form are not part of the One-Page Plan.<br><br>(d) <strong>Moving to the standard plan.</strong> Client may move to the standard plan at any time by email. The $40.00 already paid counts toward the $100.00 build, so Client pays the $60.00 difference, and the monthly fee becomes $75.00 from Client's next billing day. The standard build allowances in clause 2.2 then apply.<br><br>(e) Everything else in this agreement applies to the One-Page Plan the same way it applies to the standard plan, including payment by card under clause 2.4, failed payments under clause 2.5, and cancelling under clause 2.7.</span></div>
         <div style="margin-top:20px;"><strong>3. Ownership &amp; Brand Asset Authorization</strong></div>
         <div class="legal-clause"><span class="clause-num">3.1</span><span>Client grants Provider a limited, non-exclusive license to use Client's name, logo, images and business identity for two purposes only: building this website, and hosting and maintaining it while monthly service is active. The license begins when Client accepts the quote under clause 1.3 — not when this form is submitted — and ends when the build is canceled, when the project closes under clause 1.6, or when monthly service ends.</span></div>
         <div class="legal-clause"><span class="clause-num">3.2</span><span>Provider may link to the finished website as an example of Provider's work. Provider may not use Client's logo, name or brand in advertising, a case study, or any other promotional material without Client's separate written permission.</span></div>
@@ -1829,7 +1845,7 @@ select option { background: #0d1f33; color: var(--txt); }
         </div>
         <div class="consent-row" onclick="toggleConsent('con2')">
           <div class="consent-tick" id="con2"></div>
-          <div class="consent-copy"><strong>I authorize</strong> Provider to charge my card <strong>$100 for the build</strong> when I accept a written quote, and <strong>$75 each month</strong> starting the day my site goes live, continuing until I cancel by email under clause 2.7.</div>
+          <div class="consent-copy" id="consent-pay"><strong>I authorize</strong> Provider to charge my card <strong>$100 for the build</strong> when I accept a written quote, and <strong>$75 each month</strong> starting the day my site goes live, continuing until I cancel by email under clause 2.7.</div>
         </div>
         <div class="consent-row" onclick="toggleConsent('con3')">
           <div class="consent-tick" id="con3"></div>
@@ -1841,7 +1857,7 @@ select option { background: #0d1f33; color: var(--txt); }
         </div>
         <div class="consent-row" onclick="toggleConsent('con5')">
           <div class="consent-tick" id="con5"></div>
-          <div class="consent-copy">I have read and <strong>agree to the full Website Development, Delivery & Monthly Hosting Agreement</strong> as shown on this page, <strong>version 2026-09-28</strong>.</div>
+          <div class="consent-copy">I have read and <strong>agree to the full Website Development, Delivery & Monthly Hosting Agreement</strong> as shown on this page, <strong>version 2026-10-06</strong>.</div>
         </div>
         <div class="consent-row" onclick="toggleConsent('con6')">
           <div class="consent-tick" id="con6"></div>
@@ -1849,11 +1865,11 @@ select option { background: #0d1f33; color: var(--txt); }
         </div>
         <div class="consent-row" onclick="toggleConsent('con7')">
           <div class="consent-tick" id="con7"></div>
-          <div class="consent-copy">I understand my $100 build covers <strong>up to seven (7) pages, forty (40) photos and two (2) rounds of changes</strong>, and that anything past those numbers is <strong>quoted to me in writing before it is done</strong>.</div>
+          <div class="consent-copy" id="consent-build">I understand my $100 build covers <strong>up to seven (7) pages, forty (40) photos and two (2) rounds of changes</strong>, and that anything past those numbers is <strong>quoted to me in writing before it is done</strong>.</div>
         </div>
         <div class="consent-row" onclick="toggleConsent('con8')">
           <div class="consent-tick" id="con8"></div>
-          <div class="consent-copy">I understand my <strong>$75/month</strong> covers hosting, my domain renewed up to <strong>$25/year</strong>, security monitoring, <strong>up to three (3) small edits</strong> and <strong>one (1) 25-minute call</strong> each month; that unused edits and call time do not carry over; and that anything more is priced in writing before it is done.</div>
+          <div class="consent-copy" id="consent-month">I understand my <strong>$75/month</strong> covers hosting, my domain renewed up to <strong>$25/year</strong>, security monitoring, <strong>up to three (3) small edits</strong> and <strong>one (1) 25-minute call</strong> each month; that unused edits and call time do not carry over; and that anything more is priced in writing before it is done.</div>
         </div>
       </div>
       <div class="alert error" id="e-consents" style="display:none;margin-top:16px;margin-bottom:0;">
@@ -1884,6 +1900,10 @@ select option { background: #0d1f33; color: var(--txt); }
     <div class="alert info" style="margin-bottom:20px;">
       <span class="alert-icon">✨</span>
       <div>None of this is required. Twenty of them are already in your build and cost you nothing. The rest add up live as you tick them.</div>
+    </div>
+    <div class="alert warn" id="onepage-addon-note" style="display:none;margin-bottom:20px;">
+      <span class="alert-icon">ℹ</span>
+      <div>The One-Page Plan has no add-ons. To add any of these, choose <strong>Standard</strong> in Section 1.</div>
     </div>
 
     <!-- LIVE TOTAL BANNER -->
@@ -2322,7 +2342,7 @@ select option { background: #0d1f33; color: var(--txt); }
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
         <div>
           <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--mint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">What This Comes To</div>
-          <div style="font-size:13px;color:var(--muted);font-weight:300;">$100 build + one-time add-ons, then $75/mo + monthly add-ons</div>
+          <div style="font-size:13px;color:var(--muted);font-weight:300;">$<span class="plan-build">100</span> build + one-time add-ons, then $<span class="plan-mo">75</span>/mo + monthly add-ons</div>
         </div>
         <div style="font-family:var(--font-display);font-weight:800;color:var(--mint);text-align:right;">
           <div style="font-size:32px;">$<span id="grand-once">100</span></div>
@@ -2397,7 +2417,7 @@ select option { background: #0d1f33; color: var(--txt); }
       </div>
       <div class="next-step-item">
         <div class="step-num">4</div>
-        <div class="step-desc"><strong>Site goes live</strong> once you approve it. The $75/mo starts the day it goes live.</div>
+        <div class="step-desc"><strong>Site goes live</strong> once you approve it. The $<span class="plan-mo">75</span>/mo starts the day it goes live.</div>
       </div>
     </div>
 
@@ -2450,9 +2470,45 @@ select option { background: #0d1f33; color: var(--txt); }
 const FKEYS = {
   ENDPOINT: 'https://orders.f-keys.com/submit',   // f-keys-intake worker -> D1
   NOTIFY:   'vincegonzalez@me.com',    // where the mailto fallback goes
-  BUILD:    100,                       // one-time build fee
-  MONTHLY:  75                         // monthly, starts after launch
+  BUILD:    100,                       // one-time build fee (set by pickPlan)
+  MONTHLY:  75,                        // monthly, starts after launch (set by pickPlan)
+  PLAN:     'standard'
 };
+
+/* The One-Page Plan (clause 2.9). Choosing a plan swaps the prices, the
+   three consent boxes that name a price, and the add-on step, so a client
+   never signs wording for a plan they did not pick. The consent wording is
+   read off the page at submission, so the record carries whichever was shown. */
+const PLANS = {
+  standard: { build: 100, monthly: 75, name: 'Standard ($100 build, $75/month)',
+    cPay:   '<strong>I authorize</strong> Provider to charge my card <strong>$100 for the build</strong> when I accept a written quote, and <strong>$75 each month</strong> starting the day my site goes live, continuing until I cancel by email under clause 2.7.',
+    cBuild: 'I understand my $100 build covers <strong>up to seven (7) pages, forty (40) photos and two (2) rounds of changes</strong>, and that anything past those numbers is <strong>quoted to me in writing before it is done</strong>.',
+    cMonth: 'I understand my <strong>$75/month</strong> covers hosting, my domain renewed up to <strong>$25/year</strong>, security monitoring, <strong>up to three (3) small edits</strong> and <strong>one (1) 25-minute call</strong> each month; that unused edits and call time do not carry over; and that anything more is priced in writing before it is done.',
+    recPay: '$100 one-time build; $75/month begins after website delivery',
+    recBuild: 'Build scope understood — 7 pages, 40 photos, 2 rounds of changes; more is quoted first' },
+  onepage: { build: 40, monthly: 20, name: 'One-Page Plan ($40 build, $20/month, clause 2.9)',
+    cPay:   '<strong>I authorize</strong> Provider to charge my card <strong>$40 for the build</strong> when I accept a written quote, and <strong>$20 each month</strong> starting the day my site goes live, continuing until I cancel by email under clause 2.7.',
+    cBuild: 'I understand my $40 build covers <strong>one (1) page, up to five (5) photos and one (1) round of changes</strong>, and that anything past those numbers is <strong>quoted to me in writing before it is done</strong>.',
+    cMonth: 'I understand my <strong>$20/month</strong> covers hosting, my domain renewed up to <strong>$25/year</strong> and security monitoring, with <strong>no edits and no calls included</strong>; that each small edit is <strong>$15</strong> and each 25-minute call is <strong>$40</strong>, priced in writing before it is done.',
+    recPay: 'One-Page Plan: $40 one-time build; $20/month begins after website delivery; edits $15, calls $40',
+    recBuild: 'Build scope understood — 1 page, 5 photos, 1 round of changes; more is quoted first' }
+};
+
+function pickPlan(key) {
+  const p = PLANS[key]; if (!p) return;
+  FKEYS.PLAN = key; FKEYS.BUILD = p.build; FKEYS.MONTHLY = p.monthly;
+  document.querySelectorAll('#plan-group .choice-btn').forEach(b =>
+    b.classList.toggle('selected', b.dataset.plan === key));
+  document.querySelectorAll('.plan-build').forEach(e => e.textContent = p.build);
+  document.querySelectorAll('.plan-mo').forEach(e => e.textContent = p.monthly);
+  const set = (id, html) => { const e = document.getElementById(id); if (e) e.innerHTML = html; };
+  set('consent-pay', p.cPay); set('consent-build', p.cBuild); set('consent-month', p.cMonth);
+  const one = key === 'onepage';
+  document.querySelectorAll('.upsell-check').forEach(c => { if (one) c.checked = false; c.disabled = one; });
+  document.querySelectorAll('.upsell-item').forEach(i => i.style.opacity = one ? '.45' : '');
+  const note = document.getElementById('onepage-addon-note'); if (note) note.style.display = one ? '' : 'none';
+  updateUpsellTotal();
+}
 
 // ════════════════════════════════
 // STATE
@@ -2918,6 +2974,7 @@ function submitForm() {
     'Due To Build':         '$' + t.dueToday,
     'Monthly After Launch': '$' + t.perMonth,
     'Notes':                v('f-notes'),
+    'Plan':                 PLANS[FKEYS.PLAN].name,
     'Agreement Accepted':   'Yes — all 7 clauses + final confirmation, ' + ts
   };
 
@@ -2982,6 +3039,9 @@ ANALYTICS & DOMAIN
   Domain Owner:      ${fields['Domain Owner']}
   Target Launch:     ${fields['Target Launch']}
 
+PLAN
+  ${PLANS[FKEYS.PLAN].name}
+
 SELECTED ADD-ONS
 ${upsells.length ? upsells.map(u => '  • ' + u).join('\n') : '  None selected'}
 
@@ -3001,12 +3061,12 @@ Timestamp: ${ts}
 The following was individually confirmed by the Client:
 
   [✓] Submission is a quote request — does not start work, does not charge the client
-  [✓] $100 one-time build; $75/month begins after website delivery
+  [✓] ${PLANS[FKEYS.PLAN].recPay}
   [✓] Provider licensed to use logo/images to build + host, from quote acceptance
   [✓] Client confirms ownership of all submitted content
   [✓] Client agrees to full Website Development, Delivery & Hosting Agreement
   [✓] Submission constitutes electronic signature under U.S. E-SIGN law
-  [✓] Build scope understood — 7 pages, 40 photos, 2 rounds of changes; more is quoted first
+  [✓] ${PLANS[FKEYS.PLAN].recBuild}
   [✓] Final confirmation: all information is accurate
 
 This submission constitutes a binding electronic agreement.
