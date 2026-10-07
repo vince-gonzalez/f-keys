@@ -21,7 +21,7 @@ is the glass you are already holding.
 ## Then sixty seconds to make it yours
 
 The default layout is the fifteen-second answer. The real one is a mock screen you draw
-on: drop a control anywhere, size it, colour it, and decide what it sends.
+on: drop a control anywhere, size it, color it, and decide what it sends.
 
 | Field | Value |
 | --- | --- |

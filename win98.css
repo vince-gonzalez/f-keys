@@ -673,3 +673,39 @@ table.details th.num,table.details td.num{text-align:right}
   .doc .getit{gap:4px}
   .card .go{margin-left:0}
 }
+
+/* ------------------------------------------------------------------
+   /portfolio.html - the header.
+
+   The page used to open on a grid of twelve cards with no name, no year
+   and no statement of who built any of it, which reads as a link farm
+   rather than a body of work. Three verified facts now sit above the
+   grid. Colours are existing tokens; nothing new needed checking.
+   ------------------------------------------------------------------ */
+.pf-head{
+  border-bottom:1px solid var(--sh);padding:0 0 13px;margin:0 0 18px;
+}
+.pf-head h1{
+  font-size:17px;margin:0 0 3px;letter-spacing:.2px;color:var(--ink);
+}
+.pf-who{color:var(--dim);margin:0 0 11px;max-width:58em;line-height:1.6}
+.pf-facts{list-style:none;margin:0 0 11px;padding:0;max-width:58em}
+.pf-facts li{
+  margin:0 0 6px;padding:0 0 0 15px;position:relative;line-height:1.6;
+}
+.pf-facts li::before{
+  content:"\2022";position:absolute;left:3px;color:var(--dim);
+}
+.pf-note{color:var(--dim);margin:0;max-width:58em;line-height:1.6}
+
+/* Tag chips had no layout at all: the spans butted together and rendered
+   as "formal methodsLean 4MetamathPython". A reader does not consciously
+   register why that page looks unfinished, only that it does. */
+.card .tags{
+  display:flex;flex-wrap:wrap;gap:4px;margin:7px 0 9px;
+  color:var(--dim);font-size:13px;
+}
+.card .tag{
+  background:var(--face);border:1px solid var(--sh);
+  padding:1px 7px;color:var(--dim);white-space:nowrap;
+}

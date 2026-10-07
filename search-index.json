@@ -19,7 +19,7 @@
   "name": "OpticQuiz",
   "kind": "Web app",
   "status": "Ready",
-  "text": "Colour-vision and acuity tests that run entirely in the browser.",
+  "text": "Color-vision and acuity tests that run entirely in the browser.",
   "href": "https://opticquiz.com",
   "group": "apps"
  },
@@ -171,7 +171,7 @@
   "name": "ishihara",
   "kind": "Python package",
   "status": "pip install",
-  "text": "Generate pseudoisochromatic colour-vision plates, reproducible from a seed.",
+  "text": "Generate pseudoisochromatic color-vision plates, reproducible from a seed.",
   "href": "/ishihara/",
   "group": "research"
  },
@@ -179,7 +179,7 @@
   "name": "legible",
   "kind": "Python package",
   "status": "pip install",
-  "text": "Three build gates: unreadable type, unreadable colour, a retired name.",
+  "text": "Three build gates: unreadable type, unreadable color, a retired name.",
   "href": "/legible/",
   "group": "tools"
  },

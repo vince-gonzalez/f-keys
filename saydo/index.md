@@ -47,7 +47,7 @@ captures the tool definitions, exercises the server, and writes a receipt.
 A harness that only ever passes is worth nothing, so it ships with a server
 built to fail. saydo selfcheck runs that one and requires the
 harness to catch every violation — the same discipline the rest of this
-catalogue is built on, pointed at itself.
+catalog is built on, pointed at itself.
 
 ## A receipt, actually
 
@@ -109,7 +109,7 @@ is out of their scope.
 | Declarations | 11 — 6 F-Keys servers, 1 seeded fixture, 4 third-party; all draft, all unsigned |
 | Receipts | Ed25519-signed with a proof-of-concept key; production signing not settled |
 | Invariant types | 13 in the current draft |
-| Licence | Apache-2.0 on the open layers |
+| License | Apache-2.0 on the open layers |
 | Source | vince-gonzalez/saydo |
 
 ## Questions
