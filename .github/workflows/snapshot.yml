@@ -59,11 +59,22 @@ jobs:
       - name: Keep the specification in step with the snapshot
         run: python tools/buildapi.py
 
+      # Same reasoning, and it was missed. buildsitemap stores a content
+      # hash per page in sitemap-dates.json. Rewriting status/index.html
+      # and status/detail/index.html above changes those hashes, so the
+      # sitemap starts describing two pages that have since changed - and
+      # the site-claims gate then fails on WHOEVER PUSHES NEXT, about a
+      # file they never touched. That has been firing for weeks and it is
+      # not their bug, it is this job's. Correct it here, in the job that
+      # caused it.
+      - name: Keep the sitemap in step with the snapshot
+        run: python tools/buildsitemap.py
+
       - name: Commit the public snapshot
         run: |
           git config user.name  "kpi-snapshot"
           git config user.email "noreply@f-keys.com"
-          git add status/ openapi.json
+          git add status/ openapi.json sitemap.xml sitemap-dates.json
           if git diff --staged --quiet; then
             echo "No change in the numbers today - nothing to commit."
             exit 0
