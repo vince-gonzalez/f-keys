@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "columns": 8,
+    "repeats": 3,
+    "cases": [
+      [
+        16,
+        1000
+      ],
+      [
+        64,
+        1000
+      ],
+      [
+        256,
+        1000
+      ],
+      [
+        1024,
+        500
+      ],
+      [
+        4096,
+        125
+      ],
+      [
+        16384,
+        32
+      ],
+      [
+        65536,
+        8
+      ]
+    ],
+    "note": "N is scaled down as row size rises to hold bytes written per run near 4 MB, so times are comparable only between strategies WITHIN one row size, never across row sizes. A refused literal run is the finding, not a failure: it marks the region where one row's literal tuple exceeds the 100,000-byte statement limit and only bound parameters remain available."
+  },
+  "results": [
+    {
+      "bytes_per_col": 16,
+      "rows": 1000,
+      "strategy": "params",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 96,
+      "d1_ms_min": 93,
+      "d1_ms_max": 106,
+      "d1_ms_stdev": 6.81,
+      "statements": 84,
+      "rows_per_stmt": 12,
+      "max_bound_params": 96,
+      "max_stmt_bytes": 269
+    },
+    {
+      "bytes_per_col": 16,
+      "rows": 1000,
+      "strategy": "literal",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 69,
+      "d1_ms_min": 67,
+      "d1_ms_max": 72,
+      "d1_ms_stdev": 2.52,
+      "statements": 2,
+      "rows_per_stmt": 500,
+      "max_bound_params": 0,
+      "max_stmt_bytes": 97923
+    },
+    {
+      "bytes_per_col": 64,
+      "rows": 1000,
+      "strategy": "params",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 90,
+      "d1_ms_min": 87,
+      "d1_ms_max": 102,
+      "d1_ms_stdev": 7.94,
+      "statements": 84,
+      "rows_per_stmt": 12,
+      "max_bound_params": 96,
+      "max_stmt_bytes": 269
+    },
+    {
+      "bytes_per_col": 64,
+      "rows": 1000,
+      "strategy": "literal",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 99,
+      "d1_ms_min": 91,
+      "d1_ms_max": 119,
+      "d1_ms_stdev": 14.42,
+      "statements": 5,
+      "rows_per_stmt": 200,
+      "max_bound_params": 0,
+      "max_stmt_bytes": 97933
+    },
+    {
+      "bytes_per_col": 256,
+      "rows": 1000,
+      "strategy": "params",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 254,
+      "d1_ms_min": 193,
+      "d1_ms_max": 264,
+      "d1_ms_stdev": 38.43,
+      "statements": 84,
+      "rows_per_stmt": 12,
+      "max_bound_params": 96,
+      "max_stmt_bytes": 269
+    },
+    {
+      "bytes_per_col": 256,
+      "rows": 1000,
+      "strategy": "literal",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 182,
+      "d1_ms_min": 172,
+      "d1_ms_max": 198,
+      "d1_ms_stdev": 13.11,
+      "statements": 19,
+      "rows_per_stmt": 53,
+      "max_bound_params": 0,
+      "max_stmt_bytes": 96619
+    },
+    {
+      "bytes_per_col": 1024,
+      "rows": 500,
+      "strategy": "params",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 231,
+      "d1_ms_min": 136,
+      "d1_ms_max": 258,
+      "d1_ms_stdev": 64.08,
+      "statements": 42,
+      "rows_per_stmt": 12,
+      "max_bound_params": 96,
+      "max_stmt_bytes": 269
+    },
+    {
+      "bytes_per_col": 1024,
+      "rows": 500,
+      "strategy": "literal",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 289,
+      "d1_ms_min": 151,
+      "d1_ms_max": 308,
+      "d1_ms_stdev": 85.69,
+      "statements": 39,
+      "rows_per_stmt": 13,
+      "max_bound_params": 0,
+      "max_stmt_bytes": 93627
+    },
+    {
+      "bytes_per_col": 4096,
+      "rows": 125,
+      "strategy": "params",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 203,
+      "d1_ms_min": 159,
+      "d1_ms_max": 213,
+      "d1_ms_stdev": 28.73,
+      "statements": 11,
+      "rows_per_stmt": 12,
+      "max_bound_params": 96,
+      "max_stmt_bytes": 269
+    },
+    {
+      "bytes_per_col": 4096,
+      "rows": 125,
+      "strategy": "literal",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 217,
+      "d1_ms_min": 214,
+      "d1_ms_max": 226,
+      "d1_ms_stdev": 6.24,
+      "statements": 42,
+      "rows_per_stmt": 3,
+      "max_bound_params": 0,
+      "max_stmt_bytes": 86159
+    },
+    {
+      "bytes_per_col": 16384,
+      "rows": 32,
+      "strategy": "params",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 150,
+      "d1_ms_min": 130,
+      "d1_ms_max": 175,
+      "d1_ms_stdev": 22.55,
+      "statements": 3,
+      "rows_per_stmt": 11,
+      "max_bound_params": 96,
+      "max_stmt_bytes": 269
+    },
+    {
+      "bytes_per_col": 16384,
+      "rows": 32,
+      "strategy": "literal",
+      "refused": true,
+      "error": "D1_ERROR: statement too long: SQLITE_TOOBIG"
+    },
+    {
+      "bytes_per_col": 65536,
+      "rows": 8,
+      "strategy": "params",
+      "refused": false,
+      "passes": 3,
+      "d1_ms_median": 202,
+      "d1_ms_min": 200,
+      "d1_ms_max": 210,
+      "d1_ms_stdev": 5.29,
+      "statements": 1,
+      "rows_per_stmt": 8,
+      "max_bound_params": 64,
+      "max_stmt_bytes": 197
+    },
+    {
+      "bytes_per_col": 65536,
+      "rows": 8,
+      "strategy": "literal",
+      "refused": true,
+      "error": "D1_ERROR: statement too long: SQLITE_TOOBIG"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "f-keys-d1bench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "D1 write-ceiling benchmark: which strategy wins, and which limit binds first.",
+  "scripts": {
+    "check": "node --check src/index.js",
+    "deploy": "wrangler deploy",
+    "drive": "python -I drive.py"
+  }
+}

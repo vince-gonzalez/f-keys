@@ -1,0 +1,44 @@
+# ============================================================
+# d1bench - the D1 write-ceiling benchmark
+# F-Keys | www.f-keys.com
+# ------------------------------------------------------------
+# Runs inside a Worker because two of the limits under test only
+# exist inside a Worker invocation: queries per invocation, and
+# the 30 second cap on a whole batch() call. Measured from a
+# laptop those limits do not exist and the number is mostly the
+# home internet connection.
+#
+# ITS OWN DATABASE, on purpose. This thing creates, drops and
+# truncates tables and writes rows in bulk. Pointing it at the
+# relay's database would put a benchmark's DROP TABLE one typo
+# away from live delivery history.
+#
+# NO CUSTOM DOMAIN, and not because of politeness. A route that
+# inserts D1 rows as fast as it can is a billing hole if anyone
+# else can reach it, so it is gated on BENCH_TOKEN and lives on
+# an unadvertised workers.dev address.
+#
+# Create:  npx wrangler d1 create f-keys-d1bench
+# Secret:  npx wrangler secret put BENCH_TOKEN
+# Deploy:  npx wrangler deploy
+# Drive:   python -I drive.py
+# ============================================================
+
+name = "f-keys-d1bench"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+# One address, deliberately. Preview URLs would publish a second
+# unadvertised hostname for a route that writes D1 rows in bulk, and
+# every extra door on a billing-sensitive endpoint is one more thing
+# to remember exists.
+preview_urls = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "f-keys-d1bench"
+database_id = "47810360-b8e3-4159-8fe0-dd5cbb085ae8"
+
+[observability]
+enabled = true
