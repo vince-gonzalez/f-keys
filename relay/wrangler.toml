@@ -26,7 +26,7 @@ workers_dev = true
 [[d1_databases]]
 binding = "DB"
 database_name = "f-keys-relay"
-# database_id is filled in by `wrangler d1 create`.
+database_id = "3bce2c78-c6c3-4a3f-b373-31c78d138f77"
 
 [observability]
 enabled = true
