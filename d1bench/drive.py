@@ -40,11 +40,38 @@ import urllib.request
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-BASE = "https://f-keys-d1bench.vince-848.workers.dev"
-TOKEN_FILE = os.path.join(
-    os.environ.get("USERPROFILE", r"C:\Users\Admin"),
-    "Desktop", "f-keys-docs", "D1BENCH-TOKEN.txt")
-TOKEN = io.open(TOKEN_FILE, encoding="utf-8").read().strip().split("\n")[-1]
+# ---------------------------------------------------------------------
+# CONFIGURED FROM THE ENVIRONMENT, not baked in. Two reasons, and
+# neither is tidiness: the hardcoded value was an account's own
+# workers.dev subdomain and a local home directory, and this file is
+# published. Anyone reproducing this points it at their own deployment.
+#
+#   set D1BENCH_BASE=https://<your-worker>.workers.dev
+#   set D1BENCH_TOKEN=<the value of BENCH_TOKEN>
+#
+# or put the token in a file and give its path as D1BENCH_TOKEN_FILE.
+# ---------------------------------------------------------------------
+BASE = os.environ.get("D1BENCH_BASE", "").rstrip("/")
+if not BASE:
+    sys.exit("set D1BENCH_BASE to the deployed Worker's origin")
+
+
+def _token():
+    direct = os.environ.get("D1BENCH_TOKEN")
+    if direct:
+        return direct.strip()
+    path = os.environ.get("D1BENCH_TOKEN_FILE")
+    if path and os.path.exists(path):
+        # Last non-empty line, so the file may carry a header describing
+        # what the value is for.
+        lines = [l for l in io.open(path, encoding="utf-8").read().splitlines()
+                 if l.strip()]
+        if lines:
+            return lines[-1].strip()
+    sys.exit("set D1BENCH_TOKEN, or D1BENCH_TOKEN_FILE to a file holding it")
+
+
+TOKEN = _token()
 
 COLUMNS = [2, 4, 8, 16, 32, 64]
 STRATEGIES = ["params", "literal", "onebyone"]

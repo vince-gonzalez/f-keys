@@ -27,8 +27,10 @@ is not — and that is the only part a developer actually has to decide.
 ## Finding 1 — `batch()` is not bound by "queries per Worker invocation"
 
 The documented cap is **1000 queries per Worker invocation** (50 on free), and
-the advice that follows it everywhere is to chunk a bulk insert so the
-statement count stays under it.
+the advice that follows it is to chunk a bulk insert so the statement count
+stays under it. Whether that cap is charged per statement inside a `batch()`
+is left open by the documentation — see the quotations below — and the open
+question is why the cautious reading spread.
 
 A single `batch()` call accepted far more:
 
@@ -54,11 +56,39 @@ runs, 260,487 present in the table. Exact. Every statement executed.
 So one `batch()` call behaves as **one query** against the per-invocation cap.
 Chunking statements to stay under 1000 is solving a problem that is not there.
 
-At 0.236 ms per statement the 30-second duration cap is the next wall — and
-note that the 128,000-statement call took 30,208 ms, which has already passed
-30 seconds, and still returned successfully. **Where that cap actually bites
-was not measured.** It is left as unmeasured rather than extrapolated into a
-number.
+### What the documentation actually says, quoted
+
+The relevant row is not phrased the way it is usually quoted. Verbatim:
+
+> **Queries per Worker invocation (read subrequest limits)**: 1000 (Workers
+> Paid) / 50 (Free)
+
+The parenthetical is the hint, and it is routinely dropped when the number is
+repeated. The page then says:
+
+> Limits for individual queries (listed above) apply to each individual
+> statement contained within a batch statement.
+
+with statement length given as the example. **What the page does not say is
+how a `batch()` counts against the query-count row** — one query, or one per
+statement. That is the ambiguity, and the sentence above invites the stricter
+reading. The measurement resolves it: a batch is one.
+
+### A correction to an earlier draft of this document
+
+An earlier draft noted that the 128,000-statement call ran 30,208 ms, past
+the documented 30-second **Maximum SQL query duration**, and treated that as
+a second unenforced limit. That was wrong, and wrong by the same misreading
+this finding is about.
+
+The duration limit applies **per statement**, exactly as the quoted sentence
+says. Each statement here took about 0.236 ms, so no statement came close to
+30 seconds and nothing was violated. A batch whose *total* wall time exceeds
+30 seconds does not breach a per-statement cap.
+
+So there is **no finding about the 30-second limit**, in either direction. It
+was never approached. Where a genuinely long single statement gets refused is
+a different experiment and was not run.
 
 ---
 
@@ -199,8 +229,11 @@ That is the whole result in one line, and everything above is a consequence:
 - **No indexes on any table.** Index maintenance is real write cost,
   excluded deliberately to isolate the variable. A table with three indexes
   will not match these absolute numbers.
-- **The 30-second cap was not located.** A 128,000-statement call ran
-  30,208 ms and succeeded; where refusal begins is unmeasured.
+- **Nothing here tests the 30-second duration cap.** It applies per
+  statement, and every statement measured took well under a millisecond, so
+  the cap was never approached. An earlier draft of this document claimed the
+  cap went unenforced because a whole batch ran 30,208 ms; that conflated a
+  per-statement limit with a per-call total and has been removed.
 - **Values contained no characters needing escaping.** Escaping cost scales
   with quote density, which is a separate sweep and was not run. This matters
   only for `literal`, and it is the one axis where the untested direction
