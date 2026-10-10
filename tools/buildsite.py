@@ -3425,7 +3425,7 @@ specification.</p>
 EXTRA_NODES = [("/shop/", "Shop"), ("/intake/", "Websites"), ("/audit/", "Site audit"),
                ("/search/", "Find"),
                ("/about.html", "About"), ("/cv/", "CV"),
-               ("/writing/", "Writing"),
+               ("/writing/", "Writing"), ("/stack/", "Stack"),
                ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
                ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
                ("/contact.html", "Contact"), ("/privacy.html", "Privacy")]

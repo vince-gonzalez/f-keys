@@ -16,7 +16,7 @@ Formal verification, color science and epistemology. Built the tooling the measu
 
 ## Published Research
 
-58 deposited works · ORCID 0009-0005-3640-014X · all open access
+25 deposited works · ORCID 0009-0005-3640-014X · all open access
 
 - Where Formal Libraries Spend Their Axioms. Axiom use measured across six libraries and two proof systems by one program. Located an avoidable classical dependency in Lean's `omega` and computed a 13.1% ceiling on removable classical dependence in Mathlib.
 - Which Constant Is Responsible?. Dominator analysis over 766,564 constants showing that reachability overstates responsibility by 58×, and that 60.1% of classically dependent theorems have no responsible constant at all.

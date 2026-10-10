@@ -709,3 +709,20 @@ table.details th.num,table.details td.num{text-align:right}
   background:var(--face);border:1px solid var(--sh);
   padding:1px 7px;color:var(--dim);white-space:nowrap;
 }
+
+/* ------------------------------------------------------------------
+   /stack/ - one entry per capability.
+
+   A skills list proves nothing, so each entry leads with what had to be
+   decided. The decision is the part that cannot be faked, so it gets the
+   body text and the technology name gets the label.
+   ------------------------------------------------------------------ */
+.stk{
+  border-left:3px solid var(--sh);padding:0 0 0 11px;margin:0 0 13px;
+}
+.stk-h{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:0 0 3px;
+}
+.stk-h strong{color:var(--ink)}
+.stk-w{color:var(--dim);font-size:13px}
+.stk p{margin:0;line-height:1.65;max-width:46em}

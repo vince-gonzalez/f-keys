@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack — F-Keys</title>
+<meta name="description" content="What the work required and the decision each piece forced, read out of the source rather than listed as skills.">
+<link rel="canonical" href="https://f-keys.com/stack/">
+<meta name="robots" content="index, follow">
+<meta name="llms-txt" content="https://f-keys.com/llms.txt">
+<meta name="ai" content="allow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="F-Keys">
+<meta property="og:title" content="Stack — F-Keys">
+<meta property="og:description" content="What the work required and the decision each piece forced, read out of the source rather than listed as skills.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://f-keys.com/stack/">
+<meta property="og:image" content="https://f-keys.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stack — F-Keys">
+<meta name="twitter:description" content="What the work required and the decision each piece forced, read out of the source rather than listed as skills.">
+<meta name="twitter:image" content="https://f-keys.com/assets/og.png">
+<link rel="stylesheet" href="/win98.css?v=0df044cb">
+
+</head>
+<body>
+<div class="window raised">
+
+  <div class="titlebar">
+    <span class="t"><span>F-Keys\Stack</span></span>
+    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+  </div>
+
+  <nav class="menubar"><a href="/"><u>F</u>ile</a><a href="/log/"><u>E</u>dit</a><a href="/status/"><u>V</u>iew</a><a href="/papers/"><u>I</u>nsert</a><a href="/writing/">F<u>o</u>rmat</a><a href="/about.html"><u>H</u>elp</a></nav>
+
+  <div class="toolbar groove">
+    <a class="tool" href="/">&#8592; Back</a>
+    <span class="tool off">Forward &#8594;</span>
+    <a class="tool" href="/">&#8593; Up</a>
+    <span class="sep"></span>
+    <a class="tool" href="/">Home</a>
+    <a class="tool" href="/search/">Find</a>
+    <a class="tool hide-xs" href="/status/">Status</a>
+    <a class="tool hide-xs" href="/log/">Log</a>
+  </div>
+
+
+  <div class="ruler sunken" aria-hidden="true"></div>
+
+  <div class="panes solo">
+    <section class="content sunken app-wordpad">
+<div class="doc">
+<h1>Stack</h1>
+<p class="sub">What the work required, and the decision each piece forced. A list of technologies proves nothing, so every entry below names the thing that had to be decided and what it was decided against. All of it is in the source.</p>
+<h2>Data</h2>
+<div class="stk"><div class="stk-h"><strong>SQL at the edge, Cloudflare D1</strong><span class="stk-w">the intake funnel and a five-source data pipeline</span></div><p>D1 binds at most a hundred parameters per query. The upsert binds five per row, and a chunk size of forty written next to the limit meant every statement carried two hundred, so every run of every source failed on “too many SQL variables” and had done for months. The chunk is now derived from the limit rather than written beside it, so adding a column cannot quietly put it back over.</p></div>
+<div class="stk"><div class="stk-h"><strong>SQLite inside a Durable Object</strong><span class="stk-w">DaisuPop, a room per game</span></div><p>A room is addressed by name rather than by a generated id, so two players typing the same room string reach the same object without a lookup table anywhere. The class is declared in a migration as a SQLite-backed Durable Object, which puts the room&#x27;s state and its storage in the same place as its WebSocket.</p></div>
+<div class="stk"><div class="stk-h"><strong>Postgres with row-level security</strong><span class="stk-w">LOCK IN</span></div><p>A view declared security_invoker runs as the original caller even when it sits inside a view the owner owns, so owner rights do not pass through it. Anything that genuinely has to cross the RLS boundary goes through a SECURITY DEFINER function instead, which is the only construct that actually changes who the query runs as.</p></div>
+<div class="stk"><div class="stk-h"><strong>SQLite on the desktop</strong><span class="stk-w">PlumHUD</span></div><p>A polling thread writes each reading straight to SQLite and hands the batch to the interface thread, so the database is never touched from the thread that draws.</p></div>
+<h2>Objects, links and mail</h2>
+<div class="stk"><div class="stk-h"><strong>R2 with signed, expiring links</strong><span class="stk-w">the intake funnel</span></div><p>A client&#x27;s logo is their property, not the internet&#x27;s, so the bucket is private and a link in an email cannot carry an admin key. The link carries its own expiry and an HMAC over it instead, and the signature is verified BEFORE the database lookup, so file ids cannot be walked by asking for them.</p></div>
+<div class="stk"><div class="stk-h"><strong>Constant-time comparison</strong><span class="stk-w">the same signature check</span></div><p>Signatures are compared with an XOR walk over the whole string rather than with ===, because an equality check returns early on the first wrong character and a wrong signature could then be guessed one character at a time from how long the answer took.</p></div>
+<div class="stk"><div class="stk-h"><strong>Hashing in the log, not the address</strong><span class="stk-w">the same worker</span></div><p>Visitor addresses are salted, hashed and truncated before they are written anywhere, so the log cannot identify anyone if it ever leaks.</p></div>
+<div class="stk"><div class="stk-h"><strong>Transactional mail on a subdomain</strong><span class="stk-w">the intake funnel</span></div><p>The apex MX belongs to Apple and every address already forwards correctly, so sender records went on a send subdomain. Writing SPF at the apex would have broken mail that was working in order to add mail that was not. And a Worker has no TCP, so it cannot speak SMTP at all: an HTTP mail API is a requirement here, not a preference.</p></div>
+<div class="stk"><div class="stk-h"><strong>The order is the design</strong><span class="stk-w">the intake funnel</span></div><p>The database row is written before the mail is sent, and the response reports recorded and notified as two separate facts. A mail failure costs a notification. It never costs the enquiry.</p></div>
+<h2>Edge and real time</h2>
+<div class="stk"><div class="stk-h"><strong>Workers, routed on custom domains</strong><span class="stk-w">several properties</span></div><p>Static assets are served through an assets binding on the same Worker that handles the dynamic routes, so there is one deploy and one origin rather than a site and an API that can drift apart.</p></div>
+<div class="stk"><div class="stk-h"><strong>WebSockets</strong><span class="stk-w">DaisuPop over Durable Objects, RemapWrap over a LAN</span></div><p>Two different problems. The game needs every player in a room to see the same state, which is what the Durable Object is for. RemapWrap needs a phone to act as an input device for the desktop beside it, so it runs a local bridge on the network they already share and nothing leaves the building.</p></div>
+<div class="stk"><div class="stk-h"><strong>A native global keyboard hook</strong><span class="stk-w">Key-J</span></div><p>Installing a system-wide keyboard listener is the same machinery a keylogger uses. The documentation says exactly that, in those words, because a reader deciding whether to trust it is entitled to know before they install rather than after.</p></div>
+<div class="stk"><div class="stk-h"><strong>Desktop packaging</strong><span class="stk-w">Key-J, Electron and NSIS</span></div><p>The installer resolves its scope at compile time rather than negotiating it at run time. The assisted installer carries a UAC relaunch and a scope-selection interface that initialise even during a silent install, which is machinery a package manager has no way to answer.</p></div>
+<h2>Concurrency, and taking things out</h2>
+<div class="stk"><div class="stk-h"><strong>Producer and consumer across threads</strong><span class="stk-w">PlumHUD</span></div><p>A daemon thread polls the fleet on a timer and hands batches to the interface thread through a queue, which the interface drains on its own clock. Nothing blocks the thread that draws.</p></div>
+<div class="stk"><div class="stk-h"><strong>Deleting an event loop</strong><span class="stk-w">PlumHUD 3.0 to 4.0</span></div><p>The previous version ran a private asyncio loop with an aiohttp session and a thread-pool fallback behind it. The library underneath already did the concurrency with the standard library, so the loop, the optional dependency and the fallback path were all removed. Measured afterwards: no loss of speed. Three moving parts and one dependency gone for nothing in return except less to go wrong.</p></div>
+<h2>What is not here</h2>
+<p>Not used here, and worth saying so: Cloudflare KV, Queues, Vectorize, Workers AI, Hyperdrive, Browser Rendering and Containers. A webhook is sent from these systems but none of them receives one and verifies a signature at the door, which is a different piece of work. A page that lists only what went well is an advertisement.</p>
+<p class="note">The products these came out of are on <a href="/portfolio.html">the work page</a>. Writing, with the source of every excerpt linked, is at <a href="/writing/">/writing/</a>.</p>
+</div>
+    </section>
+  </div>
+
+  <div class="statusbar">
+    <span class="cell groove">15 entries</span>
+    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
+    <span class="cell groove">F-Keys</span>
+  </div>
+
+</div>
+</body>
+</html>
