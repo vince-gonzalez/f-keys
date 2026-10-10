@@ -50,5 +50,17 @@ max_batch_timeout = 5
 # is the backstop underneath it, high enough not to pre-empt it.
 max_retries = 20
 
+# One limiter per endpoint slug. A Durable Object is the only thing here
+# that can hold a counter several requests agree on; KV would let a flood
+# read the same stale balance a hundred times at once, which is exactly
+# the case the limiter exists for.
+[[durable_objects.bindings]]
+name = "LIMITER"
+class_name = "EndpointLimiter"
+
+[[migrations]]
+tag = "v1-limiter"
+new_sqlite_classes = ["EndpointLimiter"]
+
 [observability]
 enabled = true

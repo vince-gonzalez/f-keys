@@ -33,6 +33,7 @@ Deploy:  cd relay && npx wrangler deploy
 */
 
 import queue from './deliver.js';
+import { take, EndpointLimiter } from './limiter.js';
 
 const enc = new TextEncoder();
 
@@ -143,6 +144,39 @@ async function receive(request, env, slug) {
     }
   }
 
+  /* A rejection is decided here, before anything is written. The BAD
+     bucket is spent only by rejections and verified traffic never
+     touches it, so no amount of garbage aimed at this endpoint can
+     throttle a real sender. When it is empty the answer is still 401 -
+     the sender learns nothing new - but the row is not recorded, and
+     the unbounded D1 write is the cost this exists to stop. */
+  if (!v.ok) {
+    const bad = await take(env, slug, 'bad');
+    if (!bad.allowed) {
+      return new Response(
+        JSON.stringify({ error: 'signature rejected', reason: v.why }), {
+          status: 401,
+          headers: { 'content-type': 'application/json',
+                     'retry-after': String(bad.retry_after_s) },
+        });
+    }
+    await env.DB.prepare(
+      'INSERT INTO events (id, source, sender_id, received_at, signature_ok,'
+      + ' reject_reason, body_bytes, body) VALUES (?,?,?,?,?,?,?,?)')
+      .bind(id, slug, null, now, 0, v.why, raw.length, raw).run();
+    return json({ error: 'signature rejected', reason: v.why }, 401);
+  }
+
+  /* Verified traffic spends its own bucket, which a flood cannot reach. */
+  const okGate = await take(env, slug, 'ok');
+  if (!okGate.allowed) {
+    return new Response(JSON.stringify({ error: 'rate limited' }), {
+      status: 429,
+      headers: { 'content-type': 'application/json',
+                 'retry-after': String(okGate.retry_after_s) },
+    });
+  }
+
   /* FAST PATH. KV answers in a millisecond and saves a D1 round trip on
      the ordinary retry, which is most of them. It is not the guarantee:
      KV is eventually consistent, so two copies arriving inside the
@@ -159,9 +193,7 @@ async function receive(request, env, slug) {
     await env.DB.prepare(
       'INSERT INTO events (id, source, sender_id, received_at, signature_ok,'
       + ' reject_reason, body_bytes, body) VALUES (?,?,?,?,?,?,?,?)')
-      .bind(id, slug, senderId, now, v.ok ? 1 : 0, v.ok ? null : v.why,
-            raw.length, raw)
-      .run();
+      .bind(id, slug, senderId, now, 1, null, raw.length, raw).run();
   } catch (err) {
     /* THE GUARANTEE. A unique violation here is not a failure, it is the
        second copy of an event learning what the first copy's id was. Any
@@ -179,8 +211,6 @@ async function receive(request, env, slug) {
   if (seenKey) {
     await env.SEEN.put(seenKey, id, { expirationTtl: DEDUPE_TTL_S });
   }
-
-  if (!v.ok) return json({ error: 'signature rejected', reason: v.why }, 401);
 
   /* Queued AFTER the row exists, for the same reason the row comes
      before the mail in intake-worker. If the enqueue fails the event is
@@ -215,4 +245,5 @@ export default {
   },
 };
 
+export { EndpointLimiter };
 export { sameSig, verify, hmacHex };
