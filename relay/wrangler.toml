@@ -18,10 +18,23 @@ name = "f-keys-relay"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
 
-# No custom domain yet, on purpose. A rejected request still costs a
-# D1 write until the rate-limiting Durable Object lands in step 4, so
-# the address is not advertised until it can defend itself.
+# THE ADDRESS, and why it exists now and not before. A rejected request
+# used to cost a D1 write, so anyone who knew an endpoint name could grow
+# the table by POSTing garbage. That is why this had no domain. Step 4's
+# rate-limiting Durable Object closed it: a rejection past the bad bucket
+# is answered and not recorded, so the address can defend itself and is
+# therefore allowed to be a real one.
+#
+# workers.dev stays on deliberately. The test harness in test/ points at
+# the custom domain now, but anything already wired to the old address
+# keeps working, and turning off a host that senders may hold is how a
+# relay loses events. Nothing here depends on which host served it: the
+# signature covers the timestamp and the body, never the Host header.
 workers_dev = true
+
+[[routes]]
+pattern = "relay.f-keys.com"
+custom_domain = true
 
 [[d1_databases]]
 binding = "DB"

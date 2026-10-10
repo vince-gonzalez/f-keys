@@ -25,7 +25,12 @@ from concurrent.futures import ThreadPoolExecutor
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-BASE = "https://f-keys-relay.vince-848.workers.dev"
+# The address is relay.f-keys.com since 2026-10-10. workers.dev still
+# serves the same Worker, so the old host is a fallback, not a second
+# service. Every request here sets an explicit user-agent on purpose:
+# Cloudflare answers 403 to the Python-urllib default on every zone, so
+# a script that does not set one tests the bot rule instead of the relay.
+BASE = "https://relay.f-keys.com"
 SECRET = io.open(r"C:\Users\Admin\Desktop\f-keys-docs\RELAY-DEMO-SECRET.txt",
                  encoding="utf-8").read().strip().split("\n")[-1]
 

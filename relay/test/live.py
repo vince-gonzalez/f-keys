@@ -4,7 +4,20 @@
 A unit test proves the function is right. This proves the thing that is
 actually running on the internet is right, which is a different claim.
 
-Five requests: one genuine, four forgeries of the kinds that matter.
+Seven requests: one genuine, four forgeries of the kinds that matter,
+one deliberate replay, and one unknown endpoint.
+
+THE EVENT ID IS STAMPED PER RUN, and that is not a detail. The first
+version of this file sent a hardcoded "evt_live_1" and demanded 202.
+It passed exactly once. Every run after that the relay recognised the
+id it had already stored and correctly answered 200 duplicate - so a
+PASSING dedupe made the happy-path case read as a failure, and the
+reflex is to go looking for a bug in the service that is behaving.
+
+A test that can only pass on a virgin database is not testing the
+service, it is testing whether anyone ran it before. So: a fresh id
+each run for the accept case, and the duplicate behaviour is now a
+case of its own that asserts it on purpose rather than tripping over it.
 """
 import hashlib
 import hmac
@@ -16,11 +29,19 @@ import sys
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-BASE = "https://f-keys-relay.vince-848.workers.dev"
+# The address is relay.f-keys.com since 2026-10-10. workers.dev still
+# serves the same Worker, so the old host is a fallback, not a second
+# service. Every request here sets an explicit user-agent on purpose:
+# Cloudflare answers 403 to the Python-urllib default on every zone, so
+# a script that does not set one tests the bot rule instead of the relay.
+BASE = "https://relay.f-keys.com"
 SECRET_FILE = r"C:\Users\Admin\Desktop\f-keys-docs\RELAY-DEMO-SECRET.txt"
 SECRET = io.open(SECRET_FILE, encoding="utf-8").read().strip().split("\n")[-1]
 
-BODY = json.dumps({"id": "evt_live_1", "kind": "demo", "n": 1})
+# Unique per run. See the docstring: a fixed id makes dedupe look like
+# a defect on the second run and every run after it.
+EVENT_ID = "evt_live_%d" % int(time.time())
+BODY = json.dumps({"id": EVENT_ID, "kind": "demo", "n": 1})
 
 
 def sign(body, ts, secret=SECRET):
@@ -59,6 +80,10 @@ CASES = [
                                         sign(BODY, now - 7200), 401),
     ("no signature at all",             "/in/demo", BODY, None, 401),
     ("endpoint that does not exist",    "/in/nope", BODY, sign(BODY, now), 404),
+    # Asserted, not stumbled into. Same id, same secret, valid signature:
+    # a sender retrying something we already hold. 200 and not 202, because
+    # 202 would claim we accepted something new and we did not.
+    ("REPLAY of the accepted event",    "/in/demo", BODY, sign(BODY, now), 200),
 ]
 
 print("  %-34s %-6s %-6s %s" % ("CASE", "GOT", "WANT", ""))

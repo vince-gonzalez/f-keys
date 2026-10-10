@@ -6,6 +6,9 @@
   "description": "Webhook relay: verify at the door, record every attempt.",
   "scripts": {
     "test": "node --test test/*.test.mjs",
+    "test:live": "python -I test/live.py",
+    "test:dedupe": "python -I test/dedupe.py",
+    "test:limiter": "python -I test/limiter.py",
     "deploy": "wrangler deploy"
   }
 }

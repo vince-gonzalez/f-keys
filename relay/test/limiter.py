@@ -30,7 +30,12 @@ from concurrent.futures import ThreadPoolExecutor
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-BASE = "https://f-keys-relay.vince-848.workers.dev"
+# The address is relay.f-keys.com since 2026-10-10. workers.dev still
+# serves the same Worker, so the old host is a fallback, not a second
+# service. Every request here sets an explicit user-agent on purpose:
+# Cloudflare answers 403 to the Python-urllib default on every zone, so
+# a script that does not set one tests the bot rule instead of the relay.
+BASE = "https://relay.f-keys.com"
 SECRET = io.open(r"C:\Users\Admin\Desktop\f-keys-docs\RELAY-DEMO-SECRET.txt",
                  encoding="utf-8").read().strip().split("\n")[-1]
 SLUG = sys.argv[1] if len(sys.argv) > 1 else "ratetest"
@@ -81,6 +86,31 @@ def rows_written():
 
 stamp = int(time.time())
 print("  endpoint: %s" % SLUG)
+
+# THE ENDPOINT HAS TO EXIST OR NOTHING BELOW MEANS ANYTHING.
+# This check is here because the run that prompted it reported
+# "** THROTTLED BY THE FLOOD, which is the bug **" and "capped - the
+# flood could not grow the table" when the real answer was that every
+# request 404'd: the endpoint row had never been inserted, because it
+# omitted created_at (NOT NULL, no default) and INSERT OR IGNORE
+# swallowed the violation. Two false statements from one missing row,
+# one of them accusing the service of the exact bug it was built to
+# prevent. A rate-limit test that cannot tell "throttled" from "no such
+# endpoint" is not measuring the limiter.
+probe = json.dumps({"id": "exists_%d" % stamp})
+probe_code = post(probe, good(probe))
+if probe_code == 404:
+    print()
+    print("  ABORT: /in/%s does not exist, so no result here is about" % SLUG)
+    print("  the limiter. Create the endpoint row - all seven columns,")
+    print("  created_at included - and run again.")
+    sys.exit(2)
+if probe_code not in (200, 202):
+    print()
+    print("  ABORT: a good request got %s before the flood even started."
+          % probe_code)
+    sys.exit(2)
+print("  endpoint reachable, a good request is accepted")
 print()
 print("  1. %d requests with BAD signatures, fired together" % FLOOD)
 with ThreadPoolExecutor(max_workers=8) as pool:
@@ -105,7 +135,14 @@ bad_rows, ok_rows = rows_written()
 if bad_rows is None:
     print("     could not read D1")
     sys.exit(1)
-capped = bad_rows <= BAD_CAPACITY + 4      # a little refill during the run
+# "0 rows written" is only a cap if the requests actually arrived. If
+# nothing reached the service, zero rows proves nothing and must not be
+# dressed up as a pass.
+arrived = any(c in (401, 429) for c in codes)
+capped = arrived and bad_rows <= BAD_CAPACITY + 4   # some refill mid-run
+if not arrived:
+    print("     ** no request reached the limiter - codes were %s **"
+          % sorted(set(codes)))
 print("     rejected rows : %d   (from %d attempts, bucket holds %d)"
       % (bad_rows, FLOOD, BAD_CAPACITY))
 print("     verified rows : %d" % ok_rows)
