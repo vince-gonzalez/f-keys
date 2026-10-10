@@ -32,6 +32,8 @@ Deploy:  cd relay && npx wrangler deploy
 ============================================================
 */
 
+import queue from './deliver.js';
+
 const enc = new TextEncoder();
 
 /* Four days. Stripe retries a failing webhook for three, and a dedupe
@@ -179,10 +181,19 @@ async function receive(request, env, slug) {
   }
 
   if (!v.ok) return json({ error: 'signature rejected', reason: v.why }, 401);
+
+  /* Queued AFTER the row exists, for the same reason the row comes
+     before the mail in intake-worker. If the enqueue fails the event is
+     still on disk and can be replayed; if it were the other way round a
+     queue hiccup would lose an event we had already told the sender we
+     had. */
+  await env.DELIVERIES.send({ eventId: id, slug });
   return json({ ok: true, id, received_at: now }, 202);
 }
 
 export default {
+  queue,
+
   async fetch(request, env) {
     const url = new URL(request.url);
     const m = url.pathname.match(/^\/in\/([a-z0-9][a-z0-9-]{0,62})$/);

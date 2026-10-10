@@ -35,5 +35,20 @@ database_id = "3bce2c78-c6c3-4a3f-b373-31c78d138f77"
 binding = "SEEN"
 id = "85618647398f4686984289868e6022b1"
 
+# The delivery queue. Producer and consumer are the same Worker: one
+# deploy, one place where the signing scheme lives, and no second service
+# to keep in step with this one.
+[[queues.producers]]
+binding = "DELIVERIES"
+queue = "relay-deliveries"
+
+[[queues.consumers]]
+queue = "relay-deliveries"
+max_batch_size = 10
+max_batch_timeout = 5
+# Our own cap lives in endpoints.max_attempts and is per endpoint. This
+# is the backstop underneath it, high enough not to pre-empt it.
+max_retries = 20
+
 [observability]
 enabled = true
