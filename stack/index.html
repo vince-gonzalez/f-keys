@@ -75,8 +75,6 @@
 <h2>Concurrency, and taking things out</h2>
 <div class="stk"><div class="stk-h"><strong>Producer and consumer across threads</strong><span class="stk-w">PlumHUD</span></div><p>A daemon thread polls the fleet on a timer and hands batches to the interface thread through a queue, which the interface drains on its own clock. Nothing blocks the thread that draws.</p></div>
 <div class="stk"><div class="stk-h"><strong>Deleting an event loop</strong><span class="stk-w">PlumHUD 3.0 to 4.0</span></div><p>The previous version ran a private asyncio loop with an aiohttp session and a thread-pool fallback behind it. The library underneath already did the concurrency with the standard library, so the loop, the optional dependency and the fallback path were all removed. Measured afterwards: no loss of speed. Three moving parts and one dependency gone for nothing in return except less to go wrong.</p></div>
-<h2>What is not here</h2>
-<p>Not used here, and worth saying so: Cloudflare KV, Queues, Vectorize, Workers AI, Hyperdrive, Browser Rendering and Containers. A webhook is sent from these systems but none of them receives one and verifies a signature at the door, which is a different piece of work. A page that lists only what went well is an advertisement.</p>
 <p class="note">The products these came out of are on <a href="/portfolio.html">the work page</a>. Writing, with the source of every excerpt linked, is at <a href="/writing/">/writing/</a>.</p>
 </div>
     </section>

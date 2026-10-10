@@ -169,15 +169,6 @@ SECTIONS = [
  ]),
 ]
 
-NOT_USED = (
-    "Not used here, and worth saying so: Cloudflare KV, Queues, Vectorize, "
-    "Workers AI, Hyperdrive, Browser Rendering and Containers. A webhook is "
-    "sent from these systems but none of them receives one and verifies a "
-    "signature at the door, which is a different piece of work. A page that "
-    "lists only what went well is an advertisement."
-)
-
-
 def render():
     e = B.esc
     o = ['<div class="doc">', "<h1>Stack</h1>",
@@ -191,8 +182,6 @@ def render():
                      '<div class="stk-h"><strong>%s</strong>'
                      '<span class="stk-w">%s</span></div>'
                      '<p>%s</p></div>' % (e(name), e(where), e(decision)))
-    o.append("<h2>What is not here</h2>")
-    o.append("<p>%s</p>" % e(NOT_USED))
     o.append('<p class="note">The products these came out of are on '
              '<a href="/portfolio.html">the work page</a>. Writing, with the '
              'source of every excerpt linked, is at '
