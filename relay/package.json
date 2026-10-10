@@ -1,0 +1,11 @@
+{
+  "name": "f-keys-relay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Webhook relay: verify at the door, record every attempt.",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "deploy": "wrangler deploy"
+  }
+}

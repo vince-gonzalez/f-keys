@@ -1,0 +1,32 @@
+# ============================================================
+# relay - webhook receiver, verification and attempt log
+# F-Keys | www.f-keys.com
+# ------------------------------------------------------------
+# Step 1 of the relay: receive, verify at the door, record.
+# Queue retries, KV dedupe, the per-destination Durable Object
+# and the R2 archive are steps 2 to 5 and are not bound yet.
+# A binding that exists before the code that uses it is a thing
+# that silently does nothing.
+#
+# Create:  npx wrangler d1 create f-keys-relay
+# Apply:   npx wrangler d1 execute f-keys-relay --remote --file schema.sql
+# Secret:  npx wrangler secret put RELAY_SECRET_DEMO
+# Deploy:  npx wrangler deploy
+# ============================================================
+
+name = "f-keys-relay"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# No custom domain yet, on purpose. A rejected request still costs a
+# D1 write until the rate-limiting Durable Object lands in step 4, so
+# the address is not advertised until it can defend itself.
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "f-keys-relay"
+# database_id is filled in by `wrangler d1 create`.
+
+[observability]
+enabled = true
