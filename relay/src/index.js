@@ -34,6 +34,12 @@ Deploy:  cd relay && npx wrangler deploy
 
 const enc = new TextEncoder();
 
+/* Four days. Stripe retries a failing webhook for three, and a dedupe
+   window shorter than the sender's retry window is a window through
+   which a duplicate walks on the last attempt. The KV entry expiring is
+   not a correctness problem either way: the unique index outlives it. */
+const DEDUPE_TTL_S = 4 * 24 * 60 * 60;
+
 /* Compared with an XOR walk rather than ===, so a wrong signature
    cannot be guessed one character at a time from how long the
    comparison took. Same reasoning as intake-worker; same code,
@@ -135,12 +141,42 @@ async function receive(request, env, slug) {
     }
   }
 
-  await env.DB.prepare(
-    'INSERT INTO events (id, source, sender_id, received_at, signature_ok,'
-    + ' reject_reason, body_bytes, body) VALUES (?,?,?,?,?,?,?,?)')
-    .bind(id, slug, senderId, now, v.ok ? 1 : 0, v.ok ? null : v.why,
-          raw.length, raw)
-    .run();
+  /* FAST PATH. KV answers in a millisecond and saves a D1 round trip on
+     the ordinary retry, which is most of them. It is not the guarantee:
+     KV is eventually consistent, so two copies arriving inside the
+     replication window can both read "not seen" and both continue. That
+     is not a corner case, it is exactly what a retry storm looks like.
+     The unique index in migration 0002 is what makes the answer true. */
+  const seenKey = senderId ? `${slug}:${senderId}` : null;
+  if (seenKey) {
+    const already = await env.SEEN.get(seenKey);
+    if (already) return json({ ok: true, id: already, duplicate: true }, 200);
+  }
+
+  try {
+    await env.DB.prepare(
+      'INSERT INTO events (id, source, sender_id, received_at, signature_ok,'
+      + ' reject_reason, body_bytes, body) VALUES (?,?,?,?,?,?,?,?)')
+      .bind(id, slug, senderId, now, v.ok ? 1 : 0, v.ok ? null : v.why,
+            raw.length, raw)
+      .run();
+  } catch (err) {
+    /* THE GUARANTEE. A unique violation here is not a failure, it is the
+       second copy of an event learning what the first copy's id was. Any
+       other database error is a real one and must not be swallowed. */
+    if (!/UNIQUE constraint failed/i.test(String(err && err.message))) throw err;
+    const first = await env.DB
+      .prepare('SELECT id FROM events WHERE source = ? AND sender_id = ?')
+      .bind(slug, senderId).first();
+    if (seenKey && first) {
+      await env.SEEN.put(seenKey, first.id, { expirationTtl: DEDUPE_TTL_S });
+    }
+    return json({ ok: true, id: first ? first.id : null, duplicate: true }, 200);
+  }
+
+  if (seenKey) {
+    await env.SEEN.put(seenKey, id, { expirationTtl: DEDUPE_TTL_S });
+  }
 
   if (!v.ok) return json({ error: 'signature rejected', reason: v.why }, 401);
   return json({ ok: true, id, received_at: now }, 202);

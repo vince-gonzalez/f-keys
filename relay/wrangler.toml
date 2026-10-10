@@ -28,5 +28,12 @@ binding = "DB"
 database_name = "f-keys-relay"
 database_id = "3bce2c78-c6c3-4a3f-b373-31c78d138f77"
 
+# Dedupe. KV is the fast path and migration 0002's unique index is the
+# guarantee; KV alone cannot be, because it is eventually consistent and
+# a retry storm is exactly the case that beats it.
+[[kv_namespaces]]
+binding = "SEEN"
+id = "85618647398f4686984289868e6022b1"
+
 [observability]
 enabled = true
