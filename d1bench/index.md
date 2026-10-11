@@ -21,7 +21,7 @@ not written down.
 | literal | many rows, values **inlined** | 100,000-byte statement length |
 | onebyone | one row | queries per invocation |
 
-## A single batch() call took 128,000 statements
+## A single batch() call took 150,000 statements
 
 The documented cap is 1000 queries per Worker invocation, and the advice
 that follows it is to chunk a bulk insert so the statement count stays under
@@ -33,10 +33,18 @@ it. No rung refused:
 | 8,000 | 1,701 ms | 0.213 ms |
 | 32,000 | 6,563 ms | 0.205 ms |
 | 128,000 | 30,208 ms | 0.236 ms |
+| 150,000 | 25,802 ms | 0.172 ms |
+| 175,000 | **refused** |  |
 
-Flat across a 128-fold range. One batch() behaves as one query
-against that limit, so chunking statements to stay under 1000 solves a problem
-that is not there.
+One batch() behaves as one query against the count limit, so
+chunking statements to stay under 1000 solves a problem that is not there. The
+limit that does bind is **duration**: thirty seconds, applied to the entire
+batch call, exactly as the documentation’s own footnote 4 states.
+
+Which makes the ceiling a **time budget rather than a statement
+count** — thirty seconds divided by your per-statement cost. It moves
+with row width, so a number copied out of this table into code handling wider
+rows will be wrong.
 
 ## The ceiling is exact, and it reaches one
 

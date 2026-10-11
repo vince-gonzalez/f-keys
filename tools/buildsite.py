@@ -221,9 +221,14 @@ PAGES = {
           "worthless.")],
   features_title="What it found",
   features=[("<code>batch()</code> is not charged per statement",
-             "A single call took <b>128,000 statements</b> without refusal, "
-             "128&times; the documented 1000-query per-invocation cap, at a "
-             "flat 0.205 to 0.280&nbsp;ms each across that whole range."),
+             "A single call took <b>150,000 statements</b> without refusal, "
+             "150&times; the documented 1000-query per-invocation cap."),
+            ("The real ceiling is a time budget, not a count",
+             "The 30-second cap applies to the whole batch, as the "
+             "documentation's own footnote says. 150,000 statements "
+             "succeeded in 25.8&nbsp;s and 175,000 were refused, so the "
+             "maximum is thirty seconds divided by your per-statement "
+             "cost &mdash; and it moves with row width."),
             ("The parameter ceiling is exactly <code>floor(100/C)</code>",
              "Confirmed by climbing until D1 answers <code>too many SQL "
              "variables</code>, at every column count. Not quoted from the "
@@ -303,7 +308,7 @@ not written down.</p>
       <td>queries per invocation</td></tr>
 </table>
 
-<h2>A single batch() call took 128,000 statements</h2>
+<h2>A single batch() call took 150,000 statements</h2>
 <p>The documented cap is 1000 queries per Worker invocation, and the advice
 that follows it is to chunk a bulk insert so the statement count stays under
 it. No rung refused:</p>
@@ -313,10 +318,17 @@ it. No rung refused:</p>
   <tr><td>8,000</td><td>1,701 ms</td><td>0.213 ms</td></tr>
   <tr><td>32,000</td><td>6,563 ms</td><td>0.205 ms</td></tr>
   <tr><td>128,000</td><td>30,208 ms</td><td>0.236 ms</td></tr>
+  <tr><td>150,000</td><td>25,802 ms</td><td>0.172 ms</td></tr>
+  <tr><td>175,000</td><td colspan="2"><b>refused</b></td></tr>
 </table>
-<p>Flat across a 128-fold range. One <code>batch()</code> behaves as one query
-against that limit, so chunking statements to stay under 1000 solves a problem
-that is not there.</p>
+<p>One <code>batch()</code> behaves as one query against the count limit, so
+chunking statements to stay under 1000 solves a problem that is not there. The
+limit that does bind is <b>duration</b>: thirty seconds, applied to the entire
+batch call, exactly as the documentation&rsquo;s own footnote&nbsp;4 states.</p>
+<p>Which makes the ceiling a <b>time budget rather than a statement
+count</b> &mdash; thirty seconds divided by your per-statement cost. It moves
+with row width, so a number copied out of this table into code handling wider
+rows will be wrong.</p>
 
 <h2>The ceiling is exact, and it reaches one</h2>
 <p>Climbed until D1 refused, at every column count. The arithmetic holds
