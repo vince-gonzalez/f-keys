@@ -1,49 +1,70 @@
-# d1bench
-
-How fast can you write N rows to Cloudflare D1, which strategy wins, and which
-of the documented limits stops you first.
-
-Results: [`results/FINDINGS.md`](results/FINDINGS.md). Raw data:
-[`results/sweep.json`](results/sweep.json),
-[`results/rowsize.json`](results/rowsize.json).
-
-## Why it runs inside a Worker
-
-Two of the limits under test only exist inside a Worker invocation - queries
-per invocation, and the 30-second cap on one `batch()` call. Measured from a
-laptop those limits do not exist, and the number you get is mostly your own
-internet connection.
-
-## Why it has its own database
-
-It creates, drops and truncates tables and writes rows in bulk. Pointed at a
-database that mattered, a benchmark's `DROP TABLE` would be one typo away from
-live data.
-
-## Why every writing route is gated
-
-A public endpoint that inserts D1 rows as fast as it can is a billing hole
-with a documented API. `BENCH_TOKEN` gates everything except `/limits`, and
-there is no custom domain.
-
-## Run it
-
 ```
-npx wrangler d1 create f-keys-d1bench     # put the id in wrangler.toml
-npx wrangler secret put BENCH_TOKEN
-npm run deploy
-
-python -I drive.py            # column-count sweep
-python -I drive_rowsize.py    # row-size sweep
+╔════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                            ║
+║                   ██████╗  ██╗██████╗ ███████╗███╗   ██╗ ██████╗██╗  ██╗                   ║
+║                   ██╔══██╗███║██╔══██╗██╔════╝████╗  ██║██╔════╝██║  ██║                   ║
+║                   ██║  ██║╚██║██████╔╝█████╗  ██╔██╗ ██║██║     ███████║                   ║
+║                   ██║  ██║ ██║██╔══██╗██╔══╝  ██║╚██╗██║██║     ██╔══██║                   ║
+║                   ██████╔╝ ██║██████╔╝███████╗██║ ╚████║╚██████╗██║  ██║                   ║
+║                   ╚═════╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝                   ║
+║                                                                                            ║
+║               Which D1 write strategy wins, and which limit stops you first.               ║
+║                                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════════════════════╝
 ```
 
-## The one thing to know before trusting any of it
+This directory is the d1bench page on f-keys.com. Nothing in it is
+written by hand.
 
-In Workers, `Date.now()` advances only on I/O. It is frozen across pure
-computation. So an inside-the-Worker clock cannot see the CPU spent building a
-statement - and the literal-SQL strategy is precisely the one doing that work.
-Timed only from inside, literal SQL looks better than it is.
+```
+index.html   generated
+index.md     generated  (the markdown an agent gets)
+README.md    generated  (this file)
+```
 
-Every run is therefore timed twice: `d1_ms` from inside, around the awaited
-`batch()` call, and `total_ms` from the driver, which includes CPU and
-network. Reporting one without the other is how this gets the answer wrong.
+All three come from `PAGES["d1bench"]` in `tools/buildsite.py`.
+Editing one directly works right up until the next build, which
+overwrites it without a word - so the edit is not refused, it is
+quietly lost.
+
+    python tools/buildsite.py
+
+| | |
+|---|---|
+| Measured | 2026-10-10, region ENAM |
+| Version | v0.1.0 |
+| Strategies | bound parameters, literal SQL, one statement per row |
+| Axes | columns 2 to 64, values 16 B to 64 KB |
+| License | MIT |
+| Source | vince-gonzalez/d1bench |
+
+[The page itself](https://f-keys.com/d1bench/)
+
+---
+
+```
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║      ███████╗      ██╗  ██╗███████╗██╗   ██╗███████╗       ║
+║      ██╔════╝      ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔════╝       ║
+║      █████╗  █████╗█████╔╝ █████╗   ╚████╔╝ ███████╗       ║
+║      ██╔══╝  ╚════╝██╔═██╗ ██╔══╝    ╚██╔╝  ╚════██║       ║
+║      ██║           ██║  ██╗███████╗   ██║   ███████║       ║
+║      ╚═╝           ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝       ║
+║                                                            ║
+║               ·   C  R  E  A  T  I  V  E   ·               ║
+║                                                            ║
+║          ────────────────────────────────────────          ║
+║                                                            ║
+║                      Vincent Gonzalez                      ║
+║                         f-keys.com                         ║
+║                 ORCID 0009-0005-3640-014X                  ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+```
+
+Part of [F-Keys](https://f-keys.com) — independent hardware, software
+and internet products. See the [working log](https://f-keys.com/log/)
+and [live status](https://f-keys.com/status/).
+
+<!-- generated by tools/buildsite.py -->

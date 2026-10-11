@@ -128,6 +128,11 @@ CATALOGUE = [
     ("authorecon", "authorecon", "research", "Python package", PIP,
      "Reconcile published work against every place it lives, for any ORCID, from public sources.", "/authorecon/"),
 
+    # 2026-10-11. A measurement rather than a package: the harness lives in
+    # its own repository, this is the landing page for its findings.
+    ("d1bench", "d1bench", "research", "Benchmark", PUBLISHED,
+     "Which Cloudflare D1 write strategy wins, and which of its limits stops you first. Measured, not cited.", "/d1bench/"),
+
     # 2026-08-31. Four packages that were live on PyPI with no page here.
     ("mmforge", "mmforge", "research", "Python package", PIP,
      "Find avoidable axiom dependencies in Metamath, and build the proofs that remove them.", "/mmforge/"),
@@ -187,6 +192,176 @@ CATEGORIES = [
 
 # ── long-form detail, one entry per product ──────────────────
 PAGES = {
+"d1bench": dict(
+  title="d1bench", tagline="Which D1 write strategy wins, and which limit stops you first.",
+  lede="Cloudflare documents D1's limits one at a time. It does not document "
+       "how they interact, and they interact in a way that changes which "
+       "bulk-insert strategy is correct. This harness deploys inside a "
+       "Worker, because two of the limits under test only exist inside a "
+       "Worker invocation, and sweeps three strategies against a live "
+       "database.",
+  cta=[("The harness", "https://github.com/vince-gonzalez/d1bench"),
+       ("The findings", "https://github.com/vince-gonzalez/d1bench/blob/main/results/FINDINGS.md"),
+       ("Raw data", "https://github.com/vince-gonzalez/d1bench/tree/main/results")],
+  herometa="<b>Measured 2026-10-10</b> &middot; live D1, region ENAM &middot; "
+           "five findings &middot; <code>v0.1.0</code> &middot; raw data "
+           "published &middot; MIT",
+  steps=[("Deploy the harness where the limits exist",
+          "Two of the limits under test only exist inside a Worker "
+          "invocation. Measured from a laptop they do not exist at all, and "
+          "the number you get is mostly your own internet connection."),
+         ("Sweep both axes, repeats on the outside",
+          "Column count against row size, three strategies. The repeat loop "
+          "is the outer one, so drift over the sweep spreads across every "
+          "condition instead of pooling in whichever strategy happened to "
+          "run last."),
+         ("Reconcile the rows before believing the clock",
+          "260,487 statements sent, 260,487 rows present, exact. A benchmark "
+          "that reports a time for writes which never happened is "
+          "worthless.")],
+  features_title="What it found",
+  features=[("<code>batch()</code> is not charged per statement",
+             "A single call took <b>128,000 statements</b> without refusal, "
+             "128&times; the documented 1000-query per-invocation cap, at a "
+             "flat 0.205 to 0.280&nbsp;ms each across that whole range."),
+            ("The parameter ceiling is exactly <code>floor(100/C)</code>",
+             "Confirmed by climbing until D1 answers <code>too many SQL "
+             "variables</code>, at every column count. Not quoted from the "
+             "documentation &mdash; hit on purpose."),
+            ("Chunked bound parameters stops being batching",
+             "At 51 or more columns the ceiling is one row per statement, "
+             "which is the naive strategy under another name, still "
+             "described as batching by the code that uses it."),
+            ("Literal SQL is 2.7&times; faster at 64 columns",
+             "187&nbsp;ms against 503&nbsp;ms. The mechanism is not subtle: "
+             "literal carries 77 rows per statement there, bound parameters "
+             "carry one."),
+            ("And then literal SQL becomes unavailable",
+             "Past roughly 131&nbsp;KB of row, one literal tuple exceeds the "
+             "100,000-byte statement limit and no chunk size works. Not "
+             "slower. Refused."),
+            ("The two are capped by orthogonal limits",
+             "Bound parameters bind on column count and ignore row size. "
+             "Literal binds on row size and ignores column count. Every "
+             "finding above is a consequence of that one sentence."),
+            ("Timed from both sides, because one side is blind",
+             "In Workers <code>Date.now()</code> advances only on I/O, so a "
+             "clock inside cannot see the CPU that builds a statement "
+             "&mdash; and literal SQL is the strategy doing that work.")],
+  faq=[("Does this say the documentation is wrong?",
+        "No, and the weaker claim is the true one. The row reads "
+        "<i>Queries per Worker invocation (read subrequest limits)</i>, and "
+        "the parenthetical is routinely dropped when the number is quoted. "
+        "The page says per-query limits apply to each statement inside a "
+        "batch, giving statement <em>length</em> as its example, but never "
+        "says how the query <em>count</em> is charged. The documentation "
+        "leaves the question open while inviting the stricter reading. The "
+        "measurement settles it."),
+       ("Why does it matter which clock you use?",
+        "Because timed only from inside the Worker, literal SQL looks better "
+        "than it is, and the headline becomes an artifact of the measuring "
+        "instrument rather than a property of D1. Outside overhead was "
+        "measured at 84 to 98&nbsp;ms and came out the same for both "
+        "strategies at every column count, so the CPU the inner clock "
+        "cannot see is not what produced the gap. That was the measurement "
+        "most likely to overturn the result, which is why it was run."),
+       ("So which should I use?",
+        "Wide rows of short values: literal SQL, by a margin that grows to "
+        "2.7&times; at 64 columns. Any value pushing a row past about "
+        "100&nbsp;KB of literal text: bound parameters, because literal SQL "
+        "cannot express the statement at all. The broad middle, eight "
+        "columns or fewer and rows under 32&nbsp;KB: the difference sits "
+        "inside run-to-run spread, so use bound parameters and have no "
+        "escaping to get wrong. And never chunk to stay under 1000 "
+        "statements."),
+       ("What is not claimed?",
+        "One region, one database, one account, one day, and no indexes on "
+        "any table. No sweep of escaping cost, which is the one untested "
+        "axis that could narrow literal SQL's advantage. Nothing here tests "
+        "the 30-second duration cap, which applies per statement and was "
+        "never approached. The ratios and the orthogonality are the claims; "
+        "the absolute milliseconds are evidence for them, not the result.")],
+  facts=[("Measured", "2026-10-10, region ENAM"),
+         ("Version", "v0.1.0"),
+         ("Strategies", "bound parameters, literal SQL, one statement per row"),
+         ("Axes", "columns 2 to 64, values 16 B to 64 KB"),
+         ("License", "MIT"),
+         ("Source", "vince-gonzalez/d1bench")],
+  body="""
+<h2>The question</h2>
+<p>Three ways to write N rows to D1, and each one is stopped by a different
+documented limit. Which limit binds first, for a given shape of data, is the
+only part a developer actually has to decide &mdash; and it is the part that is
+not written down.</p>
+<table class="facts">
+  <tr><th>strategy</th><th>one statement holds</th><th>capped by</th></tr>
+  <tr><td><code>params</code></td><td>many rows, values <b>bound</b></td>
+      <td>100 bound parameters per query</td></tr>
+  <tr><td><code>literal</code></td><td>many rows, values <b>inlined</b></td>
+      <td>100,000-byte statement length</td></tr>
+  <tr><td><code>onebyone</code></td><td>one row</td>
+      <td>queries per invocation</td></tr>
+</table>
+
+<h2>A single batch() call took 128,000 statements</h2>
+<p>The documented cap is 1000 queries per Worker invocation, and the advice
+that follows it is to chunk a bulk insert so the statement count stays under
+it. No rung refused:</p>
+<table class="facts">
+  <tr><th>statements in one batch()</th><th>D1 time</th><th>per statement</th></tr>
+  <tr><td>1,000</td><td>280 ms</td><td>0.280 ms</td></tr>
+  <tr><td>8,000</td><td>1,701 ms</td><td>0.213 ms</td></tr>
+  <tr><td>32,000</td><td>6,563 ms</td><td>0.205 ms</td></tr>
+  <tr><td>128,000</td><td>30,208 ms</td><td>0.236 ms</td></tr>
+</table>
+<p>Flat across a 128-fold range. One <code>batch()</code> behaves as one query
+against that limit, so chunking statements to stay under 1000 solves a problem
+that is not there.</p>
+
+<h2>The ceiling is exact, and it reaches one</h2>
+<p>Climbed until D1 refused, at every column count. The arithmetic holds
+exactly: 50 rows at two columns, 12 at eight, 3 at thirty-two, and
+<b>1 at sixty-four</b>. Past fifty columns, &ldquo;chunked bound
+parameters&rdquo; is one statement per row wearing a different name.</p>
+
+<h2>Which is why literal SQL pulls away</h2>
+<p>1,000 rows of 16-byte values, median of five passes, tables truncated before
+every measured run:</p>
+<table class="facts">
+  <tr><th>columns</th><th>params</th><th>literal</th><th>params rows/stmt</th>
+      <th>literal rows/stmt</th></tr>
+  <tr><td>4</td><td>54 ms</td><td>49 ms</td><td>25</td><td>1000</td></tr>
+  <tr><td>8</td><td>88 ms</td><td>59 ms</td><td>12</td><td>500</td></tr>
+  <tr><td>32</td><td>195 ms</td><td>123 ms</td><td>3</td><td>143</td></tr>
+  <tr><td>64</td><td>503 ms</td><td><b>187 ms</b></td><td>1</td><td>77</td></tr>
+</table>
+<p>At four columns the gap is inside the noise and no winner is named. At
+sixty-four it is <b>2.7&times;</b>.</p>
+
+<h2>Then the row-size axis reverses it, and ends in a wall</h2>
+<p>Literal SQL's chunk collapses as rows fatten &mdash; 500, 200, 53, 13, 3
+&mdash; and once one literal tuple passes the statement limit, there is no
+chunk size that works. At roughly 131&nbsp;KB rows it is <b>refused
+outright</b> while bound parameters carry on unaffected, because bound values
+travel beside the SQL rather than inside it.</p>
+
+<h2>The result</h2>
+<p>The two strategies are capped by <b>orthogonal</b> limits. Bound parameters
+bind on column count and are blind to row size; literal binds on row size and
+is blind to column count. Everything above follows from that.</p>
+
+<h2>It reports what it did not establish</h2>
+<p>One region, one database, one account, one day, and no indexes anywhere.
+Escaping cost was not swept, and that is the one untested axis that could
+narrow literal SQL's advantage. The findings document also carries a
+correction to an earlier draft of this work, which claimed the 30-second
+duration cap went unenforced by confusing a per-statement limit with a
+per-call total.</p>
+<div class="btnrow">
+  <a class="btn default" href="https://github.com/vince-gonzalez/d1bench" rel="noopener">The harness</a>
+  <a class="btn" href="https://github.com/vince-gonzalez/d1bench/blob/main/results/FINDINGS.md" rel="noopener">The findings</a>
+  <a class="btn" href="/papers/">The papers</a>
+</div>"""),
 "saydo": dict(
   title="SayDo", tagline="Prove a tool behaves as it says.",
   lede="Signing proves a tool's code is what the publisher released. It does "
