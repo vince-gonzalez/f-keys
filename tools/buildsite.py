@@ -123,6 +123,10 @@ CATALOGUE = [
     # as everything else.
     ("saydo", "SayDo", "tools", "Standard + harness", READY,
      "Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check.", "/saydo/"),
+    # 2026-10-11. Live at its own subdomain, listed on the MCP Registry and
+    # Smithery the same day; the page is the product, so the row links out.
+    ("coldhat", "coldHat", "tools", "Web tool", READY,
+     "Your AI rules on any chat. Type one line into Claude, ChatGPT or Grok and it works your way.", "https://coldhat.f-keys.com"),
     ("axsent", "axsent", "research", "Python package", PIP,
      "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.", "/axsent/"),
     ("authorecon", "authorecon", "research", "Python package", PIP,

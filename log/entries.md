@@ -6,6 +6,29 @@ underneath it. Blank line between paragraphs. `**bold**`, `` `code` `` and
 
 CI renders this into `log/index.html` on push. Do not edit that file by hand.
 
+## 2026-10-11
+
+Shipped [coldHat](https://coldhat.f-keys.com): your working rules for an AI,
+worn in any chat by typing one line.
+
+The rules live in a file called `hat.md` in a public GitHub repository
+named `coldhat`, so only the owner can change them. Typing
+`open sesame coldhat.f-keys.com/u/vince-gonzalez/frontier` into Claude or
+Grok makes the assistant fetch that file, answer with its hat code, and work
+by it for the rest of the chat. The code is a hash of the file, so the
+assistant can only quote it by actually reading the page. ChatGPT does the
+same while its browsing quota lasts. Gemini declines to fetch it, and that is
+written down rather than hidden.
+
+Facts in a hat carry a date and a shelf life. The server compares them with
+today, and the assistant asks before it uses one that has gone stale. A
+rule sheet that says "no revenue yet" is wrong the day the first grant
+lands, and nothing in an ordinary prompt tells the assistant so.
+
+It is also an MCP server, listed on the official MCP Registry and on
+Smithery as of today, so a client that supports connectors can wear a hat by
+name without a browser. Free, MIT, [source on GitHub](https://github.com/vince-gonzalez/coldhat).
+
 ## 2026-09-29
 
 Checked whether this site is current. Most of it was; the stylesheet was
