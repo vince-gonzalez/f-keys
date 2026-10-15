@@ -174,12 +174,18 @@ h3 { font-family:'VT323',monospace; font-weight:400; font-size:1.35rem; color:va
 <meta property="og:title" content="Kernel Trust Profile 0.1">
 <meta property="og:description" content="There is no standard way to say what a formal library rests on. This is one.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- Self-hosted. This header is copy-pasted in five places across the
+     gonzalgo build chain, which is why a third-party font request kept
+     coming back; test_site.py is what catches it each time. -->
+<link rel="stylesheet" href="/assets/fonts.css">
 <script type="application/ld+json">
 {jsonld}
 </script>
-<style>{CSS}{extra}</style>
+<style>{CSS}{extra}
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+</style>
 </head>
 <body>
 <nav>

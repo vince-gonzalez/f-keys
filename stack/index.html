@@ -24,10 +24,11 @@
 <meta name="twitter:title" content="Stack — F-Keys">
 <meta name="twitter:description" content="What the work required and the decision each piece forced, read out of the source rather than listed as skills.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=0df044cb">
+<link rel="stylesheet" href="/win98.css?v=9e06dd3d">
 
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 <div class="window raised">
 
   <div class="titlebar">
@@ -52,7 +53,7 @@
   <div class="ruler sunken" aria-hidden="true"></div>
 
   <div class="panes solo">
-    <section class="content sunken app-wordpad">
+    <main id="content" class="content sunken app-wordpad">
 <div class="doc">
 <h1>Stack</h1>
 <p class="sub">What the work required, and the decision each piece forced. A list of technologies proves nothing, so every entry below names the thing that had to be decided and what it was decided against. All of it is in the source.</p>
@@ -77,7 +78,7 @@
 <div class="stk"><div class="stk-h"><strong>Deleting an event loop</strong><span class="stk-w">PlumHUD 3.0 to 4.0</span></div><p>The previous version ran a private asyncio loop with an aiohttp session and a thread-pool fallback behind it. The library underneath already did the concurrency with the standard library, so the loop, the optional dependency and the fallback path were all removed. Measured afterwards: no loss of speed. Three moving parts and one dependency gone for nothing in return except less to go wrong.</p></div>
 <p class="note">The products these came out of are on <a href="/portfolio.html">the work page</a>. Writing, with the source of every excerpt linked, is at <a href="/writing/">/writing/</a>.</p>
 </div>
-    </section>
+    </main>
   </div>
 
   <div class="statusbar">

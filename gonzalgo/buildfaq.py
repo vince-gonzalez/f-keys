@@ -209,8 +209,8 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="twitter:title" content="gonzalgo FAQ — what it does, and what it refuses to do">
 <meta name="twitter:description" content="Not a theorem prover. No SMT solver. Cannot read prose. Here is what it actually reports.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- Self-hosted; see indexlib.py. Both families are in /assets/fonts.css. -->
+<link rel="stylesheet" href="/assets/fonts.css">
 
 <script type="application/ld+json">
 {ld}
@@ -235,6 +235,16 @@ pre {{ background:#0d120d; border:1px solid var(--border); padding:1.1rem; overf
 code {{ color:var(--cyan); }}
 .lede {{ font-size:1.1rem; }}
 footer {{ border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }}
+
+/* Visible focus; this template had none. --green measures 14.34:1 on --bg
+   and 13.23:1 on --panel, against the 3:1 that 1.4.11 asks for. */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+@supports not selector(:focus-visible) {
+  a:focus, button:focus, input:focus, select:focus, textarea:focus,
+  summary:focus, [tabindex]:focus { outline:2px solid var(--green); outline-offset:2px; }
+}
 </style>
 </head>
 <body>

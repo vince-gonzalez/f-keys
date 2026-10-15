@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="legible — F-Keys">
 <meta name="twitter:description" content="Three gates a linter will not give you.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=0df044cb">
+<link rel="stylesheet" href="/win98.css?v=9e06dd3d">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,6 +55,7 @@
 </script>
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 <div class="window raised">
 
   <div class="titlebar">
@@ -97,6 +98,7 @@
 <li><a class="" href="/plumhud/"><span class="ic">&#128196;</span>PlumHUD</a></li>
 <li><a class="" href="/saydo/"><span class="ic">&#128196;</span>SayDo</a></li>
 <li><a class="" href="https://coldhat.f-keys.com"><span class="ic">&#128196;</span>coldHat</a></li>
+<li><a class="" href="/promptcheck/"><span class="ic">&#128196;</span>Prompt Check</a></li>
 <li><a class="on" href="/legible/"><span class="ic">&#128196;</span>legible</a></li>
 <li><a class="" href="/openapi-drift/"><span class="ic">&#128196;</span>openapi-drift</a></li>
 <li><a class="" href="/changewatch/"><span class="ic">&#128196;</span>changewatch</a></li>
@@ -126,7 +128,7 @@
 <li><a href="/privacy.html"><span class="ic">&#128220;</span>Privacy</a></li>
 </ul></li></ul>
     </aside>
-    <section class="content sunken">
+    <main id="content" class="content sunken">
 <div class="doc"><div class="hero"><h1>legible</h1><p class="lede">Three build gates for defects a linter has no opinion about, because none of them is a syntax error. Type too small to read, color that cannot be read on its own background, and a name that should be gone.</p><div class="herocta"><a class="btn default" href="https://pypi.org/project/legible/" rel="noopener">Install it</a><a class="btn" href="https://github.com/vince-gonzalez/typefloor" rel="noopener">Use as a GitHub Action</a><a class="btn" href="https://github.com/vince-gonzalez/cvd-palette" rel="noopener">The palette gate</a></div><p class="meta"><code>pip install legible</code> &middot; MIT &middot; three commands, four GitHub Actions</p></div>
 <h2>What it does</h2>
 <p>Three build gates for defects a linter has no opinion about, because none of
@@ -156,7 +158,7 @@ rather than passing a stylesheet that declares no colors at all.</p>
   <a class="btn" href="https://github.com/vince-gonzalez/typefloor" rel="noopener">typefloor action</a>
   <a class="btn" href="https://github.com/vince-gonzalez/cvd-palette" rel="noopener">cvd-palette action</a>
 </div><h2>How it works</h2><ol class="steps"><li><b>Install it, or add the Action</b><span><code>pip install legible</code> locally, or drop one of the four Actions into a workflow.</span></li><li><b>Point it at a directory</b><span><code>typefloor ./src</code>, <code>contrast-gate ./src</code>, <code>deadname-gate ./src</code>. Exceptions live in a JSON file rather than suppressed inline, so what you allowed is one list you can read.</span></li><li><b>Let it fail the build</b><span>That is the point. A warning nobody reads is the same as no check at all.</span></li></ol><h2>The three gates</h2><div class="featgrid"><div class="feat"><b>typefloor</b><span>Fails when type is declared below a readable floor. A linter has no view on 9px body text; a person does.</span></div><div class="feat"><b>contrast-gate</b><span>Fails when a declared color cannot be read on a surface the same file declares. <code>--require-pairs</code> also fails a file that declares no pairs at all, because a vacuous pass looks exactly like a real one.</span></div><div class="feat"><b>deadname-gate</b><span>Fails when a retired name reaches a title, a footer, a byline, alt text or a comment, and leaves machine identifiers alone, because renaming a published artifact breaks links or contradicts a deposited record.</span></div><div class="feat"><b>It exits 2, not 0, unconfigured</b><span>An unconfigured gate must not be mistakable for a passing one.</span></div><div class="feat"><b>Four GitHub Actions</b><span>typefloor, contrast-gate, deadname-gate and cvd-palette, each usable on its own.</span></div><div class="feat"><b>Written for a real rename</b><span>The rename gate came out of a company rename. It is the same shape as a person changing their name and finding it in three hundred places, which is the version worth getting right.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>pip install legible</td></tr><tr><th>License</th><td>MIT</td></tr><tr><th>Commands</th><td>typefloor, contrast-gate, deadname-gate</td></tr><tr><th>Actions</th><td>typefloor, contrast-gate, deadname-gate, cvd-palette</td></tr><tr><th>Source</th><td>vince-gonzalez/f-keys</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Why not just use a linter?</dt><dd>A linter checks syntax. None of these three are syntax errors &mdash; they are things a person could not read, which no parser has an opinion about.</dd><dt>Will it fight my existing style rules?</dt><dd>No. It only asserts the three things above, and every exception is recorded in a file rather than scattered through the source.</dd><dt>Do I have to use all three?</dt><dd>No. They are separate commands and separate Actions.</dd></dl></div>
-    </section>
+    </main>
   </div>
 
   <div class="statusbar">

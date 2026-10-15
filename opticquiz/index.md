@@ -1,57 +1,8 @@
-# OpticQuiz
+# OpticQuiz — F-Keys
 
 > See color. Check color. Correct color.
 
 Canonical: https://f-keys.com/opticquiz/
-
-Sixteen vision tests that run entirely in your browser, and a color-accessibility toolkit for people who ship things other people have to look at. Nothing is uploaded.
-
-**Free, no account** · runs entirely in the browser · fifteen npm packages · method deposited with a DOI
-
-## What it is
-
-Sixteen vision tests that run in the browser — acuity charts, color
-vision, contrast, and a color-accessibility toolkit for people building
-things other people have to look at.
-
-Nothing is uploaded. The tests run on your machine, which is the only
-arrangement under which anyone should be typing what they can and cannot see
-into a web page.
-
-## Two audiences, one engine
-
-If you want to check your own eyes, open the site. If you are shipping a
-design, the same simulation is installable: npm i opticquiz-cvd or
-the PyPI package of the same name, so the check that runs in the browser also
-runs in your build.
-
-There is a [GitHub Action](https://github.com/vince-gonzalez/cvd-palette) too — it
-fails a build when two colors in a palette become the same color under
-protanopia, deuteranopia or tritanopia. The default matplotlib red and green
-are seventy-one apart to normal vision and five apart under deuteranopia.
-
-## What it is not
-
-Screening, not diagnosis. These are the same plates and charts an optician
-would recognize, rendered honestly, with their calibration limits published
-rather than glossed. A screen is not a lightbox and the tests say so.
-
-## How it works
-
-## Two audiences, one engine
-
-## Specifications
-
-| Field | Value |
-| --- | --- |
-| Where | opticquiz.com |
-| Cost | Free, no account |
-| Runs | Entirely in the browser |
-| Packages | 15 on npm — opticquiz-cvd, opticquiz-eye, cvdsim, cvdsafe, safepalette, cvdplate, and the rest |
-| MCP servers | opticquiz-cvd-mcp, cvdsafe-mcp, colorblind-mcp |
-| Research | Deposited, with DOIs |
-
-## Questions
 
 ---
 

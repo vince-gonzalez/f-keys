@@ -1,230 +1,234 @@
 {
  "": {
-  "lastmod": "2026-10-12",
-  "sha": "82697a818c26f9c4"
+  "lastmod": "2026-10-15",
+  "sha": "15b50928ba16b582"
  },
  "5best2buy/": {
-  "lastmod": "2026-10-10",
-  "sha": "8c5a9ccd6f030b6d"
+  "lastmod": "2026-10-15",
+  "sha": "5a4e24633624c47c"
  },
  "about.html": {
-  "lastmod": "2026-10-12",
-  "sha": "743a51f442f3f8ba"
+  "lastmod": "2026-10-15",
+  "sha": "9423acf694fb1737"
  },
  "apps.html": {
-  "lastmod": "2026-10-10",
-  "sha": "4185f8d2120c48fd"
+  "lastmod": "2026-10-15",
+  "sha": "0a28e24f02aecb34"
  },
  "audit/": {
-  "lastmod": "2026-10-10",
-  "sha": "b6519871f9382d4c"
+  "lastmod": "2026-10-15",
+  "sha": "48c19d90dda0039a"
  },
  "authorecon/": {
-  "lastmod": "2026-10-11",
-  "sha": "e4bffa3e12ecca28"
+  "lastmod": "2026-10-15",
+  "sha": "17ccc3e8f75a3e91"
  },
  "axsent/": {
-  "lastmod": "2026-10-11",
-  "sha": "8ff8806e673b5fcc"
+  "lastmod": "2026-10-15",
+  "sha": "c2d6a99ac0762e3d"
  },
  "certivl/": {
-  "lastmod": "2026-10-11",
-  "sha": "0bdc050458b6c40d"
+  "lastmod": "2026-10-15",
+  "sha": "aeabe7ce45d658a0"
  },
  "changewatch/": {
-  "lastmod": "2026-10-12",
-  "sha": "f7e6ae9e8395f06d"
+  "lastmod": "2026-10-15",
+  "sha": "f41ab7b8f4aacc51"
  },
  "contact.html": {
-  "lastmod": "2026-10-10",
-  "sha": "adaf172ac409487e"
+  "lastmod": "2026-10-15",
+  "sha": "b18e3b6393e8054f"
  },
  "cv/": {
-  "lastmod": "2026-10-10",
-  "sha": "54fb28a9491ec327"
+  "lastmod": "2026-10-15",
+  "sha": "b3fdc2861fbc8945"
  },
  "cv/founder/": {
-  "lastmod": "2026-10-10",
-  "sha": "e6ba7f643e26f9bc"
+  "lastmod": "2026-10-15",
+  "sha": "b518b8645665a34a"
  },
  "cv/operations/": {
-  "lastmod": "2026-10-10",
-  "sha": "fb9fb3241fba33e0"
+  "lastmod": "2026-10-15",
+  "sha": "40b78a8f40836878"
  },
  "cv/research/": {
-  "lastmod": "2026-10-10",
-  "sha": "e0238f32ccb436c6"
+  "lastmod": "2026-10-15",
+  "sha": "c5981ed98c630daf"
  },
  "cv/writing/": {
-  "lastmod": "2026-10-10",
-  "sha": "7f40115697bcdcb1"
+  "lastmod": "2026-10-15",
+  "sha": "727b523f9cbc661d"
  },
  "d1bench/": {
-  "lastmod": "2026-10-11",
-  "sha": "2b9ea0abcf98f938"
+  "lastmod": "2026-10-15",
+  "sha": "1d4809f515c37781"
  },
  "daisupop/": {
-  "lastmod": "2026-10-10",
-  "sha": "509286ff094f4a32"
+  "lastmod": "2026-10-15",
+  "sha": "6f2a886b7a417e5c"
  },
  "developers.html": {
-  "lastmod": "2026-10-10",
-  "sha": "2846545c7a8b3899"
+  "lastmod": "2026-10-15",
+  "sha": "5001c68a895ffa0f"
  },
  "fundoge/": {
-  "lastmod": "2026-10-10",
-  "sha": "0793744b45a75efa"
+  "lastmod": "2026-10-15",
+  "sha": "bf3637a7f2353787"
  },
  "fytecraft/": {
-  "lastmod": "2026-10-10",
-  "sha": "714a0ca369761bb6"
+  "lastmod": "2026-10-15",
+  "sha": "697e5ed8b86c23f8"
  },
  "games.html": {
-  "lastmod": "2026-10-10",
-  "sha": "ea42949655fc8191"
+  "lastmod": "2026-10-15",
+  "sha": "c7462bdac71c0ee7"
  },
  "hardware.html": {
-  "lastmod": "2026-10-10",
-  "sha": "5797b9f524ffc780"
+  "lastmod": "2026-10-15",
+  "sha": "61de0cfab64c7c5d"
  },
  "intake/": {
-  "lastmod": "2026-10-10",
-  "sha": "205c3ffcdba8dce7"
+  "lastmod": "2026-10-15",
+  "sha": "c87e27d7e4778718"
  },
  "ishihara/": {
-  "lastmod": "2026-10-11",
-  "sha": "aed324d3ee48196a"
+  "lastmod": "2026-10-15",
+  "sha": "7afb738278a61f6c"
  },
  "keyj/": {
-  "lastmod": "2026-10-10",
-  "sha": "a7ce6f32f8c1b3f6"
+  "lastmod": "2026-10-15",
+  "sha": "9d7785bbc8214461"
  },
  "keyjockey/": {
-  "lastmod": "2026-10-12",
-  "sha": "1a844d7fcb84c1bf"
+  "lastmod": "2026-10-15",
+  "sha": "3b6e5c93da16a999"
  },
  "leadseer/": {
-  "lastmod": "2026-10-12",
-  "sha": "b3686c0b3adbe3ea"
+  "lastmod": "2026-10-15",
+  "sha": "c1baef4277f0218c"
  },
  "legible/": {
-  "lastmod": "2026-10-12",
-  "sha": "3a85fa763201f0f2"
+  "lastmod": "2026-10-15",
+  "sha": "99ff281272efab24"
  },
  "loadbearing/": {
-  "lastmod": "2026-10-11",
-  "sha": "6d6c4bb776bea086"
+  "lastmod": "2026-10-15",
+  "sha": "2806468a42c5fce0"
  },
  "log/": {
-  "lastmod": "2026-10-14",
-  "sha": "2d5a762c36d158c4"
+  "lastmod": "2026-10-15",
+  "sha": "ac695428cbcbf2f2"
  },
  "micdrop/": {
-  "lastmod": "2026-10-10",
-  "sha": "06b870cc32aa184f"
+  "lastmod": "2026-10-15",
+  "sha": "a24ce90a31e7201b"
  },
  "mmforge/": {
-  "lastmod": "2026-10-11",
-  "sha": "8a877c5d39374a1f"
+  "lastmod": "2026-10-15",
+  "sha": "fc60d26782671cff"
  },
  "modulign/": {
-  "lastmod": "2026-10-11",
-  "sha": "9aa5bd5072343d2f"
+  "lastmod": "2026-10-15",
+  "sha": "e53f272f5d762094"
  },
  "moonbeam/": {
-  "lastmod": "2026-10-10",
-  "sha": "5ffbd0eee1aea799"
+  "lastmod": "2026-10-15",
+  "sha": "2fb61546b54ce07d"
  },
  "openapi-drift/": {
-  "lastmod": "2026-10-12",
-  "sha": "9e51f8c89899d448"
+  "lastmod": "2026-10-15",
+  "sha": "092d2754795a8896"
  },
  "opticquiz/": {
-  "lastmod": "2026-10-10",
-  "sha": "8625c407947d3c7a"
+  "lastmod": "2026-10-15",
+  "sha": "c822ff1e3e827eb6"
  },
  "pixelstaff/": {
-  "lastmod": "2026-10-10",
-  "sha": "2d9e3a1cb39d48ee"
+  "lastmod": "2026-10-15",
+  "sha": "60cfffecdecb75b7"
  },
  "plumhud/": {
-  "lastmod": "2026-10-12",
-  "sha": "dd521f5640c2bf43"
+  "lastmod": "2026-10-15",
+  "sha": "671043a427d066f6"
  },
  "poticas/": {
-  "lastmod": "2026-10-10",
-  "sha": "506ecdba8caf981a"
+  "lastmod": "2026-10-15",
+  "sha": "1a1bdb533b67ce85"
  },
  "privacy.html": {
-  "lastmod": "2026-10-10",
-  "sha": "04db65d231298d4c"
+  "lastmod": "2026-10-15",
+  "sha": "c31ea86984cb8cf1"
  },
  "prompt/": {
-  "lastmod": "2026-10-10",
-  "sha": "089ab731b1094d6f"
+  "lastmod": "2026-10-15",
+  "sha": "65d8410f1bf59476"
+ },
+ "promptcheck/": {
+  "lastmod": "2026-10-15",
+  "sha": "af96fe850fde6f5d"
  },
  "properties.html": {
-  "lastmod": "2026-10-10",
-  "sha": "05c55f740f23ca01"
+  "lastmod": "2026-10-15",
+  "sha": "6a4acbc813fa6e85"
  },
  "qv/": {
-  "lastmod": "2026-10-10",
-  "sha": "8a4376378048668a"
+  "lastmod": "2026-10-15",
+  "sha": "01be67373f1b46b3"
  },
  "remapwrap/": {
-  "lastmod": "2026-10-10",
-  "sha": "d5f8c98606ed1833"
+  "lastmod": "2026-10-15",
+  "sha": "b08044639c04a570"
  },
  "research.html": {
-  "lastmod": "2026-10-11",
-  "sha": "f09b42beaff0e1d6"
+  "lastmod": "2026-10-15",
+  "sha": "74b59b5a320fbb2a"
  },
  "saydo/": {
-  "lastmod": "2026-10-12",
-  "sha": "e722a5cd4e0f86d9"
+  "lastmod": "2026-10-15",
+  "sha": "4de4bcb773ce0878"
  },
  "search/": {
-  "lastmod": "2026-10-10",
-  "sha": "bbc70db0ad57d9fc"
+  "lastmod": "2026-10-15",
+  "sha": "dff9bc65a30a2d15"
  },
  "stack/": {
-  "lastmod": "2026-10-10",
-  "sha": "6bdbda94c7b945c9"
+  "lastmod": "2026-10-15",
+  "sha": "f39772503f0515cf"
  },
  "status/": {
   "lastmod": "2026-10-15",
   "sha": "6afee698273aa3ca"
  },
  "streamsniper/": {
-  "lastmod": "2026-10-10",
-  "sha": "a571b2f5f6efa51d"
+  "lastmod": "2026-10-15",
+  "sha": "e38c9da75750c07e"
  },
  "tag/": {
-  "lastmod": "2026-10-10",
-  "sha": "272c0831d8264c2e"
+  "lastmod": "2026-10-15",
+  "sha": "a5b4132d4ba56b32"
  },
  "tagpro/": {
-  "lastmod": "2026-10-10",
-  "sha": "6c3deb6732c80f03"
+  "lastmod": "2026-10-15",
+  "sha": "64eac7110a484303"
  },
  "tipstreams/": {
-  "lastmod": "2026-10-10",
-  "sha": "5ab8d46791c7ab5a"
+  "lastmod": "2026-10-15",
+  "sha": "97a299ac04857640"
  },
  "tools.html": {
-  "lastmod": "2026-10-12",
-  "sha": "3db641eefbfa686c"
+  "lastmod": "2026-10-15",
+  "sha": "6adf47c28d585686"
  },
  "trailer-load/": {
-  "lastmod": "2026-10-10",
-  "sha": "f8eac52d4c48fa76"
+  "lastmod": "2026-10-15",
+  "sha": "a102840607905d55"
  },
  "wikipolish/": {
-  "lastmod": "2026-10-12",
-  "sha": "e931b13db779fc40"
+  "lastmod": "2026-10-15",
+  "sha": "84667b13f6164965"
  },
  "writing/": {
-  "lastmod": "2026-10-10",
-  "sha": "79beb951c7e8e4c7"
+  "lastmod": "2026-10-15",
+  "sha": "50ec625a2d8145a8"
  }
 }

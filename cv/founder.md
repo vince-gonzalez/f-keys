@@ -34,7 +34,7 @@ poticas.com · 5best2buy.com · RemapWrap · TipStreams · DogeFundMe · PROMPT 
 
 ## Published Research
 
-25 deposited works · ORCID 0009-0005-3640-014X
+58 deposited works · ORCID 0009-0005-3640-014X
 
 - Where Formal Libraries Spend Their Axioms
 - Which Constant Is Responsible?

@@ -127,6 +127,8 @@ CATALOGUE = [
     # Smithery the same day; the page is the product, so the row links out.
     ("coldhat", "coldHat", "tools", "Web tool", READY,
      "Your AI rules on any chat. Type one line into Claude, ChatGPT or Grok and it works your way.", "https://coldhat.f-keys.com"),
+    ("promptcheck", "Prompt Check", "tools", "Service", SETUP,
+     "Send us your system prompts and we run them against a live model: which rules hold, which break, and the rewrite that holds.", "/promptcheck/"),
     ("axsent", "axsent", "research", "Python package", PIP,
      "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.", "/axsent/"),
     ("authorecon", "authorecon", "research", "Python package", PIP,
@@ -196,6 +198,71 @@ CATEGORIES = [
 
 # ── long-form detail, one entry per product ──────────────────
 PAGES = {
+"promptcheck": dict(
+  title="Prompt Check", tagline="We run your prompts against a live model and show you which rules break.",
+  lede="A linter grades a prompt by reading it. We grade it by running it. "
+       "For every rule in your system prompt, we send a message built to break "
+       "that rule to a live model, and judge the reply kept or broken. You get "
+       "a report, per file and per rule: the message that broke each rule, a "
+       "rewrite that would have held, and a flag on any two rules that "
+       "contradict each other.",
+  cta=[("Order a check", "/promptcheck/order/")],
+  herometa="<b>Service</b> &middot; your prompt is read and discarded, never "
+           "stored &middot; graded per file, per rule &middot; report returned to you",
+  steps=[("Send a prompt, a folder, or a repo",
+          "A system prompt, a CLAUDE.md, an AGENTS.md, or a whole repository of "
+          "agent rules. One file or a library."),
+         ("We probe every rule",
+          "One message per rule, written to break that rule, sent to a live "
+          "model in a fresh conversation. Each reply is judged against the rule "
+          "it was meant to break."),
+         ("You get the report and the fixes",
+          "Which rules held, which broke, the exact message that broke each "
+          "one, a rewrite that would have held, and any two rules that cannot "
+          "both be followed.")],
+  features_title="What the report tells you",
+  features=[("A static grade is not enough",
+             "A prompt that reads clean can still break under pressure. We have "
+             "graded prompts an A that broke a rule on the first probe."),
+            ("The exact message that broke each rule",
+             "Not a warning that a rule is weak &mdash; the real user message "
+             "that got a live model to ignore it."),
+            ("A rewrite that holds",
+             "For every rule that broke, a rewrite that closes the loophole, "
+             "and a refusal to harden a rule when doing so would contradict "
+             "another.")],
+  faq=[("Do you store my prompt?",
+        "No. It is read in memory, graded, and discarded. Nothing is logged "
+        "and there is no account to create."),
+       ("Which model do you run it against?",
+        "A current frontier model. If your prompt will run on a specific one, "
+        "name it and we target that model so the result reflects where it "
+        "will actually be deployed."),
+       ("Can you check a whole repository?",
+        "Yes. A single prompt, or a folder of system prompts, CLAUDE.md and "
+        "agent rule files, graded into one report."),
+       ("What is not claimed?",
+        "One probe per rule is a screen, not a rate: it shows a rule can "
+        "break, not how often. The report carries every probe and reply so "
+        "you read the evidence rather than trust a number.")],
+  facts=[("What", "A managed prompt-integrity check, run for you"),
+         ("Your prompt", "Read in memory, never stored"),
+         ("Graded", "Per file and per rule, against a live model"),
+         ("You receive", "A report: breaks, rewrites, and contradictions named"),
+         ("Status", "Open for early orders")],
+  body="""
+<p>A system prompt is a contract between its author and the model. Most tools
+check whether the contract reads well. Prompt Check tests whether the model
+keeps it.</p>
+<p>For every rule, we write a user message built to break that one rule, send
+it to a live model with your prompt in force, and judge the reply. A rule that
+survives a message designed to break it is a rule you can rely on. A rule that
+does not is one you would rather learn about here than in production.</p>
+<p>The report names the rules that broke, the exact message that broke each,
+a rewrite that would have held, and any two rules that cannot both be followed.
+Send one prompt or a whole library.</p>
+""",
+),
 "d1bench": dict(
   title="d1bench", tagline="Which D1 write strategy wins, and which limit stops you first.",
   lede="Cloudflare documents D1's limits one at a time. It does not document "
@@ -4078,6 +4145,18 @@ APPS = {
 }
 
 
+# ACCESSIBILITY, AND WHY IT LIVES HERE AND NOWHERE ELSE
+# Measured 2026-10-15: 126 of 127 pages had no <main>, no role="main" and
+# no skip link. The Windows 95 shell is the reason that matters more here
+# than it would elsewhere - every page opens with a titlebar, a menubar, a
+# toolbar, an address bar and a tree pane, so a screen reader read all of
+# that chrome before reaching a word of content, on every page.
+#
+# One function generates all 127 pages, so the fix is one edit: the content
+# region is now <main id="content"> and the first focusable thing in the
+# body is a link that jumps to it. The .content class is what win98.css
+# styles - checked, all four selectors are class-based and none says
+# section.content - so changing the element changes no layout.
 def shell(title, path_label, body, count_label, active_cat=None,
           active_slug=None, description="", canonical="", ld=None,
           noindex=False, app="explorer"):
@@ -4122,15 +4201,15 @@ def shell(title, path_label, body, count_label, active_cat=None,
     <aside class="tree sunken">
 {tree(active_cat, active_slug)}
     </aside>
-    <section class="content sunken">
+    <main id="content" class="content sunken">
 {body}
-    </section>
+    </main>
   </div>"""
     else:
         panes = f"""  <div class="panes solo">
-    <section class="content sunken app-{esc(app)}">
+    <main id="content" class="content sunken app-{esc(app)}">
 {body}
-    </section>
+    </main>
   </div>"""
 
     return f"""<!DOCTYPE html>
@@ -4163,6 +4242,7 @@ def shell(title, path_label, body, count_label, active_cat=None,
 {ld_block}
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 <div class="window raised">
 
   <div class="titlebar">

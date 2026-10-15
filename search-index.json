@@ -128,6 +128,22 @@
   "group": "tools"
  },
  {
+  "name": "coldHat",
+  "kind": "Web tool",
+  "status": "Ready",
+  "text": "Your AI rules on any chat. Type one line into Claude, ChatGPT or Grok and it works your way.",
+  "href": "https://coldhat.f-keys.com",
+  "group": "tools"
+ },
+ {
+  "name": "Prompt Check",
+  "kind": "Service",
+  "status": "Needs setup",
+  "text": "Send us your system prompts and we run them against a live model: which rules hold, which break, and the rewrite that holds.",
+  "href": "/promptcheck/",
+  "group": "tools"
+ },
+ {
   "name": "axsent",
   "kind": "Python package",
   "status": "pip install",
@@ -141,6 +157,14 @@
   "status": "pip install",
   "text": "Reconcile published work against every place it lives, for any ORCID, from public sources.",
   "href": "/authorecon/",
+  "group": "research"
+ },
+ {
+  "name": "d1bench",
+  "kind": "Benchmark",
+  "status": "Published",
+  "text": "Which Cloudflare D1 write strategy wins, and which of its limits stops you first. Measured, not cited.",
+  "href": "/d1bench/",
   "group": "research"
  },
  {

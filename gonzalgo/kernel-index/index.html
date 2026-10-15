@@ -3,28 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/kernel-index/">
 <title>The Kernel Index — what formal mathematical libraries rest on</title>
 <meta name="description" content="A measured table of what formal libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, or on an optional axiom. Lean 4 and Metamath, six foundations, one program.">
-<link rel="canonical" href="https://f-keys.com/gonzalgo/kernel-index/">
-<meta name="robots" content="index, follow">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:site_name" content="F-Keys">
-<meta property="og:title" content="The Kernel Index — what formal mathematical libraries rest on">
-<meta property="og:description" content="A measured table of what formal libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, or on an optional axiom. Lean 4 and Metamath, six foundations, one program.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/kernel-index/">
-<meta property="og:image" content="https://f-keys.com/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta property="og:title" content="The Kernel Index">
+<meta property="og:description" content="what formal libraries actually rest on">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Kernel Index — what formal mathematical libraries rest on">
-<meta name="twitter:description" content="A measured table of what formal libraries rest on: theorems depending on an unfinished proof, on the compiler rather than the kernel, or on an optional axiom. Lean 4 and Metamath, six foundations, one program.">
-<meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=0df044cb">
+<!-- Self-hosted. test_site.py refuses any page that loads from another
+     company server, because the privacy page promises none do, and this
+     generator was still emitting a Google Fonts link - so regenerating
+     these pages silently reintroduced a third-party request. Both
+     families (VT323, Share Tech Mono) are in /assets/fonts.css with
+     their woff2 files present, checked before the swap. -->
+<link rel="stylesheet" href="/assets/fonts.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -79,33 +75,61 @@
   ]
 }
 </script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+
+/* Visible focus. These pages carry their own stylesheet and had none,
+   so a keyboard user had no indication of position on 17 data pages.
+   --green is the ring because it is already the theme's accent and it
+   measures 14.34:1 on --bg and 13.23:1 on --panel; 1.4.11 asks for 3:1.
+   A black-and-white ring would work too but would look imported. */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+@supports not selector(:focus-visible) {
+  a:focus, button:focus, input:focus, select:focus, textarea:focus,
+  summary:focus, [tabindex]:focus { outline:2px solid var(--green); outline-offset:2px; }
+}
+</style>
 </head>
 <body>
-<div class="window raised">
-
-  <div class="titlebar">
-    <span class="t"><span>The Kernel Index</span></span>
-    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
+</nav>
+<main>
 
-  <nav class="menubar"><a href="/"><u>F</u>ile</a><a href="/log/"><u>E</u>dit</a><a href="/status/"><u>V</u>iew</a><a href="/papers/"><u>I</u>nsert</a><a href="/gonzalgo/data/"><u>D</u>ata</a><a href="/about.html"><u>H</u>elp</a></nav>
-
-  <div class="toolbar groove">
-    <a class="tool" href="/research.html">&#8592; Back</a>
-    <span class="tool off">Forward &#8594;</span>
-    <a class="tool" href="/research.html">&#8593; Up</a>
-    <span class="sep"></span>
-    <a class="tool" href="/">Home</a>
-    <a class="tool" href="/search/">Find</a>
-    <a class="tool hide-xs" href="/status/">Status</a>
-    <a class="tool hide-xs" href="/log/">Log</a>
-  </div>
-
-
-  <div class="panes solo">
-    <section class="content sunken app-excel">
-<div class="doc">
-<h1>The Kernel Index</h1>
+<h1>THE KERNEL INDEX</h1>
 <p class="kicker">what formal libraries actually rest on</p>
 
 <p>Each library here was measured directly. The two middle columns are the ones to read: how many theorems rest on a proof that was never finished, and how many were settled by running compiled code rather than by the kernel.</p>
@@ -133,7 +157,7 @@
 </table>
 </div>
 
-<p class="note"><strong style="color:var(--warn)">Red</strong> marks a non-zero count &mdash; theorems resting on an unfinished proof, or on the compiler. <em>unfinished</em> counts theorems reaching a <code>sorry</code> (Lean) or a <code>?</code>-bearing proof (Metamath) anywhere upstream, not only those that state one. <em>optional axiom</em> is the share of theorems depending on <code>Classical.choice</code> in Lean and on full choice in <code>set.mm</code>; the other databases declare no choice axiom.</p>
+<p class="note"><strong style="color:#ff8080">Red</strong> marks a non-zero count &mdash; theorems resting on an unfinished proof, or on the compiler. <em>unfinished</em> counts theorems reaching a <code>sorry</code> (Lean) or a <code>?</code>-bearing proof (Metamath) anywhere upstream, not only those that state one. <em>optional axiom</em> is the share of theorems depending on <code>Classical.choice</code> in Lean and on full choice in <code>set.mm</code>; the other databases declare no choice axiom.</p>
 
 <h2>Get the data</h2>
 <p>
@@ -142,7 +166,7 @@
 version 2026-08-05
 </p>
 <p class="series">
-One of the <a href="/gonzalgo/data/">gonzalgo indexes</a>. Standing
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
 measurements of what formal libraries rest on, remeasured as the libraries move.
 Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
 resolves to the current deposit.
@@ -160,22 +184,11 @@ gonzalgo mm set.mm iset.mm nf.mm ql.mm hol.mm   # the Metamath rows</pre>
 <footer>
   <p>Cite: Gonzalez, V. (2026). <em>Where Formal Libraries Spend Their Axioms</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21769846">10.5281/zenodo.21769846</a></p>
   <p style="margin-top:.8rem;">
-    Maintained at <a href="https://f-keys.com/gonzalgo/kernel-index/">f-keys.com/gonzalgo/kernel-index/</a>. The home of <code>kernel &gt; sorry</code>.
+    Maintained at <a href="https://f-keys.com/gonzalgo/kernel-index/">f-keys.com/gonzalgo/kernel-index/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
   </p>
   <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
 </footer>
-</div>
-    </section>
-  </div>
-  <div class="sheettabs"><span class="tab on">Measurements</span><span class="tab">Method</span><span class="tab">Sources</span></div>
-
-
-  <div class="statusbar">
-    <span class="cell groove">measurements</span>
-    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
-    <span class="cell groove">F-Keys</span>
-  </div>
-
-</div>
+</main>
 </body>
 </html>

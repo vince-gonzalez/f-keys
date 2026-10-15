@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order a Prompt Check — F-Keys</title>
+<meta name="description" content="Order a Prompt Check: send a system prompt, a CLAUDE.md, or a repo of agent rules and get back a graded report of which rules hold, which break, and the rewrite that holds.">
+<link rel="canonical" href="https://f-keys.com/promptcheck/order/">
+<style>
+  :root{
+    --bg:#c0c0c0; --panel:#fff; --ink:#1a1a1a; --muted:#555; --border:#808080;
+    --accent:#000080; --ok:#0a5c2b; --bad:#8a1c1c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#2b2b2b; --panel:#1e1e1e; --ink:#eee; --muted:#aaa; --border:#555; --accent:#9db4ff; --ok:#6fcf97; --bad:#ff8a8a; }
+  }
+  :root[data-theme="dark"]{ --bg:#2b2b2b; --panel:#1e1e1e; --ink:#eee; --muted:#aaa; --border:#555; --accent:#9db4ff; --ok:#6fcf97; --bad:#ff8a8a; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",system-ui,sans-serif;padding:16px}
+  main{max-width:640px;margin:0 auto;background:var(--panel);border:1px solid var(--border);padding:24px}
+  h1{font-size:1.5rem;margin:.2em 0 .1em}
+  p.sub{color:var(--muted);margin:.2em 0 1.2em}
+  label{display:block;font-weight:600;margin:1em 0 .25em}
+  input[type=text],input[type=email],textarea,select{
+    width:100%;padding:.55em;border:1px solid var(--border);background:var(--panel);color:var(--ink);font:inherit}
+  textarea{min-height:120px;resize:vertical}
+  .hint{color:var(--muted);font-size:.85rem;margin:.2em 0 0}
+  fieldset{border:1px solid var(--border);margin:1em 0 0;padding:.6em .9em}
+  fieldset label{display:inline-flex;align-items:center;gap:.4em;font-weight:400;margin:.3em 1.2em .3em 0}
+  button{margin-top:1.4em;padding:.7em 1.4em;border:1px solid var(--border);background:var(--accent);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+  button:disabled{opacity:.6;cursor:default}
+  .say{padding:.7em .9em;margin-top:1em;border:1px solid var(--border)}
+  .say.ok{color:var(--ok)} .say.bad{color:var(--bad)}
+  a.pay{display:inline-block;margin-top:1em;padding:.7em 1.4em;background:var(--ok);color:#fff;text-decoration:none;font-weight:600;border:1px solid var(--border)}
+  .foot{color:var(--muted);font-size:.85rem;margin-top:1.6em;border-top:1px solid var(--border);padding-top:1em}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Order a Prompt Check</h1>
+  <p class="sub">Send a system prompt, a CLAUDE.md, an AGENTS.md, or a whole repo's worth of rule files (we read the rules, not your code). You get back a graded report: which rules hold, which break under pressure, the message that broke each one, and a rewrite that holds.</p>
+
+  <form id="order" novalidate>
+    <label for="email">Your email <span aria-hidden="true">*</span></label>
+    <input type="email" id="email" name="email" autocomplete="email" required>
+
+    <label for="name">Your name</label>
+    <input type="text" id="name" name="name" autocomplete="name">
+
+    <label for="what">What should we check? <span aria-hidden="true">*</span></label>
+    <textarea id="what" name="what" placeholder="Paste a system prompt or CLAUDE.md here, or leave this blank and give a link below."></textarea>
+    <p class="hint">Paste the rules here, or link a file or repo below. Either is fine.</p>
+
+    <label for="url">Link to a file or repo (optional)</label>
+    <input type="text" id="url" name="url" placeholder="https://github.com/you/your-repo">
+
+    <fieldset>
+      <legend>Scope</legend>
+      <label><input type="radio" name="scope" value="One prompt" checked> One prompt</label>
+      <label><input type="radio" name="scope" value="A library"> A library of prompts</label>
+      <label><input type="radio" name="scope" value="A whole repo"> A repo (all its rule files)</label>
+    </fieldset>
+    <p class="hint">$12.99 for a single prompt; $99.99 for a repo or library. An unusually large repo we'll scope first, and team or ongoing work starts around $1,000 &mdash; just ask.</p>
+
+    <label for="model">Target model (optional)</label>
+    <input type="text" id="model" name="model" placeholder="The model your prompt will run on, if you know it.">
+
+    <label for="notes">Anything else (optional)</label>
+    <textarea id="notes" name="notes" style="min-height:70px"></textarea>
+
+    <label for="files">Attach your prompt or rule files (optional)</label>
+    <input type="file" id="files" name="files" multiple accept=".md,.mdc,.txt,.json,.yaml,.yml,.toml">
+    <p class="hint">A few small files is fine. They go straight to F-Keys storage with your order.</p>
+
+    <button type="submit" id="submit">Send order</button>
+  </form>
+
+  <div id="result" hidden></div>
+
+  <p class="foot">Submitting this does not charge you. Your prompt is read to run the check and is not published. F-Keys Creative LLC (FL) &middot; <a href="/promptcheck/">What a Prompt Check is</a> &middot; <a href="/privacy.html">Privacy</a></p>
+</main>
+
+<script>
+(function(){
+  // ── Paste the two Stripe Payment Link URLs when they exist ──
+  var STRIPE_SINGLE = "https://buy.stripe.com/00w5kDf8C00f27l4xh4Ni0c";  // $12.99 single-prompt link
+  var STRIPE_REPO = "https://buy.stripe.com/cNifZh4tY6oDeU72p94Ni0d";  // $99.99 repo/library link
+  var PRICE_SINGLE = "$12.99";
+  var PRICE_REPO = "$99.99";
+  // ────────────────────────────────────────────────────────────
+  var ENDPOINT = "https://orders.f-keys.com/submit";
+
+  var form = document.getElementById("order");
+  var result = document.getElementById("result");
+  var submit = document.getElementById("submit");
+
+  function val(id){ return (document.getElementById(id).value || "").trim(); }
+  function scope(){ var r = document.querySelector('input[name=scope]:checked'); return r ? r.value : ""; }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = val("email"), what = val("what"), url = val("url");
+    if(!email || email.indexOf("@") < 1){ show("Please enter your email so the report can reach you.", "bad"); return; }
+    if(!what && !url){ show("Paste the rules to check, or give a link to them.", "bad"); return; }
+
+    var fields = {
+      "Email": email,
+      "Contact": val("name"),
+      "Scope": scope(),
+      "Target model": val("model"),
+      "Repo or URL": url,
+      "What to check": what,
+      "Notes": val("notes")
+    };
+    var body = [
+      "Prompt Check order",
+      "Email: " + email,
+      "Name: " + (fields.Contact || "-"),
+      "Scope: " + fields.Scope,
+      "Target model: " + (fields["Target model"] || "-"),
+      "Link: " + (url || "-"),
+      "",
+      "What to check:",
+      what || "(see link)",
+      "",
+      "Notes: " + (fields.Notes || "-")
+    ].join("\n");
+
+    submit.disabled = true; submit.textContent = "Sending…";
+    readFiles(document.getElementById("files").files).then(function(files){
+      return fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "Prompt Check", body: body, fields: fields, files: files })
+      });
+    }).then(function(r){
+      if(!r.ok){ return r.text().then(function(t){ throw new Error(t || ("HTTP " + r.status)); }); }
+      form.hidden = true;
+      var repo = /repo|library/i.test(fields.Scope);
+      var link = repo ? STRIPE_REPO : STRIPE_SINGLE;
+      var price = repo ? PRICE_REPO : PRICE_SINGLE;
+      var pay = link
+        ? '<a class="pay" href="' + link + '">Pay ' + price + ' to start</a>'
+        : '<p>I\'ll reply with a secure payment link and the turnaround, or a quote for a large job. Nothing is charged yet.</p>';
+      result.className = "say ok";
+      result.innerHTML = "<b>Order received.</b> A copy is on its way to " + escapeHtml(email) + ".<br>" + pay;
+      result.hidden = false;
+    }).catch(function(err){
+      submit.disabled = false; submit.textContent = "Send order";
+      show("That did not send: " + escapeHtml(String(err.message || err)).slice(0,200) + ". Email hello@f-keys.com and I'll take it from there.", "bad");
+    });
+  });
+
+  function show(msg, kind){ result.className = "say " + kind; result.textContent = msg; result.hidden = false; }
+  function escapeHtml(s){ return s.replace(/[&<>"']/g, function(c){ return ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" })[c]; }); }
+  function readFiles(list){
+    var arr = Array.prototype.slice.call(list || []).slice(0, 10);
+    return Promise.all(arr.map(function(f){
+      return new Promise(function(res){
+        var r = new FileReader();
+        r.onload = function(){ var s = String(r.result), i = s.indexOf(","); res({ name: f.name, type: f.type || "application/octet-stream", data: i >= 0 ? s.slice(i + 1) : "" }); };
+        r.onerror = function(){ res(null); };
+        r.readAsDataURL(f);
+      });
+    })).then(function(rs){ return rs.filter(Boolean); });
+  }
+})();
+</script>
+</body>
+</html>

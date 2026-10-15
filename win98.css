@@ -726,3 +726,49 @@ table.details th.num,table.details td.num{text-align:right}
 .stk-h strong{color:var(--ink)}
 .stk-w{color:var(--dim);font-size:13px}
 .stk p{margin:0;line-height:1.65;max-width:46em}
+
+/* ============================================================
+   FOCUS AND SKIP - added 2026-10-15
+   ------------------------------------------------------------
+   This stylesheet contained ZERO :focus rules. Measured, not
+   assumed: grep found none, so a keyboard user had no visible
+   indication of where they were on any of 127 pages.
+
+   THE RING IS TWO-TONE ON PURPOSE. 1.4.11 wants 3:1 against
+   whatever sits behind it, and no single colour in this palette
+   manages that everywhere - the obvious choice, --sel on the
+   --desktop teal, is 2.99:1 and fails. A black ring with a white
+   halo cannot fail, because no background is close to both:
+
+     on --field white   black 21.00:1
+     on --face grey     black 13.66:1
+     on --desktop teal  white  4.77:1
+     on --sel blue      white 14.25:1
+
+   The skip link is the theme's own selection colours, which is
+   both native to Windows 95 and 14.25:1 for white on --sel. It
+   sits off-screen until focused rather than being hidden with
+   display:none, because a hidden element is not focusable and a
+   skip link nobody can reach is decoration.
+   ============================================================ */
+
+.skip{position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--sel);color:var(--sel-txt);
+  font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  padding:6px 12px;border:2px solid var(--hi);text-decoration:none}
+.skip:focus{left:6px;top:6px}
+
+a:focus-visible,button:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible,summary:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid var(--dk);outline-offset:1px;
+  box-shadow:0 0 0 4px var(--hi)}
+
+/* Older engines never match :focus-visible, so they would get nothing
+   at all from the block above. This gives them the same ring. */
+@supports not selector(:focus-visible){
+  a:focus,button:focus,input:focus,select:focus,textarea:focus,
+  summary:focus,[tabindex]:focus{
+    outline:2px solid var(--dk);outline-offset:1px;
+    box-shadow:0 0 0 4px var(--hi)}
+}

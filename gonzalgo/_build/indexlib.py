@@ -274,6 +274,19 @@ strong { color:#ff8080; }
 pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
 code { color:var(--cyan); }
 footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+
+/* Visible focus. These pages carry their own stylesheet and had none,
+   so a keyboard user had no indication of position on 17 data pages.
+   --green is the ring because it is already the theme's accent and it
+   measures 14.34:1 on --bg and 13.23:1 on --panel; 1.4.11 asks for 3:1.
+   A black-and-white ring would work too but would look imported. */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+@supports not selector(:focus-visible) {
+  a:focus, button:focus, input:focus, select:focus, textarea:focus,
+  summary:focus, [tabindex]:focus { outline:2px solid var(--green); outline-offset:2px; }
+}
 """
 
 
@@ -393,8 +406,13 @@ def build(idx: Index) -> dict:
 <meta property="og:title" content="{idx.title}">
 <meta property="og:description" content="{idx.kicker}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- Self-hosted. test_site.py refuses any page that loads from another
+     company server, because the privacy page promises none do, and this
+     generator was still emitting a Google Fonts link - so regenerating
+     these pages silently reintroduced a third-party request. Both
+     families (VT323, Share Tech Mono) are in /assets/fonts.css with
+     their woff2 files present, checked before the swap. -->
+<link rel="stylesheet" href="/assets/fonts.css">
 <script type="application/ld+json">
 {jsonld}
 </script>

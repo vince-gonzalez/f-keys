@@ -3,28 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/tactic-bands/">
 <title>The Tactic Background Table — Lean tactic classical-dependence rates and their calibration</title>
 <meta name="description" content="Classical-dependence rates for Lean tactics across four libraries and two attribution rules, each against the band spanned by tactics that cannot introduce a classical instance. The background is 5.8-28.2% in Mathlib and 45.0-100.0% in Lean core.">
-<link rel="canonical" href="https://f-keys.com/gonzalgo/tactic-bands/">
-<meta name="robots" content="index, follow">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:site_name" content="F-Keys">
-<meta property="og:title" content="The Tactic Background Table — Lean tactic classical-dependence rates and their calibration">
-<meta property="og:description" content="Classical-dependence rates for Lean tactics across four libraries and two attribution rules, each against the band spanned by tactics that cannot introduce a classical instance. The background is 5.8-28.2% in Mathlib and 45.0-100.0% in Lean core.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/tactic-bands/">
-<meta property="og:image" content="https://f-keys.com/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta property="og:title" content="The Tactic Background Table">
+<meta property="og:description" content="every rate, against the band that says whether it means anything">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Tactic Background Table — Lean tactic classical-dependence rates and their calibration">
-<meta name="twitter:description" content="Classical-dependence rates for Lean tactics across four libraries and two attribution rules, each against the band spanned by tactics that cannot introduce a classical instance. The background is 5.8-28.2% in Mathlib and 45.0-100.0% in Lean core.">
-<meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=0df044cb">
+<!-- Self-hosted. test_site.py refuses any page that loads from another
+     company server, because the privacy page promises none do, and this
+     generator was still emitting a Google Fonts link - so regenerating
+     these pages silently reintroduced a third-party request. Both
+     families (VT323, Share Tech Mono) are in /assets/fonts.css with
+     their woff2 files present, checked before the swap. -->
+<link rel="stylesheet" href="/assets/fonts.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -80,37 +76,65 @@
   ]
 }
 </script>
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; font-size:16px; line-height:1.65; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:1080px; margin:0 auto; padding:7rem 1.2rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(38px,7vw,68px); color:var(--green); letter-spacing:4px; line-height:1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(20px,3vw,26px); color:var(--cyan); letter-spacing:2px; margin:.5rem 0 1.5rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.7rem; color:var(--green); margin:2.5rem 0 .8rem; letter-spacing:2px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+.wrap { overflow-x:auto; border:1px solid var(--border); background:var(--panel); margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; min-width:820px; }
+th { color:var(--green); text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:.55rem .6rem; border-bottom:1px solid #142414; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.found { color:var(--dim); }
+tr:hover td { background:#0d120d; }
+strong { color:#ff8080; }
+.note { color:var(--dim); font-size:.9rem; }
+.series { color:var(--dim); font-size:.9rem; border:1px solid var(--border); background:var(--panel); padding:.7rem .9rem; margin:1.2rem 0; }
+pre { background:#0d120d; border:1px solid var(--border); padding:1rem; overflow-x:auto; font-size:.9rem; margin:1rem 0; }
+code { color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:3.5rem; padding:2rem 0; color:var(--dim); font-size:.9rem; }
+
+/* Visible focus. These pages carry their own stylesheet and had none,
+   so a keyboard user had no indication of position on 17 data pages.
+   --green is the ring because it is already the theme's accent and it
+   measures 14.34:1 on --bg and 13.23:1 on --panel; 1.4.11 asks for 3:1.
+   A black-and-white ring would work too but would look imported. */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+@supports not selector(:focus-visible) {
+  a:focus, button:focus, input:focus, select:focus, textarea:focus,
+  summary:focus, [tabindex]:focus { outline:2px solid var(--green); outline-offset:2px; }
+}
+</style>
 </head>
 <body>
-<div class="window raised">
-
-  <div class="titlebar">
-    <span class="t"><span>The Tactic Background Table</span></span>
-    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/data/">indexes</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
+</nav>
+<main>
 
-  <nav class="menubar"><a href="/"><u>F</u>ile</a><a href="/log/"><u>E</u>dit</a><a href="/status/"><u>V</u>iew</a><a href="/papers/"><u>I</u>nsert</a><a href="/gonzalgo/data/"><u>D</u>ata</a><a href="/about.html"><u>H</u>elp</a></nav>
-
-  <div class="toolbar groove">
-    <a class="tool" href="/research.html">&#8592; Back</a>
-    <span class="tool off">Forward &#8594;</span>
-    <a class="tool" href="/research.html">&#8593; Up</a>
-    <span class="sep"></span>
-    <a class="tool" href="/">Home</a>
-    <a class="tool" href="/search/">Find</a>
-    <a class="tool hide-xs" href="/status/">Status</a>
-    <a class="tool hide-xs" href="/log/">Log</a>
-  </div>
-
-
-  <div class="panes solo">
-    <section class="content sunken app-excel">
-<div class="doc">
-<h1>The Tactic Background Table</h1>
+<h1>THE TACTIC BACKGROUND TABLE</h1>
 <p class="kicker">every rate, against the band that says whether it means anything</p>
 
 <p>Scoring a tactic by how often its proofs carry a removable dependence on choice looks like it should find the tactics at fault. The number it produces is mostly a property of the theorems the tactic gets used on.</p>
-<p>The calibration is the whole table. A <em>known-negative</em> is a tactic that cannot introduce a classical instance at all — <code>rfl</code>, <code>intro</code>, <code>exfalso</code>, so whatever rate it shows is the background of its population. In Mathlib that background spans 5.8&ndash;28.2% across 30 controls; in Lean core 45.0&ndash;100.0%. The variation inside one library is as large as the variation between libraries, so no threshold survives normalisation.</p>
+<p>The calibration is the whole table. A <em>known-negative</em> is a tactic that cannot introduce a classical instance at all — <code>rfl</code>, <code>intro</code>, <code>exfalso</code> — so whatever rate it shows is the background of its population. In Mathlib that background spans 5.8&ndash;28.2% across 30 controls; in Lean core 45.0&ndash;100.0%. The variation inside one library is as large as the variation between libraries, so no threshold survives normalisation.</p>
 <p class="note">Measured with <a href="/gonzalgo/">gonzalgo</a> &middot; Lean 4.32.1 with Mathlib v4.32.1 &middot; four libraries, two attribution rules, cells with at least 20 proofs</p>
 
 <div class="wrap">
@@ -297,7 +321,7 @@
 version 2026-08-12
 </p>
 <p class="series">
-One of the <a href="/gonzalgo/data/">gonzalgo indexes</a>. Standing
+One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
 measurements of what formal libraries rest on, remeasured as the libraries move.
 Cite the series as <a href="https://doi.org/10.5281/zenodo.21900625">10.5281/zenodo.21900625</a>, which
 resolves to the current deposit.
@@ -308,36 +332,25 @@ resolves to the current deposit.
 <p class="note">Code and derived data: <a href="https://doi.org/10.5281/zenodo.21853489">10.5281/zenodo.21853489</a>. The bands here are recomputed from the cells and checked against the ones the archive stores, so a row and its band cannot come from different runs.</p>
 
 <h2>What escapes, and why it does not help</h2>
-<p>7 of the examined candidates rise above their own library's band. Four of the seven are <code>grind</code>, which proves by refuting the negation and is therefore classical by construction rather than by defect. One is <code>omega</code>, whose avoidable dependence is real and independently established, and <code>simp_all</code> ties it at exactly 100.0% in the same library under the same rule, so even there the rate does not single it out.</p>
+<p>7 of the examined candidates rise above their own library's band. Four of the seven are <code>grind</code>, which proves by refuting the negation and is therefore classical by construction rather than by defect. One is <code>omega</code>, whose avoidable dependence is real and independently established &mdash; and <code>simp_all</code> ties it at exactly 100.0% in the same library under the same rule, so even there the rate does not single it out.</p>
 <p><code>norm_num</code> carries a genuinely avoidable dependence, demonstrated by direct construction in the <a href="/gonzalgo/controlled-tactics/">controlled experiment</a>. It sits at 5.0% in Mathlib, below the known-negative floor, beneath <code>rfl</code> and <code>exfalso</code> and every other tactic that cannot introduce choice at all. The instrument ranks the one tactic with a proven defect beneath tactics incapable of the defect.</p>
 <p>Widening the rule does not rescue it. Under <code>strict</code>, <code>induction</code> reaches 87.5% and widens Mathlib's band until nothing escapes at all. The instrument either fires on the wrong tactic or does not fire.</p>
 
 <h2>One cell the paper did not test</h2>
 <p>The published count of seven is over the 15 candidate tactics its script examines. Rates were computed for every tactic meeting the threshold, and one more escapes: <code>simpa</code> in Std under loose at 76.8% against a 60.3% band, over 734 proofs. It is neither a known-negative nor on the candidate list, so nothing in the pipeline looked at it.</p>
-<p>It does not disturb the conclusion, an extra escape that nobody has a mechanism for is more evidence that the rate is not selecting on defectiveness, but it is in the data and belongs on the page rather than in a drawer.</p>
+<p>It does not disturb the conclusion — an extra escape that nobody has a mechanism for is more evidence that the rate is not selecting on defectiveness — but it is in the data and belongs on the page rather than in a drawer.</p>
 
 <h2>Why the unit is wrong, not just the statistic</h2>
-<p>In the generated corpus <code>interval_cases</code> scores 100%. Its proofs close with <code>&lt;;&gt; norm_num</code>, and the score belongs to norm_num. A surface tactic inherits the axiom behavior of whatever it delegates to, so attributing a proof to the tactic named in it is the wrong unit regardless of which statistic is computed over it. That is the finding this table exists to support.</p>
+<p>In the generated corpus <code>interval_cases</code> scores 100%. Its proofs close with <code>&lt;;&gt; norm_num</code>, and the score belongs to norm_num. A surface tactic inherits the axiom behaviour of whatever it delegates to, so attributing a proof to the tactic named in it is the wrong unit regardless of which statistic is computed over it. That is the finding this table exists to support.</p>
 
 <footer>
   <p>Cite: Gonzalez, V. (2026). <em>Why Tactic-Level Rates Cannot Attribute Classical Dependencies</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21853489">10.5281/zenodo.21853489</a></p>
   <p style="margin-top:.8rem;">
-    Maintained at <a href="https://f-keys.com/gonzalgo/tactic-bands/">f-keys.com/gonzalgo/tactic-bands/</a>. The home of <code>kernel &gt; sorry</code>.
+    Maintained at <a href="https://f-keys.com/gonzalgo/tactic-bands/">f-keys.com/gonzalgo/tactic-bands/</a>
+    &mdash; the home of <code>kernel &gt; sorry</code>.
   </p>
   <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
 </footer>
-</div>
-    </section>
-  </div>
-  <div class="sheettabs"><span class="tab on">Measurements</span><span class="tab">Method</span><span class="tab">Sources</span></div>
-
-
-  <div class="statusbar">
-    <span class="cell groove">measurements</span>
-    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
-    <span class="cell groove">F-Keys</span>
-  </div>
-
-</div>
+</main>
 </body>
 </html>

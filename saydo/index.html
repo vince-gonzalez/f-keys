@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="SayDo — F-Keys">
 <meta name="twitter:description" content="Prove a tool behaves as it says.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=0df044cb">
+<link rel="stylesheet" href="/win98.css?v=9e06dd3d">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,6 +55,7 @@
 </script>
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 <div class="window raised">
 
   <div class="titlebar">
@@ -97,6 +98,7 @@
 <li><a class="" href="/plumhud/"><span class="ic">&#128196;</span>PlumHUD</a></li>
 <li><a class="on" href="/saydo/"><span class="ic">&#128196;</span>SayDo</a></li>
 <li><a class="" href="https://coldhat.f-keys.com"><span class="ic">&#128196;</span>coldHat</a></li>
+<li><a class="" href="/promptcheck/"><span class="ic">&#128196;</span>Prompt Check</a></li>
 <li><a class="" href="/legible/"><span class="ic">&#128196;</span>legible</a></li>
 <li><a class="" href="/openapi-drift/"><span class="ic">&#128196;</span>openapi-drift</a></li>
 <li><a class="" href="/changewatch/"><span class="ic">&#128196;</span>changewatch</a></li>
@@ -126,7 +128,7 @@
 <li><a href="/privacy.html"><span class="ic">&#128220;</span>Privacy</a></li>
 </ul></li></ul>
     </aside>
-    <section class="content sunken">
+    <main id="content" class="content sunken">
 <div class="doc"><div class="hero"><h1>SayDo</h1><p class="lede">Signing proves a tool&#x27;s code is what the publisher released. It does not prove the tool behaves as its description promises. SayDo tests that second claim: a contract per tool, a harness that checks the tool against it, and a hash-chained receipt anyone can verify without trusting us.</p><div class="herocta"><a class="btn default" href="https://github.com/vince-gonzalez/saydo" rel="noopener">The repository</a><a class="btn" href="#a-receipt-actually">See a real receipt</a><a class="btn" href="https://github.com/vince-gonzalez/saydo/tree/main/spec" rel="noopener">Read the declaration spec</a></div><p class="meta"><b>Working proof of concept</b> &middot; <code>pip install saydo</code> &middot; name provisional &middot; declarations are drafts &middot; receipts are Ed25519-signed with a proof-of-concept key &middot; no trust mark issued</p></div>
 <h2>The gap</h2>
 <p>Signing and provenance prove a tool&rsquo;s code is what the publisher
@@ -199,7 +201,7 @@ is out of their scope.</p>
   <a class="btn default" href="https://github.com/vince-gonzalez/saydo" rel="noopener">The repository</a>
   <a class="btn" href="/papers/">Related work</a>
 </div><h2>How it works</h2><ol class="steps"><li><b>Declare what the tool may do</b><span>A machine-readable contract per tool: no network, writes only here, deterministic, errors returned as values. Thirteen invariant types in the current draft.</span></li><li><b>Put the tool under the harness</b><span><code>saydo verify certivl</code> captures the live tool definitions, exercises the server with valid and adversarial input while watching egress and the filesystem, and reports pass, fail or <b>not-covered</b> per invariant.</span></li><li><b>Hand somebody the receipt</b><span>Every run emits a hash-chained record, one row per verdict. They check it in a browser with no account and no request to us.</span></li></ol><h2>What is actually built</h2><div class="featgrid"><div class="feat"><b>Thirteen invariant types</b><span>no-network, network-allowlist, no-write, write-scope, read-scope, no-subprocess, subprocess-scope, deterministic, error-as-value, refusal-tool, no-data-egress, output-hygiene, property.</span></div><div class="feat"><b>Eleven declarations</b><span>Six F-Keys MCP servers, one seeded fixture and four third-party ones. All draft and all unsigned, and the page says so because they are.</span></div><div class="feat"><b>A GitHub Action</b><span><code>action.yml</code>, published as <i>SayDo conformance</i>. The build fails if the tool breaks its declaration, and also if the run established nothing.</span></div><div class="feat"><b>A sandbox</b><span><code>--sandbox</code> runs the server in a container whose only route out is a recording proxy. Linux and Docker. Without it the run is observed rather than enforced, and the receipt records which it was.</span></div><div class="feat"><b>A data-egress counterfactual</b><span>The tool is run twice with different inputs, and each destination is classified by whether what it received changed with the input. <i>It sent your input to example.com</i> is a different statement from <i>it made a request</i>.</span></div><div class="feat"><b>A chain that breaks visibly</b><span><code>row_hash = sha256(prev + row)</code>. Edit one row and every hash below it stops matching.</span></div><div class="feat"><b>It reports what it did not test</b><span>An invariant the harness could not exercise comes back not-covered rather than passed. A harness that only ever passes is worth nothing.</span></div><div class="feat"><b>It admits its blind spots</b><span>The receipt records that the monitor does not see below the Python runtime &mdash; a native extension is outside what it can observe, and it says so in the artifact.</span></div><div class="feat"><b>Offline verification</b><span>A self-contained browser verifier. No account, no network, no request to anybody, including us.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Status</th><td>Working proof of concept — name provisional</td></tr><tr><th>Install</th><td>pip install saydo</td></tr><tr><th>Declarations</th><td>11 — 6 F-Keys servers, 1 seeded fixture, 4 third-party; all draft, all unsigned</td></tr><tr><th>Receipts</th><td>Ed25519-signed with a proof-of-concept key; production signing not settled</td></tr><tr><th>Invariant types</th><td>13 in the current draft</td></tr><tr><th>License</th><td>Apache-2.0 on the open layers</td></tr><tr><th>Source</th><td>vince-gonzalez/saydo</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Does this replace TBOM or CTMS?</dt><dd>No. It extends them. Both are provenance and both state that verifying behavior against the metadata is out of their scope &mdash; that line is the reason this exists. A declaration binds to the same tool-definition digests a Tool Bill of Materials records.</dd><dt>Is anything here certified?</dt><dd>No. Every declaration carries <code>status: "draft"</code> and carries no supplier signature. Receipts are signed, but with a proof-of-concept key; production signing is not settled. Nothing here is a claim of conformance about anybody's software, including ours.</dd><dt>What about the trust mark?</dt><dd>The mechanism is built and nothing is issued. <code>tools/registry.py</code> publishes, revokes and looks up an entry, writes an <code>expiresAt</code> so a claim goes stale rather than staying green, keeps a revocation sticky against a later passing receipt, and returns one badge line that never reads as a bare grade. What does not exist: anywhere to serve it from, a mark on anybody's page, and a key anyone should rely on.</dd><dt>Why should I believe the harness?</dt><dd>Do not. Run <code>saydo selfcheck</code>. It ships a server built to fail and requires the harness to catch every violation.</dd><dt>Is the name final?</dt><dd>No. It was WARRANT, it is SayDo, and it is marked provisional because it is.</dd></dl></div>
-    </section>
+    </main>
   </div>
 
   <div class="statusbar">

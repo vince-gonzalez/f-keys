@@ -24,10 +24,11 @@
 <meta name="twitter:title" content="Log — F-Keys">
 <meta name="twitter:description" content="A working record of what gets built at F-Keys.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=0df044cb">
+<link rel="stylesheet" href="/win98.css?v=9e06dd3d">
 
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 <div class="window raised">
 
   <div class="titlebar">
@@ -88,7 +89,7 @@
 <li><a href="/privacy.html"><span class="ic">&#128220;</span>Privacy</a></li>
 </ul></li></ul>
     </aside>
-    <section class="content sunken">
+    <main id="content" class="content sunken">
 <div class="doc"><h1>Log</h1><p class="sub">A working record. What got built, what broke, and what turned out to be true.</p><article class="entry"><time datetime="2026-10-11">11 October 2026</time>
       <p>Shipped <a href="https://coldhat.f-keys.com" rel="noopener">coldHat</a>: your working rules for an AI, worn in any chat by typing one line.</p>
       <p>The rules live in a file called <code>hat.md</code> in a public GitHub repository named <code>coldhat</code>, so only the owner can change them. Typing <code>open sesame coldhat.f-keys.com/u/vince-gonzalez/frontier</code> into Claude or Grok makes the assistant fetch that file, answer with its hat code, and work by it for the rest of the chat. The code is a hash of the file, so the assistant can only quote it by actually reading the page. ChatGPT does the same while its browsing quota lasts. Gemini declines to fetch it, and that is written down rather than hidden.</p>
@@ -161,7 +162,7 @@
       <p>Rebuilt f-keys.com. The old page was one undifferentiated grid, and the version before it, on the old domain, had 23 cards of which 17 pointed at nothing. It&#x27;s six sections now — apps, games, tools, hardware, research, properties — and every card carries a status badge, so something in alpha can be visible and honest at the same time rather than hidden or oversold.</p>
       <p>Recovering Key-J turned into a rescue. Its Electron entry point was gone from the working folder and survived in exactly one zip, inside a directory named &quot;zip to sort&quot;. The entire desktop app depended on that file. It lives in a repository now, along with the browser build.</p>
       <p>Pointed the old company domain at f-keys.com. One redirect, no DNS records touched, email left intact.</p></article></div>
-    </section>
+    </main>
   </div>
 
   <div class="statusbar">

@@ -3,28 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://f-keys.com/gonzalgo/generated-proofs/">
+
 <title>What 9,169 machine-generated Lean proofs rest on — gonzalgo</title>
 <meta name="description" content="9,169 AI-generated Lean proofs audited: none rests on an unfinished proof or on the compiler. 92.7% depend on the axiom of choice, but only 6.5% avoidably.">
-<link rel="canonical" href="https://f-keys.com/gonzalgo/generated-proofs/">
-<meta name="robots" content="index, follow">
+<meta name="keywords" content="AI generated proofs, Lean 4, Goedel-Prover, Lean Workbook, Classical.choice, sorry, axiom dependency, formal verification, machine-generated mathematics">
+<meta name="author" content="Vincent Gonzalez">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:site_name" content="F-Keys">
-<meta property="og:title" content="What 9,169 machine-generated Lean proofs rest on — gonzalgo">
-<meta property="og:description" content="9,169 AI-generated Lean proofs audited: none rests on an unfinished proof or on the compiler. 92.7% depend on the axiom of choice, but only 6.5% avoidably.">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:url" content="https://f-keys.com/gonzalgo/generated-proofs/">
-<meta property="og:image" content="https://f-keys.com/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta property="og:title" content="What 9,169 machine-generated Lean proofs rest on">
+<meta property="og:description" content="None rests on an unfinished proof. 92.7% depend on choice; only 6.5% avoidably.">
+<meta property="og:site_name" content="F-Keys">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="What 9,169 machine-generated Lean proofs rest on — gonzalgo">
-<meta name="twitter:description" content="9,169 AI-generated Lean proofs audited: none rests on an unfinished proof or on the compiler. 92.7% depend on the axiom of choice, but only 6.5% avoidably.">
-<meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=0df044cb">
+<meta name="twitter:title" content="What 9,169 machine-generated Lean proofs rest on">
+<meta name="twitter:description" content="None rests on an unfinished proof. 92.7% depend on choice; only 6.5% avoidably.">
+
+<!-- Self-hosted; the generators now emit this too. -->
+<link rel="stylesheet" href="/assets/fonts.css">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -54,32 +53,101 @@
   "abstract": "9,169 machine-generated Lean 4 proofs were audited for what they rest on. None depends on an unfinished proof, on native_decide, or on any axiom beyond propext, Quot.sound and Classical.choice. 92.7% depend on the axiom of choice, of which 86.1% are bound by the statement and only 6.5% are avoidable."
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "What machine-generated Lean proofs rest on",
+  "description": "What a corpus of machine-generated Lean 4 proofs rests on. 9,169 Goedel-Prover proofs of Lean Workbook problems that compile under Lean 4.32, audited for unfinished proofs, compiler-trusted reductions and axiom dependence, with choice dependence split into the part the statement forces and the part the proof adds.",
+  "url": "https://f-keys.com/gonzalgo/generated-proofs/",
+  "version": "2026-08-13",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": [
+    "machine-generated proofs",
+    "AI generated proofs",
+    "Lean 4",
+    "Goedel-Prover",
+    "Lean Workbook",
+    "axiom of choice",
+    "sorry",
+    "native_decide",
+    "formal verification"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent Gonzalez",
+    "identifier": "https://orcid.org/0009-0005-3640-014X"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "F-Keys",
+    "url": "https://f-keys.com"
+  },
+  "isBasedOn": "https://doi.org/10.5281/zenodo.21769846",
+  "identifier": "https://doi.org/10.5281/zenodo.21900625",
+  "isPartOf": {
+    "@type": "DataCatalog",
+    "name": "gonzalgo indexes",
+    "url": "https://f-keys.com/gonzalgo/data/",
+    "identifier": "https://doi.org/10.5281/zenodo.21900625"
+  },
+  "measurementTechnique": "gonzalgo",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://f-keys.com/gonzalgo/generated-proofs/generated-proofs.csv"
+    }
+  ]
+}
+</script>
+
+<style>
+:root { --bg:#0a0e0a; --panel:#111911; --border:#1f351f; --green:#39ff14; --text:#c3dcc3; --dim:#8fae8f; --cyan:#00ffcc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Share Tech Mono',monospace; line-height:1.65; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); pointer-events:none; z-index:9000; }
+nav { position:fixed; top:0; left:0; right:0; z-index:10000; background:rgba(10,14,10,0.95); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'VT323',monospace; font-weight:400; font-size:28px; color:var(--green); letter-spacing:4px; text-decoration:none; }
+nav a { color:var(--dim); text-decoration:none; }
+nav a:hover { color:var(--green); }
+main { max-width:820px; margin:0 auto; padding:7rem 1.5rem 4rem; }
+h1 { font-family:'VT323',monospace; font-weight:400; font-size:clamp(34px,6vw,56px); color:var(--green); letter-spacing:2px; line-height:1.1; }
+.kicker { font-family:'VT323',monospace; font-weight:400; font-size:clamp(18px,3vw,24px); color:var(--cyan); letter-spacing:2px; margin:.6rem 0 1.6rem; }
+h2 { font-family:'VT323',monospace; font-weight:400; font-size:1.6rem; color:var(--green); margin:2.6rem 0 .7rem; letter-spacing:1px; }
+p { margin-bottom:1rem; }
+a { color:var(--green); }
+code { color:var(--cyan); }
+pre { background:#0d120d; border:1px solid var(--border); padding:1.1rem; overflow-x:auto; font-size:.85rem; margin:1.4rem 0; color:var(--text); }
+table { width:100%; border-collapse:collapse; margin:1.4rem 0; font-size:.9rem; }
+td,th { border-bottom:1px solid var(--border); padding:.5rem .4rem; text-align:left; }
+th { color:var(--green); }
+td.n { text-align:right; color:var(--cyan); }
+footer { border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+</style>
 </head>
 <body>
-<div class="window raised">
 
-  <div class="titlebar">
-    <span class="t"><span>What 9,169 machine-generated Lean proofs rest on</span></span>
-    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+<nav>
+  <a href="/" class="logo">F-KEYS</a>
+  <div style="display:flex;gap:1.6rem;font-size:.9rem;">
+    <a href="/gonzalgo/">gonzalgo</a>
+    <a href="/gonzalgo/faq/">FAQ</a>
+    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
   </div>
+</nav>
 
-  <nav class="menubar"><a href="/"><u>F</u>ile</a><a href="/log/"><u>E</u>dit</a><a href="/status/"><u>V</u>iew</a><a href="/papers/"><u>I</u>nsert</a><a href="/gonzalgo/data/"><u>D</u>ata</a><a href="/about.html"><u>H</u>elp</a></nav>
+<main>
 
-  <div class="toolbar groove">
-    <a class="tool" href="/research.html">&#8592; Back</a>
-    <span class="tool off">Forward &#8594;</span>
-    <a class="tool" href="/research.html">&#8593; Up</a>
-    <span class="sep"></span>
-    <a class="tool" href="/">Home</a>
-    <a class="tool" href="/search/">Find</a>
-    <a class="tool hide-xs" href="/status/">Status</a>
-    <a class="tool hide-xs" href="/log/">Log</a>
-  </div>
-
-
-  <div class="panes solo">
-    <section class="content sunken app-excel">
-<div class="doc">
 <h1>What 9,169 machine-generated Lean proofs rest on</h1>
 <p class="kicker">none of them rests on an unfinished proof</p>
 
@@ -123,7 +191,7 @@ axioms beyond propext, Quot.sound, Classical.choice        0     0.0%</pre>
 
 <p>A tactic, mostly. <code>omega</code> supplies the <code>Decidable</code> argument of six helper lemmas as a literal <code>Classical.propDecidable</code> and never attempts instance synthesis. On <code>Nat</code> and <code>Int</code> the constructive instance exists and is axiom-free, so an otherwise constructive proof comes out classical. It reproduces in one line with no imports.</p>
 
-<p>This was reported upstream and closed as completed, with the reply that avoiding choice is a deliberate non-goal of Lean core. The behavior is within Lean&#x27;s stated design. It still propagates into every proof a model generates with that tactic.</p>
+<p>This was reported upstream and closed as completed, with the reply that avoiding choice is a deliberate non-goal of Lean core. The behaviour is within Lean&#x27;s stated design. It still propagates into every proof a model generates with that tactic.</p>
 
 <h2>Why the whole corpus, and not a sample</h2>
 
@@ -166,7 +234,7 @@ The table above, machine-readable:
 <a href="generated-proofs.csv">generated-proofs.csv</a> &middot; CC-BY-4.0 &middot;
 version 2026-08-13
 </p>
-<p class="series">
+<p style="color:var(--dim);font-size:.9rem;border:1px solid var(--border);background:var(--panel);padding:.7rem .9rem;">
 One of the <a href="/gonzalgo/data/">gonzalgo indexes</a> &mdash; standing
 measurements of what formal libraries rest on. The per-proof results behind
 these totals are not published yet; releasing them means re-running the audit,
@@ -180,18 +248,7 @@ and a summary is not a substitute for the rows.
   <a href="https://doi.org/10.5281/zenodo.21853489">attribution paper</a><br>
   Vince Gonzalez · <a href="https://orcid.org/0009-0005-3640-014X">ORCID 0009-0005-3640-014X</a>
 </footer>
-</div>
-    </section>
-  </div>
-  <div class="sheettabs"><span class="tab on">Measurements</span><span class="tab">Method</span><span class="tab">Sources</span></div>
 
-
-  <div class="statusbar">
-    <span class="cell groove">measurements</span>
-    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
-    <span class="cell groove">F-Keys</span>
-  </div>
-
-</div>
+</main>
 </body>
 </html>

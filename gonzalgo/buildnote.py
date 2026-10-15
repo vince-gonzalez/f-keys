@@ -221,8 +221,8 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="None rests on an unfinished proof. 92.7% depend on choice; only 6.5% avoidably.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- Self-hosted; see indexlib.py. Both families are in /assets/fonts.css. -->
+<link rel="stylesheet" href="/assets/fonts.css">
 
 <script type="application/ld+json">
 {ld}
@@ -250,6 +250,16 @@ td,th {{ border-bottom:1px solid var(--border); padding:.5rem .4rem; text-align:
 th {{ color:var(--green); }}
 td.n {{ text-align:right; color:var(--cyan); }}
 footer {{ border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }}
+
+/* Visible focus; this template had none. --green measures 14.34:1 on --bg
+   and 13.23:1 on --panel, against the 3:1 that 1.4.11 asks for. */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible,
+[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+@supports not selector(:focus-visible) {
+  a:focus, button:focus, input:focus, select:focus, textarea:focus,
+  summary:focus, [tabindex]:focus { outline:2px solid var(--green); outline-offset:2px; }
+}
 </style>
 </head>
 <body>
