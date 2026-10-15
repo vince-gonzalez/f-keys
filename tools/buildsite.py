@@ -206,7 +206,7 @@ PAGES = {
        "a report, per file and per rule: the message that broke each rule, a "
        "rewrite that would have held, and a flag on any two rules that "
        "contradict each other.",
-  cta=[("Order a check", "/promptcheck/order/")],
+  cta=[("Order a check", "/promptcheck/order/"), ("Grade one prompt free", "https://coldhat.f-keys.com/audit")],
   herometa="<b>Service</b> &middot; your prompt is read and discarded, never "
            "stored &middot; graded per file, per rule &middot; report returned to you",
   steps=[("Send a prompt, a folder, or a repo",
