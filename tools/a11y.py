@@ -29,6 +29,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 # criterion id -> (level, human name)
 CRITERIA = {
     "1.1.1-img":     ("A",  "Non-text content: every img has an alt attribute"),
+    "1.1.1-altquality": ("A",  "Non-text content: alt describes the image, not labels it"),
     "1.1.1-svg":     ("A",  "Non-text content: inline svg used as an image is named"),
     "1.1.1-canvas":  ("A",  "Non-text content: canvas has a text alternative"),
     "1.3.1-labels":  ("A",  "Info and relationships: form controls have labels"),
@@ -87,6 +88,43 @@ def check(html, label):
     # 1.1.1 img alt
     for tag in VOID_ALT.findall(html):
         add("1.1.1-img", "img without alt: " + re.sub(r"\s+", " ", tag)[:90])
+
+    # 1.1.1 alt QUALITY, which is the check that actually mattered.
+    #
+    # Presence passed on every page while twelve screenshots said "Key-J
+    # running." and one said "QR loading...". Those are labels and states,
+    # not descriptions, and on a screenshot the picture IS the content - so
+    # a blind reader learned only that an image existed. A gate that proves
+    # the attribute is spelled correctly and never reads it is theater.
+    for tag in IMGS.findall(html):
+        am = re.search(r'\balt\s*=\s*(["\'])(.*?)\1', tag, re.S)
+        if not am:
+            continue
+        alt = re.sub(r"\s+", " ", am.group(2)).strip()
+        if not alt:
+            continue          # decorative; empty alt is the correct answer
+        sm = re.search(r'\bsrc\s*=\s*(["\'])(.*?)\1', tag, re.S)
+        src = (sm.group(2) if sm else "")
+        low_alt = alt.lower()
+
+        if re.search(r"\.(png|jpe?g|gif|svg|webp)$", low_alt):
+            add("1.1.1-altquality", 'alt is a filename: "%s"' % alt[:50])
+        # The trailing class is [\s.…]* and not \.? because the real
+        # offender was "QR loading..." - three dots, so a single optional
+        # period did not reach the end of the string and the check stayed
+        # silent on the one value that prompted writing it.
+        elif re.search(r"\b(loading|placeholder|todo|tbd|image|img|photo|graphic)"
+                       r"\b[\s.…]*$", low_alt):
+            add("1.1.1-altquality",
+                'alt describes a state or says nothing: "%s"' % alt[:50])
+        elif re.fullmatch(r"[\w\s'&.-]{1,40}\s+(running|screenshot|logo|icon)\.?",
+                          low_alt):
+            add("1.1.1-altquality",
+                'alt labels the image instead of describing it: "%s"' % alt[:50])
+        elif re.search(r"(shot|screenshot|capture)", src, re.I) and len(alt) < 60:
+            add("1.1.1-altquality",
+                'screenshot with only %d characters of alt: "%s"'
+                % (len(alt), alt[:50]))
 
     # 1.1.1 canvas
     for tag in re.findall(r"<canvas\b[^>]*>(.*?)</canvas>", html, re.S | re.I):

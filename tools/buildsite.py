@@ -3784,6 +3784,101 @@ def _shot_dates():
 SHOT_DATES = _shot_dates()
 
 
+# Written 2026-10-15 by opening each PNG. A screenshot is the one thing on
+# a product page whose entire content is the picture, so "Key-J running."
+# told a blind reader only that a screenshot existed. Live counters are
+# left out on purpose: they were true when the shot was taken, and alt
+# text that carries a stale number stops being a description and becomes
+# a claim.
+SHOT_ALT = {
+ "opticquiz":
+  "Dark homepage headed SEE COLOR, CHECK COLOR, CORRECT COLOR, the third "
+  "line running through a red-to-pink rainbow. Buttons for the color tools "
+  "and a vision test, a row of color swatches beneath, and a top menu of "
+  "color tools, vision tests, developers and research.",
+ "keyj":
+  "A dark three-column studio. Down the left each computer key is mapped to "
+  "a note and its frequency, Q to C3 at 130.8 hertz and W to C sharp 3 at "
+  "138.6. In the middle a piano keyboard with the triggering letter printed "
+  "on every key, above an empty staff. Down the right, play styles from "
+  "staccato to legato, sliders for attack, release, volume, reverb and "
+  "pitch, and a waveform picker. Record, play and export sit along the top.",
+ "trailer-load":
+  "A cream homepage headed LOAD THE TRAILER, LOCK IT IN, over a line "
+  "describing warehouse loading practice that plays like a game, free in "
+  "the browser with no download. Three buttons: play free with no login, a "
+  "daily challenge, and a page for schools and employers. A grid of live "
+  "counters runs along the bottom.",
+ "poticas":
+  "A warm cream page headed Life is sweeter with Potica, the word sweeter "
+  "set in italic script, above the line that your grandmother's recipe "
+  "deserves to live forever. A drawing of a cut slice shows the dark spiral "
+  "running through the roll. The menu offers learn, shop, community and "
+  "about.",
+ "qv":
+  "A dark ballot list under the heading QV, QikVote, with the line: live "
+  "ballots, one tap, one vote, live needle. A row of topic tags filters the "
+  "questions. Each question sits in its own card with two answer buttons "
+  "side by side and a bar beneath splitting blue against red to show the "
+  "running count.",
+ "pixelstaff":
+  "A dark purple composer titled 8-BIT COMPOSER, NO TIME SIGNATURES, "
+  "INFINITE CANVAS. A vertical piano keyboard runs down the left edge "
+  "marked C6, C7 and C8, beside a grid canvas that is currently empty. The "
+  "toolbar carries play, stop, rewind, draw and erase, a square-wave "
+  "selector, tempo, note length and volume, and buttons to export a WAV or "
+  "a ringtone.",
+ "remapwrap":
+  "A desktop app in Windows chrome. A banner across the top says to scan "
+  "the QR code with a phone camera and that there is nothing to install. "
+  "The left panel handles pairing, profiles and pages; the center is a "
+  "canvas of colored tiles reading mute mic, be right back, live, clip "
+  "that, Spotify, ad break, mic gain, master and screenshot, each labeled "
+  "with the shortcut it sends; the right panel edits whichever key is "
+  "selected.",
+ "5best2buy":
+  "A dark storefront. Under the 5best2buy wordmark and a shopping-bag mark "
+  "sits the line: the five best of everything worth eating, from the "
+  "independent makers who make it. A green panel offers recipes with the "
+  "sourcing built in, and a reverse lookup that takes what is already in "
+  "your fridge and says what to cook. A bar along the bottom links home, "
+  "shelves, recipes, what to eat and who owns.",
+ "modulign":
+  "A near-black specification page headed A Dimensional Address Grammar for "
+  "Observable Reality, the last two words in italic serif. Below the "
+  "buttons for the specification and the documents, one address string is "
+  "printed in full in monospace and color-coded, with a legend naming each "
+  "segment: namespace, domain, realm, locus, node, scale, medium, observer "
+  "and activity.",
+ "tipstreams":
+  "A dark page headed Get tipped directly, explaining that a wallet or "
+  "payment link you already own becomes a branded QR code, a permanent tip "
+  "page and an OBS overlay, and that the service never touches the money. "
+  "Three numbered cards follow: the QR code as fastest, the tip page as "
+  "recommended, and the overlay for on stream.",
+ "fundoge":
+  "A dark blue page headed The mini-golf game you build yourself, "
+  "describing a free isometric mini-golf game that runs in the browser with "
+  "nine hand-made holes, a level editor and links to share them. Beside the "
+  "text, a green inset shows one hole being played from above, with par and "
+  "hole number in the corner.",
+}
+
+
+def shot_alt(slug, title):
+    """A description of the picture, or an honest fallback.
+
+    The fallback says a screenshot exists and nothing more, which is what
+    the old alt said for every product. It is reached only when a new
+    product ships a shot before anyone has looked at it, and the a11y gate
+    is what should catch that.
+    """
+    text = SHOT_ALT.get(slug)
+    if text:
+        return text
+    return "Screenshot of %s. No description has been written for this one yet." % title
+
+
 def product_shot(slug):
     """A picture of the product running, if one has been captured.
 
@@ -4508,11 +4603,11 @@ def main():
             # for the layout of new markup cannot depend on new CSS.
             figure = (
                 '<figure class="shot">'
-                '<img src="{}" alt="{} running in a browser." '
+                '<img src="{}" alt="{}" '
                 'width="800" style="max-width:100%;height:auto" '
                 'loading="lazy" decoding="async">'
                 '<figcaption>{}{}</figcaption></figure>').format(
-                    shot, esc(page["title"]),
+                    shot, esc(shot_alt(slug, page["title"])),
                     esc(where) if where else esc(page["title"]),
                     ", " + esc(when) if when else "")
 
@@ -4523,11 +4618,12 @@ def main():
             if shot:
                 when = SHOT_DATES.get(slug, "")
                 wide = ('<figure class="shotwide">'
-                        '<img src="{}" alt="{} running." width="800" '
+                        '<img src="{}" alt="{}" width="800" '
                         'style="max-width:100%;height:auto" loading="lazy" '
                         'decoding="async"><figcaption>{}{}</figcaption>'
                         '</figure>').format(
-                            shot, esc(page["title"]), esc(page["title"]),
+                            shot, esc(shot_alt(slug, page["title"])),
+                            esc(page["title"]),
                             ", " + esc(when) if when else "")
             doc = ('<div class="doc">{}{}{}{}{}{}'
                    '<h2>Specifications</h2><table class="facts">{}</table>'
