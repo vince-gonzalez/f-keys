@@ -4702,10 +4702,16 @@ def main():
     import buildpapers
     buildpapers.main()
 
-    # Regenerate the sitemap and its per-page dates in the same build, for the
-    # same reason buildpapers runs here: pages changed, and the "every page is
-    # listed" gate goes red if a second command gets forgotten. Nobody runs the
-    # second command.
+    # Every generator with a --check freshness gate in CI runs here, in the one
+    # build, so a changed page can never leave a stale artifact and a red gate
+    # behind for a second command nobody runs. buildmd mirrors every built page
+    # as markdown, so it reads the HTML after it is written; buildapi writes
+    # openapi.json from the files that exist; buildsitemap indexes every URL and
+    # goes last.
+    import buildmd
+    buildmd.main()
+    import buildapi
+    buildapi.main()
     import buildsitemap
     buildsitemap.build()
 
