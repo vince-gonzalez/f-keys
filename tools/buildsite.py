@@ -4702,6 +4702,13 @@ def main():
     import buildpapers
     buildpapers.main()
 
+    # Regenerate the sitemap and its per-page dates in the same build, for the
+    # same reason buildpapers runs here: pages changed, and the "every page is
+    # listed" gate goes red if a second command gets forgotten. Nobody runs the
+    # second command.
+    import buildsitemap
+    buildsitemap.build()
+
     print(f"buildsite: {len(written)} pages, {readmes} READMEs")
     for n, _ in written:
         print("  ", n)
