@@ -27,7 +27,7 @@ lands, and nothing in an ordinary prompt tells the assistant so.
 
 It is also an MCP server, listed on the official MCP Registry and on
 Smithery as of today, so a client that supports connectors can wear a hat by
-name without a browser. Free to use; the public hats and the measured results are [on GitHub](https://github.com/vince-gonzalez/coldhat).
+name without a browser. The public hats and the measured results are [on GitHub](https://github.com/vince-gonzalez/coldhat).
 
 ## 2026-09-29
 
