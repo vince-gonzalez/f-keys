@@ -122,17 +122,21 @@
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
-<div class="doc"><div class="hero"><h1>Prompt Check</h1><p class="lede">A linter grades a prompt by reading it. We grade it by running it. For every rule in your system prompt, we send a message built to break that rule to a live model, and judge the reply kept or broken. You get a report, per file and per rule: the message that broke each rule, a rewrite that would have held, and a flag on any two rules that contradict each other.</p><div class="herocta"><a class="btn default" href="/promptcheck/order/">Order a check</a><a class="btn" href="https://coldhat.f-keys.com/audit" rel="noopener">Grade one prompt free</a></div><p class="meta"><b>Service</b> &middot; your prompt is read and discarded, never stored &middot; graded per file, per rule &middot; report returned to you</p></div>
-<p>A system prompt is a contract between its author and the model. Most tools
-check whether the contract reads well. Prompt Check tests whether the model
-keeps it.</p>
-<p>For every rule, we write a user message built to break that one rule, send
-it to a live model with your prompt in force, and judge the reply. A rule that
-survives a message designed to break it is a rule you can rely on. A rule that
-does not is one you would rather learn about here than in production.</p>
-<p>The report names the rules that broke, the exact message that broke each,
-a rewrite that would have held, and any two rules that cannot both be followed.
-Send one prompt or a whole library.</p>
+<div class="doc"><div class="hero"><h1>Prompt Check</h1><p class="lede">A linter grades a prompt by reading it. We grade it by running it. For every rule in your system prompt, we send a message built to break that rule to a live model, and judge the reply kept or broken. You get a report, per file and per rule: the message that broke each rule, a rewrite that would have held, and a flag on any two rules that contradict each other.</p><div class="herocta"><a class="btn default" href="/promptcheck/order/">Order a check</a><a class="btn" href="https://coldhat.f-keys.com/audit" rel="noopener">Grade one prompt free</a><a class="btn" href="/contact.html">Teams and at-scale</a></div><p class="meta"><b>Service</b> &middot; your prompt is read and discarded, never stored &middot; graded per file, per rule &middot; report returned to you</p></div>
+<p>A static checker tells you a prompt reads clean. It cannot tell you which
+rules a model ignores the moment a user pushes back. We have graded prompts an
+A, then watched a model break them on the first message. That gap, between how a
+prompt reads and how it behaves, is the part that costs you in production, and
+it is the part worth paying to find.</p>
+<p>The tools that actually run a prompt against a model are a free kit you wire
+up yourself, or a red-team engagement that starts in the thousands. This is the
+one in between: we run it, you get the report.</p>
+<p>For every rule, we write a user message built to break that one rule, send it
+to a live model with your prompt in force, and judge the reply. A rule that
+survives a message designed to break it is a rule you can rely on. The report
+names the rules that broke, the exact message that broke each, a rewrite that
+would have held, and any two rules that cannot both be followed. Send one prompt
+or a whole library.</p>
 <h2>How it works</h2><ol class="steps"><li><b>Send a prompt, a folder, or a repo</b><span>A system prompt, a CLAUDE.md, an AGENTS.md, or a whole repository of agent rules. One file or a library.</span></li><li><b>We probe every rule</b><span>One message per rule, written to break that rule, sent to a live model in a fresh conversation. Each reply is judged against the rule it was meant to break.</span></li><li><b>You get the report and the fixes</b><span>Which rules held, which broke, the exact message that broke each one, a rewrite that would have held, and any two rules that cannot both be followed.</span></li></ol><h2>What the report tells you</h2><div class="featgrid"><div class="feat"><b>A static grade is not enough</b><span>A prompt that reads clean can still break under pressure. We have graded prompts an A that broke a rule on the first probe.</span></div><div class="feat"><b>The exact message that broke each rule</b><span>Not a warning that a rule is weak &mdash; the real user message that got a live model to ignore it.</span></div><div class="feat"><b>A rewrite that holds</b><span>For every rule that broke, a rewrite that closes the loophole, and a refusal to harden a rule when doing so would contradict another.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>What</th><td>A managed prompt-integrity check, run for you</td></tr><tr><th>Your prompt</th><td>Read in memory, never stored</td></tr><tr><th>Graded</th><td>Per file and per rule, against a live model</td></tr><tr><th>You receive</th><td>A report: breaks, rewrites, and contradictions named</td></tr><tr><th>Status</th><td>Open for early orders</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Do you store my prompt?</dt><dd>No. It is read in memory, graded, and discarded. Nothing is logged and there is no account to create.</dd><dt>Which model do you run it against?</dt><dd>A current frontier model. If your prompt will run on a specific one, name it and we target that model so the result reflects where it will actually be deployed.</dd><dt>Can you check a whole repository?</dt><dd>Yes. A single prompt, or a folder of system prompts, CLAUDE.md and agent rule files, graded into one report.</dd><dt>What is not claimed?</dt><dd>One probe per rule is a screen, not a rate: it shows a rule can break, not how often. The report carries every probe and reply so you read the evidence rather than trust a number.</dd></dl></div>
     </main>
   </div>

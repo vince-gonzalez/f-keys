@@ -206,7 +206,7 @@ PAGES = {
        "a report, per file and per rule: the message that broke each rule, a "
        "rewrite that would have held, and a flag on any two rules that "
        "contradict each other.",
-  cta=[("Order a check", "/promptcheck/order/"), ("Grade one prompt free", "https://coldhat.f-keys.com/audit")],
+  cta=[("Order a check", "/promptcheck/order/"), ("Grade one prompt free", "https://coldhat.f-keys.com/audit"), ("Teams and at-scale", "/contact.html")],
   herometa="<b>Service</b> &middot; your prompt is read and discarded, never "
            "stored &middot; graded per file, per rule &middot; report returned to you",
   steps=[("Send a prompt, a folder, or a repo",
@@ -251,16 +251,20 @@ PAGES = {
          ("You receive", "A report: breaks, rewrites, and contradictions named"),
          ("Status", "Open for early orders")],
   body="""
-<p>A system prompt is a contract between its author and the model. Most tools
-check whether the contract reads well. Prompt Check tests whether the model
-keeps it.</p>
-<p>For every rule, we write a user message built to break that one rule, send
-it to a live model with your prompt in force, and judge the reply. A rule that
-survives a message designed to break it is a rule you can rely on. A rule that
-does not is one you would rather learn about here than in production.</p>
-<p>The report names the rules that broke, the exact message that broke each,
-a rewrite that would have held, and any two rules that cannot both be followed.
-Send one prompt or a whole library.</p>
+<p>A static checker tells you a prompt reads clean. It cannot tell you which
+rules a model ignores the moment a user pushes back. We have graded prompts an
+A, then watched a model break them on the first message. That gap, between how a
+prompt reads and how it behaves, is the part that costs you in production, and
+it is the part worth paying to find.</p>
+<p>The tools that actually run a prompt against a model are a free kit you wire
+up yourself, or a red-team engagement that starts in the thousands. This is the
+one in between: we run it, you get the report.</p>
+<p>For every rule, we write a user message built to break that one rule, send it
+to a live model with your prompt in force, and judge the reply. A rule that
+survives a message designed to break it is a rule you can rely on. The report
+names the rules that broke, the exact message that broke each, a rewrite that
+would have held, and any two rules that cannot both be followed. Send one prompt
+or a whole library.</p>
 """,
 ),
 "d1bench": dict(
@@ -4713,7 +4717,7 @@ def main():
     import buildapi
     buildapi.main()
     import buildsitemap
-    buildsitemap.build()
+    buildsitemap.main()  # main() writes sitemap.xml AND sitemap-dates.json; build() only returns them
 
     print(f"buildsite: {len(written)} pages, {readmes} READMEs")
     for n, _ in written:
