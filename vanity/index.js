@@ -4,15 +4,15 @@ f-keys-vanity - a product name that is also an address
 F-Keys | www.f-keys.com
 ------------------------------------------------------------
 WHY THIS EXISTS
-A product is easier to say than a path. "saydo dot f-keys dot
-com" survives being read out; "f-keys.com slash saydo" does
+A product is easier to say than a path. "keyj dot f-keys dot
+com" survives being read out; "f-keys.com slash keyj" does
 not. So each product answers to its own name.
 
 What it is NOT is a second site. Every vanity host redirects,
 permanently, to the one canonical page:
 
-    saydo.f-keys.com/anything?q=1
-      -> https://f-keys.com/saydo/anything?q=1
+    keyj.f-keys.com/anything?q=1
+      -> https://f-keys.com/keyj/anything?q=1
 
 That direction matters. A subdomain that SERVED the page
 would be a second copy of it, and search engines treat a
@@ -30,8 +30,8 @@ WORKFLOW STACK
   2. fetch()    - 301 to the product page, path and query kept
 
 Deploy:  cd vanity && npx wrangler deploy
-Check:   curl -sSI https://saydo.f-keys.com/
-         -> location: https://f-keys.com/saydo/
+Check:   curl -sSI https://keyj.f-keys.com/
+         -> location: https://f-keys.com/keyj/
 ============================================================
 */
 
@@ -47,7 +47,7 @@ var RESERVED = {
   "pay.f-keys.com": true, "email.f-keys.com": true
 };
 
-/* "saydo.f-keys.com" -> "saydo". Everything this Worker is
+/* "keyj.f-keys.com" ->. Everything this Worker is
    routed to is a *.f-keys.com host, so the first label is the
    product slug and the rest is the zone. */
 function label(host) {
@@ -72,8 +72,8 @@ export default {
     }
 
     /* url.pathname always begins with "/", so trimming the leading
-       slash keeps "/saydo/" + "" for a bare host and
-       "/saydo/" + "manual/" for a deeper one. */
+       slash keeps "/keyj/" + "" for a bare host and
+       "/keyj/" + "manual/" for a deeper one. */
     var rest = url.pathname.slice(1);
     var target = CANONICAL + "/" + slug + "/" + rest + url.search;
 

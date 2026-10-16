@@ -141,17 +141,18 @@ PYPI_PACKAGES = ["gonzalgo", "opticquiz-cvd", "moonbeam-miner", "plumhud",
                  # like a package that does not exist.
                  #
                  # NOT "warrant": that name on PyPI belongs to Brian
-                 # Jinwright at capless.io. SayDo was renamed from
-                 # WARRANT and the coincidence is not ownership.
                  "authorecon", "axsent",
                  # loadbearing 0.2.0 was live and untracked too.
                  "loadbearing",
-                 # 2026-09-04. saydo 0.1.1, the fifth time. Two names that
-                 # look like his and are not, so that neither gets added
-                 # here by pattern-matching later: "apriori" on PyPI is
-                 # Lorenzo Piu's, and "moonbeam" is somebody else's - his
-                 # is "moonbeam-miner", which is already above.
-                 "saydo"]
+                 # Two names that look like his and are not, so that
+                 # neither gets added here by pattern-matching later:
+                 # "apriori" on PyPI is Lorenzo Piu's, and "moonbeam" is
+                 # somebody else's - his is "moonbeam-miner", above.
+                 #
+                 # One package was removed from this list 2026-10-16 at his
+                 # instruction. It still exists on PyPI; this only stops the
+                 # nightly snapshot pulling its numbers back onto the site.
+                 ]
 
 # Repositories are owner-qualified now. gonzalgo moved to the personal
 # account and only kept reporting because GitHub redirects transferred
@@ -171,7 +172,7 @@ GITHUB_REPOS = [
     "vince-gonzalez/openapi-drift", "vince-gonzalez/changewatch",
     "vince-gonzalez/typefloor", "vince-gonzalez/contrast-gate",
     "vince-gonzalez/deadname-gate", "vince-gonzalez/cvd-palette",
-    "vince-gonzalez/saydo", "vince-gonzalez/axsent",
+    "vince-gonzalez/axsent",
     # Six public non-fork repositories were absent from this list, so the
     # repository count on the page was 29 against 35 on the account. The
     # last of them is the profile README, which is a public repository

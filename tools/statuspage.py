@@ -188,13 +188,37 @@ def dig(obj, path):
     return cur
 
 
+# Names this page does not print, whatever a snapshot contains.
+#
+# The snapshots under status/data/ are dated measurements and are left
+# exactly as they were taken - rewriting an archive to say something that
+# was not true on the day is worse than the thing being fixed. So the
+# filter lives at RENDER time instead: the record keeps its integrity and
+# the public page never carries the name, no matter which snapshot it is
+# pointed at or how far back somebody scrolls.
+#
+# Removing a name from snapshot.py only stops tomorrow's collection. This
+# is what covers the 46 snapshots already on disk.
+WITHHELD = ("saydo", "say-do")
+
+
+def withheld(row):
+    for field in ("package", "repo", "name", "slug", "url"):
+        v = row.get(field)
+        if isinstance(v, str) and any(w in v.lower() for w in WITHHELD):
+            return True
+    return False
+
+
 def rows_for(snap, source):
     """`packages` is the one source that is assembled rather than read:
     npm and PyPI are two lists of the same shape and one table."""
     if source == "packages":
-        return (snap.get("npm") or []) + (snap.get("pypi") or [])
-    got = dig(snap, source)
-    return got if isinstance(got, list) else []
+        rows = (snap.get("npm") or []) + (snap.get("pypi") or [])
+    else:
+        got = dig(snap, source)
+        rows = got if isinstance(got, list) else []
+    return [r for r in rows if isinstance(r, dict) and not withheld(r)]
 
 
 def sort_rows(section_id, rows):

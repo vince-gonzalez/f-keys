@@ -120,14 +120,6 @@
   "group": "tools"
  },
  {
-  "name": "SayDo",
-  "kind": "Standard + harness",
-  "status": "Ready",
-  "text": "Prove a tool behaves as it says. A signed contract, a conformance harness, a receipt anyone can check.",
-  "href": "/saydo/",
-  "group": "tools"
- },
- {
   "name": "coldHat",
   "kind": "Web tool",
   "status": "Ready",

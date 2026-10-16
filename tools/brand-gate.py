@@ -48,8 +48,15 @@ FORBIDDEN = re.compile(r"zengine", re.IGNORECASE)
 # Each entry: (pattern, why it is allowed to contain the brand word).
 # Order does not matter; every pattern is stripped before the check.
 ALLOWED = [
-    (re.compile(r"github\.com/zengineco\b", re.I),
-     "GitHub org URL - renaming breaks every repo and Pages link"),
+    # REMOVED 2026-10-16. This read:
+    #   github.com/zengineco  "renaming breaks every repo and Pages link"
+    # That was true before the migration. It has been false since: the
+    # account IS renamed, GitHub redirects the old path, and the redirect
+    # only lasts until somebody else claims the name. While this entry
+    # stood, the gate reported "clean - no retired brand names" on a
+    # published paper whose data-availability statement cited the retired
+    # account. A gate that answers the question wrongly is worse than no
+    # gate, because the answer gets believed and repeated.
     (re.compile(r"zengineco\.github\.io", re.I),
      "live GitHub Pages origins (QV, WikiPolish) linked from f-keys.com"),
     (re.compile(r"\bzengineco/[\w.\-]+", re.I),

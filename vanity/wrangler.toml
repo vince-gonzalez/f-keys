@@ -9,7 +9,6 @@
 #   2. a route in this list
 #
 # Deploy:  cd vanity && npx wrangler deploy
-# Check:   curl -sSI https://saydo.f-keys.com/
 # ============================================================
 
 name = "f-keys-vanity"
@@ -17,7 +16,6 @@ main = "index.js"
 compatibility_date = "2026-08-21"
 
 routes = [
-  { pattern = "saydo.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "tag.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "tagpro.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "keyj.f-keys.com/*", zone_name = "f-keys.com" },
