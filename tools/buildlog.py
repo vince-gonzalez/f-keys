@@ -124,7 +124,10 @@ def render(entries):
     return B.shell("Log \u2014 F-Keys", "F-Keys\\Log", doc,
                    "{} entr{}".format(len(entries), "y" if len(entries) == 1 else "ies"),
                    description="A working record of what gets built at F-Keys.",
-                   canonical="https://f-keys.com/log/")
+                   canonical="https://f-keys.com/log/",
+                   # The window follows what the tree node declares this
+                   # is, so the two cannot drift apart.
+                   app=B.NODE_APP[B.node_kind("/log/")])
 
 
 def main():

@@ -3417,13 +3417,56 @@ specification.</p>
 </div>
 """
 
-EXTRA_NODES = [("/shop/", "Shop"), ("/intake/", "Websites"), ("/audit/", "Site audit"),
-               ("/search/", "Find"),
-               ("/about.html", "About"), ("/cv/", "CV"),
-               ("/writing/", "Writing"), ("/stack/", "Stack"),
-               ("/Docs.html", "Docs"), ("/developers.html", "Developers"),
-               ("/log/", "Log"), ("/status/", "Status"), ("/papers/", "Papers"),
-               ("/contact.html", "Contact"), ("/privacy.html", "Privacy")]
+# (href, label, kind). KIND IS DECLARED, NOT GUESSED, and everything else
+# follows from it: the tree icon, and which window the page opens in.
+#
+# The tree used to give all fifteen of these the same scroll glyph, which
+# made the shell tell a lie it is specifically good at avoiding. Ten of
+# them list many things - Status carries 125 rows, Docs 54, Find 52,
+# Developers 41, Writing 28 - and five are a single piece of prose. A file
+# manager that draws a folder and a document identically is just a menu
+# with a border on it.
+#
+# Declared once here rather than inferred from the built markup, because
+# whether a thing IS a folder is a fact about the thing. Inferring it by
+# counting <tr> elements would make the icon change when somebody edits a
+# table, which is the kind of cleverness that is wrong quietly. The gate
+# below refuses a node that does not say which it is, so a new entry
+# cannot be added without the question being answered.
+FOLDER, DOCUMENT = "folder", "document"
+
+EXTRA_NODES = [("/shop/", "Shop", FOLDER),
+               ("/intake/", "Websites", FOLDER),
+               ("/audit/", "Site audit", FOLDER),
+               ("/search/", "Find", FOLDER),
+               ("/about.html", "About", DOCUMENT),
+               ("/cv/", "CV", FOLDER),
+               ("/writing/", "Writing", FOLDER),
+               ("/stack/", "Stack", DOCUMENT),
+               ("/Docs.html", "Docs", FOLDER),
+               ("/developers.html", "Developers", FOLDER),
+               ("/log/", "Log", DOCUMENT),
+               ("/status/", "Status", FOLDER),
+               ("/papers/", "Papers", FOLDER),
+               ("/contact.html", "Contact", DOCUMENT),
+               ("/privacy.html", "Privacy", DOCUMENT)]
+
+# A folder opens in Explorer and a document opens in WordPad. One lookup,
+# so no page picks its own window and none of them can disagree.
+NODE_APP = {FOLDER: "explorer", DOCUMENT: "wordpad"}
+NODE_ICON = {FOLDER: "&#128193;", DOCUMENT: "&#128220;"}
+
+
+def node_kind(href):
+    """The declared kind for a path, or None if it is not a tree node."""
+    for h, _label, kind in EXTRA_NODES:
+        if h == href:
+            return kind
+    return None
+
+
+assert all(len(n) == 3 and n[2] in (FOLDER, DOCUMENT) for n in EXTRA_NODES), (
+    "every EXTRA_NODES entry must declare FOLDER or DOCUMENT")
 
 # ── the identity the machines read ───────────────────────────
 # An agent asked what F-Keys is and had to assemble the answer from eight
@@ -3937,8 +3980,10 @@ def tree(active_cat=None, active_slug=None):
                            f'{type_icon(_t)}</span>{esc(name)}</a></li>')
             out.append('</ul>')
         out.append('</li>')
-    for href, label in EXTRA_NODES:
-        out.append(f'<li><a href="{esc(href)}"><span class="ic">&#128220;</span>{esc(label)}</a></li>')
+    for href, label, kind in EXTRA_NODES:
+        out.append(f'<li><a href="{esc(href)}">'
+                   f'<span class="ic" aria-hidden="true">{NODE_ICON[kind]}'
+                   f'</span>{esc(label)}</a></li>')
     out.append('</ul></li></ul>')
     return "\n".join(out)
 
@@ -4330,13 +4375,15 @@ def main():
         description=counted(
             "I'm Vince Gonzalez. I have %%LIVE%% live "
             "products and fifty-six deposited works."),
-        canonical="https://f-keys.com/about.html", ld=organization())))
+        canonical="https://f-keys.com/about.html", ld=organization(),
+        app=NODE_APP[node_kind("/about.html")])))
 
     written.append(("contact.html", shell(
         "Contact \u2014 F-Keys", "F-Keys\\Contact", CONTACT_DOC, "1 item",
         description="Reach F-Keys Creative LLC: email, the Florida filing, the "
                     "principal address, and what is worth writing about.",
-        canonical="https://f-keys.com/contact.html", ld=organization())))
+        canonical="https://f-keys.com/contact.html", ld=organization(),
+        app=NODE_APP[node_kind("/contact.html")])))
 
     written.append(("developers.html", shell(
         "F-Keys Developer Resources \u2014 API, CLI, and published data",
@@ -4388,7 +4435,8 @@ def main():
         "Privacy \u2014 F-Keys", "F-Keys\\Privacy", PRIVACY_DOC, "1 item",
         description="No advertising, no analytics, no cookies and no accounts. "
                     "What the servers log anyway, and the one third-party request.",
-        canonical="https://f-keys.com/privacy.html")))
+        canonical="https://f-keys.com/privacy.html",
+        app=NODE_APP[node_kind("/privacy.html")])))
 
     # GitHub Pages serves this file with a real 404 status. It is excluded
     # from the index because a soft 404 in search results is worse than no

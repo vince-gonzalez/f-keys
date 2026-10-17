@@ -1026,9 +1026,58 @@ def stylesheet_fingerprint(pages):
              .format(len(where), ver, want, ", ".join(sorted(where)[:3])))
 
 
+def tree_nodes_open_in_the_right_window():
+    """A folder opens in Explorer and a document opens in WordPad.
+
+    EXTRA_NODES declares which each tree node is, and that declaration is
+    what the icon is drawn from. If the page itself then opens in the
+    other window, the shell is telling two different stories about the
+    same thing - a folder glyph in the tree and a document window when
+    you click it - and the whole point of the interface is that it does
+    not do that.
+
+    The declaration is the authority here, not the page. If this fails,
+    the page is wrong unless the thing genuinely changed kind, in which
+    case change the kind.
+
+    Known exception: Docs.html has no builder. It is committed HTML that
+    nothing regenerates, so it cannot follow its declaration until it
+    gets one, and editing it by hand is the thing the declaration exists
+    to stop. It is listed here rather than silently skipped.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import buildsite
+
+    no_builder = {"Docs.html"}
+    for href, label, kind in buildsite.EXTRA_NODES:
+        want = buildsite.NODE_APP[kind]
+        stem = href.strip("/")
+        path = None
+        for cand in (stem + "/index.html", stem + ".html", stem):
+            full = os.path.join(ROOT, cand)
+            if os.path.isfile(full):
+                path = full
+                break
+        if path is None:
+            fail("shell", "{} points at no page".format(label))
+            continue
+        if os.path.relpath(path, ROOT).replace("\\", "/") in no_builder:
+            continue
+        source = read(path)
+        found = re.search(r'class="content sunken app-(\w+)"', source)
+        has = found.group(1) if found else (
+            "explorer" if 'class="content sunken"' in source else "none")
+        if has != want:
+            fail("shell",
+                 "{} is declared a {} so it should open in {}, but it opens "
+                 "in {}".format(label, kind, want, has))
+
+
 def main():
     pages = html_files()
     print("test_site: {} html files".format(len(pages)))
+
+    tree_nodes_open_in_the_right_window()
 
     no_trackers(pages)
     metadata(pages)
