@@ -85,72 +85,51 @@
 </li>
 <li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
 </li>
-<li><a href="/shop/"><span class="ic">&#128220;</span>Shop</a></li>
-<li><a href="/intake/"><span class="ic">&#128220;</span>Websites</a></li>
-<li><a href="/audit/"><span class="ic">&#128220;</span>Site audit</a></li>
-<li><a href="/search/"><span class="ic">&#128220;</span>Find</a></li>
-<li><a href="/about.html"><span class="ic">&#128220;</span>About</a></li>
-<li><a href="/cv/"><span class="ic">&#128220;</span>CV</a></li>
-<li><a href="/writing/"><span class="ic">&#128220;</span>Writing</a></li>
-<li><a href="/stack/"><span class="ic">&#128220;</span>Stack</a></li>
-<li><a href="/Docs.html"><span class="ic">&#128220;</span>Docs</a></li>
-<li><a href="/developers.html"><span class="ic">&#128220;</span>Developers</a></li>
-<li><a href="/log/"><span class="ic">&#128220;</span>Log</a></li>
-<li><a href="/status/"><span class="ic">&#128220;</span>Status</a></li>
-<li><a href="/papers/"><span class="ic">&#128220;</span>Papers</a></li>
-<li><a href="/contact.html"><span class="ic">&#128220;</span>Contact</a></li>
-<li><a href="/privacy.html"><span class="ic">&#128220;</span>Privacy</a></li>
+<li><a href="/shop/"><span class="ic" aria-hidden="true">&#128193;</span>Shop</a></li>
+<li><a href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a></li>
+<li><a href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a></li>
+<li><a href="/search/"><span class="ic" aria-hidden="true">&#128193;</span>Find</a></li>
+<li><a href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a></li>
+<li><a href="/cv/"><span class="ic" aria-hidden="true">&#128193;</span>CV</a></li>
+<li><a href="/writing/"><span class="ic" aria-hidden="true">&#128193;</span>Writing</a></li>
+<li><a href="/stack/"><span class="ic" aria-hidden="true">&#128220;</span>Stack</a></li>
+<li><a href="/Docs.html"><span class="ic" aria-hidden="true">&#128193;</span>Docs</a></li>
+<li><a href="/developers.html"><span class="ic" aria-hidden="true">&#128193;</span>Developers</a></li>
+<li><a href="/log/"><span class="ic" aria-hidden="true">&#128220;</span>Log</a></li>
+<li><a href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a></li>
+<li><a href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a></li>
+<li><a href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a></li>
+<li><a href="/privacy.html"><span class="ic" aria-hidden="true">&#128220;</span>Privacy</a></li>
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
-<p class="lede">Excerpts from deposited papers, measurement write-ups and software documentation. Each one links to where it came from. The papers carry DOIs, so the deposited text cannot be changed after the fact, and the documentation links to the file in the repository.</p>
-<h2>When a check should fail</h2>
-<p class="note">The gates, and what it costs to have one that cannot.</p>
-<figure class="ex"><blockquote><p>A gate that reports a pass on a tree it never opened is worse than no gate, so a positional path is now the root.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/gatekit/README.md">gatekit README</a></figcaption></figure>
-<figure class="ex"><blockquote><p>A stylesheet using neither has nothing to compare, and it says so and exits 0 — which in CI reads as a pass on a site nobody checked.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/gatekit/README.md">gatekit README</a></figcaption></figure>
-<figure class="ex"><blockquote><p>If node is not installed the parity checks skip and say so, because a check that cannot run must not report success.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj-cli/README.md">keyj-cli README</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Dark grey on navy measured 2.64:1 where body text needs 4.5, and a person found that, not a build.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/gatekit/README.md">gatekit README</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Three gates for defects a linter does not have an opinion about, because none of them is a syntax error.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/gatekit/README.md">gatekit README</a></figcaption></figure>
-<h2>Saying what a tool will not do</h2>
-<p class="note">The sentence a product page usually leaves out.</p>
-<figure class="ex"><blockquote><p>keyj play installs a system-wide keyboard listener, which is the same machinery a keylogger uses.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj-cli/README.md">keyj-cli README</a></figcaption></figure>
-<figure class="ex"><blockquote><p>What it cannot catch is a tab that is internally consistent and simply wrong; bad frets convert cleanly into bad notes, and only your ear will find that.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj-cli/README.md">keyj-cli README</a></figcaption></figure>
-<figure class="ex"><blockquote><p>A block with the wrong number of strings produces no notes and says how many it found, rather than silently guessing a tuning.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj-js/README.md">keyj-js README</a></figcaption></figure>
-<figure class="ex"><blockquote><p>A tab in a tuning that does not exist comes back with .error set and no notes, rather than raising.</p></blockquote><figcaption><a href="https://github.com/vince-gonzalez/f-keys/blob/main/keyj-js/README.md">keyj-js README</a></figcaption></figure>
-<h2>Measurement</h2>
-<p class="note">Findings that turn on a quantity, and what the quantity is allowed to support.</p>
-<figure class="ex"><blockquote><p>Across 9,169 machine-generated Lean proofs, 92.7% depend on choice, but 86.1% of them are fixed by what the theorems say, and only 6.5% are avoidable.</p></blockquote><figcaption><a href="/gonzalgo/">gonzalgo</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Asking which constant a theorem&#x27;s classical dependence is responsible to is not the same as asking which constants its proof touches, and the answers are far apart.</p></blockquote><figcaption><a href="/gonzalgo/dominator-table/">The Dominator Table</a> &middot; <a href="https://doi.org/10.5281/zenodo.21900625">DOI 10.5281/zenodo.21900625</a></figcaption></figure>
-<figure class="ex"><blockquote><p>The common cases are not choice in the mathematician&#x27;s sense at all — they are a proof style and a missing instance.</p></blockquote><figcaption><a href="/gonzalgo/module-spend/">The Module Spend Table</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Across 532,579 Lean theorems in nine libraries and 71,124 Metamath theorems in five databases, none rest on an unfinished proof and none rest on the compiler</p></blockquote><figcaption><a href="/gonzalgo/">gonzalgo</a></figcaption></figure>
-<figure class="ex"><blockquote><p>The result is a boundary rather than a gradient. norm_num introduces the axiom of choice on all 15 order goals</p></blockquote><figcaption><a href="/gonzalgo/controlled-tactics/">The Controlled Tactic Table</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Classical.propDecidable has 6,775 spenders in its subtree and Classical.byContradiction 1,854.</p></blockquote><figcaption><a href="/gonzalgo/spend-points/">The Spend-Point Table</a></figcaption></figure>
-<h2>Stating a limit</h2>
-<p class="note">What a result is not allowed to be used for, written down beside it.</p>
-<figure class="ex"><blockquote><p>Under R5 there is no score, so there is no ranking, so a profile cannot be used as a league table without leaving the specification.</p></blockquote><figcaption><a href="/gonzalgo/kernel-trust/">Kernel Trust Profile</a></figcaption></figure>
-<figure class="ex"><blockquote><p>A library reaching 61% of its theorems with the axiom of choice has made a design decision, not an error.</p></blockquote><figcaption><a href="/gonzalgo/kernel-trust/">Kernel Trust Profile</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Metamath&#x27;s set.mm tiers countable and dependent choice separately on purpose and reaches 1.2%; Lean core does not, and its maintainers have stated that avoiding choice is a deliberate non-goal.</p></blockquote><figcaption><a href="/gonzalgo/kernel-trust/">Kernel Trust Profile</a></figcaption></figure>
-<figure class="ex"><blockquote><p>The method therefore constitutes a screening stimulus generator, not a measurement instrument, and cannot classify deficiency type or grade severity.</p></blockquote><figcaption><a href="/papers/procedural-method-generating-pseudoisochromatic-plates-browser/">A Procedural Method for Generating Pseudoisochromatic Plates</a> &middot; <a href="https://doi.org/10.5281/zenodo.21310577">DOI 10.5281/zenodo.21310577</a></figcaption></figure>
-<figure class="ex"><blockquote><p>The method&#x27;s ceiling is not its design but the display.</p></blockquote><figcaption><a href="/papers/procedural-method-generating-pseudoisochromatic-plates-browser/">A Procedural Method for Generating Pseudoisochromatic Plates</a> &middot; <a href="https://doi.org/10.5281/zenodo.21310577">DOI 10.5281/zenodo.21310577</a></figcaption></figure>
-<figure class="ex"><blockquote><p>The 58x figure above is one measured pair; computing reach for every row means a second traversal of the full graph and it has not been run.</p></blockquote><figcaption><a href="/gonzalgo/dominator-table/">The Dominator Table</a> &middot; <a href="https://doi.org/10.5281/zenodo.21900625">DOI 10.5281/zenodo.21900625</a></figcaption></figure>
-<figure class="ex"><blockquote><p>The hidden digit plate returns 27% for protan and 5% for deutan, the inverted arrangement appearing directly in the measurement.</p></blockquote><figcaption><a href="/papers/pseudoisochromatic-plate-design-type-recoverable-from/">Pseudoisochromatic plate design type is recoverable from delivered color and dot geometry alone</a> &middot; <a href="https://doi.org/10.5281/zenodo.21876790">DOI 10.5281/zenodo.21876790</a></figcaption></figure>
-<figure class="ex"><blockquote><p>The certifying configurations are given by exact rational coordinates, and the certifier is validated by negative controls against Fejes Toth&#x27;s proven value r_3 = 3/5.</p></blockquote><figcaption><a href="/papers/certified-upper-bounds-fejes-t-th/">Certified upper bounds for Fejes Toth&#x27;s point-goalie problem</a> &middot; <a href="https://doi.org/10.5281/zenodo.21729548">DOI 10.5281/zenodo.21729548</a></figcaption></figure>
-<h2>Method</h2>
-<p class="note">Decisions about how a thing was measured, and why they change the answer.</p>
-<figure class="ex"><blockquote><p>Compile failures are held out of every figure here; a corpus targeting Lean 4.27 measured under 4.32 would otherwise report version drift</p></blockquote><figcaption><a href="/gonzalgo/generated-proofs/">What machine-generated Lean proofs rest on</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Run against the top of the dominance ranking it returns 8 of 114 occurrences, in 3 declarations.</p></blockquote><figcaption><a href="/gonzalgo/substitution-ledger/">The Substitution Ledger</a></figcaption></figure>
-<h2>Argument</h2>
-<p class="note">Positions taken in the papers, stated without the scaffolding around them.</p>
-<figure class="ex"><blockquote><p>The content remains admissible as evidence of the artifact&#x27;s own existence and provenance — the distinction is between what the content depicts and what the content is.</p></blockquote><figcaption><a href="/papers/ai-generated-evidence-admissibility-formal-classification/">AI-Generated Evidence Admissibility</a> &middot; <a href="https://doi.org/10.5281/zenodo.19642437">DOI 10.5281/zenodo.19642437</a></figcaption></figure>
-<figure class="ex"><blockquote><p>Every classification system presupposes an observer.</p></blockquote><figcaption><a href="/papers/epistemology-observation-formal-certification-framework-human/">The Epistemology of Observation</a> &middot; <a href="https://doi.org/10.5281/zenodo.19726226">DOI 10.5281/zenodo.19726226</a></figcaption></figure>
-<figure class="ex"><blockquote><p>A clause-by-clause analysis of Article 50 identifies five structural gaps that DAG-OR closes without displacing the regulation.</p></blockquote><figcaption><a href="/papers/classification-deficit-article-50-eu-ai/">The Classification Deficit</a> &middot; <a href="https://doi.org/10.5281/zenodo.19578570">DOI 10.5281/zenodo.19578570</a></figcaption></figure>
-<h2>Everything else</h2>
-<p>The full list of deposited work is at <a href="/papers/">/papers/</a>, the measurements at <a href="/gonzalgo/">/gonzalgo/</a>, and the products at <a href="/portfolio.html">/portfolio</a>. CVs: <a href="/cv/">/cv/</a>.</p>
+<div class="doc"><h1>Selected Writing</h1>
+<p class="sub">Excerpts from deposited papers, measurement write-ups and software documentation. Each one links to where it came from. The papers carry DOIs, so the deposited text cannot be changed after the fact, and the documentation links to the file in the repository.</p></div>
+<ul class="folders">
+<li><a href="/writing/gatekit/"><span class="fic" aria-hidden="true">&#128220;</span><span class="fname">gatekit README</span><span class="fmeta">4 excerpts</span><span class="fhint">readme</span></a></li>
+<li><a href="/writing/keyj-cli/"><span class="fic" aria-hidden="true">&#128220;</span><span class="fname">keyj-cli README</span><span class="fmeta">3 excerpts</span><span class="fhint">readme</span></a></li>
+<li><a href="/writing/keyj-js/"><span class="fic" aria-hidden="true">&#128220;</span><span class="fname">keyj-js README</span><span class="fmeta">2 excerpts</span><span class="fhint">readme</span></a></li>
+<li><a href="/writing/gonzalgo/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">gonzalgo</span><span class="fmeta">2 excerpts</span><span class="fhint">table</span></a></li>
+<li><a href="/writing/dominator-table/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">The Dominator Table</span><span class="fmeta">2 excerpts</span><span class="fhint">deposited, with a DOI</span></a></li>
+<li><a href="/writing/module-spend/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">The Module Spend Table</span><span class="fmeta">1 excerpt</span><span class="fhint">table</span></a></li>
+<li><a href="/writing/controlled-tactics/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">The Controlled Tactic Table</span><span class="fmeta">1 excerpt</span><span class="fhint">table</span></a></li>
+<li><a href="/writing/spend-points/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">The Spend-Point Table</span><span class="fmeta">1 excerpt</span><span class="fhint">table</span></a></li>
+<li><a href="/writing/kernel-trust/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">Kernel Trust Profile</span><span class="fmeta">3 excerpts</span><span class="fhint">table</span></a></li>
+<li><a href="/writing/procedural-method-generating-pseudoisochromatic-plates-browser/"><span class="fic" aria-hidden="true">&#128196;</span><span class="fname">A Procedural Method for Generating Pseudoisochromatic Plates</span><span class="fmeta">2 excerpts</span><span class="fhint">deposited, with a DOI</span></a></li>
+<li><a href="/writing/pseudoisochromatic-plate-design-type-recoverable-from/"><span class="fic" aria-hidden="true">&#128196;</span><span class="fname">Pseudoisochromatic plate design type is recoverable from delivered color and dot geometry alone</span><span class="fmeta">1 excerpt</span><span class="fhint">deposited, with a DOI</span></a></li>
+<li><a href="/writing/certified-upper-bounds-fejes-t-th/"><span class="fic" aria-hidden="true">&#128196;</span><span class="fname">Certified upper bounds for Fejes Toth&#x27;s point-goalie problem</span><span class="fmeta">1 excerpt</span><span class="fhint">deposited, with a DOI</span></a></li>
+<li><a href="/writing/generated-proofs/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">What machine-generated Lean proofs rest on</span><span class="fmeta">1 excerpt</span><span class="fhint">table</span></a></li>
+<li><a href="/writing/substitution-ledger/"><span class="fic" aria-hidden="true">&#128202;</span><span class="fname">The Substitution Ledger</span><span class="fmeta">1 excerpt</span><span class="fhint">table</span></a></li>
+<li><a href="/writing/ai-generated-evidence-admissibility-formal-classification/"><span class="fic" aria-hidden="true">&#128196;</span><span class="fname">AI-Generated Evidence Admissibility</span><span class="fmeta">1 excerpt</span><span class="fhint">deposited, with a DOI</span></a></li>
+<li><a href="/writing/epistemology-observation-formal-certification-framework-human/"><span class="fic" aria-hidden="true">&#128196;</span><span class="fname">The Epistemology of Observation</span><span class="fmeta">1 excerpt</span><span class="fhint">deposited, with a DOI</span></a></li>
+<li><a href="/writing/classification-deficit-article-50-eu-ai/"><span class="fic" aria-hidden="true">&#128196;</span><span class="fname">The Classification Deficit</span><span class="fmeta">1 excerpt</span><span class="fhint">deposited, with a DOI</span></a></li>
+</ul>
+<div class="doc"><p>The full list of deposited work is at <a href="/papers/">/papers/</a>, the measurements at <a href="/gonzalgo/">/gonzalgo/</a>, and the products at <a href="/portfolio.html">/portfolio</a>. CVs: <a href="/cv/">/cv/</a>.</p></div>
     </main>
   </div>
 
   <div class="statusbar">
-    <span class="cell groove">28 excerpt(s)</span>
+    <span class="cell groove">17 object(s)</span>
     <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
     <span class="cell groove">F-Keys</span>
   </div>

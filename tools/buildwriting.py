@@ -277,48 +277,148 @@ def check():
 
 
 # ------------------------------------------------------------------ render
-def render():
-    e = B.esc
-    o = ['<p class="lede">%s</p>' % e(LEDE)]
-    n = 0
+# A document gets its icon from what it is, the same way the catalog rows
+# do: a published paper, a standing measurement table, or the README that
+# ships with a package.
+KIND_ICON = {"paper": "&#128196;", "table": "&#128202;",
+             "readme": "&#128220;"}
+
+
+def kind_of(src):
+    if src.endswith(".md"):
+        return "readme"
+    if src.startswith("papers/"):
+        return "paper"
+    return "table"
+
+
+def slug_of(src):
+    """A folder name for the document, taken from the source path.
+
+    From the path and not the label, because the label is prose and prose
+    gets edited. The path already has to stay put for the verbatim check
+    to keep working, so it is the thing that is safe to build a URL from.
+    """
+    if src.endswith(".md"):
+        return src.split("/")[0].lower()
+    parts = [p for p in src.split("/") if p != "index.html"]
+    return parts[-1].lower()
+
+
+def documents():
+    """One entry per source file, in the order the sections introduce it.
+
+    GROUPED BY SOURCE RATHER THAN BY THEME, which was a choice. The themes
+    are editorial and good, and they survive as a heading inside each
+    document. But a folder whose files were themes would be a folder of
+    things that exist nowhere else, and the appeal of the metaphor is that
+    these are files somebody could actually open.
+    """
+    order, docs = [], {}
     for title, blurb, items in SECTIONS:
-        o.append("<h2>%s</h2>" % e(title))
-        o.append('<p class="note">%s</p>' % e(blurb))
-        for quote, label, href, doi, _ in items:
-            n += 1
-            cite = '<a href="%s">%s</a>' % (e(href), e(label))
-            if doi:
-                cite += ' &middot; <a href="%s%s">DOI %s</a>' % (
-                    DOI, e(doi), e(doi))
-            o.append('<figure class="ex"><blockquote><p>%s</p></blockquote>'
-                     '<figcaption>%s</figcaption></figure>'
-                     % (e(quote), cite))
-    o.append('<h2>Everything else</h2>')
-    o.append('<p>The full list of deposited work is at '
+        for quote, label, href, doi, src in items:
+            if src not in docs:
+                docs[src] = {"label": label, "href": href, "doi": doi,
+                             "src": src, "kind": kind_of(src),
+                             "slug": slug_of(src), "items": []}
+                order.append(src)
+            docs[src]["items"].append((title, quote))
+
+    # Two sources could reduce to the same folder name; number the later
+    # ones rather than letting one quietly overwrite the other on disk.
+    seen = {}
+    for src in order:
+        s = docs[src]["slug"]
+        seen[s] = seen.get(s, 0) + 1
+        if seen[s] > 1:
+            docs[src]["slug"] = "%s-%d" % (s, seen[s])
+    return [docs[s] for s in order]
+
+
+def render_folder(docs):
+    e = B.esc
+    o = ['<div class="doc"><h1>Selected Writing</h1>',
+         '<p class="sub">%s</p></div>' % e(LEDE)]
+    o.append('<ul class="folders">')
+    for d in docs:
+        n = len(d["items"])
+        o.append(
+            '<li><a href="/writing/%s/">'
+            '<span class="fic" aria-hidden="true">%s</span>'
+            '<span class="fname">%s</span>'
+            '<span class="fmeta">%d excerpt%s</span>'
+            '<span class="fhint">%s</span>'
+            '</a></li>' % (e(d["slug"]), KIND_ICON[d["kind"]], e(d["label"]),
+                           n, "" if n == 1 else "s",
+                           "deposited, with a DOI" if d["doi"] else d["kind"]))
+    o.append('</ul>')
+    o.append('<div class="doc"><p>The full list of deposited work is at '
              '<a href="/papers/">/papers/</a>, the measurements at '
              '<a href="/gonzalgo/">/gonzalgo/</a>, and the products at '
              '<a href="/portfolio.html">/portfolio</a>. '
-             'CVs: <a href="/cv/">/cv/</a>.</p>')
-    return "\n".join(o), n
+             'CVs: <a href="/cv/">/cv/</a>.</p></div>')
+    return "\n".join(o)
+
+
+def render_document(d):
+    e = B.esc
+    cite = '<a href="%s">%s</a>' % (e(d["href"]), e(d["href"]))
+    if d["doi"]:
+        cite += ' &middot; <a href="%s%s">DOI %s</a>' % (
+            DOI, e(d["doi"]), e(d["doi"]))
+    o = ['<div class="doc"><h1>%s</h1>' % e(d["label"]),
+         '<p class="sub">%s</p>' % cite,
+         '<p class="note">Every line below appears verbatim in the source. '
+         'The build refuses to write this page otherwise.</p></div>']
+    last = None
+    for title, quote in d["items"]:
+        if title != last:
+            o.append('<div class="doc"><h2>%s</h2></div>' % e(title))
+            last = title
+        o.append('<figure class="ex"><blockquote><p>%s</p></blockquote>'
+                 '</figure>' % e(quote))
+    o.append('<div class="doc"><p><a href="/writing/">'
+             '&#8592; Back to Selected Writing</a></p></div>')
+    return "\n".join(o)
 
 
 def main():
     check()
-    body, n = render()
-    doc = B.shell(
+    docs = documents()
+    total = sum(len(d["items"]) for d in docs)
+
+    folder = B.shell(
         "Selected Writing — F-Keys",
         "F-Keys\\Research\\Selected Writing",
-        body,
-        "%d excerpt(s)" % n,
+        render_folder(docs),
+        "%d object(s)" % len(docs),
         active_cat="research",
         description="Excerpts from deposited papers, measurement write-ups "
                     "and software documentation, each one linked to the "
                     "source it was taken from.",
-        canonical="https://f-keys.com/writing/")
+        canonical="https://f-keys.com/writing/",
+        app="explorer")
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    io.open(OUT, "w", encoding="utf-8", newline="\n").write(doc)
-    print("  buildwriting: /writing/ with %d excerpt(s), every one verified "
-          "against its source" % n)
+    io.open(OUT, "w", encoding="utf-8", newline="\n").write(folder)
+
+    for d in docs:
+        page = B.shell(
+            "%s — Selected Writing" % d["label"],
+            "F-Keys\\Research\\Selected Writing\\%s" % d["label"],
+            render_document(d),
+            "%d excerpt(s)" % len(d["items"]),
+            active_cat="research",
+            description="Excerpts from %s, each verified against the source."
+                        % d["label"],
+            canonical="https://f-keys.com/writing/%s/" % d["slug"],
+            app="wordpad")
+        out = os.path.join(ROOT, "writing", d["slug"], "index.html")
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        io.open(out, "w", encoding="utf-8", newline="\n").write(page)
+
+    print("  buildwriting: /writing/ is a folder of %d document(s), %d "
+          "excerpt(s), every one verified against its source"
+          % (len(docs), total))
     return 0
 
 
