@@ -51,55 +51,104 @@ LEDE = (
 
 # (quote, attribution, href, doi, file the quote must actually appear in)
 SECTIONS = [
+ ("When a check should fail", "The gates, and what it costs to have one "
+  "that cannot.", [
+
+  ("A gate that reports a pass on a tree it never opened is worse than no "
+   "gate, so a positional path is now the root.",
+   "gatekit README", GH + "gatekit/README.md", None, "gatekit/README.md"),
+
+  ("A stylesheet using neither has nothing to compare, and it says so and "
+   "exits 0 — which in CI reads as a pass on a site nobody checked.",
+   "gatekit README", GH + "gatekit/README.md", None, "gatekit/README.md"),
+
+  ("If node is not installed the parity checks skip and say so, because a "
+   "check that cannot run must not report success.",
+   "keyj-cli README", GH + "keyj-cli/README.md", None, "keyj-cli/README.md"),
+
+  ("Dark grey on navy measured 2.64:1 where body text needs 4.5, and a "
+   "person found that, not a build.",
+   "gatekit README", GH + "gatekit/README.md", None, "gatekit/README.md"),
+
+  ("Three gates for defects a linter does not have an opinion about, "
+   "because none of them is a syntax error.",
+   "gatekit README", GH + "gatekit/README.md", None, "gatekit/README.md"),
+ ]),
+
+ ("Saying what a tool will not do", "The sentence a product page usually "
+  "leaves out.", [
+
+  ("keyj play installs a system-wide keyboard listener, which is the same "
+   "machinery a keylogger uses.",
+   "keyj-cli README", GH + "keyj-cli/README.md", None, "keyj-cli/README.md"),
+
+  ("What it cannot catch is a tab that is internally consistent and simply "
+   "wrong; bad frets convert cleanly into bad notes, and only your ear will "
+   "find that.",
+   "keyj-cli README", GH + "keyj-cli/README.md", None, "keyj-cli/README.md"),
+
+  ("A block with the wrong number of strings produces no notes and says how "
+   "many it found, rather than silently guessing a tuning.",
+   "keyj-js README", GH + "keyj-js/README.md", None, "keyj-js/README.md"),
+
+  ("A tab in a tuning that does not exist comes back with .error set and no "
+   "notes, rather than raising.",
+   "keyj-js README", GH + "keyj-js/README.md", None, "keyj-js/README.md"),
+ ]),
+
  ("Measurement", "Findings that turn on a quantity, and what the quantity "
   "is allowed to support.", [
 
-  ("Asking which constant a theorem's classical dependence is responsible to "
-   "is not the same as asking which constants its proof touches, and the "
-   "answers are far apart. 116,766 theorems reach the order lemma "
-   "lt_or_eq_of_le; 2,018 would stop being classical if it were rebuilt.",
+  ("Across 9,169 machine-generated Lean proofs, 92.7% depend on choice, but "
+   "86.1% of them are fixed by what the theorems say, and only 6.5% are "
+   "avoidable.",
+   "gonzalgo", "/gonzalgo/", None, "gonzalgo/index.html"),
+
+  ("Asking which constant a theorem's classical dependence is responsible "
+   "to is not the same as asking which constants its proof touches, and the "
+   "answers are far apart.",
    "The Dominator Table", "/gonzalgo/dominator-table/",
    "10.5281/zenodo.21900625", "gonzalgo/dominator-table/index.html"),
 
-  ("It does not say how far each use travels, and the two are wildly "
-   "different: 324,808 theorems depend on choice while 18,109 declarations "
-   "spend it.",
+  ("The common cases are not choice in the mathematician's sense at all "
+   "— they are a proof style and a missing instance.",
    "The Module Spend Table", "/gonzalgo/module-spend/", None,
    "gonzalgo/module-spend/index.html"),
 
-  ("For Mathlib that is 13.1% of theorems, against a figure of 55% that "
-   "circulates without a measurement behind it.",
+  ("Across 532,579 Lean theorems in nine libraries and 71,124 Metamath "
+   "theorems in five databases, none rest on an unfinished proof and none "
+   "rest on the compiler",
    "gonzalgo", "/gonzalgo/", None, "gonzalgo/index.html"),
 
-  ("The result is a boundary rather than a gradient. norm_num introduces the "
-   "axiom of choice on all 15 order goals (≤, <, ≥ over Nat and "
-   "Int) and on none of the 12 equality and divisibility goals.",
+  ("The result is a boundary rather than a gradient. norm_num introduces "
+   "the axiom of choice on all 15 order goals",
    "The Controlled Tactic Table", "/gonzalgo/controlled-tactics/", None,
    "gonzalgo/controlled-tactics/index.html"),
 
-  ("15 of these 20 sites contain no direct use of a choice primitive "
-   "anywhere in their subtree.",
+  ("Classical.propDecidable has 6,775 spenders in its subtree and "
+   "Classical.byContradiction 1,854.",
    "The Spend-Point Table", "/gonzalgo/spend-points/", None,
    "gonzalgo/spend-points/index.html"),
  ]),
 
- ("Stating a limit", "What the work does not establish, written down where "
-  "the result is.", [
+ ("Stating a limit", "What a result is not allowed to be used for, written "
+  "down beside it.", [
 
-  ("It does not assert that tau(20) = 19448 or tau(21) = 29768; both remain "
-   "open, and other constructions are not excluded.",
-   "The added-vector code of the odd-sign construction is maximal",
-   "/papers/added-vector-code-odd-sign-construction/",
-   "10.5281/zenodo.21702301",
-   "papers/added-vector-code-odd-sign-construction/index.html"),
+  ("Under R5 there is no score, so there is no ranking, so a profile cannot "
+   "be used as a league table without leaving the specification.",
+   "Kernel Trust Profile", "/gonzalgo/kernel-trust/", None,
+   "gonzalgo/kernel-trust/index.html"),
 
-  ("For n = 6 an unstructured search converged back to Fejes Toth's own "
-   "configuration and produced no improvement; that is reported as a "
-   "negative result, not as evidence of optimality.",
-   "Certified upper bounds for Fejes Toth's point-goalie problem",
-   "/papers/certified-upper-bounds-fejes-t-th/",
-   "10.5281/zenodo.21729548",
-   "papers/certified-upper-bounds-fejes-t-th/index.html"),
+  ("A library reaching 61% of its theorems with the axiom of choice has "
+   "made a design decision, not an error.",
+   "Kernel Trust Profile", "/gonzalgo/kernel-trust/", None,
+   "gonzalgo/kernel-trust/index.html"),
+
+  ("Metamath's set.mm tiers countable and dependent choice separately on "
+   "purpose and reaches 1.2%; Lean core does not, and its maintainers have "
+   "stated that avoiding choice is a deliberate non-goal.",
+   "Kernel Trust Profile", "/gonzalgo/kernel-trust/", None,
+   "gonzalgo/kernel-trust/index.html"),
 
   ("The method therefore constitutes a screening stimulus generator, not a "
    "measurement instrument, and cannot classify deficiency type or grade "
@@ -107,108 +156,73 @@ SECTIONS = [
    "A Procedural Method for Generating Pseudoisochromatic Plates",
    "/papers/procedural-method-generating-pseudoisochromatic-plates-browser/",
    "10.5281/zenodo.21310577",
-   "papers/procedural-method-generating-pseudoisochromatic-plates-browser/"
-   "index.html"),
+   "papers/procedural-method-generating-pseudoisochromatic-plates-browser/index.html"),
 
-  ("Unsupervised recovery of the figure/ground assignment itself was also "
-   "attempted and fails: recall reaches 100% on ten plates while precision "
-   "falls to 38 to 63% on the vanishing plates, with no confidence signal "
-   "distinguishing successes from failures.",
+  ("The method's ceiling is not its design but the display.",
+   "A Procedural Method for Generating Pseudoisochromatic Plates",
+   "/papers/procedural-method-generating-pseudoisochromatic-plates-browser/",
+   "10.5281/zenodo.21310577",
+   "papers/procedural-method-generating-pseudoisochromatic-plates-browser/index.html"),
+
+  ("The 58x figure above is one measured pair; computing reach for every "
+   "row means a second traversal of the full graph and it has not been run.",
+   "The Dominator Table", "/gonzalgo/dominator-table/",
+   "10.5281/zenodo.21900625", "gonzalgo/dominator-table/index.html"),
+
+  ("The hidden digit plate returns 27% for protan and 5% for deutan, the "
+   "inverted arrangement appearing directly in the measurement.",
    "Pseudoisochromatic plate design type is recoverable from delivered "
    "color and dot geometry alone",
    "/papers/pseudoisochromatic-plate-design-type-recoverable-from/",
    "10.5281/zenodo.21876790",
    "papers/pseudoisochromatic-plate-design-type-recoverable-from/index.html"),
 
-  ("A library reaching 61% of its theorems with the axiom of choice has made "
-   "a design decision, not an error.",
-   "Kernel Trust Profile", "/gonzalgo/kernel-trust/", None,
-   "gonzalgo/kernel-trust/index.html"),
+  ("The certifying configurations are given by exact rational coordinates, "
+   "and the certifier is validated by negative controls against Fejes "
+   "Toth's proven value r_3 = 3/5.",
+   "Certified upper bounds for Fejes Toth's point-goalie problem",
+   "/papers/certified-upper-bounds-fejes-t-th/", "10.5281/zenodo.21729548",
+   "papers/certified-upper-bounds-fejes-t-th/index.html"),
  ]),
 
- ("Method", "Why a number is trustworthy, or why an earlier one is not.", [
+ ("Method", "Decisions about how a thing was measured, and why they change "
+  "the answer.", [
 
   ("Compile failures are held out of every figure here; a corpus targeting "
-   "Lean 4.27 measured under 4.32 would otherwise report version drift as a "
-   "property of the proofs.",
+   "Lean 4.27 measured under 4.32 would otherwise report version drift",
    "What machine-generated Lean proofs rest on",
    "/gonzalgo/generated-proofs/", None,
    "gonzalgo/generated-proofs/index.html"),
 
-  ("A previous run over the same question returned 404 synthesis timeouts "
-   "against this run's 12, and had no not-a-goal category at all, so nearly "
-   "every site it could not clean was recorded as a time limit being hit.",
-   "The Site Diagnosis Table", "/gonzalgo/site-diagnosis/", None,
-   "gonzalgo/site-diagnosis/index.html"),
-
-  ("Of 114 occurrences only 21 were testable at all. The rest occur under "
-   "binders, where the proposition is not closed and cannot be handed to "
-   "instance synthesis from outside its declaration.",
+  ("Run against the top of the dominance ranking it returns 8 of 114 "
+   "occurrences, in 3 declarations.",
    "The Substitution Ledger", "/gonzalgo/substitution-ledger/", None,
    "gonzalgo/substitution-ledger/index.html"),
  ]),
 
- ("Argument", "Openings and load-bearing claims from the written papers.", [
+ ("Argument", "Positions taken in the papers, stated without the "
+  "scaffolding around them.", [
 
-  ("This document does not explain Modulign.",
-   "The Formal Logic of Modulign", "/papers/formal-logic-modulign/",
-   "10.5281/zenodo.19350848", "papers/formal-logic-modulign/index.html"),
+  ("The content remains admissible as evidence of the artifact's own "
+   "existence and provenance — the distinction is between what the "
+   "content depicts and what the content is.",
+   "AI-Generated Evidence Admissibility",
+   "/papers/ai-generated-evidence-admissibility-formal-classification/",
+   "10.5281/zenodo.19642437",
+   "papers/ai-generated-evidence-admissibility-formal-classification/index.html"),
 
   ("Every classification system presupposes an observer.",
    "The Epistemology of Observation",
    "/papers/epistemology-observation-formal-certification-framework-human/",
    "10.5281/zenodo.19726226",
-   "papers/epistemology-observation-formal-certification-framework-human/"
-   "index.html"),
+   "papers/epistemology-observation-formal-certification-framework-human/index.html"),
 
-  ("The evidentiary problem of AI-generated content is not a disclosure "
-   "problem.",
+  ("A clause-by-clause analysis of Article 50 identifies five structural "
+   "gaps that DAG-OR closes without displacing the regulation.",
    "The Classification Deficit",
    "/papers/classification-deficit-article-50-eu-ai/",
    "10.5281/zenodo.19578570",
    "papers/classification-deficit-article-50-eu-ai/index.html"),
-
-  ("not because any rule prohibits its admission, but because its address "
-   "structure formally encodes the absence of the causal chain that "
-   "observational authentication requires",
-   "AI-Generated Evidence Admissibility",
-   "/papers/ai-generated-evidence-admissibility-formal-classification/",
-   "10.5281/zenodo.19642437",
-   "papers/ai-generated-evidence-admissibility-formal-classification/"
-   "index.html"),
- ]),
-
- ("Documentation", "Software documentation, including the parts a reader is "
-  "entitled to be warned about.", [
-
-  ("keyj play installs a system-wide keyboard listener, which is the same "
-   "machinery a keylogger uses.",
-   "keyj-cli README", GH + "keyj-cli/README.md", None,
-   "keyj-cli/README.md"),
-
-  ("If node is not installed the parity checks skip and say so, because a "
-   "check that cannot run must not report success.",
-   "keyj-cli README", GH + "keyj-cli/README.md", None,
-   "keyj-cli/README.md"),
-
-  ("A tab in a tuning that does not exist comes back with .error set and "
-   "no notes, rather than raising.",
-   "keyj-js README", GH + "keyj-js/README.md", None, "keyj-js/README.md"),
-
-  ("so the package and the page cannot answer differently",
-   "keyj-js README", GH + "keyj-js/README.md", None, "keyj-js/README.md"),
-
-  ("Dark grey on navy measured 2.64:1 where body text needs 4.5, and a "
-   "person found that, not a build.",
-   "gatekit README", GH + "gatekit/README.md", None, "gatekit/README.md"),
-
-  ("Three gates for defects a linter does not have an opinion about, because "
-   "none of them is a syntax error.",
-   "gatekit README", GH + "gatekit/README.md", None, "gatekit/README.md"),
-
-  ("Both halves matter: a gate that cannot tell those apart gets switched "
-   "off.",
-   "gatekit README", GH + "gatekit/README.md", None, "gatekit/README.md"),
  ]),
 ]
 
