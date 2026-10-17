@@ -1,15 +1,350 @@
 {
   "cloudflare": {
+    "bots_24h": {
+      "AI Assistant": 28,
+      "AI Crawler": 1080,
+      "AI Search": 36,
+      "Accessibility": 7,
+      "Monitoring & Analytics": 41,
+      "Page Preview": 125,
+      "Search Engine Crawler": 2552,
+      "Search Engine Optimization": 947,
+      "Security": 25,
+      "Unverified": 31997
+    },
+    "bots_error": null,
     "days": 7,
-    "error": "skipped: no CF_API_TOKEN",
-    "sites": [],
+    "error": null,
+    "sites": [
+      {
+        "days_returned": 7,
+        "page_views": 21618,
+        "requests": 37427,
+        "site": "5best2buy.com",
+        "threats": 70,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 45.2,
+            "requests": 16934
+          },
+          {
+            "country": "SG",
+            "pct": 11.6,
+            "requests": 4338
+          },
+          {
+            "country": "DE",
+            "pct": 7.9,
+            "requests": 2953
+          },
+          {
+            "country": "KR",
+            "pct": 5.3,
+            "requests": 2000
+          },
+          {
+            "country": "BE",
+            "pct": 3.8,
+            "requests": 1436
+          }
+        ],
+        "uniques": 8795
+      },
+      {
+        "days_returned": 7,
+        "page_views": 13189,
+        "requests": 97707,
+        "site": "f-keys.com",
+        "threats": 474,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 18.1,
+            "requests": 17718
+          },
+          {
+            "country": "KR",
+            "pct": 17.1,
+            "requests": 16727
+          },
+          {
+            "country": "IN",
+            "pct": 11.3,
+            "requests": 11027
+          },
+          {
+            "country": "HK",
+            "pct": 11.1,
+            "requests": 10821
+          },
+          {
+            "country": "JP",
+            "pct": 7.6,
+            "requests": 7453
+          }
+        ],
+        "uniques": 6454
+      },
+      {
+        "days_returned": 7,
+        "page_views": 4922,
+        "requests": 26790,
+        "site": "opticquiz.com",
+        "threats": 93,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 27.1,
+            "requests": 7257
+          },
+          {
+            "country": "IN",
+            "pct": 8.1,
+            "requests": 2160
+          },
+          {
+            "country": "DE",
+            "pct": 7.2,
+            "requests": 1917
+          },
+          {
+            "country": "AU",
+            "pct": 5.8,
+            "requests": 1546
+          },
+          {
+            "country": "BE",
+            "pct": 5.6,
+            "requests": 1497
+          }
+        ],
+        "uniques": 4011
+      },
+      {
+        "days_returned": 7,
+        "page_views": 2523,
+        "requests": 19898,
+        "site": "poticas.com",
+        "threats": 39,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 29.0,
+            "requests": 5780
+          },
+          {
+            "country": "FR",
+            "pct": 19.5,
+            "requests": 3881
+          },
+          {
+            "country": "JP",
+            "pct": 9.0,
+            "requests": 1787
+          },
+          {
+            "country": "CA",
+            "pct": 7.7,
+            "requests": 1539
+          },
+          {
+            "country": "BE",
+            "pct": 6.7,
+            "requests": 1338
+          }
+        ],
+        "uniques": 2658
+      },
+      {
+        "days_returned": 7,
+        "page_views": 1042,
+        "requests": 17451,
+        "site": "trailer-load.com",
+        "threats": 92,
+        "top_countries": [
+          {
+            "country": "FR",
+            "pct": 35.3,
+            "requests": 6165
+          },
+          {
+            "country": "US",
+            "pct": 26.5,
+            "requests": 4622
+          },
+          {
+            "country": "BE",
+            "pct": 8.2,
+            "requests": 1431
+          },
+          {
+            "country": "KR",
+            "pct": 5.4,
+            "requests": 947
+          },
+          {
+            "country": "HK",
+            "pct": 4.3,
+            "requests": 757
+          }
+        ],
+        "uniques": 1185
+      },
+      {
+        "days_returned": 7,
+        "page_views": 538,
+        "requests": 11416,
+        "site": "epistemend.org",
+        "threats": 446,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 21.9,
+            "requests": 2495
+          },
+          {
+            "country": "DE",
+            "pct": 12.3,
+            "requests": 1407
+          },
+          {
+            "country": "BE",
+            "pct": 10.9,
+            "requests": 1242
+          },
+          {
+            "country": "NL",
+            "pct": 10.0,
+            "requests": 1147
+          },
+          {
+            "country": "AU",
+            "pct": 9.5,
+            "requests": 1083
+          }
+        ],
+        "uniques": 1083
+      },
+      {
+        "days_returned": 7,
+        "page_views": 664,
+        "requests": 11161,
+        "site": "tipstreams.com",
+        "threats": 35,
+        "top_countries": [
+          {
+            "country": "AU",
+            "pct": 14.3,
+            "requests": 1594
+          },
+          {
+            "country": "US",
+            "pct": 14.0,
+            "requests": 1565
+          },
+          {
+            "country": "KR",
+            "pct": 13.4,
+            "requests": 1498
+          },
+          {
+            "country": "HK",
+            "pct": 12.8,
+            "requests": 1431
+          },
+          {
+            "country": "BE",
+            "pct": 11.7,
+            "requests": 1309
+          }
+        ],
+        "uniques": 865
+      },
+      {
+        "days_returned": 7,
+        "page_views": 485,
+        "requests": 17922,
+        "site": "modulign.org",
+        "threats": 40,
+        "top_countries": [
+          {
+            "country": "FR",
+            "pct": 42.1,
+            "requests": 7551
+          },
+          {
+            "country": "US",
+            "pct": 17.3,
+            "requests": 3098
+          },
+          {
+            "country": "JP",
+            "pct": 6.5,
+            "requests": 1170
+          },
+          {
+            "country": "DE",
+            "pct": 5.5,
+            "requests": 994
+          },
+          {
+            "country": "AU",
+            "pct": 4.7,
+            "requests": 842
+          }
+        ],
+        "uniques": 820
+      },
+      {
+        "days_returned": 7,
+        "page_views": 592,
+        "requests": 8690,
+        "site": "dogefundme.com",
+        "threats": 72,
+        "top_countries": [
+          {
+            "country": "FR",
+            "pct": 24.6,
+            "requests": 2135
+          },
+          {
+            "country": "BE",
+            "pct": 15.8,
+            "requests": 1371
+          },
+          {
+            "country": "US",
+            "pct": 15.3,
+            "requests": 1332
+          },
+          {
+            "country": "IN",
+            "pct": 9.4,
+            "requests": 819
+          },
+          {
+            "country": "NL",
+            "pct": 7.1,
+            "requests": 613
+          }
+        ],
+        "uniques": 640
+      }
+    ],
+    "sites_omitted": 4,
     "totals": {
-      "page_views": null,
-      "uniques": null
+      "page_views": 45863,
+      "threats": 1613,
+      "uniques": 28068
+    },
+    "window": {
+      "since": "2026-10-10",
+      "until": "2026-10-16"
     }
   },
   "date": "2026-10-17",
-  "generated_at": "2026-10-17 01:18 UTC",
+  "generated_at": "2026-10-17 03:51 UTC",
   "github": [
     {
       "archived": false,
@@ -22,9 +357,9 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-10-16T04:04:08Z",
+      "pushed_at": "2026-10-17T03:31:58Z",
       "repo": "f-keys",
-      "size_kb": 78175,
+      "size_kb": 78917,
       "stars": 2,
       "topics": [
         "formal-verification",
@@ -159,9 +494,9 @@
       "license": null,
       "open_issues": 1,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-10-16T21:40:33Z",
+      "pushed_at": "2026-10-17T02:54:38Z",
       "repo": "trailer-load.com",
-      "size_kb": 125279,
+      "size_kb": 131972,
       "stars": 1,
       "topics": [
         "browser-game",
@@ -1723,12 +2058,12 @@
       "github_stars": 18,
       "package_daily": null,
       "package_weekly": 576,
-      "page_views_7d": null,
+      "page_views_7d": 45863,
       "properties_total": 12,
       "properties_up": 12,
       "releases_published": null,
-      "visitors_7d": null,
-      "zenodo_downloads": 1000,
+      "visitors_7d": 28068,
+      "zenodo_downloads": 1001,
       "zenodo_views": 2002
     }
   ],
@@ -2192,18 +2527,18 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": null,
+    "bot_requests_24h": 36838,
     "github_forks": 0,
     "github_repos": 34,
     "github_stars": 18,
-    "median_response_ms": 314,
+    "median_response_ms": 261,
     "npm_all_time": 7454,
     "npm_weekly": 208,
     "open_issues": 1,
     "package_all_time": 16461,
     "package_weekly": 576,
     "packages_total": 34,
-    "page_views_7d": null,
+    "page_views_7d": 45863,
     "properties_total": 12,
     "properties_up": 12,
     "pypi_all_time": 9007,
@@ -2211,17 +2546,17 @@
     "pypi_weekly": 368,
     "repos_archived": 2,
     "repos_unlicensed": 12,
-    "threats_7d": null,
-    "visitors_7d": null,
-    "zenodo_downloads": 1000,
-    "zenodo_records": 59,
+    "threats_7d": 1613,
+    "visitors_7d": 28068,
+    "zenodo_downloads": 1001,
+    "zenodo_records": 61,
     "zenodo_views": 2002
   },
   "uptime": [
     {
       "code": 200,
       "error": null,
-      "ms": 309,
+      "ms": 268,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2229,7 +2564,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 203,
+      "ms": 201,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2237,7 +2572,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 347,
+      "ms": 459,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2245,7 +2580,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 486,
+      "ms": 134,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2253,7 +2588,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 438,
+      "ms": 615,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2261,7 +2596,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 247,
+      "ms": 254,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2269,7 +2604,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 320,
+      "ms": 229,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2277,7 +2612,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 660,
+      "ms": 578,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2285,7 +2620,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 611,
+      "ms": 546,
       "name": "epistemend.org",
       "up": true,
       "url": "https://epistemend.org"
@@ -2293,7 +2628,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 253,
+      "ms": 244,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2301,7 +2636,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 127,
+      "ms": 288,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2309,7 +2644,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 273,
+      "ms": 221,
       "name": "qv.f-keys.com",
       "up": true,
       "url": "https://qv.f-keys.com"
@@ -2487,6 +2822,14 @@
         "views": 19
       },
       {
+        "downloads": 0,
+        "id": "23428931",
+        "title": "Prompt Atoms and Conflicts: An Instruction Vocabulary and Conflict Graph from Public Prompt Libraries",
+        "unique_downloads": 0,
+        "unique_views": 0,
+        "views": 0
+      },
+      {
         "downloads": 2,
         "id": "22131388",
         "title": "THE RECORD: a hash-chained Modulign address ledger of 1,000,000 legal documents",
@@ -2656,6 +2999,22 @@
       },
       {
         "downloads": 14,
+        "id": "21618222",
+        "title": "An independent exact verification of an 11948-point kissing configuration in 19 dimensions",
+        "unique_downloads": 13,
+        "unique_views": 17,
+        "views": 17
+      },
+      {
+        "downloads": 0,
+        "id": "23293585",
+        "title": "d1bench: which Cloudflare D1 write strategy wins, and which limit stops you first",
+        "unique_downloads": 0,
+        "unique_views": 0,
+        "views": 0
+      },
+      {
+        "downloads": 14,
         "id": "19726401",
         "title": "The Modulign Correction Protocol: Formal Specification for Append-Only Error Resolution in DAG-OR",
         "unique_downloads": 11,
@@ -2775,18 +3134,10 @@
         "views": 97
       },
       {
-        "downloads": 14,
-        "id": "21618222",
-        "title": "An independent exact verification of an 11948-point kissing configuration in 19 dimensions",
-        "unique_downloads": 13,
-        "unique_views": 17,
-        "views": 17
-      },
-      {
-        "downloads": 0,
+        "downloads": 1,
         "id": "23422998",
         "title": "plateaudit: measuring pseudoisochromatic colour-vision plates from the stimulus a browser actually delivers",
-        "unique_downloads": 0,
+        "unique_downloads": 1,
         "unique_views": 1,
         "views": 1
       }
