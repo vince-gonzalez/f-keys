@@ -634,7 +634,7 @@ select option { background: #0d1f33; color: var(--txt); }
   width: 100%; height: 100%;
 }
 .upload-emoji { font-size: 30px; margin-bottom: 12px; }
-.upload-zone h4 {
+.upload-zone .dz-title {
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 600;
@@ -1119,6 +1119,12 @@ select option { background: #0d1f33; color: var(--txt); }
   .header-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
   .header-progress { max-width: 100%; width: 100%; }
 }
+
+.w95skip{position:absolute;left:-9999px;top:0;z-index:2147483001;
+  background:#0a246a;color:#fff;padding:6px 12px;text-decoration:none;
+  font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  border:2px solid #fff}
+.w95skip:focus{left:6px;top:6px}
 </style>
 <link href="/assets/fonts.css" rel="stylesheet">
 <style>
@@ -1145,7 +1151,9 @@ select option { background: #0d1f33; color: var(--txt); }
 </style>
 </head>
 <body>
+<a class="w95skip" href="#appmain">Skip to content</a>
 <div class="w95bar"><span><a href="/">F-Keys</a> &#8250; New Website - Order Form</span><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<main id="appmain">
 
 <!-- STICKY HEADER -->
 <header class="site-header">
@@ -1186,8 +1194,8 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card" id="plan-card">
       <div class="field">
-        <div class="field-label">Which plan? <span class="req">*</span></div>
-        <div class="choices grid-2" id="plan-group">
+        <div class="field-label" id="fl-which-plan">Which plan? <span class="req">*</span></div>
+        <div class="choices grid-2" id="plan-group" role="group" aria-labelledby="fl-which-plan">
           <button type="button" class="choice-btn selected" data-plan="standard" onclick="pickPlan('standard')">
             <span class="radio-dot"></span> <span style="display:block;text-align:left;"><strong>Standard: $100 + $75/month</strong><br><span style="font-size:13px;opacity:.8;">Up to 7 pages. 3 small edits and a 25-minute call every month.</span></span>
           </button>
@@ -1201,32 +1209,32 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card">
       <div class="field">
-        <div class="field-label">Business Name (Public-Facing) <span class="req">*</span></div>
+        <label class="field-label" for="f-biz-name">Business Name (Public-Facing) <span class="req">*</span></label>
         <input type="text" id="f-biz-name" name="f-biz-name" autocomplete="organization" placeholder="e.g. Cape Coral Cleaning Co.">
         <div class="field-error" id="e-biz-name">Required — please enter your business name.</div>
       </div>
       <div class="field">
-        <div class="field-label">Legal Business Name <span class="opt">optional</span></div>
+        <label class="field-label" for="f-legal-name">Legal Business Name <span class="opt">optional</span></label>
         <input type="text" id="f-legal-name" name="f-legal-name" autocomplete="organization" placeholder="If different from above">
       </div>
       <div class="field-row">
         <div class="field">
-          <div class="field-label">Primary Contact Name <span class="req">*</span></div>
+          <label class="field-label" for="f-contact-name">Primary Contact Name <span class="req">*</span></label>
           <input type="text" id="f-contact-name" name="f-contact-name" autocomplete="name" placeholder="Your full name">
           <div class="field-error" id="e-contact-name">Required.</div>
         </div>
         <div class="field">
-          <div class="field-label">Phone <span class="opt">optional</span></div>
+          <label class="field-label" for="f-phone">Phone <span class="opt">optional</span></label>
           <input type="tel" id="f-phone" name="f-phone" autocomplete="tel" placeholder="(239) 000-0000">
         </div>
       </div>
       <div class="field">
-        <div class="field-label">Email Address <span class="req">*</span></div>
+        <label class="field-label" for="f-email">Email Address <span class="req">*</span></label>
         <input type="email" id="f-email" name="f-email" autocomplete="email" placeholder="you@yourbusiness.com">
         <div class="field-error" id="e-email">Please enter a valid email address.</div>
       </div>
       <div class="field">
-        <div class="field-label">Country <span class="req">*</span></div>
+        <label class="field-label" for="f-country">Country <span class="req">*</span></label>
         <select id="f-country" name="f-country" autocomplete="country-name">
           <option value="">Select country...</option>
           <option>United States</option>
@@ -1253,8 +1261,8 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card">
       <div class="field">
-        <div class="field-label">Do you have a logo? <span class="req">*</span></div>
-        <div class="choices grid-2" id="logo-choice">
+        <div class="field-label" id="fl-do-you-have-a-logo">Do you have a logo? <span class="req">*</span></div>
+        <div class="choices grid-2" id="logo-choice" role="group" aria-labelledby="fl-do-you-have-a-logo">
           <button type="button" class="choice-btn" data-group="has-logo" data-value="yes" onclick="pickRadio(this,'has-logo'); showConditional('logo-upload-wrap', true)">
             <span class="radio-dot"></span> Yes, I have one
           </button>
@@ -1268,9 +1276,9 @@ select option { background: #0d1f33; color: var(--txt); }
           <div class="field-label" style="margin-top:20px;">Upload Your Logo <span class="req">*</span></div>
           <p class="field-hint" style="margin-bottom:10px;">PNG, JPG, or SVG preferred. Will be attached to your email submission.</p>
           <div class="upload-zone" id="logo-zone">
-            <input type="file" id="f-logo" name="f-logo" accept=".png,.jpg,.jpeg,.svg,.gif" onchange="handleLogo(this)">
+            <input type="file" id="f-logo" aria-label="Logo file" name="f-logo" accept=".png,.jpg,.jpeg,.svg,.gif" onchange="handleLogo(this)">
             <div class="upload-emoji">🖼</div>
-            <h4>Click to upload or drag & drop</h4>
+            <p class="dz-title">Click to upload or drag & drop</p>
             <p>PNG · JPG · SVG · GIF</p>
           </div>
           <div class="upload-status" id="logo-status"></div>
@@ -1280,8 +1288,8 @@ select option { background: #0d1f33; color: var(--txt); }
       <hr class="divider">
 
       <div class="field">
-        <div class="field-label">Brand Colors <span class="opt">optional</span></div>
-        <div class="swatch-row" id="swatch-row">
+        <div class="field-label" id="fl-brand-colors-optional">Brand Colors <span class="opt">optional</span></div>
+        <div class="swatch-row" id="swatch-row" role="group" aria-labelledby="fl-brand-colors-optional">
           <label class="swatch">
             <input type="color" id="f-swatch-1" value="#2a5fc8" oninput="syncSwatches()">
             <span class="swatch-cap">Main</span>
@@ -1296,14 +1304,14 @@ select option { background: #0d1f33; color: var(--txt); }
           </label>
           <button type="button" class="swatch-clear" id="swatch-clear" onclick="clearSwatches()">Clear</button>
         </div>
-        <input type="text" id="f-colors" name="f-colors" placeholder="e.g. #2a5fc8, deep navy + warm orange">
+        <input type="text" id="f-colors" aria-label="Brand colors" name="f-colors" placeholder="e.g. #2a5fc8, deep navy + warm orange">
         <div class="field-hint">Tap a square to pick a color, or just type it. Hex codes, names
           and plain descriptions all work &mdash; &ldquo;the green on my truck&rdquo; is a fine answer.</div>
       </div>
 
       <div class="field">
-        <div class="field-label">Brand Tone — select all that apply <span class="req">*</span></div>
-        <div class="choices" id="brand-tone-group">
+        <div class="field-label" id="fl-brand-tone-select-all-that-a">Brand Tone — select all that apply <span class="req">*</span></div>
+        <div class="choices" id="brand-tone-group" role="group" aria-labelledby="fl-brand-tone-select-all-that-a">
           <button type="button" class="choice-btn" data-group="brand-tone" data-value="Professional" onclick="toggleCheck(this,'brand-tone')">
             <span class="check-box"></span> Professional
           </button>
@@ -1327,7 +1335,7 @@ select option { background: #0d1f33; color: var(--txt); }
       </div>
 
       <div class="field">
-        <div class="field-label">Words or Phrases to AVOID <span class="opt">optional</span></div>
+        <label class="field-label" for="f-avoid">Words or Phrases to AVOID <span class="opt">optional</span></label>
         <textarea id="f-avoid" name="f-avoid" placeholder="e.g. cheap, budget, discount, aggressive..."></textarea>
       </div>
     </div>
@@ -1348,8 +1356,8 @@ select option { background: #0d1f33; color: var(--txt); }
 
       <!-- ADDRESS DISPLAY PREFERENCE -->
       <div class="field">
-        <div class="field-label">How should your location appear on your website? <span class="req">*</span></div>
-        <div class="field-hint" style="margin-bottom:12px;">This affects your footer, contact page, and local SEO setup.</div>
+        <div class="field-label" id="fl-how-should-your-location-app">How should your location appear on your website? <span class="req">*</span></div>
+        <div class="field-hint" style="margin-bottom:12px;" role="group" aria-labelledby="fl-how-should-your-location-app">This affects your footer, contact page, and local SEO setup.</div>
         <div class="choices stack" id="location-mode-group">
           <button type="button" class="choice-btn" data-group="location-mode" data-value="Full Address"
             onclick="pickRadio(this,'location-mode'); showConditional('loc-address-wrap',true); showConditional('loc-area-wrap',false);">
@@ -1376,13 +1384,13 @@ select option { background: #0d1f33; color: var(--txt); }
 
         <div class="conditional" id="loc-address-wrap">
           <div class="field-label" style="margin-top:20px;">Business Address <span class="opt">optional</span></div>
-          <input type="text" id="f-address" name="f-address" autocomplete="street-address" placeholder="e.g. 1234 Cape Coral Pkwy, Cape Coral, FL 33904">
+          <input type="text" id="f-address" aria-label="Business Address" name="f-address" autocomplete="street-address" placeholder="e.g. 1234 Cape Coral Pkwy, Cape Coral, FL 33904">
           <div class="field-hint">Will appear on your contact page, footer, and Google Maps embed.</div>
         </div>
 
         <div class="conditional" id="loc-area-wrap">
           <div class="field-label" style="margin-top:20px;">Area(s) Served <span class="opt">optional</span></div>
-          <input type="text" id="f-area-served" name="f-area-served" placeholder="e.g. Cape Coral, Fort Myers, Lee County, SW Florida">
+          <input type="text" id="f-area-served" aria-label="Area(s) Served" name="f-area-served" placeholder="e.g. Cape Coral, Fort Myers, Lee County, SW Florida">
           <div class="field-hint">Used for local SEO and your contact / about pages.</div>
         </div>
       </div>
@@ -1390,17 +1398,17 @@ select option { background: #0d1f33; color: var(--txt); }
       <hr class="divider">
 
       <div class="field">
-        <div class="field-label">Business Hours <span class="req">*</span></div>
+        <label class="field-label" for="f-hours">Business Hours <span class="req">*</span></label>
         <textarea id="f-hours" name="f-hours" placeholder="e.g. Mon–Fri 8am–6pm, Sat by appointment, Sun closed"></textarea>
         <div class="field-error" id="e-hours">Please enter your business hours.</div>
       </div>
       <div class="field">
-        <div class="field-label">Age Restrictions <span class="opt">optional</span></div>
+        <label class="field-label" for="f-age">Age Restrictions <span class="opt">optional</span></label>
         <input type="text" id="f-age" name="f-age" placeholder="e.g. 18+ only, 21+ for alcohol-related services">
       </div>
       <div class="field">
-        <div class="field-label">Licensed and/or Insured? <span class="opt">optional</span></div>
-        <div class="choices grid-3" id="licensed-group">
+        <div class="field-label" id="fl-licensed-and-or-insured-opti">Licensed and/or Insured? <span class="opt">optional</span></div>
+        <div class="choices grid-3" id="licensed-group" role="group" aria-labelledby="fl-licensed-and-or-insured-opti">
           <button type="button" class="choice-btn" data-group="licensed" data-value="Yes" onclick="pickRadio(this,'licensed')">
             <span class="radio-dot"></span> Yes
           </button>
@@ -1430,18 +1438,18 @@ select option { background: #0d1f33; color: var(--txt); }
     <div class="card">
       <div style="font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sky);margin-bottom:18px;">Your Services</div>
       <div class="field">
-        <div class="field-label">List Your Services <span class="req">*</span></div>
+        <label class="field-label" for="f-services">List Your Services <span class="req">*</span></label>
         <textarea id="f-services" name="f-services" style="min-height:120px;" placeholder="e.g.&#10;— Residential cleaning&#10;— Deep cleans&#10;— Move-in / move-out&#10;— Commercial spaces"></textarea>
         <div class="field-hint">Type them out, paste from a doc, or upload a menu/service list below.</div>
         <div class="field-error" id="e-services">Please describe your services — or upload a file below.</div>
       </div>
       <div class="field">
-        <div class="field-label">Upload a Menu or Service List <span class="opt">optional</span></div>
-        <div class="field-hint" style="margin-bottom:10px;">PDF, image, Word doc, or spreadsheet — anything that lists what you offer.</div>
+        <div class="field-label" id="fl-upload-a-menu-or-service-lis">Upload a Menu or Service List <span class="opt">optional</span></div>
+        <div class="field-hint" style="margin-bottom:10px;" role="group" aria-labelledby="fl-upload-a-menu-or-service-lis">PDF, image, Word doc, or spreadsheet — anything that lists what you offer.</div>
         <div class="upload-zone" id="services-zone">
-          <input type="file" id="f-services-file" name="f-services-file" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.csv" onchange="handleServicesFile(this)">
+          <input type="file" id="f-services-file" aria-label="Menu or service list file" name="f-services-file" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.csv" onchange="handleServicesFile(this)">
           <div class="upload-emoji">📋</div>
-          <h4>Click to upload or drag & drop</h4>
+          <p class="dz-title">Click to upload or drag & drop</p>
           <p>PDF · DOC · XLS · PNG · JPG</p>
         </div>
         <div class="upload-status" id="services-file-status"></div>
@@ -1452,8 +1460,8 @@ select option { background: #0d1f33; color: var(--txt); }
     <div class="card">
       <div style="font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sky);margin-bottom:18px;">Pricing on Your Website</div>
       <div class="field">
-        <div class="field-label">Would you like to display pricing on your site? <span class="req">*</span></div>
-        <div class="choices grid-2" id="show-pricing-group">
+        <div class="field-label" id="fl-would-you-like-to-display-pr">Would you like to display pricing on your site? <span class="req">*</span></div>
+        <div class="choices grid-2" id="show-pricing-group" role="group" aria-labelledby="fl-would-you-like-to-display-pr">
           <button type="button" class="choice-btn" data-group="show-pricing" data-value="Yes"
             onclick="pickRadio(this,'show-pricing'); showConditional('pricing-detail-wrap',true);">
             <span class="radio-dot"></span> Yes — show pricing
@@ -1483,15 +1491,15 @@ select option { background: #0d1f33; color: var(--txt); }
           </div>
 
           <div class="conditional" id="pricing-input-wrap">
-            <div class="field-label">Enter Your Pricing Details <span class="opt">optional</span></div>
+            <label class="field-label" for="f-pricing-custom">Enter Your Pricing Details <span class="opt">optional</span></label>
             <textarea id="f-pricing-custom" name="f-pricing-custom" style="min-height:100px;" placeholder="e.g.&#10;Basic Clean — starting at $80&#10;Deep Clean — starting at $150&#10;Move-Out — from $200"></textarea>
           </div>
           <div class="conditional" id="pricing-upload-wrap">
             <div class="field-label" style="margin-bottom:10px;">Upload Price Menu / PDF <span class="opt">optional</span></div>
             <div class="upload-zone" id="pricing-zone">
-              <input type="file" id="f-pricing-file" name="f-pricing-file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onchange="handlePricingFile(this)">
+              <input type="file" id="f-pricing-file" aria-label="Price menu or PDF file" name="f-pricing-file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onchange="handlePricingFile(this)">
               <div class="upload-emoji">💲</div>
-              <h4>Upload your pricing document</h4>
+              <p class="dz-title">Upload your pricing document</p>
               <p>PDF · DOC · PNG · JPG</p>
             </div>
             <div class="upload-status" id="pricing-file-status"></div>
@@ -1504,8 +1512,8 @@ select option { background: #0d1f33; color: var(--txt); }
     <div class="card">
       <div style="font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sky);margin-bottom:18px;">Payment Policies</div>
       <div class="field">
-        <div class="field-label">Payment Policy Highlights — select all that apply <span class="opt">optional</span></div>
-        <div class="field-hint" style="margin-bottom:12px;">These will be highlighted on your site to build trust with new clients.</div>
+        <div class="field-label" id="fl-payment-policy-highlights-se">Payment Policy Highlights — select all that apply <span class="opt">optional</span></div>
+        <div class="field-hint" style="margin-bottom:12px;" role="group" aria-labelledby="fl-payment-policy-highlights-se">These will be highlighted on your site to build trust with new clients.</div>
         <div class="choices" id="payment-policy-group">
           <button type="button" class="choice-btn" data-group="payment-policy" data-value="Deposit Required" onclick="toggleCheck(this,'payment-policy')">
             <span class="check-box"></span> Deposit Required
@@ -1540,11 +1548,11 @@ select option { background: #0d1f33; color: var(--txt); }
         </div>
       </div>
       <div class="field">
-        <div class="field-label">Additional Payment Details <span class="opt">optional</span></div>
+        <label class="field-label" for="f-payment-notes">Additional Payment Details <span class="opt">optional</span></label>
         <textarea id="f-payment-notes" name="f-payment-notes" placeholder="e.g. 50% deposit required at booking. Balance due upon completion. No refunds within 48 hours of appointment..."></textarea>
       </div>
       <div class="field">
-        <div class="field-label">Cancellation / Reschedule Policy <span class="opt">optional</span></div>
+        <label class="field-label" for="f-cancel">Cancellation / Reschedule Policy <span class="opt">optional</span></label>
         <textarea id="f-cancel" name="f-cancel" placeholder="e.g. 24-hour notice required. Late cancellations may be charged a convenience fee..."></textarea>
       </div>
     </div>
@@ -1563,8 +1571,8 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card">
       <div class="field">
-        <div class="field-label">Primary Call-to-Action — select all that apply <span class="req">*</span></div>
-        <div class="field-hint" style="margin-bottom:12px;">These become the main action buttons on your website. You may pick multiple.</div>
+        <div class="field-label" id="fl-primary-call-to-action-selec">Primary Call-to-Action — select all that apply <span class="req">*</span></div>
+        <div class="field-hint" style="margin-bottom:12px;" role="group" aria-labelledby="fl-primary-call-to-action-selec">These become the main action buttons on your website. You may pick multiple.</div>
         <div class="choices stack" id="cta-group">
 
           <button type="button" class="choice-btn" data-group="cta" data-value="Book a Consultation"
@@ -1634,20 +1642,20 @@ select option { background: #0d1f33; color: var(--txt); }
 
         <div class="conditional" id="booking-wrap">
           <div class="field-label" style="margin-top:20px;">Booking Platform <span class="opt">optional</span></div>
-          <input type="text" id="f-booking" name="f-booking" placeholder="e.g. Calendly, Square, Acuity, Mindbody, Jane...">
+          <input type="text" id="f-booking" aria-label="Booking Platform" name="f-booking" placeholder="e.g. Calendly, Square, Acuity, Mindbody, Jane...">
         </div>
 
         <div class="conditional" id="cta-other-wrap">
           <div class="field-label" style="margin-top:20px;">Describe Your Custom CTA <span class="opt">optional</span></div>
-          <textarea id="f-cta-other" name="f-cta-other" style="min-height:72px;" placeholder="e.g. WhatsApp chat button, Shopify store link, custom intake form..."></textarea>
+          <textarea id="f-cta-other" aria-label="Describe Your Custom CTA" name="f-cta-other" style="min-height:72px;" placeholder="e.g. WhatsApp chat button, Shopify store link, custom intake form..."></textarea>
         </div>
       </div>
 
       <hr class="divider">
 
       <div class="field">
-        <div class="field-label">Expected Response Time <span class="req">*</span></div>
-        <div class="choices grid-3" id="response-group">
+        <div class="field-label" id="fl-expected-response-time">Expected Response Time <span class="req">*</span></div>
+        <div class="choices grid-3" id="response-group" role="group" aria-labelledby="fl-expected-response-time">
           <button type="button" class="choice-btn" data-group="response" data-value="Same Day" onclick="pickRadio(this,'response')">
             <span class="radio-dot"></span> Same Day
           </button>
@@ -1661,7 +1669,7 @@ select option { background: #0d1f33; color: var(--txt); }
         <div class="field-error" id="e-response">Please select one.</div>
       </div>
       <div class="field">
-        <div class="field-label">Auto-Reply Message <span class="opt">optional</span></div>
+        <label class="field-label" for="f-autoreply">Auto-Reply Message <span class="opt">optional</span></label>
         <textarea id="f-autoreply" name="f-autoreply" placeholder="e.g. Thanks for reaching out! I'll get back to you within 24 hours. For urgent matters call (239) 000-0000."></textarea>
       </div>
     </div>
@@ -1680,27 +1688,27 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card">
       <div class="field">
-        <div class="field-label">Primary Service Area(s) <span class="req">*</span></div>
+        <label class="field-label" for="f-service-area">Primary Service Area(s) <span class="req">*</span></label>
         <textarea id="f-service-area" name="f-service-area" placeholder="e.g. Cape Coral, Fort Myers, Lee County FL — or nationwide"></textarea>
         <div class="field-error" id="e-service-area">Please enter your service area.</div>
       </div>
       <div class="field">
-        <div class="field-label">Keywords to Rank For <span class="opt">optional</span></div>
+        <label class="field-label" for="f-keywords">Keywords to Rank For <span class="opt">optional</span></label>
         <textarea id="f-keywords" name="f-keywords" placeholder="e.g. house cleaning Cape Coral, maid service Fort Myers, residential cleaner Lee County"></textarea>
       </div>
       <div class="field-row">
         <div class="field">
-          <div class="field-label">Instagram Username <span class="opt">optional</span></div>
+          <label class="field-label" for="f-instagram">Instagram Username <span class="opt">optional</span></label>
           <input type="text" id="f-instagram" name="f-instagram" placeholder="@yourbusiness">
         </div>
         <div class="field">
-          <div class="field-label">Google Business Profile <span class="opt">optional</span></div>
+          <label class="field-label" for="f-gbp">Google Business Profile <span class="opt">optional</span></label>
           <input type="url" id="f-gbp" name="f-gbp" placeholder="https://g.page/...">
         </div>
       </div>
       <div class="field">
-        <div class="field-label">Review Platforms — check all that apply <span class="opt">optional</span></div>
-        <div class="choices" id="review-group">
+        <div class="field-label" id="fl-review-platforms-check-all-t">Review Platforms — check all that apply <span class="opt">optional</span></div>
+        <div class="choices" id="review-group" role="group" aria-labelledby="fl-review-platforms-check-all-t">
           <button type="button" class="choice-btn" data-group="reviews" data-value="Google" onclick="toggleCheck(this,'reviews')">
             <span class="check-box"></span> Google
           </button>
@@ -1716,8 +1724,8 @@ select option { background: #0d1f33; color: var(--txt); }
         </div>
       </div>
       <div class="field">
-        <div class="field-label">Can we quote your reviews on the website? <span class="req">*</span></div>
-        <div class="choices grid-2" id="quote-reviews-group">
+        <div class="field-label" id="fl-can-we-quote-your-reviews-on">Can we quote your reviews on the website? <span class="req">*</span></div>
+        <div class="choices grid-2" id="quote-reviews-group" role="group" aria-labelledby="fl-can-we-quote-your-reviews-on">
           <button type="button" class="choice-btn" data-group="quote-reviews" data-value="Yes" onclick="pickRadio(this,'quote-reviews')">
             <span class="radio-dot"></span> Yes
           </button>
@@ -1743,8 +1751,8 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card">
       <div class="field">
-        <div class="field-label">Install Google Analytics? <span class="req">*</span></div>
-        <div class="choices grid-2" id="analytics-group">
+        <div class="field-label" id="fl-install-google-analytics">Install Google Analytics? <span class="req">*</span></div>
+        <div class="choices grid-2" id="analytics-group" role="group" aria-labelledby="fl-install-google-analytics">
           <button type="button" class="choice-btn" data-group="analytics" data-value="Yes" onclick="pickRadio(this,'analytics')">
             <span class="radio-dot"></span> Yes
           </button>
@@ -1755,8 +1763,8 @@ select option { background: #0d1f33; color: var(--txt); }
         <div class="field-error" id="e-analytics">Please select one.</div>
       </div>
       <div class="field">
-        <div class="field-label">Require a Privacy Policy page? <span class="req">*</span></div>
-        <div class="choices grid-2" id="privacy-group">
+        <div class="field-label" id="fl-require-a-privacy-policy-pag">Require a Privacy Policy page? <span class="req">*</span></div>
+        <div class="choices grid-2" id="privacy-group" role="group" aria-labelledby="fl-require-a-privacy-policy-pag">
           <button type="button" class="choice-btn" data-group="privacy" data-value="Yes" onclick="pickRadio(this,'privacy')">
             <span class="radio-dot"></span> Yes
           </button>
@@ -1770,12 +1778,12 @@ select option { background: #0d1f33; color: var(--txt); }
       <hr class="divider">
 
       <div class="field">
-        <div class="field-label">Domain Name <span class="opt">optional</span></div>
+        <label class="field-label" for="f-domain">Domain Name <span class="opt">optional</span></label>
         <input type="text" id="f-domain" name="f-domain" autocomplete="url" placeholder="e.g. mycoolbusiness.com">
       </div>
       <div class="field">
-        <div class="field-label">Domain Ownership <span class="req">*</span></div>
-        <div class="choices stack" id="domain-owner-group">
+        <div class="field-label" id="fl-domain-ownership">Domain Ownership <span class="req">*</span></div>
+        <div class="choices stack" id="domain-owner-group" role="group" aria-labelledby="fl-domain-ownership">
           <button type="button" class="choice-btn" data-group="domain-owner" data-value="Client Owns It" onclick="pickRadio(this,'domain-owner')">
             <span class="radio-dot"></span> I own it — I'll provide access
           </button>
@@ -1789,7 +1797,7 @@ select option { background: #0d1f33; color: var(--txt); }
         <div class="field-error" id="e-domain-owner">Please select one.</div>
       </div>
       <div class="field">
-        <div class="field-label">Target Launch Date <span class="opt">optional</span></div>
+        <label class="field-label" for="f-launch-date">Target Launch Date <span class="opt">optional</span></label>
         <input type="date" id="f-launch-date" name="f-launch-date">
       </div>
     </div>
@@ -1903,7 +1911,7 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card">
       <div class="field">
-        <div class="field-label">Anything else we should know? <span class="opt">optional</span></div>
+        <label class="field-label" for="f-notes">Anything else we should know? <span class="opt">optional</span></label>
         <textarea id="f-notes" name="f-notes" placeholder="Special requirements, tight deadlines, references you love, existing brand guidelines..."></textarea>
       </div>
     </div>
@@ -2391,7 +2399,7 @@ select option { background: #0d1f33; color: var(--txt); }
 
     <div class="card">
       <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.18em;color:var(--muted2);text-transform:uppercase;margin-bottom:16px;">Submission Summary</div>
-      <table class="summary-table" id="summary-table"></table>
+      <table class="summary-table" id="summary-table" role="presentation"></table>
     </div>
 
     <div class="card">
@@ -2450,9 +2458,9 @@ select option { background: #0d1f33; color: var(--txt); }
       <p class="sub2">Optional — upload photos, reference images, existing design files, or anything that helps communicate your vision. These get sent as a separate email.</p>
 
       <div class="upload-zone" id="media-zone">
-        <input type="file" id="f-media" name="f-media" accept="image/*,.pdf" multiple onchange="handleMedia(this)">
+        <input type="file" id="f-media" aria-label="Photos or documents" name="f-media" accept="image/*,.pdf" multiple onchange="handleMedia(this)">
         <div class="upload-emoji">📎</div>
-        <h4>Click to select or drag files here</h4>
+        <p class="dz-title">Click to select or drag files here</p>
         <p>Images · PDFs · Logos · References — multiple files ok</p>
       </div>
 
@@ -3234,7 +3242,7 @@ function showHandoff(payload) {
       '<p class="field-hint" style="margin:0 0 12px;">Your answers are below and nothing is lost. ' +
       'Copy them, then email them to <a href="mailto:' + FKEYS.NOTIFY + '" style="color:var(--sky);">' +
       FKEYS.NOTIFY + '</a>. I will reply with your written quote.</p>' +
-      '<textarea id="handoff-text" rows="12" readonly ' +
+      '<textarea id="handoff-text" aria-label="Your request, ready to copy" rows="12" readonly ' +
       'style="width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.5;"></textarea>' +
       '<div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">' +
       '<button type="button" class="nav-next" id="handoff-copy">Copy my answers</button>' +
@@ -3306,5 +3314,6 @@ I own or have the rights to use these files, and I authorize their use on my web
   });
 }
 </script>
+</main>
 </body>
 </html>

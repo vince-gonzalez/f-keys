@@ -562,6 +562,12 @@
   }
   .page-actions { display: flex; gap: 8px; }
   .page-actions .btn { flex: 1; }
+
+.w95skip{position:absolute;left:-9999px;top:0;z-index:2147483001;
+  background:#0a246a;color:#fff;padding:6px 12px;text-decoration:none;
+  font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  border:2px solid #fff}
+.w95skip:focus{left:6px;top:6px}
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -577,6 +583,7 @@
   color:#fff;font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
   border-bottom:1px solid #808080;position:relative;z-index:2147483000}
 .w95bar a{color:#fff;text-decoration:none}
+.w95bar .w95title{font:inherit;margin:0;padding:0;display:inline;letter-spacing:inherit}
 .w95bar a:hover{text-decoration:underline}
 .w95bar .w95btns{display:flex;gap:2px}
 .w95bar .w95btn{width:16px;height:14px;background:#d4d0c8;color:#000;
@@ -589,7 +596,9 @@
 </style>
 </head>
 <body>
-<div class="w95bar"><span><a href="/">F-Keys</a> &#8250; RemapWrap</span><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<a class="w95skip" href="#appmain">Skip to content</a>
+<div class="w95bar"><h1 class="w95title"><a href="/">F-Keys</a> &#8250; RemapWrap</h1><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<main id="appmain">
 
 <!-- ── Header ── -->
 <!-- First run. A stranger opening this saw PAIRING, BOARD SIZE, PROFILES,
@@ -622,7 +631,7 @@
     <div class="panel-body">
 
       <div class="connect-row">
-        <input class="field-input" id="server-ip" placeholder="Server IP (auto)" />
+        <input class="field-input" id="server-ip" aria-label="Server IP" placeholder="Server IP (auto)" />
         <button class="btn accent" data-act="connectWebSocket">CONNECT</button>
       </div>
 
@@ -644,16 +653,16 @@
         <!-- A profile is a file on disk. Everything here is also doable by
              dropping a .json into the profiles folder, which is how a board
              written by the Python package arrives. -->
-        <select class="field-input" id="profile-list" style="width:100%;"
+        <select class="field-input" id="profile-list" aria-label="Profiles" style="width:100%;"
                 data-act="activateProfile" data-pass="value"></select>
         <div class="field-group" style="margin-top:8px;">
           <div class="field-label">PROFILE NAME</div>
-          <input class="field-input" id="profile-name" type="text"
+          <input class="field-input" id="profile-name" aria-label="Profile name" type="text"
                  placeholder="Streaming" maxlength="64" />
         </div>
         <div class="field-group">
           <div class="field-label">SWITCH TO IT FOR THESE APPS</div>
-          <input class="field-input" id="profile-match" type="text"
+          <input class="field-input" id="profile-match" aria-label="Switch to it for these apps" type="text"
                  placeholder="photoshop, Adobe Photoshop" />
           <button class="btn btn-block" data-act="useFrontApp">USE THE APP IN FRONT</button>
           <div id="match-note" style="font-size:13px; color:var(--text-dim); margin-top:6px;"></div>
@@ -679,7 +688,7 @@
         <div class="panel-title panel-sub">THIS COPY</div>
         <div id="tier-line" style="font-size:15px; color:var(--text-bright); margin-bottom:6px;">…</div>
         <div id="tier-note" style="font-size:13px; color:var(--text-dim); line-height:1.45; margin-bottom:10px;"></div>
-        <input class="field-input" id="licence-key" type="text"
+        <input class="field-input" id="licence-key" aria-label="Licence key" type="text"
                placeholder="paste a licence key" style="width:100%;" />
         <button class="btn btn-block" data-act="applyLicence">UNLOCK</button>
         <button class="btn btn-block" data-act="removeLicence" id="licence-remove">REMOVE LICENSE FROM THIS PC</button>
@@ -689,16 +698,16 @@
         <div class="panel-title panel-sub">BOARD SIZE</div>
         <div class="field-group">
           <div class="field-label">COLUMNS</div>
-          <input class="field-input" id="cfg-cols" type="number" min="6" max="48" value="24" data-act="applyGridConfig" />
+          <input class="field-input" id="cfg-cols" aria-label="Columns" type="number" min="6" max="48" value="24" data-act="applyGridConfig" />
         </div>
         <div class="field-group">
           <div class="field-label">ROWS</div>
-          <input class="field-input" id="cfg-rows" type="number" min="4" max="32" value="16" data-act="applyGridConfig" />
+          <input class="field-input" id="cfg-rows" aria-label="Rows" type="number" min="4" max="32" value="16" data-act="applyGridConfig" />
         </div>
         <button class="btn accent btn-block first" data-act="pushLayoutToControllers">▶ PUSH TO PHONE</button>
         <button class="btn btn-block" data-act="exportLayout">EXPORT LAYOUT JSON</button>
         <button class="btn btn-block" data-act="importLayoutClick">IMPORT LAYOUT JSON</button>
-        <input type="file" id="import-file" accept=".json" style="display:none" data-act="importLayout" data-pass="event" />
+        <input type="file" id="import-file" aria-label="Import layout JSON file" accept=".json" style="display:none" data-act="importLayout" data-pass="event" />
       </div>
     </div>
   </div>
@@ -706,7 +715,7 @@
   <!-- Center: Key canvas -->
   <div class="canvas-area">
     <div class="canvas-toolbar">
-      <select class="field-input" id="add-type" style="width:auto; display:inline-block; margin-right:6px;"><option value="key">Key</option><option value="toggle">Toggle</option><option value="pad">Pad</option><option value="dial">Dial</option><option value="slider">Slider</option><option value="timer">Timer</option><option value="input">Type</option></select><button class="btn accent" data-act="addKey" data-from="add-type">+ ADD</button>
+      <select class="field-input" id="add-type" aria-label="Type of key to add" style="width:auto; display:inline-block; margin-right:6px;"><option value="key">Key</option><option value="toggle">Toggle</option><option value="pad">Pad</option><option value="dial">Dial</option><option value="slider">Slider</option><option value="timer">Timer</option><option value="input">Type</option></select><button class="btn accent" data-act="addKey" data-from="add-type">+ ADD</button>
       <button class="btn" data-act="removeSelected">− REMOVE</button>
       <button class="btn" data-act="clearAll">CLEAR ALL</button>
       <span style="font-size:13px; color:var(--text-dim); margin-left:8px;">CLICK KEY TO EDIT</span>
@@ -1781,6 +1790,14 @@ function commandOptions(type, chosen) {
 }
 
 function row(label, hint, body) {
+  // Name the control for a screen reader. The caption is a
+  // div for layout reasons, so the association is made with
+  // aria-label carrying the same words rather than by
+  // restructuring fourteen call sites.
+  if (!/aria-label=/i.test(body)) {
+    body = body.replace(/<(input|select|textarea)\b/i,
+      '<$1 aria-label="' + escAttr(label) + '"');
+  }
   return '<div class="field-group">' +
     '<div class="field-label">' + escHtml(label) +
     (hint ? ' <span class="field-hint">' + escHtml(hint) + '</span>' : '') +
@@ -2283,5 +2300,6 @@ NEXT STEPS
 - Color theming per key with gradient support
 */
 </script>
+</main>
 </body>
 </html>

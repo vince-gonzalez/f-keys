@@ -22,6 +22,7 @@ import os
 import re
 import sys
 import json
+import hashlib
 import urllib.request
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -60,6 +61,17 @@ NOT_TESTED = [
 ]
 
 STYLE_ROOTS = []
+
+# A <label> element with its whole contents, used to find controls
+# that are labelled by being INSIDE one rather than by a for=.
+#
+# Written with an explicit character class instead of a word boundary,
+# after the escape came through as a literal backspace byte and the
+# regex silently matched nothing - so the check reported fifty
+# correctly-labelled controls as unlabelled and looked like it was
+# working the whole time. A regex that cannot match is indistinguishable
+# from a rule with nothing to complain about.
+LABEL_BLOCK = re.compile(r"<label[\s>][^>]*>.*?</label>|<label>.*?</label>", re.S | re.I)
 
 VOID_ALT = re.compile(r"<img\b(?![^>]*\balt\s*=)[^>]*>", re.I)
 IMGS = re.compile(r"<img\b[^>]*>", re.I)
@@ -153,13 +165,37 @@ def check(html, label):
                     r"\bvalue\s*=|aria-label", attrs, re.I):
                 add("4.1.2-name", "%s input with no value or aria-label" % ttype)
             continue
+        # A control hidden with inline display:none is not in the
+        # accessibility tree, so there is no name for a screen reader to
+        # read and nothing for this criterion to decide. Every one of
+        # these on this site is a file picker opened by a visible button,
+        # which is the normal way to build one. They are named anyway -
+        # the cost is nothing, and a later change that reveals one should
+        # not silently lose its label - but a missing name on a hidden
+        # control is not a barrier and is not counted as one.
+        if re.search(r"style\s*=\s*['\"][^'\"]*display\s*:\s*none", attrs,
+                     re.I):
+            continue
         has_name = re.search(r"aria-label|aria-labelledby|\btitle\s*=", attrs, re.I)
         idm = re.search(r"\bid\s*=\s*['\"]([^'\"]+)", attrs, re.I)
+
+        # EXPLICIT: <label for="x"> ... and the control has id="x".
         labelled = False
         if idm:
             labelled = bool(re.search(
                 r"<label\b[^>]*\bfor\s*=\s*['\"]" + re.escape(idm.group(1)) + r"['\"]",
                 html, re.I))
+
+        # IMPLICIT: the control sits INSIDE a <label>. This is a valid
+        # association and the check used to miss it entirely, which made
+        # it report fifty correctly-labelled controls on one page as
+        # unlabelled - and would have had somebody "fix" markup that was
+        # already right. Anyone testing to 508 needs both forms counted,
+        # because authors use both.
+        if not labelled and not has_name:
+            labelled = any(lm.start() < m4.start() < lm.end()
+                           for lm in LABEL_BLOCK.finditer(html))
+
         if not has_name and not labelled:
             add("1.3.1-labels", "%s has no label, aria-label or title" % kind)
 
@@ -167,8 +203,15 @@ def check(html, label):
     for m5 in re.finditer(r"<button\b([^>]*)>(.*?)</button>", html, re.S | re.I):
         attrs, inner = m5.group(1), m5.group(2)
         text = re.sub(r"<[^>]+>", "", inner).strip()
-        if not text and not re.search(r"aria-label|aria-labelledby", attrs, re.I):
-            add("4.1.2-name", "button with no text and no aria-label")
+        # title= counts. It is the last fallback in the accessible-name
+        # computation, so a button carrying title="Close" and nothing else
+        # does have a name - weaker than aria-label, and not nothing. The
+        # check used to ignore it and reported six named buttons as
+        # nameless, which is the sort of false positive that teaches
+        # people to stop reading the report.
+        if not text and not re.search(r"aria-label|aria-labelledby|\btitle\s*=",
+                                      attrs, re.I):
+            add("4.1.2-name", "button with no text, aria-label or title")
 
     # 2.4.4 link text
     for m6 in re.finditer(r"<a\b([^>]*)>(.*?)</a>", html, re.S | re.I):
@@ -217,7 +260,14 @@ def check(html, label):
             add("2.4.3-taborder", "positive tabindex=%s" % v)
 
     # 4.1.1 duplicate ids
-    ids = re.findall(r"\bid\s*=\s*['\"]([^'\"]+)['\"]", html, re.I)
+    # Script bodies are stripped first. An id inside a JavaScript string
+    # is a template for one branch of a widget, and the branches never
+    # render together, so counting them finds duplicates the browser
+    # never sees. Checked by hand on remapwrap's ed-arg (three branches
+    # of one field) and Key-J's seqEmpty (a placeholder the script puts
+    # back) before relaxing this.
+    markup = re.sub(r"<script\b.*?</script>", "", html, flags=re.S | re.I)
+    ids = re.findall(r"\bid\s*=\s*['\"]([^'\"]+)['\"]", markup, re.I)
     seen, dup = set(), set()
     for i in ids:
         if i in seen:
@@ -264,6 +314,70 @@ def check(html, label):
     return f
 
 
+def lift_function(html, name):
+    """Return one JavaScript function's source by matching braces, or ""."""
+    i = html.find("function %s(" % name)
+    if i < 0:
+        return ""
+    try:
+        j = html.index("{", i)
+    except ValueError:
+        return ""
+    depth, k = 0, j
+    while k < len(html):
+        if html[k] == "{":
+            depth += 1
+        elif html[k] == "}":
+            depth -= 1
+            if depth == 0:
+                return html[i:k + 1].replace("\r\n", "\n")
+        k += 1
+    return ""
+
+
+# Findings this audit cannot settle by reading, because the markup does
+# not exist until the page runs - and which have been settled by running
+# it instead.
+#
+# Each entry carries the function that does the naming and a fingerprint
+# of that function's source. EDIT THE FUNCTION AND THE EXCEPTION DIES:
+# the hash stops matching, the findings come back, and the report says
+# the builder changed. An exception that outlives the thing it was
+# granted for is not an exception, it is a hole.
+RUNTIME_VERIFIED = {
+    ("remapwrap/dashboard.html", "1.3.1-labels"): (
+        "row",
+        "86aaf299ddaa5bd23d09142790d54b12aafebc0cec667d84e531b91c1753bce1",
+        "Twelve key-editor fields are emitted by row(), which attaches an\n"
+        "      aria-label carrying the caption it was given. Verified two ways\n"
+        "      on 2026-10-17: row(), escAttr() and escHtml() were lifted out of\n"
+        "      the page and run in node against six shapes - a select, a number\n"
+        "      input, a colour input, an id-less select, a body that already\n"
+        "      carries a name, and a label containing a quote - and all six came\n"
+        "      back with exactly one correct name; then the source parentheses\n"
+        "      were matched to confirm each of the twelve is an argument to a\n"
+        "      row() call. The two that were not, add-type and the arg field,\n"
+        "      were fixed rather than excused."),
+}
+
+
+def runtime_exception(name, html, crit):
+    """(applies, note) for one page and criterion."""
+    key = (name.replace("\\", "/"), crit)
+    for (page, c), (fn, want, why) in RUNTIME_VERIFIED.items():
+        if c != crit or not key[0].endswith(page):
+            continue
+        got = hashlib.sha256(lift_function(html, fn).encode("utf-8")).hexdigest()
+        if not lift_function(html, fn):
+            return False, "%s(): NOT FOUND in the page - exception void" % fn
+        if got != want:
+            return False, ("%s() has changed since it was verified "
+                           "(%s...) - exception void, re-verify it"
+                           % (fn, got[:12]))
+        return True, why
+    return False, ""
+
+
 def gather(paths):
     docs = []
     for p in paths:
@@ -285,8 +399,15 @@ def gather(paths):
 def report(docs, title):
     percrit = {}
     perdoc = {}
+    excepted = []
     for name, html in docs:
         f = check(html, name)
+        for c in list(f):
+            ok, why = runtime_exception(name, html, c)
+            if ok:
+                excepted.append((name, c, len(f.pop(c)), why))
+            elif why:
+                f[c].append("RUN-TIME EXCEPTION VOID: " + why)
         perdoc[name] = f
         for c, msgs in f.items():
             percrit.setdefault(c, {"docs": 0, "count": 0, "example": msgs[0]})
@@ -315,6 +436,14 @@ def report(docs, title):
     clean = sum(1 for n in perdoc if not perdoc[n])
     print("  pages with zero findings: %d of %d (%.0f%%)"
           % (clean, len(docs), 100.0 * clean / max(1, len(docs))))
+    if excepted:
+        print()
+        print("  PASSED BY RUNNING IT, NOT BY READING IT")
+        print("  (printed every run, on purpose - a quiet exception is a hole)")
+        for name, c, n, why in excepted:
+            print("    %s  %s  %d finding(s) set aside"
+                  % (name.replace("\\", "/"), c, n))
+            print("      %s" % why)
     return percrit, perdoc, pct
 
 

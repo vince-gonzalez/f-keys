@@ -31,7 +31,7 @@
 // ============================================================
 -->
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -556,6 +556,12 @@ input[type=range].sheet-input { padding: 0; }
   line-height: 1.2;
 }
 .key-btn.has-image .key-sub { display: none; }
+
+.w95skip{position:absolute;left:-9999px;top:0;z-index:2147483001;
+  background:#0a246a;color:#fff;padding:6px 12px;text-decoration:none;
+  font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  border:2px solid #fff}
+.w95skip:focus{left:6px;top:6px}
 </style>
 
 <link href="/assets/fonts.css" rel="stylesheet">
@@ -571,6 +577,7 @@ input[type=range].sheet-input { padding: 0; }
   color:#fff;font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
   border-bottom:1px solid #808080;position:relative;z-index:2147483000}
 .w95bar a{color:#fff;text-decoration:none}
+.w95bar .w95title{font:inherit;margin:0;padding:0;display:inline;letter-spacing:inherit}
 .w95bar a:hover{text-decoration:underline}
 .w95bar .w95btns{display:flex;gap:2px}
 .w95bar .w95btn{width:16px;height:14px;background:#d4d0c8;color:#000;
@@ -583,7 +590,9 @@ input[type=range].sheet-input { padding: 0; }
 </style>
 </head>
 <body>
-<div class="w95bar"><span><a href="/">F-Keys</a> &#8250; RemapWrap - Controller</span><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<a class="w95skip" href="#appmain">Skip to content</a>
+<div class="w95bar"><h1 class="w95title"><a href="/">F-Keys</a> &#8250; RemapWrap - Controller</h1><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<main id="appmain">
 
 <!-- ── Pairing gate ────────────────────────────────────────────────
      Shown only when this phone has no secret the PC accepts. The
@@ -2148,5 +2157,6 @@ NEXT STEPS
 - Visual "sent" confirmation flash per key
 */
 </script>
+</main>
 </body>
 </html>

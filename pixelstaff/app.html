@@ -270,6 +270,12 @@
 
   /* ── TOOL CURSOR ── */
   .tool-erase #staff-container { cursor: cell; }
+
+.w95skip{position:absolute;left:-9999px;top:0;z-index:2147483001;
+  background:#0a246a;color:#fff;padding:6px 12px;text-decoration:none;
+  font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  border:2px solid #fff}
+.w95skip:focus{left:6px;top:6px}
 </style>
 <style>
 /* The application title bar. Scoped to .w95bar so it cannot reach
@@ -283,6 +289,7 @@
   color:#fff;font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
   border-bottom:1px solid #808080;position:relative;z-index:2147483000}
 .w95bar a{color:#fff;text-decoration:none}
+.w95bar .w95title{font:inherit;margin:0;padding:0;display:inline;letter-spacing:inherit}
 .w95bar a:hover{text-decoration:underline}
 .w95bar .w95btns{display:flex;gap:2px}
 .w95bar .w95btn{width:16px;height:14px;background:#d4d0c8;color:#000;
@@ -295,7 +302,9 @@
 </style>
 </head>
 <body>
-<div class="w95bar"><span><a href="/">F-Keys</a> &#8250; Pixel Staff</span><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<a class="w95skip" href="#appmain">Skip to content</a>
+<div class="w95bar"><h1 class="w95title"><a href="/">F-Keys</a> &#8250; Pixel Staff</h1><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<main id="appmain">
 
 <!-- TITLE BAR -->
 <div id="titlebar">
@@ -319,7 +328,7 @@
 
   <!-- WAVEFORM -->
   <div class="knob-group">
-    <span class="knob-label">WAVE</span>
+    <label class="knob-label" for="sel-wave">WAVE</label>
     <select id="sel-wave">
       <option value="square">SQUARE</option>
       <option value="sawtooth">SAW</option>
@@ -331,7 +340,7 @@
 
   <!-- TEMPO -->
   <div class="knob-group">
-    <span class="knob-label">BPM</span>
+    <label class="knob-label" for="rng-bpm">BPM</label>
     <input type="range" id="rng-bpm" min="40" max="300" value="120">
     <span class="knob-val" id="val-bpm">120</span>
   </div>
@@ -339,7 +348,7 @@
 
   <!-- NOTE LENGTH (visual width) -->
   <div class="knob-group">
-    <span class="knob-label">NOTE LEN</span>
+    <label class="knob-label" for="sel-notelen">NOTE LEN</label>
     <select id="sel-notelen">
       <option value="1">1x</option>
       <option value="2" selected>2x</option>
@@ -351,7 +360,7 @@
 
   <!-- VOLUME -->
   <div class="knob-group">
-    <span class="knob-label">VOL</span>
+    <label class="knob-label" for="rng-vol">VOL</label>
     <input type="range" id="rng-vol" min="0" max="100" value="70">
     <span class="knob-val" id="val-vol">70%</span>
   </div>
@@ -373,7 +382,7 @@
     <div id="piano-keys"></div>
   </div>
   <div id="staff-container">
-    <canvas id="staff-canvas"></canvas>
+    <canvas id="staff-canvas" role="img" aria-label="Piano roll. Each square is a note at a pitch and a time; the note count and cursor position are reported as text in the status bar.">Piano roll. Each square is a note at a pitch and a time; the note count and cursor position are reported as text in the status bar.</canvas>
     <div id="playhead"></div>
   </div>
 </div>
@@ -938,5 +947,6 @@ buildPiano();
 resizeCanvas();
 updateStats();
 </script>
+</main>
 </body>
 </html>

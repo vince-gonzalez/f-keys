@@ -530,6 +530,12 @@
     white-space: nowrap;
   }
   .tooltip.show { opacity: 1; }
+
+.w95skip{position:absolute;left:-9999px;top:0;z-index:2147483001;
+  background:#0a246a;color:#fff;padding:6px 12px;text-decoration:none;
+  font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  border:2px solid #fff}
+.w95skip:focus{left:6px;top:6px}
 </style>
 
 <link href="../assets/fonts.css" rel="stylesheet">
@@ -545,6 +551,7 @@
   color:#fff;font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
   border-bottom:1px solid #808080;position:relative;z-index:2147483000}
 .w95bar a{color:#fff;text-decoration:none}
+.w95bar .w95title{font:inherit;margin:0;padding:0;display:inline;letter-spacing:inherit}
 .w95bar a:hover{text-decoration:underline}
 .w95bar .w95btns{display:flex;gap:2px}
 .w95bar .w95btn{width:16px;height:14px;background:#d4d0c8;color:#000;
@@ -557,7 +564,9 @@
 </style>
 </head>
 <body>
-<div class="w95bar"><span><a href="/">F-Keys</a> &#8250; Key-J</span><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<a class="w95skip" href="#appmain">Skip to content</a>
+<div class="w95bar"><h1 class="w95title"><a href="/">F-Keys</a> &#8250; Key-J</h1><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<main id="appmain">
 
 <!-- HEADER -->
 <header>
@@ -605,11 +614,11 @@
   <!-- CENTER -->
   <div class="panel-center">
     <div class="staff-area">
-      <canvas id="staffCanvas"></canvas>
+      <canvas id="staffCanvas" role="img" aria-label="Musical staff. The notes you play are drawn here as they sound, and the same notes are listed as text in the session log below.">Musical staff. The notes you play are drawn here as they sound, and the same notes are listed as text in the session log below.</canvas>
       <div class="note-flash" id="noteFlash">C4</div>
     </div>
     <div class="viz-area">
-      <canvas id="vizCanvas"></canvas>
+      <canvas id="vizCanvas" role="img" aria-label="Waveform display for the current sound. It is a picture of the settings in the Sound panel and carries no information those controls do not.">Waveform display for the current sound. It is a picture of the settings in the Sound panel and carries no information those controls do not.</canvas>
     </div>
     <div class="beat-row">
       <div class="beat-info">Notes: <span class="beat-val" id="noteCountHdr">0</span></div>
@@ -640,27 +649,27 @@
       <span class="ctrl-label">Sound</span>
       <div class="slider-row">
         <div class="slider-item">
-          <label>Attack</label>
+          <label for="attackSlider">Attack</label>
           <input type="range" min="1" max="200" value="10" id="attackSlider" oninput="updateParam('attack',this)">
           <span class="slider-readout" id="attackVal">10</span>
         </div>
         <div class="slider-item">
-          <label>Release</label>
+          <label for="releaseSlider">Release</label>
           <input type="range" min="50" max="2000" value="400" id="releaseSlider" oninput="updateParam('release',this)">
           <span class="slider-readout" id="releaseVal">400</span>
         </div>
         <div class="slider-item">
-          <label>Volume</label>
+          <label for="volumeSlider">Volume</label>
           <input type="range" min="0" max="100" value="75" id="volumeSlider" oninput="updateParam('volume',this)">
           <span class="slider-readout" id="volumeVal">75</span>
         </div>
         <div class="slider-item">
-          <label>Reverb</label>
+          <label for="reverbSlider">Reverb</label>
           <input type="range" min="0" max="100" value="20" id="reverbSlider" oninput="updateParam('reverb',this)">
           <span class="slider-readout" id="reverbVal">20</span>
         </div>
         <div class="slider-item">
-          <label>Pitch ±</label>
+          <label for="detuneSl">Pitch ±</label>
           <input type="range" min="-12" max="12" value="0" id="detuneSl" oninput="updateParam('detune',this)">
           <span class="slider-readout" id="detuneVal">0</span>
         </div>
@@ -694,9 +703,9 @@
   <div class="modal">
     <h2>Export Session</h2>
     <p>Your session will be rendered and downloaded as a WAV file (high-quality, no lossy compression). You can convert to MP3 using any free tool (Audacity, ffmpeg, online converter).</p>
-    <label>Filename</label>
+    <label for="exportName">Filename</label>
     <input type="text" id="exportName" value="Key-J_Session">
-    <label>Normalize</label>
+    <label for="exportNorm">Normalize</label>
     <select id="exportNorm">
       <option value="1">Yes, normalize peak to 0dB</option>
       <option value="0">No, keep as recorded</option>
@@ -737,7 +746,7 @@
   <div class="modal">
     <h2>Re-Bind Key</h2>
     <p id="rebindMsg">Press any key to assign a new note...</p>
-    <label>Note Name</label>
+    <label for="rebindNote">Note Name</label>
     <select id="rebindNote"></select>
     <div class="modal-row">
       <button class="modal-close" onclick="closeModal('rebindModal')">Cancel</button>
@@ -1935,7 +1944,7 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
           '<div class="row" id="kj-presets"></div>' +
         '</div>' +
       '</div>' +
-      '<input type="file" id="kj-midi" accept=".mid,.midi" style="display:none">';
+      '<input type="file" id="kj-midi" aria-label="Load a MIDI file" accept=".mid,.midi" style="display:none">';
     host.appendChild(box);
 
     var sel = el('kj-tuning');
@@ -2510,13 +2519,13 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
     box.innerHTML =
       '<h3>Grid</h3>' +
       '<div class="bar">' +
-        '<select id="kg-kit"></select>' +
+        '<select id="kg-kit" aria-label="Kit"></select>' +
         '<button id="kg-more">+8 steps</button>' +
         '<button id="kg-clear">Clear</button>' +
         '<button id="kg-ascii">Show ASCII</button>' +
         '<button id="kg-use" class="primary">Use as sequence</button>' +
       '</div>' +
-      '<div class="wrap"><table id="kg-table"></table></div>' +
+      '<div class="wrap"><table id="kg-table" role="presentation"></table></div>' +
       '<pre class="ascii" id="kg-out"></pre>' +
       '<p class="status" id="kg-status"></p>';
     host.insertBefore(box, document.getElementById('kj') || null);
@@ -2963,12 +2972,12 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
         '<button id="kj17-savetxt">Save .txt</button>' +
         '<button id="kj17-loadtxt">Load .txt</button>' +
         '<span style="color:#9aa0b5">BPM</span>' +
-        '<input type="number" id="kj17-bpm" value="140" min="30" max="300">' +
+        '<input type="number" id="kj17-bpm" aria-label="Beats per minute" value="140" min="30" max="300">' +
         '<button id="kj17-wav" class="primary">Export WAV</button>' +
       '</div>' +
       '<div class="note" id="kj17-status">The sequence, one note per beat, ' +
         'through the tone above. Not a recording of your typing.</div>' +
-      '<input type="file" id="kj17-file" accept=".txt,text/plain" style="display:none">';
+      '<input type="file" id="kj17-file" aria-label="Load a tablature text file" accept=".txt,text/plain" style="display:none">';
     presets.parentNode.insertBefore(wrap, presets.nextSibling);
 
     el('kj17-savetxt').onclick = function () {
@@ -3679,5 +3688,6 @@ document.addEventListener('click', () => { if (AC.state === 'suspended') AC.resu
   window.KeyJKeys = { repaint: function () { build(); } };
 })();
 </script>
+</main>
 </body>
 </html>

@@ -194,15 +194,15 @@ PAGES = {
   "prompt-atoms": dict(
     title="Prompt Atoms",
     tagline="257 instruction atoms and 32 conflicts, mined from public prompt libraries.",
-    lede="Public prompt libraries reuse the same instructions — “Only output "
-         "Markdown,” “Do not give warnings” — across unrelated tasks, and some of "
+    lede="Public prompt libraries reuse the same instructions (“Only output "
+         "Markdown,” “Do not give warnings”) across unrelated tasks, and some of "
          "them contradict each other. This dataset pulls two public corpora apart into "
          "the recurring instructions, types each to a slot, counts how widely each is "
          "used, and maps the pairs that cannot both hold.",
-    cta=[("Atoms — CSV", "/prompt-atoms/data/prompt-atoms.csv"),
-         ("Conflicts — CSV", "/prompt-atoms/data/prompt-conflicts.csv"),
+    cta=[("Atoms (CSV)", "/prompt-atoms/data/prompt-atoms.csv"),
+         ("Conflicts (CSV)", "/prompt-atoms/data/prompt-conflicts.csv"),
          ("Datasheet", "/prompt-atoms/data/DATASHEET.md"),
-         ("Cite — Zenodo", "https://doi.org/10.5281/zenodo.23428931")],
+         ("Cite (Zenodo)", "https://doi.org/10.5281/zenodo.23428931")],
     herometa="<b>257 atoms</b> &middot; 32 conflicts &middot; 195 public templates &middot; "
              "CSV + JSON &middot; CC&nbsp;BY&nbsp;4.0 &middot; "
              "<a href=\"https://doi.org/10.5281/zenodo.23428931\">DOI</a>",
@@ -214,7 +214,7 @@ PAGES = {
             "Every atom is a role, a method, a check, an output rule, or a first-reply "
             "rule, so a prompt reads as structure rather than prose."),
            ("Census the conflicts",
-            "32 pairs cannot both hold — bulleted versus numbered, Markdown versus CSV, "
+            "32 pairs cannot both hold: bulleted versus numbered, Markdown versus CSV, "
             "ten items versus twenty — each with the reason it clashes.")],
     features_title="What's in it",
     features=[("prompt-atoms, 257 rows",
@@ -4501,12 +4501,15 @@ def main():
                             shot, esc(shot_alt(slug, page["title"])),
                             esc(page["title"]),
                             ", " + esc(when) if when else "")
-            doc = ('<div class="doc">{}{}{}{}{}{}'
-                   '<h2>Specifications</h2><table class="facts">{}</table>'
-                   '{}</div>').format(
+            # The specifications block only exists when there is
+            # something in it. An empty table is a heading promising a
+            # table, a screen reader announcing a table, and no table.
+            spec = ('<h2>Specifications</h2><table class="facts">%s</table>'
+                    % facts) if facts.strip() else ""
+            doc = ('<div class="doc">{}{}{}{}{}{}{}{}</div>').format(
                        head, product_hero(page, slug), wide, page["body"],
                        product_steps(page), product_features(page),
-                       facts, product_faq(page))
+                       spec, product_faq(page))
         else:
             doc = ('<div class="doc">{}<h1>{}</h1><p class="sub">{}</p>'
                    '<table class="facts">{}</table>{}{}</div>').format(

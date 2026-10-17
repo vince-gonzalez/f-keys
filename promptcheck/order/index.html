@@ -34,6 +34,12 @@
   a.pay{display:inline-block;margin-top:1em;padding:.7em 1.4em;background:var(--ok);color:#fff;text-decoration:none;font-weight:600;border:1px solid var(--border)}
   .foot{color:var(--muted);font-size:.85rem;margin-top:1.6em;border-top:1px solid var(--border);padding-top:1em}
   a{color:var(--accent)}
+
+.w95skip{position:absolute;left:-9999px;top:0;z-index:2147483001;
+  background:#0a246a;color:#fff;padding:6px 12px;text-decoration:none;
+  font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  border:2px solid #fff}
+.w95skip:focus{left:6px;top:6px}
 </style>
 <style>
 /* The application title bar. Scoped to .w95bar so it cannot reach
@@ -59,7 +65,9 @@
 </style>
 </head>
 <body>
+<a class="w95skip" href="#appmain">Skip to content</a>
 <div class="w95bar"><span><a href="/">F-Keys</a> &#8250; Prompt Check - Order</span><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
+<main id="appmain">
 <main>
   <h1>Order a Prompt Check</h1>
   <p class="sub">Send a system prompt, a CLAUDE.md, an AGENTS.md, or a whole repo's worth of rule files (we read the rules, not your code). You get back a graded report: which rules hold, which break under pressure, the message that broke each one, and a rewrite that holds.</p>
@@ -190,5 +198,6 @@
   }
 })();
 </script>
+</main>
 </body>
 </html>

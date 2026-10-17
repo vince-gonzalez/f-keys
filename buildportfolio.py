@@ -51,18 +51,18 @@ P = [
     ("R-02", "The Kernel Index", "LIVE", "research",
      "A standing measurement of what 14 formal libraries across six foundations "
      "rest on. Machine-readable, CC-BY-4.0. Zero theorems resting on an "
-     "unfinished proof — verified, not assumed.",
+     "unfinished proof, verified rather than assumed.",
      ["measurement", "open data"],
      "/gonzalgo/kernel-index/"),
     ("R-03", "Papers", "LIVE", "research",
-     f"{DEPOSITS} deposited works with DOIs — axiom provenance, dominator "
+     f"{DEPOSITS} deposited works with DOIs: axiom provenance, dominator "
      "analysis of classical dependence, colour-vision methodology, formal "
      "epistemology. Full text, no paywall.",
      ["preprints", "open access"],
      "/papers/"),
     ("A-01", "OpticQuiz", "LIVE", "access",
-     "Colour-vision accessibility infrastructure. One engine — Machado 2009 "
-     "simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection — "
+     "Colour-vision accessibility infrastructure. One engine: Machado 2009 "
+     "simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection, "
      "shipped across eight distribution channels with no duplicated logic.",
      ["accessibility", "colour science", "npm", "PyPI"],
      "https://opticquiz.com"),
@@ -87,7 +87,7 @@ P = [
      ["voting", "embeds"],
      "https://qv.f-keys.com/"),
     ("C-01", "5Best2Buy", "LIVE", "commerce",
-     "Worth The Hunt — curated shelves of independent makers, plus a tool for "
+     "Worth The Hunt: curated shelves of independent makers, plus a tool for "
      "finding out who actually owns a brand.",
      ["commerce", "research"],
      "https://5best2buy.com"),
@@ -296,6 +296,14 @@ def _in_window(document):
     if not found:
         return document
     inner = _re.sub(r"<footer\b.*?</footer>", "", found.group(1), flags=_re.S)
+    # The hero sits outside <main>, so lifting only <main> left the page
+    # with no h1 and a screen reader starting at "Research and formal
+    # methods" with nothing above it. Take the title with us.
+    if "<h1" not in inner:
+        hero = _re.search(r"<h1\b[^>]*>.*?</h1>\s*(?:<p class=\"sub\">.*?</p>)?",
+                          document, _re.S)
+        if hero:
+            inner = hero.group(0) + inner
     return _B.shell(
         "Portfolio " + chr(8212) + " F-Keys",
         "F-Keys" + chr(92) + "Portfolio",

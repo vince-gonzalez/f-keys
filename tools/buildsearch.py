@@ -89,7 +89,7 @@ def rows():
 PAGE = """<div class="doc" style="padding-bottom:6px">
 <h1>Find</h1>
 <p class="sub">Everything on this site, filtered as you type.</p>
-<p><input id="q" type="search" placeholder="name, type or word"
+<p><input id="q" type="search" aria-label="Search this site" placeholder="name, type or word"
    autocomplete="off" spellcheck="false"
    style="width:100%%;max-width:34em;padding:6px 8px;font:inherit;"></p>
 <p id="count" class="sub" style="margin:0 0 10px;">%(total)d entries</p>
