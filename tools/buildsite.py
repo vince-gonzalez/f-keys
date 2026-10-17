@@ -4145,6 +4145,45 @@ def type_icon(typ):
     return TYPE_ICON.get(typ, FALLBACK_ICON)
 
 
+# Four view modes, as Explorer had them. The radios carry the state and
+# CSS does the switching, so this stays a site with no behavioural
+# JavaScript on it.
+VIEW_MODES = [("icons", "Large Icons", True), ("small", "Small Icons", False),
+              ("list", "List", False), ("details", "Details", False)]
+
+
+def view_switch():
+    out = ['<form class="viewbar" aria-label="View">',
+           '<span class="viewlbl">View</span>']
+    for vid, label, on in VIEW_MODES:
+        checked = ' checked' if on else ''
+        out.append(f'<input type="radio" name="view" id="v-{vid}"'
+                   f' class="vradio"{checked}>'
+                   f'<label for="v-{vid}" class="vlabel">{label}</label>')
+    out.append('</form>')
+    return "".join(out)
+
+
+def folder_grid():
+    """The root pane: six folders, not thirty-nine files.
+
+    Each one carries its own object count, because a folder that does not
+    say how much is inside it is a link with a picture on it.
+    """
+    out = ['<ul class="folders">']
+    for cid, label, hint in CATEGORIES:
+        n = len([c for c in CATALOGUE if c[2] == cid])
+        out.append(
+            f'<li><a href="/{cid}.html">'
+            f'<span class="fic" aria-hidden="true">&#128193;</span>'
+            f'<span class="fname">{esc(label)}</span>'
+            f'<span class="fmeta">{n} object{"" if n == 1 else "s"}</span>'
+            f'<span class="fhint">{esc(hint)}</span>'
+            f'</a></li>')
+    out.append('</ul>')
+    return "\n".join(out)
+
+
 def details_table(rows):
     out = ['<table class="details"><thead><tr>',
            '<th class="col-name">Name</th><th class="col-type">Type</th>',
@@ -4253,10 +4292,15 @@ def main():
     written = []
 
     # index: everything, grouped by category heading rows
-    body = [counted(HOME_DOC), details_table(CATALOGUE)]
+    body = [counted(HOME_DOC), view_switch(), folder_grid(),
+            '<div class="detailsonly">' + details_table(CATALOGUE)
+            + '</div>']
     written.append(("index.html", shell(
         "F-Keys — hardware, software and research",
-        "F-Keys", "\n".join(body), f"{len(CATALOGUE)} object(s)",
+        # The pane shows folders now, so the status bar counts
+        # folders. Explorer counted what was in front of you,
+        # not everything underneath it.
+        "F-Keys", "\n".join(body), f"{len(CATEGORIES)} object(s)",
         description="Catalog of hardware, software and research. F-Keys "
                     "Creative LLC, Punta Gorda, Florida.",
         canonical="https://f-keys.com", ld=organization())))

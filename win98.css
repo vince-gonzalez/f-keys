@@ -756,3 +756,65 @@ select:focus-visible,textarea:focus-visible,summary:focus-visible,
     outline:2px solid var(--dk);outline-offset:1px;
     box-shadow:0 0 0 4px var(--hi)}
 }
+
+/* ============================================================
+   FOLDER VIEW and the View menu - added 2026-10-16
+   ------------------------------------------------------------
+   The root pane shows six folders instead of thirty-nine files,
+   because that is what Explorer did, and four view modes switch
+   between them. The state lives in four radio inputs and the
+   switching is sibling selectors, so the site still ships no
+   behavioural JavaScript.
+
+   Colours are the ones already in the palette. The selected
+   label uses --sel with --sel-txt, measured at 14.25:1, and the
+   folder hint uses --dim on --field, which the contrast gate
+   already covers at 4.5:1 or better.
+   ============================================================ */
+
+.viewbar{display:flex;align-items:center;gap:0;flex-wrap:wrap;
+  padding:3px 4px;margin:0 0 8px;background:var(--face);
+  border-top:1px solid var(--hi);border-left:1px solid var(--hi);
+  border-right:1px solid var(--sh);border-bottom:1px solid var(--sh)}
+.viewlbl{font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  color:var(--ink);padding:0 10px 0 4px}
+.vradio{position:absolute;opacity:0;width:1px;height:1px}
+.vlabel{font:13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  color:var(--ink);padding:3px 10px;cursor:pointer;border:1px solid transparent}
+.vradio:checked + .vlabel{background:var(--sel);color:var(--sel-txt)}
+/* The radio is off-screen, so the ring has to show on its LABEL or a
+   keyboard user sees nothing move as they arrow through the modes. */
+.vradio:focus-visible + .vlabel{outline:2px solid var(--dk);
+  outline-offset:1px;box-shadow:0 0 0 4px var(--hi)}
+
+.folders{list-style:none;margin:0;padding:8px;display:grid;gap:10px;
+  grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.folders a{display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:2px;padding:12px 8px;text-decoration:none;
+  color:var(--ink);border:1px solid transparent}
+.folders a:hover{background:var(--sel);color:var(--sel-txt)}
+.folders a:hover .fmeta,.folders a:hover .fhint{color:var(--sel-txt)}
+.fic{font-size:40px;line-height:1}
+.fname{font:bold 14px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif}
+.fmeta{font:13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  color:var(--dim)}
+.fhint{font:13px Georgia,serif;color:var(--dim);max-width:22ch}
+
+/* The four modes. Everything is laid out for Large Icons above; these
+   rules reshape it. Details simply swaps which block is shown. */
+#v-small:checked ~ .folders{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+#v-small:checked ~ .folders a{flex-direction:row;text-align:left;
+  align-items:center;gap:8px}
+#v-small:checked ~ .folders .fic{font-size:20px}
+#v-small:checked ~ .folders .fhint{display:none}
+
+#v-list:checked ~ .folders{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:0}
+#v-list:checked ~ .folders a{flex-direction:row;text-align:left;
+  align-items:center;gap:6px;padding:3px 6px}
+#v-list:checked ~ .folders .fic{font-size:16px}
+#v-list:checked ~ .folders .fhint,#v-list:checked ~ .folders .fmeta{display:none}
+
+.detailsonly{display:none}
+#v-details:checked ~ .folders{display:none}
+#v-details:checked ~ .detailsonly{display:block}
