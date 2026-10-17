@@ -1,0 +1,226 @@
+[
+ {
+  "atom_a_id": "min-items-other-sections",
+  "atom_a_text": "Extract at least 10 items for the other output sections.",
+  "atom_b_id": "min-twenty-other-items",
+  "atom_b_text": "Extract at least 20 items for the other output sections.",
+  "reason": "Extracting 20 items conflicts with extracting at least 10 items."
+ },
+ {
+  "atom_a_id": "only-output-list",
+  "atom_a_text": "Only output the list, nothing else.",
+  "atom_b_id": "only-output-prompt",
+  "atom_b_text": "Only output the prompt and nothing else.",
+  "reason": "Outputting only the list conflicts with outputting only the prompt."
+ },
+ {
+  "atom_a_id": "only-output-prompt",
+  "atom_a_text": "Only output the prompt and nothing else.",
+  "atom_b_id": "valid-csv-only",
+  "atom_b_text": "Only output valid CSV data and nothing else.",
+  "reason": "CSV data output conflicts with outputting the prompt."
+ },
+ {
+  "atom_a_id": "json-only-output",
+  "atom_a_text": "Output ONLY the JSON object, and nothing else.",
+  "atom_b_id": "only-output-prompt",
+  "atom_b_text": "Only output the prompt and nothing else.",
+  "reason": "You cannot output only JSON and only the prompt at the same time."
+ },
+ {
+  "atom_a_id": "only-output-markdown",
+  "atom_a_text": "Only output Markdown.",
+  "atom_b_id": "valid-csv-only",
+  "atom_b_text": "Only output valid CSV data and nothing else.",
+  "reason": "The output cannot be exclusively Markdown and exclusively CSV at once."
+ },
+ {
+  "atom_a_id": "only-output-list",
+  "atom_a_text": "Only output the list, nothing else.",
+  "atom_b_id": "valid-csv-only",
+  "atom_b_text": "Only output valid CSV data and nothing else.",
+  "reason": "Outputting only a list contradicts outputting only CSV data."
+ },
+ {
+  "atom_a_id": "bullets-not-numbers",
+  "atom_a_text": "Use bulleted lists for output, not numbered lists.",
+  "atom_b_id": "numbers-not-bullets",
+  "atom_b_text": "Output numbered lists, not bullets.",
+  "reason": "You cannot use bulleted lists while strictly using numbered lists."
+ },
+ {
+  "atom_a_id": "no-setup-phrases",
+  "atom_a_text": "Just list the problem and nothing else.",
+  "atom_b_id": "only-output-prompt",
+  "atom_b_text": "Only output the prompt and nothing else.",
+  "reason": "Listing only the problem contradicts outputting only the prompt."
+ },
+ {
+  "atom_a_id": "no-codeblock-syntax",
+  "atom_a_text": "Do not output markdown code syntax, only the content.",
+  "atom_b_id": "only-output-markdown",
+  "atom_b_text": "Only output Markdown.",
+  "reason": "Markdown formatting versus raw content output directly clash."
+ },
+ {
+  "atom_a_id": "json-only-output",
+  "atom_a_text": "Output ONLY the JSON object, and nothing else.",
+  "atom_b_id": "valid-csv-only",
+  "atom_b_text": "Only output valid CSV data and nothing else.",
+  "reason": "Outputting only JSON conflicts with outputting only CSV."
+ },
+ {
+  "atom_a_id": "json-only-output",
+  "atom_a_text": "Output ONLY the JSON object, and nothing else.",
+  "atom_b_id": "only-output-list",
+  "atom_b_text": "Only output the list, nothing else.",
+  "reason": "Exclusive output formats for list versus JSON conflict."
+ },
+ {
+  "atom_a_id": "json-only-output",
+  "atom_a_text": "Output ONLY the JSON object, and nothing else.",
+  "atom_b_id": "no-setup-phrases",
+  "atom_b_text": "Just list the problem and nothing else.",
+  "reason": "Exclusive output requirements for JSON versus a problem list."
+ },
+ {
+  "atom_a_id": "no-setup-phrases",
+  "atom_a_text": "Just list the problem and nothing else.",
+  "atom_b_id": "valid-csv-only",
+  "atom_b_text": "Only output valid CSV data and nothing else.",
+  "reason": "CSV-only output conflicts with a plain list output."
+ },
+ {
+  "atom_a_id": "only-output-markdown",
+  "atom_a_text": "Only output Markdown.",
+  "atom_b_id": "only-output-prompt",
+  "atom_b_text": "Only output the prompt and nothing else.",
+  "reason": "One requires outputting Markdown, the other requires outputting only the prompt."
+ },
+ {
+  "atom_a_id": "extract-short-summary",
+  "atom_a_text": "Extract a short summary of the content into a SUMMARY section.",
+  "atom_b_id": "summary-sentence",
+  "atom_b_text": "Extract a summary of the paper and its conclusions into a 16-word sentence called SUMMARY.",
+  "reason": "One asks for a short summary, the other a strict 16-word sentence."
+ },
+ {
+  "atom_a_id": "no-bold-italics",
+  "atom_a_text": "Do not use bold or italic formatting.",
+  "atom_b_id": "raw-command-output",
+  "atom_b_text": "Output ONLY the command on line 1 with no markdown.",
+  "reason": "One requires valid Markdown, the other requires no markdown at all."
+ },
+ {
+  "atom_a_id": "no-bold-italics",
+  "atom_a_text": "Do not use bold or italic formatting.",
+  "atom_b_id": "valid-csv-only",
+  "atom_b_text": "Only output valid CSV data and nothing else.",
+  "reason": "CSV and Markdown formats cannot both be the exclusive output format."
+ },
+ {
+  "atom_a_id": "only-output-list",
+  "atom_a_text": "Only output the list, nothing else.",
+  "atom_b_id": "only-output-markdown",
+  "atom_b_text": "Only output Markdown.",
+  "reason": "Output cannot be exclusively a list and exclusively Markdown simultaneously."
+ },
+ {
+  "atom_a_id": "only-output-prompt",
+  "atom_a_text": "Only output the prompt and nothing else.",
+  "atom_b_id": "output-the-following",
+  "atom_b_text": "Output the following.",
+  "reason": "Outputting the prompt conflicts with outputting specific generated content."
+ },
+ {
+  "atom_a_id": "only-output-list",
+  "atom_a_text": "Only output the list, nothing else.",
+  "atom_b_id": "printable-ascii-art",
+  "atom_b_text": "Only output the printable portion of the ASCII art.",
+  "reason": "A list format conflicts with ASCII art format restrictions."
+ },
+ {
+  "atom_a_id": "only-output-markdown",
+  "atom_a_text": "Only output Markdown.",
+  "atom_b_id": "raw-command-output",
+  "atom_b_text": "Output ONLY the command on line 1 with no markdown.",
+  "reason": "Valid Markdown formatting conflicts with a strict no-markdown command output."
+ },
+ {
+  "atom_a_id": "only-output-markdown",
+  "atom_a_text": "Only output Markdown.",
+  "atom_b_id": "printable-ascii-art",
+  "atom_b_text": "Only output the printable portion of the ASCII art.",
+  "reason": "Exclusive Markdown formatting conflicts with exclusive ASCII art output."
+ },
+ {
+  "atom_a_id": "numbers-only-fields",
+  "atom_a_text": "Only output numbers in the fields, no special characters.",
+  "atom_b_id": "only-output-markdown",
+  "atom_b_text": "Only output Markdown.",
+  "reason": "Markdown requires special characters, conflicting with numbers-only output."
+ },
+ {
+  "atom_a_id": "mermaid-syntax-only",
+  "atom_a_text": "DO NOT COMPLAIN. Just output the Mermaid syntax.",
+  "atom_b_id": "no-codeblock-syntax",
+  "atom_b_text": "Do not output markdown code syntax, only the content.",
+  "reason": "Mermaid syntax requires markdown code blocks, which are forbidden."
+ },
+ {
+  "atom_a_id": "json-only-output",
+  "atom_a_text": "Output ONLY the JSON object, and nothing else.",
+  "atom_b_id": "raw-command-output",
+  "atom_b_text": "Output ONLY the command on line 1 with no markdown.",
+  "reason": "A JSON object is structurally different from a single-line command."
+ },
+ {
+  "atom_a_id": "only-output-prompt",
+  "atom_a_text": "Only output the prompt and nothing else.",
+  "atom_b_id": "printable-ascii-art",
+  "atom_b_text": "Only output the printable portion of the ASCII art.",
+  "reason": "ASCII art portion is not the same as outputting the prompt."
+ },
+ {
+  "atom_a_id": "only-output-prompt",
+  "atom_a_text": "Only output the prompt and nothing else.",
+  "atom_b_id": "reply-advice-only",
+  "atom_b_text": "",
+  "reason": "Conflicting output constraints: one wants advice only, the other wants prompt only."
+ },
+ {
+  "atom_a_id": "only-output-prompt",
+  "atom_a_text": "Only output the prompt and nothing else.",
+  "atom_b_id": "terminal-output-only",
+  "atom_b_text": "",
+  "reason": "Conflicting output constraints: one wants terminal output, the other wants prompt only."
+ },
+ {
+  "atom_a_id": "reply-advice-only",
+  "atom_a_text": "",
+  "atom_b_id": "terminal-output-only",
+  "atom_b_text": "",
+  "reason": "Demands two mutually exclusive strict response formats simultaneously."
+ },
+ {
+  "atom_a_id": "json-only-output",
+  "atom_a_text": "Output ONLY the JSON object, and nothing else.",
+  "atom_b_id": "reply-advice-only",
+  "atom_b_text": "",
+  "reason": "Requires two mutually exclusive final output formats."
+ },
+ {
+  "atom_a_id": "reply-advice-only",
+  "atom_a_text": "",
+  "atom_b_id": "valid-csv-only",
+  "atom_b_text": "Only output valid CSV data and nothing else.",
+  "reason": "Forces two mutually exclusive strict output formats."
+ },
+ {
+  "atom_a_id": "json-only-output",
+  "atom_a_text": "Output ONLY the JSON object, and nothing else.",
+  "atom_b_id": "terminal-output-only",
+  "atom_b_text": "",
+  "reason": "Demands two mutually exclusive output formats: a terminal code block and JSON."
+ }
+]

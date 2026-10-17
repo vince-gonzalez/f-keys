@@ -124,6 +124,8 @@ CATALOGUE = [
      "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.", "/axsent/"),
     ("authorecon", "authorecon", "research", "Python package", PIP,
      "Reconcile published work against every place it lives, for any ORCID, from public sources.", "/authorecon/"),
+    ("prompt-atoms", "Prompt Atoms", "research", "Dataset", PUBLISHED,
+     "257 instruction atoms and 32 measured conflicts, mined from public prompt libraries. CSV and JSON, CC BY 4.0.", "/prompt-atoms/"),
 
     # 2026-10-11. A measurement rather than a package: the harness lives in
     # its own repository, this is the landing page for its findings.
@@ -189,6 +191,47 @@ CATEGORIES = [
 
 # ── long-form detail, one entry per product ──────────────────
 PAGES = {
+  "prompt-atoms": dict(
+    title="Prompt Atoms",
+    tagline="257 instruction atoms and 32 conflicts, mined from public prompt libraries.",
+    lede="Public prompt libraries reuse the same instructions — “Only output "
+         "Markdown,” “Do not give warnings” — across unrelated tasks, and some of "
+         "them contradict each other. This dataset pulls two public corpora apart into "
+         "the recurring instructions, types each to a slot, counts how widely each is "
+         "used, and maps the pairs that cannot both hold.",
+    cta=[("Atoms — CSV", "/prompt-atoms/data/prompt-atoms.csv"),
+         ("Conflicts — CSV", "/prompt-atoms/data/prompt-conflicts.csv"),
+         ("Datasheet", "/prompt-atoms/data/DATASHEET.md")],
+    herometa="<b>257 atoms</b> &middot; 32 conflicts &middot; 195 public templates &middot; "
+             "CSV + JSON &middot; CC&nbsp;BY&nbsp;4.0",
+    steps=[("Pull the libraries apart into atoms",
+            "Fabric (265 task patterns, MIT) and prompts.chat (2,425 prompts, CC0) are "
+            "reduced to 257 distinct instructions, each with the phrasings observed and "
+            "how many prompts use it."),
+           ("Type each to a slot",
+            "Every atom is a role, a method, a check, an output rule, or a first-reply "
+            "rule, so a prompt reads as structure rather than prose."),
+           ("Census the conflicts",
+            "32 pairs cannot both hold — bulleted versus numbered, Markdown versus CSV, "
+            "ten items versus twenty — each with the reason it clashes.")],
+    features_title="What's in it",
+    features=[("prompt-atoms, 257 rows",
+               "id, text, slot, kind, whether it is a prohibition, frequency across "
+               "source prompts, number of phrasings, and how many task families it spans. "
+               "<a href=\"/prompt-atoms/data/prompt-atoms.json\">JSON</a>."),
+              ("prompt-conflicts, 32 pairs",
+               "The two atoms and the reason they cannot both hold. "
+               "<a href=\"/prompt-atoms/data/prompt-conflicts.json\">JSON</a>."),
+              ("A full datasheet",
+               "Motivation, composition, collection, and limitations, in the "
+               "<a href=\"/prompt-atoms/data/DATASHEET.md\">Gebru datasheet</a> format."),
+              ("CC BY 4.0",
+               "Free to use with attribution. The raw instructions belong to their source "
+               "authors under MIT and CC0; the slot typing and conflict graph are this work.")],
+    faq=[],
+    facts=[],
+    body="",
+  ),
 "promptcheck": dict(
   title="Prompt Check", tagline="We run your prompts against a live model and show you which rules break.",
   lede="A linter grades a prompt by reading it. We grade it by running it. "

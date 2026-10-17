@@ -1,0 +1,33 @@
+atom_a_id,atom_a_text,atom_b_id,atom_b_text,reason
+min-items-other-sections,Extract at least 10 items for the other output sections.,min-twenty-other-items,Extract at least 20 items for the other output sections.,Extracting 20 items conflicts with extracting at least 10 items.
+only-output-list,"Only output the list, nothing else.",only-output-prompt,Only output the prompt and nothing else.,Outputting only the list conflicts with outputting only the prompt.
+only-output-prompt,Only output the prompt and nothing else.,valid-csv-only,Only output valid CSV data and nothing else.,CSV data output conflicts with outputting the prompt.
+json-only-output,"Output ONLY the JSON object, and nothing else.",only-output-prompt,Only output the prompt and nothing else.,You cannot output only JSON and only the prompt at the same time.
+only-output-markdown,Only output Markdown.,valid-csv-only,Only output valid CSV data and nothing else.,The output cannot be exclusively Markdown and exclusively CSV at once.
+only-output-list,"Only output the list, nothing else.",valid-csv-only,Only output valid CSV data and nothing else.,Outputting only a list contradicts outputting only CSV data.
+bullets-not-numbers,"Use bulleted lists for output, not numbered lists.",numbers-not-bullets,"Output numbered lists, not bullets.",You cannot use bulleted lists while strictly using numbered lists.
+no-setup-phrases,Just list the problem and nothing else.,only-output-prompt,Only output the prompt and nothing else.,Listing only the problem contradicts outputting only the prompt.
+no-codeblock-syntax,"Do not output markdown code syntax, only the content.",only-output-markdown,Only output Markdown.,Markdown formatting versus raw content output directly clash.
+json-only-output,"Output ONLY the JSON object, and nothing else.",valid-csv-only,Only output valid CSV data and nothing else.,Outputting only JSON conflicts with outputting only CSV.
+json-only-output,"Output ONLY the JSON object, and nothing else.",only-output-list,"Only output the list, nothing else.",Exclusive output formats for list versus JSON conflict.
+json-only-output,"Output ONLY the JSON object, and nothing else.",no-setup-phrases,Just list the problem and nothing else.,Exclusive output requirements for JSON versus a problem list.
+no-setup-phrases,Just list the problem and nothing else.,valid-csv-only,Only output valid CSV data and nothing else.,CSV-only output conflicts with a plain list output.
+only-output-markdown,Only output Markdown.,only-output-prompt,Only output the prompt and nothing else.,"One requires outputting Markdown, the other requires outputting only the prompt."
+extract-short-summary,Extract a short summary of the content into a SUMMARY section.,summary-sentence,Extract a summary of the paper and its conclusions into a 16-word sentence called SUMMARY.,"One asks for a short summary, the other a strict 16-word sentence."
+no-bold-italics,Do not use bold or italic formatting.,raw-command-output,Output ONLY the command on line 1 with no markdown.,"One requires valid Markdown, the other requires no markdown at all."
+no-bold-italics,Do not use bold or italic formatting.,valid-csv-only,Only output valid CSV data and nothing else.,CSV and Markdown formats cannot both be the exclusive output format.
+only-output-list,"Only output the list, nothing else.",only-output-markdown,Only output Markdown.,Output cannot be exclusively a list and exclusively Markdown simultaneously.
+only-output-prompt,Only output the prompt and nothing else.,output-the-following,Output the following.,Outputting the prompt conflicts with outputting specific generated content.
+only-output-list,"Only output the list, nothing else.",printable-ascii-art,Only output the printable portion of the ASCII art.,A list format conflicts with ASCII art format restrictions.
+only-output-markdown,Only output Markdown.,raw-command-output,Output ONLY the command on line 1 with no markdown.,Valid Markdown formatting conflicts with a strict no-markdown command output.
+only-output-markdown,Only output Markdown.,printable-ascii-art,Only output the printable portion of the ASCII art.,Exclusive Markdown formatting conflicts with exclusive ASCII art output.
+numbers-only-fields,"Only output numbers in the fields, no special characters.",only-output-markdown,Only output Markdown.,"Markdown requires special characters, conflicting with numbers-only output."
+mermaid-syntax-only,DO NOT COMPLAIN. Just output the Mermaid syntax.,no-codeblock-syntax,"Do not output markdown code syntax, only the content.","Mermaid syntax requires markdown code blocks, which are forbidden."
+json-only-output,"Output ONLY the JSON object, and nothing else.",raw-command-output,Output ONLY the command on line 1 with no markdown.,A JSON object is structurally different from a single-line command.
+only-output-prompt,Only output the prompt and nothing else.,printable-ascii-art,Only output the printable portion of the ASCII art.,ASCII art portion is not the same as outputting the prompt.
+only-output-prompt,Only output the prompt and nothing else.,reply-advice-only,,"Conflicting output constraints: one wants advice only, the other wants prompt only."
+only-output-prompt,Only output the prompt and nothing else.,terminal-output-only,,"Conflicting output constraints: one wants terminal output, the other wants prompt only."
+reply-advice-only,,terminal-output-only,,Demands two mutually exclusive strict response formats simultaneously.
+json-only-output,"Output ONLY the JSON object, and nothing else.",reply-advice-only,,Requires two mutually exclusive final output formats.
+reply-advice-only,,valid-csv-only,Only output valid CSV data and nothing else.,Forces two mutually exclusive strict output formats.
+json-only-output,"Output ONLY the JSON object, and nothing else.",terminal-output-only,,Demands two mutually exclusive output formats: a terminal code block and JSON.
