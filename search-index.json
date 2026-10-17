@@ -152,6 +152,14 @@
   "group": "research"
  },
  {
+  "name": "Prompt Atoms",
+  "kind": "Dataset",
+  "status": "Published",
+  "text": "257 instruction atoms and 32 measured conflicts, mined from public prompt libraries. CSV and JSON, CC BY 4.0.",
+  "href": "/prompt-atoms/",
+  "group": "research"
+ },
+ {
   "name": "d1bench",
   "kind": "Benchmark",
   "status": "Published",

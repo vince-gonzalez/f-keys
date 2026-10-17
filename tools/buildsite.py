@@ -2959,11 +2959,24 @@ HOME_DOC = """
   </div>
 </div>
 
-<div class="doc" style="padding-bottom:6px">
-<p>F-Keys Creative LLC, Punta Gorda, Florida. The catalog below holds
-%%SHELVES%% sections, sorted the way a file manager sorts them. Each product
-page carries its own license, terms and price; nothing is assumed to match the
-last one.</p>
+<div class="doc">
+<h2>What this is</h2>
+<p><b>F-Keys Creative LLC is a one-person software studio in Punta Gorda,
+Florida.</b> The website service above is the thing that is for sale to
+local businesses. Everything below it is the rest of the work: applications,
+browser games, Python packages, measurement tools and published research,
+most of it free to use and all of it built here.</p>
+
+<p>If you arrived from a link to one particular thing &mdash; a paper, a
+package, a game &mdash; it is in the catalog below, which holds %%SHELVES%%
+sections, sorted the way a file manager sorts them. Its own page carries its
+license, its terms and its price. Nothing is assumed to match the last
+one.</p>
+
+<p class="sub">And yes, the interface is deliberate. It is a Windows&nbsp;95
+file manager because the catalog is a list of files and folders and that is
+the honest shape for it, not because the site is old. Everything on it was
+built this year.</p>
 </div>
 """
 
@@ -3918,7 +3931,8 @@ def tree(active_cat=None, active_slug=None):
             for slug, name, _c, _t, _s, _d, href in items:
                 sel = " on" if slug == active_slug else ""
                 out.append(f'<li><a class="{sel.strip()}" href="{esc(href)}">'
-                           f'<span class="ic">&#128196;</span>{esc(name)}</a></li>')
+                           f'<span class="ic" aria-hidden="true">'
+                           f'{type_icon(_t)}</span>{esc(name)}</a></li>')
             out.append('</ul>')
         out.append('</li>')
     for href, label in EXTRA_NODES:
@@ -4095,6 +4109,40 @@ def shell(title, path_label, body, count_label, active_cat=None,
 """
 
 
+# One icon per TYPE, because thirty-nine rows of the same page-facing-up
+# glyph is a list pretending to be a file manager. The type column was
+# already carrying the distinction; the icon just stops throwing it away,
+# so a Python package and a Fortnite island no longer look identical at a
+# glance. Eighteen types, eighteen glyphs, none repeated - a duplicate
+# would be worse than the single icon, because it would imply a kinship
+# that is not there.
+TYPE_ICON = {
+    "Python package":   "&#128013;",   # snake
+    "npm package":      "&#128230;",   # package
+    "Website":          "&#127760;",   # globe
+    "Web app":          "&#128433;",   # mouse
+    "Web tool":         "&#128295;",   # wrench
+    "Application":      "&#128190;",   # floppy disk
+    "Desktop tool":     "&#128421;",   # desktop computer
+    "Game":             "&#128377;",   # joystick
+    "Fortnite island":  "&#127918;",   # game controller
+    "Discord activity": "&#128172;",   # speech balloon
+    "Simulator":        "&#128666;",   # articulated lorry
+    "Service":          "&#128225;",   # satellite antenna
+    "Dataset":          "&#128202;",   # bar chart
+    "Benchmark":        "&#9201;",     # stopwatch
+    "Appliance":        "&#128250;",   # television
+    "Research tool":    "&#128300;",   # microscope
+    "Publications":     "&#128218;",   # books
+    "Standard":         "&#128208;",   # triangular ruler
+}
+FALLBACK_ICON = "&#128196;"            # page facing up, as before
+
+
+def type_icon(typ):
+    return TYPE_ICON.get(typ, FALLBACK_ICON)
+
+
 def details_table(rows):
     out = ['<table class="details"><thead><tr>',
            '<th class="col-name">Name</th><th class="col-type">Type</th>',
@@ -4104,7 +4152,10 @@ def details_table(rows):
         ext = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
         out.append(
             f'<tr><td><a class="row-name" href="{esc(href)}"{ext}>'
-            f'<span class="ic">&#128196;</span>{esc(name)}</a></td>'
+            # aria-hidden because the name follows as text. Without it a
+            # screen reader reads "snake Key-J", which is the icon being
+            # announced as content when it is decoration.
+            f'<span class="ic" aria-hidden="true">{type_icon(typ)}</span>{esc(name)}</a></td>'
             f'<td class="col-type muted">{esc(typ)}</td>'
             f'<td class="col-status"><span class="st {scls}">{esc(stext)}</span></td>'
             f'<td class="muted">{esc(blurb)}</td></tr>')
