@@ -280,7 +280,33 @@ page = f"""<!DOCTYPE html>
 </body>
 </html>
 """
-(SITE / "portfolio.html").write_text(page, encoding="utf-8", newline="\n")
+def _in_window(document):
+    """Re-wrap the portfolio in the house window.
+
+    This file emitted a whole standalone document - its own head, its own
+    stylesheet, its own nav - which left one more page outside the shell
+    the rest of the site lives in. It keeps its content and the shell
+    supplies the chrome, so there is one of each rather than two.
+    """
+    import sys as _s, re as _re, os as _o
+    _s.path.insert(0, _o.path.join(
+        _o.path.dirname(_o.path.abspath(__file__)), "tools"))
+    import buildsite as _B
+    found = _re.search(r"<main[^>]*>(.*?)</main>", document, _re.S)
+    if not found:
+        return document
+    inner = _re.sub(r"<footer\b.*?</footer>", "", found.group(1), flags=_re.S)
+    return _B.shell(
+        "Portfolio " + chr(8212) + " F-Keys",
+        "F-Keys" + chr(92) + "Portfolio",
+        '<div class="doc">' + inner.strip() + "</div>",
+        "1 document",
+        canonical="https://f-keys.com/portfolio.html",
+        app="wordpad")
+
+
+(SITE / "portfolio.html").write_text(_in_window(page), encoding="utf-8",
+                                     newline="\n")
 print(f"portfolio.html  {len(page):,} bytes  {len(P)} projects, {live} live")
 for key, label in DOMAINS:
     n = sum(1 for p in P if p[3] == key)

@@ -390,44 +390,20 @@ def build(idx: Index) -> dict:
                       f'{len(idx.rows):,} rows. {idx.row_limit_note} '
                       f'The full set is in the JSON and the CSV.</p>')
 
-    html_doc = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="index, follow, max-snippet:-1">
-<link rel="canonical" href="{url}">
-<title>{idx.meta_title}</title>
-<meta name="description" content="{idx.meta_description}">
-<meta name="llms-txt" content="{BASE}/llms.txt">
-<meta name="ai" content="allow">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{url}">
-<meta property="og:title" content="{idx.title}">
-<meta property="og:description" content="{idx.kicker}">
-<meta name="twitter:card" content="summary_large_image">
-<!-- Self-hosted. test_site.py refuses any page that loads from another
-     company server, because the privacy page promises none do, and this
-     generator was still emitting a Google Fonts link - so regenerating
-     these pages silently reintroduced a third-party request. Both
-     families (VT323, Share Tech Mono) are in /assets/fonts.css with
-     their woff2 files present, checked before the swap. -->
-<link rel="stylesheet" href="/assets/fonts.css">
-<script type="application/ld+json">
-{jsonld}
-</script>
-<style>{CSS}</style>
-</head>
-<body>
-<nav>
-  <a href="/" class="logo">F-KEYS</a>
-  <div style="display:flex;gap:1.5rem;font-size:.9rem;">
-    <a href="/gonzalgo/">gonzalgo</a>
-    <a href="/gonzalgo/data/">indexes</a>
-    <a href="https://github.com/vince-gonzalez/gonzalgo">GitHub</a>
-  </div>
-</nav>
-<main>
+    # THE WINDOW. These sixteen pages used to render their own dark
+    # terminal theme with no window around them at all, which left
+    # sixteen of the site's pages outside the shell everything else
+    # lives in. They are spreadsheets - a long table with a JSON and
+    # a CSV beside it - so they open in the spreadsheet window.
+    #
+    # The page keeps its own content and loses only its chrome: the
+    # standalone <nav> and <footer> are the shell's job now, and
+    # having two of each was the actual duplication.
+    import sys as _sys
+    _sys.path.insert(0, str(SITE / "tools"))
+    import buildsite as B
+
+    inner = f"""<div class="doc">
 
 <h1>{idx.title.upper()}</h1>
 <p class="kicker">{idx.kicker}</p>
@@ -459,18 +435,17 @@ resolves to the current deposit.
 {repro}
 {sections_html}
 
-<footer>
-  <p>{idx.citation}</p>
-  <p style="margin-top:.8rem;">
-    Maintained at <a href="{url}">{url.replace('https://', '')}</a>
-    &mdash; the home of <code>kernel &gt; sorry</code>.
-  </p>
-  <p style="margin-top:1.5rem;">&copy; 2026 F-Keys</p>
-</footer>
-</main>
-</body>
-</html>
-"""
+</div>"""
+
+    html_doc = B.shell(
+        idx.meta_title,
+        "F-Keys\\Research\\gonzalgo\\" + idx.title,
+        inner,
+        f"{len(idx.rows):,} row(s)",
+        active_cat="research",
+        description=idx.meta_description,
+        canonical=url,
+        app="excel")
     (out / "index.html").write_text(html_doc, encoding="utf-8")
 
     print(f"  {idx.slug}: {len(idx.rows):,} rows, version {version}"

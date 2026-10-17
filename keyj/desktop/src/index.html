@@ -540,8 +540,31 @@
 </style>
 
 <link href="../assets/fonts.css" rel="stylesheet">
+<style>
+/* The application title bar. Scoped to .w95bar so it cannot reach
+   anything this page already styles - these pages ship their own
+   stylesheets and some lay out full height, so the site stylesheet is
+   deliberately not loaded here. Added 2026-10-17 so every page on the
+   site sits in a window. */
+.w95bar{display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding:3px 3px 3px 6px;
+  background:linear-gradient(90deg,#000b3d 0%,#0a246a 55%,#1a3f66 100%);
+  color:#fff;font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  border-bottom:1px solid #808080;position:relative;z-index:2147483000}
+.w95bar a{color:#fff;text-decoration:none}
+.w95bar a:hover{text-decoration:underline}
+.w95bar .w95btns{display:flex;gap:2px}
+.w95bar .w95btn{width:16px;height:14px;background:#d4d0c8;color:#000;
+  border-top:1px solid #fff;border-left:1px solid #fff;
+  border-right:1px solid #000;border-bottom:1px solid #000;
+  font:bold 13px Tahoma,sans-serif;line-height:12px;text-align:center}  /* 13px, matching .tbtn in win98.css. 10px was below the
+     site's type floor and the gate said so. */
+.w95bar .w95btn:focus-visible{outline:2px solid #000;outline-offset:1px;
+  box-shadow:0 0 0 4px #fff}
+</style>
 </head>
 <body>
+<div class="w95bar"><span><a href="/">F-Keys</a> &#8250; Key-J</span><span class="w95btns" aria-hidden="true"><span class="w95btn">_</span><span class="w95btn">&#9723;</span><span class="w95btn">&#10005;</span></span></div>
 
 <!-- HEADER -->
 <header>

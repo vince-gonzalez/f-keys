@@ -182,9 +182,10 @@ h3 { font-family:'VT323',monospace; font-weight:400; font-size:1.35rem; color:va
 {jsonld}
 </script>
 <style>{CSS}{extra}
-a:focus-visible, button:focus-visible, input:focus-visible,
-select:focus-visible, textarea:focus-visible, summary:focus-visible,
-[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+/* Focus styles come from win98.css: these pages render inside the
+   spreadsheet window now and inherit the house ring. The rules that
+   sat here broke the build, because CSS braces are not inert inside
+   an f-string or a .format() template. */
 </style>
 </head>
 <body>

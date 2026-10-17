@@ -821,3 +821,35 @@ select:focus-visible,textarea:focus-visible,summary:focus-visible,
 .detailsonly{display:none}
 #v-details:checked ~ .folders{display:none}
 #v-details:checked ~ .detailsonly{display:block}
+
+/* ============================================================
+   DATA PAGES - the gonzalgo index tables, 2026-10-17
+   ------------------------------------------------------------
+   Sixteen measurement tables used to render in their own dark
+   terminal theme, outside the window shell entirely. They are
+   spreadsheets, so they open in the spreadsheet window now and
+   borrow the rules the rest of the site already has.
+
+   Only four classes come out of that generator - kicker, note,
+   wrap and series - plus one long table. Measured on --field:
+   --dim 10.37:1, --ink 21.00:1, --plat 16.33:1, and --dim on
+   --face 6.74:1 for the note boxes.
+   ============================================================ */
+
+.kicker{font:13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
+  color:var(--dim);margin:0 0 10px;text-transform:uppercase;
+  letter-spacing:.06em}
+.note{font-size:13px;color:var(--ink);background:var(--face);
+  border:1px solid var(--sh);padding:7px 10px;margin:10px 0}
+.series{font-size:13px;color:var(--dim);margin:14px 0 0}
+.wrap{overflow-x:auto;border:2px inset var(--face);background:var(--field);
+  margin:12px 0}
+.wrap table{border-collapse:collapse;width:100%;min-width:520px;
+  font-family:"Space Mono",Consolas,"Courier New",monospace;font-size:13px}
+.wrap th{position:sticky;top:0;text-align:left;padding:5px 8px;
+  background:var(--face);border-bottom:1px solid var(--sh);
+  border-right:1px solid var(--sh);color:var(--ink);font-weight:700;
+  white-space:nowrap}
+.wrap td{padding:3px 8px;border-bottom:1px solid #e6e6e6;
+  border-right:1px solid #ededed;color:var(--ink);white-space:nowrap}
+.wrap tr:nth-child(even) td{background:#f7f7f7}

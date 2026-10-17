@@ -236,15 +236,11 @@ code {{ color:var(--cyan); }}
 .lede {{ font-size:1.1rem; }}
 footer {{ border-top:1px solid var(--border); margin-top:4rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }}
 
-/* Visible focus; this template had none. --green measures 14.34:1 on --bg
-   and 13.23:1 on --panel, against the 3:1 that 1.4.11 asks for. */
-a:focus-visible, button:focus-visible, input:focus-visible,
-select:focus-visible, textarea:focus-visible, summary:focus-visible,
-[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
-@supports not selector(:focus-visible) {
-  a:focus, button:focus, input:focus, select:focus, textarea:focus,
-  summary:focus, [tabindex]:focus { outline:2px solid var(--green); outline-offset:2px; }
-}
+/* Focus styles come from win98.css now: these pages render
+   inside the spreadsheet window and inherit the house ring.
+   The rules that used to sit here broke the build twice, once
+   as .format() placeholders and once as f-string expressions,
+   because CSS braces are not inert inside either. */
 </style>
 </head>
 <body>

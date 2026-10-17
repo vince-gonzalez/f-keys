@@ -41,6 +41,33 @@ import buildnote  # noqa: E402
 HUB = SITE / "gonzalgo" / "data"
 
 
+def _in_window(document, title, crumb, status, app="excel", canonical=""):
+    """Re-wrap a standalone page in the house window.
+
+    Two pages here still emit a whole HTML document of their own - their
+    own head, their own dark stylesheet, their own nav and footer - which
+    left them outside the shell every other page on the site lives in.
+    Rather than rewrite both templates, their content is lifted out of
+    <main> and handed to buildsite.shell(), which is the same thing
+    indexlib does and the same chrome every other page gets.
+
+    If <main> is not found the original document is returned untouched.
+    A silently empty page would be worse than an unconverted one, and the
+    shell check in test_site will report it either way.
+    """
+    import sys as _s, os as _o
+    _s.path.insert(0, str(SITE / "tools"))
+    import buildsite as _B
+
+    import re as _re
+    m = _re.search(r"<main[^>]*>(.*?)</main>", document, _re.S)
+    if not m:
+        return document
+    inner = _re.sub(r"<footer.*?</footer>", "", m.group(1), flags=_re.S)
+    return _B.shell(title, crumb, '<div class="doc">' + inner.strip() + "</div>",
+                    status, active_cat="research", canonical=canonical, app=app)
+
+
 def build_indexes() -> list[dict]:
     print("indexes:")
     metas = [indexlib.build(mk_kernel_index.idx),
@@ -62,7 +89,13 @@ def build_indexes() -> list[dict]:
     # through indexlib, so build it the way that page expects and take the
     # metadata it recorded.
     out = SITE / "gonzalgo" / "generated-proofs" / "index.html"
-    out.write_text(buildnote.build(), encoding="utf-8", newline="\n")
+    out.write_text(_in_window(
+        buildnote.build(),
+        "What machine-generated Lean proofs rest on — F-Keys",
+        "F-Keys" + chr(92) + "Research" + chr(92) + "gonzalgo"
+        + chr(92) + "Generated proofs",
+        "13 row(s)", canonical=f"{BASE}/gonzalgo/generated-proofs/"),
+        encoding="utf-8", newline="\n")
     meta = dict(buildnote.META)
     meta["note"] = "write-up with the summary table as data"
     print(f"  {meta['slug']}: {meta['rows']} rows, version {meta['version']}"
@@ -148,9 +181,10 @@ def build_hub(metas: list[dict]) -> None:
 {catalog}
 </script>
 <style>{CSS}{extra}
-a:focus-visible, button:focus-visible, input:focus-visible,
-select:focus-visible, textarea:focus-visible, summary:focus-visible,
-[tabindex]:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+/* Focus styles come from win98.css: these pages render inside the
+   spreadsheet window now and inherit the house ring. The rules that
+   sat here broke the build, because CSS braces are not inert inside
+   an f-string or a .format() template. */
 </style>
 </head>
 <body>
@@ -212,7 +246,12 @@ point of publishing the data is that someone can check it.
 </html>
 """
     HUB.mkdir(parents=True, exist_ok=True)
-    (HUB / "index.html").write_text(html, encoding="utf-8")
+    (HUB / "index.html").write_text(_in_window(
+        html, "The gonzalgo indexes — F-Keys",
+        "F-Keys" + chr(92) + "Research" + chr(92) + "gonzalgo" + chr(92) + "Indexes",
+        f"{len(metas)} object(s)",
+        app="explorer", canonical=f"{BASE}/gonzalgo/data/"),
+        encoding="utf-8")
     print(f"hub: {len(metas)} indexes listed")
 
 
