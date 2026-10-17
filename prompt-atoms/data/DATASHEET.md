@@ -55,8 +55,13 @@ measured graph of pairwise conflicts between them.
 - **License: CC BY 4.0** (https://creativecommons.org/licenses/by/4.0/). Free to
   use with attribution to Vincent Gonzalez / F-Keys Creative LLC. Source corpora
   (MIT + CC0) permit it.
-- **Channels:** Zenodo (DOI, for citeability — see ZENODO.md), the F-Keys site,
-  and optionally a data marketplace (Apify/Kaggle/HuggingFace).
+- **Deposited on Zenodo:** https://doi.org/10.5281/zenodo.23428931
+- Also on the F-Keys site: https://f-keys.com/prompt-atoms/
+
+## Citation
+> Gonzalez, V. (2026). *Prompt Atoms and Conflicts: An Instruction Vocabulary and
+> Conflict Graph from Public Prompt Libraries* (v1.0.0) [Data set]. Zenodo.
+> https://doi.org/10.5281/zenodo.23428931
 
 ## Maintenance
 - Regenerate with `python dataset/build.py` from the atom library. Version by date.

@@ -201,9 +201,11 @@ PAGES = {
          "used, and maps the pairs that cannot both hold.",
     cta=[("Atoms — CSV", "/prompt-atoms/data/prompt-atoms.csv"),
          ("Conflicts — CSV", "/prompt-atoms/data/prompt-conflicts.csv"),
-         ("Datasheet", "/prompt-atoms/data/DATASHEET.md")],
+         ("Datasheet", "/prompt-atoms/data/DATASHEET.md"),
+         ("Cite — Zenodo", "https://doi.org/10.5281/zenodo.23428931")],
     herometa="<b>257 atoms</b> &middot; 32 conflicts &middot; 195 public templates &middot; "
-             "CSV + JSON &middot; CC&nbsp;BY&nbsp;4.0",
+             "CSV + JSON &middot; CC&nbsp;BY&nbsp;4.0 &middot; "
+             "<a href=\"https://doi.org/10.5281/zenodo.23428931\">DOI</a>",
     steps=[("Pull the libraries apart into atoms",
             "Fabric (265 task patterns, MIT) and prompts.chat (2,425 prompts, CC0) are "
             "reduced to 257 distinct instructions, each with the phrasings observed and "
