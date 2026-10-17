@@ -4152,25 +4152,33 @@ VIEW_MODES = [("icons", "Large Icons", True), ("small", "Small Icons", False),
               ("list", "List", False), ("details", "Details", False)]
 
 
-def view_switch():
-    out = ['<form class="viewbar" aria-label="View">',
+def file_pane(rows):
+    """The pane: its view modes, its folders, and its details table.
+
+    ONE PARENT, ON PURPOSE. The radios, their labels, the folder grid and
+    the details table are all siblings inside this one element, because
+    the sibling combinator only reaches across a single parent.
+
+    The first version put the radios in their own <form>, which made
+    .folders a sibling of the FORM rather than of the input, so
+    `#v-details:checked ~ .folders` matched nothing. Clicking Details
+    highlighted the label and changed the pane not at all - markup that
+    reads correctly and does nothing, which is the kind of bug that
+    survives review and dies the first time somebody clicks it. It was
+    found by clicking it.
+    """
+    out = ['<div class="filepane" role="group" aria-label="Catalog view">',
            '<span class="viewlbl">View</span>']
     for vid, label, on in VIEW_MODES:
         checked = ' checked' if on else ''
         out.append(f'<input type="radio" name="view" id="v-{vid}"'
                    f' class="vradio"{checked}>'
                    f'<label for="v-{vid}" class="vlabel">{label}</label>')
-    out.append('</form>')
-    return "".join(out)
 
-
-def folder_grid():
-    """The root pane: six folders, not thirty-nine files.
-
-    Each one carries its own object count, because a folder that does not
-    say how much is inside it is a link with a picture on it.
-    """
-    out = ['<ul class="folders">']
+    # Six folders, not thirty-nine files. Each carries its own object
+    # count, because a folder that does not say how much is inside it is
+    # a link with a picture on it.
+    out.append('<ul class="folders">')
     for cid, label, hint in CATEGORIES:
         n = len([c for c in CATALOGUE if c[2] == cid])
         out.append(
@@ -4181,6 +4189,9 @@ def folder_grid():
             f'<span class="fhint">{esc(hint)}</span>'
             f'</a></li>')
     out.append('</ul>')
+
+    out.append('<div class="detailsonly">' + details_table(rows) + '</div>')
+    out.append('</div>')
     return "\n".join(out)
 
 
@@ -4292,9 +4303,7 @@ def main():
     written = []
 
     # index: everything, grouped by category heading rows
-    body = [counted(HOME_DOC), view_switch(), folder_grid(),
-            '<div class="detailsonly">' + details_table(CATALOGUE)
-            + '</div>']
+    body = [counted(HOME_DOC), file_pane(CATALOGUE)]
     written.append(("index.html", shell(
         "F-Keys — hardware, software and research",
         # The pane shows folders now, so the status bar counts

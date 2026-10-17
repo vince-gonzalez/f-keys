@@ -772,10 +772,13 @@ select:focus-visible,textarea:focus-visible,summary:focus-visible,
    already covers at 4.5:1 or better.
    ============================================================ */
 
-.viewbar{display:flex;align-items:center;gap:0;flex-wrap:wrap;
-  padding:3px 4px;margin:0 0 8px;background:var(--face);
-  border-top:1px solid var(--hi);border-left:1px solid var(--hi);
-  border-right:1px solid var(--sh);border-bottom:1px solid var(--sh)}
+.filepane{margin:10px 0 0}
+/* The labels and the "View" word sit inline, so they form a bar on
+   their own; .folders is a <ul> and breaks to the next line by itself.
+   No flex container is used, because a container around the radios is
+   exactly what broke the sibling selectors the first time. */
+.viewlbl,.vlabel{display:inline-block}
+.filepane{padding-top:4px;border-top:1px solid var(--sh)}
 .viewlbl{font:bold 13px Tahoma,'MS Sans Serif',Geneva,Verdana,sans-serif;
   color:var(--ink);padding:0 10px 0 4px}
 .vradio{position:absolute;opacity:0;width:1px;height:1px}
