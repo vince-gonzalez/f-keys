@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="mmforge — F-Keys">
 <meta name="twitter:description" content="Find the axiom a theorem did not need.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=1d9d0e46">
+<link rel="stylesheet" href="/win98.css?v=ead22a99">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,15 +88,21 @@
 <ul>
 <li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
 <ul class="kids">
-<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+<li><a class="" href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a>
 </li>
-<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+<li><a class="" href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a>
 </li>
-<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+<li><a class="" href="/work.html"><span class="ic" aria-hidden="true">&#128193;</span>Work</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic" aria-hidden="true">&#128193;</span>Apps</a>
 </li>
-<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<li><a class="" href="/games.html"><span class="ic" aria-hidden="true">&#128193;</span>Games</a>
 </li>
-<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+<li><a class="" href="/tools.html"><span class="ic" aria-hidden="true">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic" aria-hidden="true">&#128193;</span>Hardware</a>
+</li>
+<li><a class="" href="/research.html"><span class="ic" aria-hidden="true">&#128193;</span>Research</a>
 <ul class="kids">
 <li><a class="" href="/axsent/"><span class="ic" aria-hidden="true">&#128013;</span>axsent</a></li>
 <li><a class="" href="/authorecon/"><span class="ic" aria-hidden="true">&#128013;</span>authorecon</a></li>
@@ -111,23 +117,18 @@
 <li><a class="" href="https://modulign.org"><span class="ic" aria-hidden="true">&#128208;</span>Modulign</a></li>
 </ul>
 </li>
-<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+<li><a class="" href="/properties.html"><span class="ic" aria-hidden="true">&#128193;</span>Properties</a>
 </li>
-<li><a href="/shop/"><span class="ic" aria-hidden="true">&#128193;</span>Shop</a></li>
-<li><a href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a></li>
-<li><a href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a></li>
-<li><a href="/search/"><span class="ic" aria-hidden="true">&#128193;</span>Find</a></li>
-<li><a href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a></li>
-<li><a href="/cv/"><span class="ic" aria-hidden="true">&#128193;</span>CV</a></li>
-<li><a href="/writing/"><span class="ic" aria-hidden="true">&#128193;</span>Writing</a></li>
-<li><a href="/stack/"><span class="ic" aria-hidden="true">&#128220;</span>Stack</a></li>
-<li><a href="/Docs.html"><span class="ic" aria-hidden="true">&#128193;</span>Docs</a></li>
-<li><a href="/developers.html"><span class="ic" aria-hidden="true">&#128193;</span>Developers</a></li>
-<li><a href="/log/"><span class="ic" aria-hidden="true">&#128220;</span>Log</a></li>
-<li><a href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a></li>
-<li><a href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a></li>
-<li><a href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a></li>
-<li><a href="/privacy.html"><span class="ic" aria-hidden="true">&#128220;</span>Privacy</a></li>
+</ul>
+</li>
+<li><a class="" href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a>
+</li>
+<li><a class="" href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a>
+</li>
+<li><a class="" href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a>
+</li>
+<li><a class="" href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a>
+</li>
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
@@ -161,6 +162,28 @@ and it says so rather than adding them for you.</p>
 </div><h2>How it works</h2><ol class="steps"><li><b>Install it</b><span><code>pip install mmforge</code>. One entry point, seven subcommands.</span></li><li><b>Measure</b><span><code>mmforge reach set.mm --axiom ax-ac</code> shows what reaches an axiom and how each one gets there. <code>impact</code> ranks theorems by how many others a repair would free.</span></li><li><b>Build the repair</b><span>The construction half writes the replacement proof and verifies it. Eight of the repairs that came out of this loop are merged upstream.</span></li></ol><h2>What it finds</h2><div class="featgrid"><div class="feat"><b>Three invocations, 583 dependents</b><span>Choice enters set.mm at <code>ac2</code>, <code>axac3</code> and <code>zfac</code>. Everything else inherits.</span></div><div class="feat"><b>The measure-theory tail</b><span><code>difelsiga</code> says a sigma-algebra is closed under set difference. Below it sit 64 results including <b>Bayes' theorem</b>, none of which needs choice.</span></div><div class="feat"><b>Repairs do not add up</b><span><code>fimact</code> alone frees one theorem; in the stack it frees fourteen. Every per-repair figure is a lower bound and the tool says so rather than summing them.</span></div><div class="feat"><b>Conformance</b><span>Round-trips every proof through the compressed format and verifies the result.</span></div><div class="feat"><b>The guard census</b><span>Reads the database's own <code>$j 'avoids'</code> directives and checks the declarations are still true.</span></div><div class="feat"><b>Merged upstream</b><span>Eight pull requests into metamath/set.mm.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>pip install mmforge</td></tr><tr><th>Version</th><td>0.2.0</td></tr><tr><th>License</th><td>MIT</td></tr><tr><th>Reads</th><td>Metamath databases</td></tr><tr><th>Upstream</th><td>8 pull requests merged into set.mm</td></tr><tr><th>Source</th><td>vince-gonzalez/mmforge</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Do I need a Metamath install?</dt><dd>For verification, yes. The analysis reads the database directly.</dd><dt>Is this only about the axiom of choice?</dt><dd>No &mdash; that is the worked example. <code>--axiom</code> takes whichever constant you want to trace.</dd></dl></div>
     </main>
   </div>
+
+  <footer class="sitefoot">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a> &middot;
+      <a href="/search/">Find</a> &middot;
+      <a href="/about.html">About</a> &middot;
+      <a href="/cv/">CV</a> &middot;
+      <a href="/writing/">Writing</a> &middot;
+      <a href="/papers/">Papers</a> &middot;
+      <a href="/developers.html">Developers</a> &middot;
+      <a href="/Docs.html">Docs</a> &middot;
+      <a href="/stack/">Stack</a> &middot;
+      <a href="/shop/">Shop</a> &middot;
+      <a href="/log/">Log</a> &middot;
+      <a href="/status/">Status</a> &middot;
+      <a href="/contact.html">Contact</a> &middot;
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157. Punta Gorda, Florida.
+    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
+  </footer>
 
   <div class="statusbar">
     <span class="cell groove">1 item</span>

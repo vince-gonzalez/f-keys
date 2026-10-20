@@ -1,6 +1,6 @@
-# F-Keys — hardware, software and research
+# F-Keys Creative LLC — software studio, Punta Gorda, Florida
 
-> Catalog of hardware, software and research. F-Keys Creative LLC, Punta Gorda, Florida.
+> A one-person software studio in Punta Gorda, Florida. Websites, website audits, publication-record checks and the tools behind them.
 
 Canonical: https://f-keys.com
 

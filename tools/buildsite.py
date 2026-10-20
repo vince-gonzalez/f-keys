@@ -2939,48 +2939,87 @@ charge you.</td></tr>
 
 HOME_DOC = """
 <div class="doc" style="padding-bottom:6px">
-<h1>F-Keys</h1>
-<p class="sub">Hardware, software and research.</p>
-</div>
-
-<div class="offerbox">
-  <div class="ico">i</div>
-  <div class="said">
-    <h2>I build websites for local businesses.</h2>
-    <p>Punta Gorda and Southwest Florida. One price, no sales call, and
-    nothing is charged until you say yes to a written quote.</p>
-    <div class="tags">
-      <span class="tag"><b>$100</b> once, to build it</span>
-      <span class="tag"><b>$75</b> a month, to run it</span>
-      <span class="tag">cancel any time</span>
-    </div>
-    <div class="btnrow" style="margin:0">
-      <a class="btn default" href="/intake/">Get a website</a>
-      <a class="btn" href="/audit/">Already have one? Audit it &mdash; $50</a>
-    </div>
-  </div>
+<h1>F-Keys Creative LLC</h1>
+<p class="sub">Software, and the tools that check it. Punta Gorda, Florida.</p>
 </div>
 
 <div class="doc">
-<h2>What this is</h2>
-<p><b>F-Keys Creative LLC is a one-person software studio in Punta Gorda,
-Florida.</b> The website service above is the thing that is for sale to
-local businesses. Everything below it is the rest of the work: applications,
-browser games, Python packages, measurement tools and published research,
-most of it free to use and all of it built here.</p>
+<p><b>A one-person software studio.</b> It builds and runs websites for
+small businesses, and it builds the instruments that check whether
+software does what it says it does: what a proof actually rests on,
+whether an interface still matches the specification it published, whether
+a record of published work agrees with the places that work lives.</p>
 
-<p>If you arrived from a link to one particular thing &mdash; a paper, a
-package, a game &mdash; it is in the catalog below, which holds %%SHELVES%%
-sections, sorted the way a file manager sorts them. Its own page carries its
-license, its terms and its price. Nothing is assumed to match the last
-one.</p>
+<h2>What you can buy</h2>
+<table class="facts">
+<tr><th>A website<br>$100, then $75 a month</th>
+    <td>Built, and then kept running. One price, no sales call, and
+    nothing is charged until you say yes to a written quote. Cancel any
+    time. <a href="/intake/">Start one</a>.</td></tr>
+<tr><th>A website audit<br>$50</th>
+    <td>Send an address and a written report comes back inside three
+    business days: what is broken, what it is costing you, and what I
+    would fix. No password or hosting login, because everything in it is
+    measured from the page a customer already sees.
+    <a href="/audit/">Order one</a>.</td></tr>
+<tr><th>A publication record, checked<br>$5 and $25</th>
+    <td>Paste an ORCID and find out what the record says, where the work
+    actually lives, and what disagrees between them. The first pass runs
+    free in your own browser and nothing reaches us.
+    <a href="https://epistemend.org" rel="noopener">Run it</a>.</td></tr>
+<tr><th>Trailer Load<br>licensed to institutions</th>
+    <td>Warehouse load training that plays like a game, licensed for
+    classroom and training use. <a href="/contact.html">Ask for a
+    quote</a>.</td></tr>
+</table>
 
-<p class="sub">And yes, the interface is deliberate. It is a Windows&nbsp;95
-file manager because the catalog is a list of files and folders and that is
-the honest shape for it, not because the site is old. Everything on it was
+<h2>Who you are dealing with</h2>
+<table class="facts">
+<tr><th>Entity</th><td>F-Keys Creative LLC, a Florida limited liability
+    company. Document L26000436157, filed 18 August 2026, status
+    active.</td></tr>
+<tr><th>Based in</th><td>Punta Gorda, Florida, United States</td></tr>
+<tr><th>Email</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a>.
+    One reader, no queue and no ticket number. Replies take days,
+    sometimes a week. There is no phone line.</td></tr>
+<tr><th>Source code</th><td><a href="https://github.com/vince-gonzalez"
+    rel="noopener">github.com/vince-gonzalez</a></td></tr>
+</table>
+
+<h2>How this site is checked</h2>
+<p>The checks that are for sale above are the ones this site runs on
+itself before every build: every text color computed against its
+background to the WCAG 4.5:1 floor, a minimum type size, and an
+accessibility audit over the WCAG 2.2 A and AA criteria that can be
+decided from the page. Every page here passes all of them.
+<a href="/status/">Status</a> reports what is running and what it
+measured, from the same file the site is built from.</p>
+
+<h2>The rest of the work</h2>
+<p>Applications, Python and npm packages, datasets, measurement tools,
+games and published research are in the file manager.
+<a href="/work.html">Open the work</a>.</p>
+</div>
+"""
+
+WORK_DOC = """
+<div class="doc" style="padding-bottom:6px">
+<h1>Work</h1>
+<p class="sub">Everything F-Keys has built and still runs.</p>
+</div>
+
+<div class="doc">
+<p>%%SHELVES%% sections, sorted the way a file manager sorts them. Each
+item has its own page, and that page carries its license, its terms and
+its price. Nothing is assumed to match the last one.</p>
+
+<p class="sub">The interface is deliberate. It is a Windows&nbsp;95 file
+manager because a catalog is a list of files and folders and that is the
+honest shape for it, not because the site is old. Everything on it was
 built this year.</p>
 </div>
 """
+
 
 # -- contact --------------------------------------------------
 # One of the three pages an agent checks before it will describe a
@@ -3435,21 +3474,13 @@ specification.</p>
 # cannot be added without the question being answered.
 FOLDER, DOCUMENT = "folder", "document"
 
-EXTRA_NODES = [("/shop/", "Shop", FOLDER),
-               ("/intake/", "Websites", FOLDER),
+EXTRA_NODES = [("/intake/", "Websites", FOLDER),
                ("/audit/", "Site audit", FOLDER),
-               ("/search/", "Find", FOLDER),
-               ("/about.html", "About", DOCUMENT),
-               ("/cv/", "CV", FOLDER),
-               ("/writing/", "Writing", FOLDER),
-               ("/stack/", "Stack", DOCUMENT),
-               ("/Docs.html", "Docs", FOLDER),
-               ("/developers.html", "Developers", FOLDER),
-               ("/log/", "Log", DOCUMENT),
-               ("/status/", "Status", FOLDER),
+               ("/work.html", "Work", FOLDER),
                ("/papers/", "Papers", FOLDER),
-               ("/contact.html", "Contact", DOCUMENT),
-               ("/privacy.html", "Privacy", DOCUMENT)]
+               ("/status/", "Status", FOLDER),
+               ("/about.html", "About", DOCUMENT),
+               ("/contact.html", "Contact", DOCUMENT)]
 
 # A folder opens in Explorer and a document opens in WordPad. One lookup,
 # so no page picks its own window and none of them can disagree.
@@ -3457,12 +3488,25 @@ NODE_APP = {FOLDER: "explorer", DOCUMENT: "wordpad"}
 NODE_ICON = {FOLDER: "&#128193;", DOCUMENT: "&#128220;"}
 
 
+# WHICH WINDOW A PAGE OPENS IN, for every page that declares one.
+# This used to be read off EXTRA_NODES, so the two questions - "what is
+# in the tree" and "is this page a folder or a document" - shared one
+# table. Trimming the tree then took the answer away from three pages
+# that are not in it, and the build died on privacy.html. They are
+# different questions, so they are different tables now.
+PAGE_KIND = {
+    "/work.html": FOLDER, "/shop/": FOLDER, "/intake/": FOLDER,
+    "/audit/": FOLDER, "/search/": FOLDER, "/cv/": FOLDER,
+    "/writing/": FOLDER, "/Docs.html": FOLDER, "/developers.html": FOLDER,
+    "/status/": FOLDER, "/papers/": FOLDER,
+    "/about.html": DOCUMENT, "/stack/": DOCUMENT, "/log/": DOCUMENT,
+    "/contact.html": DOCUMENT, "/privacy.html": DOCUMENT,
+}
+
+
 def node_kind(href):
-    """The declared kind for a path, or None if it is not a tree node."""
-    for h, _label, kind in EXTRA_NODES:
-        if h == href:
-            return kind
-    return None
+    """The declared window kind for a path, or None if it declares none."""
+    return PAGE_KIND.get(href)
 
 
 assert all(len(n) == 3 and n[2] in (FOLDER, DOCUMENT) for n in EXTRA_NODES), (
@@ -3963,27 +4007,41 @@ Questions: <a href="mailto:hello@f-keys.com">hello@f-keys.com</a>.</p>
 <p class="sub">F-Keys Creative LLC &middot; last reviewed 20 August 2026</p>
 """
 
-def tree(active_cat=None, active_slug=None):
+def tree(active_cat=None, active_slug=None, in_work=False):
+    """The tree nests, because a flat list of twenty-one destinations is
+    not a file manager, it is a sitemap with folder icons on it.
+
+    The six catalogue sections live inside Work and open when you are
+    actually in one. That is what Explorer does, and it is the difference
+    between a visitor seeing seven things and seeing twenty-one."""
     out = ['<ul>', '<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>',
            '<ul class="kids">']
-    for cid, label, _ in CATEGORIES:
-        items = [c for c in CATALOGUE if c[2] == cid]
-        on = " on" if (active_cat == cid and not active_slug) else ""
-        out.append(f'<li><a class="{("on" if on else "")}" href="/{cid}.html">'
-                   f'<span class="ic">&#128193;</span>{esc(label)}</a>')
-        if active_cat == cid:
+    for href, label, kind in EXTRA_NODES:
+        here = (href == "/work.html" and (in_work or active_cat))
+        out.append(f'<li><a class="{"on" if here and not active_cat else ""}" '
+                   f'href="{esc(href)}">'
+                   f'<span class="ic" aria-hidden="true">{NODE_ICON[kind]}'
+                   f'</span>{esc(label)}</a>')
+        if href == "/work.html" and (in_work or active_cat):
             out.append('<ul class="kids">')
-            for slug, name, _c, _t, _s, _d, href in items:
-                sel = " on" if slug == active_slug else ""
-                out.append(f'<li><a class="{sel.strip()}" href="{esc(href)}">'
-                           f'<span class="ic" aria-hidden="true">'
-                           f'{type_icon(_t)}</span>{esc(name)}</a></li>')
+            for cid, label2, _ in CATEGORIES:
+                on = " on" if (active_cat == cid and not active_slug) else ""
+                out.append(f'<li><a class="{on.strip()}" href="/{cid}.html">'
+                           f'<span class="ic" aria-hidden="true">&#128193;'
+                           f'</span>{esc(label2)}</a>')
+                if active_cat == cid:
+                    out.append('<ul class="kids">')
+                    for slug, name, _c, _t, _s, _d, h2 in [
+                            c for c in CATALOGUE if c[2] == cid]:
+                        sel = " on" if slug == active_slug else ""
+                        out.append(f'<li><a class="{sel.strip()}" '
+                                   f'href="{esc(h2)}">'
+                                   f'<span class="ic" aria-hidden="true">'
+                                   f'{type_icon(_t)}</span>{esc(name)}</a></li>')
+                    out.append('</ul>')
+                out.append('</li>')
             out.append('</ul>')
         out.append('</li>')
-    for href, label, kind in EXTRA_NODES:
-        out.append(f'<li><a href="{esc(href)}">'
-                   f'<span class="ic" aria-hidden="true">{NODE_ICON[kind]}'
-                   f'</span>{esc(label)}</a></li>')
     out.append('</ul></li></ul>')
     return "\n".join(out)
 
@@ -4037,7 +4095,7 @@ APPS = {
 # section.content - so changing the element changes no layout.
 def shell(title, path_label, body, count_label, active_cat=None,
           active_slug=None, description="", canonical="", ld=None,
-          noindex=False, app="explorer"):
+          noindex=False, app="explorer", in_work=False):
     cfg = APPS.get(app) or APPS["explorer"]
     up = "/" if active_cat is None else f"/{active_cat}.html"
     ld_block = jsonld(ld) if ld else ""
@@ -4077,7 +4135,7 @@ def shell(title, path_label, body, count_label, active_cat=None,
     if cfg["tree"]:
         panes = f"""  <div class="panes">
     <aside class="tree sunken">
-{tree(active_cat, active_slug)}
+{tree(active_cat, active_slug, in_work)}
     </aside>
     <main id="content" class="content sunken">
 {body}
@@ -4143,6 +4201,28 @@ def shell(title, path_label, body, count_label, active_cat=None,
 
 {addressbar}{ruler}
 {panes}{tabs}
+
+  <footer class="sitefoot">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a> &middot;
+      <a href="/search/">Find</a> &middot;
+      <a href="/about.html">About</a> &middot;
+      <a href="/cv/">CV</a> &middot;
+      <a href="/writing/">Writing</a> &middot;
+      <a href="/papers/">Papers</a> &middot;
+      <a href="/developers.html">Developers</a> &middot;
+      <a href="/Docs.html">Docs</a> &middot;
+      <a href="/stack/">Stack</a> &middot;
+      <a href="/shop/">Shop</a> &middot;
+      <a href="/log/">Log</a> &middot;
+      <a href="/status/">Status</a> &middot;
+      <a href="/contact.html">Contact</a> &middot;
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157. Punta Gorda, Florida.
+    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
+  </footer>
 
   <div class="statusbar">
     <span class="cell groove">{esc(count_label)}</span>
@@ -4348,15 +4428,28 @@ def main():
     written = []
 
     # index: everything, grouped by category heading rows
-    body = [counted(HOME_DOC), file_pane(CATALOGUE)]
+    # The homepage is the business. The catalogue is one click away in
+    # its own window, because forty-five rows under a price list is the
+    # thing that made this read as somebody's project pile.
+    written.append(("work.html", shell(
+        "Work — F-Keys",
+        "F-Keys\\Work",
+        counted(WORK_DOC) + file_pane(CATALOGUE),
+        f"{len(CATEGORIES)} object(s)", in_work=True,
+        description="Applications, packages, datasets, games and published "
+                    "research from F-Keys Creative LLC.",
+        canonical="https://f-keys.com/work.html")))
+
+    body = [counted(HOME_DOC)]
     written.append(("index.html", shell(
-        "F-Keys — hardware, software and research",
+        "F-Keys Creative LLC — software studio, Punta Gorda, Florida",
         # The pane shows folders now, so the status bar counts
         # folders. Explorer counted what was in front of you,
         # not everything underneath it.
-        "F-Keys", "\n".join(body), f"{len(CATEGORIES)} object(s)",
-        description="Catalog of hardware, software and research. F-Keys "
-                    "Creative LLC, Punta Gorda, Florida.",
+        "F-Keys", "\n".join(body), "F-Keys Creative LLC",
+        description="A one-person software studio in Punta Gorda, Florida. "
+                    "Websites, website audits, publication-record checks "
+                    "and the tools behind them.",
         canonical="https://f-keys.com", ld=organization())))
 
     # one page per category

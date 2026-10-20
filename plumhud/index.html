@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="PlumHUD — F-Keys">
 <meta name="twitter:description" content="Watch the fleet, not the screen.">
 <meta name="twitter:image" content="https://f-keys.com/assets/products/plumhud-og.png">
-<link rel="stylesheet" href="/win98.css?v=1d9d0e46">
+<link rel="stylesheet" href="/win98.css?v=ead22a99">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,11 +88,17 @@
 <ul>
 <li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
 <ul class="kids">
-<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+<li><a class="" href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a>
 </li>
-<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+<li><a class="" href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a>
 </li>
-<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+<li><a class="" href="/work.html"><span class="ic" aria-hidden="true">&#128193;</span>Work</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic" aria-hidden="true">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic" aria-hidden="true">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic" aria-hidden="true">&#128193;</span>Tools</a>
 <ul class="kids">
 <li><a class="" href="/wikipolish/"><span class="ic" aria-hidden="true">&#128295;</span>WikiPolish</a></li>
 <li><a class="" href="/leadseer/"><span class="ic" aria-hidden="true">&#128421;</span>LeadSeer</a></li>
@@ -105,27 +111,22 @@
 <li><a class="" href="/keyjockey/"><span class="ic" aria-hidden="true">&#128230;</span>keyjockey</a></li>
 </ul>
 </li>
-<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<li><a class="" href="/hardware.html"><span class="ic" aria-hidden="true">&#128193;</span>Hardware</a>
 </li>
-<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+<li><a class="" href="/research.html"><span class="ic" aria-hidden="true">&#128193;</span>Research</a>
 </li>
-<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+<li><a class="" href="/properties.html"><span class="ic" aria-hidden="true">&#128193;</span>Properties</a>
 </li>
-<li><a href="/shop/"><span class="ic" aria-hidden="true">&#128193;</span>Shop</a></li>
-<li><a href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a></li>
-<li><a href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a></li>
-<li><a href="/search/"><span class="ic" aria-hidden="true">&#128193;</span>Find</a></li>
-<li><a href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a></li>
-<li><a href="/cv/"><span class="ic" aria-hidden="true">&#128193;</span>CV</a></li>
-<li><a href="/writing/"><span class="ic" aria-hidden="true">&#128193;</span>Writing</a></li>
-<li><a href="/stack/"><span class="ic" aria-hidden="true">&#128220;</span>Stack</a></li>
-<li><a href="/Docs.html"><span class="ic" aria-hidden="true">&#128193;</span>Docs</a></li>
-<li><a href="/developers.html"><span class="ic" aria-hidden="true">&#128193;</span>Developers</a></li>
-<li><a href="/log/"><span class="ic" aria-hidden="true">&#128220;</span>Log</a></li>
-<li><a href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a></li>
-<li><a href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a></li>
-<li><a href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a></li>
-<li><a href="/privacy.html"><span class="ic" aria-hidden="true">&#128220;</span>Privacy</a></li>
+</ul>
+</li>
+<li><a class="" href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a>
+</li>
+<li><a class="" href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a>
+</li>
+<li><a class="" href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a>
+</li>
+<li><a class="" href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a>
+</li>
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
@@ -155,6 +156,28 @@ plumhud where    where config and history live</pre>
 </div><h2>How it works</h2><ol class="steps"><li><b>Install it</b><span><code>pip install plumhud</code>. It needs Python 3.8 or newer and Tk, which ships with most Python builds.</span></li><li><b>Point it at the fleet</b><span>It finds the miners through <code>moonbeam-miner</code>, so the discovery you already have is the discovery it uses.</span></li><li><b>Leave it alone</b><span>That is the design. It is a heads-up display, so the correct amount of attention to give it while things work is none.</span></li></ol><h2>What it does</h2><div class="featgrid"><div class="feat"><b>A glance, not a dashboard</b><span>The whole fleet reduced to a strip you can read without stopping what you are doing.</span></div><div class="feat"><b>Alerts when it matters</b><span>Silence while the machines are working. A machine that stops earning is the event, not the ordinary variation around it.</span></div><div class="feat"><b>Built on moonbeam-miner</b><span>Discovery is shared with the tool that already finds the NerdMiners on your network.</span></div><div class="feat"><b>Desktop, not a web app</b><span>It runs on your machine with Tk. Nothing is hosted and nothing phones home.</span></div><div class="feat"><b>MIT licensed</b><span>Read it, change it, ship it.</span></div><div class="feat"><b>Version 4</b><span>Four major revisions of one small idea, which is what happens when a tool is used daily by the person who wrote it.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Name</th><td>Personal Ledger Utility Monitor, Heads-Up Display</td></tr><tr><th>Version</th><td>4.1.2</td></tr><tr><th>License</th><td>MIT</td></tr><tr><th>Install</th><td>pip install plumhud</td></tr><tr><th>Requires</th><td>Python 3.8+, Tk</td></tr><tr><th>Depends on</th><td>moonbeam-miner</td></tr></table><h2>Questions</h2><dl class="faq"><dt>What does the name mean?</dt><dd>Personal Ledger Utility Monitor, Heads-Up Display. It was a joke that stuck.</dd><dt>Do I need Moonbeam too?</dt><dd>It depends on <code>moonbeam-miner</code> for discovery, which pip installs for you.</dd><dt>Will it run on a headless box?</dt><dd>No. It draws a window with Tk, so it wants a desktop. The machine being watched can be headless; the machine watching cannot.</dd></dl></div>
     </main>
   </div>
+
+  <footer class="sitefoot">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a> &middot;
+      <a href="/search/">Find</a> &middot;
+      <a href="/about.html">About</a> &middot;
+      <a href="/cv/">CV</a> &middot;
+      <a href="/writing/">Writing</a> &middot;
+      <a href="/papers/">Papers</a> &middot;
+      <a href="/developers.html">Developers</a> &middot;
+      <a href="/Docs.html">Docs</a> &middot;
+      <a href="/stack/">Stack</a> &middot;
+      <a href="/shop/">Shop</a> &middot;
+      <a href="/log/">Log</a> &middot;
+      <a href="/status/">Status</a> &middot;
+      <a href="/contact.html">Contact</a> &middot;
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157. Punta Gorda, Florida.
+    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
+  </footer>
 
   <div class="statusbar">
     <span class="cell groove">1 item</span>

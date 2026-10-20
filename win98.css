@@ -853,3 +853,13 @@ select:focus-visible,textarea:focus-visible,summary:focus-visible,
 .wrap td{padding:3px 8px;border-bottom:1px solid #e6e6e6;
   border-right:1px solid #ededed;color:var(--ink);white-space:nowrap}
 .wrap tr:nth-child(even) td{background:#f7f7f7}
+
+/* The site footer. The tree used to carry every destination on the site
+   at one level, which is how a seven-page business ends up looking like
+   a twenty-one-page filing cabinet. The secondary destinations live here
+   now. No color is declared, so it inherits one the contrast gate has
+   already cleared. Added 2026-10-20. */
+.sitefoot{margin:14px 0 0;padding:10px 2px 2px;font-size:13px;
+  line-height:1.7;border-top:1px solid var(--shadow)}
+.sitefoot nav{margin-bottom:7px}
+.sitefoot p{margin:0}

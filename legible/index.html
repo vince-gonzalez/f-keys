@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="legible — F-Keys">
 <meta name="twitter:description" content="Three gates a linter will not give you.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=1d9d0e46">
+<link rel="stylesheet" href="/win98.css?v=ead22a99">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -87,11 +87,17 @@
 <ul>
 <li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
 <ul class="kids">
-<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+<li><a class="" href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a>
 </li>
-<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+<li><a class="" href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a>
 </li>
-<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+<li><a class="" href="/work.html"><span class="ic" aria-hidden="true">&#128193;</span>Work</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic" aria-hidden="true">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic" aria-hidden="true">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic" aria-hidden="true">&#128193;</span>Tools</a>
 <ul class="kids">
 <li><a class="" href="/wikipolish/"><span class="ic" aria-hidden="true">&#128295;</span>WikiPolish</a></li>
 <li><a class="" href="/leadseer/"><span class="ic" aria-hidden="true">&#128421;</span>LeadSeer</a></li>
@@ -104,27 +110,22 @@
 <li><a class="" href="/keyjockey/"><span class="ic" aria-hidden="true">&#128230;</span>keyjockey</a></li>
 </ul>
 </li>
-<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<li><a class="" href="/hardware.html"><span class="ic" aria-hidden="true">&#128193;</span>Hardware</a>
 </li>
-<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+<li><a class="" href="/research.html"><span class="ic" aria-hidden="true">&#128193;</span>Research</a>
 </li>
-<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+<li><a class="" href="/properties.html"><span class="ic" aria-hidden="true">&#128193;</span>Properties</a>
 </li>
-<li><a href="/shop/"><span class="ic" aria-hidden="true">&#128193;</span>Shop</a></li>
-<li><a href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a></li>
-<li><a href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a></li>
-<li><a href="/search/"><span class="ic" aria-hidden="true">&#128193;</span>Find</a></li>
-<li><a href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a></li>
-<li><a href="/cv/"><span class="ic" aria-hidden="true">&#128193;</span>CV</a></li>
-<li><a href="/writing/"><span class="ic" aria-hidden="true">&#128193;</span>Writing</a></li>
-<li><a href="/stack/"><span class="ic" aria-hidden="true">&#128220;</span>Stack</a></li>
-<li><a href="/Docs.html"><span class="ic" aria-hidden="true">&#128193;</span>Docs</a></li>
-<li><a href="/developers.html"><span class="ic" aria-hidden="true">&#128193;</span>Developers</a></li>
-<li><a href="/log/"><span class="ic" aria-hidden="true">&#128220;</span>Log</a></li>
-<li><a href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a></li>
-<li><a href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a></li>
-<li><a href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a></li>
-<li><a href="/privacy.html"><span class="ic" aria-hidden="true">&#128220;</span>Privacy</a></li>
+</ul>
+</li>
+<li><a class="" href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a>
+</li>
+<li><a class="" href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a>
+</li>
+<li><a class="" href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a>
+</li>
+<li><a class="" href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a>
+</li>
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
@@ -159,6 +160,28 @@ rather than passing a stylesheet that declares no colors at all.</p>
 </div><h2>How it works</h2><ol class="steps"><li><b>Install it, or add the Action</b><span><code>pip install legible</code> locally, or drop one of the four Actions into a workflow.</span></li><li><b>Point it at a directory</b><span><code>typefloor ./src</code>, <code>contrast-gate ./src</code>, <code>deadname-gate ./src</code>. Exceptions live in a JSON file rather than suppressed inline, so what you allowed is one list you can read.</span></li><li><b>Let it fail the build</b><span>That is the point. A warning nobody reads is the same as no check at all.</span></li></ol><h2>The three gates</h2><div class="featgrid"><div class="feat"><b>typefloor</b><span>Fails when type is declared below a readable floor. A linter has no view on 9px body text; a person does.</span></div><div class="feat"><b>contrast-gate</b><span>Fails when a declared color cannot be read on a surface the same file declares. <code>--require-pairs</code> also fails a file that declares no pairs at all, because a vacuous pass looks exactly like a real one.</span></div><div class="feat"><b>deadname-gate</b><span>Fails when a retired name reaches a title, a footer, a byline, alt text or a comment, and leaves machine identifiers alone, because renaming a published artifact breaks links or contradicts a deposited record.</span></div><div class="feat"><b>It exits 2, not 0, unconfigured</b><span>An unconfigured gate must not be mistakable for a passing one.</span></div><div class="feat"><b>Four GitHub Actions</b><span>typefloor, contrast-gate, deadname-gate and cvd-palette, each usable on its own.</span></div><div class="feat"><b>Written for a real rename</b><span>The rename gate came out of a company rename. It is the same shape as a person changing their name and finding it in three hundred places, which is the version worth getting right.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>pip install legible</td></tr><tr><th>License</th><td>MIT</td></tr><tr><th>Commands</th><td>typefloor, contrast-gate, deadname-gate</td></tr><tr><th>Actions</th><td>typefloor, contrast-gate, deadname-gate, cvd-palette</td></tr><tr><th>Source</th><td>vince-gonzalez/f-keys</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Why not just use a linter?</dt><dd>A linter checks syntax. None of these three are syntax errors &mdash; they are things a person could not read, which no parser has an opinion about.</dd><dt>Will it fight my existing style rules?</dt><dd>No. It only asserts the three things above, and every exception is recorded in a file rather than scattered through the source.</dd><dt>Do I have to use all three?</dt><dd>No. They are separate commands and separate Actions.</dd></dl></div>
     </main>
   </div>
+
+  <footer class="sitefoot">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a> &middot;
+      <a href="/search/">Find</a> &middot;
+      <a href="/about.html">About</a> &middot;
+      <a href="/cv/">CV</a> &middot;
+      <a href="/writing/">Writing</a> &middot;
+      <a href="/papers/">Papers</a> &middot;
+      <a href="/developers.html">Developers</a> &middot;
+      <a href="/Docs.html">Docs</a> &middot;
+      <a href="/stack/">Stack</a> &middot;
+      <a href="/shop/">Shop</a> &middot;
+      <a href="/log/">Log</a> &middot;
+      <a href="/status/">Status</a> &middot;
+      <a href="/contact.html">Contact</a> &middot;
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157. Punta Gorda, Florida.
+    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
+  </footer>
 
   <div class="statusbar">
     <span class="cell groove">1 item</span>

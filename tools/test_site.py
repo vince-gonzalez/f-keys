@@ -185,8 +185,13 @@ def homepage_without_javascript():
     if len(text) < MIN_TEXT:
         fail("homepage", "index.html has {} chars of text, needs {}".format(
             len(text), MIN_TEXT))
-    if not re.search(r"<h1[^>]*>\s*F-Keys\s*</h1>", s):
-        fail("homepage", "index.html has no F-Keys h1")
+    # The heading has to NAME the business, not match one spelling of it.
+    # It was "F-Keys" and is now "F-Keys Creative LLC", which is the same
+    # claim with the legal entity attached; a gate that fails on that is
+    # checking punctuation rather than meaning. It still fails on a
+    # missing h1, an empty one, or one about something else.
+    if not re.search(r"<h1[^>]*>\s*F-Keys\b[^<]*</h1>", s):
+        fail("homepage", "index.html has no h1 naming F-Keys")
 
 
 # ── 4. structured data ───────────────────────────────────────
@@ -791,7 +796,7 @@ def counts_in_prose():
         # a reader sees, so the table row reads "Live products thirty-two".
         ("about.html", r"Live products ([a-z]+(?:-[a-z]+)?)",
          live, "the live count"),
-        ("index.html", r"([a-z]+(?:-[a-z]+)?) sections, sorted",
+        ("work.html", r"([a-z]+(?:-[a-z]+)?) sections, sorted",
          shelves, "the number of shelves"),
     ]
     for name, pattern, want, what in claims:

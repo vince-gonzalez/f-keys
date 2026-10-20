@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="ishihara — F-Keys">
 <meta name="twitter:description" content="Color-vision plates, reproducible from a seed.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=1d9d0e46">
+<link rel="stylesheet" href="/win98.css?v=ead22a99">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,15 +88,21 @@
 <ul>
 <li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
 <ul class="kids">
-<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+<li><a class="" href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a>
 </li>
-<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+<li><a class="" href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a>
 </li>
-<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+<li><a class="" href="/work.html"><span class="ic" aria-hidden="true">&#128193;</span>Work</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic" aria-hidden="true">&#128193;</span>Apps</a>
 </li>
-<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<li><a class="" href="/games.html"><span class="ic" aria-hidden="true">&#128193;</span>Games</a>
 </li>
-<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+<li><a class="" href="/tools.html"><span class="ic" aria-hidden="true">&#128193;</span>Tools</a>
+</li>
+<li><a class="" href="/hardware.html"><span class="ic" aria-hidden="true">&#128193;</span>Hardware</a>
+</li>
+<li><a class="" href="/research.html"><span class="ic" aria-hidden="true">&#128193;</span>Research</a>
 <ul class="kids">
 <li><a class="" href="/axsent/"><span class="ic" aria-hidden="true">&#128013;</span>axsent</a></li>
 <li><a class="" href="/authorecon/"><span class="ic" aria-hidden="true">&#128013;</span>authorecon</a></li>
@@ -111,23 +117,18 @@
 <li><a class="" href="https://modulign.org"><span class="ic" aria-hidden="true">&#128208;</span>Modulign</a></li>
 </ul>
 </li>
-<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+<li><a class="" href="/properties.html"><span class="ic" aria-hidden="true">&#128193;</span>Properties</a>
 </li>
-<li><a href="/shop/"><span class="ic" aria-hidden="true">&#128193;</span>Shop</a></li>
-<li><a href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a></li>
-<li><a href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a></li>
-<li><a href="/search/"><span class="ic" aria-hidden="true">&#128193;</span>Find</a></li>
-<li><a href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a></li>
-<li><a href="/cv/"><span class="ic" aria-hidden="true">&#128193;</span>CV</a></li>
-<li><a href="/writing/"><span class="ic" aria-hidden="true">&#128193;</span>Writing</a></li>
-<li><a href="/stack/"><span class="ic" aria-hidden="true">&#128220;</span>Stack</a></li>
-<li><a href="/Docs.html"><span class="ic" aria-hidden="true">&#128193;</span>Docs</a></li>
-<li><a href="/developers.html"><span class="ic" aria-hidden="true">&#128193;</span>Developers</a></li>
-<li><a href="/log/"><span class="ic" aria-hidden="true">&#128220;</span>Log</a></li>
-<li><a href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a></li>
-<li><a href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a></li>
-<li><a href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a></li>
-<li><a href="/privacy.html"><span class="ic" aria-hidden="true">&#128220;</span>Privacy</a></li>
+</ul>
+</li>
+<li><a class="" href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a>
+</li>
+<li><a class="" href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a>
+</li>
+<li><a class="" href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a>
+</li>
+<li><a class="" href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a>
+</li>
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
@@ -155,6 +156,28 @@ underlying method is deposited with a DOI.</p>
 </div><h2>How it works</h2><ol class="steps"><li><b>Install it</b><span><code>pip install ishihara</code>.</span></li><li><b>Pick a seed and a figure</b><span><code>ishihara --seed 4211 --figure 74</code>.</span></li><li><b>Get the same plate anywhere</b><span>The seed is the plate. Run it on another machine next year and it is identical.</span></li></ol><h2>What it does</h2><div class="featgrid"><div class="feat"><b>Reproducible from a seed</b><span>The entire point. Plates in the wild are generated with an unseeded RNG, so no two runs produce the same test.</span></div><div class="feat"><b>Comparable results</b><span>A screening tool whose stimulus changes between subjects is measuring the stimulus as much as the subject.</span></div><div class="feat"><b>Published method</b><span>The generation method is deposited with a DOI.</span></div><div class="feat"><b>Deficiency types</b><span>Plates targeted at protan, deutan and tritan separation.</span></div><div class="feat"><b>Honest about the screen</b><span>A display is not a lightbox, and the calibration limits are published rather than glossed.</span></div><div class="feat"><b>Not a diagnosis</b><span>Screening. The pages that matter say so.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>pip install ishihara</td></tr><tr><th>Version</th><td>0.1.2</td></tr><tr><th>License</th><td>MIT</td></tr><tr><th>Output</th><td>Plate images from a seed</td></tr><tr><th>Source</th><td>vince-gonzalez/ishihara</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Can I use these to diagnose someone?</dt><dd>No. It is screening, and a screen is not a calibrated instrument.</dd><dt>Why does the seed matter so much?</dt><dd>Because without it, two people take two different tests and the results cannot be compared with each other or with themselves.</dd></dl></div>
     </main>
   </div>
+
+  <footer class="sitefoot">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a> &middot;
+      <a href="/search/">Find</a> &middot;
+      <a href="/about.html">About</a> &middot;
+      <a href="/cv/">CV</a> &middot;
+      <a href="/writing/">Writing</a> &middot;
+      <a href="/papers/">Papers</a> &middot;
+      <a href="/developers.html">Developers</a> &middot;
+      <a href="/Docs.html">Docs</a> &middot;
+      <a href="/stack/">Stack</a> &middot;
+      <a href="/shop/">Shop</a> &middot;
+      <a href="/log/">Log</a> &middot;
+      <a href="/status/">Status</a> &middot;
+      <a href="/contact.html">Contact</a> &middot;
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157. Punta Gorda, Florida.
+    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
+  </footer>
 
   <div class="statusbar">
     <span class="cell groove">1 item</span>

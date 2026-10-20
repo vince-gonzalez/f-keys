@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="openapi-drift — F-Keys">
 <meta name="twitter:description" content="Does the service still do what the spec says?">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=1d9d0e46">
+<link rel="stylesheet" href="/win98.css?v=ead22a99">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -87,11 +87,17 @@
 <ul>
 <li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
 <ul class="kids">
-<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+<li><a class="" href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a>
 </li>
-<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+<li><a class="" href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a>
 </li>
-<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+<li><a class="" href="/work.html"><span class="ic" aria-hidden="true">&#128193;</span>Work</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic" aria-hidden="true">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic" aria-hidden="true">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic" aria-hidden="true">&#128193;</span>Tools</a>
 <ul class="kids">
 <li><a class="" href="/wikipolish/"><span class="ic" aria-hidden="true">&#128295;</span>WikiPolish</a></li>
 <li><a class="" href="/leadseer/"><span class="ic" aria-hidden="true">&#128421;</span>LeadSeer</a></li>
@@ -104,27 +110,22 @@
 <li><a class="" href="/keyjockey/"><span class="ic" aria-hidden="true">&#128230;</span>keyjockey</a></li>
 </ul>
 </li>
-<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<li><a class="" href="/hardware.html"><span class="ic" aria-hidden="true">&#128193;</span>Hardware</a>
 </li>
-<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+<li><a class="" href="/research.html"><span class="ic" aria-hidden="true">&#128193;</span>Research</a>
 </li>
-<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+<li><a class="" href="/properties.html"><span class="ic" aria-hidden="true">&#128193;</span>Properties</a>
 </li>
-<li><a href="/shop/"><span class="ic" aria-hidden="true">&#128193;</span>Shop</a></li>
-<li><a href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a></li>
-<li><a href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a></li>
-<li><a href="/search/"><span class="ic" aria-hidden="true">&#128193;</span>Find</a></li>
-<li><a href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a></li>
-<li><a href="/cv/"><span class="ic" aria-hidden="true">&#128193;</span>CV</a></li>
-<li><a href="/writing/"><span class="ic" aria-hidden="true">&#128193;</span>Writing</a></li>
-<li><a href="/stack/"><span class="ic" aria-hidden="true">&#128220;</span>Stack</a></li>
-<li><a href="/Docs.html"><span class="ic" aria-hidden="true">&#128193;</span>Docs</a></li>
-<li><a href="/developers.html"><span class="ic" aria-hidden="true">&#128193;</span>Developers</a></li>
-<li><a href="/log/"><span class="ic" aria-hidden="true">&#128220;</span>Log</a></li>
-<li><a href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a></li>
-<li><a href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a></li>
-<li><a href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a></li>
-<li><a href="/privacy.html"><span class="ic" aria-hidden="true">&#128220;</span>Privacy</a></li>
+</ul>
+</li>
+<li><a class="" href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a>
+</li>
+<li><a class="" href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a>
+</li>
+<li><a class="" href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a>
+</li>
+<li><a class="" href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a>
+</li>
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
@@ -157,6 +158,28 @@ value reports drift that is the checker's fault. Nothing is ever written.</p>
 </div><h2>How it works</h2><ol class="steps"><li><b>Point it at your document</b><span><code>openapi-drift openapi.json</code>, or a URL.</span></li><li><b>Add &lt;code&gt;--live&lt;/code&gt; to call the service</b><span>It calls every parameterless GET and compares what comes back to what the document promised.</span></li><li><b>Put it in CI</b><span>The document and the service drift apart quietly. Every consumer finds out one failed call at a time; this finds out on the commit that caused it.</span></li></ol><h2>What it checks</h2><div class="featgrid"><div class="feat"><b>The $ref trap, reported not silently fixed</b><span>A response schema behind a <code>$ref</code> is valid and useless to a consumer that does not dereference. This is a known problem with libraries built to solve it &mdash; <a href="https://github.com/devflowinc/openapi-schema-ref-parser" rel="noopener">openapi-schema-ref-parser</a> is one. Those dereference it for you; this reports it, so the document gets fixed rather than every consumer working around it.</span></div><div class="feat"><b>Live comparison</b><span>Not just the document. What the service actually returns.</span></div><div class="feat"><b>Only safe calls</b><span>Parameterless GETs. A path with a placeholder or a required parameter is skipped rather than guessed at &mdash; a guessed value reports drift that is the checker's fault.</span></div><div class="feat"><b>It never writes</b><span>No POST, no PUT, no DELETE. Ever.</span></div><div class="feat"><b>Not a fuzzer</b><span>It calls what you documented rather than generating traffic hunting for crashes.</span></div><div class="feat"><b>A GitHub Action</b><span>One step in a workflow, pointed at a path or a live URL.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>Install</th><td>pip install openapi-drift</td></tr><tr><th>License</th><td>MIT</td></tr><tr><th>Action</th><td>vince-gonzalez/openapi-drift</td></tr><tr><th>Source</th><td>vince-gonzalez/openapi-drift</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Is this a schema validator?</dt><dd>No, and that is the point. A perfectly well-formed document can be unreadable by the tooling that has to consume it.</dd><dt>Will it hit my production API?</dt><dd>Only if you pass <code>--live</code>, and only with parameterless GETs. It never writes anything.</dd><dt>Why does the $ref thing matter?</dt><dd>It cost a week on a specification that passed every other check.</dd></dl></div>
     </main>
   </div>
+
+  <footer class="sitefoot">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a> &middot;
+      <a href="/search/">Find</a> &middot;
+      <a href="/about.html">About</a> &middot;
+      <a href="/cv/">CV</a> &middot;
+      <a href="/writing/">Writing</a> &middot;
+      <a href="/papers/">Papers</a> &middot;
+      <a href="/developers.html">Developers</a> &middot;
+      <a href="/Docs.html">Docs</a> &middot;
+      <a href="/stack/">Stack</a> &middot;
+      <a href="/shop/">Shop</a> &middot;
+      <a href="/log/">Log</a> &middot;
+      <a href="/status/">Status</a> &middot;
+      <a href="/contact.html">Contact</a> &middot;
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157. Punta Gorda, Florida.
+    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
+  </footer>
 
   <div class="statusbar">
     <span class="cell groove">1 item</span>

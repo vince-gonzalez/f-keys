@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="Prompt Check — F-Keys">
 <meta name="twitter:description" content="We run your prompts against a live model and show you which rules break.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=1d9d0e46">
+<link rel="stylesheet" href="/win98.css?v=ead22a99">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -80,11 +80,17 @@
 <ul>
 <li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>
 <ul class="kids">
-<li><a class="" href="/apps.html"><span class="ic">&#128193;</span>Apps</a>
+<li><a class="" href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a>
 </li>
-<li><a class="" href="/games.html"><span class="ic">&#128193;</span>Games</a>
+<li><a class="" href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a>
 </li>
-<li><a class="" href="/tools.html"><span class="ic">&#128193;</span>Tools</a>
+<li><a class="" href="/work.html"><span class="ic" aria-hidden="true">&#128193;</span>Work</a>
+<ul class="kids">
+<li><a class="" href="/apps.html"><span class="ic" aria-hidden="true">&#128193;</span>Apps</a>
+</li>
+<li><a class="" href="/games.html"><span class="ic" aria-hidden="true">&#128193;</span>Games</a>
+</li>
+<li><a class="" href="/tools.html"><span class="ic" aria-hidden="true">&#128193;</span>Tools</a>
 <ul class="kids">
 <li><a class="" href="/wikipolish/"><span class="ic" aria-hidden="true">&#128295;</span>WikiPolish</a></li>
 <li><a class="" href="/leadseer/"><span class="ic" aria-hidden="true">&#128421;</span>LeadSeer</a></li>
@@ -97,27 +103,22 @@
 <li><a class="" href="/keyjockey/"><span class="ic" aria-hidden="true">&#128230;</span>keyjockey</a></li>
 </ul>
 </li>
-<li><a class="" href="/hardware.html"><span class="ic">&#128193;</span>Hardware</a>
+<li><a class="" href="/hardware.html"><span class="ic" aria-hidden="true">&#128193;</span>Hardware</a>
 </li>
-<li><a class="" href="/research.html"><span class="ic">&#128193;</span>Research</a>
+<li><a class="" href="/research.html"><span class="ic" aria-hidden="true">&#128193;</span>Research</a>
 </li>
-<li><a class="" href="/properties.html"><span class="ic">&#128193;</span>Properties</a>
+<li><a class="" href="/properties.html"><span class="ic" aria-hidden="true">&#128193;</span>Properties</a>
 </li>
-<li><a href="/shop/"><span class="ic" aria-hidden="true">&#128193;</span>Shop</a></li>
-<li><a href="/intake/"><span class="ic" aria-hidden="true">&#128193;</span>Websites</a></li>
-<li><a href="/audit/"><span class="ic" aria-hidden="true">&#128193;</span>Site audit</a></li>
-<li><a href="/search/"><span class="ic" aria-hidden="true">&#128193;</span>Find</a></li>
-<li><a href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a></li>
-<li><a href="/cv/"><span class="ic" aria-hidden="true">&#128193;</span>CV</a></li>
-<li><a href="/writing/"><span class="ic" aria-hidden="true">&#128193;</span>Writing</a></li>
-<li><a href="/stack/"><span class="ic" aria-hidden="true">&#128220;</span>Stack</a></li>
-<li><a href="/Docs.html"><span class="ic" aria-hidden="true">&#128193;</span>Docs</a></li>
-<li><a href="/developers.html"><span class="ic" aria-hidden="true">&#128193;</span>Developers</a></li>
-<li><a href="/log/"><span class="ic" aria-hidden="true">&#128220;</span>Log</a></li>
-<li><a href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a></li>
-<li><a href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a></li>
-<li><a href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a></li>
-<li><a href="/privacy.html"><span class="ic" aria-hidden="true">&#128220;</span>Privacy</a></li>
+</ul>
+</li>
+<li><a class="" href="/papers/"><span class="ic" aria-hidden="true">&#128193;</span>Papers</a>
+</li>
+<li><a class="" href="/status/"><span class="ic" aria-hidden="true">&#128193;</span>Status</a>
+</li>
+<li><a class="" href="/about.html"><span class="ic" aria-hidden="true">&#128220;</span>About</a>
+</li>
+<li><a class="" href="/contact.html"><span class="ic" aria-hidden="true">&#128220;</span>Contact</a>
+</li>
 </ul></li></ul>
     </aside>
     <main id="content" class="content sunken">
@@ -139,6 +140,28 @@ or a whole library.</p>
 <h2>How it works</h2><ol class="steps"><li><b>Send a prompt, a folder, or a repo</b><span>A system prompt, a CLAUDE.md, an AGENTS.md, or a whole repository of agent rules. One file or a library.</span></li><li><b>We probe every rule</b><span>One message per rule, written to break that rule, sent to a live model in a fresh conversation. Each reply is judged against the rule it was meant to break.</span></li><li><b>You get the report and the fixes</b><span>Which rules held, which broke, the exact message that broke each one, a rewrite that would have held, and any two rules that cannot both be followed.</span></li></ol><h2>What the report tells you</h2><div class="featgrid"><div class="feat"><b>A static grade is not enough</b><span>A prompt that reads clean can still break under pressure. We have graded prompts an A that broke a rule on the first probe.</span></div><div class="feat"><b>The exact message that broke each rule</b><span>Not a warning that a rule is weak &mdash; the real user message that got a live model to ignore it.</span></div><div class="feat"><b>A rewrite that holds</b><span>For every rule that broke, a rewrite that closes the loophole, and a refusal to harden a rule when doing so would contradict another.</span></div></div><h2>Specifications</h2><table class="facts"><tr><th>What</th><td>A managed prompt-integrity check, run for you</td></tr><tr><th>Your prompt</th><td>Read in memory, never stored</td></tr><tr><th>Graded</th><td>Per file and per rule, against a live model</td></tr><tr><th>You receive</th><td>A report: breaks, rewrites, and contradictions named</td></tr><tr><th>Status</th><td>Open for early orders</td></tr></table><h2>Questions</h2><dl class="faq"><dt>Do you store my prompt?</dt><dd>No. It is read in memory, graded, and discarded. Nothing is logged and there is no account to create.</dd><dt>Which model do you run it against?</dt><dd>A current frontier model. If your prompt will run on a specific one, name it and we target that model so the result reflects where it will actually be deployed.</dd><dt>Can you check a whole repository?</dt><dd>Yes. A single prompt, or a folder of system prompts, CLAUDE.md and agent rule files, graded into one report.</dd><dt>What is not claimed?</dt><dd>One probe per rule is a screen, not a rate: it shows a rule can break, not how often. The report carries every probe and reply so you read the evidence rather than trust a number.</dd></dl></div>
     </main>
   </div>
+
+  <footer class="sitefoot">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a> &middot;
+      <a href="/search/">Find</a> &middot;
+      <a href="/about.html">About</a> &middot;
+      <a href="/cv/">CV</a> &middot;
+      <a href="/writing/">Writing</a> &middot;
+      <a href="/papers/">Papers</a> &middot;
+      <a href="/developers.html">Developers</a> &middot;
+      <a href="/Docs.html">Docs</a> &middot;
+      <a href="/stack/">Stack</a> &middot;
+      <a href="/shop/">Shop</a> &middot;
+      <a href="/log/">Log</a> &middot;
+      <a href="/status/">Status</a> &middot;
+      <a href="/contact.html">Contact</a> &middot;
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157. Punta Gorda, Florida.
+    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
+  </footer>
 
   <div class="statusbar">
     <span class="cell groove">1 item</span>
