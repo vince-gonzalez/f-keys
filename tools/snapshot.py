@@ -905,8 +905,19 @@ def render(snap, prev):
         # Re-sort here: the snapshot is written with sort_keys=True for stable
         # diffs, which alphabetises these and buries the large buckets.
         ranked = sorted(bots.items(), key=lambda kv: -kv[1])
+        # The label cell is a ROW HEADER. This is a two-column key/value
+        # table, so without it a screen reader reads "32,022 89.9%" with
+        # nothing saying which bucket it belongs to. The inline style is
+        # deliberate: a bare <th> renders bold and centred, and this
+        # table carries no class that the stylesheet already dresses, so
+        # the markup changes and the pixels do not.
+        #
+        # It was fixed once in the built HTML instead of here, and the
+        # nightly snapshot regenerated the page and threw it away. A fix
+        # that is not in the generator is not a fix.
         mix_rows = "".join(
-            f"<tr><td>{k}</td><td class='num'>{fmt(v)}"
+            f"<tr><th scope='row' style='text-align:left;font-weight:400'>"
+            f"{k}</th><td class='num'>{fmt(v)}"
             f" <span class='dim'>{round(100.0*v/btotal,1)}%</span></td></tr>"
             for k, v in ranked[:9])
         mix_html = ("<table>" + mix_rows + "</table>"
