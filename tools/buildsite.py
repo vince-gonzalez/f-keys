@@ -81,30 +81,30 @@ LIVE = ("Live", "st-ready")
 # ── the catalogue ────────────────────────────────────────────
 # (slug, name, category, type, status, one-line, href)
 CATALOGUE = [
-    ("keyj", "Key-J", "apps", "Application", READY,
+    ("keyj", "Key-J", "tools", "Application", READY,
      "Every keystroke plays a note, in any application. Live staff, WAV export.", "/keyj/"),
-    ("pixelstaff", "Pixel Staff", "apps", "Application", READY,
+    ("pixelstaff", "Pixel Staff", "tools", "Application", READY,
      "An 8-bit composer. Piano roll, waveform per channel, WAV or ringtone out.", "/pixelstaff/"),
-    ("opticquiz", "OpticQuiz", "apps", "Web app", READY,
+    ("opticquiz", "OpticQuiz", "check", "Web app", READY,
      "Color-vision and acuity tests that run entirely in the browser.", "https://opticquiz.com"),
-    ("qv", "QV", "apps", "Web app", READY,
+    ("qv", "QV", "tools", "Web app", READY,
      "Live ballots. Put a question to a room and watch the count move.", "/qv/"),
-    ("remapwrap", "RemapWrap", "apps", "Application", ALPHA,
+    ("remapwrap", "RemapWrap", "tools", "Application", ALPHA,
      "Any smartphone becomes a programmable macro pad. No app, no dongle.", "/remapwrap/"),
 
-    ("trailer-load", "Trailer Load", "games", "Simulator", READY,
+    ("trailer-load", "Trailer Load", "training", "Simulator", READY,
      "Warehouse load training that plays like a game. Institutional licensing.", "https://trailer-load.com"),
-    ("prompt", "PROMPT", "games", "Discord activity", DISCORD,
+    ("prompt", "PROMPT", "play", "Discord activity", DISCORD,
      "A multiplayer word game inside Discord, in a 90s CRT shell.", "https://prompt.f-keys.com"),
-    ("daisupop", "DaisuPop", "games", "Discord activity", DISCORD,
+    ("daisupop", "DaisuPop", "play", "Discord activity", DISCORD,
      "A dice popper. Everyone in the room sees the same roll at the same moment.", "https://dp.f-keys.com"),
-    ("micdrop", "MICDROP", "games", "Fortnite island", FORTNITE,
+    ("micdrop", "MICDROP", "play", "Fortnite island", FORTNITE,
      "A live open-mic arena. 120 seconds to win the crowd. Code 1534-0440-5810.", "/micdrop/"),
-    ("tag", "TAG", "games", "Fortnite island", FORTNITE,
+    ("tag", "TAG", "play", "Fortnite island", FORTNITE,
      "One player is IT and everyone else runs. Ninety seconds to pass it on. Code 8134-9047-4850.", "/tag/"),
-    ("tagpro", "TAG PRO", "games", "Fortnite island", FORTNITE,
+    ("tagpro", "TAG PRO", "play", "Fortnite island", FORTNITE,
      "The blink version: lunge, dash, counter-tag on an open arena. Code 5571-1708-8987.", "/tagpro/"),
-    ("fytecraft", "FyteCraft", "games", "Game", ALPHA,
+    ("fytecraft", "FyteCraft", "play", "Game", ALPHA,
      "An RTS built around combat rather than base-building. Early, and openly so.", "https://github.com/vince-gonzalez/fytecraft.com"),
 
     ("wikipolish", "WikiPolish", "tools", "Web tool", READY,
@@ -118,13 +118,13 @@ CATALOGUE = [
     # Smithery the same day; the page is the product, so the row links out.
     ("coldhat", "coldHat", "tools", "Web tool", READY,
      "Your AI rules on any chat. Type one line into Claude, ChatGPT or Grok and it works your way.", "https://coldhat.f-keys.com"),
-    ("promptcheck", "Prompt Check", "tools", "Service", SETUP,
-     "Send us your system prompts and we run them against a live model: which rules hold, which break, and the rewrite that holds.", "/promptcheck/"),
+    ("promptcheck", "Prompt Check", "check", "Service", SETUP,
+     "Send a system prompt and it is run against a live model: which rules hold, which break, and the rewrite that holds.", "/promptcheck/"),
     ("axsent", "axsent", "research", "Python package", PIP,
      "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.", "/axsent/"),
-    ("authorecon", "authorecon", "research", "Python package", PIP,
+    ("authorecon", "authorecon", "check", "Python package", PIP,
      "Reconcile published work against every place it lives, for any ORCID, from public sources.", "/authorecon/"),
-    ("prompt-atoms", "Prompt Atoms", "research", "Dataset", PUBLISHED,
+    ("prompt-atoms", "Prompt Atoms", "check", "Dataset", PUBLISHED,
      "257 instruction atoms and 32 measured conflicts, mined from public prompt libraries. CSV and JSON, CC BY 4.0.", "/prompt-atoms/"),
 
     # 2026-10-11. A measurement rather than a package: the harness lives in
@@ -137,23 +137,23 @@ CATALOGUE = [
      "Find avoidable axiom dependencies in Metamath, and build the proofs that remove them.", "/mmforge/"),
     ("loadbearing", "loadbearing", "research", "Python package", PIP,
      "What a claim asserts, separated from what its derivation consumed.", "/loadbearing/"),
-    ("certivl", "certivl", "research", "Python package", PIP,
+    ("certivl", "certivl", "check", "Python package", PIP,
      "Certified interval arithmetic: an enclosure that turns a computed inequality into a proof.", "/certivl/"),
-    ("ishihara", "ishihara", "research", "Python package", PIP,
+    ("ishihara", "ishihara", "check", "Python package", PIP,
      "Generate pseudoisochromatic color-vision plates, reproducible from a seed.", "/ishihara/"),
 
-    ("legible", "legible", "tools", "Python package", PIP,
+    ("legible", "legible", "check", "Python package", PIP,
      "Three build gates: unreadable type, unreadable color, a retired name.", "/legible/"),
-    ("openapi-drift", "openapi-drift", "tools", "Python package", PIP,
+    ("openapi-drift", "openapi-drift", "check", "Python package", PIP,
      "Has your API drifted from its spec, and can a machine still read it?", "/openapi-drift/"),
-    ("changewatch", "changewatch", "tools", "Python package", PIP,
+    ("changewatch", "changewatch", "check", "Python package", PIP,
      "A doorbell for your published work. Silent until somebody else acts.", "/changewatch/"),
     ("keyjockey", "keyjockey", "tools", "npm package", NPM,
      "Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency.", "/keyjockey/"),
 
-    ("streamsniper", "Stream Sniper", "hardware", "Appliance", SETUP,
+    ("streamsniper", "Stream Sniper", "tools", "Appliance", SETUP,
      "A spare mini PC shows a channel fullscreen the moment it goes live.", "/streamsniper/"),
-    ("moonbeam", "Moonbeam", "hardware", "Python package", PIP,
+    ("moonbeam", "Moonbeam", "tools", "Python package", PIP,
      "Finds the NerdMiners on your network and reads their vitals.", "/moonbeam/"),
 
     ("gonzalgo", "gonzalgo", "research", "Research tool", PUBLISHED,
@@ -163,28 +163,33 @@ CATALOGUE = [
     ("modulign", "Modulign", "research", "Standard", PUBLISHED,
      "A dimensional address grammar for observable reality. DAG-OR v3.", "https://modulign.org"),
 
-    ("5best2buy", "5Best2Buy", "properties", "Website", LIVE,
+    ("5best2buy", "5Best2Buy", "sites", "Website", LIVE,
      "A sourcing map for independent American food.", "https://www.5best2buy.com"),
-    ("poticas", "Poticas", "properties", "Website", LIVE,
+    ("poticas", "Poticas", "sites", "Website", LIVE,
      "The home of potica. History, method, and who still ships one.", "https://poticas.com"),
-    ("tipstreams", "TipStreams", "properties", "Website", LIVE,
+    ("tipstreams", "TipStreams", "sites", "Website", LIVE,
      "Branded tip pages and OBS overlays. The widget never touches money.", "https://tipstreams.com"),
-    ("fundoge", "FunDoge", "properties", "Website", LIVE,
+    ("fundoge", "FunDoge", "sites", "Website", LIVE,
      "Free isometric mini-golf in the browser.", "https://dogefundme.com"),
     # 2026-09-04. Live, taking checkout, and listed nowhere on this site
     # until now - the same failure described for the other properties.
-    ("epistemend", "Epistemend", "properties", "Website", LIVE,
+    ("epistemend", "Epistemend", "check", "Website", LIVE,
      "One ORCID in, one document out. Checks a published record against where the work lives.",
      "https://www.epistemend.org"),
 ]
 
 CATEGORIES = [
-    ("apps", "Apps", "Things you sit in front of and use."),
-    ("games", "Games", "Things you play."),
-    ("tools", "Tools", "Things that do the work for you."),
-    ("hardware", "Hardware", "Software that makes a box do one thing forever."),
-    ("research", "Research", "Things you read. Every claim carries a DOI."),
-    ("properties", "Properties", "Sites that stand on their own."),
+    ("check", "Check",
+     "Does a thing match what it claims? Records, interfaces, prompts, "
+     "colour vision and this site's own builds."),
+    ("research", "Research",
+     "What a result actually rests on, measured from source, with a DOI "
+     "on every claim."),
+    ("tools", "Tools", "Things you sit in front of and use."),
+    ("training", "Training",
+     "Built to teach a job, and licensed to the people who teach it."),
+    ("play", "Play", "Things you play."),
+    ("sites", "Sites", "Sites that stand on their own."),
 ]
 
 
@@ -2965,7 +2970,8 @@ a record of published work agrees with the places that work lives.</p>
 <tr><th>A publication record, checked<br>$5 and $25</th>
     <td>Paste an ORCID and find out what the record says, where the work
     actually lives, and what disagrees between them. The first pass runs
-    free in your own browser and nothing reaches us.
+    free in your own browser, and the requests go to ORCID and the
+    archives rather than through this site.
     <a href="https://epistemend.org" rel="noopener">Run it</a>.</td></tr>
 <tr><th>Trailer Load<br>licensed to institutions</th>
     <td>Warehouse load training that plays like a game, licensed for

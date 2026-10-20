@@ -5,7 +5,7 @@
   "status": "Ready",
   "text": "Every keystroke plays a note, in any application. Live staff, WAV export.",
   "href": "/keyj/",
-  "group": "apps"
+  "group": "tools"
  },
  {
   "name": "Pixel Staff",
@@ -13,7 +13,7 @@
   "status": "Ready",
   "text": "An 8-bit composer. Piano roll, waveform per channel, WAV or ringtone out.",
   "href": "/pixelstaff/",
-  "group": "apps"
+  "group": "tools"
  },
  {
   "name": "OpticQuiz",
@@ -21,7 +21,7 @@
   "status": "Ready",
   "text": "Color-vision and acuity tests that run entirely in the browser.",
   "href": "https://opticquiz.com",
-  "group": "apps"
+  "group": "check"
  },
  {
   "name": "QV",
@@ -29,7 +29,7 @@
   "status": "Ready",
   "text": "Live ballots. Put a question to a room and watch the count move.",
   "href": "/qv/",
-  "group": "apps"
+  "group": "tools"
  },
  {
   "name": "RemapWrap",
@@ -37,7 +37,7 @@
   "status": "Alpha",
   "text": "Any smartphone becomes a programmable macro pad. No app, no dongle.",
   "href": "/remapwrap/",
-  "group": "apps"
+  "group": "tools"
  },
  {
   "name": "Trailer Load",
@@ -45,7 +45,7 @@
   "status": "Ready",
   "text": "Warehouse load training that plays like a game. Institutional licensing.",
   "href": "https://trailer-load.com",
-  "group": "games"
+  "group": "training"
  },
  {
   "name": "PROMPT",
@@ -53,7 +53,7 @@
   "status": "In Discord",
   "text": "A multiplayer word game inside Discord, in a 90s CRT shell.",
   "href": "https://prompt.f-keys.com",
-  "group": "games"
+  "group": "play"
  },
  {
   "name": "DaisuPop",
@@ -61,7 +61,7 @@
   "status": "In Discord",
   "text": "A dice popper. Everyone in the room sees the same roll at the same moment.",
   "href": "https://dp.f-keys.com",
-  "group": "games"
+  "group": "play"
  },
  {
   "name": "MICDROP",
@@ -69,7 +69,7 @@
   "status": "In Fortnite",
   "text": "A live open-mic arena. 120 seconds to win the crowd. Code 1534-0440-5810.",
   "href": "/micdrop/",
-  "group": "games"
+  "group": "play"
  },
  {
   "name": "TAG",
@@ -77,7 +77,7 @@
   "status": "In Fortnite",
   "text": "One player is IT and everyone else runs. Ninety seconds to pass it on. Code 8134-9047-4850.",
   "href": "/tag/",
-  "group": "games"
+  "group": "play"
  },
  {
   "name": "TAG PRO",
@@ -85,7 +85,7 @@
   "status": "In Fortnite",
   "text": "The blink version: lunge, dash, counter-tag on an open arena. Code 5571-1708-8987.",
   "href": "/tagpro/",
-  "group": "games"
+  "group": "play"
  },
  {
   "name": "FyteCraft",
@@ -93,7 +93,7 @@
   "status": "Alpha",
   "text": "An RTS built around combat rather than base-building. Early, and openly so.",
   "href": "https://github.com/vince-gonzalez/fytecraft.com",
-  "group": "games"
+  "group": "play"
  },
  {
   "name": "WikiPolish",
@@ -131,9 +131,9 @@
   "name": "Prompt Check",
   "kind": "Service",
   "status": "Needs setup",
-  "text": "Send us your system prompts and we run them against a live model: which rules hold, which break, and the rewrite that holds.",
+  "text": "Send a system prompt and it is run against a live model: which rules hold, which break, and the rewrite that holds.",
   "href": "/promptcheck/",
-  "group": "tools"
+  "group": "check"
  },
  {
   "name": "axsent",
@@ -149,7 +149,7 @@
   "status": "pip install",
   "text": "Reconcile published work against every place it lives, for any ORCID, from public sources.",
   "href": "/authorecon/",
-  "group": "research"
+  "group": "check"
  },
  {
   "name": "Prompt Atoms",
@@ -157,7 +157,7 @@
   "status": "Published",
   "text": "257 instruction atoms and 32 measured conflicts, mined from public prompt libraries. CSV and JSON, CC BY 4.0.",
   "href": "/prompt-atoms/",
-  "group": "research"
+  "group": "check"
  },
  {
   "name": "d1bench",
@@ -189,7 +189,7 @@
   "status": "pip install",
   "text": "Certified interval arithmetic: an enclosure that turns a computed inequality into a proof.",
   "href": "/certivl/",
-  "group": "research"
+  "group": "check"
  },
  {
   "name": "ishihara",
@@ -197,7 +197,7 @@
   "status": "pip install",
   "text": "Generate pseudoisochromatic color-vision plates, reproducible from a seed.",
   "href": "/ishihara/",
-  "group": "research"
+  "group": "check"
  },
  {
   "name": "legible",
@@ -205,7 +205,7 @@
   "status": "pip install",
   "text": "Three build gates: unreadable type, unreadable color, a retired name.",
   "href": "/legible/",
-  "group": "tools"
+  "group": "check"
  },
  {
   "name": "openapi-drift",
@@ -213,7 +213,7 @@
   "status": "pip install",
   "text": "Has your API drifted from its spec, and can a machine still read it?",
   "href": "/openapi-drift/",
-  "group": "tools"
+  "group": "check"
  },
  {
   "name": "changewatch",
@@ -221,7 +221,7 @@
   "status": "pip install",
   "text": "A doorbell for your published work. Silent until somebody else acts.",
   "href": "/changewatch/",
-  "group": "tools"
+  "group": "check"
  },
  {
   "name": "keyjockey",
@@ -237,7 +237,7 @@
   "status": "Needs setup",
   "text": "A spare mini PC shows a channel fullscreen the moment it goes live.",
   "href": "/streamsniper/",
-  "group": "hardware"
+  "group": "tools"
  },
  {
   "name": "Moonbeam",
@@ -245,7 +245,7 @@
   "status": "pip install",
   "text": "Finds the NerdMiners on your network and reads their vitals.",
   "href": "/moonbeam/",
-  "group": "hardware"
+  "group": "tools"
  },
  {
   "name": "gonzalgo",
@@ -277,7 +277,7 @@
   "status": "Live",
   "text": "A sourcing map for independent American food.",
   "href": "https://www.5best2buy.com",
-  "group": "properties"
+  "group": "sites"
  },
  {
   "name": "Poticas",
@@ -285,7 +285,7 @@
   "status": "Live",
   "text": "The home of potica. History, method, and who still ships one.",
   "href": "https://poticas.com",
-  "group": "properties"
+  "group": "sites"
  },
  {
   "name": "TipStreams",
@@ -293,7 +293,7 @@
   "status": "Live",
   "text": "Branded tip pages and OBS overlays. The widget never touches money.",
   "href": "https://tipstreams.com",
-  "group": "properties"
+  "group": "sites"
  },
  {
   "name": "FunDoge",
@@ -301,7 +301,7 @@
   "status": "Live",
   "text": "Free isometric mini-golf in the browser.",
   "href": "https://dogefundme.com",
-  "group": "properties"
+  "group": "sites"
  },
  {
   "name": "Epistemend",
@@ -309,7 +309,7 @@
   "status": "Live",
   "text": "One ORCID in, one document out. Checks a published record against where the work lives.",
   "href": "https://www.epistemend.org",
-  "group": "properties"
+  "group": "check"
  },
  {
   "name": "CV - founder",

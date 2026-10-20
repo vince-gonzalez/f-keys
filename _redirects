@@ -1,0 +1,7 @@
+# The catalogue was sorted by file type and is now sorted by purpose,
+# so four section pages changed address on 2026-10-20. These keep every
+# old link working. tools.html and research.html did not move.
+/apps.html        /tools.html     301
+/games.html       /play.html      301
+/hardware.html    /tools.html     301
+/properties.html  /sites.html     301

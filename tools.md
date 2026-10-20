@@ -1,6 +1,6 @@
 # Tools — F-Keys
 
-> Things that do the work for you.
+> Things you sit in front of and use.
 
 Canonical: https://f-keys.com/tools.html
 

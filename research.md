@@ -1,6 +1,6 @@
 # Research — F-Keys
 
-> Things you read. Every claim carries a DOI.
+> What a result actually rests on, measured from source, with a DOI on every claim.
 
 Canonical: https://f-keys.com/research.html
 
