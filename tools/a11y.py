@@ -24,6 +24,7 @@ import sys
 import json
 import hashlib
 import urllib.request
+import urllib.parse
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -61,6 +62,29 @@ NOT_TESTED = [
 ]
 
 STYLE_ROOTS = []
+
+# When auditing a live URL, linked stylesheets have to be fetched rather
+# than opened. Set by the --url path; empty for a local run, where the
+# filesystem answers instead.
+STYLE_URL_BASE = ""
+_CSS_CACHE = {}
+
+
+def fetch_css(url):
+    """One linked stylesheet, over HTTP. Failure returns "" and is NOT
+    treated as 'no focus styles' by the caller, which only concludes that
+    after looking everywhere it can reach."""
+    if url in _CSS_CACHE:
+        return _CSS_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"user-agent": "a11y-audit/0.1"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            body = r.read().decode("utf-8", "replace")
+    except Exception:                                        # noqa: BLE001
+        body = ""
+    _CSS_CACHE[url] = body
+    return body
 
 # A <label> element with its whole contents, used to find controls
 # that are labelled by being INSIDE one rather than by a for=.
@@ -293,12 +317,22 @@ def check(html, label):
                 r"<link\b[^>]*href\s*=\s*['\"]([^'\"]+\.css)[^'\"]*['\"]",
                 html, re.I):
             cand = href.split("?")[0].lstrip("/")
+            got = False
             for base in (STYLE_ROOTS or ["."]):
                 fp = os.path.join(base, cand)
                 if os.path.isfile(fp):
                     css += io.open(fp, encoding="utf-8",
                                    errors="replace").read()
+                    got = True
                     break
+            # OVER HTTP TOO. Reading only local files meant that auditing a
+            # live URL could never see the stylesheet, so 2.4.7 failed on
+            # every remote site whose focus rules are in a sheet - which is
+            # every well-built site. The check was right locally and wrong
+            # everywhere else, and a false fail on a site that is fine is
+            # how a report gets ignored.
+            if not got and STYLE_URL_BASE:
+                css += fetch_css(urllib.parse.urljoin(STYLE_URL_BASE, href))
         both = low + css.lower()
         if ":focus" not in both and "focus-visible" not in both:
             add("2.4.7-focus",
@@ -457,7 +491,20 @@ if __name__ == "__main__":
         url = args[0]
         req = urllib.request.Request(url, headers={"user-agent": "a11y-audit/0.1"})
         html = urllib.request.urlopen(req, timeout=40).read().decode("utf-8", "replace")
+        STYLE_URL_BASE = url
+        globals()["STYLE_URL_BASE"] = url
         report([(url, html)], url)
+        # The honest exclusions belong on BOTH paths. They were printed
+        # only on a local run, so auditing a URL produced a report that
+        # looked complete and silently dropped the list of things nobody
+        # checked - which is the exact lie this section exists to stop.
+        print()
+        print("  NOT TESTED HERE (counting these as passes would be the lie):")
+        for c, w in NOT_TESTED:
+            print("    %-26s %s" % (c, w))
+        print()
+        print("  ONE PAGE ONLY. A criterion passes here only for this URL; "
+              "the rest of the site was not fetched.")
     else:
         STYLE_ROOTS.extend([a for a in args if os.path.isdir(a)])
         docs = gather(args)
