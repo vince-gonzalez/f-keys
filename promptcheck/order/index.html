@@ -70,7 +70,7 @@
 <main id="appmain">
 <main>
   <h1>Order a Prompt Check</h1>
-  <p class="sub">Send a system prompt, a CLAUDE.md, an AGENTS.md, or a whole repo's worth of rule files (we read the rules, not your code). You get back a graded report: which rules hold, which break under pressure, the message that broke each one, and a rewrite that holds.</p>
+  <p class="sub">Send a system prompt, a CLAUDE.md, an AGENTS.md, or a whole repo's worth of rule files (only the rules are read, not your code). You get back a graded report: which rules hold, which break under pressure, the message that broke each one, and a rewrite that holds.</p>
 
   <form id="order" novalidate>
     <label for="email">Your email <span aria-hidden="true">*</span></label>
@@ -79,7 +79,7 @@
     <label for="name">Your name</label>
     <input type="text" id="name" name="name" autocomplete="name">
 
-    <label for="what">What should we check? <span aria-hidden="true">*</span></label>
+    <label for="what">What should I check? <span aria-hidden="true">*</span></label>
     <textarea id="what" name="what" placeholder="Paste a system prompt or CLAUDE.md here, or leave this blank and give a link below."></textarea>
     <p class="hint">Paste the rules here, or link a file or repo below. Either is fine.</p>
 
@@ -92,7 +92,7 @@
       <label><input type="radio" name="scope" value="A library"> A library of prompts</label>
       <label><input type="radio" name="scope" value="A whole repo"> A repo (all its rule files)</label>
     </fieldset>
-    <p class="hint">$12.99 for a single prompt. $99.99 for a repo or library. Teams, pipelines, and at-scale testing: <a href="/contact.html">contact us</a>.</p>
+    <p class="hint">$12.99 for a single prompt. $99.99 for a repo or library. Teams, pipelines, and at-scale testing: <a href="/contact.html">get in touch</a>.</p>
 
     <label for="model">Target model (optional)</label>
     <input type="text" id="model" name="model" placeholder="The model your prompt will run on, if you know it.">

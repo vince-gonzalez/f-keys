@@ -240,9 +240,9 @@ PAGES = {
     body="",
   ),
 "promptcheck": dict(
-  title="Prompt Check", tagline="We run your prompts against a live model and show you which rules break.",
-  lede="A linter grades a prompt by reading it. We grade it by running it. "
-       "For every rule in your system prompt, we send a message built to break "
+  title="Prompt Check", tagline="I run your prompts against a live model and show you which rules break.",
+  lede="A linter grades a prompt by reading it. Prompt Check grades it by running it. "
+       "For every rule in your system prompt, I send a message built to break "
        "that rule to a live model, and judge the reply kept or broken. You get "
        "a report, per file and per rule: the message that broke each rule, a "
        "rewrite that would have held, and a flag on any two rules that "
@@ -253,7 +253,7 @@ PAGES = {
   steps=[("Send a prompt, a folder, or a repo",
           "A system prompt, a CLAUDE.md, an AGENTS.md, or a whole repository of "
           "agent rules. One file or a library."),
-         ("We probe every rule",
+         ("Every rule gets probed",
           "One message per rule, written to break that rule, sent to a live "
           "model in a fresh conversation. Each reply is judged against the rule "
           "it was meant to break."),
@@ -263,7 +263,7 @@ PAGES = {
           "both be followed.")],
   features_title="What the report tells you",
   features=[("A static grade is not enough",
-             "A prompt that reads clean can still break under pressure. We have "
+             "A prompt that reads clean can still break under pressure. I have "
              "graded prompts an A that broke a rule on the first probe."),
             ("The exact message that broke each rule",
              "Not a warning that a rule is weak &mdash; the real user message "
@@ -277,7 +277,7 @@ PAGES = {
         "and there is no account to create."),
        ("Which model do you run it against?",
         "A current frontier model. If your prompt will run on a specific one, "
-        "name it and we target that model so the result reflects where it "
+        "name it and I target that model so the result reflects where it "
         "will actually be deployed."),
        ("Can you check a whole repository?",
         "Yes. A single prompt, or a folder of system prompts, CLAUDE.md and "
@@ -293,14 +293,14 @@ PAGES = {
          ("Status", "Open for early orders")],
   body="""
 <p>A static checker tells you a prompt reads clean. It cannot tell you which
-rules a model ignores the moment a user pushes back. We have graded prompts an
+rules a model ignores the moment a user pushes back. I have graded prompts an
 A, then watched a model break them on the first message. That gap, between how a
 prompt reads and how it behaves, is the part that costs you in production, and
 it is the part worth paying to find.</p>
 <p>The tools that actually run a prompt against a model are a free kit you wire
 up yourself, or a red-team engagement that starts in the thousands. This is the
-one in between: we run it, you get the report.</p>
-<p>For every rule, we write a user message built to break that one rule, send it
+one in between: I run it, you get the report.</p>
+<p>For every rule, I write a user message built to break that one rule, send it
 to a live model with your prompt in force, and judge the reply. A rule that
 survives a message designed to break it is a rule you can rely on. The report
 names the rules that broke, the exact message that broke each, a rewrite that

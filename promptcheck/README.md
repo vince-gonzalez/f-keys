@@ -15,7 +15,7 @@
 ║                          ╚██████╗██║  ██║███████╗╚██████╗██║  ██╗                          ║
 ║                           ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝  ╚═╝                          ║
 ║                                                                                            ║
-║          We run your prompts against a live model and show you which rules break.          ║
+║          I run your prompts against a live model and show you which rules break.           ║
 ║                                                                                            ║
 ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 ```
