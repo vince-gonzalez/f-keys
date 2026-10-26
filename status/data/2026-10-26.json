@@ -2,15 +2,15 @@
   "cloudflare": {
     "bots_24h": {
       "AI Assistant": 27,
-      "AI Crawler": 1141,
+      "AI Crawler": 1129,
       "AI Search": 57,
       "Advertising & Marketing": 7,
       "Feed Fetcher": 1,
       "Monitoring & Analytics": 32,
-      "Page Preview": 94,
+      "Page Preview": 93,
       "Search Engine Crawler": 1829,
-      "Search Engine Optimization": 1001,
-      "Unverified": 35829
+      "Search Engine Optimization": 997,
+      "Unverified": 35916
     },
     "bots_error": null,
     "days": 7,
@@ -158,30 +158,30 @@
       },
       {
         "days_returned": 7,
-        "page_views": 1373,
-        "requests": 18571,
+        "page_views": 1370,
+        "requests": 18627,
         "site": "trailer-load.com",
-        "threats": 176,
+        "threats": 177,
         "top_countries": [
           {
             "country": "US",
-            "pct": 38.2,
-            "requests": 7099
+            "pct": 38.1,
+            "requests": 7098
           },
           {
             "country": "FR",
-            "pct": 17.2,
+            "pct": 17.1,
             "requests": 3192
           },
           {
             "country": "BR",
-            "pct": 14.3,
-            "requests": 2650
+            "pct": 14.4,
+            "requests": 2676
           },
           {
             "country": "BE",
-            "pct": 8.1,
-            "requests": 1502
+            "pct": 8.2,
+            "requests": 1534
           },
           {
             "country": "NL",
@@ -189,7 +189,7 @@
             "requests": 1076
           }
         ],
-        "uniques": 1375
+        "uniques": 1374
       },
       {
         "days_returned": 7,
@@ -334,9 +334,9 @@
     ],
     "sites_omitted": 4,
     "totals": {
-      "page_views": 54846,
-      "threats": 4486,
-      "uniques": 32170
+      "page_views": 54843,
+      "threats": 4487,
+      "uniques": 32169
     },
     "window": {
       "since": "2026-10-19",
@@ -344,7 +344,7 @@
     }
   },
   "date": "2026-10-26",
-  "generated_at": "2026-10-26 04:10 UTC",
+  "generated_at": "2026-10-26 04:30 UTC",
   "github": [
     {
       "archived": false,
@@ -357,7 +357,7 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-10-25T04:07:58Z",
+      "pushed_at": "2026-10-26T04:12:05Z",
       "repo": "f-keys",
       "size_kb": 78386,
       "stars": 2,
@@ -2058,16 +2058,16 @@
       "github_stars": 18,
       "package_daily": null,
       "package_weekly": 324,
-      "page_views_7d": 54846,
+      "page_views_7d": 54843,
       "properties_total": 12,
       "properties_up": 12,
       "releases_published": null,
-      "visitors_7d": 32170,
+      "visitors_7d": 32169,
       "zenodo_downloads": 1092,
-      "zenodo_views": 2262
+      "zenodo_views": 2264
     }
   ],
-  "mode": "daily",
+  "mode": "weekly",
   "npm": [
     {
       "all_time": 525,
@@ -2527,18 +2527,18 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 40018,
+    "bot_requests_24h": 40088,
     "github_forks": 0,
     "github_repos": 34,
     "github_stars": 18,
-    "median_response_ms": 144,
+    "median_response_ms": 279,
     "npm_all_time": 7571,
     "npm_weekly": 117,
     "open_issues": 1,
     "package_all_time": 16834,
     "package_weekly": 324,
     "packages_total": 34,
-    "page_views_7d": 54846,
+    "page_views_7d": 54843,
     "properties_total": 12,
     "properties_up": 12,
     "pypi_all_time": 9263,
@@ -2546,17 +2546,17 @@
     "pypi_weekly": 207,
     "repos_archived": 2,
     "repos_unlicensed": 12,
-    "threats_7d": 4486,
-    "visitors_7d": 32170,
+    "threats_7d": 4487,
+    "visitors_7d": 32169,
     "zenodo_downloads": 1092,
     "zenodo_records": 61,
-    "zenodo_views": 2262
+    "zenodo_views": 2264
   },
   "uptime": [
     {
       "code": 200,
       "error": null,
-      "ms": 249,
+      "ms": 248,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2564,7 +2564,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 122,
+      "ms": 279,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2572,7 +2572,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 152,
+      "ms": 405,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2580,7 +2580,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 53,
+      "ms": 146,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2588,7 +2588,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 274,
+      "ms": 440,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2596,7 +2596,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 135,
+      "ms": 352,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2604,7 +2604,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 134,
+      "ms": 274,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2612,7 +2612,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 538,
+      "ms": 647,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2620,7 +2620,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 522,
+      "ms": 649,
       "name": "epistemend.org",
       "up": true,
       "url": "https://epistemend.org"
@@ -2628,7 +2628,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 137,
+      "ms": 204,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2636,7 +2636,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 84,
+      "ms": 280,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2644,7 +2644,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 162,
+      "ms": 231,
       "name": "qv.f-keys.com",
       "up": true,
       "url": "https://qv.f-keys.com"
@@ -2855,14 +2855,6 @@
       },
       {
         "downloads": 11,
-        "id": "21715685",
-        "title": "Rigorous areas for the classical Lebesgue universal covering ladder",
-        "unique_downloads": 10,
-        "unique_views": 19,
-        "views": 19
-      },
-      {
-        "downloads": 11,
         "id": "19726994",
         "title": "Modulign: Architecture, Implementation, and Applications of a Dimensional Address Grammar for Observable Reality",
         "unique_downloads": 8,
@@ -2971,6 +2963,14 @@
         "title": "A congruence obstruction on the Euler prime of an odd perfect number",
         "unique_downloads": 7,
         "unique_views": 20,
+        "views": 21
+      },
+      {
+        "downloads": 11,
+        "id": "21715685",
+        "title": "Rigorous areas for the classical Lebesgue universal covering ladder",
+        "unique_downloads": 10,
+        "unique_views": 21,
         "views": 21
       },
       {
