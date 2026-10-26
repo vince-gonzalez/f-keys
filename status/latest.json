@@ -1,16 +1,16 @@
 {
   "cloudflare": {
     "bots_24h": {
-      "AI Assistant": 39,
-      "AI Crawler": 1320,
-      "AI Search": 37,
-      "Academic Research": 37,
-      "Aggregator": 5,
-      "Monitoring & Analytics": 10,
-      "Page Preview": 105,
-      "Search Engine Crawler": 1889,
-      "Search Engine Optimization": 909,
-      "Unverified": 26677
+      "AI Assistant": 27,
+      "AI Crawler": 1141,
+      "AI Search": 57,
+      "Advertising & Marketing": 7,
+      "Feed Fetcher": 1,
+      "Monitoring & Analytics": 32,
+      "Page Preview": 94,
+      "Search Engine Crawler": 1829,
+      "Search Engine Optimization": 1001,
+      "Unverified": 35829
     },
     "bots_error": null,
     "days": 7,
@@ -18,333 +18,333 @@
     "sites": [
       {
         "days_returned": 7,
-        "page_views": 32499,
-        "requests": 57009,
+        "page_views": 32719,
+        "requests": 57514,
         "site": "5best2buy.com",
-        "threats": 164,
+        "threats": 190,
         "top_countries": [
           {
             "country": "US",
-            "pct": 40.9,
-            "requests": 23344
+            "pct": 39.4,
+            "requests": 22641
           },
           {
             "country": "FR",
-            "pct": 13.7,
-            "requests": 7822
-          },
-          {
-            "country": "SG",
-            "pct": 9.2,
-            "requests": 5248
+            "pct": 13.6,
+            "requests": 7818
           },
           {
             "country": "DE",
-            "pct": 8.0,
-            "requests": 4573
+            "pct": 11.1,
+            "requests": 6368
+          },
+          {
+            "country": "SG",
+            "pct": 9.5,
+            "requests": 5437
           },
           {
             "country": "FI",
-            "pct": 4.8,
-            "requests": 2748
-          }
-        ],
-        "uniques": 11360
-      },
-      {
-        "days_returned": 7,
-        "page_views": 9652,
-        "requests": 62280,
-        "site": "f-keys.com",
-        "threats": 634,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 22.9,
-            "requests": 14259
-          },
-          {
-            "country": "FR",
-            "pct": 17.4,
-            "requests": 10858
-          },
-          {
-            "country": "BE",
-            "pct": 7.5,
-            "requests": 4683
-          },
-          {
-            "country": "FI",
-            "pct": 5.6,
-            "requests": 3505
-          },
-          {
-            "country": "IN",
-            "pct": 5.2,
-            "requests": 3233
-          }
-        ],
-        "uniques": 6795
-      },
-      {
-        "days_returned": 7,
-        "page_views": 5043,
-        "requests": 24612,
-        "site": "opticquiz.com",
-        "threats": 300,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 33.2,
-            "requests": 8159
-          },
-          {
-            "country": "BE",
-            "pct": 10.7,
-            "requests": 2628
-          },
-          {
-            "country": "SG",
-            "pct": 6.8,
-            "requests": 1674
-          },
-          {
-            "country": "DE",
-            "pct": 6.6,
-            "requests": 1636
-          },
-          {
-            "country": "IN",
-            "pct": 4.3,
-            "requests": 1054
-          }
-        ],
-        "uniques": 3822
-      },
-      {
-        "days_returned": 7,
-        "page_views": 2458,
-        "requests": 22378,
-        "site": "poticas.com",
-        "threats": 108,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 28.1,
-            "requests": 6299
-          },
-          {
-            "country": "FR",
-            "pct": 27.3,
-            "requests": 6100
-          },
-          {
-            "country": "BE",
-            "pct": 5.8,
-            "requests": 1303
-          },
-          {
-            "country": "SG",
-            "pct": 5.6,
-            "requests": 1249
-          },
-          {
-            "country": "DE",
             "pct": 4.7,
-            "requests": 1050
+            "requests": 2694
           }
         ],
-        "uniques": 2643
+        "uniques": 11517
       },
       {
         "days_returned": 7,
-        "page_views": 1329,
-        "requests": 19592,
-        "site": "trailer-load.com",
-        "threats": 202,
+        "page_views": 9631,
+        "requests": 61396,
+        "site": "f-keys.com",
+        "threats": 586,
         "top_countries": [
           {
             "country": "US",
-            "pct": 34.1,
-            "requests": 6682
+            "pct": 26.0,
+            "requests": 15965
           },
           {
             "country": "FR",
-            "pct": 16.3,
-            "requests": 3196
+            "pct": 17.7,
+            "requests": 10864
+          },
+          {
+            "country": "BE",
+            "pct": 7.0,
+            "requests": 4295
+          },
+          {
+            "country": "FI",
+            "pct": 6.1,
+            "requests": 3723
+          },
+          {
+            "country": "DE",
+            "pct": 5.0,
+            "requests": 3062
+          }
+        ],
+        "uniques": 7301
+      },
+      {
+        "days_returned": 7,
+        "page_views": 5246,
+        "requests": 27136,
+        "site": "opticquiz.com",
+        "threats": 367,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 32.4,
+            "requests": 8789
+          },
+          {
+            "country": "BE",
+            "pct": 9.4,
+            "requests": 2561
+          },
+          {
+            "country": "CA",
+            "pct": 8.7,
+            "requests": 2367
+          },
+          {
+            "country": "SG",
+            "pct": 6.2,
+            "requests": 1690
+          },
+          {
+            "country": "DE",
+            "pct": 5.9,
+            "requests": 1588
+          }
+        ],
+        "uniques": 3983
+      },
+      {
+        "days_returned": 7,
+        "page_views": 2670,
+        "requests": 29544,
+        "site": "poticas.com",
+        "threats": 154,
+        "top_countries": [
+          {
+            "country": "FR",
+            "pct": 34.0,
+            "requests": 10056
+          },
+          {
+            "country": "US",
+            "pct": 25.3,
+            "requests": 7464
+          },
+          {
+            "country": "BE",
+            "pct": 4.4,
+            "requests": 1309
+          },
+          {
+            "country": "SG",
+            "pct": 4.3,
+            "requests": 1257
+          },
+          {
+            "country": "AU",
+            "pct": 3.8,
+            "requests": 1123
+          }
+        ],
+        "uniques": 2713
+      },
+      {
+        "days_returned": 7,
+        "page_views": 1373,
+        "requests": 18571,
+        "site": "trailer-load.com",
+        "threats": 176,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 38.2,
+            "requests": 7099
+          },
+          {
+            "country": "FR",
+            "pct": 17.2,
+            "requests": 3192
           },
           {
             "country": "BR",
-            "pct": 13.6,
-            "requests": 2671
+            "pct": 14.3,
+            "requests": 2650
           },
           {
             "country": "BE",
-            "pct": 9.0,
-            "requests": 1768
+            "pct": 8.1,
+            "requests": 1502
           },
           {
             "country": "NL",
-            "pct": 7.0,
-            "requests": 1374
+            "pct": 5.8,
+            "requests": 1076
           }
         ],
-        "uniques": 1349
+        "uniques": 1375
       },
       {
         "days_returned": 7,
-        "page_views": 891,
-        "requests": 15380,
+        "page_views": 987,
+        "requests": 17847,
         "site": "tipstreams.com",
-        "threats": 620,
+        "threats": 651,
         "top_countries": [
           {
             "country": "US",
-            "pct": 30.2,
-            "requests": 4643
+            "pct": 31.1,
+            "requests": 5557
           },
           {
             "country": "NL",
-            "pct": 12.2,
-            "requests": 1879
+            "pct": 12.7,
+            "requests": 2260
           },
           {
             "country": "BE",
-            "pct": 12.1,
-            "requests": 1863
+            "pct": 9.8,
+            "requests": 1746
           },
           {
             "country": "FR",
-            "pct": 8.9,
-            "requests": 1374
+            "pct": 7.7,
+            "requests": 1369
           },
           {
-            "country": "DE",
-            "pct": 7.3,
-            "requests": 1118
+            "country": "FI",
+            "pct": 5.7,
+            "requests": 1013
           }
         ],
-        "uniques": 1020
+        "uniques": 1064
       },
       {
         "days_returned": 7,
-        "page_views": 556,
-        "requests": 15591,
+        "page_views": 554,
+        "requests": 15437,
         "site": "epistemend.org",
-        "threats": 1224,
+        "threats": 1229,
         "top_countries": [
           {
             "country": "NL",
-            "pct": 16.5,
-            "requests": 2569
+            "pct": 16.6,
+            "requests": 2557
           },
           {
             "country": "US",
-            "pct": 15.0,
-            "requests": 2337
+            "pct": 15.8,
+            "requests": 2437
           },
           {
             "country": "SG",
-            "pct": 10.1,
-            "requests": 1582
+            "pct": 10.4,
+            "requests": 1609
           },
           {
-            "country": "BE",
-            "pct": 9.7,
-            "requests": 1519
+            "country": "JP",
+            "pct": 9.6,
+            "requests": 1482
           },
           {
             "country": "PL",
-            "pct": 9.6,
-            "requests": 1503
+            "pct": 9.2,
+            "requests": 1426
           }
         ],
-        "uniques": 962
+        "uniques": 993
       },
       {
         "days_returned": 7,
-        "page_views": 713,
-        "requests": 14767,
-        "site": "dogefundme.com",
-        "threats": 261,
-        "top_countries": [
-          {
-            "country": "NL",
-            "pct": 42.8,
-            "requests": 6319
-          },
-          {
-            "country": "DE",
-            "pct": 15.9,
-            "requests": 2350
-          },
-          {
-            "country": "US",
-            "pct": 7.6,
-            "requests": 1116
-          },
-          {
-            "country": "ID",
-            "pct": 6.0,
-            "requests": 881
-          },
-          {
-            "country": "BR",
-            "pct": 5.8,
-            "requests": 863
-          }
-        ],
-        "uniques": 767
-      },
-      {
-        "days_returned": 7,
-        "page_views": 431,
-        "requests": 13529,
+        "page_views": 533,
+        "requests": 14156,
         "site": "modulign.org",
-        "threats": 81,
+        "threats": 118,
         "top_countries": [
           {
             "country": "FR",
-            "pct": 31.9,
-            "requests": 4316
+            "pct": 30.5,
+            "requests": 4322
           },
           {
             "country": "DE",
             "pct": 23.4,
-            "requests": 3169
-          },
-          {
-            "country": "BE",
-            "pct": 10.4,
-            "requests": 1408
-          },
-          {
-            "country": "US",
-            "pct": 9.9,
-            "requests": 1342
+            "requests": 3309
           },
           {
             "country": "NL",
+            "pct": 11.1,
+            "requests": 1569
+          },
+          {
+            "country": "US",
+            "pct": 10.7,
+            "requests": 1517
+          },
+          {
+            "country": "BE",
             "pct": 9.9,
-            "requests": 1334
+            "requests": 1405
           }
         ],
-        "uniques": 736
+        "uniques": 889
+      },
+      {
+        "days_returned": 7,
+        "page_views": 743,
+        "requests": 10800,
+        "site": "dogefundme.com",
+        "threats": 279,
+        "top_countries": [
+          {
+            "country": "DE",
+            "pct": 21.9,
+            "requests": 2367
+          },
+          {
+            "country": "NL",
+            "pct": 18.9,
+            "requests": 2036
+          },
+          {
+            "country": "BR",
+            "pct": 12.5,
+            "requests": 1345
+          },
+          {
+            "country": "US",
+            "pct": 11.3,
+            "requests": 1224
+          },
+          {
+            "country": "ID",
+            "pct": 8.1,
+            "requests": 879
+          }
+        ],
+        "uniques": 778
       }
     ],
     "sites_omitted": 4,
     "totals": {
-      "page_views": 53965,
-      "threats": 4330,
-      "uniques": 31056
+      "page_views": 54846,
+      "threats": 4486,
+      "uniques": 32170
     },
     "window": {
-      "since": "2026-10-18",
-      "until": "2026-10-24"
+      "since": "2026-10-19",
+      "until": "2026-10-25"
     }
   },
-  "date": "2026-10-25",
-  "generated_at": "2026-10-25 04:06 UTC",
+  "date": "2026-10-26",
+  "generated_at": "2026-10-26 04:10 UTC",
   "github": [
     {
       "archived": false,
@@ -357,9 +357,9 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-10-24T04:06:55Z",
+      "pushed_at": "2026-10-25T04:07:58Z",
       "repo": "f-keys",
-      "size_kb": 78366,
+      "size_kb": 78386,
       "stars": 2,
       "topics": [
         "formal-verification",
@@ -494,9 +494,9 @@
       "license": null,
       "open_issues": 1,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-10-24T15:17:17Z",
+      "pushed_at": "2026-10-25T13:16:50Z",
       "repo": "trailer-load.com",
-      "size_kb": 171243,
+      "size_kb": 173084,
       "stars": 1,
       "topics": [
         "browser-game",
@@ -1212,20 +1212,6 @@
     }
   ],
   "history": [
-    {
-      "backfilled": false,
-      "date": "2026-08-26",
-      "github_stars": 17,
-      "package_daily": null,
-      "package_weekly": 70,
-      "page_views_7d": 42629,
-      "properties_total": 11,
-      "properties_up": 11,
-      "releases_published": null,
-      "visitors_7d": 19386,
-      "zenodo_downloads": 434,
-      "zenodo_views": 1025
-    },
     {
       "backfilled": false,
       "date": "2026-08-27",
@@ -2065,6 +2051,20 @@
       "visitors_7d": 31056,
       "zenodo_downloads": 1083,
       "zenodo_views": 2211
+    },
+    {
+      "backfilled": false,
+      "date": "2026-10-26",
+      "github_stars": 18,
+      "package_daily": null,
+      "package_weekly": 324,
+      "page_views_7d": 54846,
+      "properties_total": 12,
+      "properties_up": 12,
+      "releases_published": null,
+      "visitors_7d": 32170,
+      "zenodo_downloads": 1092,
+      "zenodo_views": 2262
     }
   ],
   "mode": "daily",
@@ -2300,8 +2300,8 @@
   ],
   "pypi": [
     {
-      "all_time": 2107,
-      "daily": 18,
+      "all_time": 2121,
+      "daily": 14,
       "error": null,
       "license": null,
       "monthly": 467,
@@ -2312,11 +2312,11 @@
       "summary": "Measure where a formal library spends its axioms: Lean 4 and Metamath.",
       "url": "https://pypi.org/project/gonzalgo/",
       "version": "0.5.6",
-      "weekly": 87
+      "weekly": 88
     },
     {
-      "all_time": 941,
-      "daily": 1,
+      "all_time": 944,
+      "daily": 3,
       "error": null,
       "license": null,
       "monthly": 116,
@@ -2327,7 +2327,7 @@
       "summary": "Color accessibility engine: colorblind-safety (protan/deutan/tritan, Machado 2009 + CIEDE2000), palette fixing, and WCAG contrast. Zero dependencies; drops into any matplotlib/plotly workflow.",
       "url": "https://pypi.org/project/opticquiz-cvd/",
       "version": "1.1.3",
-      "weekly": 8
+      "weekly": 9
     },
     {
       "all_time": 517,
@@ -2387,7 +2387,7 @@
       "summary": "Find avoidable axiom dependencies in Metamath databases, and build the proofs that remove them.",
       "url": "https://pypi.org/project/mmforge/",
       "version": "0.2.0",
-      "weekly": 5
+      "weekly": 4
     },
     {
       "all_time": 589,
@@ -2417,7 +2417,7 @@
       "summary": "Generate pseudoisochromatic (Ishihara-style) colour vision plates. Reproducible from a seed, no dependencies.",
       "url": "https://pypi.org/project/ishihara/",
       "version": "0.1.2",
-      "weekly": 8
+      "weekly": 7
     },
     {
       "all_time": 1228,
@@ -2436,7 +2436,7 @@
     },
     {
       "all_time": 157,
-      "daily": 1,
+      "daily": 0,
       "error": null,
       "license": "MIT",
       "monthly": 22,
@@ -2450,7 +2450,7 @@
       "weekly": 6
     },
     {
-      "all_time": 236,
+      "all_time": 237,
       "daily": 1,
       "error": null,
       "license": "MIT",
@@ -2465,8 +2465,8 @@
       "weekly": 13
     },
     {
-      "all_time": 161,
-      "daily": 0,
+      "all_time": 164,
+      "daily": 3,
       "error": null,
       "license": "MIT",
       "monthly": 21,
@@ -2477,10 +2477,10 @@
       "summary": "A doorbell for your published work. Tells you when somebody else cites, stars, files or mentions it - and stays silent the rest of the time.",
       "url": "https://pypi.org/project/changewatch/",
       "version": "0.1.0",
-      "weekly": 4
+      "weekly": 6
     },
     {
-      "all_time": 611,
+      "all_time": 613,
       "daily": 2,
       "error": null,
       "license": "MIT",
@@ -2492,11 +2492,11 @@
       "summary": "Reconcile a body of published work against every place it lives - for any ORCID, from public sources - plus the gates that run before research output leaves your hands.",
       "url": "https://pypi.org/project/authorecon/",
       "version": "1.1.0",
-      "weekly": 14
+      "weekly": 16
     },
     {
-      "all_time": 171,
-      "daily": 0,
+      "all_time": 173,
+      "daily": 2,
       "error": null,
       "license": null,
       "monthly": 28,
@@ -2507,11 +2507,11 @@
       "summary": "Measure what a formal library assumes: Rocq, Agda and Isabelle, from source, with nothing built",
       "url": "https://pypi.org/project/axsent/",
       "version": "0.1.0",
-      "weekly": 3
+      "weekly": 4
     },
     {
-      "all_time": 441,
-      "daily": 0,
+      "all_time": 442,
+      "daily": 1,
       "error": null,
       "license": null,
       "monthly": 62,
@@ -2522,41 +2522,41 @@
       "summary": "Separate what a claim asserts from what its derivation consumed.",
       "url": "https://pypi.org/project/loadbearing/",
       "version": "0.2.0",
-      "weekly": 4
+      "weekly": 5
     }
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 31028,
+    "bot_requests_24h": 40018,
     "github_forks": 0,
     "github_repos": 34,
     "github_stars": 18,
-    "median_response_ms": 139,
+    "median_response_ms": 144,
     "npm_all_time": 7571,
     "npm_weekly": 117,
     "open_issues": 1,
-    "package_all_time": 16808,
-    "package_weekly": 318,
+    "package_all_time": 16834,
+    "package_weekly": 324,
     "packages_total": 34,
-    "page_views_7d": 53965,
+    "page_views_7d": 54846,
     "properties_total": 12,
     "properties_up": 12,
-    "pypi_all_time": 9237,
+    "pypi_all_time": 9263,
     "pypi_monthly": 1249,
-    "pypi_weekly": 201,
+    "pypi_weekly": 207,
     "repos_archived": 2,
     "repos_unlicensed": 12,
-    "threats_7d": 4330,
-    "visitors_7d": 31056,
-    "zenodo_downloads": 1083,
+    "threats_7d": 4486,
+    "visitors_7d": 32170,
+    "zenodo_downloads": 1092,
     "zenodo_records": 61,
-    "zenodo_views": 2211
+    "zenodo_views": 2262
   },
   "uptime": [
     {
       "code": 200,
       "error": null,
-      "ms": 154,
+      "ms": 249,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2564,7 +2564,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 128,
+      "ms": 122,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2572,7 +2572,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 197,
+      "ms": 152,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2580,7 +2580,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 88,
+      "ms": 53,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2588,7 +2588,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 235,
+      "ms": 274,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2596,7 +2596,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 87,
+      "ms": 135,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2604,7 +2604,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 132,
+      "ms": 134,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2612,7 +2612,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 393,
+      "ms": 538,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2620,7 +2620,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 491,
+      "ms": 522,
       "name": "epistemend.org",
       "up": true,
       "url": "https://epistemend.org"
@@ -2628,7 +2628,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 105,
+      "ms": 137,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2636,7 +2636,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 97,
+      "ms": 84,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2644,7 +2644,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 147,
+      "ms": 162,
       "name": "qv.f-keys.com",
       "up": true,
       "url": "https://qv.f-keys.com"
@@ -2654,22 +2654,6 @@
     "error": null,
     "records": [
       {
-        "downloads": 8,
-        "id": "21937801",
-        "title": "One Grammar, a Continuous Register Dial: Section, Locus, and Onset Variation in Voynichese",
-        "unique_downloads": 7,
-        "unique_views": 3,
-        "views": 3
-      },
-      {
-        "downloads": 8,
-        "id": "21937805",
-        "title": "Currier A and B as Degrees of One System: A Gradient Model of Voynichese Variation",
-        "unique_downloads": 7,
-        "unique_views": 4,
-        "views": 4
-      },
-      {
         "downloads": 29,
         "id": "19643322",
         "title": "Inter-Rater Reliability of Automated Modulign Standard Classifiers",
@@ -2678,36 +2662,44 @@
         "views": 42
       },
       {
-        "downloads": 7,
-        "id": "21922825",
-        "title": "The gonzalgo Indexes: standing measurements of what formal mathematical libraries rest on",
-        "unique_downloads": 7,
-        "unique_views": 56,
-        "views": 59
+        "downloads": 39,
+        "id": "21866882",
+        "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
+        "unique_downloads": 37,
+        "unique_views": 58,
+        "views": 60
       },
       {
         "downloads": 8,
         "id": "21729549",
         "title": "Certified upper bounds for Fejes T\u00f3th's point-goalie problem at n = 4 and 5",
         "unique_downloads": 7,
+        "unique_views": 21,
+        "views": 21
+      },
+      {
+        "downloads": 8,
+        "id": "21937801",
+        "title": "One Grammar, a Continuous Register Dial: Section, Locus, and Onset Variation in Voynichese",
+        "unique_downloads": 7,
+        "unique_views": 5,
+        "views": 5
+      },
+      {
+        "downloads": 9,
+        "id": "22162430",
+        "title": "Verified Software Assumes What Its Arithmetic Requires: An Axiom Census of Four Rocq Developments",
+        "unique_downloads": 9,
         "unique_views": 20,
-        "views": 20
+        "views": 21
       },
       {
-        "downloads": 4,
-        "id": "21716006",
-        "title": "Exact calculator for Norton's abundancy bound a(j) on odd perfect numbers",
-        "unique_downloads": 3,
-        "unique_views": 17,
-        "views": 17
-      },
-      {
-        "downloads": 3,
-        "id": "21311369",
-        "title": "OpticQuiz PPPG \u2014 Procedural Pseudoisochromatic Plate Generator (source code)",
-        "unique_downloads": 3,
-        "unique_views": 30,
-        "views": 32
+        "downloads": 13,
+        "id": "21708693",
+        "title": "The added-vector code of the odd-sign construction is maximal in dimensions 20 and 21",
+        "unique_downloads": 12,
+        "unique_views": 53,
+        "views": 60
       },
       {
         "downloads": 4,
@@ -2716,14 +2708,6 @@
         "unique_downloads": 4,
         "unique_views": 30,
         "views": 32
-      },
-      {
-        "downloads": 7,
-        "id": "22162430",
-        "title": "Verified Software Assumes What Its Arithmetic Requires: An Axiom Census of Four Rocq Developments",
-        "unique_downloads": 7,
-        "unique_views": 20,
-        "views": 21
       },
       {
         "downloads": 44,
@@ -2762,56 +2746,64 @@
         "id": "20013337",
         "title": "Competitive Context as a Jailbreak Accelerant: Inter-Model Rivalry as a Novel Adversarial Vector in Large Language Model Safety",
         "unique_downloads": 19,
-        "unique_views": 45,
-        "views": 48
+        "unique_views": 46,
+        "views": 49
       },
       {
         "downloads": 30,
         "id": "21866855",
         "title": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
         "unique_downloads": 28,
-        "unique_views": 114,
-        "views": 131
+        "unique_views": 115,
+        "views": 132
       },
       {
-        "downloads": 13,
-        "id": "21708693",
-        "title": "The added-vector code of the odd-sign construction is maximal in dimensions 20 and 21",
-        "unique_downloads": 12,
-        "unique_views": 50,
-        "views": 57
+        "downloads": 4,
+        "id": "21716006",
+        "title": "Exact calculator for Norton's abundancy bound a(j) on odd perfect numbers",
+        "unique_downloads": 3,
+        "unique_views": 19,
+        "views": 19
       },
       {
-        "downloads": 15,
-        "id": "21937797",
-        "title": "Voynichese as a Structured, Positionally Constrained System: A Null-Tested Characterization Across Transcription Traditions",
-        "unique_downloads": 13,
-        "unique_views": 14,
-        "views": 16
+        "downloads": 8,
+        "id": "21937805",
+        "title": "Currier A and B as Degrees of One System: A Gradient Model of Voynichese Variation",
+        "unique_downloads": 7,
+        "unique_views": 6,
+        "views": 6
       },
       {
         "downloads": 9,
         "id": "21937807",
         "title": "How Voynichometry Kills Its Own Mirages: Nulls, Positive Controls, and the Limits of Structural Inference",
         "unique_downloads": 8,
-        "unique_views": 5,
-        "views": 5
+        "unique_views": 7,
+        "views": 7
       },
       {
-        "downloads": 39,
-        "id": "21866882",
-        "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
-        "unique_downloads": 37,
-        "unique_views": 58,
-        "views": 60
+        "downloads": 7,
+        "id": "21922825",
+        "title": "The gonzalgo Indexes: standing measurements of what formal mathematical libraries rest on",
+        "unique_downloads": 7,
+        "unique_views": 60,
+        "views": 63
       },
       {
-        "downloads": 16,
-        "id": "21729805",
-        "title": "Maximality of the added-vector codes in the Cohn-Li kissing constructions",
-        "unique_downloads": 14,
-        "unique_views": 56,
-        "views": 67
+        "downloads": 15,
+        "id": "21937797",
+        "title": "Voynichese as a Structured, Positionally Constrained System: A Null-Tested Characterization Across Transcription Traditions",
+        "unique_downloads": 13,
+        "unique_views": 16,
+        "views": 18
+      },
+      {
+        "downloads": 4,
+        "id": "21311369",
+        "title": "OpticQuiz PPPG \u2014 Procedural Pseudoisochromatic Plate Generator (source code)",
+        "unique_downloads": 4,
+        "unique_views": 33,
+        "views": 35
       },
       {
         "downloads": 35,
@@ -2822,12 +2814,28 @@
         "views": 74
       },
       {
-        "downloads": 8,
-        "id": "22149628",
-        "title": "Interface Assumptions Are Not Mathematical Assumptions: An Axiom Census of Five Libraries Across Four Proof Systems",
-        "unique_downloads": 8,
-        "unique_views": 29,
-        "views": 30
+        "downloads": 13,
+        "id": "21937803",
+        "title": "Compositional Reuse and Grade Operators in Voynichese",
+        "unique_downloads": 12,
+        "unique_views": 13,
+        "views": 13
+      },
+      {
+        "downloads": 1,
+        "id": "21913737",
+        "title": "Kernel Trust Profile 0.1: a machine-readable declaration of what a body of machine-checked mathematics rests on",
+        "unique_downloads": 1,
+        "unique_views": 30,
+        "views": 32
+      },
+      {
+        "downloads": 11,
+        "id": "21937811",
+        "title": "A Transcription-Independent Structural Validation Strategy for D'Imperio Voynich Witnesses: Protocol and Execution Report",
+        "unique_downloads": 10,
+        "unique_views": 10,
+        "views": 10
       },
       {
         "downloads": 4,
@@ -2836,14 +2844,6 @@
         "unique_downloads": 3,
         "unique_views": 11,
         "views": 11
-      },
-      {
-        "downloads": 16,
-        "id": "21883964",
-        "title": "Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib",
-        "unique_downloads": 10,
-        "unique_views": 25,
-        "views": 35
       },
       {
         "downloads": 12,
@@ -2894,12 +2894,12 @@
         "views": 48
       },
       {
-        "downloads": 9,
-        "id": "21777108",
-        "title": "A congruence obstruction on the Euler prime of an odd perfect number",
-        "unique_downloads": 7,
-        "unique_views": 19,
-        "views": 20
+        "downloads": 18,
+        "id": "21951050",
+        "title": "Eligibility Discriminates Among Theorems and Not Among the Constants They Rest On",
+        "unique_downloads": 15,
+        "unique_views": 31,
+        "views": 38
       },
       {
         "downloads": 32,
@@ -2922,56 +2922,56 @@
         "id": "22131388",
         "title": "THE RECORD: a hash-chained Modulign address ledger of 1,000,000 legal documents",
         "unique_downloads": 2,
-        "unique_views": 18,
-        "views": 18
+        "unique_views": 19,
+        "views": 19
       },
       {
         "downloads": 8,
         "id": "22083875",
         "title": "Filtering and Generating: Two Roles for Method-Specification in Epistemic-Possibility Anti-Luck Conditions",
         "unique_downloads": 8,
-        "unique_views": 17,
-        "views": 17
+        "unique_views": 18,
+        "views": 18
+      },
+      {
+        "downloads": 8,
+        "id": "22149628",
+        "title": "Interface Assumptions Are Not Mathematical Assumptions: An Axiom Census of Five Libraries Across Four Proof Systems",
+        "unique_downloads": 8,
+        "unique_views": 30,
+        "views": 31
+      },
+      {
+        "downloads": 16,
+        "id": "21883964",
+        "title": "Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib",
+        "unique_downloads": 10,
+        "unique_views": 26,
+        "views": 36
       },
       {
         "downloads": 25,
         "id": "23418394",
         "title": "Pseudoisochromatic plate design type is recoverable from delivered colour and dot geometry alone",
         "unique_downloads": 22,
-        "unique_views": 17,
-        "views": 18
+        "unique_views": 21,
+        "views": 22
       },
       {
-        "downloads": 11,
-        "id": "21937811",
-        "title": "A Transcription-Independent Structural Validation Strategy for D'Imperio Voynich Witnesses: Protocol and Execution Report",
-        "unique_downloads": 10,
-        "unique_views": 9,
-        "views": 9
+        "downloads": 16,
+        "id": "21729805",
+        "title": "Maximality of the added-vector codes in the Cohn-Li kissing constructions",
+        "unique_downloads": 14,
+        "unique_views": 62,
+        "views": 73
       },
       {
-        "downloads": 18,
-        "id": "21951050",
-        "title": "Eligibility Discriminates Among Theorems and Not Among the Constants They Rest On",
-        "unique_downloads": 15,
-        "unique_views": 31,
-        "views": 38
-      },
-      {
-        "downloads": 13,
-        "id": "21937803",
-        "title": "Compositional Reuse and Grade Operators in Voynichese",
-        "unique_downloads": 12,
-        "unique_views": 13,
-        "views": 13
-      },
-      {
-        "downloads": 1,
-        "id": "21913737",
-        "title": "Kernel Trust Profile 0.1: a machine-readable declaration of what a body of machine-checked mathematics rests on",
-        "unique_downloads": 1,
-        "unique_views": 30,
-        "views": 32
+        "downloads": 9,
+        "id": "21777108",
+        "title": "A congruence obstruction on the Euler prime of an odd perfect number",
+        "unique_downloads": 7,
+        "unique_views": 20,
+        "views": 21
       },
       {
         "downloads": 14,
@@ -2990,28 +2990,12 @@
         "views": 26
       },
       {
-        "downloads": 12,
-        "id": "21701339",
-        "title": "A machine-checked proof of opacity for a Faber\u2013Mycielski barrier",
-        "unique_downloads": 11,
-        "unique_views": 13,
-        "views": 14
-      },
-      {
         "downloads": 17,
         "id": "19644070",
         "title": "On The Record: Toward a Formal Epistemology of Journalistic Attestation",
         "unique_downloads": 17,
         "unique_views": 47,
         "views": 48
-      },
-      {
-        "downloads": 26,
-        "id": "19642385",
-        "title": "Chain of Custody Formalisation in Digital Forensics: The Modulign ^EVID Architecture as a Registry-Based Evidentiary Framework",
-        "unique_downloads": 23,
-        "unique_views": 54,
-        "views": 56
       },
       {
         "downloads": 40,
@@ -3022,14 +3006,6 @@
         "views": 99
       },
       {
-        "downloads": 7,
-        "id": "22030575",
-        "title": "Which Axiom Seams Yield",
-        "unique_downloads": 6,
-        "unique_views": 10,
-        "views": 10
-      },
-      {
         "downloads": 92,
         "id": "21946925",
         "title": "Voynichometry: analysis code and replication package",
@@ -3038,20 +3014,20 @@
         "views": 20
       },
       {
-        "downloads": 21,
-        "id": "21310578",
-        "title": "A Procedural Method for Generating Pseudoisochromatic Plates in the Browser, and the Calibration Limits of Screen-Based Colour-Vision Screening",
-        "unique_downloads": 18,
-        "unique_views": 152,
-        "views": 171
+        "downloads": 8,
+        "id": "22030575",
+        "title": "Which Axiom Seams Yield",
+        "unique_downloads": 7,
+        "unique_views": 10,
+        "views": 10
       },
       {
-        "downloads": 9,
-        "id": "21302924",
-        "title": "Potica in America: Naming, Transmission, and the Printed Record of a Diaspora Pastry",
-        "unique_downloads": 9,
-        "unique_views": 11,
-        "views": 11
+        "downloads": 27,
+        "id": "19642385",
+        "title": "Chain of Custody Formalisation in Digital Forensics: The Modulign ^EVID Architecture as a Registry-Based Evidentiary Framework",
+        "unique_downloads": 24,
+        "unique_views": 54,
+        "views": 56
       },
       {
         "downloads": 13,
@@ -3070,14 +3046,6 @@
         "views": 11
       },
       {
-        "downloads": 28,
-        "id": "21937799",
-        "title": "Positional Rigidity in the Voynich Manuscript: Cross-Tradition Replication Without Glyph Mapping",
-        "unique_downloads": 26,
-        "unique_views": 9,
-        "views": 10
-      },
-      {
         "downloads": 2,
         "id": "23422998",
         "title": "plateaudit: measuring pseudoisochromatic colour-vision plates from the stimulus a browser actually delivers",
@@ -3092,6 +3060,14 @@
         "unique_downloads": 9,
         "unique_views": 18,
         "views": 18
+      },
+      {
+        "downloads": 12,
+        "id": "21701339",
+        "title": "A machine-checked proof of opacity for a Faber\u2013Mycielski barrier",
+        "unique_downloads": 11,
+        "unique_views": 14,
+        "views": 15
       },
       {
         "downloads": 28,
@@ -3110,20 +3086,36 @@
         "views": 66
       },
       {
-        "downloads": 5,
-        "id": "22030569",
-        "title": "Specialisation Loss: Avoidable Classical Dependence from Correctly-Stated Lemmas",
-        "unique_downloads": 4,
-        "unique_views": 9,
-        "views": 9
-      },
-      {
         "downloads": 41,
         "id": "19351056",
         "title": "Synthetic Content As Epistemic Category",
         "unique_downloads": 36,
         "unique_views": 93,
         "views": 94
+      },
+      {
+        "downloads": 28,
+        "id": "21937799",
+        "title": "Positional Rigidity in the Voynich Manuscript: Cross-Tradition Replication Without Glyph Mapping",
+        "unique_downloads": 26,
+        "unique_views": 12,
+        "views": 13
+      },
+      {
+        "downloads": 21,
+        "id": "21310578",
+        "title": "A Procedural Method for Generating Pseudoisochromatic Plates in the Browser, and the Calibration Limits of Screen-Based Colour-Vision Screening",
+        "unique_downloads": 18,
+        "unique_views": 156,
+        "views": 175
+      },
+      {
+        "downloads": 6,
+        "id": "22030569",
+        "title": "Specialisation Loss: Avoidable Classical Dependence from Correctly-Stated Lemmas",
+        "unique_downloads": 5,
+        "unique_views": 10,
+        "views": 10
       },
       {
         "downloads": 2,
@@ -3134,12 +3126,20 @@
         "views": 7
       },
       {
-        "downloads": 22,
+        "downloads": 25,
         "id": "21618222",
         "title": "An independent exact verification of an 11948-point kissing configuration in 19 dimensions",
-        "unique_downloads": 21,
-        "unique_views": 20,
-        "views": 20
+        "unique_downloads": 24,
+        "unique_views": 21,
+        "views": 21
+      },
+      {
+        "downloads": 9,
+        "id": "21302924",
+        "title": "Potica in America: Naming, Transmission, and the Printed Record of a Diaspora Pastry",
+        "unique_downloads": 9,
+        "unique_views": 13,
+        "views": 13
       }
     ]
   }
