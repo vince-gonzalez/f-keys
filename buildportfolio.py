@@ -60,6 +60,26 @@ P = [
      "epistemology. Full text, no paywall.",
      ["preprints", "open access"],
      "/papers/"),
+    ("M-01", "kv-bench", "LIVE", "measurement",
+     "Cross-region staleness in Cloudflare Workers KV: how long a read keeps "
+     "serving the old value after a write, and how that window scales linearly "
+     "with the cacheTtl you set. Timed from an external clock, reproducible, "
+     "archived with a DOI.",
+     ["Cloudflare KV", "edge caching", "measurement"],
+     "https://github.com/vince-gonzalez/kv-bench"),
+    ("M-02", "d1-replica-bench", "LIVE", "measurement",
+     "Read-replica lag in Cloudflare D1: after a primary write, how long a "
+     "replica in another region can still answer stale. Sub-round-trip in "
+     "practice, with the poll-scheduling correction that got there published "
+     "alongside the result.",
+     ["Cloudflare D1", "replication", "measurement"],
+     "https://github.com/vince-gonzalez/d1-replica-bench"),
+    ("M-03", "locationhint-bench", "LIVE", "measurement",
+     "Where a Durable Object actually lands when you ask for a region: three "
+     "documented location hints never reach their named region. Placement "
+     "verified by trace, not assumed.",
+     ["Durable Objects", "edge placement", "measurement"],
+     "https://github.com/vince-gonzalez/locationhint-bench"),
     ("A-01", "OpticQuiz", "LIVE", "access",
      "Colour-vision accessibility infrastructure. One engine: Machado 2009 "
      "simulation, Brettel 1997 cone projection, CIE ΔE2000 conflict detection, "
@@ -108,6 +128,7 @@ P = [
 
 DOMAINS = [
     ("research", "Research & formal methods"),
+    ("measurement", "Platform measurement"),
     ("access", "Accessibility infrastructure"),
     ("games", "Games & simulation"),
     ("tools", "Tools"),

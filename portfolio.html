@@ -85,6 +85,32 @@
     </div>
   </div>
   <div class="sec">
+    <h2>Platform measurement</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="top"><span class="id">M-01</span><span class="st LIVE">LIVE</span></div>
+        <h3>kv-bench</h3>
+        <p>Cross-region staleness in Cloudflare Workers KV: how long a read keeps serving the old value after a write, and how that window scales linearly with the cacheTtl you set. Timed from an external clock, reproducible, archived with a DOI.</p>
+        <div class="tags"><span class="tag">Cloudflare KV</span><span class="tag">edge caching</span><span class="tag">measurement</span></div>
+        <a class="go" href="https://github.com/vince-gonzalez/kv-bench" target="_blank" rel="noopener">open &rarr;</a>
+      </div>
+      <div class="card">
+        <div class="top"><span class="id">M-02</span><span class="st LIVE">LIVE</span></div>
+        <h3>d1-replica-bench</h3>
+        <p>Read-replica lag in Cloudflare D1: after a primary write, how long a replica in another region can still answer stale. Sub-round-trip in practice, with the poll-scheduling correction that got there published alongside the result.</p>
+        <div class="tags"><span class="tag">Cloudflare D1</span><span class="tag">replication</span><span class="tag">measurement</span></div>
+        <a class="go" href="https://github.com/vince-gonzalez/d1-replica-bench" target="_blank" rel="noopener">open &rarr;</a>
+      </div>
+      <div class="card">
+        <div class="top"><span class="id">M-03</span><span class="st LIVE">LIVE</span></div>
+        <h3>locationhint-bench</h3>
+        <p>Where a Durable Object actually lands when you ask for a region: three documented location hints never reach their named region. Placement verified by trace, not assumed.</p>
+        <div class="tags"><span class="tag">Durable Objects</span><span class="tag">edge placement</span><span class="tag">measurement</span></div>
+        <a class="go" href="https://github.com/vince-gonzalez/locationhint-bench" target="_blank" rel="noopener">open &rarr;</a>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
     <h2>Accessibility infrastructure</h2>
     <div class="grid">
       <div class="card">
