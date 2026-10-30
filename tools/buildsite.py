@@ -120,6 +120,8 @@ CATALOGUE = [
      "Your AI rules on any chat. Type one line into Claude, ChatGPT or Grok and it works your way.", "https://coldhat.f-keys.com"),
     ("promptcheck", "Prompt Check", "check", "Service", SETUP,
      "Send a system prompt and it is run against a live model: which rules hold, which break, and the rewrite that holds.", "/promptcheck/"),
+    ("securitycheck", "Security Check", "check", "Service", SETUP,
+     "Your site's security headers read against the OWASP standard: what's exposed, and the fix applied.", "/securitycheck/"),
     ("axsent", "axsent", "research", "Python package", PIP,
      "What a formal library assumes, measured from source: Rocq, Agda and Isabelle, with nothing built.", "/axsent/"),
     ("authorecon", "authorecon", "check", "Python package", PIP,
@@ -306,6 +308,81 @@ survives a message designed to break it is a rule you can rely on. The report
 names the rules that broke, the exact message that broke each, a rewrite that
 would have held, and any two rules that cannot both be followed. Send one prompt
 or a whole library.</p>
+""",
+),
+"securitycheck": dict(
+  title="Security Check", tagline="I read your site's security headers against the OWASP standard and fix what's missing.",
+  lede="Most small-business sites are missing the basic response headers browsers "
+       "use to block the most common attacks &mdash; not through any mistake, but "
+       "because default hosting does not switch them on. A free scanner hands you a "
+       "letter grade and a wall of jargon, then leaves you to fix it. I read the "
+       "whole site, tell you in plain English what is exposed, and apply the fix.",
+  cta=[("Request a check", "/contact.html"), ("The websites service", "/intake/")],
+  herometa="<b>Service</b> &middot; eight headers read against the OWASP standard "
+           "&middot; a plain-English report &middot; the fix applied, usually same day",
+  steps=[("Your site is read, header by header",
+          "The five core response headers and three hardening headers, checked "
+          "against the OWASP Secure Headers standard. Measured facts, not an "
+          "opinion, and the same check every time."),
+         ("You get a one-page report",
+          "Every protection, present or missing, in plain English: what each one "
+          "stops, and what a missing one lets through. No jargon dump."),
+         ("I apply the fix, and keep watching",
+          "The headers are set at your edge or server &mdash; no redesign, no "
+          "downtime, usually the same day. A monthly re-check confirms it stays "
+          "clean as the site changes.")],
+  features_title="What the report tells you",
+  features=[("The five that matter",
+             "Enforced HTTPS, a content-security-policy, a MIME-sniffing guard, a "
+             "referrer policy, and a clickjacking guard &mdash; the headers that "
+             "stop script injection, a downgraded connection, and your site being "
+             "framed inside a scam page."),
+            ("Three more for hardening",
+             "A permissions policy and two cross-origin isolations. Recommended, "
+             "not urgent &mdash; and named so you know the difference."),
+            ("Where the line is",
+             "This is a header audit, and it is honest about what it does not test: "
+             "whether the policy is tuned tightly, your TLS and certificate, logins, "
+             "injection, or the application's own logic. A deep penetration test is "
+             "a separate, larger job I will scope or refer.")],
+  faq=[("Isn't this what a free scanner does?",
+        "A free scanner reads the headers and grades them. It does not read the "
+        "rest of the site, explain the result in plain English, or fix anything. "
+        "This does all three."),
+       ("Will the fix break my site?",
+        "No. The protections are added at the edge or in your server configuration. "
+        "Nothing about the site's content or design changes, and there is no "
+        "downtime."),
+       ("Do you need access to my site?",
+        "To report, no &mdash; the check reads what your site already sends to every "
+        "visitor. To apply the fix, yes: access to your hosting or CDN, or I hand "
+        "your developer the exact settings to paste in."),
+       ("Is this a penetration test?",
+        "No, and it does not pretend to be. It catches the common, cheap-to-fix "
+        "exposures in a site's response headers. A full penetration test &mdash; "
+        "TLS, authentication, injection, application logic &mdash; is a separate "
+        "engagement.")],
+  facts=[("What", "A managed website security-header check, run for you"),
+         ("Standard", "OWASP Secure Headers"),
+         ("You receive", "A one-page report, in plain English"),
+         ("The fix", "Applied at your edge or server, no downtime"),
+         ("After", "Optional monthly re-check"),
+         ("Status", "Open for early orders")],
+  body="""
+<p>Open any small-business website's response headers and you will usually find
+the same thing: none of the protections browsers have offered for a decade are
+switched on. Not through neglect &mdash; default hosting simply does not turn
+them on, and nobody ever had a reason to look.</p>
+<p>The gap is quiet, and it is real. Missing headers let a page be framed inside a
+lookalike scam, let injected scripts run in a page your customers trust, and let a
+visitor be downgraded off a secure connection. They also turn up now in insurance
+questionnaires, buyer due-diligence and partner security reviews, where a single
+missing setting can stall a renewal or a deal.</p>
+<p>The tools that read these headers are free, and they stop at a grade. I read
+the whole site, write the result in plain English, apply the fix at your edge or
+server, and re-check it monthly as the site changes. And I am clear about the
+line: this is a header audit, not a penetration test. It catches the common,
+cheap-to-fix exposures, and names the deeper work it does not cover.</p>
 """,
 ),
 "d1bench": dict(
