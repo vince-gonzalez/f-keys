@@ -73,7 +73,11 @@ ALLOWED = [
      "renaming it here would make the site contradict the deposited record"),
 ]
 
-SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", "dist", "build"}
+# .claude holds local, gitignored git worktrees and session data. It is never
+# served, and its worktree copies of this gate's own files - which must contain
+# "zengine" in order to ban it - were the only thing failing a local run while
+# CI, which never sees the worktree, stayed green. Scan only what can ship.
+SKIP_DIRS = {".git", ".claude", "node_modules", "__pycache__", ".venv", "venv", "dist", "build"}
 SKIP_FILES = {"skills-lock.json"}          # tooling lockfile, not published
 
 # The gate's own definition files are exempt: they must name the thing they
