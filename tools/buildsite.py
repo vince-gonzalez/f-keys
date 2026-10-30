@@ -161,7 +161,8 @@ CATALOGUE = [
     ("gonzalgo", "gonzalgo", "research", "Research tool", PUBLISHED,
      "Which axioms a Lean 4 or Metamath theorem spends rather than inherits.", "/gonzalgo/"),
     ("papers", "Papers", "research", "Publications", PUBLISHED,
-     "Where formal libraries spend their axioms. Full text, DOIs, archives.", "/papers/"),
+     "Where formal libraries spend their axioms. Full text, DOIs, archives.",
+     "https://epistemend.org/papers/"),
     ("modulign", "Modulign", "research", "Standard", PUBLISHED,
      "A dimensional address grammar for observable reality. DAG-OR v3.", "https://modulign.org"),
 
@@ -3559,7 +3560,6 @@ FOLDER, DOCUMENT = "folder", "document"
 EXTRA_NODES = [("/intake/", "Websites", FOLDER),
                ("/audit/", "Site audit", FOLDER),
                ("/work.html", "Work", FOLDER),
-               ("/papers/", "Papers", FOLDER),
                ("/status/", "Status", FOLDER),
                ("/about.html", "About", DOCUMENT),
                ("/contact.html", "Contact", DOCUMENT)]
@@ -4289,9 +4289,7 @@ def shell(title, path_label, body, count_label, active_cat=None,
       <a href="/work.html">Work</a> &middot;
       <a href="/search/">Find</a> &middot;
       <a href="/about.html">About</a> &middot;
-      <a href="/cv/">CV</a> &middot;
-      <a href="/writing/">Writing</a> &middot;
-      <a href="/papers/">Papers</a> &middot;
+      <a href="https://epistemend.org" rel="noopener">Research</a> &middot;
       <a href="/developers.html">Developers</a> &middot;
       <a href="/Docs.html">Docs</a> &middot;
       <a href="/stack/">Stack</a> &middot;

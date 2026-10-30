@@ -63,6 +63,22 @@ ORCID = "0009-0005-3640-014X"
 # whole reason the group exists.
 DOCS_GROUP = "docs"
 
+# The papers moved to the academic site. f-keys keeps /papers/ as a
+# redirect so every old link (and the "The papers" buttons on the research
+# product pages) lands on the one canonical copy, at epistemend.org.
+REDIRECT = """<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Papers — moved to Epistemend</title>
+<link rel="canonical" href="https://epistemend.org/papers/">
+<meta http-equiv="refresh" content="0; url=https://epistemend.org/papers/">
+<meta name="robots" content="noindex, follow">
+</head><body style="font-family:Georgia,serif;max-width:40em;margin:3em auto;padding:0 1em">
+<p>The papers now live at <a href="https://epistemend.org/papers/">epistemend.org/papers/</a>.
+You are being sent there now.</p>
+<script>location.replace("https://epistemend.org/papers/");</script>
+</body></html>
+"""
+
 
 def esc(s):
     return B.esc(s)
@@ -207,7 +223,7 @@ def build():
 
 
 def main():
-    fresh = build()
+    fresh = REDIRECT
     if "--check" in sys.argv:
         current = io.open(OUT, encoding="utf-8").read() \
             if os.path.exists(OUT) else ""
@@ -218,11 +234,7 @@ def main():
         print("buildpapers: papers/index.html current")
         return 0
     io.open(OUT, "w", encoding="utf-8", newline="\n").write(fresh)
-    with io.open(DATA, encoding="utf-8") as f:
-        data = json.load(f)
-    print("buildpapers: wrote papers/index.html (%d groups, %d entries)"
-          % (len(data["groups"]),
-             sum(len(g["entries"]) for g in data["groups"])))
+    print("buildpapers: wrote papers/index.html (redirect to epistemend.org/papers/)")
     return 0
 
 
