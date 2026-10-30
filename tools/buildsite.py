@@ -173,9 +173,9 @@ CATALOGUE = [
      "Free isometric mini-golf in the browser.", "https://dogefundme.com"),
     # 2026-09-04. Live, taking checkout, and listed nowhere on this site
     # until now - the same failure described for the other properties.
-    ("epistemend", "Epistemend", "check", "Website", LIVE,
+    ("epistemend", "Authorecon", "check", "Website", LIVE,
      "One ORCID in, one document out. Checks a published record against where the work lives.",
-     "https://www.epistemend.org"),
+     "https://authorecon.f-keys.com"),
 ]
 
 CATEGORIES = [
@@ -2949,35 +2949,34 @@ HOME_DOC = """
 </div>
 
 <div class="doc">
-<p><b>A one-person software studio.</b> It builds and runs websites for
-small businesses, and it builds the instruments that check whether
-software does what it says it does: what a proof actually rests on,
-whether an interface still matches the specification it published, whether
-a record of published work agrees with the places that work lives.</p>
+<p><b>A one-person software studio in Punta Gorda, Florida.</b> It builds
+and runs websites for small businesses, and it builds tools that check a
+claim against the record: whether a home's listing matches the county's,
+whether a published work really exists where it says it does, whether an
+interface still matches the specification it published.</p>
 
 <h2>What you can buy</h2>
+<p class="sub">Three things. Each has its own page, its own price and its
+own terms, and nothing is charged until you say yes.</p>
 <table class="facts">
 <tr><th>A website<br>$100, then $75 a month</th>
     <td>Built, and then kept running. One price, no sales call, and
     nothing is charged until you say yes to a written quote. Cancel any
     time. <a href="/intake/">Start one</a>.</td></tr>
-<tr><th>A website audit<br>$50</th>
-    <td>Send an address and a written report comes back inside three
-    business days: what is broken, what it is costing you, and what I
-    would fix. No password or hosting login, because everything in it is
-    measured from the page a customer already sees.
-    <a href="/audit/">Order one</a>.</td></tr>
-<tr><th>A publication record, checked<br>$5 and $25</th>
-    <td>Paste an ORCID and find out what the record says, where the work
-    actually lives, and what disagrees between them. The first pass runs
-    free in your own browser, and the requests go to ORCID and the
-    archives rather than through this site.
-    <a href="https://epistemend.org" rel="noopener">Run it</a>.</td></tr>
-<tr><th>Trailer Load<br>licensed to institutions</th>
-    <td>Warehouse load training that plays like a game, licensed for
-    classroom and training use. <a href="/contact.html">Ask for a
-    quote</a>.</td></tr>
+<tr><th>A publication record, checked<br>$1.99 and $9.99</th>
+    <td><b>Authorecon.</b> Paste an ORCID and find out what the record
+    says, where the work actually lives, and what disagrees between them.
+    The first pass runs free in your own browser, and the requests go to
+    the archives rather than through this site.
+    <a href="https://authorecon.f-keys.com" rel="noopener">Run it</a>.</td></tr>
+<tr><th>A property record, checked<br>opening soon</th>
+    <td><b>LOTFILE.</b> A home's listing checked against the county record
+    before you buy: permits, flood zone, the full sales history and what
+    is owed against it &mdash; every line sourced and dated.</td></tr>
 </table>
+<p class="sub">Also: a <a href="/audit/">website audit</a> for $50, and
+<a href="/contact.html">Trailer&nbsp;Load</a> licensed to institutions for
+training use.</p>
 
 <h2>Who you are dealing with</h2>
 <table class="facts">

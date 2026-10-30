@@ -34,7 +34,6 @@ routes = [
   { pattern = "certivl.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "ishihara.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "axsent.f-keys.com/*", zone_name = "f-keys.com" },
-  { pattern = "authorecon.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "legible.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "openapi-drift.f-keys.com/*", zone_name = "f-keys.com" },
   { pattern = "changewatch.f-keys.com/*", zone_name = "f-keys.com" },
