@@ -2789,8 +2789,7 @@ names no names but yours.</p>
 <tr><th>Do you need my login?</th><td>No. Nothing in the report requires access
 to your site.</td></tr>
 <tr><th>What if nothing is wrong?</th><td>Then the report says so and you have
-paid $50 to find out, which is cheaper than guessing. It has not happened
-yet.</td></tr>
+paid $50 to find out, which is cheaper than guessing.</td></tr>
 <tr><th>Is this a sales pitch?</th><td>It ends in prices, so partly. The
 measurements are the measurements either way, and you can hand them to
 anyone.</td></tr>
@@ -2878,6 +2877,19 @@ references are real, which cannot be found, and which were retracted, with a
 corrected bibliography back. $5. A full report on one researcher's publication
 record, by ORCID, is $25.
 <div class="btnrow"><a class="btn default" href="https://www.epistemend.org/order/">Order on Epistemend</a></div></td></tr>
+</table>
+
+<h2>Checks, by request</h2>
+<p>New managed checks, open for early orders. Each is run for you and returned
+as a report; while they are in early access the price is set per job, quoted
+before anything is paid.</p>
+<table class="facts">
+<tr><th>Prompt Check</th><td>Your AI system prompts run against a live model:
+which rules hold, which break, and a rewrite that holds.
+<div class="btnrow"><a class="btn" href="/promptcheck/">What it checks</a></div></td></tr>
+<tr><th>Security Check</th><td>Your website's security headers read against the
+OWASP standard, reported in plain English, and fixed.
+<div class="btnrow"><a class="btn" href="/securitycheck/">What it checks</a></div></td></tr>
 </table>
 
 <h2>Warehouse training</h2>
@@ -3033,9 +3045,10 @@ claim against the record: whether a home's listing matches the county's,
 whether a published work really exists where it says it does, whether an
 interface still matches the specification it published.</p>
 
-<h2>What you can buy</h2>
-<p class="sub">Three things. Each has its own page, its own price and its
-own terms, and nothing is charged until you say yes.</p>
+<h2>What's new</h2>
+<p class="sub">The latest work. Each has its own page, its own price and its
+own terms, and nothing is charged until you say yes. The full list is in the
+<a href="/shop/">shop</a>.</p>
 <table class="facts">
 <tr><th>A website<br>$100, then $75 a month</th>
     <td>Built, and then kept running. One price, no sales call, and
@@ -3052,9 +3065,12 @@ own terms, and nothing is charged until you say yes.</p>
     before you buy: permits, flood zone, the full sales history and what
     is owed against it &mdash; every line sourced and dated.</td></tr>
 </table>
-<p class="sub">Also: a <a href="/audit/">website audit</a> for $50, and
-<a href="/contact.html">Trailer&nbsp;Load</a> licensed to institutions for
-training use.</p>
+<p class="sub">Also for sale, all on the <a href="/shop/">shop</a>: a
+<a href="/audit/">website audit</a> ($50), a color palette check ($25),
+Epistemend reference checks ($5/$25), and
+<a href="https://www.trailer-load.com/" rel="noopener">Trailer&nbsp;Load</a>
+warehouse training. Prompt&nbsp;Check and Security&nbsp;Check are open for early
+orders.</p>
 
 <h2>Who you are dealing with</h2>
 <table class="facts">
@@ -3129,8 +3145,10 @@ Division of Corporations</a> under the document number above.</td></tr>
 each product page.</p>
 
 <h2>Licensing</h2>
-<p>Trailer Load is offered to institutions for training use under a priced
-license. Published source is MIT; commercial use of anything else, ask.</p>
+<p>Every product's terms are on its own page. Each public repository is released
+under the license named in that repository. Trailer Load is licensed to
+institutions for training use. For commercial use of anything not covered,
+ask.</p>
 
 <h2>Research</h2>
 <p>The tooling is public, so a measurement can be reproduced without asking.
