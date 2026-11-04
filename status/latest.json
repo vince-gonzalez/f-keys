@@ -1,15 +1,14 @@
 {
   "cloudflare": {
     "bots_24h": {
-      "AI Assistant": 24,
-      "AI Crawler": 1190,
-      "AI Search": 19,
-      "Advertising & Marketing": 1,
-      "Page Preview": 204,
-      "Search Engine Crawler": 1530,
-      "Search Engine Optimization": 596,
-      "Security": 11,
-      "Unverified": 35930
+      "AI Assistant": 30,
+      "AI Crawler": 1137,
+      "AI Search": 35,
+      "Monitoring & Analytics": 4,
+      "Page Preview": 163,
+      "Search Engine Crawler": 1941,
+      "Search Engine Optimization": 404,
+      "Unverified": 46217
     },
     "bots_error": null,
     "days": 7,
@@ -17,333 +16,333 @@
     "sites": [
       {
         "days_returned": 7,
-        "page_views": 26455,
-        "requests": 55847,
+        "page_views": 27005,
+        "requests": 56972,
         "site": "5best2buy.com",
-        "threats": 134,
+        "threats": 139,
         "top_countries": [
           {
             "country": "US",
-            "pct": 30.3,
-            "requests": 16905
+            "pct": 28.9,
+            "requests": 16493
           },
           {
             "country": "SG",
-            "pct": 15.6,
-            "requests": 8708
+            "pct": 16.2,
+            "requests": 9231
           },
           {
             "country": "NL",
-            "pct": 11.9,
-            "requests": 6662
+            "pct": 10.9,
+            "requests": 6210
           },
           {
             "country": "BE",
-            "pct": 11.2,
-            "requests": 6257
+            "pct": 10.6,
+            "requests": 6035
           },
           {
             "country": "FR",
-            "pct": 8.7,
-            "requests": 4839
+            "pct": 8.8,
+            "requests": 4991
           }
         ],
-        "uniques": 16815
+        "uniques": 18428
       },
       {
         "days_returned": 7,
-        "page_views": 13986,
-        "requests": 65711,
+        "page_views": 13590,
+        "requests": 66863,
         "site": "f-keys.com",
-        "threats": 566,
+        "threats": 569,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 27.9,
+            "requests": 18675
+          },
+          {
+            "country": "NL",
+            "pct": 19.8,
+            "requests": 13214
+          },
+          {
+            "country": "DE",
+            "pct": 7.8,
+            "requests": 5219
+          },
+          {
+            "country": "FI",
+            "pct": 5.0,
+            "requests": 3348
+          },
+          {
+            "country": "FR",
+            "pct": 4.5,
+            "requests": 2977
+          }
+        ],
+        "uniques": 6941
+      },
+      {
+        "days_returned": 7,
+        "page_views": 4469,
+        "requests": 27185,
+        "site": "opticquiz.com",
+        "threats": 440,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 27.5,
+            "requests": 7466
+          },
+          {
+            "country": "NL",
+            "pct": 15.1,
+            "requests": 4111
+          },
+          {
+            "country": "CA",
+            "pct": 11.1,
+            "requests": 3009
+          },
+          {
+            "country": "SG",
+            "pct": 6.4,
+            "requests": 1734
+          },
+          {
+            "country": "TW",
+            "pct": 5.9,
+            "requests": 1598
+          }
+        ],
+        "uniques": 3654
+      },
+      {
+        "days_returned": 7,
+        "page_views": 3025,
+        "requests": 19327,
+        "site": "poticas.com",
+        "threats": 95,
         "top_countries": [
           {
             "country": "US",
             "pct": 27.4,
-            "requests": 18035
+            "requests": 5297
           },
           {
             "country": "NL",
-            "pct": 19.7,
-            "requests": 12957
-          },
-          {
-            "country": "DE",
-            "pct": 8.1,
-            "requests": 5349
+            "pct": 19.9,
+            "requests": 3840
           },
           {
             "country": "BE",
-            "pct": 5.6,
-            "requests": 3654
-          },
-          {
-            "country": "FI",
-            "pct": 4.6,
-            "requests": 3046
-          }
-        ],
-        "uniques": 7469
-      },
-      {
-        "days_returned": 7,
-        "page_views": 4509,
-        "requests": 26725,
-        "site": "opticquiz.com",
-        "threats": 248,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 29.1,
-            "requests": 7764
-          },
-          {
-            "country": "NL",
-            "pct": 12.3,
-            "requests": 3281
-          },
-          {
-            "country": "CA",
-            "pct": 11.8,
-            "requests": 3156
-          },
-          {
-            "country": "TW",
-            "pct": 6.0,
-            "requests": 1601
-          },
-          {
-            "country": "BR",
-            "pct": 5.3,
-            "requests": 1412
-          }
-        ],
-        "uniques": 3579
-      },
-      {
-        "days_returned": 7,
-        "page_views": 3078,
-        "requests": 19310,
-        "site": "poticas.com",
-        "threats": 116,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 25.9,
-            "requests": 5001
-          },
-          {
-            "country": "NL",
-            "pct": 16.9,
-            "requests": 3255
-          },
-          {
-            "country": "BE",
-            "pct": 13.1,
-            "requests": 2522
+            "pct": 11.3,
+            "requests": 2180
           },
           {
             "country": "FR",
             "pct": 7.4,
-            "requests": 1431
+            "requests": 1430
           },
           {
             "country": "DE",
-            "pct": 6.4,
-            "requests": 1236
+            "pct": 6.3,
+            "requests": 1224
           }
         ],
-        "uniques": 3022
+        "uniques": 3051
       },
       {
         "days_returned": 7,
-        "page_views": 699,
-        "requests": 12898,
+        "page_views": 701,
+        "requests": 11429,
         "site": "epistemend.org",
-        "threats": 568,
+        "threats": 511,
         "top_countries": [
           {
             "country": "US",
-            "pct": 19.7,
-            "requests": 2537
+            "pct": 19.5,
+            "requests": 2231
           },
           {
             "country": "BR",
-            "pct": 14.1,
-            "requests": 1820
+            "pct": 16.0,
+            "requests": 1829
           },
           {
             "country": "DE",
-            "pct": 11.6,
-            "requests": 1494
+            "pct": 10.3,
+            "requests": 1178
           },
           {
-            "country": "PL",
-            "pct": 7.5,
-            "requests": 966
-          },
-          {
-            "country": "CL",
-            "pct": 6.5,
-            "requests": 841
-          }
-        ],
-        "uniques": 1358
-      },
-      {
-        "days_returned": 7,
-        "page_views": 944,
-        "requests": 12240,
-        "site": "trailer-load.com",
-        "threats": 113,
-        "top_countries": [
-          {
-            "country": "US",
-            "pct": 35.4,
-            "requests": 4327
-          },
-          {
-            "country": "FR",
-            "pct": 11.0,
-            "requests": 1341
-          },
-          {
-            "country": "CA",
-            "pct": 10.8,
-            "requests": 1319
+            "country": "IL",
+            "pct": 8.9,
+            "requests": 1015
           },
           {
             "country": "NL",
-            "pct": 7.3,
-            "requests": 894
-          },
-          {
-            "country": "BE",
-            "pct": 6.9,
-            "requests": 846
+            "pct": 7.1,
+            "requests": 811
           }
         ],
-        "uniques": 1211
+        "uniques": 1341
       },
       {
         "days_returned": 7,
-        "page_views": 853,
-        "requests": 9595,
-        "site": "tipstreams.com",
+        "page_views": 926,
+        "requests": 17779,
+        "site": "trailer-load.com",
         "threats": 96,
         "top_countries": [
           {
+            "country": "FR",
+            "pct": 44.6,
+            "requests": 7932
+          },
+          {
             "country": "US",
-            "pct": 27.1,
-            "requests": 2600
+            "pct": 23.5,
+            "requests": 4171
+          },
+          {
+            "country": "NL",
+            "pct": 4.9,
+            "requests": 873
           },
           {
             "country": "BE",
-            "pct": 19.8,
-            "requests": 1899
+            "pct": 4.2,
+            "requests": 740
+          },
+          {
+            "country": "SG",
+            "pct": 4.2,
+            "requests": 739
+          }
+        ],
+        "uniques": 1179
+      },
+      {
+        "days_returned": 7,
+        "page_views": 972,
+        "requests": 13628,
+        "site": "tipstreams.com",
+        "threats": 71,
+        "top_countries": [
+          {
+            "country": "US",
+            "pct": 20.0,
+            "requests": 2722
+          },
+          {
+            "country": "NL",
+            "pct": 15.9,
+            "requests": 2165
+          },
+          {
+            "country": "FR",
+            "pct": 15.8,
+            "requests": 2159
           },
           {
             "country": "CA",
-            "pct": 12.4,
-            "requests": 1194
+            "pct": 8.7,
+            "requests": 1191
           },
           {
-            "country": "NL",
-            "pct": 6.8,
-            "requests": 652
-          },
-          {
-            "country": "FI",
-            "pct": 5.8,
-            "requests": 557
+            "country": "PL",
+            "pct": 7.0,
+            "requests": 952
           }
         ],
-        "uniques": 987
+        "uniques": 977
       },
       {
         "days_returned": 7,
-        "page_views": 571,
-        "requests": 16761,
+        "page_views": 614,
+        "requests": 16981,
         "site": "modulign.org",
-        "threats": 159,
+        "threats": 145,
         "top_countries": [
           {
             "country": "FR",
-            "pct": 43.9,
-            "requests": 7351
+            "pct": 43.1,
+            "requests": 7327
           },
           {
             "country": "US",
-            "pct": 10.3,
-            "requests": 1724
-          },
-          {
-            "country": "SG",
-            "pct": 9.2,
-            "requests": 1542
+            "pct": 11.9,
+            "requests": 2024
           },
           {
             "country": "NL",
-            "pct": 8.9,
-            "requests": 1493
+            "pct": 10.2,
+            "requests": 1736
+          },
+          {
+            "country": "SG",
+            "pct": 8.7,
+            "requests": 1470
           },
           {
             "country": "BR",
-            "pct": 6.3,
-            "requests": 1058
+            "pct": 6.2,
+            "requests": 1059
           }
         ],
-        "uniques": 926
+        "uniques": 890
       },
       {
         "days_returned": 7,
-        "page_views": 743,
-        "requests": 8637,
+        "page_views": 746,
+        "requests": 8595,
         "site": "dogefundme.com",
-        "threats": 90,
+        "threats": 85,
         "top_countries": [
           {
             "country": "SG",
-            "pct": 26.1,
-            "requests": 2256
-          },
-          {
-            "country": "NL",
-            "pct": 12.1,
-            "requests": 1049
+            "pct": 25.7,
+            "requests": 2207
           },
           {
             "country": "US",
-            "pct": 11.5,
-            "requests": 992
+            "pct": 13.8,
+            "requests": 1185
+          },
+          {
+            "country": "NL",
+            "pct": 11.7,
+            "requests": 1005
           },
           {
             "country": "PL",
             "pct": 10.9,
-            "requests": 939
+            "requests": 937
           },
           {
             "country": "BE",
-            "pct": 9.8,
-            "requests": 843
+            "pct": 7.4,
+            "requests": 633
           }
         ],
-        "uniques": 742
+        "uniques": 751
       }
     ],
     "sites_omitted": 4,
     "totals": {
-      "page_views": 52191,
-      "threats": 2473,
-      "uniques": 37646
+      "page_views": 52438,
+      "threats": 2529,
+      "uniques": 38734
     },
     "window": {
-      "since": "2026-10-27",
-      "until": "2026-11-02"
+      "since": "2026-10-28",
+      "until": "2026-11-03"
     }
   },
-  "date": "2026-11-03",
-  "generated_at": "2026-11-03 06:05 UTC",
+  "date": "2026-11-04",
+  "generated_at": "2026-11-04 05:43 UTC",
   "github": [
     {
       "archived": false,
@@ -356,9 +355,9 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-11-02T05:48:38Z",
+      "pushed_at": "2026-11-03T06:06:35Z",
       "repo": "f-keys",
-      "size_kb": 78766,
+      "size_kb": 78793,
       "stars": 2,
       "topics": [
         "formal-verification",
@@ -696,9 +695,9 @@
       "license": "Apache-2.0",
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-10-03T06:16:08Z",
+      "pushed_at": "2026-11-03T13:21:15Z",
       "repo": "gonzalgo",
-      "size_kb": 376,
+      "size_kb": 378,
       "stars": 2,
       "topics": [
         "axiom-of-choice",
@@ -1211,20 +1210,6 @@
     }
   ],
   "history": [
-    {
-      "backfilled": false,
-      "date": "2026-09-04",
-      "github_stars": 17,
-      "package_daily": null,
-      "package_weekly": 2360,
-      "page_views_7d": null,
-      "properties_total": 12,
-      "properties_up": 12,
-      "releases_published": null,
-      "visitors_7d": null,
-      "zenodo_downloads": 573,
-      "zenodo_views": 1436
-    },
     {
       "backfilled": false,
       "date": "2026-09-05",
@@ -2064,12 +2049,26 @@
       "visitors_7d": 37646,
       "zenodo_downloads": 1287,
       "zenodo_views": 2614
+    },
+    {
+      "backfilled": false,
+      "date": "2026-11-04",
+      "github_stars": 18,
+      "package_daily": null,
+      "package_weekly": 475,
+      "page_views_7d": 52438,
+      "properties_total": 12,
+      "properties_up": 12,
+      "releases_published": null,
+      "visitors_7d": 38734,
+      "zenodo_downloads": 1304,
+      "zenodo_views": 2684
     }
   ],
   "mode": "daily",
   "npm": [
     {
-      "all_time": 540,
+      "all_time": 560,
       "error": null,
       "license": "MIT",
       "package": "@f-keys/tip-widget",
@@ -2078,7 +2077,7 @@
       "summary": "Embeddable multi-method tip QR web component for streamers and creators. One <script> tag, zero dependencies, nothing leaves the browser. Deep-links to crypto (BIP-21) + PayPal, Cash App, Venmo, Ko-fi. No account, no custody, no fees.",
       "url": "https://www.npmjs.com/package/@f-keys/tip-widget",
       "version": "0.1.3",
-      "weekly": 8
+      "weekly": 10
     },
     {
       "all_time": 173,
@@ -2090,10 +2089,10 @@
       "summary": "Simulate total color blindness (achromatopsia / complete monochromacy) \u2014 collapse a color or an image to its WCAG luminance. Built on the OpticQuiz engine.",
       "url": "https://www.npmjs.com/package/achromatopsia",
       "version": "0.1.0",
-      "weekly": 8
+      "weekly": 6
     },
     {
-      "all_time": 545,
+      "all_time": 554,
       "error": null,
       "license": "MIT",
       "package": "colorblind-mcp",
@@ -2102,10 +2101,10 @@
       "summary": "MCP server that lets an LLM (Claude, Cursor, etc.) see a color or an image the way a colorblind person does \u2014 recolors PNG/JPEG for protan/deutan/tritan. Built on the published OpticQuiz engine (Machado 2009).",
       "url": "https://www.npmjs.com/package/colorblind-mcp",
       "version": "0.2.0",
-      "weekly": 43
+      "weekly": 47
     },
     {
-      "all_time": 513,
+      "all_time": 517,
       "error": null,
       "license": "MIT",
       "package": "cvdplate",
@@ -2126,10 +2125,10 @@
       "summary": "Is your palette colorblind-safe? Check and fix color palettes for color-vision deficiency (protan, deutan, tritan) with the published OpticQuiz engine \u2014 Machado 2009 + CIEDE2000.",
       "url": "https://www.npmjs.com/package/cvdsafe",
       "version": "0.2.0",
-      "weekly": 10
+      "weekly": 9
     },
     {
-      "all_time": 559,
+      "all_time": 568,
       "error": null,
       "license": "MIT",
       "package": "cvdsafe-mcp",
@@ -2138,7 +2137,7 @@
       "summary": "MCP server that lets an LLM (Claude, Cursor, etc.) check whether a palette OR an image is colorblind-safe, simulate color-vision deficiency, and check WCAG contrast \u2014 built on the published OpticQuiz engine (Machado 2009 + CIEDE2000).",
       "url": "https://www.npmjs.com/package/cvdsafe-mcp",
       "version": "0.2.0",
-      "weekly": 43
+      "weekly": 48
     },
     {
       "all_time": 429,
@@ -2150,7 +2149,7 @@
       "summary": "See a color, a palette, or a whole image as a colorblind person does. Recolors PNG/JPEG for protanopia, deuteranopia, and tritanopia \u2014 built on the published OpticQuiz engine (Machado, Oliveira & Fernandes 2009).",
       "url": "https://www.npmjs.com/package/cvdsim",
       "version": "0.2.0",
-      "weekly": 14
+      "weekly": 12
     },
     {
       "all_time": 176,
@@ -2162,7 +2161,7 @@
       "summary": "Simulate deuteranopia (green-blind) color vision \u2014 a typed shortcut over cvdsim / the OpticQuiz engine (Machado, Oliveira & Fernandes 2009).",
       "url": "https://www.npmjs.com/package/deutan",
       "version": "0.1.0",
-      "weekly": 6
+      "weekly": 4
     },
     {
       "all_time": 154,
@@ -2177,7 +2176,7 @@
       "weekly": 4
     },
     {
-      "all_time": 1035,
+      "all_time": 1038,
       "error": null,
       "license": "MIT",
       "package": "dogefundme",
@@ -2189,7 +2188,7 @@
       "weekly": 19
     },
     {
-      "all_time": 186,
+      "all_time": 187,
       "error": null,
       "license": "MIT",
       "package": "keyjockey",
@@ -2198,10 +2197,10 @@
       "summary": "Read guitar tablature and convert notes: eight tunings, capo offsets, MIDI and frequency. The same reader the Key-J browser app runs, lifted from it so the two cannot disagree.",
       "url": "https://www.npmjs.com/package/keyjockey",
       "version": "0.1.0",
-      "weekly": 5
+      "weekly": 6
     },
     {
-      "all_time": 170,
+      "all_time": 171,
       "error": null,
       "license": "MIT",
       "package": "logmar",
@@ -2213,7 +2212,7 @@
       "weekly": 5
     },
     {
-      "all_time": 876,
+      "all_time": 881,
       "error": null,
       "license": "MIT",
       "package": "opticquiz-cvd",
@@ -2222,7 +2221,7 @@
       "summary": "Color accessibility engine. Checks palettes for colorblind-safety (protan/deutan/tritan, Machado 2009, scored with CIEDE2000), fixes failing palettes, and checks WCAG contrast. Zero dependencies.",
       "url": "https://www.npmjs.com/package/opticquiz-cvd",
       "version": "1.1.0",
-      "weekly": 40
+      "weekly": 39
     },
     {
       "all_time": 412,
@@ -2234,10 +2233,10 @@
       "summary": "MCP server exposing the OpticQuiz color-accessibility engine as callable tools for LLMs (Claude, Cursor, etc.): colorblind-safe palette checks, color simulation, and WCAG contrast.",
       "url": "https://www.npmjs.com/package/opticquiz-cvd-mcp",
       "version": "1.1.0",
-      "weekly": 10
+      "weekly": 7
     },
     {
-      "all_time": 989,
+      "all_time": 992,
       "error": null,
       "license": "MIT",
       "package": "opticquiz-eye",
@@ -2258,10 +2257,10 @@
       "summary": "Simulate protanopia (red-blind) color vision \u2014 a typed shortcut over cvdsim / the OpticQuiz engine (Machado, Oliveira & Fernandes 2009).",
       "url": "https://www.npmjs.com/package/protanopia",
       "version": "0.1.0",
-      "weekly": 5
+      "weekly": 4
     },
     {
-      "all_time": 508,
+      "all_time": 509,
       "error": null,
       "license": "MIT",
       "package": "safepalette",
@@ -2270,10 +2269,10 @@
       "summary": "Generate, check, and fix colorblind-safe color palettes \u2014 protanopia, deuteranopia, tritanopia. Built on the published OpticQuiz engine (Machado 2009 + CIEDE2000) with the Okabe-Ito safe palette.",
       "url": "https://www.npmjs.com/package/safepalette",
       "version": "0.2.0",
-      "weekly": 21
+      "weekly": 19
     },
     {
-      "all_time": 149,
+      "all_time": 152,
       "error": null,
       "license": "MIT",
       "package": "trichromacy",
@@ -2282,10 +2281,10 @@
       "summary": "Normal (three-cone) color vision and anomalous trichromacy (protanomaly/deuteranomaly/tritanomaly) \u2014 the mild, partial deficiency. Built on cvdsim / the OpticQuiz engine.",
       "url": "https://www.npmjs.com/package/trichromacy",
       "version": "0.1.0",
-      "weekly": 6
+      "weekly": 7
     },
     {
-      "all_time": 164,
+      "all_time": 165,
       "error": null,
       "license": "MIT",
       "package": "tritanopia",
@@ -2299,8 +2298,8 @@
   ],
   "pypi": [
     {
-      "all_time": 2213,
-      "daily": 11,
+      "all_time": 2230,
+      "daily": 17,
       "error": null,
       "license": null,
       "monthly": 467,
@@ -2314,8 +2313,8 @@
       "weekly": 80
     },
     {
-      "all_time": 962,
-      "daily": 0,
+      "all_time": 963,
+      "daily": 1,
       "error": null,
       "license": null,
       "monthly": 116,
@@ -2329,8 +2328,8 @@
       "weekly": 17
     },
     {
-      "all_time": 524,
-      "daily": 0,
+      "all_time": 525,
+      "daily": 1,
       "error": null,
       "license": "MIT",
       "monthly": 43,
@@ -2359,8 +2358,8 @@
       "weekly": 9
     },
     {
-      "all_time": 457,
-      "daily": 0,
+      "all_time": 458,
+      "daily": 1,
       "error": null,
       "license": "MIT",
       "monthly": 46,
@@ -2374,8 +2373,8 @@
       "weekly": 7
     },
     {
-      "all_time": 666,
-      "daily": 1,
+      "all_time": 668,
+      "daily": 2,
       "error": null,
       "license": "MIT",
       "monthly": 65,
@@ -2390,7 +2389,7 @@
     },
     {
       "all_time": 599,
-      "daily": 2,
+      "daily": 0,
       "error": null,
       "license": "MIT",
       "monthly": 51,
@@ -2404,7 +2403,7 @@
       "weekly": 6
     },
     {
-      "all_time": 438,
+      "all_time": 439,
       "daily": 1,
       "error": null,
       "license": "MIT",
@@ -2419,8 +2418,8 @@
       "weekly": 10
     },
     {
-      "all_time": 1246,
-      "daily": 1,
+      "all_time": 1248,
+      "daily": 2,
       "error": null,
       "license": "MIT",
       "monthly": 110,
@@ -2434,8 +2433,8 @@
       "weekly": 14
     },
     {
-      "all_time": 164,
-      "daily": 0,
+      "all_time": 165,
+      "daily": 1,
       "error": null,
       "license": "MIT",
       "monthly": 22,
@@ -2449,8 +2448,8 @@
       "weekly": 4
     },
     {
-      "all_time": 255,
-      "daily": 2,
+      "all_time": 256,
+      "daily": 1,
       "error": null,
       "license": "MIT",
       "monthly": 54,
@@ -2465,7 +2464,7 @@
     },
     {
       "all_time": 172,
-      "daily": 3,
+      "daily": 0,
       "error": null,
       "license": "MIT",
       "monthly": 21,
@@ -2479,7 +2478,7 @@
       "weekly": 6
     },
     {
-      "all_time": 622,
+      "all_time": 623,
       "daily": 1,
       "error": null,
       "license": "MIT",
@@ -2494,7 +2493,7 @@
       "weekly": 4
     },
     {
-      "all_time": 180,
+      "all_time": 182,
       "daily": 2,
       "error": null,
       "license": null,
@@ -2509,8 +2508,8 @@
       "weekly": 3
     },
     {
-      "all_time": 450,
-      "daily": 1,
+      "all_time": 452,
+      "daily": 2,
       "error": null,
       "license": null,
       "monthly": 62,
@@ -2526,36 +2525,36 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 39505,
+    "bot_requests_24h": 49931,
     "github_forks": 0,
     "github_repos": 34,
     "github_stars": 18,
-    "median_response_ms": 319,
-    "npm_all_time": 8098,
-    "npm_weekly": 291,
+    "median_response_ms": 300,
+    "npm_all_time": 8158,
+    "npm_weekly": 290,
     "open_issues": 1,
-    "package_all_time": 17615,
-    "package_weekly": 476,
+    "package_all_time": 17707,
+    "package_weekly": 475,
     "packages_total": 34,
-    "page_views_7d": 52191,
+    "page_views_7d": 52438,
     "properties_total": 12,
     "properties_up": 12,
-    "pypi_all_time": 9517,
+    "pypi_all_time": 9549,
     "pypi_monthly": 1249,
     "pypi_weekly": 185,
     "repos_archived": 2,
     "repos_unlicensed": 12,
-    "threats_7d": 2473,
-    "visitors_7d": 37646,
-    "zenodo_downloads": 1287,
+    "threats_7d": 2529,
+    "visitors_7d": 38734,
+    "zenodo_downloads": 1304,
     "zenodo_records": 64,
-    "zenodo_views": 2614
+    "zenodo_views": 2684
   },
   "uptime": [
     {
       "code": 200,
       "error": null,
-      "ms": 250,
+      "ms": 291,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2563,7 +2562,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 214,
+      "ms": 448,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2571,7 +2570,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 404,
+      "ms": 444,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2579,7 +2578,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 139,
+      "ms": 286,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2587,7 +2586,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 468,
+      "ms": 588,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2595,7 +2594,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 356,
+      "ms": 224,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2603,7 +2602,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 264,
+      "ms": 265,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2611,7 +2610,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 903,
+      "ms": 740,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2619,7 +2618,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 656,
+      "ms": 694,
       "name": "epistemend.org",
       "up": true,
       "url": "https://epistemend.org"
@@ -2627,7 +2626,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 310,
+      "ms": 281,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2635,7 +2634,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 226,
+      "ms": 143,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2643,7 +2642,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 329,
+      "ms": 310,
       "name": "qv.f-keys.com",
       "up": true,
       "url": "https://qv.f-keys.com"
@@ -2669,22 +2668,6 @@
         "views": 46
       },
       {
-        "downloads": 8,
-        "id": "21922825",
-        "title": "The gonzalgo Indexes: standing measurements of what formal mathematical libraries rest on",
-        "unique_downloads": 8,
-        "unique_views": 77,
-        "views": 92
-      },
-      {
-        "downloads": 5,
-        "id": "21716006",
-        "title": "Exact calculator for Norton's abundancy bound a(j) on odd perfect numbers",
-        "unique_downloads": 4,
-        "unique_views": 25,
-        "views": 25
-      },
-      {
         "downloads": 31,
         "id": "19351250",
         "title": "Modulign As Evidence",
@@ -2693,12 +2676,36 @@
         "views": 93
       },
       {
-        "downloads": 20,
-        "id": "21701081",
-        "title": "A certified opaque barrier for the unit disc of length 4.79984937\u2026",
-        "unique_downloads": 18,
-        "unique_views": 56,
-        "views": 58
+        "downloads": 5,
+        "id": "21716006",
+        "title": "Exact calculator for Norton's abundancy bound a(j) on odd perfect numbers",
+        "unique_downloads": 4,
+        "unique_views": 27,
+        "views": 27
+      },
+      {
+        "downloads": 8,
+        "id": "21922825",
+        "title": "The gonzalgo Indexes: standing measurements of what formal mathematical libraries rest on",
+        "unique_downloads": 8,
+        "unique_views": 80,
+        "views": 95
+      },
+      {
+        "downloads": 43,
+        "id": "21866882",
+        "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
+        "unique_downloads": 41,
+        "unique_views": 66,
+        "views": 68
+      },
+      {
+        "downloads": 34,
+        "id": "21866855",
+        "title": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
+        "unique_downloads": 31,
+        "unique_views": 132,
+        "views": 149
       },
       {
         "downloads": 4,
@@ -2707,22 +2714,6 @@
         "unique_downloads": 4,
         "unique_views": 37,
         "views": 39
-      },
-      {
-        "downloads": 9,
-        "id": "22162430",
-        "title": "Verified Software Assumes What Its Arithmetic Requires: An Axiom Census of Four Rocq Developments",
-        "unique_downloads": 9,
-        "unique_views": 24,
-        "views": 25
-      },
-      {
-        "downloads": 43,
-        "id": "21866882",
-        "title": "Why Tactic-Level Rates Cannot Attribute Classical Dependencies in Lean",
-        "unique_downloads": 41,
-        "unique_views": 65,
-        "views": 67
       },
       {
         "downloads": 24,
@@ -2741,14 +2732,6 @@
         "views": 52
       },
       {
-        "downloads": 18,
-        "id": "21937801",
-        "title": "One Grammar, a Continuous Register Dial: Section, Locus, and Onset Variation in Voynichese",
-        "unique_downloads": 16,
-        "unique_views": 16,
-        "views": 17
-      },
-      {
         "downloads": 22,
         "id": "19559689",
         "title": "Public Commitment Document",
@@ -2765,28 +2748,12 @@
         "views": 77
       },
       {
-        "downloads": 4,
-        "id": "22037150",
-        "title": "Independent US Food Makers: direct-to-consumer producers, with named halal and kosher certifying authorities",
-        "unique_downloads": 4,
-        "unique_views": 34,
-        "views": 36
-      },
-      {
         "downloads": 22,
         "id": "21937807",
         "title": "How Voynichometry Kills Its Own Mirages: Nulls, Positive Controls, and the Limits of Structural Inference",
         "unique_downloads": 21,
         "unique_views": 10,
         "views": 10
-      },
-      {
-        "downloads": 34,
-        "id": "21866855",
-        "title": "Where Formal Libraries Spend Their Axioms: A Cross-Foundation Measurement, and an Avoidable Classical Dependency in Lean's omega",
-        "unique_downloads": 31,
-        "unique_views": 130,
-        "views": 147
       },
       {
         "downloads": 17,
@@ -2797,12 +2764,44 @@
         "views": 12
       },
       {
+        "downloads": 4,
+        "id": "22037150",
+        "title": "Independent US Food Makers: direct-to-consumer producers, with named halal and kosher certifying authorities",
+        "unique_downloads": 4,
+        "unique_views": 35,
+        "views": 37
+      },
+      {
+        "downloads": 9,
+        "id": "22162430",
+        "title": "Verified Software Assumes What Its Arithmetic Requires: An Axiom Census of Four Rocq Developments",
+        "unique_downloads": 9,
+        "unique_views": 26,
+        "views": 27
+      },
+      {
+        "downloads": 18,
+        "id": "21937801",
+        "title": "One Grammar, a Continuous Register Dial: Section, Locus, and Onset Variation in Voynichese",
+        "unique_downloads": 16,
+        "unique_views": 16,
+        "views": 17
+      },
+      {
+        "downloads": 20,
+        "id": "21701081",
+        "title": "A certified opaque barrier for the unit disc of length 4.79984937\u2026",
+        "unique_downloads": 18,
+        "unique_views": 59,
+        "views": 61
+      },
+      {
         "downloads": 16,
         "id": "21708693",
         "title": "The added-vector code of the odd-sign construction is maximal in dimensions 20 and 21",
         "unique_downloads": 14,
-        "unique_views": 70,
-        "views": 77
+        "unique_views": 72,
+        "views": 79
       },
       {
         "downloads": 13,
@@ -2811,14 +2810,6 @@
         "unique_downloads": 13,
         "unique_views": 25,
         "views": 26
-      },
-      {
-        "downloads": 37,
-        "id": "23418394",
-        "title": "Pseudoisochromatic plate design type is recoverable from delivered colour and dot geometry alone",
-        "unique_downloads": 34,
-        "unique_views": 29,
-        "views": 30
       },
       {
         "downloads": 13,
@@ -2845,52 +2836,20 @@
         "views": 25
       },
       {
-        "downloads": 35,
-        "id": "19350848",
-        "title": "The Formal Logic of Modulign",
-        "unique_downloads": 32,
-        "unique_views": 89,
-        "views": 89
-      },
-      {
-        "downloads": 2,
-        "id": "22131388",
-        "title": "THE RECORD: a hash-chained Modulign address ledger of 1,000,000 legal documents",
-        "unique_downloads": 2,
-        "unique_views": 27,
-        "views": 27
-      },
-      {
-        "downloads": 1,
-        "id": "21913737",
-        "title": "Kernel Trust Profile 0.1: a machine-readable declaration of what a body of machine-checked mathematics rests on",
-        "unique_downloads": 1,
-        "unique_views": 35,
-        "views": 37
-      },
-      {
         "downloads": 2,
         "id": "23700393",
         "title": "KV-Bench: measured read-after-write and cross-region staleness for Cloudflare Workers KV",
         "unique_downloads": 2,
-        "unique_views": 1,
-        "views": 1
+        "unique_views": 4,
+        "views": 4
       },
       {
         "downloads": 16,
         "id": "21883964",
         "title": "Which Constant Is Responsible? Dominator Analysis of Classical Dependence in Mathlib",
         "unique_downloads": 10,
-        "unique_views": 29,
-        "views": 39
-      },
-      {
-        "downloads": 16,
-        "id": "21729805",
-        "title": "Maximality of the added-vector codes in the Cohn-Li kissing constructions",
-        "unique_downloads": 14,
-        "unique_views": 65,
-        "views": 76
+        "unique_views": 31,
+        "views": 41
       },
       {
         "downloads": 24,
@@ -2901,12 +2860,20 @@
         "views": 61
       },
       {
-        "downloads": 4,
-        "id": "22541788",
-        "title": "Discretionary-Axiom Reach Is Not Comparable Across Proof Systems: A Cross-Foundation Kernel Census",
-        "unique_downloads": 3,
-        "unique_views": 14,
-        "views": 14
+        "downloads": 2,
+        "id": "22131388",
+        "title": "THE RECORD: a hash-chained Modulign address ledger of 1,000,000 legal documents",
+        "unique_downloads": 2,
+        "unique_views": 28,
+        "views": 28
+      },
+      {
+        "downloads": 1,
+        "id": "21913737",
+        "title": "Kernel Trust Profile 0.1: a machine-readable declaration of what a body of machine-checked mathematics rests on",
+        "unique_downloads": 1,
+        "unique_views": 36,
+        "views": 38
       },
       {
         "downloads": 2,
@@ -2933,14 +2900,6 @@
         "views": 56
       },
       {
-        "downloads": 9,
-        "id": "21777108",
-        "title": "A congruence obstruction on the Euler prime of an odd perfect number",
-        "unique_downloads": 7,
-        "unique_views": 23,
-        "views": 24
-      },
-      {
         "downloads": 19,
         "id": "21951050",
         "title": "Eligibility Discriminates Among Theorems and Not Among the Constants They Rest On",
@@ -2957,44 +2916,76 @@
         "views": 17
       },
       {
-        "downloads": 10,
-        "id": "22083875",
-        "title": "Filtering and Generating: Two Roles for Method-Specification in Epistemic-Possibility Anti-Luck Conditions",
-        "unique_downloads": 10,
-        "unique_views": 26,
-        "views": 26
-      },
-      {
         "downloads": 8,
         "id": "22149628",
         "title": "Interface Assumptions Are Not Mathematical Assumptions: An Axiom Census of Five Libraries Across Four Proof Systems",
         "unique_downloads": 8,
-        "unique_views": 40,
-        "views": 41
+        "unique_views": 42,
+        "views": 43
       },
       {
         "downloads": 21,
         "id": "21937803",
         "title": "Compositional Reuse and Grade Operators in Voynichese",
         "unique_downloads": 20,
-        "unique_views": 18,
-        "views": 18
+        "unique_views": 19,
+        "views": 19
       },
       {
-        "downloads": 14,
-        "id": "23428931",
-        "title": "Prompt Atoms and Conflicts: An Instruction Vocabulary and Conflict Graph from Public Prompt Libraries",
+        "downloads": 36,
+        "id": "19350848",
+        "title": "The Formal Logic of Modulign",
+        "unique_downloads": 33,
+        "unique_views": 91,
+        "views": 91
+      },
+      {
+        "downloads": 5,
+        "id": "22541788",
+        "title": "Discretionary-Axiom Reach Is Not Comparable Across Proof Systems: A Cross-Foundation Kernel Census",
+        "unique_downloads": 4,
+        "unique_views": 22,
+        "views": 22
+      },
+      {
+        "downloads": 12,
+        "id": "22083875",
+        "title": "Filtering and Generating: Two Roles for Method-Specification in Epistemic-Possibility Anti-Luck Conditions",
+        "unique_downloads": 12,
+        "unique_views": 28,
+        "views": 28
+      },
+      {
+        "downloads": 16,
+        "id": "21729805",
+        "title": "Maximality of the added-vector codes in the Cohn-Li kissing constructions",
         "unique_downloads": 14,
-        "unique_views": 10,
-        "views": 10
+        "unique_views": 76,
+        "views": 87
       },
       {
         "downloads": 10,
-        "id": "22030575",
-        "title": "Which Axiom Seams Yield",
-        "unique_downloads": 9,
-        "unique_views": 13,
-        "views": 13
+        "id": "21777108",
+        "title": "A congruence obstruction on the Euler prime of an odd perfect number",
+        "unique_downloads": 8,
+        "unique_views": 24,
+        "views": 25
+      },
+      {
+        "downloads": 47,
+        "id": "23418394",
+        "title": "Pseudoisochromatic plate design type is recoverable from delivered colour and dot geometry alone",
+        "unique_downloads": 44,
+        "unique_views": 29,
+        "views": 30
+      },
+      {
+        "downloads": 15,
+        "id": "23428931",
+        "title": "Prompt Atoms and Conflicts: An Instruction Vocabulary and Conflict Graph from Public Prompt Libraries",
+        "unique_downloads": 15,
+        "unique_views": 10,
+        "views": 10
       },
       {
         "downloads": 23,
@@ -3003,6 +2994,54 @@
         "unique_downloads": 20,
         "unique_views": 165,
         "views": 184
+      },
+      {
+        "downloads": 10,
+        "id": "21629399",
+        "title": "First-Return Walks on Vertex-Transitive Graphs",
+        "unique_downloads": 9,
+        "unique_views": 21,
+        "views": 21
+      },
+      {
+        "downloads": 2,
+        "id": "23422998",
+        "title": "plateaudit: measuring pseudoisochromatic colour-vision plates from the stimulus a browser actually delivers",
+        "unique_downloads": 2,
+        "unique_views": 3,
+        "views": 3
+      },
+      {
+        "downloads": 10,
+        "id": "22030575",
+        "title": "Which Axiom Seams Yield",
+        "unique_downloads": 9,
+        "unique_views": 14,
+        "views": 14
+      },
+      {
+        "downloads": 25,
+        "id": "21618222",
+        "title": "An independent exact verification of an 11948-point kissing configuration in 19 dimensions",
+        "unique_downloads": 24,
+        "unique_views": 25,
+        "views": 25
+      },
+      {
+        "downloads": 41,
+        "id": "19348704",
+        "title": "MODULIGN Standard, A Dimensional Address Grammar for Observable Reality",
+        "unique_downloads": 35,
+        "unique_views": 103,
+        "views": 107
+      },
+      {
+        "downloads": 7,
+        "id": "22030569",
+        "title": "Specialisation Loss: Avoidable Classical Dependence from Correctly-Stated Lemmas",
+        "unique_downloads": 6,
+        "unique_views": 15,
+        "views": 15
       },
       {
         "downloads": 13,
@@ -3021,28 +3060,20 @@
         "views": 51
       },
       {
-        "downloads": 13,
-        "id": "21701339",
-        "title": "A machine-checked proof of opacity for a Faber\u2013Mycielski barrier",
-        "unique_downloads": 12,
-        "unique_views": 18,
-        "views": 19
+        "downloads": 142,
+        "id": "21946925",
+        "title": "Voynichometry: analysis code and replication package",
+        "unique_downloads": 142,
+        "unique_views": 24,
+        "views": 25
       },
       {
-        "downloads": 6,
-        "id": "22030569",
-        "title": "Specialisation Loss: Avoidable Classical Dependence from Correctly-Stated Lemmas",
-        "unique_downloads": 5,
-        "unique_views": 12,
-        "views": 12
-      },
-      {
-        "downloads": 10,
-        "id": "21629399",
-        "title": "First-Return Walks on Vertex-Transitive Graphs",
-        "unique_downloads": 9,
-        "unique_views": 19,
-        "views": 19
+        "downloads": 49,
+        "id": "21937799",
+        "title": "Positional Rigidity in the Voynich Manuscript: Cross-Tradition Replication Without Glyph Mapping",
+        "unique_downloads": 46,
+        "unique_views": 21,
+        "views": 22
       },
       {
         "downloads": 2,
@@ -3085,12 +3116,20 @@
         "views": 13
       },
       {
-        "downloads": 41,
-        "id": "19348704",
-        "title": "MODULIGN Standard, A Dimensional Address Grammar for Observable Reality",
-        "unique_downloads": 35,
-        "unique_views": 102,
-        "views": 106
+        "downloads": 42,
+        "id": "19351056",
+        "title": "Synthetic Content As Epistemic Category",
+        "unique_downloads": 37,
+        "unique_views": 108,
+        "views": 109
+      },
+      {
+        "downloads": 13,
+        "id": "21701339",
+        "title": "A machine-checked proof of opacity for a Faber\u2013Mycielski barrier",
+        "unique_downloads": 12,
+        "unique_views": 20,
+        "views": 21
       },
       {
         "downloads": 16,
@@ -3109,14 +3148,6 @@
         "views": 17
       },
       {
-        "downloads": 2,
-        "id": "23422998",
-        "title": "plateaudit: measuring pseudoisochromatic colour-vision plates from the stimulus a browser actually delivers",
-        "unique_downloads": 2,
-        "unique_views": 2,
-        "views": 2
-      },
-      {
         "downloads": 10,
         "id": "21302924",
         "title": "Potica in America: Naming, Transmission, and the Printed Record of a Diaspora Pastry",
@@ -3125,44 +3156,12 @@
         "views": 15
       },
       {
-        "downloads": 49,
-        "id": "21937799",
-        "title": "Positional Rigidity in the Voynich Manuscript: Cross-Tradition Replication Without Glyph Mapping",
-        "unique_downloads": 46,
-        "unique_views": 14,
-        "views": 15
-      },
-      {
-        "downloads": 42,
-        "id": "19351056",
-        "title": "Synthetic Content As Epistemic Category",
-        "unique_downloads": 37,
-        "unique_views": 107,
-        "views": 108
-      },
-      {
-        "downloads": 142,
-        "id": "21946925",
-        "title": "Voynichometry: analysis code and replication package",
-        "unique_downloads": 142,
-        "unique_views": 24,
-        "views": 25
-      },
-      {
         "downloads": 5,
         "id": "22647226",
         "title": "Half of Mathlib's Choice Is Classical Logic: Unbundling the Axiom-of-Choice Reach of a Formal Library",
         "unique_downloads": 5,
-        "unique_views": 20,
-        "views": 20
-      },
-      {
-        "downloads": 25,
-        "id": "21618222",
-        "title": "An independent exact verification of an 11948-point kissing configuration in 19 dimensions",
-        "unique_downloads": 24,
-        "unique_views": 24,
-        "views": 24
+        "unique_views": 21,
+        "views": 21
       }
     ]
   }
