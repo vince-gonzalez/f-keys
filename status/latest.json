@@ -1,17 +1,17 @@
 {
   "cloudflare": {
     "bots_24h": {
-      "AI Assistant": 24,
-      "AI Crawler": 846,
-      "AI Search": 27,
+      "AI Assistant": 23,
+      "AI Crawler": 863,
+      "AI Search": 26,
       "Academic Research": 110,
       "Accessibility": 8,
       "Monitoring & Analytics": 8,
-      "Page Preview": 1577,
-      "Search Engine Crawler": 2695,
-      "Search Engine Optimization": 514,
+      "Page Preview": 1526,
+      "Search Engine Crawler": 2685,
+      "Search Engine Optimization": 505,
       "Security": 4,
-      "Unverified": 33138
+      "Unverified": 34088
     },
     "bots_error": null,
     "days": 7,
@@ -345,7 +345,7 @@
     }
   },
   "date": "2026-11-23",
-  "generated_at": "2026-11-23 06:54 UTC",
+  "generated_at": "2026-11-23 07:20 UTC",
   "github": [
     {
       "archived": false,
@@ -358,7 +358,7 @@
       "license": null,
       "open_issues": 0,
       "owner": "vince-gonzalez",
-      "pushed_at": "2026-11-22T06:02:56Z",
+      "pushed_at": "2026-11-23T06:55:46Z",
       "repo": "f-keys",
       "size_kb": 79332,
       "stars": 2,
@@ -2068,7 +2068,7 @@
       "zenodo_views": 3325
     }
   ],
-  "mode": "daily",
+  "mode": "weekly",
   "npm": [
     {
       "all_time": 630,
@@ -2528,11 +2528,11 @@
   ],
   "redacted": "GitHub repo traffic is owner-only and lives in the private KPI repo, not here. Cloudflare zones that are not published F-Keys properties are omitted from this file entirely.",
   "summary": {
-    "bot_requests_24h": 38951,
+    "bot_requests_24h": 39846,
     "github_forks": 0,
     "github_repos": 34,
     "github_stars": 18,
-    "median_response_ms": 265,
+    "median_response_ms": 253,
     "npm_all_time": 9499,
     "npm_weekly": 253,
     "open_issues": 1,
@@ -2557,7 +2557,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 263,
+      "ms": 277,
       "name": "f-keys.com",
       "up": true,
       "url": "https://f-keys.com"
@@ -2565,7 +2565,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 205,
+      "ms": 174,
       "name": "opticquiz.com",
       "up": true,
       "url": "https://opticquiz.com"
@@ -2573,7 +2573,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 447,
+      "ms": 540,
       "name": "poticas.com",
       "up": true,
       "url": "https://poticas.com"
@@ -2581,7 +2581,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 130,
+      "ms": 92,
       "name": "5best2buy.com",
       "up": true,
       "url": "https://www.5best2buy.com"
@@ -2589,7 +2589,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 432,
+      "ms": 459,
       "name": "trailer-load.com",
       "up": true,
       "url": "https://trailer-load.com"
@@ -2597,7 +2597,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 367,
+      "ms": 243,
       "name": "tipstreams.com",
       "up": true,
       "url": "https://tipstreams.com"
@@ -2605,7 +2605,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 241,
+      "ms": 191,
       "name": "dogefundme.com",
       "up": true,
       "url": "https://dogefundme.com"
@@ -2613,7 +2613,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 530,
+      "ms": 580,
       "name": "modulign.org",
       "up": true,
       "url": "https://modulign.org"
@@ -2621,7 +2621,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 496,
+      "ms": 346,
       "name": "epistemend.org",
       "up": true,
       "url": "https://epistemend.org"
@@ -2629,7 +2629,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 235,
+      "ms": 161,
       "name": "prompt.f-keys.com",
       "up": true,
       "url": "https://prompt.f-keys.com"
@@ -2637,7 +2637,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 267,
+      "ms": 153,
       "name": "dp.f-keys.com",
       "up": true,
       "url": "https://dp.f-keys.com"
@@ -2645,7 +2645,7 @@
     {
       "code": 200,
       "error": null,
-      "ms": 187,
+      "ms": 263,
       "name": "qv.f-keys.com",
       "up": true,
       "url": "https://qv.f-keys.com"
