@@ -1,4 +1,4 @@
-# Key-J Manual — F-Keys
+# Key-J Manual — F-Keys Creative
 
 > How to use Key-J: sequence mode, tablature import, global capture, and what to check when something is not working.
 

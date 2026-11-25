@@ -1,6 +1,6 @@
-# Hardware — F-Keys
+# Hardware — F-Keys Creative
 
-> Software that makes a box do one thing forever.
+> Software for physical devices: a mini PC that becomes an appliance, a phone that becomes a macro pad, and monitors for a fleet of miners.
 
 Canonical: https://f-keys.com/hardware.html
 

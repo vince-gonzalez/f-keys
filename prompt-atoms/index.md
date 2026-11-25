@@ -1,4 +1,4 @@
-# Prompt Atoms — F-Keys
+# Prompt Atoms — F-Keys Creative
 
 > 257 instruction atoms and 32 conflicts, mined from public prompt libraries.
 

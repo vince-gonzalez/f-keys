@@ -1,4 +1,4 @@
-# Pixel Staff — F-Keys
+# Pixel Staff — F-Keys Creative
 
 > An 8-bit composer with no DAW anywhere in it.
 

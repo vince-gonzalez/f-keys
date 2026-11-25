@@ -37,7 +37,7 @@
   "status": "Alpha",
   "text": "Any smartphone becomes a programmable macro pad. No app, no dongle.",
   "href": "/remapwrap/",
-  "group": "tools"
+  "group": "hardware"
  },
  {
   "name": "Trailer Load",
@@ -117,13 +117,13 @@
   "status": "pip install",
   "text": "Miner fleet monitor. Overlay HUD, alerts, and local history.",
   "href": "/plumhud/",
-  "group": "tools"
+  "group": "hardware"
  },
  {
   "name": "coldHat",
   "kind": "Web tool",
   "status": "Ready",
-  "text": "Your AI rules on any chat. Type one line into Claude, ChatGPT or Grok and it works your way.",
+  "text": "Your AI rules on any chat. Type one line into an AI assistant and it works your way.",
   "href": "https://coldhat.f-keys.com",
   "group": "tools"
  },
@@ -133,6 +133,14 @@
   "status": "Needs setup",
   "text": "Send a system prompt and it is run against a live model: which rules hold, which break, and the rewrite that holds.",
   "href": "/promptcheck/",
+  "group": "check"
+ },
+ {
+  "name": "Security Check",
+  "kind": "Service",
+  "status": "Needs setup",
+  "text": "Your site's security headers read against the OWASP standard: what's exposed, and the fix applied.",
+  "href": "/securitycheck/",
   "group": "check"
  },
  {
@@ -237,7 +245,7 @@
   "status": "Needs setup",
   "text": "A spare mini PC shows a channel fullscreen the moment it goes live.",
   "href": "/streamsniper/",
-  "group": "tools"
+  "group": "hardware"
  },
  {
   "name": "Moonbeam",
@@ -245,7 +253,7 @@
   "status": "pip install",
   "text": "Finds the NerdMiners on your network and reads their vitals.",
   "href": "/moonbeam/",
-  "group": "tools"
+  "group": "hardware"
  },
  {
   "name": "gonzalgo",
@@ -260,7 +268,7 @@
   "kind": "Publications",
   "status": "Published",
   "text": "Where formal libraries spend their axioms. Full text, DOIs, archives.",
-  "href": "/papers/",
+  "href": "https://epistemend.org/papers/",
   "group": "research"
  },
  {
@@ -304,11 +312,11 @@
   "group": "sites"
  },
  {
-  "name": "Epistemend",
+  "name": "Authorecon",
   "kind": "Website",
   "status": "Live",
   "text": "One ORCID in, one document out. Checks a published record against where the work lives.",
-  "href": "https://www.epistemend.org",
+  "href": "https://authorecon.f-keys.com",
   "group": "check"
  },
  {

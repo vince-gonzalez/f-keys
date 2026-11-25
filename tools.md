@@ -1,6 +1,6 @@
-# Tools — F-Keys
+# Software — F-Keys Creative
 
-> Things you sit in front of and use.
+> Desktop and web applications, and the packages behind them.
 
 Canonical: https://f-keys.com/tools.html
 

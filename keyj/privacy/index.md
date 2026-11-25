@@ -1,4 +1,4 @@
-# Key-J Privacy — F-Keys
+# Key-J Privacy — F-Keys Creative
 
 > Key-J collects nothing. What the global keyboard hook sees, what is kept, and how to verify it.
 

@@ -1,6 +1,6 @@
-# F-Keys Creative LLC — software studio, Punta Gorda, Florida
+# F-Keys Creative — what does it actually rest on?
 
-> A one-person software studio in Punta Gorda, Florida. Websites, website audits, publication-record checks and the tools behind them.
+> F-Keys Creative LLC, Punta Gorda, Florida, builds checks that trace a claim to its source: a home listing to the county record, a bibliography to the literature, a proof to the axioms it spends.
 
 Canonical: https://f-keys.com
 

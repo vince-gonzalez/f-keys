@@ -27,13 +27,13 @@ Documentation that carries consequences: compliance records in a safety-intensiv
 ## Selected Process & Quality Work
 
 - **State-adopted procedure.** Designed a formal request-documentation procedure at Giant Eagle's State Liquor Agency that Ohio later standardized statewide as its lottery system.
-- **Hub Certification.** First achieved in the history of COLO/432, FY25. A standard the hub had never previously met.
+- **Hub Certification.** First achieved in the history of a Columbus hub, FY25. A standard the hub had never previously met.
 - **LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally live as undocumented dock knowledge into a scored training simulator with logins, an institutional dashboard and a defined pilot program.
 - **Technical and professional content.** User manuals, SOPs, academic writing in mathematics, philosophy and history, and full websites and applications.
 
 ## Published Research
 
-61 deposited works · ORCID 0009-0005-3640-014X
+ORCID 0009-0005-3640-014X
 
 - Where Formal Libraries Spend Their Axioms
 - Which Constant Is Responsible?
@@ -52,11 +52,11 @@ Documentation that carries consequences: compliance records in a safety-intensiv
 
 ## Professional Experience
 
-**Federal Express Corporation** · 2020–present
+**National parcel carrier** · 2020–present
 
 - Operations Supervisor, Columbus OH then Punta Gorda FL. Supervise a sort operation of up to 30 people against a fixed dispatch time; own the written compliance record.
 - Promoted to Operations Supervisor in May 2023. New hire facilitator for the outbound sort.
-- Hub Certification first in the history of COLO/432, FY25. Bravo Zulu 2025, Purple Promise of the Month 2024.
+- Hub certification FY25, the first in the history of a Columbus hub. Company recognition awards in 2024 and 2025.
 
 ## Certifications & Recognition
 

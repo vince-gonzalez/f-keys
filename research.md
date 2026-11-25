@@ -1,6 +1,6 @@
-# Research — F-Keys
+# Research — F-Keys Creative
 
-> What a result actually rests on, measured from source, with a DOI on every claim.
+> Measurement tools and published results on what formal mathematics rests on, with the data and the code to reproduce them.
 
 Canonical: https://f-keys.com/research.html
 

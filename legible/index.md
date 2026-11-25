@@ -1,4 +1,4 @@
-# legible — F-Keys
+# legible — F-Keys Creative
 
 > Three gates a linter will not give you.
 

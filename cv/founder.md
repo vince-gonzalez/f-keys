@@ -34,7 +34,7 @@ poticas.com · 5best2buy.com · RemapWrap · TipStreams · DogeFundMe · PROMPT 
 
 ## Published Research
 
-61 deposited works · ORCID 0009-0005-3640-014X
+ORCID 0009-0005-3640-014X
 
 - Where Formal Libraries Spend Their Axioms
 - Which Constant Is Responsible?
@@ -53,11 +53,11 @@ poticas.com · 5best2buy.com · RemapWrap · TipStreams · DogeFundMe · PROMPT 
 
 ## Professional Experience
 
-**Federal Express Corporation** · 2020–present
+**National parcel carrier** · 2020–present
 
 - Operations Supervisor, Columbus OH then Punta Gorda FL. Supervise a sort operation of up to 30 people against a fixed dispatch time; own the written compliance record.
 - Promoted to Operations Supervisor in May 2023. New hire facilitator for the outbound sort.
-- Hub Certification first in the history of COLO/432, FY25. Bravo Zulu 2025, Purple Promise of the Month 2024.
+- Hub certification FY25, the first in the history of a Columbus hub. Company recognition awards in 2024 and 2025.
 
 ## Education
 

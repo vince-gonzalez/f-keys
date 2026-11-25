@@ -1,6 +1,6 @@
-# Sites — F-Keys
+# Websites — F-Keys Creative
 
-> Sites that stand on their own.
+> Standalone sites: a sourcing map for American food, the history of potica, tip pages for streamers, and browser mini-golf.
 
 Canonical: https://f-keys.com/sites.html
 

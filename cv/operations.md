@@ -12,25 +12,25 @@ f-keys.com · github.com/vince-gonzalez · orcid.org/0009-0005-3640-014X
 
 ## Profile
 
-Operations Supervisor at FedEx Ground since May 2023; Outbound, Sorter and Mentor from October 2020. Coaches entry-level teams and trainers. Wrote a request-documentation procedure adopted statewide in Ohio. Took a hub to a certification it had not previously held.
+Operations Supervisor at a national parcel carrier since May 2023; Outbound, Sorter and Mentor from October 2020. Coaches entry-level teams and trainers. Wrote a request-documentation procedure adopted statewide in Ohio. Took a hub to a certification it had not previously held.
 
 ## Professional Experience
 
-**Federal Express Corporation** · 2020–present
+**National parcel carrier** · 2020–present
 
 ### Operations Supervisor · Columbus, OH, then Punta Gorda, FL · 2020–present
 
 - Supervise a sort operation of up to 30 people against a fixed dispatch time; own the written compliance record.
 - Promoted to Operations Supervisor in May 2023. Lateral transfer to Punta Gorda in 2025.
 - New hire facilitator for the outbound sort. Coach new hires into leadership pipelines and develop trainers.
-- Manage linehaul, dispatch Express and Ground, and cover VSA duties as needed.
+- Manage linehaul and dispatch across both service networks, and cover other supervisory duties as needed.
 - Field package handler injuries by following protocol and providing post-injury guidance.
-- Hub Certification FY25, the first in the history of COLO/432. Bravo Zulu 2025 · Purple Promise of the Month 2024.
+- Hub certification FY25, the first in the history of a Columbus hub. Company recognition awards in 2024 and 2025.
 
 ## Selected Process & Quality Work
 
 - **State-adopted procedure.** Designed a formal request-documentation procedure at Giant Eagle's State Liquor Agency that Ohio later standardized statewide as its lottery system.
-- **Hub Certification.** First achieved in the history of COLO/432, FY25. A standard the hub had never previously met.
+- **Hub Certification.** First achieved in the history of a Columbus hub, FY25. A standard the hub had never previously met.
 - **LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally live as undocumented dock knowledge into a scored training simulator with logins, an institutional dashboard and a defined pilot program.
 - **Technical and professional content.** User manuals, SOPs, academic writing in mathematics, philosophy and history, and full websites and applications.
 

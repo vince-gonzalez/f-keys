@@ -1,4 +1,4 @@
-# Privacy — F-Keys
+# Privacy — F-Keys Creative
 
 > No advertising, no analytics, no cookies and no accounts. What the servers log anyway, and the one third-party request.
 

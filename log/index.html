@@ -3,60 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log — F-Keys</title>
+<title>Log — F-Keys Creative</title>
 <meta name="description" content="A working record of what gets built at F-Keys.">
 <link rel="canonical" href="https://f-keys.com/log/">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#e7e6e2">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:site_name" content="F-Keys">
-<meta property="og:title" content="Log — F-Keys">
+<meta property="og:site_name" content="F-Keys Creative">
+<meta property="og:title" content="Log — F-Keys Creative">
 <meta property="og:description" content="A working record of what gets built at F-Keys.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://f-keys.com/log/">
 <meta property="og:image" content="https://f-keys.com/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The F-Keys mark: a script f with KEYS set in seven-segment digits across it.">
+<meta property="og:image:alt" content="F-Keys Creative: software, hardware, and everything in between.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Log — F-Keys">
+<meta name="twitter:title" content="Log — F-Keys Creative">
 <meta name="twitter:description" content="A working record of what gets built at F-Keys.">
 <meta name="twitter:image" content="https://f-keys.com/assets/og.png">
-<link rel="stylesheet" href="/win98.css?v=ead22a99">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/site.css?v=68923daa">
 
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
-<div class="window raised">
-
-  <div class="titlebar">
-    <span class="t"><span>F-Keys\Log</span></span>
-    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+<div class="signal" aria-hidden="true"></div>
+<header class="masthead">
+  <div class="bar">
+    <a class="brand" href="/" aria-label="F-Keys Creative, home"><span class="wm">F<i>-</i>Keys</span><span class="wm2">Creative</span></a>
+    <nav class="primary" aria-label="Main"><a href="/directory/">Directory</a><a href="/about.html">Record</a><a href="/shop/">Shop</a><a href="/research.html">Research</a><a href="/contact.html">Contact</a><a class="cta" href="/intake/">Start a website</a></nav>
   </div>
-
-  <nav class="menubar"><a href="/"><u>F</u>ile</a><a href="/log/"><u>E</u>dit</a><a href="/status/"><u>V</u>iew</a><a href="/papers/"><u>I</u>nsert</a><a href="/writing/">F<u>o</u>rmat</a><a href="/about.html"><u>H</u>elp</a></nav>
-
-  <div class="toolbar groove">
-    <a class="tool" href="/">&#8592; Back</a>
-    <span class="tool off">Forward &#8594;</span>
-    <a class="tool" href="/">&#8593; Up</a>
-    <span class="sep"></span>
-    <a class="tool" href="/">Home</a>
-    <a class="tool" href="/search/">Find</a>
-    <a class="tool hide-xs" href="/status/">Status</a>
-    <a class="tool hide-xs" href="/log/">Log</a>
-  </div>
-
-
-  <div class="ruler sunken" aria-hidden="true"></div>
-
-  <div class="panes solo">
-    <main id="content" class="content sunken app-wordpad">
+</header>
+<nav class="trail" aria-label="You are here"><a href="/">F-Keys Creative</a><span class="sl" aria-hidden="true">/</span><span>Log</span></nav>
+<div class="frame solo">
+  <main id="content" class="content app-wordpad">
 <div class="doc"><h1>Log</h1><p class="sub">A working record. What got built, what broke, and what turned out to be true.</p><article class="entry"><time datetime="2026-10-11">11 October 2026</time>
       <p>Shipped <a href="https://coldhat.f-keys.com" rel="noopener">coldHat</a>: your working rules for an AI, worn in any chat by typing one line.</p>
-      <p>The rules live in a file called <code>hat.md</code> in a public GitHub repository named <code>coldhat</code>, so only the owner can change them. Typing <code>open sesame coldhat.f-keys.com/u/vince-gonzalez/frontier</code> into Claude or Grok makes the assistant fetch that file, answer with its hat code, and work by it for the rest of the chat. The code is a hash of the file, so the assistant can only quote it by actually reading the page. ChatGPT does the same while its browsing quota lasts. Gemini declines to fetch it, and that is written down rather than hidden.</p>
+      <p>The rules live in a file called <code>hat.md</code> in a public GitHub repository named <code>coldhat</code>, so only the owner can change them. Typing <code>open sesame coldhat.f-keys.com/u/vince-gonzalez/frontier</code> into an AI assistant that can browse makes it fetch that file, answer with its hat code, and work by it for the rest of the chat. The code is a hash of the file, so the assistant can only quote it by actually reading the page. Two of the assistants tested do this, a third while its browsing quota lasts, and a fourth declines to fetch it; that is written down rather than hidden.</p>
       <p>Facts in a hat carry a date and a shelf life. The server compares them with today, and the assistant asks before it uses one that has gone stale. A rule sheet that says &quot;no revenue yet&quot; is wrong the day the first grant lands, and nothing in an ordinary prompt tells the assistant so.</p>
       <p>It is also an MCP server, listed on the official MCP Registry and on Smithery as of today, so a client that supports connectors can wear a hat by name without a browser. The public hats and the measured results are <a href="https://github.com/vince-gonzalez/coldhat" rel="noopener">on GitHub</a>.</p></article>
 <article class="entry"><time datetime="2026-09-29">29 September 2026</time>
@@ -126,15 +113,28 @@
       <p>Rebuilt f-keys.com. The old page was one undifferentiated grid, and the version before it, on the old domain, had 23 cards of which 17 pointed at nothing. It&#x27;s six sections now — apps, games, tools, hardware, research, properties — and every card carries a status badge, so something in alpha can be visible and honest at the same time rather than hidden or oversold.</p>
       <p>Recovering Key-J turned into a rescue. Its Electron entry point was gone from the working folder and survived in exactly one zip, inside a directory named &quot;zip to sort&quot;. The entire desktop app depended on that file. It lives in a repository now, along with the browser build.</p>
       <p>Pointed the old company domain at f-keys.com. One redirect, no DNS records touched, email left intact.</p></article></div>
-    </main>
-  </div>
-
-  <div class="statusbar">
-    <span class="cell groove">14 entries</span>
-    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
-    <span class="cell groove">F-Keys</span>
-  </div>
-
+  </main>
 </div>
+<footer class="sitefoot">
+  <div class="in">
+    <nav aria-label="More of this site">
+      <a href="/work.html">Work</a>
+      <a href="/about.html">Record</a>
+      <a href="/cv/">CV</a>
+      <a href="/shop/">Shop</a>
+      <a href="/developers.html">Developers</a>
+      <a href="/Docs.html">Docs</a>
+      <a href="/stack/">Stack</a>
+      <a href="/search/">Find</a>
+      <a href="/log/">Log</a>
+      <a href="/status/">Status</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+    <p class="legal"><b>F-Keys Creative LLC</b>, a Florida limited liability
+    company, document L26000436157. Punta Gorda, Florida.
+    <!--email_off--><a href="mailto:hello@f-keys.com">hello@f-keys.com</a><!--/email_off--></p>
+  </div>
+</footer>
 </body>
 </html>

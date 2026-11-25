@@ -1,4 +1,4 @@
-# FunDoge — F-Keys
+# FunDoge — F-Keys Creative
 
 > The mini-golf game you build yourself.
 

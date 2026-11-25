@@ -13,12 +13,12 @@ worn in any chat by typing one line.
 
 The rules live in a file called `hat.md` in a public GitHub repository
 named `coldhat`, so only the owner can change them. Typing
-`open sesame coldhat.f-keys.com/u/vince-gonzalez/frontier` into Claude or
-Grok makes the assistant fetch that file, answer with its hat code, and work
-by it for the rest of the chat. The code is a hash of the file, so the
-assistant can only quote it by actually reading the page. ChatGPT does the
-same while its browsing quota lasts. Gemini declines to fetch it, and that is
-written down rather than hidden.
+`open sesame coldhat.f-keys.com/u/vince-gonzalez/frontier` into an AI
+assistant that can browse makes it fetch that file, answer with its hat code,
+and work by it for the rest of the chat. The code is a hash of the file, so the
+assistant can only quote it by actually reading the page. Two of the
+assistants tested do this, a third while its browsing quota lasts,
+and a fourth declines to fetch it; that is written down rather than hidden.
 
 Facts in a hat carry a date and a shelf life. The server compares them with
 today, and the assistant asks before it uses one that has gone stale. A

@@ -1,6 +1,6 @@
-# About — F-Keys
+# Record — F-Keys Creative
 
-> I'm Vince Gonzalez. I have thirty-four live products and fifty-six deposited works.
+> The record of Vincent Gonzalez and F-Keys Creative LLC: contributions merged into curl, Caddy and Metamath, published research with DOIs, and the business filings.
 
 Canonical: https://f-keys.com/about.html
 

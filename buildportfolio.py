@@ -55,7 +55,7 @@ P = [
      ["measurement", "open data"],
      "/gonzalgo/kernel-index/"),
     ("R-03", "Papers", "LIVE", "research",
-     f"{DEPOSITS} deposited works with DOIs: axiom provenance, dominator "
+     "Deposited works with DOIs: axiom provenance, dominator "
      "analysis of classical dependence, colour-vision methodology, formal "
      "epistemology. Full text, no paywall.",
      ["preprints", "open access"],
@@ -278,13 +278,6 @@ page = f"""<!DOCTYPE html>
   described.</p>
 </div>
 
-<div class="strip">
-  <div class="cell"><span class="n">{len(P)}</span><span class="l">listed</span></div>
-  <div class="cell"><span class="n">{live}</span><span class="l">live now</span></div>
-  <div class="cell"><span class="n">{DEPOSITS}</span><span class="l">deposited works</span></div>
-  <div class="cell"><span class="n">8</span><span class="l">distribution channels</span></div>
-  <div class="cell"><span class="n">0</span><span class="l">proofs resting on a sorry</span></div>
-</div>
 
 <main>
 {chr(10).join(secs)}

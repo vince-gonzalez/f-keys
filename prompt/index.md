@@ -1,4 +1,4 @@
-# PROMPT — F-Keys
+# PROMPT — F-Keys Creative
 
 > A multiplayer word game, inside Discord.
 

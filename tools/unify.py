@@ -77,16 +77,23 @@ def grab(pat, s, default=""):
 def convert(path, app, cat):
     raw = io.open(path, encoding="utf-8").read()
 
-    if 'class="window' in raw:
+    shelled = re.search(r'<main id="content" class="content[^"]*">\s*'
+                        r'<div class="doc">\n', raw)
+    if shelled:
         # Already converted, so re-emit it. This has to be repeatable: a
         # one-shot converter leaves these pages frozen, and the first
         # time the stylesheet changed they kept a hash describing a file
-        # nobody is served. shell() writes the content section in one
-        # exact shape, so it can be read back out of the same shape.
-        main = grab(r'<section class="content sunken[^"]*">\s*'
-                    r'<div class="doc">(.*?)\n</div>\s*</section>', raw)
+        # nobody is served. shell() writes the content in one exact
+        # shape - <main id="content" class="content ..."> holding one
+        # <div class="doc"> - in the Windows shell and in the 2026-11-25
+        # one alike, so it reads back out of either. Greedy to the single
+        # </main>, because the content holds nested </div>s of its own.
+        main = grab(r'<main id="content" class="content[^"]*">\s*'
+                    r'<div class="doc">\n(.*)\n</div>\s*</main>', raw)
         if not main:
             return None, "in the shell but its content could not be read back"
+    elif 'class="window' in raw:
+        return None, "an older shell shape this script no longer reads"
     else:
         main = grab(r"<main\b[^>]*>(.*?)</main>", raw)
         if not main:

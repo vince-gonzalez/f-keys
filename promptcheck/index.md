@@ -1,4 +1,4 @@
-# Prompt Check — F-Keys
+# Prompt Check — F-Keys Creative
 
 > I run your prompts against a live model and show you which rules break.
 

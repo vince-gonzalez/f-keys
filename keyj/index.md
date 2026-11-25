@@ -1,4 +1,4 @@
-# Key-J — F-Keys
+# Key-J — F-Keys Creative
 
 > Every keystroke plays a note, in any application.
 

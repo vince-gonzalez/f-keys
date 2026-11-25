@@ -64,12 +64,12 @@ FEDEX = [
         "Punta Gorda in 2025.",
         "New hire facilitator for the outbound sort. Coach new hires into "
         "leadership pipelines and develop trainers.",
-        "Manage linehaul, dispatch Express and Ground, and cover VSA duties as "
-        "needed.",
+        "Manage linehaul and dispatch across both service networks, and "
+        "cover other supervisory duties as needed.",
         "Field package handler injuries by following protocol and providing "
         "post-injury guidance.",
-        "Hub Certification FY25, the first in the history of COLO/432. Bravo "
-        "Zulu 2025 · Purple Promise of the Month 2024.",
+        "Hub certification FY25, the first in the history of a Columbus "
+        "hub. Company recognition awards in 2024 and 2025.",
     ]),
 ]
 
@@ -183,7 +183,8 @@ V = {
     "operations": dict(
         slug="operations",
         tag="Operations · quality and process",
-        profile="Operations Supervisor at FedEx Ground since May 2023; "
+        profile="Operations Supervisor at a national parcel carrier since "
+                "May 2023; "
                 "Outbound, Sorter and Mentor from October 2020. Coaches "
                 "entry-level teams and trainers. Wrote a "
                 "request-documentation procedure adopted statewide in Ohio. "
@@ -255,7 +256,7 @@ PROCESS = [
     "**State-adopted procedure.** Designed a formal request-documentation "
     "procedure at Giant Eagle's State Liquor Agency that Ohio later "
     "standardized statewide as its lottery system.",
-    "**Hub Certification.** First achieved in the history of COLO/432, FY25. A "
+    "**Hub Certification.** First achieved in the history of a Columbus hub, FY25. A "
     "standard the hub had never previously met.",
     "**LOCK IN (trailer-load.com).** Turned trailer-loading rules that normally "
     "live as undocumented dock knowledge into a scored training simulator with "
@@ -270,20 +271,20 @@ def md_section(key: str) -> list[str]:
     t = SECTION_TITLES[key]
     o = [f"## {t}", ""]
     if key == "fedex":
-        o.append("**Federal Express Corporation** · 2020–present")
+        o.append("**National parcel carrier** · 2020–present")
         o.append("")
         for head, bullets in FEDEX:
             o += [f"### {head}", ""] + [f"- {b}" for b in bullets] + [""]
     elif key == "fedex_brief":
-        o.append("**Federal Express Corporation** · 2020–present")
+        o.append("**National parcel carrier** · 2020–present")
         o.append("")
         o += ["- Operations Supervisor, Columbus OH then Punta Gorda FL. "
               "Supervise a sort operation of up to 30 people against a fixed "
               "dispatch time; own the written compliance record.",
               "- Promoted to Operations Supervisor in May 2023. New hire "
               "facilitator for the outbound sort.",
-              "- Hub Certification first in the history of COLO/432, FY25. "
-              "Bravo Zulu 2025, Purple Promise of the Month 2024.", ""]
+              "- Hub certification FY25, the first in the history of a "
+              "Columbus hub. Company recognition awards in 2024 and 2025.", ""]
     elif key == "process":
         o += [f"- {p}" for p in PROCESS] + [""]
     elif key == "earlier":
@@ -299,11 +300,10 @@ def md_section(key: str) -> list[str]:
             o += [f"- **{head}**: {body.split('.')[0]}."]
         o += ["- **Also live**: " + PRODUCTS[3][1].split(".")[0] + ".", ""]
     elif key == "research":
-        o += [f"{DEPOSITS} deposited works · ORCID 0009-0005-3640-014X · "
-              "all open access", ""]
+        o += ["ORCID 0009-0005-3640-014X · all open access", ""]
         o += [f"- {r}" for r in RESEARCH] + [""]
     elif key == "research_brief":
-        o += [f"{DEPOSITS} deposited works · ORCID 0009-0005-3640-014X", ""]
+        o += ["ORCID 0009-0005-3640-014X", ""]
         o += [f"- {r.split('. ')[0]}" for r in RESEARCH[:5]] + [""]
     elif key == "writing":
         o += [f"- {w}" for w in WRITING] + [""]

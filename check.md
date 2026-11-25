@@ -1,6 +1,6 @@
-# Check — F-Keys
+# Checks — F-Keys Creative
 
-> Does a thing match what it claims? Records, interfaces, prompts, colour vision and this site's own builds.
+> Tools that compare a thing to what it claims: publication records, interfaces, prompts, color vision, and this site's own builds.
 
 Canonical: https://f-keys.com/check.html
 

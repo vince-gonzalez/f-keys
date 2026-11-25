@@ -366,6 +366,66 @@
       "ink": "key-active",
       "on": "sel",
       "reason": "the lit state of a piano key; a fill, never text"
+    },
+    {
+      "ink": "line",
+      "on": "bg",
+      "reason": "a hairline border between surfaces, never text"
+    },
+    {
+      "ink": "line",
+      "on": "panel",
+      "reason": "as above"
+    },
+    {
+      "ink": "line",
+      "on": "panel-2",
+      "reason": "as above"
+    },
+    {
+      "ink": "line",
+      "on": "panel-3",
+      "reason": "as above"
+    },
+    {
+      "ink": "line-hi",
+      "on": "bg",
+      "reason": "as above"
+    },
+    {
+      "ink": "line-hi",
+      "on": "panel",
+      "reason": "as above"
+    },
+    {
+      "ink": "line-hi",
+      "on": "panel-2",
+      "reason": "as above"
+    },
+    {
+      "ink": "line-hi",
+      "on": "panel-3",
+      "reason": "as above"
+    },
+    {
+      "ink": "edge",
+      "on": "bg",
+      "reason": "the outline of a control (a key, the search box); never text. Measured 3.5:1 or more against the page, which clears the 3:1 non-text floor (WCAG 1.4.11)."
+    },
+    {
+      "ink": "edge",
+      "on": "panel",
+      "reason": "the outline of a control (a key, the search box); never text. Measured 3.5:1 or more against the page, which clears the 3:1 non-text floor (WCAG 1.4.11)."
+    },
+    {
+      "ink": "edge",
+      "on": "paper",
+      "reason": "the outline of a control (a key, the search box); never text. Measured 3.5:1 or more against the page, which clears the 3:1 non-text floor (WCAG 1.4.11)."
+    },
+    {
+      "ink": "edge",
+      "on": "card",
+      "reason": "the outline of a control (a key, the search box); never text. Measured 3.5:1 or more against the page, which clears the 3:1 non-text floor (WCAG 1.4.11)."
     }
   ]
 }

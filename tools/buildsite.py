@@ -47,7 +47,7 @@ def css_version():
     """
     import hashlib
     try:
-        raw = open(os.path.join(ROOT, "win98.css"), "rb").read()
+        raw = open(os.path.join(ROOT, "site.css"), "rb").read()
     except OSError:
         return "0"
     # Hash the bytes that SHIP, not the bytes on this disk. Git stores LF
@@ -89,7 +89,7 @@ CATALOGUE = [
      "Color-vision and acuity tests that run entirely in the browser.", "https://opticquiz.com"),
     ("qv", "QV", "tools", "Web app", READY,
      "Live ballots. Put a question to a room and watch the count move.", "/qv/"),
-    ("remapwrap", "RemapWrap", "tools", "Application", ALPHA,
+    ("remapwrap", "RemapWrap", "hardware", "Application", ALPHA,
      "Any smartphone becomes a programmable macro pad. No app, no dongle.", "/remapwrap/"),
 
     ("trailer-load", "Trailer Load", "training", "Simulator", READY,
@@ -111,13 +111,13 @@ CATALOGUE = [
      "Grammar scout for Wikipedia. Finds a first edit nobody will revert.", "/wikipolish/"),
     ("leadseer", "LeadSeer", "tools", "Desktop tool", SETUP,
      "Finds the local businesses that still have no website.", "/leadseer/"),
-    ("plumhud", "PlumHUD", "tools", "Python package", PIP,
+    ("plumhud", "PlumHUD", "hardware", "Python package", PIP,
      "Miner fleet monitor. Overlay HUD, alerts, and local history.", "/plumhud/"),
 
     # 2026-10-11. Live at its own subdomain, listed on the MCP Registry and
     # Smithery the same day; the page is the product, so the row links out.
     ("coldhat", "coldHat", "tools", "Web tool", READY,
-     "Your AI rules on any chat. Type one line into Claude, ChatGPT or Grok and it works your way.", "https://coldhat.f-keys.com"),
+     "Your AI rules on any chat. Type one line into an AI assistant and it works your way.", "https://coldhat.f-keys.com"),
     ("promptcheck", "Prompt Check", "check", "Service", SETUP,
      "Send a system prompt and it is run against a live model: which rules hold, which break, and the rewrite that holds.", "/promptcheck/"),
     ("securitycheck", "Security Check", "check", "Service", SETUP,
@@ -153,9 +153,9 @@ CATALOGUE = [
     ("keyjockey", "keyjockey", "tools", "npm package", NPM,
      "Guitar tablature to notes: eight tunings, capo offsets, MIDI and frequency.", "/keyjockey/"),
 
-    ("streamsniper", "Stream Sniper", "tools", "Appliance", SETUP,
+    ("streamsniper", "Stream Sniper", "hardware", "Appliance", SETUP,
      "A spare mini PC shows a channel fullscreen the moment it goes live.", "/streamsniper/"),
-    ("moonbeam", "Moonbeam", "tools", "Python package", PIP,
+    ("moonbeam", "Moonbeam", "hardware", "Python package", PIP,
      "Finds the NerdMiners on your network and reads their vitals.", "/moonbeam/"),
 
     ("gonzalgo", "gonzalgo", "research", "Research tool", PUBLISHED,
@@ -182,17 +182,26 @@ CATALOGUE = [
 ]
 
 CATEGORIES = [
-    ("check", "Check",
-     "Does a thing match what it claims? Records, interfaces, prompts, "
-     "colour vision and this site's own builds."),
+    ("tools", "Software",
+     "Desktop and web applications, and the packages behind them."),
+    ("hardware", "Hardware",
+     "Software for physical devices: a mini PC that becomes an appliance, "
+     "a phone that becomes a macro pad, and monitors for a fleet of miners."),
+    ("check", "Checks",
+     "Tools that compare a thing to what it claims: publication records, "
+     "interfaces, prompts, color vision, and this site's own builds."),
     ("research", "Research",
-     "What a result actually rests on, measured from source, with a DOI "
-     "on every claim."),
-    ("tools", "Tools", "Things you sit in front of and use."),
+     "Measurement tools and published results on what formal mathematics "
+     "rests on, with the data and the code to reproduce them."),
     ("training", "Training",
-     "Built to teach a job, and licensed to the people who teach it."),
-    ("play", "Play", "Things you play."),
-    ("sites", "Sites", "Sites that stand on their own."),
+     "Warehouse load training built as a simulator, licensed to the "
+     "institutions that teach it."),
+    ("play", "Games",
+     "Fortnite islands, Discord activities and a real-time strategy game "
+     "in development."),
+    ("sites", "Websites",
+     "Standalone sites: a sourcing map for American food, the history of "
+     "potica, tip pages for streamers, and browser mini-golf."),
 ]
 
 
@@ -254,7 +263,7 @@ PAGES = {
   herometa="<b>Service</b> &middot; your prompt is read and discarded, never "
            "stored &middot; graded per file, per rule &middot; report returned to you",
   steps=[("Send a prompt, a folder, or a repo",
-          "A system prompt, a CLAUDE.md, an AGENTS.md, or a whole repository of "
+          "A system prompt, an agent rules file, or a whole repository of "
           "agent rules. One file or a library."),
          ("Every rule gets probed",
           "One message per rule, written to break that rule, sent to a live "
@@ -283,8 +292,8 @@ PAGES = {
         "name it and I target that model so the result reflects where it "
         "will actually be deployed."),
        ("Can you check a whole repository?",
-        "Yes. A single prompt, or a folder of system prompts, CLAUDE.md and "
-        "agent rule files, graded into one report."),
+        "Yes. A single prompt, or a folder of system prompts and agent "
+        "rule files, graded into one report."),
        ("What is not claimed?",
         "One probe per rule is a screen, not a rate: it shows a rule can "
         "break, not how often. The report carries every probe and reply so "
@@ -2683,34 +2692,72 @@ def counted(text):
 
 
 ABOUT_DOC = """
-<div class="doc"><h1>About</h1>
-<p class="sub">F-Keys Creative LLC.</p>
+<div class="doc"><h1>Record</h1>
+<p class="sub">Vincent Gonzalez and F-Keys Creative LLC. What has been merged,
+published and filed, each with a link that lets you check it.</p>
+
+<h2>Merged into other projects</h2>
 <table class="facts">
-<tr><th>Entity</th><td>F-Keys Creative LLC (Florida)</td></tr>
-<tr><th>Trading as</th><td>F-Keys</td></tr>
-<tr><th>Based in</th><td>Punta Gorda, Florida</td></tr>
-<tr><th>Live products</th><td>%%LIVE%%</td></tr>
-<tr><th>ORCID</th><td><a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">0009-0005-3640-014X</a></td></tr>
-<tr><th>Source</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
-<tr><th>Contact</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a></td></tr>
+<tr><th>Caddy</th><td>Alt text for the home-page and footer images, and a language
+    attribute on the home page, merged into the Caddy web server's website,
+    2026-11-04.
+    <a href="https://github.com/caddyserver/website/pull/589" rel="noopener">#589</a>,
+    <a href="https://github.com/caddyserver/website/pull/590" rel="noopener">#590</a></td></tr>
+<tr><th>curl</th><td>Alt text for three home-page images, merged 2026-11-02.
+    <a href="https://github.com/curl/curl-www/pull/669" rel="noopener">curl/curl-www #669</a></td></tr>
+<tr><th>metamath-exe</th><td>A memory-layout fix in the reference Metamath proof
+    verifier, merged 2026-10-24.
+    <a href="https://github.com/metamath/metamath-exe/pull/203" rel="noopener">#203</a></td></tr>
+<tr><th>set.mm</th><td>Proofs that remove avoidable uses of the axiom of choice from
+    the main Metamath library, merged August and September 2026.
+    <a href="https://github.com/metamath/set.mm/pulls?q=is%3Apr+author%3Avince-gonzalez+is%3Amerged" rel="noopener">The pull requests</a></td></tr>
 </table>
-<h2>Scope</h2>
-<p>Built and maintained end to end: architecture, both ends, database,
-deployment, documentation.</p>
-<h2>Recurring subject</h2>
-<p>Provenance &mdash; what a result rests on. gonzalgo reads a compiled Lean 4 or
-Metamath library and reports which axioms a theorem spends rather than inherits.
-OpticQuiz runs one color-vision engine across every channel it ships to, with
-the JavaScript and Python implementations verified identical to six decimal
-places, and publishes the calibration limits that bound its own results.</p>
-<h2>Subjects</h2>
-<p>Accessibility &middot; hardware interfaces &middot; creator tools &middot;
-gaming &middot; formal methods &middot; the open web.</p>
+
+<h2>Published research</h2>
+<table class="facts">
+<tr><th>2026-08-28</th><td>Interface Assumptions Are Not Mathematical Assumptions: An Axiom
+    Census of Five Libraries Across Four Proof Systems.
+    <a href="https://doi.org/10.5281/zenodo.22148932" rel="noopener">10.5281/zenodo.22148932</a></td></tr>
+<tr><th>2026-08-24</th><td>Filtering and Generating: Two Roles for Method-Specification in
+    Epistemic-Possibility Anti-Luck Conditions.
+    <a href="https://doi.org/10.5281/zenodo.22072131" rel="noopener">10.5281/zenodo.22072131</a></td></tr>
+<tr><th>2026-08-10</th><td>Where Formal Libraries Spend Their Axioms: A Cross-Foundation
+    Measurement, and an Avoidable Classical Dependency in Lean's omega.
+    <a href="https://doi.org/10.5281/zenodo.21769846" rel="noopener">10.5281/zenodo.21769846</a></td></tr>
+<tr><th>2026-07-11</th><td>A Procedural Method for Generating Pseudoisochromatic Plates in the
+    Browser, and the Calibration Limits of Screen-Based Colour-Vision Screening.
+    <a href="https://doi.org/10.5281/zenodo.21310578" rel="noopener">10.5281/zenodo.21310578</a></td></tr>
+<tr><th>2026-05-03</th><td>Competitive Context as a Jailbreak Accelerant: Inter-Model Rivalry as
+    a Novel Adversarial Vector in Large Language Model Safety.
+    <a href="https://doi.org/10.5281/zenodo.20013336" rel="noopener">10.5281/zenodo.20013336</a></td></tr>
+<tr><th>OEIS</th><td>A398262: closed walks on the 4-cube that return to their start only on
+    the last step. <a href="https://oeis.org/A398262" rel="noopener">oeis.org/A398262</a></td></tr>
+</table>
+<p class="sub">Every paper is deposited on Zenodo with a DOI, and the full
+list is on the <a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">ORCID
+record</a>.</p>
+
+<h2>The business</h2>
+<table class="facts">
+<tr><th>Entity</th><td>F-Keys Creative LLC, a Florida limited liability company, document
+    L26000436157, filed 2026-08-18</td></tr>
+<tr><th>Federal</th><td>Registered in SAM.gov since 2026-10-13. UEI VX5TBUJSHAS5, CAGE 25Y16</td></tr>
+<tr><th>Based in</th><td>Punta Gorda, Florida</td></tr>
+<tr><th>Source</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
+</table>
+
+<h2>The person</h2>
+<table class="facts">
+<tr><th>Education</th><td>B.A. in Philosophy (Pre-Law), minor in History, Ohio University</td></tr>
+<tr><th>ORCID</th><td><a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">0009-0005-3640-014X</a></td></tr>
+<tr><th>Work history</th><td><a href="/cv/">Four CVs</a>: founder, operations, research and writing</td></tr>
+<tr><th>Contact</th><td><!--email_off--><a href="mailto:hello@f-keys.com">hello@f-keys.com</a><!--/email_off--></td></tr>
+</table>
 <div class="btnrow">
-  <a class="btn default" href="/papers/">Papers</a>
+  <a class="btn default" href="/work.html">Open the work</a>
   <a class="btn" href="/cv/">CV</a>
-  <a class="btn" href="/log/">Log</a>
   <a class="btn" href="/status/">Status</a>
+  <a class="btn" href="/log/">Log</a>
 </div>
 </div>
 """
@@ -3033,89 +3080,120 @@ charge you.</td></tr>
 """
 
 HOME_DOC = """
-<div class="doc" style="padding-bottom:6px">
-<h1>F-Keys Creative LLC</h1>
-<p class="sub">Software, and the tools that check it. Punta Gorda, Florida.</p>
+<div class="heroband">
+<p class="eyebrow">F-Keys Creative LLC &middot; Punta Gorda, Florida</p>
+<h1 class="big"><span>Software.</span><span class="g">Hardware.</span><span class="v">Everything in between.</span></h1>
+<p class="lede">Built, shipped and kept running by Vincent Gonzalez: websites for
+local businesses, desktop and web applications, appliances made from spare
+hardware, games, and the measurement tools that check all of it. Each line of
+the record below links to where it can be checked.</p>
+<div class="ctas">
+  <a class="btn default" href="/intake/">Start a website</a>
+  <a class="btn" href="/about.html">Read the record</a>
+  <a class="btn" href="/work.html">Open the work</a>
+</div>
 </div>
 
-<div class="doc">
-<p><b>A one-person software studio in Punta Gorda, Florida.</b> It builds
-and runs websites for small businesses, and it builds tools that check a
-claim against the record: whether a home's listing matches the county's,
-whether a published work really exists where it says it does, whether an
-interface still matches the specification it published.</p>
+<section aria-labelledby="h-built">
+<div class="sh"><h2 id="h-built">What has been built</h2><span class="k">Index</span></div>
+<div class="grid3">
+  <a class="tile" href="/tools.html"><span class="tk">Software</span>
+    <h3>Applications and packages</h3>
+    <p>Key-J turns every keystroke into a note in any application. Pixel Staff
+    composes 8-bit music. QV runs live ballots for a room. The Python and npm
+    packages behind them install from the public registries.</p>
+    <span class="go">Software &rarr;</span></a>
+  <a class="tile" href="/hardware.html"><span class="tk">Hardware</span>
+    <h3>Devices that do one job</h3>
+    <p>Stream Sniper turns a spare mini PC into a screen that shows a channel the
+    moment it goes live. RemapWrap turns a phone into a macro pad. Moonbeam and
+    PlumHUD watch a fleet of miners.</p>
+    <span class="go">Hardware &rarr;</span></a>
+  <a class="tile" href="/work.html"><span class="tk">Everything in between</span>
+    <h3>Sites, games, training, research</h3>
+    <p>Standalone websites, Fortnite islands and Discord games, a warehouse
+    training simulator licensed to institutions, and the tools that measure what
+    formal mathematics rests on.</p>
+    <span class="go">All of the work &rarr;</span></a>
+</div>
+</section>
 
-<h2>What's new</h2>
-<p class="sub">The latest work. Each has its own page, its own price and its
-own terms, and nothing is charged until you say yes. The full list is in the
-<a href="/shop/">shop</a>.</p>
-<table class="facts">
-<tr><th>A website<br>$100, then $75 a month</th>
-    <td>Built, and then kept running. One price, no sales call, and
-    nothing is charged until you say yes to a written quote. Cancel any
-    time. <a href="/intake/">Start one</a>.</td></tr>
-<tr><th>A publication record, checked<br>$1.99 and $9.99</th>
-    <td><b>Authorecon.</b> Paste an ORCID and find out what the record
-    says, where the work actually lives, and what disagrees between them.
-    The first pass runs free in your own browser, and the requests go to
-    the archives rather than through this site.
-    <a href="https://authorecon.f-keys.com" rel="noopener">Run it</a>.</td></tr>
-<tr><th>A property record, checked<br>opening soon</th>
-    <td><b>LOTFILE.</b> A home's listing checked against the county record
-    before you buy: permits, flood zone, the full sales history and what
-    is owed against it &mdash; every line sourced and dated.</td></tr>
-</table>
-<p class="sub">Also for sale, all on the <a href="/shop/">shop</a>: a
-<a href="/audit/">website audit</a> ($50), a color palette check ($25),
-Epistemend reference checks ($5/$25), and
-<a href="https://www.trailer-load.com/" rel="noopener">Trailer&nbsp;Load</a>
-warehouse training. Prompt&nbsp;Check and Security&nbsp;Check are open for early
-orders.</p>
+<section aria-labelledby="h-record">
+<div class="sh"><h2 id="h-record">Merged, published, filed</h2><a class="k" href="/about.html">The full record &rarr;</a></div>
+<ul class="ledger">
+  <li><span class="when">2026-11-04</span><span class="what"><b>Caddy.</b> Two
+    accessibility fixes merged into the Caddy web server's website: alt text for
+    the home-page images and a language attribute on the page.
+    <span><a href="https://github.com/caddyserver/website/pull/589" rel="noopener">#589</a> &middot;
+    <a href="https://github.com/caddyserver/website/pull/590" rel="noopener">#590</a></span></span></li>
+  <li><span class="when">2026-11-02</span><span class="what"><b>curl.</b> Alt text for
+    three images on curl's home page, merged.
+    <span><a href="https://github.com/curl/curl-www/pull/669" rel="noopener">curl/curl-www #669</a></span></span></li>
+  <li><span class="when">2026-10-24</span><span class="what"><b>Metamath.</b> A memory-layout
+    fix merged into metamath-exe, the reference Metamath proof verifier.
+    <span><a href="https://github.com/metamath/metamath-exe/pull/203" rel="noopener">metamath/metamath-exe #203</a></span></span></li>
+  <li><span class="when">2026-10-13</span><span class="what"><b>Federal registration.</b>
+    F-Keys Creative LLC registered in SAM.gov: UEI VX5TBUJSHAS5, CAGE 25Y16.
+    <span><a href="https://sam.gov/search/?index=ei&amp;keywords=VX5TBUJSHAS5" rel="noopener">Look it up on SAM.gov</a></span></span></li>
+  <li><span class="when">Aug&ndash;Sep 2026</span><span class="what"><b>set.mm.</b> Proofs
+    merged into set.mm, the main Metamath library, that remove avoidable uses of
+    the axiom of choice.
+    <span><a href="https://github.com/metamath/set.mm/pulls?q=is%3Apr+author%3Avince-gonzalez+is%3Amerged" rel="noopener">The merged pull requests</a></span></span></li>
+  <li><span class="when">2026-08-18</span><span class="what"><b>F-Keys Creative LLC</b>
+    filed with the Florida Division of Corporations, document L26000436157.
+    <span><a href="https://search.sunbiz.org/Inquiry/CorporationSearch/ByName" rel="noopener">Look it up on Sunbiz</a></span></span></li>
+  <li><span class="when">OEIS</span><span class="what"><b>A398262.</b> A published
+    integer sequence: the number of closed walks on the 4-cube that return to
+    their start only on the last step.
+    <span><a href="https://oeis.org/A398262" rel="noopener">oeis.org/A398262</a></span></span></li>
+</ul>
+</section>
 
-<h2>Who you are dealing with</h2>
+<section aria-labelledby="h-buy">
+<div class="sh"><h2 id="h-buy">What you can buy</h2><a class="k" href="/shop/">The shop &rarr;</a></div>
+<div class="grid3">
+  <a class="tile" href="/intake/"><span class="tk">Websites</span>
+    <h3>$100, then $75 a month</h3>
+    <p>A full site, built and then kept running. One page instead is $40, then
+    $20 a month. A written quote first, and nothing is charged until you say yes.</p>
+    <span class="go">Start one &rarr;</span></a>
+  <a class="tile" href="/audit/"><span class="tk">Website audit</span>
+    <h3>$50, in three business days</h3>
+    <p>A written report on what is broken on your site, what it costs you, and
+    what to fix first. No login and no access to your hosting.</p>
+    <span class="go">Order an audit &rarr;</span></a>
+  <a class="tile" href="https://authorecon.f-keys.com" rel="noopener"><span class="tk">Publication record</span>
+    <h3>$1.99 and $9.99</h3>
+    <p>Authorecon checks an ORCID record against every place the work actually
+    lives. The first pass runs free in your own browser.</p>
+    <span class="go">Run it &rarr;</span></a>
+</div>
+</section>
+
+<section aria-labelledby="h-who">
+<div class="sh"><h2 id="h-who">Who you are dealing with</h2><a class="k" href="/contact.html">Contact &rarr;</a></div>
+<div class="idcard">
 <table class="facts">
-<tr><th>Entity</th><td>F-Keys Creative LLC, a Florida limited liability
-    company. Document L26000436157, filed 18 August 2026, status
-    active.</td></tr>
+<tr><th>Business</th><td>F-Keys Creative LLC, a Florida limited liability company,
+    document L26000436157. Registered in SAM.gov, UEI VX5TBUJSHAS5.</td></tr>
+<tr><th>Principal</th><td>Vincent Gonzalez. B.A. in Philosophy (Pre-Law), Ohio University.
+    <a href="https://orcid.org/0009-0005-3640-014X" rel="noopener">ORCID 0009-0005-3640-014X</a>
+    &middot; <a href="/cv/">CV</a></td></tr>
 <tr><th>Based in</th><td>Punta Gorda, Florida, United States</td></tr>
-<tr><th>Email</th><td><a href="mailto:hello@f-keys.com">hello@f-keys.com</a>.
-    One reader, no queue and no ticket number. Replies take days,
-    sometimes a week. There is no phone line.</td></tr>
-<tr><th>Source code</th><td><a href="https://github.com/vince-gonzalez"
-    rel="noopener">github.com/vince-gonzalez</a></td></tr>
+<tr><th>Source code</th><td><a href="https://github.com/vince-gonzalez" rel="noopener">github.com/vince-gonzalez</a></td></tr>
+<tr><th>Email</th><td><!--email_off--><a href="mailto:hello@f-keys.com">hello@f-keys.com</a><!--/email_off--></td></tr>
 </table>
-
-<h2>How this site is checked</h2>
-<p>The checks that are for sale above are the ones this site runs on
-itself before every build: every text color computed against its
-background to the WCAG 4.5:1 floor, a minimum type size, and an
-accessibility audit over the WCAG 2.2 A and AA criteria that can be
-decided from the page. Every page here passes all of them.
-<a href="/status/">Status</a> reports what is running and what it
-measured, from the same file the site is built from.</p>
-
-<h2>The rest of the work</h2>
-<p>Applications, Python and npm packages, datasets, measurement tools,
-games and published research are in the file manager.
-<a href="/work.html">Open the work</a>.</p>
 </div>
+</section>
 """
 
 WORK_DOC = """
 <div class="doc" style="padding-bottom:6px">
 <h1>Work</h1>
-<p class="sub">Everything F-Keys has built and still runs.</p>
-</div>
-
-<div class="doc">
-<p>%%SHELVES%% sections, sorted the way a file manager sorts them. Each
-item has its own page, and that page carries its license, its terms and
-its price. Nothing is assumed to match the last one.</p>
-
-<p class="sub">The interface is deliberate. It is a Windows&nbsp;95 file
-manager because a catalog is a list of files and folders and that is the
-honest shape for it, not because the site is old. Everything on it was
-built this year.</p>
+<p class="sub">Everything F-Keys Creative has built and still runs.</p>
+<p>The work is filed in %%SHELVES%% sections, sorted by what it is. Each item
+has its own page, and that page carries its license, its terms and its
+price.</p>
 </div>
 """
 
@@ -3424,7 +3502,7 @@ Action is three lines of workflow and fails the build when a proof rests on
 something unfinished.</p>
 
 <h2>Packages</h2>
-<p>Sixteen on PyPI. Every one installs from the public index, with no account
+<p>On PyPI. Every one installs from the public index, with no account
 and no registration step.</p>
 <table class="facts">
 <tr><th>gonzalgo</th><td><code>pip install gonzalgo</code>. Axiom
@@ -3459,7 +3537,7 @@ monitor.</td></tr>
 <tr><th>moonbeam-miner</th><td><code>pip install moonbeam-miner</code> &mdash;
 NerdMiner discovery and vitals.</td></tr>
 </table>
-<p>Nineteen on npm. Most of them are the OpticQuiz color engine published one
+<p>On npm. Most of them are the OpticQuiz color engine published one
 name per deficiency, so somebody searching for <code>protanopia</code> finds
 it; these are the entry points.</p>
 <table class="facts">
@@ -3575,11 +3653,11 @@ specification.</p>
 # cannot be added without the question being answered.
 FOLDER, DOCUMENT = "folder", "document"
 
-EXTRA_NODES = [("/intake/", "Websites", FOLDER),
+EXTRA_NODES = [("/intake/", "Start a website", FOLDER),
                ("/audit/", "Site audit", FOLDER),
                ("/work.html", "Work", FOLDER),
                ("/status/", "Status", FOLDER),
-               ("/about.html", "About", DOCUMENT),
+               ("/about.html", "Record", DOCUMENT),
                ("/contact.html", "Contact", DOCUMENT)]
 
 # A folder opens in Explorer and a document opens in WordPad. One lookup,
@@ -3857,15 +3935,15 @@ def organization():
         "@context": "https://schema.org",
         "@type": "Organization",
         "@id": SITE + "/#organization",
-        "name": "F-Keys",
+        "name": "F-Keys Creative",
         "legalName": LEGAL_NAME,
         "alternateName": "F-Keys Creative LLC",
         "url": SITE,
         "logo": SITE + "/assets/fkeys-logo.png",
         "image": OG_IMAGE,
-        "description": "Hardware, software and internet products I build and "
-                       "keep running. Apps, games, tools, "
-                       "hardware and research.",
+        "description": "Software, hardware, and everything in between, built "
+                       "and kept running by Vincent Gonzalez in Punta Gorda, "
+                       "Florida.",
         "email": EMAIL,
         "founder": {
             "@type": "Person",
@@ -4114,7 +4192,7 @@ def tree(active_cat=None, active_slug=None, in_work=False):
     The six catalogue sections live inside Work and open when you are
     actually in one. That is what Explorer does, and it is the difference
     between a visitor seeing seven things and seeing twenty-one."""
-    out = ['<ul>', '<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys</a>',
+    out = ['<ul>', '<li><a class="root" href="/"><span class="ic">&#128421;</span>F-Keys Creative</a>',
            '<ul class="kids">']
     for href, label, kind in EXTRA_NODES:
         here = (href == "/work.html" and (in_work or active_cat))
@@ -4172,6 +4250,7 @@ APPS = {
                ("View", 0, "/status/"), ("Insert", 0, "/papers/"),
                ("Format", 1, "/writing/"), ("Help", 0, "/about.html")],
         address=False, tree=False, ruler=True, tabs=None),
+    "home": dict(menus=[], address=False, tree=False, ruler=False, tabs=None),
     "excel": dict(
         menus=[("File", 0, "/"), ("Edit", 0, "/log/"),
                ("View", 0, "/status/"), ("Insert", 0, "/papers/"),
@@ -4193,60 +4272,92 @@ APPS = {
 # body is a link that jumps to it. The .content class is what win98.css
 # styles - checked, all four selectors are class-based and none says
 # section.content - so changing the element changes no layout.
+def trail(path_label):
+    """The path a page sits at, as links. path_label is the old address-bar
+    string, "F-Keys\\Work\\Tools"; each step that has a page of its own
+    becomes a link to it, and the root is the company's full name."""
+    parts = [p for p in path_label.split("\\") if p]
+    if not parts:
+        return ""
+    known = {"work": "/work.html", "shop": "/shop/", "websites": "/intake/",
+             "papers": "/papers/", "cv": "/cv/", "gonzalgo": "/gonzalgo/",
+             "writing": "/writing/", "status": "/status/"}
+    known.update({lab.lower(): f"/{cid}.html" for cid, lab, _ in CATEGORIES})
+    out = ['<a href="/">F-Keys Creative</a>']
+    for i, p in enumerate(parts[1:], 1):
+        last = i == len(parts) - 1
+        href = known.get(p.lower())
+        if href and not last:
+            out.append(f'<a href="{esc(href)}">{esc(p)}</a>')
+        else:
+            out.append(f'<span>{esc(p)}</span>')
+    return '<span class="sl" aria-hidden="true">/</span>'.join(out)
+
+
+# The masthead's destinations. Five, because a buyer reads five; the rest
+# of the site is one click further, in the footer and on the Work page.
+PRIMARY = [("/directory/", "Directory"), ("/about.html", "Record"),
+           ("/shop/", "Shop"), ("/research.html", "Research"),
+           ("/contact.html", "Contact")]
+
+# Cloudflare rewrites a plain mailto into a script-decoded placeholder, and
+# a reader without scripts sees "[email protected]" where the only contact
+# is. These comments tell it to leave the address alone.
+MAILTO = ('<!--email_off--><a href="mailto:hello@f-keys.com">'
+          'hello@f-keys.com</a><!--/email_off-->')
+
+
+def full_name(title):
+    """Every tab title ends in the company's whole name, never the
+    bare short form."""
+    if title.endswith(" — F-Keys"):
+        return title[:-len("F-Keys")] + "F-Keys Creative"
+    return title
+
+
 def shell(title, path_label, body, count_label, active_cat=None,
           active_slug=None, description="", canonical="", ld=None,
           noindex=False, app="explorer", in_work=False):
     cfg = APPS.get(app) or APPS["explorer"]
-    up = "/" if active_cat is None else f"/{active_cat}.html"
+    title = full_name(title)
     ld_block = jsonld(ld) if ld else ""
     robots = "noindex, follow" if noindex else "index, follow"
     og_url = canonical or SITE
     og_image = product_og(active_slug)
     og_alt = ("The {} mark.".format(title.split(" — ")[0])
               if og_image != OG_IMAGE else
-              "The F-Keys mark: a script f with KEYS set in seven-segment "
-              "digits across it.")
+              "F-Keys Creative: software, hardware, and everything in between.")
 
-    menubar = "".join(
-        '<a href="{}">{}<u>{}</u>{}</a>'.format(
-            esc(href), esc(label[:i]), esc(label[i]), esc(label[i + 1:]))
-        for label, i, href in cfg["menus"])
+    here = canonical.replace(SITE, "") if canonical else ""
+    links = []
+    for h, t in PRIMARY:
+        on = here == h or (h == "/directory/" and bool(in_work or active_cat))
+        attrs = ' class="on" aria-current="page"' if on else ""
+        if h.startswith("http"):
+            attrs += ' rel="noopener"'
+        links.append(f'<a href="{esc(h)}"{attrs}>{esc(t)}</a>')
+    nav = "".join(links)
 
-    addressbar = ("""
-  <div class="addressbar">
-    <span class="lbl">Address</span>
-    <span class="path sunken"><span>&#128193; %s</span></span>
-  </div>
-""" % esc(path_label)) if cfg["address"] else ""
-
-    # A WordPad ruler is not ornament: it tells the reader the measure is
-    # fixed, which is the whole claim a document window makes.
-    ruler = ("""
-  <div class="ruler sunken" aria-hidden="true"></div>
-""" if cfg["ruler"] else "")
-
-    tabs = ""
-    if cfg["tabs"]:
-        cells = "".join(
-            f'<span class="tab{" on" if on else ""}">{esc(n)}</span>'
-            for n, on in cfg["tabs"])
-        tabs = f'\n  <div class="sheettabs">{cells}</div>\n'
+    path = trail(path_label)
+    trail_block = (f'<nav class="trail" aria-label="You are here">{path}</nav>'
+                   if path and app != "home" else "")
 
     if cfg["tree"]:
-        panes = f"""  <div class="panes">
-    <aside class="tree sunken">
+        frame = f"""<div class="frame">
+  <aside class="tree" aria-label="Index of the work">
+    <p class="rail-h">Index</p>
 {tree(active_cat, active_slug, in_work)}
-    </aside>
-    <main id="content" class="content sunken">
+  </aside>
+  <main id="content" class="content app-{esc(app)}">
 {body}
-    </main>
-  </div>"""
+  </main>
+</div>"""
     else:
-        panes = f"""  <div class="panes solo">
-    <main id="content" class="content sunken app-{esc(app)}">
+        frame = f"""<div class="frame solo">
+  <main id="content" class="content app-{esc(app)}{" home" if app == "home" else ""}">
 {body}
-    </main>
-  </div>"""
+  </main>
+</div>"""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -4257,11 +4368,12 @@ def shell(title, path_label, body, count_label, active_cat=None,
 <meta name="description" content="{esc(description)}">
 {f'<link rel="canonical" href="{esc(canonical)}">' if canonical else ''}
 <meta name="robots" content="{robots}">
+<meta name="theme-color" content="#e7e6e2">
 <meta name="llms-txt" content="https://f-keys.com/llms.txt">
 <meta name="ai" content="allow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:site_name" content="F-Keys">
+<meta property="og:site_name" content="F-Keys Creative">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:type" content="website">
@@ -4274,61 +4386,42 @@ def shell(title, path_label, body, count_label, active_cat=None,
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(description)}">
 <meta name="twitter:image" content="{esc(og_image)}">
-<link rel="stylesheet" href="/win98.css?v={CSS_V}">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/site.css?v={CSS_V}">
 {ld_block}
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
-<div class="window raised">
-
-  <div class="titlebar">
-    <span class="t"><span>{esc(path_label)}</span></span>
-    <span class="tbtns"><span class="tbtn">_</span><span class="tbtn">&#9723;</span><span class="tbtn">&#10005;</span></span>
+<div class="signal" aria-hidden="true"></div>
+<header class="masthead">
+  <div class="bar">
+    <a class="brand" href="/" aria-label="F-Keys Creative, home"><span class="wm">F<i>-</i>Keys</span><span class="wm2">Creative</span></a>
+    <nav class="primary" aria-label="Main">{nav}<a class="cta" href="/intake/">Start a website</a></nav>
   </div>
-
-  <nav class="menubar">{menubar}</nav>
-
-  <div class="toolbar groove">
-    <a class="tool" href="{esc(up)}">&#8592; Back</a>
-    <span class="tool off">Forward &#8594;</span>
-    <a class="tool" href="{esc(up)}">&#8593; Up</a>
-    <span class="sep"></span>
-    <a class="tool" href="/">Home</a>
-    <a class="tool" href="/search/">Find</a>
-    <a class="tool hide-xs" href="/status/">Status</a>
-    <a class="tool hide-xs" href="/log/">Log</a>
-  </div>
-
-{addressbar}{ruler}
-{panes}{tabs}
-
-  <footer class="sitefoot">
+</header>
+{trail_block}
+{frame}
+<footer class="sitefoot">
+  <div class="in">
     <nav aria-label="More of this site">
-      <a href="/work.html">Work</a> &middot;
-      <a href="/search/">Find</a> &middot;
-      <a href="/about.html">About</a> &middot;
-      <a href="https://epistemend.org" rel="noopener">Research</a> &middot;
-      <a href="/developers.html">Developers</a> &middot;
-      <a href="/Docs.html">Docs</a> &middot;
-      <a href="/stack/">Stack</a> &middot;
-      <a href="/shop/">Shop</a> &middot;
-      <a href="/log/">Log</a> &middot;
-      <a href="/status/">Status</a> &middot;
-      <a href="/contact.html">Contact</a> &middot;
+      <a href="/work.html">Work</a>
+      <a href="/about.html">Record</a>
+      <a href="/cv/">CV</a>
+      <a href="/shop/">Shop</a>
+      <a href="/developers.html">Developers</a>
+      <a href="/Docs.html">Docs</a>
+      <a href="/stack/">Stack</a>
+      <a href="/search/">Find</a>
+      <a href="/log/">Log</a>
+      <a href="/status/">Status</a>
+      <a href="/contact.html">Contact</a>
       <a href="/privacy.html">Privacy</a>
     </nav>
-    <p>F-Keys Creative LLC, a Florida limited liability company, document
-    L26000436157. Punta Gorda, Florida.
-    <a href="mailto:hello@f-keys.com">hello@f-keys.com</a></p>
-  </footer>
-
-  <div class="statusbar">
-    <span class="cell groove">{esc(count_label)}</span>
-    <span class="cell groove grow"><a href="/log/">Log</a> &nbsp;&middot;&nbsp; <a href="/status/">Status</a></span>
-    <span class="cell groove">F-Keys</span>
+    <p class="legal"><b>F-Keys Creative LLC</b>, a Florida limited liability
+    company, document L26000436157. Punta Gorda, Florida.
+    {MAILTO}</p>
   </div>
-
-</div>
+</footer>
 </body>
 </html>
 """
@@ -4530,7 +4623,7 @@ def main():
     # its own window, because forty-five rows under a price list is the
     # thing that made this read as somebody's project pile.
     written.append(("work.html", shell(
-        "Work — F-Keys",
+        "Work — F-Keys Creative",
         "F-Keys\\Work",
         counted(WORK_DOC) + file_pane(CATALOGUE),
         f"{len(CATEGORIES)} object(s)", in_work=True,
@@ -4538,17 +4631,25 @@ def main():
                     "research from F-Keys Creative LLC.",
         canonical="https://f-keys.com/work.html")))
 
-    body = [counted(HOME_DOC)]
+    # The front page is one idea shown working: every claim rests on
+    # something, and each check here shows what (tools/landing.py). The
+    # whole catalogue is one door in, at /directory/ (tools/directory.py).
+    import directory
+    import landing
+    written.append((os.path.join("directory", "index.html"), shell(
+        "Directory — F-Keys Creative",
+        "F-Keys\\Directory", directory.home_body(), "",
+        description="Everything F-Keys Creative has made, by wing: what is "
+                    "for sale, what is live, and what is still being built.",
+        canonical="https://f-keys.com/directory/", app="home")))
     written.append(("index.html", shell(
-        "F-Keys Creative LLC — software studio, Punta Gorda, Florida",
-        # The pane shows folders now, so the status bar counts
-        # folders. Explorer counted what was in front of you,
-        # not everything underneath it.
-        "F-Keys", "\n".join(body), "F-Keys Creative LLC",
-        description="A one-person software studio in Punta Gorda, Florida. "
-                    "Websites, website audits, publication-record checks "
-                    "and the tools behind them.",
-        canonical="https://f-keys.com", ld=organization())))
+        "F-Keys Creative — what does it actually rest on?",
+        "F-Keys", landing.home_body(), "",
+        description="F-Keys Creative LLC, Punta Gorda, Florida, builds checks "
+                    "that trace a claim to its source: a home listing to the "
+                    "county record, a bibliography to the literature, a proof "
+                    "to the axioms it spends.",
+        canonical="https://f-keys.com", ld=organization(), app="home")))
 
     # one page per category
     for cid, label, hint in CATEGORIES:
@@ -4562,10 +4663,10 @@ def main():
 
 
     written.append(("about.html", shell(
-        "About \u2014 F-Keys", "F-Keys\\About", counted(ABOUT_DOC), "1 item",
-        description=counted(
-            "I'm Vince Gonzalez. I have %%LIVE%% live "
-            "products and fifty-six deposited works."),
+        "Record \u2014 F-Keys", "F-Keys\\Record", ABOUT_DOC, "",
+        description="The record of Vincent Gonzalez and F-Keys Creative LLC: "
+                    "contributions merged into curl, Caddy and Metamath, "
+                    "published research with DOIs, and the business filings.",
         canonical="https://f-keys.com/about.html", ld=organization(),
         app=NODE_APP[node_kind("/about.html")])))
 

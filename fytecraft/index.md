@@ -1,4 +1,4 @@
-# FyteCraft — F-Keys
+# FyteCraft — F-Keys Creative
 
 > An RTS built around the fight, not the build order.
 

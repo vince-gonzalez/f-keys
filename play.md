@@ -1,6 +1,6 @@
-# Play — F-Keys
+# Games — F-Keys Creative
 
-> Things you play.
+> Fortnite islands, Discord activities and a real-time strategy game in development.
 
 Canonical: https://f-keys.com/play.html
 

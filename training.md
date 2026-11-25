@@ -1,6 +1,6 @@
-# Training — F-Keys
+# Training — F-Keys Creative
 
-> Built to teach a job, and licensed to the people who teach it.
+> Warehouse load training built as a simulator, licensed to the institutions that teach it.
 
 Canonical: https://f-keys.com/training.html
 

@@ -794,8 +794,10 @@ def counts_in_prose():
         # where it now lives.
         # Matched against VISIBLE text, not markup - this gate checks what
         # a reader sees, so the table row reads "Live products thirty-two".
-        ("about.html", r"Live products ([a-z]+(?:-[a-z]+)?)",
-         live, "the live count"),
+        # The live-products count left the Record page on 2026-11-25: a
+        # tally of products is a boast, so the page names what was merged,
+        # published and filed instead. The shelf count stays, because it
+        # describes the page a reader is on.
         ("work.html", r"([a-z]+(?:-[a-z]+)?) sections, sorted",
          shelves, "the number of shelves"),
     ]
@@ -1069,9 +1071,12 @@ def tree_nodes_open_in_the_right_window():
         if os.path.relpath(path, ROOT).replace("\\", "/") in no_builder:
             continue
         source = read(path)
-        found = re.search(r'class="content sunken app-(\w+)"', source)
+        # The shell writes class="content app-<window>"; the Windows 95
+        # shell before 2026-11-25 wrote "content sunken app-<window>".
+        found = re.search(r'class="content(?: sunken)? app-(\w+)', source)
         has = found.group(1) if found else (
-            "explorer" if 'class="content sunken"' in source else "none")
+            "explorer" if re.search(r'class="content(?: sunken)?"', source)
+            else "none")
         if has != want:
             fail("shell",
                  "{} is declared a {} so it should open in {}, but it opens "
